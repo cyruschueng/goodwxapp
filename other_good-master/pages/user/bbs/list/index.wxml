@@ -1,0 +1,33 @@
+<!--forumlist.wxml-->
+<block wx:if="{{postlist == null}}">
+<!--暂无内容提示 start-->
+<view class="no-content tc">
+    <text class="no-content-icon iconfont icon-yemianwuneirong"></text>
+    <view class="no-content-font">暂无帖子信息</view>
+</view>
+<!--暂无内容提示 end-->
+</block>
+<block wx:else>
+<view class="forumlist">
+    <block wx:for="{{postlist}}">
+    <view class="list-item gridXt" bindtap="bbs_info_bind" id="{{item.id}}">
+        <view class="title">
+            <block wx:if="{{item.digest == 1}}">
+                <view class="state marrow">精华</view>
+            </block>
+            <text>{{item.content}}</text>
+        </view>
+        <view class="info linght f12">
+            <text class="fr iconfont icon-comment">{{item.reply_count}}</text>
+            <text>{{item.post_mytime}}</text>
+        </view>
+    </view>
+    </block>
+</view>
+
+<!--loading start-->
+<view class="m20 tc grey loading" wx:if="{{showLoading}}">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在加载...</text>
+</view>
+<!--loading end-->
+</block>

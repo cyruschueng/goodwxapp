@@ -1,0 +1,44 @@
+<!--pages/myCenter/shop/mapedit/mapedit.wxml-->
+<view class="mapeditview">
+    <view class='infolist'>
+        <view class='l-label'>收货人 :</view>
+        <view class='r-inputtext'><input placeholder='请输入名称'></input></view>
+    </view>
+    <view class='infolist'>
+        <view class='l-label'>手机号码 :</view>
+        <view class='r-inputtext'><input placeholder='请输入手机号码'></input></view>
+    </view>
+    <view class='infolist'>
+        <view class='l-label'>所在地区 :</view>
+        <view class='r-inputtext'><text bindtap='showmap' class='text'>请输入所在地区</text></view>
+        <image class='rigtharrow' src='/images/myCenter/arrow.png'></image>
+    </view>
+    <view class='infolist'>
+        <view class='l-label'>详细地址 :</view>
+        <view class='r-inputtext'><textarea bindblur="bindTextAreaBlur" auto-height placeholder="请输入详细地址" /></view>
+    </view>
+    <view class='infolist'>
+        <view class='l-label' style='float:initial;'>收默认地址 :</view>
+        <view class='msg'>注：每次下单时会使用该地址</view>
+        <view class='r-inputtext switch'><switch></switch></view>
+    </view>
+</view>
+<view class='stitebtn' bindtap='linklist'>保存</view>
+
+<view class='picker-view' hidden='{{picker}}'>
+    <view class='picker-mag' bindtap='hidepicker'></view>
+    <view class='picker-wrep'>
+        <view class='wrep-title'>所在地区<text class='coles' bindtap='hidepicker'>X</text></view>
+        <view class='wrep-ber'>
+            <text class='tab'>广东省</text>
+            <text class='tab'>广州市</text>
+            <text class='tab active'>请选择</text>
+        </view>
+        <view class='picker-center'>
+            <view class='list active'><text>白云区</text></view>
+            <view class='list'><text>天河区</text>></view>
+            <view class='list'><text>海珠区</text>></view>
+            <view class='list'><text>黄埔区</text>></view>
+        </view>
+    </view>
+</view>

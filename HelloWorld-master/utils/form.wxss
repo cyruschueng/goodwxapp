@@ -1,0 +1,84 @@
+/* pages/form/list/index.wxss */
+
+
+
+page{font-size: 32rpx;}
+image{width: 100%;height: 100%;}
+.form-item{background: #f8f8f8;}
+.form-tit{padding: 20rpx;font-size: 30rpx;color: #999;display:block;}
+.form-cot{background: #fff;padding:30rpx;}
+
+/* 选择按钮 */
+.form-choose{display: flex;line-height: 1.4;padding:20rpx 0;}
+/* .form-choose:nth-child(n+2){margin-top: 10rpx;} */
+
+/* 重置单选多选样式 */
+.form-choose .wx-radio-input{width: 20px;height: 20px;margin-right: 8px;}
+.wx-radio-input-checked{border-color: #09bb07!important;background: #fff!important;}
+.wx-radio-input-checked::before{content: ''!important;width: 70%;height: 70%;display: block;background: #09bb07;border-radius: 50%;} 
+page .wx-checkbox-input{width: 18px;height: 18px;margin-right: 8px;}
+page .wx-checkbox-input-checked{background: #09bb07;border-color: #09bb07;}
+.wx-checkbox-input-checked{color: #fff!important;} 
+
+/* .form-pic-choose .form-choose{align-items: center;}
+.choose-img{width: 140rpx;height: 140rpx;}
+.radio-text{flex: 1;}
+.form-pic-choose .radio-text{margin-left: 20rpx;align-self: flex-start;} */
+
+/* 图片选择 */
+.form-pic-choose .form-choose{display: inline-block;text-align: center;margin-top: 0;padding: 0;}
+.choose-img{width: 110rpx;height: 110rpx;margin-right: 20rpx;}
+.form-pic-choose .choose-img{margin-bottom: 16rpx;}
+.form-pic-choose .form-choose:nth-child(4n+4) .choose-img,
+.form-pic-choose .form-choose:last-child .choose-img{margin-right: 0;}
+.form-pic-choose .form-choose:nth-child(n+5){margin-top: 20rpx;}
+.choose-text{flex: 1;}
+.form-pic-choose .choose-text{margin-left: 20rpx;align-self: flex-start;}
+/* 文字加图片选择 */
+.form-tex-choose .form-choose{align-items: center;padding: 0;}
+.form-tex-choose .form-choose:nth-child(n+2){margin-top: 20rpx;}
+/* 配置 */
+.form-choose-col2 .form-choose{display: inline-flex;width: 50%;} 
+.form-choose-col2 .form-choose:nth-child(-n+2){margin-top: 0;} 
+.form-choose-col3 .form-choose{display: inline-flex;width: 33.33%;} 
+.form-choose-col3 .form-choose:nth-child(-n+3){margin-top: 0;} 
+.form-choose-col4 .form-choose{display: inline-flex;width: 25%;} 
+.form-choose-col4 .form-choose:nth-child(-n+4){margin-top: 0;} 
+
+/* 开关 */
+.form-switch{display: flex;justify-content: space-between;align-items: center;}
+.form-switch switch{zoom: 0.7;}
+.form-item .wx-switch-input{margin-right: 0;}
+
+/* 添加图片 */
+.form-add-img{display: inline-block;width: 156rpx;height: 156rpx;margin-right: 20rpx;position: relative;vertical-align: bottom;}
+.form-add-img:nth-child(4n+4),
+.form-add-img:last-child{margin-right: 0;}
+.form-add-img:nth-child(n+5){margin-top: 20rpx;}
+.add-img-fail{display:block;width:100%;background: rgba(255, 0, 0, 0.5);position: absolute;bottom: 0;left: 0;text-align: center;color: #fff;font-size: 24rpx;}
+.close-img{width: 40rpx;height: 40rpx;color: #fff;position: absolute;top: 0;right: 0;background: rgba(0, 0, 0, 0.1);}
+.close-img::before,.close-img::after,.add-btn::before,.add-btn::after{content: '';width: 50%;height: 1px;background: currentColor;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%) rotate(45deg);}
+.close-img::after{transform: translate(-50%,-50%) rotate(-45deg);}
+.add-btn{display: block;width: 100%;height: 100%;background: transparent;border: 1px solid #ddd;color: #aaa;}
+.add-btn::before{transform: translate(-50%,-50%) rotate(0);}
+.add-btn::after{transform: translate(-50%,-50%) rotate(90deg);}
+
+/* 多文本输入 */
+.form-tear-box{padding: 20rpx 0;}
+.form-tear{height: 120rpx;width:100%;}
+/* 选择地址 */
+.choose-adds{width: 70rpx;text-align: center;font-size: 38rpx;transition: all .2s linear;}
+.choose-adds:active{background: rgba(0, 0, 0, 0.05);}
+
+/* 时间选择 */
+.time-item:nth-child(n+2){margin-left: 30rpx;}
+
+/* slide */
+.form-item slider{margin: 20rpx 10rpx;} 
+.form-item .wx-slider-handle {-webkit-transform: scale(0.8);transform: scale(0.8);}
+
+/* 下拉选择 */
+.select-item{word-wrap: normal;white-space: nowrap;padding: 10rpx 0;}
+.select-item::after{content: '';display: inline-block;border-bottom: 6px solid #aaa;border-left: 5px solid transparent;border-right: 5px solid transparent;margin-left: 3px;vertical-align: middle;transform-origin: center;transition: all 0.3s linear;}
+.select-item.active::after{transform: rotate(180deg);}
+.select-item .lineText{max-width: 80%;display: inline-block;vertical-align: bottom;}

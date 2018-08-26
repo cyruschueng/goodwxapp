@@ -1,0 +1,29 @@
+<!--pages/noticeinfo/noticeinfo.wxml-->
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-article">
+            <view class="weui-article__h1">{{notice.title}}</view>
+            <view class="weui-article__section">
+                <view class="weui-article__section">
+                    <view class="weui-article__p">
+                        {{notice.content}}
+                    </view>
+                </view>
+            </view>
+            <view class="weui-media-box__info">
+                <view class="weui-media-box__info__meta">{{notice.createtime}}</view>
+            </view>
+        </view>
+        <view style='width:100%;'>
+          <view wx:for="{{images}}" wx:for-item="image" style='padding:10px 15px;'>
+            <image src='{{image}}' style='height:200px;width:100%;'></image>
+          </view>
+        </view>
+        <view class="page__bd page__bd_spacing">
+        <view class="button-sp-area" style='padding:10px 15px;' wx:if="{{ismanager}}">
+            <button class="weui-btn" type="primary" plain="true" bindtap="edit">编辑</button>
+            <button class="weui-btn" type="default" plain="true" bindtap="deleted">删除</button>
+        </view>
+    </view>
+    </view>
+</view>

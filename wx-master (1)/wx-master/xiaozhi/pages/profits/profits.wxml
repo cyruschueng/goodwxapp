@@ -1,0 +1,53 @@
+<!--pages/profits/profits.wxml-->
+<view class='container'>
+  <view class='title row'>
+    <view class="{{profit?'nav-item-active':''}}" catchtap="onTab">分润补贴</view>
+    <view class="{{profit?'':'nav-item-active'}}" catchtap="onTab">分润级差</view>
+  </view>
+  <view wx:if="{{show}}">
+    <image src='../../images/null.png'></image>
+    <view style='text-align:center;font-size:30rpx;font-weight:bold;'>您还没有产生{{filter?"分润分红":"分润收益"}}</view>
+  </view>
+  <view wx:else>
+    <block wx:for="{{profitList}}" wx:key="{{item.id}}">
+      <view class='list column'>
+        <view class=' time row'>
+          <view class='left'>{{profitList[index].createTime}}</view>
+          <!-- <view class='right'>{{profitList[index].head?profitList[index].head:}}</view> -->
+          <image class="avator"src='{{profitList[index].head?profitList[index].head:"../../images/avator.png"}}'></image>
+          <view class='column col'>
+            <view class='row'>
+              <text style='margin-bottom:20rpx;font-weight:bold;color:#000;'>+{{profitList[index].HL_Total}}</text>
+              <text style='display:inline-block;margin-left:20rpx;'>金额 <text>{{profitList[index].borrowMoney}}</text> </text>
+            </view>
+            <text>{{profitList[index].username}}</text>
+          </view>
+          
+        </view>
+        <!-- <view class=' time row'>
+          <view class='left'>交易时间</view>
+          <view class='right'>{{profitList[index].createTime}}</view>
+        </view> -->
+
+        <!-- <view class=' jine row'>
+          <view class='left'>交易金额</view>
+          <view class='right'>￥{{profitList[index].borrowMoney}}</view>
+        </view>
+        <view class=' rate row'>
+          <view class='left'>手续费</view>
+          <view class='right'>{{profitList[index].poundage}}</view>
+        </view>
+        <view class=' rate row'>
+          <view class='left'>收益费率</view>
+          <view class='right'>{{profitList[index].HL_Rate}}%</view>
+        </view> -->
+
+
+        <!-- <view class=' first row'>
+          <view class='left'>分润总额</view>
+          <view class='right'>￥{{profitList[index].HL_Total}}</view>
+        </view> -->
+      </view>
+    </block>
+  </view>
+</view>

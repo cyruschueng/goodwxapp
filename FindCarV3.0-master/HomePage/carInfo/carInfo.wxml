@@ -1,0 +1,33 @@
+<!--HomePage/carInfo/carInfo.wxml-->
+<view class="wrapper">
+  <view class="carInfo-wrapper">
+    <view class="title">车型信息配置</view>
+    <view class="carInfo-list" wx:for="{{carInfo}}" wx:key="this" wx:for-index="index">
+      <image class="select {{(item.src || item.car_img) && 'selected'}}" src="{{item.src ? '/Images/' + item.src : item.car_img || '/Images/huiButto.png'}}" bindtap="changeCar" data-index="{{index}}"></image>
+      <input class="name" value="{{item.carname}}" bindinput="carNameInput" data-index="{{index}}" placeholder="例如" />
+      <image class="delete" src="/Images/CunWu.png" bindtap="deleteCar" data-index="{{index}}"></image>
+    </view>
+    <view class="add-wrapper">
+      <image class="add" src="/Images/LvButto.png" bindtap="addCar"></image>
+    </view>
+  </view>
+
+  <view class="remark">
+    <text class="title">备注</text>
+    <textarea class="memo" value="{{remark}}" bindinput="remarkInput" />
+  </view>
+
+  <button class="submit" bindtap="submitCarInfo">保存</button>
+</view>
+
+<view class="select-mask" wx:if="{{showSelect}}">
+  <view class="select-wrapper">
+    <view class="select-header">
+      <text class="title">车型图标选择</text>
+      <image class="close" src="/Images/CunWu.png" bindtap="closeMak"></image>
+    </view>
+    <view class="car-wrapper">
+      <image class="list" wx:for="{{selectCar}}" wx:key="this" src="{{'/Images/' + item}}" bindtap="selectCar" data-src="{{item}}"></image>
+    </view>
+  </view>
+</view>

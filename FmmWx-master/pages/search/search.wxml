@@ -1,0 +1,51 @@
+<scroll-view class="container" scroll-y="true" scroll-into-view="{{toView}}"  scroll-top="{{scrollTop}}" bindscroll="scroll">
+
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="weui-icon-search" type="search" size="14"></icon>
+        <view class="weui-search-bar__text">搜索</view>
+      </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+  </view>
+
+  <view class="weui-grids">
+  <block wx:for-items="{{searchProductList}}" wx:key="index" >
+    <view class="myweui-grid" id="{{item.contentId}}" bindtap="tapPush">
+      <image class="myweui-grid__icon" src='{{item.url}}' />
+      <view class="myweui-grid__label">{{item.title}}</view>
+      <view class= "myweui-grid__subview"> 
+        <view class='myweui-grid__subviewlabel'>￥{{item.price}}/{{item.unit}} </view>
+        <view class='myweui-grid__subviewsublabel'>已售{{item.saled}}/{{item.stock}} </view>
+      </view>
+      <block wx:if="{{item.saleType==1}}">
+        <image class="hot-icon" src="../../images/hot.png"></image>
+      </block>
+      <block wx:elif="{{item.saleType==2}}">
+        <image class="hot-icon" src="../../images/cheap.png"></image>
+      </block>
+      <block wx:else>
+      </block>
+    </view>
+  </block>
+</view>  
+
+<view class="pull-title">
+  <block wx:if="{{loadfinish}}">
+    已经全部加载完毕
+  </block>
+  <block wx:else>
+    上拉刷新
+  </block>
+</view>
+
+
+</scroll-view>

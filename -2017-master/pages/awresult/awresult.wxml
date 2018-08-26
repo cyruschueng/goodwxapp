@@ -1,0 +1,32 @@
+<!--create.wxml-->
+<view class="page">
+    <view class="header">
+      <view class="title">{{title}}<text class="gray"><text class="red" wx:if="{{is_must==1}}">*</text>(填空)</text><text class="good" wx:if="{{is_correct==1}}">正确</text><text class="bad"  wx:if="{{is_correct==2}}">错误</text></view>
+      <view class="bigUrl" wx:if="{{img}}"><image mode="aspectFit"  wx:if="{{img}}" src="{{img}}"></image></view>
+      <view class="Input">
+          <text>我的回答:{{mycorrent}}</text>
+          <text wx:if="{{correct}}" selectable="true"> 正确答案:{{correct}}</text>
+      </view>
+    </view>
+    <scroll-view scroll-y="true" style="height:{{winH}}px;" bindscrolltolower="upper" bindscrolltoupper="down">
+    <view class="box" wx:for="{{list}}" wx:for-item="item" wx:key="this">
+      <view class="left">
+        <image src="{{item.avatar}}"></image>
+        <text>{{item.nickname}}</text>
+      </view>
+      <view class="right">
+          <text>{{item.add_time}}</text>
+          <view class="add">{{item.reply}}</view>
+      </view>
+    </view>
+     <view class="tips" wx:if="{{list.length>0}}">
+       <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+           <text>上拉会玩命的加载...</text>
+        </view>
+        <view wx:if="{{!hasMore}}"><text>没有更多内容了</text></view>
+    </view>  
+   <view wx:if="{{list.length==0}}" class="nones">
+      数据不在地球上了。。。
+    </view>
+ </scroll-view>
+</view>

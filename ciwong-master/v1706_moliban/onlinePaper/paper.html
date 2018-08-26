@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>在线作答</title>
+    <link rel="stylesheet" type="text/css" href="common/css/common.css?v=3.9.7">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=3.9.7">
+    <link rel="stylesheet" href="js/swiper/swiper.min.css" />
+</head>
+<body>
+    <script>
+        if(!(/ipad|iphone/i.test(navigator.userAgent))){
+            var body = document.getElementsByTagName('body')[0]
+            body.setAttribute('class',(body.getAttribute('class')||'')+' device-android')
+        }
+    </script>
+     <div class="loading">
+        <div class="load-inner">
+            <img style="display:none" src="common/images/loading.gif" alt="">
+            <span>加载中...</span>
+        </div>
+    </div>
+    <!--loading end-->
+    <div class="dialog" style="display:none;">
+        <div class="dialog-inner"> <span>暂无信息~</span>
+        </div>
+    </div>
+    <!--dialog end-->
+    <div class="m-error" style="display:none;">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.reload()">重 试</div>
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div>
+    <!--error end-->
+
+    <div class="wrap word-wrap" id="app" style="display:none;">
+        <div class="banner" id="topNav">
+            <div class="btn-exit" id="exitOnline"><img src="images/back.png" style="width: 0.18rem;height: 0.3rem;padding-top: 0.3rem;"></div>
+            <div class="unitTitle" v-html="title"></div>
+            <div class="backCard" id="backCard"><img src="images/card.png" style="width: 0.35rem;height: 0.34rem;padding-top: 0.3rem;"></div>
+            <div class="top-tips hidetext">系统已保存上次记录，你将继续上次的学习</div>
+        </div>
+        <div class="body-main" id="body-main">
+        <!-- parts -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" :data-level="question.level" :data-qtype="question.qtype" :data-isProblems="question.qtype==4||question.qtype==5?'true':'false'" v-for="question in exampaper">
+                        <div class="moduleName pt30 mlr30" v-if="question.level==1"> <span class="green prh30">|</span><div class="inline">{{question.module_type_name}}</div>
+                            <div><img src="images/hand.png" class="hand"></div>
+                        </div>
+                        <div v-if="question.level==2">
+                            <sortline :sort="question.sort" :totalnum="totalNum"></sortline>
+                            <question :question="question" :questionnum="" :showrefanswers="showRefAnswers" :index="$index+1"></question>
+                        </div>
+                    </div>
+
+                    <!-- 答题卡 -->
+                    <div class="card_ans pt30 swiper-slide">
+                        <div><div class="mlr30 pb50">
+                            <div class="inline" v-for="(index,question) in exampaper">
+                                <div class="mb50" v-if="question.level==1">{{question.module_type_name}}</div>
+                                <div class="list-item reFormQuestion" :class="question.finished?'ans_check':''" v-if="question.level==2" :data-index="index">{{question.sort}}</div>
+                            </div>
+                            <p style="opacity:0;text-align:right;color:#ccc;" onclick="this.style.opacity=0.5">v=3.9.7</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div></div>
+                </div><!--end swiper-wrapper-->
+            </div>
+        <!-- parts end -->
+        </div>
+        <div class="question_btn">
+            <button class="green_btn flBtn" id="prevQuestion">上一题</button>
+            <button class="green_btn frBtn" id="nextQuestion">下一题</button>
+        </div>
+        <div class="submitBox">
+            <button class="sub_btn" id="submitOnline">交作业</button>
+        </div>
+    </div>
+    <!--app end-->
+    <script>
+        var app_interaction = true; // 是否与APP交互
+    </script>
+    <!--公共js打包压缩成build-->
+    <script src="common/js/build.min.js"></script>
+    <!--通用函数-->
+    <script src="js/swiper/swiper.min.js"></script>
+    <script src="common/js/common.js?v=3.9.7"></script>
+    <script src="common/components/online_question.js?v=3.9.7"></script>
+    <script src="js/index.js?v=3.9.7"></script>
+    <!-- 音频插件 -->
+    <script src="js/audiojs/hoasou.audio.js?v=3.9.7"></script>
+    <!-- 图片放大插件 -->
+    <script src="js/hammer.min.js"></script>
+    <!--end 通用函数-->
+</body>
+
+</html>

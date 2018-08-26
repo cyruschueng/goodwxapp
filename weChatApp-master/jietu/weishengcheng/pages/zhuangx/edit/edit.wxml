@@ -1,0 +1,148 @@
+<import src="/zanui/toast/index.wxml" />
+<import src="../../../wux/dialog/dialog.wxml"/>
+
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view wx:if="{{notifyPath}}" catchtap="nofityRedirect" style="padding: 0.6em;background-color: #540000;" class="flex_center" data-istab="{{notifyIstab}}" data-appid="{{notifyAppid}}" data-path="{{notifyPath}}">
+    <view>
+        <image style="width:1em;height: 1em;margin-right: 4px;" src="{{notifyImage}}"></image>
+    </view>
+    <view style="color: #fff;">
+        {{notifyText}}
+    </view>
+</view>
+<view class="container page__bd" >
+    <form bindsubmit="formSubmit" report-submit="true">
+        <view style="margin-top:10px;position:relative" >
+            <!-- <view class="contain">
+                <image lazyload="true" catchtap="preview" data-src="{{content[0].preview.url}}" src="{{content[0].preview.url}}" wx:if="{{content.length==1}}" style="width:{{size.width}}rpx;height:{{size.height}}rpx;margin-bottom: 20rpx;" />
+            </view> -->
+            <view class="contain">
+              <form bindsubmit="preview" data-src="{{content[0].preview.url}}" report-submit="true" wx:if="{{content.length==1}}">
+                <button plain class="formidBtn" form-type="submit" style="border:none;">
+                  <image lazyload="true" mode="aspectFit"  src="{{content[0].preview.url}}" style="width:{{size.width}}rpx;height:{{size.height}}rpx;max-height:750rpx;margin-bottom: 20rpx;" />
+                </button>
+              </form>
+            </view>
+
+            <view bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" wx:if="{{content.length>1}}">
+                <view class="moban" style="height:{{450*size.height/size.width}}rpx;">
+                    <block wx:for-index="index" wx:for="{{content}}" wx:key="index">
+                        <view class="{{lb[index]}}">
+                            <image src="{{item.preview.url}}" />
+                        </view>
+                    </block>
+                </view>
+
+                <!-- <view class='left' bindtap='scrollLeft' style="height:{{0.9*450*size.height/size.width}}rpx;top:{{0.5*45*size.height/size.width+30}}rpx;"></view> -->
+                <form class='left' bindsubmit="scrollLeft" style="height:{{0.9*450*size.height/size.width}}rpx;top:{{0.5*45*size.height/size.width+30}}rpx;" report-submit="true">
+                  <button plain class="formidBtn" form-type="submit" style="width:100%;height:100%;border:none;">
+                  </button>
+                </form>
+                <!-- <view class='right' bindtap='scrollRight' style="height:{{0.9*450*size.height/size.width}}rpx;top:{{0.5*45*size.height/size.width+30}}rpx;"></view> -->
+                <form class='right' bindsubmit="scrollRight" style="height:{{0.9*450*size.height/size.width}}rpx;top:{{0.5*45*size.height/size.width+30}}rpx;" report-submit="true">
+                  <button plain class="formidBtn" form-type="submit" style="width:100%;height:100%;border:none;">
+                  </button>
+                </form>
+            </view>
+
+            <block wx:for-index="index" wx:for-item="template" wx:for="{{contentItem}}" wx:key="{{index}}">
+              <view wx:if="{{template.type=='text'&&template.disabled!=1}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <input class="zan-form__input zan-cell__bd" value="{{template.value}}" maxlength="{{template.max}}" name="{{index}}" id="{{index}}" placeholder="{{template.placeholder}}" bindblur="inputBlur" />
+                </view>
+              </view>
+
+              <view wx:elif="{{template.type=='textarea'&&template.disabled!=1}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <textarea value="{{template.value}}" id="{{index}}" class="zan-form__textarea zan-cell__bd" maxlength="{{template.max}}" name="{{index}}" placeholder="{{template.placeholder}}"  />
+                </view>
+              </view>
+
+              <view wx:elif="{{template.type=='avatar'}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <view class="weui-cell__bd weui-select weui-select_in-select-after" data-avatarindex="{{index}}" style="height: auto;line-height: auto;" bindtap="avatarMenu">
+                      <image style="width: 50px;height: 50px;display: block;" src="{{template.value}}" mode="aspectFill"></image>
+                  </view>
+                  <input id="{{index}}" name="{{index}}" value="{{template.value}}" style="display: none;" />
+                </view>
+              </view>
+
+                <view wx:elif="{{template.type=='image'&&template.disabled!=1}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                    <view style="width: 90%;" class="zan-cell zan-form__item">
+                        <text class="zan-form__title">{{template.title}}：</text>
+                        <view class="weui-cell__bd weui-select weui-select_in-select-after" data-imageindex="{{index}}" style="height: auto;line-height: auto;" bindtap="imageMenu">
+                            <image style="width: 50px;height: 50px;display: block;" src="{{template.value}}" mode="aspectFill"></image>
+                        </view>
+                        <input id="{{index}}" name="{{index}}" value="{{template.value}}" style="display: none;" />
+                    </view>
+                </view>
+
+              <view wx:elif="{{template.type=='user_name'}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <input id="{{index}}" value="{{template.value}}" class="zan-form__input zan-cell__bd"  maxlength="{{template.max}}" name="{{index}}" placeholder="{{template.placeholder}}" bindblur="inputBlur" />
+                </view>
+              </view>
+
+              <view wx:elif="{{template.type=='select'}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <picker name="{{index}}" data-name="{{index}}" value="{{pickerIndex[index]?pickerIndex[index]:template.value}}" class="zan-form__picker zan-cell__bd" bindchange="pickerChange" range="{{template.options}}" range-key="name">
+                    <view class="picker">
+                      <view wx:if="{{pickerIndex[index]||template.value>=0}}" class="weui-select-noHeight weui-select_in-select-after"  >{{pickerIndex[index]?template.options[pickerIndex[index]].name:template.options[template.value].name}}</view>
+                      <view wx:else class="weui-select weui-select_in-select-after"  style="color: #999;">请选择</view>
+                    </view>
+                  </picker>
+                </view>
+              </view>
+
+              <view wx:if="{{template.type=='select'&&selfDefine}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <input id="{{index}}" class="zan-form__input zan-cell__bd"  maxlength="{{template.max?template.max:5}}" name="{{index}}" placeholder="输入自定义内容" />
+                </view>
+              </view>
+
+              <view wx:elif="{{template.type=='time'&&template.disabled!=1}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <picker name="{{index}}" data-name="{{index}}" mode="time" value="{{template.value}}" class="zan-form__picker zan-cell__bd" start="00:00" end="23:59" bindchange="bindTimeChange">
+                      <view class="picker">
+                          <view wx:if="{{time[index]||template.value}}" class="weui-select weui-select_in-select-after"  >{{time[index]?time[index]:template.value}}</view>
+                          <view wx:else class="weui-select weui-select_in-select-after"  style="color: #999;">请选择</view>
+                      </view>
+                  </picker>
+                </view>
+              </view>
+
+              <view wx:elif="{{template.type=='date'&&template.disabled!=1}}" style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+                <view style="width: 90%;" class="zan-cell zan-form__item">
+                  <text class="zan-form__title">{{template.title}}：</text>
+                  <picker name="{{index}}" data-name="{{index}}" mode="date" value="{{template.value}}" class="zan-form__picker zan-cell__bd" bindchange="bindDateChange">
+                      <view class="picker">
+                          <view wx:if="{{date[index]||template.value}}" class="weui-select weui-select_in-select-after"  >{{date[index]?date[index]:template.value}}</view>
+                          <view wx:else class="weui-select weui-select_in-select-after"  style="color: #999;">请选择</view>
+                      </view>
+                  </picker>
+                </view>
+              </view>
+
+              <view wx:elif="{{template.disabled==1}}" style="display: none;">
+                <input id="{{index}}" name="{{index}}" value="{{template.value}}" />
+              </view>
+            </block>
+
+            <!-- <view class="weui-btn-area">
+                <button disabled="{{disabled}}" class="weui-btn" type="primary" style="width: 100%;" formType="submit">生成图片</button>
+            </view> -->
+            <view class="fixButton a_flex" style="position:fixed;bottom:0;width:100%;height:45px;background-color:#fff;z-index:100;border-top:1px solid #e5e5e5;">
+              <navigator url="/pages/index/index" open-type="switchTab" hover-class="other-navigator-hover" style="width:50%;height:45px;line-height:45px;text-align:center;">{{homeLinkText}}</navigator>
+              <button disabled="{{disabled}}" type="primary" style="width:50%;border-radius:0;" formType="submit">{{buttonText}}</button>
+            </view>
+        </view>
+    </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

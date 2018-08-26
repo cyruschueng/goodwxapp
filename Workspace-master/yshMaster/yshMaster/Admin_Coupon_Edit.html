@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>编辑优惠券</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<!--adddate-->
+		<script src="js/adddate.js"></script>
+	</head>
+
+	<body class="children-body">
+		<section>
+			<!-- main content start-->
+			<div class="">
+				<!--body wrapper start-->
+				<section class="wrapper">
+					<!-- page start-->
+
+					<div class="row">
+						<div class="col-lg-12">
+							<section class="panel">
+								<header class="panel-heading">
+									<h2 style="padding-left: 50px;">商品优惠券</h2>
+									<p style="padding-left: 50px;    font-weight: normal;">可针对部分宝贝发放优惠券，买家领取在下单时使用，获得优惠</p>
+								</header>
+								<div class="panel-body">
+									<div class=" form">
+										<!-- 表格开始-->
+										<form class="cmxform form-horizontal" id="sub_form">
+
+											<div class="form-group">
+												<label for="cname" class="control-label col-lg-2">活动名称：</label>
+												<div class="col-lg-9">
+													<input class=" form-control" id="couponName" name="couponName" maxlength="10" type="text" />
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="curl" class="control-label col-lg-2">面值：</label>
+												<div class="col-lg-9">
+													<input class=" form-control" id="couponPrice" name="couponPrice" maxlength="4" type="text" />
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="cname" class="control-label col-lg-2">发行量：</label>
+												<div class="col-lg-7">
+													<input class="form-control" id="pushCount" name="pushCount" maxlength="6" type="text" />
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+												<label class="col-lg-2" style="margin-top: 0.5rem;">
+													总金额：
+													<label id="totalCoupon">0.00</label>元
+												</label>
+											</div>
+											<div class="form-group">
+												<label for="cemail" class="control-label col-lg-2">选择商品：</label>
+												<div class="col-lg-1">
+													<button class="btn btn-info" type="button" data-toggle="modal" data-target="#myModal">选择宝贝</button>
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+												<label class="col-lg-8">
+													<p style="padding-top: 7px;">指定此券可以在哪些宝贝上使用，最多100个宝贝</p>
+												</label>
+											</div>
+											<div class="form-group ">
+												<label for="ccomment" class="control-label col-lg-2">活动时间：</label>
+												<div class="col-lg-9">
+													<div class="col-lg-4" style="padding-left: 0;">
+														<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+															<input type="text" readonly="" size="16" id="startTime" name="startTime" class="form-control" />
+															<span class="input-group-btn add-on">
+																<button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+																</span>
+														</div>-->
+														<input type="text" size="16" id="startTime" name="startTime" class="form-control" onclick="SelectDate(this,'yyyy-MM-dd')"//>
+													</div>
+													<p class="col-lg-2" style="padding-top: 7px;text-align: center;">至</p>
+													<div class="col-lg-4" style="padding-left: 0;">
+														<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-12-12" class="input-append date dpYears">
+															<input type="text" readonly="" id="endTime" name="endTime" size="16" class="form-control" />
+															<span class="input-group-btn add-on"> 
+																<button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+																</span>
+														</div>-->
+														<input type="text" id="endTime" name="endTime" size="16" class="form-control" onclick="SelectDate(this,'yyyy-MM-dd')"//>
+													</div>
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="ccomment" class="control-label col-lg-2">使用条件：</label>
+												<div class="col-lg-9">
+													<p style="padding-top: 7px;">单笔订单中，在指定的宝贝中购买金额满
+														<input id="canCoupon" name="canCoupon" type="number" /> 元可使用此优惠券。亲，请预算好使用优惠券后的价格，避免商品亏本出售
+													</p>
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="ccomment" class="control-label col-lg-2">每人限额：</label>
+												<div class="col-lg-9">
+													<p style="padding-top: 7px;">1张</p>
+												</div>
+											</div>
+										</form>
+										<!-- 表格结束-->
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" onclick="window.history.back()">取消</button>
+									<button type="button" class="btn btn-success" id="btn_save">保存</button>
+								</div>
+							</section>
+
+						</div>
+					</div>
+
+					<!-- main content end-->
+					<!-- Modal -->
+					<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+									<h4 class="modal-title">选择商品</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-horizontal">
+										<p>全部(
+											<label id="seleAll">9</label>) 已选择(
+											<label id="hasSele">0</label>)</p>
+										<div class="form-group ">
+											<div class="col-lg-3">
+												<select class="form-control" id="classify">
+													<option value=''>所有</option>
+												</select>
+											</div>
+											<input type="text" class="col-lg-3" id="keyword" placeholder="商品关键字" style="margin-top: 4px;">
+											<div class="col-lg-6">
+												<label style="padding-top: 7px;">价格</label>
+												<input type="number" id="startprice" style="width: 5rem;">
+												<label>-</label>
+												<input type="number" id="endprice" style="width: 5rem;">
+												<button class="btn btn-warning pull-right" type="button" id="btn_search">搜索</button>
+											</div>
+										</div>
+										<div class="form-group ">
+											<table id="bs" class="table table-striped table-condensed table-hover talbe-border" data-side-pagination="server">
+												<thead>
+													<tr>
+														<th data-field="Id" data-align="center">编号</th>
+														<th data-field="Operation" data-align="left" data-formatter="imageFormatter">商品</th>
+														<th data-field="Sku" data-align="left" data-formatter="skuFormatter">规格</th>
+														<th data-field="Price" data-align="center">当前价（￥）</th>
+														<th data-field="Id" data-align="center" data-formatter="operationFormatter">操作</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-success" data-dismiss="modal">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- modal -->
+				</section>
+				<!--body wrapper end-->
+
+				<!-- Placed js at the end of the document so the pages load faster -->
+				<script src="js/jquery-1.10.2.min.js"></script>
+				<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+				<script src="js/jquery-migrate-1.2.1.min.js"></script>
+				<script src="js/bootstrap.min.js"></script>
+				<script src="js/modernizr.min.js"></script>
+				<script src="js/jquery.nicescroll.js"></script>
+
+				<!--pickers plugins-->
+				<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+				<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+				<!--bootstrap Table-->
+				<script src='js/bootstrap-table.js'></script>
+				<script src='js/bootstrap-table-zh-CN.js'></script>
+				<script src='js/bootstrap-editable.js'></script>
+				<script src='js/bootstrap-table-editable.js'></script>
+
+				<!--common scripts for all pages-->
+				<script src="js/scripts.js"></script>
+				<script src="js/ysh_comm.js"></script>
+				<script src="js/layer.js"></script>
+
+				<!--pickers initialization-->
+				<script src="js/pickers-init.js"></script>
+				<script src="js/bootstrapValidator.js"></script>
+				<script>
+					var checkList = new Array();
+					var selectProList = new Array();
+					var addList = new Array();
+					var deleList = new Array();
+					var $table = $("#bs");
+					var getID = ysh_GetQueryString("stID");
+					var condition = {
+						coId: getID
+					}
+					$(document).ready(function() {
+						getDataList(yshurl + "GetCouponById", condition, function(d) {
+							$("#couponName").val(d.aaData[0].CouponsName);
+							$("#couponPrice").val(d.aaData[0].Value);
+							$("#pushCount").val(d.aaData[0].Circulation);
+							$("#startTime").val(d.aaData[0].StartDateTime);
+							$("#endTime").val(d.aaData[0].EndDateTime);
+							$("#canCoupon").val(d.aaData[0].SatisfactionValue);
+						});
+						getdata(0);
+						getDataList(yshurl + "GetProductCategory", null, function(d) {
+							data = d.many[0];
+							for (var i = 0; i < data.length; i++) {
+								$("#classify").append("<option value='" + data[i].Id + "'>" + data[i].CateName + "</option>");
+							}
+						});
+						getSelectedPro(0, getID);
+						$("#totalCoupon").text($("#couponPrice").val() * $("#pushCount").val());
+						$("#couponPrice").bind('input propertychange', function() {
+							$("#totalCoupon").text($(this).val() * $("#pushCount").val());
+						});
+						$("#pushCount").bind('input propertychange', function() {
+							$("#totalCoupon").text($(this).val() * $("#couponPrice").val());
+						});
+					});
+					$table.bootstrapTable({
+						pagination: true, //分页
+						onCheck: function(row) {
+							checkList.push(row.Id);
+							$.unique(checkList);
+						},
+						onUncheck: function(row) {
+							var pIndex = $.inArray(row.Id, checkList);
+							checkList.splice(pIndex, 1);
+							$.unique(checkList);
+						},
+						onCheckAll: function(rows) {
+							$.each(rows, function(index) {
+								checkList.push(rows[index].Id);
+							});
+							$.unique(checkList);
+						},
+						onUncheckAll: function(rows) {
+							$.unique(checkList);
+							var filterarray = $.grep(checkList, function(value) {
+								var isDel = false;
+								for (var i = 0; i < rows.length; i++) {
+									if (rows[i].Id == value) {
+										isDel = true;
+										break;
+									}
+								}
+								return !isDel;
+							});
+							checkList = filterarray;
+						},
+						escape: true,
+						pageList: [10]
+					});
+
+					function getdata(offset) {
+						var proData = new Array();
+						condition = {
+							KeyWord: $("#keyword").val(),
+							startPrice: $("#startprice").val() == "" ? 0 : $("#startprice").val(),
+							endPrice: $("#endprice").val() == "" ? 100000 : $("#endprice").val(),
+							TypeId: $("#classify").val()
+						}
+						condition.p_limit = $table.bootstrapTable('getOptions').pageSize;
+						condition.p_offset = offset;
+						getDataList(yshurl + "GetSkuListForCoupon", condition, function(d) {
+							proData = d.many[0];
+							totalcount = d.many[1][0].totalcount;
+							var pdata = {
+								total: totalcount,
+								rows: proData
+							};
+							$("#seleAll").text(totalcount);
+							$table.bootstrapTable('load', pdata);
+							setIframeHeight();
+							$(".selectBtn").each(function(index, element) {
+								for (var i = 0; i < selectProList.length; i++) {
+									if (selectProList[i] == $(this).val()) {
+										$(this).text("取消");
+									}
+								}
+							});
+							$(".selectBtn").click(function() {
+								var thisval = parseInt($(this).val());
+								if ($(this).text() == "选择") { //添加
+									selectProList.push(thisval);
+									$(this).text("取消");
+									$("#hasSele").text(selectProList.length);
+									if (addList.indexOf(thisval) < 0) {
+										var delindex = deleList.indexOf(thisval);
+										if (delindex < 0) {
+											addList.push(thisval);
+										} else {
+											deleList.splice(delindex, 1);
+										}
+									}
+								} else { //删除
+									var index = selectProList.indexOf(thisval);
+									if (index > -1) {
+										selectProList.splice(index, 1);
+										$(this).text("选择");
+										$("#hasSele").text(selectProList.length);
+									}
+									if (deleList.indexOf(thisval) < 0) {
+										var addindex = addList.indexOf(thisval);
+										if (addindex < 0) {
+											deleList.push(thisval);
+										} else {
+											addList.splice(addindex, 1);
+										}
+									}
+								}
+							});
+							//保存更改
+							$("#btn_save").click(function() {
+								$('#sub_form').data('bootstrapValidator').validate();
+								if ($("#sub_form").data('bootstrapValidator').isValid()) {
+									if (selectProList.length == 0) {
+										ysh_msg('请选择要优惠的商品！');
+										return;
+									}
+									var condition = {
+										CouponId: getID,
+										CouponName: $("#couponName").val(),
+										CouponPrice: $("#couponPrice").val(),
+										PushCount: $("#pushCount").val(),
+										StartTime: $("#startTime").val(),
+										EndTime: $("#endTime").val(),
+										CanCoupon: $("#canCoupon").val()
+									}
+									var AddList = "";
+									if (addList.length > 0) {
+										AddList = addList[0];
+									}
+									for (var i = 1; i < addList.length; i++) {
+										AddList = AddList + "," + addList[i];
+									}
+									var addCoupon = {
+										CouponId: getID,
+										CouponPrice: $("#couponPrice").val(),
+										CanCoupon: $("#canCoupon").val(),
+										AddSKUList: AddList
+									}
+									var DeleList = "";
+									if (deleList.length > 0) {
+										DeleList = deleList[0];
+									}
+									for (var i = 1; i < deleList.length; i++) {
+										DeleList = DeleList + "," + deleList[i];
+									}
+									var deleCoupon = {
+										CouponId: getID,
+										CouponPrice: $("#couponPrice").val(),
+										CanCoupon: $("#canCoupon").val(),
+										DelSKUList: DeleList
+									}
+									var startdate = getDate(condition.StartTime);
+									var enddate = getDate(condition.EndTime);
+									if (startdate <= enddate) {
+										if (parseFloat(condition.CouponPrice) < parseFloat(condition.CanCoupon)) {
+											getDataList(yshurl + "UpdateCoupon", condition, function(d) {
+												if (d.state == 0) {
+													getDataList(yshurl + "AddCoupon", addCoupon, function(d) {
+														if (d.state == 0) {
+															getDataList(yshurl + "DeleCoupon", deleCoupon, function(d) {
+																if (d.state == 0) {
+																	window.history.back();
+																}
+															});
+														}
+													});
+												}
+											});
+										} else {
+											ysh_msg('优惠券面值不能超过可用金额！');
+										}
+									} else {
+										ysh_msg('活动结束日期应该大于开始日期！');
+									}
+								}
+							});
+						});
+					}
+					$("#btn_search").click(function() {
+						getdata(0);
+					});
+					$table.on('page-change.bs.table', function(e, number, size) {
+						var os = (number - 1) * size;
+						getdata(os);
+						for (var i = 0; i < selectProList.length; i++) {
+							$(".selectBtn").each(function() {
+								if ($(this).val() == selectProList[i]) {
+									$(this).text("取消");
+								}
+							});
+						}
+					});
+					//根据优惠券ID获取选择了此优惠券的商品
+					function getSelectedPro(offset, couponId) {
+						condition = {
+							KeyWord: $("#keyword").val(),
+							startPrice: $("#startprice").val() == "" ? 0 : $("#startprice").val(),
+							endPrice: $("#endprice").val() == "" ? 100000 : $("#endprice").val(),
+							CouponId: couponId,
+							OwnerType: 4
+						}
+						condition.p_limit = $table.bootstrapTable('getOptions').pageSize;
+						condition.p_offset = offset;
+						getDataList(yshurl + "GetSelectedProListById", condition, function(d) {
+							data = d.aaData;
+							for (var i = 0; i < data.length; i++) {
+								$(".selectBtn").each(function() {
+									if ($(this).val() == data[i].Id) {
+										$(this).text("取消");
+									}
+								});
+								selectProList.push(data[i].Id);
+							}
+							$("#hasSele").text(data.length);
+						});
+					}
+
+					function getDate(strDate) {
+						var st = strDate;
+						var a = st.split(" ");
+						var b = a[0].split("-");
+						var date = new Date(b[0], b[1], b[2], "0", "0", "0");
+						return date;
+					}
+
+					function imageFormatter(value, row, index) {
+						var result = [
+							'<img src="http://f.yshfresh.com' + row.Picurl + '" style="height: 30px;width: 30px;"/>', '<label>' + row.ProductName + '</label>'
+						];
+						return result.join(' ');
+					}
+
+					function skuFormatter(value, row, index) {
+						var result = [
+							'<label>' + row.Specifications + row.MeasureName + '</label>'
+						];
+						return result.join(' ');
+					}
+
+					function operationFormatter(value, row, index) {
+						var result = [
+							'<button class="selectBtn btn btn-info" value="' + row.Id + '">选择</button>'
+						];
+						return result.join(' ');
+					}
+
+					function getQueryString(name) {
+						var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+						var r = window.location.search.substr(1).match(reg);
+						if (r != null) return unescape(r[2]);
+						return null;
+					}
+					//表单验证
+					$('#sub_form').bootstrapValidator({
+						message: '错误',
+						feedbackIcons: {
+							valid: 'glyphicon glyphicon-ok',
+							invalid: 'glyphicon glyphicon-remove',
+							validating: 'glyphicon glyphicon-refresh'
+						},
+						fields: {
+							couponName: {
+								validators: {
+									notEmpty: {
+										message: '值不能为空'
+									}
+								}
+							},
+							couponPrice: {
+								validators: {
+									notEmpty: {
+										message: '值不能为空'
+									},
+									numeric: {
+										message: '只能输入数字'
+									}
+								}
+							},
+							pushCount: {
+								validators: {
+									notEmpty: {
+										message: '值不能为空'
+									},
+									numeric: {
+										message: '只能输入数字'
+									}
+								}
+							},
+							startTime: {
+								validators: {
+									notEmpty: {
+										message: '值不能为空'
+									}
+								}
+							},
+							endTime: {
+								validators: {
+									notEmpty: {
+										message: '值不能为空'
+									}
+								}
+							},
+							canCoupon: {
+								validators: {
+									notEmpty: {
+										message: '值不能为空'
+									},
+									numeric: {
+										message: '只能输入数字'
+									}
+								}
+							}
+						}
+					});
+				</script>
+				<!--
+	作者：zhj
+	时间：2016-05-05
+	描述：修改结束
+-->
+	</body>
+
+</html>

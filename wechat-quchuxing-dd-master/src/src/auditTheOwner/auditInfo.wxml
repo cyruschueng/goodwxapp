@@ -1,0 +1,19 @@
+<view class="header">
+  <view class="status">{{ driverInfo.status }}</view>
+  <view class="time">{{ driverInfo.creatTime }}</view>
+  <view class="phone">手机: {{ driverInfo.phone }}</view>
+  <view class="code">车牌：{{ driverInfo.carNumber  }}</view>
+  <view class="car_type">车型: {{ driverInfo.car  }}</view>
+</view>
+<view class="body">
+  <view class="img_title">驾驶证</view>
+  <image src="{{ driverInfo.driverLicencePictureMain }}"></image>
+  <view class="img_title">行驶证</view>
+  <image src="{{ driverInfo.drivingLicensePictureMain }}"></image>
+</view>
+<block wx:if="{{ driverInfo.status == '待审核' }}">
+  <view class="foot_btn">
+    <button class="yes" bindtap="throughAudit" data-id="{{ driverInfo.phone }}">通过</button>
+    <button class="pass" bindtap="refusehAudit" data-id="{{ driverInfo.phone }}">拒绝</button>
+  </view>
+</block>

@@ -1,0 +1,56 @@
+<view class='login_b' wx:if="{{!TableInfo.length}}" >
+  <view class='i1'>
+    <image src='https://lingju360.com/miniapp/resources/image/yesShopping.png'></image>
+  </view>
+  <view class='t1'>暂可选桌号</view>
+  <!-- <navigator url='/page/coupon/index'>
+    <view class='t2'>立即去领取</view>
+  </navigator> -->
+
+</view>
+
+<!-- 第一版点菜 -->
+<!-- <view class='bj'>
+
+<view class='title'>选择桌号</view>
+
+<view wx:if="{{0}}" class="section btn">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      桌型：{{array[index]}}
+    </view>
+  </picker>
+</view>
+
+
+<view class="section btn">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{TableInfo}}" range-key="deskNo" >
+    <view class="picker">
+      桌号：{{TableInfo[index].deskNo}}
+    </view>
+  </picker>
+</view>
+
+<view bindtap='to_takeoutpay' class='btn'>确定</view>
+
+<view bindtap='scan' class='scan'>扫一扫（ 快速点餐 ）</view>
+
+</view> -->
+
+  <view class='dish_tab' wx:if="{{0}}">
+    <view wx:key="{{index}}" data-index="{{item.num}}" catchtap='change_active_tab' class='li {{ item.num === active_tab ? "active" : ""  }}' wx:for="{{tab}}">{{item.text}}
+    </view>
+  </view>
+
+
+
+  <view class='desklist'>
+     <view class='desk_li {{item.flag==0?"flag_0":""}} {{index==sel_num?"choosed":""}}' wx:for="{{TableInfo}}" wx:key="{{index}}" data-flag="{{item.flag}}" catchtap='desk_sel' data-index='{{index}}'>
+        <view class='in'>
+          <view>{{ '' + item.deskNo}}</view>
+          <view class='{{index==sel_num?"mine_c":""}}'>{{item.deskTypeName +' 人桌'}}</view>
+        </view>
+     </view>
+  </view>
+
+  <view bindtap='scan' class='scan'>扫一扫（ 快速点餐 ）</view>

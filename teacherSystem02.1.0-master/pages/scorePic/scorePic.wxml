@@ -1,0 +1,85 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 查询条件 -->
+  <view class="searchW flex">
+    <view class="searchIf flex">
+      <view class="searchIf-item" bindtap="getYear" data-id="year">{{schoolYear}}年<image src="../images/arrow.gif"></image></view>
+      <view class="searchIf-item" bindtap="getSemester" data-id="semester">{{semester}}<image src="../images/arrow.gif"></image></view>
+    </view>
+    <view class="menu"><image src="../images/menu.gif" bindtap="powerDrawer" data-statu="{{isopen}}" wx:if="{{!showModalStatus}}"></image></view>
+  </view>
+  <!-- 结果显示 -->
+  <view class="searchResult" style="height:{{resultH}}px">
+    <view class="resultItem flex" wx:for="{{classes}}" bindtap="goPic" data-index="{{index}}" data-id="classes" wx:key="id">
+      <view class="dot"></view>
+      <view class="txt">{{item.value}}</view>
+    </view>
+  </view>
+<!--   <image wx:if="{{showImg}}" style="width:{{windowWidth}}px;height:{{imageH*windowWidth/imageW}}px" mode="aspectFit" class="PreviewImg" src="{{src}}" bindload="loadImg" bindtap="showPreview"></image> -->
+
+  <!-- 弹窗 -->
+  <view class="float" wx:if="{{show}}" data-id="float" bindtap="closeFloat">
+    <view class="floatWrap">
+      <view class="arrows arrowT"><image class="arrowT" src="../images/arrow-t.png"></image></view>
+      <view class="floatC">
+        <view class="floatC-item" wx:for="{{arr}}" data-id="{{item.id}}" bindtap="getIndex">{{item.value}}</view>
+      </view>
+      <view class="arrows arrowB"><image class="arrowB" src="../images/arrow-b.png"></image></view>
+    </view>
+  </view>
+
+  <!-- 按钮弹窗 -->
+  <view class="float float1" wx:if="{{show1}}" data-id="float" bindtap="closeFloat">
+    <view class="floatWrap">
+      <view class="floatC">
+        <radio-group class="radio-group" bindchange="getIndex">
+          <view class="floatC-item">
+            <label class="radio">
+              <radio value="7" />至第7讲
+            </label> 
+          </view>
+          <view class="floatC-item">
+            <label class="radio">
+              <radio value="10" />至第10讲
+            </label> 
+          </view>
+          <view class="floatC-item">
+            <label class="radio">
+              <radio value="12" />至第12讲
+            </label> 
+          </view>
+          <view class="floatC-item">
+            <label class="radio">
+              <radio value="15" />至第15讲
+            </label> 
+          </view>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导航tab -->
+  <view class="tabBar flex">
+    <view class="tabItem " bindtap="changeColor" wx:for="{{tabBarArr}}" data-id="{{index}}" wx:key="id">
+      <view class="icon"><image class="icon1" mode="aspectFit" src="{{item.iconSrc}}"></image></view>
+      <view class="txt" style="color:{{item.changeTextColor}}">{{item.txt}}</view>
+    </view>
+  </view>
+
+  <!-- 导航 -->
+  <view animation="{{animationData}}" class="mainMenu drawer_attr_box" wx:if="{{showModalStatus}}" bindtap="closeNav" data-id="closeNav">
+    <view class="menu" data-id="menu">
+        <view class="userinfo flex">
+            <view class="Avatar">
+                <image src="../images/noface.png" mode='widthFix'></image>
+            </view>
+            <view class="name">{{teacherName}}</view>
+        </view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SchoolCollection/SchoolCollection'>学校信息收集</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClassEntryGrade/SelectClassEntryGrade'>学员资料查询</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClass/SelectClass'>班级成绩录入</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/PicClassList/PicClassList'>定制图片生成</navigator></view>
+        <view class="quit tac"><button class="btn" bindtap="unlogin" hover-class="hoverLogin">退出登录</button></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+  <!--top -->
+  <view class='bgColorFE pd05 flex flexCenter'>
+    <view class='mr1 cir' style='min-width:100px;min-height:100px;'>
+      <view class='ecBar'>
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+      </view>
+    </view>
+    <view class='flexColumn flex1'>
+      <template is="listAdmStat" data="{{admStaBox: admStaBox}}" />
+    </view>
+  </view>
+  <!--nav -->
+  <view class='h8' class='orderFilter bg256'>
+    <template is="tapMenu" data="{{tapBox: tapBox}}"/>  
+    <template is="tapMenu" data="{{tapBox: tapBox1}}"/>  
+  </view>
+  <!--body -->
+  <view class='flexv1 modeldrawer_content pb1'>
+    <template is="listStyle" data="{{stationBox: stationBox}}"/> 
+  </view>
+  <!--err  -->
+  <template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

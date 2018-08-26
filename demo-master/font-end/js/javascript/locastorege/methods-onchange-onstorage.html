@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>localStorage方法，不兼容</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <input type="number" id="num" value="3" />
+    <div id="all"></div>
+</body>
+<script>
+window.onload = function() {
+    var oNum = document.getElementById('num');
+    var oAll = document.getElementById('all');
+    oNum.onchange = function() {//google不支持
+        localStorage.setItem("apple", oNum.value)
+    };
+    window.onstorage = function(ev) {//google不支持
+        oAll.innerHTML = '共消费￥' + localStorage.getItem("apple") * 20 + '元';
+    };
+};
+</script>

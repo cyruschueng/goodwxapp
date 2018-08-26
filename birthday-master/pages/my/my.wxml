@@ -1,0 +1,60 @@
+<view class="container">
+	<view class="userInfo">
+		<image wx:if="{{inform.avatar=='undefined' || !inform.avatar}}" src="{{userInfo.avatarUrl}}" 
+           bindtap='wanshan'  class="userInfo-avarta"></image>
+    <image wx:else src="{{inform.avatar}}" bindtap='wanshan'  class="userInfo-avarta"></image>
+    <view class="userInfo-name" wx:if="{{!inform.name}}" bindtap='wanshan'>	{{userInfo.nickName}}</view>
+    <view class="userInfo-name" wx:else bindtap='wanshan'>	{{inform.name}}</view>
+		<view class="userInfo-check-birth" wx:if="{{shiming}}" bindtap='wanshan'>	
+      {{inform.birth_year}}年{{inform.birth_month}}月{{inform.birth_day}}日  | 
+        <text wx:if="{{inform.gender==2}}">♀</text> <text wx:if="{{inform.gender==1}}">♂</text>
+    </view>
+    <view class="userInfo-name" wx:else bindtap='wanshan'>	生日信息未完善，点此完善</view>
+		<navigator url="../renzheng/renzheng" class="userInfo-uncheck" wx:if="{{myselfName==false}}">
+    <!--myselfName  -->
+        <view class="userInfo-uncheck-check" >认证手机号</view>
+    </navigator>
+	</view>
+	<view class="separateLine">
+	</view>
+	<navigator url="../money/money" class="otherInfo">
+		<text class="otherInfo-desc">我的钱包</text>
+		<view class="otherInfo-content">
+        <text wx:if="{{money}}">{{money}}</text>
+        <text wx:else>0.00</text>元
+    </view>
+		<image class="otherInfo-guideIcon"></image>
+	</navigator>
+	<!-- <view class="otherInfo">
+		<text class="otherInfo-desc">生日提醒</text>
+		<view class="otherInfo-content red">未开通</view>
+		<image class="otherInfo-guideIcon"></image>
+	</view> -->
+	<view class="otherInfo">
+    <view class='contact-button'>
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button> 
+        <contact-button size="20" session-from="weapp"></contact-button>
+    </view>
+		<text class="otherInfo-desc">	意见反馈</text>
+		<view class="otherInfo-content"></view>
+		<image class="otherInfo-guideIcon"></image>
+	</view>
+</view>

@@ -1,0 +1,42 @@
+<import src="../../templates/personalInfo.wxml"/>
+<view  hidden="{{listBox}}">
+  <view class="btn-area" wx:if="{{isopen == '' || isopen == 2 || bindphone == '' || bindphone == null}}">
+    <template is="nobind"></template>
+    <button type="red" bindtap="gotopublic">前往公开</button>
+  </view>
+  <view class="container">
+    <!-- 搜索行号 -->
+    <view class="searchBox" wx:if="{{isopen == 1 && bindphone !== ''}}">
+      <view class="section">
+        <input type="text" bindinput="searchVal" confirm-type="done" placeholder="请输入电话号，姓名，地点..." />
+        <view class="searchicon" bindtap="clickSearch">
+          <icon type="search" size="20" />
+        </view>
+      </view>
+    </view>
+    <!-- 没有数据显示 -->
+    <template is="nothing" wx:if="{{dataList.length <= 0 && isopen == 1}}"></template>
+    <view class="abbressbook" wx:if="{{isopen == 1 && bindphone !== ''}}" wx:for="{{dataList}}"  wx:key="id" id="{{item.id}}" bindtap="listClick">
+      <view class="abbressbook-main">
+        <view class="abbressbook-title">{{item.name}}<text>{{item.position == null || item.position == '' ? '' : "（"+item.position+"）"}}</text></view>
+        <view class="abbressbook-list">
+          <view class="abbressbook-list-box clearfix"><image class="abbressbook-image" src="../../image/phone.png"></image><text>{{item.user_id == null || item.user_id == '' ? '无' : item.user_id}}</text></view>
+          <view class="abbressbook-list-box clearfix"><image class="abbressbook-image" src="../../image/position.png"></image><text>{{item.address == null || item.address == '' ? '全国' : item.address}}</text></view>
+          <view class="abbressbook-list-box clearfix"><image class="abbressbook-image" src="../../image/city.png"></image><text>{{item.company == null || item.company == '' ? '无' : item.company}}</text></view>
+        </view>
+        <view class="abbressbook-address">
+          <view class="clearfix" wx:if="{{item.wechat}}"><text class="address-title">微信：</text><text class="address-mian">{{item.wechat}}</text></view>
+          <view class="clearfix" wx:if="{{item.email}}"><text class="address-title">邮箱：</text><text class="address-mian">{{item.email}}</text></view>
+        </view>
+      </view>
+      <image class="abbressbook-address-image" wx:if="{{item.gender=='1'}}" src="../../image/abbressbook_qj_man.png"></image>
+      <image class="abbressbook-address-image" wx:elif="{{item.gender=='2'}}" src="../../image/abbressbook_qj_woman.png"></image>
+      <image class="abbressbook-address-image" wx:else src="../../image/abbressbook_qj_unknown.png"></image>
+      <image class="abbressbook-avatar-image" src="{{item.avatar}}"></image>
+    </view>
+
+  </view>
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

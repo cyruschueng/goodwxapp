@@ -1,0 +1,60 @@
+<!--pages/home/recommendedCourses.wxml-->
+
+<import src="../../templates/empty-view/empty-view.wxml"/>
+<import src="../../templates/recoCourse-item/recoCourse-item.wxml"/>
+
+<view class='bg-view'>
+
+  <view>
+    <image class='title-img' src='../../images/icon/home/car/banner.png'></image>
+  </view>
+
+<!-- tab -->
+<view class="weui-tab">
+  <!-- tab  -->
+  <view class="weui-navbar">
+    <block wx:for-items="{{ navbarTabs }}" wx:key="{{ index }}">
+      <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="bindNavbarTabTap">
+        <view class="weui-navbar__title">
+          {{ item }}
+        </view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+  </view>
+
+  <!-- panel -->
+  <view class="weui-tab__panel">
+
+<!-- 选项一 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
+      <!-- 选项一 内容 -->
+      <block wx:if='{{ personalClassList.length > 0 }}'>
+      <block wx:for='{{ personalClassList }}' wx:for-item='personal'  wx:key='{{ index }}'>
+        <template is="recoCourse-item" data="{{ ...personal, index }}"/>
+      </block>
+      </block>
+      
+      <!--无 更多 -->
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
+    </view>
+<!-- 选项一 结束 -->
+
+<!-- 选项二 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
+      <!-- 选项二 内容 -->
+      <block wx:if='{{ singleClassList.length > 0 }}'>
+      <block wx:for='{{ singleClassList }}' wx:for-item='single' wx:key='{{ index }}'>
+        <template is="recoCourse-item" data="{{ ...single, index }}"/>
+      </block>
+      </block>
+      <!-- 无 更多 -->
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
+    </view>
+<!-- 选项二结束 -->
+
+  </view>
+</view>
+
+
+</view>

@@ -1,0 +1,54 @@
+<view class='slbd rank {{rankPage}}'>
+    <view class='rank-menu'>
+        <view class="flex-box menu-main">
+            <view class='flex-item menu-item menu-friend' bindtap='rankFriendShow'>
+                <image class='img-friend' src="{{friendRankMenuImg}}" mode="widthFix"></image>
+            </view>
+            <view class='flex-item menu-item menu-all' bindtap='rankAllShow'>
+                <image class='img-all' src="{{allRankMenuImg}}" mode="widthFix"></image>
+            </view>
+        </view>
+    </view>
+    <view class='rank-content'>
+        <scroll-view class='rank-scroll' scroll-y="true">
+        <view class='rank-list'>
+            <view class='rank-li clearfix' wx:for="{{rankListArr}}" wx:key="{{index}}">
+                <view class='li-cell li-sort'>
+                    <view class='sort-box {{item.hat}}'>{{item.sort}}<text class='sort-hat'></text></view>
+                </view>
+                <view class='li-cell li-face'>
+                    <image class="img-face" src="{{item.userface}}" mode="widthFix"></image>
+                </view>
+                <view class='li-cell li-nick'>
+                    <text class='nick-text'>{{item.usernick}}</text>
+                </view>
+                <view class='li-cell li-level'>
+                    {{'Lv'+item.level}}<text class="iconstar {{'star'+item.star}}"></text>
+                </view>
+                <view class='li-cell li-score'>{{item.score}}</view>
+            </view>
+            <view class='rank-me {{myRankShow}}'>
+                <view class='rankme-line'>... ...</view>
+                <view class='rank-li clearfix'>
+                    <view class='li-cell li-sort'>
+                        <view class='sort-box'>{{myRank.sort}}</view>
+                    </view>
+                    <view class='li-cell li-face'>
+                        <image class="img-face" src="{{myRank.userface}}" mode="widthFix"></image>
+                    </view>
+                    <view class='li-cell li-nick'>
+                        <text class='nick-text'>{{myRank.usernick}}</text>
+                    </view>
+                    <view class='li-cell li-level'>
+                        {{'Lv'+myRank.level}}<text class="iconstar {{'star'+myRank.star}}"></text>
+                    </view>
+                    <view class='li-cell li-score'>{{myRank.score}}</view>
+                </view>
+            </view>
+        </view>
+        </scroll-view>
+    </view>
+    <button class='hidebtn rank-more' bindtap='rankListPageAdd'>
+        <image class='img-more' src="../../asset/image/rank-more.png" mode="widthFix"></image>
+    </button>
+</view>

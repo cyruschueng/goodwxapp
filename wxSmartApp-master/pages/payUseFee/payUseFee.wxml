@@ -1,0 +1,15 @@
+<!--现在没有了，原来是用来支付超期罚单的  -->
+
+<view>
+
+  <view class="time-tip" wx:if="{{info.autoPayCount != 0}}">
+    嘀嘀币支付订单数{{info.autoPayCount}}，支付嘀嘀币{{info.autoPayFree}}
+  </view>
+  
+  <view class="{{info.autoPayCount != 0?'pay-tip':'time-tip'}}">未支付订单数<text>{{info.unpayCount}}单</text></view>
+  <view class="pay-tip">需支付金额<text>{{info.unpayFree}}元</text></view>
+
+  <view class="btn-group">
+    <button class="wechat-pay" bindtap="bindWechatPay">支付费用</button>
+  </view>
+</view>

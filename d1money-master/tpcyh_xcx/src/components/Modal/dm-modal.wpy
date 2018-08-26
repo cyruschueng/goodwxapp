@@ -1,0 +1,77 @@
+<style lang="less" rel="stylesheet/less">
+
+    .demon-modalBox{
+
+        .demon-modal{
+            position: fixed;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            background-color: #ffffff;
+            z-index:1001;
+            width: 450rpx;
+
+            .demon-modal__hd{
+                font-size: 18px;
+                text-align: center;
+
+            }
+
+            .demon-modal__bd{
+
+            }
+            /*dialog 页脚*/
+            .demon-modal__ft{
+                display: flex;
+                align-items: center;
+                background-color: #ffffff;
+                font-size:16px;
+                text-align: center;
+                view{
+                    padding: 20rpx 0;
+                    flex:1;
+                    border-left: 1px solid #dddddd;
+                    &:first-child{
+                        border-left: none;
+                    }
+                }
+            }
+        }
+
+    }
+
+</style>
+<template>
+    <view class="demon-modalBox">
+        <view class="demon-mask"></view>
+        <view class="demon-modal">
+            <view class="demon-modal__hd">
+                <slot></slot>
+            </view>
+            <view class="demon-modal__bd">
+                <slot></slot>
+            </view>
+            <view class="demon-modal__ft">
+                <view>取消</view>
+                <view>确认</view>
+            </view>
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {}
+
+        data = {}
+
+        events = {}
+
+        methods = {}
+
+        onLoad() {
+
+        }
+    }
+</script>

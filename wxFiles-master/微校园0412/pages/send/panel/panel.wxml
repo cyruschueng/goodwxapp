@@ -1,0 +1,172 @@
+<view class="plep">
+  <view class="item {{barflag == 0 ? 'acts':''}}" data-id="0" bindtap="changeBar">待接手</view>
+  <view class="item {{barflag == 1 ? 'acts':''}}" data-id="1" bindtap="changeBar">已接手</view>
+  <view class="item {{barflag == 2 ? 'acts':''}}" data-id="2" bindtap="changeBar">已完成</view>
+</view>
+
+<view style="height:100rpx"></view>
+
+
+<view class="spinner {{loading ? '':'hiddenpl'}}">
+  <view class="spinner-container container1">
+    <view class="circle1"></view>
+    <view class="circle2"></view>
+    <view class="circle3"></view>
+    <view class="circle4"></view>
+  </view>
+  <view class="spinner-container container2">
+    <view class="circle1"></view>
+    <view class="circle2"></view>
+    <view class="circle3"></view>
+    <view class="circle4"></view>
+  </view>
+  <view class="spinner-container container3">
+    <view class="circle1"></view>
+    <view class="circle2"></view>
+    <view class="circle3"></view>
+    <view class="circle4"></view>
+  </view>
+</view>
+
+<view style="font-size:30rpx;text-align:center" class="{{loading ? '':'hiddenpl'}}">加载中...</view>
+
+
+<view style="text-align:center;" wx:if="{{barflag == 0 && list.length == 0}}">
+  <image style="width:180rpx;height:180rpx;margin-top:50rpx" src="/images/none.png"></image>
+  <view style="font-size:32rpx">暂无订单</view>
+</view>
+
+
+<view class=" margin-xs" wx:if="{{barflag == 0 && list.length>0}}" wx:for="{{list}}"  >
+  <view class="flex-start" style="padding:10rpx;background:#4a6467">
+    <image src="{{url+item.shop.imagec.url}}" style="width:70rpx;height:60rpx;border:1px solid #fff;border-radius:5rpx"></image>
+    <view style="width:400rpx;color:#fff;margin-left:20rpx;margin-top:2rpx">
+      <view style="font-size:28rpx;font-weight:bold;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;height:32rpx;line-height:32rpx">{{item.shop.name}}</view>
+      <view style="font-size:26rpx;">{{item.time}}</view>
+    </view>
+  </view>
+  <view class="panel">
+  <view class="flex-start">
+    <image style="width:40rpx;height:40rpx" src="/images/l3.png"></image>
+    <view style="font-size:30rpx;margin-left:20rpx;width:650rpx">{{item.addressdetail}}</view>
+  </view>
+  <view class="flex-start margin-xs">
+    <view class="flex-start">
+      <image style="width:40rpx;height:40rpx" src="/images/l1.png"></image>
+      <view style="font-size:30rpx;margin-left:10rpx;font-weight:bold">{{item.addressname}}</view>
+    </view>
+    <view class="flex-start" style="margin-left:20rpx;">
+      <image style="width:40rpx;height:40rpx" src="/images/l2.png"></image>
+      <view style="font-size:30rpx;margin-left:10rpx;font-weight:bold">{{item.addressphone}}</view>
+    </view>
+  </view>
+  <view class="flex-start margin-xs">
+    <image style="width:40rpx;height:40rpx" src="/images/l5.png"></image>
+    <view style="font-size:30rpx;margin-left:20rpx;width:600rpx">备注：{{item.bz}}</view>
+  </view>
+  <view class="flex-end">
+    <view data-id="{{index}}" bindtap="recapt" style="width:200rpx;line-height:60rpx;text-align:center;border-radius:12rpx;color:#fff;background:#06c1ae;font-size:30rpx;">接手</view>
+  </view>
+  </view>
+</view>
+
+<view style="text-align:center;" wx:if="{{barflag == 1 && list1.length == 0}}">
+  <image style="width:180rpx;height:180rpx;margin-top:50rpx" src="/images/none.png"></image>
+  <view style="font-size:32rpx">暂无订单</view>
+</view>
+
+
+<view class=" margin-xs" wx:if="{{barflag == 1 && list1.length>0}}" wx:for="{{list1}}">
+  <view class="flex-start" style="padding:10rpx;background:#4a6467">
+    <image src="{{url+item.shop.imagec.url}}" style="width:70rpx;height:60rpx;border:1px solid #fff;border-radius:5rpx"></image>
+    <view style="width:400rpx;color:#fff;margin-left:20rpx;margin-top:2rpx">
+      <view style="font-size:28rpx;font-weight:bold;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;height:32rpx;line-height:32rpx">{{item.shop.name}}</view>
+      <view style="font-size:26rpx;">{{item.time}}</view>
+    </view>
+  </view>
+  <view class="panel">
+  <view class="flex-start">
+    <image style="width:40rpx;height:40rpx" src="/images/l3.png"></image>
+    <view style="font-size:30rpx;margin-left:20rpx;width:650rpx">{{item.addressdetail}}</view>
+  </view>
+  <view class="flex-start margin-xs">
+    <view class="flex-start">
+      <image style="width:40rpx;height:40rpx" src="/images/l1.png"></image>
+      <view style="font-size:30rpx;margin-left:10rpx;font-weight:bold">{{item.addressname}}</view>
+    </view>
+    <view class="flex-start" style="margin-left:20rpx;">
+      <image style="width:40rpx;height:40rpx" src="/images/l2.png"></image>
+      <view style="font-size:30rpx;margin-left:10rpx;font-weight:bold">{{item.addressphone}}</view>
+    </view>
+  </view>
+  <view class="flex-start margin-xs">
+    <image style="width:40rpx;height:40rpx" src="/images/l5.png"></image>
+    <view style="font-size:30rpx;margin-left:20rpx;width:600rpx">备注：{{item.bz}}</view>
+  </view>
+  <view class="flex-end">
+    <view style="width:200rpx;line-height:60rpx;text-align:center;border-radius:12rpx;color:#000;background:#e1e1e1;font-size:30rpx;margin-right:20rpx" data-na="{{item.id}}" bindtap="navToDetail">查看</view>
+    <view data-id="{{index}}" bindtap="dook" style="width:200rpx;line-height:60rpx;text-align:center;border-radius:12rpx;color:#fff;background:#06c1ae;font-size:30rpx;">送达</view>
+  </view>
+  </view>
+</view>
+
+
+<view style="text-align:center;" wx:if="{{barflag == 2 && list2.length == 0}}">
+  <image style="width:180rpx;height:180rpx;margin-top:50rpx" src="/images/none.png"></image>
+  <view style="font-size:32rpx">暂无订单</view>
+</view>
+
+<view class=" margin-xs" wx:if="{{barflag == 2 && list2.length>0}}" wx:for="{{list2}}">
+  <view class="flex-start" style="padding:10rpx;background:#4a6467">
+    <image src="{{url+item.shop.imagec.url}}" style="width:70rpx;height:60rpx;border:1px solid #fff;border-radius:5rpx"></image>
+    <view style="width:400rpx;color:#fff;margin-left:20rpx;margin-top:2rpx">
+      <view style="font-size:28rpx;font-weight:bold;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;height:32rpx;line-height:32rpx">{{item.shop.name}}</view>
+      <view style="font-size:26rpx;">{{item.time}}</view>
+    </view>
+  </view>
+  <view class="panel">
+  <view class="flex-start">
+    <image style="width:40rpx;height:40rpx" src="/images/l3.png"></image>
+    <view style="font-size:30rpx;margin-left:20rpx;width:650rpx">{{item.addressdetail}}</view>
+  </view>
+  <view class="flex-start margin-xs">
+    <view class="flex-start">
+      <image style="width:40rpx;height:40rpx" src="/images/l1.png"></image>
+      <view style="font-size:30rpx;margin-left:10rpx;font-weight:bold">{{item.addressname}}</view>
+    </view>
+    <view class="flex-start" style="margin-left:20rpx;">
+      <image style="width:40rpx;height:40rpx" src="/images/l2.png"></image>
+      <view style="font-size:30rpx;margin-left:10rpx;font-weight:bold">{{item.addressphone}}</view>
+    </view>
+  </view>
+  <view class="flex-start margin-xs">
+    <image style="width:40rpx;height:40rpx" src="/images/l5.png"></image>
+    <view style="font-size:30rpx;margin-left:20rpx;width:600rpx">备注：{{item.bz}}</view>
+  </view>
+  <view class="flex-end">
+    <view style="width:200rpx;line-height:60rpx;text-align:center;border-radius:12rpx;color:#000;background:#e1e1e1;font-size:30rpx;margin-right:20rpx" data-na="{{item.id}}" bindtap="navToDetail">查看</view>
+    <view data-id="{{index}}"  style="width:200rpx;line-height:60rpx;text-align:center;border-radius:12rpx;color:#000;background:#e1e1e1;font-size:30rpx;">完成</view>
+  </view>
+  </view>
+</view>
+
+<view class="paneasd {{show ? 'asd':'ddd'}}">
+  <text wx:if="{{show}}">已连接</text>
+  <text wx:if="{{!show}}" bindtap="linked">已断开</text>
+</view>
+
+
+
+
+
+<view style="height:150rpx"></view>
+<view class="bottomple">
+  <view class="item">
+    <image src="/images/index/q3.png"></image>
+    <view>运单</view>
+  </view>
+  <view class="item" bindtap="navToMysend">
+    <image src="/images/index/q2.png"></image>
+    <view>我的</view>
+  </view>
+</view>

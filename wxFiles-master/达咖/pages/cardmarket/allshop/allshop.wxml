@@ -1,0 +1,22 @@
+<view class="panel" style="padding-bottom:0" wx:if="{{list.length > 0}}">
+  <view class="panel-xs bottom-line shop-list panel-between" wx:for="{{list}}" data-title='{{item.shopname}}' data-location="{{item.shopaddressprovince+item.shopaddresscity+item.shopaddressdistrict+item.shopaddressstreet+item.shopaddressstreetNumber}}" bindtap="navToShop">
+    <image mode="aspectFill" class="shop-img" src="{{url+item.shopimage}}"></image>
+    <view class="shop-panel">
+      <view class="blod font-lg ellipsis">{{item.shopname}}</view>
+      <view class="panel-start margin-top-xs">
+        <view class="font-sm font-default ellipsis" style="width:350rpx">{{item.shopaddresscity}}{{item.shopaddressdistrict}}{{item.shopaddressstreet}}{{item.shopaddressstreetNumber}}</view>
+      </view>
+      <view class=" font-md ellipsis">电话:{{item.shopphone}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

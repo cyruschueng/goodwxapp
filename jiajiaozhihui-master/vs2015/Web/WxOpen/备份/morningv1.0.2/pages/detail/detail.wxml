@@ -1,0 +1,44 @@
+<import src="/pages/common/template/habitdetail.wxml" />
+<import src="/pages/common/template/rank.wxml" />
+<import src="/pages/common/template/group_dialog.wxml" />
+<view class="page">
+      <view class="page__bd">
+          <view class="weui-tab">
+              <view class="weui-navbar">
+                  <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+                      <view id="{{index}}" 
+                        class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item-on' : ''}}" 
+                        bindtap="tabClick">
+                          <view class="weui-navbar__title">{{item}}</view>
+                      </view>
+                  </block>
+                 <view class="weui-navbar__slider" 
+                    style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);background-color:#f60;"></view>
+             </view>
+             <view class="weui-tab__panel">
+                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                    <template is="habitdetail" data="{{...items}}" />                    
+                 </view>
+                 <view class="weui-tab__content" style="padding-top:15px;padding-bottom:20px;" hidden="{{activeIndex != 1}}">
+                    <template is="rank" data="{{...ranks}}" />
+                 </view>
+                 <template is="group_dialog" data="{{...group}}"  />
+             </view>
+         </view>
+     </view>
+     <view class="join_wrap" wx:if="{{habit.isJoin==false}}">
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+                <view class="title">{{habit.info.title}}</view>
+                <view class="desc">已有有{{habit.info.join_num}}人加入</view>
+            </view>
+            <view class="weui-flex__item" style="padding-top:5px;">
+                <navigator url="/pages/set/set?habitid={{habitId}}" open-type="navigate">
+                    <button class="input" plain="true" size="mini">加入</button>
+                </navigator>
+            </view>
+        </view>
+     </view>
+
+     
+</view>

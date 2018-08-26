@@ -1,0 +1,575 @@
+﻿<!DOCTYPE html >
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../js/audio.min.js" type="text/javascript"></script>
+    <link href="../css/layoutit.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/button.css" rel="stylesheet" type="text/css" />
+    <link href="../css/libao.css" rel="stylesheet" type="text/css" />
+    <style>
+        
+        .group1,.group2,.group3,.group4,.group5,.group6{ display:none;}
+        .group_button2,.group_button3,.group_button4,.group_button5,.group_button6{ display:none;}
+        
+        .media{ border-bottom:1px solid #eee; border-top:1px solid #eee;}
+        .media-body{ padding-top:5px;}
+        .media-body h4{ font-size:16px; }
+        
+    </style>
+    <script charset="utf-8">
+        $(function () {
+            var cur_src = "";
+            var audios = audiojs.createAll({
+                trackEnded: function () {
+                    var next = $(".on").parent().parent().parent().next().children().children().children();
+                    if (!next.length) next = $('.music_switch').first();
+                    $(".music_switch").removeClass("on");
+                    next.addClass("on");
+                    var src = encodeURI(next.data("src"));
+                    $(".music_switch").data("switch", "on");
+                    next.data("switch", "off");
+                    $(".music_switch").css("background-position", "0px 0px");
+                    next.css("background-position", "0px -41px");
+                    cur_src = src;
+                    audio.load(src);
+                    audio.play();
+                }
+            });
+            var audio = audios[0];
+
+            $(audio).css("display", "none");
+            $(".music_switch").click(function () {
+                $(".music_switch").css("background-position", "0px 0px");
+                var status = jQuery(this).data("switch");
+                var src = encodeURI(jQuery(this).data("src"));
+                if (status == "on") {
+                    jQuery(this).data("switch", "off");
+                    $(this).css("background-position", "0px -41px");
+                    if (cur_src != src) {
+                        cur_src = src;
+                        $(".music_switch").removeClass("on");
+                        $(this).addClass("on");
+                        audio.load(src);
+                    }
+                    audio.play();
+                } else {
+                    jQuery(this).data("switch", "on");
+                    $(this).css("background-position", "0px 0px");
+                    audio.playPause();
+                }
+            });
+
+            $(".group_button1").click(function () {
+                $(".group1").css("display", "block");
+                $(".group_button1").css("display", "none");
+                $(".group_button2").css("display", "block");
+            });
+            $(".group_button2").click(function () {
+                $(".group2").css("display", "block");
+                $(".group_button2").css("display", "none");
+                $(".group_button3").css("display", "block");
+            });
+            $(".group_button3").click(function () {
+                $(".group3").css("display", "block");
+                $(".group_button3").css("display", "none");
+                $(".group_button4").css("display", "block");
+            });
+            $(".group_button4").click(function () {
+                $(".group4").css("display", "block");
+                $(".group_button4").css("display", "none");
+                $(".group_button5").css("display", "block");
+            });
+            $(".group_button5").click(function () {
+                $(".group5").css("display", "block");
+                $(".group_button5").css("display", "none");
+                $(".group_button6").css("display", "block");
+            });
+            $(".group_button6").click(function () {
+                $(".group6").css("display", "block");
+                $(".group_button6").css("display", "none");
+            });
+        })
+    </script>
+</head>
+<body style=" margin-left:0px;">
+    <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1649 手足多汗怎么办.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            手足多汗怎么办
+		            </h4> 
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1650 细菌是怎么繁殖的.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            细菌是怎么繁殖的
+		            </h4> 
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1656 为什么许多蘑菇都有个伞盖.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么许多蘑菇都有个伞盖
+		            </h4> 
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1662 计算机是怎么发明的.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            计算机是怎么发明的
+		            </h4>
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1663 电话为什么能传声.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            电话为什么能传声
+		            </h4>
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1664 飞机是怎么飞起来的.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            飞机是怎么飞起来的
+		            </h4>
+	            </div>
+            </div>
+             <a href="javascript:void(0)" id="" class="button button-block button-rounded button-highlight button-large group_button1" style="height:30px; line-height:30px;font-size:13px; margin-top:10px;">加载更多...</a>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1665 车轮为什么是圆形的.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            车轮为什么是圆形的
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1666 滑冰有哪些好处.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            滑冰有哪些好处
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1667 为什么不能多吃巧克力.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么不能多吃巧克力
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1668 为什么不能挑食.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么不能挑食
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1669 为什么小伙伴比我长的高.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么小伙伴比我长的高
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1670 我是从哪里来的.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            我是从哪里来的
+		            </h4>
+	            </div>
+            </div>
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button2" style="height:30px; line-height:30px;font-size:13px; margin-top:10px;">加载更多...</a>
+
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1671 猴子吃东西为什么那么快.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            猴子吃东西为什么那么快
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1672 松鼠的大尾巴有什么用.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            松鼠的大尾巴有什么用
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1673 螃蟹为什么吐泡泡.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            螃蟹为什么吐泡泡
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1674 鱼也睡觉吗.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            鱼也睡觉吗
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1675 为什么猫走路没有声音.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么猫走路没有声音
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1676 为什么蝴蝶有美丽的翅膀.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么蝴蝶有美丽的翅膀
+		            </h4>
+	            </div>
+            </div>
+
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button3" style=" height:30px; line-height:30px; font-size:13px; margin-top:10px;">加载更多...</a>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1677 天空中为什么会下雨呢.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            天空中为什么会下雨呢
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1678 地球是怎么形成的.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            地球是怎么形成的
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1680 天河真的是天上的河吗.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            天河真的是天上的河吗
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1681 天空中为什么有白云和乌云.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            天空中为什么有白云和乌云
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1682 沙漠是怎样形成的.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            沙漠是怎样形成的
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1683 为什么会有白天和黑夜.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么会有白天和黑夜
+		            </h4>
+	            </div>
+            </div>
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button4" style="height:30px; line-height:30px; font-size:13px; margin-top:10px;">加载更多...</a>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1684 为什么夏天热冬天冷.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么夏天热冬天冷
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1685 元旦的来历.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            元旦的来历
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1686 什么是甲骨文.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            什么是甲骨文
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1687 为什么说吸烟有害健康.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么说吸烟有害健康
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1688 为什么野草的生命力特别强.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么野草的生命力特别强
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1689 水仙为什么不用土壤栽种.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            水仙为什么不用土壤栽种
+		            </h4>
+	            </div>
+            </div>
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button5" style=" height:30px; line-height:30px;font-size:13px; margin-top:10px;">加载更多...</a>
+            <div class="media group5">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1690 黑色的花为什么少见.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            黑色的花为什么少见
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group5">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1691 为什么煮熟的种子不会发芽.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么煮熟的种子不会发芽
+		            </h4>
+	            </div>
+            </div>
+			<div class="media group5">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1693 肥皂泡泡为什么五颜六色.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            肥皂泡泡为什么五颜六色
+		            </h4>
+	            </div>
+            </div>
+			<div class="media group5">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1694 扇扇子为什么会觉得凉快.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            扇扇子为什么会觉得凉快
+		            </h4>
+	            </div>
+            </div>
+			<div class="media group5">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1695 脱衣服的时候为什么会有火花.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            脱衣服的时候为什么会有火花
+		            </h4>
+	            </div>
+            </div>
+			<div class="media group5">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1696 玩水以后手为什么会起皱.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            玩水以后手为什么会起皱
+		            </h4>
+	            </div>
+            </div>
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button6" style=" height:30px; line-height:30px;font-size:13px; margin-top:10px;">加载更多...</a>
+			<div class="media group6">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1697 汽车灯罩为什么会凹凸.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            汽车灯罩为什么会凹凸
+		            </h4>
+	            </div>
+            </div>
+			<div class="media group6">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/weishimo/1698 为什么救生圈被涂上橙黄色.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            为什么救生圈被涂上橙黄色
+		            </h4>
+	            </div>
+            </div>
+			
+		</div>
+	</div>
+</div>
+<audio id="audio" style=" display:none;" >
+    <source src="../../upload/voice/weishimo/1502%20太阳妈妈和她的儿女.mp3"  type="audio/mpeg" />
+</audio>
+</body>
+</html>

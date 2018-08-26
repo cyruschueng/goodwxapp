@@ -1,0 +1,16 @@
+  <import src="../tpls/products/products-tpls-modal.wxml" />
+  <view class="container classifyContainer">
+
+  <view class="nav"><!--nav start-->
+    <block wx:for="{{navList}}">
+      <view class="item {{item.selected?'active':''}}" data-id="{{item.tagId}}"  capture-bind:touchstart="navChange">
+        <text>{{item.tagName}}</text>
+      </view>
+    </block>
+  </view><!--nav end-->
+
+  <view class="list"><!--list start-->
+     <template is="products-modal" data='{{type: "index", data: requestProducts}}'></template>
+  </view><!--list end-->
+
+</view>

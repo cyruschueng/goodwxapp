@@ -1,0 +1,27 @@
+<view class="container minesent">
+	<view class="toptabs">
+		<view class="tab"><text class="tabin {{type=='sent'?'tabin_ac':''}}" data-way="sent" bindtap="changeway">我发出的</text></view>
+		<view class="tab"><text class="tabin {{type=='get'?'tabin_ac':''}}" data-way="get" bindtap="changeway">我收到的</text></view>
+	</view>
+	<view class="infobox">
+		<view class="ibhead"><image class="ibimg" mode="aspectFit" style="background: #fff" src="{{userInfo.avatarUrl}}"></image></view>
+		<text class="ibtext"><text class="ibname">{{userInfo.nickName}}</text>{{type=='sent'?'发出的':'收到的'}}</text>
+		<view class="ibtabs">
+			<view class="ibtab"><text class="ibnum">{{data.total}}</text><text class="ibtp">金额(元)</text></view>
+			<view class="ibtab"><text class="ibnum">{{data.num}}</text><text class="ibtp">数量(个)</text></view>
+		</view>
+	</view>
+	<view class="list {{type=='get'?'listget':''}}">
+		<view class="item"  wx:for="{{data.list}}">
+			<image class="iimg" mode="aspectFit" style="background: #fff" src="{{item.headimg}}"></image> 
+			<text class="ititle">{{item.watchword}}</text>
+			<text class="imoney">{{item.amount}}元</text>
+			<view class="ibot">
+				<text class="itime">{{item.timestr||'暂无时间'}}</text>
+				<text class="ista">{{item.remain}}/{{item.total}}</text>
+			</view>
+		</view>
+		<view class="botmore">{{loadtext}}</view>
+	</view>
+	<navigator url="/question/question" class="botlink">常见问题</navigator>
+</view>

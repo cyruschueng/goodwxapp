@@ -1,0 +1,65 @@
+<!--pages/wait/wait.wxml-->
+<view class="container">
+    <view class='header'>
+        <view class='left public'>
+            <view class='leftBg bg'>
+                  <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/chengyu/hat.png" mode='widthFix'></image>
+                  <image class='avatarUrl' src="{{userInfo.avatarUrl}}" mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='leftInform inform'>
+            <view class='text little'>{{userInfo.nickName}}</view>
+            <view class='text name'>{{userInfo.gender}}分</view>
+            <!-- <view class='text little'>来自：{{userInfo.province}}</view> -->
+        </view> 
+        <!--胜利  -->
+        <view class='win' wx:if="{{game==true}}">
+            <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/chengyu/win.png" mode='widthFix'></image>
+        </view>
+        <view class='right public'>
+            <view class='rightBg bg'>
+                  <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/chengyu/hat.png" mode='widthFix'></image>
+                  <image class='avatarUrl' src="{{userInfo.avatarUrl}}" mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='rightInform inform'>
+            <view class='text little'>{{userInfo.nickName}}</view>
+            <view class='text name'>{{userInfo.gender}}分</view>
+            <!-- <view class='text little'>来自：{{userInfo.province}}</view> -->
+        </view> 
+    </view>
+    <view class='gift'>
+        <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/gift.png" mode='widthFix'></image>
+    </view>
+    <view class='integral'>
+        <view class='img'>
+            <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode='widthFix'></image>  +{{userInfo.gender}}
+        </view>
+        <image class='line' src="http://ovhvevt35.bkt.clouddn.com/chengyu/line.png" mode='widthFix'></image>
+    </view>
+    <view class='foot'>
+        <view class='button'>
+            <view class='star' bindtap='starTap'>
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button formType="submit" class="submit" style='border-radius:0'>
+                      继续游戏
+                  </button>
+              </form>
+            </view>
+            <view class='out'>
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button formType="submit" class="submit" style='border-radius:0'>
+                      <button bindtap='resultTap'>分享结果</button>
+                  </button>
+              </form>
+            </view>
+        </view>
+        <view class='color'>分享到微信群，可获得50<image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode='widthFix'></image></view>
+    </view>
+</view>
+<!--失败  -->
+<view class='bg' wx:if="{{game==false}}">
+    <view class='zindex'>
+          <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/chengyu/false.png" mode='widthFix'></image>
+    </view>
+</view>

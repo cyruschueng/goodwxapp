@@ -1,0 +1,95 @@
+<view wx:if="{{orderCreateFlag}}">
+  <view class="play-header-total-container">
+    <view class="play-tip" wx:if="{{ifInGroup}}" bindtap="playTipEv">请告知本群群主来领钱！！！</view>
+    <image wx:if="{{showCommonBanner}}" src="https://image.qunmee.com/wxapp/qunmee_task1503900633766.jpg" class="header"></image>
+
+    <view class="play-header-container" wx:if="{{ifBindGroupOwner && !ifGroupOwner}}">
+      <image src="https://image.qunmee.com/wxapp/qunmee_task1500447517488.jpg" class="header"></image>
+      <view class="play-header-text">欢迎来到
+        <open-data type="groupName" open-gid="{{openGid}}"></open-data>
+      </view>
+      <view class="play-header-text play-header-text-top">我是群主 {{groupOwner}}</view>
+    </view>
+
+    <view class="play-header-container" wx:if="{{ifBindGroupOwner && ifGroupOwner}}" bindtap="accountDetailEv">
+      <image src="https://image.qunmee.com/wxapp/qunmee_task1500450605300.jpg" class="header"></image>
+      <view class="play-header-account">账户：{{balance}}元</view>
+      <view class="play-header-order-num">下单用户({{orderUserCount}})</view>
+      <view class="play-header-user-container">
+        <image wx:for="{{orderUsers}}" class="play-header-user" wx:key="{{item.userId}}" src="{{item.avatarUrl}}"></image>
+      </view>
+    </view>
+  </view>
+  <view class="classname" wx:if="{{ifShowOpenGid}}">
+    openGid:<input type="text" value="{{openGid}}" />
+  </view>
+
+  <view class="play-head-info">
+    <view class="play-head-tag">王者荣耀</view>
+    <view class="play-head-tag play-head-tag-rank">排位赛</view>
+    <view class="paly-head-log"></view>
+    <view class="play-head-info-detail " wx:if="{{!headTipInfoFlag}}">{{headTipInfo}}</view>
+    <view class="play-head-info-detail " wx:if="{{headTipInfoFlag}}">已选：<span class="play-head-info-detail-split">{{regionArray[gameRegion - 1]}}</span><span class="play-head-info-detail-split">{{levelArray[levelId - 1]}}</span>{{gameNumber}}局</view>
+    <view class="play-head-info-detail play-head-info-detail-price" data-node="playHeadPrice">{{priceStr}}</view>
+
+  </view>
+  <view class="paly-choose-cot" data-node="chooseItem" bindtap="chooseItemEv">
+    <view class="play-choose-item">
+      <view class="play-choose-type-common">游戏大区</view>
+      <view wx:for="{{regionValArray}}" class="play-choose-item-common play-choose-item-top-first {{regionClassArr[index]}} {{item.chosed?'chosed':''}}" wx:key="{{index}}" data-type="gameRegion" data-val="{{item.value}}">{{item.text}}</view>
+      <!-- <view class="play-choose-item-common  play-choose-item-top-first" data-type="gameRegion" data-val="1">微信大区</view>
+      <view class="play-choose-item-common  play-choose-item-top-first" data-type="gameRegion" data-val="2">QQ大区</view> -->
+    </view>
+    <view class="play-choose-item">
+      <view class="play-choose-type-common play-choose-type-left-sec">游戏段位</view>
+      <view wx:for="{{levelValArray}}" class="play-choose-item-common {{levelClassArr[index]}}  {{item.chosed?'chosed':''}}" wx:key="{{index}}" data-type="levelId" data-val="{{item.value}}">{{item.text}}</view>
+      <!-- <view class="play-choose-item-common " data-type="levelId" data-val="5">永恒钻石</view>
+      <view class="play-choose-item-common " data-type="levelId" data-val="4">尊贵铂金</view>
+      <view class="play-choose-item-common " data-type="levelId" data-val="3">荣耀黄金</view>
+      <view class="play-choose-item-common " data-type="levelId" data-val="2">秩序白银</view>
+      <view class="play-choose-item-common " data-type="levelId" data-val="1">倔强青铜</view> -->
+    </view>
+    <view class="play-choose-item">
+      <view class="play-choose-type-common play-choose-type-left-third">游戏局数</view>
+      <view wx:for="{{numberValArray}}" class="play-choose-item-common play-choose-item-top-four {{numberClassArr[index]}} {{item.chosed?'chosed':''}}" wx:key="{{index}}" data-type="gameNumber" data-val="{{item.value}}">{{item.text}}</view>
+      <!-- <view class="play-choose-item-common  play-choose-item-top-four chosed" data-type="gameNumber" data-val="1">1</view>
+      <view class="play-choose-item-common  play-choose-item-top-four" data-type="gameNumber" data-val="2">2</view>
+      <view class="play-choose-item-common  play-choose-item-top-four" data-type="gameNumber" data-val="3">3</view>  -->
+    </view>
+  </view>
+
+  <form bindsubmit="delayPublishEv" report-submit>
+    <button class="play-next" form-type="submit">来一局</button>
+    <!-- <button class="payMoney" form-type="submit">塞10元进红包</button> -->
+  </form>
+
+  <view class="play-new-ad" hidden="{{true}}">新用户首局免费</view>
+</view>
+
+<view class="wrap wrap2" wx:if="{{orderInGroupFlag}}">
+  <view class="speheader">
+    <view class="title">最强王者已到达战场</view>
+    <view class="headImg-wrapper">
+      <image src="{{headImg}}" class="headImg"></image>
+    </view>
+    <view class="nickName">{{nickName}}</view>
+    <view class="desc">{{desc}}</view>
+  </view>
+  <view class="start-time">
+    <view class="start-time-content" data-node="countDown">{{countDown}}</view>
+  </view>
+  <view class="footer">
+    <view class="groupImg-wrapper">
+      <image src="{{qrCode}}" class="groupImg"></image>
+    </view>
+    <view class="single-introduce" data-node="introduce" wx:if="{{singlePersonFlag}}" style="margin-top:80rpx;text-align:center;">请截屏并用微信扫一扫打开图片</view>
+    <view class="" data-node="gamePerson" wx:if="{{!singlePersonFlag}}">
+      <view class="introduce" style="margin-top:80rpx">1.请截屏并用微信扫一扫打开图片</view>
+      <view class="introduce ">2.请尽快邀请好友入群开车，避免错过发车时间</view>
+    </view>
+  </view>
+  <view class="footer none">
+    <image src="../../../images/bigBtn.png" class="btn" bindtap="joinQQ">进群备战</image>
+    <view class="tip3">请点击按钮进入QQ群备战</view>
+  </view>
+</view>

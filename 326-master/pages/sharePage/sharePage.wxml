@@ -1,0 +1,95 @@
+<view class="container">
+  <view class='h40 cir'>
+    <image class='wh100' src='/images/top.png'></image>
+    <view class='circ top'>
+      <view class='flexColumn flexCenter'>
+        <view class='fexjusi '>
+          <image class='img56' src='/images/total.png'></image>
+          <view class='flexColumn flexCenter color11 mb05'>
+            <view>累计发电({{energyTotalTUnit}})：</view>
+            <view class='font2 flexCenter'>{{energyTotalT}}</view>
+          </view>
+        </view>
+
+        <view class='flexCenter flex1 flex bg256 width90 br03 color0'>
+        <view class='flexColumn flexCenter'>
+          <view class='flexCenter font10'>{{energyTodayT}}</view>
+          <view class='color9 flexCenter font07'>今日发电({{energyTodayTUnit}})</view>
+        </view>
+        <view class='flexColumn flexCenter'>
+          <view class='flexCenter font10'>{{monthPower}}</view>
+          <view class='color9 flexCenter font07'>当月发电({{monthPowerUnit}})</view>
+        </view>
+        <view class='flexColumn flexCenter'>
+          <view class='flexCenter font10'>{{yearPower}}</view>
+          <view class='color9 flexCenter font07'>当年发电({{yearPowerUnit}})</view>
+        </view>
+      </view> 
+      </view>
+    </view>
+    
+  </view>
+  <view class='h30  flexCenter bgColor0'>
+    <view class='width90 borderA cir'>
+      <view class='flex  Skin pd1 flexBetw'>
+          <view class='flexColumn'>
+            <view class='flexCenter'>今日收益(￥)</view>
+            <view class='flexCenter'>{{profitT}}</view>
+          </view>
+          <view class='flexColumn'>
+            <view class='flexCenter'>累计收益(￥)</view>
+            <view class='flexCenter'>{{TotprofitT}}</view>
+          </view>
+      </view>
+      <image class='img5 circ' style='top:-1.5rem;left:{{0.45*shareWidth-40}}px' src='/images/mone.png'></image>
+      <view class='flex flex1'>
+        <view class='flexColumn flexCenter'>
+            <image class='imgM' src='/images/co2.png'></image>
+            <view class='flexCenter'>CO2减排(kg)</view>
+            <view class='flexCenter'>{{co2}}</view>
+          </view>
+          <view class='flexColumn flexCenter'>
+            <image class='imgM' src='/images/coal.png'></image>
+            <view class='flexCenter'>节约标准煤(T)</view>
+            <view class='flexCenter'>{{coal}}</view>
+          </view>
+          <view class='flexColumn flexCenter'>
+            <image class='imgM' src='/images/tree.png'></image>
+            <view class='flexCenter'>SO2减排(kg)</view>
+            <view class='flexCenter'>{{so2}}</view>
+          </view>
+      </view>
+    </view>
+  </view>
+  <view class='h30 flexColumn flexCenter bgColor0'>
+    <view class=' flexColumn width90 pd04'>
+      <view class='flexBetw borderB'>
+        <view class='flex'>
+          <image class='imgl mr03' src='/images/usert.png'></image>
+          <view class='flexCenter'>{{accountInfo.usr}}</view>
+        </view>
+        <view>{{accountInfo.role==0?'电站业主':'管理员'}}</view>
+      </view>
+      <view class='flexBetw'>
+        <view>装机容量</view>
+        <view>{{queryNorPower}}</view>
+      </view>
+      <!-- <view class='flexBetw'>
+        <view>时区</view>
+        <view>111</view>
+      </view>
+      <view class='flexBetw'>
+        <view>地址</view>
+        <view>111</view>
+      </view> -->
+      <view class='flexBetw'>
+        <view>建站时间</view>
+        <view>{{accountInfo.gts}}</view>
+      </view>
+    </view>
+    <view><button class='font09 Skin' bindtap='toIndex'>返回恒通源光伏监控</button></view>
+  </view>
+</view>
+
+
+

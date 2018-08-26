@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    body,
+    a {
+        background: black;
+        color: white
+    }
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="item in center">
+            <h3>{{item.title}}</h3>
+            <p>{{item.content}}</p>
+        </div>
+        <div v-for="item in link">
+            <a :href="item.link">
+                <p>{{item.title}}</p>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        center: [{
+            title: "工作区",
+            content: "workspaace"
+        }, {
+            title: "缓存区",
+            content: "index/stage"
+        }, {
+            title: "本地仓库",
+            content: "repository"
+        }, {
+            title: "远程仓库",
+            content: "remote"
+        }],
+        link: [{
+            title: "官网",
+            link: "https://git-scm.com/docs"
+        }, {
+            title: "简易教程，经典",
+            link: "http://www.bootcss.com/p/git-guide/"
+        }, {
+            title: "中文教程",
+            link: "http://www.yiibai.com/git/git_merge.html"
+        }, {
+            title: "大神教程",
+            link: "https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000"
+        }, {
+            title: "原理",
+            link: "http://blog.jobbole.com/25775/"
+        }],
+    },
+    created: function() {},
+    mounted: function() {},
+    computed: {},
+    watch: {},
+    methods: {}
+})
+</script>

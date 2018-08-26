@@ -1,0 +1,35 @@
+ 
+
+<template name='textInput-item'>
+
+  <!-- 标题 输入框 -->
+  <view wx:if='{{ types == "txtInput" }}' id='{{ id }}' class='textInput-view'>
+    <view class='title-view'>{{ title }}</view>
+    <input type='{{ inputType ? inputType : "text" }}' data-title='{{ title }}' bindinput='bindTextKeyInput' value='{{ value }}' placeholder-style='color:#848296;' placeholder='{{ placeholder }}'></input>
+  </view>
+
+  <!-- 性别选择 -->
+  <view wx:if='{{ types == "other" }}' id='{{ id }}' class='textInput-view'>
+    <view class='title-view'>{{ title }}</view>
+    <view class='gender-view' id='male' bindtap='bindSelectGenderTap'>
+      <image wx:if='{{ placeholder == true }}' class='checked-icon' src='../../../images/icon/checked.png'></image>
+      <view wx:else class='checked-view'></view>
+      <text>男</text>
+    </view>
+    <view class='gender-view' id='female' bindtap='bindSelectGenderTap'>
+      <image wx:if='{{ placeholder == false }}' class='checked-icon' src='../../../images/icon/checked.png'></image>
+      <view wx:else class='checked-view'></view>
+      <text>女</text>
+    </view>
+
+  </view>
+
+  <!-- 标题 选择框 -->
+  <view wx:if='{{ types == "txtPicker" }}' id='{{ id }}' class='textInput-view' bindtap='bindTextPickerTap'>
+    <view class='title-view'>{{ title }}</view>
+    <view wx:if='{{ value == "" }}' class='text-view'>{{ placeholder }}</view>
+    <view wx:else class='textValue-view'>{{ value }}</view>
+    <image class='right-icon' src='../../../images/icon/arrow_right.png'></image>
+  </view>
+
+</template>

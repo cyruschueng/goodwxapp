@@ -1,0 +1,27 @@
+<!--pages/market/search.wxml-->
+<import src="../template/coin-items/coin-items.wxml" />
+<import src="../template/favorite-items/favorite-items.wxml" />
+
+<view class="container">
+  <form>
+    <view class="filter">
+      <view class="filter-set">
+        <icon type="search" class="search-img" size="15" color="#999"></icon>
+        <input value="{{keyword}}" class="search-input" type="text" confirm-type="search" placeholder="{{placeholderText}}" focus="{{focus}}" placeholder-class="placeholder" bindinput="onBindInput" bindfocus="onBindFocus" bindconfirm="search" />
+        <button id="cancel-btn" wx:if="{{searchPanelShow}}" plain="true" formType="reset" bindtap="onCancelImgTap">
+          <image src="/images/buttons/close_btn.png" class="xx-img" ></image>
+        </button>
+      </view>
+      <view id="search-btn" bindtap="search">搜索</view>
+    </view>
+  </form>
+
+  <view wx:if='{{noResult}}' class="noresult">
+    <label class="noresult-lbl">好气啊，什么都没找到！</label>
+  </view>
+  <block wx:for="{{currencyData}}" wx:for-item="currency">
+    <!-- <template is="marketDataItems" data="{{...currency}}"></template> -->
+     <template wx:if="{{dataType == 'list'}}" is="coinItems" data="{{...currency}}"></template> 
+     <template wx:else is="favoriteItems" data="{{...currency}}"></template> 
+  </block>
+</view>

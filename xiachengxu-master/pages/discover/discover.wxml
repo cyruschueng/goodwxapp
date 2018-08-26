@@ -1,0 +1,14 @@
+<import src="../tpls/products/products-tpl-simple.wxml" />
+<import src="../tpls/nextInfo/index.wxml" />
+<import src="../tpls/collocation/collocation.wxml" />
+
+<view class='container discover-container' hidden='{{!loadingHidden}}'>
+  <block wx:for='{{briefProducts}}' wx:key='index'>
+    <template is='{{templateId == "theme_default"? "collocation":"product-simple"}}' data='{{product: item, click_like_id}}'></template>
+  </block>
+  <template is='next-info' data='{{hasMore, data: briefProducts}}'></template>
+</view>
+
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

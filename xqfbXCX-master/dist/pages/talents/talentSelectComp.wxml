@@ -1,0 +1,33 @@
+<!--pages/talents/talentSelectComp.wxml-->
+
+<view class='bgview'>
+
+  <view class='select-view'>
+    <block wx:for='{{ talentList }}' wx:for-item='talt' wx:key='{{ index }}'>
+    <checkbox-group data-checkidx='{{ index }}' bindchange="bindCheckboxChange">
+    <view class='select-cell weui-flex'>
+    
+      <checkbox class='checkbox' value="{{ index }}" checked="{{ talt.checked }}"/>
+
+      <view class='avatar'>
+        <image mode='aspectFill' src='{{ talt.avatar }}'></image>
+      </view>
+      <view class='weui-flex__item'>
+        <view>{{ talt.name }}</view>
+        <view class='third-txt-color'>
+          <text>{{ talt.goodCom }}%好评</text>
+          <text style='margin-left:20rpx;'>交易：{{ talt.deal }}次</text>
+        </view>
+      </view>
+      <view class='price'>¥ {{ talt.price }}</view>
+
+    </view>
+    </checkbox-group>
+    </block>
+  </view>
+  <view class='weui-footer weui-footer_fixed-bottom weui-flex btn-view'>
+    <view class='weui-flex__item cancel-btn' bindtap='bindCancelTap'>取消</view>
+    <view class='weui-flex__item confirm-btn' bindtap='bindConfirmTap'>确定</view>
+  </view>
+
+</view>

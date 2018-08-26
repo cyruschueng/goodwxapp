@@ -1,0 +1,22 @@
+<!--pages/tixian-record/tixian-record.wxml-->
+<view class='container'>
+  <view class='title'>
+    <view class='title-item' wx:for='{{title_items}}' wx:key='code'>{{item}}</view>
+  </view>
+  <view class='tixian-list'>
+    <view class='tixian-item' wx:for='{{items}}' wx:key='code'>
+      <view class='time'>{{item.inputtime}}</view>
+      <view class='money'>￥{{item.money}}元</view>
+      <view class='result'>{{item.error}}</view>
+      <view class='checkResult' data-idx="{{index}}" bindtap='animation_tip'>查看详情</view>
+    </view>
+  </view>
+  <!-- 动画提示 -->
+  <view class='animation-box' animation="{{tip_animation}}" bindtap='tip_animate_out'>
+    <view class='section-animation'>
+      <view class='tip-content'>{{tip_message}}</view>
+      <view class='close'>X</view>
+    </view>
+  </view>
+  <view class='section-ft'>没有更多啦</view>
+</view>

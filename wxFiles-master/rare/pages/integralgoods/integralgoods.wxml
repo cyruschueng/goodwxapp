@@ -1,0 +1,36 @@
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <swiper indicator-dots="true" autoplay="true" interval="5000" duration="2000" style="height:{{innerWidth}}px" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" bindchange="imgChange" bindtap="preview" circular="true">
+    <block wx:for="{{GoodsList.cicon}}">
+      <swiper-item>
+        <image src="{{item}}" style="width:{{innerWidth}}px;height:{{innerWidth}}px" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="pan">
+    <view class="title pull-left">{{GoodsList.msgcontent}}</view>
+    <view class="theme men pull-left" style="color:#e2906a;clear:both">积分{{GoodsList.sellprice}}</view>
+    <view class="pull-left kls line-through">原价:￥{{GoodsList.price}}</view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="pan" style="margin-top:-4px">
+    <view class="title pull-left">数量</view>
+    <view class="pull-right">1</view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="pan">
+    图文信息
+  </view>
+
+  <view class="pan" style="margin-top:1px">
+    <import src="../../wxParse/wxParse.wxml"/> 
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  </view>
+  <view style="height:100rpx"></view>
+
+  <view class="fix-bottom bars" bindtap="duihuan">
+    立即兑换
+  </view>
+</view>

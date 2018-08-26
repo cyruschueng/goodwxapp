@@ -1,0 +1,101 @@
+<view class="fix-box">
+    <view class='wrap-bar-tab'>
+        <view data-index="0" bindtap='changetab' class="wrap-tab {{tabindex==0 ? 'active' : ''}}">我的推荐人</view>
+        <view data-index="1" bindtap='changetab' class="wrap-tab {{tabindex==1 ? 'active' : ''}}">代言的门店</view>
+    </view> 
+  <view style='margin-top:52px' class="relative-box {{viewindex==0 ? 'active' : ''}}">
+    <view class='item-row' hidden='{{itemuserinfo}}'>
+        <view class="top-info">
+          <image class="info-photo" src="{{avatarUrl}}"></image>
+          <view class="info-name">{{nickName}}</view>
+          <view class="info-type">{{position}}</view>
+          <view class="info-qrcode">
+            <image src="/images/icon_home_qrcode.png" bindtap='PreCodoImg'></image>
+            <view>专属码</view>
+          </view>
+          <view class="follow-btn" bindtap="LinkStore">进入商城</view>
+          <view class="contact-btn" bindtap="powerDrawer">联系方式</view> 
+        
+          <view class="info-desc">介绍：{{introduce}}</view>
+          <view class="info-desc-img">
+            <scroll-view scroll-x style='width:100%;height:{{imgHeight}}px;'>
+                <view style='width:{{(imgWidth)*imgNum}}px;height:{{imgHeight}}px;'>
+                    <view wx:for="{{itemimglist}}" wx:key="" wx:for-item="image" class="desc-img" style='width:{{imgWidth}}px;height:{{imgHeight-2}}px;'>
+                        <image bindtap="previewImage" data-src="{{image.photo_url}}" src="{{image.photo_url}}" ></image>
+                    </view>
+                </view>
+            </scroll-view> 
+          </view>
+        </view>
+        <view class="info-data">
+          <view class="info-data-item" bindtap='linkmoods'>
+            <image src="/images/icon_home_visit.png"></image>
+            <view>人气：{{looksdata}}</view>
+          </view>
+          <view class="info-data-item" style='left:33.33%;' bindtap='linklike'>
+            <image src="/images/icon_home_praise.png"></image>
+            <view>已赞：{{loversdata}}</view>
+          </view>
+          <view class="info-data-item" style='right:0;' bindtap='linkcollect'>
+            <image src="/images/icon_home_favor.png"></image>
+            <view>收藏：{{collectiondata}}</view>
+          </view>
+        </view>
+        <view class="home-tabs">
+            <view data-current="0" class="home-tab-item {{currentTab==0 ? 'active' : ''}}" bindtap='changeType'>动态</view>
+            <view data-current="1" class="home-tab-item {{currentTab==1 ? 'active' : ''}}" bindtap='changeType'>商品</view>
+        </view>
+        <view class='tab-block-box'>
+            <view class="tab-block {{currentindex==0 ? 'active' : ''}}">
+                <view class='inner-block'>
+                    <view style='padding:15px 10px;background:#fff;line-height:26px;font-size:15px;color:#999;'>
+                </view>
+                </view>
+
+            </view>
+            <view class="tab-block {{currentindex==1 ? 'active' : ''}}">
+                <view class="goods-list">
+                    
+                </view>
+     
+            </view>
+        </view>
+    </view>
+    <view class='itemmsgtext' hidden='{{ShowRecommendState}}'><image src='/images/myCenter/shopset/icon_self_setting.png'></image>没有更多内容</view>
+  </view>
+  <view style='margin-top:52px' class="relative-box {{viewindex==1 ? 'active' : ''}}">
+      <view class='itemmsgtext' hidden='{{ShowRepresentState}}'><image src='/images/myCenter/shopset/icon_self_setting.png'></image>没有更多内容</view>
+      <view hidden='{{listinfoshow}}'>
+          <view class='row-list' bindtap='viewMoreGoods'>
+              <view class='col-xs-8'>
+                  <view class='shopimg'><image src='/images/demo_goods.jpg'></image></view>
+                  <view class='col-body'>
+                      <view class='name'>奶茶店</view>
+                      <view class='shopinfo'>
+                          <view class='goodicon'>
+                              <image src='/images/icon_home_favor.png'></image>
+                              <image src='/images/icon_home_favor.png'></image>
+                              <image src='/images/icon_home_favor.png'></image>
+                              <image src='/images/icon_home_favor.png'></image>
+                              <image src='/images/icon_home_favor.png'></image>
+                          </view>
+                          <text class='mean'>￥17/人</text>
+                      </view>
+                      <view class='xs-info'>
+                          <text style='margin-right:10px;'>月销 234</text>
+                          <text>赞 2422</text>
+                      </view>
+                      <view class='pay-info'>
+                          <text class='mag'>买</text>
+                          <text class='pyif'>买单立减8折</text>
+                      </view>
+                  </view>
+              </view>
+              <view class='col-xs-2'>
+                  <text>天河路</text>
+                  <text class='map'>551m</text>
+              </view>
+          </view>
+      </view>
+  </view>
+</view>

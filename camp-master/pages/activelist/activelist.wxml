@@ -1,0 +1,63 @@
+<!-- <import src="../../widgets/modules/modules.wxml"/> -->
+
+<view name="page-activelist">
+	<scroll-view scroll-y="{{true}}" 
+	bindscrolltolower="getNext"
+	class="view-activelist"
+	scroll-y="{{true}}"
+	style="height:{{height}}">
+		<block wx:for="{{activelist}}" wx:key='id'>
+			<template is="gouponitem-tpl" data="{{...item}}"></template>
+		</block>
+	</scroll-view>
+</view>
+
+
+
+<template name="gouponitem-tpl">
+	<view class="gouponitem-tpl">
+		<view class="wrapper">
+			<view class="ware-img" data-id="1" bindtap="events" data-func="toDetail">
+				<image src="{{thumbnail}}"></image>
+				<view class="postState">{{showPostsState}}</view>
+			</view>
+			<view class="detail">
+				<view class="line1">
+					<view class="category">{{showCategory}}<view class="arror"></view></view>
+					<view class="ware-name ellipsis-1">
+						{{title}}
+					</view>
+					<view class="vacancy">
+						还剩{{vacancy}}个名额
+					</view>
+				</view>
+				<view class="ware-desc ellipsis-2 line2">
+					{{brief}}
+				</view>
+				<view class="ware-detail line3">
+					<view class="left-side">
+						<view class="quantity-wrapper">
+							<text class="ageRange">{{showAgeRange}}</text>
+							<text class="period">{{showPeriod}}</text>
+						</view>
+						<view class="left-side-bottom">
+								<!-- <view class="price-wrapper"> -->
+										<text class="unitPrice"></text>
+										<text class="orgPrice"></text>
+									<!-- </view> -->
+									<!-- <view class="basic-wrapper">
+										
+									</view> -->
+						</view>
+						
+					</view>
+					<view class="btn-wrapper"  bindtap="toDetail" data-sku="{{wareSkuId}}" data-id="{{id}}">
+						<text class="buybtn"  data-sku="{{wareSkuId}}" data-id="{{id}}">报名活动</text>
+						<!-- <image class="addCart" src="../../asset/gp-cart.png"></image> -->
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+

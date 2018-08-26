@@ -1,0 +1,11 @@
+<!--pages/me/me.wxml-->
+<view class='container'>
+  <image class='avator'src="{{avator}}"></image>
+  <block wx:for="{{arr}}" wx:key="{{item.id}}">
+  <view class='row'>
+    <view class='title'>{{item.title?item.title:"未登录"}}</view>
+    <view class='dec'>{{item.dec?item.dec:"未登录"}}</view>
+  </view>
+  </block>
+  <button catchtap='loginout'>安全退出</button>
+</view>

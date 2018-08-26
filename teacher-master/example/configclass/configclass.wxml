@@ -1,0 +1,65 @@
+<view class='help'>
+<button class='kefu-btn' open-type='contact'><view class='xm-kefu'></view></button>
+</view>
+
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+     <form bindsubmit="submit" report-submit="true">
+    <view class="page__bd">
+  
+        <view class="weui-cells__title" style='font-size:18px;color:#4c4c4c;'>配置班级群"<open-data type="groupName" open-gid="{{gid}}"></open-data>"的基本信息</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">班级名称</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput="bindKeyInput" id="class_name"  name="class_name" value='{{class_name}}' placeholder="请输入班级名称"/>
+                </view>
+            </view>
+             <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">班级人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" type='number'  bindinput="bindKeyInput" id="student_number"  name="student_number" placeholder="学生人数"/>
+                </view>
+            </view> 
+             <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">您的姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="name"  value='{{name}}' bindinput="bindKeyInput" id="name"  placeholder="您的姓名"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">电话号码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="phone" type='number' value='{{phone}}' bindinput="bindKeyInput" id="phone"  placeholder="请输入电话号码"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">所教科目</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="teachRoleChange" value="{{teachRoleIndex}}" range="{{teachRoles}}">
+                        <view class="weui-select weui-select_in-select-after">{{teachRoles[teachRoleIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+          
+        </view>
+   
+
+    
+        <view class="weui-btn-area">
+            <button class="weui-btn btn_config_class" loading="{{button_loadding}}" type="primary" disabled='{{button_disable}}' style='background-color:#1e90ff;' formType="submit">保存配置,进入主页</button>
+        </view>
+    </view>
+    </form>
+</view>

@@ -1,0 +1,13 @@
+<!--pages/myInfo/myInfo.wxml-->
+<view class='container'>
+  <view class='myInfo-hd'>
+    <image src='{{userPic}}'></image>
+    <text>{{userName}}</text>
+  </view>
+  <view class='myInfo-list'>
+    <view class='myInfo-item' wx:for='{{items}}' wx:key='code' bindtap='info_skip' data-index='{{index}}'>
+      <image src='{{item.url}}'></image>
+      <text>{{item.title}}</text>
+    </view>
+  </view>
+</view>

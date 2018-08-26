@@ -1,0 +1,24 @@
+<!--pages/paycomplete/paycomplete.wxml-->
+
+<view class='page'>
+
+  <view class='pay-money'>
+    <icon type="success" size="60"></icon>
+    <text class='pay-text'>您已经成功支付</text>
+    <text class='pay-money-text'>￥{{amt}}</text>
+  </view>
+
+  <view class='paydata-list'>
+    <view wx:for="{{payData}}" wx:key="{{index}}">
+      <view class='paydata-list-item'>
+        <text class='paydata-list-item-name'>{{item.Value}}</text>
+        <text class='paydata-list-item-content'>{{item.Text}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='pay-result'>
+    <button class='pay-result-button' bindtap='lookOverDetailTab'>查看详情</button>
+    <button class='pay-result-button' bindtap='backHomePageTab'>返回首页</button>
+  </view>
+</view>

@@ -1,0 +1,137 @@
+<view class="glo_load_view" wx:if="{{isload}}">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+</view>
+<block wx:else>
+    <view class="user_content">
+        <view class="Member_head">
+            <view class="Member_img domain">
+                <image class="userinfo-avatar" src="{{avatar}}" background-size="cover" catchtap='onModifyAvatar'></image>
+                <view class="userinfo_name">{{user_name}}</view>
+            </view>
+            <view class="bianji">
+                <!-- <view catchtap="onNavigateTap" data-url="../info/edit">
+                    <view class="bianji_text f12">
+                        <text class="f14 mr5 iconfont icon-addressbook"></text>
+                        <text>名片</text>
+                    </view>
+                </view> -->
+            </view>
+            <block wx:if="{{is_vip == 1}}">
+                <view class="vip">
+                    <view class="vip_ico">
+                        <image src="../../../images/ico_vip.png" background-size="cover"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+
+    <view class="my-menu mt10">
+        <!--我的资料-->
+        <view class="my-menu-box">
+            <view class="my-menu-item arrowR" catchtap="onNavigateTap" data-url="../info/edit">
+                <text class="green f20 mr5 iconfont icon-profilefill"></text>
+                <text>我的资料</text>
+            </view>
+            <block wx:if="{{!is_root}}">
+                <view class="gridXt"></view>
+                <view class="my-menu-item arrowR " catchtap="onNavigateTap" data-url="../score_apply/index">
+                    <text class="green f20 mr5 iconfont icon-shenqing"></text>
+                    <text>积分申请</text>
+                </view>
+            </block>
+
+            <block wx:if="{{is_show_score_check}}">
+                <view class="gridXt"></view>
+                <view class="my-menu-item arrowR " catchtap="onNavigateTap" data-url="../score_apply/check">
+                    <text class="green f20 mr5 iconfont icon-shenhe"></text>
+                    <text>积分审核</text>
+                </view>
+            </block>
+
+            <block wx:if="{{is_manager||is_manager2||is_admin||is_root||is_assistant}}">
+                <view class="gridXt"></view>
+                <view class="my-menu-item arrowR " catchtap="onNavigateTap" data-url="{{is_manage||is_assistant?'../score_reward/person?dept_id='+dept_id:'../score_reward/index'}}">
+                    <text class="green f20 mr5 iconfont icon-zhuanrujilutubiao"></text>
+                    <text>积分录入</text>
+                </view>
+            </block>
+
+            <view class="gridXt"></view>
+            <view class="my-menu-item arrowR " catchtap="onUnBindAccountTap">
+                <text class="green f20 mr5 iconfont icon-jiebang"></text>
+                <text>解绑当前账号</text>
+            </view>
+
+            <view class="gridXt"></view>
+            <view class="my-menu-item arrowR " catchtap="onNavigateTap" data-url='modifyPwd'>
+                <text class="green f20 mr5 iconfont icon-xiugaimima"></text>
+                <text>修改密码</text>
+            </view>
+
+
+            <!-- <view class="forum-box gridXt">
+        <view class="my-menu-sub">
+          <view class="my-menu-subitem gridXt flex" catchtap="onNavigateTap" data-url="../address/index">
+            <text class="linght f16 mr5 iconfont icon-locationfill"></text>
+            <text class="sub arrowR">地址管理</text>
+          </view>
+        </view>
+      </view>-->
+        </view>
+        <!--我的社区-->
+        <!-- <view class="my-menu-box">
+      <view class="my-menu-item {{item.isshow == true ? 'arrowR arrowRv' :'arrowR'}}" catchtap="onNavigateTap" data-url="../../bbs/index/index" data-type="switchTab">
+        <text class="pink f20 mr5 iconfont icon-messagefill"></text>
+        <text>中联之家</text>
+      </view>
+      <view class="forum-box gridXt">
+        <view class="forum-list tc" catchtap="onNavigateTap" data-url="../bbs/my-lists">
+          <text class="iconfont icon-jingdianwanfa"></text>
+          <view>我的发表</view>
+        </view>
+        <view class="forum-list tc">
+          <text class="iconfont icon-pinglun"></text>
+          <view>我的评论</view>
+        </view>
+        <view class="forum-list tc">
+          <text class="iconfont icon-zan"></text>
+          <view>我的点赞</view>
+        </view>
+      </view>
+    </view> -->
+        <!--积分商城-->
+        <view class="my-menu-box">
+            <view class="my-menu-item arrowR arrowRv" catchtap="onNavigateTap" data-url="../../shop/mall/mall" data-type="switchTab">
+                <text class="yellow f20 mr5 iconfont icon-shopfill"></text>
+                <text>积分商城</text>
+            </view>
+            <view class="forum-box gridXt">
+                <view class="forum-list tc" bindtap="onNavigateTap" data-url='../order/list/index'>
+                    <text class="iconfont icon-jingdianwanfa"></text>
+                    <view>我的订单</view>
+                </view>
+                <view class="forum-list tc" bindtap="onNavigateTap" data-url='../../shop/mallcart/mallcart'>
+                    <text class="iconfont icon-gouwuche"></text>
+                    <view>购物车</view>
+                </view>
+                <view class="forum-list tc jifen" bindtap="onNavigateTap" data-url='../../ranking/person?uid={{uc_uid}}'>
+                    <image src="/images/icon_baby.png" mode="aspectFit" />
+                    <view class="score">{{available_score}}</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="my-menu-box">
+            <view class="my-menu-item" catchtap="onClearCacheTap">
+                <text class="green f20 mr5 iconfont icon-qingchuhuancun"></text>
+                <text>清除缓存</text>
+            </view>
+        </view>
+
+    </view>
+    <view class="copyright grey">
+        <view class="copyright-text">{{userInfo.app_copy_right||'夺冠互动'}}提供技术支持</view>
+    </view>
+</block>

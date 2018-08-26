@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>智慧电力实时监测平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="dist/css/swiper.min.css">
+    <link rel="stylesheet" href="dist/css/animate.min.css">
+    <link rel="stylesheet" href="dist/css/my.css">
+
+	<!-- <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
+	<script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+	<script src="dist/js/dark.js"></script>
+	<script src="dist/js/jiangxi.js"></script>
+	<script src="dist/js/swiper.jquery.min.js"></script>
+    <script src="dist/js/swiper.animate1.0.2.min.js"></script>
+</head>
+<body onload="getBigData();">
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide slide1">
+				<h1 class="ani maintitle" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" swiper-animate-delay="0.3s">能源实时监测平台</h1>
+				<h3 class="ani subtitle" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.7s">V1.0版</h3>
+            </div>
+            <div class="swiper-slide slide2">
+				<div class="fullpage hotmap" id="hotmap"></div>
+            </div>
+            <div class="swiper-slide slide3" style="overflow: auto;">
+				<div style="height: 75%;" class="fullpage" id="dforecast"></div>
+				<div style="height: 15%;" class="fullpage" style="overflow: auto;">
+					<table class="table" style="overflow: auto;">
+						<thead>
+							<tr class="text-c">
+								<th rowspan="2">年</th>
+								<th rowspan="2">月</th>
+								<th colspan="3">
+									电量
+								</th>
+								<th colspan="2">
+									预计
+								</th>
+								<th colspan="4">
+									调控方式
+								</th>
+							</tr>
+							<tr>
+								<td>实时</td>
+								<td>预测</td>
+								<td>合同</td>
+								<td>偏差(mwh)</td>
+								<td>偏差率(%)</td>
+								<td>储能</td>
+								<td>光伏</td>
+								<td>减产</td>
+								<td>增产</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="text-c">
+								<td>2017</td>
+								<td>5</td>
+								<td id='monthActualValue'></td>
+								<td id="monthForecastValue"></td>
+								<td id="monthContractValue"></td>
+								<td id="monthDifferValue"></td>
+								<td id="monthDifferRatio"></td>
+								<td>可选</td>
+								<td>可选</td>
+								<td>可选</td>
+								<td>可选</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+            </div>
+            <div class="swiper-slide slide4">
+				<div style="height: 75%;" class="fullpage" id="ssfh"></div>
+				<div style="height: 15%;" class="fullpage">
+					<table class="table">
+						<thead>
+							<tr class="text-c">
+								<th>最大负荷</th>
+								<th>最小负荷</th>
+								<th>平均负荷</th>
+								<th>当日电量</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td id="dayMax"></td>
+								<td id="dayMin"></td>
+								<td id="dayAvg"></td>
+								<td id="dayTotal"></td>
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+            </div>
+            <div class="swiper-slide slide5">
+            	<div style="height: 30%;" class="fullpage" id="yn"></div>
+            	<div style="height: 30%;" class="fullpage" id="pclv"></div>
+            	<div style="height: 30%;" class="fullpage" id="pcla"></div>
+            </div>
+	        <div class="swiper-slide slide6">
+	        	<p class="ani subtitle" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" swiper-animate-delay="0.3s"><img style="width: 100px;" src="dist/images/xl.png"/></p>
+				<h1 class="ani maintitle" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" swiper-animate-delay="0.3s">Let me have a rest</h1>
+	        </div>
+        </div>
+   		<img src="dist/images/arrow.png" style="width:20px;height:15px; bottom:25px; left:50%;margin-left: -10px;" id="array" class="resize">
+        <!-- Add Pagination -->
+<!--    <div class="swiper-pagination"></div>-->
+    </div>
+
+
+
+
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+//      pagination: '.swiper-pagination',
+//      paginationClickable: true,
+        direction : 'vertical',
+	  onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+	    swiperAnimateCache(swiper); //隐藏动画元素
+	    swiperAnimate(swiper); //初始化完成开始动画
+	  },
+	  onSlideChangeEnd: function(swiper){
+	    swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+	  },
+    });
+</script>
+
+<!--echarts-->
+
+<script type="text/javascript">
+/***********	Ajax获取数据并渲染图表	**********/
+function getBigData() {
+	$.ajax({
+		url: "http://zhsd.tpddns.cn:8889/common/getBigData.do",
+		dataType: 'json',
+        beforeSend:function(){
+           console.log('正在加载...');
+           dforecast.showLoading();
+           ssfh.showLoading();
+           yn.showLoading();
+           pclv.showLoading();
+           pcla.showLoading();
+        },
+		success: function(v1, v2) {
+			console.log('加载完毕！');
+            dforecast.hideLoading();
+            ssfh.hideLoading();
+            yn.hideLoading();
+            pclv.hideLoading();
+            pcla.hideLoading();
+			//当月累计电量
+			$('#monthActualValue').html(v1['monthActualValue']);
+			//当月预测电量
+			$('#monthForecastValue').html(v1['monthForecastValue']);
+			//当月合同电量
+			$('#monthContractValue').html(v1['monthContractValue']);
+			//当月偏差量
+			$('#monthDifferValue').html(v1['monthDifferValue']);
+			//当月偏差率
+			$('#monthDifferRatio').html(v1['monthDifferRatio']);
+
+			//当日最大负荷
+			$('#dayMax').html(v1['dayMax']);
+			//当日最小负荷
+			$('#dayMin').html(v1['dayMin']);
+			//当日平均负荷
+			$('#dayAvg').html(v1['dayAvg']);
+			//当日总负荷
+			$('#dayTotal').html(v1['dayTotal']);
+
+			//获取json对象里面的数组
+			var fmvd = v1['fmvd'];  //月负荷
+			var fmvdh = v1['fmvdh'];  //时负荷
+			var monthDifferTop10 = v1['monthDifferTop10'];  //偏差前10
+			var monthDlTop10 = v1['monthDlTop10'];	//电量前10
+
+			//月负荷预测
+			var hours = new Array(fmvd.length);
+			var values = new Array(fmvd.length);
+			for(var i = 0; i < fmvd.length; i++) {
+				hours[i] = fmvd[i]['day'];
+				values[i] = fmvd[i]['dl'];
+			}
+			pcyc(hours, values);
+			//日实时负荷
+			var hours = new Array(fmvdh.length);
+			var values = new Array(fmvdh.length);
+			for(var i = 0; i < fmvdh.length; i++) {
+				hours[i] = fmvdh[i]['hour'];
+				values[i] = fmvdh[i]['fhValue'];
+			}
+			ssfhjc(hours, values);
+			//偏差率排行
+			var meteringName = new Array(monthDifferTop10.length);
+			var differRatio = new Array(monthDifferTop10.length);
+			for(var i = 0; i < monthDifferTop10.length; i++) {
+				meteringName[i] = monthDifferTop10[i]['meteringName'].substr(0,3);
+				differRatio[i] = monthDifferTop10[i]['differRatio'];
+			}
+			pclvph(meteringName, differRatio);
+			//偏差量排行
+			var meteringName = new Array(monthDlTop10.length);
+			var differValue = new Array(monthDlTop10.length);
+			for(var i = 0; i < monthDlTop10.length; i++) {
+				meteringName[i] = monthDlTop10[i]['meteringName'].substr(0,3);
+				differValue[i] = monthDlTop10[i]['differValue'];
+			}
+			pclaph(meteringName, differValue);
+			//电量排行
+			var meteringName = new Array(monthDlTop10.length);
+			var actualValue = new Array(monthDlTop10.length);
+			for(var i = 0; i < monthDlTop10.length; i++) {
+				meteringName[i] = monthDlTop10[i]['meteringName'].substr(0,3);
+				actualValue[i] = monthDlTop10[i]['actualValue'];
+			}
+			ynph(meteringName, actualValue);
+		}
+	});
+}
+
+/***********	偏差预测 	**********/
+var dforecast = echarts.init(document.getElementById('dforecast'), 'dark');
+function pcyc(hours, values) {
+	option = {
+		title: {
+			text: "负荷偏差预测",
+			left: 'center',
+			top: '4%',
+			textStyle: {
+				color: '#fff'
+			}
+		},
+		grid: {
+			left: '5%',
+			right: '5%',
+			top: '20%',
+			bottom: '10%',
+			containLabel: true
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data: ['负荷预测走势(mwh)']
+		},
+		xAxis: [{
+			type: 'category',
+			//      axisTick: {
+			//          alignWithLabel: true
+			//      },
+			data: hours
+		}],
+		yAxis: [{
+			type: 'value',
+			name: '负荷预测走勢(mw)',
+			//						min: 0,
+			//						max: 28000,
+			position: 'left',
+		}],
+		series: [{
+			name: '负荷预测走势(平均mw)',
+			type: 'line',
+			stack: '总量',
+			lineStyle: {
+				normal: {
+					width: 5,
+					shadowColor: 'rgba(0,0,0,0.4)',
+					shadowBlur: 10,
+					shadowOffsetY: 10
+				}
+			},
+			data: values
+		}, ]
+	};
+	dforecast.setOption(option);
+}
+
+/***********	实时负荷预测		**********/
+var ssfh = echarts.init(document.getElementById('ssfh'), 'dark');
+function ssfhjc (hours, values) {
+	option = {
+		tooltip: {
+			trigger: 'axis'
+		},
+		title: {
+			text: "实时负荷预测",
+			left: 'center',
+			top: '4%',
+			textStyle: {
+				color: '#fff'
+			}
+		},
+		grid: {
+			left: '5%',
+			right: '5%',
+			top: '20%',
+			bottom: '10%',
+			containLabel: true
+		},
+		xAxis: [{
+			type: 'category',
+			boundaryGap: '0',
+			name: '时间',
+			data: hours
+
+		}],
+		yAxis: [{
+			type: 'value',
+			name: 'mw'
+		}],
+		series: [{
+			name: '负荷',
+			type: 'line',
+			stack: '总量',
+			lineStyle: {
+				normal: {
+					width: 5,
+					shadowColor: 'rgba(0,0,0,0.4)',
+					shadowBlur: 10,
+					shadowOffsetY: 10
+				}
+			},
+			data: values
+		}]
+	};
+	ssfh.setOption(option);
+}
+
+/***********	用能排行		**********/
+var yn = echarts.init(document.getElementById('yn'), 'dark');
+function ynph (meteringName,actualValue) {
+	option = {
+		title: {
+			text: "用能排行",
+			left: 'center',
+			top: '4%',
+			textStyle: {
+				color: '#fff'
+			}
+		},
+		grid: {
+			left: '5%',
+			right: '5%',
+			bottom: '0',
+			containLabel: true
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: meteringName,
+			axisLabel: {
+				interval: 0
+			}
+		},
+		yAxis: {
+			type: 'value',
+			name: 'mwh'
+		},
+		series: [{
+			name: '用电',
+			type: 'bar',
+			stack: '总量',
+			barWidth: '30%',
+			data: actualValue
+		}]
+	};
+	yn.setOption(option);
+}
+
+/***********	偏差率排行	**********/
+var pclv = echarts.init(document.getElementById('pclv'), 'dark');
+function pclvph (meteringName,differRatio) {
+	option = {
+		title: {
+			text: "偏差率排行",
+			left: 'center',
+			top: '4%',
+			textStyle: {
+				color: '#fff'
+			}
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		grid: {
+			left: '5%',
+			right: '5%',
+			bottom: '0',
+			containLabel: true
+		},
+		xAxis: [{
+			type: 'category',
+			data: meteringName,
+			axisTick: {
+				alignWithLabel: true
+			},
+			axisLabel: {
+				interval: 0
+			}
+		}],
+		yAxis: [{
+			type: 'value',
+			name: '%',
+		}],
+		series: [{
+			name: '偏差率',
+			type: 'bar',
+			barWidth: '30%',
+			data: differRatio,
+
+		}]
+	};
+	pclv.setOption(option);
+}
+
+/***********	偏差量排行		**********/
+var pcla = echarts.init(document.getElementById('pcla'), 'dark');
+function pclaph (meteringName,differValue) {
+	option = {
+		title: {
+			text: "偏差率排行",
+			left: 'center',
+			top: '4%',
+			textStyle: {
+				color: '#fff'
+			}
+		},
+		color: ['#87A4A9'],
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		grid: {
+			left: '5%',
+			right: '5%',
+			bottom: '0',
+			containLabel: true
+		},
+		xAxis: [{
+			type: 'category',
+			data: meteringName,
+			axisTick: {
+				alignWithLabel: true
+			},
+			axisLabel: {
+				interval: 0
+			}
+		}],
+		yAxis: [{
+			type: 'value',
+			name: 'mwh',
+		}],
+		series: [{
+			name: '偏差量',
+			type: 'bar',
+			barWidth: '30%',
+			data: differValue
+		}]
+	};
+	pcla.setOption(option);
+}
+
+
+
+
+
+/***********	热力图	**********/
+(function() {
+	var chart = echarts.init(document.getElementById('hotmap'), 'dark');
+	chart.setOption({
+		title: {
+			text: "江西省各区县用能等级监测图",
+			left: 'center',
+			top: '4%',
+			textStyle: {
+				color: '#fff'
+			}
+		},
+		toolbox: {
+			show: true,
+			feature: {
+				dataView: {
+					readOnly: false
+				},
+				dataView: {
+					show: true,
+					readOnly: false
+				},
+				restore: {
+					show: true
+				},
+				saveAsImage: {
+					show: true
+				}
+			}
+		},
+		visualMap: {
+			min: 0,
+			max: 100,
+			right: '5%',
+			bottom: '30',
+			text: ['高', '低'], // 文本，默认为数值文本
+			textStyle: {
+				color: "#fff"
+			},
+			calculable: true
+		},
+		tooltip: {
+			trigger: 'item',
+			formatter: function(params) {
+				var value = (params.value + '').split('.');
+				var value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
+				return '用能等级' + '<br/>' + params.name + ' : ' + value;
+			}
+		},
+		series: [{
+			type: 'map',
+			map: '江西',
+			data: [{
+					name: '九江市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '上饶市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '南昌市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '吉安市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '赣州市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '新余市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '萍乡市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '抚州市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '景德镇市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '鹰潭市',
+					value: GetRandomNum(0, 100)
+				},
+				{
+					name: '宜春市',
+						value: GetRandomNum(0, 100)
+					},
+				]
+			}]
+		});
+})();
+
+/***********	随机数	**********/
+//	限定范围内的随机整数（包含min和max）
+function GetRandomNum(Min, Max) {
+	var Range = Max - Min;
+	var Rand = Math.random();
+	return(Min + Math.round(Rand * Range));
+};
+//	保留小数后两位
+function randomDatatoFix(x) {
+	var f = parseFloat(x);
+	if(isNaN(f)) {
+		return;
+	}
+	f = Math.round(x * 100) / 100;
+	return f;
+}
+
+</script>
+
+</body>
+</html>

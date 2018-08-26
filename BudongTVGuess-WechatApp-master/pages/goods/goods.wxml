@@ -1,0 +1,33 @@
+<view class="goods">
+  <view class="help">
+    <dfn>领券方法：复制淘口令，打开手机淘宝即可</dfn>
+  </view>
+  <view class="item" wx:for="{{goods}}" wx:key="item">
+    <image src="{{item.pic}}" mode="widthFix" class="thumb" />
+    <view class="title">
+      <dfn class="tmall">{{item.store}}</dfn> {{item.title}} 
+    </view>
+    <view class="desc">
+      <span class="price">
+        <span class="row">
+          <code>天猫价：</code>
+          <ins><small>￥</small> {{item.originPrice}}</ins>
+        </span>
+        <span class="row">
+          <code>券后价：</code>
+          <em><small>￥</small> {{item.originPrice-item.couponValue}}</em>
+        </span>
+      </span>
+      <button class="coupon" bindtap="onTakeCoupon" data-goodsId="{{item.id}}" data-taokouling="{{item.taokouling}}">
+        <dfn>{{item.couponValue}} 元券</dfn>
+        <em>复制淘口令</em>
+      </button>
+    </view>
+  </view>
+  <view class="tips">
+    每日上午 10:00 更新
+  </view>
+</view>
+
+<mc-coins id="coins"></mc-coins>
+<mc-toast id="toast"></mc-toast>

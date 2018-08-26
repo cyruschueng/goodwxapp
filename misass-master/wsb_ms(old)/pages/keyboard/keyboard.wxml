@@ -1,0 +1,144 @@
+<!--<view class="title">查询停车费</view>-->
+<view class="page">
+  <view class='car_title'>
+  车牌号
+  </view>
+  <view class='car_btn'>
+    <button class='{{_btn?"none":"active"}}' bindtap='haveHang'>有挂</button>
+    <button class='{{_btn?"active":"none"}}' bindtap='noneHang'>无挂</button>
+  </view>
+  <view wx:if="{{_haveHang}}">
+    <!--输入框打开键盘样式-->
+    <block>
+      <view bindtap="bindFocus" class='car_num'>
+          <text>{{textArr[0]}}</text>
+          <text>{{textArr[1]}}</text>
+          <text>{{textArr[2]}}</text>
+          <text>{{textArr[3]}}</text>
+          <text>{{textArr[4]}}</text>
+          <text>{{textArr[5]}}</text>
+          <text>{{textArr[6]}}</text>
+      </view>
+    </block>
+    <block>
+      <view bindtap="hangFocus" class='car_num'>
+          <text>挂</text>
+          <text>{{textHangArr[0]}}</text>
+          <text>{{textHangArr[1]}}</text>
+          <text>{{textHangArr[2]}}</text>
+          <text>{{textHangArr[3]}}</text>
+          <text>{{textHangArr[4]}}</text>
+          <text>{{textHangArr[5]}}</text>
+      </view>
+    </block>
+    <!--键盘-->
+    <block wx:if="{{isKeyboard}}">
+      <view class="keyboard aa">
+        <!--省份简写键盘-->
+        <view class="td td_nor" wx:for="{{keyboardValue}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="tapKeyboard" data-index="{{idx}}" data-val="{{itemName}}" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--数字键盘不可点击-->
+        <view wx:if="{{specialBtn && !tapNum}}" class="td td_num board_bg" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this">
+          {{itemName}}
+        </view>
+        <!--数字键盘可点击-->
+        <view wx:if="{{specialBtn && tapNum}}" class="td td_num" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="tapKeyboard" data-index="{{idx}}" data-val="{{itemName}}" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--字母键盘-->
+        <view wx:if="{{specialBtn}}" class="td td_num" wx:for="{{keyboardAlph}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+            <view class="del_icon" wx:if="{{idx == 19}}" bindtap="tapKeyboard" data-index="{{idx}}" data-val="{{itemName}}">
+            </view>
+            <view wx:elif="{{idx != 19}}"  bindtap="tapKeyboard" data-index="{{idx}}" data-val="{{itemName}}">
+            {{itemName}}
+            </view>
+        </view>
+        <!--完成按钮 start-->
+        <view class="td td_spec_fin" wx:for="{{keyboard2For}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="tapSpecBtn" data-index="{{idx}}" data-val="{{itemName}}" wx:if="{{specialBtn}}" hover-class="board_bg_spec" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--完成按钮 end-->
+      </view>
+    </block>
+    <!--挂输入键盘-->
+    <block wx:if="{{isKeyHangboard}}">
+      <view class="keyboard bb">
+        <!--省份简写键盘-->
+        <view class="td td_nor" wx:for="{{keyboardHangValue}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="hangboard" data-index="{{idx}}" data-val="{{itemName}}" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--数字键盘不可点击-->
+        <view wx:if="{{specialBtnHang && !tapNum}}" class="td td_num board_bg" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this">
+          {{itemName}}
+        </view>
+        <!--数字键盘可点击-->
+        <view wx:if="{{specialBtnHang && tapNum}}" class="td td_num" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="hangboard" data-index="{{idx}}" data-val="{{itemName}}" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--字母键盘-->
+        <view wx:if="{{specialBtnHang}}" class="td td_num" wx:for="{{keyboardAlph}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+            <view class="del_icon" wx:if="{{idx == 19}}" bindtap="hangboard" data-index="{{idx}}" data-val="{{itemName}}">
+            </view>
+            <view wx:elif="{{idx != 19}}"  bindtap="hangboard" data-index="{{idx}}" data-val="{{itemName}}">
+            {{itemName}}
+            </view>
+        </view>
+        <!--完成按钮 start-->
+        <view class="td td_spec_fin"  wx:for="{{keyboard2For}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="tapHangSpecBtn" data-index="{{idx}}" data-val="{{itemName}}" wx:if="{{specialBtnHang}}" hover-class="board_bg_spec" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--完成按钮 end-->
+      </view>
+    </block>
+  </view>
+  <view wx:if="{{!_haveHang}}">
+    <!--输入框打开键盘样式-->
+    <block>
+      <view bindtap="noneHangFocus" class='car_num'>
+          <text>{{noneHangArr[0]}}</text>
+          <text>{{noneHangArr[1]}}</text>
+          <text>{{noneHangArr[2]}}</text>
+          <text>{{noneHangArr[3]}}</text>
+          <text>{{noneHangArr[4]}}</text>
+          <text>{{noneHangArr[5]}}</text>
+          <text>{{noneHangArr[6]}}</text>
+      </view>
+    </block>
+    <!--键盘-->
+    <block wx:if="{{noneKeyboard}}">
+      <view class="keyboard aa">
+        <!--省份简写键盘-->
+        <view class="td td_nor" wx:for="{{keyboardValue}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="noneKeyboard" data-index="{{idx}}" data-val="{{itemName}}" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--数字键盘不可点击-->
+        <view wx:if="{{specialBtn && !tapNum}}" class="td td_num board_bg" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this">
+          {{itemName}}
+        </view>
+        <!--数字键盘可点击-->
+        <view wx:if="{{specialBtn && tapNum}}" class="td td_num" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="noneKeyboard" data-index="{{idx}}" data-val="{{itemName}}" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--字母键盘-->
+        <view wx:if="{{specialBtn}}" class="td td_num" wx:for="{{keyboardAlph}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" hover-class="board_bg" hover-start-time="0" hover-stay-time="80">
+            <view class="del_icon" wx:if="{{idx == 19}}" bindtap="noneKeyboard" data-index="{{idx}}" data-val="{{itemName}}">
+            </view>
+            <view wx:elif="{{idx != 19}}"  bindtap="noneKeyboard" data-index="{{idx}}" data-val="{{itemName}}">
+            {{itemName}}
+            </view>
+        </view>
+        <!--完成按钮 start-->
+        <view class="td td_spec_fin" wx:for="{{keyboard2For}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindtap="tapNoneSpecBtn" data-index="{{idx}}" data-val="{{itemName}}" wx:if="{{specialBtn}}" hover-class="board_bg_spec" hover-start-time="0" hover-stay-time="80">
+          {{itemName}}
+        </view>
+        <!--完成按钮 end-->
+      </view>
+    </block>
+  
+  </view>
+  <view class='car_result'>
+    <button bindtap='carResult'>确定</button>
+    <button bindtap='carCancel'>取消</button>
+  </view>
+</view>

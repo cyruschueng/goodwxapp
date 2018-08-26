@@ -1,0 +1,37 @@
+<view>
+  <loading hidden="{{initload}}">正在加载</loading>
+</view>
+<view class="mine-info" hidden="{{!initload}}">
+  <view class='infobox'>
+    <view class="information">
+      <image src="{{userInfo.avatar}}" class="icon"></image>
+      <view class="cbox">
+        {{userInfo.name}}
+      </view>
+      <view class="cbox t2">
+        <text class='jiaru' hidden="{{!isNew}}">请先选择你居住的小区</text>
+      </view>
+      <view class="cbox t2">
+        <text class='jiaru' hidden="{{isNew}}">{{userInfo.xqname}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='red'>
+    <icon type="warn" size="20"/>
+    <text class="wzbianju">只有当前小区的用户才可以发布信息</text>
+  </view>
+
+  <view class='btn'>
+    <button hidden="{{!isNew}}" bindtap='joinxq'> 加入{{opsname}} </button>
+    <button hidden="{{!isNew}}" bindtap="choose"> 选择其他小区 </button>
+    <button hidden="{{isNew}}" bindtap="home"> 回到我的小区 </button>
+  </view>
+  <view class='infobox'>
+    <view class="information">
+      <view class="cbox t2">
+        <text class="jiaru">你刚刚通过{{opsname}}小区的邻居{{name}}进入此页面</text>
+      </view>
+    </view>
+  </view>
+
+</view>

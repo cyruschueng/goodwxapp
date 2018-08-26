@@ -1,0 +1,76 @@
+<view class="header" bindtap="changePhoto">
+    <image class="head" src="{{ulist.avatarUrl}}"></image>
+    <image class="right" src="/img/right_pull.png"></image>
+    <view class="title" style="color:#888888">修改</view>
+</view>
+<view class="lpanel">
+  <view class="item" wx:if="{{ulist.name != ''}}">
+    <view class="title">昵称</view>
+    <input class="value" value="{{userInfo.name}}" bindinput="bindInputName" />
+    <view style="clear:both"></view>
+  </view>
+  <view class="item" wx:if="{{ulist.name == ''}}">
+    <view class="title">昵称</view>
+    <input class="value" placeholder="昵称" bindinput="bindInputName"/>
+    <view style="clear:both"></view>
+  </view>
+
+  <picker class="item" bindchange="bindPickerGender" value="{{index}}" range="{{genderList}}">
+    <view class="title">性别</view>
+    <view class="value">
+      {{ulist.sex}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" bindchange="bindPickerAge" value="{{index}}" range="{{ageList}}">
+    <view class="title">年龄段</view>
+    <view class="value">{{ulist.age}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" bindchange="bindPickerMarital" value="{{index}}" range="{{maritalList}}">
+    <view class="title">婚姻</view>
+    <view class="value">{{ulist.marital}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" bindchange="bindPickerConstellation" value="{{index}}" range="{{constellationList}}">
+    <view class="title">星座</view>
+    <view class="value">{{ulist.constellation}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+
+  <view class="item" wx:if="{{ulist.mobile == null}}">
+    <view class="title">联系电话</view>
+    <input class="value" type="number" placeholder="11位手机号" maxlength="11" bindinput="bindInputMobile"  />
+    <view style="clear:both"></view>
+  </view>
+
+  <view class="item" wx:if="{{ulist.mobile != null}}">
+    <view class="title">联系电话</view>
+    <input class="value" type="number" value="{{ulist.mobile}}" maxlength="11" bindinput="bindInputMobile" />
+    <view style="clear:both"></view>
+  </view>
+  
+  <view class="item" wx:if="{{ulist.des != null && ulist.des != ''}}" >
+    <view class="title">个人简介</view>
+    <textarea style="margin-top:60rpx;height:80px" value="{{ulist.des}}" bindinput="bindInputDes" />  
+    <view style="clear:both"></view>
+  </view>
+
+  <view class="item" wx:if="{{ulist.des == null || ulist.des == ''}}">
+    <view class="title">个人简介</view>
+    <textarea style="margin-top:60rpx;height:80px" placeholder="个人简介" bindinput="bindInputDes" />  
+    <view style="clear:both"></view>
+  </view>
+
+</view>
+
+<view class="btn btn-theme" bindtap="submit">
+  <view >保存</view>
+</view>

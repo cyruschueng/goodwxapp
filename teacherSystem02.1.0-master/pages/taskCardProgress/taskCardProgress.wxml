@@ -1,0 +1,88 @@
+<!--index.wxml-->
+<view class="container">
+<!-- 学员存在 -->
+  <view class="wrap" wx:if="{{showWrap}}">
+   <view class="taskTitle">
+     <view class="sClass">{{className}}  第{{queryArr[1]}}讲打卡<image src="../images/clock1.png"></image></view>
+     <view class="sTime">剩余时间：<text>{{queryArr[2]}}</text></view>
+     <view class="sCard flex">
+       <view>已打卡人数：<text>{{alreadyCount}}</text></view>
+       <view>未打卡人数：<text>{{noAlreadyCount}}</text></view>
+     </view>
+   </view>
+ 
+   <view class="tasks">
+     <form bindsubmit="postTask">
+       <view class="taskItems">
+         <view class="sStudent"><text>{{studentTask.sStudentName}}</text>同学 本讲的任务有：</view>
+         <view class="taskItem flex" wx:for="{{taskArr}}" wx:key="id">
+           <view class="taskItem-left flex">
+              <input type="text" class="hideInp" name="datas[{{index}}][sPunchCardCode]" value="{{item.sCode}}" />
+              <input type="text" class="hideInp" name="datas[{{index}}][sItemName]" value="{{item.task}}" />
+             <view class="dot" style="background:{{item.isComplete?'#ff8c59':'#fafafa'}}"></view>
+             <view class="txt">{{item.task}}</view>
+           </view>
+           <view class="radio" bindtap="checkRadio" data-id="{{index}}" data-complete="{{item.isComplete}}">
+              <image src="../images/{{item.isComplete?'check':'nocheck'}}.png"></image>
+           </view>
+           <input type="text" class="hideInp" name="datas[{{index}}][isComplete]" value="{{item.isComplete}}" />
+         </view>
+       </view>
+       
+       <view class="btn">
+         <button formType="submit" wx:if="{{!showLogin}}" class="loginBtn" disabled="{{flag}}">确定</button>
+         <button class="loginBtn" bindtap="unlogin1" wx:if="{{showLogin}}">退出登录</button>
+       </view>
+     </form>
+   </view>
+ </view>
+ <!-- 学员不存在 -->
+  <view class="wrap1" wx:if="{{!showWrap}}">
+    <image src="../images/tipicon.png"></image>
+    <view class="tip">您登录的学员并未报名本课程，请退出登录</view>
+    <view class="tip">并尝试切换账号，或检查是否进错班级群。</view>
+    <button bindtap="unlogin">退出登陆</button>
+  </view>
+
+  <!-- 班级弹窗 -->
+  <!-- <view class="float">
+    <view class="floatWrap">
+      <view class="arrows arrowT"><image class="arrowT" src="../images/arrow-t.png"></image></view>
+      <view class="floatC">
+        <view class="floatC-item">qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</view>
+        <view class="floatC-item">qqq</view>
+      </view>
+      <view class="arrows arrowB"><image class="arrowB" src="../images/arrow-b.png"></image></view>
+    </view>
+  </view> -->
+  <!-- 学校弹窗 -->
+
+  <!-- 实验班弹窗 -->
+
+
+  <!-- 导航 -->
+  <view animation="{{animationData}}" class="mainMenu drawer_attr_box" wx:if="{{showModalStatus}}">
+    <view class="menu">
+        <view class="userinfo flex">
+            <view class="Avatar">
+                <image src="../images/noface.png" mode='widthFix'></image>
+            </view>
+            <view class="name">{{teacherName}}</view>
+        </view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SchoolCollection/SchoolCollection'>学校信息收集</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClassEntryGrade/SelectClassEntryGrade'>学员资料查询</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClass/SelectClass'>班级成绩录入</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/PicClassList/PicClassList'>定制图片生成</navigator></view>
+        <view class="quit tac"><button class="btn" bindtap="unlogin">退出登录</button></view>
+    </view>
+  </view>
+
+
+  <!-- 导航tab -->
+  <!-- <view class="tabBar flex">
+    <view class="tabItem flex" bindtap="changeColor" wx:for="{{tabBarArr}}" data-id="{{index}}">
+      <view class="icon"><image class="icon1" mode="aspectFit" src="{{item.iconSrc}}"></image></view>
+      <view class="txt" style="color:{{item.changeTextColor}}">{{item.txt}}</view>
+    </view>
+  </view> -->
+</view>

@@ -1,0 +1,99 @@
+<!--index.wxml-->
+<view id='mask' wx:if='{{totalDetail}}' bindtap='showDetail'>
+
+</view>
+<view class="container">
+    <!-- <view class='banner'>
+        <swiper indicator-dots="{{indicatorDots}}"
+          autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"  indicator-active-color="{{activeColor}}" circular="true">
+          <block wx:for="{{imgUrls}}">
+            <swiper-item>
+              <image src="{{item}}" class="slide-image"/>
+            </swiper-item>
+          </block>
+      </swiper>
+    </view> -->
+    <view class='content'>
+            <view class='ms_left'>
+                        <view class='ms_left_list {{ifIndex == index?"active":""}}' wx:for="{{array}}" wx:for-item="list" wx:key="*this" bindtap='jumpTo' data-opt = "list{{index}}">
+                                <image wx:if="{{ifIndex == index}}" class="ms_left_img" src='{{list.imgSrc}}'/>
+                              <text class='list_vul'>{{list.name}}</text>
+                        </view>
+            </view>
+              <scroll-view 
+                  scroll-into-view="{{toView}}" 
+                  scroll-y="true" 
+                  scroll-with-animation="true" 
+                  class="scr">
+                        <view class='ms_right'>
+                            <view class='ms_right_box' wx:for="{{teaArray}}"  wx:for-item="lis"   id="{{lis.aId}}"  wx:key="*this">
+                                  <view wx:for="{{lis.listArr}}" wx:for-item="list">
+                                        <view class='ms_right_tea'>
+                                            <image  class='ms_right_img' src='{{list.imgSrc}}'/>  
+                                        </view>
+                                        <view class='ms_right_price'>
+                                            <view class='ms_price_top'>
+                                                        <view class='price_box'>
+                                                              <text>{{list.teaName}}</text>
+                                                              <label>
+                                                                    <text>{{list.moneyCode}}</text>
+                                                                    <text>{{list.money}}</text>
+                                                                    <text>{{list.star}}</text>
+                                                              </label>
+                                                        </view> 
+                                            </view>
+                                            <view class='ms_price_bottom'>
+                                                <view class='tea-size' wx:for="{{list.sizeArr}}" wx:for-item="siezArr" wx:key="*this">
+                                                  <text class='tea_size_type'>{{siezArr.cupZize}}</text>
+                                                  <label class='{{siezArr.num<1?"":"tea_size_num"}}'>
+                                                    <text class='tea_size_min' hidden ="{{siezArr.num<1}}" bindtap='minusCount' data-lis='{{lis.aId}}' data-lit='{{list.sizeId}}'  data-index='{{index}}'>{{siezArr.del}}</text>
+                                                    <input  type='number' hidden ="{{siezArr.num<1}}"  value='{{siezArr.num}}'/>
+                                                    <text class='tea_size_add'  bindtap="addCount" data-lis='{{lis.aId}}' data-lit='{{list.sizeId}}' data-index="{{index}}">{{siezArr.add}}</text>
+                                                  </label>
+                                                </view> 
+                                            </view>
+                                        </view>
+                                  </view>
+                            </view>
+                  </view>
+            </scroll-view>
+    </view>
+    <view class='footer'>
+      <view class='footer-top'  wx:if='{{totalDetail}}'>
+           <view wx:for='{{detailArray}}' wx:for-item='detailList' wx:key='*this' wx:if='{{detailList.num>0}}'>
+            <view class='footer-top-left'>{{detailList.name}}</view>
+            <view class='footer-top-right'>
+                  <view class='footer-top-price'>
+                      <text>￥</text>
+                      <text>{{detailList.price}}</text>
+                  </view>
+                  <view class='footer-top-count'>
+                      <text class='del'  data-index='{{index}}' bindtap='detailMinus'>-</text>
+                      <input value='{{detailList.num}}'/>
+                      <text class='add' data-index='{{index}}' bindtap='detailAdd'>+</text>
+                  </view>
+            </view>
+          </view>
+      </view>
+      <view class='footer-bottom' wx:if='{{priceCar}}'>
+        <view class='footer-left'>
+            <label class='footer-lab'>
+              <view class='footer-icon' bindtap='jumpTotal'>
+                <image src='../../images/car.png'/>
+                <text class='footer-icon-msg'>{{numTotal}}</text>
+              </view>
+              <view class='footer-lab-price'>
+                <text class='price_samll'>￥</text>
+                <text>{{totalPrice}}</text>
+              </view>
+            </label>  
+        </view>
+          <view class='footer-right'>
+              <text>选好了</text>
+              <text>{{char_lt}}</text>
+          </view>
+      </view>
+    </view>
+</view>
+
+

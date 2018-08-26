@@ -1,0 +1,245 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="./styles/common.css">
+    <title>VBPANO数据管理平台——数据统计</title>
+    <style>
+        html, body, .contentWrap {
+            margin: 0;
+        }
+
+        body {
+            max-width: none;
+        }
+
+        .title {
+            position: absolute;
+            top: 7%;
+            left: 50%;
+            margin-left: -97px;
+            width: 194px;
+            height: 46px;
+        }
+
+        .footer {
+            position: absolute;
+            /*top:80%;*/
+            top: 91%;
+            left: 50%;
+            margin-left: -51px;
+            width: 102px;
+            height: 33px;
+        }
+
+        .login-form {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            margin-left: -240px;
+            width: 480px;
+            height: 370px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .login-form .login-form-title {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            margin-left: -113px;
+            width: 226px;
+            height: 28px;
+        }
+
+        .login-form .input-item {
+            /*display: table;*/
+            position: relative;
+            width: 398px;
+            height: 50px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            background-color: #eaeaea;
+        }
+
+        .login-form .input-item.user {
+            position: absolute;
+            top: 108px;
+            left: 40px;
+        }
+
+        .login-form .input-item.pwd {
+            position: absolute;
+            top: 188px;
+            left: 40px;
+        }
+
+        .login-form .input-item-ico {
+            position: absolute;
+            top: 14px;
+            left: 12px;
+            width: 22px;
+            height: 22px;
+        }
+
+        .login-form .input-item-ico.user-ico {
+            background: url(./images/icon_login_user.png) no-repeat;
+        }
+
+        .login-form .input-item-ico.pwd-ico {
+            background: url(./images/icon_login_pwd.png) no-repeat;
+        }
+
+        .login-form .input-item input {
+            position: absolute;
+            top: 16px;
+            left: 46px;
+            width: 336px;
+            height: 18px;
+            line-height: 18px;
+            border: none;
+            background: transparent;
+        }
+
+        .login-form .input-item input:focus {
+            outline: 0;
+        }
+
+        .login-form .login-button {
+            display: block;
+            position: absolute;
+            bottom: 37px;
+            left: 40px;
+            width: 398px;
+            height: 50px;
+            background-color: #364c86;
+            cursor: pointer;
+            border-radius: 25px;
+        }
+
+        .login-form .login-button span {
+            display: block;
+            width: 50px;
+            margin: 13px auto;
+            color: #fff;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div id="appContainer" style="width: 100%; height: 100%;"></div>
+<div class="contentWrap">
+    <!-- <img class="title" src="./images/logo_login_big.png"> -->
+    <!-- <div class="login-form ">
+        <img class="login-form-title" src="./images/title_login.png">
+        <div class="input-item user">
+            <span class="input-item-ico user-ico">
+            </span>
+            <input type="text" id="userName" class="user" placeholder="用户名">
+        </div>
+        <div class="input-item pwd">
+            <span class="input-item-ico pwd-ico">
+            </span>
+            <input type="password" id="password" class="pwd" placeholder="密码">
+        </div>
+        <a class="login-button" id="login">
+            <span>登录</span>
+        </a>
+    </div> -->
+    <!-- <img class="footer" src="./images/logo_weijing.png"> -->
+</div>
+<script type="text/javascript" src="./scripts/lib/jquery-1.12.4.min.js"></script>
+<script type="application/javascript" src="http://webapp.visualbusiness.cn/appengine/v1.0.26/libs/vbpano.js"></script>
+<script type="text/javascript" src="./scripts/util.js"></script>
+<script type="text/javascript" src="./scripts/url.config.js"></script>
+<script type="text/javascript" src="../backstage/dist/scripts/albumEdit-all.min.js"></script>
+<script type="text/javascript">
+    // function login() {
+    // 	var data = {
+    // 		userName: $('#userName').val(),
+    // 		password: $('#password').val()
+    // 	};
+    // 	if(!data.userName || !data.password) {
+    // 		var d = new Dialog({title: '提示', content: '用户名或密码不能为空。'});
+    // 		return;
+    // 	}
+    // 	$.ajax({
+    // 		type: 'post',
+    // 		url: url_root + '/auth/login',
+    // 		data: data,
+    // 		success: function(data) {
+    // 			if(data.result == 0 ){
+    // 				window.location.href = 'htmls/index.html';
+    // 				localStorage.userName = $('#userName').val();
+    // 			} else {
+    // 				var d = new Dialog({title: '提示', content: '用户名或密码错误。'});
+    // 			}
+    // 		}
+    // 	});
+    // }
+    function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+    function login() {
+      if(getQueryString('albumId') != null){
+        var data2 = {
+          token: getQueryString('token'),
+          uniqueId: getQueryString('unique_id'),
+          albumId: getQueryString('albumId')
+        };
+      }else{
+        var data2 = {
+          token: getQueryString('token'),
+          uniqueId: getQueryString('unique_id')
+        };
+      }
+
+        window.uniqueID = data2.uniqueId
+                $.ajax({
+                    type: 'post',
+                    url: url_root + '/auth/tokenLogin',
+                    data: data2,
+                    success: function (data) {
+                        if (data.result != 0) {
+                            alert('登录失败，请重新登录。' + data.msg);
+                        } else {
+                          if(data2.albumId != null){
+                            window.location.href = "htmls/albumEdit.html?unique_id=" + data2.uniqueId + "&token=" + data2.token + "&albumId=" + data2.albumId;
+                          }else {
+                            window.location.href = "htmls/albumEdit.html?unique_id=" + data2.uniqueId + "&token=" + data2.token;
+                          }
+                        }
+                    }});
+    }
+    $(function () {
+        $.ajaxSetup({
+            xhrFields: {
+                withCredentials: true
+            }
+        });
+        login();
+        $('#login').on('click', function () {
+            login();
+        });
+
+        $('.login-form .input-item').keydown(function (e) {
+            if (e.keyCode == 13) {
+                login();
+            }
+        });
+    });
+    enablePano();
+
+    function enablePano() {
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!--pages/membership/membership.wxml-->
+<view class='container'>
+<view wx:if="{{show}}">
+  <image src="../../images/null.png" class='null'></image>
+  <view class='tips'>您还没有这个等级的会员</view>
+</view>
+<block wx:for="{{memberList}}" wx:key="{{item.index}}" >
+  <view class='content row' wx:if="{{!show}}" catchtap='call' data-index='{{index}}'>
+    <image src='../../images/avator.png' class='avator'></image>
+    <view class='cloumn'>
+      <view class='name'>{{memberList[index].realname?memberList[index].realname+'**':"未实名"}}[<text class='state'>{{memberList[index].state}}</text>]</view>
+      <view class='phone'>{{memberList[index].mobile}}</view>
+    </view>
+    <!-- <view class='column right'>
+      <view class="{{show1? 'time1': 'time' }}">{{memberList[index].createTime}}</view>
+      <block wx:if="{{show1}}">
+        <view class='consum'  wx:if="{{memberList[index].isSubmit?true:false}}">{{dec}}</view>
+      </block>
+    </view> -->
+  </view>
+</block>
+</view>

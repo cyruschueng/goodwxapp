@@ -1,0 +1,24 @@
+<view class="chat">
+  <view class="chat_cont">
+    <scroll-view class="chat_list" scroll-y>
+      <view wx:for="{{ chatList }}" wx:key="@" class="chat_item {{ item.from === user._id? 'chat_item_r': 'chat_item_l' }}">
+        <view class="chat_item_hd">
+          <navigator class="chat_item_thumb" url="../show/index?id={{ item.from === user._id? user._id: customer._id }}" style="background-image: url({{ item.from === user._id? user.avatarUrl: customer.avatarUrl }})"></navigator>
+        </view>
+
+        <view class="chat_item_bd">
+          <view class="chat_item_cont">
+            <text class="chat_text">{{ item.text }}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="controller">
+    <view class="input_box">
+      <input name="input" class="chat_text" confirm-type="send" cursor-spacing="12" value="{{ inputValue }}" focus="{{ isFocus }}" bindconfirm="sendText" />
+    </view>
+    <view class="btn_img" bindtap="sendImg" style="background-image: url({{ iconUploadTipsUrl }})"></view>
+  </view>
+</view>

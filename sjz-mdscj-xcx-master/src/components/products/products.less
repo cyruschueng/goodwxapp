@@ -1,0 +1,59 @@
+@import '../../value';
+@itemWidth: 357rpx;
+
+.list {
+    box-sizing: border-box;
+    width: 750rpx;
+    overflow-x: hidden;
+    padding: 12rpx;
+}
+
+.list::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.item {
+    float: left;
+    width: @itemWidth;
+    padding-bottom: 12rpx;
+}
+
+.item:nth-of-type(2n + 1) {
+    padding-right: 12rpx;
+}
+
+.item image {
+    width: @itemWidth;
+    height: @itemWidth;
+}
+
+.name {
+    display: block;
+    margin-bottom: 10rpx;
+    color: #666;
+    font-size: 28rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    width: @itemWidth;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.price{
+  color:@main;
+  font-size: 32rpx;
+  line-height: 34rpx;
+  padding-bottom: 12rpx;
+}
+.promotion-type{
+    display: inline-block;
+    margin: 6rpx 10rpx 6rpx 0;
+    padding: 0 5rpx;
+    font-size: 20rpx;
+    line-height: 42rpx;
+    vertical-align: top;
+    color: #fff;
+    background: #ff6685;
+}

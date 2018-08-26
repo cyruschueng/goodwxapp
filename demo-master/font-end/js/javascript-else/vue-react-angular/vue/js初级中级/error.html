@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" onclick="erroCatch()">
+    try+catch
+    </div>
+
+    <input type="text" id="demo">
+    <button onclick = "myFunction()">测试</button>
+    <div id="message"></div>
+</body>
+
+</html>
+<script>
+/*try 语句允许我们定义在执行时进行错误测试的代码块。
+catch 语句允许我们定义当 try 代码块发生错误时，所执行的代码块
+try {
+  //在这里运行代码
+} catch(err) {
+  //在这里处理错误
+}*/
+
+
+//try,catch是err.message
+//try,catch,throw是err
+
+
+function erroCatch(){
+    try{
+        alert(1)
+    }catch(err){
+        alert(err.message)
+    }
+}
+
+
+
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("demo").value;
+    try { 
+        if(x == "")  throw "值为空";
+        if(isNaN(x)) throw "不是数字";
+        x = Number(x);
+        if(x < 5)    throw "太小";
+        if(x > 10)   throw "太大";
+    }
+    catch(err) {
+        message.innerHTML = "错误: " + err;
+    }
+}
+
+
+</script>

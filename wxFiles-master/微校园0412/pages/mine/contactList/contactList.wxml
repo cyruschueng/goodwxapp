@@ -1,0 +1,18 @@
+
+<view class="panel sdsd bottom-line " wx:for="{{list}}" id="{{index}}"  bindtap="sele">
+  <view class="tit">
+    <view class="t1">{{item.name}},{{item.phone}}</view>
+    <view data-index="{{index}}" catchtap="delItem" style="background:#ee5353; color:#fff;width:120rpx;line-height:50rpx; text-align:center;border-radius:10rpx;font-size:26rpx">删除</view>
+    <!-- <icon  type="clear"  bindtap="delItem" data-index="{{index}}"  /> -->
+  </view>
+  <view class="con">{{item.detail}}</view>
+</view>
+<view class="psd" wx:if="{{list.length == 0 && showl}}">
+  <view class="t1" >生活不止眼前的苟且</view>
+  <view class="t2">还有姓名住址和你的联系方式</view>
+  <image  src="/images/won.png" style="padding-top:40rpx;width:120rpx;height:120rpx"></image>
+</view>
+
+
+
+<view class="btn-ori" bindtap="add_Address">+</view>

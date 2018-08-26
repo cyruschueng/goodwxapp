@@ -1,0 +1,26 @@
+<template name="products-modal">
+  <view class='{{type=="index"?"products-box-index":"products-box"}}'>
+
+    <block wx:for="{{data}}" wx:key="{{index}}">
+      <view class='product-wrapper' wx:if="{{data.length}}"  data-id='{{item.goodsId}}' data-index='{{index}}' data-storeno='{{item.storeNo}}' bindTap='onProductTap'><!--product-wrapper start-->
+
+        <view class='{{type=="index"?"product-index":"product"}}'>
+
+              <view class='img-wrap back_img'><!--img-wrap start-->
+                <image class="products-image" src="{{item.goodsPic}}" mode="aspectFill"></image>
+              </view><!--img-wrap end-->
+
+              <view wx:if='{{type=="index"}}' class="extra"><!--extra start-->
+                <view class='product-name'>{{item.goodsName}}</view>
+                <view class='product-price'>
+                  <text>￥{{item.goodsPrice}}</text>
+                  <image src="../../images/newIcon/{{item.isFavorite==0?'listing-normal@2x':'listing@2x'}}.png" data-id='{{item.goodsId}}' data-index='{{listIndex}}' ontap='collectProduct'></image>
+                </view>
+              </view><!--extra end-->
+           
+        </view>
+
+      </view><!--product-wrapper end-->
+    </block>
+  </view>
+</template>

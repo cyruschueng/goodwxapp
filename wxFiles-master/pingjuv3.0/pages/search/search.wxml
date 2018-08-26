@@ -1,0 +1,87 @@
+<view class="as">
+  <view class="area">
+    <view>{{city}}</view>
+    <view style="clear:both"></view>
+  </view>
+  <view class="ser">
+    <image src="/img/search2.png"></image>
+    <input type="text" bindinput="inputSearch" placeholder="{{cn}}" />
+  </view>
+  <view class="btns" bindinput="inputSearch">搜索</view>
+  <view style="clear:both"></view>
+</view>
+<view wx:if="{{list.length == 0 && op == true}}" class="soli" style="border-bottom:1px #f2f2f2 solid;padding-bottom:10px;">
+  <view class="title">未找到相关活动</view>
+  <view class="notice">萍水相逢 有缘再聚 去报名吧</view>
+  <image src="/img/none2.png"></image>
+</view>
+<view wx:if="{{re ==true}}" style="padding:10px;padding-left:15px;">热门推荐</view>
+<view wx:if="{{re ==true}}">
+  <view wx:for="{{iconList}}"  style="margin-left:35rpx;margin-top:20rpx;width:200rpx; float:left; background:#f5f5f5; border-radius:30rpx;text-align:center;line-height:70rpx;" data-cn="{{item.cn}}" data-en="{{item.en}}" bindtap="bindTapType">{{item.cn}}</view>
+</view>
+
+
+<block wx:if="{{op == true}}">
+  <view class="its" style="clear:both">
+    <block wx:for="{{typeList}}" wx:for-item="it" wx:if="{{re == false}}">
+      <view class="items" bindtap="selectType" id="{{it.id}}">
+        <view>{{it.name}}</view>
+        <image src="{{it.open == true ? drop[1]:drop[0]}}"></image>
+      </view>
+    </block>
+    <block wx:for="{{toShow.list}}">
+    <view class="ite {{toShow.open == true ? '' : 'close'}}"  id="{{index}}" bindtap="doselect" style="{{ index == 0 ? '':''}}">
+      <view class="title" wx:if="{{index == 0}}">不限</view>
+      <view class="title" wx:if="{{index != 0}}">{{item}}</view>
+      <image wx:if="{{index == toShow.active}}" src="/img/true.png"></image>
+      <view style="clear:both"></view>
+    </view>
+    </block>
+    <view style="clear:both"></view>
+
+  </view>
+  <view class="panel" style="background:#fff">
+    <block wx:for="{{iconList}}" wx:for-item="ic"  >
+    <block wx:for="{{list}}" wx:for-item="it" wx:if="{{it.general == ic.en}}" >
+    <view class="item" id="{{benid == it.uid ? 'meact':'taact'}}" data-id="{{it.id}}" data-uid="{{it.uid}}" bindtap="navToDetail" >
+      <view class="head" style="background:{{ic.color}}"></view>
+      <view class="msg">
+        <view class="line">
+          <image class="header" src="{{it.icon}}"></image>
+          <image wx:if="{{it.sex == '男'}}" class="gender" src="/img/male.png"></image>
+          <image wx:if="{{it.sex == '女'}}" class="gender" src="/img/female.png"></image>
+          <view class="dot">
+            <image src="/img/dot.png"></image>
+            <view>已报名人数:{{it.apply_total}}</view>
+          </view>
+          <image class="type" src="{{ic.url1}}"></image>
+          <view style="position:relative;left:350rpx;top:-70rpx;color:{{ic.color}}">{{it.general_title}}</view>
+        </view>
+        
+        <view class="line-msg">
+          <image src="/img/clock.png"></image>
+          <view class="title">时间：{{it.open_date}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/localtion.png"></image>
+          <view class="title">地点：{{it.address}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/money.png"></image>
+          <view class="title">预算金额：{{it.budget}}</view>
+        </view>
+        <view class="line-msg" style="padding-bottom:15px;border-bottom:1px solid #f2f2f2">
+          <image src="/img/flag.png"></image>
+          <view class="title">开支性质：{{it.expend_title}}</view>
+        </view>
+        <view style="clear:both"></view>
+        <view class="link">查看详情
+          <image src="/img/right.png" style="margin-top:1rpx;width:30rpx;height:30rpx;"></image>
+        </view>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+    <view style="clear:both;height:25rpx;"></view>
+  </block></block>
+  </view>
+</block>

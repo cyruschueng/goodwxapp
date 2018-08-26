@@ -1,0 +1,86 @@
+<!--pages/post/post.wxml-->
+
+<!--post.wxml-->
+<import src="../common/foot.wxml" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+
+  <view class="page__bd">
+
+    <form bindsubmit="bindPublish">
+      <view class="section">
+        <view class="weui-media-box__title weui-media-box__title_in-text">项目名称：</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <input name="title" class="weui-input" placeholder="例如：电商类app 网站" />
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-flex">
+        <view class="section weui-flex__item">
+          <view class="weui-media-box__title weui-media-box__title_in-text">项目类型：</view>
+          <picker name="typepicker" class="weui-btn" bindchange="bindPickerChange1" value="{{one}}" range="{{typelist}}">
+            <button type="default">选择：{{typelist[one]}}</button>
+          </picker>
+        </view>
+        <view class="section weui-flex__item">
+          <view class="weui-media-box__title weui-media-box__title_in-text">项目预算：</view>
+          <picker name="picker" class="weui-btn" bindchange="bindPickerChange" value="{{index}}" range="{{budget}}">
+            <button type="default">选择：{{budget[index]}}</button>
+          </picker>
+        </view>
+      </view>
+      <view class="section">
+        <view class="weui-media-box__title weui-media-box__title_in-text">项目周期：</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <input name="days" class="weui-input" placeholder="您期望的交付天数" type="number" />
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-media-box__title weui-media-box__title_in-text">填写您的需求（至少需要20个字符）：</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea bindinput="bindInput" name="content" class="weui-textarea" maxlength="100" placeholder="例如：功能、可参照项目及其他说明" style="height: 3.3em" />
+            <view class="weui-textarea-counter">{{num}}/100</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-media-box__title weui-media-box__title_in-text">联系电话：</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input name="telnum" class="weui-input" placeholder="请输入联系电话" type="number" bindblur="validatemobile" />
+          </view>
+        </view>
+      </view>
+
+
+
+
+
+
+
+
+      <view class="weui-btn-area">
+        <view class="ad_popError" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
+        <button formType="submit" class="weui-btn" type="primary">发布</button>
+      </view>
+    </form>
+
+    <view class="body-view">
+      <loading hidden="{{hidden}}" bindchange="loadingChange">
+        发布中...
+      </loading>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-footer__text">Copyright © Kn0w thyself</view>
+    </view>
+  </view>
+
+</view>

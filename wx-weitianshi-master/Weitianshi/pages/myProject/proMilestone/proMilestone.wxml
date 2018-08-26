@@ -1,0 +1,15 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--历史融资  -->
+  <scroll-view style="height:1200rpx;background:#fff;padding-top:20rpx" scroll-y="true">
+    <!-- <template is="searchNothing" data="{{empty:investorList}}"></template> -->
+    <block wx:for="{{mileStoneArray}}" wx:key="{{mileStoneArray}}">
+      <template is="investHistory1" data='{{item}}'></template>
+    </block>
+    <!-- <template is="theBottom" wx:if="{{mileStoneArray!==''}}"></template> -->
+    <!-- <view class="high"></view> -->
+  </scroll-view>
+  <!--空状态-->
+  <template is="isEmpty" data="{{emptyNumber:mileStoneArray}}"></template>
+</view>

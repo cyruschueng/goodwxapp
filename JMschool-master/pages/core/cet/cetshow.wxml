@@ -1,0 +1,32 @@
+<!--cj.wxml-->
+<view class="container">
+  <view class="cj-header">
+    <view class="cj-text">
+      <text class="cj-header-title">成绩查询</text>
+      <text class="cj-header-info">姓名：{{name}}</text>
+      <text class="cj-header-info">学校：{{school}}</text>
+      <text class="cj-header-info">考试类型：{{type}}</text>
+      <text class="cj-header-info">准考证号：{{number}}</text>
+    </view>
+  </view>
+  <view class="cj-info-ctn">
+    <text class="grade-comment">总分：{{total}}</text>
+    <view class="cj-info-box">
+      <view class="cj-info">
+        <text class="cj-info-name">听力</text>
+        <text class="cj-info-socre">{{listen}}</text>
+      </view>
+      <view class="cj-info">
+        <text class="cj-info-name">阅读</text>
+        <text class="cj-info-socre">{{read}}</text>
+      </view>
+      <view class="cj-info">
+        <text class="cj-info-name">写作和翻译</text>
+        <text class="cj-info-socre">{{writing}}</text>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{total}}" class="msg">
+     <text>{{total<425?'革命尚未成功,同志仍需努力':'Congratulation!!!'}}</text> 
+  </view>
+</view>

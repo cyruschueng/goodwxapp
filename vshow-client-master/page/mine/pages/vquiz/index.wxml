@@ -1,0 +1,52 @@
+<form class="quiz" bindsubmit="submit">
+
+  <view class="weui-cells__title">问题类型</view>
+  <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+              <input class="weui-input" name="quizType" bindblur="typeBlur"  placeholder="如：情感, 娱乐, 工作等" />
+          </view>
+      </view>
+  </view>
+
+  <view class="weui-cells__title">问题描述</view>
+  <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+          <view class="weui-cell__bd">
+              <textarea hidden='{{ !hideTips }}' class="weui-textarea" name="quizText" bindblur="textBlur" placeholder="如：喜欢一个人是种什么样的感觉？" />
+          </view>
+      </view>
+  </view>
+
+  <view class="btn-area">
+  <button form-type="submit" wx:if="{{ !showShareBtn }}" disabled="{{ disabled1 || disabled2 || isLoading }}" loading="{{ isLoading }}" type="primary">{{ submitText }}</button>
+    <button open-type="share" wx:if="{{ showShareBtn }}" loading="{{ isLoading }}" type="primary">生成成功,点击转发</button>
+  </view>
+
+</form>
+
+
+  <!-- 绝对定位 提示按钮-->
+   <view class="tips">
+    <view class="icon-tips" bindtap="showTips"></view>
+    <view class="tips-box" hidden="{{ hideTips }}" bindtap="hideTips">
+      <view class="tips-bg full_page"></view>
+      <view class="tips-cont">
+        <view class="tips-hd">提示</view>
+        <view class="tips-bd">
+          <view class="tips-items">
+            <view class="tips-item">
+              <view class="tips-item-hd">1. 流程是如何的呢?</view>
+              <view class="tips-item-bd">答：1. 填写问题类型。 2填写问题描述， 3. 点击提交，4. 提交成功会显示转发按钮， 5. 您可以转发到群或个人。 6. 点击转发卡片会直接进入您的问题回答页。 7. 返回查看结果页，下拉刷新可以实时统计回答问题详情</view>
+            </view>
+
+            <view class="tips-item">
+              <view class="tips-item-hd">1. 我为什么要填呢?直接问不就得了？</view>
+              <view class="tips-item-bd">答：这就是我做这个模块的初衷了， 1. 作为朋友，现在人们不愿意去实名评论某事，因为怕得罪人 2. 您的问题和其他人回答的答案会永久的保存，您可以随时查看</view>
+            </view>
+
+          </view>
+        </view>
+      </view>
+    </view>
+  </view> 

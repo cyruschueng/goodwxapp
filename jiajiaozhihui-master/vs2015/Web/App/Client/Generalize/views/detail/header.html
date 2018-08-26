@@ -1,0 +1,14 @@
+﻿<div class="weui-cells" style="margin-top:0;padding-top:0;">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <a class="nav" ng-href="#home"><span class="fa fa-chevron-left"></span></a>
+        </div>
+        <div class="weui-cell__bd">
+            <p style=" text-align: center;"><button type="button" class="weui-btn weui-btn_warn weui-btn_mini " ng-click="delete(info.id)">删除</button></p>
+        </div>
+        <div class="weui-cell__ft">
+            <button ng-if="detailForm.$valid==false || (detailForm.$pristine==true &&  serverId=='')" class=" weui-btn weui-btn_mini weui-btn_default " type="button" >保存</button>
+            <button ng-if="detailForm.$valid && (detailForm.$pristine==false || serverId!='' )"  class="weui-btn weui-btn_primary weui-btn_mini " type="submit">保存</button>
+        </div>
+    </div>
+</div>

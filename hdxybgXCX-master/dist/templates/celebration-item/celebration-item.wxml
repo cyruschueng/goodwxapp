@@ -1,0 +1,18 @@
+
+<template name="celebration-item">
+
+<!-- 宴会厅 列表 -->
+<block wx:for="{{ celebrationList }}" wx:for-item="banquet" wx:key="*this" wx:key="{{ index }}" >
+<view class='celebration-scroll-h-item' id='{{ banquet.celebrationid }}' bindtap='goCelebrationDetailsPage' style='{{ index%2 == 0 ? "float:left;" : "float:right;" }}'>
+  <image class='bg-img' mode='aspectFill' src='{{ banquet.imgUrl }}'></image>
+  <view class='weui-flex text-view'>
+    <view class='weui-flex__item left-text'>{{ banquet.name }}</view>
+    <view class='right-text'>¥ {{ banquet.price }}</view>
+  </view>
+  <view class='style-view'>
+    <text class='style-icon'>{{ banquet.style }}</text>
+  </view>
+</view>
+</block>
+
+</template>

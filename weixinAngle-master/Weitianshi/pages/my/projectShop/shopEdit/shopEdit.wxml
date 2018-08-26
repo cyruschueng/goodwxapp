@@ -1,0 +1,21 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="classname">
+    <view class="shopTitle">店铺图片</view>
+    <view class="uploadPic" bindtap="upLoadPic" wx:if="{{!filePath&&!userInfo.shop_banner}}">
+      <image src="/img/img-shangchuan@2x.png" class="pic"></image>
+      <view class="tips">点击上传，不超过2M</view>
+    </view>
+    <view class="uploadPic" wx:if="{{filePath||userInfo.shop_banner}}" bindtap="upLoadPic">
+      <image src="{{filePath||userInfo.shop_banner}}" class="picAfter"></image>
+    </view>
+    <view class="shopTitle">店铺名称</view>
+    <input class="writeShopName" placeholder="请输入店铺名称" maxlength="50" bindinput="shopNameEdit" value="{{userInfo.shop_name}}" />
+    <view class="prompt">如：华蓥资本合伙人-张灿的FA项目库</view>
+    <view class="shopTitle">店铺描述</view>
+    <textarea value="{{userInfo.user_intro}}" class="describe" bindinput="shopDescrible" maxlength="500" placeholder="请用简短的语言描述个人的投资背景，可以包括从业经历，成功案例等信息，便于投资人判断您的专业度。" />
+    <view class="prompt">示例：从事投资行业6年，曾任XX资本财务总监。主导完成投资项目12个，已完成退出项目4个，投资案例包括：二维火，毒舌电影，小蓝单车等。</view>
+  </view>
+  <view style="height:88rpx"></view>
+  <view class="floatBtn flex pushPro" bindtap="save" hover-class="t-other-button-hover">保存</view>
+</view>

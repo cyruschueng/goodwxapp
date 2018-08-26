@@ -1,0 +1,134 @@
+@import "~antd/lib/style/themes/default.less";
+
+.header {
+    height: 108px;
+    padding:0;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+    position: relative;
+    background-color: transparent;
+    .top{
+        height: 60px;
+        padding: 0 20%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+    .bottom{
+        background-color: #fff;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+    }
+}
+.content{
+    margin: 24px 0 0;
+    height: 100%;
+    padding:0 20%;
+}
+@media screen and (max-width: @screen-xl)  and (min-width: @screen-lg) {
+    .content,.top{
+        padding:0 10%;
+    }
+}
+@media screen and (max-width: @screen-lg) {
+    .content,.top{
+        padding:0 5%;
+    }
+}
+.logo {
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+    transition: all .3s;
+    overflow: hidden;
+    img {
+        display: inline-block;
+        vertical-align: middle;
+        height: 32px;
+    }
+    h1 {
+        color: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 20px;
+        margin: 0 0 0 12px;
+        font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 600;
+    }
+}
+
+.home {
+    cursor: pointer;
+    &:hover {
+        background: @primary-1;
+    }
+    img {
+        width: 30px;
+    }
+}
+
+i.trigger {
+    font-size: 20px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: all .3s;
+    padding-right: 12px;
+
+}
+
+@media screen and (max-width: @screen-xs) {
+    .trigger {
+        display: none;
+    }
+}
+
+.right {
+    float: right;
+    height: 100%;
+    .action {
+        cursor: pointer;
+        padding: 0 12px;
+        display: inline-block;
+        transition: all .3s;
+        height: 100%;
+        > i {
+            font-size: 16px;
+            vertical-align: middle;
+        }
+        &:global(.ant-popover-open),
+        &:hover {
+            background: @primary-1;
+        }
+    }
+    .search {
+        padding: 0;
+        margin: 0 12px;
+        &:hover {
+            background: transparent;
+        }
+    }
+    .account {
+        .avatar {
+            margin: 20px 8px 20px 0;
+            color: @primary-color;
+            background: rgba(255, 255, 255, .85);
+            vertical-align: middle;
+        }
+    }
+}
+
+.menu {
+    :global(.anticon) {
+        margin-right: 8px;
+    }
+    :global(.ant-dropdown-menu-item) {
+        width: 160px;
+    }
+}
+
+:global {
+    .ant-layout {
+        overflow-x: hidden;
+        height: 100%;
+    }
+}

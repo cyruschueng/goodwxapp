@@ -1,0 +1,169 @@
+<!--pages/organization/org_detail/org_detail.wxml-->
+<import src="/pages/Template/Template.wxml" />
+
+
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <scroll-view style='heigt:3000rpx;' scroll-y='true'>
+    <!--投资机构类型，标签  -->
+    <view class="media11">
+      <view class="inMedia">
+        <view class="detailIntroduce flex">
+          <view class="detailLogo">
+            <view class="detailLogo1">
+              <image src="{{info.investment_logo}}" wx:if="{{info.investment_logo}}" mode="aspectFit"></image>
+              <image src="/img/warband-logo.png" wx:if="{{info.investment_logo==''}}"></image>
+            </view>
+          </view>
+          <view class="detailName">{{info.investment_name}}</view>
+        </view>
+        <view class="mediaLine" wx:if="{{info.type_list.length!=0||info.style_list.length!=0}}"></view>
+        <view class="detailType11">
+          <block wx:for="{{info.type_list}}" wx:key="{{item}}">
+            <view class="detailType1 detailColor detailRight">{{item.type_name}}</view>
+          </block>
+        </view>
+
+        <view class="detailType11">
+          <block wx:for="{{info.style_list}}" wx:key="{{item}}">
+            <view class="detailType1 detailColor1 detailRight">{{item.style_name}}</view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <!--投资策略  -->
+    <view class="media1" wx:if="{{info.industry_map}}">
+      <view class="inMedia investBottom">
+        <view class="investStrategy">投资策略</view>
+        <view class="investStrategy1">* 根据机构近期投资事件刻画投资图谱</view>
+        <view class="investImg">
+          <image src="{{info.industry_map}}"></image>
+        </view>
+      </view>
+    </view>
+    <!--机构介绍  -->
+    <view class="media1" wx:if="{{info.investment_introduce}}">
+      <view class="inMedia investBottom1">
+        <view class="investStrategy investBottom">机构介绍</view>
+        <view class="{{checkedArr.ischecked1?'investIntroduce':'investIntroduceAfter'}}">{{info.investment_introduce}}</view>
+        <label class="more" bindtap="allPoint1" wx:if="{{checkedArr.ischecked1 == true && longMore==true }}">更多</label>
+        <label class="more" bindtap="allPoint1" wx:if="{{checkedArr.ischecked1 == false && longMore==true }}">收起</label>
+      </view>
+    </view>
+    <!--资本规模  -->
+    <view class="media1" wx:if="{{info.investment_capital_scale||info.investment_project_scale}}">
+      <view class="inMedia investBottom">
+        <view class="scale" wx:if="{{info.investment_capital_scale}}">
+          <view class="scaleTitle investBottom">管理资本规模</view>
+          <view class="scaleDetail scaleDetail1">
+            {{info.investment_capital_scale}}
+          </view>
+        </view>
+        <view class="scale" wx:if="{{info.investment_project_scale}}">
+          <view class="scaleTitle investBottom">单个项目投资规模</view>
+          <view class="scaleDetail">
+            {{info.investment_project_scale}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--投资领域  -->
+    <view class="media1" wx:if="{{info.industry_list.length!=0}}">
+      <view class="inMedia investBottom">
+        <view class="industry investBottom">投资领域</view>
+        <view class="{{aisChecked3?'detailType':'detailTypeAfter'}}">
+          <block wx:for="{{info.industry_list}}" wx:key="{{item}}">
+            <!-- <view class="detailType1 detailColor detailRight">{{item.industry_name}}</view> -->
+            <template is='industry' data='{{item}}'></template>
+          </block>
+          <!-- <view class="detailType1 detailColor detailRight">类型</view>
+        <view class="detailType1 detailColor detailRight">类型类型</view>
+        <view class="detailType1 detailColor detailRight">机构</view>
+        <view class="detailType1 detailColor detailRight">类构</view>
+        <view class="detailType1 detailColor detailRight">机构类型</view>
+        <view class="detailType1 detailColor detailRight">类型</view> -->
+        </view>
+        <label class="more" bindtap="allBrightPoint" wx:if="{{aisChecked3 == true && textBeyond3==true}}" data-check="{{3}}">展开</label>
+        <label class="more" bindtap="noBrightPoint" wx:if="{{aisChecked3== false && textBeyond3==true}}" data-check="{{3}}">收起</label>
+      </view>
+    </view>
+    <!--投资轮次  -->
+    <view class="media1" wx:if="{{info.stage_list.length!=0}}">
+      <view class="inMedia ">
+        <view class="industry investBottom">投资轮次</view>
+        <view class="{{aisChecked4?'detailType':'detailTypeAfter'}}">
+          <block wx:for="{{info.stage_list}}" wx:key="{{item}}">
+            <view class="detailType1 detailColor1 detailRight">{{item.stage_name}}</view>
+          </block>
+        </view>
+        <label class="more" bindtap="allBrightPoint" wx:if="{{aisChecked4 == true && textBeyond4==true}}" data-check="{{4}}">展开</label>
+        <label class="more" bindtap="noBrightPoint" wx:if="{{aisChecked4== false && textBeyond4==true}}" data-check="{{4}}">收起</label>
+      </view>
+    </view>
+    <!--基金管理方  -->
+    <view class="media1" wx:if="{{info.manage_fund_list.length!=0}}">
+      <view class="inMedia investBottom">
+        <view class="industry investBottom flex">基金管理方</view>
+        <block wx:for="{{info.manage_fund_list}}" wx:key="{{index}}" wx:if="{{index<2 ||industrialChangeMore == 5}}">
+          <view class="manageCompany">{{item.fund_manager_name}}</view>
+        </block>
+        <label class="more" catchtap="checkMore" wx:if="{{industrialChangeMore!=5&&info.manage_fund_list.length>2 }}" data-id="{{5}}">更多</label>
+        <label class="more" catchtap="noCheckMore" wx:if="{{industrialChangeMore==5 }}" data-id="{{5}}">收起</label>
+      </view>
+    </view>
+    <!--投资案例  -->
+    <view class="media1" wx:if="{{investment_events.list.length!=0}}">
+      <view class="inMedia  flex case1">
+        <view class="case">投资案例</view>
+        <view class="caseAll" bindtap="toCase">
+          <view class="caseIn caseLeft"> 全部</view>
+          <view class="caseIn">({{investment_events.investment_event_total_num}})</view>
+        </view>
+      </view>
+      <block wx:for="{{investment_events.list}}" wx:key="{{investment_events.list}}">
+        <template is='invest' data='{{item}}'></template>
+      </block>
+    </view>
+    <!--媒体新闻  -->
+    <view class="media1" wx:if="{{media_list1.length!=0}}">
+      <view class="inMedia  flex case1">
+        <view class="case ">媒体</view>
+        <view class="caseAll " bindtap='toMedia'>
+          <view class="caseIn"> 全部</view>
+          <view class="caseIn caseLeft">({{media_list.news_total_num}})</view>
+        </view>
+      </view>
+      <block wx:for="{{media_list1}}" wx:key="{{media_list1}}">
+        <template is='media' data='{{item}}'></template>
+      </block>
+    </view>
+    <!--在职成员  -->
+    <view class="media1" wx:if="{{memberList.length!=0}}">
+      <view class="inMedia  flex case1">
+        <view class="case ">在职成员</view>
+        <view class="caseAll " bindtap='toMember'>
+          <view class="caseIn"> 全部</view>
+          <view class="caseIn caseLeft">({{member_list.member_total_num}})</view>
+        </view>
+      </view>
+      <block wx:for="{{memberList}}" wx:key="{{memberList}}">
+        <template is='memberList1' data='{{item}}'></template>
+      </block>
+    </view>
+    <!--离职成员  -->
+    <view class="media1" wx:if="{{leaveList.length!=0}}">
+      <view class="inMedia  flex case1">
+        <view class="case ">离职成员</view>
+        <view class="caseAll " bindtap='toLeave'>
+          <view class="caseIn"> 全部</view>
+          <view class="caseIn caseLeft">({{leave_member_list.member_total_num}})</view>
+        </view>
+      </view>
+      <block wx:for="{{leaveList}}" wx:key="{{leaveList}}">
+        <template is='memberList1' data='{{item}}'></template>
+      </block>
+    </view>
+    <!--错误提示-->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+  </scroll-view>
+</view>

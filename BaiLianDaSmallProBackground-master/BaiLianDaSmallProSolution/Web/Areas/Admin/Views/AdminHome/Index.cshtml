@@ -1,0 +1,67 @@
+﻿@{
+    var imgSrc = Url.Content("~/Content/images");
+}
+
+<div class="layui-layout layui-layout-admin">
+    <!-- 顶部 -->
+    <div class="layui-header header">
+        <div class="layui-main">
+            <a href="#" class="logo">后台管理系统</a>
+            <!-- 顶部菜单 -->
+            <ul class="layui-nav top_menu" style="position: relative;">
+                <li class="layui-nav-item top_menu_item" pc data-module-id="1">
+                    <a href="javascript:;"><cite>系统</cite></a>
+                </li>
+                <li class="layui-nav-item top_menu_item" pc data-module-id="2">
+                    <a href="javascript:;"><cite>内容</cite></a>
+                </li>
+                <li class="layui-nav-item" pc style="float:right;">
+                    <a href="javascript:;">
+                        <img src="@imgSrc/face.jpg" class="layui-circle" width="35" height="35">
+                        <cite>@ViewBag.UserName</cite>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" data-url="/layui/LayUiSystem/changepwd"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                        <dd><a href="javascript:;" data-url="/layui/LayUiAdminLogin/LogOut" data-type="action"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 左侧导航 -->
+    <div class="layui-side layui-bg-black">
+        <div class="user-photo">
+            <a class="img" title="我的头像"><img src="@imgSrc/face.jpg"></a>
+            <p>你好！<span class="userName">@ViewBag.UserName</span>, 欢迎登录</p>
+        </div>
+        <div class="navBar layui-side-scroll"></div>
+    </div>
+    <!-- 右侧内容 -->
+    <div class="layui-body layui-form">
+        <div class="layui-tab marg0" lay-filter="bodyTab">
+            <ul class="layui-tab-title top_tab">
+                <li class="layui-this" lay-id=""><i class="iconfont icon-barrage"></i> <cite>首页</cite></li>
+            </ul>
+            <div class="layui-tab-content clildFrame">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="@Url.Action("Index","LayUiHome",new RouteValueDictionary() { { "Namespaces", "Web.Areas.LayUI.Controllers" }, {"Area","LayUI"} })"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="layui-footer footer">
+        <p>
+            copyright @@2018 Darren
+        </p>
+    </div>
+</div>
+<!-- 移动导航 -->
+<div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>
+<div class="site-mobile-shade"></div>
+@section footerJs
+{
+    <script type="text/javascript">
+
+    </script>
+}

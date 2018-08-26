@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>优惠券</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+	</head>
+
+	<body class="children-body">
+		<section>
+			<!-- main content start-->
+			<div class="">
+				<!--
+            	作者：443267568@qq.com
+            	时间：2016-05-03
+            	描述：修改开始处
+            -->
+				<!--body wrapper start-->
+				<section class="wrapper">
+					<!-- page start-->
+
+					<div class="row">
+						<div class="col-lg-12">
+							<section class="panel">
+								<header class="panel-heading">
+									优惠券
+								</header>
+								<div class="panel-body">
+									<form class="form-horizontal" role="form">
+										<div class="row clearfix">
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label class="col-sm-3 control-label col-lg-3">优惠券名称</label>
+													<div class="col-lg-9">
+														<input class=" form-control" id="couponName" minlength="2" type="text">
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label class="col-sm-3 control-label col-lg-3">券状态</label>
+													<div class="col-lg-9">
+														<select class="form-control m-bot15" id="qstatus">
+															<option>使用</option>
+															<option>停用</option>
+														</select>
+
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label class="col-sm-3 control-label col-lg-3"></label>
+													<div class="col-lg-9">
+														<button class="btn btn-info" type="button" id="btn_search">搜索</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+
+							</section>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<section class="panel">
+								<div class="panel-body">
+									<div class="clearfix pull-right">
+										<div class="btn-group">
+											<button id="share_add" class="btn btn-success" onclick="window.location.href='Admin_Coupon_Add.html'">
+												<a style="text-decoration:none;color: #FFFFFF;">
+												添加 
+												</a>
+											</button>
+										</div>
+									</div>
+									<table id="bs" class="table table-striped table-condensed table-hover talbe-border" data-side-pagination="server">
+										<thead>
+											<tr>
+												<th data-field="status" data-align="center" data-checkbox="true"></th>
+												<th data-field="Id" data-align="center">优惠券编号</th>
+												<th data-field="CouponsName" data-align="center">名称</th>
+												<th data-field="UseorGet" data-align="center">券状态</th>
+												<th data-field="EndDateTime" data-align="center">到期时间</th>
+												<th data-field="Id" data-align="center" data-formatter="operationFormatter">操作</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</section>
+
+							<!--body wrapper end-->
+
+						</div>
+						<!-- main content end-->
+				</section>
+
+				<!-- Placed js at the end of the document so the pages load faster -->
+				<script src="js/jquery-1.10.2.min.js"></script>
+				<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+				<script src="js/jquery-migrate-1.2.1.min.js"></script>
+				<script src="js/bootstrap.min.js"></script>
+				<script src="js/modernizr.min.js"></script>
+				<script src="js/jquery.nicescroll.js"></script>
+
+				<!--pickers plugins-->
+				<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+				<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+				<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+				<!--bootstrap Table-->
+				<script src='js/bootstrap-table.js'></script>
+				<script src='js/bootstrap-table-zh-CN.js'></script>
+				<script src='js/bootstrap-editable.js'></script>
+				<script src='js/bootstrap-table-editable.js'></script>
+
+				<!--pickers initialization-->
+				<script src="js/pickers-init.js"></script>
+				<script src="js/bootstrapValidator.js"></script>
+				<!--common scripts for all pages-->
+				<script src="js/scripts.js"></script>
+				<script src="js/ysh_comm.js"></script>
+				<script src="js/layer.js"></script>
+				<script src="js/select2.min.js"></script>
+				<script>
+					var checkList = new Array();
+					var $table = $("#bs");
+					$(document).ready(function() {
+						$('select').select2();
+						
+						$table.bootstrapTable({
+							pagination: true, //分页
+							onCheck: function(row) {
+								checkList.push(row.Id);
+								$.unique(checkList);
+							},
+							onUncheck: function(row) {
+								var pIndex = $.inArray(row.Id, checkList);
+								checkList.splice(pIndex, 1);
+								$.unique(checkList);
+							},
+							onCheckAll: function(rows) {
+								$.each(rows, function(index) {
+									checkList.push(rows[index].Id);
+								});
+								$.unique(checkList);
+							},
+							onUncheckAll: function(rows) {
+								$.unique(checkList);
+								var filterarray = $.grep(checkList, function(value) {
+									var isDel = false;
+									for(var i = 0; i < rows.length; i++) {
+										if(rows[i].Id == value) {
+											isDel = true;
+											break;
+										}
+									}
+									return !isDel;
+								});
+								checkList = filterarray;
+							},
+							escape: true,
+							pageList: [10]
+						});
+						getdata(0);
+						$("#btn_search").click(function() {
+							getdata(0);
+						});
+					});
+
+					function operationFormatter(value, row, index) {
+						var result = null;
+						if(row.IsValid == 1) {
+							result = [
+								'<button class="stopBtn btn btn-danger" value="' + row.Id + '">停用</button>', '<button class="btn btn-warning" onclick="EditShare(' + row.Id + ')">编辑</button>'
+							];
+						} else {
+							result = [
+								'<button class="stopBtn btn btn-danger" value="' + row.Id + '">使用</button>', '<button class="btn btn-warning" onclick="EditShare(' + row.Id + ')">编辑</button>'
+							];
+						}
+						return result.join(' ');
+					}
+					
+					
+					//表格加载数据
+					function loadData(f1, data) {
+						f1.bootstrapTable('load', data);
+						var hashTemp = window.location.hash || "1"
+			
+						hashTemp = hashTemp.replace("#", "")
+						$(".pagination").find('a').each(function() {
+							if($(this).text() == hashTemp)
+								$(this).click()
+						})
+					}
+					var getdata = function(offset) {
+							checkList = new Array();
+							var data = new Array();
+							condition = {
+								UseorGet: $("#qstatus").val() == "停用" ? 1 : 2,
+								CouponsName: $("#couponName").val()
+							}
+							condition.p_limit = $table.bootstrapTable('getOptions').pageSize;
+							condition.p_offset = offset;
+							//						console.info(condition)
+							getDataList(yshurl + "GetCouponList", condition, function(d) {
+								data = d.many[0];
+								for(var i = 0; i < data.length; i++) {
+									if(data[i].IsValid == 1) {
+										data[i].UseorGet = "使用";
+									} else {
+										data[i].UseorGet = "停用";
+									}
+								}
+								totalcount = d.many[1][0].totalcount;
+								var pdata = {
+									total: totalcount,
+									rows: data
+								};
+								loadData($table, pdata);
+								setIframeHeight();
+								//停用
+								$(".stopBtn").click(function() {
+									var ds = $(this);
+									if(ds.text() == "停用") {
+										getDataList(yshurl + "StopThisCoupon", {
+											stID: $(this).val()
+										}, function(d) {
+											if(d.state == 0) {
+												ds.text("使用");
+											}
+											window.location.reload();
+										});
+									} else {
+										getDataList(yshurl + 'SelectCouponSKUInSpecial', {stID: ds.val()}, function(data){
+											if(d.state == 0 && data.aaData[0].totals > 0){
+												ysh_msg('该优惠卷下有商品参加了优惠活动，不能开始')
+											}else{
+												getDataList(yshurl + "StartThisCoupon", {
+													stID: ds.val()
+												}, function(d) {
+													if(d.state == 0) {
+														ds.text("停用");
+													}
+													window.location.reload();
+												});
+											}
+										})
+									}
+
+								});
+							});
+						}
+					//分页点击
+					$table.on('page-change.bs.table', function(e, number, size) {
+						var os = (number - 1) * size;
+						window.location.hash = number;
+						getdata(os);
+					});
+					// onhashchange可以监控hash变化
+					window.onhashchange = function() {
+						var hash = window.location.hash;
+						var id;
+						if(hash != "") {
+							id = parseInt(hash.substr(1));
+						} else {
+							id = 1
+						}
+						var os = (id - 1) * 10;
+						getdata(os);
+						console.info(hash)
+						$("ul.pagination").children().eq(id).addClass("active").siblings().removeClass("active");
+					};
+
+					function EditShare(id) {
+						window.location.href = "Admin_Coupon_Edit.html?stID=" + id; 
+					}
+				</script>
+				<!--
+	作者：zhj
+	时间：2016-05-05
+	描述：修改结束
+-->
+	</body>
+
+</html>

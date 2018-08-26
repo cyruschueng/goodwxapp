@@ -1,0 +1,53 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class='container'>
+    <!--固定页头str  -->
+    <view class='clearfix'>
+      <view>返回</view>
+      <view>GPRS充值</view>
+      <view>充值记录</view>
+    </view>
+      <!--间隔  -->
+      <view class='padd '></view>
+    
+    <!--固定页头end  -->
+  <!--逆变器  -->
+<view style="margin-top:3rem;">
+  <!--电站列表str  -->
+  <view class="list" id='{{index}}'  wx:for="{{GprsCollector}}" wx:for-index="index"   wx:for-item="GprsCollector" >
+      <view class='listImg flexColumn flexCenter width20 mr0'>
+        <image class="imgL br50"src="/images/nbqZC.png"></image>
+        <view class='flexCenter'>GPRS RTU</view>
+      </view>
+      <view class='listPar flexColumn'>
+        <view>
+          <view>PN：</view>
+          <view class="lisNum">{{GprsCollector.pn}}kW</view>
+        </view>
+        <view>
+          <view>CCID：</view>
+          <view class="lisNum">{{GprsCollector.ccid}}</view>
+        </view>
+        <view>
+          <view>带载数：</view>
+          <view class="lisNum">{{GprsCollector.load}}</view>
+        </view>
+        <view>
+          <view>激活日期：</view>
+          <view class="lisNum">{{GprsCollector.adate}}</view>
+        </view>
+        <view>
+          <view>失效日期：</view>
+          <view class="lisNum">{{GprsCollector.edate}}</view>
+        </view>
+        <view>
+          <view>状态：</view>
+          <view class="lisNum">{{GprsCollector.cardStatus==0?'在线':GprsCollector.cardStatus==1?'离线':GprsCollector.cardStatus==2?'故障':GprsCollector.cardStatus==3?'待机':GprsCollector.cardStatus==4?'告警':GprsCollector.cardStatus==5?'错误':GprsCollector.cardStatus==6?'协议错误':'其它错误'}}</view> 
+        </view>
+      </view>
+      <view class='btnxs'>充值</view>
+    </view> 
+<!--电站列表end --> 
+
+  </view>   
+  </view>

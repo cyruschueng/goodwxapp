@@ -1,0 +1,72 @@
+<!--pages/ByNow/ByNow.wxml-->
+<view class="container">
+
+<view class="AddAddress">
+
+<view class="HaveAddress" bindtap="toaddress">
+<image class="fl HaveAddressLogo" style="width:33rpx;height:39rpx;" src="/images/36.jpg"></image>
+<view class="HaveAddressText fl">
+<text style="font-size:32rpx;">{{address.name}} </text><text style="font-size:24rpx;">{{address.phone}}\n</text>
+<text style="font-size:24rpx;">{{address.detail}}</text>
+</view>
+<view><image class="fr" style="width:16rpx;height:25rpx;position:relative;top:50rpx" src="/images/moreImg.jpg"></image></view>
+</view>
+<!--end HaveAddress-->
+
+<view class="AddAddressTop {{'hidden'}}">
+<image style="width:39rpx;height:39rpx;" src="/images/34.jpg"></image>
+<text>手动添加收货地址</text>
+</view>
+<!--end AddAddressTop-->
+
+<image style="width:750rpx;height:4rpx;display:block" src="/images/35.jpg"></image>
+</view>
+<!--end AddAddress-->
+
+<view class="ShopList">
+
+<view class="ShopListTop">
+<image style="width:42rpx;height:42rpx;" src="/images/20_1.jpg"></image>
+</view>
+<!--end ShopListTop-->
+<view class="ShopListMid">
+<image class="fl" style="width:179rpx;height:179rpx;" src="{{product.image}}"></image>
+<view class="ShopListMidText">
+<view style="height:145rpx">{{product.name}}</view>
+<view>¥ {{product.price}}/件</view>
+</view>
+<!--end ShopListMidText-->
+</view>
+<!--end ShopListMid-->
+
+<view class="ShopListFoot">
+
+<picker bindchange="bindPickerChange" value="{{index}}" range="{{payStyle}}">
+    <view class="picker">
+      付款方式：
+      <text>{{payStyle[index]}}  ></text>
+    </view>
+</picker>
+<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <view class="picker">
+     预定日期: 
+     <text>{{date}}  ></text>
+    </view>
+</picker>
+<!--end Counter-->
+</view>
+
+<!--end ShopListFoot-->
+</view>
+<!--end ShopList-->
+
+
+<view class="ShopCarFoot">
+<view style="width:500rpx">实付款： <text style="font-size:30rpx;color:#ff7a92;">¥ {{total}}</text></view>
+<view style="background-color:#ff7a92;width:250rpx; color: #fff;" bindtap="buy">立即支付</view>
+</view>
+<!--end ShopCarFoot-->
+
+
+</view>
+<!--end container-->

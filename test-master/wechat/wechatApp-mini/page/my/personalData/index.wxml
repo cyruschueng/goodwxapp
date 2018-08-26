@@ -1,0 +1,53 @@
+<alert show="{{alert.show}}" type="{{alert.type}}" title="{{alert.title}}"></alert>
+<!--修改姓名弹出框  -->
+<modal hidden="{{!hiddeneditalias}}" title="修改昵称" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="sub_editalias">
+  <view class='login'>
+    <input type='text' class='phone input' value='{{alias}}' placeholder="请输入新的昵称" bindinput='changealias' />
+  </view>
+</modal>
+
+<!--修改手机号弹出框  -->
+<modal hidden="{{!hiddenmodalput}}" title="修改手机号" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="verifyPhone">
+  <view class='login'>
+    <input type='number' class='phone input' value='{{phone}}' placeholder="请输入新的手机号" bindinput='input_phone' />
+    <input type='number' class='yzm input' value='{{ValidCode}}' placeholder="请输入验证码" bindinput='inputValidCode' />
+    <view wx:if="{{!validCodeShow}}" catchtap='getValidCode' class='get_yzm'>获取验证码</view>
+    <view wx:if="{{validCodeShow}}" class='get_yzm active'>{{validCodeTime}} (s)</view>
+  </view>
+</modal>
+
+<view class='user_box'>
+  <view wx:if="{{miniIndex}}" class='image_box'>
+    <image src='{{miniIndex.headsculpture}}'></image>
+  </view>
+  <view class='t'>{{miniIndex.alias}}</view>
+</view>
+
+<view class="list_box">
+  
+  <view class="li">
+    <text class="title">手机号</text>
+    <text catchtap='editphone' class="right_icon"></text>
+    <text class="more">{{miniIndex.phone}}</text>
+  </view>
+  <view class="li">
+    <text class="title">昵称</text>
+    <!-- <text catchtap='editalias' class="right_icon"></text> -->
+    <text class="more">{{miniIndex.alias}}</text>
+  </view>
+</view>
+
+
+<view class="list_box">
+  <view class="li">
+    <text class="title">性别</text>
+    <text class="more">{{miniIndex.sexName}}</text>
+  </view>
+</view>
+
+<view class="list_box">
+  <view class="li">
+    <text class="title">注册时间</text>
+    <text class="more">{{miniIndex.createdDate}}</text>
+  </view>
+</view>

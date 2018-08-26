@@ -1,0 +1,152 @@
+<import src="../templates/bookInfoTpl/bookInfoTpl.wxml" />
+<import src="../templates/barInfoTpl/barInfoTpl.wxml" />
+
+<view class="page">
+  <!--页头-->
+  <view class="page__hd"></view>
+  <!--主体-->
+  <view class="page__bd page__bd_spacing">
+    <!-- 推荐 -->
+    <view class="navbar white-bg">
+      <view class="navbar-item font-size-14" wx:for="{{navbar}}" wx:for-index="idx" data-idx="{{idx}}" bindtap="swichNav">
+        <text class="navbar-text {{currentNavbar==idx ? 'active' : ''}}">{{item}}</text>
+      </view>
+    </view>
+    <!--占位用80rpx-->
+    <view style="height:100rpx;"></view>
+
+    <swiper bindchange="changeSwiper" class="swiper" current="{{currentNavbar}}" duration="300" style="height:{{systemInfo.windowHeight}}px">
+      <!--推荐部分-->
+      <swiper-item>
+        <scroll-view class="hot-item-container" style="height: {{systemInfo.windowHeight}}px;" scroll-y="true" bindscrolltolower="">
+          <!--轮播广告图-->
+          <swiper indicator-dots="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#FFFFFF" autoplay="true" interval="4000" duration="600" style="height:{{systemInfo.windowWidth/2}}px">
+            <block wx:for="{{swipers}}">
+              <swiper-item>
+                <image src="{{item.img}}" class="slide-image" width="750rpx" />
+              </swiper-item>
+            </block>
+          </swiper>
+          <view wx:if="{{indexPage.bookInfos}}" class="white-bg margin-top-20">
+            <view class="book border-bottom margin-left-40 margin-right-40 padding-top-10 padding-bottom-10 margin-top-10 line-text weui-flex font-weight" bindtap="seeMoreBook">
+              <view class="weui-flex__item">新书推荐</view>
+              <view class="weui-flex__item text-right">
+                <image src="/images/more.png" class="more"></image>
+              </view>
+            </view>
+            <view>
+              <block wx:for="{{indexPage.bookInfos}}">
+                <template is="bookInfoIndex" data="{{...item}}" />
+              </block>
+            </view>
+          </view>
+          <view wx:if="{{indexPage.barInfos}}" class="white-bg margin-top-20 padding-bottom-30">
+            <view class="book border-bottom margin-left-40 margin-right-40 padding-top-10 padding-bottom-10 margin-top-10 line-text weui-flex font-weight" bindtap="seeMoreBar">
+              <view class="weui-flex__item">附近书吧</view>
+              <view class="weui-flex__item text-right">
+                <image src="/images/more.png" class="more"></image>
+              </view>
+            </view>
+            <view >
+              <block wx:for="{{indexPage.barInfos}}">
+                <template is="barInfoIndex2" data="{{...item}}" />
+              </block>
+            </view>
+          </view>
+          <view wx:if="{{reactions}}" class="margin-top-20 list">
+            <view class="item" wx:for="{{reactions}}">
+              <view class="white-bg padding-left-30 padding-right-30 margin-bottom-20">
+                <view class="border-bottom">
+                  <view class="read-user-img float-left margin-top-30 margin-bottom-30 margin-right-30">
+                    <image src="{{item.userInfo.avatar}}" class="read-photo" mode="aspectFill"></image>
+                  </view>
+                  <view class="read-user-word float-left">{{item.userInfo.nick_name}}</view>
+                  <view class="read-user-time float-right">{{item.twInfo.create_time}}</view>
+                  <view class="clear"></view>
+                </view>
+                <view class="padding-top-30 padding-bottom-30">
+                  <view class="text-oneline font-weight margin-bottom-10 book-title-font" bindtap="jumpReadInfo" data-readid="{{item.twInfo.id}}">{{item.twInfo.title}}</view>
+                  <view class="{{item.twInfo.see?'':'text-fourline'}} book-font weui-flex padding-top-30 margin-bottom-30" bindtap="jumpReadInfo" data-readid="{{item.twInfo.id}}">
+                    {{item.twInfo.intro}}
+                  </view>
+                  <view wx:if="{{item.twInfo.intro.length>120}}">
+                    <view wx:if="{{item.twInfo.see}}" class="text-oneline look-font" bindtap="transformationFalse" data-id="{{item.twInfo.id}}" data-index="{{index}}">收起</view>
+                    <view wx:else class="text-oneline look-font" bindtap="transformationTrue" data-id="{{item.twInfo.id}}" data-index="{{index}}">查看</view>
+                  </view>
+                  <view wx:if="{{item.twStepInfos.length>0}}">
+                    <view class="book-font weui-flex padding-top-30" bindtap="jumpReadInfo" data-readid="{{item.twInfo.id}}">
+                      <view class="weui-uploader__bd">
+                        <view class="weui-uploader__files">
+                          <block wx:for="{{item.twStepInfos}}" wx:for-item="pic">
+                            <view class="weui-uploader__file">
+                              <image class="weui-uploader__img_self" src="{{pic.img}}" mode="aspectFill" />
+                            </view>
+                          </block>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view wx:if="{{item.twInfo.book_id!=null}}">
+                    <view wx:for="{{bookInfo}}" wx:for-index="id" wx:for-item="info">
+                      <view wx:if="{{item.twInfo.book_id==info.id}}">
+                        <view class="white-bg margin-top-20 add-book-detail padding-top-40 padding-bottom-20 border-t" bindtap="jumpBookInfo" data-bookid="{{info.id}}">
+                          <view class="book-img">
+                            <image src="{{info.images_medium}}" class="book-img-detial" mode="aspectFill"></image>
+                          </view>
+                          <view class="book-info">
+                            <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{info.title}}</view>
+                            <view wx:if="{{info.summary}}" class="text-threeline margin-bottom-10 book-font">{{info.summary}}</view>
+                            <view wx:else>
+                              <view class="text-oneline margin-bottom-10 book-font">{{info.subtitle}}</view>
+                              <view class="text-oneline margin-bottom-10 book-font">作者：{{info.author}}</view>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="clear"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+
+      <!--图书部分-->
+      <swiper-item>
+        <!--搜索框-->
+        <view class="index-search-botton white-bg margin-top-20" catchtap="clickSearch">
+          <view class="index-search-input">
+            <view class="index-search-bar__box weui-flex">
+              <view class="bar-img weui-flex__item">
+                <text class="index-search-font">搜索你喜欢的书籍</text>
+              </view>
+              <view class="bar-img weui-flex__item text-right padding-top-5">
+                <image src="../../images/search_icon.png" class="opt-icon-sma"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!--<view style="height:50rpx;"></view>-->
+        <!--图书列表-->
+        <scroll-view class="hot-item-container" style="height: {{systemInfo.windowHeight-80}}px;" scroll-y="true" bindscrolltolower="loadMoreDatas">
+          <view class="white-bg">
+            <block wx:for="{{bookInfos}}">
+              <template is="bookInfoIndex" data="{{...item}}" />
+            </block>
+          </view>
+        </scroll-view>
+      </swiper-item>
+
+      <!--书吧部分-->
+      <swiper-item>
+        <scroll-view class="hot-item-container" style="height: {{systemInfo.windowHeight}}px;" scroll-y="true" bindscrolltolower="loadMoreDatas">
+          <block wx:for="{{barInfos}}">
+            <template is="barInfoIndexs" data="{{...item}}" />
+          </block>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

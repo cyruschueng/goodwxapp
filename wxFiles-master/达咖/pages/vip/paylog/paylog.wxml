@@ -1,0 +1,17 @@
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+
+<view class="panel bottom-line " wx:if="{{list.length > 0}}" wx:for="{{list}}">
+  <view class='panel-between'>
+    <view class='font-md'>{{item.describle}}</view>
+    <view class='font-md'>{{item.type == 4 ? '-':'+'}}{{item.bz}}</view>
+  </view>
+  <view class='font-sm'>{{item.time}}</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

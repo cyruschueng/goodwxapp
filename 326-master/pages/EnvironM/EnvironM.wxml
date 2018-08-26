@@ -1,0 +1,26 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+    <view class='panel flexCenter  Skin'>
+    <view class='panelL'>
+      <image class="imgL"src="/images/hcyZC.png"></image>
+    </view>
+    <view class='panelL pAb15'>
+      <view>{{EnvDevPPage.sn}}</view>
+      <view>风速:{{EnvDevPPage.wind_speed}}m/s</view>
+      <view>日照:{{EnvDevPPage.radiation}}W/m2</view>
+      <view>环境温度:{{EnvDevPPage.temp}}°C</view>
+      <view>背板温度:{{EnvDevPPage.btemp}}°C</view>
+    </view>
+      <view class='flexV1 deviceDetMode mr03'>
+        <template is="tapMenu" data="{{tapBox: tapBox}}"/> 
+      </view>
+  </view>
+<template is="calendar" data="{{calendar: calendar}}"/>
+  <view class='mainCharData flexColumn flexv1 cir'>
+    <view class='ecBar'>
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+  </view>
+  <template is="errTip" data="{{errBox: errBox}}"/> 
+  <template is="operaModel" data="{{modelDat: modelDat}}"/>

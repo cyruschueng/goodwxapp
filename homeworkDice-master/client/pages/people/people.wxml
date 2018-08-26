@@ -1,0 +1,42 @@
+<!--index.wxml-->
+<view class="container" style="background:url('http://chinnmt.com/content/plugins/kl_album/upload/201803/beab4d77a2af7a055fa574df9ce990ca20180304161701649239289.jpg') no-repeat;background-size:100% 100%">
+  <view class="userinfo">
+    <block>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="userinput">
+    <!--设置分配的家务  -->
+    <view class='cards'>
+      <view class='houseworkItem'>
+        <text class='inputTip'>请输入参与家务分配的人员（最多六项）</text>
+        <input class='myInput' placeholder='请在此输入姓名' placeholder-class='placeholderStyle' bindblur='bindblurInput' id='peopleInput' value='{{addInput}}' maxlength='10'></input>
+        <view class='buttonArea'>
+          <button class='myButton' bindtap='bindtapButton' hover-class='tapStyle' id='prev'>上一步</button>
+          <button class='myButton' disabled='{{peopleList.length===6?true:false}}' bindtap='bindtapButton' hover-class='tapStyle' id='addItem'>添加</button>
+          <button class='myButton' disabled='{{peopleList.length===0?true:false}}' id='next' bindtap='bindtapButton' hover-class='tapStyle'>下一步</button>
+        </view>
+        <view class='inputList'>
+          <view wx:if='{{peopleList.length===0}}'>
+            <text class='inputTip'>您还未设置参与家务分配的人员名单</text>
+          </view>
+          <view wx:else>
+            <text class='inputTip'>已经添加的人员：</text>
+            <view wx:for='{{peopleList}}' class='houseworkListItem'>
+              <text class='houseworkItemText'>{{item}}</text>
+              <icon type='cancel' id='delete{{index}}' bindtap='bindtapButton' data-index='{{index}}' size='15'></icon>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class='cover' wx:if='{{showModalStatus}}' data-status='close' id='closePopView' bindtap='bindtapButton'></view>
+      <view animation='{{animationData}}' class='drawerBox' wx:if='{{showModalStatus}}'>
+        <view class='drawerContent'>
+          <button class='drawerButton' id="shareBtn" open-type="share" hover-class='tapStyle'>转发给好友</button>
+          <button class='drawerButton' id='cancelShare' bindtap='bindtapButton'>取消</button>
+        </view>
+      </view> -->
+    </view>
+  </view>
+</view>

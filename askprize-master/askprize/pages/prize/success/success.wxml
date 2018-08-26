@@ -1,0 +1,36 @@
+<!--pages/prize/success/success.wxml-->
+<view class='body'>
+    <image mode='widthFix' src='http://i1.dd-img.com/assets/image/1520837531-60d50366702fb32b-670w-82h.png'></image>
+    <view class='body-main'>
+        <view class='body-main-box'>
+
+            <view class='body-main-box-title'>通关文牒</view>
+            <view class='body-main-box-explain'>因你足智多谋，博学多才</view>
+            <view class='body-main-box-explain'>赐你通关文牒一张</view>
+            <view class='body-main-box-user'>
+                <view class='body-main-box-user-img'>
+                    <view class='body-main-box-user-img-box'>
+                        <image mode='aspectFill' src='{{uesrInfo.img}}'></image>
+                    </view>
+                </view>
+                <view class='body-main-box-user-name'>{{uesrInfo.name}}</view>
+            </view>
+            <view wx:if="{{moneytimebox}}" class='body-main-box-time'>{{moneytime}}</view>
+            <block wx:else>
+                <view class='body-main-box-money'>获得奖金</view>
+                <view class='body-main-box-moneyNum'>{{apply}}元</view>
+            </block>
+            
+            <image class='body-main-box-code' src='http://i1.dd-img.com/assets/image/1520837531-067d71c8e08d326e-120w-120h.png'></image>
+
+            <view class='body-main-box-success'>本期共
+                <text>{{prize.access_num}}</text>  
+                人通关</view>
+            <view class='body-main-box-success'>平分{{prize.access_total_money}}元奖金</view>
+
+        </view>
+    </view>
+    <image mode='widthFix' src='http://i1.dd-img.com/assets/image/1520837531-7f06b70f4b67ec17-670w-70h.png'></image>
+
+    <!-- <button class='body-save'>保存到手机相册</button> -->
+</view>

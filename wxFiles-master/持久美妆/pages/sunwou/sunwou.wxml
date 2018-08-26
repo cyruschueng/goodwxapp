@@ -1,0 +1,24 @@
+<!-- 带图标的底部导航 -->
+<template name="bottomNavWithIcon">
+<view class="bottom_nav_with_icon">
+  <view class="item" style="width:{{100/bottomNavList.length}}%" wx:for="{{bottomNavList}}" data-page="{{item.page}}" bindtap="switchBottomNav">
+    <image src="{{item.active ? item.selectedIcon:item.icon}}" class="icon"></image>
+    <view class="font-xs" style="color:{{item.active ? bottomNavColor.selectedTextColor:bottomNavColor.defaultTextColor}};">{{item.text}}</view>
+  </view>
+</view>
+</template>
+
+<!-- 经典搜索框 -->
+<template name="searchBarClassic">
+<view wx:if="{{config.show}}" style="width: 100%; display: flex; {{config.hasLocation ? 'justify-content:space-between':''}} ;background:{{config.barColor == 'theme' ? theme:'#d1d1d1'}}">
+  <view data-index='{{index}}' data-function="setLocation" bindtap="bindTap" wx:if="{{config.hasLocation}}" class="panel-center" style="width:120rpx;height: 90rpx;width:120rpx;text-align:center; line-height: 90rpx; padding: 0 30rpx; background:{{config.barColor == 'default' ? '#ffffff':theme}}">
+    <view class="font-md ellipsis" style="width:90rpx;color:{{config.barColor == 'default' ? '#262626':'#ffffff'}}">
+      {{config.data.locationName}}
+    </view>
+    <view><image style="margin-left:5rpx" class="icon-xs" src="{{config.barColor == 'default' ? '/img/yzy/dropdown2.png':'/img/yzy/dropdown1.png'}}"></image></view>
+  </view>
+  <view style="height:70rpx;background:{{config.barColor == 'theme' ? theme:'#d1d1d1'}};padding:10rpx 20rpx;width:{{config.hasLocation ? '550rpx':'100%'}};">
+    <view style="height:70rpx;line-height:70rpx;border-radius:10rpx;width:{{config.hasLocation ? '530rpx':'100%'}};background:#fff;text-align:center;" class="font-md " >{{config.placeholder}}</view>
+  </view>
+</view>
+</template>

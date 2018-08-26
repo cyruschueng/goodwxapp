@@ -1,0 +1,124 @@
+<!--index.wxml-->
+<import src="../../templates/scorestart/scorestart.wxml"/>
+
+ <view class='remind-empty-view' hidden='{{ emptyHidden }}'>暂无数据，请重试！</view>  
+
+<view class="body" hidden='{{ bodyHidden }}'>
+
+  <!-- 头部 -->
+  <view class='header'>
+    
+    <!-- 首页头部轮播图 -->
+    <swiper class='imgSwiper'>
+    <block wx:for="{{ hotelInfo.hotelBgimg }}" wx:key="{{ index }}">
+      <swiper-item>
+        <image class='header-img' mode="widthFix" src="{{ item }}"/>
+      </swiper-item>
+    </block>
+    </swiper>
+
+    <!-- 电话按钮 -->
+    <image class='phone-call-icon' src='../../images/phonecall.png' data-phonenum='{{ hotelInfo.hotelphonecall }}' bindtap='bindPhoneCallTap'></image>
+
+    <view class='header-text weui-flex'>
+      
+      <text>{{ hotelInfo.hotelName }}</text>
+      <view class='score-view'>
+        <text class='comment-text'>{{ hotelInfo.hotelGoodReputation }}用户好评</text>
+        <text class='hotelscore'>{{ hotelInfo.hotelScore }}分</text>
+      </view>
+      <view class='text'>{{ hotelInfo.hotelDescription }}</view>
+    </view>
+    
+  </view>
+
+  <!-- 酒店信息 -->
+  <view class="img-title-arrow-cell" bindtap='bindLocationTap'>
+    <image class='left-icon' src='../../images/location.png'></image>
+    <text class='left-text'>{{ hotelInfo.hotelLocation }}</text>
+    <image class='right-icon' src='../../images/arrow-right.png'></image>
+  </view>
+
+  <!-- 宴会厅 -->
+  <view class='hotel-ballroom'>
+    <view class='title-cell'>
+      <text>宴会厅（{{ ballroomsNum }}）</text>
+    </view>
+    <view class='middle-cell' wx:for="{{ ballrooms }}" wx:for-item="ball" wx:key="*this" data-ballroomid='{{ ball.ballroomId }}' bindtap='goBallroomPage'>
+      <image mode='aspectFill' class='middle-cell-left-img' src='{{ ball.imgUrl }}'></image>
+      <view class='middle-cell-middle-text'>
+        <text>{{ ball.name }} {{ ball.level }}F</text>
+        <text class='lit-text'>桌数：{{ ball.tabNums }}桌</text>
+        <text class='lit-text'>层高：{{ ball.highLevel }}m</text>
+      </view>
+      <view class='middle-cell-right-button'>查看</view>
+    </view>
+    <view class='title-arrow-cell' bindtap='goBallroomListViewPage'>     
+      <text class='title'>查看全部宴会厅</text>
+      <image class='right-icon' src='../../images/arrow-right.png'></image> 
+    </view>  
+  </view>
+
+  <!-- 菜品 -->
+  <view class='hotel-wedding-menu'>
+    <view class='scroll-h-title'>
+      <text>菜品</text>
+    </view>
+    <scroll-view class="scroll-view_H" scroll-x='true'>
+      <view class='scroll-h-item' wx:for="{{ weddingmenu }}" wx:for-item="wed" wx:key="*this" id='{{ wed.disId }}' bindtap='goDishesDetailsPage'>
+        <image mode='aspectFill' class='bg-img' src='{{ wed.imgUrl }}'></image>
+        <view class='text-view'>
+          <text class='left-text'>{{ wed.name }}</text>
+          <text class='right-text'>¥ {{ wed.price }}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 宴会庆典 -->
+  <view class='hotel-wedding-menu'>
+    <view class='scroll-h-title'>
+      <text>宴会庆典</text>
+    </view>
+    <scroll-view class="celebration-scroll-view_H" scroll-x='true'>
+      <view class='celebration-scroll-h-item' wx:for="{{ banquet }}" wx:for-item="banquet" wx:key="*this" id='{{ banquet.celebrationid }}' bindtap='goCelebrationDetailsPage'>
+        <image class='bg-img' mode='aspectFill' src='{{ banquet.imgUrl }}'></image>
+        <view class='weui-flex text-view'>
+          <view class='weui-flex__item left-text'>{{ banquet.name }}</view>
+          <view class='right-text'>¥ {{ banquet.price }}</view>
+        </view>
+        <view class='style-view'>
+          <text class='style-icon'>{{ banquet.style }}</text>
+        </view>
+      </view>
+    </scroll-view>
+    </view>
+
+  <!-- 婚礼人才 -->
+  <view class='hotel-talent-menu'>
+    <view class='scroll-h-title'>
+      <text>婚礼人才</text>
+    </view>
+    <scroll-view class="talent-scroll-view_H" scroll-x='true'>
+      <view class='talent-scroll-h-item' wx:for="{{ talents }}" wx:for-item="talent" wx:key="*this" id='{{ talent.talentid }}' bindtap='goTalentDetailsPage'>
+        <view class='head-img'>
+          <image mode='aspectFill' src='{{ talent.headImg }}'></image>
+        </view>
+        <view class='name-view'>
+          <text>{{ talent.name }}</text>
+          <text>({{ talent.occupation }})</text>
+        </view>
+        <view class='btn-view'>查看</view>
+        <view class='text-view'>
+          <text>{{ talent.goodReputation }}好评</text>
+          <text>交易:{{ talent.experience }}次</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='title-arrow-cell' bindtap='goTalentListPage'>     
+      <text class='title'>查看全部人才</text>
+      <image class='right-icon' src='../../images/arrow-right.png'></image> 
+    </view> 
+  </view>
+
+</view>

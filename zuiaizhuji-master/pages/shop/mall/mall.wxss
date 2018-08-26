@@ -1,0 +1,242 @@
+
+/* 引入公共样式 */
+@import "/pages/shop/common/common.wxss";
+
+.bgwhite{background: #fff;}
+.gridFour::before{border-color: inherit;}
+
+.no-content .no-content-img{width: 50%;}
+
+/* page>view:first-child{ margin-top: 0;}
+page>view:first-child.search{ margin-top:20rpx;} */
+/**基本框架样式**/
+.rec-img,.ads-img,.swiper-box,.goods-img{ position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
+.search{ -webkit-transition: all  0.5s ease;transition: all  0.5s ease;}
+
+.swiper{ width: 100%; position: relative; padding-bottom: 50%;}
+.swiper-img{ width: 100%; height: 100%;}
+page .wx-swiper-dot{content:'';  width: 14rpx; height: 14rpx; border-radius: 50rpx;}
+page .wx-swiper-dots.wx-swiper-dots-horizontal{ bottom: 0; overflow: visible; font-size: 0; padding:0 2rpx;}
+
+.search{margin:20rpx; width:auto; z-index: 9;}
+.address{max-width: 150rpx;line-height: 32px;font-size: 14px;}
+.search-box{ background:#fff; border-radius: 6rpx;height: 32px;}
+.search-input{ height: 32px; padding: 0 20rpx; text-align: center; vertical-align: top;}
+button.search-btn{ background: none; padding:0 0.8em;}
+button.search-btn icon{ vertical-align: top; margin-top: 15rpx;}
+.search-btn::after{ display: none;}
+.saoyisao,.contact-button{background: none;margin:0;padding:0;width:100rpx;color: #666; font-size: 48rpx;line-height: 64rpx;transition: all 0.3s linear;}
+.contact-button::after{ display: none;}
+.saoyisao:active,.contact-button:active{background: rgba(0, 0, 0, 0.05);}
+
+/* 分类 */
+.menu{padding:20rpx 0;box-sizing: border-box;}
+.menu-item{ width: 25%; float: left; font-size: 26rpx;vertical-align: bottom;}
+.menu-item:nth-child(n+5){ margin-top: 20rpx;}
+.menu-item-img{ width:78rpx; height: 78rpx;margin: 0 auto; margin-bottom: 8rpx; display: block;}
+/* 分类自定义 */
+.menu-five .menu-item{width:20%;margin-top: 0;}
+.menu-five .menu-item:nth-child(n+6){margin-top:20rpx;}
+.menu-circle .menu-item-img{border-radius: 50%;}
+.menu-fillet .menu-item-img{border-radius: 12rpx;}
+
+/* 公告 */
+.notice{height: 92rpx;line-height: 92rpx;background: rgba(255, 255, 255, 0.8);padding: 0 30rpx; margin: 20rpx 0;}
+.notice:active{background: #eee;}
+.notice-list{height: 92rpx;width: 100%;}
+.notice .icon-tongzhi{ transform: scale(1.2);}
+.tips-detail{z-index: 1;border-radius: 5px;width: 600rpx;padding-bottom: 30rpx;background: #fff;}
+.tips-top{background: #00aeff; letter-spacing: 10rpx; padding: 30rpx;font-weight: bold;font-size: 36rpx;color: #fff;position: relative;border-radius: 5px 5px 0 0;overflow: hidden;} 
+.tips-detail .close{width: 36px;height: 36px;color:#fff;border: 1px solid;border-radius: 50%;position: absolute;bottom:-50px;left: 50%;transform: translateX(-50%);}
+.tips-detail .close::before,.tips-detail .close::after{content:'';display:block;width: 50%;height: 1px;background: currentColor;position: absolute;top:50%;left: 50%;}
+.tips-detail .close::before{transform: translate(-50%,-50%) rotate(45deg);}
+.tips-detail .close::after{transform: translate(-50%,-50%) rotate(-45deg);}
+.tips-detail-content{max-height:500rpx;overflow: auto;padding: 0 30rpx;}
+.tips-detail-item{margin: 20rpx 0;}
+.tips-top::before,.tips-top::after{content: '';display: block;width: 100%;padding-top: 100%;background: rgba(255, 255, 255, 0.1);border-radius:50% 40%;position: absolute;bottom:30rpx;}
+.tips-top::before{animation: drift 8s linear infinite;left: 10%;} 
+.tips-top::after{animation: drift 12s linear infinite;right: 10%;} 
+@-webkit-keyframes drift {
+  from {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);transform: rotate(360deg);}
+}
+@keyframes drift {
+  from {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);transform: rotate(360deg);}
+}
+
+
+/* 扩展模块 */
+.adver{-webkit-column-gap:0;column-gap:0;} 
+.adver image{width:100%;height: 100%;}
+.adver .ad-item{float: left;position: relative;width: 100%;-webkit-column-break-inside:avoid;}
+.ad-item image{position: absolute;top: 0;left: 0;}
+
+.ad2th{-webkit-column-count:2;column-count:2;}
+.ad2th .ad-item{padding-top: 100%;}
+.ad3th{-webkit-column-count:3;column-count:3;}
+.ad3th .ad-item{padding-top: 120%;}
+.ad3th2 .ad-item:first-child{width:46%;padding-top: 60%;}
+.ad3th2 .ad-item:nth-child(n+2){width:54%;padding-top: 30%;}
+.ad4th{-webkit-column-count:4;column-count:4;}
+.ad4th .ad-item{padding-top: 140%;} 
+.ad4th2{-webkit-column-count:2;column-count:2;}
+.ad4th2 .ad-item{padding-top: 100%;}
+.ad4th3 .ad-item:first-child{width:40%;padding-top: 60%;}
+.ad4th3 .ad-item:nth-child(2){width:60%;padding-top: 30%;}
+.ad4th3 .ad-item:nth-child(3),.ad4th3 .ad-item:nth-child(4){width:30%;padding-top: 30%;}
+.ad5th .ad-item:first-child{width: 100%;padding-top:50%;}
+.ad5th .ad-item:nth-child(2),.ad5th .ad-item:nth-child(5){width: 50%;padding-top:48%;}
+.ad5th .ad-item:nth-child(3),.ad5th .ad-item:nth-child(4){width: 50%;padding-top:52%;}
+.ad5th .ad-item:nth-child(4){margin-top: -4%;} 
+/* 扩展模块间距 */
+.adver{--adver-space:0px;}
+.adver.space-mini{--adver-space:2rpx;}
+.adver.space-large{--adver-space:16rpx;}
+.space-tb{margin:20rpx 0;} 
+.adver-box .adver:first-child{margin-top: 0;} 
+.adver{-webkit-column-gap:var(--adver-space);column-gap:var(--adver-space);}
+.adver.ad3th2 .ad-item:nth-child(n+2){margin-left: var(--adver-space);width:calc(54% - var(--adver-space));padding-top: calc(30% - (var(--adver-space)/2));}
+.adver.ad3th2 .ad-item:nth-child(n+3){margin-top: var(--adver-space);}
+.adver.ad4th2 .ad-item:nth-child(2n){margin-top: var(--adver-space);} 
+.adver.ad4th3 .ad-item:first-child{width: calc(40% - var(--adver-space));} 
+.adver.ad4th3 .ad-item:nth-child(n+2){margin-left: var(--adver-space);padding-top: calc(30% - (var(--adver-space)/2));} 
+.adver.ad4th3 .ad-item:nth-child(n+3){margin-top: var(--adver-space);width:calc(30% - (var(--adver-space)/2));}
+.adver.ad5th .ad-item:nth-child(n+2){width: calc(50% - (var(--adver-space)/2));}
+.adver.ad5th .ad-item:nth-child(2),.adver.ad5th .ad-item:nth-child(4){margin-right: var(--adver-space);}
+.adver.ad5th .ad-item:nth-child(2),.adver.ad5th .ad-item:nth-child(3),.adver.ad5th .ad-item:nth-child(5){margin-top: var(--adver-space);}
+.adver.ad5th .ad-item:nth-child(4){margin-top: calc(var(--adver-space) - 4%);} 
+
+/* 广告 */
+.ads{margin: 16rpx;}
+.ads-item{ position: relative;}
+
+.ads-1th .ads-item{ width: 100%; padding-bottom: 50%;}
+.ads-2th .ads-item{ width:49%; padding-bottom: 24.5%; float: left; margin-left: 2%;}
+.ads-2th .ads-item:nth-child(2n-1){ margin-left: 0;}
+.ads-2th .ads-item:nth-child(n+3){ margin-top: 2%;}
+.ads-3th .ads-item{ width:49%; padding-bottom: 23.5%; float: left; margin-left: 2%;}
+.ads-3th .ads-item:first-child{ margin-left: 0; padding-bottom: 49%;}
+.ads-3th .ads-item:last-child{ margin-top:2%;}
+.ads-4th .ads-item{ width:49%; padding-bottom: 24.5%; float: left; margin-left: 2%;}
+.ads-4th .ads-item:nth-child(2n-1){ margin-left: 0;}
+.ads-4th .ads-item:nth-child(n+3){ margin-top: 2%;}
+
+/* 推荐标题 */
+.home-tit{ background: #fff; margin-top: 16rpx; padding:20rpx 0;}
+/* 热门商品标题 */
+.goods-tit{margin-top: 16rpx; padding:20rpx 0; position: relative;}
+.goods-tit::after,.goods-tit::before{ content:""; position: absolute; display: block; border-top: 1px solid #ececec; top: 50%; width: calc(50% - 120rpx);}
+.goods-tit::after{ left: 0;}
+.goods-tit::before{ right: 0;}
+/* 商品列表公用样式 */
+.goods-item{background: #fff; display: inline-block;vertical-align: bottom;}
+.goods-imgbox{ position: relative; width: 100%; padding-bottom: 100%;}
+.goods-name{line-height:40rpx; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.goods-pricebox{display: flex;width: 100%;justify-content: space-between;}
+.goods-price{flex:1;}
+.shopCart-btn{width: 60rpx;height: 60rpx;border-radius: 50%;text-align: center;line-height: 60rpx;font-size: 40rpx;color:#f66;transition: all .3s linear;}
+.shopCart-btn:active{background: #f66;color: #fff;font-size: 32rpx;}
+
+/* 是否显示原价 */
+.hid-oldprice .delLine{display: none;}
+/* 商品名称行数 */
+.name-lineTwo .goods-name{-webkit-line-clamp: 2;height: 80rpx;white-space: normal;display: -webkit-box; -webkit-box-orient: vertical;}
+
+/* 推荐滑动列表 */
+.recommend{padding: 20rpx 0;box-sizing: border-box;}
+.goods-recombox{background: #fff;white-space: nowrap;}
+.goods-recombox .goods-item{width: 280rpx;}
+.goods-recombox .goods-item:nth-child(n+2){margin-left: 10rpx;}
+.goods-recombox .goods-info{ margin:10rpx;}
+
+/* 两列商品形式 */
+.goods-colbox .goods-item{ width:49%;}
+.goods-colbox .goods-item:nth-child(2n){margin-left: 2%;}
+.goods-colbox .goods-item:nth-child(n+3){ margin-top: 2%;}
+.goods-colbox .goods-info{ margin: 10rpx;}
+.goods-colbox .goods-name{ margin:15rpx 0 10rpx;}
+.goods-colbox .goods-pricebox{ align-items: flex-start;}
+.goods-colbox .goods-price > view{ display: block;}
+
+/* 商品列表形式 */
+.goods.goods-listbox{padding:0;}
+.goods-listbox .goods-item{width:100%;margin: 0;display: flex;clear: both;padding: 30rpx;}
+.goods-listbox .goods-item:nth-child(n+2){margin-top: 2rpx;}
+.goods-listbox .goods-imgbox{width:200rpx;height: 200rpx;margin-right: 20rpx;padding: 0;}
+.goods-listbox .goods-info{flex: 1;margin: 0;display: flex;flex-direction: column;justify-content: space-between;}
+.goods-listbox .goods-name{margin: 0;}
+.goods-listbox .goods-pricebox{ align-items: flex-end;line-height: 1.1;}
+.goods-listbox .goods-price>view {display: inline-block;}
+.goods-listbox .goods-price>view:nth-child(n+2) {margin-left: 20rpx;}
+
+/* 商品大图形式 */
+.goods-blockbox{padding: 20rpx;}
+.goods-blockbox .goods-item{width: 100%;border-radius: 12rpx;overflow: hidden;}
+.goods-blockbox .goods-item:nth-child(n+2){margin-top: 20rpx;}
+.goods-blockbox .goods-info{margin: 0;padding: 20rpx 30rpx;display: flex;flex-direction: column;justify-content: space-between;}
+.goods-blockbox .goods-pricebox{ align-items: flex-end;line-height: 1.1;}
+.goods-blockbox .goods-price>view {display: inline-block;}
+.goods-blockbox .goods-price>view:nth-child(n+2) {margin-left: 20rpx;}
+.goods-blockbox .goods-name{margin: 0;}
+.goods-blockbox .goods-name.lineText2{height: auto;}
+
+
+/* 优惠券 */
+.juan-box{width:100%;overflow-x: auto;-webkit-overflow-scrolling: touch;word-break: keep-all;white-space:nowrap;margin: 20rpx 0;}
+.coupon-list{width: 345rpx;line-height: 110%;color: #ee4f4f;margin: 0 auto;margin-left: 20rpx;display: inline-flex;align-items: stretch;}
+.coupon-list:only-child{display:flex;width: 670rpx;position: relative;margin: 0 40rpx;}
+.coupon-price{padding: 40rpx 20rpx;padding-left: 30rpx;line-height: 1.1;background: url('http://www.ixiaochengxu.cc/resource/images/shop/coupon/juanBg_1.png') no-repeat left;background-size: auto 100%;}
+.coupon-list:only-child .coupon-price{padding: 50rpx 60rpx;padding-left: 120rpx;}
+.receive-btn{padding: 30rpx;padding-left: 40rpx;width:114rpx;line-height: 1.6;text-align: center;align-items: center;word-break: normal;white-space:pre-wrap;background: url('http://www.ixiaochengxu.cc/resource/images/shop/coupon/juanBg_1.png') no-repeat right;background-size: auto 100%;}
+.coupon-list:only-child .receive-btn{width: 130rpx;padding: 40rpx 30rpx;padding-left: 50rpx;}  
+
+
+/* 优惠券 */
+/*.card-item{ position: relative; width: 42.5%; background: #fe8a0d; padding-bottom:20%; margin-left: 5%; float: left; color: #fff; overflow: hidden;}
+.card-item:nth-child(n+3){ margin-top: 3%;}
+.card-item:after,.card-item:before{ content: ""; display: block; width:30rpx; height: 200%; position: absolute; top:50%; bottom: 0; background: radial-gradient(#f5f5f5,#f5f5f5 12rpx,rgba(0,0,0,0) 12rpx); background-size: 32rpx 32rpx; }
+.card-item:after{ left:0; -webkit-transform: translate(-50%,-50%) scale(0.5); transform: translate(-50%,-50%) scale(0.5); }
+.card-item:before{ right:0; -webkit-transform: translate(50%,-50%) scale(0.5); transform: translate(50%,-50%) scale(0.5); }
+.card-info{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden;}
+.card-txt{ line-height: 120%; padding: 0 25rpx 0 19rpx; position: relative;}
+.card-txt-box{ display: block; width: 28rpx;}
+.card-count{ border-right: 1px dashed #fff; overflow: hidden; position: relative; margin-left: 30rpx; padding-right: 30rpx;}
+.card-txt::after,.card-txt::before{ content: ""; width: 18rpx; height: 18rpx; display: block; background: #f5f5f5; border-radius: 50%; position: absolute; left: -8rpx;}
+.card-txt::after{ top: -9rpx;}
+.card-txt::before{ bottom: -9rpx;}
+.card-counts{ padding-bottom: 12rpx; margin-bottom: 12rpx;}
+.cards{ width: 100%; text-align: right;}
+.card{ margin: 30rpx 0;}
+.card-count,.card-txt{display: -webkit-box; -webkit-box-align:center;}
+.card-tit{ background: #fff;font-size:32rpx; padding: 20rpx 30rpx; line-height: 48rpx;}
+.icon-ticket{ color: #fff; width: 62rpx; height: 62rpx; line-height: 62rpx; text-align: center; border-radius: 50%; font-size: 38rpx; display: inline-block; overflow: hidden; -webkit-transform: scale(0.6);transform: scale(0.6); -webkit-transform: left center;transform: left center; margin: -15rpx 0;} */
+
+.tips-foot{padding:20rpx 0; position: relative;}
+.tips-foot::after,.tips-foot::before{ content:""; position: absolute; display: block; border-top: 1px solid #ececec; top: 50%; width: calc(50% - 160rpx);}
+.tips-foot::after{ left: 0;}
+.tips-foot::before{ right: 0;}
+
+/********** color ***********/
+/*绿色*/
+.home-tit .iconfont::before{ color: #fea512;}
+.goods-tit .iconfont::before{ color: #09bb07;}
+.good-price,.goods-price,.home-tit2 .iconfont::before{ color: #f35150;}
+
+
+.brand-box{ padding:30rpx; background: #fff; overflow: hidden;}
+.brand-home{ font-size: 0; white-space: nowrap; height: 120rpx;}
+.brand-list{ width: 200rpx; height: 120rpx; position: relative; display: inline-block;}
+.brand-list:not(:last-child){ margin-right: 20rpx;}
+.brand-img{ position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
+
+
+
+
+/* 右侧浮动按钮 */
+.aside-flote{ position: fixed; right: 30rpx; bottom: 30rpx;width: 72rpx;}
+.aside-flote button{padding: 0;border-radius: 50%;line-height: 72rpx;}
+.aside-flote button:nth-child(n+2){margin-top: 15rpx;}
+
+
+@import "/css/DuoguanShop/DuoguanShop-template-default.wxss";

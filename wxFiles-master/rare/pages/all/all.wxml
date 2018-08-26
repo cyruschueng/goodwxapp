@@ -1,0 +1,62 @@
+<view class="container-theme {{opq == 0? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;padding-top:250rpx;">
+<view class="spinner-cube-grid">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+</view>
+</view>
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="tbar {{opq == 0 ? 'hidden':''}}">
+    <view class="li">
+      <view class="{{tap == 0 ? 'ac':''}}" data-id="0" bindtap="changetap">全部</view>
+    </view>
+    <view class="li">
+      <view class="{{tap == 1 ? 'ac':''}}" data-id="1" bindtap="changetap">促销</view>
+    </view>
+    <view class="clear-both"></view>
+  </view>
+  <swiper style="height:{{innerHeight-50}}px;overflow-y:scroll;margin-top:120rpx;" current="{{tap}}" bindchange="changesw">
+    <swiper-item style="overflow-y:scroll">
+      <view style="height:120rpx;"></view>
+      <view class="goods" >
+        <view class="good" bindtap="navToGoods" wx:for="{{list}}" id="{{item.msgId}}" bindtap="navToGoods">
+          <image class="image" src="{{item.icon}}"></image>
+          <view class="gob">
+            <view class="gtit">{{item.msgcontent}}</view>
+            <view class="col">
+              <text class="fontsize-26">￥</text>{{item.price}}
+            </view>
+            <view class="col">
+              <text class="asf">STOP NOW ></text>
+            </view>
+          </view>
+        </view>
+        
+      </view>
+    </swiper-item>
+    <swiper-item style="overflow-y:scroll">
+      <view style="height:120rpx;"></view>
+      <view class="goods" >
+        <view class="good" bindtap="navToGoods" wx:for="{{slist}}" id="{{item.msgId}}" bindtap="navToGoods">
+          <image class="image" src="{{item.icon}}"></image>
+          <view class="gob">
+            <view class="gtit">{{item.msgcontent}}</view>
+            <view class="col">
+              <text class="fontsize-26">￥</text>{{item.sellprice}} <text style="text-decoration: line-through;color:#aaaaaa;font-size:26rpx">￥{{item.price}}</text>
+            </view>
+            <view class="col">
+              <text class="asf">STOP NOW ></text>
+            </view>
+          </view>
+        </view>
+        
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

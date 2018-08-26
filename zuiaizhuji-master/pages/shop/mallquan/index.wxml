@@ -1,0 +1,28 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>  
+<view class="contenter">
+　<image class="bgimg" src="{{this_quan_d_img}}" mode="aspectFill"></image>
+  <view class="money">{{shop_quan_info.q_dai_jiner}}</view>
+  <view class="get">
+    <button bindtap="quan_lingqu_bind">立即领取</button>
+  </view>
+  <view class="notes tc">
+    <view class="note-title f16">
+      <text>活动说明</text>
+    </view>
+    <view class="note-content tl f14">
+      <text class="note-list">活动期限：{{shop_quan_info.q_begin_time}}-{{shop_quan_info.q_end_time}}</text>
+      <text class="note-list">1、每笔订单一次只能使用一种优惠券,不能叠加使用。</text>
+      <text class="note-list">2、优惠券仅限在本店购物时使用；</text>
+      <text class="note-list">3、如使用优惠券，订单提交后不能修改。如你要修改需求，请取消订单后另下订单。</text>
+      <text class="note-list">4、每张优惠券均有使用有效期，请在有效期内使用，过期作废。</text>
+      <text class="note-list">5、不同活动优惠券有不同的活动规则，请看清楚活动规则后再进行使用。</text>
+      <text class="note-list">6、优惠券的使用规则:{{shop_quan_info.q_shuoming}}</text>  
+    </view>
+  </view>
+</view>
+</block>

@@ -1,0 +1,32 @@
+<import src="/wxSearch/wxSearch.wxml"/>
+
+<view class="wxSearch-section">
+  <view class="wxSearch-pancel">
+    <input bindinput="wxSearchInput" bindfocus="wxSerchFocus" value="{{searchValue}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="搜索" />
+    <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">搜索</button>
+  </view>
+</view>
+<!-- <view class="content" style="margin-bottom:0px;"><view> {{detail}}</view><view>{{dijkl}}</view><view>{{baoMa}}</view><view>{{beiZhun}}</view><view>{{lianXiRen}}</view><view>{{dianHua}}</view></view> -->
+
+<view class="list-wrapper">
+  <view class="list" wx:for="{{carList}}" wx:key="this" wx:for-item="item">
+    <view class="car-list" wx:for="{{item.carsinfo}}" wx:key="*this" wx:for-item="subItem">
+      <view class="icon-wrapper">
+        <image class="icon {{!!subItem.car_img && 'carIcon'}}" src="{{subItem.car_img || '/Images/huiButto.png'}}"></image> 
+      </view>
+      <text class="info">{{subItem.carname}}</text>
+    </view>
+    <view class="remark-wrapper">
+      <text>备注：</text>
+      <text>{{item.remark || ''}}</text>
+    </view>
+    <view class="info-wrapper">
+      <view class="name">{{item.name}}</view>
+      <view class="phone-wrapper">
+        <text class="desc">电话:</text>
+        <text class="number">{{item.phone}}</text>
+        <image class="icon" src="/Images/phop.png" bindtap="makePhone" data-phone="{{item.phone}}"></image> 
+      </view>
+    </view>
+  </view>
+</view>

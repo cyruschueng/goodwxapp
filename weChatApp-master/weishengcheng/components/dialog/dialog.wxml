@@ -1,0 +1,25 @@
+<view class="zan-popup {{ showSharePopup ? 'zan-popup--show' : ''}}" bindtap="toggleShowDialog">
+    
+    <view class="zan-popup__container" catchtap="stop">
+    	<!-- <view class="title">
+    		<text>{{content}}</text>
+    	</view> -->
+        <view class="share-wrapper">
+            <button class="share-item shareButton" open-type="share" catchtap="shareToChats">
+                <view class="share-item-avatar">
+                    <image src="http://icons.maiyizhi.cn/weixin_icon.png"></image>
+                </view>
+                <view class="share-item-name">微信</view>
+            </button>
+            <button class="share-item shareButton" catchtap="shareToMoments">
+                <view class="share-item-avatar">
+                    <image src="http://icons.maiyizhi.cn/pengyouquan_icon.png"></image>
+                </view>
+                <view class="share-item-name">朋友圈</view>
+            </button>
+        </view>
+        <view  class="cancel">
+        	<view catchtap="toggleShowDialog" class="button">取消</view>
+        </view>
+    </view>
+</view>

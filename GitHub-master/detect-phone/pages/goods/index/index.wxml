@@ -1,0 +1,140 @@
+<view class="page header-sort navbar">
+  <view class="fui-header">
+    <view class="searchbar">
+     <icon size="12" type="search"></icon>
+      <input name="search" bindconfirm="bindSearch" bindfocus="bindFocus" bindinput="bindInput" focus="{{focusin}}" placeholder="输入关键字进行搜索" value="{{params.keywords}}" /> 
+    </view>
+    <image class="icon" bindtap="changeMode" src="/static/images/icon/viewlist.png" wx:if="{{!fromsearch}}"></image>
+    <view class="cancel" bindtap="bindback" wx:if="{{fromsearch}}">取消</view>
+  </view>
+  <view class="sort">
+    <view data-order="" bindtap="bindSort" class="item {{params.order == '' || !params.order ? 'on' : ''}}">
+      <view class="text">综合</view>
+    </view>
+    <view bindtap="bindSort" class="item {{params.order == 'sales' ? 'on' : ''}}" data-order="{{sales}}">
+      <view class="text">销量</view>
+    </view>
+    <view bindtap="bindSort" class="item item-price {{params.order == 'minprice' ? 'on' : ''}}" data-order="{{minprice}}">
+      <view class="text">价格
+        <image class="icon" src="/static/images/icon/listsort.png"></image>
+      </view>
+    </view>
+    <view bindtap="showFilter" class="item {{isfilter ? 'on' : ''}}">
+      <view class="text">筛选
+        <image class="icon small" src="/static/images/icon/filter.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="fui-goods-group {{listmode}}">
+    <template is="tpl_list" data="{{list}}"></template>
+  </view>
+  <view class="fui-loading" wx:if="{{loading}}">
+    <view class="icon"></view>
+    <view class="text">正在加载</view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{list.length == total && total > 0}}">
+    <view class="text">没有更多了</view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{total <= 0 && !loading}}">
+    <view class="text">暂时没有任何商品</view>
+  </view>
+  <view class="records" wx:if="{{fromsearch}}">
+    <view class="records-title" wx:if="{{searchRecords.length > 0}}">
+      <view bindtap="delRecord" class="pull-right text-danger">清除</view>
+      <view>历史搜索</view>
+    </view>
+    <view class="navs">
+      <block wx:for="{{searchRecords}}" wx:key="">
+        <nav data-text="{{item}}" bindtap="bindnav">{{item}}</nav>
+      </block>
+    </view>
+    <view hidden="true" class="records-title">
+      <view class="pull-right text-danger">换一批</view>
+      <view>热门搜索</view>
+    </view>
+    <view hidden="true" class="navs">
+      <nav bindtap="bindnav" data-text="推子">推子</nav>
+      <nav bindtap="bindnav" data-text="推子">推子</nav>
+      <nav bindtap="bindnav" data-text="推子">推子</nav>
+    </view>
+  </view>
+  <view class="screen {{isFilterShow ? 'in' : ''}}">
+    <view class="attribute">
+      <view class="item on">
+        <view bindtap="btnFilterBtns" class="btn btn-default-o block {{filterBtns.isrecommand ? 'btn-danger-o' : ''}}" data-type="{{isrecommand}}">
+          <icon color="#fd5454" size="12" type="success_no_circle" wx:if="{{filterBtns.isrecommand}}" /> 推荐商品</view>
+      </view>
+      <view class="item">
+        <view bindtap="btnFilterBtns" class="btn btn-default-o block {{filterBtns.isnew ? 'btn-danger-o' : ''}}" data-type="{{isnew}}">
+          <icon color="#fd5454" size="12" type="success_no_circle" wx:if="{{filterBtns.isnew}}" /> 新品上市
+        </view>
+      </view>
+      <view class="item">
+        <view bindtap="btnFilterBtns" class="btn btn-default-o block {{filterBtns.ishot ? 'btn-danger-o' : ''}}" data-type="ishot">
+          <icon color="#fd5454" size="12" type="success_no_circle" wx:if="{{filterBtns.ishot}}" /> 热卖商品</view>
+      </view>
+      <view class="item">
+        <view bindtap="btnFilterBtns" class="btn btn-default-o block {{filterBtns.isdiscount ? 'btn-danger-o' : ''}}" data-type="isdiscount">
+          <icon color="#fd5454" size="12" type="success_no_circle" wx:if="{{filterBtns.isdiscount}}" /> 促销商品</view>
+      </view>
+      <view class="item">
+        <view bindtap="btnFilterBtns" class="btn btn-default-o block {{filterBtns.issendfree ? 'btn-danger-o' : ''}}" data-type="issendfree">
+          <icon color="#fd5454" size="12" type="success_no_circle" wx:if="{{filterBtns.issendfree}}" /> 卖家包邮</view>
+      </view>
+      <view class="item">
+        <view bindtap="btnFilterBtns" class="btn btn-default-o block {{filterBtns.istime ? 'btn-danger-o' : ''}}" data-type="istime">
+          <icon color="#fd5454" size="12" type="success_no_circle" wx:if="{{filterBtns.istime}}" /> 限时抢购</view>
+      </view>
+    </view>
+    <block wx:if="{{catlevel != '-' && opencategory}}">
+      <view class="title">选择分类</view>
+      <view class="cate" data-catlevel="{$catlevel}">
+        <view class="item">
+          <block wx:for="{{category_parent}}" wx:key="">
+            <view>
+              <nav data-level="1" bindtap="bindCategoryEvents" class="{{category_parent_selected == item.id ? 'on' : ''}}" data-id="{{item.id}}">{{item.name}}</nav>
+            </view>
+          </block>
+        </view>
+        <view class="item" wx:if="{{catlevel >= 2}}">
+          <block wx:for="{{category_child}}" wx:key="">
+            <view>
+              <nav data-level="2" bindtap="bindCategoryEvents" class="{{category_child_selected == item.id ? 'on' : ''}}" data-id="{{item.id}}">{{item.name}}</nav>
+            </view>
+          </block>
+        </view>
+        <view class="item" wx:if="{{catlevel >= 3}}">
+          <block wx:for="{{category_third}}">
+            <view>
+              <nav data-level="3" bindtap="bindCategoryEvents" class="{{category_third_selected == item.id ? 'on' : ''}}" data-id="{{item.id}}">{{item.name}}</nav>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <view class="btns">
+      <view class="cancel" bindtap="bindFilterCancel">取消筛选</view>
+      <view class="confirm" bindtap="bindFilterSubmit">确认</view>
+    </view>
+  </view>
+</view>
+<view bindtap="showFilter" class="fui-mask hide"></view>
+
+<template name="tpl_list">
+  <block wx:for="{{list}}" wx:key="">
+    <view class="fui-goods-item">
+      <navigator hover-class="none" url="/pages/goods/detail/index?id={{item.id}}">
+        <view class="image" style="background-image:url({{item.thumb}})"></view>
+      </navigator>
+      <view class="detail">
+        <image src="{{item.saleout}}" class="salez" wx:if="{{item.saleout}}"></image>
+        <navigator hover-class="none" url="/pages/goods/detail/index?id={{item.id}}">
+          <view class="name">{{item.title}}</view>
+        </navigator>
+        <view class="price">
+          <view class="text">￥{{item.minprice}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</template>

@@ -1,0 +1,221 @@
+var app = getApp()
+Page({
+  data: {
+    imagesUrl: app.data.picUrl,
+    city: "位置",
+    i: 0,
+    j: 0,
+    // 省市信息
+    arrayPro: [],
+    provinceInfo: [],
+    arrayCity: [],
+    cityInfo: [],
+    show: true,
+    photoURL: null,
+    // 预约信息
+    info:"预约信息 预约信息预约信息 预约信息预约信息 预约信息预约信息 预约信息预约信息 预约信息",
+     // 登录
+     showLogin: false,
+     // 手机号
+     mobile: "",
+     // 验证码
+     verifycode: "1",
+     verifycode2: "2",
+     // openid
+     openid: '',
+  },
+  onLoad: function () {
+    var that = this
+    //显示头像
+    app.getUserInfo(function () {
+      //更新数据
+      that.setData({
+        photoURL: app.globalData.userInfo
+      })
+    })
+    // 获取位置
+    wx.getStorage({
+      key: 'city',
+      success: function (res) {
+        that.setData({
+          city: res.data
+        })
+      },
+    })
+    wx.getStorage({
+      key: 'openid',
+      success: function (res) {
+        that.setData({
+          openid: res.data
+        })
+      }
+    })
+    // huo获取市
+    wx.request({
+      url: app.data.requestUrl + '/leilingapplet/public/index.php/index/User/getProvince',
+      success: function (data) {
+        var data = data.data
+        var province = [];
+        for (var i = 0; i < data.length; i++) {
+          province.push(data[i].province_name)
+        }
+        that.setData({
+          arrayPro: province,
+          provinceInfo: data
+        })
+        getCity(that, 0, data)
+      }
+    })
+  },
+  // 换头像
+  updatePhoto: function () {
+    this.setData({
+      showLogin: true
+    })
+  },
+  close2: function () {
+    this.setData({
+      showLogin: false
+    })
+  },
+  switchCity: function () {
+    this.setData({
+      show: (!this.data.show)
+    })
+  },
+  bindProChange: function (e) {
+    this.setData({
+      i: e.detail.value
+    })
+    getCity(this, e.detail.value, this.data.provinceInfo)
+
+  },
+  bindCityChange: function (e) {
+    this.setData({
+      j: e.detail.value,
+      city: this.data.arrayCity[e.detail.value],
+      show: (!this.data.show)
+    })
+    wx.setStorage({
+      key: 'city',
+      data: this.data.arrayCity[e.detail.value],
+    })
+  },
+  // 修改
+  update:function(){
+    wx.navigateBack({
+      delta: 2
+    })
+  },
+  // 重新预约
+  reyuyue:function(){
+    wx.navigateBack({
+      delta:3
+    })
+  },
+  // 提交信息
+  submitInfo:function(){
+    wx.redirectTo({
+      url: '../testDriveInfo/testDriveInfo',
+    })
+  },
+  // 测试手机号
+  testMobile: function (e) {
+    this.setData({
+      mobile: e.detail.value
+    })
+  },
+  // 测试验证码
+  testVerifycode: function (e) {
+    this.setData({
+      verifycode: e.detail.value
+    })
+  },
+  // 获取验证码
+  getCode: function () {
+    var _this = this;
+    if (!(/^1[34578]\d{9}$/.test(this.data.mobile))) {
+      wx.showToast({
+        title: '手机号格式不正确',
+        image: '',
+        duration: 2000
+      })
+    } else {
+      wx.request({
+        url: app.data.requestUrl + 'leilingapplet/public/index.php/index/User/CreateVerificationCode/',
+        method: "GET",
+        success: function (d) {
+          var data = d.data.verifycode
+          console.log(data)
+          _this.setData({
+            verifycode2: data
+          })
+        }
+      })
+    }
+  },
+  // 账号登录
+  user_login: function () {
+    var _this = this
+    if (this.data.verifycode != this.data.verifycode2) {
+      wx.showToast({
+        title: '验证码不正确',
+        image: '',
+        duration: 2000
+      })
+    } else {
+      wx.request({
+        url: app.data.requestUrl + 'leilingapplet/public/index.php/index/User/userLogin',
+        method: "POST",
+        data: {
+          'telephone': _this.data.mobile,
+          'city': _this.data.city,
+          'verificationcode': _this.data.verifycode,
+          'openid': _this.data.openid
+        },
+        success: function (d) {
+          var data = d.data
+          console.log(d)
+          if (data.error == 0) {
+            wx.showToast({
+              title: '登录成功',
+              image: '',
+              duration: 2000
+            })
+            _this.setData({
+              showLogin: false,
+            })
+
+          } else {
+            wx.showToast({
+              title: '登录失败,请重试',
+              image: '',
+              duration: 2000
+            })
+          }
+        }
+      })
+    }
+  }
+})
+// 获取市
+function getCity(that, i, data) {
+  wx.request({
+    url: app.data.requestUrl + 'leilingapplet/public/index.php/index/User/getCity',
+    method: "POST",
+    data: { "provincecode": data[i].province_code },
+    success: function (res) {
+      var data = res.data
+      var arr = []
+      for (var j = 0; j < data.length; j++) {
+        arr.push(data[j].city_name)
+      }
+      that.setData({
+        arrayCity: arr
+      })
+    }
+  })
+}
+
+
+

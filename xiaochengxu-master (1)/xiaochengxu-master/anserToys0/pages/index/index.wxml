@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<image class="banner" src='../images/banner.png'></image>
+<form bindsubmit="obtainFormId" report-submit="true">
+<view class='toys'>
+  <view class='toys_text'>★ 奖品公仔娃娃 ★</view>
+  <view class='toys_bannerBox'>
+  <view class='toys_banner' wx:for="{{items}}">
+    <image class='toys_banner1' src="{{item.img}}" data-img="{{item.img}}" bindtap="previewImage"></image>
+  </view>
+  </view>
+  <image class='more_icon' src='../images/more_icon.png'></image>
+</view>
+<button class='rules' bindtap='rules'>【规则】</button>
+<view class='foot_box'>
+   <view bindtap='startplay'> 
+     <button formType="submit" class='search_formid'></button> 
+    <image class='start_play' src='../images/start_play.png'></image>
+   </view>  
+    <image class='foot_bg' src='../images/foot_bg.png'></image>
+</view>
+<!-- 规则 -->
+<view class='bg'  wx:if="{{show}}">
+  <view class='content_box'>
+  <image class='hide' bindtap='yincang' src='../images/hide.png'></image>
+    <view class='content_text'>1、首次进入游戏可获得一次免费挑战机会，每次分享到不同群可以获得一次免费挑战机会。</view>
+    <view class='content_text'>2、每道题在规定时间内答题，共十二题全部答对可获得随机娃娃一个。</view>
+    <view class='content_text'>3、获奖后您将获得一个随机验证码(长按保存)，领取娃娃需通过联系客服使用验证码兑换（每个验证码仅生效一次）。</view>
+    <view class='content_text'>4、领取成功后将在15个工作日内送达（节假日延期）。</view>
+    <view class='content_text'>5、其他问题请联系客服！</view>
+    <button class='service' open-type="contact" formType="submit">联系客服</button>
+  </view>
+</view>
+</form>
+<!-- 没有次数，提示分享 -->
+<view class='bg1'  wx:if="{{show1}}">
+  <view class='content_box'>
+  <image class='hide' bindtap='yincang1' src='../images/hide.png'></image>
+    <image class='lost' src='../images/lost.png'></image>
+    <view class='content_text2'>没得免费次数了哦~</view>
+    <view class='content_text1'>分享到不同的群，可获得挑战机会</view>
+    <button class='service' open-type="share">转发到不同群</button>
+  </view>
+</view>

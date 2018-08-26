@@ -1,0 +1,198 @@
+<!--pages/treaty/treaty.wxml-->
+<view class='container'>
+
+  <view wx:if="{{!payOrder}}">
+    <view class='title'>信用卡借款协议书</view>
+    <view class='title-content column'>
+      <view class='row'>
+        <view class='row1'>
+          <text>甲</text>
+          <text>方</text> </view>：
+        <view>{{realName}}</view>
+      </view>
+      <view class='row'>
+        <view class='row1'>
+          <text>身</text>
+          <text>份</text>
+          <text>证</text>
+          <text>号</text>
+        </view>：
+        <view>{{ID}}</view>
+      </view>
+      <view class='row'>
+        <view class='row1'>
+          <text>乙</text>
+          <text>方</text> </view>：
+        <view>成都宏磊科技有限公司</view>
+      </view>
+      <view class='row'>
+        <view class='row1'>
+          <text>公</text>
+          <text>司</text>
+          <text>地</text>
+          <text>址</text> </view>：
+        <view>成都市武侯区高升桥路9号5橦12层1201号</view>
+      </view>
+    </view>
+    <view class='detail detail1'>
+      甲方因自身经济状况等原因，为避免信用卡逾期等违约行为，特向乙方借款，并且承诺该款项仅仅用于偿还本人信用卡透支额度，并自愿与乙方达成以下借款协议：
+    </view>
+    <view class='detail detail2'>
+      第一条：甲方自愿向乙方借款，指定乙方代为偿还
+      <text>{{bankName}}</text>银行信用卡透支额度
+      <text>{{quota}}</text>元整,卡号:
+      <text>{{cardId}}</text>
+    </view>
+    <view class='detail detail3'>
+      第二条：甲方将持有的银行信用卡消费后，自愿申请乙方出资金帮忙垫付偿还透支额度，在乙方代为偿还信用卡款项后，甲方通过该信用卡偿还乙方借款本金以及服务费、手续费，不需要甲方另外书面授权行为。甲方每次签约即应该按照本协议书的约定支付给乙方一定次服务费，每一次借款的服务费为借款本金的
+      <text>{{rate}}%</text>，每一次的借款手续费为
+      <text>{{poundaqe}}</text>元
+    </view>
+
+    <view class='detail detail4'>
+      第三条：签订本借款协议书后，甲方无需交付乙方信用卡，但是有义务明确书面告知乙方信用卡的信用卡有效期、以及CVV2(即卡片背后签名栏后三位数字)，明确书面告知该信用卡的额度以及此前的信用情况，并且承诺本协议书签订之后不得更改查询密码、交易密码或者挂失补办信用卡。
+    </view>
+    <view class='detail detail5'>
+      第四条：甲方有义务在本协议签订的同时告知乙方信用卡的账单日以及应还款期限。在请乙方代还款（信用卡）时，如果因没有提前告知带来信用卡逾期等后果，由甲方承担。
+    </view>
+
+    <view class='detail detail6'>
+      第五条：甲方在请乙方代还款（信用卡）之前，有义务提前告知乙方以下情况：本人同一银行自己名下的信用卡数量，并包括主卡和副卡数量；本人信用卡还款日最后期限
+      <text>{{lastDate}}</text>日以及账单日
+      <text>{{billDate}}</text>日。
+    </view>
+
+    <view class='detail detail7'>
+      第六条：甲方保证在乙方将款项还入甲方名下信用卡内后，不会在偿还乙方的借款之前，自行使用本人信用卡内的资金，若出现此情况，甲方承担一切法律责任并按照乙方借款本金金额的二倍标准赔偿乙方的损失。
+    </view>
+
+    <view class='detail detail8'>
+      第七条： 乙方在接到甲方借款请求时，应该按照约定帮助甲方垫资还款，如果因为不及时足额还款导致甲方信用等级下降以及信用卡额度降低，乙方应该赔偿甲方的合理损失。
+    </view>
+    <view class='detail detail9'>
+      第八条：甲方应该按照乙方的要求提供相关个人必要身份信息资料，保证提交材料的真实性，提供甲方身份证复印件及本人签名，否则承担相应的法律责任。
+    </view>
+
+    <view class='detail detail10'>
+      第九条：甲乙双方同意因本协议发生的或一切与本协议有关的纠纷应协商解决，协商不成的，任何一方有权起诉到重庆市渝中区人民法院诉讼方式解决。
+    </view>
+
+    <view class='detail detail11'>
+      <view> 第十条：违约责任</view>
+      <view>
+        本协议正式签订后，任何一方不履行或不完全履行本协议约定条款的，即构成违约。违约方应当负责赔偿其违约行为给守约方造成的损失,损失范围包括但不限于因仲裁、诉讼发生的律师代理费、差旅费、仲裁费、诉讼费等费用。
+      </view>
+    </view>
+
+    <view class='detail detail12'>
+      第十一条：对本协议条款如有任何修改或补充，甲乙双方均应在友好协商的基础上订立补充协议。该补充协议作为本协议的组成部分，与本协议具有同等法律效力。
+    </view>
+
+    <view class='detail detail13'>
+      第十二条：本协议经自双方签字盖章或法定代表人签字之日起生效。
+    </view>
+    <view class='detail detail14'>
+      第十三条：本协议书为电子文本，具有同等法律效力。
+    </view>
+
+    <view class='agree'>
+      <checkbox-group bindchange="checkboxChange">
+        <checkbox value="" checked="{{item.checked}}" />我已阅读并同意
+      </checkbox-group>
+    </view>
+
+    <button class='confirm' catchtap='sure' disabled='{{disable}}'>确认</button>
+  </view>
+
+
+  <!--订单支付-->
+  <view wx:if="{{payOrder}}">
+    <view class='order'>
+      <view class='orderList row'>
+        <view>
+          <text>订</text>
+          <text>单</text>
+          <text>号</text> </view>：
+        <view>{{orderNumber}}</view>
+      </view>
+      <view class='orderList row'>
+        <view>
+          <text>信</text>
+          <text>用</text>
+          <text>卡</text>
+          <text>号</text> </view>：
+        <view>{{cardId}}</view>
+      </view>
+
+      <view class='orderList row'>
+        <view>
+          <text>申</text>
+          <text>请</text>
+          <text>金</text>
+          <text>额</text> </view>：
+        <view>{{quota}}</view>
+      </view>
+
+      <view class='orderList row'>
+        <view>
+          <text>手</text>
+          <text>续</text>
+          <text>费</text> </view>：
+        <view>{{poundaqe}}</view>
+      </view>
+    </view>
+    <button class='sureOrder' catchtap='sureOrder'>确认</button>
+  </view>
+</view>
+
+<!--验证码发送区-->
+<view class='msg pos-r' wx:if="{{show}}">
+  <view class='msg-mask'>
+    <view style='width:100%; margin-top:40rpx; font-size:34rpx; font-weight:bold; text-align:center;'>选择支付方式</view>
+    <view class='choose_wrapper row'>
+      <view class='chooseItem col'>
+        <view class='choosed {{choose===true?"wallet":""}}' catchtap='choose' data-method="wallet">
+          <image src="../../images/wallet/t.png"></image>
+          <text>钱包支付</text>
+        </view>
+      </view>
+      <view class='chooseItem '>
+        <view class='choosed column'>
+          <view class='choosed {{choose===false?"kj":""}}' catchtap='choose' data-method="kj">
+            <image src="../../images/wallet/p.png"></image>
+            <text>快捷支付</text>
+          </view>
+        </view>
+      </view>
+      <image class='close' catchtap='close' src='../../images/index/close.png'></image>
+    </view>
+    <view class='row'>
+      <button class='pay_method' catchtap='pay_cancel'>取消</button>
+      <button class='pay_method' catchtap='pay_sure' disabled='{{pay_disable}}'>支付</button>
+    </view>
+  </view>
+</view>
+
+<!-- //状态弹窗 
+<view class='popup' wx:if="{{popup_state}}">
+  <view class='tips_wrapper'>
+    <view class='tips_title'>提示</view>
+    <view class='tips_content'>{{tips_content}}</view>
+  </view>
+</view> -->
+
+<!--扣款验证码-->
+
+<view class='msg' wx:if="{{msg_state}}">
+  <view class='msg-mask'>
+    <view class='title'>扣款验证码</view>
+    <view class='row' style='width:90%;margin:0 auto; border-bottom:2rpx solid #ccc;'>
+      <text class='CODE'>扣款验证码：</text>
+      <input maxlength='6' type='number' bindinput='CODE' value='{{Code}}' class='kCode' placeholder='扣款验证码'></input>
+    </view>
+    <view class='row'>
+      <button class='btn' catchtap='msg_cancel'>取消</button>
+      <button class='btn' catchtap='msg_sure' disabled='{{msg_disable}}'>确认</button>
+    </view>
+  </view>
+</view>

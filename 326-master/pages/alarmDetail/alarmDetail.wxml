@@ -1,0 +1,91 @@
+<import src="/template/listStyle.wxml" />
+<view class='container'>
+<!--top str -->
+  <view class='h8 flexBetw Skin pdr1 pdl1 borderD'>
+    <image class='imgxs15' src='/images/back.png' bindtap='alarmPage'></image>
+    <view class='flex'>
+      当月告警
+    </view>
+    <view></view>
+  </view>
+<!--top end -->
+<!--nav str  -->
+  <view class='bgColorFE pd05 flex flexCenter h20'>
+    <view class='mr1 cir' style='min-width:100px;min-height:100px;'>
+      <view class='ecBar'>
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+      </view>
+    </view>
+    <view class='flexColumn flex1'>
+        <view class='flex pt01 color3'>
+          <view>未处理：</view>
+          <view class='width3'>{{noHandleCount}} </view>
+          <view>{{noHandleCountPer == 'NaN'?'0':noHandleCountPer}}%</view>
+        </view>
+        <view class='flex color6 pt01'>
+          <view>已处理：</view>
+          <view class='width3'>{{handleCount}}</view>
+          <view> {{handleCountPer == 'NaN'?'0':handleCountPer}}%</view>
+        </view>
+    </view>
+  </view>
+  <view class=''>
+      <!--top-->
+  <view class='bg256 pdr1 pdl1 borderD'>
+    <view class='flex'>
+      本月告警趋势图
+    </view>
+  </view>
+  <!--nav-->
+  <view class='dayNavMax flex tab-left pab05' bindtap="tabFun">
+        <button  bindtap="levelto"   class="{{tabBox.tabArr1.curHdIndex=='0'? 'active' : ''}} font075" data-id="0">告警</button>
+        <button  bindtap="levelto" class="{{tabBox.tabArr1.curHdIndex=='1'? 'active' : ''}} font075" data-id="1">错误</button>
+        <button  bindtap="levelto" class="{{tabBox.tabArr1.curHdIndex=='2'? 'active' : ''}} font075" data-id="2">故障</button>
+  </view>
+    <!--top-->
+  <view class='bg256 pdr1 pdl1 borderD'>
+    <view class='flex flexS'>
+      <view>当月告警数:</view>
+      <view class='color0'>{{Count}}</view>
+    </view>
+  </view>
+ <!--图表 -->
+  <view class='mainCharData flexColumn flexv1 modeldrawer_content h12r cir'>
+    <view class='ecBar'>
+      <ec-canvas id="mychart-dom-bar1" canvas-id="mychart-bar1" ec="{{ ec1 }}"></ec-canvas>
+    </view>
+  </view>
+    <!--top str -->
+  <view class='bg256 pdr1 pdl1 borderD'>
+    <view class='flex'>
+      本月告警设备次数排名:
+    </view>
+  </view>
+<!--top end -->
+<!--排名 -->
+<view  class='flexv1 modeldrawer_content'>
+  <view class="list bg256 borderE flexColumn justi" >  
+      <view class='listPar flex width100 borderB'  wx:for="{{WarningCountRank}}" wx:for-index="index" wx:for-item="WarningCountRank">
+        <image class='imgxs15 mr03' src="/images/{{index==0?'topone.png':index==1?'toptwo.png':index==2?'topthree.png':index==3?'topfour.png':'topfive.png'}}"></image>
+        <view class="flexColumn">
+            <view> 
+              <view>{{WarningCountRank.sn}}</view>
+            </view>
+            <view class='flex'>
+              <view class="mr1">{{WarningCountRank.pn}}</view>
+            </view>
+            <view> 
+              <view>{{WarningCountRank.usr?WarningCountRank.usr:WarningCountRank.uid?WarningCountRank.uid:WarningCountRank.pn}}</view>
+            </view>
+            <view> 
+            </view>
+          </view>
+          <view class='lisNum flexCenter'>{{WarningCountRank.count}}</view>
+        </view>
+      </view>
+    </view> 
+<!--用户列表end --> 
+  </view>
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- mybits半自动化配置实现IEquipmentDao CRUD操作 -->
+<mapper namespace="com.javen.dao.IEquipmentDao" >
+
+  <!-- 查询字段结果集 -->
+  <resultMap id="BaseResultMap" type="com.javen.model.Equipment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="equip_id" property="equip_id" jdbcType="VARCHAR" />
+    <result column="user_id" property="user_id" jdbcType="VARCHAR" />
+    <result column="location_nl" property="location_nl" jdbcType="VARCHAR" />
+    <result column="location_el" property="location_el" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, equip_id, user_id, location_nl, location_el, description, state
+  </sql>
+  
+  <!-- 获取所有车位设备接口 -->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.javen.model.Equipment" >
+    select
+    <include refid="Base_Column_List" />
+    from comm_equipments
+  </select>
+  
+  <!-- 确认预约车位 -->
+  <update id="updateByEquipId" parameterType="com.javen.model.Equipment">
+    update comm_equipments
+    set state = #{state,jdbcType=INTEGER}
+    where equip_id = #{equip_id,jdbcType=VARCHAR}
+  </update>
+  
+    
+</mapper>

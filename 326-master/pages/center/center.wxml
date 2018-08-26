@@ -1,0 +1,60 @@
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<!--top  str-->
+     <!--电站列表str  -->
+<view class="list Skin" bindtap='CenterModi'>
+      <view class='listImg mAb'>
+        <image class="imgL br50"src="{{AccountInfo.photo?AccountInfo.photo:'/images/userW.png'}}"></image>
+      </view>
+      <view class='.listPar'>
+        <view class="flexColumn">
+        <view>{{qname==''?AccountInfo.usr:qname}}</view>
+        <view>电站业主</view>
+      <view>
+    </view>
+  </view>
+</view>
+ <image class="imgxxs"src="/images/next.png"></image> 
+</view> 
+   <!--nav  -->
+  <view class='powerLisThir flexBetw padding02 borderB'>
+    <template is="listNav" data="{{listNavData: listNavData}}"/>
+  </view>
+   <!--list -->
+   <template is="listOne" data="{{listOne: listOne[0]}}"/>
+   <template is="listOne" data="{{listOne: listOne[1]}}"/>
+ <!--绑定  str-->
+    <view class='flexBetw bgColor0 borderB pd05 h8' >
+    <view class='flexCenter '>
+      <image class="imgxs"src="/images/bindwx.png"></image>
+      绑定微信（{{isCheck}}）
+    </view> 
+   
+    <view class='overhiden' wx:if="{{wxCheckbind}}" bindtap='offWechart'>
+      <switch checked />
+    </view>
+    
+    <view class='overhiden' wx:if="{{wxCheck}}">
+      <button class='btnNone'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+        <switch/>
+      </button>
+    </view>
+    </view>   
+
+    <!-- <template is="listOne" data="{{listOne: listOne[2]}}"  wx:if="{{wxNoCheckbind}}"/> -->
+
+    <view class='bgColor0 borderB pd05 h8'  wx:if="{{wxCheckbind}}">
+      <button class='btnNone width100 h100 flexBetw' open-type="share">
+        <view class='flexCenter'>
+          <image class="imgxs"src="/images/rank.png"></image>
+          <view class='color9 font08'>群排名</view>
+        </view>
+      <image class="imgxxs"src="/images/arrow_unexpanded.png"></image> 
+      </button>
+    </view>  
+    <!--绑定  end-->
+   <view class='flexCenter bg256 pd1 fontSkin h8' bindtap='logOut'>退出当前账号</view>
+   <template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

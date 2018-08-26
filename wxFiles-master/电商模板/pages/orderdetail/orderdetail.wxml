@@ -1,0 +1,72 @@
+<view class="padding-md">
+  <view class='status {{order.orderType == 1 ? "bg1":""}}{{order.orderType == 2 ? "bg2":""}}{{order.orderType == 3 ? "bg3":""}}{{order.orderType == 4 ? "bg4":""}} panel-between item-center'>
+    <view class='bold font-36'>{{order.orderType == 1 ? "待付款":""}}{{order.orderType == 2 ? "待发货":""}}{{order.orderType == 3 ? "待收货":""}}{{order.orderType == 4 ? "已完成":""}}</view>
+    <view class=''>{{order.createTime}}</view>
+  </view>
+</view>
+<view class='panel panel-start item-center'>
+  <image src='/img/l3.png' class='icon-xl'></image>
+  <view class='margin-left-md' style='width:600rpx;'>
+    <view class='bold'>{{order.address.userName}}，{{order.address.telNumber}}</view>
+    <view>{{order.address.provinceName+' '+order.address.cityName+' '+order.address.countyName+' '+order.address.detailInfo}}</view>
+  </view>
+</view>
+<image class='imline' src='/img/line.png'></image>
+
+<view class='panel margin-top-sm bottom-line'>
+  <view class='bg-default panel-between bog' wx:for="{{order.orderItemModels}}" data-id='{{item.commodityId}}'  bindtap='navToShop'>
+    <view class='panel-start'>
+      <image src="{{ip+item.imagePath}}" class='gimg'></image>
+      <view class='margin-left-md bgsd'>
+        <view class='bold'>{{item.commodityName}}</view>
+        <view class='margin-top-sm'>{{item.specificationName}}</view>
+      </view>
+    </view>
+    <view style='text-align:right'>
+      <view class='font-danger bold'>￥{{item.itemPrice/item.itemCount}}</view>
+      <view>x{{item.itemCount}}</view>
+    </view>
+  </view>
+</view>
+<view class='panel panel-between' style='padding-bottom:0'>
+  <view>运费</view>
+  <view>￥{{order.mailPrice}}</view>
+</view>
+<view class='panel panel-between' >
+  <view class='bold'>需付款</view>
+  <view class='bold font-lg font-danger'>￥{{order.payPrice}}</view>
+</view>
+<view class='panel panel-between margin-top-sm bottom-line' >
+  <view class=''>订单编号</view>
+  <view class=' font-lg'>{{order.orderTag}}</view>
+</view>
+<view class='panel panel-between ' wx:if="{{order.logisticsTag}}">
+  <view class=''>物流编号</view>
+  <view class=' font-lg'>{{order.logisticsTag}}</view>
+</view>
+<view class='padding-md' wx:if="{{logistics}}">
+  物流信息
+</view>
+<view style='background:#fff;padding:15rpx 30rpx;' wx:for="{{logistics.Traces}}">
+  <view class='panel-start'>
+    <view style='width:120rpx;text-align:center' class='font-22'>{{item.AcceptTime}}</view>
+    <view class='margin-left-sm margin-right-sm' style='width:50rpx;text-align:center'><icon type='success' size='{{index==0? "15":"10"}}' color='{{index == 0? "#ff9900":"#d1d1d1"}}'></icon></view>
+    <view style='width:450rpx;font-size:28rpx'>
+      {{item.AcceptStation}}
+    </view>
+  </view>
+</view>
+<view wx:if="{{version == 2}}" style='padding:50rpx;text-align:center'>请主动联系商家付款哦！！！</view>
+
+<view class="fixbottom panel-between item-center">
+  <view class='margin-left-md panel-start item-center'  bindtap='takeTojq'>
+    <image src='/img/wex.png' style='width:50rpx;height:50rpx'></image>
+    <view class='margin-left-xs'>{{wxnumber}}</view>
+  </view>
+  <view class='panel-end'>
+    <button class='cb' open-type='contact' wx:if="{{order.orderType != 3}}">联系客服</button>
+    <button class='cr'  wx:if="{{version == 2 && order.orderType == 1}}" bindtap='exist'>给店家打款</button>
+    <button class='cf'  wx:if="{{version == 1 && order.orderType == 1}}" bindtap='pay'>立即付款</button>
+    <button class='bg3' wx:if="{{order.orderType == 3}}" bindtap='receive'>确认收货</button>
+  </view>
+</view>

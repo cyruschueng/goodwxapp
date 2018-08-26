@@ -1,0 +1,76 @@
+<!--pages/index/dining-room/dining-room.wxml-->
+<import src="dining-room-tiem/dining-room-tiem-template.wxml" />
+<scroll-view scroll-y="{{isScroll}}">
+
+  <view class='modal_box' wx:if="{{ismodel}}" catchtap='closemodel'>
+    <!-- 附近 、美食、综合排序 -->
+    <view class='white_box'>
+      <view class='sonNavigation'>
+        <view class='Navigation_data' catchtap="nearby">
+          <text>附近</text>
+          <image class='Navigation_img' src='/images/icon/restaurant_arrow.png'></image>
+        </view>
+        <view class='Navigation_data' catchtap="goodfood">
+          <text>美食</text>
+          <image class='Navigation_img' src='/images/icon/restaurant_arrow.png'></image>
+        </view>
+        <view class='Navigation_data' catchtap="sorting">
+          <text>综合排序</text>
+          <image class='Navigation_img' src='/images/icon/restaurant_arrow.png'></image>
+        </view>
+      </view>
+
+      <view class='nearby' wx:if="{{isnearby}}">
+        <view class='options' wx:for="{{nearbydatas}}" wx:key="{{index}}" bindtap='clicknearby' id="{{index}}">
+          {{item}}
+        </view>
+      </view>
+      <view class='food' wx:if="{{isfood}}">
+        <view class='options' wx:for="{{fooddatas}}" wx:key="{{index}}" bindtap='clickfood' id="{{index}}">
+          {{item}}
+        </view>
+      </view>
+      <view class='sorting' wx:if="{{issorting}}">
+        <view class='options' wx:for="{{sortingdatas}}" wx:key="{{index}}" bindtap='clicksorting' id="{{index}}">
+          {{item}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class='page_row'>
+    <view class='dining_top'>
+      <view class="search" bindtap="seekTap">
+        <view class="search_arr">
+          <icon class="searchcion" size='20' type='search' catchtap="onSearchInp"></icon>
+          <input class='inputs' placeholder="搜索商品" bindinput="onInputText" bindconfirm="onSearchInp" value='{{searchValue}}'/>
+        </view>
+      </view>
+      <view class='sonNavigation'>
+        <view class='Navigation_data' id='1' catchtap='openmodel'>
+          <text>附近</text>
+          <image class='Navigation_img' src='/images/icon/restaurant_arrow.png'></image>
+        </view>
+        <view class='Navigation_data' id='2' catchtap='openmodel'>
+          <text>美食</text>
+          <image class='Navigation_img' src='/images/icon/restaurant_arrow.png'></image>
+        </view>
+        <view class='Navigation_data' id='3' catchtap='openmodel'>
+          <text>综合排序</text>
+          <image class='Navigation_img' src='/images/icon/restaurant_arrow.png'></image>
+        </view>
+      </view>
+    </view>
+    <!-- 商家 -->
+    <block wx:for="{{posts_key}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+      <template is="tpeMerchant" data="{{item}}" />
+    </block>
+    <block wx:if="{{posts_key.length<1}}">
+      <view class='withouttishiWrap'>
+        <image class='withouttishi' src='/images/icon/zhanweitu.png'></image>
+      </view>
+      <view class='withoutText'>*^＠^* 暂无此商家</view>
+    </block>
+  </view>
+</scroll-view>

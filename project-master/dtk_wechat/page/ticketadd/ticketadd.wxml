@@ -1,0 +1,80 @@
+<view class="container"  >
+  <view class="containerBox">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="section-box">
+        <image class="section-box-image" src="../../image/title.png"></image>
+        <view class="add-title">基础信息</view>
+        <view class="section" style="border:0;">
+          <view class="section__title">汇票类型：</view>
+            <picker class="picker" bindchange="bindChange" value="{{index}}"  range="{{array}}" range-key="name">
+              <view>{{array[index].name}}</view>
+          </picker>
+        </view>
+        <view class="section money">
+          <view class="section__title">总金额：</view>
+            <input type="number" class="weui-input section-mian " name="draft_value" placeholder="请输入金额(万元)" value="{{all}}" bindinput="sumchange"/>
+            <text class="moneytext">万元</text>
+        </view>
+        <view class="section money">
+          <view class="section__title">汇票张数：</view>
+            <input type="number" class="weui-input section-mian " name="draft_count" placeholder="请输入汇票张数" value="{{quantity}}" bindinput="quantitychange"/>
+            <text class="moneytext">张</text>
+        </view>
+        <view class="section">
+          <view class="section__title">到期日期：</view>
+          <picker class="section-mian" mode="date" value="{{stardate}}"  bindchange="bindStartDateChange" name="draft_end_date">
+              <view class="weui-input">{{stardate}}</view>
+          </picker>
+        </view>
+        <view class="section money">
+          <view class="section__title">售价：</view>
+            <input type="number" class="weui-input section-mian " name="sell_price" placeholder="面议" value="{{sumMoney}}"/>
+            <view class="calicon moneytext" catchtap="toCalculator" style="z-index:999;">
+              <image src="../../image/calculator.png"></image>
+            </view>
+        </view>
+        <view class="section money">
+          <view class="section__title">承兑人：</view>
+            <input class="weui-input section-mian " name="acceptance" placeholder="请输入承兑人" />
+        </view>
+        <view class="section money">
+          <view class="section__title">交易地点：</view>
+            <input class="weui-input section-mian " name="address" placeholder="请输入交易地点" />
+        </view>
+        <view class="section">
+          <view class="section__title">上传图片：</view>
+          <text class="picright" catchtap="business_license_pic">点击上传</text>
+        </view>
+        <view class="sectionpic clearfix" wx:if="{{picslocal.length > 0}}">
+          <view class="pic"  wx:for="{{picslocal}}"><image  src="{{item}}" ></image><view class="picslocalDelete" data-picslocalbox="{{item}}"  ontap="picslocalDelete" ><image src="{{imgdelete}}"></image></view></view>
+        </view>
+      </view>
+      <view class="prompt">小贴士：选择图片->预览->编辑，即可对敏感信息打码</view>
+      <view class="section-box">
+        <image class="section-box-image" src="../../image/title.png"></image>
+        <view class="add-title">标签信息</view>
+        <view>
+          <view class="lable-main searchList clearfix {{labelView?'label_show':'label_hide'}}">
+            <view class="lable-list" wx:for="{{todolabels}}" wx:for-item="label" style="position:relative">
+              <view id="label-item-name-{{label.id}}" class="todo-text">
+                    <text class="labelText">{{label.label_name}}</text>
+                    <view class="labeldelete" id="label-del-item-{{label.id}}" bindtap="clearLabelSingle">
+                      <image style="width:20rpx; height:20rpx;" src="{{imgdelete}}"></image>
+                    </view>
+                </view>
+            </view>
+          </view>
+          <view class="section-box" style="padding:0;margin:0">
+            <view class="section sectionbottom" style=" border-top:0;">
+                <input  class="weui-input section-mian" name="label_name" placeholder="请输入标签名称" bindinput="bindLabelName" value="{{label_name}}" />
+                <button class="orangebutton" type="warn"  bindtap="addLabel" size="mini" plain="true">添加</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="btn-area">
+        <button type="red" formType="submit" disabled="{{disabled}}">提交</button>
+      </view>
+    </form>
+  </view>
+</view>

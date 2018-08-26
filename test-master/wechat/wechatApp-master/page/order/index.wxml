@@ -1,0 +1,22 @@
+<view class="order">全部订单</view>
+<view class="order_ul">
+
+  <view class="order_li" wx:for-items="{{OrderList}}" data-id="{{item.id}}" data-orderStatus="{{item.orderStatus}}" wx:key="{{index}}" catchtap="gominiDetail">
+    <view class="order-message-top">
+      <text>订单信息 ></text>
+      <text class="icon_money"></text>
+      <text class="num">¥{{item.totalMoney}}</text>
+    </view>
+    <view class="order-message-bottom">
+      <view class="t1">订单类型：{{item.type == 1 ? '会员订单':''}}{{item.type == 2 ? '门店订单':''}}{{item.type == 3 ? '结账总订单':''}}{{item.type == 4 ? '团购订单':''}}</view>
+      <view class="t1">订单编号：{{item.id}}</view>
+      <view class="t1">下单时间：{{item.createdDate}}</view>
+
+      <image  src="https://lingju360.natappvip.cc/miniapp/resources/image/order/order_status_{{item.orderStatus}}.png"></image> 
+      <!-- <image wx:if="{{item.orderStatus == 1}}" src="https://lingju360.natappvip.cc/member/resources/images/order/order_status_1.png"></image>
+      <image wx:if="{{item.orderStatus == 2}}" src="https://lingju360.natappvip.cc/member/resources/images/order/order_status_2.png"></image> -->
+    </view>
+  </view>
+
+
+</view>

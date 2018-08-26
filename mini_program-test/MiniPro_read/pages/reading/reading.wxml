@@ -1,0 +1,82 @@
+<!-- wxml -->
+<!--封面页-->
+<view class="pages">
+    <view class="preview_wrap {{coverFlag?'':'hidden'}}">
+        <image class="preview_bg" src="../../images/library/preview_bg.png"></image>
+        <image class="up_fenge" src="../../images/library/fenge_double.png"></image>
+        <view class="book_name"><view>{{bookData.book_name}}</view></view>
+        <image class="preview_img" src="{{book_pic}}"></image>
+        <image class="down_fenge" src="../../images/library/fenge_double.png"></image>
+        <view class="author">
+            <text wx:if="{{bookData.author}}" class="block">Written by {{bookData.author}}</text>
+            <text wx:if="{{bookData.illustrator}}" class="block">Illustrated by {{bookData.illustrator}}</text>
+        </view>
+        <view class="btn-box">
+            <image class="btn_start" src="../../images/library/button_start.png" bindtap="startRead"></image>
+            <image class="btn_rank" src="../../images/library/button_rank.png" bindtap="toRank"></image>
+        </view>
+    </view>
+    <view class="page_wrap">
+        <view class="bookpages {{coverFlag?'hidden':''}}">
+            <view class="{{bookData.cid<=9?'scroll-box':'hidden'}} hidden">
+                <view class="scroll-btn" style="width: {{scrbtnWidth}}rpx;left:{{scrboxLeft}}rpx;">
+                </view>
+            </view>
+            <swiper indicator-dots="{{indicatorDots}}" bindchange="pageChange"
+                    autoplay="{{autoplay}}" interval="2000" current="{{currentPage}}" duration="250" class="bookpage_wrap">
+                <block wx:for="{{pageData}}" data-item="{{item}}" wx:for-index="b_ind">
+                    <swiper-item class="bookpage">
+                        <image class="bg" src="../../images/library/preview_bg.png"></image>
+                        <image class="page_img" src="{{item.pic_path}}" lazy-load="true"></image>
+                        <text class="pageContent">{{item.page_content}}</text>
+                        <text class="pIndex">{{b_ind+1}}/{{pageNum}}</text>
+                    </swiper-item>
+                </block>
+            </swiper>
+            <scroll-view scroll-x class="star-box" upper-threshold="5" lower-threshold="5" scroll-left="{{scrLeft}}" bindscroll="starScroll" bindscrolltolower="scrollLower" bindscrolltoupper="scrollUpper">
+                <view class="stars">
+                    <view wx:for="{{pageData}}" data-item="{{item}}" wx:for-index="ind" data-page="{{ind}}" bindtap="goPage" class="star_wrap">
+                        <!--<view>-->
+                            <image class="star_bg" src="{{ind==page?'../../images/library/Star_BG_current.png':'../../images/library/Star_BG.png'}}"></image>
+                            <image class="star" wx:if="{{scoreArr[ind].flag}}" src="../../images/library/Star.png"></image>
+                            <view>{{scoreArr[ind].score}}</view>
+                        <!--</view>-->
+                        <!--<image src="../../images/library/Star.png"></image>-->
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="control-box">
+                <image class="audio" bindtap="audioPlay" src="{{audioStatus?'../../images/library/button_pause.png':'../../images/library/button_play.png'}}"></image>
+                <view class="speak-box" bindtouchstart="startRecode" bindtouchend="endRecode">
+                    <image class="speak" src="{{!speaking?'../../images/library/button_read.png':'../../images/library/button_reading.png'}}"></image>
+                </view>
+                <!--<view class="messageBtn" bindtouchstart="startRecode" bindtouchend="endRecode"></view>-->
+                <view wx:if="{{bookData.cid<=9}}" class="submit-box" bindtap="addScore">
+                    <image class="submit" src="{{canSubmit?'../../images/library/button_submit.png':'../../images/library/button_unsubmit.png'}}"></image>
+                </view>
+            </view>
+            <image wx:if="{{speaking}}" class="recording_icon" src="../../images/library/recording.png"></image>
+            <view class="animation_wrap {{scoreAni?'':'hidden'}}">
+                <view class="score-box star_fade">
+                <!--<view class="score-box {{scoreAni?'star_fade':'hidden'}}">-->
+                    <image class="bg {{scoreAni?'scoreAni':'hidden'}}" src="../../images/icon/s_circleBg.png"></image>
+                    <image class="score_bg" src="../../images/icon/s_bg.png"></image>
+                    <text class="{{isIp5?'i5':''}}">{{endScore}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
+    <view class="sub_bg" wx:if="{{sub_bg}}"></view>
+    <audio src="{{lowSrc}}" id="lowAudio"></audio>
+    <audio src="{{highSrc}}" id="highAudio"></audio>
+    <audio src="{{resultSrc}}" id="resultAudio"></audio>
+    <!--<view animation="{{animation}}" class="animation-box {{animationStatus?'star_fade':'hidden'}}">-->
+    <view class="animation_wrap {{animationStatus?'':'hidden'}}">
+        <view class="animation-box star_fade">
+            <image src="../../images/icon/scoreStar.png"></image>
+            <text class="{{isIp5?'ip5':'ip'}}">{{pageScore}}</text>
+        </view>
+    </view>
+    <!--{{animationStatus?'star_fade':'hidden'}}-->
+</view>

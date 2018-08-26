@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>分销规则列表</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+		<!--common scripts for all pages-->
+		<script src="js/layer.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/select2.min.js"></script>
+		
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+
+		<section>
+			<!--body wrapper start-->
+			<section>
+				<!-- page start-->
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								分销规则列表
+							</header>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form" id="condition">
+									<div class="row clearfix">
+										<div class="row" style="height: 14px;"></div>
+										<div class="row">
+											<div class="col-lg-1" style="text-align: right;">
+												渠道：
+											</div>
+											<div class="col-lg-3" style="text-align: right;">
+												<select class="form-control m-bot15 formData" id="channel">
+													<option value="0">全部</option>
+												</select>
+											</div>
+											<div class="col-lg-1" style="text-align: right;">
+												<span>规则名称：</span>
+											</div>
+											<div class="col-lg-3" style="text-align: right;">
+												<input id="RuleName" name="RuleName" type="text" class="form-control formData">
+											</div>
+										</div>
+										<div class="row" style="height: 14px;"></div>
+										<div class="row" style="height: 14px;">
+											<div class="col-lg-9" style="text-align: right;"></div>
+											<div class="col-lg-1" style="text-align: center;"><button class="btn btn-info" onclick="initSearch('#1')" type="button">搜索</button></div>
+											<div class="col-lg-1" style="text-align: center;"><button class="btn btn-success" onclick="window.location.href='Distribution.html?action=add'" type="button">添加</button></div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</section>
+						<section class="panel">
+							<div class="panel-body">
+								<table id='goodstable' class="table table-bordered table-striped table-condensed ysh_table">
+									<thead>
+										<tr>
+											<th data-width="8%" data-field="Code" data-align="center">规则名称</th>
+											<th data-width="8%" data-field="Code" data-align="center">创建者</th>
+											<th data-width='121px' data-field="pic" data-align="center">总分润比例</th>
+											<th data-width="10%" data-align="center">平台分润比例</th>
+											<th data-width="10%" data-align="center">招商分润比例</th>
+											<th data-width="10%" data-align="center">一级销售分润比例</th>
+											<th data-width="10%" data-align="center">二级销售分润比例</th>
+											<th data-width='300px' data-align="center">店铺分润比例</th>
+											<th data-width='300px' data-align="center">所属渠道</th>
+											<th data-width='300px' data-align="center">操作</th>
+										</tr>
+									</thead>
+									<tbody id="view">
+
+									</tbody>
+								</table>
+								<div class="row">
+									<div class="col-lg-4">
+										<div style="height: 30px;">总共<span id="pageTotal"></span>页，<span id="itemTotal"></span>条记录，每页显示10条</div>
+									</div>
+									<div class="col-lg-7" style="text-align: right;">
+										<ul class="pagination pagination-lg" id="paginator">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+		</section>
+	</body>
+
+</html>
+<script src="js/layer.js"></script>
+<script src="js/laytpl.js"></script>
+<script src="js/ysh_comm.js"></script>
+<script src="script/DistributionList.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('select').select2();
+	})
+</script>
+<script type="text/html" id="tpl">
+	<tr>
+		<td>{{d.RuleName||"匿名规则"}}</td>
+		<td>{{d.CreatUserName||"匿名用户"}}</td>
+		<td>{{d.TotalProfit||"0"}}%</td>
+		<td>{{d.ManagersProfit||"0"}}%</td>
+		<td>{{d.InvestmentProfit||"0"}}%</td>
+		<td>{{d.FirstDistributionProfit||"0"}}%</td>
+		<td>{{d.DistributionProfit||"0"}}%</td>
+		<td>{{d.StoreProfit||"0"}}%</td>
+		<td>{{d.ChannelName||"未知渠道"}}</td>
+		<td>
+			<button class="btn btn-success" onclick="window.location.href='Distribution.html?ruleId={{d.Id}}&action=search'" type="button">查看规则</button>
+			<button class="btn btn-warning" onclick="window.location.href='Distribution.html?ruleId={{d.Id}}&action=editor'" type="button">编辑规则</button>
+			<button class="btn btn-danger" onclick="deleteRule({{d.Id}})" type="button" Id={{d.Id}}>删除规则</button>
+		</td>
+	</tr>
+</script>

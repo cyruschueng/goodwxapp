@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="example">
+    <select v-model="prov">
+        <option v-for="option in arr" :value="option.name">
+            {{ option.name }}
+        </option>
+    </select>
+    <select v-model="city">
+        <option v-for="option in cityArr" :value="option.name">
+            {{ option.name }}
+        </option>
+    </select>
+    <select v-model="district" v-if="district">
+        <option v-for="option in districtArr" :value="option.name">
+            {{ option.name }}
+        </option>
+    </select>
+</div>
+	
+</body>
+</html>
+<!-- https://www.cnblogs.com/zhishaofei/p/6964673.html -->
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script src="all_area.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#example',
+        data: {
+            arr: arrAll,
+            prov: '北京',
+            city: '北京',
+            district: '东城区',
+            cityArr: [],
+            districtArr: []
+        },
+        methods: {
+            updateCity: function () {
+                for (var i in this.arr) {
+                    var obj = this.arr[i];
+                    if (obj.name == this.prov) {
+                        this.cityArr = obj.sub;
+                        break;
+                    }
+                }
+                this.city = this.cityArr[1].name;
+            },
+            updateDistrict: function () {
+                for (var i in this.cityArr) {
+                    var obj = this.cityArr[i];
+                    if (obj.name == this.city) {
+                        this.districtArr = obj.sub;
+                        break;
+                    }
+                }
+                if(this.districtArr && this.districtArr.length > 0 && this.districtArr[1].name) {
+                    this.district = this.districtArr[1].name;
+                } else {
+                    this.district = '';
+                }
+            }
+        },
+        beforeMount: function () {
+            this.updateCity();
+            this.updateDistrict();
+        },
+        watch: {
+            prov: function () {
+                this.updateCity();
+                this.updateDistrict();
+            },
+            city: function () {
+                this.updateDistrict();
+            }
+        }
+    })
+</script>
+
+
+
+
+

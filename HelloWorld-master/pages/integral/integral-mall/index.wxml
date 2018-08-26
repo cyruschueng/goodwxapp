@@ -1,0 +1,56 @@
+<!--pages/integral-mall/index.wxml-->
+<block wx:if='{{isLoading}}'>
+    <view class="linght tc" style='margin-top:45%;' hidden="{{!isLoading}}">
+        <text class="loading-icon mr10 f18"></text>
+        <text>正在加载中...</text>
+    </view>
+</block>
+
+<block wx:else>
+    <view class="integral-box">
+        <view>
+            <view class="integral-num">
+                <text class="integral-number mr5">{{score}}</text>积分
+            </view>
+            <view class="integral-detail">
+              <text catchtap='onNavigateTap' data-url='../integral-detail/index'>积分明细</text>
+              <text class='integral-tit'>|</text>
+              <text catchtap='onNavigateTap' data-url='../integral-info/index'>如何获取积分</text>
+            </view>
+        </view>
+        <button class="exchange-record" catchtap='onNavigateTap' data-url='../integral-record/index'>兑换记录</button>
+    </view>
+
+    <view class="integral-mall">
+        <view class="integral-mall-tit gridXb">积分商城</view>
+
+        <view class="mall-box" wx:for='{{data}}' wx:key='{{item.id}}' catchtap='onNavigateTap' data-url='../integral-goods/index?id={{item.id}}'>
+            <view class="mall-item flex gridXb">
+                <view class="goods-img mr15">
+                    <image src="{{item.thumbnail}}" mode="aspectFill"></image>
+                </view>
+                <view class="sub flex flexC">
+                    <view class="sub">
+                        <view class="goods-name lineText2">{{item.title}}</view>
+                        <view class="goods-desc grey f12 lineText2">{{item.description}}</view>
+                        <view class="goods-integral f14 mt5">
+                            <text class="f18">{{item.sale_price}}</text>
+                            <text> 积分</text>
+                            <text class="ml10 delLine linght">￥{{item.market_price}}</text>
+                        </view>
+                    </view>
+                    <view>
+                        <!-- <button class="exchange-btn">兑换</button> -->
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class='nothing tc linght flex mt10 mb10' hidden="{{hasMore}}">
+            <text class="sub line mr10"></text>
+            <text>没有更多了</text>
+            <text class="sub line ml10"></text>
+        </view>
+
+    </view>
+</block>

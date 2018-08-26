@@ -1,0 +1,66 @@
+
+<view class="text-wrapper" hidden="{{!ifKeyboard}}">
+    <textarea class="textarea" bindinput="textInput" bindblur="getTextValue" value="{{textAreaVal}}" placeholder="{{placeholder}}"  placeholder-class="text-header-textarea-placeholder" maxlength="300" />
+    <view class="wordRemindTip">{{textLength}}/300</view>
+</view>
+
+<!--<view class="voice-wrapper" hidden="{{ifKeyboard}}">
+    <view hidden="{{ifStartRecord}}">
+        <image class="startRecord recordIcon" src="../../../images/startRecord.png" bindtap="startRecordEv"></image>
+        <view class="recordText" bindtap="startRecordEv">点击开始录音</view>
+    </view>
+    <view hidden="{{!ifRecording}}">
+        <image class="finishRecord recordIcon" src="../../../images/finishRecord.png" bindtap="finishRecordEv"></image>
+        <view class="recordText">{{recordingTime}} / 1:00</view>
+    </view>
+    <view class="playRecordIcon" hidden="{{!ifFinishRecord}}">
+        <view bindtap="playRecordEv">
+            <image class="playRecordBg" src="../../../images/playRecordBg.png"></image>
+            <image class="playRecordHorn" src="../../../images/playRecordHorn.png"></image>
+        </view>
+        <view class="playRecordTime">{{recordSeconds}}"</view>
+        <view class="reRecord" bindtap="reRecordEv">重录</view>
+    </view>
+</view>-->
+
+<view class="handleBtn">
+    <!--<image class="voice" hidden="{{!ifKeyboard}}" src="../../../images/voice.png" bindtap="changeInputState"></image>
+    <image class="keyboard" hidden="{{ifKeyboard}}" src="../../../images/keyboard.png" bindtap="changeInputState"></image>-->
+    <image class="addPics" src="../../../images/addPics.png" bindtap="uploadPic"></image>
+</view>
+
+<view class="img-wrapper" hidden="{{picPath.length == 0}}">
+    <block wx:for="{{picPath}}" wx:for-item="item" wx:key="{{index}}">
+        <view class="pic-item">
+            <image src="{{item}}"></image>
+            <icon type="clear" size="15" class="delete-btn" color="red" data-index="{{index}}" bindtap="deletePicEv"></icon>
+        </view>
+    </block>
+</view>
+<view class="rule-wrapper">
+    <view class="rule-btn" bindtap="showRule">查看规则</view>
+    <image class="rule-icon" bindtap="showRule" src="{{ifShowRule ? '../../../images/down.png' : '../../../images/up.png'}}"></image>
+</view>
+<view class="rule-detail-wrapper" hidden="{{ifShowRule}}">
+        <text class="rule-detail">
+        1.发起人塞钱进红包，提出问题，任何人都可以参与回答。
+        2.发起人选择满意的回答，被选中的回答者将平分红包70%的红包金额。
+        3.若48小时内无人帮助，则全额退款。
+        4.若48小时内没有选出满意答案，所有参与回答的达人平分70%的红包金额。
+        5.分享邀请到朋友的回答被采纳，分享者将平分30%红包奖励。
+        6.问答结束后仅需付1元查看全部结果，集得金额将平分给发起人和被采纳的回答者。
+        7.每个问题可以回答一次，问题结束后将无法参与回答。
+
+        免责声明：
+
+        “问技”相关回答仅为该答主在该领域下个人经验，意见或观点，不能被自动视为该答主供职单位/机构的意见或者观点，仅供用户参考所用。解答内容及答主个人观点不代表“问技”平台观点，“问技”平台对解答内容的正确的不予担保，对在“问技”平台之外进行的任何接洽行为的后果亦不承担责任。烦请您在使用“问技”前仔细阅读并确保完全理解以上声明的全部内容。请知悉，谢谢。
+        </text>
+</view>
+
+<form bindsubmit="publishEv" report-submit="true">
+    <button class="payMoney" form-type="submit" >提交</button>
+</form>
+
+<!--<button class="payMoney" bindtap="publishEv">提交</button>-->
+
+<view hidden="{{ifShowToast}}" class="toast">{{toastTitle}}</view> 

@@ -1,0 +1,21 @@
+<!--pages/user/myCode/myCode.wxml-->
+    <view class="head-yellow"></view>
+     <view class='head'>
+        <image class='head-img' src='{{userInfo.headImgUrl}}'></image>
+        <view class="headone">
+            <view class='name'>{{userInfo.nickName}}</view>
+            <!--<image src='{{userInfo.sex==1?"/images/sexman.png":"/images/sexwoman.png"}}'></image>-->
+            <view class="invitation">邀请总人数：{{userInfo.orders}}</view>
+        </view>
+    </view>
+<view class='content'>
+   
+     <view class='code'> 
+         <image bindlongtap='lookCode' data-url="{{userInfo.qrImg}}" src='{{userInfo.qrImg}}'></image> 
+        <!-- <image src='{{userInfo.qrImg|| "/images/testCode.jpg"}}'></image> -->
+     </view> 
+     <view class='tip'> 
+        <!-- 扫一扫上面的二维码图案，领取嘀嘀币     -->
+     </view> 
+    <button  open-type="share" lass="fanhui" >邀请好友</button>
+</view>

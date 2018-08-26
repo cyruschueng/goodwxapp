@@ -1,0 +1,105 @@
+<div ng-controller="expertDetailController">
+    <div loading="" ng-model="isLoading"></div>
+    <div class="container" when-scrolled="loadDefaultMore()" style="height: 600px; overflow: auto;">
+        <div class="row" style="padding-top: 15px;position: relative;">
+            <div class="col-xs-4 text-center" >
+                <div class="row">
+                    <div class="col-xs-12" style="padding-top:0px;padding-bottom:20px;">
+                        <img class="img-responsive" style="border-radius: 15px;" ng-src="{{details.imgUrl}}">
+                    </div>
+                    <div class="col-xs-12 text-center">
+                    <span se-expert-like
+                          ng-class="{true:'btn btn-xs btn-success',false:'btn btn-xs btn-default'}[details.userData.isLike]"
+                          style="margin-top:15px; padding:0 6px; font-size:11px;"
+                          data-fileId="{{details.expertId}}">
+                          <span ng-if="details.userData.isLike">已关注</span>
+                          <span ng-if="!details.userData.isLike">关注</span>
+                    </span>
+                    </div>
+                    <div class="col-xs-12 text-center" style="margin-top:15px;">
+                        <span ng-if="attention" ng-click="selectedExpert(details.expertType,details.nickName,details.expertId,details.headImgUrl)" class="btn btn-xs btn-info">我要提问</span>
+                        <span ng-if="!attention" se-show-dialog class="btn btn-xs btn-info">我要提问</span>
+                    </div>
+                    <div class="col-xs-12" style="margin-top:15px;">
+                    <span ng-model="isMyExpert"
+                          ng-click="setMyExpert(details.expertId,details.expertType)"
+                          ng-class="{true:'btn btn-xs btn-info',false:'btn btn-xs btn-default'}[isMyExpert==1]">
+                        设置我的专家</span>
+                    </div>
+                    <div class="col-xs-12" style="margin-top:15px;">
+                        <p  se-pay
+                           headImgUrl="{{details.headImgUrl}}"
+                           nickName="{{details.nickName}}"
+                           imgUrl="{{details.imgUrl}}"
+                           userName="{{details.uName}}"
+                           fromOpenId="{{details.userData.openId}}"
+                           toOpenId="{{details.openId}}"
+                           expertType="{{details.expertType}}">
+                            <img style="width:30px;" src="./imgs/qa/pay.png">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="h3 text-center text-info">家教智慧教育专家</div>
+                <div class="text-center text-danger" style="padding-bottom:10px;">———— {{details.uName}} ————</div>
+                <div class="text-center" style="padding:10px 0;"><span class="badge" style="font-size:12px;">关注人数：{{details.likeNumber+' 人'}}</span> </div>
+                {{details.intro}}
+            </div>
+        </div>
+        <div class="row" >
+            <div class="page-header" style="margin-bottom:5px;">
+                <span style="font-weight: bold; font-size: 20px;">专家解答</span>
+            </div>
+        </div>
+        <div class="row" id="{{'commentWrap'+info.fileId}}" ng-repeat="item in items" style="padding-top:0px; padding-bottom:10px; margin-bottom: 10px; background-color: #eee; ">
+            <div class="col-xs-12" >
+                <div class="row">
+                    <div class="col-xs-12" style="padding-bottom:20px;">
+                        <div style="font-size:16px; color:#000; padding-top:10px;"><strong>{{item.question}}</strong></div>
+                        <div style="font-size:12px; color:#666;">{{item.nickName}} <span ng-hide="item.question==null">/</span> {{item.createDate|date:"yyyy-MM-dd"}}</div>
+                    </div>
+                    <div class="col-xs-12" style="padding-bottom:10px;">
+                        <div class="row">
+                            <div class="col-xs-2 text-center" style="padding-right:0;">
+                                <img ng-if="item.hotAns.expertType==0" class="img-circle" style="width:30px;" src="{{item.hotAns.headImgUrl}}">
+                                <img ng-if="item.hotAns.expertType!=0" class="img-circle" style="width:30px;" src="{{item.hotAns.imgUrl}}">
+                            </div>
+                            <div class="col-xs-10" style="padding-left:0;">
+                                <div style="font-size:12px; color:#666;">
+                                    <span ng-if="item.hotAns.expertType==0">{{item.hotAns.nickName}}</span>
+                                    <span ng-if="item.hotAns.expertType!=0">{{item.hotAns.uName}}</span>
+                                    <span >{{item.hotAns.nickName}}</span>
+
+                                    <span class="text-danger" ng-show="item.hotAns.expertType!=0" >专家</span>
+                                    <span>{{item.hotAns.answerDate|date:"yyyy-MM-dd"}}</span>
+                                </div>
+
+
+                                <div style="margin:15px 0;font-size:14px;" id="{{'fold'+item.hotAns.id}}" class="se-fold">
+                                    <div >{{item.hotAns.answer}}</div>
+                                </div>
+                                <div se-word-fold data-warp="{{'fold'+item.hotAns.id}}" ng-show="item.hotAns.answer.length>90" class="text-info">全文</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div ng-show="item.ans.length>0"><strong>其它回答</strong></div>
+                        <hr style="margin-top:5px; margin-bottom:10px;">
+                        <div style="padding-bottom:10px; border-bottom:1px solid #eee;" ng-repeat="m in item.ans">
+                            <div style="margin:15px 0;font-size:14px;" id="{{'foldsub'+m.id}}" class="se-fold">
+                                <div >{{m.answer}}</div>
+                            </div>
+                            <div style="font-size:12px;">
+                                <span ng-if="m.expertType==0">{{m.nickName}}</span>
+                                <span ng-if="m.expertType!=0">{{m.uName}}</span>
+                                <span>{{m.answerDate|date:"yyyy-MM-dd"}}</span>
+                            </div>
+                            <div se-word-fold data-warp="{{'foldsub'+m.id}}" ng-show="m.answer.length>90" class="text-info">全文</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

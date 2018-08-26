@@ -1,0 +1,26 @@
+<!--pages/chat/chat.wxml-->
+<scroll-view scroll-y style="height: 1000rpx;" scroll-top="{{scrollTop}}">
+<loading hidden="{{hidden}}">
+  小医生在诊断...
+ </loading>
+<block wx:for="{{msglist}}">
+    <view class='reply' wx:if="{{item.type==1}}">
+        <image class='rob_photo' src='../../images/女医生.png'></image>
+        <text class='reply_text' >{{item.msg}}</text>
+    </view>
+
+    <view class='send' wx:if="{{item.type==0}}">
+        <text class='send_text' >{{item.msg}}</text>
+        <image class='rob_photo' src='{{avatarUrl}}'></image>
+        
+    </view>
+</block>
+</scroll-view>
+
+
+<form bindsubmit='send'>
+    <view class='sendMsg'>
+        <textarea name='msg' class='inputMsg' value='{{inputVal}}'/>
+        <button form-type='submit' class='sendBtn' hover-class="button-hover">发送</button>
+    </view>
+</form>

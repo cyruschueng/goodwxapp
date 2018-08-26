@@ -1,0 +1,166 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="page">
+        
+  <!-- <view>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{swiper}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view> -->
+
+
+
+    <!-- <view class="page__title">
+        <view class="title">{{title}}</view>
+    </view> -->
+
+     <!-- <view class="page__bd">
+         <view class="art__content"> 
+              <rich-text wx:if="{{canIUseRichText}}" nodes="{{article}}" bindtap="tap"></rich-text>  
+              <template  is="wxParse" data="{{wxParseData:article.nodes}}"/>   
+         </view> 
+    </view>  -->
+     <view class="">
+        <view class="art__content" >
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+        </view>
+    </view>
+
+    <view class="your_choice" hidden="{{hiddenChoiceBtn}}">
+        <button wx:if="{{stepNext.left_id}}" catchtap="nextArticle" data-next_id="{{stepNext.left_id}}"  size="mini" type="warn">{{stepNext.left_name}}</button>
+        <button hidden="{{hiddenBackBtn}}" catchtap="backArticle" data-next_id="{{stepNext.right_id}}"   size="mini" >上一步</button>
+        <button wx:if="{{stepNext.right_id}}" catchtap="nextArticle" data-next_id="{{stepNext.right_id}}"   size="mini" type="warn">{{stepNext.right_name}}</button>   
+    </view>
+
+</view>
+
+<!-- 
+{
+	"1":
+	{
+	    "right_id":"10",
+	    "right_name":"玩王者荣耀",
+	    "left_id":"2",
+	    "left_name":"成为天下第一",
+        "2":
+        {
+			"right_id":"11",
+			"right_name":"拒绝",
+			"left_id":"3",
+			"left_name":"接收",
+			"3":
+			{
+				"right_id":"4",
+				"right_name":"逃跑",
+				"left_id":"12",
+				"left_name":"反抗",
+				"4":
+				{
+                    "right_id":"5",
+                    "right_name":"野区",
+                    "left_id":"13",
+                    "left_name":"河道",
+                    "5":
+                    {
+                        "right_id":"6",
+                        "right_name":"相信",
+                        "left_id":"14",
+                        "left_name":"不相信",
+                        "6":
+                        {
+                            "right_id":"7",
+                            "right_name":"救队友",
+                            "left_id":"15",
+                            "left_name":"不救",
+                            "7":
+                            {
+                               
+                            },
+                            "15":{}
+                        },
+                        "14":{}
+                    },
+                    "13":{}
+				},
+				"12":{}
+			},
+			"11":{}
+        },
+        "10":{}
+	}
+} 
+-->
+
+<!-- NO.1 -->
+<!-- {
+	"1":
+	{
+	    "right_id":"10",
+	    "right_name":"乱戳玩",
+	    "left_id":"2",
+	    "left_name":"好好学习",
+        "2":
+        {
+			"right_id":"11",
+			"right_name":"不去",
+			"left_id":"3",
+			"left_name":"去",
+			"3":
+			{
+				"right_id":"4",
+				"right_name":"再想想办法",
+				"left_id":"12",
+				"left_name":"跳炉",
+				"4":
+				{
+                    "right_id":"5",
+                    "right_name":"跑",
+                    "left_id":"13",
+                    "left_name":"不跑",
+                    "5":
+                    {
+                        "right_id":"6",
+                        "right_name":"报仇",
+                        "left_id":"14",
+                        "left_name":"继续怂",
+                        "6":
+                        {
+                            "right_id":"7",
+                            "right_name":"绕野区",
+                            "left_id":"15",
+                            "left_name":"正面冲",
+                            "7":
+                            {
+                                "right_id":"8",
+                                "right_name":"相信黑衣人",
+                                "left_id":"16",
+                                "left_name":"黑衣人是骗子",
+                                "8":
+                                {
+                                    "right_id":"9",
+                                    "right_name":"救队友",
+                                    "left_id":"17",
+                                    "left_name":"不理他",
+                                    "9":
+                                    {
+                                    },
+                                    "17":{}
+                                },
+                                "16":{}
+                            },
+                            "15":{}
+                        },
+                        "14":{}
+                    },
+                    "13":{}
+				},
+				"12":{}
+			},
+			"11":{}
+        },
+        "10":{}
+	}
+} -->

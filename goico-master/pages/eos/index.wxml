@@ -1,0 +1,43 @@
+<!--pages/eos/index.wxml-->
+<view class="eos-container">
+  <view class="page1">
+    <image class='eos-logo' src="/images/logos/eos-logo.png" bindtap="getRequsetParams"></image>
+    <text class="eos-title">当前周期至{{periodEndTime}} \n EOS 价格预测</text>
+    <text class="eos-text-large">{{eosPrice}} ETH</text>
+    <text class="eos-text-normal">≈ {{eosPriceCNY}} CNY</text>
+    <text class="eos-title">当前周期已筹集 ETH</text>
+    <text class="eos-text">{{gatheredETH}} ETH</text>
+    <text class="eos-title">当前周期 EOS 总量</text>
+    <text class="eos-text">{{totalEOS}} EOS</text>
+    <text class="eos-title">Gas Price, Gas Limit 推荐</text>
+    <text class="eos-text">{{gasPrice}} GWei, {{gasLimit}}</text>
+    <text class="eos-marketcap" bindtap="goMarketCap">市值 ${{marketCap}}, 排名第{{eosRank}}</text>
+  </view>
+  <view class="page2">
+    <text class="eos-title">EOS 价格趋势</text>
+    <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas"></canvas>
+    <text class="eos-title">累计发行 EOS 均价</text>
+    <text class="eos-text-black">{{historyPrice}} ETH</text>
+    <text class="eos-text-black-normal">≈ {{historyPriceCNY}} CNY</text>
+    <text class="eos-title">累计发行 EOS 总量</text>
+    <text class="eos-text-black">{{historyEOS}}</text>
+    <text class="eos-title">累计筹集 ETH 总量</text>
+    <text class="eos-text-black">{{historyETH}}</text>
+    <view class="placeholder"></view>
+  </view>
+  <view class="page3">
+    <text class="eos-title">EOS 官网</text>
+    <text class="eos-text" selectable="true">https://eos.io</text>
+    <text class="eos-title">购买渠道</text>
+    <image id="logs-img" src="/images/logos/logos.png"></image>
+    <!-- <text class="eos-title" selectable="true">加群请先加微信: voicecho</text>
+    <!--<text class="eos-text" selectable="true">voicecho</text>-->
+    <!-- <image id="qr-img" src="/images/wechat_qr.jpg"></image> -->
+    <view class="placeholder"></view>
+  </view>
+  <view class="float-share">
+    <button id="share-btn" open-type="share" plain="true">
+      <image class="share-img" src="/images/buttons/share_btn.png"></image>
+    </button>
+  </view>
+</view>

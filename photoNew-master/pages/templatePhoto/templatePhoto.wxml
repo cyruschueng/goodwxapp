@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="musicList {{music_play?'music_play':'stop'}}"  bindtap='bindPlay'></view> 
+<view class="container">
+    <view class='navbar'>
+        <view wx:for="{{TemplateList}}" class="one {{cate_id==item.cate_id?'active':''}}"  style='background:{{item.bg}}'
+              bindtap='navbar' data-cate_id='{{item.cate_id}}' data-index="{{index}}" data-type='{{item.type}}'>
+                <view><image src="{{item.icon}}" mode="widthFix" style="width:{{item.width}};"></image></view>
+                <view>{{item.title}}</view>
+        </view>
+    </view>  
+    <!-- <view class='navbar'>
+        <view wx:for="{{navList}}" class="one two {{cate_id==item.cate_id?'active':''}} " 
+              bindtap='navbar' data-now='image' data-cate_id='{{item.cate_id}}'>
+        {{item.cate_name}}</view>
+    </view> -->
+    <view class='nowTitle'>
+        {{nowTitle}}<image src="../img/{{nowImage+1}}a.png" mode='widthFix'></image>
+    </view>
+    <view class='photo common'>
+        <block wx:if="{{photoList.length>0}}">
+            <view class='item' bindtap='templateInform' wx:for="{{photoList}}" wx:key="{{index}}" 
+                  data-temp_id='{{item.temp_id}}' data-type="{{item.type}}">
+                  <text wx:if="{{item.activity==true}}" class='activity'></text>
+                  <text wx:if="{{item.activity==true}}" class='activity1'>活动中</text>
+                <image src="{{item.thumb}}" mode='aspectFit'></image>
+            </view>
+        </block>
+        <view wx:else>
+            <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 暂无模板！ </view>
+        </view>
+    </view>   
+</view>

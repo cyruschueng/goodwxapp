@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+	<div class="logo">
+		<image src="../../../static/images/img_logo@3x.png" />
+	</div>
+	<p class="title">接车单</p>
+	<p class="desc">平安好汽修旗下产品</p>
+	<div class="form">
+		<p>
+			<input type="text" type="number" maxlength="11" placeholder-class="phcolor" placeholder="请输入手机号码" value="{{formData.mobile}}" bindinput="bindMobile" />
+			<icon type="clear" size="15" wx:if="{{formData.mobile}}" bindtap="clearInput" data-key="mobile"/>
+		</p>
+		<p>
+			<input type="text" type="number" maxlength="6" placeholder-class="phcolor" placeholder="请输入验证码" value="{{formData.otp}}" bindinput="bindOtp" />
+			<div class="codeBtn {{allowPhoneCode&&formData.mobile?'orange':''}}" bindtap="getPhoneCode">{{codeBtnText}}</div>
+			<icon type="clear" size="15" wx:if="{{formData.otp}}" bindtap="clearInput" data-key="otp"/>
+		</p>
+	</div>
+	<div class="loginBtn {{formData.mobile&&formData.otp?'orange':''}}" bindtap="doLogin">登录</div>
+</view>

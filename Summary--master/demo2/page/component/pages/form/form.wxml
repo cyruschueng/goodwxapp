@@ -1,0 +1,86 @@
+<form catchsubmit="formSubmit" report-submit catchreset="formReset">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">switch</view>
+      <view class="weui-cell__ft">
+        <switch name="switch" checked />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">input</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input name="input" class="weui-input" placeholder="请输入文本" />
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__title">多项选项器countries</view>
+  <view class="weui-cells weui-cells_after-title">
+    <checkbox-group name="countries">
+      <label class="weui-cell weui-check__label" wx:for="{{['美国','法国','中国']}}" wx:key="*this">
+            <view class="weui-cell__hd">
+              <checkbox color="red" style="color:red" value="{{item}}"/>
+            </view>
+            <view class="weui-cell__bd">{{item}}</view>
+          </label>
+    </checkbox-group>
+  </view>
+
+  <view class="weui-cells__title">滑动选择器slider</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">slider</view>
+      </view>
+      <view class="weui-cell__bd">
+        <slider name="slider" max="10" value="1" show-value/>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">单项选择器color</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell__bd">
+      <radio-group name="color" data-name="activeColor" bindchange="onRadioChange">
+        <label class="weui-cell weui-check__label" wx:for="{{['#10AEFF','#ff00ff','#aaAEFF']}}" 
+        wx:key="value">
+            <radio class="weui-check" value="{{item}}" checked="{{item == activeColor}}"/>
+            <view class="weui-cell__bd" style="color:{{item}}">{{item}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item == activeColor}}">
+                <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+            </view>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">省市region</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_access">
+      <view class="weui-cell__bd">
+        <picker name="region" mode="region" data-name="region" 
+        value="{{['广东省', '广州市', '海珠区']}}">
+          <text wx:if="{{region}}">{{region[0]}},{{region[1]}},{{region[2]}}</text>
+          <text wx:else>选择</text>
+        </picker>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </view>
+  <view class="weui-cells__title">文本域textarea</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea name="textarea" class="weui-textarea" placeholder="请输入文本" 
+        style="height: 3.3em" />
+        <view class="weui-textarea-counter">0/200</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button type="primary" formType="submit">Submit</button>
+    <button formType="reset">Reset</button>
+  </view>
+</form>

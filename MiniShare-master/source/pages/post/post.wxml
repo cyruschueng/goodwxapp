@@ -1,0 +1,196 @@
+<!--pages/group/group.wxml-->
+<view class='superheader'></view>
+<text class='fa fa-chevron-left btnback' bindtap='myback'></text>
+
+<view class='noticepost'>
+  <view class='cover' wx:if="{{info.operation=='N'&&info.noticecover_id_name!=null}}" style='background-image:url({{uploadpath}}banner/{{info.noticecover_id_name}})'>
+  </view>
+  <view class='title' wx:if="{{info.title!=null}}" >
+    {{info.title}}
+  </view>
+  <view class='description'>
+    <view class='member flex-row'>
+      <view>
+        <image class="memberphoto" src="{{info.member_id_photo}}" />
+      </view>
+      <view class='membername'>
+        {{info.member_id_name}}
+      </view>
+      <view class='delete' wx:if="{{info.member_id_openid==UserInfo.openid}}" bindtap='deletePost' id="{{info.id}}">删除</view>
+      <view class='posttime flex-1'>
+        {{info.updated_date_str}}
+      </view>
+    </view>
+    <view class='desctext' wx:if="{{info.operation=='N'}}">
+      {{info.description}}
+    </view>
+    <view class='voteoptions'>
+    <block wx:for="{{info.voteoptions}}" wx:key="k">
+    <view class='options flex-row'  bindtap='selectedOption'  id="{{item.id}}" >
+    <view class='flex-1'>
+        <icon type="success" size="22" color="{{item.checked==0?'#ccc':''}}"></icon>
+    </view>
+    <view class='flex-6'>
+    {{item.optionstr}}
+    </view>
+    <view class='flex-2 text-right'>
+    ({{item.votemembers.length}}票)
+    </view>
+    </view>
+    </block>
+
+              <view class="desc" style='margin-top:3vh;' wx:if="{{info.vote_expired_count>0}}">投票截止时间：{{info.vote_expired}}</view>
+              <view class="desc" style='margin-top:3vh;' wx:if="{{info.vote_expired_count<0}}">投票已结束</view>
+    </view>
+    <view class='photolist' wx:if="{{info.operation=='P'}}" >
+                      <image wx:for="{{info.photos}}" wx:key="{{index}}" wx:for-item="photo" class="pphoto" src="{{uploadpath}}album/{{photo.photo}}" mode="aspectFill" bindtap='viewPhoto' id="{{uploadpath}}album/{{photo.photo}}" />
+    </view>
+    <view class='other'>
+      <image wx:for="{{info.memberview}}" wx:key="kf" class='viewphoto' src="{{item.avatarUrl}}"></image>
+      <view class='viewcounts'>{{info.memberviewcount}}人浏览过</view>
+    </view>
+  </view>
+  <view class="sendshare">
+    <button class="btnShare" type="primary" open-type="share">分享</button>
+  </view>
+</view>
+<view class='allcomments'>
+  全部评论
+</view>
+<view class='comment' wx:for="{{commentlist}}" wx:key="k">
+  <view class='member flex-row'>
+    <view>
+      <image class="memberphoto" src="{{item.member_id_avatarUrl}}" />
+    </view>
+    <view class='membername'>
+      {{item.member_id_name}}
+    </view>
+    <view class='posttime flex-1'>
+      {{item.update_span}}
+    </view>
+  </view>
+  <view class='commenttext'>
+    {{item.comment}}
+  </view>
+</view>
+<view style='height:88rpx;'>
+
+</view>
+<view class='commentbox'>
+  <input placeholder='我来发表评论' class='inputcomment' maxlength='144' bindinput='commentChange' bindconfirm="sendComment" value='{{comment}}'></input>
+</view>
+
+<view class='likecomment flex-row' style='right:42rpx;'>
+  <view class='incon'>
+    <image class='likeicon' bindtap='likePost' id="{{info.id}}" src="http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/like.png"></image>
+  </view>
+  <view class='likestr'>
+    {{info.like}}
+  </view>
+
+  <view  class='incon'>
+    <image class='commenticon' bindtap='navtoPage' data-page="post" data-param="id={{info.id}}" src="http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/comment.png"></image>
+  </view>
+  <view class='likestr'>
+    {{info.comment}}
+  </view>
+</view>
+
+
+
+
+
+
+<view class="page" wx:if="{{false}}">
+  <view class="page__bd" style='margin-bottom:7vh;'>
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <view url="" class="weui-media-box weui-media-box_appmsg" style=''>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb photo" src="{{info.member_id_photo}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title primary" style='font-size:28rpx;'>{{info.member_id_name}}</view>
+            <view class="weui-media-box__desc" style='font-size:20rpx;margin-top:1vh;'>{{info.updated_date_span}}
+              <text class="desc primary" bindtap='deletePost' id="{{info.id}}" style='margin-left:10rpx;font-size:20rpx;' wx:if="{{info.member_id_openid==UserInfo.openid}}">删除</text>
+            </view>
+
+          </view>
+        </view>
+      </view>
+      <view class="weui-panel__bd">
+        <view url="" class=" weui-media-box_appmsg" style='border-top:0rpx;padding:30rpx;padding-top:0rpx;'>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{info.title}}</view>
+            <view wx:if="{{info.operation=='P'}}">
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files " id="uploaderFiles">
+                  <block wx:for="{{info.photos}}" wx:key="{{index}}" wx:for-item="photo">
+                    <view class="weui-uploader__file" id="photo_{{info}}">
+                      <image class="weui-uploader__img" src="{{uploadpath}}album/{{photo.photo}}" mode="aspectFill" bindtap='viewPhoto' id="{{uploadpath}}album/{{photo.photo}}" />
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{info.operation=='V'}}">
+              <view class="desc" style=''>{{info.description}}</view>
+              <block wx:for="{{info.voteoptions}}" wx:key="k">
+                <view class="weui-progress" style='margin-top:1vh;' id="{{item.id}}" bindtap='selectedOption'>
+                  <view class="weui-progress__bar">
+                    <text style='font-size:30rpx;'>{{item.optionstr}} ({{info.totalvote>0?(item.votemembers.length*100/info.totalvote):0}}%)</text>
+                    <progress percent="{{info.totalvote>0?item.votemembers.length*100/info.totalvote:0}}" stroke-width="5" />
+                  </view>
+                  <view class="weui-progress__opr">
+                    <icon type="success" size="22" color="{{item.checked==0?'#ccc':''}}"></icon>
+                  </view>
+                </view>
+                <view class="desc" style='margin-top:1vh;'>
+                  <text wx:for="{{item.votemembers}}" wx:for-item="members" wx:key='c' style='margin-right:10rpx;'>{{members.nickName}}</text>
+                </view>
+              </block>
+              <view class="desc" style='margin-top:3vh;' wx:if="{{info.vote_expired_count>0}}">投票截止时间：{{info.vote_expired}}</view>
+              <view class="desc" style='margin-top:3vh;' wx:if="{{info.vote_expired_count<0}}">投票已结束</view>
+            </view>
+
+            <view wx:if="{{info.operation=='N'}}">
+              <view class="desc" style=''>{{info.description}}</view>
+            </view>
+            <view style='margin-top:10rpx;'>
+              <text class="desc" style=''>阅读数（{{info.readcount}}）</text>
+              <text class="desc" style='margin-left:5vw;' bindtap='likePost' id="{{info.id}}">赞（{{info.like}}）</text>
+              <text class="desc" style='margin-left:10rpx;'>评论（{{info.comment}}）</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="page__bd page__bd_spacing" style='padding-left:20vw;padding-right:20vw;margin-top:3vh;'>
+      <button class="weui-btn" type="primary" open-type="share">发布到微信群</button>
+    </view>
+    <view class="page__bd primary page__bd_spacing" style='margin-top:5vh;text-align:center;font-size:28rpx;' bindtap='switchTab' id="index">
+      返回首页
+    </view>
+    <view class="page__bd  page__bd_spacing" style='background:#f2f2f2;margin-left:10vw;margin-right:10vw;margin-top:5vh;font-size:24rpx;padding:1vh;' wx:if="{{commentlist.length>0}}">
+      <view wx:for="{{commentlist}}" wx:key="k">
+        <text class='primary'>{{item.member_id_name}}</text>
+        <text>：{{item.comment}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="page__bd page__bd_spacing" style='height:unset;'>
+    <view class="weui-footer weui-footer_fixed-bottom" style='background-color:white;'>
+      <view class='flex-row'>
+        <view class='flex-3'>
+          <input placeholder='我来发表评论' style='background:#f2f2f2;border-radius:1vw;margin-left:5vw;' maxlength='144' bindinput='commentChange' value='{{comment}}'></input>
+        </view>
+        <view class='flex-1'>
+          <form name='uploadform' report-submit bindsubmit='sendComment'>
+            <button size="mini" form-type="submit">发表</button>
+          </form>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,14 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--历史融资  -->
+  <scroll-view style="height:1200rpx;background:#fff;padding-top:20rpx" scroll-y="true">
+    <!-- <template is="searchNothing" data="{{empty:investorList}}"></template> -->
+    <block wx:for="{{pro_history_financeList}}" wx:key="{{pro_history_financeList}}">
+      <template is="investHistory" data='{{item}}'></template>
+    </block>
+  </scroll-view>
+  <!--空状态-->
+  <template is="isEmpty" data="{{emptyNumber:pro_history_financeList}}"></template>
+
+</view>

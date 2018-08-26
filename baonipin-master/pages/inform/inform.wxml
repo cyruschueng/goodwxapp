@@ -1,0 +1,99 @@
+<!--pages/inform/inform.wxml-->
+<view class='box'>
+    <view class='content'>
+         <view class='avatarUrl'> 
+            <image src="{{member_info.avatar}}" mode='widthFix'></image> 
+         </view>
+         <view class='avatarUrl'> 
+            <view class='nickName'>{{member_info.nickname}}</view> 
+         </view>
+         <!--文字  -->
+         <view class='question' wx:if="{{red_info.red_type=='text'}}">{{red_info.content}}</view>
+         <!--图片  -->
+          <view class='question' wx:if="{{red_info.red_type=='img'}}">
+              <image bindtap='prewImg' src="{{red_info.content}}" mode='widthFix'></image>
+              <view class='big' bindtap='prewImg'>
+                  <image src="../images/big.png" mode='widthFix'></image>
+              </view>
+          </view> 
+           <!--语音 -->
+         <view class='question' wx:if="{{red_info.red_type=='voice'}}">{{red_info.content}}</view>
+          <view class='money'>
+            <view><text>{{red_info.total_money}}</text>元</view>
+          </view>
+          <!-- 红包状态 wait待领取 received已领取 end已领完 refunded已退款 -->
+         <view class='type no' wx:if="{{red_status == 'end' || red_status == 'refunded' ||red_status =='received'}}">
+              红包已失效
+          </view>
+         <view class='type yes' wx:if="{{red_status == 'wait'}}">点击拼出上面的图片领红包</view>
+         <!--tABS  -->
+         <view class='tabs'>
+              <view class='item' bindtap='money'><image src="../images/iconkeep.png" mode='widthFix'></image>去提现</view>
+              <view class='item' bindtap='add'><image src="../images/iconadd.png" mode='widthFix'></image>发起一个</view>
+              <view class='item' bindtap='share'><image src="../images/iconshare.png" mode='widthFix'></image>去转发</view>
+         </view>
+    </view>
+    <view class='all'>
+        <view class='notice'>
+            <view>共￥{{red_info.total_money}}元，领取{{red_info.receive_count}}/{{red_info.total_count}}个</view>
+        </view>
+        <!--领取列表  -->
+        <view class='list' wx:for="{{receive_info}}">
+            <view class='top'> <image src="{{item.avatar}}" mode='widthFix'></image>  </view>
+            <view class='keepList'>
+                <view class='itemkeep'  bindtap='inform' data-index='{{index}}'>
+                    <view class='sum item'>
+                        <view class='left'>
+                            {{item.nickname}}
+                            <!--sex  -->
+                            <image wx:if="{{item.gender == 2}}" src="../images/girl.png" mode='widthFix'></image>
+                            <image wx:if="{{item.gender == 1}}" src="../images/box.png" mode='widthFix'></image>
+                            <image wx:if="{{item.gender == 0}}" src="../images/question-icon.png" mode='widthFix'></image>
+                        </view>
+                        <view class='right'>￥{{item.receive_money}}</view>
+                    </view> 
+                    <view class='time item'>
+                        <view class='left' style='width:50%;'>{{item.content}}</view>
+                        <view class='right' style='width:50%;'>{{item.receive_time}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--文字弹窗  -->
+    <view class='Tword' style='display:none'>
+        <view class='tishi'>提示：请按顺序勾选</view>
+        <view class='time'><view class='now'>22</view></view>
+        <view class='red'>文字</view>
+        <view class='grid'>
+            <view class='grid-item'>是</view>
+            <view class='grid-item'>是</view>
+        </view>
+    </view>
+    <!--失败弹窗  -->
+    <view class='false' style='display:none'>
+        <view class='img'><image src="../images/red.png" mode='widthFix'></image></view>
+        <view class='tishi'>很遗憾，您未在指定时间拼出文字</view>
+        <view class='button'>
+            <view class='close' bindtap='close'>关闭</view>
+            <view class='again' bindtap='again'>再来一次</view>
+        </view>
+    </view>
+    <!--成功弹窗  -->
+    <view class='success' style='display:none'>
+        <view class='avatarUrl'> 
+         <!--{{userInfo.avatarUrl}}  -->
+            <image src="https://qncdn.playonwechat.com/nice/users.png" mode='widthFix'></image> 
+         </view>
+         <view class='avatarUrl'> 
+            <view class='nickName'>{{userInfo.nickName}}user</view> 
+         </view>
+         <view class='question'>科学研究科学研究科学研究研究科学研究科学研究科学研究科学研究科学研究</view>
+           <view class='question'>
+              <image src="../images/1.png" mode='widthFix'></image>
+          </view> 
+          <view class='open'>
+             <image src="../images/open.png" mode='widthFix'></image> 
+          </view>
+    </view>
+</view>

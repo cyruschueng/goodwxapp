@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>LayIM 3.x PC版本地演示</title>
+    <link rel="stylesheet" href="../build/css/layui.css">
+
+</head>
+<body data-token="roigGRiK+ak1utJChy937IbgbSWaKfmKyH0Gj9HAkypdSYC1l07Ehsvsl3CtSaKKdLxgCxH9aqIqQlJdTPPqEQ=="
+      data-rykey="sfci50a7s120i">
+
+</body>
+
+<script src="../build/layui.js"></script>
+<script>
+
+    if (!/^http(s*):\/\//.test(location.href)) {
+        alert('请部署到localhost上查看该演示');
+    }
+
+    //layui绑定扩展
+    layui.config({
+        base: '../rc/'
+    }).extend({
+        rmlib: 'rmlib',
+        protobuf: 'protobuf',
+        socket: 'socket',
+    });
+    layui.use(['layim', 'jquery', 'socket'], function (layim, socket) {
+        var $ = layui.jquery;
+        var socket = layui.socket;
+        var token = $('body').data('token');
+        var rykey = $('body').data('rykey');
+
+        //基础配置
+        layim.config({
+            //初始化接口
+            init: {
+                mine: {
+                    "username": "在线客服二" //我的昵称
+                    , "id": "zxkf2" //我的ID
+                    , "status": "online" //在线状态 online：在线、hide：隐身
+                    , "avatar": "https://ss0.baidu.com/73x1bjeh1BF3odCf/it/u=1142825487,1776434340&fm=73" //我的头像
+                }
+            }
+            , isAudio: true //开启聊天工具栏音频
+            , isVideo: true //开启聊天工具栏视频
+
+            //,brief: true //是否简约模式（若开启则不显示主面板）
+
+            //,title: 'WebIM' //自定义主面板最小化时的标题
+            //,right: '100px' //主面板相对浏览器右侧距离
+            //,minRight: '90px' //聊天面板最小化时相对浏览器右侧距离
+            , initSkin: '5.jpg' //1-5 设置初始背景
+            //,skin: ['aaa.jpg'] //新增皮肤
+            //,isfriend: false //是否开启好友
+            //,isgroup: false //是否开启群组
+            //,min: true //是否始终最小化主面板，默认false
+            , notice: true //是否开启桌面消息提醒，默认false
+            //,voice: false //声音提醒，默认开启，声音文件为：default.mp3
+
+            , msgbox: layui.cache.dir + 'css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
+            , find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
+            , chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
+        });
+        // 融云socket初始化
+        socket.config({
+            key: 'y745wfm8yrxfv',
+            // 在线客服一 token（由唯一ID和共用AppSecret生成）
+            token: "YhuzMhf9xKwmu47rtkPy/o1Zfe3jBeh54LZhIF/UVC+6I3MgPGbV8Zld/E9BdFyhipq83kBnWF2cw0edULBG+w==",
+            layim: layim
+        });
+
+    });
+</script>
+</body>
+</html>

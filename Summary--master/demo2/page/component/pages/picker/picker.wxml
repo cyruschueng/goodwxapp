@@ -1,0 +1,85 @@
+<view class="weui-cells__title">单项选择器</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view class="weui-label">当前选择</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="selector" data-name="single" bindchange="onPickerChange" range="{{array}}">
+        <view class="weui-input">{{array[single]}}</view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">单项选择器(使用range-key)</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view class="weui-label">当前选择</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="selector" data-name="single2" bindchange="onPickerChange" range="{{objectArray}}" range-key="name">
+        <view class="weui-input">{{objectArray[single2].name}}</view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">多项选择器</view>
+<view class="weui-cells weui-cells_after-title">
+  <label class="weui-cell">
+    <view class="weui-cell__hd">
+      <view class="weui-label">当前选择</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="multiSelector" data-name="multiIndex" bindcolumnchange="onPickerColumnChange" bindchange="onPickerChange" range="{{multiArray}}">
+        <view>{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}</view>
+      </picker>
+    </view>
+  </label>
+</view>
+
+<view class="weui-cells__title">时间选择器</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view class="weui-label">当前选择</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="time" data-name="time" value="{{time}}" start="09:01" end="21:01" bindchange="onPickerChange">
+        <view class="weui-input">{{time}}</view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">日期选择器</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view class="weui-label">当前选择</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="date" data-name="date" value="{{date}}" 
+      start="2015-09-01" end="2017-09-01" value="2015-09-02" fields="year,month,day" bindchange="onPickerChange">
+        <view class="weui-input">{{date}}</view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">省市选择器</view>
+<view class="weui-cells weui-cells_after-title">
+  <picker mode="region" data-name="region" value="{{['广东省', '广州市', '海珠区']}}" 
+  bindchange="onPickerChange">
+    <label class="weui-cell">
+    <view class="weui-cell__hd">
+      <view class="weui-label">当前选择</view>
+    </view>
+    <view class="weui-cell__bd">
+        <view>{{region}}</view>
+    </view>
+  </label>
+  </picker>
+</view>

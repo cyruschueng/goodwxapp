@@ -1,0 +1,54 @@
+
+<!-- 顶部背景 -->
+<view id="top-bg" catchtap="profile">
+  <image lazyload="true" id="avatar" src="{{user.user_avatar}}" />
+  <view id="name">{{user.user_name}}<image wx:if="{{user.isVip}}" class="icon" style="margin-left: 5px;" src="http://icons.maiyizhi.cn/VIP.png"/></view>
+    <view id="lost" wx:if="{{user.isVip}}">VIP过期时间：{{user.vip_lost_time_str}}</view>
+</view>
+
+  <view>
+      <view class="divider" wx:if="{{!user.isVip&&0}}" style=""></view>
+      <navigator wx:if="{{!user.isVip&&0}}" class="item" style="margin-top: 20rpx;" url="/pages/about/about?type=vip">
+          <image class="icon" src="http://icons.maiyizhi.cn/VIP.png"/>
+          <view class="ttext" style="color: #ff8840;">升级VIP会员，获取更多特权</view>
+          <image class="arrow" src="http://avatars.maiyizhi.cn/arrow_right.png"/>
+      </navigator>
+
+      <view class="divider" style="display: none;"></view>
+    <navigator wx:if="{{!is_verify}}" class="item" style="margin-top: 20rpx;display: none;" url="/pages/wallet/wallet">
+      <image class="icon" src="http://icons.maiyizhi.cn/qianbao.png"/>
+      <view class="ttext">我的钱包</view>
+      <image class="arrow" src="http://avatars.maiyizhi.cn/arrow_right.png"/>
+    </navigator>
+    <view class="divider" style="display: none;"></view>
+
+      <view wx:if="{{!is_verify}}" class="divider"></view>
+      <view wx:if="{{!is_verify}}" class="item" style="margin-top: 20rpx;" catchtap="lianxi">
+          <image class="icon" src="http://icons.maiyizhi.cn/fankui1.png"/>
+          <view class="ttext">帮助与反馈</view>
+          <image class="arrow" src="http://avatars.maiyizhi.cn/arrow_right.png"/>
+      </view>
+      <view wx:if="{{!is_verify}}" class="divider"></view>
+
+      <navigator  class="item" style="margin-top: 20rpx;display: none;" wx:if="{{!is_verify}}" url="/pages/about/about?type=help">
+          <image class="icon" src="http://icons.maiyizhi.cn/shiyongshuoming1.png"/>
+          <view class="ttext">使用说明</view>
+          <image class="arrow" src="http://avatars.maiyizhi.cn/arrow_right.png"/>
+      </navigator>
+
+      <view class="divider"  style="" wx:if="{{user.isVip}}" ></view>
+      <!-- 联系客服 -->
+      <view class="item"  style="margin-top: 20rpx;padding: 0 20rpx;" wx:if="{{user.isVip}}">
+          <image class="icon" src="http://icons.maiyizhi.cn/lianxikefu.png"/>
+          <button open-type="contact" session-from="vip_goumai">联系专属客服</button>
+          <image class="arrow" src="http://avatars.maiyizhi.cn/arrow_right.png"/>
+      </view>
+      <view wx:if="{{!is_verify}}" class="divider" style="display: none;"></view>
+      <!-- 联系客服 -->
+      <navigator wx:if="{{!is_verify}}" class="item" style="margin-top: 20rpx;display: none;"  url="/pages/about/about?type=tuijian">
+          <image class="icon" src="http://icons.maiyizhi.cn/jingpintuijian.png"/>
+          <view class="ttext">精品小程序推荐</view>
+          <image class="arrow" src="http://avatars.maiyizhi.cn/arrow_right.png"/>
+      </navigator>
+
+  </view>

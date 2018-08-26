@@ -1,0 +1,29 @@
+<!--pages/ok/pages/aboutme/aboutme.wxml-->
+<view class="card">
+  <view class="card_bg"></view>
+  <view class="card_bd">
+    <view class="img_box" style="background-image: url({{ customer.avatarUrl }})">
+        
+    </view>
+  </view>
+  <view class="card_ft">
+    <view class="user_info">
+      <view class="user_info_left">
+        <view class="user_des">
+          <text class="user_name" style="background-image: url({{ customer.gender === 1? iconManUrl: iconGirlUrl }})">{{ customer.nickName }}</text>
+        </view>
+        <view class="info_tips">这张照片做头像合适吗？</view>
+      </view>
+
+      <view class="user_info_right">
+        <navigator class="user_edit" wx:if="{{ customer._id !== user_id }}" url="../edit/index">
+        编辑
+        </navigator>
+      </view>
+    </view>
+    <view class="saw_info">
+      <view class="saw_text" style="background-image: url({{ iconLikeMiniUrl }})"><text class="highlight">2678人</text>喜欢你 | 3000人看过你</view>
+      <view class="share_area" style="background-image: url({{ iconShareUrl }})">晒一晒</view>
+    </view>
+  </view>
+</view>

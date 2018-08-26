@@ -1,0 +1,154 @@
+<div class="page" ng-controller="taskController">
+    <div class="page-header" style="background:#f60;">
+        <div style="color: #fff; font-size: 20px; padding: 10px 0;  text-align: center;">{{memberInfo.className}}</div>
+    </div>
+    <div class="page__bd" style="padding-bottom:70px;">
+
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <h4 class="weui-media-box__title" style="text-align: center;font-weight: bold;padding-top:15px;">每周一课</h4>
+                <div class="weui-media-box weui-media-box_text" ng-show="task.everyWeek.title!='' && task.everyWeek.title!=null">
+                    <p class="weui-media-box__desc" style="font-size:16px;padding-bottom:15px">{{task.everyWeek.title}}</p>
+                    <p class="weui-media-box__desc"
+                       style="font-size:16px;padding-bottom:15px;padding-bottom:25px; line-height: normal; display: inherit">{{task.everyWeek.intro}}</p>
+                    <div class="weui-flex" >
+                        <div class="weui-flex__item" style="text-align: center;">
+                            <span class="weui-btn weui-btn_mini "
+                               style="border:1px solid #f60; color:#f60"
+                               data-exerciseid="{{task.everyWeek.exercisesId}}"
+                               check-member-exercise="{{memberInfo.state}}"  >练习</span>
+                        </div>
+                        <div class="weui-flex__item" style="text-align: center;">
+                            <a href="#/courses?courseId={{task.everyWeek.id}}"  class="weui-btn weui-btn_mini " style="border:1px solid #f60; color:#f60">进入</a>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="task.everyWeek.title=='' || task.everyWeek.title==null">
+                    <p style="text-align: center;font-size:13px; color:#666;padding:15px 0;">开课时间还未开始</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <h4 class="weui-media-box__title" style="text-align: center;font-weight: bold;padding-top:15px;">万妈妈微课</h4>
+                <div class="weui-media-box weui-media-box_appmsg" ng-show="task.wangMaMa.title!='' && task.wangMaMa.title!=null">
+                    <div class="weui-media-box__hd">
+                        <img class="weui-media-box__thumb " ng-class="{true:'gardenia-img__active',false:''}[!audios[1].paused]"
+                             style="border-radius:30px;width:60px; height: 60px;"
+                             src="imgs/gardenia/cd.png" alt="">
+                    </div>
+                    <div class="weui-media-box__bd player">
+                        <p class="weui-media-box__desc" style="font-size:16px;padding-bottom:15px">{{task.wangMaMa.title}}</p>
+                        <div class="xl-progress">
+                            <span style="width:20px" class="current" ng-bind="audios[1].currentTime | trackTime"></span>
+                            <div  class="xl-progress-bar">
+                                <div class="played" style="margin-left:{{audios[1].progress*progressWidth+'px'}}"></div>
+                            </div>
+                            <span style="width:20px" class="duration" ng-bind="audios[1].duration|trackTime"></span>
+                        </div>
+                        <div class="text-center">
+                            <span   check-member-audio="{{memberInfo.state}}"
+                                    data-audio-index="1"
+                                    ng-if="audios[1].paused"
+                                    class="fa fa-play"
+                                    style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></span>
+                            <span ng-click="audios[1].pause()"
+                                  ng-if="!audios[1].paused"
+                                  class="fa fa-pause"
+                                  style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></span>
+                            <span ng-click="setLoop(1)">
+                                <i class="fa fa-refresh "
+                                   title="单曲循环"
+                                   ng-if="audios[1].loop==false"
+                                   style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></i>
+                                <i class="fa fa-repeat btnPlay"
+                                   title="循环播放"
+                                   ng-if="audios[1].loop==true"
+                                   style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="task.wangmama.title=='' || task.wangmama.title==null">
+                    <p style="text-align: center;font-size:13px; color:#666;padding:15px 0;">开课时间还未开始</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <h4 class="weui-media-box__title" style="text-align: center;font-weight: bold;padding-top:15px;">会员教材</h4>
+                <div class="weui-media-box weui-media-box_appmsg" ng-show="task.everyDay.title!='' && task.everyDay.title!=null">
+                    <div class="weui-media-box__hd">
+                        <img class="weui-media-box__thumb " ng-class="{true:'gardenia-img__active',false:''}[!audios[0].paused]"
+                             style="border-radius:30px;width:60px; height: 60px;"
+                             src="imgs/gardenia/cd.png" alt="">
+                    </div>
+                    <div class="weui-media-box__bd player">
+                        <p class="weui-media-box__desc" style="font-size:16px;padding-bottom:15px">{{task.everyDay.title}}</p>
+                        <div class="xl-progress">
+                            <span style="width:20px" class="current" ng-bind="audios[0].currentTime | trackTime"></span>
+                            <div id="xl-progress-bar"  class="xl-progress-bar">
+                                <div class="played" style="margin-left:{{audios[0].progress*progressWidth+'px'}}"></div>
+                            </div>
+                            <span style="width:20px" class="duration" ng-bind="audios[0].duration|trackTime"></span>
+                        </div>
+                        <div class="text-center">
+                            <span   check-member-audio="{{memberInfo.state}}"
+                                    data-audio-index="0"
+                                    ng-if="audios[0].paused"
+                                    class="fa fa-play"
+                                    style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></span>
+                            <span ng-click="audios[0].pause()"
+                                  ng-if="!audios[0].paused"
+                                  class="fa fa-pause"
+                                  style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></span>
+                            <span ng-click="setLoop(0)">
+                                <i class="fa fa-refresh "
+                                   title="单曲循环"
+                                   ng-if="audios[0].loop==false"
+                                   style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></i>
+                                <i class="fa fa-repeat btnPlay"
+                                   title="循环播放"
+                                   ng-if="audios[0].loop==true"
+                                   style="font-size: 18px;padding:2px 5px;color:#f1f1f1"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="task.everyDay.title=='' || task.everyDay.title==null">
+                    <p style="text-align: center;font-size:13px; color:#666;padding:15px 0;">开课时间还未开始</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <h4 class="weui-media-box__title" style="text-align: center;font-weight: bold;padding-top:15px;">习惯助手</h4>
+                <div class="weui-media-box weui-media-box_text" ng-show="task.everyMonth.title!='' && task.everyMonth.title!=null">
+                    <p class="weui-media-box__desc" style="font-size:16px;padding-bottom:15px">{{task.everyMonth.title}}</p>
+                    <p class="weui-media-box__desc" style="font-size:16px;padding:5px 0;">
+                        今日
+                        <span ng-if="task.everyMonth.is_today_completed==true" style="color:#f60;padding-left: 10px;">已打卡</span>
+                        <span ng-if="task.everyMonth.is_today_completed==false" style="color:#f00;padding-left: 10px;">未打卡</span>
+                    </p>
+                    <p class="weui-media-box__desc" style="font-size:16px;padding:5px 0;">
+                        打卡次数<span style="color:#f60;padding-left: 10px;">{{task.everyMonth.completed}}/{{task.everyMonth.target}}</span>
+                    </p>
+                    <div class="weui-flex" style="margin-top:25px;">
+                        <div class="weui-flex__item" style="text-align: center;">
+                            <a href="#/habitrank?habitId={{task.everyMonth.habitid}}&t={{task.everyMonth.title}}"   style="border:1px solid #f60; color:#f60" class="weui-btn weui-btn_mini">排行榜</a>
+                        </div>
+                        <div class="weui-flex__item" style="text-align: center;">
+                            <a href="#/habitrecord?habitid={{task.everyMonth.habitid}}&t={{task.everyMonth.target}}&c={{task.everyMonth.completed}}&n={{task.everyMonth.title}}" style="border:1px solid #f60; color:#f60" class="weui-btn weui-btn_mini">打卡</a>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="task.everyMonth.title=='' || task.everyMonth.title==null">
+                    <p style="text-align: center;font-size:13px; color:#666;padding:15px 0;">开课时间还未开始</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

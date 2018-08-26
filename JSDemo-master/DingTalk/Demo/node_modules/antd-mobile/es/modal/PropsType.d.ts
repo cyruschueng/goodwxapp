@@ -1,0 +1,46 @@
+/// <reference types="react" />
+import React from 'react';
+export interface ModalProps {
+    title?: string;
+    visible: boolean;
+    maskClosable?: boolean;
+    closable?: boolean;
+    footer?: Array<{}>;
+    onClose?: () => void;
+    /** react native only **/
+    transparent?: boolean;
+    style?: {};
+    animated?: boolean;
+    bodyStyle?: {};
+    animationType?: any;
+    onAnimationEnd?: (visible: boolean) => void;
+    animateAppear?: boolean;
+    styles?: any;
+    /** web only */
+    prefixCls?: string;
+    transitionName?: string;
+    maskTransitionName?: string;
+    className?: string;
+    wrapClassName?: string;
+    touchFeedback?: boolean;
+    wrapProps?: {};
+    operation?: boolean;
+    platform?: string;
+}
+export declare type Action = {
+    text: string;
+    onPress?: Function;
+    style?: {};
+};
+export declare type Callback = (valueOrLogin: string, password?: string) => void;
+export declare abstract class ModalComponent<P, S> extends React.Component<P, S> {
+    static alert: (title: string | JSX.Element, message: string | JSX.Element, actions?: Action[]) => {
+        close: () => void;
+    };
+    static prompt: (title: string | JSX.Element, message: string | JSX.Element, callbackOrActions: Callback | Action[], type?: 'default' | 'secure-text' | 'login-password', defaultValue?: string) => {
+        close: () => void;
+    };
+    static operation: (actions?: Action[]) => {
+        close: () => void;
+    };
+}

@@ -1,0 +1,29 @@
+<!--pages/personal/mytopic/mytopic.wxml-->
+<view class='httitle'>我的话题(共{{length}}条)</view>
+<block wx:if="{{message}}">
+  <view class='nohuati t2'>{{message}}</view>
+</block>
+<view class='card'>
+  <block wx:if="{{!message}}">
+    <block wx:for="{{posts}}" wx:key="index">
+      <view class='post' id="{{item.id}}" bindtap='clickHuati'>
+        <block wx:if="{{item.leixing=='post'}}">
+          <view class='title'>
+            <text>【求助】</text>{{item.title}}</view>
+        </block>
+        <block wx:if="{{item.leixing=='event'}}">
+          <view class='title'>
+            <text>【活动】</text>{{item.title}}</view>
+        </block>
+        <block wx:if="{{item.leixing=='serman'}}">
+          <view class='title'>
+            <text>【生活推荐】</text>{{item.title}}</view>
+        </block>
+        <view class='remarks'>
+          <view class='time'>{{item.created_at}}</view>
+        </view>
+      </view>
+    </block>
+  </block>
+
+</view>

@@ -1,0 +1,19 @@
+<view class="container">
+    <view class='header'>
+        <view class='item' wx:for="{{imgList}}" wx:key="{{index}}"  bindtap='checkColor'
+              data-index="{{index+1}}" data-color='{{item.color}}'>
+            <image src="{{item.url}}" mode='widthFix'></image>
+        </view>
+    </view>
+    <view class='content'>
+          <view class='title'>
+              <image src="../image/box{{color}}.png" mode='widthFix'></image>
+              <input  bindinput="nameInput" value="{{name}}"/>
+          </view>
+          <view class='title remarks'>
+              <image style='visibility: hidden;' src="../image/box1.png" mode='widthFix'></image>
+              <input  bindinput="descInput" value='{{desc}}' placeholder='备注...'/>
+          </view>
+    </view>
+    <button bindtap='saveTap'>保存</button>
+</view>

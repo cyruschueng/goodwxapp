@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <title>css动画-动物碎片拼接</title>
+</head>
+<body>
+<!--
+ 原文链接
+ https://juejin.im/post/5acc561f6fb9a028d6647dd6?utm_medium=fe&utm_source=weixinqun
+ -->
+<!--
+第一步 做动画底图
+碎片当存为SVG格式后，打开时，会有一些<polygon points="" />的标签，
+每个<polygon>对应一个碎片，notepad打开你的SVG文件，代码的可读性会加强
+
+无论用哪种做图软件，AI或者sketch，切记基础图形一定是三角形，不要引入任何其他形状。
+也就是说导出的每个<polygon poins="">里面的坐标数量是相等的，会有三组或者四组。
+（AI另存和导出为两种方法生成的SVG是不同的，但四组的最后一组与第一组是重复的，推荐另存为SVG格式，此坑已经踩过）
+-->
+
+<!--
+第二步，让碎片变形
+首先，我们需要改变SVG文件的DOM结构，
+目前导出来的SVG文件除了一个背景的矩形<rect>标签，剩下的应该都是<polygon>标签了
+
+这个动画整体的思路就是每个碎片变形的组合
+变形的鲸鱼whale的<polygon>标签如下：
+<polygon points="W1,W2 W3,W4 W5,W6" style="fill: #…"/>
+
+d:path属性的变化来得到变形动效
+@keyframes p2{
+0% {d:path('MB1,B2LB3,B4LB5,B6z');fill:#…}  /*绘制bird其中之一碎片*/
+100%{d:path('MW1,W2LW3,W4LW5,W6z');fill:#…} /*绘制whale其中之一碎片*/
+}
+#p2{animation:p2 2s ease both;}
+
+而在DOM结构中，只要保留一个简单的<polygon>标签，获取这个动画属性就可以了
+<polygon id ="p2" />
+
+在用CSS属性来绘制碎片时，格式记得一定要正确，填充色比较好理解，但所有的顶点坐标在写入d:path时都要转成Mxy Lx1y1 Lx2y2 Lx2y2 z这种样式
+-->
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="960"  height="720" viewbox="0 0 960 720">
+    <rect width="960" height="720" id="p_bg"/>
+    <path  id="p1" />
+    <path id="p2"  />
+    <path id="p3"  />
+    <path id="p4"  />
+    <path id="p5"  />
+    <path id="p6"  />
+    <path id="p7"  />
+    <path id="p8"  />
+    <path id="p9"  />
+    <path id="p10"  />
+    <path id="p11"  />
+    <path id="p12"  />
+    <path id="p13"  />
+    <path id="p14"  />
+    <path id="p15"  />
+    <path id="p16"  />
+    <path id="p17"  />
+    <path id="p18"  />
+    <path id="p19"  />
+    <path id="p20"  />
+    <path id="p21"  />
+    <path id="p22"  />
+    <path id="p23"  />
+    <path id="p24"  />
+    <path id="p25"  />
+    <path id="p26"  />
+    <path id="p27"  />
+    <path id="p28"  />
+    <path id="p29"  />
+    <path id="p30"  />
+    <path id="p31"  />
+    <path id="p32"  />
+    <path id="p33"  />
+</svg>
+<p>
+    <button type="button" turnTo="bird" class="button gray">鸟</button>
+    <button type="button" turnTo="frog" class="button gray">青蛙</button>
+    <button type="button" turnTo="whale" class="button gray">鲸鱼</button>
+    <button type="button" turnTo="sheep" class="button gray">绵羊</button>
+</p>
+<script src="js/jquery.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<import src="../tpls/page-foot/index.wxml" />
+<view class='container about'>
+  <view class='location'>
+    <map style="width: 100%; height: 200px;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" covers="{{covers}}">
+    </map>
+  </view>
+  <view class='store-info'>
+    <label>地址</label>
+    <view class='address'>
+      <text>{{storeInfo.location}}</text>
+      <image bindtap='getLocation' src='../../images/icon/location.png' mode='aspectFill'></image>
+    </view>
+    <label>电话</label>
+    <view class='telephone'>
+      <text>{{storeInfo.phoneNumber}}</text>
+      <image bindtap='call' src='../../images/icon/phone.png' mode='aspectFill'></image>
+    </view>
+  </view>
+  <template is='page-foot'></template>
+</view>

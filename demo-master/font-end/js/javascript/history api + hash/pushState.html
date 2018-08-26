@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    if (history.pushState) {
+        // 监听控制物理后退键
+        setTimeout(function() {
+            window.addEventListener("popstate", function(e) {
+                window.location.href = goto_url + "/view/html/approve/approve-index.html";
+            }, false);
+            window.history.pushState({}, "", "");
+        }, 200);
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!--pages/courseReview/courseReview.wxml-->
+<view class="container">
+  <view>
+    <text class="title">{{title}}{{currentPostId}}</text>
+    <view class="author-date">
+      <image wx:if="{{img.author_img}}" class="avatar" src="{{img.author_img}}"></image>
+      <text class="author">{{author}}</text>
+      <text class="const-text">发表于</text>
+      <text class="date">{{dateTime}}</text>
+    </view>
+    <view class="clear" height="30rpx"></view>
+    <image wx:if="{{headImgSrc}}" class="head-image" src="{{headImgSrc}}"></image>
+    <view class="clear" height="10rpx"></view>
+    <text class="detail">{{detail}}</text>
+    <view class="tool">
+      <view class="circle-img">
+        <image catchtap="onCollectionTip" wx:if="{{collected}}" src="/image/icon/collection.png"></image>
+        <image catchtap="onCollectionTip" wx:else src="/image/icon/collection-anti.png"></image>
+        <image catchtap="onShareTap" src="/image/icon/share.png" class="share-img"></image>
+      </view>
+      <view class="horizon"></view>
+    </view>
+  </view>
+</view>

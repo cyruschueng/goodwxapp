@@ -1,0 +1,30 @@
+<!--回复及发表评论 start-->
+<view class="floatBox mod-layer" bindtap="reply">
+<form bindsubmit="formSubmit">
+    <view class="score gridXb">
+        <view class="score-area fr">
+        <block wx:for="{{score_arr}}" wx:for-item="gitem">
+            <text class="iconfont score-star icon-favor{{gitem.ischeck == true ? 'fill' : ''}}" bindtap="set_score_bind" id="{{gitem.val}}"></text>
+         </block>   
+        </view>
+        <view><text>评分</text></view>
+    </view>
+
+    <view class="input-text-box">
+        <textarea class="textarea" name="content" placeholder="写点什么吧..." auto-focus />
+    </view>
+    <!--<view class="upload-img">
+        <block wx:for="{{postimg}}">
+            <view class="item">
+                <image src="{{item}}" mode="aspectFill"></image>
+                <text class="iconfont icon-close item-del" bindtap="del_pic_bind" id="{{index}}"></text>
+            </view>
+        </block>
+        <view class="item add" bindtap="chooseimg_bind"></view>
+    </view>-->
+    <view style="padding:16px;">
+            <button formType="submit" type="primary" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">提交保存</button>
+        </view>
+</form>
+</view>
+<!--回复及发表评论 end-->

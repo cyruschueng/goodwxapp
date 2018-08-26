@@ -1,0 +1,132 @@
+<?php
+
+class Api_Pay extends PhalApi_Api {
+
+    private $appDomain;
+
+    public function __construct() {
+        $this->appDomain = new Domain_App();
+    }
+
+    public function getRules() {
+        return array(
+            'getRechargeItemList'         => array(
+                'channel' => array('name' => 'channel', 'type' => 'string', 'require' => true, 'desc' => '渠道ID'),
+                'os' => array('name' => 'os', 'type' => 'int', 'require' => false, 'default' =>1,
+                              'desc' => 'Android或iOS'),
+            ),
+            'getExchange2CoinItemList'    => array(
+                'channel' => array('name' => 'channel', 'type' => 'string', 'require' => true, 'desc' => '渠道ID'),
+            ),
+            'getExchange2DiamondItemList' => array(
+                'channel' => array('name' => 'channel', 'type' => 'string', 'require' => true, 'desc' => '渠道ID'),
+            ),
+            'diamondExchange2Coin'        => array(
+                'channel' => array('name' => 'channel', 'type' => 'string', 'require' => true, 'desc' => '渠道ID'),
+                'user_id' => array('name' => 'user_id', 'type' => 'int', 'require' => true, 'desc' => '用户ID'),
+                'item_id' => array('name' => 'item_id', 'type' => 'int', 'require' => true, 'desc' => '兑换列表ID'),
+            ),
+            'coinExchange2Diamond'        => array(
+                'channel' => array('name' => 'channel', 'type' => 'string', 'require' => true, 'desc' => '渠道ID'),
+                'user_id' => array('name' => 'user_id', 'type' => 'int', 'require' => true, 'desc' => '用户ID'),
+                'item_id' => array('name' => 'item_id', 'type' => 'int', 'require' => true, 'desc' => '兑换列表ID'),
+            ),
+            'placeOrder' => array(
+                'type'        => array('name' => 'type', 'type' => 'int', 'require' => true, 'desc' => '1是微信支付，2是支付宝,3苹果支付'),
+                'money'       => array('name' => 'money', 'type' => 'int', 'require' => true, 'desc' => '支付金额,单位分'),
+                'user_id'     => array('name' => 'user_id', 'type' => 'int', 'require' => true, 'desc' => '用户id'),
+                'operation_id'=> array('name' => 'operation_id', 'type' => 'int', 'require' => false,
+                                              'desc' => '操作内容，1钻石充值，2大礼包'),
+                'operation_value' => array('name' => 'operation_value', 'type' => 'int', 'require' => false,
+                                                 'desc' => '操作内容对应的id,如钻石充值列表id,礼包id'),
+                //'channel' => array('name' => 'channel', 'type' => 'sting', 'require' => false, 'desc' => '渠道'),
+            ),
+            'updateDiamond' => array(
+                'order_no'        => array('name' => 'order_no', 'type' => 'string', 'require' => true, 'desc' => '订单号'),
+                'user_id'        => array('name' => 'user_id', 'type' => 'int', 'require' => true, 'desc' => '用户id'),
+            ),
+        );
+    }
+
+    /**
+     * 钻石充值价格列表
+     * @desc 1元能充多少钻石价格列表
+     * @request https://mibo.yahalei.com/mibo/index.php?service=Pay.GetRechargeItemList&channel=bt
+     */
+    public function getRechargeItemList() {
+        $pay_domain = new Domain_Pay();
+        return $pay_domain->getRechargeItemList();
+    }
+
+    /**
+     * 钻石兑换金币价格列表
+     * @desc 钻石兑换金币价格列表
+     */
+    public function getExchange2CoinItemList() {
+        $pay_domain = new Domain_Pay();
+        return $pay_domain->getExchange2CoinItemList();
+    }
+
+    /**
+     * 钻石兑换金币接口
+     * @desc 钻石兑换金币接口
+     * @request http://mibo.yahalei.com/mibo/index.php?service=Pay.diamondExchange2Coin&channel=bt&user_id=14&&item_id=1
+     */
+    public function diamondExchange2Coin() {
+        $pay_domain = new Domain_Pay();
+        return $pay_domain->diamondExchange2Coin();
+    }
+
+    /**
+     * 金币兑换钻石详情列表
+     * @desc 金币兑换钻石详情列表
+     */
+    public function getExchange2DiamondItemList() {
+        $pay_domain = new Domain_Pay();
+        return $pay_domain->getExchange2DiamondItemList();
+    }
+
+    /**
+     * 金币兑换钻石接口
+     * @desc 金币兑换钻石接口
+     */
+    public function coinExchange2Diamond() {
+        throw new PhalApi_Exception_BadRequest("暂时不支持兑换钻石", 70);
+    }
+
+    /**
+     * 创建订单
+     * @ignore
+     */
+    public function createOrderNo() {
+        throw new PhalApi_Exception_BadRequest("接口暂未提供", 70);
+    }
+
+
+    /**
+     * 米播钻石充值，微信、支付宝下单
+     * @desc 米播钻石充值，微信、支付宝下单
+     * @return id为充值列表id
+     * @request http://mibo.yahalei.com/mibo/index.php?service=Pay.PlaceOrder&type=1&money=1
+     */
+    public function placeOrder() {
+        $domain_pay = new Domain_Pay();
+        return $domain_pay->placeOrder();
+    }
+
+
+    /**
+     * 微信下单后，更新用户钻石
+     * @desc 微信下单后，更新用户钻石，礼包或者第一次充值先走Gift.SendPackage这个接口，发送米币，再走充值接口充优惠钻石。
+     * 登录时有first_charge_package这个字段，因此不管是第一次充值，还是”首充大礼包"，如果first_charge_package是false,
+     * 都要走Gift.SendPackage	这个接口，用以记录已经首充了，以后不弹首充大礼包。
+     */
+    public function updateDiamond() {
+        $domain_pay = new Domain_Pay();
+        $rs = $domain_pay->updateDiamond();
+        return $rs;
+    }
+
+
+
+}

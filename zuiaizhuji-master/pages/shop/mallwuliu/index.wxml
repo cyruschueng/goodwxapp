@@ -1,0 +1,20 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+<!-- <view class="top-logistics">
+  <view class="f20">京东快递</view>
+  <view class="mt10">订单编号:1234567890</view>
+</view> -->
+
+<view class="mt10">
+<block wx:for="{{wldata}}">
+  <view class="info-list gridYl">
+    <view>{{item.context}}</view>
+    <view class="time">{{item.ftime}}</view>
+  </view>
+</block>
+</view>
+</block>

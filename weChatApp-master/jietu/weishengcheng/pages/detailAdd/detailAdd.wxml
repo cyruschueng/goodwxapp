@@ -1,0 +1,93 @@
+<import src="/zanui/toast/index.wxml" />
+<!--index.wxml-->
+<view class="container page__bd" >
+  <view bindtap="help" >
+    <image src="http://icons.maiyizhi.cn/shuoming.png" style="width: 750rpx;height:132rpx;"></image>
+  </view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input" bindtap="avatarMenu" style="height:60px;line-height:60px;">
+        <view class="weui-cell__hd">
+          <view class="weui-label">发布人头像</view>
+        </view>
+        <view class="weui-cell__bd" >
+          <image style="width: 50px;height: 50px;display: block;float: right;" src="{{detail.avatar?detail.avatar:'http://icons.maiyizhi.cn/default_avatar.png'}}" mode="aspectFill"></image>
+          <view style="clear: both;"></view>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">发布人昵称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input name="name"  style="text-align: right;" class="weui-input" value="{{detail.name}}" placeholder="请输入昵称" bindinput="bindName"/>
+          <!--
+          <image src="http://icons.maiyizhi.cn/lianxiren.png?V6" style="width: 2.58em;height: 2.58em;margin-top: 0.004em;float:right;"></image>
+          <view style="clear: both;"></view>
+          -->
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" bindtap="nav" id="/pages/detailExtra/detailExtra?type=time" >
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">发布时间</view>
+        </view>
+        <view class="weui-cell__bd">
+            <text style="display: block;color: #888;text-align:right;margin-right:25px;" class="weui-input">{{detail.time?detail.time:'1分钟前'}}</text>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title"> </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select" bindtap="nav" id="/pages/detailExtra/detailExtra?type=source"  style="display:none;">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">来源</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text style="display: block;color: #888;text-align:right;margin-right:25px;" class="weui-input">{{detail.source?detail.source:'选填'}}</text>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_select" bindtap="nav" id="/pages/detailExtra/detailExtra?type=loc">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">所在位置</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text style="display: block;color: #888;text-align:right;margin-right:25px;" class="weui-input">{{detail.city?detail.city:'选填'}}{{detail.loc?'·'+detail.loc:''}}</text>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view>
+    </view>
+
+
+      <view class="weui-cells__title"> </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <textarea placeholder="请输入内容" name="content" value="{{detail.content}}" style="height: 80px;margin: 8px 0;" bindinput="bindContent" maxlength="800"></textarea>
+        </view>
+        <view style="padding: 0 15px;">
+          <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{detail.files}}" wx:key="{{item.url}}">
+                  <view class="weui-uploader__file" bindtap="deleteImage" id="{{item.url}}">
+                    <image class="weui-uploader__img" src="{{item.url}}" mode="aspectFill" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+          </view>
+          </view>
+        </view>
+      </view>
+
+    <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

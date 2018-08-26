@@ -1,0 +1,39 @@
+<!--pages/shareHistory/shareHistory.wxml-->
+
+<!--分享列表  -->
+
+<view class="header">
+  <image class="background" src="{{IMG_PATH}}/sharehistory.jpg"></image>
+  <view class="user-box">
+    <image class="userImg" src="{{userInfo.profileImage}}"></image>
+    <view class="name">{{userInfo.nick_name}}</view>
+    <view class="btn-box">
+      <view class="mess" bindtap="bindToLetter">
+        <image src="{{IMG_PATH}}/historyMess.png"></image>
+        <text>私信</text>
+      </view>
+      <view class="follow" wx:if="{{!isNotice}}" bindtap="bindFollow" data-id="{{userId}}">
+        <image src="{{IMG_PATH}}/historyFollow.png"></image>
+        <text>关注</text>
+      </view> 
+      
+      <view class="follow" wx:if="{{isNotice}}" bindtap="bindDelFollow" data-id="{{userId}}">
+        <image src="{{IMG_PATH}}/okicon.png"></image>
+        <text>已关注</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="images-box flex-box">
+  <view class="box-1">
+    <view wx:for="{{arr1}}" wx:key="{{index}}">
+       <image data-id="{{item.id}}" bindtap="goToShareDetail" src="{{item.imgUrl}}" mode="widthFix"></image>
+    </view>
+  </view>
+  <view class="box-2">
+    <view wx:for="{{arr2}}" wx:key="{{index}}">
+       <image data-id="{{item.id}}" bindtap="goToShareDetail" src="{{item.imgUrl}}" mode="widthFix"></image>
+    </view>
+  </view>
+</view>

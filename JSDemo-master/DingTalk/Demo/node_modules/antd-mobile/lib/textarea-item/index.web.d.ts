@@ -1,0 +1,38 @@
+/// <reference types="react" />
+import React from 'react';
+import TextareaItemProps from './PropsType';
+export interface TextareaItemState {
+    focus?: boolean;
+    focused?: boolean;
+}
+export default class TextareaItem extends React.Component<TextareaItemProps, TextareaItemState> {
+    static defaultProps: {
+        prefixCls: string;
+        prefixListCls: string;
+        autoHeight: boolean;
+        editable: boolean;
+        disabled: boolean;
+        placeholder: string;
+        clear: boolean;
+        rows: number;
+        onChange: () => void;
+        onBlur: () => void;
+        onFocus: () => void;
+        onErrorClick: () => void;
+        error: boolean;
+        labelNumber: number;
+    };
+    debounceTimeout: any;
+    scrollIntoViewTimeout: any;
+    constructor(props: any);
+    componentDidMount(): void;
+    componentDidUpdate(): void;
+    componentWillReceiveProps(nextProps: any): void;
+    componentWillUnmount(): void;
+    onChange: (e: any) => void;
+    onBlur: (e: any) => void;
+    onFocus: (e: any) => void;
+    onErrorClick: () => void;
+    clearInput: () => void;
+    render(): JSX.Element;
+}

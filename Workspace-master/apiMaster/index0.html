@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>API接口管理</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="js/layui/css/layui.css">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+		
+		<!--[if lt IE 9]>
+		  	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	  	<![endif]-->
+	  	<style type="text/css">
+	  		thead tr th{
+	  			text-align: center;
+	  		}
+	  		.btn-mr{
+	  			margin-right: 20px;
+	  		}
+	  	</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini fixed">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>A</b>PI</span>
+					<span class="logo-lg"><b>APIMaster</b></span>
+				</a>
+				<!-- Header Navbar -->
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">Toggle navigation</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown messages-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-envelope-o"></i>
+									<span class="label label-success">4</span>
+								</a>
+							</li>
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-bell-o"></i>
+									<span class="label label-warning">10</span>
+								</a>
+							</li>
+							<li class="dropdown tasks-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-flag-o"></i>
+									<span class="label label-danger">9</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<form action="#" method="get" class="sidebar-form">
+						<div class="input-group">
+							<input type="text" name="q" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+				                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+				                </button>
+				            </span>
+						</div>
+					</form>
+					<ul class="sidebar-menu" id="muenListView">
+						<!--<li class="header">HEADER</li>
+						<li class="active">
+							<a href="index.html"><i class="fa fa-link"></i> <span>API管理</span></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-files-o"></i> <span>页面字段配置</span></a>
+						</li>
+						<li class="header">BUTTON</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-th"></i> <span>按钮管理</span>
+								<span class="pull-right-container">
+					              	<i class="fa fa-angle-left pull-right"></i>
+					            </span>
+							</a>
+							<ul class="treeview-menu">
+								<li>
+									<a href="pages/new_file.html">按钮配置</a>
+								</li>
+								<li>
+									<a href="#">页面按钮配置</a>
+								</li>
+							</ul>
+						</li>-->
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<!-- Main content -->
+				<section class="content flow-default">
+		            <div class="form-horizontal">
+              			<div class="box-body">
+							<div class="form-group">
+			                  	<label for="api_name" class="col-sm-1 control-label">接口名：</label>
+			                  	<div class="col-sm-11">
+			                  		<input type="text" class="form-control" id="api_name">
+			                  	</div>
+			                </div>
+			                <div class="form-group">
+			                  	<label for="sql" class="col-sm-1 control-label">SQL：</label>
+			                  	<div class="col-sm-11">
+			                  		<textarea name="sql" class="form-control" id="sql" cols="30" rows="10" style="height:100px"></textarea>
+			                  	</div>
+			                </div>
+			                <div class="form-group">
+			                  	<label for="sql" class="col-sm-1 control-label">说明：</label>
+			                  	<div class="col-sm-11">
+			                  		<input type="text" class="form-control" id="explan">
+			                  	</div>
+			                </div>
+			                <div class="form-group">
+			                  	<label for="sql" class="col-sm-1 control-label"></label>
+			                	<div class="col-sm-11">
+			                		<button id="search" class="btn btn-primary btn-mr">搜索</button>
+				                	<button id="add" class="btn btn-primary btn-mr" onclick="addPop()">新增</button>
+				                	<button id="test" class="btn btn-primary">测试</button>
+			                	</div>
+		                	</div>
+				        </div>
+				    </div>
+			           
+		            <div class="box" style="margin-top: 30px;">
+			            <!-- /.box-header -->
+			            <div class="box-body">
+			              	<table id="example2" class="table table-bordered table-hover">
+			                	<thead>
+					                <tr>
+					                  <th width="15%">接口名</th>
+					                  <th width="45%">SQL</th>
+					                  <th width="20%">说明</th>
+					                  <th width="20%">操作</th>
+					                </tr>
+				                </thead>
+				                <tbody align="center" id="mainTableView">
+					                
+				                </tbody>
+			             	</table>
+							<!--<div id="callBackPager" style="float: right;"></div>-->
+							<!--<div style="clear: both;"></div>-->
+			            </div>
+			          </div>
+				</section>
+			</div>
+			<aside class="control-sidebar control-sidebar-dark">
+				<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+					<li class="active">
+						<a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a>
+					</li>
+					<li>
+						<a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="control-sidebar-home-tab">
+						<h3 class="control-sidebar-heading">Recent Activity</h3>
+						<ul class="control-sidebar-menu">
+							<li>
+								<a href="javascript:;">
+									<i class="menu-icon fa fa-birthday-cake bg-red"></i>
+									<div class="menu-info">
+										<h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+										<p>Will be 23 on April 24th</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+						<h3 class="control-sidebar-heading">Tasks Progress</h3>
+						<ul class="control-sidebar-menu">
+							<li>
+								<a href="javascript:;">
+									<h4 class="control-sidebar-subheading">
+						                Custom Template Design
+						                <span class="pull-right-container">
+						                  <span class="label label-danger pull-right">70%</span>
+						                </span>
+						            </h4>
+									<div class="progress progress-xxs">
+										<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+					<div class="tab-pane" id="control-sidebar-settings-tab">
+						<form method="post">
+							<h3 class="control-sidebar-heading">General Settings</h3>
+							<div class="form-group">
+								<label class="control-sidebar-subheading">
+	                                Report panel usage
+	                                <input type="checkbox" class="pull-right" checked>
+	                            </label>
+								<p>
+									Some information about this general settings option
+								</p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</aside>
+			<div class="control-sidebar-bg"></div>
+		</div>
+		<!--新增编辑api弹出窗HTML-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        	<h4 class="modal-title" id="gridSystemModalLabel">新增API信息</h4>
+			      	</div>
+				    <div class="modal-body">
+				       	<div class="form-horizontal">
+			  				<div class="box-body">
+					  			<div class="form-group">
+					  				<label for="popApiName" class="col-sm-2 control-label">接口名：</label>
+					  				<div class="col-sm-9">
+					  					<input type="text" class="form-control" id="popApiName">
+					  				</div>
+					  			</div>
+					  			<div class="form-group">
+				                  	<label for="sql" class="col-sm-2 control-label">SQL：</label>
+				                  	<div class="col-sm-9">
+				                  		<textarea name="sql" class="form-control" id="popSql" cols="30" rows="10" style="height:120px"></textarea>
+				                  	</div>
+				                </div>
+				                <div class="form-group">
+				                  	<label for="sql" class="col-sm-2 control-label">说明：</label>
+				                  	<div class="col-sm-9">
+				                  		<textarea name="sql" class="form-control" id="popExplan" cols="30" rows="10" style="height:120px"></textarea>
+				                  	</div>
+				                </div>
+				  			</div>
+			  			</div>
+				    </div>
+		      		<div class="modal-footer">
+		        		<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+		        		<button type="button" class="btn btn-primary" id="addSubmint">确认</button>
+		      		</div>
+		    	</div>
+		  	</div>
+		</div>
+		<!--测试api弹出窗口-->
+		<div class="modal fade" id="myTestModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        	<h4 class="modal-title" id="gridSystemModalLabel">测试API信息</h4>
+			      	</div>
+				    <div class="modal-body">
+				       	<div class="form-horizontal">
+			  				<div class="box-body">
+					  			<div class="form-group">
+					  				<label for="popApiName" class="col-sm-2 control-label">接口名：</label>
+					  				<div class="col-sm-10">
+					  					<input type="text" disabled="disabled" class="form-control" id="ApitestPopAPIname">
+					  				</div>
+					  			</div>
+					  			<div class="form-group">
+				                  	<label for="sql" class="col-sm-2 control-label">SQL：</label>
+				                  	<div class="col-sm-10">
+				                  		<textarea name="sql" disabled="disabled" class="form-control" id="ApitestPopSql" cols="30" rows="10" style="height:100px"></textarea>
+				                  	</div>
+				                </div>
+				                <table class="table table-bordered table-hover">
+				                	<thead>
+					                	<tr>
+					                		<th width="50%">参数</th>
+					                		<th width="50%">参数值</th>
+					                		<!--<th width="60%">执行结果</th>-->
+					                	</tr>
+				                	</thead>
+				                	<tbody align="center" id="ApitestPopView">
+				                	
+				                	</tbody>
+				                	<tfoot>
+				                		<tr align="center">
+							    			<td colspan="2"><button class="btn btn-primary" onclick="implementSql()">执行</button></td>
+							    		</tr>
+							    		<tr>
+							    			<td colspan="2"><strong>执行结果：</strong>打法的发送到发送到发顺丰打法的发送到发送到发顺丰打法的发送到发送到发顺丰打法的发送到发送到发顺丰打法的发送到发送到发顺丰</td>
+							    		</tr>
+				                	</tfoot>
+				                </table>
+				  			</div>
+			  			</div>
+				    </div>
+		      		<div class="modal-footer">
+		        		<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+		        		<button type="button" class="btn btn-primary">确认</button>
+		      		</div>
+		    	</div>
+		  	</div>
+		</div>
+		<!--测试加载模板-->
+		<script type="text/html" id="ApitestPopTpl">
+    		<tr>
+    			<td>{{d}}</td>
+    			<td>
+					<input class="form-control" type="text" name="" id="{{d}}" value="" style="width: 100%;"/>
+    			</td>
+    		</tr>
+		</script>
+		<!--接口列表加载模板-->
+		<script type="text/html" id="mainTableTpl">
+    		<tr>
+              	<td>{{d.JKM}}</td>
+              	<td>{{d.JKSQL}}</td>
+              	<td>{{d.JKBZ}}</td>
+              	<td>
+    				<button id="edit" class="btn btn-primary" onclick="editPop()">编辑</button>
+            		<button id="test1" class="btn btn-primary" onclick="ApitestPop()">测试</button>
+    				<button id="delete" class="btn btn-danger" onclick="deleteApi()">删除</button>
+              	</td>
+            </tr>
+		</script>
+		<!--左侧菜单栏加载模板-->
+		<script type="text/html" id="muenListTpl">
+			{{# for(var i = 0;i < d.length; i++){ }}
+				{{# if(d[i].isTwolevelmenu == 0){ }}
+					<li>
+						<a href="{{d[i].href}}"><i class="{{d[i].iconClass}}"></i> <span>{{d[i].muenName}}</span></a>
+					</li>
+				{{# } else { }}
+					<li class="treeview">
+						<a href="#"><i class="fa fa-th"></i> <span>{{d[i].muenName}}</span>
+							<span class="pull-right-container">
+				              	<i class="fa fa-angle-left pull-right"></i>
+				            </span>
+						</a>
+						<ul class="treeview-menu">
+							{{# for(var j = 0; j < d[i].Twolevelmenu.length;++j){ }}
+								<li>
+									<a href="{{d[i].Twolevelmenu[j].href}}">{{d[i].Twolevelmenu[j].name}}</a>
+								</li>
+							{{# } }}
+						</ul>
+					</li>
+				{{# } }}
+			{{# } }}
+		</script>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+		<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		<!--分页-->
+		<script src="js/extendPagination.js"></script>
+		<script src="js/layui/layui.js"></script>
+		<script src="js/layer/layer.js"></script>
+		<script src="js/laytpl.js"></script>
+		<script src="js/common.js"></script>
+		<script type="text/javascript">
+			$(function(){
+//				slimScroll();
+				// 新增提交
+				$('#addSubmint').on('click',function(){
+					var param = new Object;
+					param.APIname = $("#popApiName").val()
+					param.APIExplan = $("#popExplan").val()
+					param.APISql = $("#popSql").val()
+					console.log(param)
+				})
+				// 分页
+			    $('#callBackPager').extendPagination({
+			        totalCount: 250,
+			        showCount: 10,
+			        limit: 10,
+			        callback: function(curr, limit, totalCount) {
+			            // createTable(curr, limit, totalCount);
+			        }
+			    });
+			    
+			    $.get('js/data.json',function(d){
+			    	
+			    	for(var i=0;i<d.leftMuenList.length;i++){
+			    		if(d.leftMuenList[i].isTwolevelmenu == 1){
+//			    			console.log(d.leftMuenList[i].Twolevelmenu)
+			    			for(var j = 0;j<d.leftMuenList[i].Twolevelmenu.length;++j){
+//			    				console.log(d.leftMuenList[i].Twolevelmenu[j].name)
+			    			}
+			    		}
+			    	}
+			    	
+			    	var view = $("#muenListView");
+			    	var tpl = $("#muenListTpl").html();
+			    	laytpl(tpl).render(d.leftMuenList, function(html){
+					  	view.html(html)
+					});
+			    })
+			})
+			// 查询数据
+			function Query (){
+				$.ajax({
+					type:"get",
+					url:'js/data.json',
+					async:true,
+					success: function(d){
+						var view = $("#mainTableView")
+						var tpl = $('#mainTableTpl').html()
+						showData(view,tpl,d.apiList)
+					},
+				});
+			}
+			// 下拉加载
+			layui.use('flow', function(){
+				var flow = layui.flow;
+			  	flow.load({
+				    elem: '.content', //流加载容器
+				    done: function(page, next){ //执行下一页的回调
+			      		//模拟数据插入
+			      		setTimeout(function (){
+			      			next(Query(),page < 10)
+			      		},500 )
+				    }
+			  	});
+			});
+					
+			// 美化滚动条
+			function slimScroll (){
+				$('.wrapper').slimScroll({
+				    height: $(window).innerHeight()
+				});
+			}
+			
+			// 新增弹出窗口
+			function addPop (){
+				$("#popExplan").val('')
+				$("#popSql").val('')
+				$("#popApiName").val('')
+				$('#myModal').modal('show');
+			}
+			
+			// 编辑弹出窗口
+			function editPop (){
+				var popApiName = 'Category1'
+				var popExplanVal = '接口说明 所有接口以 api/get/cmd的形式访问, cmd即为列表中显示的指令 返回的status=0为正常，其它的异常 status=1 需要管理员登录，url中有登录地址 status=2需要用户登录 status=800 api内部错'
+				var popSqlVal = 'select Category.Id,Category.nickName,PictureBinary from Category left join _Picture ON Category.PictureId = _Picture.Id where Category.ParentCategoryId =[ParentCategoryId] AND Category.Deleted = 0;'
+				$("#popExplan").val(popExplanVal)
+				$("#popSql").val(popSqlVal)
+				$("#popApiName").val(popApiName)
+				$('#myModal').modal('show');
+			}
+			
+			// 测试弹出窗口
+			function ApitestPop (){
+				var popApiName = 'Category1'
+				var popExplanVal = '接口说明 所有接口以 api/get/cmd的形式访问, cmd即为列表中显示的指令 返回的status=0为正常，其它的异常 status=1 需要管理员登录，url中有登录地址 status=2需要用户登录 status=800 api内部错'
+				var popSqlVal = 'select [Category].Id,Category.nickName,PictureBinary from Category [left] join _Picture ON Category.[PictureId] = _Picture.Id where Category.ParentCategoryId =[ParentCategoryId] AND Category.Deleted = 0;'
+				$("#ApitestPopSql").val(popSqlVal)
+				$("#ApitestPopAPIname").val(popApiName)
+				$('#myTestModal').modal('show');
+				
+				// 正则匹配【】内参数
+				var reg = /\[(.+?)\]/g;
+				var paramArr = popSqlVal.match(reg);
+				var newParamArr = [];
+				for(var i = 0;i < paramArr.length;++i){
+					newParamArr.push(paramArr[i].replace(/^\[|\]$/g, ''))//去掉参数两边的【】
+				}
+				// 显示数据
+				var view = $('#ApitestPopView');
+				var tpl = $('#ApitestPopTpl').html()
+				view.empty();
+				showData(view,tpl,newParamArr)
+			}
+			
+			// 执行sql
+			function implementSql (){
+				var paramEle = $('#ApitestPopView input');
+				$.each(paramEle, function(i,v) {
+					console.log($(v).attr('id') +':'+ $(v).val() )
+				});
+				
+				var popSqlVal = 'select [Category].Id,Category.nickName,PictureBinary from Category [left] join _Picture ON Category.[PictureId] = _Picture.Id where Category.ParentCategoryId =[ParentCategoryId] AND Category.Deleted = 0;'
+				console.log(popSqlVal)
+			}
+			
+			// 删除
+			function deleteApi (){
+				api_confirm('确定要删除？','','',function(){
+					api_msg('删除失败')
+				})
+			}
+			
+//			$(window).resize(function(){
+//				slimScroll();
+//			})
+		</script>
+	</body>
+
+</html>

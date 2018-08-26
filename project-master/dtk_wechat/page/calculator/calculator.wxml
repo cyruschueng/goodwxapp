@@ -1,0 +1,112 @@
+<!--drawer.wxml-->
+<view class="container"  >
+  <view class="containerBox">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+      <!-- 显示结果 -->
+      <view class="section-box">
+         <view class="money sum">
+            <view class="section_sum">{{surplus}}<text>元</text></view>
+            <text>贴现金额</text> 
+        </view>
+        <view class="section_message">
+            <view class="section_days">
+                <view class="section__title">计息天数：</view>
+                <view class="content">{{sumdays}}天</view>
+            </view>
+            <view class="section_accural">
+                <view class="section__title">贴现利息：</view>
+                <view class="content">{{accural}}元</view></view>  
+        </view>
+    </view>
+
+    <!-- 计算 -->
+    <view class="section-box">
+        <view class="section money" style="border:0;">
+          <view class="section__title">票面金额：</view>
+          <input class="weui-input section-mian " type="text" name="sum" value="{{sum}}" type="digit" bindinput="sumMoney"/>
+          <text class="moneytext">万元</text>
+      </view>
+      <view class="section money" style="background:{{ybgcolor}}">
+          <view class="section__title">年 利 率：</view>
+          <input class="weui-input section-mian " type="text" name="yrate" value="{{fullrate}}" type="digit" disabled="{{year}}" bindinput="ycontrol"/>
+          <text class="moneytext">%</text>
+      </view>
+      <view class="section money" style="background:{{mbgcolor}}">
+          <view class="section__title">月 利 率：</view>
+          <input class="weui-input section-mian " type="text" name="rate" value="{{monrate}}" type="digit" disabled="{{month}}" bindinput="mcontrol"/>
+          <text class="moneytext">‰</text>
+      </view>
+      <view class="section money item">
+          <view class="section__title">贴 现 日：</view>
+          <picker mode="date" value="{{start_date}}" bindchange="bindStartDate" name="start_date">
+              <view class="picker">
+                {{start_date}}
+            </view>
+        </picker>
+        <view class="moneytext"><image src="../../image/calendar.png" width="30"></image></view>
+    </view>
+    <view class="section money item">
+      <view class="section__title">到 期 日：</view>
+      <picker mode="date" value="{{end_date}}" bindchange="bindEndDate" name="end_date">
+          <view class="picker">
+            {{end_date}}
+        </view>
+    </picker>
+    <view class="moneytext"><image src="../../image/calendar.png" width="30"></image></view>
+
+</view>
+<view class="section money">
+  <view class="section__title">调整天数：</view>
+  <input class="weui-input section-mian " type="text" name="days" type="number" value="{{days}}" bindinput="changeday"/>
+  <text class="moneytext">天</text>
+</view>
+<view class="section money">
+  <view class="section__title">每十万扣费：</view>
+  <input class="weui-input section-mian " type="text" name="lakh" value="{{lakh}}" type="digit" bindinput="lakhchange"/>
+  <text class="moneytext">元</text>
+</view>
+</view>
+<view class="btn-area">
+    <view class="btn_limit" wx:if="{{calshow}}">
+      <button type="warn" formType="submit" class="submit" bindtap="goticket">确 认</button>
+  </view>
+
+  <view class="btn_limit" wx:else>
+      <button type="warn" formType="submit" class="submit">计算</button>
+      <button formType="reset" class="reset">重置</button>
+  </view>
+</view>
+</form>
+</view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<view></view>

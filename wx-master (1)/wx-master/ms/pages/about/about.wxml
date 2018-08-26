@@ -1,0 +1,25 @@
+<!--pages/about/about.wxml-->
+<view class='container' catchtap='disappear'>
+  <view class='top'>
+    <image class='logo' src='../../images/logo.png'></image>
+  </view>
+  <view class='body'>
+    <view class='col row' catchtap='call'>
+      <view>客服电话</view>
+      <view class='right'>4000222058</view>
+    </view>
+    <view class='col row' catchtap='qrcode' data-type="qrcode">
+      <view>app下载</view>
+      <image src='../../images/qrcode.png' class='right'></image>
+    </view>
+    <view class='col row'>
+      <view>客服QQ</view>
+      <view class='right'>3229317073</view>
+    </view>
+  </view>
+  <block wx:if="{{show}}">
+    <view class='mask'>
+       <image src='../../images/qrcode.png' class='qrcode'></image>
+    </view>
+  </block>
+</view>

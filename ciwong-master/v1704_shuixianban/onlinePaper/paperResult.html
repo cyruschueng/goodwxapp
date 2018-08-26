@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" manifest="onlinePaper.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>在线作答</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <link rel="stylesheet" href="js/plyr/dist/plyr.css">
+    <link rel="stylesheet" href="js/swiper/swiper.min.css">
+    <link rel="stylesheet" href="css/gestalt.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <script src="js/adaptive.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/jquery-1.8.0.min.js"></script>
+    <script src="js/swiper/swiper.min.js"></script>
+    <script src="js/plyr/dist/plyr.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/require.js"></script>
+    
+    <script src="../common/js/common.js"></script>
+
+    <!--app 交互插件-->
+    <script src="../common/js/cordova.min.js"></script>
+</head>
+<body data-bind="if: paper">
+<div class="swiper-container swiper-container-h"
+     data-bind="template:{ name: 'paperTemplate', data: paper, afterRender: afterRender}"></div>
+<script type="text/javascript">
+    $.showLoading();
+
+    var  accessToken = $common.getUrlParaBase64('accessToken') || '';
+    var  clientId = $common.getUrlParaBase64('clientId') || '';
+    var  userId = $common.getUrlParaBase64('userId') || '';
+    var  brandId = $common.getUrlParaBase64('brandId') || '';
+    var  versionId = $common.getUrlParaBase64('versionId') || '';
+    var  doWorkId = $common.getUrlParaBase64('doWorkId') || '';
+    var authorization = '?grantType=hmac&clientId='+ clientId + '&userId='+ userId;
+
+    var apiData = {
+        list:'',
+        answers:''
+    }
+
+    // 设置超时报错
+    var firstTimer = setTimeout(function(){
+        if(apiData.list==='' || apiData.answers===''){
+            location.href=location.href;
+            return;
+        }
+    },30000)
+
+    getOnlineExamination()
+    getDoWorkInfo()
+    
+    // 获取在线作答试卷
+    function getOnlineExamination(){
+        // var url = 'http://121.14.117.254:8069/Package/ExaminationDataForApp?versionId='+ versionId;
+        var url = API.getOnlineExamination + authorization + '&versionId='+ versionId;
+        $common.ajax(url,function(response){
+            log = '返回用户答案'
+            var json = typeof response == 'string' ? JSON.parse(response) : response;
+            if((json.errcode==undefined || json.errcode!=0) || !json.data){
+                $.error(json.msg || log)
+            }else{
+                dataReady('getOnlineExamination',json.data);
+            }
+        },userId)
+    }
+    // 获取用户答案
+    function getDoWorkInfo(){
+        var url = API.getDoWorkInfo + authorization + '&doWorkId='+ doWorkId;
+        $common.ajax(url,function(response){
+            log = '返回用户答案'
+            var json = typeof response == 'string' ? JSON.parse(response) : response;
+            if((json.errcode==undefined || json.errcode!=0) || !json.data){
+                $.error(json.msg || log)
+            }else{
+                dataReady('getDoWorkInfo',json.data);
+            }
+        },userId)
+    }
+    // Api数据集中处理
+    function dataReady(method,data){
+        var json = typeof data == 'string' ? JSON.parse(data) : data;
+        if(method=='getOnlineExamination'){
+            apiData.list = json;
+        }else if(method=='getDoWorkInfo'){
+            apiData.answers = json;
+        }
+        // 所有数据接收完成才开始处理
+        if(apiData.list !=='' && apiData.answers !==''){
+            // 处理列表和用户答案
+            // 渲染页面
+            callback(apiData.list,apiData.answers.workAnswers)
+        }
+    }
+
+    function callback(data, userAnswer) {
+        require(["ko", "ciwong", "paper", "cordova", "questionResultTemplate"], function (ko, ciwong, paper) {
+            var settings = {
+                data: (typeof data) === "object" ? data : JSON.parse(data),
+                userAnswer: (typeof userAnswer) === "object" ? userAnswer : JSON.parse(userAnswer),
+                afterRender: after
+            }
+            ko.applyBindings(new paper.viewModel.resultView(settings));
+            
+            // 评论内容传给App
+            if(apiData.answers.comment){
+                ciwongPlugin.createEvent('GetComments' , [{source:3,comment:apiData.answers.comment}] ,function( response ){
+                    // alert(log + (typeof response=='string'?response:JSON.stringify(response)) )
+                })
+            }
+            document.title = apiData.list.title
+            if(/Iphone|Ipad|Ipod/i.test(navigator.userAgent)){
+                // ios需要主动请求更改文档标题
+                log = 'set SetTitle'
+                ciwongPlugin.createEvent('SetTitle' , [{source:3,title:document.title}] ,function( response ){
+                    // alert(log + (typeof response=='string'?response:JSON.stringify(response)) )
+                })
+            }
+        })
+    }
+
+    function after() {
+        var currPageY = 0,
+                boxH,
+                questBox = '.questArea',
+                answerBox = '.answerArea',
+                wrapperH = $(window).height(),
+                answerAreaH = $(answerBox).height(),
+                margins = parseInt(wrapperH * 0.1);
+
+        ciwong.swiperInstall = new Swiper('.swiper-container-h', {
+            onInit: function () {
+                new Swiper('.answerInfo', {nested: true})
+            }
+        })
+
+        var agentInfo = window.navigator.userAgent;
+        if (agentInfo.indexOf("iPhone") > -1 || agentInfo.indexOf("iPad") > -1 || agentInfo.indexOf("iPod") > -1) {
+            //$(".answerCon").height(wrapperH);
+        }
+
+        $(questBox).height(wrapperH - answerAreaH);
+        $(".weui_toast,.weui_masktransparent").remove()
+
+        $('.toggleBox .btn').on('touchstart', function (e) {
+            var box = $(this).closest('.wrapper');
+            var _touch = e.originalEvent.targetTouches[0];
+            currPageY = _touch.pageY;
+            boxH = box.find(answerBox).height();
+            ciwong.swiperInstall.lockSwipes();
+            e.preventDefault();
+        }).on('touchmove', function (e) {
+            var box = $(this).closest('.wrapper');
+            var _touch = e.originalEvent.targetTouches[0];
+            var currY = _touch.pageY;
+            if (currY <= 5) {
+                return;
+            }
+            if (currY < currPageY) {
+                if (box.find(answerBox).height() >= wrapperH - margins) {
+                    return;
+                }
+                var moveLen = currPageY - _touch.pageY;
+                box.find(answerBox).height(boxH + moveLen);
+                box.find(questBox).height(wrapperH - boxH - moveLen);
+            } else {
+                if (box.find(answerBox).height() <= margins * 3) {
+                    return;
+                }
+                var moveLen = _touch.pageY - currPageY;
+                box.find(answerBox).height(boxH - moveLen);
+                box.find(questBox).height(wrapperH - boxH + moveLen);
+            }
+            e.preventDefault();
+        }).on('touchend', ciwong.swiperInstall.unlockSwipes);
+    }
+</script>
+</body>
+</html>

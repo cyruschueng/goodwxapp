@@ -1,0 +1,68 @@
+<view class='container'>
+  <view class='address'>
+    <view class='showadd' wx:if="{{address!=''}}" bindtap='checkAdd'>
+      <view class='addleft'>
+        <image src='/pages/source/images/pos.png'></image>
+        <view>
+          <view class='addname'>
+            <text>{{address.consignee}}, </text><text>{{address.tel}}</text>
+          </view>
+          <view class='room'>
+            <text>{{address.province}} </text>
+            <text>{{address.city}} </text>
+            <text>{{address.area}}    </text>
+            <text>{{address.address}} </text>  
+          </view>  
+        </view>    
+      </view>
+      <view class='addright'>
+        <text>修改</text>
+        <image src='/pages/source/images/foward.png'></image>
+      </view>
+    </view>
+    <view class='bindadd'wx:if="{{address==''}}" bindtap='bindAdd'>
+      <view>
+        <image src='/pages/source/images/add.png'></image>
+        <text>点击输入您的地址</text>    
+      </view>
+      <image src='/pages/source/images/foward.png'></image> 
+    </view>
+  </view>
+    <view class='break'></view>  
+    <view class='item' wx:for='{{payment}}' wx:key="this">
+      <view class='itemInfo'>
+        <view>
+          <image src='{{item.goods_img}}'></image>
+        </view>
+        <view class='detail'>
+          <view class='itemTitle'>{{item.goods_name}}</view>
+          <view class='itemColor'>颜色: {{item.goods_attr_color}}</view>
+          <view class='itemSize'>尺寸: {{item.goods_attr_size}}</view>
+          <view class='itemSize'>数量: X{{item.goods_number}}</view>
+          <view class='itemPrice'>价格: ¥{{item.goods_price}}</view>
+        </view>
+      </view>
+      <view class='break'></view>
+    </view>  
+    <view class='sub'>
+      <view>实付款:<text class='sum'>¥{{sum}}</text></view>
+      <view bindtap='pay'>立即支付</view>
+    </view>
+</view>
+<view class='model' wx:if="{{hidden=='0'}}">
+  <view class='window'>
+    <view class='wintitle'>选择您的地址</view>
+    <view class='list'>
+      <view wx:for="{{addressList}}" class='addItem' bindtap='changeAdd' data-index='{{index}}'>
+        <view>{{item.consignee}},{{item.tel}}</view>
+        <view>
+          <text>{{item.province}} </text>
+          <text>{{item.city}} </text>
+          <text>{{item.area}} </text>
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+    <image class='close' bindtap='close' src='/pages/source/images/close.png'></image>
+  </view>
+</view>

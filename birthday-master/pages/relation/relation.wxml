@@ -1,0 +1,26 @@
+<!--pages/relation/relation.wxml-->
+<view class="container">
+    <view class="checked-list clearfix">
+        <view wx:for="{{list}}">
+            <view data-friendindex="{{item.inx}}" wx:for-item="das"  wx:for="{{item.types}}" 
+                  data-index="{{index}}" class="checked" wx:if="{{das.active==true}}" bindtap='del'>
+                <view class="del" >x</view>{{das.title}}
+            </view>
+        </view>
+    </view>
+    <!--list  -->
+    <view class="group-list">
+      <view class="group open" wx:for="{{list}}">
+          <view data-groupidx="{{index}}" class="group-title"  bindtap='group'>{{item.title}}</view>
+          <view class="group-wrap clearfix" wx:if="{{index==nowIndex}}">
+              <view  wx:for="{{item.types}}" data-friendindex="{{item.inx}}"  
+                    data-index="{{index}}" wx:for-item="das" 
+                    data-active="{{das.active}}" class="relation" bindtap='checked' >
+                {{das.title}}
+                <view class="ckd" wx:if="{{das.active==true}}">·</view>
+              </view>
+          </view>
+      </view>
+    </view>
+    <view class="submit" bindtap='save'>保存</view>
+</view>

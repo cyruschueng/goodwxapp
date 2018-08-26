@@ -1,0 +1,54 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+     <form bindsubmit="submit">
+    <view class="page__bd">
+  
+        <view class="weui-cells__title">添加同学</view>
+        <view class="weui-cells weui-cells_after-title">
+            <!-- <view class="weui-cell weui-cell_input"  wx:if="{{mode=='parent'}}">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">学号</view>
+                </view>
+                <view class="weui-cell__bd" >
+                    <input class="weui-input" bindinput="bindKeyInput" disabled="true" id="student_code"  name="student_code" value='{{student_code}}' placeholder="请输入学号"/>
+                </view>
+            </view> -->
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input"  bindinput="bindKeyInput" id="name" value='{{name}}'  name="name" placeholder="输入姓名"/>
+                </view>
+            </view>
+             <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" type='number'  value='{{phone}}' name="phone" bindinput="bindKeyInput" id="phone"  placeholder="输入电话号码"/>
+                </view>
+            </view>
+
+
+                <!-- <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">所教科目</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="teachRoleChange" value="{{teachRoleIndex}}" range="{{teachRoles}}">
+                        <view class="weui-select weui-select_in-select-after">{{teachRoles[teachRoleIndex]}}</view>
+                    </picker>
+                </view>
+            </view> -->
+
+          
+        </view>
+   
+
+    
+        <view class="weui-btn-area">
+            <button class="weui-btn" loading="{{button_loadding}}" type="primary" disabled='{{button_disable}}' style='background-color:#1e90ff;' formType="submit">保存</button>
+        </view>
+    </view>
+    </form>
+</view>

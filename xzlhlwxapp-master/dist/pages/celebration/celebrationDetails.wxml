@@ -1,0 +1,127 @@
+<!--pages/celebration/celebrationDetails.wxml-->
+
+<view class='body' wx:if='{{ celebration }}'>
+  <!-- 头部 -->
+  <view class='celeTitle'>
+    <view class='ttle'>风格：<text class='txt'>{{ celebration.styles }}</text></view>
+    <view class='weui-flex ttle'>
+      <view>主题：</view>
+      <view class='weui-flex__item  txt'>{{ celebration.theme }}</view>
+    </view>
+    <view class='ttle'>参考价：<text class='txt'>￥{{ celebration.basicPrice }}</text></view>
+  </view>
+
+  <!-- 效果展示 -->
+  <view class='celeShow' wx:if='{{ celebration.showImgs.length > 0 }}'>
+    <view class='title-txt-arrow-cell'>     
+      <view class="weui-cell__ft weui-cell__ft_in-access" bindtap='bindMorePicTap'>
+        <text class='title'>效果展示</text>  
+        <text class='text'>查看更多</text>
+      </view>
+    </view> 
+    <view class='show-img' wx:for="{{ celebration.showImgs }}" wx:for-item="imgurl" wx:key="{{ index }}">
+      <image mode='aspectFill' src='{{ imgurl }}'></image>
+    </view>
+  </view>
+
+  <!-- 套餐详情 -->
+  <view class='celeDetails'>
+    <view class='title-cell'>
+      <text>{{ celebration.comboname }}</text>
+      <text class='price'>￥{{ celebration.luxuryPrice }}</text>
+    </view>
+    <view class='detail-title ttle'>套餐详情</view>
+
+    <!-- 外层 -->
+     <block wx:for="{{ celebration.celeDesc }}" wx:for-item="descItem" wx:key="{{ index }}">
+    <view class='detail-bg-view' style='{{ index%2 == 0 ? "" : "margin-left:8%;" }}'>
+      <view class='boder-top-view' style='{{ index%2 == 0 ? "left:6%;right:16%;" : "left:10%;right:10%;" }}'></view>
+      <view class='boder-bottom-view' style='{{ index%2 == 0 ? "left:8%;right:14%;" : "left:12%;right:8%;" }}'></view>
+      <view class='boder-title-view' style='{{ index%2 == 0 ? "left:3%;" : "right:5%;" }}'>{{ descItem.name }}</view>
+      <view class='inside-text-view' style='{{ index%2 == 0 ? "" : "margin-left:10%;" }}'>
+         <!-- 里层  -->
+        <block wx:if="{{ descItem.array }}" wx:for="{{ descItem.array }}" wx:for-item="text" wx:key="{{ index }}">
+          <view>{{ index+1 }}、{{ text }}</view>
+        </block>
+         <!-- 里层结束  -->
+      </view>
+    </view>
+    </block> 
+    <!-- 外层结束 -->
+
+
+    <!-- 外层 -->
+    <!-- <block wx:for="{{ celebration.details }}" wx:for-item="desc" wx:key="{{ index }}">
+    <view class='weui-flex details'>
+      <view class='icon'>
+        <image src='{{ desc.iconUrl }}'></image>
+      </view>
+      <view class='desc'> -->
+        <!-- 里层 -->
+        <!-- <block wx:for="{{ desc.celeDesc }}" wx:for-item="descItem" wx:key="{{ index }}">
+        <view class='weui-flex'>
+          <view class='desc-ttle ttle'>
+            <text>{{ descItem.name }}：</text>
+          </view>
+          <view class='weui-flex__item'>
+            <text class='txt' wx:if="{{ descItem.text }}" >{{ descItem.text }}</text>
+            <view class='txt' wx:if="{{ descItem.array }}" wx:for="{{ descItem.array }}" wx:for-item="text" wx:key="{{ index }}">{{ index+1 }}、{{ text }}</view> 
+          </view>
+        </view>
+        </block> -->
+        <!-- 里层结束 -->
+      <!-- </view>
+    </view>
+    </block> -->
+    <!-- 外层结束 -->
+  </view>
+</view>
+
+<!-- 预订按钮 -->
+<view class='weui-footer weui-footer_fixed-bottom weui-flex appointment-view' wx:if='{{ celebration }}'>
+  <view class='weui-flex__item'>
+    <image class='comment-icon' src='../../images/comment-gray.png' bindtap='goDishesCommentPage'></image>
+  </view> 
+  <view class='weui-flex__item appointment-btn' bindtap='bindAppointmentTap' hidden='{{ prepagetype == "home" }}'>预定</view>
+</view>
+
+<!-- 弹窗 -->
+<view class='select-package' hidden='{{ selectPackage }}'>
+  <view class="weui-cells weui-cells_after-title select-view">
+
+    <view class='checkbox-view' wx:for="{{ checkboxItems }}" wx:key="{{ index }}">
+    
+      <view class='base-view' id='{{ index }}' bindtap='bindCheckBoxTap'>
+        <!-- <checkbox class="weui-check" value="{{ item.value }}" checked="{{ item.checked }}"/> -->
+        <!-- 套餐名 -->
+        <text>{{ item.name }}</text>
+        <icon class="weui-icon-checkbox_circle" type="circle" size="20" wx:if="{{ !item.checked }}"></icon>
+        <icon class="weui-icon-checkbox_success" type="success" size="20" wx:if="{{ item.checked }}"></icon>
+      </view>
+
+      <view class='stage-view' data-stage='stage' id='{{ index }}' bindtap='bindCheckBoxTap'>
+        <!-- <checkbox class="weui-check" value="{{ item.stagevalue }}" checked="{{ item.stage }}"/> -->
+        <!-- 有全息 -->
+        <icon class="weui-icon-checkbox_circle" type="circle" size="20" wx:if="{{ !item.stage }}"></icon>
+        <icon class="weui-icon-checkbox_success" type="success" size="20" wx:if="{{ item.stage }}"></icon>
+        <text>有全息(需另加 <text class='price'>¥{{ item.stagePrice }}</text>)</text>
+        <!-- 无全息 -->
+        <!-- <icon class="weui-icon-checkbox_circle" type="circle" size="20" wx:if="{{ !item.notStage }}" data-stage='notstage' id='{{ index }}' bindtap='bindCheckBoxTap'></icon>
+        <icon class="weui-icon-checkbox_success" type="success" size="20" wx:if="{{ item.notStage }}" data-stage='notstage' id='{{ index }}' bindtap='bindCheckBoxTap'></icon>
+        <text>无全息</text> -->
+      </view>
+
+    </view>
+
+    <view class='weui-flex btn-view' >
+      <view class='weui-flex__item'>
+        <button class='cancel-btn' bindtap='bindCancelTap'>取消</button>
+      </view>
+      <view class='weui-flex__item'>
+        <button class='define-btn' bindtap='bindDefineTap'>确定</button>
+      </view>
+    </view>
+    
+
+  </view>
+</view>

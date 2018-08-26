@@ -1,0 +1,28 @@
+<include src='/utils/wxml/projectDetail' />
+
+<include src='/utils/wxml/common' />
+
+<view class="flex t-aboutNetwork" wx:if="{{nonet}}">
+  <view class="t-flexBox" hover-class="t-hoverColor" bindtap="moreProject">
+    <image src='/img/icon-shouye@2x.png' class="t-shopPic"></image>
+    <view class='t-shopBlock'>首页</view>
+  </view>
+  <view class="t-line"></view>
+  <view class="t-flexBox">
+    <view class='t-shopBlock' wx:if="{{score}}" bindtap="projectRemark" hover-class="t-hoverColor">
+      <image src='/img/icon-pingjia@2x.png' class="t-shopPic"></image>
+      评价</view>
+  </view>
+  <view class="t-line"></view>
+  <view class="t-flexBox" bindtap="maintainProject" hover-class="t-hoverColor">
+    <image src='/img/icon-fenxiang@2x.png' class="t-shopPic"></image>
+    <button class='t-shopBlock' open-type="share">分享</button>
+  </view>
+  <view class="t-line"></view>
+  <view class="t-flexBox" catchtap="businessBook" hover-class="t-hoverColor">
+    <image src='/img/icon-jihuashu@2x.png' class="t-shopPic"></image>
+    <view class='t-shopBlock'>商业计划书</view>
+  </view>
+  <view class="t-line"></view>
+  <view class='t-creatProject' catchtap="contactPerson" hover-class="t-redColor">联系项目方</view>
+</view>

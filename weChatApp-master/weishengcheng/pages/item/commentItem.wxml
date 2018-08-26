@@ -1,0 +1,33 @@
+<template name="comment_item">
+    <block wx:if="{{mode=='detail'}}">
+        <view  class="cmt-item" catchtap="operateComment" data-index="{{index}}" id="{{idx}}" data-fname="{{item.name}}" >
+            <view style="padding: 0 4px 0 0;">
+                <image lazyload="true" mode="aspectFill" class="like-avatar" src="{{item.avatar}}"></image>
+            </view>
+            <view style="width:100%;">
+                <view style="width: 100%;" class="flex_row">
+                    <view class="news_name" style="width:57%;margin-top:-5px;font-size: 14px;color: #576b95;font-weight:700;overflow:hidden;word-break:keep-all; white-space:nowrap;">{{item.name}}</view>
+                    <view style="font-size: 11px;text-align:right;color:#828282;width:43%;">{{item.time?item.time:'1分钟前'}}</view>
+                </view>
+                <view>
+                    <text wx:if="{{item.fName && item.fName!=name}}" style="color:#1e1e20;">回复</text>
+                    <text wx:if="{{item.fName && item.fName!=name}}" style="font-size: 14px;color: #576b95;font-weight:700;">{{item.fName}}：</text>
+                    <text class="word-break:break-all;">{{item.content}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="cmt-item" style="border:none;" catchtap="operateComment" data-index="{{index}}" id="{{idx}}" data-fname="{{item.name}}" >
+            <view style="width:100%;font-size: 14px;">
+                <view>
+                    <text class="news_name" style="color: #576b95;font-weight:700;">{{item.name}}</text>
+                    <text wx:if="{{item.fName && item.fName!=name}}" style="color:#1e1e20;">回复</text>
+                    <text wx:if="{{item.fName && item.fName!=name}}" style="color: #576b95;font-weight:700;"> {{item.fName}}</text>
+                    <text class="word-break:break-all;">：{{item.content}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+
+</template>

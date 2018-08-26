@@ -1,0 +1,31 @@
+<include src='/utils/wxml/common' />
+
+<scroll-view scroll-y="true" scroll-top="{{scroll}}" bindscrolltolower="loadMore" style="height:1334rpx" >
+  <view wx:if="{{activity.length != 0}}">
+    <block wx:for="{{activity}}" wx:key="{{index}}">
+      <view class="activityBox" data-id="{{item.activity_id}}" bindtap='activityDetail' hover-class="t-hoverColor">
+        <view class="topBox flex">
+          <view class="activityPic" wx:if="{{!item.main_image}}"></view>
+          <image class="activityPic" src='{{item.main_image}}' wx:if="{{item.main_image}}"></image>
+          <view class="activityContent">{{item.activity_title}}</view>
+        </view>
+        <view class="activityInfo">
+          <view class="title">时间:
+            <label class="content" wx:if="{{item.start_time || item.end_time}}">{{item.start_time}}~{{item.end_time}}</label>
+            <label class="content" wx:if="{{!item.start_time && !item.end_time}}">暂未编辑</label>
+          </view>
+          <view class="title">地址:
+            <label class="content" wx:if="{{item.activity_address}}">{{item.activity_address}}</label>
+            <label class="content" wx:if="{{!item.activity_address}}">暂未编辑</label>
+          </view>
+          <view class="title">主办方:
+            <label class="content" wx:if="{{item.activity_user}}">{{item.activity_user}}</label>
+            <label class="content" wx:if="{{!item.activity_user}}">暂未编辑</label>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 为空-->
+<image src="{{imgUrls}}" class="backgroundPic" wx:if="{{activity.length == 0}}"></image>
+</scroll-view>

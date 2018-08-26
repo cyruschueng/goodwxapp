@@ -1,0 +1,107 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{tipMsg}}</view>
+    <view class="weui-cells weui-cells_after-title" style="margin-top:20px;">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" maxlength="80" bindinput="themeInput" placeholder="请输入投票主题" style="height: 3.3em" />
+          <view class="weui-textarea-counter">{{themeCount}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title" style="height:16px;"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <block wx:for="{{checkboxItems}}">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" data-index="{{index}}" bindinput="optionInput" maxlength="25" placeholder="选项{{item.value}}" />
+          </view>
+          <view class="weui-cell__hd" bindtap="deleteClick" data-index="{{index}}" hidden="{{item.checked}}">
+            <icon class="weui-icon-checkbox_circle" type="cancel" size="23"></icon>
+          </view>
+        </view>
+      </block>
+      <view class="weui-cell weui-cell_link" bindtap="addCheckItem" hidden="{{addMore}}">
+        <view class="weui-cell__bd">添加选项</view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">最多支持10个选项，每个选项不超过40个字</view>
+
+    <view class="weui-cells__title" style="margin-top:16px;"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <text style="margin-left:15px;padding-right:20px;">最多选项</text>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindAccountChange" value="{{accountIndex}}" range="{{accounts}}">
+            <view class="weui-select">{{accounts[accountIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">结束日期</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+          <view class="weui-input">{{date}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">结束时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+          <view class="weui-input">{{time}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">匿名投票</view>
+        <view class="weui-cell__ft">
+          <switch bindchange="switchhandle" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">开启后，投票发起人仍可查看投票人详情</view>
+
+    <view class="page__bd">
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <!--<view class="weui-uploader__file weui-uploader__file_status">
+                    <image class="weui-uploader__img" src="" mode="aspectFill" />
+                    <view class="weui-uploader__file-content">50%</view>
+                  </view>-->
+                  <block wx:for="{{files}}" wx:key="*this">
+                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                      <view style="position:relative;">
+                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                        <image class="image_delete" id="{{index}}" data-index="{{index}}" catchtap="deleteImage" src="../../imgs/delete.png"></image>
+                      </view>
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" hidden="{{uploadHidden}}">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells__tips">可上传一张和主题相关的图片</view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="publish">发布</button>
+    </view>
+  </view>
+</view>

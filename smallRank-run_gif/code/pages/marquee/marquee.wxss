@@ -1,0 +1,26 @@
+@keyframes around {
+    from {
+        transform: translate3d(50%, 0, 0)   ;
+        -webkit-transform: translate3d(50%,0, 0) ;
+    }
+    to {
+        transform: translate3d(-80%, 0, 0)   ;
+        -webkit-transform: translate3d(-80%,0, 0) ;
+    }
+  }
+
+.marquee_container{
+  position: relative;
+  width: 100%;
+}
+.marquee_container:hover{
+  animation-play-state: paused;  
+}
+.marquee_text{
+  display: inline-block;
+  white-space: nowrap;
+  animation-name: around;
+  animation-duration:15s;
+  animation-iteration-count: infinite;
+  animation-timing-function:linear;
+}

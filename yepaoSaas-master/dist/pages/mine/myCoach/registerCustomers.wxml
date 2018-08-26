@@ -1,0 +1,23 @@
+<!--pages/mine/myCoach/registerCustomers.wxml-->
+
+<view class='bg-view'>
+
+  <view class='weui-flex rec-cell' bindtap='bindSelectedMemTap'>
+    <view class='title'>会员选择</view>
+    <view class='weui-flex__item {{ selectCustName == "点击选择会员" ? "deepGryColor" : "" }}'>{{ selectCustName }}</view>
+  </view>
+
+  <view class='weui-flex content-view'>
+    <view class='title'>任务内容</view>
+    <view class='weui-flex__item'>
+      <text hidden='{{ textareaPlaceHidden }}' class='placeholder-text'>输入任务内容</text>
+      <textarea bindconfirm='bindTextareaBlur' bindinput='bindTextareaInpput' />
+    </view>
+  </view>
+
+  <view class='foot-view weui-flex' >
+    <view class='left-btn weui-flex__item' >取消</view>
+    <view class='right-btn weui-flex__item' bindtap='bindJoinTaskListTap'>加入任务列表</view>
+  </view>
+
+</view>

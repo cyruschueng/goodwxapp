@@ -1,0 +1,82 @@
+ <image bindtap='toPause' class="music {{showView3?'show':''}}" src='/pages/imgs/start_button.png'></image>
+ <image bindtap='toStart' class="music {{showView4?'show':''}}" src='/pages/imgs/pause_button.png'></image>
+ <image src='https://www.mqtp8.cn/imgs/birthday2.jpg' class='bg_color'>
+</image>
+
+<view class='footer'>
+  <view class='info_box'>
+    <image class="photo" src="{{imgUrl}}" background-size="cover"> </image>
+    <view class='name'>{{name}}</view>
+    <view class='tip'>恭喜发财 ☻ 财源滚滚</view>
+    <image bindtap='slideUp' class="theme_button" src="/pages/imgs/themeContent_button.png"> </image>
+  </view>
+</view>
+
+<!-- 滑动层 -->
+  <view class="index_content" animation="{{animationData}}">
+  <view class='nav'>
+        <text class='nav_text'>设置红包</text>
+        <image bindtap='slideDown' class='nav_hide' src='/pages/imgs/nav_hide.png'></image>
+        <view class='clearfix'></view>
+      </view>
+    <form bindsubmit="formSubmit">
+    <!-- 文字祝福 -->
+    <view class="{{showView?'show':''}}">  
+      <view class="index_content_info">
+        <text class="index_content_title">祝福语 :</text>
+          <view class="index_content_input1 form-group">
+            <input bindinput="check" name="input_key" maxlength='20'  placeholder="请输入祝福语 (最多20个字)"></input>
+          </view>
+          <view class='clearfix'></view>
+          <view class='switchPlay' bindtap='word'>切换为语音祝福</view>
+      </view>
+    </view>
+    <!-- 语音祝福 -->
+    <view class="{{showView1?'show':''}}">  
+      <view class="index_content_info">
+        <text class="index_content_title">祝福语 :</text>
+        <view wx:if="{{isPlay}}" class="playVoice" bindtap='playVoice'>试听</view>
+          <image type="primary" bindtouchstart="touchdown" bindtouchend="touchup" class='voicePhone' src='/pages/imgs/voicePhone.png'></image>
+          <view class='clearfix'></view>
+          <view class='switchPlay' bindtap='voice'>切换为文字祝福</view>
+      </view>
+    </view>
+<!-- 麦克风帧动画 -->
+        <view wx:if="{{isSpeaking}}"  class="playStyle">  
+          <image class="play-style" src="/pages/imgs/playIcon1.png" ></image>  
+          <image wx:if="{{j==2}}" class="play-style" src="/pages/imgs/playIcon1.png" ></image>  
+          <image wx:if="{{j==3}}" class="play-style" src="/pages/imgs/playIcon2.png" ></image>  
+          <image wx:if="{{j==4}}" class="play-style" src="/pages/imgs/playIcon3.png" ></image>
+        </view>
+
+      
+      <view class='index_content_info'>
+      <view class="index_content_info_mt">
+        <view class="index_content_title1">祝福金 :</view>
+          <view class="index_content_input2 form-group">
+            <input type='digit' bindinput='word_length' value="{{tel}}"  name="input_money" placeholder="填写金额 (元)"></input>
+          </view>
+          <view class="clearfix"></view>
+      </view>
+      
+      <view class="index_content_info_mt">
+        <view class="index_content_title1">祝福数 :</view>
+          <view class="index_content_input2 form-group">
+            <input type='number' bindinput='word_length2' value="{{tel2}}" name="input_count" placeholder="填写数量 (个)"></input>
+          </view>
+          <view class="clearfix"></view>
+      </view>
+      <view class="clearfix"></view>
+      </view>
+      <view class='myMoney'>余额：{{myCount}}元</view>
+ <view class="record-style">   
+ <!-- bindtouchstart="touchdown" bindtouchend="touchup"  -->
+ <button class='submit' formType="submit">
+ <image class="pay" src='/pages/imgs/pay.png'></image>
+ </button>
+ <view class='pay_tip'>未领取金额,将在24小时内返回到余额</view>
+      <!-- <button bindtap='payMoney'  formType="submit"  class="index_content_botton" style="background-color:#d24d46;" >生成语音口令</button> -->
+  </view> 
+  </form>
+  </view> 
+

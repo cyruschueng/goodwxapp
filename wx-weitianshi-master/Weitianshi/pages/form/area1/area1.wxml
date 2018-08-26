@@ -1,0 +1,17 @@
+<include src='/utils/wxml/common' />
+<view id="payArea" class="flex" wx:if="{{nonet}}">
+  <scroll-view scroll-y="true" class="frame_province">
+    <view>
+      <block wx:for="{{province}}" wx:for-index='idx' wx:key="{{item.area_id}}">
+        <view class="province {{item.check == true ? 'checkOn':''}}" bindtap="province" data-index="{{idx}}" data-id='{{item.area_id}}'>{{item.area_title}}</view>
+      </block>
+    </view>
+  </scroll-view>
+  <scroll-view scroll-y="true" class="frame_city">
+    <view>
+      <block wx:for="{{city}}" wx:for-index='idx' wx:key="{{item.area_id}}">
+        <view class="city {{item.check == true ? 'checkOn2':''}}" bindtap="city" data-index='{{idx}}' data-id='{{item.area_id}}' wx:key="{{item.area_id}}">{{item.area_title}}</view>
+      </block>
+    </view>
+  </scroll-view>
+</view>

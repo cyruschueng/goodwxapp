@@ -1,0 +1,47 @@
+<!--pages/order-details/order-details.wxml-->
+<view class='container'>
+  <view class='section-hd'>
+    <view class='order-state'>订单状态：{{order_state}}</view>
+    <view class='order-num'>订单号：{{order_num}}</view>
+  </view>
+  <view class='order-time'>下单时间：{{order_time}}</view>
+  <view class='express'>
+    <view>配送方式</view>
+    <view>{{express}}</view>
+  </view>
+  <view class='user-info'>
+    <view class='user-info-hd'>
+      <view class='name'>{{name}}</view>
+      <view class='phone'>{{phone}}</view>
+    </view>
+    <view class='address'>{{address}}</view>
+  </view>
+  <view class='goods-list'>
+    <view class='goods-items' wx:for='{{items}}' wx:key='code' wx:for-item='item'>
+      <image class='goods-img' src='{{item.goods_thumb}}'></image>
+      <view class='goods-text'>
+        <view class='goods-title'>{{item.goods_name}}</view>
+        <view class='goods-num'>
+          <view class='goods-price'>￥{{item.goods_price}}</view>
+          <view class='sale-num'>X{{item.goods_num}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='goods-totalPrice'>
+    <view>商品金额</view>
+    <view>￥{{goods_totalPrice}}</view>
+  </view>
+  <view class='freight'>
+    <view>运费</view>
+    <view>￥{{freight}}</view>
+  </view>
+  <view class='totalPrice'>
+    <view>订单总价</view>
+    <view>￥{{totalPrice}}</view>
+  </view>
+  <view class='order-manage' wx:if='{{orderState}}'>
+    <view class='cancel-order' bindtap='deleteOrder'>取消订单</view>
+    <view class='toPay' bindtap='toPay'>立即支付</view>
+  </view>
+</view>

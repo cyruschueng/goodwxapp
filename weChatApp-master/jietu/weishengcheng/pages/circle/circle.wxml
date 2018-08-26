@@ -1,0 +1,57 @@
+<import src="../item/newsItem.wxml" />
+<import src="/zanui/toast/index.wxml" />
+<import src="../../wux/dialog/dialog.wxml"/>
+
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view class="container page__bd" style="position: relative;" bindlongtap="popup">
+    <view class="header" style="position: relative;" catchtap="editInfo" >
+        <image wx:if="{{!info.banner}}" src="" style="width:750rpx;height:512.5rpx;background-color: #434343;"></image>
+        <view wx:if="{{!info.banner}}" style="color: #151515;font-size: 16px;position: absolute;left:275rpx;top:244.25rpx;">轻触设置相册封面</view>
+        <image wx:if="{{info.banner}}" src="{{info.banner}}" style="width:750rpx;height:512.5rpx;" mode="aspectFill"></image>
+        <view style="position: absolute;font-size:16px;right: 200rpx;bottom: 28rpx;color: #fff;font-weight: 700;">{{info.name?info.name:'昵称'}}</view>
+        <image style="position: absolute;width: 130.21rpx;height: 130.21rpx;border: 1px solid #cecece;right: 18.75rpx;bottom: -36.87rpx;margin:5px;background-color: #fff;" src="{{info.avatar?info.avatar:'http://icons.maiyizhi.cn/default_avatar.png'}}"></image>
+    </view>
+    <view wx:if="{{info.news}}"  style="padding: 131.9rpx 0 0 0;" catchtap="editInfo">
+        <view class="flex_row_center">
+            <view  class="flex_center" style="position:relative;border-radius: 10rpx;background: #383a39;width: 360.4rpx;height:79.9rpx;">
+                <image style="position:absolute;left:10rpx;top:10rpx;width: 60rpx;height: 60rpx;display: block;" src="{{info.newsAvatar?info.newsAvatar:'http://icons.maiyizhi.cn/xiaoxi.png'}}" mode="aspectFill"></image>
+                <view style="color:#fff;font-size:13px;">{{info.news}}条新消息</view>
+                <view class="zan-arrow" style="border-color:#282a29;"></view>
+                <view style="clear: both;"></view>
+            </view>
+        </view>
+    </view>
+
+    <view wx:if="{{info.news}}"  style="height: 24rpx;border-bottom:1rpx solid #e5e5e5;" catchtap="editInfo">
+    </view>
+    <view wx:else  style="height: 36rpx;" catchtap="editInfo">
+    </view>
+
+    <view wx:if="{{!empty}}">
+        <block wx:for="{{details}}" wx:key="*this" wx:for-index="index" wx:for-item="detail"  >
+            <block wx:if="{{detail&&index!=99&&detail.content}}">
+                <template is="news_item" data="{{mode:'circle',isAndroid:isAndroid,name:info.name,padding:padding,style:'border-top:1rpx solid #e5e5e5;margin-top:24rpx;padding-top:24rpx;',index:index,item: detail,oneSize:oneSize,twoSize:twoSize,pixelRatio:pixelRatio,threeSize:threeSize}}" />
+            </block>
+        </block>
+    </view>
+    <view wx:else style="margin-top:180rpx;height: 270rpx;" class="flex_center">
+        <view class="weui-msg__icon-area" style="">
+            <image style="width: 588rpx;height:269rpx;" src="http://icons.maiyizhi.cn/nocontent_list.png"></image>
+        </view>
+    </view>
+</view>
+
+<view class="drawer_screen" bindtap="close"  wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+    <view class="drawer_content">
+        <view>长按屏幕添加朋友圈内容</view>
+        <view class='drawer_img'><image src="http://icons.maiyizhi.cn/changan.png"   style="width:150rpx;height:150rpx;"></image></view>
+        <view>点页面任何部分，修改该部分内容</view>
+        <view class='drawer_img'><image src="http://icons.maiyizhi.cn/dianjitishi_1.jpg"   style="width:500rpx;height:244rpx;"></image></view>
+        <view>制作完成后，请用手机截屏来保存图片</view>
+    </view>
+    <view style="position: absolute;right:-35rpx;top:-35rpx;" bindtap="close">
+        <image src="http://icons.maiyizhi.cn/guanbi3.png" style="width:70rpx;height:70rpx;"></image>
+    </view>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

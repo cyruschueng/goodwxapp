@@ -1,0 +1,30 @@
+<!--提现列表pages/WithdrawalList/WithdrawalList.wxml-->
+<view wx:if="{{show}}"> 
+  <image src='../../images/null.png'></image>
+  <view class='tips'>您还没有提现</view>
+</view>
+  <block wx:for="{{listData}}" wx:key="{{item.id}}">
+  <view class='menu'>
+    <view class='list row'>
+    <view class='left'>提现时间</view>
+    <view class='right'>{{listData[index].addtime}}</view>
+    </view>
+    <view class='list row'>
+    <view class='left'>提现方式</view>
+    <view class='right'>{{method}}</view>
+    </view>
+    <view class='list row'>
+    <view class='left'>提现金额</view>
+    <view class='right row'>￥{{listData[index].total}}</view>
+    </view>
+    <view class='list row'>
+    <view class='left'>提现状态</view>
+    <view class='right'>{{listData[index].state}}</view>
+    </view>
+    <view class='list row'>
+      <view class='left'>手续费</view>
+      <view class='right'>￥{{listData[index].total-listData[index].usem}}</view>
+    </view>
+    </view>
+  </block>
+

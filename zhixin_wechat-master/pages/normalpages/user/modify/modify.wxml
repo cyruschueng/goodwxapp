@@ -1,0 +1,167 @@
+<!--pages/userinfo/userinfo.wxml-->
+
+<view class="container">
+
+    <view class='page-title'>
+        <text>请填写信息</text>
+    </view>
+
+    <view class='gray-space'></view>
+
+    <form class='form-container' bindsubmit="onFormSubmit" bindreset="onFormReset">
+        <view class='items-container'>
+
+            <!-- 头像 -->
+            <view wx:if="{{displayControl.avatar}}">
+                <view class='userinfo-item-box' bindtap='onChangeAvatar'>
+                    <view class='item-text'>
+                        <text>头像</text>
+                    </view>
+                    <view class='userinfo-item-contanier'>
+                        <image class="item-image" id="avatar" name="avatar" src="{{userInfo.avatarUrl}}" />
+                    </view>
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 昵称 -->
+            <view wx:if="{{displayControl.nickName}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        <text>昵称*</text>
+                    </view>
+                    <view class='userinfo-item-contanier'>
+                        <input id="nickName" class="userinfo-item-input" name="nickName" placeholder="请输入昵称" value="{{userInfo.nickName}}" />
+                    </view>
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 中文名字 -->
+            <view wx:if="{{displayControl.cnName}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        <text>中文名</text>
+                    </view>
+                    <view class='userinfo-item-contanier'>
+                        <input id="cnName" class="userinfo-item-input" type='text' name="cnName" placeholder="请输入中文名" value="{{userInfo.cnName}}" />
+                    </view>
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 英文名字 -->
+            <view wx:if="{{displayControl.enName}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        <text>英文名</text>
+                    </view>
+                    <view class='userinfo-item-contanier'>
+                        <input id="enName" class="userinfo-item-input" type='text' name="enName" placeholder="请输入英文名" value="{{userInfo.enName}}" />
+                    </view>
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 性别选择 -->
+            <view wx:if="{{displayControl.gender}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        <text>性别*</text>
+                    </view>
+
+                    <picker id='gender' mode="selector" name="gender" value="{{genderEnArray[genderIdx]}}" range='{{genderChArray}}' bindchange="onPickerChange">
+                        <view class='userinfo-item-contanier'>
+                            <view class='userinfo-item-picker'>
+                                {{genderChArray[genderIdx]}}
+                            </view>
+                            <image class='userinfo-item-image' src='../../image/down_arrow.png'> </image>
+                        </view>
+                    </picker>
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 生日 -->
+            <view wx:if="{{displayControl.dateOfBirth}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        <text>生日</text>
+                    </view>
+
+                    <picker id='dateOfBirth' mode="date" name="dateOfBirth" value="{{userInfo.dateOfBirth}}" start="1900-01-01" end="2099-12-31" bindchange="onPickerChange">
+                        <view class='userinfo-item-contanier'>
+                            <view class='userinfo-item-picker'>
+                                {{userInfo.dateOfBirth}}
+                            </view>
+                            <image class='userinfo-item-image' src='../../image/down_arrow.png'> </image>
+                        </view>
+                    </picker>
+
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 电话号码 -->
+            <view wx:if="{{displayControl.mobileNumber}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        <text>电话</text>
+                    </view>
+                    <view class='userinfo-item-contanier'>
+                        <input id="mobileNumber" class="userinfo-item-input" type='number' confirm-type='done' name="mobileNumber" placeholder="13800000000" value="{{userInfo.mobileNumber}}" />
+                    </view>
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 电子邮件 -->
+            <view wx:if="{{displayControl.email}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        <text>email</text>
+                    </view>
+                    <view class='userinfo-item-contanier'>
+                        <input id="email" class="userinfo-item-input" type='text' name="email" placeholder="mail@qq.com" value="{{userInfo.email}}" />
+                    </view>
+                </view>
+
+                <view class='gray-space-small'></view>
+            </view>
+
+            <!-- 角色设置 -->
+            <view class='items-container' wx:if="{{displayControl.authorities}}">
+                <view class='userinfo-item-box'>
+                    <view class='item-text'>
+                        角色*
+                    </view>
+                </view>
+
+                <checkbox-group bindchange="onCheckboxChange" id="authorities" name="authorities">
+                    <label class="items-container" wx:for="{{authorities}}" wx:key="{{index}}">
+                        <view class='checkbox-item'>
+                            <checkbox id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+                        </view>
+
+                        <view class='checkbox-item-text'>{{item.description}}</view>
+                    </label>
+                </checkbox-group>
+
+            </view>
+
+        </view>
+
+        <view class="foot-box">
+            <button class='reset-btn' type='default' size='default' formType="reset">重置</button>
+            <button class='confirm-btn' type='primary' size='default' formType="submit">保存</button>
+        </view>
+    </form>
+
+</view>

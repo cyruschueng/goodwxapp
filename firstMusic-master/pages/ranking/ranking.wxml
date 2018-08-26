@@ -1,0 +1,33 @@
+<!--pages/ranking/ranking.wxml-->
+<form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+    <button formType="submit" class="submit" style='border-radius:0'>
+        <view class='container'>
+            <view class='navbar'>
+                <view class='one {{type=="friend"?"active":""}}' bindtap='navbar' data-type='friend'>好友排行榜</view>
+                <view class='one {{type=="all"?"active":""}}' bindtap='navbar' data-type='all'>世界排行榜</view>
+            </view>
+            <view class='list' wx:if="{{list}}">
+                <view class='item' wx:for="{{list}}" wx:key="{{index}}">
+                    <view class='left'>
+                        <view  class="num {{index==0?'yellow':''}} {{index==1?'violet':''}} {{index==2?'violet':''}}">
+                            {{index+1}}
+                        </view>
+                        <view  class='niceImg'><image src="{{item.avatarurl}}" mode='widthFix'></image></view>
+                        <view class='inform'>
+                            <view class='niceImg'>{{item.wx_name}}</view>
+                            <view class='jifen'>
+                                  <image src="http://ovhvevt35.bkt.clouddn.com/music/goldss.png"></image>{{item.gold}}
+                            </view>
+                        </view>
+                    </view>
+                    <view class='musicNum'>Lv.{{item.level}}</view>
+                </view>
+            </view>
+            <block wx:else>
+                <view style="text-align:center;font-size:24rpx;padding:30rpx;margin-top:90rpx"> 
+                  还没有排行榜！
+                </view>
+            </block>
+        </view>
+   </button>
+</form>

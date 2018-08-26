@@ -1,0 +1,87 @@
+<!--pages/view/view.wxml-->
+
+<view class="container column_center">
+  <scroll-view scroll-y="true" class="view_scroll" bindscrolltolower="nextPage">
+    <view class="column_view column_left user_info">
+      <image class="user_avatar" src="{{blog.userLogo}}" background-size="cover"></image>
+
+      <view class="column_view column_space_between">
+        <view class="user_info_right">
+          <text class="user_nickname">{{blog.userName}}</text>
+          <view class="column_view column_left">
+            <!-- <text class="">Lv{{blog.level}}</text>
+            <image class="honor_icon_small" src="{{honors[0 | (blog.level/ 5)]}}"></image> -->
+          </view>
+        </view>
+        <text wx:if="{{blog.hasFollow == 0}}" catchtap="catchFollowTap" class="follow">＋关注</text>
+        <text wx:if="{{blog.hasFollow == 1}}" catchtap="catchFollowTap" class="follow followed">已关注</text>
+      </view>
+    </view>
+
+    <view class="column_view column_space_between">
+      <text class="title">{{blog.title}}</text>
+      <navigator class="type_tab" url="/pages/types/types?blogType={{blog.blogType}}" open-type="navigate">{{blog.blogType}}</navigator>
+    </view>
+
+    <view wx:if="{{blog.thumbImgList}}" class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files">
+                <block wx:for="{{blog.thumbImgList}}" wx:for-item="image">
+                  <view class="weui-uploader__file">
+                    <image class="weui-uploader__img" src="{{image}}" data-src="{{blog.imgUrlList[index]}}" catchtap="previewImage"></image>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <text class="desc full_width">{{blog.content}}</text>
+
+    <view class="column_view column_space_between" catchtap="catchMap">
+      <text class="type_tab">{{blog.shopName || blog.title}}</text>
+      <image src="/img/market1.png" mode="aspectFill" class="location_icon" />
+    </view>
+    <view class="comment_desc">{{blog.addr}}附近</view>
+
+    <view class="column_view column_space_between">
+      <view class="column_view left">
+        <text class="iconfont icon-view">{{blog.blogViews}}</text>
+        <text catchtap="catchLikeTap" class="iconfont {{blog.hasLike==1 ? 'icon-liked' : 'icon-like'}}">{{blog.blogLikes}}</text>
+        <text class="iconfont icon-comment" style="display:{{hidePost ? 'none' : ''}}">{{blog.blogComments}}</text>
+        <!-- <text class="iconfont icon-share hide">{{blog.blogShares}}</text> -->
+      </view>
+      <text class="time">{{blog.insertTime_fmt}}</text>
+    </view>
+
+    <view class="full_width" style="display:{{hidePost ? 'none' : 'flex'}}">最新评论</view>
+
+    <view wx:for="{{comments}}" class="column_view column_left column_top list_comment_item" style="display:{{hidePost ? 'none' : 'flex'}}" data-comment='{{item}}' catchtap="catchCommentListTap">
+      <view class="comment_left">
+        <image class="user_avatar_small" src="{{item.userLogo}}"></image>
+      </view>
+      <view class="row_view row_left list_comment_item_right">
+        <view class="column_view column_space_between">
+          <text class="user_name_small">{{item.userName}}</text>
+          <text class="time ">{{item.insertTime_fmt}}</text>
+        </view>
+        <text class="user_name_small">Lv{{item.level}}</text>
+        <text class="comment_desc">{{item.commentUserName ? ('回复' + item.commentUserName + ':' + item.commentContent) : item.commentContent}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <form class="comment_form" style="display:{{hidePost ? 'none' : 'flex'}}" catchsubmit="formSubmit" catchreset="formReset">
+    <textarea class="comment_content" name="content" placeholder="{{commentPlaceholder}}" value="{{commentContent}}" maxlength="500" focus="{{focusComment}}" bindblur="bindCommentBlur" />
+    <view class="column_view">
+      <!-- <button size="mini" type="default" formType="reset">清空评论</button> -->
+      <button size="mini" type="primary" formType="submit">发表评论</button>
+    </view>
+  </form>
+
+</view>

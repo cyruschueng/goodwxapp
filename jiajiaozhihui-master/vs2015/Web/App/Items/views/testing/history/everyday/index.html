@@ -1,0 +1,31 @@
+<div class="page" ng-controller="historyEveryDayController">
+    <div class="page__bd" ng-init="getEveryDayData()">
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd">每天一课历史</div>
+            <div class="weui-panel__bd">
+                <div  href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" ng-repeat="m in list.data">
+                    <div class="weui-media-box__hd"  style="position: relative;" check-member-history-audio="{{$index}}" ng-click="play($index)">
+                        <img class="weui-media-box__thumb"
+                             ng-class="{true:'gardenia-img__active',false:''}[!audio.paused && $index==index]"
+                             src="./imgs/gardenia/cd.png" alt="">
+                        <div style="position: absolute;left: 0px; top: 11px; width:100%; height: 100%;">
+                            <!--
+                            <span style="color:#ccc; font-size: 30px;" ng-if="!audio.paused && index==$index" class="fa fa-pause"></span>
+                            <span style="color:#ccc;font-size: 30px;"  ng-if="audio.paused || index!=$index" class="fa fa-play"></span>
+                            -->
+                            <img src="imgs/gardenia/s.png" style="color:#ccc; width: 30px;" ng-if="!audio.paused && index==$index" />
+                            <img src="imgs/gardenia/p.png" style="color:#ccc; width: 30px;" ng-if="audio.paused || index!=$index" />
+                        </div>
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <h4 class="weui-media-box__title">{{m.title}}</h4>
+                        <ul class="weui-media-box__info">
+                            <li class="weui-media-box__info__meta">{{memberInfo.className}}</li>
+                            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{m.startUp}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

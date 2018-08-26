@@ -1,0 +1,35 @@
+<swiper style="width:100%;" indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" autoplay="true" interval="5000" duration="1000"  circular="true">
+  <swiper-item wx:for="{{imgUrl}}">
+    <image src="{{url+item.path}}" mode="aspectFill" style="width:100%"></image>
+  </swiper-item>
+</swiper>
+
+<block wx:for="{{list}}" wx:for-item="it" wx:for-index="in">
+  <view class="panel panel-between item-center" >
+    <view class="font-md">{{it.name}}</view>
+    <view class="panel-end item-center">
+      <view class="font-md" data-id='{{it.id}}' bindtap='navToShop'>所有联盟商户({{it.shop.length}})</view>
+      <image class="icon-sm margin-left-sm" src="/img/right.png"></image>
+    </view>
+  </view>
+  <view class="bg-white panel-around">
+    <view class="bitem" wx:for="{{it.car}}" wx:for-item="li" wx:for-index="dex" data-in='{{in}}' data-dex='{{dex}}' bindtap="navToCmdetail">
+      <view class="bgs" style="background:#{{it.style == 1 ? '66CCFF':''}}{{it.style == 2 ? '66CC99':''}}{{it.style==3 ? 'CC9966':''}}">
+        <view class="pull-left margin-left-md" style="margin-top:-50rpx"><text style="font-size:70rpx;">{{li.number}}</text><text class="font-sm">杯</text></view>
+      </view>
+      <view class="bodys panel-between item-center" style="background:rgba({{it.style == 1 ? '102,204,255,0.2':''}}{{it.style == 2 ? '102,204,153,0.2':''}}{{it.style==3 ? '204,153,102,0.2':''}})">
+        <view style="width:70%;">
+          <view class="font-md">{{li.name}}</view>
+          <view class="font-lg"><text class="font-danger">￥{{li.price*li.discount}}</text><text class="font-20 font-default text-through">￥{{li.price}}</text></view>
+        </view>
+        <image src="/img/coffee.png" mode="aspectFill" style="width:30%;height:100rpx;"></image>
+      </view>
+    </view>
+  </view>
+</block>
+
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>

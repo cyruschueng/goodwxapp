@@ -1,0 +1,17 @@
+<import src="../../common/common.wxml" />
+
+<view wx:if="{{groupList.length>0}}">
+  <view wx:if="{{showHint}}" class="hint">更新微信到最新版，可显示群名</view>
+  <view wx:for="{{groupList}}" wx:key="{{item.groupId}}">
+    <view class="item {{index%4==0?'background-yellow':(index%4==1?'background-red':(index%4==2?'background-pink':(index%4==3?'background-green':'background-green')))}}" bindtap="navigateToDetail" bindlongtap="deleteGroup" data-group-id="{{item.groupId}}"
+      data-index="{{index}}">
+      <open-data type="groupName" open-gid="{{item.groupId}}" />
+    </view>
+  </view>
+</view>
+<view wx:elif="{{canShowEmpty}}">
+  <template is="empty-page" data="{{text:'转发到群里，您的群会在这里显示'}}" />
+</view>
+<button class="create-button" open-type="share">
+    <image class="img" src="/images/icon_add.png" mode="aspectFit"/>
+</button>

@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container">
+  <view  style="visibility:{{_ifShow ==0?'visible':'hidden'}}">
+    <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+  </view>
+  <view style="visibility:{{_ifShow ==1?'visible':'hidden'}}">
+    <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec1 }}"></ec-canvas>
+  </view>
+  <view style="visibility:{{_ifShow ==2?'visible':'hidden'}}">
+    <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" ></ec-canvas>
+  </view>
+</view>
+<view class='index_detail'>
+  <view wx:for='{{tabArr}}'   wx:for-item='list' wx:key='name' bindtap='clickTab' data-index='{{index}}'>
+    <text>{{list.name}}</text>
+    <text>{{list.reward}}</text>
+    <text>{{list.punish}}</text> 
+  </view>
+</view>
+ <view class='table' bindtap='jumpTable'>跳转到tab画面</view>
+
+ <view bindtap='other' class='other'>点击我获取其他实例图形</view> 
+

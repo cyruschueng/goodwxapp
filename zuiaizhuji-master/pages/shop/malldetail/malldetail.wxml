@@ -1,0 +1,214 @@
+<!--malldetail.wxml-->
+<!-- <view class="no-content tc">
+    <image class="no-content-img mb10" src="/images/no-goods.png" mode="widthFix"></image>
+    <view class="f16">商品不存在</view>
+    <view class="mt20"><button type="primary" plain size="mini">返回首页</button></view>
+</view>   -->
+<!--商品幻灯片 start-->
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}" bindscrolltolower="scrolltolower" style="position: absolute; left: 0; top:0; bottom: 0; right: 0;">
+    <view class="swiper">
+      <swiper indicator-dots="true" autoplay="true" current="{{swiperCurrent}}" interval="5000" duration="600" bindchange="swiperChange">
+        <block wx:if="{{goods_info.g_photo_url.length>0}}">
+          <swiper-item wx:for="{{goods_info.g_photo_url}}">
+            <image src="{{item}}" mode="aspectFill" />
+          </swiper-item>
+        </block>
+        <block wx:else>
+          <swiper-item>
+            <image src="{{goods_info.g_img_url}}" mode="aspectFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!--商品幻灯片 end-->
+    <!--goods start-->
+    <view class="goods-info">
+      <view class="title">{{goods_info.g_name}}</view>
+      <view class="price red f18">
+        <text wx:if="{{goods_info.price_info.type=='vip_price'}}" class="cuxiao">V</text>
+        <text>￥{{goods_property[goods_info.price_info.type]>0?goods_property[goods_info.price_info.type]:goods_info.price_info.price}}</text>
+        <text class="delLine grey f12 ml10">原价：￥{{goods_info.market_price}}</text>
+      </view>
+      <view class="grey f12">
+        <text>库存：{{goods_info.g_number}}</text>
+        <text class="ml10">销量：{{goods_info.sale_number}}</text>
+      </view>
+    </view>
+    <view class="guige-box gridXt">
+      <!-- 商品属性 -->
+      <view wx:if="{{goods_info.property.length > 0}}" class="guige-tit" bindtap='showProperty'>规格</view>
+      <view class="guige-cont" wx:if="{{show_property}}">
+        <view class="goods-attrs-box">
+          <block wx:for="{{goods_info.property}}" wx:for-item="itemType" wx:for-index="index">
+            <view class="attr_list">
+              <view class="attr_list_t">{{itemType.name}}</view>
+              <view>
+                <block wx:for="{{itemType.item}}" wx:for-item="itemVal" wx:for-index="key">
+                  <text class="attr-list-li {{property_select[index].item == key? 'on': ''}}" data-index="{{index}}" data-key="{{key}}" bindtap="select_attr_bind">{{itemVal}}</text>
+                </block>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+      <!-- 商品属性end -->
+    </view>
+    <!--goods end-->
+    <!--goods-detail start-->
+    <view class="goods-detail mt15">
+      <view class="nav-tab tc flex gridXb">
+        <view class="sub nav-tit {{this_g_nav == 1?'active':''}}" bindtap="goods_nav_bind" id="1">商品详情</view>
+        <view class="sub nav-tit {{this_g_nav == 2?'active':''}}" bindtap="goods_nav_bind" id="2">商品评价</view>
+      </view>
+      <!--商品详情-->
+      <view class="container" wx:if="{{this_g_nav==1}}">
+        <!-- 无商品详情 -->
+        <block wx:if="{{!article.nodes.length}}">
+          <view class="no-content tc">
+            <image class="no-content-img" src="http://www.ixiaochengxu.cc/resource/images/common/no-message.png" mode="widthFix"></image>
+            <view class="mt10">请等待商家更新哦</view>
+          </view>
+        </block>
+
+        <import src="wxParse/wxParse.wxml" />
+        <view class="wxParse">
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+      </view>
+      <!--销售记录-->
+      <view class="recording-part" wx:if="{{this_g_nav==2}}">
+        <!-- 暂无评论 -->
+        <block wx:if="{{!goods_info.cmlist.length}}">
+          <view class="no-content tc">
+            <image class="no-content-img" src="http://www.ixiaochengxu.cc/resource/images/common/no-order.png" mode="widthFix"></image>
+            <view class="mt10">还没有评价哦~~</view>
+            <view class="mt20">
+              <button size="mini" type="primary">抢沙发</button>
+            </view>
+          </view>
+        </block>
+        <block wx:for="{{goods_info.cmlist}}" wx:for-item="citem">
+          <view class="r-item gridXb">
+            <view class="info flex">
+              <image src="{{citem.user_headimgurl}}" width="40" height="40" mode="aspectFill"></image>
+              <view class="sub f12">
+                <text class="linght fr">{{citem.addtime}}</text>
+                <text class="grey">{{citem.user_nickname}}</text>
+                <view class="content mt8">
+                  <text>{{citem.content}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <!--goods-detail end-->
+    <!--底部浮动 start-->
+    <view class="foot-nav mt15">
+      <view class="flex con gridXt tc">
+        <view class="fast-links flex f12">
+          <view class="foot-ico sub gridYr" bindtap="bind_contant_kefu">
+            <text class="iconfont icon-phone"></text>
+            <view>电话</view>
+          </view>
+          <view class="foot-ico sub gridYr">
+            <button open-type="contact" style="width:100%;height:100%;left:0;top:0;position:absolute;opacity:0;z-index:1"></button>
+            <text class="iconfont icon-comment"></text>
+            <view>客服</view>
+          </view>
+          <view class="foot-ico sub notempty" bindtap="bind_go_cart">
+            <text class="iconfont icon-cart"></text>
+            <view>购物车</view>
+          </view>
+        </view>
+        <view class="buy-now sub" bindtap="bind_goods_add_cart">
+          <button class="add-cart-btn">加入购物车</button>
+        </view>
+        <view class="add-cart sub" bindtap="bind_goods_buy_now">
+          <button class="buy-now-btn">立即购买</button>
+        </view>
+      </view>
+    </view>
+    <!--底部浮动 end-->
+    <!--加入购物车 start-->
+    <view class="add-cart-box floatBox" wx:if="{{is_add_cart_view || is_buy_now_view}}">
+      <view class="layout">
+        <text class="iconfont icon-close fr" bindtap="add_cart_close_bind"></text>
+        <view class="layout-info gridXb flex">
+          <image src="{{goods_property.g_img_url ==''?goods_info.g_img_url:goods_property.g_img_url}}" width="40" height="40" mode="aspectFill"></image>
+          <view class="sub ml10">
+            <view class="lineText">{{goods_info.g_name}}</view> 
+            <view class="red f18 mt5">
+              <text>￥{{goods_property[goods_info.price_info.type]>0?goods_property[goods_info.price_info.type]:goods_info.price_info.price}}</text>
+            </view>
+            <view class="f12 grey">
+              <text>库存：<text>{{goods_property.last_num == undefined ? goods_info.g_number:goods_property.last_num}}</text></text>
+              <text class="ml10">销量：<text>{{goods_property.sell_num == undefined ? goods_info.sale_number:goods_property.sell_num}}</text></text>
+            </view>
+          </view>
+        </view>
+        <!-- 商品属性和数量 -->
+        <view class="goods-attrs-box">
+          <block wx:for="{{goods_info.property}}" wx:for-item="itemType" wx:for-index="index">
+            <view class="attr_list">
+              <view class="attr_list_t">{{itemType.name}}</view>
+              <view>
+                <block wx:for="{{itemType.item}}" wx:for-item="itemVal" wx:for-index="key">
+                  <text class="attr-list-li {{property_select[index].item == key? 'on': ''}}" data-index="{{index}}" data-key="{{key}}" bindtap="select_attr_bind">{{itemVal}}</text>
+                </block>
+              </view>
+            </view>
+          </block>
+          <view class="options">
+            <view class="options-tiem">
+              <view class="count-set tc fr flex">
+                <view class="sub" bindtap="bind_cart_number_jian">
+                  <text class="iconfont icon-move"></text>
+                </view>
+                <view class="sub buy-couts">
+                  <input type="number" value="{{cart_default_number}}" bindinput="check_cart_number" bindblur="change_cart_number" />
+                </view>
+                <view class="sub" bindtap="bind_cart_number_jia">
+                  <text class="iconfont icon-add"></text>
+                </view>
+              </view>
+              <view class="name" style="line-height:30px;">
+                <text>购买数量：</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{is_add_cart_view}}">
+          <button class="buy-now-btn" bindtap="goods_add_cart" disabled="{{btn_add_cart_disabled}}">加入购物车</button>
+        </block>
+        <block wx:if="{{is_buy_now_view}}">
+          <button class="buy-now-btn" bindtap="goods_buy_now" disabled="{{btn_add_cart_disabled}}">立即购买</button>
+        </block>
+      </view>
+      <view class="floatBox floatBoxBg" style="display:block;" bindtap="set_close"></view>
+    </view>
+    <!--加入购物车 end-->
+  </scroll-view>
+
+
+  <!--右侧浮动-->
+  <block wx:if="{{(is_add_cart_view || is_buy_now_view) == false}}">
+    <view class="backtop">
+      <block wx:if="{{shop_config.enablefx == 1}}">
+        <view class="icon-homefill kefu" style="position:relative">
+          <text class="iconfont icon-share" bindtap="fxgoods"></text>
+        </view>
+      </block>
+      <text class="iconfont icon-homefill" bindtap="goHome"></text>
+      <text class="iconfont icon-fold" bindtap="goTop" wx:if="{{floorstatus}}"></text>
+    </view>
+  </block>
+</block>

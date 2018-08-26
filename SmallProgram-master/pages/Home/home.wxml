@@ -1,0 +1,19 @@
+<button bindtap='toIndex'>跳转到index页</button>
+<button bindtap='say'>Say Hello</button>
+<view class='{{_class}}'>组建属性</view>
+<view id='item-{{id}}'>组建属性</view>
+<view wx:if="{{bol}}">条件渲染显示</view>  <!--控制是否显示  -->
+<view hidden='{{!bol}}'>我是谁</view> <!--控制是否显示  -->
+
+<!--定义模版  -->
+<template name="temp">
+  <view>第一个对象：{{a}}</view>
+  <view>第二个对象：{{b}}</view>
+</template>
+
+<!--使用模板  -->
+<template is="temp" data="{{a:1,b:2}}"></template> 
+
+
+<!--for  -->
+<view wx:for="{{arr}}" wx:key="asd">项目[{{index}}]={{item}}</view>

@@ -1,0 +1,83 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '房租相关费用分摊账单'}}" />
+  <view class="page-body">
+
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">每人均摊：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{price}} 元">{{price}} 元</input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">单月成本：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{rent}} 元">{{price}} 元</input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">续租月数：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{month}} 月">{{price}} 元</input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">租客人数：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{num}} 人">{{price}} 元</input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type="" bindinput="input_rent1" placeholder="房租" />
+          <input class="weui-input" type="number" bindinput="input_rent2" placeholder="宽带" />
+          <input class="weui-input" type="number" bindinput="input_rent3" placeholder="洗衣" />
+          <input class="weui-input" type="number" bindinput="input_rent4" placeholder="物业" />
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type="number" bindinput="input_month" placeholder="续租月数" />
+          <input class="weui-input" type="number" bindinput="input_num" placeholder="租客人数" />
+        </view>
+      </view>
+    </view>
+
+    <view class="btn-area" id="buttonContainer">
+      <view class="button-sp-area">
+        <button type="primary" plain="true" bindtap="output">计算</button>
+      </view>
+    </view>
+
+    <!-- <view class="page-body">
+      <view class="page-section">
+        <view>支付金额</view>
+        <view class="price">{{price}}</view>
+        <view class="desc"> </view>
+        <view class="btn-area">
+          <button type="primary" bindtap="requestPayment" loading="{{loading}}">支付</button>
+        </view>
+      </view>
+    </view> -->
+
+    <view class="page-section page-section-gap">
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/app_k.jpg" />
+        <!-- <image class="image" src="../../resources/pic/mmqrcode.png"/>  -->
+      </view>
+    </view>
+
+  </view>
+  <template is="foot" />
+</view>

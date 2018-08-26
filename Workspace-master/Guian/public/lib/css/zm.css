@@ -1,0 +1,224 @@
+/*地图区域*/
+html{font-family: "微软雅黑"}
+.map .conbg{background-size: contain;position: relative;}
+.map_p{position: relative;color: #fff;font-size: 16px;top: 20px;left: 30px;}
+.change_map{position: absolute;line-height: 30px;border-radius: 15px;box-shadow:  0 0 10px 0  #7c9aa6 inset;font-size: 14px;padding: 0 15px;cursor: pointer;z-index: 200;}
+.map_name{position: absolute;top:20px;left: 1.4rem;font-size: 1.6rem;}
+.pic_p{vertical-align: middle;margin-right: 5px;}
+.wrapper{position: relative;}
+.on{background: #ecda22;}
+/*文字轮播*/
+#demo{height: 92%;width: 100%;overflow: hidden;position: relative;}
+#demo1 {height: auto; text-align: left;width: 100%;
+}
+i{font-style: normal;}
+#demo2 {height: auto; text-align: left;width: 100%;
+}
+#demo li {list-style-type: none;
+    text-align: left;line-height: 30px;padding: 5px 0 5px 5%;width: 100%;box-sizing: border-box;
+}
+/*弹出框*/
+#mask{position: absolute;width: 100%;height: 100%;background: rgba(0,0,0,0.3);z-index: 10;top: 0;left: 0;display: none;}
+#popup{overflow: hidden;width: 80%;
+    /*background: #0c2484;*/
+    height:80%;position: absolute;z-index: 11;top: 10%;left: 10%;
+    /*opacity: 0.8;*/
+    background: rgba(12,36,132, 0.8);
+    display: none;
+   ;box-sizing: border-box;padding: 30px 0;box-shadow: 0 0 20px 13px #7c9aa6 inset;border: 1px solid #fff;}
+/*@-moz-keyframes myanimate {*/
+    /*0%{width: 0;height: 0;}*/
+    /*100%{height: 60%;width: 60%;}*/
+/*}*/
+/*@-webkit-keyframes myanimate{*/
+    /*0%{width: 0;height: 0;}*/
+    /*100%{height: 60%;width: 60%;}*/
+/*}*/
+/*@-o-keyframes myanimate{*/
+    /*0%{width: 0;height: 0;}*/
+    /*100%{height: 60%;width: 60%;}*/
+/*}*/
+#close{height: 30px;width: 30px;border-radius: 50%;box-shadow: 0 0 10px 0 #7c9aa6 inset; position: absolute;right: 10px;
+    top: 10px;text-align: center;line-height: 30px;cursor: pointer;color: #fff;font-size: 24px;font-weight: 600;z-index: 999;}
+.brand{position: absolute;right:10px;font-size:14px;bottom:2%;height: 15%;}
+.brand p:nth-of-type(1){color: #eed725;font-weight: 600;line-height: 24px;}
+.dataSource{overflow: hidden;width: 33%;height: 100%;overflow: hidden;box-sizing: border-box;display:inline-block;margin-left: 3%;float: left}
+.goodeInfo{width: 100%;box-sizing: border-box;height: 100%;}
+.dataSource .pro-img{width: 65%;height: 100%;float: left;border-left:1px solid rgba(255, 255, 255, 0.3);border-right:1px solid rgba(255, 255, 255, 0.3);background-color: rgba(0,0,0,0.3)}
+.dataSource .yrz-img{width: 35%;height: 100%;float: left;padding: 0.8rem;border-bottom: 1px solid rgba(255, 255, 255, 0.3);}
+.infoItem{padding-top: 2%;}
+.infoItem li{line-height: 1rem;color: #fff;font-size: 0.6rem;}
+#popup{font-size: 0.6rem;z-index: 215;}
+.sellingPiont{overflow: hidden;width:59%;box-sizing: border-box;height:100%;display: inline-block;margin-left: 2%;margin-right: 3%;float: left;height: 87%;overflow-y: scroll;}
+.f_ul,.s_ul{width: 47%;float: left;height: 100%;}
+.f_ul{margin-right: 6%;}
+.f_ul ul,.s_ul ul,.goodeInfo ul{width: 100%;overflow: hidden;height: 100%;margin-bottom: 0;padding-left: 0;padding: 3%;background-color: rgba(0,0,0,0.3)}
+.f_ul ul li,.s_ul ul li{line-height: 1rem;font-size: 0.6rem;}
+#popup .f_li{color: #eed725;font-size: 0.8rem;}
+/*文字轮播2样式*/
+#slider_div{overflow: hidden;width: 100%;padding: 0 5%;box-sizing: border-box}
+.item_li{line-height: 35px;font-size: 14px;width: 100%;}
+.item_li span{line-height: 35px;height: 35px;overflow: hidden;vertical-align: middle;display: inline-block;}
+.item_li span:nth-of-type(1){width:47%;overflow: hidden; }
+.item_li span:nth-of-type(2){width: 47%;overflow: hidden;}
+.item_li i{color: #eeda21;}
+/*第三轮播*/
+#slider_div2{width: 100%;overflow: hidden;}
+#slider_div2 ul{width: 100%;overflow: hidden;box-sizing: border-box;padding: 0 4%;}
+.search_time{width: 100%;font-size: 14px;line-height: 35px;height: 35px;overflow: hidden;}
+.search_time a{color: #eeda23;text-decoration: none;float: right;width: 15%;display: inline-block;text-align: right;}
+.search_time span{display: inline-block;height: 35px;line-height: 35px;overflow: hidden}
+.search_time span:nth-of-type(1){width: 52%;;}
+.search_time span:nth-of-type(2){width: 33%;}
+/*地点定位*/
+.mapwrapper{margin: 0 auto;position: relative;width: 100%;height: 100%;padding: 15px 15px;}
+.mapwrapper img{width: 100%;height:100%;}
+.mapwrapper .position_div{position: absolute;display: inline-block;color: #333;font-size: 12px;cursor: pointer;text-align: center;}
+.position_div span{display: inline-block;height: 10px;width: 10px;background: #bd843d;border-radius: 50%;}
+.hunlaxiang{top: 43%;left: 12%;}
+.liuguanxiang{top:53%;left: 9%;}
+.qiyanqiao{top:63%;left: 18%;}
+.caiguanzhen{top: 70%;left: 11%;}
+.jiushou{top:73%;left: 35%;}
+.daxiqiao{top:79%;left: 28%;}
+.machang span{background: red;width: 15px;height: 15px;}
+.machang{top: 36%;left: 20%;}
+.gaofeng{top:46%;left: 30%;}
+.tianlong{top:58%;left: 34%;}
+.baiyun{top:62%;left: 43%;}
+.gulou{top:32%;left: 43%;}
+.anping{top:41%;left: 50%;}
+.yangchang{top:50%;left: 66%;}
+.nieyun{top:58%;left: 62%;}
+.leping{top:60%;left: 78%;}
+.shizi{top:65%;left: 66%;}
+.dangwu{top:47%;left: 80%;}
+.maiping{top:48%;left: 88%;}
+.shiban{top:33%;left: 87%;}
+.huchao{top:26%;left: 80%;}
+.mapwrapper .qingzhen{color: #a158c1;font-size: 16px;}
+.qingzhen span{background: red;width: 15px;height: 15px;}
+.qingzhen{top:23%;left: 65%;}
+.hongfenghu{top:13%;left: 68%;}
+.position_span{position: absolute;font-size: 18px;}
+.xixiu{color: #c88f4c;top:74%;left: 20%;}
+.pingba{top: 52%;left: 45%;color: #beb86c;}
+.huaxi{color: green;top:38%;right: 14%;}
+
+
+/*map*/
+.mapcon{width: 100%;height: 100%;position: absolute;left: 0;top: 0;z-index: -1;opacity: 0;visibility: hidden;
+transform: rotateY(180deg);-webkit-transform: rotateY(180deg);-moz-transform: rotateY(180deg);-ms-transform: rotateY(180deg);-o-transform: rotateY(180deg);
+transition: all ease-in-out 1s;-webkit-transition: all ease-in-out 1s;-moz-transition: all ease-in-out 1s;-o-transition: all ease-in-out 1s;-ms-transition: all ease-in-out 1s;/*-webkit-transform: 1s;*/}
+.mapcon.chinamap{}
+.mapcon.chinamap .change_map{right: 30px;top: 20px;}
+.mapcon.guianmap .change_map{right: 30px;top: 20px;}
+.mapcon.currentmap{z-index: 2;opacity: 1;height: 100%;visibility: visible;
+transform: rotateY(0deg);-webkit-transform: rotateY(0deg);-moz-transform: rotateY(0deg);-ms-transform: rotateY(0deg);-o-transform: rotateY(0deg);
+transition: all ease-in-out 1s;-webkit-transition: all ease-in-out 1s;-moz-transition: all ease-in-out 1s;-o-transition: all ease-in-out 1s;-ms-transition: all ease-in-out 1s;/*-webkit-transform: 1s;*/}
+/*china map*/
+.mapcon.chinamap .mapouter{margin: 0 auto;display: block;height: 100%;width: 100%;text-align: center;box-sizing: border-box;padding: 20px 0px;}
+.mapcon.chinamap .mapouter .mapbox{height: 100%;max-width: 100%;position: relative;display: inline-block;}
+.mapcon.chinamap .mapouter .mapbox .mappic{max-width: 100%;max-height: 100%;}
+.mapcon.chinamap .mapouter .mapbox .point{position: absolute;width: 100%;height: 100%;left: 0;top: 0;color: #ffffff;}
+.mapcon.chinamap .mapouter .mapbox .point .po{position: absolute;width: 8px;height: 8px;border-radius: 50%;}
+.mapcon.chinamap .mapouter .mapbox .point .po.blue{background: #0478cb;}
+.mapcon.chinamap .mapouter .mapbox .point .po.blue .name{position: absolute;left: 10px;top:-5px;font-size: 10px;color: #ffffff;min-width: 26px;text-align: left;}
+.mapcon.chinamap .mapouter .mapbox .point .po.green{background: #00933b;}
+.mapcon.chinamap .mapouter .mapbox .point .po.green .name{position: absolute;right: 10px;top:-5px;font-size: 10px;color: #ffffff;min-width: 26px;text-align: right;}
+.mapcon.chinamap .mapouter .mapbox .point .po.black{background: #030303;border: 2px solid #fff;box-shadow: 0px 3px 3px #bbb;}
+.mapcon.chinamap .mapouter .mapbox .point .po.black .name{position: absolute;right: 10px;top:-5px;font-size: 10px;color: #ffffff;min-width: 26px;text-align: right;}
+.mapcon.chinamap .mapouter .mapbox .point .po.red{background: #af588d;width: 6px;height: 6px;}
+.mapcon.chinamap .mapouter .mapbox .point .po.red .name{position: absolute;left:-10px;top:6px;font-size: 10px;color: #ffffff;min-width: 26px;text-align: center;}
+.mapcon.chinamap .mapouter .mapbox .point .po.dark_blue{background: #203D89;width: 8px;height: 8px;}
+.mapcon.chinamap .mapouter .mapbox .point .po.dark_blue .name{position: absolute;left:-10px;top:6px;font-size: 10px;color: #ffffff;min-width: 26px;text-align: center;}
+.mapcon.chinamap .mapouter .mapbox .point .po.flag:before{content: ''; width: 15px;height: 25px;background: url(images/flag.png)no-repeat;background-size:contain ; position: absolute;bottom: 8px;left: 0px;z-index: 3;}
+/*blue*/
+.mapcon.chinamap .mapouter .mapbox .point .changchun{top: 22%;left: 84%;}
+.mapcon.chinamap .mapouter .mapbox .point .beijing{top: 36%;left: 70%;}
+.mapcon.chinamap .mapouter .mapbox .point .hhht{top: 36%;left: 64%;}
+.mapcon.chinamap .mapouter .mapbox .point .taiyuan{top: 40%;left: 66%;}
+.mapcon.chinamap .mapouter .mapbox .point .xining{top: 45%;left: 45%;}
+.mapcon.chinamap .mapouter .mapbox .point .xian{top: 53%;left: 60%;}
+.mapcon.chinamap .mapouter .mapbox .point .zhengzhou{top: 51%;left: 68%;}
+.mapcon.chinamap .mapouter .mapbox .point .yichang{top: 61%;left: 63%;}
+.mapcon.chinamap .mapouter .mapbox .point .wuhu{top: 60%;left:77%;}
+.mapcon.chinamap .mapouter .mapbox .point .suzhou{top: 59%;left: 81%;}
+.mapcon.chinamap .mapouter .mapbox .point .changsha{top: 69%;left: 66%;}
+.mapcon.chinamap .mapouter .mapbox .point .nanning{top: 84%;left: 59%;}
+/*green*/
+.mapcon.chinamap .mapouter .mapbox .point .wlmq{top: 24%;left: 21%;}
+.mapcon.chinamap .mapouter .mapbox .point .lanzhou{top: 49%;left: 50%;}
+.mapcon.chinamap .mapouter .mapbox .point .yinchuan{top: 46%;left: 54%;}
+.mapcon.chinamap .mapouter .mapbox .point .tianjin{top: 39%;left: 72%;}
+.mapcon.chinamap .mapouter .mapbox .point .shijiazhuang{top: 42%;left: 70%;}
+.mapcon.chinamap .mapouter .mapbox .point .jinan{top: 46%;left: 75%;}
+.mapcon.chinamap .mapouter .mapbox .point .hefei{top: 58%;left:75%;}
+.mapcon.chinamap .mapouter .mapbox .point .nanchang{top: 69%;left:73%;}
+/*red*/
+.mapcon.chinamap .mapouter .mapbox .point .shihezi{top: 17%;left:19%;}
+.mapcon.chinamap .mapouter .mapbox .point .lasa{top: 62%;left:23%;}
+.mapcon.chinamap .mapouter .mapbox .point .haidong{top: 48%;left:41%;}
+.mapcon.chinamap .mapouter .mapbox .point .baotou{top: 42%;left:52%;}
+.mapcon.chinamap .mapouter .mapbox .point .wuzhong{top: 48%;left:55%;}
+.mapcon.chinamap .mapouter .mapbox .point .jinzhong{top: 43%;left: 61%;}
+.mapcon.chinamap .mapouter .mapbox .point .tianshui{top: 55%;left: 52%;}
+.mapcon.chinamap .mapouter .mapbox .point .zunyi{top: 73%;left: 56%;}
+.mapcon.chinamap .mapouter .mapbox .point .tongren{top: 76%;left:58%;}
+.mapcon.chinamap .mapouter .mapbox .point .luohe{top: 54%;left: 68%;}
+.mapcon.chinamap .mapouter .mapbox .point .xiangyang{top: 61%;left: 60%;}
+.mapcon.chinamap .mapouter .mapbox .point .xiangtan{top: 69%;left: 70%;}
+.mapcon.chinamap .mapouter .mapbox .point .zhongshan{top: 84%;left: 69%;}
+.mapcon.chinamap .mapouter .mapbox .point .jilin{top: 25%;left: 86%;}
+.mapcon.chinamap .mapouter .mapbox .point .mudanjiang{top: 25%;left: 89%;}
+.mapcon.chinamap .mapouter .mapbox .point .shenyang{top: 34%;left: 75%;}
+.mapcon.chinamap .mapouter .mapbox .point .yantai{top: 44%;left: 76%;}
+.mapcon.chinamap .mapouter .mapbox .point .xuzhou{top: 52%;left: 77%;}
+.mapcon.chinamap .mapouter .mapbox .point .fuzhou{top: 71%;left:82%;}
+.mapcon.chinamap .mapouter .mapbox .point .linyi{top: 50%;left: 73%;}
+
+/*黑色*/
+.mapcon.chinamap .mapouter .mapbox .point .chengdu{top: 63%;left: 45%;}
+.mapcon.chinamap .mapouter .mapbox .point .mianyang{top: 60%;left: 48%;}
+.mapcon.chinamap .mapouter .mapbox .point .guiyang{top: 76%;left:52%;}
+.mapcon.chinamap .mapouter .mapbox .point .nanjing{top: 52%;left: 76%;}
+.mapcon.chinamap .mapouter .mapbox .point .qinhuangdao{top: 36%;left: 75%;}
+.mapcon.chinamap .mapouter .mapbox .point .haikou{top: 94%;left: 60%;}
+
+/*dark blue*/
+.mapcon.chinamap .mapouter .mapbox .point .kunming{top: 79%;left:43%;}
+.mapcon.chinamap .mapouter .mapbox .point .hangzhou{top: 68%;left:79%;}
+.mapcon.chinamap .mapouter .mapbox .point .ningbo{top: 68%;left:83%;}
+.mapcon.chinamap .mapouter .mapbox .point .shanghai{top: 61%;left:82%;}
+.mapcon.chinamap .mapouter .mapbox .point .qingdao{top: 49%;left: 78%;}
+.mapcon.chinamap .mapouter .mapbox .point .chongqing{top: 66%;left: 54%;}
+
+
+.touch_div{
+    /*width: 200px;*/
+    box-sizing: border-box;
+    padding: 20px;
+    position: fixed;box-shadow: 0 0 10px 3px #7c9aa6 inset;display: none;
+    /*background: #1a2871;*/
+    background: rgba(26,40,113, 0.8);
+    z-index: 100;
+    /*opacity: 0.8;*/
+    /*animation: touch .25s linear;*/
+    font-size: 0.9rem;}
+.touch_div p{
+    font-size: 0.8rem;
+    color: #ffffff;
+}
+@-moz-keyframes touch {
+    0%{width: 0;height: 0;}
+    100%{height:auto;width: 200px;}
+}
+@-webkit-keyframes touch{
+    0%{width: 0;height: 0;}
+    100%{height: auto;width:200px;}
+}
+@-o-keyframes touch{
+    0%{width: 0;height: 0;}
+    100%{height: auto;width:200px;}
+}
+

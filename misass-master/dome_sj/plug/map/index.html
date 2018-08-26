@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CitySelect</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" href="css/ydui.css?rev=@@hash"/>
+    <link rel="stylesheet" href="css/demo.css"/>
+    <script src="js/ydui.flexible.js"></script>
+</head>
+<body>
+
+<section class="g-flexview">
+
+    
+
+    <section class="g-scrollview">
+        <div class="m-celltitle">默认调用</div>
+        <div class="m-cell">
+            <div class="cell-item">
+                <div class="cell-left">所在地区：</div>
+                <div class="cell-right cell-arrow">
+                    <input type="text" class="cell-input" readonly id="J_Address" placeholder="请选择收货地址">
+                </div>
+            </div>
+        </div>
+
+        <div class="m-celltitle">设置默认值</div>
+        <div class="m-cell">
+            <div class="cell-item">
+                <div class="cell-left">所在地区：</div>
+                <div class="cell-right cell-arrow">
+                    <input type="text" class="cell-input" readonly id="J_Address2" value="新疆 乌鲁木齐市 天山区" placeholder="请选择收货地址">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</section>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/ydui.citys.js"></script>
+<script type="text/javascript" src="js/ydui.js"></script>
+<script type="text/javascript">
+/**
+ * 默认调用
+ */
+!function () {
+	var $target = $('#J_Address');
+
+	$target.citySelect();
+
+	$target.on('click', function (event) {
+		event.stopPropagation();
+		$target.citySelect('open');
+	});
+
+	$target.on('done.ydui.cityselect', function (ret) {
+		$(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+	});
+}();
+/**
+ * 设置默认值
+ */
+!function () {
+	var $target = $('#J_Address2');
+
+	$target.citySelect({
+		provance: '新疆',
+		city: '乌鲁木齐市',
+		area: '天山区'
+	});
+
+	$target.on('click', function (event) {
+		event.stopPropagation();
+		$target.citySelect('open');
+	});
+
+	$target.on('done.ydui.cityselect', function (ret) {
+		$(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+	});
+}();
+</script>
+
+</body>
+</html>

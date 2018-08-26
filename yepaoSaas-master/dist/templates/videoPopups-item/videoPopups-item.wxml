@@ -1,0 +1,26 @@
+
+
+<template name="videoPopups-item">
+
+<!-- 视频 弹窗 -->
+<view class='popUps-bgview' hidden='{{ showVideoHidden }}'>
+  <!-- 收起按钮 -->
+  <image class='popUps-cancel-btn' src='{{ videoIconUrl }}' bindtap='bindCloseVideoShowTap'></image>
+
+  <!-- 视频 -->
+  <view class="we-container">
+    <view class="we-wrapper"
+      bindtouchstart="touchstart"
+      bindtouchmove="touchmove"
+      bindtouchend="touchend" >
+      <block wx:for="{{ videoUrlsBrowse }}" wx:key="{{ index }}">
+      <view class="we-slide" >
+        <video class='video' autoplay='true' id="{{ index }}" src="{{ item.url }}" bindended='bindVideoPalyEnded'></video>
+      </view>
+      </block>
+    </view> 
+  </view> 
+  
+</view>
+
+</template>

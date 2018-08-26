@@ -1,0 +1,21 @@
+<!--引入towxml模版入口文件，并使用模版-->
+<view class="loading" wx:if="{{isloading}}">
+  <image class="loading__icon" src="../../images/loading.svg"></image>
+</view>
+<import src="../../towxml/entry.wxml"/>
+<template is="entry" data="{{...article}}"/>
+<import src="../../wxParse/wxParse.wxml"/> 
+<view class="wxParse">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+</view>
+
+<view style="padding: 20px 10px; background-color:#eee;">
+    <block wx:for="{{replyTemArray}}" wx:key="">
+        回复{{index}}:<template is="wxParse" data="{{wxParseData:item}}"/>
+    </block>
+</view>
+ <view class="uploader">      
+           <view class="uploader-text" id="the-id" bindtap="doNav">
+            <text>返回首页</text>
+        </view>
+    </view>

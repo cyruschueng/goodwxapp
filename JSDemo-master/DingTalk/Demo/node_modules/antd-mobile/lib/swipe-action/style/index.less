@@ -1,0 +1,61 @@
+@import '../../style/themes/default';
+@import '../../style/mixins';
+
+@swipeout-prefix-cls: am-swipe;
+
+.@{swipeout-prefix-cls} {
+  overflow: hidden;
+  position: relative;
+  &-swiping {
+    .am-list-item-active {
+      background-color: #FFF;
+    }
+  }
+  &-content {
+    position: relative;
+    background-color: #fff;
+  }
+
+  &-cover {
+    position: absolute;
+    z-index: 2;
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+  }
+
+  & .@{swipeout-prefix-cls}-content,
+  & .@{swipeout-prefix-cls}-actions {
+    transition: all 250ms;
+  }
+
+  &-actions {
+    position: absolute;
+    top: 1PX;
+    bottom: 1PX;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &-left {
+      left: 0;
+    }
+
+    &-right {
+      right: 0;
+    }
+  }
+
+  &-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &-text {
+      padding: 0 @h-spacing-sm;
+    }
+  }
+}

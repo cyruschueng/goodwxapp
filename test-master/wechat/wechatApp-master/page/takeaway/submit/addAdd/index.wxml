@@ -1,0 +1,50 @@
+<view class="list_box">
+
+  <view class="li">
+
+    <input bindinput="inputusername" class="more" placeholder="联系人" value="{{username}}" />
+  </view>
+
+  <view class="li">
+
+    <input bindinput="inputphone" class="more" placeholder="电话" value="{{phone}}" />
+  </view>
+
+  <view class="li">
+
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+      <view class="picker">
+        {{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="li">
+    <input bindinput="inputaddress" class="more" placeholder="具体地址" value="{{address}}" />
+  </view>
+
+  <view class="li" wx:if="{{0}}" catchtap="location">
+    <text>选择地址</text>
+  </view>
+
+  <view class='li'>
+    <checkbox-group bindchange="checkboxChange">
+      <label class="checkbox" wx:for="{{items}}">
+        <checkbox value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+      </label>
+    </checkbox-group>
+  </view>
+
+</view>
+
+
+
+
+
+<view wx:if="{{!id}}" bindtap="save" class="btn_bom">
+  <view class="classname">保存</view>
+</view>
+
+<view wx:if="{{id}}" bindtap="edit" class="btn_bom">
+  <view class="classname">确认修改</view>
+</view>

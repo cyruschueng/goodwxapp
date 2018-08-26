@@ -1,0 +1,53 @@
+<!--pages/index/detail/index.wxml-->
+<view class="page">
+  <image src="{{rows.image}}" mode="aspectFit" />
+  <view class="page__hd">
+    <view class="page__title">{{rows.title}}</view>
+    <view class="page__desc">{{rows.subtitle}}</view>
+    <view class="page__desc">作者：{{rows.author}}</view>
+    <view class="page__desc">译者：{{rows.translator}}</view>
+    <view class="page__desc">装订：{{rows.binding}}</view>
+    <view class="page__desc">系列：{{rows.series}}</view>
+    <view class="page__desc">ISBN：{{rows.isbn}}</view>
+    <view class="page__desc">页数：{{rows.pages}}</view>
+    <view class="page__desc">出版社：{{rows.publisher}}</view>
+    <view class="page__desc">评分：{{rows.rating[0]}}/{{rows.rating[1]}}</view>
+    <view class="page__desc">作者简介：{{rows.author_intro}}</view>
+    <view class="blackcolor page__desc"  wx:if="{{rows.level}}">适读年龄</view>
+    <view class="positioncenter" >
+    <block wx:for="{{rows.level}}" wx:key="{{index}}">
+      <a wx:if="{{item.checked}}" class="page__tags">{{item.name}}</a>
+    </block>
+    </view>
+    <view class="blackcolor page__desc"  wx:if="{{rows.tags}}">标签</view>
+    <view class="positioncenter" >
+    <block wx:for="{{rows.tags}}" wx:key="{{index}}">
+      <a class="page__tags">{{item.name}}[{{item.count}}]</a>
+    </block>
+    </view>
+    <view class="blackcolor page__desc"  wx:if="{{rows.category}}">内容分类</view>
+    <view class="positioncenter" >
+    <block wx:for="{{rows.category}}" wx:key="{{index}}">
+      <view wx:if="{{item.checked}}">
+      <a class="page__tags">{{item.name}}</a>
+      </view>
+    </block>
+    </view>
+    <view class="blackcolor page__desc"  wx:if="{{rows.theme}}">主题分类</view>
+    <view class="positioncenter" >
+    <block wx:for="{{rows.theme}}" wx:key="{{index}}">
+      <a wx:if="{{item.checked}}" class="page__tags">[{{item.name}}]</a>
+    </block>
+    </view>
+    <view class="blackcolor page__desc"  wx:if="{{rows.type}}">体裁分类</view>
+    <view class="positioncenter" >
+    <block wx:for="{{rows.type}}" wx:key="{{index}}">
+      <view wx:if="{{item.checked}}">
+      <a class="page__tags">{{item.name}}</a>
+      </view>
+    </block>
+    </view>
+    <view class="blackcolor page__desc">概要</view>
+    <view class="page__tags">{{rows.summary}}</view>
+  </view>
+</view>

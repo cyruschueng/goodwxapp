@@ -1,0 +1,71 @@
+<!--pages/goodList/goodList.wxml-->
+<view class="container">
+	<view>
+		<view class="today-star">
+			<text>我的爱豆</text>
+			<text class="more" bindtap='more'>	更多</text>
+		</view>
+    <!--爱豆  -->
+		<scroll-view scroll-x="true" class="star-box" scroll-top="0" scroll-left="0">
+        <view class="single-star" wx:for="{{idolList}}" data-idol_id="{{item.idol_id}}" bindtap='goodInform'>
+          <image class="star-avatar" src="{{item.avatar}}"  style="display:inline-block"></image>
+          <view class="star-info">
+            <view class="star-name-in"> {{item.name}}</view>
+            <view class="star-birth-in">{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日</view>
+            <view class="star-like">
+              <image src="../images/star.png"></image>{{item.wish_count}}
+            </view>
+            <view class="star-like">
+              <image src="../images/collect_star.png"></image> {{item.follow_count}}
+            </view>
+          </view>
+        </view>
+        <view class="single-star" wx:for="{{idolList}}" data-idol_id="{{item.idol_id}}" bindtap='goodInform'>
+          <image class="star-avatar" src="{{item.avatar}}"  style="display:inline-block"></image>
+          <view class="star-info">
+            <view class="star-name-in"> {{item.name}}</view>
+            <view class="star-birth-in">{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日</view>
+            <view class="star-like">
+              <image src="../images/star.png"></image>{{item.wish_count}}
+            </view>
+            <view class="star-like">
+              <image src="../images/collect_star.png"></image> {{item.follow_count}}
+            </view>
+          </view>
+        </view>
+    </scroll-view>
+    <!--生日榜  -->
+    <view class="star-list-title">十一月明星生日榜</view>
+    <view class="top20">
+        <image src="http://ovhvevt35.bkt.clouddn.com/day/top20.png"></image>
+        <view class="more" bindtap='moreIdol' style="width:72px">更多明星</view>
+    </view>
+    <view class="all-star">
+        <view class="star" data-idol_id="{{item.idol_id}}" bindtap='goodInform' wx:for="{{goodList}}">
+            <view class="prize" wx:if="{{index+1==1}}">
+              <image src="http://ovhvevt35.bkt.clouddn.com/day/star-list-1.png"></image>
+            </view>
+            <view class="prize" wx:elif="{{index+1==2}}">
+              <image src="http://ovhvevt35.bkt.clouddn.com/day/star-list-2.png"></image>
+            </view>
+            <view class="prize" wx:elif="{{index+1==3}}">
+              <image src="http://ovhvevt35.bkt.clouddn.com/day/star-list-3.png"></image>
+            </view>
+            <view class="prize" wx:else>{{index+1}}</view>
+            <view class="star-detail">
+              <image src="{{item.avatar}}"></image>
+              <view style="text-align:left">
+                <view class="name">	{{item.name}}</view>
+                <view class="birth">	{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日	</view>
+                <view class="star-like">
+                  <image src="../images/star.png"></image>{{item.wish_count}}k
+                </view>
+                <view class="star-like">
+                  <image src="../images/collect_star.png"></image> {{item.follow_count}}
+                </view>
+              </view>
+            </view>
+        </view>
+    </view>
+	</view>
+</view>

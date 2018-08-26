@@ -1,0 +1,55 @@
+<!--pages/calculate/appointmentSite.wxml-->
+<view class="flex box box-tb box-align-center">
+  <view class="calendar box box-tb">
+
+    <!-- 头部 -->
+    <view class="top-handle fs36 box box-lr box-align-center box-pack-center">
+        <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
+            <view class="prev-handle box box-lr box-align-center box-pack-center">{{ preStr }}</view>
+        </view>
+        <picker class='date-area box box-lr box-align-center box-pack-center' mode="date" fields="month" value="{{ picker_value }}" start="{{ start_date }}" bindchange="pickerChange" bindtap="chooseYearAndMonth">
+          {{ cur_year || "--" }} 年 {{ cur_month || "--" }} 月
+        </picker>
+        <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
+            <view class="next-handle box box-lr box-align-center box-pack-center">{{ nextStr }}</view>
+        </view>
+    </view>
+
+    <!-- 星期 -->
+    <view class="weeks box box-lr box-pack-center box-align-center">
+        <view class="flex week fs28 {{ index == 0 ? 'weekend' : '' }} {{ index == 6 ? 'weekend' : '' }}" wx:for="{{ weeks_ch }}" wx:key="{{ index }}" data-idx="{{ index }}">{{ item }}</view>
+    </view>
+
+    <!-- 日期 -->
+    <view class="days box box-lr box-wrap">
+        <view wx:if="{{ hasEmptyGrid }}" class="grid white-color box box-align-center box-pack-center" wx:for="{{ empytGrids }}" wx:key="{{ index }}" data-idx="{{ index }}">
+        </view>
+        <view class="grid white-color box box-align-center box-pack-center" wx:for="{{ days }}" wx:key="{{ index }}" data-idx="{{ index }}" bindtap="tapDayItem">
+            <view class="day {{ item.choosed ? 'border-radius red-bg' : ''}} box box-align-center box-pack-center">
+            <view class='day-view'>
+              <text style='{{ item.notOptional ? "color:#C9C9C9" : "" }}' >{{ item.day }}</text>
+              <view class='{{ item.choosed ? "white-color" : "red-color" }}'  hidden='{{  }}'>{{ item.lunar }}</view>
+            </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 下一步 -->
+    <view class='next-step' data-type='appointment' bindtap='bindCommitBtnTap'>预约</view>
+    <view class='tips-view'>
+      <text class='second-txt-color'>具体时间段去店里与商家详谈</text>
+    </view>
+
+    </view>
+</view>
+
+
+<!-- 弹窗 -->
+<view class='commit-bgview' hidden='{{ commitHidden }}'>
+  <view class='commit-view'>
+    <view>您预约的日期是：{{ newDays }}</view>
+    <input data-type='name' maxlength='10' bindinput="bindCommitKeyInput" placeholder='请填写联系人'></input>
+    <input type='number' data-type='number' maxlength='11' bindinput="bindCommitKeyInput" placeholder='请填写联系人电话号码'></input>
+    <view class='commit-btn' data-type='commit' bindtap='bindCommitBtnTap'>确认</view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<view class="header">
+	<view>座位已锁定</view>
+	<view>{{ countdown }}s</view>
+</view>
+
+<view class="body">
+	<view class="input_list">
+		<view class="title">票价</view>
+		<view class="price_color">{{ price }}元/位</view>
+	</view>
+	<view class="input_list">
+		<view class="title">座位数量</view>
+		<view class="price_color">{{ order.bookSeats }}</view>
+	</view>
+	<!-- <view class="input_list">
+		<view class="title">优惠券</view>
+		<view class="voucher">
+			<view>无可用</view>
+			<view class="voucher_img">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view> -->
+	<block wx:if="{{ order.buyingSafety }}">
+		<view class="input_list">
+			<view class="title">
+				<view>1万元出行保险</view>
+				<view class="Insurance_rule">确认上车后生效</view>
+			</view>
+			<view class="Insurance_switch">
+				<view class="Insurance_price">
+					<view class="now_price">1元</view>
+					<view class="old_price">10元</view>
+				</view>
+			</view>
+		</view>
+	</block>
+</view>
+
+<view class="foot_btn">
+	<button bindtap="postWxPay">合计{{ order.ticketPrice }}元 支付</button>
+	<button bindtap="closeWxPay" style="background: #888888;">取消支付</button>
+</view>

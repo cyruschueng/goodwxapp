@@ -1,0 +1,48 @@
+<!--pages/core/kaoshi/kaoshi.wxml-->
+<view class="container">
+  <view class="ks-header">
+    <view class="ks-text">
+      <text class="ks-header-title">考试安排</text>
+      <text class="ks-header-info">学号：{{user.student_no}}</text>
+      <text class="ks-header-info">姓名：{{user.student_name}}</text>
+    </view>
+    <image class="ks-bg" src="/images/core/kaoshi.png"></image>
+  </view>
+  <view wx:if="{{remind}}" class="remind-box">
+    <image class="remind-img" src="/images/index/nothing.png"></image>
+    <text class="remind-text">{{remind}}</text>
+  </view>
+  <block wx:else>
+    <view class="ks-class-ctn">
+      <block wx:for="{{list}}" wx:key="index">
+        <view class="ks-class-item {{!item[11] ? '': 'ks-item-show'}}">
+          <view class="ks-hd" data-id="{{index}}" bindtap="slideDetail">
+            <view class="ks-hd-left">
+              <view class="ks-hd-name">
+                {{item[1]}}
+              </view>
+              <view class="ks-hd-other" wx:if="{{item[6]}}">
+                考试地点:{{item[5]}}
+              </view>
+            </view>
+            <image class="ks-item-icon" src="/images/core/common/down.png"></image>
+          </view>
+          <view class="ks-detail">
+            <view class="ks-detail-item">
+              <text class="ks-detail-label">考试周次</text>
+              <text class="ks-detail-content">第{{item[3]}}周</text>
+            </view>
+            <view class="ks-detail-item">
+              <text class="ks-detail-label">考试时间</text>
+              <text class="ks-detail-content">{{item[4]}}</text>
+            </view>
+            <view class="ks-detail-item" wx:if="{{item[10]!=='&nbsp;'}}">
+              <text class="ks-detail-label">备注</text>
+              <text class="ks-detail-content">{{item[10]}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>

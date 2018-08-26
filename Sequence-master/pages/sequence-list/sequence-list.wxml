@@ -1,0 +1,90 @@
+<import src="../../common/common.wxml" />
+
+<view class="tab-bar">
+  <view class="tab {{selectJoin?'select':'unselect'}}" bindtap="switchTab" id="join">我参与的</view>
+  <view class="tab {{selectJoin?'unselect':'select'}}" bindtap="switchTab" id="follow">我围观的</view>
+</view>
+
+<block wx:if="{{selectJoin}}">
+  <block wx:if="{{joinList.length>0}}">
+    <template is="sequence-list" data="{{sequenceList:joinList}}" />
+    <view wx:if="{{joinList.length>0&&hasNextJoinPage}}" class="next-page">
+      <view class="text">{{loadingNextJoinPage?'加载中':'加载更多'}}</view>
+    </view>
+  </block>
+  <block wx:elif="{{getJoinComplete}}">
+    <template is="empty-page" data="{{text:'点击右下角按钮创建接龙'}}" />
+  </block>
+</block>
+<block wx:else>
+  <block wx:if="{{followList.length>0}}">
+    <template is="sequence-list" data="{{sequenceList:followList}}" />
+    <view wx:if="{{followList.length>0&&hasNextFollowPage}}" class="next-page">
+      <view class="text">{{loadingNextFollowPage?'加载中':'加载更多'}}</view>
+    </view>
+  </block>
+  <block wx:elif="{{getFollowComplete}}">
+    <template is="empty-page" data="{{text:'围观过的接龙会在这里显示'}}" />
+  </block>
+</block>
+
+<view class="create-button {{showCreateBtn?'show-button':'hide-button'}}">
+  <button wx:if="{{hasUserInfo}}" class="button" bindtap="navigateToCreate">
+    <image class="img" src="/images/icon_add.png" mode="aspectFit"/>
+  </button>
+  <button wx:elif="{{canGetUserInfo}}" class="button" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+    <image class="img" src="/images/icon_add.png" mode="aspectFit"/>
+  </button>
+  <button wx:else class="button" open-type="getUserInfo" bindtap="openSetting">
+    <image class="img" src="/images/icon_add.png" mode="aspectFit"/>
+  </button>
+</view>
+
+<image class="bottom-shadow" src="/images/bottom_shadow.png" mode="aspectFill" />
+
+<template name="sequence-list">
+  <view wx:for="{{sequenceList}}" wx:key="{{index}}" class="sequence" bindtap="navigateToIdiomList" id="{{index}}">
+    <view class="text">
+      <view class="name">{{item.title}}</view>
+      <view class="lastIdiom">{{item.idiomCount}}. {{item.lastIdiom}}</view>
+    </view>
+    <view wx:if="{{item.type=='all'}}" class="all">
+      <view wx:if="{{item.imgList.length==1}}" class="img-list img-list-width1">
+      <image class="img img1" src="{{item.imgList[0]}}" mode="aspectFill"/>
+    </view>
+    <view wx:elif="{{item.imgList.length==2}}" class="img-list img-list-width2">
+      <image class="img img1" src="{{item.imgList[0]}}" mode="aspectFill"/>
+      <image class="img img2" src="{{item.imgList[1]}}" mode="aspectFill"/>
+    </view>
+    <view wx:elif="{{item.imgList.length==3}}" class="img-list img-list-width3">
+      <image class="img img1" src="{{item.imgList[0]}}" mode="aspectFill"/>
+      <image class="img img2" src="{{item.imgList[1]}}" mode="aspectFill"/>
+      <image class="img img3" src="{{item.imgList[2]}}" mode="aspectFill"/>
+    </view>
+    <view wx:elif="{{item.imgList.length==4}}" class="img-list img-list-width4">
+      <image class="img img1" src="{{item.imgList[0]}}" mode="aspectFill"/>
+      <image class="img img2" src="{{item.imgList[1]}}" mode="aspectFill"/>
+      <image class="img img3" src="{{item.imgList[2]}}" mode="aspectFill"/>
+      <image class="img img4" src="{{item.imgList[3]}}" mode="aspectFill"/>
+    </view> 
+    <view wx:elif="{{item.imgList.length>4}}" class="img-list img-list-width5">
+      <image class="img img1" src="{{item.imgList[0]}}" mode="aspectFill"/>
+      <image class="img img2" src="{{item.imgList[1]}}" mode="aspectFill"/>
+      <image class="img img3" src="{{item.imgList[2]}}" mode="aspectFill"/>
+      <image class="img img4" src="{{item.imgList[3]}}" mode="aspectFill"/>
+      <image class="img img5" src="{{item.imgList[4]}}" mode="aspectFill"/>
+    </view>
+    </view>
+    <view wx:elif="{{item.type=='group'}}" class="group">
+      <block wx:if="{{item.groupId.length>0}}">
+        <open-data type="groupName" open-gid="{{item.groupId}}" />
+      </block>
+      <block wx:else>未分享到群</block>
+    </view>
+    <view wx:elif="{{item.type=='two'}}" class="two">
+      <image class="img" src="{{item.imgList[0]}}" mode="aspectFit" />
+      <view class="vs">VS</view>
+      <image class="img" src="{{item.imgList[1].length>0?item.imgList[1]:'/images/default_avatar.png'}}" mode="aspectFill" />
+    </view>
+  </view>
+</template>

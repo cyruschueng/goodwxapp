@@ -1,0 +1,60 @@
+<template name="groupRankingItem">
+  <view class="rank">{{rank}}</view>
+  <image src="{{avatars.medium}}" class="avatar"></image>
+
+  <view class="info">
+    <view class="account-digest">
+      <text class="name">{{displayName}}</text>
+      <text decode class="kda">KDA:&nbsp;&nbsp;&nbsp;{{summary.kdaAvg}}</text>
+    </view>
+
+    <view class="index-data">
+      <text class="value">{{summary.winningPercentage}}</text>
+      <text class="unit">%</text>
+    </view>
+  </view>
+</template>
+
+<view class="group-ranking">
+  <image src="../../assets/images/shadow_demon.png" class="logo"></image>
+
+  <view class="container">
+    <view animation="{{animationData}}" class="ranking" style="top: {{viewShifting}}rpx">
+      <text class="page-title">天梯胜率排行</text>
+
+      <scroll-view scroll-y style="height: calc(100vh - 53vw - 136rpx)"
+                  enable-back-to-top
+                  bindscroll="scrolling"
+
+                  bindscrolltolower="lower"
+                  scroll-into-view="{{scrollToView}}"
+                  scroll-top="{{scrollTop}}"
+                  animation="{{scrollAnimationData}}"
+                  class="group-ranking__items">
+        <view class="group-ranking__account-item"
+              data-index="0">
+          <template is="groupRankingItem" 
+                    data="{{...currentUserAccount}}"/>
+        </view>
+
+        <view class="group-ranking__account-item"
+              data-index="{{index + 1}}"
+              wx:for="{{accounts}}"
+              wx:key="groupRankingList"
+              wx:for-item="account">
+          <template is="groupRankingItem" 
+                    data="{{...account}}"/>
+        </view>
+
+        <view class="more-view" 
+              wx:if="{{totalCount > accountsCount}}">
+          <text class="more">查看更多</text>
+        </view>
+
+        <view class="share-view" id="group-ranking-share">
+          <button open-type="share" class="share">转发到其他群PK</button>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

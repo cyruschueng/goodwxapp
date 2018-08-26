@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>chart</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="统计">
+    <meta name="keyword" content="统计">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/tongji.css">
+</head>
+
+<body>
+    <div class="header-wrapper">header</div>
+    <div class="body">
+        <div class="aside">aside</div>
+        <div class="main">
+            <div id="report-wrapper" class="content clearfix">
+                <div id="content-header-wrapper">main header</div>
+                <div class="main-content">
+                    <div class="table-list" id="IndexPreview">
+                        <div class="overview-card-title-container">
+                            <label class="overview-card-title">今日流量</label>
+                        </div>
+                        <table cellspacing="0" cellpadding="0" class="list" id="IndexPreviewTableList">
+                            <tbody>
+                                <tr class="title">
+                                    <th></th>
+                                    <th>浏览量(PV)</th>
+                                    <th>访客数(UV)</th>
+                                    <th>IP数</th>
+                                    <th>跳出率</th>
+                                    <th>平均访问时长</th>
+                                    <th>转化次数</th>
+                                    <th class="empty-tr0"></th>
+                                </tr>
+                                <tr class="highlight">
+                                    <td class="normal">今日</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="empty-tr0"></td>
+                                </tr>
+                                <tr>
+                                    <td class="normal">昨日</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="empty-tr0"></td>
+                                </tr>
+                                <tr>
+                                    <td class="normal">预计今日</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="empty-tr0"></td>
+                                </tr>
+                                <tr class="empty-tr1"></tr>
+                                <tr class="fade empty-tr2">
+                                    <td colspan="9"></td>
+                                </tr>
+                                <tr class="fade">
+                                    <td class="normal">昨日此时</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="">--</td>
+                                    <td class="empty-tr0"></td>
+                                </tr>
+                                <tr class="fade">
+                                    <td class="normal">每日平均</td>
+                                    <td class="">0</td>
+                                    <td class="">0</td>
+                                    <td class="">0</td>
+                                    <td class="">100%</td>
+                                    <td class="">00:01:05</td>
+                                    <td class="">--</td>
+                                    <td class="empty-tr0"></td>
+                                </tr>
+                                <tr class="fade">
+                                    <td class="normal">历史峰值</td>
+                                    <td d="2018年01月28日" title="峰值日：2018/01/28" class="highlight-tip">1</td>
+                                    <td d="2018年01月28日" title="峰值日：2018/01/28" class="highlight-tip">1</td>
+                                    <td d="2018年01月28日" title="峰值日：2018/01/28" class="highlight-tip">1</td>
+                                    <td d="2018年01月28日" title="峰值日：2018/01/28" class="highlight-tip">100%</td>
+                                    <td d="2018年02月23日" title="峰值日：2018/02/23" class="highlight-tip">00:02:00</td>
+                                    <td class="">--</td>
+                                    <td class="empty-tr0"></td>
+                                </tr>
+                                <tr class="fade empty-tr3">
+                                    <td colspan="9"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="fold  btw ">
+                        <a href="javascript:void(0)" id="TogglePreviewTableBtn" targets=".fade" class="toggleable recordable trackable close"></a>
+                    </div>
+                    <div class="overview-gap"></div>
+                    <div class="overview-detail">
+                        <div id="DateSelectBar">
+                            <div class="control-bar-wrapper clearfix" id="control-bar-wrapper">
+                                <div class="control-bar bg-iframe l" id="control-bar">
+                                    <span class="l label">时间：</span>
+                                    <div class="l date-select-bar" id="date-select-bar">
+                                        <a href="#00" class="trackable date-bar-single-day cur" memo="{id:'time_tody'}">今天</a>
+                                        <span class="seprator"></span>
+                                        <a href="#-1" class="trackable date-bar-single-day" memo="{id:'time_yest'}">昨天</a>
+                                        <span class="seprator"></span>
+                                        <a href="#-6" class="trackable" memo="{id:'time_week'}">最近7天</a>
+                                        <span class="seprator"></span>
+                                        <a href="#-29" class="trackable" memo="{id:'time_month'}">最近30天</a>
+                                    </div>
+                                    <div class="l time-select-bar" id="custom-date-select">
+                                        <div class="select-bar-item l">
+                                            <input onfocus="javascript:this.blur();" readonly="readonly" class="text trackable" memo="{id:'time_selt'}" id="date-select" value="自定义时间段">
+                                            <a class="dropdown"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overview-gap"></div>
+                        <div class="clearfix table-grid">
+                            <div class="left">
+                                <div class="table-grid-item">
+                                    1
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="table-grid-item">
+                                    <div class="title clearfix">
+                                        <div class="l">Top10搜索词</div>
+                                        <div class="r"><a id="event-monitor-word" class="detail-report-btn" href="/web/23774733/source/searchword?siteId=10669172"></a></div>
+                                    </div>
+                                    <div class="table-data clearfix">
+                                        <table cellpadding="0" cellspacing="0" class="table-layout-01">
+                                            <thead>
+                                                <tr>
+                                                    <td class="al url">搜索词</td>
+                                                    <td class="ar" width="20%">浏览量(PV)</td>
+                                                    <td class="ratio" width="20%">占比</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="empty-td" colspan="3" align="middle">暂无数据</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix table-grid">
+                            <div class="left">
+                                <div class="table-grid-item">
+                                    <div class="title clearfix">
+                                        <div class="l">Top10来源网站</div>
+                                        <div class="r"><a class="detail-report-btn" href="/web/23774733/source/all?viewType=site&amp;siteId=10669172">&nbsp;</a></div>
+                                    </div>
+                                    <div class="table-data clearfix">
+                                        <table cellpadding="0" cellspacing="0" class="table-layout-01">
+                                            <thead>
+                                                <tr>
+                                                    <td class="al url">来源网站</td>
+                                                    <td class="ar" width="20%">浏览量(PV)</td>
+                                                    <td class="ratio" width="20%">占比</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="source-site-container">
+                                                <tr>
+                                                    <td class="al url"><span class="ellipsis" title="直接访问">直接访问</span></td>
+                                                    <td class="ar">1</td>
+                                                    <td class="ratio">
+                                                        <div title="100%" style="background-color:#dcebfe; width:100%;">100%</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="table-grid-item">
+                                    <div class="title clearfix">
+                                        <div class="l">Top10入口页面</div>
+                                        <div class="r">
+                                            <a class="detail-report-btn" href="/web/23774733/visit/landingpage?siteId=10669172">&nbsp;</a>
+                                        </div>
+                                    </div>
+                                    <div class="table-data clearfix">
+                                        <table cellpadding="0" cellspacing="0" class="table-layout-01">
+                                            <thead>
+                                                <tr>
+                                                    <td class="al url">入口页面</td>
+                                                    <td class="ar" width="20%">浏览量(PV)</td>
+                                                    <td class="ratio" width="20%">占比</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="landing-page-container">
+                                                <tr>
+                                                    <td title="https://yuanzihtml.github.io" class="al url"><a target="_blank" class="ellipsis" href="https://yuanzihtml.github.io">https://yuanzihtml.github.io</a></td>
+                                                    <td class="ar">1</td>
+                                                    <td class="ratio">
+                                                        <div title="100%" style="background-color:#dcebfe; width:100%;">100%</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix table-grid">
+                            <div class="left">
+                                <div class="table-grid-item">
+                                    <div class="title clearfix">
+                                        <div class="l">Top10受访页面</div>
+                                        <div class="r">
+                                            <a class="detail-report-btn" href="/web/23774733/visit/toppage?siteId=10669172">&nbsp;</a>
+                                        </div>
+                                    </div>
+                                    <div class="table-data clearfix">
+                                        <table cellpadding="0" cellspacing="0" class="table-layout-01">
+                                            <thead>
+                                                <tr>
+                                                    <td class="al url">受访页面</td>
+                                                    <td class="ar" width="20%">浏览量(PV)</td>
+                                                    <td class="ratio" width="20%">占比</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="visit-page-container">
+                                                <tr>
+                                                    <td title="https://yuanzihtml.github.io" class="al url"><a target="_blank" class="ellipsis" href="https://yuanzihtml.github.io">https://yuanzihtml.github.io</a></td>
+                                                    <td class="ar">1</td>
+                                                    <td class="ratio">
+                                                        <div title="100%" style="background-color:#dcebfe; width:100%;">100%</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="table-grid-item">
+                                    <div class="title clearfix">
+                                        <div class="l">新老访客</div>
+                                        <div class="r">
+                                            <a class="detail-report-btn" href="/web/23774733/visit/type?siteId=10669172">&nbsp;</a>
+                                        </div>
+                                    </div>
+                                    <div class="table-data clearfix" id="visitor-type-container">
+                                        <div class="visit-type-summary clearfix">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="visit-type-icon">
+                                                            <div></div>
+                                                        </td>
+                                                        <td class="visit-type-new">
+                                                            <div>
+                                                                <div class="visit-type-summary-title">新访客</div>
+                                                                <div class="visit-type-summary-data">100<span class="ratil-unit">%</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="visit-type-old">
+                                                            <div>
+                                                                <div class="visit-type-summary-title">老访客</div>
+                                                                <div class="visit-type-summary-data">0<span class="ratil-unit">%</span></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="visit-type-detail">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="visit-type-detail-name">浏览量</td>
+                                                        <td class="visit-type-detail-new">1</td>
+                                                        <td class="visit-type-detail-old">--</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="visit-type-detail-name">访客数</td>
+                                                        <td class="visit-type-detail-new">1</td>
+                                                        <td class="visit-type-detail-old">--</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="visit-type-detail-name">跳出率</td>
+                                                        <td class="visit-type-detail-new">100%</td>
+                                                        <td class="visit-type-detail-old">--</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="visit-type-detail-name">平均访问时长</td>
+                                                        <td class="visit-type-detail-new">00:02:00</td>
+                                                        <td class="visit-type-detail-old">--</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="visit-type-detail-name">平均访问页数</td>
+                                                        <td class="visit-type-detail-new">1</td>
+                                                        <td class="visit-type-detail-old">--</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix table-grid">
+                            <div class="left">
+                                <div class="table-grid-item">
+                                    <div class="title clearfix">
+                                        <div class="l">访客属性-年龄分布</div>
+                                        <div class="r"><a id="event-monitor-age" class="detail-report-btn" href="/web/23774733/visit/attribute?siteId=10669172">&nbsp;</a></div>
+                                    </div>
+                                    <div id="china-map" style="position: relative; font-family: &quot;Microsoft Yahei&quot;, Helvetica, STHeitiSC-Light, Arial, sans-serif;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="table-grid-item">
+                                    <div class="title clearfix">
+                                        <div class="l">地域分布</div>
+                                        <div class="r"><a id="event-monitor-area" class="detail-report-btn" href="/web/23774733/visit/district?siteId=10669172">&nbsp;</a></div>
+                                    </div>
+                                    <div id="age-bar" style="position: relative; font-family: &quot;Microsoft Yahei&quot;, Helvetica, STHeitiSC-Light, Arial, sans-serif;"></div>
+                                    <div class="map-legend">浏览量<em>&nbsp;</em></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+    <script src="https://cdn.bootcss.com/highcharts/6.0.6/highcharts.js"></script>
+    <script>
+    </script>
+</body>
+
+</html>

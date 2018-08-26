@@ -1,0 +1,38 @@
+<!--pages/profile/historyOrder.wxml-->
+
+<import src="../../templates/myorder-item/myorder-item.wxml"/>
+
+<view class='body'>
+
+
+  <template is="myorder-item" data="{{ orderList }}"/>
+
+  <!-- <block wx:for="{{ historyList }}" wx:key="{{ index }}" wx:for-item="his">
+  <view class='history-cell'>
+    <view class='title'>
+      <text>{{ his.date }}</text>
+    </view>
+    <view class='content'>
+      <view class='appointment-cell' wx:for="{{ his.appointmentList }}" wx:for-item="apit" wx:key="{{ index }}" data-title='{{ apit.title }}' bindtap='bindAppointmentTap'>
+        <image class='cellImg' src='{{ apit.imgUrl }}' mode='aspectFill'></image>
+        <view class='text'>
+          <view>{{ apit.title }}</view>
+          <view class='second-txt-color'> 
+            <text>{{ apit.name }} {{ apit.floor }}</text>
+            <text style='margin-left:30rpx;'>{{ apit.floorHeight }}</text>
+          </view>
+          <view class='price'>¥ {{ apit.price }} <text class='second-txt-color' style='float:right;'>x{{ apit.nums }}</text> </view>
+        </view>
+      </view>
+    </view>
+    <view class='price-view weui-flex'>
+      <view class=''>共计：{{ his.appointmentList.length }}件</view>
+      <view class='weui-flex__item preprice-text'>定金：<text>¥ {{ his.prePrice }}</text></view>
+      <view class='weui-flex__item price-text'>合计：<text class='price'>¥ {{ his.totalPrice }}</text></view>
+    </view>
+  </view>
+  </block> -->
+
+  <view class='remind-empty-view' wx:if='{{ historyList.length <= 0 }}'>暂无历史...</view>
+  
+</view>

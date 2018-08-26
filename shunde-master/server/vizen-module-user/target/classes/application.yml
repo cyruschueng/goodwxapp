@@ -1,0 +1,16 @@
+##
+spring:
+  profiles:
+    active: dev
+
+# 请求的上下文
+server:
+  context-path: /vizen-module-user
+  port: 8082
+mark-framework:
+  request:
+    cache:
+      policy: LFU
+      size: 128
+      repository: com.vizen.framework.anotation.requestcache.RequestCacheMemoGeneric
+

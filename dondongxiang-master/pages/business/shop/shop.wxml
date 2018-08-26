@@ -1,0 +1,108 @@
+<view class="section-boxs">
+  <view class="relative-box">
+    <scroll-view scroll-y style='width:100%;height:100%;'>
+      <view class="cover-block" style='width:100%;height:{{coverHeight}}px;'>
+        <swiper indicator-dots="true" autoplay="true" interval="2000" duration="300" style='width:100%;height:{{coverHeight}}px;'>
+          <swiper-item wx:for="{{shop_imgs}}" wx:key="">
+            <image data-index='{{item.id}}' class="shop-cover" src="{{item.img_url}}" style='width:100%;height:{{coverHeight}}px;'></image>
+          </swiper-item>
+        </swiper>
+        <view class="cover-title">{{shop_name}}</view>
+      </view>
+      <view class="merchant-info">
+          <view class="merchant-title">商家信息</view>
+          <view class='shopinfo'>
+              <view class='shoppic'><image src='{{Shopkeeperheadimgurl}}' bindtap='goshopkeeper'></image></view>
+              <view class='shop-fun'>
+                  <view class='shop-name'>{{shop_name}}</view>
+                  <view class='shop-address'>{{address}}</view>
+                  <view class="shop-distance">
+                      <image bindtap='goshoploation' src="/images/main/config/icon_distance.png"></image>
+                      <text>580m</text>
+                  </view>
+              </view>
+              <view class='shop-touch'>
+                  <view bindtap='makingcall'><image src='/images/main/config/mobile_icon.png' class='phone'></image></view>
+                  <view bindtap='getshopcode'><image src='/images/main/config/icon_home_qrcode.png' class='code'></image></view>
+                  <text class='shop-link'>为店铺代言</text>
+              </view>
+          </view>
+      </view>
+      <!-- <view class="merchant-info mertinfo">
+          <view class="merchant-title">服务</view>
+          <view class='merchant-name'>
+              <view class='col-tab'><text>美发</text></view>
+              <view class='col-tab'><text>沙龙</text></view>
+              <view class='col-tab'><text>专业造型</text></view>
+              <view class='col-tab'><text>专业造型</text></view>
+          </view>
+      </view> -->
+      <view class="merchant-info">
+        <view class="merchant-title">介绍</view>
+        <view class="merchant-desc {{openStatus}}">{{introduce}}</view>
+        <view class="desc-closed {{openStatus}}" bindtap='openDesc'>
+          <image src="/images/business/shop/icon_filter_arrow.png"></image>
+        </view>
+        <view class="desc-opened {{openStatus}}" bindtap='closeDesc'>
+          <image src="/images/business/shop/icon_filter_arrow_up.png"></image>
+        </view>
+      </view>
+      <view class='merchant-info'>
+          <view class='pull-lefticon'><image src='/images/business/shop/hd.png'></image></view>
+          <view class='cent-data'>
+              <view class='block-title'>{{act_description}}</view>
+              <view hidden='{{showdesc}}' class='block-text'>{{act_description}}</view>
+          </view>
+          <view class='pull-righticon'><image  src='/images/business/shop/ddx.jpeg' bindtap='gowebaction'></image></view>
+          <view bindtap='{{arrorbottom}}' class='arrorbottom'><image src='{{arrowsrc}}'></image></view>
+      </view> 
+      <view class='bartabrow'>
+          <scroll-view scroll-x>
+              <view class='bartab-box' style='width:{{boxwidth}}px'>
+                <block wx:for="{{cat_info}}" wx:key="">
+                  <view  data-index="{{item.cat_id}}" bindtap='choosecatgoods' class="desc-img" style="width:70px;color:{{tabclass==item.cat_id?'#1aad16':''}}">
+                      <text>{{item.cat_name}}</text>
+                  </view>
+                </block>
+              </view>
+          </scroll-view>
+          <image class='rightarrow' src='/images/myCenter/arrow.png'></image>
+      </view>
+      <view class="merchant-info" style='overflow:hidden;'>
+        <view class="goods-list" style='background-color:#ffffff;'>
+          <block wx:for='{{prolist}}' wx:key="">
+            <view data-index="{{item.goods_id}}" class="goods-item" bindtap="goodsDetail">
+              <view class="goods-item-block">
+                <image src="{{item.img_url}}" style='height:190px;'></image>
+                <view class="goods-title">{{item.goods_name}}</view>
+                <view class="goods-price">￥{{item.price}}/台</view>
+              </view>
+            </view>
+          </block>
+          <view class="load-more" bindtap='viewMoreGoods'>查看更多</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+
+<view data-tab="{{conftab}}" class='conftbtnlet' bindtap='conftbtn'>
+    <image src='{{confimgurl}}'></image>
+</view>
+<view class='share-btn' bindtap='goindex' hidden='{{hiddenbtn}}'>回首页</view>
+<view class='share-btn'  hidden='{{hiddenbtn}}' style='left:115px'><button open-type="share"></button>分享店铺</view>
+
+
+<view class='footbar'>
+    <view class='barbtn' bindtap='goindex'>
+        <image src='/images/myCenter/upgrade-Bg.png'></image>
+        首页</view>
+    <view class='barbtn'>
+        <image src='/images/main/config/icon_distance.png'></image>
+        导航</view>
+    <view class='barbtn btn-col50' bindtap='makingcall'>
+        <text>一键拨号</text>
+        <text>{{tel}}</text>
+    </view>
+</view>

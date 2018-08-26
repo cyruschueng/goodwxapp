@@ -1,0 +1,29 @@
+
+    <scroll-view scroll-y="true" class="dev-list" style="height:{{scrollHeight}}">
+
+      <view class="devTip" wx:if="{{devList.length == 0}}">没有设备</view>  
+
+      <view class="dev-item" wx:for="{{devList}}" wx:key="" data-id="{{item.id}}" bindtap="goToDevInfo">
+        <view class="img-box">
+          <image src="{{item.imgUrl}}"></image>
+        </view>
+
+        <view class="dev-info">
+          <view >设备编号：{{item.deviceNo}}</view>
+          <view >领取时间：{{item.inDate}}</view>
+        </view>
+
+        <view class='dev-remainder'>
+           <text>{{item.timeInfo}}</text>
+        </view>
+
+      </view>
+
+    </scroll-view>
+
+
+
+
+
+
+

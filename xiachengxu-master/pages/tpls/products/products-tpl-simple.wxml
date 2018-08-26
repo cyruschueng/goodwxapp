@@ -1,0 +1,29 @@
+<template name='product-simple'>
+  <view class='product-simple-product' data-id='{{product.postId}}' catchtap='showDetailPopup'>
+    <view class='product-simple-top back_img'>
+      <image src='{{product.postPics[0].postPic}}' mode='widthFix'></image>
+      <view class='product-img-num'>{{product.postPics.length}}图</view>
+      <view class='product-simple-rate' wx:if='{{product.discountPrice}}'>
+        <image src='/images/icon/discount_border.png' mode='aspectFit'></image>
+        <text>{{product.discountRate}} 折</text>
+      </view>
+    </view>
+    <view class='product-simple-bottom'>
+      <view class='product-simple-title' style='{{product.postPics[0].goodsPrice?"flex: 0 0 70%;":""}}'>
+        <view class='product-simple-name'>{{product.postContent}}</view>
+        <view class='product-simple-collect'>{{product.postPics[0].bookingCount}}人已预约</view>
+      </view>
+      <view class='product-simple-attr' wx:if='{{product.postPics[0].goodsPrice}}'>
+        <view class='product-simple-price-discount' wx:if='{{product.postPics[0].discountPrice}}'>
+          <view>
+            <text>RMB</text> {{product.postPics[0].discountPrice}}
+          </view>
+          <view>原价{{product.postPics[0].goodsPrice}}</view>
+        </view>
+        <view class='product-simple-price' wx:else>
+          <text>RMB</text> {{product.postPics[0].goodsPrice}}
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

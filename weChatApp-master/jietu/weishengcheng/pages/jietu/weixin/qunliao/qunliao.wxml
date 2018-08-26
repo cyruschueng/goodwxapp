@@ -1,0 +1,96 @@
+<import src="../../../item/empty.wxml" />
+<import src="../../../item/messageItem.wxml" />
+<import src="/zanui/toast/index.wxml" />
+<import src="../../../../wux/dialog/dialog.wxml"/>
+
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view class="container page__bd" bindlongtap="toggleDialog" style="background:url({{bg}}) no-repeat center center fixed;background-size: cover;-webkit-background-size: cover; -moz-background-size: cover;-o-background-size: cover;{{list.length>0?'':'background-color:#fff;'}}">
+    <block wx:if="{{list.length>0}}">
+        <block wx:for="{{list}}" wx:key="*this" wx:for-index="index" wx:for-item="message"  >
+            <template is="message_item" data="{{index:index,item:message,app:'weixin',isAndroid:isAndroid,type:'qunliao',name:name,show_name:1,system:system,max_width:0.3589,max_height:0.3713}}" />
+        </block>
+    </block>
+    <view wx:else style="height:1000rpx;" class="flex_center">
+        <view class="weui-msg__icon-area" style="">
+            <image lazyload="true" style="width: 588rpx;height:269rpx;" src="http://icons.maiyizhi.cn/nocontent_list.png"></image>
+        </view>
+    </view>
+    <view bindtap="toggleDialog" id="input-bg" style="position:fixed;bottom:0;width:100%;height:100.14rpx;background-color:#f5f5f7;border-top: 1.04rpx solid #d9d9d9;" class="flex_col_center">
+        <view style="width: 70rpx;height: 57.64rpx">
+        <image src="http://icons.maiyizhi.cn/yuyin.png" style="width:56.33rpx;height: 56.33rpx;margin-left:9.375rpx;"></image></view>
+        <view style="height:70.93rpx;width:503.91rpx;border-radius:4px;border:2.09rpx solid #ddd;background-color: #fcfcfc;margin-left:18.78rpx;"></view>
+        <view style="width: 56.33rpx;height: 56.33rpx;"><image src="http://icons.maiyizhi.cn/biaoqinga.png" style="width:57.64rpx;height: 57.64rpx;margin-left:18.5rpx;"></image></view>
+        <view style="width: 70rpx;height: 57.64rpx;"><image src="http://icons.maiyizhi.cn/duihuatianjia1.png" style="width:56.33rpx;height: 56.33rpx;margin-left:36.09rpx"></image></view>
+    </view>
+</view>
+
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" bindtap="toggleDialog" />
+    <view class="zan-dialog__container">
+        <view class="weui-grids">
+            <view catchtap="itemClick" data-index="0" class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/shezhi.png" />
+                <view class="weui-grid__label">群聊设置</view>
+            </view>
+            <view catchtap="itemClick" data-index="1"  class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/tianjiawenzi.png" />
+                <view class="weui-grid__label">加文字消息</view>
+            </view>
+            <view catchtap="itemClick" data-index="2"  class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/tianjiatupian.png" />
+                <view class="weui-grid__label">加图片消息</view>
+            </view>
+            <view catchtap="itemClick" data-index="3"  class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/tianjiayuyin.png" />
+                <view class="weui-grid__label">加语音消息</view>
+            </view>
+            <view  catchtap="itemClick" data-index="4" class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/tianjiahongbao.png" />
+                <view class="weui-grid__label">加红包消息</view>
+            </view>
+            <view  catchtap="itemClick" data-index="10" class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/qunyuyin.png" />
+                <view class="weui-grid__label">加语音聊天</view>
+            </view>
+            <view  catchtap="itemClick" data-index="11" class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/zhuanfa.png" />
+                <view class="weui-grid__label">加转发消息</view>
+            </view>
+            <view  catchtap="itemClick" data-index="8" class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/time.png" />
+                <view class="weui-grid__label">加时间</view>
+            </view>
+            <view  catchtap="itemClick" data-index="9" class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/msg.png" />
+                <view class="weui-grid__label">系统提示</view>
+            </view>
+            <!--<view  catchtap="itemClick" data-index="5"  class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/moban_a.png" />
+                <view class="weui-grid__label">群聊模板</view>
+            </view>-->
+            <view  catchtap="itemClick" data-index="5"  class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/jietu_daohangtiao.png" />
+                <view class="weui-grid__label">截图</view>
+            </view>
+            <view  catchtap="itemClick" data-index="6"  class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/qingkong.png" />
+                <view class="weui-grid__label">清空</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="drawer_screen" bindtap="close"  wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+    <view class="drawer_content" style="margin-top:30rpx;height:370rpx;">
+        <view>长按屏幕添加消息</view>
+        <view class='drawer_img'><image src="http://icons.maiyizhi.cn/changan.png"   style="width:150rpx;height:150rpx;"></image></view>
+        <view>点击每条消息内容，修改或者删除它</view>
+        <view class='drawer_img'><image src="http://pics.maiyizhi.cn/bianjitishi.png" style="width:600rpx;height:225.3rpx;"></image></view>
+        <view>制作完成之后，请用手机截屏来保存图片</view>
+    </view>
+    <view style="position: absolute;right:-35rpx;top:-35rpx;" bindtap="close">
+        <image src="http://icons.maiyizhi.cn/guanbi3.png" style="width:70rpx;height:70rpx;"></image>
+    </view>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

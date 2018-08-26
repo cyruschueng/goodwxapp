@@ -1,0 +1,36 @@
+<!--userInfo.wxml-->
+<view style="margin-top:40rpx;">用户栏</view>
+<view class="demon_userInfo clearfix">
+  <view class="demon_userImg">
+    <image src="http://wx.qlogo.cn/mmopen/vi_32/rz4xqX0A7oyAPVbbqylbDcDQhZmibHHouwcxHPycLVfyicN3xEEXBOibdjw3LPN12UvedakfMO4y0ufAsKQIrfSfg/0" class="demon_img"></image>
+  </view>
+  <view class="demon_userInfo_content">
+    <view class="demon_userInfo_content_item">
+      <view>{{result.friendNum}}</view>
+      <view>好友数</view>
+    </view>
+    <view class="demon_userInfo_content_item">
+      <view>{{result.newclientNum}}</view>
+      <view>本周新客户</view>
+    </view>
+    <view class="demon_userInfo_content_item">
+      <view>{{result.allclientNum}}</view>
+      <view>积累客户</view>
+    </view>
+  </view>
+</view>
+<view style="margin-top:40rpx;">navbar</view>
+<view class="section">
+  <view class="section__title">vertical scroll</view>
+  <scroll-view scroll-y style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view id="green" class="scroll-view-item bc_green"></view>
+    <view id="red"  class="scroll-view-item bc_red"></view>
+    <view id="yellow" class="scroll-view-item bc_yellow"></view>
+    <view id="blue" class="scroll-view-item bc_blue"></view>
+  </scroll-view>
+
+  <view class="btn-area">
+    <button size="mini" bindtap="tap">click me to scroll into view </button>
+    <button size="mini" bindtap="tapMove">click me to scroll</button>
+  </view>
+</view>

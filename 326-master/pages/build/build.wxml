@@ -1,0 +1,56 @@
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<view>
+<!--创建电站str  -->
+     <form bindsubmit="finishInstal" bindreset="formReset">  
+      <view class='build'>
+        <view class='bgColorD flexA'>装机容量  
+        <view class='color3'>*</view>
+      </view> 
+       <view> 
+        装机容量(kW)
+        <input type="text" placeholder='请输入装机容量' name="capacity" bindinput='capacityInput'/>
+      </view> 
+      <view class='bgColorD flex'>安装信息</view> 
+       <view> 
+        安装商
+        <input type="text" name="Installer" value='暂无安装商'  bindinput='InstallerInput'/>
+      </view>
+      <view> 
+        安装日期
+        <!-- <input type="text" name="builTime" value='{{install}}'/> -->
+        <picker class='pick' mode="date" value="{{date}}" start="2000-01-01" end="2027-1-23" bindchange="buildDat">  
+          <view  class="picker color0 "> {{install}}</view>  
+        </picker>
+      </view> 
+       <view class='bgColorD'>收益公式</view>  
+       <view>
+        资金收益
+        <input type="text" name="Capital"  placeholder='' value='1.20' bindinput='incomeInput'/>
+      </view>
+      <view>
+        节约标准煤(kg)
+        <input type="text" name="coal" placeholder='' value='0.400' bindinput='stanCoalInput'/>
+      </view>
+      <view>
+        CO2减排(kg)
+        <input type="text" name="redRmisC" placeholder='' value='0.997' bindinput='devicCO2Input'/>
+      </view>
+       <view>
+        SO2减排(kg)
+        <input type="text" name="redRmisS"  placeholder='' value='0.030' bindinput='devisSO2Input'/>
+      </view> 
+       <view class='flex flexCenter '>
+       <button formType="submit" class='Skin  br02 btn' >确定</button>
+      </view>   
+      </view>   
+    </form>    
+    </view> 
+    <!--日历  -->
+<template is="errTip" data="{{errBox: errBox}}"/> 
+  </view> 
+  <!--创建电站end  -->
+
+

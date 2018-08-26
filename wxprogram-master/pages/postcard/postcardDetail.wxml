@@ -1,0 +1,31 @@
+<!--experiene.wxml-->
+<view class='box'>
+  <form bindsubmit='postcardShare' class='containers'>
+    <view class='banner'>
+      <image src='{{pic}}' mode='aspectFill'></image>
+      <view class='date'>
+        <view>{{day}}</view>
+        <view>{{mon}}</view>
+      </view>
+      <button class='createPostcard' form-type="submit">生成我的明信片</button>
+      <view class='editPostcard iconfont icon-bianji' bindtap='editText'></view>
+    </view>
+    <view class='content'>
+      <input hidden='1' name='pic' value='{{pic}}' />
+      <input hidden='1' name='mark' value='{{mark}}' />
+      <view class='textarea'>
+        <textarea focus='{{isEdit}}' maxlength='80' name="content" value="{{info}}" style='width:100%;height: 300rpx;overflow-y: scroll;'/>
+      </view>
+      <view class="userinfo">
+        <block>
+          <view class='userImage'>
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+          </view>
+          <view class='userName'>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </form>
+</view>

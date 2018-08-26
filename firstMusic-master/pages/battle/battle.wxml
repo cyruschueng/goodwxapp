@@ -1,0 +1,28 @@
+<!--pages/battle/battle.wxml-->
+<view class="container">
+
+    <view class='inform'>
+        <image class='niceImg' src="{{userInfo.avatarUrl}}" mode='widthFix'></image>
+        <view class='name'>{{userInfo.nickName}}</view>
+        <view class='money'>入场费：<image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode="widthFix"></image>
+        <text class='fen'>{{gold}}</text>
+        </view>
+    </view>
+    <!--倒计时  -->
+    <view class='wait'>
+    <!-- http://p1jrmxejh.bkt.clouddn.com/chengyu/rol.gif -->
+        <image class='waitImg' src="http://p1jrmxejh.bkt.clouddn.com/music/dao1.gif" mode='widthFix'></image>
+        <view class='time'>{{second}}</view>
+    </view>
+    <!--second>5s显示  -->
+    <view class='cancel' bindtap='outTap' wx:if="{{show}}">取消匹配</view>
+</view>
+<view class='bg' wx:if="{{bg}}">
+    <view class='zindex'>
+        <view class='title'>未匹配到对手</view>
+        <view class='think'>
+          <view class='item one' bindtap='newReady'>重新匹配</view>
+          <view class='item' bindtap='outTap'>退出</view>
+        </view>
+    </view>
+</view>

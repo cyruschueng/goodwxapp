@@ -1,0 +1,116 @@
+<view class="container {{isScroll == true ? '':'overflow-y-hidden'}}" style="height:{{innerHeight}}px;">
+  <view class="padding-10 bottom-line font-size-30">Model：</view>
+
+  <!--模态框展示 start-->
+  <view class="padding-10">
+
+    <!--默认模态框 start-->
+    <view class="btn btn-primary btn-lg" data-model="myModel" bindtap="bindModel">default model</view>
+    <!--模态框-->
+    <view class="model {{model == 'myModel'? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;" data-model="cancel" bindtap="bindModel">
+      <view class="set" style="margin-top:{{innerHeight*0.2}}px">
+        <view class="title text-align-center">提示</view>
+        <view class="body text-align-center">
+          default model
+        </view>
+        <view class="bottom">
+          <view class="cancel" data-model="cancel" bindtap="bindModel">取消</view>
+          <view class="confirm" data-model="confirm" bindtap="bindModel">确定</view>
+          <view class="clear-both"></view>
+        </view>
+      </view>
+    </view>
+    <!--默认模态框 end-->
+
+    <!--上滑模态框 start-->
+    <view class="margin-top-10 btn btn-success btn-lg" data-model="slideUp" bindtap="bindModel">slide up model</view>
+    <!--模态框-->
+    <view class="model-slide-up {{model == 'slideUp'? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;" data-model="cancel" bindtap="bindModel">
+      <view class="set" style="margin-top:{{innerHeight*0.2}}px">
+        <view class="top">
+          <view class="cancel" data-model="cancel" bindtap="bindModel">取消</view>
+          <view class="confirm" data-model="confirm" bindtap="bindModel">确定</view>
+          <view class="clear-both"></view>
+        </view>
+        <view class="body text-align-center">
+          <view style="height:100px">slide up model</view>
+        </view>
+      </view>
+    </view>
+    <!--上滑模态框 end-->
+
+    <!--右滑模态框 start-->
+    <view class="margin-top-10 btn btn-warring btn-lg" data-model="slideRight" bindtap="bindModel">slide right model</view>
+    <!--模态框-->
+    <view class="model-slide-right {{model == 'slideRight'? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;" data-model="cancel" bindtap="bindModel">
+      <view class="set" style="margin-top:{{innerHeight*0.2}}px">
+        <view class="body text-align-center">
+          slide right model
+        </view>
+      </view>
+    </view>
+    <!--右滑模态框 end-->
+  </view>
+
+  <!--模态框展示 end-->
+
+  <!--按钮展示 start-->
+  <view class="padding-10 bottom-line top-line font-size-30">Button XS：</view>
+  <view class="padding-10">
+    <view class="btn btn-default btn-xs">default</view>
+    <view class="margin-left-10 btn btn-primary btn-xs">primary</view>
+    <view class="margin-left-10 btn btn-success btn-xs">success</view>
+    <view class="margin-left-10 btn btn-warring btn-xs">warring</view>
+    <view class="margin-left-10 btn btn-danger btn-xs">danger</view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="padding-10 bottom-line top-line font-size-30">Button SM：</view>
+  <view class="padding-10">
+    <view class="btn btn-default btn-sm">default</view>
+    <view class="margin-left-10 btn btn-primary btn-sm">primary</view>
+    <view class="margin-left-10 btn btn-success btn-sm">success</view>
+    <view class="margin-left-10 btn btn-warring btn-sm">warring</view>
+    <view class="margin-top-10 btn btn-danger btn-sm">danger</view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="padding-10 bottom-line top-line font-size-30">Button MD：</view>
+  <view class="padding-10">
+    <view class="btn btn-default btn-md">default</view>
+    <view class="margin-left-10 btn btn-primary btn-md">primary</view>
+    <view class="margin-left-10 btn btn-success btn-md">success</view>
+    <view class="margin-left-10 btn btn-warring btn-md">warring</view>
+    <view class="margin-top-10 btn btn-danger btn-md">danger</view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="padding-10 bottom-line top-line font-size-30">Button LG：</view>
+  <view class="padding-10">
+    <view class="btn btn-default btn-lg">default</view>
+    <view class="margin-top-10 btn btn-primary btn-lg">primary</view>
+    <view class="margin-top-10 btn btn-success btn-lg">success</view>
+    <view class="margin-top-10 btn btn-warring btn-lg">warring</view>
+    <view class="margin-top-10 btn btn-danger btn-lg">danger</view>
+    <view class="clear-both"></view>
+  </view>
+  <!--按钮展示 end-->
+
+  <view class="padding-10 bottom-line top-line font-size-30">ShowToast：</view>
+  <view class="padding-10">
+    <view class="btn btn-default btn-lg" data-toast="toast" bindtap="bindToast">default toast</view>
+    <view class="margin-top-10 btn btn-default btn-lg" data-toast="upToast" bindtap="bindToast">up toast</view>
+    <view class="margin-top-10 btn btn-default btn-lg" data-toast="toast-left-right" bindtap="bindToast">left to right toast</view>
+  </view>
+
+  <view class="{{toast == 'toast'? 'toast':'hidden'}}">default toast </view>
+
+  <view class="{{toast == 'upToast'? 'toast-up':'hidden'}}">up toast </view>
+
+  <view class="{{toast == 'toast-left-right'? 'toast-left-right':'hidden'}}">up toast </view>
+
+  <view class="padding-10 bottom-line top-line font-size-30">Edit Panel：</view>
+  <view class="padding-10">
+    <view class="btn btn-default btn-lg"  bindtap="navToEditPanel">Edit Panel</view>
+  </view>
+</view>

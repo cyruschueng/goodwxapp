@@ -1,0 +1,41 @@
+<!--pages/normalpages/course/student_set/student_set.wxml-->
+<view class="container">
+
+    <view class='gray-space-small'></view>
+
+    <view id="{{index}}" class='student-item-box' wx:for="{{userInfo.studentSet}}" wx:key="{{index}}">
+        <!-- 头像区 -->
+        <view class='item-avatar-container'>
+            <image class='item-avatar-image' src='{{item.avatarUrl}}'></image>
+        </view>
+
+        <!-- 文字信息及操作 -->
+        <view class='item-info-contanier'>
+            <!-- 信息区 -->
+            <view id='{{item.id}}' class='item-info-sub-contanier'>
+                <view class='item-info-name'>
+                    {{item.nickName}}
+                </view>
+                <radio-group id='{{item.id}}' bindchange='onChecked' class='item-radio-group'>
+                    <radio id='{{item.id}}' value='true' class='item-radio-btn'>出勤</radio>
+                    <radio id='{{item.id}}' value='false' class='item-radio-btn'>缺勤</radio>
+                </radio-group>
+
+            </view>
+
+            <!-- 操作区 -->
+            <view id='{{item.id}}' class='item-info-sub-contanier'>
+                <view id='{{item.id}}' class='item-info-action-contanier' bindtap='onCreateHomework'>
+                    <view class='item-info-action-text'>布置家庭作业</view>
+                    <image class='item-image-btn' src='../../../image/right_arrow.png'></image>
+                </view>
+
+                <view id='{{item.id}}' class='item-info-action-contanier' bindtap='onPerformance'>
+                    <view class='item-info-action-text'>评价今日表现</view>
+                    <image class='item-image-btn' src='../../../image/right_arrow.png'></image>
+                </view>
+            </view>
+        </view>
+
+    </view>
+</view>

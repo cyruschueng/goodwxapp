@@ -1,0 +1,13 @@
+<!--privateMember.wxml-->
+
+<import src="../../../templates/private-item/private-item.wxml"/>
+<import src="../../../templates/empty-view/empty-view.wxml"/>
+
+
+<view class='bg-view'>
+
+  <template is="private-item" data="{{ privateMemberList }}"/>
+  
+  <template wx:if='{{ privateMemberList.length <= 0 }}' is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+
+</view>

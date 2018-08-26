@@ -1,0 +1,32 @@
+<view class="searchbar">
+  <view class="item">
+    <view class="abs">
+      <image src="/img/search.png"></image>
+    </view>
+    <input name="keyword" id="keyword" style="position:absolute;top:20rpx;left:100rpx;width:600rpx" placeholder-style="color:#bfbfbf;" bindinput="search" placeholder="输入城市名或首字母查询" />
+  </view>
+  <view class="citytitle">
+    <label>{{cityTitle}}</label>
+    <text>{{city}}</text>
+  </view>
+</view>
+<scroll-view scroll-y="true" scroll-into-view="{{stop}}" style="height:900px;">
+  <block wx:if="{{ssss == 0}}">
+  <view class="titem">
+    <view class="title">热门城市</view>
+    <block wx:for="{{hotCity}}">
+      <view class="item" bindtap="bindCity" data-city="{{hotCity[index].name}}" data-id="{{hotCity[index].id}}">{{hotCity[index].name}}</view>
+    </block>
+  </view>
+  <view class="witem">
+    <view class="title">更多城市</view>
+    <block wx:for="{{word}}">
+      <view id="{{word[index]}}_qw" class="item" bindtap="bindword">{{word[index]}}</view>
+    </block>
+  </view>
+  </block>
+  <view class="titem" wx:for="{{cityList}}" wx:key="{{item.initial}}" id="{{item.initial}}">
+    <view class="title">{{item.initial}}</view>
+    <view class="item" wx:for="{{item.cityInfo}}" wx:for-item="ct" wx:key="{{ct.id}}" data-city="{{ct.city}}" data-id="{{ct.code}}" bindtap="bindCity">{{ct.city}}</view>
+  </view>
+</scroll-view>

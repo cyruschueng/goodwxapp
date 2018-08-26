@@ -1,0 +1,13 @@
+var orderStatusObj = { "0": "未付款", "1": "已付款，待发货", "2": "已发货", "3": "已完成", "4":"退款中"}
+var filters = {
+  toFix: function (value) {
+    return Number(value).toFixed(2)
+  },
+  orderStatus: function (value) {
+    return orderStatusObj[value];
+  }
+}
+module.exports = {
+  toFix: filters.toFix,
+  orderStatus: filters.orderStatus
+}

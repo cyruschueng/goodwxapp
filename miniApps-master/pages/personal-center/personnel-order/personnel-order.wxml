@@ -1,0 +1,19 @@
+<import src="order-template-item/order-template-item.wxml" />
+<view>
+  <view class="myorder_tab">
+    <view class="myorder_tab_list {{currentTab=='' ? 'on' : ''}}" data-current="" bindtap="swichNav">全部订单</view>
+    <view class="myorder_tab_list {{currentTab=='1' ? 'on' : ''}}" data-current="1" bindtap="swichNav">待付款</view>
+    <view class="myorder_tab_list {{currentTab=='2' ? 'on' : ''}}" data-current="2" bindtap="swichNav">已完成</view>
+    <view class="myorder_tab_list {{currentTab=='10' ? 'on' : ''}}" data-current="10" bindtap="swichNav">已取消</view>
+  </view>
+</view>
+<view class="myOrderBox">
+  <view>
+    <block wx:for="{{order_list}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+      <template is="order_template" data="{{item}}"></template>
+    </block>
+  </view>
+</view>
+<view wx:if="{{order_list.length < 1}}" class='placeholder'>
+  <image src="/images/icon/zhanweitu.png"></image>
+</view>

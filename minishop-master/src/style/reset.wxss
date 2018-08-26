@@ -1,0 +1,56 @@
+view,
+view::before,
+view::after,
+scroll-view,
+swiper,
+movable-area,
+cover-view,
+icon,
+text,
+rich-text,
+progress,
+button,
+checkbox-group,
+form,
+input,
+label,
+picker,
+picker-view,
+radio-group,
+radio,
+slider,
+switch,
+textarea,
+navigator,
+audio,
+image,
+video,
+map,
+canvas,
+open-data,
+contact-button {
+  box-sizing: border-box;
+}
+
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', Roboto, Arial, 'Microsoft YaHei', sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+/* wuage:remove */
+/*
+WX:BUG
+CSS page::after或page::before 添加 content 后编辑器的wxml无法显示
+https://developers.weixin.qq.com/blogdetail?action=get_post_info&docid=4fa9180f3d3d855ba5493836d48896e0&highline=page%3A%3Aafter&token=1058616900&lang=zh_CN
+*/
+page::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: ' ';
+  width: 100%;
+  height: 1px;
+  background-color: #e2e2e2;
+  z-index: 1001;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<script type="text/javascript">
+var name = 'World!';
+(function namev() {
+  console.log(typeof name);//undefined,变量提升
+  if (typeof name === 'undefined') {
+        var name = 'Jack';
+        console.log('Goodbye ' + name);
+    } else {
+        console.log('Hello ' + name);
+    }
+})();
+
+var name = 'World!';
+(function namev() {
+  console.log(typeof name);//string
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+
+  <!--filter start-->
+  <view class="filter-box tc {{son_cate.length > 0?'':'menu-none'}}">
+
+    <view class="menu-fixed">
+      <scroll-view class="son-cate tl f14 gridXb" scroll-x="true" scroll-with-animation="true" wx:if="{{son_cate.length > 0}}">
+        <view class="submenu-item {{this_cate_id == select_cate? 'active':''}}" bindtap='change_cate' data-val="{{this_cate_id}}">全部</view>
+        <view class="submenu-item {{item.id == select_cate? 'active':''}}" wx:for="{{son_cate}}" bindtap='change_cate' data-val="{{item.id}}">{{item.name}}</view>
+      </scroll-view>
+
+      <view class="filter flex">
+        <view class="sub filter-item {{select_type == ''?'active':''}}" bindtap="select_goods_list" data-stype="">综合</view>
+        <view class="sub filter-item {{select_type == 'xiaoliang'?'active':''}}" bindtap="select_goods_list" data-stype="xiaoliang">销量</view>
+        <view class="sub price-rank {{is_select_jiage?'pr-arrow':''}} {{select_type == 'jiage'?'active':''}}" bindtap="select_goods_list" data-stype="jiage">价格</view>
+        <view class="type f20 filter-item" bindtap="toggle_list_type_bind">
+          <text class="iconfont {{list_type==true?'icon-list':'icon-apps'}}"></text>
+        </view>
+      </view>
+
+
+    </view>
+  </view>
+  <!--filter end-->
+
+  <!--list start-->
+  <view class="malllist" wx:if="{{list_type&&true}}">
+    <block wx:if="{{goods_data&&goods_data!=''&&goods_data!=null}}">
+      <block wx:for="{{goods_data}}">
+        <view class="m-item flex" bindtap="detail" id="{{item.id}}">
+          <view class="m-imgbox">
+            <image src="{{item.g_img}}" class="m-img" mode="aspectFill"></image>
+          </view>
+          <view class="sub flex flexC ml20 m-box">
+            <view class="m-tit lineText2">
+              <text>{{item.g_name}}</text>
+            </view>
+            <view class="m-info grey f12 mt5 sub">
+              <text>月销{{item.sale_number}}笔</text>
+            </view>
+            <view class="flex mt10">
+              <view class="good-price sub">
+                <block wx:if="{{item.promote_status == 1}}">
+                  <text class="iconfont icon-cu"></text>
+                  <text class="f20">￥{{item.promote_price}}</text>
+                  <text class="delLine f12 grey ml5">￥{{item.shop_price}}</text>
+                </block>
+                <block wx:else>
+                  <text class="f20">￥{{item.shop_price}}</text>
+                  <text class="delLine f12 grey ml5">￥{{item.market_price}}</text>
+                </block>
+              </view>
+              <!-- 加入购物车 -->
+              <view class='f18' catchtap="is_show_card" data-id="{{item.id}}">
+                <text class=" red iconfont icon-cart"></text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+  <!--list end-->
+
+  <view class="goods clearfix" wx:if="{{!list_type}}">
+    <block wx:if="{{goods_data&&goods_data!=''&&goods_data!=null}}">
+      <block wx:for="{{goods_data}}">
+        <view class="goods-item" bindtap="detail" id="{{item.id}}">
+          <view class="goods-imgbox">
+            <image src="{{item.g_img}}" class="goods-img" mode="aspectFill"></image>
+          </view>
+          <view class="goods-info">
+            <view class="goods-name lineText">
+              <text>{{item.g_name}}</text>
+            </view>
+            <view class="m-info grey f12 sub">
+              <text>月销{{item.sale_number}}笔</text>
+            </view>
+            <view class="flex mt5">
+              <view class="goods-price sub">
+                <block wx:if="{{item.promote_status == 1}}">
+                  <text class="iconfont icon-cu"></text>
+                  <text class="f16">￥{{item.promote_price}}</text>
+                  <text class="delLine grey ml5 f12">￥{{item.shop_price}}</text>
+                </block>
+                <block wx:else>
+                    <text class="f16">￥{{item.shop_price}}</text>
+                    <text class="delLine grey ml5 f12">￥{{item.market_price}}</text>
+                </block>
+              </view>
+              <!-- 加入购物车 -->
+              <view catchtap="is_show_card" data-id="{{item.id}}">
+                <text class="f18 red iconfont icon-cart"></text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+
+  <!--加入购物车 start-->
+  <block wx:if="{{is_show_card}}">
+    <view class="add-cart-box floatBox">
+      <view class="layout">
+        <text class="iconfont icon-close fr" bindtap="is_show_card"></text>
+        <view class="layout-info gridXb flex">
+          <image src="{{goods_property.g_img_url ==''?goods_info.g_img_url:goods_property.g_img_url}}" width="40" height="40" mode="aspectFill"></image>
+          <view class="sub ml10">
+            <view class="lineText">{{goods_info.g_name}}</view>
+            <view class="red f18 mt5">
+              ￥{{goods_property.shop_price>0?goods_property.shop_price:goods_info.price_info.price}}
+            </view>
+            <view class="f12 grey">
+              <text>库存：<text>{{goods_property.last_num == undefined ? goods_info.g_number:goods_property.last_num}}</text></text>
+              <text class="ml10">销量：<text>{{goods_property.sell_num == undefined ? goods_info.sale_number:goods_property.sell_num}}</text></text>
+            </view>
+          </view>
+        </view>
+        <!-- 商品属性和数量 -->
+        <view class="goods-attrs-box">
+          <block wx:for="{{goods_info.property}}" wx:for-item="itemType" wx:for-index="index">
+            <view class="attr_list">
+              <view class="attr_list_t">{{itemType.name}}</view>
+              <view>
+                <block wx:for="{{itemType.item}}" wx:for-item="itemVal" wx:for-index="key">
+                  <text class="attr-list-li {{property_select[index].item == key? 'on': ''}}" data-index="{{index}}" data-key="{{key}}" bindtap="select_attr_bind">{{itemVal}}</text>
+                </block>
+              </view>
+            </view>
+          </block>
+          <view class="options">
+            <view class="options-tiem">
+              <view class="count-set tc fr flex">
+                <view class="sub" bindtap="bind_cart_number_jian">
+                  <text class="iconfont icon-move"></text>
+                </view>
+                <view class="sub buy-couts">
+                  <input type="number" value="{{cart_default_number}}" bindinput="check_cart_number" bindblur="change_cart_number" />
+                </view>
+                <view class="sub" bindtap="bind_cart_number_jia">
+                  <text class="iconfont icon-add"></text>
+                </view>
+              </view>
+              <view class="name" style="line-height:30px;">
+                <text>购买数量：</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="flex">
+          <button style="background:#f0aa30;" class="add-cart-btn sub" bindtap="goods_add_cart" disabled="{{btn_add_cart_disabled}}">加入购物车</button>
+          <button class="buy-now-btn sub" bindtap="goods_buy_now" disabled="{{btn_add_cart_disabled}}">立即购买</button>
+        </view>
+      </view>
+      <view class="floatBox floatBoxBg" style="display:block;" bindtap="set_close"></view>
+    </view>
+  </block>
+  <!--加入购物车 end-->
+
+  <!--back top-->
+  <view class="backtop" bindtap="goTop" wx:if="{{floorstatus}}">
+    <text class="iconfont icon-fold"></text>
+  </view>
+
+  <!--tips-->
+  <block wx:if="{{is_loadmore==false}}">
+    <view class="tips-foot grey tc f12">
+      不要扯了，已经扯到底了
+    </view>
+  </block>
+</block>

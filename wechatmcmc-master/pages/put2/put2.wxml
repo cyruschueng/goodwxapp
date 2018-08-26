@@ -1,0 +1,154 @@
+<!--put2.wxml-->
+<!--pages/z_test/z_test.wxml-->
+  <scroll-view class="uploadimg" scroll-x="true">
+          <view style="width:{{width}}px;height:64px;margin-top:8px;">
+             <block wx:if="{{logo==''}}"> 
+                  <view class="box2" style="margin-left:{{box}}px;" bindtap="upload">
+                    <view class="box_img">
+                      <image src="/images/add.png" />
+                    </view>
+                    <view class="wenzi">
+                      添加图片
+                    </view>
+                  </view>
+              </block>
+              <block wx:if="{{logo!=''}}">
+                  <view class="box" bindtap="upload">
+                        <view class="box_img">
+                          <image src="/images/add.png" />
+                        </view>
+                        <view class="wenzi">
+                          添加图片
+                        </view>
+                    </view> 
+              </block>
+            <block wx:for="{{logo}}" wx:for-index="id">
+              <block wx:if="{{item!=''}}">
+                <!-- <view class="boxlist"  style="display:block;background-image:url({{item}});"> -->
+                <view class="boxlist"  style="display:block;background-image:url({{item}});">
+          
+                    <view class="close" bindtap="close" data-id="{{id}}"></view>  
+                    <view class="cilck" bindtap="preview" data-img="{{item}}"></view>
+                </view>
+              </block>
+            </block>
+          </view>
+        </scroll-view>
+
+<form bindsubmit="formSubmit" bindreset="formReset" report-submit="true">
+      
+        
+      
+        <scroll-view class="content">
+         <view class="page__bd">
+        <view style="width:100%;height:8px;"></view>
+      
+       <scroll-view>
+            <scroll-view>
+              <scroll-view>
+               <scroll-view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">供应名称</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" maxlength="50" name="title" placeholder="服务名称" value=""/>
+                </view>
+            </view>
+          
+            
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">服务类别</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="liebie" bindchange="bindtypeChange" value="{{TypeIndex}}" range="{{Type}}">
+                        <view class="weui-select weui-select_in-select-after">{{Type[TypeIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">所在区域</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="sheng" bindchange="bindshengChange" value="{{shengIndex}}" range="{{shengtype}}">
+                        <view class="weui-select weui-select_in-select-after">{{shengtype[shengIndex]}}</view>
+                    </picker>
+                </view>
+                 <view class="weui-cell__bd">
+                    <picker name="shi"  bindchange="bindshiChange" value="{{shiIndex}}" range="{{shitype}}">
+                        <view class="weui-select weui-select_in-select-after">{{shitype[shiIndex]}}</view>
+                    </picker>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="qu" bindchange="bindquChange" value="{{quIndex}}" range="{{qutype}}">
+                        <view class="weui-select weui-select_in-select-after">{{qutype[quIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">详细地址</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="jiedao"  class="weui-input" maxlength="20" placeholder="街道地址" value="{{gsinfo.dizhi}}"/>
+                </view>
+            </view>
+           
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">联系人</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="lianxiren"  class="weui-input" value="{{gsinfo.lianxiren}}" placeholder="不少于两个字"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="phone"  value="{{gsinfo.phone}}"  class="weui-input" placeholder="请输入手机号" />
+                </view>
+              
+            </view>
+          
+             <view class=" weui-cells_after-title" style="background-color:#F8F8F8;border-top:1px solid #D9D9D9;">   
+                    <view style="margin-left:16px;padding-top:4px;">
+                    <view>服务介绍</view>
+                    </view>    
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell"> 
+                    <view class="weui-cell__bd">
+                        <textarea name="jieshao" maxlength='500' value=""  class="weui-textarea" placeholder="（选填）" style="height: 6em" />
+                        <view class="weui-textarea-counter">0/500</view>
+                    </view>
+                </view>
+            </view>
+
+          </scroll-view> 
+              </scroll-view>
+            </scroll-view>
+          </scroll-view>
+
+        <checkbox-group bindchange="bindAgreeChange">
+            <label class="weui-agree" for="weuiAgree">
+                <view class="weui-agree__text">
+                    <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                    <view class="weui-agree__checkbox-icon">
+                        <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                    </view>
+                    阅读并同意<navigator url="../fabuxuzhi/fabuxuzhi?token=1" class="weui-agree__link" style="color:#999999;">《发布须知》</navigator>
+                </view>
+            </label>
+        </checkbox-group>
+            <button class="weui-btn" style="width:90%;background-color:#FF5902;color:#ffffff" formType="submit" hover-class="none" type="default" disabled="{{status}}">确认发布</button>
+    </view>
+    </scroll-view>
+</form>      
+
+
+
+

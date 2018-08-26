@@ -1,0 +1,74 @@
+<view class="padding-15 address-bottom-line">
+  <view class="pull-left sad">
+    <image class="icon-50" src="/img/icon_room.png"></image>
+  </view>
+  <view class="pull-left wid">
+    <view class="pull-left fontsize-30">收货人:{{defAddress.name}}</view>
+    <view class="pull-righ fontsize-30">{{defAddress.number}}</view>
+    <view style="clear:both"></view>
+    <view class="fontsize-25" style="padding-top:30rpx;">收货地址:{{defAddress.province}} {{defAddress.city}} {{defAddress.area}} {{defAddress.address}}</view>
+  </view>
+  <view class="pull-righ fkl">
+    <image class="icon-30" src="/img/right.png"></image>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<view class="bg-gray-line"></view>
+
+<!-- 一个订单 start -->
+<view class="padding-10 order">
+  <view class="fontsize-25 pull-left">订单编号:23156456456554</view>
+  <view style="clear:both"></view>
+</view>
+<view class="padding-10 order bottom-line" style="background:#f7f7f7">
+  <image class="pull-left" style="width:150rpx;height:150rpx;" src="/img/carousel1.jpg"></image>
+  <view class="pull-left fontsize-30" style="width:400rpx;margin-left:20rpx;">adsa多撒多阿萨德阿萨德阿萨</view>
+  <view class="pull-righ">
+    <view class="fontsize-30">￥15.00</view>
+    <view class="fontsize-30" style="color:#888;text-align:right">x1</view>
+  </view>
+  <view style="clear:both"></view>
+</view>
+
+<picker class="padding-15 bottom-line" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+  <view class="fontsize-30 pull-left">规格型号</view>
+  <view class="fontsize-30 pull-righ color-r8">
+    <view class="pull-left fontsize-30">{{array[index]}}</view>
+    <image class="pull-righ icon-25" src="/img/right.png" style="margin-top:9rpx;"></image>
+  </view>
+  <view style="clear:both"></view>
+</picker>
+<view class="padding-10 fontsize-30 bottom-line">
+  <view class="fontsize-30 pull-left" style="padding-left:10rpx; padding-top:10rpx;">数量</view>
+  <view class="pull-righ">
+    {{numValue}}
+  </view>
+  <view style="clear:both"></view>
+</view>
+
+<view class="padding-10 order bottom-line">
+  <view class="fontsize-25 pull-righ">共2件商品 小计：￥15.00(包邮)</view>
+  <view style="clear:both"></view>
+</view>
+<view class="bg-gray-line"></view>
+<view class="padding-15 bottom-line">
+    <view class="pull-left fontsize-30" >买家留言:</view>
+    <input class="pull-left fontsize-30" style="margin-left:20rpx;" placeholder="对本次交易的说明" />
+    <view style="clear:both"></view>
+</view>
+<picker class="padding-15 bottom-line" bindchange="bindPickerChange" value="{{index}}" range="{{payStyle}}">
+  <view class="fontsize-30 pull-left">支付方式</view>
+  <view class="fontsize-30 pull-righ color-r8">
+    <view class="pull-left fontsize-30">{{payStyle[index]}}</view>
+    <image class="pull-righ icon-25" src="/img/right.png" style="margin-top:9rpx;"></image>
+  </view>
+  <view style="clear:both"></view>
+</picker>
+<!-- 一个订单 end -->
+<view class="paybar">
+  <view style="float:left;font-size:30rpx;margin-top:20rpx;margin-left:30rpx;">合计:
+    <text style="color:rgba(255,86,112,1.00)">￥2156</text>
+  </view>
+  <view class="btn-pay">提交订单</view>
+  <view style="font-size:25rpx;float:right; margin-right:20rpx;color:#888888;margin-top:20rpx;"></view>
+</view>

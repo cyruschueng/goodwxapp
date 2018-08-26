@@ -1,0 +1,54 @@
+var imgStyle = {}
+function handleImgSize (list, one) {
+  if (list.length !== 1) return
+  if (imgStyle[one.id]) return imgStyle[one.id]
+  var baseWidth = 444
+  var baseHeight = 670
+  var width = 218
+  var height = 218
+  if (one.contentAttr.width) {
+    width = one.contentAttr.width
+    height = one.contentAttr.height
+  }
+  var heightRatio = height / baseHeight
+  var widthRatio = width / baseWidth
+  if (width >= baseWidth && height >= baseHeight) {
+    if (heightRatio > widthRatio) {
+      width = width / heightRatio
+      height = baseHeight
+    } else {
+      width = baseWidth
+      height = height / widthRatio
+    }
+  } else if (width >= baseWidth) {
+    width = baseWidth
+    height = height / widthRatio
+  } else if (height >= baseWidth) {
+    width = width / heightRatio
+    height = baseHeight
+  }
+
+  imgStyle[one.id] = 'width:' + Math.round(width) + 'rpx;height:' + Math.round(height) + 'rpx'
+  return imgStyle[one.id]
+}
+function handleVotesPadding (length){
+
+  if (length > 5) {
+   return 'padding: 0;'
+  }
+  if (length === 5) {
+   return 'padding: 15rpx;'
+  }
+  if (length === 4) {
+   return 'padding: 30rpx;'
+  }
+  if (length === 3) {
+   return 'padding: 15rpx;'
+  }
+
+
+}
+module.exports = {
+  handleImgSize: handleImgSize,
+  handleVotesPadding: handleVotesPadding
+}

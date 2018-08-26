@@ -1,0 +1,16 @@
+<!--pages/distribution/distribution.wxml-->
+<view class='container'>
+  <view class='section-hd'>
+    <view class='balance'>{{balance}}</view>
+    <view>账户余额（元）</view>
+  </view>
+  <view class='info-number-wrap'>
+    <view class='info-number' wx:for='{{infoNumber}}' wx:key='code'>
+      <view class='money-num'>{{item.money}}</view>
+      <view class='money-title'>{{item.title}}</view>
+    </view>
+  </view>
+  <view class='distribution-list'>
+    <view class='distribution-item' wx:for='{{balance_items}}' wx:for-item='item' wx:key='code' data-id='{{index}}' bindtap='skipList'>{{item}}</view>
+  </view>
+</view>

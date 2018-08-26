@@ -1,0 +1,47 @@
+<!--pages/list/list.wxml-->
+<view class='page skin-{{skin}}'>
+  <navigator class='search' url='/pages/search/search'>
+    <image src='http://res.o2o.com.cn:8082/img/c865b1495d834199a3b5bbb900bc8e70'></image>
+    <input placeholder='请输入直播内容' placeholder-style="color:#e1e1e1" disabled="true"></input>
+  </navigator>
+
+  <view class='tabs'>
+    <view class="tab-item {{currentTabIndex==index?'active':''}}" data-current-index="{{index}}" bindtap="swichTab" wx:key="{{item.tabType}}" wx:for="{{tabs}}">
+      {{item.title}}
+    </view>
+  </view>
+
+  <view class='tabs-content'>
+    <navigator class='zhubo-item clearfix' wx:key="{{zhubo.id}}" wx:for="{{datas}}" wx:for-item="zhubo" url="/pages/live/live?id={{zhubo.id}}">
+      <view class='zhubo-item-left pull-left'>
+        <image class='zhubo-item-avatar' src='{{zhubo.zhuboAvatar}}/125/150'></image>
+        <view class='zhubo-item-left-content'>
+          <view class='zhubo-item-left-top'>
+            <text>直播中</text>
+          </view>
+          <view class='zhubo-item-left-bottom'>
+            <view>
+              <image class='icon-people-count mr3' src='http://res.o2o.com.cn:8082/img/14d5c633830f45dea674c16571d5ce32'></image>
+              <text>{{zhubo.onlineCount}}</text>
+            </view>
+            <view>
+              <text>{{zhubo.likeCount}}</text>
+              <image class='icon-like ml3' src='http://res.o2o.com.cn:8082/img/f764588d857a43b7be6f9427e76b0d9d'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='zhubo-item-right'>
+        <text class='text-black block ellipsis fs15'>{{zhubo.roomTitle}}</text>
+        <text class='text-default block ellipsis mt5'>{{zhubo.zhuboName}}</text>
+        <view class='product-images mt20'>
+          <image wx:for="{{zhubo.productImages}}" wx:key="*this" wx:for-item="image" src='{{image}}/75/90'></image>
+          <view wx:if="{{zhubo.productTotalCount>3}}" class='product-info'>
+            <view>{{zhubo.productTotalCount}}件</view>
+            <view>直播购</view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</view>

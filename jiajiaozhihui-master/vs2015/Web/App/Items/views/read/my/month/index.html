@@ -1,0 +1,63 @@
+<div class="container" ng-controller="myController">
+    <div class="row" ng-controller="statisticsController">
+        <div ng-if="joinState!=-1" class="col-xs-12">
+            <div class=" weui_cells_title"></div>
+            <div class="weui_cells">
+                <a ng-if="joinState!=0" class="weui_cell" href="javascript:void(0)" >
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>参加活动开始时间</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.startDate|date:'yyyy-MM-dd'}}</div>
+                </a>
+                <a  class="weui_cell" href="javascript:void(0)">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>参加活动结束时间</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.endDate|date:'yyyy-MM-dd'}}</div>
+                </a>
+                <a class="weui_cell" href="javascript:void(0)" >
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>正在挑战的主题</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.themeName}}</div>
+                </a>
+                <a class="weui_cell" href="javascript:void(0)" >
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>已挑战的主题</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.userTaskClass.mTask.completedNumber}}个</div>
+                </a>
+                <a class="weui_cell" href="javascript:void(0)" >
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>未开启的主题</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.unOpenNumber}}个</div>
+                </a>
+                <a  class="weui_cell" href="javascript:void(0)" >
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>成功挑战的主题</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.userTaskClass.mTask.successNumber}}个</div>
+                </a>
+                <a class="weui_cell" href="javascript:void(0)" >
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>挑战失败的主题</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.userTaskClass.mTask.failNumber}}个</div>
+                </a>
+                <a class="weui_cell" href="javascript:void(0)" >
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>正在审核的主题</div>
+                    </div>
+                    <div class="weui_cell_ft">{{info.userTaskClass.mTask.checkingNumber}}个</div>
+                </a>
+                <a   class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div>任务完成信息</div>
+                    </div>
+                    <div class="weui_cell_ft"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

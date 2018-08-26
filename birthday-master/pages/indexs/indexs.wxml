@@ -1,0 +1,158 @@
+
+<view class="container">
+    <!-- 文字轮播 -->
+    <!-- <view class="marquee">
+        <view class="content">
+            <text>{{broadcasting}}</text> <text style="display: inline-block; width: 5em;"></text>
+            <text>{{broadcasting}}</text> <text style="display: inline-block; width: 5em;"></text>
+            <text>{{broadcasting}}</text> <text style="display: inline-block; width: 5em;"></text>
+        </view>
+    </view> -->
+    <view class="header-nav">
+        <view class="search-container" bindtap='search'>
+            <icon size="15" type="search"></icon>
+            <view class="input">搜索{{count}}位亲友</view>
+        </view>
+    </view>
+    <!--明星生日  -->
+    <view class="star-container" wx:if="{{birthIdol}}">
+      <view class="today-star">
+          <view class="left">
+            <image src="../images/yello-star.png"></image>
+            <text class="today-birth">明星生日</text>
+            <text>{{nowMonth}}.{{strDate}}</text>
+          </view>
+          <view class="close" bindtap='close'>
+            收起<text style="margin-left:4px;color:#333">✕</text>
+          </view>
+      </view>
+      <scroll-view scroll-x="" class="star-box">
+          <view data-idol_id="{{birthIdol[0].idol_id}}" class="single-star" bindtap='idolInform'>
+              <view class="star-info">
+                <view class="star-name-in">{{birthIdol[0].name}}</view>
+                <view class="star-birth-in" >{{birthIdol[0].type}}</view>
+                 <view class="star-like">点赞送祝福</view> 
+              </view>
+              <image src="{{birthIdol[0].picture}}"
+              class="star-avatar" style="display:inline-block"></image>
+          </view>
+      </scroll-view>
+</view>
+    <!-- <view class="remind wechatip" bindtap='remind'>
+      <view style="width:211px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">
+        免费开通生日提醒
+      </view>
+      <text style="display: inline-block; float: right;width:20px;">x</text>
+    </view> -->
+    <view class="history-today" wx:if="{{history}}">
+      <view class="history-header">
+          <image src="../images/time.png" style="width:22px;height:22px;margin-right:4px"></image>
+          <view>历史上的今天</view>
+      </view>
+      <view class='historyAll' wx:for="{{history}}" data-day='{{item.day}}' bindtap='inform'>
+          <image  mode="widthFix" src="{{item.picture}}" style="width: 100%; height: 106.159px;"></image>
+          <view class="arrow">
+            <view class="history-date-box">
+              <view class="history-date"> {{item.day}}</view>
+              <view class="history-lunar">	“{{item.title}}”</view>
+            </view>
+          </view>
+      </view>
+    </view>
+    <view class="mayFriends" wx:if="{{known}}">
+      <view class="title">
+          <text>你可能认识的朋友</text>
+          <!-- <text data-index="all">	全部添加</text> -->
+      </view>
+      <scroll-view scroll-x="" class="friendsInfo">
+        <view class="scroll-view">
+          <view style="overflow-x: auto; overflow-y: hidden;" class="scroll-view">
+            <view style="height: 100%;text-align:center;">
+              <view class="item" wx:for="{{known}}">
+                <image style="" src="{{item.avatar}}">
+                </image>
+                <view class="name">{{item.name}}</view>
+                <view class="date">
+                  {{item.birthday}} {{item.star}}<text style="font-size: 11px"><text>	♂</text>
+                  </text>
+                </view>
+                <view class="desc">推荐理由：你们在同一微信群</view>
+                <view class="btn" data-index="" bindtap='sendShare'>记下生日</view>
+              </view>
+              <view class="item" style="position: relative;">
+                <image src="http://ovhvevt35.bkt.clouddn.com/day/srgjmore@2x.jpg"></image>
+                <view class="name">按时</view>
+                <view class="date">撒</view>
+                <view class="desc">推荐理由：你们可能都认识养乐多</view>
+                <view class="btn">	记下生日</view>
+                <view class="more" data-path="moreFriend" bindtap='more'></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <!--即将过生日  -->
+    <view class="recentBirthday" wx:if="{{soon}}">
+      <view class="title">即将过生日</view>
+      <view data-path="detail" data-mf_id="{{item.mf_id}}" data-url='{{item.avatar}}'
+      class="birthdayInfo clearfix" bindtap='birthdayInfo' wx:for="{{soon}}">
+        <view class="left clearfix">
+          <image wx:if="{{item.avatar!='undefined'}}" src="{{item.avatar}}"></image>
+          <image wx:else src="../images/user.png"></image>
+          <view class="msg">
+            <view class="name">{{item.name}}</view>
+            <view class="date">{{item.birthday}}</view>
+          </view>
+        </view>
+        <view class="right">
+          <view class="day">
+            <text style="font-size: 19px;">{{item.surplus_day}}</text>天
+          </view>
+          <view class="nextBirthday">距{{item.age}}岁生日</view>
+        </view>
+      </view>
+    </view>
+    <!--近期过生日  -->
+    <view class="recentBirthday" wx:if="{{monthBirth}}">
+      <view class="title">近期过生日</view>
+      <view data-path="detail" data-mf_id="{{item.mf_id}}" data-url='{{item.avatar}}'
+      class="birthdayInfo clearfix" bindtap='birthdayInfo' wx:for="{{monthBirth}}">
+        <view class="left clearfix">
+          <image wx:if="{{item.avatar!='undefined'}}" src="{{item.avatar}}"></image>
+          <image wx:else src="../images/user.png"></image>
+          <view class="msg">
+            <view class="name">{{item.name}}</view>
+            <view class="date">{{item.birthday}}</view>
+          </view>
+        </view>
+        <view class="right">
+          <view class="day">
+            <text style="font-size: 19px;">{{item.surplus_day}}</text>天
+          </view>
+          <view class="nextBirthday">距{{item.age}}岁生日</view>
+        </view>
+      </view>
+    </view>
+    <view class="monthBirthday" wx:if="{{later}}">
+      <view class="title">	一个月后生日</view>
+      <view data-path="detail" wx:for="{{later}}" data-url='{{item.avatar}}'
+      data-mf_id="{{item.mf_id}}" class="birthdayInfo clearfix" bindtap='birthdayInfo'>
+        <view class="left clearfix">
+          <image src="{{item.avatar}}"> </image>
+          <view class="msg">
+            <view class="name">{{item.name}}</view>
+            <view class="date">	{{item.birthday}}</view>
+          </view>
+        </view>
+        <view class="right">
+          <view class="day">
+            <text style="font-size: 19px;">{{item.surplus_day}}</text>天
+          </view>
+          <view class="nextBirthday">距{{item.age}}岁生日</view>
+        </view>
+      </view>
+    </view>
+    <view style="width: 100%; height: 93px;"></view>
+    <image bindtap='findAdd' class="addBtn" src="../images/srgjadd@3x.png" ></image>
+</view>

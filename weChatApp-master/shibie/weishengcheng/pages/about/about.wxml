@@ -1,0 +1,155 @@
+
+<view wx:if="{{type=='share_success'}}">
+    <view class="page">
+        <view class="weui-msg">
+            <view class="weui-msg__icon-area">
+                <icon type="success" size="93"></icon>
+            </view>
+            <view class="weui-msg__text-area">
+                <view class="weui-msg__title">感谢分享</view>
+                <view class="weui-msg__desc">我们会在8小时内审核，审核通过后会显示在『发现』页面哦</view>
+            </view>
+            <view class="weui-msg__opr-area">
+                <view class="weui-btn-area">
+                    <button  class="weui-btn" type="primary" data-url="/pages/share/share" bindtap="switchTab">返回</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{type=='vip'}}">
+    <view class="page">
+        <view style="margin: 25px 0;">
+            <!--<view  class="flex_center" style="font-size: 20px;font-weight: 700;">制作器VIP</view>-->
+            <view  class="flex_center">
+                <text>终身永久VIP</text>
+                <text style="margin-left: 6px;text-decoration: line-through;white-space: nowrap;color: #999;font-size: 12pt;">128元</text>
+                <text style="font-size: 24px;margin-left: 6px;color: #d7282d;">66元</text>
+            </view>
+            <view  class="flex_center">
+                <text>包月VIP</text>
+                <text style="margin-left: 6px;text-decoration: line-through;white-space: nowrap;color: #999;font-size: 12pt;">38元</text>
+                <text style="font-size: 24px;margin-left: 6px;color: #d7282d;">18元</text>
+            </view>
+        </view>
+        <view style="margin: 10px;">
+            <view class="flex_row_center">
+                <image src="http://icons.maiyizhi.cn/quanjiesuo_vip.png" style="width: 90px;height: 90px;margin-right:10px;"></image>
+                <view style="flex:1;">
+                    <view style="font-weight: 700;font-size: 18px;margin-bottom: 8px;">全解锁</view>
+                    <view>解锁所有付费功能，使用更畅快，永久有效</view>
+                </view>
+            </view>
+            <view class="flex_row_center" style="margin-top:15px;">
+                <image src="http://icons.maiyizhi.cn/juhuasuan_vip.png" style="width: 90px;height: 90px;margin-right:10px;"></image>
+                <view style="flex:1;">
+                    <view style="font-weight: 700;font-size: 18px;margin-bottom: 8px;">巨划算</view>
+                    <view>新年限时活动半价，活动结束之后恢复原价</view>
+                </view>
+            </view>
+            <view class="flex_row_center" style="margin-top:15px;">
+                <image src="http://icons.maiyizhi.cn/zhuanshufuwu_vip.png" style="width: 90px;height: 90px;margin-right:10px;"></image>
+                <view style="flex:1;">
+                    <view style="font-weight: 700;font-size: 18px;margin-bottom: 8px;">专属服务</view>
+                    <view>会员专属一对一客服，高效解决问题</view>
+                </view>
+            </view>
+        </view>
+        <view>
+            <button type="primary" style="margin-top:20px;width: 80%;position:fixed;bottom: 10px;left: 10%;" open-type="contact" session-from="vip_goumai">去购买</button>
+        </view>
+    </view>
+</view>
+<view wx:elif="{{type=='tixian'}}">
+    <view class="page">
+        <view class="weui-msg">
+            <view class="weui-msg__icon-area">
+                <icon type="info" size="93"></icon>
+            </view>
+            <view class="weui-msg__text-area">
+                <view class="weui-msg__title">请联系客服给您发红包提现</view>
+            </view>
+            <view class="weui-msg__opr-area">
+                <view class="weui-btn-area">
+                    <button open-type="contact" class="weui-btn" style="width: 80%;" type="primary">联系客服</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:elif="{{type=='video_help'}}">
+    <view class="page">
+        <video src="http://pics-1254221309.cossh.myqcloud.com/zhizuoqi_help.mp4" objectFit="cover" style="width:750rpx;height:1375rpx;"></video>
+    </view>
+</view>
+<view wx:elif="{{type=='video_help_woshishui'}}">
+    <view class="page">
+        <video src="http://pics-1254221309.cossh.myqcloud.com/l053925g6ra.mp4" objectFit="cover" style="width:750rpx;height:424.6rpx;"></video>
+    </view>
+</view>
+<view wx:elif="{{type=='tuijian'}}">
+    <view class="page" style="margin-top: 30rpx;">
+        <view class="page__bd">
+            <view class="weui-panel">
+                <view class="weui-panel__bd">
+                    <view class="weui-media-box weui-media-box_small-appmsg">
+                        <view class="weui-cells weui-cells_after-title">
+                            <block wx:for="{{tuijian}}" wx:key="{{item.idx}}" wx:for-index="idx">
+                                <view catchtap="tiaozhuan" data-id="{{item.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                                    <view class="weui-cell__hd">
+                                        <image src="{{item.avatar}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                                    </view>
+                                    <view class="weui-cell__bhd" style="width: 250rpx;">{{item.name}}</view>
+                                    <view class="weui-cell__ft weui-cell__ft_in-access">{{item.desc}}</view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:elif="{{type=='help'}}">
+    <view class="page" style="margin-top: 30rpx;">
+        <view class="page__bd">
+            <view class="weui-panel">
+
+                <view class="weui-panel__bd">
+                    <view class="weui-media-box weui-media-box_small-appmsg">
+                        <view class="weui-cells weui-cells_in-small-appmsg">
+                            <navigator url="/pages/about/about?type=video_help" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                                <view class="weui-cell__hd"></view>
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>视频说明</view>
+                                </view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                            </navigator>
+                            <navigator url="/pages/webview/webview?key=dashangtu_help" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                                <view class="weui-cell__hd"></view>
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>红包照片/视频使用说明</view>
+                                </view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                            </navigator>
+                            <navigator url="/pages/webview/webview?key=weishengcheng_help" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                                <view class="weui-cell__hd"></view>
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>朋友圈制作使用说明</view>
+                                </view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                            </navigator>
+                            <navigator url="/pages/webview/webview?key=duihuajietu_help" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                                <view class="weui-cell__hd"></view>
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>微信聊天页制作使用说明</view>
+                                </view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                            </navigator>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

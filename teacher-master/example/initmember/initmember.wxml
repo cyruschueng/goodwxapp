@@ -1,0 +1,62 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+
+ 
+
+  <form bindsubmit="submit">
+    <view class="page__bd">
+
+      <view class="weui-cells__title">添加同学</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">学号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" bindinput="bindKeyInput" focus='{{focus}}' id="student_code" name="student_code" value='{{student_code}}' placeholder="请输入学号" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" bindinput="bindKeyInput" id="name" value='{{name}}' name="name" placeholder="请输入学生姓名" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">电话</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type='number' name="phone" value='{{phone}}' bindinput="bindKeyInput" id="phone" placeholder="输入家长的电话号码" />
+          </view>
+        </view>
+
+
+      </view>
+
+
+
+      <view class="weui-btn-area">
+        <button class="weui-btn" loading="{{button_loadding}}" type="primary" disabled='{{button_disable}}' style='background-color:#1e90ff;' formType="submit">{{button_title}}</button>
+      </view>
+    </view>
+  </form>
+
+ <view wx:if="{{members.length>0}}">
+    <view class="weui-cells__title">已经添加的学生名单</view>
+    <view class="weui-cells weui-cells_after-title">
+      <block wx:for="{{members}}" wx:key="id">
+        <view class="weui-cell weui-cell_access" bindtap='action' data-mid='{{item._id}}' hover-class="weui-cell_active">
+          <view class="weui-cell__bd">{{item.student_code}},{{item.name}},{{item.phone}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </block>
+    </view>
+     <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap='next' style='background-color:#1e90ff;'>添加完成,下一步</button>
+      </view>
+  </view>
+
+
+</view>

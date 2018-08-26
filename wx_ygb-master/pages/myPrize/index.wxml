@@ -1,0 +1,25 @@
+<!--  待领取  -->
+<view class="prize-item" wx:for="{{recordsList}}" wx:key="{{index}}" bindtap="toPrizeDetail" data-index="{{ index }}">
+    <view class="item-header">
+        <view class="header-left">
+            <image class="left-logo" src="{{ item.advertiserIcon }}"></image>
+            <view class="left-p">由 {{ item.advertiserName }} 提供</view>
+        </view>
+        <view wx:if="{{ item.status == 1 }}" class="header-right red">待领取</view>
+        <view wx:if="{{ item.status == 2 }}" class="header-right red">待发货</view>
+        <view wx:if="{{ item.status == 4 }}" class="header-right red">待自取</view>
+        <view wx:if="{{ item.status == 3 }}" class="header-right gray">已发货</view>
+        <view wx:if="{{ item.status == 5 }}" class="header-right gray">已领取</view>
+        <view wx:if="{{ item.status == 6 }}" class="header-right gray">已过期</view>
+    </view>
+    <view class="item-content">
+        <image class="content-img" src="{{ item.entityIcon }}"></image>
+        <view class="content-font">
+            <view class="font-p">{{ item.entityName }}</view>
+            <view class="font-p1">{{ item.createTime }}</view>
+        </view>
+        <view class="content-num">x1</view>
+    </view>
+</view>
+
+<view class="no-prize" wx:if="{{ recordsList.length == 0 && isShowPage }}">暂无奖品</view>

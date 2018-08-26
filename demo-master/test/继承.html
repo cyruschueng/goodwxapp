@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    // Shape - 父类(superclass)
+    function Shape2() {
+        this.x = 0;
+        this.y = 0;
+    };
+    // 父类的方法
+    Shape2.prototype.move = function(x, y) {
+        this.x += x;
+        this.y += y;
+        console.info('Shape moved.');
+    };
+    // Rectangle - 子类(subclass)
+    function Rectangle2() {
+        Shape.call(this); // call super constructor.
+    }
+    // 子类续承父类
+    Rectangle2.prototype = Object.create(Shape2.prototype);
+    Rectangle2.prototype.constructor = Rectangle2;
+
+    var rect2 = new Rectangle2();
+    console.log(rect2 instanceof Shape2);
+    </script>
+</body>
+
+</html>
+
+
+
+
+@原子 一个是构造函数，一个是给此函数添加原型方法，

@@ -1,0 +1,21 @@
+<!--page/component/list/list.wxml-->
+<view class="main">
+  <view class="banner">
+    <image src="/image/list1.png"></image>
+  </view>
+  <view class="list-box">
+    <block wx:for="{{foodList}}" wx:key="{{index}}">
+      <view class="newest-list">
+        <navigator url="../details/details">
+          <image src="{{item.url}}"></image>
+          <view class="newest-text">
+            <text>{{item.name}}{{item.specification}}</text>
+          </view>
+          <view class="newest-text">
+            <text>￥{{item.price}}</text>
+          </view>
+        </navigator>
+      </view>
+    </block>
+  </view>
+</view>

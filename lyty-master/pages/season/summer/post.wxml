@@ -1,0 +1,14 @@
+<import src="post-item/post-item-template.wxml" />
+<view>
+  
+  <image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/season/summer/summer.jpg" style="width:100%"></image>
+  <block wx:for="{{postList}}" wx:for-item="item" wx:for-index="idx">
+
+    <!--把内容放在对象里面，组成数组，对内容进行数据绑定，再搭配for循环-->
+    <view catchtap="onPostTap" data-postId="{{item.postId}}">
+      <template is="postItem" data="{{...item}}" />
+    </view>
+    <!--这里的item的前面加入三个.可以在数据绑定标签内免去写itemitem.
+    等于是展开json数据的意思，不需要用前缀指定了-->
+  </block>
+</view>

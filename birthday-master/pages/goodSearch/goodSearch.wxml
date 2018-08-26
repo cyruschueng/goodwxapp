@@ -1,0 +1,32 @@
+<view class="container">
+	<view class="header-nav" bindtap='goodSearchs'>
+		<view class="search-container">
+			<icon size="15" type="search"></icon>
+			<view class="input">搜索明星</view>
+		</view>
+	</view>
+  <!--time  -->
+  <scroll-view class="search_world" scroll-x="true">
+      <view style="width:1300rpx">
+        <view wx:for="{{monthList}}"
+        class="search_w_box search_item {{item.active == true?'red':''}}" 
+        bindtap="tapKeyWorld1" data-active="{{item.active}}" data-month="{{item.month}}"
+        data-inx="{{index}}">{{item.month}}月</view>
+      </view>
+  </scroll-view>
+  <!--list  -->
+  <view class='allList'>
+      <view class="item-layout"  wx:for="{{goodList}}" bindtap='goodInform' data-idol_id="{{item.idol_id}}">
+          <image class="avatar" src="{{item.avatar}}"></image>
+          <view class="right-layout">
+              <view class="right-top-layout">
+                <view class="name">{{item.name}}</view>
+                <view class="num">{{item.wish_count}}k</view>
+                <image class="star" src="../images/star.png"></image>
+              </view>
+              <view class="birth">{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日</view>
+              <view class="desc">{{item.desc}}</view>
+          </view>
+      </view>
+  </view>
+</view>

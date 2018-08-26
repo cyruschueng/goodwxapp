@@ -1,0 +1,73 @@
+
+<import src='./shoppingCartGoodsTemplate/shoppingCartGoodsTemplate.wxml'/>
+<import src='../homepage/recommendTemplate/recommendTemplate.wxml'/>
+
+<view class='shopppingCartPage'>
+  <!--购物车为空时的页面  -->
+   <view class='emptyShoppingCart' wx:if='{{isShoppingCartNull}}'>
+    <view class='shoppingCartimg'>
+      <image src='../images/girl.jpeg'></image>
+    </view>
+    <view>购物车空空的快去逛逛吧~</view>
+    <view class='goShopping' bindtap='goHomepage'>去购物</view>
+  </view>  
+  <!--购物车有商品  -->
+  <view class='openVIPBox' wx:else>
+    <view class='ringImg'>
+      <image src='../images/ring.png'></image>
+    </view>
+    <view class='textBox'>开通会员本单可节省10元哦~</view>
+    <view class='openVIPBtn'>开通</view>
+  </view>
+  <view class='goodsListBox' wx:for='{{shoppingCartListInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index'  >
+    <view class='shoppingCartGoodsTemplateBox'>
+    <view class='choose'>
+       <checkbox-group bindchange='checkedClick' data-cart_id='{{item.cart_id}}' data-product_id='{{item.product_id}}' data-model_id='{{item.model_id}}' data-market_price='{{item.market_price}}' data-member_price='{{item.member_price}}' data-index='{{index}}' data-vip_price='{{item.vip_price}}' data-quantity='{{item.quantity}}'>
+        <checkbox  checked='{{item.checked}}' value='{{item.product_name}}'></checkbox>
+      </checkbox-group>
+    </view>
+    <view bindtap='shopCartDetail' data-product_id='{{item.product_id}}' data-model_id='{{item.model_id}}' data-quantity='{{item.quantity}}' >
+      <view class='goodsImg'>
+      <image src='{{item.exhibition}}'></image>
+    </view>
+    <view class='goodsInfo'>
+      <text>{{item.product_name}}</text>
+      <text>{{item.content}}{{item.unit}}</text>
+      <text wx:if='{{level==1}}'>¥{{item.market_price}}</text>
+      <text wx:if='{{level==2}}'>¥{{item.member_price}}</text>
+      <text wx:if='{{level==3}}'>¥{{item.vip_price}}</text>
+    </view>
+    <view class="stepper">  
+        <!-- 减号 -->  
+        <text class="{{item.minusStatus}}" bindtap="bindMinus" data-index='{{index}}' data-cart_id='{{item.cart_id}}' >-</text> 
+        <!-- 数值 -->
+        <input type="number" bindc='quantityNum' bindchange="bindManual" disabled='disabled' value="{{item.quantity}}" />  
+        <!-- 加号 -->  
+        <text class="normal" data-index='{{index}}' data-cart_id='{{item.cart_id}}' bindtap="bindPlus">+</text>  
+    </view>  
+    </view>
+  </view>
+  </view>
+  <view class='shoppingCartRecommand'>
+      <image src='../images/recommand.png'></image>
+  </view>
+  <view class='shoppingCartRecommandGoods'>
+     <block wx:for='{{recommendGoodsInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+       <template is = 'recommendTemplate' data='{{...item,index,currentIndex}}'/> 
+    </block>
+  </view>
+  <view class='price'>
+    <view class='chooseAll'>
+       <checkbox-group bindchange='totalSelect'>
+       <checkbox wx:if='{{isTotalOrSignal}}'></checkbox>
+        <checkbox checked='{{totalDelete}}' wx:else></checkbox>
+      </checkbox-group> 
+      <text>全选</text>
+    </view>
+    <view class='totalDeleteImg' bindtap='deleteShoppingCart' data-cart_id='{{item.cart_id}}'>
+      <image src='../images/delete.png'></image>
+    </view>
+    <view class='totalPrice'>总计：¥{{amount}}</view>
+    <view class='settlement' bindtap='goSubmitOrder'>结算</view>
+  </view>
+</view>

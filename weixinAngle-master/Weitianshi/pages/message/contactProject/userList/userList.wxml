@@ -1,0 +1,15 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="s_frame" hidden="{{projectList=='' || !projectList}}">
+    <scroll-view scroll-y="true" bindscrolltolower="loadMore" scroll-top="{{scroll}}" style="height:1334rpx;">
+      <template is="allNumber" data="{{count:count,text:'约谈的项目'}}"></template>
+      <template is="selectProject" data="{{list:projectList,type:3,timeShow:true}}"></template>
+    </scroll-view>
+  </view>
+
+  <!--没有更多-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+  <!--空状态  -->
+  <template is="hasNothing" data="{{emptyNumber:projectList}}"></template>
+</view>

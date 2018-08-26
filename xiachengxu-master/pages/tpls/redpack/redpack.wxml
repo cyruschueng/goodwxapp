@@ -1,0 +1,20 @@
+<template name='redpack'>
+  <view class='redpack-card' data-id='{{id}}'>
+    <view class='card-amount'>
+      <text class='currency'>￥</text>
+      <text>{{amount}}</text>
+    </view>
+    <view class='card-des'>
+      <text>每个订单限使用一个</text>
+      <text>仅限圣诞节期间使用</text>
+      <text>2017.12.24-2017.12.30</text>
+    </view>
+    <view wx:if='{{status > 0}}' class='card-status'>
+      <image wx:if='{{status==1}}' src='/images/icon/used.png' mode='aspectFit'></image>
+      <image wx:else src='/images/icon/expired.png' mode='aspectFit'></image>
+    </view>
+    <view wx:else class='card-btn' catchtap='showQrCode'>
+      <view>立即使用</view>
+    </view>
+  </view>
+</template>

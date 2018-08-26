@@ -1,0 +1,79 @@
+<view class="spacing">
+  <button bindtap="onTap" session-from="xx" open-type="{{openType}}" loading="{{loading}}" form-type="{{formType}}" size="{{size}}" type="{{type}}" plain="{{plain}}" disabled="{{disabled}}">按钮</button>
+  <button bindgetuserinfo="onGetUserinfo" open-type="getUserInfo" type="primary">用户授权</button>
+  <button open-type="contact" type="primary">联系客服</button>
+</view>
+
+<view class="weui-cells">
+  <view class="weui-cell weui-cell_switch">
+    <view class="weui-cell__bd">是否镂空</view>
+    <view class="weui-cell__ft">
+      <switch data-name="plain" checked="{{plain}}" bindchange="onSwitchChange" />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_switch">
+    <view class="weui-cell__bd">是否禁用</view>
+    <view class="weui-cell__ft">
+      <switch data-name="disabled" checked="{{disabled}}" bindchange="onSwitchChange" />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_switch">
+    <view class="weui-cell__bd">loading图标</view>
+    <view class="weui-cell__ft">
+      <switch data-name="loading" checked="{{loading}}" bindchange="onSwitchChange" />
+    </view>
+  </view>
+  
+</view>
+
+<view class="weui-cells__title">大小</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group data-name="size" bindchange="onRadioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['default','mini']}}" wx:key="*this">
+                    <radio class="weui-check" value="{{item}}"/>
+                    <view class="weui-cell__bd" style="color:{{item}}">{{item}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item == size}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
+                </label>
+  </radio-group>
+</view>
+
+<view class="weui-cells__title">类型</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group data-name="type" bindchange="onRadioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['primary','default','warn']}}" wx:key="*this">
+                    <radio class="weui-check" value="{{item}}" checked="{{item == type}}"/>
+                    <view class="weui-cell__bd" style="color:{{item}}">{{item}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item == type}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
+                </label>
+  </radio-group>
+</view>
+
+<view class="weui-cells__title">form-type</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group data-name="formType" bindchange="onRadioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['submit','reset']}}">
+                    <radio class="weui-check" value="{{item}}" />
+                    <view class="weui-cell__bd" style="color:{{item}}">{{item}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item == formType}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
+                </label>
+  </radio-group>
+</view>
+
+<view class="weui-cells__title">open-type</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group data-name="openType" bindchange="onRadioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['contact','share','getUserInfo']}}">
+                    <radio class="weui-check" value="{{item}}" />
+                    <view class="weui-cell__bd" style="color:{{item}}">{{item}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item == openType}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
+                </label>
+  </radio-group>
+</view>

@@ -1,0 +1,58 @@
+
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" /> 
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class='container'>
+<!--top str -->
+  <view class='h8 flexBetw Skin bbottom pdr1 pdl1'>
+  <view  hidden="{{alarmAdm}}"></view>
+    <image class='imgxs15' src='/images/alarm_fenxi.png' bindtap='alarmDetailPage'  wx:if="{{alarmAdm}}"></image>
+     <view wx:if='{{pnSearchH}}'>告警管理</view> 
+     
+    <view class='flex' wx:if='{{pnSearchNH}}'>
+      <view class='bgColor0 br03 mr03'>
+        <input class='wh100 pdl04' placeholder='{{pnSnHolder}}' bindinput='pnInput'></input>
+      </view>
+      <button class='font075 bgColorC mh0 pdlr05' bindtap='pnConfiInput'>确定</button>
+    </view>
+    <image class='imgxs15' src='/images/sousuo.png' bindtap='pnSearch'  wx:if="{{alarmAdm}}"></image>
+    <view hidden="{{alarmAdm}}"></view>
+  </view>
+<!--top end -->
+  <!--下拉菜单str  -->
+<view class='orderFilter Skin '>
+  <template is="tapMenu" data="{{tapBox: tapBox}}"/>
+</view>
+  <view class='flexColumn flexCenter alarmdiy' hidden='{{diy}}'>
+    <view class='flex flexCenter pAb1 fonts085'>
+      <view class="pdr1 borderR">
+        <picker class='pick' mode="date" value="{{date}}" start="2000-01-01" end="2027-1-23" bindchange="bindDateChange0">  
+          <view  class="picker fontSkin "> {{dates0}}   </view>  
+        </picker>  
+      </view> 
+      <view class="pdl1">  
+        <picker class='pick' mode="date" value="{{date}}" start="2000-01-01" end="2027-1-23" bindchange="bindDateChange1">  
+          <view class="picker fontSkin "> {{dates1}}</view>  
+        </picker>  
+      </view> 
+    </view>
+    <button bindtap='diyC' class='width100 bgColorCD font09'>确定</button>
+  </view>
+  <!--下拉菜单 -->
+  <view class='h8 flexCenter flexColumn Skin  borderD' wx:if="{{alarmAdm}}">
+     <view class='color3'>{{warnTotal?warnTotal:'----'}}</view> 
+     <view>告警数</view>
+  </view>
+   <!--排序/筛选 -->
+   <view class='orderFilter bg256' hidden='{{invH}}'> 
+    <template is="tapMenu" data="{{tapBox: tapBox1}}"/>
+    <template is="tapMenu" data="{{tapBox: tapBox2}}"/>
+    <template is="tapMenu" data="{{tapBox: tapBox3}}"/>
+   </view> 
+<template is="updateTime" data="{{nowdate: nowdate}}"/> 
+  <!--电站列表  -->
+  <view class="flexv1 modeldrawer_content pb1" >
+    <template is="alarList" data="{{alarList: alarList}}"/>
+  </view>
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

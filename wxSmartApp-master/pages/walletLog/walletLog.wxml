@@ -1,0 +1,31 @@
+<view class="flex-box">
+  <view class="{{logType==4?'on':''}}" data-type='4' bindtap="bindChooseType">
+    <text>充共享金</text>
+  </view>
+  <view class="{{logType==0?'on':''}}" data-type='0' bindtap="bindChooseType">
+    <text>充值金额</text>
+  </view>
+  <view class="{{logType==1?'on':''}}" data-type='1' bindtap="bindChooseType">
+    <text>消费金额</text>
+  </view>
+  <view class="{{logType==2?'on':''}}" data-type='2' bindtap="bindChooseType">
+    <text>退共享金</text>
+  </view>
+</view>
+
+<view class="content-box">
+  <view class="item"  wx:if="{{walletList.length == 0}}">
+    <text>无记录</text>
+  </view>
+  <view class="item" wx:for="{{walletList}}" wx:key="">
+     <text>{{item.logDate}}</text>
+     <text class="price">
+
+        <text wx:if="{{logType==0||logType==4}}">+</text><text wx:if="{{logType==2||logType==1}}">-</text>{{item.money}}元
+        <!-- <text wx:if="{{logType==2||logType==4}}">元</text><text wx:if="{{logType==0||logType==1}}">嘀嘀币</text> -->
+    </text>
+        
+     <!--<text wx:if="{{logType==0||logType==4}}">+</text><text wx:if="{{logType==2||logType==1}}">-</text>{{item.money}}元
+     </text>-->
+  </view>
+</view>

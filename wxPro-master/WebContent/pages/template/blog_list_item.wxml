@@ -1,0 +1,42 @@
+<template name="blog_list_item">
+  <view wx:if="{{showUser}}" class="row_view row_left item_left" data-otherusercode='{{item.userCode}}' catchtap="catchUserTap">
+    <image class="thumb_img" mode="aspectFit" src="{{item.userLogo || '/img/icon81.png'}}"></image>
+    <text class="user_name">{{item.userName}}</text>
+    <text class="user_name level">Lv{{item.level || 0}}</text>
+    <image class="honor_icon" src="{{honors[0 | (item.level/ 5)]}}"></image>
+    <text wx:if="{{item.hasFollow == 0}}" catchtap="catchFollowTap" data-index='{{index}}' class="follow">＋关注</text>
+    <text wx:if="{{item.hasFollow == 1}}" catchtap="catchFollowTap" data-index='{{index}}' class="follow followed">已关注</text>
+  </view>
+
+  <view class="row_view row_full_fill">
+    <text class="row_title">{{item.title}}</text>
+
+    <view wx:if="{{item.thumbImgList}}" class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files">
+                <block wx:for="{{item.thumbImgList}}" wx:for-item="image">
+                  <view class="weui-uploader__file">
+                    <image class="weui-uploader__img" src="{{image}}" data-src="{{item.imgUrlList[index]}}" data-list="{{item.imgUrlList}}" catchtap="previewImage"></image>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <text class="row_desc">{{item.content}}</text>
+    </view>
+
+    <view class="column_view column_space_between full_width" bindtap="bindListTap">
+      <text class="iconfont icon-view">{{item.blogViews}}</text>
+      <text catchtap="catchLikeTap" data-index='{{index}}' class="iconfont {{item.hasLike==1 ? 'icon-liked' : 'icon-like'}}">{{item.blogLikes}}</text>
+      <text catchtap="catchCommentTap" data-index='{{index}}' class="iconfont icon-comment" style="display:{{hidePost ? 'none' : ''}}">{{item.blogComments}}</text>
+      <!-- <text catchtap="catchShareTap" data-index='{{index}}' class="iconfont icon-share hide">{{item.blogShares}}</text> -->
+      <text wx:if="{{isMy}}" catchtap="catchDeleteTap" data-index='{{index}}' class="iconfont right">删除</text>
+      <text class="time">{{item.insertTime_fmt}}</text>
+    </view>
+  </view>
+</template>

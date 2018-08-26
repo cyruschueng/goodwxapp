@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<view class="mainView">
+  <loading hidden="{{loading}}">
+    加载中...
+  </loading>
+  <view class="topTabBar">
+    <view class="leftView">
+      <scroll-view scroll-x="true" scroll-y="false" class="tpscview" scroll-left="-2">
+        <block wx:for="{{categoryData}}">
+          <view class="topdatalist {{index == curpage?'curPage':''}}" bindtap="navClick" id="{{index}}" data-idx="{{item.category}}">
+            {{item.name}}
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+    <view class="rightView">
+      <image src="../../images/person.png" class="accountCenter"></image>
+    </view>
+  </view>
+  <scroll-view bindscrolltolower="addData" scroll-y="true">
+    <!-- <block wx:for="{{selData}}"> -->
+      <view class="subView index">
+        <block wx:for="{{detaildata}}">
+          <view class="detailCell" catchtap="onTapArticle" data-id="{{item.id}}">
+            <text class="cellTitle">{{item.title}}</text>
+            <view class="imageContainer" hidden="{{!item.has_image}}">
+              <image class="imageshow" src="{{item.image_list[0].url}}"></image>
+              <image class="imageshow" src="{{item.image_list[1].url}}"></image>
+              <image class="imageshow" src="{{item.image_list[2].url}}"></image>
+            </view>
+            <view class="videoContainer" hidden="{{!item.has_video}}">
+              <video class="videoshow" src="{{item.video_url}}"></video>
+            </view>
+            <view class="cellbottom">
+              <text style="margin-right:10px">{{item.author}}</text>
+              <text>{{item.publish_time}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    <!-- </block> -->
+  </scroll-view>
+</view>

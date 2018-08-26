@@ -1,0 +1,71 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view id="companyInfo" wx:if="{{nonet}}">
+  <!--姓名  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex noBorder bottomStyle">
+      <view class="projectTitle">姓名*</view>
+      <input placeholder="请输入" placeholder-style='color:#ccc' class="newBox" bindblur="name" maxlength="40" value="{{name}}" />
+    </view>
+  </view>
+  <!--手机  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex {{user_id == 0 ? ' ' : 'bottomStyle noBorder'}}">
+      <view class="projectTitle">手机*</view>
+      <input placeholder="请输入" type="number" bindinput="checkPhone" bindconfirm="checkPhone" value="{{telephone}}" placeholder-style='color:#999' maxlength="40" class="newBox" wx:if="{{user_id == 0}}" />
+      <input wx:if="{{user_id}}" value="{{telephone}}" placeholder-style='color:#999' maxlength="40" class="newBox" disabled="true" />
+    </view>
+  </view>
+  <!--获取验证码  -->
+  <view class="boxStyle"  wx:if="{{user_id == 0}}">
+    <view class="projectBoxContent flex bottomStyle noBorder">
+      <view class="projectTitle">获取验证码</view>
+      <view>
+        <input placeholder="请输入" placeholder-style='color:#ccc' class="newBoxs" maxlength="40" value="{{checkCode}}" bindblur="checkCode2" />
+        <button class="clear {{time =='1'?'clearOn':''}}" bindtap="checkCode" disabled="{{time == 1}}" loading="{{checking == 1}}">{{getCode}}</button>
+      </view>
+    </view>
+  </view>
+
+  <!--品牌  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex">
+      <view class="projectTitle">品牌</view>
+      <input placeholder="请输入" placeholder-style='color:#ccc' class="newBox" bindblur="checkBrand" value="{{brand}}" maxlength="40" />
+    </view>
+  </view>
+  <!--公司  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex">
+      <view class="projectTitle">公司*</view>
+      <input placeholder="请输入" placeholder-style='color:#ccc' class="newBox" maxlength="40" value="{{company}}" bindblur="company" />
+    </view>
+  </view>
+  <!--职位  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex">
+      <view class="projectTitle">职位*</view>
+      <input placeholder="请输入" placeholder-style='color:#ccc' class="newBox" maxlength="40" value="{{position}}" bindblur="position" />
+    </view>
+  </view>
+  <!--邮箱  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex">
+      <view class="projectTitle">邮箱</view>
+      <input placeholder="请输入" placeholder-style='color:#ccc' class="newBox" bindblur="checkEmail" value="{{email}}" />
+    </view>
+  </view>
+  <!--微信  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex noBorder">
+      <view class="projectTitle">微信</view>
+      <input placeholder="请输入" placeholder-style='color:#ccc' class="newBox" bindblur="checkWechart" value="{{weChat}}" />
+    </view>
+  </view>
+
+  <!--错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>
+
+<!--保存  -->
+<template is="buttonTwo" data="{{text:'下一步',btnName:'pushInfo',disabled}}"></template>

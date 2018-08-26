@@ -1,0 +1,86 @@
+<!--activity.wxml-->
+<view class="app">
+
+<!--当前模板  -->
+<template name="tmp-current">
+  <view class='cur-item' data-id="{{id}}" bindtap="toDetail">
+    <view class='key-box'>
+      <view class='key'>{{key}}</view>
+    </view>
+
+    <view class='cur-title'>{{title}}</view>
+    <view class='cur-desc'>
+      <view wx:for='{{des}}'>{{item}}</view>
+    </view>
+
+    <view class='cur-bot'>
+      <view class='cur-time'>{{time}}</view>
+      <view class='cur-add'>{{address}}</view>
+      <view class='cur-num'>
+        <view class='cur-view-num'>{{view}}查看</view>
+        <view class='cur-join-num'>{{join}}人参与</view>
+      </view>
+    </view>
+    
+  </view>
+</template>
+
+
+<!--往期模板  -->
+<template name="tmp-before">
+  <view class="bg-box" data-id="{{id}}" style="background-image: url({{image}})">
+    <view class="info-box">
+      <view class="main-info">
+        <view class="title">{{title}}</view>
+        <view class="time">已结束：{{time}}</view>
+        <button class="btn-primary" type='default' size="mini" data-id="{{id}}"  bindtap="toDetail">活动已结束</button>
+      </view>
+      <view class="join">
+        <text class="num">{{join}}人参与</text>
+        <text>{{view}}查看</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+
+<!--切换标签  -->
+<view class="tab-box">
+  <view class="tab" bindtap="currentActivity">
+    <view class='tab-in  {{now}}'>正在进行</view>  
+  </view>
+  <view class="tab" bindtap="beforeActivity">
+    <view class='tab-in  {{before}}'>往期活动</view> 
+  </view>
+</view>
+
+<view class="main">
+  <!--正在进行活动列表  -->
+  <view class='current-list-box list-box {{now}}'>
+
+      <swiper id='cur-swiper' indicator-dots="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff" duration="300">
+      <block wx:for="{{currentList}}">
+        <swiper-item  style='background-image: url("{{item.image}}")'>
+          <template is="tmp-current" data="{{...item}}"></template>
+        </swiper-item>
+      </block>
+      </swiper>  
+
+  </view>
+
+
+  <!--往期活动列表  -->
+  <view class="before-list-box list-box {{before}}">
+    <block wx:for="{{beforeList}}">
+      <template is="tmp-before" data="{{...item}}"></template>
+    </block>
+    
+    <view class='load-more'>
+      <view class='more-inner'><icon type='waiting' size='16' color='#ccc'></icon>{{loadinfo}}</view>
+    </view>
+  </view>
+
+</view>
+
+
+</view>

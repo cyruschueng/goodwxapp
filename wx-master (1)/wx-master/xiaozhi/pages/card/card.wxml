@@ -1,0 +1,30 @@
+<!--======添加信用卡======pages/card/card.wxml-->
+<view class='container'>
+  <block wx:if="{{!show}}">
+  <image src="../../images/null.png" ></image>
+  </block>
+    
+    <block wx:for="{{list}}" wx:key="{{item.index}}">
+      <view wx:if="{{show}}" class='content row pos-r' style="background:rgba({{list[index].r}},{{list[index].g}},{{list[index].b}},{{list[index].a}})" catchtap='tap' data-index="{{index}}">
+        <view class='left'>
+          <!-- <view class='bank'>{{list[index].bankName}}</view> -->
+          <view class='bank_logo row'>
+            <image src="http://ppp.zhybpay.com:1177{{list[index].logo}}" class='logo'></image>
+            <view class='bank'>{{list[index].bankName}}</view>
+          </view>
+          <view class='cardType'>{{list[index].acctType?"信用卡":"储蓄卡"}}</view>
+          <view class='cardNo'>{{cardId[index]}}</view>
+        </view>
+        <view class='right'>
+            <block wx:if="{{list[index].state=='还款中'}}">
+              <image class='sta' src='../../images/repaymentOnGoing.png'></image>
+            </block>
+            <!-- <view class='sta'>{{list[index].state}}</view>  -->
+          <view class='dele' catchtap='alter' data-index="{{index}}">删除</view>
+        </view>
+      </view>
+    </block>
+  <view class='add' bindtap='bindAdd' wx:if="{{add}}">
+    添加信用卡
+  </view>
+</view>

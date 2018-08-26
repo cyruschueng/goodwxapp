@@ -1,0 +1,351 @@
+// rankinglist.js
+var util = require('../../utils/util.js');
+var app = getApp();
+var rankUrl = app.globalData.rankUrl;
+var topicUrl = app.globalData.topicUrl;
+var memaddUrl = app.globalData.memaddUrl;
+var addUrl = app.globalData.addUrl;
+var livesUrl = app.globalData.livesUrl;
+var sign_key = app.globalData.sign_key;
+var canShow = true,bTimer,member_id,openid,canTap=true;
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    heartNum:0,
+    showHeart:false,
+    addHeart:false,
+      audioSrc:'https://qnfile.abctime.com/pkstart.mp3',
+      ipX:app.globalData.isIpx?true:false
+      // audioSrc:'../../audio/pkstart.mp3'
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+  },
+    hideAdd:function () {
+        this.setData({addHeart:false})
+    },
+  showHeart:function () {
+      var that = this;
+      if(canShow){
+          canShow = false;
+          this.setData({showHeart:true})
+          setTimeout(function () {
+              that.setData({showHeart:false})
+              canShow = true;
+          },1200);
+      }else {}
+  },
+  toRank:function () {
+     if(canTap){
+         canTap = false;
+         if(!wx.getStorageSync('userInfo')){
+             wx.showModal({
+                 title: '温馨提示',
+                 content: '“公开信息”授权失败，允许授权后才可进行答题、查看排行榜。点击重新授权，则可重新使用',
+                 cancelText:'不授权',
+                 confirmText:'授权',
+                 success: res=>{
+                 if (res.confirm) {
+                 wx.openSetting({
+                     success:function(res){
+                         if (!res.authSetting["scope.userInfo"] || !res.authSetting["scope.userLocation"]) {
+                             //这里是授权成功之后 填写你重新获取数据的js
+                             console.log('auth',res);
+                             wx.getUserInfo({
+                                 success:function (data) {
+                                     var da = JSON.parse(data.rawData);
+                                     // data.rawData=JSON.parse(data.rawData)
+                                     wx.setStorageSync('userInfo',data.rawData);
+                                     var s = "headimg_url"+da.avatarUrl+"nickname"+da.nickName+"openid"+wx.getStorageSync('openid')+"sex1"+sign_key;
+                                     var sign = util.SHA256(s);
+                                     var fd = {openid:wx.getStorageSync('openid'),sex:1,'nickname':da.nickName,headimg_url:da.avatarUrl,sign:sign};
+                                     console.log(fd);
+                                     wx.request({
+                                         // url:"http://dev.wechat.abctime.com/v1/activity/activity/add",
+                                         url:memaddUrl,
+                                         data:fd,
+                                         method:'POST',
+                                         header: {"Content-Type": "application/x-www-form-urlencoded"},
+                                         success:function (res) {
+                                             if(res.data.data.id && res.data.data.id!=''){
+                                                 wx.setStorageSync('memberId', res.data.data.id);
+                                                 wx.setStorageSync('lives', res.data.data.lives);
+                                                 wx.setStorageSync('maxScore', res.data.data.score);
+                                             };
+                                             if(res.data.code==200){
+
+                                             }else{
+                                                 console.log('addRES',res.data.data)
+                                             }
+                                             canTap = true;
+                                         },
+                                         fail:function (res) {
+                                             console.log(res);
+                                             canTap = true;
+                                         }
+                                     })
+                                 },
+                             })
+                         }
+                     }
+                 })
+             }else {
+                 canTap = true;
+             }
+         }
+         });
+         }else {
+             wx.navigateTo({
+                 url: '../../pages/rankinglist/rankinglist?source=1'
+             })
+         }
+     }
+  },
+    showError:function (res) {
+        console.log(res)
+    },
+  toTest:function () {
+      if(canTap){
+          console.log(canTap);
+          canTap=false;
+          console.log(canTap);
+          // console.log(this.audioCtx);
+          // return;
+          if(!wx.getStorageSync('userInfo')){
+              wx.showModal({
+                  title: '温馨提示',
+                  content: '“公开信息”授权失败，允许授权后才可进行答题、查看排行榜。点击重新授权，则可重新使用',
+                  cancelText:'不授权',
+                  confirmText:'授权',
+                  success: res=>{
+                  if (res.confirm) {
+                  wx.openSetting({
+                      success:function(res){
+                          if (!res.authSetting["scope.userInfo"] || !res.authSetting["scope.userLocation"]) {
+                              //这里是授权成功之后 填写你重新获取数据的js
+                              console.log('auth',res);
+                              wx.getUserInfo({
+                                  success:function (data) {
+                                      var da = JSON.parse(data.rawData);
+                                      // data.rawData=JSON.parse(data.rawData)
+                                      wx.setStorageSync('userInfo',data.rawData);
+                                      var s = "headimg_url"+da.avatarUrl+"nickname"+da.nickName+"openid"+wx.getStorageSync('openid')+"sex1"+sign_key;
+                                      var sign = util.SHA256(s);
+                                      var fd = {openid:wx.getStorageSync('openid'),sex:1,'nickname':da.nickName,headimg_url:da.avatarUrl,sign:sign};
+                                      console.log(fd);
+                                      wx.request({
+                                          // url:"http://dev.wechat.abctime.com/v1/activity/activity/add",
+                                          url:memaddUrl,
+                                          data:fd,
+                                          method:'POST',
+                                          header: {"Content-Type": "application/x-www-form-urlencoded"},
+                                          success:function (res) {
+                                              if(res.data.data.id && res.data.data.id!=''){
+                                                  wx.setStorageSync('memberId', res.data.data.id);
+                                                  wx.setStorageSync('lives', res.data.data.lives);
+                                                  wx.setStorageSync('maxScore', res.data.data.score);
+                                              };
+                                              if(res.data.code==200){
+
+                                              }else{
+                                                  console.log('addRES',res.data.data)
+                                              }
+                                              canTap = true;
+                                          },
+                                          fail:function (res) {
+                                              console.log(res);
+                                              canTap = true;
+                                          }
+                                      })
+                                  },
+                              })
+                          }
+                      }
+                  })
+              }else {
+                  canTap = true;
+
+              }
+          }
+          });
+          }else {
+              this.audioCtx.play();
+              var s = "p1"+sign_key;
+              var sign = util.SHA256(s);
+              var fd={p:1,sign:sign};
+              wx.request({
+                  url:topicUrl,
+                  data:fd,
+                  method:'POST',
+                  header: {"Content-Type": "application/x-www-form-urlencoded"},
+                  success:function (res) {
+                      console.log('topic',res);
+                      if(res.data.code==200){
+                          app.globalData.quiz = res.data.data;
+                          var data = res.data.data;
+                          wx.getImageInfo({
+                              src: data[0].title,
+                              success:function (re) {
+                                  wx.navigateTo({
+                                      url: '../../pages/test/test'
+                                  })
+                              },
+                              fail:function () {
+                                  wx.navigateTo({
+                                      url: '../../pages/test/test'
+                                  });
+                              }
+                          })
+                      }
+                  },
+                  fail:function (res) {
+                      canTap = true;
+                  }
+              })
+          }
+      }
+  },
+    toMain:function () {
+        wx.navigateToMiniProgram({
+            appId: 'wx2599a6b43e5a74e3',
+            path: 'pages/index/index',
+            envVersion: 'release',
+            success(res) {
+                // 打开成功
+            }
+        })
+    },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+      this.audioCtx = wx.createAudioContext('startAudio');
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+      this.setData({heartNum:wx.getStorageSync('lives')||0});
+      wx.showShareMenu({
+          withShareTicket: true,
+          success: function (res) {
+              // 分享成功
+              // console.log(JSON.stringify(res))
+          },
+          fail: function (res) {
+              // 分享失败
+              // console.log(res)
+          }
+      });
+      canTap = true;
+      var that = this;
+      bTimer = setInterval(function () {
+          var lives = wx.getStorageSync('lives');
+          if(lives === 0||lives>0){
+              clearInterval(bTimer);
+              that.setData({heartNum:lives});
+              openid=wx.getStorageSync('openid');
+              member_id=wx.getStorageSync('memberId');
+          }
+      },200);
+  },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (res) {
+      var that = this;
+      if (res.from === 'button') {
+          // 来自页面内转发按钮
+          console.log(res.target)
+      }
+      return {
+          title: '抢词夺礼，测测你在美国读几年级？',
+          path: '/pages/index/index',
+          imageUrl:'/images/share_index.png',
+          success: function(res) {
+              console.log(res);
+              // 转发成功
+              wx.getShareInfo({
+                  shareTicket: res.shareTickets[0],
+                  success: function (res) {
+                      var n = that.data.heartNum+1
+                      that.setData({heartNum:n})
+                      wx.setStorageSync('lives',n);
+                      openid=wx.getStorageSync('openid');
+                      member_id=wx.getStorageSync('memberId');
+                      var s = 'lives1'+'member_id'+member_id+'openid'+openid+'type1'+sign_key;
+                      var sign = util.SHA256(s);
+                      var fd={lives:1,member_id:member_id,openid:openid,type:1,sign:sign};
+                      console.log(fd);
+                      wx.request({
+                          url:livesUrl,
+                          data:fd,
+                          method:'POST',
+                          header: {"Content-Type": "application/x-www-form-urlencoded"},
+                          success:function (res) {
+                              console.log('addLives',res);
+                              if(res.data.code==200){
+                                  that.setData({addHeart:true})
+                              }
+                          },
+                          fail:function (res) {
+                              console.log(res);
+                              wx.hideLoading();
+                              wx.showModal({
+                                  title: '提示',
+                                  content: '网络情况不好,请检查网络后重新挑战',
+                                  success: function(res) {
+                                      if (res.confirm) {
+                                          wx.navigateBack({
+                                              delta: 2
+                                          })
+                                      } else if (res.cancel) {
+                                      }
+                                  }
+                              })
+                          }
+                      })
+                  },
+                  fail: function (res) { console.log(res) },
+                  complete: function (res) { console.log(res) }
+              })
+          },
+          fail: function(res) {
+              console.log(res);
+          }
+      }
+  }
+})

@@ -1,0 +1,82 @@
+<!doctype HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=320,initial-scale=1.0,maximum-scale=1.3,user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>报名</title>
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/common.css"/>
+		<link rel="stylesheet" href="src/vApply/index.css"/>
+
+	</head> 
+	<body>
+		<div id="wrap">
+			<div class="banner"></div>
+			<div class="main">
+				<div class="votitle">
+					<h1>
+						我要报名
+						<span class="orbottom"></span>
+					</h1>
+				</div>
+				<p class="bgColor"></p>
+				<form action="" id='submitform'>
+				<div class="playvoInfor">
+					<div class="weui-cell">
+				        <div class="weui-cell__bd">
+				          <input class="weui-input" type="text" name="name" id="name" maxLength="6"  placeholder="请输入参赛人姓名" required />
+				        </div>
+				    </div>
+				    <div class="weui-cell">
+				        <div class="weui-cell__bd">
+				          	<input class="weui-input" type="number" name="phone" id="phone" pattern="^1[34578]\d{9}$" placeholder="请输入联系方式" required minLength="11" maxLength="11" />
+				        </div>
+	      			</div>
+	      			<div class="weui-cells weui-cells_form">
+					    <div class="weui-cell">
+					      	<div class="weui-cell__bd">
+					        	<textarea class="weui-textarea" maxLength="200" id="applySlogan" placeholder="请输入参赛宣言" rows="3" required /></textarea>
+					         	<div class="weui-textarea-counter"><span id='count'>0</span>/<span id='count_max'>200</span></div>
+					      	</div>
+					      </div>
+	    			</div>
+				</div>
+				<p class="bgColor"></p>
+				<div class="upLoad">
+					<div class="upInput">
+						<img src="" class="image" width="100%" />
+						<input type="file" accept="image/*" multiple="" class="updateFile weui-uploader__input" name="imageFile" id="imageFile" required /> 
+					</div>
+				    <p>点击上传照片，要求亲子合照<br />像素280*186</p>
+				</div>	
+				<div class="vote">
+			    	<input class="weui-btn weui-btn_primary" type="submit" value="我要报名" />
+			    </div>	
+			    </form>	
+			</div>
+
+			
+			<!--裁切图片-->
+			<div id="clipBox">
+				<div id="clipArea"></div>
+				<button id="clipBtn">截取</button>
+			</div>
+
+			<div class="footerNav"></div>
+		</div>
+		<script type="text/javascript" src="http://h5.iliujia.com/vote/src/common.lib/sea.js"></script>
+		<script type="text/javascript" src="http://h5.iliujia.com/vote/src/common.lib/seajs-text/seajs-text-1.1.1/seajs-text.js"></script>
+		<script type="text/javascript" src="http://h5.iliujia.com/vote/src/config.js"></script>
+		<script>
+		    seajs.use("http://h5.iliujia.com/vote/src/common.lib/sea_css", function(){
+		        seajs.use("http://h5.iliujia.com/vote/src/vApply/index");
+		    });
+		</script>
+	</body>
+</html>

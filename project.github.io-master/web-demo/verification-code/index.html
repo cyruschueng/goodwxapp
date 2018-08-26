@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <title>验证码输入(静态引入Vue)</title>
+</head>
+<body>
+<div id="app" class="app">
+    <h2 class="heading-2">验证码：</h2>
+    <div class="v-code">
+        <input
+            ref = "vcode"
+            id = "vcode"
+            type = "tel"
+            maxlength = "6"
+            v-model = "code"
+            @focus = "focused = true"
+            @blur = "focused = false"
+            :disabled = "telDisabled">
+        <label
+            for="vcode"
+            class="line"
+            v-for="item,index in codeLength"
+            :class="{'animated' : focused && cursorIndex === index}"
+            v-text = "codeArr[index]">
+        </label>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

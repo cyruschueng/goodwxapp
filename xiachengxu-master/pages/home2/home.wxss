@@ -1,0 +1,526 @@
+/* 列表单个商品样式 */
+@import '../tpls/products/products-tpl.wxss';
+@import '../tpls/products/products-tpl-simple.wxss';
+@import '../tpls/nextInfo/index.wxss';
+@import '../tpls/activity/activity.wxss';
+@import '../common/css/weui.wxss';
+
+.products-box {
+  display: flex;
+  background-color: #f0f0f0;
+}
+
+.products-box .product {
+  margin-bottom: 12rpx;
+}
+
+.product .img-wrap {
+  height: 580rpx;
+}
+
+.product .title {
+  margin: 16rpx;
+  padding: 0;
+  font: 32rpx/normal PingFang-Regular;
+  color: #2a2a2a;
+}
+
+.store-desc {
+  position: relative;
+}
+
+.store-desc image {
+  display: block;
+  width: 100%;
+  height: 350rpx;
+  font-size: 0;
+}
+
+.header {
+  background-color: #fff;
+  margin-bottom: 16rpx;
+}
+
+.store-info-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.1) 40%, rgba(0, 0, 0, 0.9));
+}
+
+.store-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.store-info-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+}
+
+.store-info-left-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-info-left-name text {
+  color: #fff;
+}
+
+.store-info-left-name text:last-child {
+  font: 28rpx/normal PingFang-SC-Medium;
+}
+
+.store-info image {
+  width: 160rpx;
+  height: 160rpx;
+  border: 1px solid #e6e6e6;
+  margin-right: 18rpx;
+}
+
+.store-name {
+  font-family: PingFang-SC-Bold;
+  font-size: 36rpx;
+  color: #fff;
+}
+
+.store-address-phone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12rpx;
+}
+
+.store-address-phone>view {
+  display: flex;
+  align-items: center;
+}
+
+.store-address-phone>view image {
+  margin-right: 20rpx;
+}
+
+.store-address-phone>view text {
+  flex: 1;
+  font: 28rpx/normal PingFang-SC-Regular;
+  text-align: justify;
+}
+
+.store-address-phone image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.store-address-phone view {
+  flex: 1;
+  margin-right: 20rpx;
+  color: #212121;
+  font-size: 28rpx;
+}
+
+.attention {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 110rpx;
+  height: 40rpx;
+  padding: 10rpx 30rpx;
+  margin-right: 30rpx;
+  font-family: PingFang-SC-Bold;
+  font-size: 28rpx;
+  color: #fff;
+  background-color: rgb(33, 33, 33);
+}
+
+button.form_button {
+  position: static;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0;
+  background-color: transparent;
+  font-size: 0rpx;
+  color: transparent;
+}
+
+button.form_button::after {
+  content: '';
+  width: 0;
+  height: 0;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  display: none;
+  background-color: transparent;
+}
+
+.guide-modal .form_button>image {
+  position: absolute;
+  top: 2rpx;
+  right: 0rpx;
+  width: 50rpx;
+  height: 50rpx;
+  transform: rotate(45deg);
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+
+button.form_button text {
+  color: #fff;
+}
+
+.store-introduce {
+  display: flex;
+  flex-direction: column;
+  margin: 30rpx 30rpx 20rpx;
+  border-bottom: 2rpx solid #f2f2f2;
+}
+
+.store-introduce>view {
+  font-family: PingFang-SC-Medium;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: rgb(153, 153, 153);
+}
+
+.text-slice {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.collapse .spread, .collapse .packup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+  font-family: PingFang-SC-Medium;
+  font-size: 26rpx;
+  color: rgb(33, 33, 33);
+}
+
+.packup image {
+  transform: rotate(180deg);
+}
+
+.collapse image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.indexContainer {
+  min-height: 100%;
+  font-family: PingFang-SC-Medium;
+  background-color: #f0f0f0;
+}
+
+.loading, .no-more {
+  background-color: #f2f2f2;
+  padding-top: 0;
+}
+
+/*修改weui.wxss样式  */
+
+.weui-navbar {
+  position: relative;
+}
+
+.weui-tab__panel {
+  padding-top: 0;
+}
+
+.weui-navbar__slider {
+  background-color: #212121;
+}
+
+.weui-navbar__item.weui-bar__item_on .weui-navbar__title {
+  color: #333;
+}
+
+.weui-navbar__title {
+  color: #999;
+}
+
+/* 导购欢迎页面样式  */
+
+.guide-modal .guide-modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: background-color 0.3s;
+  animation: fadeIn ease 0.3s forwards;
+}
+
+.guide-modal .guide-modal-content {
+  position: fixed;
+  z-index: 5000;
+  width: 80%;
+  padding: 80rpx 50rpx 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: inherit;
+  text-align: center;
+  overflow: hidden;
+}
+
+.guide-modal-content>image {
+  position: absolute;
+  top: 2rpx;
+  right: 0rpx;
+  width: 50rpx;
+  height: 50rpx;
+  transform: rotate(45deg);
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+
+.guide-content {
+  width: 600rpx;
+  height: 660rpx;
+  border-radius: 3px;
+  font-size: 0;
+}
+
+.guide-content>image, .guide-center {
+  width: 100%;
+  background-color: #fff;
+  height: 330rpx;
+}
+
+.guide-content>image {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.guide-center {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.guide-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.guide-user, .guide-employee {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.guide-employee text {
+  display: inline-block;
+  flex: 1;
+  padding: 20rpx;
+  color: #fff;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 28rpx;
+}
+
+.guide-user .guide-user-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 24rpx;
+  color: #333;
+}
+
+.guide-user-info text:first-child {
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.guide-user {
+  position: absolute;
+  top: -80rpx;
+}
+
+.guide-employee {
+  justify-content: flex-end;
+}
+
+.guide-user image, .guide-employee image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 30rpx;
+  padding: 10rpx;
+  background-color: #fff;
+  box-shadow: 5rpx 5rpx 20rpx 0 rgba(0, 0, 0, 0.6);
+  border-radius: 8rpx;
+}
+
+.guide-employee image {
+  margin-right: 0;
+}
+
+.guide-employee text {
+  display: inline-block;
+  margin-right: 30rpx;
+  background-color: #000;
+}
+
+.guide-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150rpx;
+  height: 50rpx;
+  padding: 10rpx 50rpx;
+  margin: 30rpx auto 0;
+  color: #fff;
+  border: 2rpx solid #fff;
+  border-radius: 4px;
+  background-color: #212121;
+}
+
+/* loadmore 样式修改 */
+
+.weui-navbar {
+  background-color: #fff;
+}
+
+.weui-navbar__slider {
+  width: 70px;
+  height: 2px;
+}
+
+.weui-loadmore__tips, .weui-loadmore__tips_in-dot, .weui-tab__panel,
+.weui-loadmore__tips_in-line {
+  background-color: #f2f2f2;
+}
+
+.degree {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background-color: #fef9ef;
+}
+
+.degree view {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.degree text {
+  color: #f9984e;
+  font-size: 28rpx;
+}
+
+.degree image {
+  width: 40rpx;
+  height: 40rpx;
+  transform: rotate(-90deg);
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-width: 200rpx;
+  height: 50rpx;
+  padding: 10rpx 50rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 50rpx;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 24rpx;
+  animation: show-popup ease 3s forwards;
+}
+
+@keyframes show-popup {
+  from {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.event-item {
+  background-color: #fff;
+}
+
+.event-item .event-access {
+  padding: 30rpx 12rpx;
+}
+
+.event-access>view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.event-access>view text {
+  font: 26rpx/normal PingFang-SC-Regular;
+  color: #8f8f8f;
+}
+
+.event-item swiper-item {
+  height: 325rpx;
+}
+
+.event-item swiper image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.event-access {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+}
+
+.event-access image {
+  width: 40rpx;
+  height: 40rpx;
+  transform: rotate(-90deg);
+}

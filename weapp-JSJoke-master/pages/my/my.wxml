@@ -1,0 +1,81 @@
+<import src='../../wxParse/wxParse.wxml' />
+<view class="page">
+    <view class="kind-list-item">
+          <view  class="kind-list-item-hd " >
+            <view class="kind-list-text" style="margin-left:30%;">笑话圈</view>
+            <navigator url="/pages/newjoke/newjokevideo">
+              <image class="kind-list-img" src="/images/video.png" style="padding-right:15px;"></image>
+            </navigator>
+            <navigator url="/pages/newjoke/newjoke">
+              <image class="kind-list-img" src="/images/camera.png"></image>
+            </navigator>
+          </view>
+    </view>
+
+    <view class="page__bd">
+    
+        <view class="weui-panel weui-panel_access" >
+           
+            <view class="weui-panel__bd">
+                <navigator url="/pages/newjoke/newjoke" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{userInfo.nickName}}</view>
+                        <view class="weui-media-box__desc"></view>
+                    </view>
+                </navigator>
+            </view> <!-- panel__bd-->
+        </view>  <!-- weui-panel weui-panel_access-->
+
+     </view> <!--page__bd-->
+    <view class="page__hd">
+        <view class="page__title">集思笑话</view>
+        <view class="page__desc">欢乐人生，由自己</view>
+    </view>
+
+ <view class="jokeContainer">
+    <view class="jokeItem" wx:for="{{jokes}}" wx:for-index="index" wx:key="">
+      <view class="jokeAuthor">
+        <image class="jokeAuthorImg" src="{{item.author[0].avatar}}" background-size="cover"></image>
+        <view class="jokeAuthorRight">
+          <text class="jokeAuthorName">{{item.author[0].nickname||item.author[0].username}}</text>
+          <text class="jokeTime">{{item.createdate}}</text>
+        </view>
+         <image src="/images/del.png" style="width:24px;height:24px;" bindtap="del" data-id="{{item._id}}" ></image>
+      </view>
+
+      <view class="jokeCont">
+        <template is="wxParse" data="{{wxParseData:replyTemArray[index]}}"/>
+        <block wx:if="{{item.videourl}}">
+                       <video src="{{item.videourl}}" poster="{{jokes[index].videourl}}.jpg"> </video>
+                      </block>
+      </view>
+
+      <view class="operateBlock" wx:if="{{item.comments}}">
+        <view class="operateItem" data-id="{{item._id}}" data-index = "{{index}}" bindtap="bindcomment" >
+          <image class="replayIcon" src="/images/icon_reply.png" style="height:20px;"></image>
+          <text class="num">{{item.comments.length}}</text>
+        </view>
+        <view class="operateItem" data-id="{{item._id}}" data-index = "{{index}}" bindtap="bindjoke">
+          <image class="followIcon" src="/images/icon_follow_normal.png"   style="height:20px;"></image>
+          <text class="num" >{{item.joke}}</text>
+        </view>
+      
+      </view> <!--operateBlock-->
+
+      <view class="reply" wx:if="{{item.comments.length}}">
+        <view class="replyItem" wx:for="{{item.comments}}" wx:for-index="cinx" wx:for-item="c" wx:key="" >
+          <text class="replyName">{{c.author.nickname||c.author.username}} : </text>
+          <text class="replyCont">{{c.content}}</text>
+        </view>
+        
+      </view> 
+
+      <view class="line"></view>
+    </view>
+</view>
+
+
+</view> <!--page-->

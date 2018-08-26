@@ -1,0 +1,61 @@
+<view class='captain'>
+    <view class='captainNull' wx:if='{{isCaptain}}' bindtap='becomeCaptain'>成为堡主</view> 
+    <view class='captainContentBox' wx:else>
+      <view class='captainContentTop'>
+        <view class='topLeft'>
+           <image src='{{captainInfo.picture}}'></image>
+        </view>
+        <view class='topCenter'>
+          <view class='lineBox lineBox1'>
+            <text>昵称：</text>
+            <text>{{captainInfo.nick_name}}</text>
+          </view>
+          <view class='lineBox lineBox2'>
+            <text>ID：</text>
+            <text>{{captainInfo.customer_id}}</text>
+          </view>
+          <view class='lineBox lineBox3'>{{captainInfo.grade_name!=null?captainInfo.grade_name:'暂无等级描述'}}</view>
+        </view>
+        <view class='topRight'>
+          <image src='../images/demo1.png'></image>
+          <!-- <image src='{{captainInfo.code_url}}'></image> -->
+        </view>
+      </view>
+      <view class='dividendBox'>
+        <view class='dividendBoxName'>工厂分红收益（元）</view>
+        <view class='dividendAmount'>{{totalEarnings}}</view>
+        <view class='dividendProject'>
+          <view class='dividendProjectNum' bindtap='goFactoryDividendEarnings' data-navid='{{0}}'>
+            <view>{{captainInfo.sign_honey_bean!=null?captainInfo.sign_honey_bean:0}}</view>
+            <view>签到蜜豆币</view>
+          </view>
+          <view class='dividendProjectNum' bindtap='goFactoryDividendEarnings' data-navid='{{1}}'>
+            <view>{{captainInfo.shopping_bonus!=null?captainInfo.shopping_bonus:0}}</view>
+            <view>购物分红</view>
+          </view>
+          <view class='dividendProjectNum' bindtap='goFactoryDividendEarnings' data-navid='{{2}}'>
+            <view>{{captainInfo.love_honey_bean!=null?captainInfo.love_honey_bean:0}}</view>
+            <view>爱心蜜豆币</view>
+          </view>
+        </view>
+      </view>
+      <view class='captainBottom'>
+        <!-- <view class='captainBottomRow' bindtap='myGiftBag'>
+          <image src='../images/demo1.png'></image>
+          <view>我的礼包</view>
+        </view> -->
+        <view class='captainBottomRow' bindtap='goTopPage'>
+          <image src='../images/demo1.png'></image>
+          <view>排行榜</view>
+        </view>
+        <view class='captainBottomRow' bindtap='goPartner'>
+          <image src='../images/demo1.png'></image>
+          <view>客户管理</view>
+        </view>
+        <view class='captainBottomRow' bindtap='withdrawClick'>
+          <image src='../images/demo1.png'></image>
+          <view>提现</view>
+        </view>
+      </view>
+   </view>
+</view>

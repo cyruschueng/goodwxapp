@@ -1,0 +1,25 @@
+<!--pages/user/user.wxml-->
+<view class="container">
+   <view class="header">
+        <view class="img"><image mode='aspectFill' src="{{avatar}}"></image></view>
+        <view class="txt" wx:if="{{nickname}}"><text>{{nickname}}</text></view>
+        <view class="txt" wx:else><text>匿名</text></view>
+   </view>
+   <view class="content">
+      <view class="box">
+        <text>用户名：</text><input bindinput='userchange' value="{{user}}" placeholder-style="color:#808080;font-size:28rpx;" placeholder='请输入要你的用户名' />
+      </view>
+      <view class="box">
+        <text>部门：</text><picker bindchange="bindPickerChange" value="{{where}}" range="{{array}}">
+    <view class="picker">
+      <view wx:if="{{!department}}"> <text class="sm" wx:if="{{!array[where]}}">点我选择：</text><text wx:else>当前选择：</text>{{array[where]}}</view>
+      <view wx:if="{{department}}">{{department}}</view>
+      
+    </view>
+  </picker>
+      </view>
+   </view>
+   <view class="do_over">
+        <button bindtap="check">保存</button>
+    </view>
+</view>

@@ -1,0 +1,192 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="entryBox flex" wx:if="{{!user}}" bindtap='entry' hover-class='t-hoverColor'>
+    <view class="user_left">
+      <image class="user_pic" src="/img/img-touxiang@2x.png"></image>
+    </view>
+    <view class='user_right'>
+      <view class="entryPoint">点击登录</view>
+      <label class='entryContent'>登录只需1秒，就能体验更多功能</label>
+    </view>
+  </view>
+  <view wx:if="{{user}}">
+    <view class="myInfo flex" bindtap='toMyCard' hover-class='t-hoverColor'>
+      <view class="user_left" catchtap='avatarEdit'>
+        <image wx:if="{{user.user_avatar_url}}" class="user_pic" src="{{user.user_avatar_url}}"></image>
+        <view wx:if="{{user.user_avatar_text}}" class="user_text noPic">{{user.user_avatar_text}}</view>
+        <view wx:if="{{status == 2}}">
+          <image wx:if="{{user.authentication[0].group_id == 3}}" src="/img/img-rzchuangyezhe@2x.png" class='user_identifyContent'></image>
+          <image wx:if="{{user.authentication[0].group_id == 18}}" src="/img/img-rzfa@2x.png" class='user_identifyContent'></image>
+          <image wx:if="{{user.authentication[0].group_id == 21}}" src="/img/img-rzfa2@2x.png" class='user_identifyContent'></image>
+          <image wx:if="{{user.authentication[0].group_id == 6}}" src="/img/img-rztouziren@2x.png" class='user_identifyContent'></image>
+        </view>
+        <image wx:if="{{!user}}" class="user_pic" src="/img/img-avatar@3x.png"></image>
+      </view>
+      <view class='user_right'>
+        <view class="userName" wx:if="{{user.user_real_name}}">{{user.user_real_name}}</view>
+        <view class="user_career">
+          <label wx:if="{{user.user_company_career}}">{{user.user_company_career}}</label> ·
+          <label wx:if="{{user.user_company_name}}">{{user.user_company_name}}</label>
+        </view>
+        <view class='checkNum' catchtap="searchIdentification" hover-stop-propagation="true">查税号</view>
+      </view>
+      <view class="flex">
+        <image src="/img/icon-jiantou3@2x.png" class="myArrowStyle"></image>
+      </view>
+    </view>
+
+    <!--浏览过-->
+    <view class="user_down flex">
+      <view class="user_popularity user_tips contacts-sentimentm" bindtap="popularity" hover-class="t-hoverColor">
+        <view wx:if="{{user.user_popularity}}">{{user.user_popularity}}</view>
+        <view class='flex flexCenter'>
+          <view wx:if="{{!user.user_popularity}}" class="popularity-Num">{{count.user_view_all}}</view>
+          <label class="popularityNum" wx:if="{{count.user_view_new !=0}}">+{{count.user_view_new}}</label>
+        </view>
+        <view class="popularity-people">浏览过</view>
+      </view>
+      <!--新的好友-->
+      <view class="user_attention user_tips contacts-requestm" bindtap="attention" hover-class="t-hoverColor">
+        <view wx:if="{{user.user_attention}}">{{user.user_attention}}</view>
+        <view class='flex flexCenter'>
+          <view wx:if="{{!user.user_attention}}" class="attention-Num">{{count.user_followed_all}}</view>
+          <view class="attentionNum" wx:if="{{count.user_followed_new}}">+{{count.user_followed_new}}
+          </view>
+        </view>
+        <view class="attention-people">新的好友</view>
+      </view>
+      <!-- 收到项目 -->
+      <view class="user_potential user_tips potential-projectm" bindtap="pushTo" hover-class="t-hoverColor">
+        <view wx:if="{{user.user_potential}}">{{user.user_potential}}</view>
+        <view class='flex flexCenter'>
+          <view wx:if="{{!user.user_attention}}" class="attention-Num">{{count.project_push_all}}</view>
+          <label class="potentialNum" wx:if="{{count.project_push_new}}">+{{count.project_push_new}}</label>
+        </view>
+        <view class="potential-content">收到项目</view>
+      </view>
+    </view>
+  </view>
+  <!--红包页面  -->
+  <view  bindtap='sendBag' wx:if="{{packetStatus == 'SUCCESS'}}">
+    <image src="{{sendHB}}" class='redBag'></image>
+  </view>
+  <!--项目店铺  -->
+  <view class="shopBlock flex" bindtap="projectShop" hover-class="t-hoverColor">
+    <view class="flex">
+      <image src="/img/icon-xiangmudianpu@2x.png" class="shopPic"></image>
+      <view style="align-items:center">
+        <view class="shopTitle">我的项目店铺</view>
+        <label class="shopShow">FA专属 · 项目展示 · 案源收集</label>
+      </view>
+    </view>
+    <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+  </view>
+  <!--模块内容  -->
+  <view class="outSideBox">
+    <!--已发红包  -->
+    <view class="blockInfo flex" hover-class="t-hoverColor" bindtap='sendedBag'>
+      <view class="flex">
+        <image src="/img/icon-hongbao@2x.png" class="blockPic"></image>
+        <view class="blockTitle redBox">已发红包</view>
+      </view>
+      <view class="flex">
+        <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+      </view>
+    </view>
+    <view class="aline"></view>
+    <!--我的好友  -->
+    <view class="blockInfo flex" hover-class="t-hoverColor" bindtap='myFri'>
+      <view class="flex">
+        <image src="/img/icon-haoyou@2x.png" class="blockPic"></image>
+        <view class="blockTitle">我的好友</view>
+      </view>
+      <view class="flex">
+        <view class="number">{{count.my_friends}}</view>
+        <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+      </view>
+    </view>
+    <view class="aline"></view>
+    <view class="blockInfo flex" plain="{{true}}" catchtap="shareSth" data-clickid="{{user.user_id}}" hover-class="t-hoverColor">
+      <view class="flex">
+        <image src="/img/icon-erweima@2x.png" class="blockPic"></image>
+        <view class="blockTitle">名片二维码</view>
+      </view>
+      <view class="flex">
+        <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+      </view>
+    </view>
+    <view class="aline"></view>
+    <view class="flex blockInfo" bindtap="identity" hover-class="t-hoverColor">
+      <view class="flex">
+        <image src="/img/icon-renzheng@2x.png" class="blockPic"></image>
+        <view class="blockTitle">身份认证</view>
+      </view>
+      <view class='flex'>
+        <view class="blockContent" wx:if="{{status == 0 || !user}}" data-status="{{0}}">立即认证</view>
+        <view class="identifyContent" wx:if="{{status == 3}}">审核未通过</view>
+        <view class="identifyContent on" wx:if="{{status == 1}}">审核中</view>
+        <view class=" blockContent blockContentAfter" wx:if="{{status == 2}}">
+          {{user.authentication[0].group_title}}
+        </view>
+        <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+      </view>
+    </view>
+    <view class="aline"></view>
+    <view class="blockInfo flex" bindtap="contactProject" hover-class="t-hoverColor">
+      <view class="flex">
+        <image src="/img/icon-yuetan@2x.png" class="blockPic"></image>
+        <view class="blockTitle">我约谈的项目</view>
+      </view>
+      <view class="flex">
+        <view class="number">{{count.meet_project_count}}</view>
+        <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+      </view>
+    </view>
+  </view>
+  <button open-type='contact' style='margin:32rpx 0;'>
+    <view class="contectPerson flex" hover-class="t-hoverColor">
+      <view class="flex">
+        <image src="/img/icon-kefu@2x.png" class="blockPic"></image>
+        <view class="blockTitle">联系客服</view>
+      </view>
+
+      <view class="flex">
+        <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+      </view>
+    </view>
+  </button>
+  <!--没有更多-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+
+
+  <!--税号-->
+  <view class="modalBox" hidden="{{modalBox==0}}">
+    <view class="IdentificationNum">
+      <view class="flex">
+        <label class="oneLine"></label>
+        <view class="IdentificationTitle">公司税号</view>
+        <label class="oneLine"></label>
+      </view>
+      <view class="IdentificationNumText">*未办理三证合一、五证合一的公司不适用此税号</view>
+      <view class="IdentificationNumCompany" wx:if="{{modalStyle == 0}}">
+        <view class="companyTitle">公司</view>
+        <view class="companyName">{{data.com_name}}</view>
+        <view class="companyTitle">税号</view>
+        <text class="IdentificationNumber">{{tax_member}}</text>
+        <view class="modalBtn flex">
+          <view class="modalYes" bindtap="copyNum" hover-class="t-hoverColor">复制税号</view>
+          <view class="modalYes" bindtap="laterOn" hover-class="t-hoverColor">确定</view>
+        </view>
+      </view>
+      <view class="IdentificationNumCompany" wx:if="{{modalStyle == 1}}">
+        <view class="informationText">暂未查询到税号</view>
+        <view class="informationText">请先完善公司全称或稍后再试</view>
+        <view class="informationBtn flex">
+          <view class="informationYes" catchtap="writeInformation" hover-class="t-hoverColor">去完善</view>
+          <view class="informationYes" catchtap="laterOn" hover-class="t-hoverColor">稍后再试</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,48 @@
+<!--pages/ranking/ranking.wxml-->
+<form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+    <button formType="submit" class="submit" style='border-radius:0'>
+        <view class='container'>
+            <view class='navbar'>
+                <view class='one {{type=="friend"?"active":""}}' bindtap='navbar' data-type='friend'>好友排行榜</view>
+                <view class='one {{type=="all"?"active":""}}' bindtap='navbar' data-type='all'>世界排行榜</view>
+            </view>
+            <view class='list' wx:if="{{list}}">
+                <view class='item {{index == 0?"first":""}}' wx:for="{{list}}" wx:key="{{index}}" data-rank_id="{{item.rank_id}}">
+                    <view class='left'>
+                        <view  class='niceImg'><image src="{{item.avatarurl}}" mode='widthFix'></image></view>
+                        <view class='inform'>
+                            <view class='niceImg'>{{item.wx_name}}</view>
+                            <view class='jifen'>
+                                  <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode='widthFix'></image>
+                                  {{item.star}}
+                            </view>
+                        </view>
+                    </view>
+                    <view class='right'>
+                          <image wx:if="{{index==0}}" src="http://ovhvevt35.bkt.clouddn.com/chengyu/one.png" mode='widthFix'></image>
+                          <image wx:elif="{{index==1}}" src="http://ovhvevt35.bkt.clouddn.com/chengyu/two.png" mode='widthFix'></image>
+                          <image wx:elif="{{index==2}}" src="http://ovhvevt35.bkt.clouddn.com/chengyu/three.png" mode='widthFix'></image>
+                          <view wx:else>{{index+1}}</view>
+                          <view>{{item.rank}}</view>
+                    </view>
+                </view>
+            </view>
+            <block wx:else>
+                <view style="text-align:center;font-size:24rpx;padding:30rpx;margin-top:90rpx"> 
+                  还没有排行榜！
+                </view>
+            </block>
+        </view>
+        <!-- 转发 -->
+        <view class='fixed'>
+            <button open-type='share'>去其它群VS</button> 
+            <view class='share'>
+                <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/bei.png" mode='widthFix'></image>我的排名：{{mine}}
+            </view>
+            <view class='share' style='padding-bottom:20rpx;'>
+                <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/share.png" mode='widthFix'></image>分享微信群可得+
+                {{allPoint.share_point}}金币
+            </view>
+        </view>
+   </button>
+</form>

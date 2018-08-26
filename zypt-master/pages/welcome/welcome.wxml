@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="cotent">
+ <view class="info content_center">  <!-- 用户信息-->
+    <image src="{{selfimg}}" style='margin-left:-25px;'></image>
+    <view style='margin-left:-100rpx;'>
+      <view class='username'>
+        {{ username}}
+      </view> 
+      <view class='rice'  wx:if='{{islogin}}'>
+        我的中油米：{{rice}}斤
+      </view>
+    </view>   
+    <view bindtap='wxlogout'  class='loginout' wx:if='{{islogin}}'>
+      <text>退出\n账号</text>
+    </view>
+    <view wx:else class='loginout'>
+       <navigator url="/pages/login/login" open-type='redirect'> <text >登录\n账号</text>  </navigator>   
+    </view>
+  </view>
+
+  <view class='imgG'> 
+    <swiper indicator-dots="ture"  autoplay="true" interval="5000" duration="1000" circular="true">
+      <!--轮播图信息  -->
+      <block wx:for="{{imgGroup}}">
+        <navigator url='{{item.url}}'>
+          <swiper-item>
+            <image src="{{item.imgurl}}" class="slide-image"/>
+          </swiper-item>
+        </navigator>  
+      </block>
+    </swiper>
+  </view>
+
+   
+</view>
+<view class="usermotto content_center icon-box">
+    <block wx:for="{{iconGroup}}">
+      <!-- 图标信息 -->
+      <view class='icon_item item' >
+         <navigator url='{{item.url}}' hover-class="none"><!--//open-type="redirect" -->
+          <view class='icon_img'>
+            <image src='{{item.iconImg}}'></image>
+          </view>
+          <text>{{item.iconName}}</text>
+        </navigator> 
+      </view>  
+    </block>
+  </view>
+
+<view class='tabBar' >
+    <view><image src='/img/home.png'></image></view>
+    <view class='text'>首页</view> 
+  </view>
+

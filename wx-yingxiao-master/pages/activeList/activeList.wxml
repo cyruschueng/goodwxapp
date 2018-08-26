@@ -1,0 +1,42 @@
+<view class='container'>
+  <view class='top'></view>
+  <view class='header'>
+    <view wx:for="{{header}}" bindtap='changeMenu' data-index='{{index}}' wx:key='index'>
+      <text class='{{menuCurrent==index?"sel":"none"}}'>{{item}}</text>
+    </view>
+  </view>
+  <swiper duration='300' current='{{swiperCurrent}}' bindchange='changeSwiper' data-current='{{swiperCurrent}}' style='height:{{height[heightCurrent]}}rpx'>
+    <swiper-item>
+      <view  class='activeList'>
+        <view class='active' wx:for="{{active}}" wx:key="index" wx:if="{{item.status=='1'}}">
+          <image src='{{item.img}}'></image>
+          <view class='wrap'>
+            <view class='activeTitle'>{{item.title}}</view>
+            <view class='time'>
+              <text>{{item.starttime}}</text>
+              <text>至</text>
+              <text>{{item.endtime}}</text>
+            </view>
+          </view>
+        </view>
+      </view>    
+    </swiper-item>
+    <swiper-item>
+      <view class='activeList'>
+        <view class='active' wx:for="{{active}}" wx:key="index" wx:if="{{item.status=='0'}}">
+          <image src='{{item.img}}'></image>
+          <view class='wrap'>
+            <view class='activeTitle'>{{item.title}}</view>
+            <view class='time'>
+              <text>{{item.starttime}}</text>
+              <text>至</text>
+              <text>{{item.endtime}}</text>
+            </view>
+          </view>
+        </view>
+      </view>       
+    
+    </swiper-item>    
+  </swiper>
+
+</view>

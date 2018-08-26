@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="page">
+  <view class="cover">
+    <view class="logo">
+      <mc-television id="television">
+        <view class="screen" style="line-height:{{lineHeight}}px">猜</view>
+      </mc-television>
+    </view>
+    <text class="title">听音乐，猜电视</text>
+  </view>
+  <view class="controls">
+    <button class="start {{isLoading ? 'loading' : ''}}" hover-class="active" bindtap="onStart">
+      <span><em> {{isLoading ? '正在启动..' : '开始游戏'}} </em></span>
+    </button>
+    <button class="link" hover-class="active" bindtap="onContact" wx-if="{{!goodsHave}}">关于猜电视</button>
+    <button class="store" bindtap="onStore" wx-if="{{goodsHave}}">
+      <image src="{{goodsInfo.pic}}" class="image" />
+      <span class="text">
+        <em>{{goodsInfo.title}}</em>
+        <dfn>原价 <var>{{goodsInfo.originPrice}}</var> 券后 <strong>{{goodsInfo.originPrice-goodsInfo.couponValue}}</strong></dfn>
+        <code>更多></code>
+      </span>
+    </button>
+  </view>
+</view>
+<mc-toast id="toast"></mc-toast>

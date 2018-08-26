@@ -1,0 +1,30 @@
+<view class="submit">
+  <view class="title">{{storeNane}}</view>
+  
+  <view class="list-food">
+    <view class="food_li" wx:for-items="{{buymenu}}" wx:if="{{item.num}}">
+      <text class="t1 f_l">{{item.menuName}}{{item.name}}</text>
+      <text class="t2 ">{{item.num}}份</text>
+      <text class="t3 f_r" >¥{{item.price}}</text>
+    </view>
+    
+  </view>
+
+<view class="pay-money-box">
+  <text class="t1 f_1">支付金额</text>
+  <text class="t2">(数量{{num}})</text>
+  <text class="t3 f_r">¥{{price}}</text>
+</view>
+
+
+
+</view>
+
+
+
+
+<view class="footer">
+  <view class="num" >实付:</view>
+  <view  class="rmb">¥{{price}}</view>
+  <view class="sub" catchtap="sub" >提交订单</view>
+</view>

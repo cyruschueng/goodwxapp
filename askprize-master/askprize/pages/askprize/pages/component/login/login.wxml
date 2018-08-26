@@ -1,0 +1,23 @@
+<!--pages/inc/login/login.wxml-->
+<view class='phone-box' hidden='{{!show}}'>
+  <!-- <view class='phone-box' >   -->
+  <form>
+    <view class='phone'>
+      <view class='phone-input'>
+        <view class='phone-input-slogan'>
+          <text>初次访问？手机快捷验证，加入电动邦</text>
+          <!-- <image mode='widthFix' bindtap='close' src='http://i1.dd-img.com/assets/image/1511257148-05e45f23897155b3-40w-40h.png'></image> -->
+        </view>
+        <view class="phone-input-number {{phoneBorder ? 'border-on' : ''}}">
+          <input class="{{error ? 'red' : ''}}" placeholder-style="color:#999999;" bindfocus='inPhone' bindblur='outPhone' placeholder="请输入手机号" bindinput="mobileInputEvent" />
+          <button class='verify' bindtap='getCode' disabled="{{buttonDisable}}">{{verifyCodeTime}}</button>
+        </view>
+        <view class="phone-input-code {{codeBorder ? 'border-on' : ''}}">
+          <input class="{{error ? 'red' : ''}}" placeholder-style="color:#999999;" bindfocus='inCode' bindblur='outCode' bindinput="codeInputEvent" placeholder="请输入动态码" />
+        </view>
+
+      </view>
+      <view class='phone-submit' bindtap='phoneSubmit'>提 交</view>
+    </view>
+  </form>
+</view>

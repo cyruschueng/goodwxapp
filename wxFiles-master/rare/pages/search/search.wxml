@@ -1,0 +1,49 @@
+<view class="container-theme {{opq == 0? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;padding-top:250rpx;">
+<view class="spinner-cube-grid">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+</view>
+</view>
+
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="as">
+    <view class="ser">
+      <image src="/img/sdfg.png"></image>
+      <input type="text" bindinput="inputSearch" placeholder="大家都在搜：石榴石戒指" />
+    </view>
+    <view class="btns" bindinput="inputSearch">搜索</view>
+    <view style="clear:both"></view>
+  </view>
+
+  <view class="pan {{list.length == 0? '':'hidden'}}">
+    <view style="line-height:80rpx; text-align:center" wx:if="{{keyword != ''}}">未搜索到<text style="color:red">‘{{keyword}}’</text>相关结果</view>
+    <view>热门搜索</view>
+    <view class="ssdd" style="padding-top:30rpx;padding-bottom:30rpx">
+      <view class="lils" wx:for="{{classify}}" id="{{index}}" bindtap="chan">{{item.classname}}</view>
+    </view>
+  </view>
+
+  <view class="goods" style="clear:both">
+    <block wx:for="{{list}}">
+    <view class="good" id="{{item.msgId}}" bindtap="navToGoods">
+      <image class="image" src="{{item.icon}}"></image>
+      <view class="gob">
+        <view class="gtit">{{item.msgcontent}}</view>
+        <view class="col">
+          <text class="fontsize-26">￥</text>{{item.sellprice}}
+        </view>
+        <view class="col">
+          <text class="asf">SHOW NOW ></text>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+</view>

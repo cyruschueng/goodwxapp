@@ -1,0 +1,92 @@
+<!--pages/core/chengji/chengji.wxml-->
+<view class="container">
+  <!-- <view wx:if="{{remind}}" class="remind-box">
+    <image wx:if="{{remind == '加载中'}}" class="remind-img" src="../../res/img/loading.gif"></image>
+    <block wx:else>
+      <image class="remind-img" src="/images/index/nothing.png"></image>
+      <text class="remind-text">{{remind}}</text>
+    </block>
+  </view> -->
+  <!-- <block wx:else> -->
+  <view class="cj-header">
+    <view class="cj-text">
+      <text class="cj-header-title">成绩查询</text>
+      <text class="cj-header-info">学号：{{user.we.student_no}}</text>
+      <text class="cj-header-info">姓名：{{user.we.student_name}}</text>
+    </view>
+    <image class="cj-bg" src="/images/core/chengji.png"></image>
+  </view>
+
+  <view class="cj-grade">
+    <image class="cj-grade-logo" src="/images/core/chengji.png"></image>
+    <view class="cj-grade-term">
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+        <view class="cj-grade-fst">
+          <text>{{multiArray[0][multiIndex[0]]}}学年</text>
+          <text class="grade-comment">{{multiArray[1][multiIndex[1]]}}</text>
+        </view>
+      </picker>
+    </view>
+    <text class="pay-text" bindtap="bindSearch">查询</text>
+  </view>
+
+
+  <!--页面主体部分-->
+  <view class="main">
+    <!--主体部分标题-->
+    <view class="main-title">
+      <text class="title-text">共计：{{cjInfo.length}}门课程</text>
+    </view>
+
+    <!--主体部分内容列表-->
+    <view class="main-list" wx:for="{{cjInfo}}" wx:key="item">
+
+      <!--列表的一个元素的模板结构-->
+      <view class="list-item">
+
+        <!--信息直接显示部分-->
+        <view class="item" data-index="{{index}}" bindtap="bindOpenList">
+          <view class="item-content">
+            <!-- <view class="content-state-name">
+              <text class="state-name-{{item[6]<60||item[7]?'red':'active'}}">{{item[3]}}</text>
+            </view>
+            <view class="content-state-score">
+              <text class="state-name-{{item[6]<60||item[7]?'red':'active'}}">{{item[6]}}</text>
+            </view> -->
+
+             <view class="content-state-name"> 
+              <text class="state-name-{{item[6]<60||item[7]?'red':'active'}}">{{item[3]}}</text>
+             </view> 
+             <view class="content-state-score"> 
+              <text class="state-name-{{item[6]<60||item[7]?'red':'active'}}">{{item[6]}}</text>
+             </view> 
+
+
+          </view>
+
+          <!--信息直接显示部分的下拉标识-->
+          <view class="list-sign">
+            <image class="list-sign-icon {{!item[9] ? 'list-sign-icon-show' : ''}}" src="/images/core/common/up.png"></image>
+          </view>
+        </view>
+
+        <!--信息隐藏的下拉列表-->
+        <view class="item-ul" hidden="{{!item[9]}}">
+          <view class="item-ul-li">
+            <text class="ul-li-content">课程要求：{{item[4]}}</text>
+          </view>
+          <view class="item-ul-li">
+            <text class="ul-li-content">学分：{{item[5]}}</text>
+          </view>
+          <view wx:if="{{item[7]}}" class="item-ul-li">
+            <text class="ul-li-content">补考：{{item[7]}}</text>
+          </view>
+          <view wx:if="{{item[8]}}" class="item-ul-li">
+            <text class="ul-li-content">清考：{{item[8]}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- </block> -->
+</view>

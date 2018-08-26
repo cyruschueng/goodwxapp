@@ -1,0 +1,61 @@
+<view class='padding-md '>
+  <view class='panel panel-between item-center msgtit'>
+    <image src='{{userInfo.avatarUrl}}' class='avatar' mode='aspectFill'></image>
+    <view>
+      <view style='text-align:right' class='font-theme' bindtap='navToDefaultPublish'>发布默认设置</view>
+      <view class=' bold' style='font-size:50rpx;margin-top:60rpx'>{{userInfo.nickName}}</view>
+    </view>
+    
+  </view>
+</view>
+
+<view class='padding-md' style='padding-top:0'>
+  <view class='jditem' wx:for="{{orderType}}" data-index='{{index}}' bindtap='navToOrder'>
+    <view class='pan'>
+      <image src='{{item.icon}}' style='width:60rpx;height:60rpx'></image>
+      <view class='font-def'>{{item.label}}</view>
+    </view>
+  </view>
+</view>
+
+<view style='text-align:center;color:#888888'>今日业绩</view>
+<view class='padding-md' style='padding-top:0'>
+  <view class='jditem' style='background:no-repeat'>
+    <view class='pan'>
+      <view class='numk'>6</view>
+      <view class='font-def'>已接单</view>
+    </view>
+  </view>
+  <view class='jditem' style='background:no-repeat'>
+    <view class='pan'>
+      <view class='numk'>5</view>
+      <view class='font-def'>交易完成</view>
+    </view>
+  </view>
+  <view class='jditem' style='background:no-repeat'>
+    <view class='pan'>
+      <view class='numk'>￥35</view>
+      <view class='font-def'>成交额</view>
+    </view>
+  </view>
+</view>
+<view class='padding-md' style='padding-top:0'>
+  <view class='panel panel-between item-center' style='border-radius:10rpx' bindtap='navToGetPay'>
+    <view class='panel-start item-center'>
+      <image src='/img/icon/tx.png' class='icon-lg'></image>
+      <view class='margin-left-sm'>余额提现</view>
+    </view>
+    <image src='/img/icon/right.png' class='icon-md'></image>
+  </view>
+</view>
+<view class='padding-md' style='padding-top:0'>
+  <view class='panel panel-between item-center' style='border-radius:10rpx'>
+    <view class='panel-start item-center'>
+      <image src='/img/icon/rz.png' class='icon-lg'></image>
+      <view class='margin-left-sm'>申请接单</view>
+    </view>
+    <image src='/img/icon/right.png' class='icon-md'></image>
+  </view>
+</view>
+<button open-type='contact' class='kefubtn'>联系客服</button>
+<view style='text-align:center' class='margin-top-xs font-def'>双沃科技版权所有</view>

@@ -1,0 +1,49 @@
+<view class="order-bar panel-between">
+  <view class="item" wx:for="{{navBar}}" data-index="{{index}}" bindtap="changeBar">
+    <view class="{{item.active ? 'bar-active':'bar-default'}}">{{item.label}}</view>
+  </view>
+</view>
+<view style="height:100rpx;"></view>
+
+<view wx:if="{{list.length > 0 && navBar[0].active}}" wx:for="{{list}}" class='bottom-line panel panel-start margin-top-sm' >
+  <view>
+    <image src='{{url + item.image}}' style='width:250rpx;height:200rpx;border-radius:10rpx' mode='aspectFill'></image>
+  </view>
+  <view class='margin-left-lg ' style='width:400rpx;'>
+    <view class='font-lg bold'>{{item.name}}</view>
+    <view class='font-md margin-top-xs'>已兑换 {{item.sales}} 件</view>
+    <view class='font-lg margin-top-xs'>需要积分 <text class='font-danger'>{{item.price}}</text></view>
+    <view class='margin-top-xs font-md bg-cart' style='padding:10rpx 50rpx;float:left;color:#fff;border-radius:10rpx' data-index='{{index}}' bindtap='duihuan'>立即兑换</view>
+  </view>
+</view>
+
+<view wx:if="{{orders.length > 0 && navBar[1].active}}"  wx:for="{{orders}}" class='bottom-line panel margin-top-sm'>
+  <view class='font-md'>{{item.addressname}},{{item.addressphone}} || {{item.createtime}}</view>
+  <view class='font-md'>{{item.address}}</view>
+  <view class='padding-top-xs padding-bottom-md panel-start item-center bottom-line'>
+    <image src='{{url + item.orderproduct[0].productimage}}' style='width:100rpx;height:100rpx;border-radius:5px' mode='aspectFill'></image>
+    <view style='margin-left:30rpx;'>
+      <view class='font-md bold'>{{item.orderproduct[0].productname}}</view>
+    </view>
+    <view style='margin-left:30rpx;'>
+      <view class='font-md'>积分 {{item.orderproduct[0].productprice}}</view>
+    </view>
+  </view>
+  <view class='padding-top-xs panel-start item-center'>
+    <image src='{{url + item.shop.shopimage}}' style='width:50rpx;height:50rpx;border-radius:5px' mode='aspectFill'></image>
+    <view style='margin-left:30rpx;'>
+      <view class='font-md bold'>{{item.shop.shopname}}</view>
+      <view class='font-md'>{{item.shop.shopaddressprovince}}{{item.shop.shopaddresscit}}{{item.shop.shopaddressdistrict}}{{item.shop.shopaddressstreet}}{{item.shop.shopaddressstreetNumber}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

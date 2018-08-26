@@ -1,0 +1,25 @@
+ <view class='container'>
+  <scroll-view scroll-x class='nav'>
+    <view wx:for="{{cat}}" wx:key="*this" class='navItem' bindtap='catSel' data-index='{{index}}'>
+      <text class='{{catCurrent==index?"sel":"none"}}'>{{item.catname}}</text>
+    </view>
+  </scroll-view>
+   <swiper style='height:{{height[heightCurrent]}}rpx' current='{{swiperCurrent}}' bindchange='swiperSel'>
+    <swiper-item wx:for="{{cat}}" wx:key="*this" wx:for-item="cat">
+      <view class='wrap'>
+        <view class="info-item">
+        <view class='info-list'>
+          <view class="item-card" wx:for="{{items}}" wx:for-item="detail" wx:if="{{detail.catid==cat.id&&detail.is_distribution==2}}" wx:key="index" bindtap='todetail' data-id='{{detail.id}}'>
+            <image src="{{detail.goods_img}}"></image>
+            <view class='itemTitle'>{{detail.goods_name}}</view>           
+            <view class='itemPrice'>
+              <text>¥{{detail.group.group_price}}</text> 
+              <text>{{detail.group_num}}人团</text>
+            </view>
+          </view>    
+        </view>
+        </view> 
+      </view>
+    </swiper-item>
+  </swiper> 
+</view> 

@@ -1,0 +1,19 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="outside">
+    <view class="box">
+      <view class="shopTitle" wx:if="{{userInfo.shop_name}}">{{userInfo.shop_name}}</view>
+      <view class="shopTitle" wx:if="{{!userInfo.shop_name}}">{{userInfo.user_real_name}}的项目店铺</view>
+      <view class="qrCode">
+        <image class="QR_pic" src="{{access_token}}"></image>
+      </view>
+      <view class="tips"> 长按或微信扫码查看更多</view>
+    </view>
+  </view>
+  <view class="aboutNetwork flex">
+    <view bindtap="shareFriend">
+      <button open-type="share" id="shareFriend">分享给朋友</button>
+    </view>
+    <view bindtap="savePic" class="savePic">保存二维码图片</view>
+  </view>
+</view>

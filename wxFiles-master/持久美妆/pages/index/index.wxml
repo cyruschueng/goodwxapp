@@ -1,0 +1,28 @@
+<import src="../sunwou/sunwou.wxml"/>
+<!-- 小程序内容 -->
+
+<view class="sw-container" style="width:{{windowWidth}}px;height:{{showBottomNav ? windowHeight-60:windowHeight}}px">
+ <view class="{{page1.active ? '':'hidden'}}" style="width:{{windowWidth}}px;height:{{showBottomNav ? windowHeight-60:windowHeight}}px">
+  <block wx:for="{{page1.contentList}}">
+    <template is="{{item.name}}" data="{{config:item.config,theme:theme,index:index}}"></template>
+  </block>
+ </view>
+ <view class="{{page2.active ? '':'hidden'}}" style="width:{{windowWidth}}px;height:{{showBottomNav ? windowHeight-60:windowHeight}}px">
+  2
+ </view>
+ <view class="{{page3.active ? '':'hidden'}}" style="width:{{windowWidth}}px;height:{{showBottomNav ? windowHeight-60:windowHeight}}px">
+  3
+ </view>
+ <view class="{{page4.active ? '':'hidden'}}" style="width:{{windowWidth}}px;height:{{showBottomNav ? windowHeight-60:windowHeight}}px">
+  4
+ </view>
+ <view class="{{page5.active ? '':'hidden'}}" style="width:{{windowWidth}}px;height:{{showBottomNav ? windowHeight-60:windowHeight}}px">
+  5
+ </view>
+</view>
+
+
+<!-- 底部导航 -->
+<view class="sw-footer" wx:if="{{showBottomNav}}">
+ <template is="bottomNavWithIcon" data="{{bottomNavList:bottomNavList,bottomNavColor:bottomNavColor}}"></template> 
+</view>

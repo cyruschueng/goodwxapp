@@ -1,0 +1,18 @@
+<!--pages/home/selectedCoach.wxml-->
+
+<import src="../../templates/search-item/search-item.wxml"/>
+
+<view class='bg-view'>
+
+  <view class='search-view'>
+    <view class='search-input-view'>
+      <image class='search-icon' src='../../images/icon/search.png' bindtap='bindConfiSearchTap'></image>
+      <input class='search-input' placeholder-class='plh-style' placeholder='输入姓名/电话号码' bindinput='bindSearchInput' bindconfirm='bindConfiSearchTap'></input>
+    </view>
+  </view>
+
+  <block wx:for='{{ searchList }}' wx:key='{{ index }}' wx:for-item='search'>
+    <template is='search-item' data='{{ ...search,index }}'/>
+  </block>
+
+</view>

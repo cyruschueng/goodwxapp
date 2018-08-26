@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title style="text-align:center">···</title>
+    <style type="text/css">html {height: 100%;margin: 0;} body {height: 100%;margin: 0;}</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+     <!--<script type="application/javascript" src="//mob.visualbusiness.cn/vizengine_web/v2.0.13/vizengine_web.js"></script>-->
+     <!--<script type="application/javascript" src="//mob.visualbusiness.cn/appengine_web/v1.0.65/appengine_web.js"></script>-->
+     <!-- <script type="application/javascript" src="libs/vizengine_web.js"></script> -->
+    <!--<script type="application/javascript" src="libs/thirdparty/share.js"></script>-->
+    <script src="//qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
+    <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <!-- <link href="css/loading.css" rel="stylesheet" type="text/css"> -->
+    <link href="css/content.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div style="width:100%;height:100%;position: absolute;">
+    <div id="appContainer" style="position: absolute;width: 100%; height: 100%;"></div>
+    <div id="vizenLoadingDiv" style="position:absolute;width:100%;height:100%;background: #000000;"></div>
+    <script src="//webapp.vizen.cn/vizengine_web/v2.0.32/css/loading_controlled.js"></script>
+</div>
+
+<!-- 视频 -->
+<div>
+    <div id="id_video_container" style="padding-top: 150px;" ></div>
+</div>
+
+<!-- 音频 -->
+<audio id="audioDom" style="display:none; height: 0" preload="auto" loop="loop"></audio>
+
+<script type="text/javascript">
+    window.myIndexAlbum = 0;
+    window.myIndexPano = 0;
+    window.urlProvider = function(urlName){
+        var url = '';
+        switch (urlName){
+            case 'getUrlByAlbum'://根据相册ID返回
+                url = window.location.protocol +'//pano.shunde.vizen.cn/pano-viewer-web/rest/album/view/';
+            break ;
+            case 'getUrlByPano'://根据相册ID返回
+                url = window.location.protocol +'//pano.shunde.vizen.cn/pano-viewer-web/rest/album';
+            break ;
+            case 'source':
+                url = window.location.protocol +'//'+ window.location.host;
+            break ;
+            case 'panotiles':
+                url = window.location.protocol + '//tiles.pano.vizen.cn/';
+            break;
+        }
+        return url;
+    }
+    window.loadScript = function(src, loadcall){
+        var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.onload = function(){
+                loadcall && loadcall();
+            }
+            script.onerror = function(){
+                console.error('error')
+            }
+
+            script.src  = src;
+        document.getElementsByTagName('body')[0].insertAdjacentElement('beforeEnd', script);
+    }
+    window.loadScript(window.urlProvider('source') + '/engine/vizengine_web.js', function(){
+        new com.appengine.App(document.getElementById("appContainer"),"album_pano.bundle");
+    })
+    // window.loadScript('//webapp.pano.pingtan.visualbusiness.cn/engine/vizengine_web.js', function(){
+    //     new com.appengine.App(document.getElementById("appContainer"),"album_pano.bundle");
+    // })
+</script>
+
+</body>
+</html>

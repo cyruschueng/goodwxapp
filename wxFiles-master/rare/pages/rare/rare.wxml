@@ -1,0 +1,46 @@
+<view class="container sdsss {{isLogin == true ? 'hidden':''}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px; background-size:{{innerWidth}}px {{innerHeight}}px;{{isScroll == true ? '':'overflow:hidden'}}">
+<image style="width:{{innerWidth}}px;height:{{innerHeight}}px;" src="/img/bggs.png"></image>
+  <view class="login">
+    
+  </view>
+  <view style="position:absolute; top:200rpx;width:100%">
+  <form bindsubmit="submit">
+    <view class="form-control">
+      <view class="title">USERNAME</view>
+      <view class="input {{ty == 0 ? 'act':'def'}}">
+        <input name="username" placeholder="请输入账号" style="line-height:80rpx;height:80rpx;" data-ty="0" bindfocus="dofocus" bindblur="doblur" />
+      </view>
+    </view>
+
+    <view class="form-control" style="margin-top:30rpx;">
+      <view class="title">PASSWORD</view>
+      <view class="input {{ty == 1 ? 'act':'def'}}">
+        <input name="password" style="line-height:80rpx;height:80rpx;" placeholder="请输入密码" data-ty="1" bindfocus="dofocus" bindblur="doblur" />
+      </view>
+    </view>
+
+    <view class="form-control">
+      <button class="btn btn-theme btn-md" form-type="submit" style="margin-top:100rpx;color:#562a17;border-radius:80rpx;line-height:80rpx;font-size:28rpx;">SIGN IN</button>
+    </view>
+  </form>
+  </view>
+</view>
+<view class="container {{isLogin == true ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;">
+  <view class="as">
+    <view class="ser">
+      <image src="/img/sdfg.png"></image>
+      <input type="text" bindinput="inputSearch" placeholder="库存搜索" />
+    </view>
+    <view class="btns" bindinput="inputSearch">搜索</view>
+    <view style="clear:both"></view>
+  </view>
+
+  <view class="panel" wx:for="{{list}}">
+
+    <image class="pull-left" style="width:80rpx;height:80rpx;" src="{{item.icon}}"></image>
+    <view class="pull-left fontsize-28" style="margin-left:30rpx;">{{item.msgcontent}}</view>
+    <view class="pull-right fontsize-28">库存:{{item.storecount}}</view>
+    <view class="clear-both"></view>
+  </view>
+
+</view>

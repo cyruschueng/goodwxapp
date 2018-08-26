@@ -1,0 +1,208 @@
+.user-info {
+    background-color: white;
+    margin-bottom: 30rpx;
+    padding-top: 90rpx;
+    padding-bottom: 30rpx;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.user-info .user-row {
+    position: relative;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.user-info .user-row .user-row-item {
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: top;
+    padding: 10rpx;
+}
+
+.user-info .user-row .user-row-item .title {
+    display: block;
+    font-weight: bold;
+    color: #667;
+}
+
+.user-info .user-row .user-row-item .remark {
+    display: block;
+    color: #888;
+}
+
+.list {
+    position: relative;
+    background-color: white;
+}
+
+.list-item {
+    position: relative;
+    overflow: hidden;
+    color: #334;
+    font-size: 16px;
+}
+
+.list-item:active {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.list-item::after {
+    content: '';
+    clear: both;
+}
+
+.list-item:not(:last-child)::after {
+    position: absolute;
+    left: 20rpx;
+    right: 20rpx;
+    bottom: 0;
+    height: 1px;
+    background-color: #ddd;
+    -webkit-transform: scaleY(0.3);
+    transform: scaleY(0.3);
+}
+
+.list-item .icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 30rpx;
+    font-size: 24px;
+    text-align: center;
+}
+
+.list-item .title {
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}
+
+.right-arrow::after {
+    font-family: "iconfont" !important;
+    font-size: 12px;
+    content: '\e60d';
+    float: right;
+    margin-right: 30rpx;
+    color: #888;
+}
+
+.list-item .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    background-color: #f0f0f0;
+    float: left;
+    margin: 10px;
+}
+
+.list-item .content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.list-item .avatar+.content {
+    padding-left: 58px;
+}
+
+.list-item .content .time {
+}
+
+/*正在加载*/
+
+.loding .icon-jiazai {
+    -webkit-animation: lodingRotate 1s linear infinite;
+    -animation: lodingRotate 1s linear infinite;
+    display: inline-block;
+}
+
+@-webkit-keyframes lodingRotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes lodingRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.box {
+    background-color: white;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-bottom: 30rpx;
+    border-radius: 3px;
+}
+
+.box:first-child {
+    margin-top: 30rpx;
+}
+
+.box, .box-header, .box-content, .box-footer {
+    position: relative;
+}
+
+.box-content {
+    padding: 0 30rpx;
+}
+
+.box-header, .box-footer {
+    padding: 20rpx 30rpx;
+}
+
+.box-footer {
+    color: #888;
+    font-size: 12px;
+}
+
+.btn-row {
+    margin: 30rpx;
+}
+
+.page {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #f9f9f9;
+}
+
+.page .body, .page .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.page .body {
+    overflow-y: auto;
+    bottom: 96rpx;
+    top: 0;
+}
+
+.page .footer {
+    background-color: #09bb07;
+    bottom: 0;
+    height: 96rpx;
+    box-shadow: -1px 0 5px #09bb07;
+    line-height: 96rpx;
+    text-align: center;
+    color: white;
+}
+
+.page .footer:active {
+    background-color: #03b802;
+}

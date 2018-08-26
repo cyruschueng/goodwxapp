@@ -1,0 +1,96 @@
+<view class="detail-header" hidden="{{trainerInfoFlag}}">
+  <view class="detail-header-headImg-cot">
+    <image src="{{headImg}}" class="detail-header-headImg"></image>
+  </view>
+  <view class="detail-header-headName">{{headName}}</view>
+  <view class="detail-header-rank">{{trainerLevel}}</view>
+  <view class="detail-header-second">{{grabTime}}</view>
+</view>
+
+<view class="detail-info">
+  <view class="detail-info-header">订单信息</view>
+  <view class="detail-info-content">
+    <view class="detail-info-item-common detail-info-item-left">排位赛</view>
+    <view class="detail-info-item-common detail-info-item-center">{{gameRegion}}</view>
+    <view class="detail-info-item-common detail-info-item-right">{{level}}</view>
+    <view class="detail-info-com detail-info-com-up">{{gameNumber}}</view>
+    <view class="detail-info-com detail-info-com-center">{{gamePerson}}</view>
+    <view class="detail-info-com detail-info-com-bottom">{{createTime}}</view>
+    <view class="detail-info-coupon detail-info-com">
+      <view class="detail-info-com-left">优惠抵扣券</view>
+      <view class="detail-info-com-right">{{couponValue}}</view>
+    </view>
+    <view class="detail-info-price detail-info-com">
+      <view class="detail-info-com-left">{{originalAmount}}</view>
+      <view class="detail-info-com-right detail-info-com-red">{{amount}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 优惠券分享 -->
+<view class="detail-coupon" hidden="{{detailCouponFlag}}" bindtap="detailCouponEv"></view>
+<view class="share-modal " hidden="{{shareModalFlag}}">
+  <view class="share-modal-container">
+    <view class="share-modal-close" data-node="shareModalClose" bindtap="shareModalCloseEv"></view>
+  </view>
+</view>
+
+<view class="play-order-result {{appealFlag ? 'appeal':''}}" hidden="{{orderResulgFlag}}">
+  <!-- <view class="detail-info-header" data-node="playResultText">游戏结果</view> -->
+  <view class="play-order-result-gamePerson">{{actualPersons}}</view>
+  <view class="play-order-result-cot">
+    <span data-node="playResultText">游戏结果：</span>
+    <view class="play-order-result-list split">
+      <span class="play-order-result-list-name">胜利</span>
+      <span class="play-order-result-list-content">{{victoryNum}}</span>
+    </view>
+    <view class="play-order-result-list split">
+      <span class="play-order-result-list-name">失败</span>
+      <span class="play-order-result-list-content">{{defeatNum}}</span>
+    </view>
+    <view class="play-order-result-list">
+      <span class="play-order-result-list-name">没打</span>
+      <span class="play-order-result-list-content">{{failNum}}</span>
+    </view>
+  </view>
+  <!-- <view class="play-order-result-ul {{appealFlag ? 'appeal':''}}" data-node="playOrderTitle">
+    <view class="play-order-result-item">
+      <view class="play-order-result-item-name">胜利</view>
+      <view class="play-order-result-item-content" data-node="victoryNum">{{victoryNum}}</view>
+    </view>
+    <view class="play-order-result-item after">
+      <view class="play-order-result-item-name">失败</view>
+      <view class="play-order-result-item-content" data-node="defeatNum">{{defeatNum}}</view>
+    </view>
+    <view class="play-order-result-item after">
+      <view class="play-order-result-item-name">没打</view>
+      <view class="play-order-result-item-content" data-node="failNum">{{failNum}}</view>
+    </view>
+  </view> -->
+</view>
+
+
+
+
+<view class="play-appeal" wx:if="{{appealFlag}}">
+  <view class="play-appeal-p">申诉处理中...</view>
+  <view class="play-appeal-p">会在3个工作日内给出结果，请注意查看</view>
+</view>
+<view wx:if="{{orderEvidenceFlag}}">
+  <view class="play-evidence-text">图证</view>
+  <view class="play-evidence-container" bindtap="quesImagesEv">
+    <image src="{{quesImages}}" class="play-evidence"></image>
+  </view>
+</view>
+<view class="play-end-button" bindtap="playAgreeEv" wx:if="{{playAgreeFlag}}">认同结果</view>
+<view class="play-contract" data-val="{{val}}" bindtap="playContractEv" wx:if="{{playContractFlag}}">{{playContract}}</view>
+
+
+<view class="kf-modal" hidden="{{kfModalFlag}}" bindtap="kfModalEv" data-id="modal">
+  <view class="kf-container">
+    <view class="kf-p">客服人员微信号</view>
+    <view class="kf-view">
+      <image src="https://image.qunmee.com/wxapp/qunmee_task1497861151684.jpg" class="kf-img"></image>
+    </view>
+  </view>
+</view>

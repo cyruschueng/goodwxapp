@@ -1,0 +1,26 @@
+<!--pages/test/NetWork/network.wxml-->
+<view>
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="sectionItem {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+  <swiper class='swiper' indicator-dots='{{indicatorDots}}' autoplay='true' circular='true' vertical='true'>
+      <block wx:key="{{banners}}">
+        <swiper-item class='swiper-item'>
+          <image class='bannerImage' src='http://test-img.baoxiuguanjia.com/{{item.img}}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  <view>
+    <scroll-view class='orderlist' scroll-top='{{scrollTop}}' scroll-y='true' enable-back-to-top='true' bindscroll='scroll' bindscrolltoupper='refreshData' bindscrolltolower ='loadMore' style='height: 70vh;'>
+      <view class='item' wx:for="{{orderList}}" wx:key="item">
+        <view class='title'>
+          <text>{{item.trouble_describle}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class='top' hidden='{{hidden}}' catchtap='goTop'>⇧</view>
+</view>
+
+<!-- http://test-img.baoxiuguanjia.com/ -->

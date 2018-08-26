@@ -1,0 +1,27 @@
+<!-- <view class="header">
+  <input placeholder="请输入地址" bindblur="searchAddress" bindconfirm="searchAddress" />
+</view> -->
+<view>
+  <view class="dqtitle">当前地址</view>
+  <view class="current-site">
+    <view catchtap='dangqian'>{{currentSite}}</view>
+    <view bindtap="anewPosition">重新定位</view>
+  </view>
+</view>
+<view wx:if="{{resultPosition.length>0}}">
+  <view class="dqtitle">搜索地址</view>
+  <block wx:for="{{resultPosition}}" wx:key="key">
+    <view class="result-address" id='{{item.id}}' data-postId="{{item.id}}" bindtap="selectAddress" data-title="{{item.title}}">
+      <view class="addressTitle">{{item.title}}</view>
+      <view class="addressDetail">{{item.address}}</view>
+    </view>
+  </block>
+</view>
+<view wx:if="{{resultPosition.length<1}}" class='loca_content'>
+  <view class="title">热门城市</view>
+  <view wx:for="{{hotcity}}" wx:key="{{indes}}">
+    <text id="{{index}}" class="cityname {{item.open==1?'isopen':''}}" catchtap='clickcity'>
+    {{item.name}}
+  </text>
+  </view>
+</view>

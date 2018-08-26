@@ -1,0 +1,112 @@
+<view class='indexview'>
+  <view class="relative-box">
+      <view class="top-info">
+        <image class="info-photo" src="{{avatarUrl}}"></image>
+        <view class="info-name">{{nickName}}</view>
+        <view class="info-type">{{position}}</view>
+        <view class="info-qrcode">
+          <image src="/images/introduce/icon_home_qrcode.png" bindtap='PreCodoImg'></image>
+          <view>专属码</view>
+        </view>
+        <view class="follow-btn" bindtap="LinkStore">{{userIdentity}}</view>
+         <view class="contact-btn" bindtap="powerDrawer">联系方式</view> 
+       
+        <view class="info-desc">
+            <view style='float:left'>介绍：</view>
+            <view style='padding-left:50px;color:#999;'>{{introduce}}</view>
+        </view>
+        <view class="info-desc-img">
+           <scroll-view scroll-x style='width:100%;height:{{imgHeight}}px;'>
+              <view style='width:{{(imgWidth)*imgNum}}px;height:{{imgHeight}}px;'>
+                  <view wx:for="{{itemimglist}}" wx:key="" wx:for-item="image" class="desc-img" style='width:{{imgWidth}}px;height:{{imgHeight-2}}px;'>
+                      <image bindtap="previewImage" data-src="{{image.photo_url}}" src="{{image.photo_url}}" ></image>
+                  </view>
+              </view>
+          </scroll-view> 
+        </view>
+      </view>
+      <view class="info-data">
+        <view class="info-data-item" bindtap='linkmoods'>
+          <image src="/images/friends/icon_home_visit.png"></image>
+          <view>人气：{{looksdata}}</view>
+        </view>
+        <view class="info-data-item" style='left:33.33%;' bindtap='linklike'>
+          <image src="/images/friends/icon_home_praise.png"></image>
+          <view>已赞：{{loversdata}}</view>
+        </view>
+        <view class="info-data-item" style='right:0;' bindtap='linkcollect'>
+          <image src="/images/friends/icon_home_favor.png"></image>
+          <view>收藏：{{collectiondata}}</view>
+        </view>
+      </view>
+      <view class="home-tabs">
+          <view data-current="0" class="home-tab-item {{currentTab==0 ? 'active' : ''}}" bindtap='changeType'>动态</view>
+          <view data-current="1" class="home-tab-item {{currentTab==1 ? 'active' : ''}}" bindtap='changeType'>商品</view>
+      </view>
+      <view class='tab-block-box'>
+          <view class="tab-block {{currentindex==0 ? 'active' : ''}}">
+              <view class='inner-block'>
+                  <view style='float:left;width:100px;height;100px;'><image src='{{Dynamicimg_url}}' style='display:block;width:100%'></image></view>
+                  <view style='padding-left:110px;line-height:26px;font-size:15px;color:#999;'>
+              {{Dynamiccontent}}</view>
+              </view>
+               <!-- <view class="load-more" bindtap='viewMoreGoods'>查看更多</view>  -->
+          </view>
+          <view class="tab-block {{currentindex==1 ? 'active' : ''}}">
+          <view class="goods-list" style='background-color:#ffffff;'>
+          <block wx:for='{{mygoods}}' wx:key="">
+            <view data-index="{{item.goods_id}}" class="goods-item" bindtap="goodsDetail">
+              <view class="goods-item-block">
+                <image src="{{item.img_url}}" style='height:190px;'></image>
+                <view class="goods-title">{{item.goods_name}}</view>
+                <view class="goods-price">￥{{item.price}}/台</view>
+              </view>
+            </view>
+          </block>
+           <!-- <view class="load-more" bindtap='viewMoreGoods'>查看更多</view>  -->
+        </view>
+          </view>
+      </view>
+  </view>
+</view>
+<view class="arrow-btn {{arrowClosed}}" bindtap='openArrow'>
+    <image src="/images/introduce/icon_home_arrow.png"></image>
+</view>
+<view class="close-btn {{arrowOpened}}" bindtap='closeArrow'>
+  <image src="/images/introduce/icon_home_close.png"></image>
+</view>
+ <view class="share-btn {{arrowOpened}}">
+    <button style='width:100%;height:100%;z-index:2;opacity:0;position:absolute;top:0;left:0' open-type="share"></button>
+    <view style='margin-top:5px;' >分享</view><view>咚咚</view>
+</view> 
+
+<view  class="dong-btn {{arrowOpened}}" >
+  <view style='margin-top:12px;'  bindtap='editAction'>咚一下</view>
+</view>
+<view class="edit-btn" hidden='{{hiddenfunction}}' bindtap='jumpToMyPage'>编辑我的咚咚</view>
+
+
+
+<view class='ShowPhoneInfo' hidden='{{ShowPhoneInfo}}'>
+    <view class='ShowMsgBg' bindtap='ShowMsgBg'></view>
+    <view class='ShowBulgView'>
+        <view class='title'>联系方式</view>
+        <view class='ShowRow'>
+            <view class='col-list'>
+                <text class='label'>微信号：</text>
+                <text class='cent'>{{wechat}}</text>
+                <!-- <button class='copyBtn'>复制</button> -->
+            </view>
+            <view class='col-list'>
+                <text class='label'>手机号：</text>
+                <text class='cent'>{{myPhone}}</text>
+                <image class='phonicon' src="/images/introduce/ph.png"></image>
+            </view>
+            <view class='col-list'>
+                <text class='label'>地址：</text>
+                <text class='cent'>{{address}}</text>
+                <image class='phonicon' src="/images/main/config/icon_distance.png"></image>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,70 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<!--创建电站str  -->
+  <view class='h100'>
+  <view class='infoImg'>
+      <image class="" src="{{webQueryPlants.picBig?webQueryPlants.picBig:picBig}}"></image>
+  </view>
+  <view class='flexv1 h60 modeldrawer_content pb1'>
+    <view class='build'>
+      <view class='bgColorD'>电站信息</view>
+      <view bindtap='infoEdit' data-arg='sname'> 
+        电站名称
+        <view>{{webQueryPlants.name}}</view>
+      </view>
+      <view bindtap='infoEdit' data-arg='nominalPower'> 
+        装机容量(kW)
+        <view>{{webQueryPlants.nominalPower}}</view>
+      </view>
+      <view bindtap='infoEdit' data-arg='designCompany'> 
+        安装商
+        <view>{{webQueryPlants.designCompany?webQueryPlants.designCompany:''}}</view>
+      </view>
+      <view bindtap='infoEdit' data-arg='install' data-install='{{webQueryPlants.install}}'> 
+        建站时间
+        <view>{{webQueryPlants.install?webQueryPlants.install:''}}</view>
+      </view>
+    </view> 
+   <view class='build'>
+    <view class='bgColorD'>地理信息</view>
+    <view bindtap='infoEdit' data-arg='country'>
+      国家
+      <view>{{webQueryPlants.address.country?webQueryPlants.address.country:''}}</view>
+    </view>
+    <view bindtap='infoEdit' data-arg='province'>
+        省份
+      <view>{{webQueryPlants.address.province?webQueryPlants.address.province:''}}</view>
+    </view>
+    <view bindtap='infoEdit' data-arg='city'>
+      城市
+      <view>{{webQueryPlants.address.city?webQueryPlants.address.city:''}}</view>
+    </view>
+    <view>
+        时区
+      <view>{{webQueryPlants.address.timezone?webQueryPlants.address.timezone:''}}</view>
+    </view>
+    </view> 
+     <view class='build'>
+      <view class='bgColorD'>收益公式</view>
+      <view bindtap='infoEdit' data-arg='unitProfit'>
+        资金收益
+        <view>{{webQueryPlants.profit.unitProfit?webQueryPlants.profit.unitProfit:''}}</view>
+      </view>
+      <view bindtap='infoEdit' data-arg='coal'>
+        节约标准煤
+        <view>{{webQueryPlants.profit.coal?webQueryPlants.profit.coal:''}}</view>
+      </view>
+      <view bindtap='infoEdit' data-arg='co2'>
+        CO2减排(kg)
+        <view>{{webQueryPlants.profit.co2?webQueryPlants.profit.co2:''}}</view>
+      </view>
+      <view bindtap='infoEdit' data-arg='so2'>
+        SO2减排(kg)
+        <view>{{webQueryPlants.profit.so2?webQueryPlants.profit.so2:''}}</view>
+      </view>
+    </view> 
+  </view>   
+  </view> 
+  <!--创建电站end  -->
+</view>

@@ -1,0 +1,196 @@
+<!--pages/shopping/shopping.wxml-->
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="time">添加时间</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="acura">预约数</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="transactions">收藏</view>
+  <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="supply">点赞</view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <!--添加时间 -->
+  <swiper-item>
+    <view class='main'>
+      <view class='shop' wx:for='{{list}}' wx:key='{{key}}'>
+        <view class='essay' id="{{item.goodsId}}" catchtap='modifyHandle'>
+          <image src='{{item.goodsPic}}' mode='aspectFill'></image>
+          <view class='text'>
+            <text class='skirt'>{{item.goodsName}}</text>
+            <text class='money'>￥{{item.goodsPrice}}</text>
+            <view class='gather'>
+              <view class='gather1'>
+                <text class='sales'>预约: {{item.isBook}}</text>
+                <text class='knockdown'>收藏: {{item.isFavorite}}</text>
+              </view>
+              <view class='gather2'>
+                <text class='repertory'>点赞: {{item.isLike}}</text>
+                <text class='increase'>添加: {{item.soldonTime}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='feature'>
+          <view class='preview' catchtap='productclick' data-id='{{item.goodsId}}'>
+            <image src='/images/iconfont/yulan.png'></image>
+            <text>预览</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxi.png'></image>
+            <text>分析</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/tuiguang.png'></image>
+            <text>推广</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxiang.png'></image>
+            <text>分享</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+  </swiper-item>
+  <!-- 预约数 -->
+  <swiper-item>
+    <view class='main'>
+      <view class='shop' wx:for='{{list}}' wx:key='{{key}}' bindtap='CommodityDetails'>
+        <view class='essay' bindtap='button' id="{{item.goodsId}}">
+          <image src='{{item.goodsPic}}' mode='aspectFill'></image>
+          <view class='text'>
+            <text class='skirt'>{{item.goodsName}}</text>
+            <text class='money'>￥{{item.goodsPrice}}</text>
+            <view class='gather'>
+              <view class='gather1'>
+                <text class='sales'>预约: {{item.isBook}}</text>
+                <text class='knockdown'>收藏: {{item.isFavorite}}</text>
+              </view>
+              <view class='gather2'>
+                <text class='repertory'>点赞: {{item.isLike}}</text>
+                <text class='increase'>添加: {{item.soldonTime}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='feature'>
+          <view class='preview' catchtap='productclick' data-id='{{item.goodsId}}'>
+            <image src='/images/iconfont/yulan.png'></image>
+            <text>预览</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxi.png'></image>
+            <text>分析</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/tuiguang.png'></image>
+            <text>推广</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxiang.png'></image>
+            <text>分享</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </swiper-item>
+  <!-- 收藏 -->
+  <swiper-item>
+    <view class='main'>
+      <view class='shop' wx:for='{{list}}' wx:key='{{key}}' bindtap='CommodityDetails'>
+        <view class='essay' bindtap='button' id="{{item.goodsId}}">
+          <image src='{{item.goodsPic}}' mode='aspectFill'></image>
+          <view class='text'>
+            <text class='skirt'>{{item.goodsName}}</text>
+            <text class='money'>￥{{item.goodsPrice}}</text>
+            <view class='gather'>
+              <view class='gather1'>
+                <text class='sales'>预约: {{item.isBook}}</text>
+                <text class='knockdown'>收藏: {{item.isFavorite}}</text>
+              </view>
+              <view class='gather2'>
+                <text class='repertory'>点赞: {{item.isLike}}</text>
+                <text class='increase'>添加: {{item.soldonTime}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='feature'>
+          <view class='preview' catchtap='productclick' data-id='{{item.goodsId}}'>
+            <image src='/images/iconfont/yulan.png'></image>
+            <text>预览</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxi.png'></image>
+            <text>分析</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/tuiguang.png'></image>
+            <text>推广</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxiang.png'></image>
+            <text>分享</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <!-- 点赞 -->
+  </swiper-item>
+  <swiper-item>
+    <view class='main'>
+      <view class='shop' wx:for='{{list}}' wx:key='{{key}}' bindtap='CommodityDetails'>
+        <view class='essay' bindtap='button' id="{{item.goodsId}}">
+          <image src='{{item.goodsPic}}' mode='aspectFill'></image>
+          <view class='text'>
+            <text class='skirt'>{{item.goodsName}}</text>
+            <text class='money'>￥{{item.goodsPrice}}</text>
+            <view class='gather'>
+              <view class='gather1'>
+                <text class='sales'>预约: {{item.isBook}}</text>
+                <text class='knockdown'>收藏: {{item.knockdown}}</text>
+              </view>
+              <view class='gather2'>
+                <text class='repertory'>点赞: {{item.isLike}}</text>
+                <text class='increase'>添加: {{item.soldonTime}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='feature'>
+          <view class='preview' catchtap='productclick' data-id='{{item.goodsId}}'>
+            <image src='/images/iconfont/yulan.png'></image>
+            <text>预览</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxi.png'></image>
+            <text>分析</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/tuiguang.png'></image>
+            <text>推广</text>
+          </view>
+          <view class='preview' bindtap="powerDrawer" data-statu="open">
+            <image src='/images/iconfont/fenxiang.png'></image>
+            <text>分享</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
+<view class='footer'>
+  <button catchtap="additionclick">添加商品</button>
+  <!-- <button catchtap='vastclick'>批量管理</button>
+  <button catchtap='manageclick'>分类管理</button> -->
+</view>
+
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <!--drawer content-->
+  <view class="drawer_title">尽情期待</view>
+  <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view>
+</view>

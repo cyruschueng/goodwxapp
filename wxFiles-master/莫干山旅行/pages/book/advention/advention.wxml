@@ -1,0 +1,56 @@
+<view class="Page" style="margin:0rpx 25rpx;">
+  <view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+        <view class="kind-list" wx:else>
+                <!--景点-->
+                <view class="kind-list__item">
+                    <view id="{{scenery.id}}" class="weui-flex kind-list__item-hd {{scenery.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle">
+                        <view class="title_groups">
+                          <image src="../../../image/scenery_icon.png" class='icon'></image>
+                          <view class="title">{{scenery.name}}</view>
+                          <image src="../../../image/arrow2.png" class="arrow"></image>
+                        </view>
+                    </view>
+                    <view class="kind-list__item-bd {{scenery.open ? 'kind-list__item-bd_show' : ''}}">
+                      <view class="weui-cells {{scenery.open ? 'weui-cells_show' : ''}} scenery">
+                        <block wx:for="{{scenery.pages}}" wx:for-item="page" wx:key="*this">
+                          <navigator url="{{'../../live/food/merchants/merchants?id='+page.id}}" class="scenery_item" style="{{'background-image:url('+page.img+');'}}">
+                            <view class="name_group">
+                              <view class="title">{{page.title}}</view>
+                              <image src="../../../image/arrow3.png" class="icon"></image>
+                            </view>                                      
+                         </navigator>
+
+                         
+
+                        </block>  
+                        </view>
+                    </view>
+                </view>
+                <!--探险-->
+                <view class="kind-list__item">
+                  <view id="{{advention.id}}" class="weui-flex kind-list__item-hd {{advention.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle">
+                        <view class="title_groups">
+                          <image src="../../../image/advention_icon.png" class='icon'></image>
+                          <view class="title">{{advention.name}}</view>
+                          <image src="../../../image/arrow2.png" class="arrow"></image>
+                        </view>
+                    </view>
+                    <view class="kind-list__item-bd {{advention.open ? 'kind-list__item-bd_show' : ''}}">
+                      <view class="weui-cells {{advention.open ? 'weui-cells_show' : ''}} advention">
+                        <block wx:for="{{advention.pages}}" wx:for-item="page" wx:key="*this">
+                          <navigator class="advention_item" style="{{ index % 2 == 0 ? 'margin-right:7rpx;' : 'margin-left:7rpx;'}}" url="{{'../sport/sport?id='+page.id+'&name='+page.name}}">
+
+                            <image src="{{page.img}}" mode="aspectFill" class="img" binderror="errImg" data-err-img="advention.pages[{{index}}].img" wx:if="{{page.img.length > 0}}"></image>
+                            <image src="../../../image/default.png" mode="aspectFill" class="img" wx:else></image>
+                            <view class="triangle"></view>
+                            <view class="title">{{page.name}}</view>               
+                          </navigator>
+                        </block>  
+                        </view>
+                    </view>
+                </view>
+        </view>
+</view>

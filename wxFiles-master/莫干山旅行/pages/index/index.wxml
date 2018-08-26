@@ -1,0 +1,138 @@
+<view class="Page">
+  <view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  
+  <scroll-view scroll-y="true" class="list" bindscrolltolower="lower" style="height:{{scrollHeight}}px;" wx:else>
+    <!--轮播 -->
+    
+    <view class="swiper-container">
+        <swiper class="swiper"  interval="3000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange">
+            <block wx:for="{{hot}}" wx:key="*this">
+                <swiper-item>
+                    <navigator url="{{item.url}}" class="swiper_item" data-id="{{item.id}}" data-title="{{item.title}}">
+                      <image src="{{item.hot_img}}" mode="aspectFill" class="img" binderror="errImg" data-err-img="hot[{{index}}].img"/>
+                      <view class="content_groups">
+                        <view class="index">{{index+1}}</view>
+                        <view class="divide"></view>
+                        <view class="swiper_title">{{item.title}}</view>
+                      </view>
+                      
+                    </navigator>        
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="dots">  
+          <block wx:for="{{hot}}" wx:key="*this">  
+            <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+          </block>  
+        </view> 
+
+
+
+            <image src="../../image/swiper_icon1.png" class="search" mode="aspectFill" bindtap="search" ></image>
+            <image src="../../image/swiper_icon2.png" class="myTrait" mode="aspectFill" bindtap="myTrait"></image>
+    </view>
+        
+        <!--班夫生活-->
+        <view>
+            <view class="bfLive">
+
+                <navigator url="{{'../live/food/food?id='+food.id}}" class="cell1of3">
+                  <!--<image src="../../image/food.png" mode="aspectFill" class="img"></image>-->
+                  <view class="title" style="position: absolute;left: 20rpx;top:130rpx;">{{food.name}}</view>
+                  <image src="../../image/food_icon.png" class="food_icon"></image>
+                  <image src="../../image/arrow4.png" class="arrow"></image>
+                </navigator>
+
+                <navigator url="{{'../live/food/food?id='+accommodation.id}}" class="cell2of3">
+                  <!--<image src="../../image/accommodation.png" mode="aspectFill" class="img"></image>-->
+                  <view class="title" style="position: absolute;left: 20rpx;top:112rpx;">{{accommodation.name}}</view>
+                  <image src="../../image/accommodation_icon.png" class="accommodation_icon"></image>
+                </navigator>
+
+                <navigator url="{{'../live/food/food?id='+shop.id}}" class="cell2of3">
+                  <!--<image src="../../image/shop.png" mode="aspectFill" class="img"></image>-->
+                  <view class="title" style="position: absolute;left: 20rpx;top:240rpx;">{{shop.name}}</view>
+                  <image src="../../image/shop_icon.png" class="shop_icon"></image>
+                </navigator>
+
+                <navigator url="{{'../live/food/food?id='+entertainment.id}}" class="cell1of3">
+                  <!--<image src="../../image/entertainment.png" mode="aspectFill" class="img"></image>-->
+                  <view class="title" style="position: absolute;left: 20rpx;top:130rpx;">{{entertainment.name}}</view>
+                  <image src="../../image/entertainment_icon.png" class="entertainment_icon"></image>
+                  <image src="../../image/arrow4.png" class="arrow"></image> 
+                </navigator>
+
+                <navigator url="{{'../live/food/food?id='+culture.id}}" class="cell1of3">
+                  <!--<image src="../../image/culture.png" class="img" mode="aspectFill"></image>-->
+                  <view class="title" style="position: absolute;left: 20rpx;top:130rpx;">{{culture.name}}</view> 
+                  <image src="../../image/culture_icon.png" class="culture_icon"></image>
+                  <image src="../../image/arrow4.png" class="arrow"></image>
+                </navigator>
+
+                <navigator url="{{'../live/food/food?id='+scenery.id}}" class="cell2of3">
+                  <!--<image src="../../image/scenery.png" class="img" mode="aspectFill"></image>-->
+                  <view class="title" style="position: absolute;left: 20rpx;top:112rpx;">{{scenery.name}}</view> 
+                  <image src="../../image/liveScenery_icon.png" class="liveScenery_icon"></image>
+                </navigator>
+
+                <navigator url="{{'../live/food/food?id='+fitness.id}}" class="cell2of3">
+                  <!--<image src="../../image/fitness.png" class="img" mode="aspectFill"></image>-->
+                  <view class="title" style="position: absolute;left: 20rpx;top:240rpx;">{{fitness.name}}</view>
+                  <image src="../../image/fitness_icon.png" class="fitness_icon"></image>
+                </navigator>
+
+                <navigator url="{{'../live/food/food?id='+all.id}}" class="cell1of3">
+                    <!--<view class="img" style="background-color:rgb(104,46,107)"></view>-->
+                    <view class="title" style="position: absolute;left: 20rpx;top:130rpx;">{{all.name}}</view>
+                <image src="../../image/all_icon.png" class="all_icon"></image>
+                <image src="../../image/arrow4.png" class="arrow"></image>
+                </navigator>
+            </view>
+        </view>
+
+        <!--班夫宝典-->
+            <view class="bfBook">
+                <block wx:for="{{book}}" wx:key="id">
+                    <navigator class="bfBook-item" style="{{'background-image: url('+item.img+');'+'background-repeat: no-repeat;'+'background-size: 100% auto;'}}" url="{{'../book/'+item.en+'/'+item.en}}">
+                        <view class="title">{{item.name}}</view>
+                        <view class="division">—</view>
+                        <view class="logo">班夫宝典</view>
+                    </navigator>
+                </block>
+                
+            </view>
+        
+        <!--精彩班夫-->
+        <view class="bfWonderful_title" > ---  精彩莫干 ---</view>
+        <!-- <view style="width:100%;text-align: center;">
+          <image src="../../image/wonderful_title.png" class="bfWonderful_title"></image>
+        </view> -->
+        
+
+          <view class="bfWonderful" >
+            <block wx:for="{{wonderful}}" wx:key="id">
+                <navigator url="{{item.url}}" class="item" style="{{'background-image:url('+item.img+');'}}">
+                      <view class="title_group">
+                        <view class="title">{{item.title}}</view>
+                        <image src="../../image/arrow.png" class="icon"></image>
+                      </view>
+                      
+                      <view class="theme_icon" wx:if="{{item.is_theme == 1}}">专题</view>
+                </navigator>
+                <!--<navigator url="{{item.url}}" class="item"  wx:else>
+                      <view class="poster" style="background-color:rgb(104, 46, 107);"></view>
+                      <view class="title">{{item.title}}</view>
+                      <image src="../../image/arrow.png" class="icon"></image>
+                      <view class="theme_icon" wx:if="{{item.is_theme == 1}}">专题</view>
+                </navigator>-->
+            </block>
+          </view>
+  </scroll-view>
+    
+</view>
+
+
+

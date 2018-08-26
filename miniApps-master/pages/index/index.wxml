@@ -1,0 +1,114 @@
+<import src="index-item/index-item-template.wxml" />
+<!--index.wxml-->
+<view class="container">
+  <!--顶部 定位 搜索 卷  -->
+  <!-- <template is="locationSeek" data="{{...item}}" /> -->
+
+  <view class='headSeek'>
+    <view class='site_location' bindtap='userLocation'>
+      <text class='site_location_text'>{{city}}</text>
+      <image class='location' src='/images/icon/home_bar_arrow.png'></image>
+    </view>
+    <view class='page_row' bindtap="seekTap">
+      <view class="search">
+        <view class="df search_arr">
+          <image class="searchcion" src="/images/icon/home_bar_search.png"></image>
+          <input disabled placeholder="请输入关键字" value="{{searchValue}}" />
+        </view>
+      </view>
+    </view>
+    <view class="usingTheVolumeBox" catchtap='discountCoupon'>
+      <image class='usingTheVolume' src='/images/icon/home_bar_quan.png'></image>
+    </view>
+  </view>
+  <!-- 轮播组件 -->
+  <!-- <template is="Allslideshow" data="{{...item}}" />  -->
+  <swiper class="homePage_banner" indicator-dots="true" autoplay="true" circular="true" interval="5000" indicator-active-color="rgba(252, 94, 45,0.8)">
+    <block wx:for="{{carousel}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+      <swiper-item>
+        <image bindtap="toNewExclusive" mode="aspectFill" id="{{item.id}}" class="lbtupian" src='{{item.imgUrl}}'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 分类 -->
+  <template is="allClassify" data="{{...item}}" />
+  <view wx:for="{{logs}}" wx:for-item="value" wx:key="{{index}}">
+    {{value.shopName}}
+  </view>
+  <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>    -->
+  <!--推荐餐厅 -->
+  <template is="postItem" data="{{...item}}" />
+  <!--推荐餐厅  -->
+  <view class='scroll_box'>
+    <scroll-view scroll-x="true" class='scroll'>
+      <block wx:for="{{business}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+        <template is="postItemss" data="{{item}}" />
+      </block>
+    </scroll-view>
+  </view>
+  <!--美食墙 -->
+  <template is="classify" data="{{...item}}" />
+  <!--美食墙 -->
+  <view class='scroll_box'>
+    <scroll-view scroll-x="true" class='scroll element'>
+      <block wx:for="{{food}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+        <template is="classifyss" data="{{item}}" />
+      </block>
+    </scroll-view>
+  </view>
+  <!--热门活动 -->
+  <template is="hotActivity" data="{{...item}}" />
+  <!--热门活动  -->
+  <view class='scroll_box'>
+    <scroll-view scroll-x="true" class='scroll_activity'>
+      <block wx:for="{{actlist}}" wx:key="{{index}}">
+        <template is="hotActivityss" data="{{item}}" />
+      </block>
+    </scroll-view>
+  </view>
+  <!--趣享直播 -->
+  <template is="liveStreaming" data="{{...item}}" />
+  <!--趣享直播  -->
+  <view class='scroll_box'>
+    <scroll-view scroll-x="true" class='scroll_anchor'>
+      <block wx:for="{{hotlive}}" wx:key="{{index}}">
+        <template is="liveStreamingss" data="{{item}}" />
+      </block>
+    </scroll-view>
+  </view>
+
+  <!-- 专题推荐 -->
+  <view class='recommend-topics'>
+    <text>专题推荐</text>
+  </view>
+  <view class='homepage'>
+    <!--tab导航条-->
+    <view class="navbar">
+      <text wx:for="{{navbar}}" wx:key="{{index}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">{{item}}</text>
+    </view>
+    <!--菜系专题-->
+    <view hidden="{{currentTab!==0}}">
+      <!-- <swiper-item> -->
+      <block wx:for="{{restaurant}}" wx:key="{{index}}">
+        <template is="styleOfCookingTm" data="{{item}}" />
+      </block>
+      <!-- </swiper-item> -->
+    </view>
+    <!--服务专题-->
+    <view hidden="{{currentTab!==1}}">
+      <!-- <swiper-item> -->
+      <block wx:for="{{service}}" wx:for-item="item" wx:key="{{index}}">
+        <template is="CreateEmailAlerts" data="{{item}}" />
+      </block>
+      <!-- </swiper-item>. -->
+    </view>
+  </view>
+
+  <!-- 底部动画 -->
+  <view class='bottomAnimation '>
+    <view class='bottomAnimationText'>
+      <image class='bottomAnimationImg' src='/images/icon/dongtaiLgy.png'></image>
+      <text>共享美味新生活</text>
+    </view>
+  </view>
+</view>

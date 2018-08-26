@@ -1,0 +1,89 @@
+<!--pages/answer/answer.wxml-->
+<view class="box">
+    <view class="box_left">
+        <image  mode="aspectFit"  src="{{logo}}"></image>
+    </view>
+    <view class="box_center">
+        <view class="titles">{{title}}</view>
+        <view class="describe" wx:if="{{describe}}">{{describe}}</view>
+        <view class="security">
+          <image wx:if="{{is_anony==1}}" src="../../images/4.png"></image>
+          <image wx:if="{{is_anony==2}}"  src="../../images/1.png"></image>
+          <image wx:if="{{has_correct==1}}" src="../../images/3.png"></image>
+          <image wx:if="{{is_open==2}}"  src="../../images/5.png"></image>
+          <image wx:if="{{is_open==1}}"  src="../../images/2.png"></image>
+          <image wx:if="{{is_push==1}}"  src="../../images/6.png"></image>
+        </view>
+    </view>
+    <view class="box_right">
+        <view class="persons">
+          <image  mode="aspectFit"  src="../../images/ps.png">
+          </image>
+          <text>{{num}}</text>
+        </view>
+        <view class="time">
+          <view>{{time}}</view>
+        </view>
+    </view>
+</view>
+<view wx:for="{{nums}}"  wx:key="this*" wx:for-index="iIndex" wx:for-item="itemIndex" class="bg">
+  <view wx:if="{{itemIndex.type==3}}"  class="inputTxt">
+    <view class="title">{{iIndex+1}}.{{itemIndex.title}}<text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(填空)</text></view>
+    <view class="bigUrl" wx:if="{{itemIndex.img}}"><image mode="aspectFit"  wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+    <textarea class="Input" cursor-spacing="120" placeholder='请输入...' maxlength='1000' data-key="{{iIndex}}" bindinput="bindTextAreaBlur"></textarea>
+  </view>
+  <radio-group bindchange="radioChange" wx:if="{{itemIndex.type==1&&itemIndex.option_type==3}}" data-key="{{iIndex}}">
+   <view class="title">{{iIndex+1}}.{{itemIndex.title}}<text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(图文单选)</text></view>
+   <view class="bigUrl"><image mode="aspectFit"  wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+    <view class="radios" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+         <view class="radios_box {{itemIndex.checked==index?'active':''}}"> 
+            <label class="radio">
+              <image mode="aspectFit" src="{{item.file}}" bindlongtap='review' data-keys="{{iIndex}}" data-current="{{index}}"></image>
+              <radio value="{{index}}" class="move" color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+            </label>
+        </view>
+    </view>
+  </radio-group>
+  <radio-group bindchange="radioChange" wx:if="{{itemIndex.type==1&&itemIndex.option_type==1}}" data-key="{{iIndex}}">
+  <view class="title">{{iIndex+1}}.{{itemIndex.title}}<text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(文字单选)</text></view>
+  <view class="bigUrl" wx:if="{{itemIndex.img}}"><image mode="aspectFit" wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+  <view class="radios" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{itemIndex.checked==index?'active':''}}"> 
+          <label class="radio">
+            <radio value="{{index}}" color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+          </label>
+      </view>
+  </view>
+  </radio-group>
+  <checkbox-group bindchange="checkboxChange" wx:if="{{itemIndex.type==2&&itemIndex.option_type==1}}" data-key="{{iIndex}}">
+  <view class="title">{{iIndex+1}}.{{itemIndex.title}}<text class="gray" wx:if="{{itemIndex.multi_limit==0}}"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(文字多选)</text><text class="gray" wx:else><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(最多选{{itemIndex.multi_limit}}个)</text></view>
+  <view class="bigUrl" wx:if="{{itemIndex.img}}"><image mode="aspectFit"  wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+  <view class="radios" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.check==true?'active':''}}"> 
+          <label class="radio">
+            <checkbox value="{{index}}" checked='{{item.check}}'  color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+          </label>
+      </view>
+  </view>
+  </checkbox-group>
+   <checkbox-group bindchange="checkboxChange" wx:if="{{itemIndex.type==2&&itemIndex.option_type==3}}" data-key="{{iIndex}}">
+  <view class="title">{{iIndex+1}}.{{itemIndex.title}}<text class="gray" wx:if="{{itemIndex.multi_limit==0}}"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(图文多选)</text><text class="gray" wx:else><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(最多选{{itemIndex.multi_limit}}个)</text></view>
+  <view class="bigUrl" wx:if="{{itemIndex.img}}"><image mode="aspectFit"  wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+  <view class="radios" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.check==true?'active':''}}"> 
+          <label class="radio">
+            <image mode="aspectFit" src="{{item.file}}" bindlongtap='review' data-keys="{{iIndex}}" data-current="{{index}}"></image>
+            <checkbox value="{{index}}" class="move" checked='{{item.check}}'  color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+          </label>
+      </view>
+  </view>
+  </checkbox-group> 
+</view>
+<button bindtap='check'>提交</button>
+<view class="bottom">
+<text>图标说明</text>
+<view><text class="red">*</text>必答题</view>
+<view><text class="red">*</text><text>选项中长按图片预览</text></view>
+</view>
+
+    

@@ -1,0 +1,130 @@
+<map id="map"
+ longitude="{{longitude}}"
+ latitude="{{latitude}}"
+ scale="14"
+ controls="{{controls}}"
+ bindcontroltap="controltap"
+ markers="{{markers}}"
+ bindmarkertap="markertap"
+ polyline="{{polyline}}"
+ show-location
+ style="width: 100%; height: {{ win_height - 214 }}px;"></map>
+
+<view class="body">
+  <view class="code_one" wx:if="{{ switch_type == 'index' }}">
+    <view class="one_address" bindtap="selectStart">
+      <view class="addr_icon">
+        <image src='../images/icon_map_star@3x.png'></image>
+      </view>
+      <view class="addr_text">{{ startAddress }}</view>
+    </view>
+    <view class="one_address" bindtap="selectEnd">
+      <view class="addr_icon">
+        <image src='../images/icon_map_end@3x.png'></image>
+      </view>
+      <view class="addr_text">{{ endAddress }}</view>
+    </view>
+    <view class="one_button">
+      <button class="peopleofcar" bindtap="peopleLookingForAcar">人找车</button>
+      <button class="carofpeople" bindtap="carToFindSomeone">车找人</button>
+    </view>
+  </view>
+  <view class="code_two" wx:if="{{ switch_type == 'people' }}" animation="{{ switch_type == 'people' ? switchCodeAnimationPeople : '' }}">
+    <view class="two_title">
+      <view class="two_addr">{{startAddress}}</view>
+      <view class="two_addr_icon">
+        <image src="../images/icon_arrow@3x.png"></image>
+      </view>
+      <view class="two_addr">{{ endAddress }}</view>
+    </view>
+    <view class="select_list">
+      <view class="select">
+        <view class="select_icon">
+          <image src="../images/btn_card_time@3x.png"></image>
+        </view>
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{timeIndex}}" range="{{selectTime}}">
+          <view class="picker">
+            {{selectTime[0][timeIndex[0]]}}{{selectTime[1][timeIndex[1]]}}{{selectTime[2][timeIndex[2]]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="select_list">
+      <view class="select">
+        <view class="select_icon">
+          <image src="../images/btn_card_seat@3x.png"></image>
+        </view>
+        <picker bindchange="bindPickerSeatsChange" value="{{seatIndex}}" range="{{seatArray}}">
+          <view class="select_text">
+            {{seatArray[seatIndex]}}
+          </view>
+        </picker>
+      </view>
+      <view class="select">
+        <view class="select_icon">
+          <image src="../images/btn_card_money@3x.png"></image>
+        </view>
+        <picker bindchange="bindPickerPriceChange" value="{{priceIndex}}" range="{{priceArray}}">
+          <view class="select_text">
+            {{priceArray[priceIndex]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="select_button">
+      <button class="people_select_btn" bindtap="creatTravel">发布人找车</button>
+    </view>
+  </view>
+  <view class="code_two" wx:if="{{ switch_type == 'car' }}" animation="{{ switch_type == 'car' ? switchCodeAnimationCar : '' }}">
+    <view class="two_title">
+      <view class="two_addr">{{startAddress}}</view>
+      <view class="two_addr_icon">
+        <image src="../images/icon_arrow@3x.png"></image>
+      </view>
+      <view class="two_addr">{{ endAddress }}</view>
+    </view>
+    <view class="select_list">
+      <view class="select">
+        <view class="select_icon">
+          <image src="../images/btn_card_time@3x.png"></image>
+        </view>
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{timeIndex}}" range="{{selectTime}}">
+          <view class="picker">
+            {{selectTime[0][timeIndex[0]]}}{{selectTime[1][timeIndex[1]]}}{{selectTime[2][timeIndex[2]]}}
+          </view>
+        </picker>
+      </view>
+      <view class="select" style="margin-right: 10px">
+        <view class="select_icon">
+          <image src="../images/btn_card_seat_car@3x.png"></image>
+        </view>
+        <picker bindchange="bindPickerSeatsChange" value="{{seatIndex}}" range="{{seatArray}}">
+          <view class="select_text">
+            {{seatArray[seatIndex]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="select_list">
+      <view class="select" bindtap="selectLine">
+        <view class="select_icon">
+          <image src="../images/btn_card_line@3x.png"></image>
+        </view>
+        <view class="select_text">{{strategy_active}}</view>
+      </view>
+      <view class="select">
+        <view class="select_icon">
+          <image src="../images/btn_card_money@3x.png"></image>
+        </view>
+        <picker bindchange="bindPickerPriceChange" value="{{priceIndex}}" range="{{priceArray}}">
+          <view class="select_text">
+            {{priceArray[priceIndex]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="select_button">
+      <button class="car_select_btn" bindtap="creatTravel">发布车找人</button>
+    </view>
+  </view>
+</view>

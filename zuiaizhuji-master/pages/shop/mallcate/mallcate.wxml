@@ -1,0 +1,46 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+<!--mallcate.wxml-->
+<view class="cate flex flexC">
+
+  <view class="search">
+    <view class="search-box flex">
+        <input class="sub search-input" type="text" placeholder="请搜索商品" confirm-type="search" bindconfirm="goods_search_bind"/>
+        <button size="mini" class="search-btn"><icon type="search" size="18" /></button>
+    </view>
+  </view>
+
+  <view class="cate-box sub">
+    
+     <scroll-view scroll-y="true" class="sidebar tc gridXt">
+        <block wx:for="{{cate_one_data}}">
+            <view class="cate-name {{this_cate_id==item.id?'cate-name-active':''}} gridXb" bindtap="cate_item_bind" data-cid="tcate_{{item.id}}" id="{{item.id}}">{{item.name}}</view>
+        </block>
+    </scroll-view>
+
+    <scroll-view scroll-y="true" class="cate-con" scroll-into-view="{{classifyViewed}}" bindscroll="onCateScroll">
+    <view wx:for="{{cate_one_data}}" wx:for-item="citem" wx:key="id" id="tcate_{{citem.id}}">
+      <!--list start-->
+      <view class="cate-tit" bindtap="mall_list_bind" id="{{citem.id}}">{{citem.name}}</view>
+      <view class="cate-list tc clearfix">
+        <block wx:for="{{citem.two_cat_list}}" wx:for-item="titem">
+        <view class="cate-item" bindtap="mall_list_bind" id="{{titem.id}}">
+          <view class="cate-imgbox"><image src="{{titem.icon}}" class="cate-img" mode="aspectFill"></image></view>
+          <view class="cate-txt">{{titem.name}}</view>
+        </view>
+        </block>
+      </view>
+      </view>
+      <!--list end-->
+
+    </scroll-view>
+
+  </view>
+
+</view>
+<!--tips-->
+</block>

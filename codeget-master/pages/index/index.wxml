@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<import src="../common/foot.wxml" />
+<image class="toWrite" bindtap="refresh" src="/images/刷新.png"></image>
+<view class="page">
+  <view class="page__hd">
+  </view>
+  <view class="page__bd">
+    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" class="list" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh">
+      <block wx:if="{{list.length>0}}">
+        <block wx:for="{{list}}">
+          <view class="item weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-flex">
+              <view class="weui-cell__hd">
+                <block wx:if="{{item.protype == 'Web'}}">
+                  <image class="userinfo-avatar" src="/images/web.png" background-size="cover"></image>
+                </block>
+                <block wx:elif="{{item.protype == '微信开发'}}">
+                  <image class="userinfo-avatar" src="/images/微信.png" background-size="cover"></image>
+                </block>
+                <block wx:elif="{{item.protype == '移动APP'}}">
+                  <image class="userinfo-avatar" src="/images/移动APP.png" background-size="cover"></image>
+                </block>
+                <block wx:elif="{{item.protype == '爬虫类'}}">
+                  <image class="userinfo-avatar" src="/images/爬虫.png" background-size="cover"></image>
+                </block>
+                <block wx:elif="{{item.protype == '数据挖掘类'}}">
+                  <image class="userinfo-avatar" src="/images/数据挖掘.png" background-size="cover"></image>
+                </block>
+                <block wx:elif="{{item.protype == '其他'}}">
+                  <image class="userinfo-avatar" src="/images/其他.png" background-size="cover"></image>
+                </block>
+              </view>
+              <view class="weui-cell__bd weui-flex__item">
+                <view class="text" data-id="{{item.objectId}}" bindtap="listAction">
+                  <view class="">名称：{{item.title}}</view>
+                  <view class="">类型：{{item.protype}}</view>
+                  <view class="">预算：{{item.budget}}</view>
+                </view>
+              </view>
+              <view class="weui-cell__ft">
+                <view class="">状态：</view>
+                <block wx:if="{{item.status == '招募中'}}">
+                  <text class="justify align green">{{item.status}}</text>
+                </block>
+                <block wx:elif="{{item.status == '开发中'}}">
+                  <text class="justify align red">{{item.status}}</text>
+                </block>
+                <block wx:elif="{{item.status == '完成'}}">
+                  <text class="justify align gray ">已{{item.status}}</text>
+                </block>
+              </view>
+              <!--<view class="weui-textarea-counter">查看详情...</view>-->
+            </view>
+          </view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">
+            码赚
+          </view>
+          <view class="weui-media-box__desc">
+            by Kn0w thyself
+          </view>
+
+        </view>
+      </block>
+    </scroll-view>
+    <view class="body-view">
+      <loading hidden="{{hidden}}" bindchange="loadingChange">
+        加载中...
+      </loading>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-footer__text">Copyright © Kn0w thyself</view>
+    </view>
+  </view>
+
+</view>

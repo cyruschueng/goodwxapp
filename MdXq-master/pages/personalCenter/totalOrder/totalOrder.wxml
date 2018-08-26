@@ -1,0 +1,96 @@
+<import src='./orderTemplate/orderTemplate.wxml'/>
+<view class='totalOrder'>
+  <view class='topNavBox'>
+    <view wx:for='{{topNavInfoArr}}' wx:for-index='index' wx:for-item='item' wx:key='index' class='navigation {{index==currentID?"navigationActive":""}}' data-currentID='{{index}}' bindtap='goSelectNav'>{{item.topNavInfoName}}</view>
+  </view>
+  <view class='obligationBox'  wx:for='{{orderListInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index' wx:if='{{currentID==0}}'>
+    <view class='obligationTop'>
+      <text class='obligationTopLeft'>待付款</text>
+      <text class='obligationTopRight'>
+        <text>{{item.create_time}}</text>
+      </text>
+    </view>
+    <view bindtap='goOrderDetail' data-order_id='{{item.order_id}}' data-currentID='{{0}}' data-state='{{item.state}}'>
+      <block  wx:for='{{orderDetail}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+        <template is='obligationCenter' data='{{...item,orderDetailLength}}'></template>
+      </block>
+    </view>
+    <view class='obligationCenterBottom'>
+      <view class='obligationCenterBottomLine'>
+        <text>总计</text>
+        <text>￥{{item.amount}}</text>
+      </view>
+      <view class='obligationCenterBottomLine2'>
+        <text bindtap='cancleOrder' data-order_id='{{item.order_id}}'>取消订单</text>
+        <text bindtap='pay'>付款</text>
+      </view>
+    </view>
+  </view>
+  <view class='waitSendOutBox' wx:for='{{orderListInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index' data-order_id='{{item.order_id}}' wx:if='{{currentID==1}}'>
+    <view bindtap='goOrderDetail' data-state='{{item.state}}' data-order_id='{{item.order_id}}' data-currentID='{{1}}'>
+      <view class='obligationTop'>
+      <text class='obligationTopLeft'>待发货</text>
+      <text class='obligationTopRight'>
+        <text>{{item.create_time}}</text>
+      </text>
+    </view>
+     <block  wx:for='{{orderDetail}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+      <template is='obligationCenter' data='{{...item}}'></template>
+    </block>
+    </view>
+    <view class='obligationCenterBottom'>
+      <view class='obligationCenterBottomLine'>
+        <text>总计</text>
+        <text>￥{{item.amount}}</text>
+      </view>
+      <view class='obligationCenterBottomLine2'>
+        <text wx:if='{{item.remind_deliver_goods==1}}' style='border: 1rpx solid #BEBEBE;color:black'  bindtap='goRemind' data-order_id='{{item.order_id}}'>提醒发货</text>
+         <text wx:if='{{item.remind_deliver_goods==2}}'  style='border: 1rpx solid #BEBEBE;color:black;width:300rpx;color:red' >已经提醒发货</text>
+      </view>
+    </view>
+  </view>
+  <view class='waitReceivingBox' wx:for='{{orderListInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index' wx:if='{{currentID==2}}'>
+    <view bindtap='goOrderDetail' data-state='{{item.state}}' data-order_id='{{item.order_id}}' data-currentID='{{2}}'>
+      <view class='obligationTop'>
+      <text class='obligationTopLeft'>待收货</text>
+      <text class='obligationTopRight'>
+        <text>{{item.create_time}}</text>
+      </text>
+    </view>
+     <block  wx:for='{{orderDetail}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+      <template is='obligationCenter' data='{{...item}}'></template>
+    </block>
+    </view>
+    <view class='obligationCenterBottom'>
+      <view class='obligationCenterBottomLine'>
+        <text>总计</text>
+        <text>￥{{item.amount}}</text>
+      </view>
+      <view class='obligationCenterBottomLine2'>
+        <text bindtap='confirmReceipt' data-order_id='{{item.order_id}}' style='border: 1rpx solid #BEBEBE;color:black '>确认收货</text>
+      </view>
+    </view>
+  </view>
+  <view class='allOrdersBox' bindtap='goOrderDetail'  wx:for='{{orderListInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index' data-order_id='{{item.order_id}}' data-state='{{item.state}}'  wx:if='{{currentID==3}}'>
+    <view class='obligationTop'>
+      <text class='obligationTopLeft' wx:if='{{item.payment_state==1}}'>已支付</text>
+       <text class='obligationTopLeft' wx:if='{{item.payment_state==2}}'>待支付</text>
+        <text class='obligationTopLeft' wx:if='{{item.logistics_state==1}}'>已发货</text>
+        <text class='obligationTopLeft' wx:if='{{item.logistics_state==2}}'>已收货</text>
+        <text class='obligationTopLeft' wx:if='{{item.logistics_state==3}}'>待收货</text>
+      <text class='obligationTopRight'>
+        <text>{{item.create_time}}</text>
+        <!-- <text>12:00</text> -->
+      </text>
+    </view>
+    <block  wx:for='{{orderDetail}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+      <template is='obligationCenter' data='{{...item}}'></template>
+    </block>
+    <view class='obligationCenterBottom'>
+      <view class='obligationCenterBottomLine'>
+        <text>总计</text>
+        <text>￥{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+</view>

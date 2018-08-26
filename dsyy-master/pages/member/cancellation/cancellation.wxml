@@ -1,0 +1,62 @@
+<view wx:if="{{show}}" class="page">
+  <view>
+    <view class="cancellation-background" style="background:url('{{bg}}');background-size:contain;">
+      <view class="cancellation-text">
+        <view class="cancellation-money">{{money}}元</view>
+        <view class="cancellation-name margin-top-20">借书卡金额</view>
+      </view>
+    </view>
+    <view class="white-bg cancellation-notice margin-top-20">
+      <view wx:if="{{count==0}}" class="margin-left-30 margin-right-30 cancellation-notice-list" bindtap="apply">
+        <view class="float-left">
+          我要退卡
+        </view>
+        <view class="float-right">
+          <image src="/images/more.png" class="more"></image>
+        </view>
+      </view>
+      <view wx:else class="margin-left-30 margin-right-30 cancellation-notice-list-f">
+        您还有{{count}}本书尚未归还，请归还图书后才能办理退卡
+      </view>
+    </view>
+  </view>
+  <!--申请退卡_Start-->
+  <view wx:if="{{showModal}}">
+    <view class="cancellation-cover"></view>
+    <view class="cancellation-box white-bg">
+      <image src="/images/cover_banner.png" class="cover-banner"></image>
+      <view wx:if="{{normal}}">
+        <view class="cancellation-box-text margin-bottom-100">
+          借书卡充值金额将在1-7个工作日到账，退还给您后您将无法借书。确认要退卡吗？
+        </view>
+        <view class="cancellation-box-button">
+          <view class="cancellation-box-button-close float-left" bindtap="clickCancellation">退卡</view>
+          <view class="cancellation-box-button-open float-right" bindtap="clickRetain">继续用</view>
+        </view>
+      </view>
+      <view wx:else>
+        <view class="cancellation-box-text margin-bottom-10">
+          退款失败，请联系系统管理员
+        </view>
+        <view class="cancellation-box-button">
+          <view class="cancellation-box-button-open" style="width:100%;" bindtap="close">确定</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--申请退卡_End-->
+<!--退卡成功_Start-->
+<view wx:else class="white-bg cancellation-success">
+  <view class="page" style="height:20rpx;"></view>
+  <view class="cancellation-success-img">
+    <image src="/images/recharge_successfully.png" class="cancellation-success-image"></image>
+  </view>
+  <view class="cancellation-success-title margin-top-50">
+    <view class="cancellation-success-title-money margin-right-20">{{money}}元</view>
+    <view class="cancellation-success-title-yes">退卡成功</view>
+  </view>
+  <view class="cancellation-success-prompt margin-top-20">预计1-7个工作日原路退回支付账户</view>
+  <view class="cancellation-success-button" bindtap="complete">完成</view>
+</view>
+<!--退卡成功_End-->

@@ -1,0 +1,39 @@
+<!--pages/policymsg/policymsg.wxml-->
+<view class='policymsg'>
+    <view class='policymsg_top'>
+        <view wx:if="{{_manage}}" bindtap='changeManage'>
+          <text class='policymsg_msg'>管理</text>
+        </view>
+        <view wx:if="{{!_manage}}" bindtap='changeManage'>
+          <text class='policymsg_msg'>完成</text>
+        </view>
+        <view class='policymsg_top_list' wx:for="{{msgArr}}" wx:for-item="list" wx:key="name">
+              <text>{{list.listname}}</text>
+              <view wx:for="{{list.name}}"  wx:key="*this">
+                      <text>{{item}}</text>
+                      <view wx:if="{{!_manage}}">
+                         <icon class='iconfont icon_edit' data-name='{{list.listname}}' data-index='{{index}}' bindtap='clickEdit'></icon>
+                         <icon class='iconfont icon_delete' data-name='{{list.listname}}' data-index='{{index}}' bindtap='clickdel'></icon>
+                      </view>
+              </view>
+        </view>
+    </view>
+    <view class='policymsg_bottom' wx:if="{{_manage}}" bindtap='addplicy'>
+        <icon class='iconfont icon_add'></icon>
+        <text>新增投保人</text>
+    </view>
+</view>
+
+
+<view id='mask' wx:if='{{_show}}'>
+</view>  
+<view class='model' wx:if='{{_show}}'>
+    <view class='model_content'>
+        <text>是否删除该投保人</text>
+        <text class='model_scale'>删除后将无法恢复</text>
+    </view>
+    <view class='model_result'>
+        <text bindtap='modelClose'>取消</text>
+        <text bindtap='modelConfirm' data-oindex='{{index}}'>确认</text>
+    </view>
+</view>

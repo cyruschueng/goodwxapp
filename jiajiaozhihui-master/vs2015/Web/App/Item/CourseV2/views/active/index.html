@@ -1,0 +1,42 @@
+<div ng-controller="activeCardController">
+    <div class="container" style="padding-top:30px;">
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-xs-12" style="position:relative">
+                <img style="width: 100%" ng-src="{{info.imgUrl}}" >
+                <span class="text-muted" style="position: absolute;left: 40px; bottom: 5%;">No. JJZH{{info.cardNo}}</span>
+            </div>
+        </div>
+        <div ng-if="info.isAct==false" class="row">
+            <div class="col-xs-12 text-center">
+                <span style="width:50%" class=" alert alert-danger">当前卡已失效</span>
+            </div>
+        </div>
+        <div ng-if="info.isAct==true" class="row">
+            <div ng-if="info.isActive==true" class="col-xs-12">
+                <p ng-if="isMyCard==true" class=" alert alert-danger">
+                    当前卡你已在<span class="text-danger">{{info.registDate|date:'yyyy-MM-dd'}}</span>激活
+                    <a style="padding-left:15px;" href='http://weixin.jiajiaozhihui.cn/app/appstart/course/baseinfo.ashx?redirect_url=http://courses.jiajiaozhihui.cn/app/default.html&state={"appid":"app001","hash":"card"}'>进入</a>
+                </p>
+                <p ng-if="isMyCard==false" class=" alert alert-danger">
+                    当前卡已有其他人在{{info.registDate|date:'yyyy-MM-dd'}}激活
+                </p>
+            </div>
+            <div ng-if="info.isActive==false" class="col-xs-12 text-center">
+                <span class="btn btn-lg  btn-warning" style="width:100%" ng-click="active()">立即激活</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="padding-top:30px;">
+                <div class="text-danger" style="padding-bottom:15px;">关于学习卡的温馨提示：</div>
+                <div class="small">
+                    <p>1、如果您在学习卡激活过程中遇到问题需要咨询，请拨打服务电话：0755—21622298， 或者长按进入下面的小慧老师微信号进行咨询。</p>
+                    <p>2、一张学习卡只能供一人激活使用，请妥善保管好，最好立即激活</p>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <img class="img-thumbnail" style="width: 100%;" src="../../../content/imgs/hf.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+

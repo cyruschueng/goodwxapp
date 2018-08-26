@@ -1,0 +1,26 @@
+<import src="../../common/common.wxml" />
+
+<view class="content">
+  <textarea class="input" placeholder="分享此刻心情..." bindinput="onInput" />
+  <view class="select-image">
+    <template is="multi-pic-view" data="{{imageList}}" />
+    <view wx:if="{{imageList.length<9}}">
+      <template is="add-pic-view" />
+    </view>
+  </view>
+</view>
+<view class="address" bindtap="chooseLocation">
+  <image class="icon" src="/images/icon_location.png" mode="aspectFit" />
+  <view class="text">
+    {{addressName.length>0||address.length>0?(addressName.length>0?addressName:address):'所在位置'}}
+  </view>
+  <image class="arrow" src="/images/icon_arrow.png" mode="aspectFit" />
+</view>
+<!-- <label class="anonymity">
+    <view class="text">匿名发布</view><checkbox value="" checked=""/>
+</label> -->
+<view class="submit">
+  <view class="btn {{content != '' || imageList.length > 0 ? 'clickable' : 'unclickable'}}" bindtap="submit">
+    发布
+  </view>
+</view>

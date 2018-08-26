@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>运动测试说明</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ppublic.css">
+    <link rel="stylesheet" type="text/css" href="css/trainerExplainer.css?v=20171020">
+</head>
+
+<body>
+    <section class="container">
+        <div class="content">
+            <div class="text1">
+                欢迎进入<br/>有品燃脂营运动能力测试
+            </div>
+            <div class="text2">
+                本次测试需占用您大约15分钟，测试内容 包含<span class="num">6</span>个问题和6组动作，需要您穿好运动 服并铺好瑜伽垫哦～
+            </div>
+            <div class="text3">
+                您需要准备
+            </div>
+            <div class="text4">
+                • 15分钟 <br/>• 运动服 <br/>• 瑜伽垫 <br/>• 水
+            </div>
+            <div class="btn">进入测试</div>
+        </div>
+    </section>
+</body>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.ellipsis.js"></script>
+<script type="text/javascript" src="jsv2/public.js"></script>
+<script type="text/javascript" id="script1"></script>
+<!--<script type="text/javascript" src="jsv1/openTrain.js"></script>-->
+<script>
+    var sex = getParamByUrl('sex');
+    if (sex == 0) {
+        $('.num').text('6');
+    }
+    else {
+        $('.num').text('5');
+    }
+    if (getParamByUrl("webver") > 2) {
+        if (getParamByUrl("os") == "android") {
+            $("#script1").attr("src", "jsv1/trainerExplain.js?v=17");
+        }
+        else {
+            var mobileApp = window.webkit.messageHandlers;
+            $("#script1").attr("src", "jsv1/trainerExplain.js?v=17");
+        }
+    }
+    else {
+        $("#script1").attr("src", "js/trainerExplain.js?v=17");
+    }
+</script>
+
+</script>
+<!--<script type="text/javascript" src="js/hdConfirmOrder.js?v=2"></script>-->
+<script>
+        //百度统计上传代码
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAutoPageview', false]);
+        _hmt.push(['_trackPageview', location.pathname]);
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+
+</script>
+
+</html>

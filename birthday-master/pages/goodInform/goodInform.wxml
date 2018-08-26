@@ -1,0 +1,136 @@
+<view class="container">
+  <image class="header-image" wx:if="{{informAll.info.cover==''}}" src="http://ovhvevt35.bkt.clouddn.com/day/FhYppomFqZC92sPSsSqt3dLRY3T7.jpg"></image>
+	<image class="header-image" wx:else src="{{informAll.info.cover}}"></image>
+	<view class="follow" bindtap='guanzhu'>
+		<image wx:if="{{follow==false}}" src="http://ovhvevt35.bkt.clouddn.com/day/follow.png" style="width:15px;height:15px;display:inline-block"></image>
+    <image wx:else src="http://ovhvevt35.bkt.clouddn.com/day/star-2.png" style="width:15px;height:15px;display:inline-block"></image>关注
+	</view>
+	<view class="rank-box">
+		<view class="rank-num no1">
+			<view>{{informAll.info.month_cat}}月榜第{{informAll.info.rank}}名</view>
+		</view>
+		<view class="rank-desc">
+      <view style="padding-bottom:11px" wx:if="{{informAll.info.rank==1}}">
+          恭喜{{informAll.info.name}}荣登榜首
+      </view>
+			<view style="padding-bottom:11px" wx:else>距超越第{{informAll.info.rank-1}}名{{informAll.last.name}}</view>
+      <view wx:if="{{informAll.info.rank==1}}" style="font-family:PingFangSC-Light;line-height:13px;">
+				<text style="margin-left:9px;font-family:PingFangSC-Semlbold">获得祝福数{{informAll.info.wish_count}}</text>
+        </view>
+			<view wx:else style="font-family:PingFangSC-Light;line-height:13px;">
+				<text style="margin-left:9px;font-family:PingFangSC-Semlbold">还差祝福数{{informAll.last.wish_count-informAll.info.wish_count}}</text>
+			</view>
+		</view>
+	</view>
+	<view class="star-name">{{informAll.info.name}}</view>
+	<view class="star-birth">
+		{{informAll.info.birth_year}}年{{informAll.info.birth_month}}月{{informAll.info.birth_day}}日
+		<text style="padding-left:9px">	{{informAll.info.type_desc}}	</text>
+	</view>
+	<view class="introduction">	{{informAll.info.desc}}</view>
+	<view class="like">
+		<image src="{{userInfo.avatarUrl}}"></image>
+		<view class="self-like-num">
+			{{userInfo.nickName}}已给{{informAll.info.name}} 送了{{wish_count}}个祝福
+		</view>
+	</view>
+	<view class="total-like">
+		<image src="../images/star.png"></image>{{wish_count}}
+		<view class="baoji-wrap"></view>
+	</view>
+	<view class="like-btn" bindtap='dianzan'>
+		<image src="https://static.shengri.cn/uploads/xydd/web/srgjxin@2x.png"></image>点赞
+	</view>
+	<image src="https://static.shengri.cn/uploads/image/app/wxapp/challenge-title.png"
+	style="width:253px;height:64px;margin:0 auto;"></image>
+	<view class="anli" bindtap='goodPoster'>
+		<image src="https://static.shengri.cn/uploads/image/app/wxapp/anli.png" mode="widthFix"></image>
+	</view>
+	<!-- <view class="anli">
+		<button open-type="share">
+		   <image src="https://static.shengri.cn/uploads/image/app/wxapp/qiandao.png" mode="widthFix"></image>
+    </button>
+	</view> -->
+	<view class="tab-page-box">
+		<view class="page {{tab == 'city'?'active':''}}" data-tab="city" bindtap='tab'>
+			<view class="line1">全国排行榜	</view>
+			<view class="line2" wx:if="{{informAll.my_wish_rank==false}}">	-未上榜-	</view>
+      <view class="line2" wx:else>-No.{{informAll.my_wish_rank}}-</view>
+		</view>
+		<view class="page {{tab == 'share'?'active':''}}" data-tab="share" bindtap='tab'>
+			<view class="line1" >真爱安利榜</view>
+			<view class="line2" wx:if="{{informAll.my_share_rank==false}}">-未上榜-</view>
+      <view class="line2" wx:else>-No.{{informAll.my_share_rank}}-</view>
+		</view>
+		<view class="page {{tab == 'group'?'active':''}}" data-tab="group" bindtap='tab'>
+			<view class="line1" >	群内排行榜</view>
+      <view class="line2" wx:if="{{informAll.my_group_rank==false || !informAll.my_group_rank}}">-未上榜-</view>
+			<view class="line2" wx:else>-No.{{informAll.my_group_rank}}-</view>
+		</view>
+	</view>
+  <!--city  -->
+  <view class='content city' wx:if="{{tab=='city'}}">
+      <image  src="https://static.shengri.cn/uploads/image/app/wxapp/top50.png"
+      style="width:216px;height:37px;margin:28px auto 9px"></image>
+      <view class="tips" wx:if="{{informAll.my_wish_rank==false}}">
+        - 目前未上榜，你需要再送
+          {{informAll.country_wish_rank[length1-1].wish_count-informAll.my_wish_count}} 
+        个祝福 -
+      </view>
+      <view class='items' wx:else>
+        <view class="rank" wx:for="{{informAll.country_wish_rank}}" data-mid="{{item.mid}}">
+          <view class='num'>{{index+1}}</view>
+          <image src="{{item.avatar}}" style="margin:4px 13px 0 0;width:38px;height:38px;border-radius:100%;"></image>
+          <view class="name">	{{item.nickname}}</view>
+          <image class="gender_pic_male" src="../images/male.png"></image>
+          <view class="city"></view>
+          <view class="like-num">	{{item.wish_count}}	</view>
+        </view>
+      </view>
+  </view>
+  <!--share  -->
+   <view class='content share' wx:if="{{tab=='share'}}">
+      <image  src="https://static.shengri.cn/uploads/image/app/wxapp/top50.png"
+      style="width:216px;height:37px;margin:28px auto 9px"></image>
+      <view class="tips" wx:if="{{informAll.my_share_rank==false}}">
+        - 目前未上榜，你需要再安利
+        <text wx:if="{{informAll.share_rank.length==0}}">5</text>
+        <text wx:else>
+          {{informAll.share_rank[length2-1].wish_count-informAll.my_invite_count}} 
+        </text>
+        个路人 -
+      </view>
+      <view class='items' wx:else>
+        <view class="rank" wx:for="{{informAll.my_share_rank}}" data-mid="{{item.mid}}">
+          <view class='num'>{{index+1}}</view>
+          <image src="{{item.avatar}}" style="margin:4px 13px 0 0;width:38px;height:38px;border-radius:100%;"></image>
+          <view class="name">	{{item.nickname}}</view>
+          <image class="gender_pic_male" src="../images/male.png"></image>
+          <view class="city"></view>
+          <view class="like-num">	{{item.wish_count}}	</view>
+        </view>
+      </view>
+  </view>
+  <!--group  -->
+  <view class='content group' wx:if="{{tab=='group'}}">
+      <image  src="https://static.shengri.cn/uploads/image/app/wxapp/top50.png"
+      style="width:216px;height:37px;margin:28px auto 9px"></image>
+      <view class="tips" wx:if="{{informAll.my_group_rank==false || !informAll.my_group_rank}}">
+        - 目前未上榜-
+         <view class='title'>转发到微信群，即可比拼群内对爱豆的真爱程度</view>
+         <button class="share shareQun" open-type="share">转发到群聊</button>
+      </view>
+      <view class='items' wx:else>
+        <view class='notice'>想看各个微信群内粉丝的排行榜，</view>
+        <view class='notice' style="padding-bottom:30rpx">须分享到相应微信群，并在群内打开可见哦！</view>
+        <view class="rank" wx:for="{{informAll.group_rank}}" data-mid="{{item.mid}}">
+          <view class='num'>{{index+1}}</view>
+          <image src="{{item.avatar}}" style="margin:4px 13px 0 0;width:38px;height:38px;border-radius:100%;"></image>
+          <view class="name">	{{item.nickname}}</view>
+          <image class="gender_pic_male" src="../images/male.png"></image>
+          <view class="city"></view>
+          <view class="like-num">	{{item.wish_count}}	</view>
+        </view>
+      </view>
+  </view>
+</view>

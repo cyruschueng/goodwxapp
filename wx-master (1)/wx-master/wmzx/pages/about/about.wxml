@@ -1,0 +1,33 @@
+<!--pages/about/about.wxml-->
+<view class='container' catchtap='disappear'>
+  <view class='top'>
+    <image class='logo' src='../../images/about/logo.png'></image>
+  </view>
+
+  <view class='body'>
+    <block wx:for="{{arr}}" wx:key="{{item.id}}">
+      <view class='col row' catchtap='{{item.tap}}' data-index="{{index}}">
+        <view>{{item.title}}</view>
+        <view class='right'>{{item.dec}}</view>
+      </view>
+    </block>
+
+    <block wx:for="{{arr2}}" wx:key="{{item.id}}">
+      <view class='col row' catchtap='{{item.tap}}' data-type="{{item.Type}}">
+        <view>{{item.title}}</view>
+        <image src='{{item.src}}' class='right'></image>
+      </view>
+    </block>
+  </view>
+
+  <block wx:if="{{show}}">
+    <view class='mask'>
+       <image src='../../images/qrcode.jpg' class='qrcode'></image>
+    </view>
+  </block>
+  <block wx:if="{{show1}}">
+    <view class='mask'>
+       <image src='../../images/wm.png' class='qrcode'></image>
+    </view>
+  </block>
+</view>

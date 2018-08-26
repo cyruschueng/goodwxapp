@@ -1,0 +1,69 @@
+<!--pages/jifen/jifen.wxml-->
+<view class="panel biaoti" style="background-color: rgba(255, 255, 255, 0.2);margin:30rpx;border-radius:10px;box-shadow:2px 2px 2px #0e313e">
+  <view class="h1" >
+    --充值送积分--
+  </view>
+  <view style="display:flex;flex-direction:row;justify-content:space-between;">
+    <view class="p1">
+      *充值10元送10积分
+    </view>
+    <view class="p1">
+      *充值20元送26积分
+    </view>
+  </view>
+  <view style="display:flex;flex-direction:row;justify-content:space-between;">
+    <view class="p1">
+      *充值50元送68积分
+    </view>
+    <view class="p1">
+      *充值100元送158积分
+    </view>
+  </view>
+  <view style="display:flex;flex-direction:row;justify-content:space-between;">
+    <view class="p1">
+      *充值200元送388积分
+    </view>
+    <view class="p1">
+      *充值500元送998积分
+    </view>
+  </view>
+  <view class="h1" style="margin-top:30rpx">
+    --消费送积分--
+  </view>
+  <view style="display:flex;flex-direction:row;justify-content:space-between;">
+    <view class="p1">
+      *用任意支付方式支付订单可获得相应支付金额的积分
+    </view>
+  </view> 
+  <view class="h1" style="margin-top:30rpx">
+    --分享送积分--
+  </view>
+    <view class="p1">
+      *首页右上角转发群或者个人进入小程序送18积分/人
+    </view>
+    <view class="p1" style="margin-top:20rpx">
+      *被邀请进入的小伙伴每一次下单即送3积分
+    </view> 
+  <view class="h1" style="margin-top:30rpx">
+    --签到送积分--
+  </view> 
+    <view class="p1">
+      *每日签到送2积分，每连续签到10次系统额外赠送28积分
+    </view>     
+</view>
+<view class="panel biaoti" style="background-color: rgba(255, 255, 255, 0.2);margin:30rpx;border-radius:10px;box-shadow:2px 2px 2px #0e313e">
+  <view class="h1" style="color:#ffd0cc">
+    --积分兑换--
+  </view>
+  <view style="display:flex;flex-direction:row;justify-content:flex-start;" wx:for="{{jifen}}">
+    <view class="jkl" wx:if="{{!item.active}}" data-index="{{index}}" bindtap="chooseIt"></view>
+    <icon wx:if="{{item.active}}" type="success" size="22" color="rgb(6,193,174)" data-index="{{index}}" bindtap="chooseIt"/>
+    <view class="p2">
+      {{item.label}}
+    </view>
+  </view>
+ 
+  <view class="paybtn" bindtap="luck" >
+    <view >确认兑换</view>
+  </view>
+</view>

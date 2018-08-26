@@ -1,0 +1,15 @@
+<!--pages/common/cartGoods.wxml-->
+<template name='cartGoods'>
+  <image class='cart-img' bindtap='goodsIndo' src='{{item.img}}' mode='aspectFill'></image>
+  <view class='goods'>
+    <view class='goods-name'>{{item.title}}</view>
+    <view class='goods-line'>
+      <view class='goods-price'>￥{{item.price}}</view>
+      <view class='goods-num'>
+        <view class='num-sub' bindtap='numSub'>-</view>
+        <view class='num'>{{item.num}}</view>
+        <view class='num-add' data-item='{{item}}' bindtap='numAdd'>+</view>
+      </view>
+    </view>
+  </view>
+</template>

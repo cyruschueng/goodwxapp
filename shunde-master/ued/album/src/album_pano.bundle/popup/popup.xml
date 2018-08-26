@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<View xmlns:xsi="//www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../View.xsd"
+       id="popup">
+    <include src="popup.js"/>
+    <include src="/widgets/imageText.js"/>
+    <View background="#000000" alpha="0.6"/>
+    <!-- 介绍文案 -->
+    <View id="introPopup" gone="true" alpha="0">   
+        <View padding="20dp" layout="vertical">
+            <View height="wrap" layout="horizontal" paddingBottom="10dp">
+                <TextView id="introName" gravity="center" contentGravity="centerVertical" fontColor="#ffffff" fontSize="20dp" height="wrap" maxLine="2" width="fill"  marginRight="25dp" lineSpace="5dp"/>
+                <ImageView id="closeIntro" width="40dp" height="40dp" padding="10dp" gravity="right|center" src="images/icon/symbols-ic-close.png"/>
+            </View> 
+            <View background="#f3f1e6" alpha="0.4" height="1dp"/>
+            <View clipToBounds="true">
+                <ScrollView height="fill" marginTop="30dp">
+                    <TextView id="authorTime" height="wrap" fontSize="14dp" fontColor="#ffffff" lineSpace="8dp"/>
+                    <TextView id="tips" height="wrap" fontSize="14dp" fontColor="#ffffff" lineSpace="8dp"/>
+                    <TextView id="introTxtAll" height="wrap" fontSize="14dp" fontColor="#ffffff" lineSpace="8dp" marginTop="20dp"/>
+                    <TextView id="introDetail" height="wrap" fontSize="14dp" fontColor="#ffffff" lineSpace="8dp" marginTop="20dp"/>
+                </ScrollView>
+            </View>
+        </View>
+    </View>
+    <!-- 播放视频时的遮罩 -->
+    <View id="videoPopup"  gone="true" alpha="0">
+        <!-- <View id="id_video_container"/> -->
+    </View>
+    <!-- 时间选择 -->
+    <View id="tPopup" gone="true" padding="20dp" alpha="0">
+        <View id="timeContainer" height="wrap" width="wrap" gravity="center" layout="flow"/>
+    </View>
+    <!-- marker: 图文 -->
+    <View id="tuwenPopup" gone="true" alpha="0">
+        <com.album.widgets.ImageText id="tuwen">        
+        </com.album.widgets.ImageText>
+    </View>    
+    <!-- marker：html片段 -->
+    <View id="htmlPopup" padding="20dp" gone="true" alpha="0">
+        <View marginTop="25dp" clipToBounds="true">
+            <ScrollView>
+                <WebView id="html" height="wrap"/>
+            </ScrollView>
+        </View>
+	</View>
+	<!-- 关闭 -->
+	<ImageView id="close" width="60dp" height="60dp" padding="20dp" gravity="right" src="images/icon/symbols-ic-close.png"/>
+</View>

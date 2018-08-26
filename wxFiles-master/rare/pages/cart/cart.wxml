@@ -1,0 +1,34 @@
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px;">
+
+<view style="padding-top:200rpx; text-align:center" wx:if="{{list.length == 0}}">
+<image style="height:200rpx;width:200rpx;" src="/img/cartnone.png"></image>
+<view style="margin-top:30rpx;">购物车空空如也！</view>
+</view>
+<block wx:for="{{list}}" wx:for-item="li"  wx:for-index="lindex" >
+<block wx:for="{{check}}" wx:for-item="ch" wx:for-index="cindex" wx:if="{{lindex == cindex}}">
+  <view class="pan">
+    <view wx:if="{{ch == 0}}" style="margin-right:30rpx;float:left;border-radius:44rpx; border:2rpx solid #cfcfcf;width:44rpx;height:44rpx;margin-top: 70rpx;" data-id="{{cindex}}" data-val="{{ch}}" bindtap="checked"></view>
+    <image wx:if="{{ch == 1}}" class="cri pull-left" src="/img/true.png" data-id="{{cindex}}" data-val="{{ch}}" bindtap="checked"></image>
+    <image class="pull-left img-md" src="{{li.icon}}"></image>
+    <view class="nei pull-left">
+      <view class="title">{{li.proname}}</view>
+      <view class="title" style="color:#aaa;margin-top:30rpx;">规格:{{li.prostandard}}</view>
+      <view class="pull-left title">￥{{li.sellprice}}</view>
+      <view class="pull-right title">X{{li.buypron}}</view>
+    </view>
+    <view class=" pull-right" style="font-size:28rpx;color:#aaa" id="{{li.buycid}}" bindtap="del">删除</view>
+    <view class="clear-both"></view>
+  </view>
+  <view style="height:24rpx"></view>
+</block>
+</block>
+
+  <view class="fix-bottom bhj">
+    <view class="pull-left" style="margin-top:30rpx;margin-left:30rpx">
+    <view wx:if="{{checkall == false}}" style="float:left;border-radius:44rpx; border:2rpx solid #cfcfcf;width:44rpx;height:44rpx;"  bindtap="checkedAll"></view>
+      <image wx:if="{{checkall == true}}" class="pull-left" style="width:46rpx;height:46rpx;" src="/img/true.png" bindtap="checkedAll"></image><view class="pull-left" bindtap="checkedAll"> 全选</view>
+    </view>
+    <view class="pull-right oli" bindtap="navToPayfor">结算({{count}})</view>
+    <view class="pull-right " style="font-size:28rpx;text-align:center;margin-right:30rpx;margin-top:15rpx;"><text>合计：￥{{sum}}\n<text style="color:#888">(不含运费)</text></text></view>
+  </view>
+</view>

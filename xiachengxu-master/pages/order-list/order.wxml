@@ -1,0 +1,33 @@
+<import src="../tpls/order/order-tpl.wxml" />
+<import src="../tpls/nextInfo/index.wxml" />
+<import src="../foot/empty/empty.wxml" />
+<import src="../tpls/scroll-item/scroll-item.wxml" />
+
+
+<view class='container'>
+  <!-- <view class='order-list'>
+    <view wx:for='{{orderList}}' wx:key='{{index}}'>
+      <template is='order-item' data='{{...item}}'></template>
+    </view>
+  </view>
+  <template is='next-info' data='{{hasMore}}'></template> -->
+
+  <view class="navbar">
+    <view class="navbar-item" wx:for="{{navbar}}" wx:key="idx" wx:for-index="idx" data-idx="{{idx}}" bindtap="switchNav">
+      <text class="navbar-text {{currentNavbar==idx ? 'active ' : ' '}}">{{item}}</text>
+    </view>
+  </view>
+  <swiper hidden='{{!loadingHidden}}' class='tab-content' current='{{currentNavbar}}' duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{orderList.length}}' data='{{hasMore: params[0].hasMore, data: orderList, type: "order", from}}'></template>
+      <template is='empty' data='{{from}}' wx:else></template>
+    </swiper-item>
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{expiredList.length}}' data='{{hasMore: params[1].hasMore, data: expiredList, type: "order", from}}'></template>
+      <template is='empty' data='{{from}}' wx:else></template>
+    </swiper-item>
+  </swiper>
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

@@ -1,0 +1,67 @@
+<!--pages/mine/mine.wxml-->
+<view class="container" style="background:url({{background}}) no-repeat;background-size: cover; ">
+   <scroll-view scroll-y="true" bindscrolltolower="bottom"> 
+    <view class="mine_wrap">
+      <view class="person_info">
+        <image src="{{avatar}}"></image>
+        <view wx:if="{{avatar}}">{{nickname}}</view>
+        <!--  -->
+        <button class="login"  wx:else bindtap="login" 
+              style='background:{{backgroundColor}};box-shadow:2px 2px 5px {{border}};border:1rpx solid {{border}};'>点击授权</button>
+      </view>
+
+      <view class="divide"></view>
+      <view class="rank_wrap" wx:if="{{array.length !== 0}}">
+        <view class="rank_item" wx:for="{{array}}" wx:key="{{index}}" catchtap="deleteItem" data-name="{{item.nickname}}" data-id="{{item.asid}}">
+          <view class="item_left">
+            <image src="{{avatar}}"></image>
+            <image src="{{item.headimgurl}}" class="partner_img"></image>
+          </view>
+          <view class="item_con" style="color:{{color}}">
+            默契度： {{item.correct_percent}}%
+          </view>
+          <button class="item_right" catchtap="makeCerti" data-number="{{item.set_number}}" 
+                  data-id="{{item.answerer_uid}}" style="background:{{backgroundColor}}">
+              制作证书
+          </button>
+        </view>
+      </view>
+      <view class="no_rank" wx:else="{{array.length == 0}}">
+        <view>不怕神一样的对手，就怕猪一样的队友！</view>
+        <view>不服来战！</view>
+      </view>
+
+    </view>  
+   </scroll-view> 
+
+
+
+  <button class="home_icon"  bindtap="backHome">
+     <image src="../../resource/images/home_icon.png"></image>
+  </button>
+
+   <view class="answer" bindtap='toSearch' style="background:#f1c12d">
+     <image src="http://ovhvevt35.bkt.clouddn.com/moqi/see.png"></image>
+     查看答案
+   </view> 
+  <!-- <contact-button class="home_icon feedback" wx:else><image src="../../resource/images/feedback.png"></image></contact-button> -->
+
+
+</view>
+<!--弹窗  -->
+<view class='bg' wx:if="{{zindex}}">
+    <view class='zindex'>
+        <view class='notice'>
+            <view class='title' style='background:{{backgroundColor}}'>温馨提示</view>
+            <view class='text'>
+                是否确定删除朋友 “ {{name}} ” 的答题记录
+            </view>
+            <view class='flex'>
+                <view class='one' bindtap='catale' style='border:1px solid {{border}}'>取消</view>
+                <view class='two' bindtap='ok' style='background:{{backgroundColor}};border:1px solid {{border}}'>确定</view>
+            </view>
+        </view>
+    </view>
+</view> 
+
+

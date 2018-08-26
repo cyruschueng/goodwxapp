@@ -1,0 +1,43 @@
+<!--pages/calculate/changeScheduleDate.wxml-->
+
+<view class="flex box box-tb box-align-center" wx:if='{{ days.length > 0 }}'>
+  <view class="calendar box box-tb">
+
+        <view>当前选择的日期：{{ my }}</view>
+        <!-- 头部 -->
+        <view class="top-handle fs36 box box-lr box-align-center box-pack-center">
+            <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
+                <view class="prev-handle box box-lr box-align-center box-pack-center">{{ preStr }}</view>
+            </view>
+            <picker class='date-area box box-lr box-align-center box-pack-center' mode="date" fields="month" value="{{ picker_value }}" start="{{ start_date }}" bindchange="pickerChange" bindtap="chooseYearAndMonth">
+              {{ cur_year || "--" }} 年 {{ cur_month || "--" }} 月
+            </picker>
+            <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
+                <view class="next-handle box box-lr box-align-center box-pack-center">{{ nextStr }}</view>
+            </view>
+        </view>
+
+        <!-- 星期 -->
+        <view class="weeks box box-lr box-pack-center box-align-center">
+            <view class="flex week fs28 {{ index == 0 ? 'weekend' : '' }} {{ index == 6 ? 'weekend' : '' }}" wx:for="{{ weeks_ch }}" wx:key="{{ index }}" data-idx="{{ index }}">{{ item }}</view>
+        </view>
+
+        <!-- 日期 -->
+        <view class="days box box-lr box-wrap">
+            <view wx:if="{{ hasEmptyGrid }}" class="grid white-color box box-align-center box-pack-center" wx:for="{{ empytGrids }}" wx:key="{{ index }}" data-idx="{{ index }}">
+            </view>
+            <view class="grid white-color box box-align-center box-pack-center" wx:for="{{ days }}" wx:key="{{ index }}" data-idx="{{ index }}" bindtap="tapDayItem">
+                <view class="day {{ item.choosed ? 'border-radius red-bg' : ''}} box box-align-center box-pack-center">
+                <view class='day-view'>
+                  <text>{{ item.day }}</text>
+                  <view class='{{ item.choosed ? "white-color" : "red-color" }}' hidden='{{  }}'>{{ item.lunar }}</view>
+                </view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 下一步 -->
+        <!-- <view class='next-step' bindtap='bindNextBtnTap'>下一步</view> -->
+
+    </view>
+</view>

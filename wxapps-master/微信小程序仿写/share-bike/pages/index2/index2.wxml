@@ -1,0 +1,15 @@
+<!--pages/index2/index2.wxml-->
+<view class="container">
+  <!--map-->
+  <map class="mb-map" id="mbMap" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" markers="{{markers}}" polyline="{{polyline}}" controls="{{controls}}" show-location bindcontroltap="controltap" bindmarkertap="bindmarkertap"/>
+  <!--扫码弹出层-->
+  <modal class="mb-lock" hidden="{{lockhidden}}" title="提示" confirm-text="确定" bindconfirm="confirm" no-cancel="true">
+  清扫描车身或车锁上的二维码
+  </modal>
+  <!--new模块-->
+  <navigator class="mb-new" url="/pages/recharge/recharge">
+    <image src="/images/mywallet.png"></image>
+    <text>限时活动：充值返利，充了就返</text>
+    <text class="right">></text>
+  </navigator>
+</view>

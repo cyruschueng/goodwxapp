@@ -1,0 +1,336 @@
+/**index.wxss**/
+
+page{
+  width:100%;
+  height:100%;
+  overflow-x:hidden;
+}
+text,view{
+  color:#fff;
+}
+
+/************  主体部分  *************/
+view{
+  font-family:microsoft yahei,Arial,Helvetica, sans-serif;
+}
+.container{
+  height:100%;
+  padding:0;
+  background:url(http://api.h6vr.com/cdn.h6vr.com/chwl/images/icon/bg.jpg) no-repeat center center/cover;
+}
+.scroll{
+  height:100%;
+}
+.main-container{
+  width:100%;
+  height:1200rpx;
+  position:relative;
+}
+.main-container swiper{
+  width:100%;
+  height:100%;
+}
+.main-container swiper-item{
+  width:100%;
+  height:100%;
+}
+.change{
+  position:absolute;
+  right:40rpx;
+  top:40rpx;
+  z-index:100;
+  color:#fff;
+
+}
+/**返回按钮**/
+.goBack{
+  margin:22px 0 0 12px;
+  color: #fff;
+  background: rgba(255,255, 255, .1)
+}
+.main-section{
+  width:500rpx;
+  height:400rpx;
+  position:absolute;
+  left:50%;
+  top:200rpx;
+  margin-left:-250rpx;
+  z-index:10;
+  text-align: center;
+  color:#fff;
+}
+
+/*.location .weather .temp .num .value高度后加*/
+.main-section .location{
+  font-size:50rpx;
+}
+.main-section .weather{
+  font-size:32rpx;
+  margin-top:16rpx;
+}
+.main-section .temp{
+  font-size:150rpx;
+}
+
+.main-section .num,.main-section .value{
+  display:inline-block;
+  margin:0 6rpx;
+}
+
+/*图片*/
+.main .slide-image{
+  width:100%;
+  height:100%;
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:0;
+}
+
+
+
+
+/************  每天天气  *************/
+.day-container{
+  box-sizing: border-box;
+  width:100%;
+  height:320rpx;
+  padding: 40rpx 30rpx;
+  /*background:#FAFAFA;*/
+  display:flex;
+  justify-content:space-around;
+  overflow:hidden;
+  position:absolute;
+  left:0;
+  bottom:0;
+}
+.day-container .day{
+  width:33.33%;
+  overflow:hidden;
+  text-align: center;
+  align-content: center;
+}
+.day-container .date{
+  font-size:30rpx;
+  color:#fff;
+}
+.day-container .icon{
+  font-size:34rpx;
+  color:#fff;
+  margin:20rpx 0;
+}
+.day-container .icon image{
+  width:100rpx;
+  height:100rpx;
+}
+.day-container .degree{
+  font-size:24rpx;
+  color:#fff;
+}
+
+/************  空气质量  *************/
+.airvalue-container{
+  box-sizing: border-box;
+  width:100%;
+  height:auto;
+  padding: 40rpx 40rpx 30rpx 40rpx;
+  /*background:#8DBEFA;*/
+  margin-top:20rpx;
+  overflow:hidden;
+}
+
+/*********** 左部分 **********/
+.airvalue-left{
+  float:left;
+  width:30%;
+  height:20rpx;
+  font-size: 34rpx;
+  color:#fff;
+  text-align: left;
+}
+.airvalue-left .num{
+  font-size:90rpx;
+}
+
+/*********** 右部分 **********/
+.airvalue-right{
+  float:left;
+  width:70%;
+}
+.airvalue-right .progress-container{
+  margin-bottom:30rpx;
+  color:#fff;
+}
+.progress-container .pm{
+  float:left;
+  font-size:26rpx;
+}
+.progress-container .per{
+  float:right;
+  font-size:26rpx;
+}
+.progress-container progress{
+  width:100%;
+  padding-top:10rpx;
+}
+
+/** 描述 **/
+.airvalue-right .describe{
+  font-size:34rpx;
+}
+.airvalue-right .describe text{
+  color:#fff;
+  font-size:36rpx;
+}
+
+
+/***************** 其他  *******************/
+.other-container{
+  box-sizing: border-box;
+  width:100%;
+  height:auto;
+  padding: 40rpx;
+  margin-top:20rpx;
+  font-size: 32rpx;
+  position:relative;
+  background-color: rgba(255,255, 255, .1);
+  
+}
+/*.other-container:before{
+  content:"";
+  display:block;
+  width:1px;
+  height:100%;
+  background:#E8E8EA;
+  position:absolute;
+  left:50%;
+  top:0;
+}
+.other-container:after{
+  content:"";
+  display:block;
+  height:1px;
+  width:100%;
+  background:#E8E8EA;
+  position:absolute;
+  top:50%;
+  left:0;
+}*/
+/*
+.other-container .items{
+  box-sizing: border-box;
+  float:left;
+  width:50%;
+  padding:40rpx;
+}*/
+.other-wraper{
+  display: flex;
+  justify-content: space-around;
+  width:100%;
+}
+.other-container .items{
+  width:35%;
+  margin-bottom: 20rpx
+}
+.other-container .items .pic{
+  display:block;
+  width:150rpx;
+  height:150rpx;
+  margin:0 auto;
+  margin-bottom:20rpx;
+  border-radius: 50%;
+}
+.other-container .items .pic image{
+  width:100%;
+  height:100%;
+}
+.items .left{
+  float:left;
+  text-align:left;
+}
+.items .right{
+  float:right;
+  text-align:right;
+}
+.items .middle{
+  text-align: center;
+}
+.items .items-title-sub{
+  color:#fff;
+  margin-bottom:10rpx;
+}
+
+/*边框*/
+/*
+.wind-items{
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+.hum-items{
+  border-right: 1px solid #fff;
+}
+.sun-items{
+  border-bottom: 1px solid #fff;
+}
+*/
+
+/*****************  服务  *******************/
+.serve-container{
+  box-sizing: border-box;
+  width:100%;
+  height:auto;
+  padding:40rpx;
+  /*
+  margin-top:20rpx;
+  */
+  font-size: 32rpx;
+  overflow:hidden;
+}
+.serve-container .items{
+  box-sizing:border-box;
+  width:100%;
+  height:auto;
+  padding-bottom: 20rpx;
+  margin-bottom:10rpx;
+  overflow:hidden;
+  display:flex;
+  align-items: center;
+  /*border-bottom: 1px solid #fff;*/
+}
+.serve-container .items .left{
+  width:240rpx;
+}
+.serve-container .items .pic{
+  width:100%;
+  height:150rpx;
+  overflow:hidden;
+  position:relative;
+}
+.serve-container .items .pic image{
+  width:120rpx;
+  height:120rpx;
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+}
+.serve-container .items text{
+  display: block;
+  text-align: center;
+}
+.serve-container .items .sub{
+  color:#fff;
+}
+.serve-container .items .dis{
+  box-sizing: border-box;
+  width:100%;
+  padding:40rpx;
+  vertical-align: middle;
+  color:#fff;
+}
+
+
+
+

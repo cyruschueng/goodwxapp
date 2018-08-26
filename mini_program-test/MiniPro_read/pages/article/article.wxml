@@ -1,0 +1,17 @@
+<view class="wrap">
+    <image class="pic" src="{{infoData.pic}}"></image>
+    <view class="audio-box">
+        <image class="bg" src="../../images/article/bar.png"></image>
+        <image class="audio_play" bindtap="audioPlay" src="{{pauseStatus?'../../images/article/button_pause.png':'../../images/article/button_play.png'}}"></image>
+        <view class="audio_pro">
+            <view class="art_title">{{infoData.title}}</view>
+            <!--<image class="pro_bg" src="../../images/article/line_bg.png"></image>-->
+            <!--<image class="pro" src="../../images/article/line.png"></image>-->
+        </view>
+        <view class="audio_time">{{audio_min}} : {{audio_sis}}</view>
+        <!--<view class="audio_time">{{audio_sis}}</view>-->
+        <audio src="{{infoData.autio_path}}" id="artAudio"></audio>
+    </view>
+    <!--<view class="art_title">{{infoData.title}}</view>-->
+    <view class="art_content"><text>{{infoData.content}}</text></view>
+</view>

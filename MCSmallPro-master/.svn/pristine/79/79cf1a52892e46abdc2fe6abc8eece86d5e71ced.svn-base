@@ -1,0 +1,98 @@
+<!--pages/me/children/orderDetail/orderDetail.wxml-->
+<view class='top-time' wx:if='{{res.Status == -2}}'>
+  <view>
+    <view class='top-title'>系统关闭</view>
+  </view>
+  <view class='top-time-right' bindtap='deleteOrderAction' data-orderid='{{res.OrderId}}'>删除订单</view>
+</view>
+<view class='top-time' wx:if='{{res.Status == -1}}'>
+  <view>
+    <view class='top-title'>用户取消</view>
+  </view>
+  <view class='top-time-right' bindtap='deleteOrderAction' data-orderid='{{res.OrderId}}'>删除订单</view>
+</view>
+<view class='top-time' wx:if='{{res.Status == 0}}'>
+  <view>
+    <view class='top-title'>等待买家付款</view>
+    <view class='top-msg'>{{countdown}}自动取消订单</view>
+  </view>
+  <view class='top-time-right' bindtap='cancelOrderAction' data-orderid='{{res.OrderId}}'>取消订单</view>
+</view>
+<view class='top-time' wx:if='{{res.Status == 1}}'>
+  <view>
+    <view class='top-title'>付款成功</view>
+  </view>
+  <view class='top-right-text'>普通快递</view>
+</view>
+<view class='top-time' wx:if='{{res.Status == 2}}'>
+  <view>
+    <view class='top-title'>已出库</view>
+  </view>
+  <view class='top-right-text'>普通快递</view>
+</view>
+<view class='top-time' wx:if='{{res.Status == 3}}'>
+  <view>
+    <view class='top-title'>已完成</view>
+  </view>
+  <view class='top-right-text'>欢迎再次光临</view>
+</view>
+
+<view class='address'>
+  <image class='add-img' src='http://res.o2o.com.cn:8082/img/74088ca975dc40438ebc26a361bf31a4'></image>
+  <view>
+  <view class='add-name'>{{res.ReceiveName}}{{res.ReceiveMobile}}</view>
+  <view class='add-address'>{{res.ReceiveAddress}}</view>
+  </view>
+</view>
+
+<view class='product-view'>
+  <view class='pro-top'>
+    <view>商户</view>
+    <view class='pro-contact'>
+       <image class='add-img' src='http://res.o2o.com.cn:8082/img/f2d612ccb00f4b7db02b62ba6584eded'></image>
+        <view>联系商家</view> 
+        <button class='contact-btn' open-type="contact"></button>
+    </view>
+  </view>
+  <!-- 商品详情 -->
+  <view class='order-detail' bindtap='orderDetailAction' wx:for-items="{{res.Products}}" wx:key='{{index}}' wx:for-item='product'>
+    <image class='pro-image' src='{{product.Image}}'></image>
+    <view class='pro-detail'>
+       <text class='pro-name ellipsis2'>{{product.Name}}</text>
+       <text class='pro-content ellipsis2'>规格：{{product.Attr}}</text>
+    </view>
+    <view class='pro-num-price'>
+       <text class='pro-price'>¥{{product.Price}}</text>
+       <text class='pro-num'>x{{product.Qty}}</text>
+    </view>
+  </view>
+  <!-- 商品价格和运费 -->
+  <view class='pro-all-price'>
+     <view class='pro-real-price'>
+       <view>商品应付金额：</view>
+       <view>¥{{res.TotalAmt}}</view>
+     </view>
+     <view class='pro-real-price'>
+       <view>快递运费：默认快递</view>
+       <view>免费</view>
+     </view>
+  </view>
+  <!-- 店铺合计 -->
+  <view class='pro-total-price'>
+     <view>合计</view>
+     <view>¥{{res.TotalAmt}}</view>
+  </view>
+  <!-- 订单编号下单时间 -->
+  <view class='order-time-num'>
+    <view>订单编号：{{res.OrderNo}}</view>
+    <view>下单时间：{{creatTime}}</view>
+  </view>
+</view>
+
+<view class='bottom-view'>
+  <view class='bottom-total'>
+     <view>总计：</view>
+     <view class='bottom-price'>¥{{res.TotalAmt}}</view>
+  </view>
+  <view class='bottom-btn' bindtap='payAction' wx:if='{{res.Status == 0}}'>付款</view>
+</view>

@@ -1,0 +1,88 @@
+//app.js
+var that; 
+var customerIdKey ="customerIdV2";
+App({
+  onLaunch: function () {
+    that = this;
+    that.login();
+  },
+  util: require('utils/util.js'),
+  globalData: {
+    isLogin: false
+  },
+  login: function (callback) {
+    if (wx.getStorageSync(customerIdKey)) {
+      that.globalData.isLogin = true;
+      callback && callback();
+      return;
+    }
+
+    wx.showLoading({
+      title: "正在登录",
+      mask: true,
+    });
+    wx.login({
+      success: function (res) {
+        var code = res.code;
+        wx.getUserInfo({
+          success: function (res) {
+            console.log(res);
+            that.util.post("/ApiAccount/LoginV2", {
+              code: code,
+              encryptedData: res.encryptedData,
+              iv: res.iv
+            }, function (res) {
+              wx.setStorageSync(customerIdKey,res.CustomerId);
+              that.globalData.isLogin=true;
+              callback && callback();
+            });
+          },
+          fail: function (e) {
+            that.getauth({
+              content: '需要获取您的用户信息授权，请到小程序设置中打开授权',
+              cancel: true,
+              success: function (e) {
+                if (e) {
+                  that.login();
+                }
+              },
+            });
+          }
+        });
+      },
+      fail: function (e) {
+      },
+      complete: function () {
+        wx.hideLoading();
+      }
+    });
+  },
+  getauth: function (obj) {
+    wx.showModal({
+      title: '是否打开设置页面重新授权',
+      content: obj.content,
+      confirmText: '去设置',
+      success: function (e) {
+        if (e.confirm) {
+          wx.openSetting({
+            success: function (res) {
+              if (obj.success) {
+                obj.success(res);
+              }
+            },
+            fail: function (res) {
+              obj.fail && obj.fail(res);
+            },
+            complete: function (res) {
+              obj.complete && obj.complete(res);
+            }
+          })
+        } else {
+          if (obj.cancel) {
+            getApp().getauth(obj);
+          }
+        }
+      }
+    });
+  }
+})

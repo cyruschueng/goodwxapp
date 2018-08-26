@@ -1,0 +1,38 @@
+<view class="user-info clearfix">
+    <view class="balance">
+        <text class="money-icon">￥</text>{{recharge}}
+    </view>
+    <view class="fr mr15 grey">总消费<text class="blue">￥{{consume}}</text>元</view>
+</view>
+<view class="list">
+    <view class="list-item transition-duration-150" catchtap="onNavigateTap" data-url="recharge">
+        <text class="icon iconfont icon-recharge"></text>
+        <view class="title right-arrow">充值</view>
+    </view>
+    <view class="list-item transition-duration-150" catchtap="onNavigateTap" data-url="tradelog">
+        <text class="icon iconfont icon-text"></text>
+        <view class="title right-arrow">交易记录</view>
+    </view>
+    <view class="list-item transition-duration-150" catchtap="onNavigateTap" data-url="coupon">
+        <text class="icon iconfont icon-ticket"></text>
+        <view class="title right-arrow">优惠券</view>
+    </view>
+    <view class="list-item" catchtap="onSelectTicketTap">
+        <view class="icon iconfont icon-zuanshi"></view>
+        <view class="title">{{level_info.level}} <text class="f12 linght">(折扣：{{level_info.discount}}%)</text></view>
+    </view>
+    <!-- <view class="list-item transition-duration-150" catchtap="onPayTest" data-url="tradelog">
+        <text class="icon iconfont icon-text"></text>
+        <view class="title right-arrow">支付测试</view>
+    </view> -->
+</view>
+<!-- <view class="page">
+    <view class="body">
+        <view class="box" wx:for="{{data}}" wx:key="*this">
+            <view class="box-header">{{}}</view>
+            <view class="box-content">
+            </view>
+        </view>
+    </view>
+    <view class="footer">取消</view>
+</view> -->

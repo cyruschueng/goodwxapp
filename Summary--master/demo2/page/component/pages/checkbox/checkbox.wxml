@@ -1,0 +1,12 @@
+<view class="weui-cells__title">
+  多选（已选：{{countries}}）</view>
+<view class="weui-cells weui-cells_after-title">
+  <checkbox-group data-name="countries" bindchange="onCheckboxChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['美国','法国','中国']}}" wx:key="*this">
+            <view class="weui-cell__hd">
+              <checkbox color="red" style="color:red" value="{{item}}"/>
+            </view>
+            <view class="weui-cell__bd">{{item}}</view>
+          </label>
+  </checkbox-group>
+</view>

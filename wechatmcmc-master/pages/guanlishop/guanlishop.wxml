@@ -1,0 +1,55 @@
+<block wx:for="{{name}}" wx:for-item="aa">
+      <view class="title"><text>{{aa.name}}</text></view>
+      <block wx:for="{{info}}">
+        <block wx:if="{{aa.leibie==item.liebie}}">
+          <view class="fenge"></view>
+          <navigator class="list" url="../shop/shop?token={{item.id}}">
+            <view class="content">
+              <view class="left">
+                <image src="{{item.logo}}" mode="aspectFill"></image>
+              </view>
+              <view class="right">
+                <view class="top">{{item.title}}</view>
+                <view class="bot-left">
+                  
+                  <block wx:if="{{item.status==1}}">
+                    <view class="bl_t" style="color:green;font-size:14px;">展示中</view>
+                  </block>
+                  <block wx:if="{{item.status==0}}">
+                    <view class="bl_t" style="color:#D81E06;font-size:14px;">下架未展示</view>
+                  </block> 
+                  <view class="bl_b">{{item.city}} {{item.area}}</view>
+                </view>
+                <view class="bot-right">
+                    <block wx:if="{{item.vip==1}}">
+                      <image src="http://www.mcmchw.com/Public/tupian/sas1.png"></image>
+                    </block>
+                    <block wx:if="{{item.vip==0}}">
+                      <image src="http://www.mcmchw.com/Public/tupian/sas.png"></image>
+                    </block>
+                </view>
+              </view>
+            </view>
+          </navigator>
+          <view class="manu">
+              <view class="m_list">
+                <view class="btn" bindtap="shanchu" data-id="{{item.id}}">删除</view>
+                <navigator url="../put/put?token={{item.id}}&leibie={{item.liebie}}" class="btn" >编辑</navigator>
+                <block wx:if="{{item.status==1}}">
+                    <view class="btn" bindtap="xiajia" data-id="{{item.id}}">下架</view>
+                </block>
+                <block wx:if="{{item.status==0}}">
+                    <view class="btn" bindtap="shangjia" data-id="{{item.id}}">上架</view>
+                </block>
+                <view class="btn" bindtap="shuaxin"  data-id="{{item.id}}" data-status="{{item.status}}">刷新</view>
+                <!-- <view class="btn" bindtap="zhiding" data-id="{{item.id}}">置顶</view> -->
+                <view class="btn2" style="font-size:14px;">{{item.time}}</view>
+              </view>
+          </view>
+          </block>
+      </block>
+</block>
+<view style="width:100%;height:60px;"></view>
+<navigator open-type="switchTab" hover-class="none" url="../fabu/fabu" class="bottom">
+  发布信息
+</navigator>

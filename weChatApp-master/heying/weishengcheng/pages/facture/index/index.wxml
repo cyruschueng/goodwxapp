@@ -1,0 +1,128 @@
+<import src="/wux/notification/notification.wxml" />
+<template is="notification" data="{{ ...$wux.notification }}" />
+<import src="/zanui/toast/index.wxml" />
+<view class="mainBox" catchtap="cancel">
+    <!-- <view bindtap="scanImage" style="padding: 40rpx 0 40rpx 530rpx;">
+      <button class="weui-btn mini-btn" type="primary" size="mini">预览头像</button>
+    </view> -->
+    <!--<form bindsubmit="scanImage" report-submit="true" style="width: 100%;">
+      <view style="padding: 40rpx 0;float: left;margin-left: 160rpx;">
+        <button class="weui-btn mini-btn" type="primary" size="mini" form-type="submit" style="width:250rpx;height:80rpx;line-height:80rpx;">方形头像</button>
+      </view>
+
+      <view style="clear: both;"></view>
+    </form>
+  -->
+    <!-- <view style="width: 100%;height: auto">
+      <view style="padding-top:15px;padding-bottom:15px;">
+
+        <view class="avatar-base">
+          <view class="avatar-squ {{!isCircle ? 'avatar-active':''}}" bindtap="changeSqu">
+            方形头像
+          </view>
+          <view class="avatar-cir {{isCircle ? 'avatar-active':''}}" bindtap="changeCircle">
+            圆形头像
+          </view>
+
+        </view>
+      </view>
+    </view> -->
+    <view wx:if="{{!hasChooseBackground}}" >
+        <!-- <view style="margin-top: 20rpx;text-align: center;">选择合影背景</view> -->
+        <!-- 背景图片 -->
+        <view style="position:relative;margin-top:9%;height:700rpx;">
+            <image src="{{backgroundSrc}}" style="width:{{avatarCanvasWidth}}px;height:{{avatarCanvasHeight}}px;{{isCircle?'border-radius: 50%;':''}}margin: 0 auto;display: block;" mode="aspectFit"></image>
+        </view>
+
+        <view class="avatarBox">
+
+            <scroll-view scroll-x style="width: 560rpx;" hidden="{{avatarHidden}}">
+                <view class="flex_row">
+                    <view style="background-color: #fff;" wx:for="{{bgImage}}" wx:key="avatar">
+                        <image class="avatar" src="{{item.avatar}}" catchtap="chooseBackground" data-src="{{item.list}}" style="width: 150rpx;height: 150rpx;padding: 10rpx 0;padding-left:20rpx;box-sizing: border-box;"></image>
+                    </view>
+                </view>
+            </scroll-view>
+           
+            <view hidden="{{avatarHidden}}" style="position: relative;width: 130rpx;height: 130rpx;margin: 10rpx 30rpx;border: 1px solid #000;" catchtap='uploadBackgroundImage'>
+                <view style="position: absolute;top: 50%;left: 50%;transform: translateX(-50%);width: 90rpx;height: 90rpx;border-top: 1px solid #000;"></view>
+                <view style="position: absolute;top: 50%;left: 50%;transform: translateY(-50%);width: 90rpx;height: 90rpx;border-left: 1px solid #000;"></view>
+            </view>
+        </view>
+         <view style="position:fixed;bottom:200rpx;width:100%;border:solid red 1px;background-color: #FFF"  wx:if="{{backgroundImages}}" hidden="{{!avatarHidden}}">
+            <scroll-view scroll-x style="height:200rpx">
+                <view class="flex_row">
+                    <view style="background-color: #fff;" wx:for="{{backgroundImages}}" wx:key="bg">
+                        <image class="avatar" src="{{item}}" catchtap="backgroundClick" data-src="{{item}}" style="width: 200rpx;height: 200rpx;padding: 10rpx 0;padding-left:20rpx;box-sizing: border-box;"></image>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <button class="weui-btn" disabled="{{!backgroundSrc}}" type="primary" size="max" catchtap='nextStep' style="width: 60%;position:fixed;bottom:100rpx;left:50%;transform: translateX(-50%);">下一步</button>
+        <!-- <button catchtap="cancel">取消</button> -->
+    </view>
+
+
+
+
+    <view wx:else>
+        <!-- 头像动作画布 -->
+        <view style="position:relative;margin-top:9%;">
+            <image src="{{backgroundSrc}}" style="width:{{avatarCanvasWidth}}px;height:{{avatarCanvasHeight}}px;{{isCircle?'border-radius: 50%;':''}}margin: 0 auto;display: block;"></image>
+            <canvas disable-scroll="true" canvas-id="avatar" bindtouchmove="avatarTouchMove" bindtouchstart="avatarTouchStart" bindtouchend="avatarTouchEnd" style="width:{{avatarCanvasWidth}}px;height:{{avatarCanvasWidth}}px;position: absolute;top:0;left: 5%;background-color:transparent;">
+            </canvas>
+        </view>
+        <view style="z-index:1;margin-top: 7%;">
+            <view class="avatarBox">
+                <scroll-view scroll-x style="width: 560rpx;">
+                    <view class="flex_row">
+                        <view style="background-color: #fff;" wx:for="{{urls}}" wx:key="value">
+                            <image class="avatar" src="{{item}}" catchtap="itemClick" data-index="{{index}}" style="width: 150rpx;height: 150rpx;padding: 10rpx 0;padding-left:20rpx;box-sizing: border-box;"></image>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view style="position: relative;width: 130rpx;height: 130rpx;margin: 10rpx 30rpx;border: 1px solid #000;" catchtap='chooseSelf'>
+                    <view style="position: absolute;top: 50%;left: 50%;transform: translateX(-50%);width: 90rpx;height: 90rpx;border-top: 1px solid #000;"></view>
+                    <view style="position: absolute;top: 50%;left: 50%;transform: translateY(-50%);width: 90rpx;height: 90rpx;border-left: 1px solid #000;"></view>
+                </view>
+            </view>
+            <view class="btn-image">
+                <view class="upload-avatar" bindtap="changeBackground">换个背景</view>
+                <view class="download-phone" bindtap="scanImage">预览</view>
+                <!-- <view class="download-phone" bindtap="chooseSelf">选择自己</view> -->
+            </view>
+        </view>
+        <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+            <view class="zan-dialog__mask" catchtap="toggleDialog" />
+            <view class="zan-dialog__container">
+                <scroll-view class="scroll" scroll-x wx:if="{{showDialog}}" style="background-color: #262626;">
+                    <view style="width:{{100*urls.length}}rpx;" class="flex_row">
+                        <block wx:for="{{iconList}}" wx:key="item">
+                            <vidw data-avatarpath="{{item}}" bindtap="selectAvatar" style="  padding: 10rpx;">
+                                <image style="width: 85rpx;height: 85rpx;" src="{{item}}" />
+                            </vidw>
+                        </block>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <!--<view class="avatarBox avatarBoxChild" wx:if="{{avatarBoxChild}}">-->
+    <!--<scroll-view scroll-x style="background-color: transparent;width: 100vw;">-->
+    <!--<view style="width:{{100*urls.length}}rpx;" class="flex_row">-->
+    <!--<block wx:for="{{iconList}}" wx:key="item">-->
+    <!--<vidw data-avatarpath="{{'http://icons.maiyizhi.cn/'+item}}" bindtap="selectAvatar"-->
+    <!--style=" margin: 9px 5px 0 5px; padding: 10rpx;">-->
+    <!--<image class="avatarBoxChildImage" style="width: 95rpx;height: 95rpx;"-->
+    <!--src="{{'http://icons.maiyizhi.cn/'+item}}"/>-->
+    <!--</vidw>-->
+    <!--</block>-->
+    <!--</view>-->
+    <!--</scroll-view>-->
+    <!--&lt;!&ndash;<view class="avatarBtnBox" bindtap="avatarBtn">&ndash;&gt;-->
+    <!--<view class="avatarBtnBox">-->
+    <!--<view>定</view>-->
+    <!--</view>-->
+    <!--</view>-->
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

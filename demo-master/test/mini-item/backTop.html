@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+<style type="text/css">
+body {
+    height: 10000px;
+    position: relative;
+}
+
+.back_top {
+    position: fixed;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    top: 100px;
+    background: pink;
+    color: white;
+    display: none;
+}
+</style>
+<script type="text/javascript" src="../common/js/lib/jquery-1.11.0.min.js"></script>
+
+<body>
+    <div class="back_top">返回顶部</div>
+    <script type="text/javascript">
+    $(function() {
+        function backTop(className, showDis, spentTime) {
+            $(window).scroll(function() {
+                var backDis = $(window).scrollTop();
+                if (backDis < showDis) {
+                    $("." + className).fadeOut()
+                } else {
+                    $("." + className).fadeIn()
+                };
+            })
+
+
+            $("." + className).on("click", function() {
+                $('bady,html').animate({ scrollTop: 0 }, spentTime);
+                return false;
+            })
+        }
+        backTop("back_top", "500", "500");
+    })
+    </script>
+</body>
+
+</html>

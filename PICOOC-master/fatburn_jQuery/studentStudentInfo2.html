@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+	<head>
+	<title>个人主页</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+	<link rel="stylesheet" type="text/css" href="css/comment.css">
+	<link rel="stylesheet" type="text/css" href="css/comment2.css?v=6">
+	<link rel="stylesheet" type="text/css" href="css/studentInfo2.css?v=5">
+	<link rel="stylesheet" type="text/css" href="css/studentType1.css">
+	<link rel="stylesheet" type="text/css" href="css/heightCommon.css" />
+    <link href="css/mobiscroll.custom-3.0.0-beta4.css" rel="stylesheet" />
+    <style type="text/css">
+    	.container{
+    		min-height: 480px;
+    	}
+	    .mbsc-android-holo-light .mbsc-fr-w, .mbsc-android-holo-light .mbsc-cal-sc-c {
+		    background: #fff;
+	        font-family: 'Regular','.PingFang SC','Helvetica Neue',Helvetica,Verdana,Arial,sans-serif;
+		}
+    	.mbsc-android-holo-light .mbsc-fr-hdr {
+		    color: #31b7e8;
+		    border-color: #fff;
+		}
+		.mbsc-android-holo .mbsc-fr-hdr {
+		    color: #575b61;
+		    padding: 0 .5em;
+		    min-height: 3em;
+		    line-height: 3em;
+		    border-bottom: 2px solid #fff;
+		    font-size: 1.125em;
+		}
+		/*.mbsc-android-holo .mbsc-fr-hdr {
+		    color: #31b6e7;
+		    padding: 0 .5em;
+		    min-height: 2em;
+		    line-height: 2em;
+		    border-bottom: 2px solid #fff;
+		    font-size: 1.125em;
+		}*/
+		.mbsc-android-holo-light .mbsc-sc-whl-l {
+		    border-color: #e2e2e3;
+		}
+		.mbsc-android-holo .mbsc-sc-whl-l {
+		    border-top: 1px solid #e2e2e3;
+		    border-bottom: 1px solid #e2e2e3;
+		}
+		/*.birthTitle{
+			color: #575b61;
+		    padding: 0 .5em;
+		    min-height: 2em;
+		    line-height: 2em;
+		    border-bottom: 2px solid #fff;
+		    font-size: 1.125em;
+		    text-align: center;
+		}*/
+		.mbsc-android-holo-light .mbsc-sc-whl-o {
+		    background: -webkit-gradient(linear,left bottom,left top,from(#fff),color-stop(0.52,rgba(255,255,255,0)),color-stop(0.48,rgba(255,255,255,0)),to(#fff));
+		    background: -webkit-linear-gradient(#fff,rgba(255,255,255,0) 52%,rgba(255,255,255,0) 48%,#fff);
+		    background: linear-gradient(#fff,rgba(255,255,255,0) 52%,rgba(255,255,255,0) 48%,#fff);
+		}
+		.mbsc-ltr .mbsc-img-w {
+		   text-align: center;
+		}
+		.mbsc-android-holo .mbsc-fr-hdr{
+            color: #575b61;
+        }
+        .mbsc-fr-w {
+		    border-radius: 0;
+		    position: relative;
+		}
+        .mbsc-fr-btn-cont{
+		    border-color: #fff;
+		    height: 3rem;
+		    position: absolute;
+		    top: 0;
+		}
+		.mbsc-fr-btn-w {
+		    float: right;
+		    height: 3rem;
+		}
+		.mbsc-fr-btn-s{
+			padding-left: 8.7rem;
+			/*padding: 0 1.4rem;*/
+		}
+		.mbsc-fr-btn-c{
+			padding: 0 1.4rem;
+			/*padding-left: 8.7rem;*/
+		}
+		.mbsc-fr-btn0{
+			width:1.25rem;
+			height: 3rem;
+			background: url(image/studentInfo/save.png) no-repeat;
+    		background-size: contain;
+    		background-position: center;
+		}
+		.mbsc-fr-btn1{
+			width:1.25rem;
+			height: 3rem;
+			background: url(image/studentInfo/cancel.png) no-repeat;
+    		background-size: contain;
+    		background-position: center;
+		}
+		/*.mbsc-fr-btn0:hover,.mbsc-fr-btn0:active,.mbsc-fr-btn0:link,.mbsc-fr-btn0:visited{
+			background-color: #fff;
+		}*/
+		.mbsc-fr-btn-a{
+			background-color: #fff;
+		}
+
+    </style>
+	</head>
+	<body>
+	<div class="container">
+		<div class="top-info">
+			<div class="row top-img">
+				<img  class="head" src="" />
+				<img class="sex" src="" />
+			</div>
+			<div class="row account">
+				<span id="accountVal"></span>
+			</div>
+			<div class="row info-tag">
+				<!-- <div class="row">
+					<div class="col-xs-3 col-sm-3 info-tagImg-item">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/cardInfo5.png" />
+					</div>
+					<div class="col-xs-3 col-sm-3 info-tagImg-item">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/trainInfo6.png" />
+					</div>
+					<div class="col-xs-3 col-sm-3 info-tagImg-item">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/bodyChange6.png" />
+					</div>
+					<div class="col-xs-3 col-sm-3 info-tagImg-item">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/baseInfo6.png" />
+					</div>
+				</div> -->
+				<div class="row">
+					<div class="col-xs-3 col-sm-3 info-tag-item">
+						<div>
+							<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/cardInfo5.png" />
+						</div>
+						<span>打卡记录</span>
+					</div>
+					<div class="col-xs-3 col-sm-3 info-tag-item">
+						<div>
+							<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/trainInfo6.png" />
+						</div>
+						<span>运动数据</span>
+					</div>
+					<div class="col-xs-3 col-sm-3 info-tag-item">
+						<div>
+							<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/bodyChange6.png" />
+						</div>
+						<span>身体变化</span>
+					</div>
+					<div class="col-xs-3 col-sm-3 info-tag-item">
+						<div>
+							<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/baseInfo6.png" />
+						</div>
+						<span>基本信息</span>
+					</div>
+				</div>
+				<div class="row navBar">
+					<div></div>
+					<!-- <img src="image/studentInfo/tagIcon.png"> -->
+				</div>
+			</div>
+		</div>
+
+		<div class="row" id="tag-content">
+			<aside class="row page1 msgType1">
+					<div class="row shaixuan1">
+						<div class="col-xs-12 col-sm-12 campstatusContainer1">
+							<div class="ttab1"><span class="tabtype1">全部</span></div>
+							<div class="col-xs-12 col-sm-12 campstatus1">
+							<div class="campstatusContent"></div>
+							</div>
+						</div>
+						<div class="type-container1">
+							<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-2.png" /></div>
+							<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/studentList/all.png" /></div>
+							<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-3.png" /></div>
+							<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/studentList/diet.png" /></div>
+							<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-4.png" /></div>
+							<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-7.png" /></div>
+							<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-5.png" /></div>
+						</div>
+					</div>
+					<article class="row list">
+					</article>
+					<div class="saveImg-ceng">
+						<aside class="row saveImg">
+							<div class="col-xs-12 col-sm-12 saveImg-btn saveImg-item">保存图片</div>
+							<div class="col-xs-12 col-sm-12 cancelImg-btn saveImg-item">取消</div>
+						</aside>
+					</div>
+			</aside>
+			<div class="row page2">
+				<div class="trainTime">
+					<div class="train_title">您累计运动时长</div>
+					<div class="trainTime_info">
+						<span class="minute">1242</span>分
+						<span class="second">45</span>秒
+					</div>
+				</div>
+				<div class="trainList">
+					<!-- <div class="train_week_list">
+						<div class="train_week_title">第4周  2月13日- 2月19日</div>
+						<div class="train_day_list row">
+							<div class="train_day_item row">
+								<div class="train_day_date col-xs-2 col-sm-2">第七天</div>
+								<div class="train_day_timeInfo col-xs-4 col-sm-4">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/trainTime.png">
+									<span>14分20秒</span>
+								</div>
+								<div class="train_day_groupInfo col-xs-3 col-sm-3">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/fire.png">
+									<span>10组</span>
+								</div>
+								<div class="train_day_rateInfo col-xs-3 col-sm-3">
+									<canvas id="canvas1" class="canvas_bg"></canvas>  
+									<span class="parcentText"><span>80</span>%</span>
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/processText.png">
+								</div>
+							</div>
+							<div class="train_day_item row">
+								<div class="train_day_date col-xs-2 col-sm-2"></div>
+								<div class="train_day_timeInfo col-xs-4 col-sm-4">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/trainTime.png">
+									<span>14分20秒</span>
+								</div>
+								<div class="train_day_groupInfo col-xs-3 col-sm-3">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/fire.png">
+									<span>10组</span>
+								</div>
+								<div class="train_day_rateInfo col-xs-3 col-sm-3">
+									<canvas id="canvas2" class="canvas_bg"></canvas>  
+									<span class="parcentText"><span>80</span>%</span>
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/processText.png">
+									<canvas id="canvas2" ></canvas>  
+								</div>
+							</div>
+							<div class="train_day_item row">
+								<div class="train_day_date col-xs-2 col-sm-2">第六天</div>
+								<div class="train_day_timeInfo col-xs-4 col-sm-4">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/trainTime.png">
+									<span>14分20秒</span>
+								</div>
+								<div class="train_day_groupInfo col-xs-3 col-sm-3">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/fire.png">
+									<span>10组</span>
+								</div>
+								<div class="train_day_rateInfo col-xs-3 col-sm-3">
+									<canvas id="canvas3" class="canvas_bg"></canvas>  
+									<span class="parcentText"><span>80</span>%</span>
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/processText.png">
+								</div>
+							</div>
+							<div class="train_day_item row">
+								<div class="train_day_date col-xs-2 col-sm-2"></div>
+								<div class="train_day_timeInfo col-xs-4 col-sm-4">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/trainTime.png">
+									<span>14分20秒</span>
+								</div>
+								<div class="train_day_groupInfo col-xs-3 col-sm-3">
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/fire.png">
+									<span>10组</span>
+								</div>
+								<div class="train_day_rateInfo col-xs-3 col-sm-3">
+									<canvas id="canvas4" class="canvas_bg"></canvas>  
+									<span class="parcentText"><span>80</span>%</span>
+									<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/processText.png">
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			<div class="page3">
+				<div class="chart">
+					<div class="row chartTop">
+						<div class="row top">
+							<div class="col-xs-6 col-sm-6 chartTag-item">
+								<div>体重变化</div>
+								<div>
+									<img class="wFlag" src="" />
+									<span class="wChangePar"></span>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-6 chartTag-item">
+								<div>脂肪变化</div>
+								<div>
+									<img class="fFlag" src="" />
+									<span class="fChangePar"></span>
+								</div>
+							</div>
+						</div>
+						<div class="userBody">
+							<span>更多指标变化</span>
+							<img src="image/studentInfo/right.png">
+						</div>
+					</div>
+
+					<div class="row chartContent">
+						<div class="row chartTag">
+							<span class="col-xs-4 col-sm-4 tag-weight active">体重</span>
+							<span class="col-xs-4 col-sm-4 tag-fat">脂肪</span>
+							<span class="col-xs-4 col-sm-4 tag-waist">腰围</span>
+						</div>
+						<div class="row chartBottom weightContent">
+							<canvas class="line" id="weight" width="100px" height="100px"></canvas>
+							<div id="weightNum" class="lineNum"></div>
+						</div>
+						<div class="row chartBottom fatContent">
+							<canvas class="line" id="fat" width="100px" height="100px"></canvas>
+							<div id="fatNum" class="lineNum"></div>
+						</div>
+						<div class="row chartBottom waistContent">
+							<canvas class="line" id="waist" width="100px" height="100px"></canvas>
+							<div id="waistNum" class="lineNum"></div>
+						</div>
+					</div>
+ 					<article class="row change">
+						<div class="col-xs-6 col-sm-6 changeList changeList1">
+							<a class="row changeList-main1" href="javascript:void(0);" onclick="javascript:this.href='trainPlan.html'+location.search">
+								<div class="col-xs-12 col-sm-12 changeList-icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/student/plan.png"></div>
+								<div class="col-xs-12 col-sm-12 changeList-p myPlan">我的方案</div>
+							</a>
+						</div>
+						<div class="col-xs-6 col-sm-6 changeList changeList2">
+							<a class="row changeList-main2" href="">
+								<div class="col-xs-12 col-sm-12 changeList-icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/student/body.png"></div>
+								<div class="col-xs-12 col-sm-12 changeList-p myBody">我的身材</div>
+							</a>
+						</div>
+					</article>
+					<div class="bodyMessage">
+						暂时没有身体数据哦～
+					</div>
+				</div>
+			</div>
+			
+			<div class="row page4">
+				<div class="col-xs-12 col-sm-12 info-item name jumpItem">
+					<span>昵称</span>
+					<span class="text-item"></span>
+					<img src="image/studentInfo/right1.png" class="info-img"/>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item height noJump">
+					<span>身高</span>
+					<ul id="height" style="display:none"></ul>
+					<!-- <input id="userHeight" name="userHeight" type="text" /> -->
+					<img src="image/studentInfo/right1.png" class="info-img"/>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item age noJump">
+					<span>生日</span>
+					<input id="birthday" name="StartTime" type="text"/>
+					<img src="image/studentInfo/right1.png" class="info-img"/>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item physicalPeriod noJump">
+					<span>上次生理期</span>
+					<input id="physicalPeriodInput" name="StartTime" type="text" value/>
+					<img src="image/studentInfo/right1.png" class="info-img"/>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item periodDesc noJump">
+					<span>习惯测量</span>
+					<ul id="weightTime" style="display:none">
+						<!-- <li data-val="凌晨 (00:00-04:00)">
+				            <p>凌晨 (00:00-04:00)</p>
+				        </li> -->
+				        <li data-val="上午时段 (04:00-12:00)">
+				            <p>上午时段 (04:00-12:00)</p>
+				        </li>
+				        <li data-val="下午时段 (12:00-16:00)">
+				            <p>下午时段 (12:00-16:00)</p>
+				        </li>
+				        <li data-val="傍晚时段 (16:00-20:00)">
+				            <p>傍晚时段 (16:00-20:00)</p>
+				        </li>
+				        <li data-val="夜晚时段 (20:00-24:00)">
+				            <p>夜晚时段 (20:00-24:00)</p>
+				        </li>
+				    </ul>
+					<img src="image/studentInfo/right1.png" class="info-img"/>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item career jumpItem">
+					<span>职业</span>
+					<span class="text-item"></span>
+					<img src="image/studentInfo/right1.png" class="info-img"/>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item area jumpItem">
+					<span>所在地</span>
+					<span class="text-item"></span>
+					<img src="image/studentInfo/right1.png" class="info-img"/>
+				</div>
+			</div>
+		</div>
+		<div class="row footer comment">
+			<div class="col-xs-12 col-sm-12 footer-top"><span class="footer-top-1" id="comment-back">取消</span><span class="footer-top-3"></span><span class="footer-top-2" id="comment-btn">发送</span></div>
+			<div class="col-xs-12 col-sm-12 footer-main">
+				<textarea id="comment-msg" class="col-xs-12 col-sm-12 " placeholder="回复："></textarea>
+			</div>
+		</div>
+
+		<div class="row footer  comment2">
+			   <div class="col-xs-2 col-sm-2" style="position:relative;height:auto">
+					<div class="imgContainer" style="width:100%;">
+						<img class="img1" src="image/student/student-19.png">
+						<div class="shuxian"></div>
+					</div>
+			   </div>
+				<div class="footer-main1 col-xs-8 col-sm-8">
+					<textarea id="comment2-msg1" class="" placeholder="回复:"></textarea>
+			   </div>
+			   <div class="col-xs-2 col-sm-2" style="position:relative;height:auto">
+					<div class="btn" style="width:100%">
+						<img class="comment2-send" src="image/student/send1.png">
+					</div>
+			   </div>
+		</div>
+		<div class="row footer comment3">
+				<div class="footer-main1 col-xs-8 col-sm-8">
+					<textarea id="comment2-msg2" class=""></textarea>
+			   </div>
+		</div>
+		<aside class="row swiper-container bigImg">
+			<div class="row swiper-wrapper bigImg-main">
+			</div>
+			<div class="swiper-pagination"></div>
+		</aside>
+		<aside class="row fixbg">
+			<div class="col-xs-12 col-sm-12 fixbg-main">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 fixbg-main-t">您确定删除这条评论吗？</div>
+					<div class="col-xs-12 col-sm-12 fixbg-main-btn">
+						<div class="row">
+							<div class="col-xs-6 col-sm-6 fixbg-main-btn1">取消</div>
+							<div class="col-xs-6 col-sm-6 fixbg-main-btn2">确定</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	<div class="typeContainer"></div>
+	</div>
+
+		<div class="row errorAlert">
+			<div class="col-xs-12 col-sm-12 error-main">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 error-main-t"></div>
+					<div class="col-xs-12 col-sm-12 error-main-btn">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 error-main-btn1">我知道了</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/mobiscroll.custom-3.0.0-beta4.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript" src="jsv1/rateCanvas.js"></script>
+	<script type="text/javascript" id="script1"></script>
+	<script type="text/javascript" id="script2"></script>
+	<script type="text/javascript" id="script3"></script>
+	<script type="text/javascript" id="script4"></script>
+	<script>
+		if(getParamByUrl("webver")>2){
+			if(getParamByUrl("os")=="android"){
+				$("#script1").attr("src","jsv1/infoWidget.js?v=16");
+				$("#script2").attr("src","jsv1/cardFunction.js?v=19");
+				$("#script3").attr("src","jsv1/card1.js?v=30");
+				$("#script4").attr("src","jsv1/studentStudentInfo2.js?v=25");
+			}
+			else{
+				var mobileApp=window.webkit.messageHandlers;
+				$("#script1").attr("src","jsv1/infoWidget.js?v=16");
+				$("#script2").attr("src","jsv1/cardFunction.js?v=19");
+				$("#script3").attr("src","jsv1/card1.js?v=30");
+				$("#script4").attr("src","jsv1/studentStudentInfo2.js?v=25");
+			}
+		}
+		else{
+			$("#script1").attr("src","js/infoWidget.js?v=16");
+			$("#script2").attr("src","js/cardFunction.js?v=19");
+			$("#script3").attr("src","js/card1.js?v=30");
+			$("#script4").attr("src","js/studentStudentInfo2.js?v=25");
+		}
+	</script>
+<script>
+//百度统计上传代码
+	var _hmt = _hmt || [];
+	_hmt.push(['_setAutoPageview', false]);
+	_hmt.push(['_trackPageview', location.pathname]);
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+	  var s = document.getElementsByTagName("script")[0];
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</html>

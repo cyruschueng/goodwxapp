@@ -1,0 +1,25 @@
+<!--MyRecord.wxml-->
+ <view class="bg_img" style="background-image: url('https://www.mqtp8.cn/imgs/record_img.png')">
+  <view class='sendCount_box'>
+    <image class="coin" src="/pages/imgs/coin.png" background-size="cover"> </image>
+    <view class="myMoney1">余额：￥{{myCount}}</view>
+    <view class="myMoney_tip">● 每日最多可提现3次 ●</view>
+  </view>
+  </view>
+
+  <view class='input_box'>
+    <view class='input_box_tip'>提现金额</view>
+  <view class="return_money_content">
+    <text>￥</text>
+    <input type='digit' placeholder-style="color:#ccc;font-size:14px;margin-top:3px;" placeholder="不低于2元" value="{{value}}" name="returnMoney" bindinput="returnMoneyEvent" />
+    <view class="clearfix"></view>
+  </view>
+    <view class='return_count'>当天剩余提现次数{{return_num}}/3,   提现上限500元</view>
+  </view>
+<image bindtap="moneyBack" bindtouchstart="touchStart" bindtouchend="touchEnd" class='returnMoney' src="/pages/imgs/returnMoney.png"></image>
+<view class='returnMoney_tip'>提示：3个工作日之内到账</view>
+
+<view class='problem_list'>
+  <view class='problem' bindtap='NormalProblem' bindtouchstart="touchStart" bindtouchend="touchEnd">常见问题</view>
+  <view class='list' bindtap='list' bindtouchstart="touchStart" bindtouchend="touchEnd">收支明细</view>
+</view>

@@ -1,0 +1,61 @@
+<!--index.wxml-->
+<!--公共头部-->
+<include src="../header/header.wxml" />
+<view class="container">
+  <block wx:for="{{advertisementinfo}}">
+    <!--第一进来  -->
+    <block wx:if="{{item.status==0}}">
+      <view class="list" id="{{item.id}}" bindtap="{{tiaoDetail}}"  data-sta="{{item.status}}" data-carid="{{item.car_model_id}}">
+        <image src="{{item.ad_img_url}}"></image>
+        <text>{{item.statusmessage}}</text>
+      </view>
+    </block>
+    <!-- 已经预约 -->
+    <block wx:elif="{{item.status==1}}">
+      <view class="list" id="{{item.id}}" bindtap="{{alreadyRe}}" data-orderid="{{item.orderid}}" data-orderhid="{{item.orderh5id}}" data-sta="{{item.status}}" data-carid="{{item.car_model_id}}">
+        <image src="{{item.ad_img_url}}"></image>
+        <text>{{item.statusmessage }}</text>
+        <image src="{{imagesUrl}}look.png" class="look"></image>
+      </view>
+    </block>
+    <!-- 置灰半年内不能重复试驾 -->
+    <block wx:elif="{{item.status==-1}}">
+      <view class="list" id="{{item.id}}" bindtap="noclick" data-sta="{{item.status}}" data-carid="{{item.car_model_id}}">
+        <image src="{{item.ad_img_url}}" class="gray"></image>
+        <text>{{item.statusmessage}}</text>
+      </view>
+    </block>
+    <!-- 试驾完成 -->
+    <block wx:elif="{{item.status==2}}">
+      <view class="list" id="{{item.id}}" data-sta="{{item.status}}" bindtap="{{alreadyTest}}" data-carid="{{item.car_model_id}}">
+        <image src="{{item.ad_img_url}}"></image>
+        <text>{{item.statusmessage }}</text>
+        <image src="{{imagesUrl}}look.png" class="look"></image>
+      </view>
+    </block>
+    <!-- 试驾审核中 -->
+    <block wx:elif="{{item.status==3}}">
+      <view class="list" id="{{item.id}}" data-sta="{{item.status}}" bindtap="testIng" data-carid="{{item.car_model_id}}">
+        <image src="{{item.ad_img_url}}"></image>
+        <text>{{item.statusmessage }}</text>
+        <image src="{{imagesUrl}}look.png" class="look"></image>
+      </view>
+    </block>
+    <!-- 审核成功 -->
+    <block wx:elif="{{item.status==4}}">
+      <view class="list" id="{{item.id}}" bindtap="testSuccess" data-sta="{{item.status}}" data-carid="{{item.car_model_id}}">
+        <image src="{{item.ad_img_url}}"></image>
+        <text>{{item.statusmessage }}</text>
+        <image src="{{imagesUrl}}look.png" class="look"></image>
+      </view>
+    </block>
+    <!-- 审核失败 -->
+    <block wx:elif="{{item.status==5}}">
+      <view class="list" id="{{item.id}}" bindtap="testFail" data-sta="{{item.status}}" data-carid="{{item.car_model_id}}">
+        <image src="{{item.ad_img_url}}"></image>
+        <text>{{item.statusmessage }}</text>
+        <image src="{{imagesUrl}}look.png" class="look"></image>
+      </view>
+    </block>
+  </block>
+</view>

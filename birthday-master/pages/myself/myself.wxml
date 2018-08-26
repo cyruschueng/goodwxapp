@@ -1,0 +1,73 @@
+<view class="container">
+     <!-- 获取自己 -->
+    <image class="avatarIcon"  wx:if="{{avatar}}"  bindtap="niceimg" src="{{avatar}}" 
+          mode='scaleToFill'></image>
+    <image bindtap="niceimg" wx:else class="avatarIcon"  src='{{userInfo.avatarUrl}}' mode='scaleToFill'></image>
+    <view class="userInfo">
+      <text class="userInfo-title">姓名</text>
+      <input bindinput="nameOnTouch" class="userInfo-content name" placeholder="请输入姓名"
+      placeholder-style="color:#999" type="text" value="{{name}}" />
+    </view>
+    <view class="userInfo">
+      <text class="userInfo-title">性别</text>
+      <view class="userInfo-content">
+        <view class="userInfo-content-male" bindtap='male' data-gender="1">
+            <image class="userInfo-content-icon" wx:if="{{gender == 1}}" mode="aspectFit" src="../images/birthwall_checkeda.png"></image>
+            <image class="userInfo-content-icon" wx:else mode="aspectFit" src="../images/birthwall_unchecked.png"></image>
+            <text bindtap="gender" class="userInfo-content-name" style="color:#999;">男</text>
+        </view>
+        <view class="userInfo-content-female" bindtap='male' data-gender="2">
+            <image class="userInfo-content-icon" wx:if="{{gender == 2}}" mode="aspectFit" src="../images/birthwall_checkeda.png"></image>
+            <image class="userInfo-content-icon" wx:else mode="aspectFit" src="../images/birthwall_unchecked.png"></image>
+            <text bindtap="gender" class="userInfo-content-name" style="color:#999;">女</text>
+        </view>
+      </view>
+    </view>
+    <view class="userInfo" style='justify-content: flex-start;'>
+      <text class="userInfo-title">生日</text>
+      <view style='padding:0 0 0 60rpx'>
+           <picker mode="date" value="{{birth_year}}{{birth_month}}{{birth_day}}" start="" end="" bindchange="bindDateChange">
+              <view class="weui-input">{{birth_year}}-{{birth_month}}-{{birth_day}}</view>
+            </picker>
+      </view>
+    </view>
+
+    <!-- <view class="userInfo" style='justify-content: flex-start;'>
+      <text class="userInfo-title">家乡</text>
+      <view style='padding:0 0 0 60rpx'>
+          <input class="weui-input" name="city" placeholder="点击设置生日" value="{{province}}-{{city}}-{{county}}" focus="{{focus}}" bindfocus="open"/>
+      </view>
+    </view> -->
+    <view class="userInfo">
+      <text class="userInfo-title">手机</text>
+      <input placeholder-style="color:#999" bindinput="phoneOnTouch" class="userInfo-content phone"
+      maxlength="11" placeholder="请输入手机号" type="number" value="{{phone}}" />
+    </view>
+    <!-- <view class="separateLine"></view>
+     <view class="userInfo" bindtap='relative'>
+        <text class="userInfo-title">关系</text>
+        <input bindinput="nameOnTouch" class="userInfo-content name" placeholder="描述你们的关系"
+        placeholder-style="color:#999" type="text" value="{{relation}}" disabled/>
+    </view>  -->
+    <view class="birthBehavior">
+      <view class="birthBehavior-save" bindtap='save'>保存</view>
+    </view>
+</view>
+<!--地区  -->
+<view wx:if="{{condition}}" class="citypicker">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;padding:0 20rpx;box-sizing:border-box;background:#fff;z-index:999;" value="{{value}}" bindchange="bindChange" class="citybody">
+    <view class="cityheader">
+      <view bindtap="open" class="city-cancel">取消</view>
+      <view bindtap="open" class="city-true">确定</view>
+    </view>
+    <picker-view-column>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>

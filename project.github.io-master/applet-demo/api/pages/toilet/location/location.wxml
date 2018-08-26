@@ -1,0 +1,21 @@
+<!--pages/toilet/location/location.wxml-->
+<view class="main">
+    <map id="map"
+         longitude="{{longitude}}"
+         latitude="{{latitude}}"
+         scale="15"
+         markers="{{markers}}"
+         bindmarkertap="doMarkertap"
+         polyline="{{polyline}}"
+         show-location>
+    </map>
+    <view class="descript">
+        <view class="left">
+            <view class="name">{{toiletName}}</view>
+            <view class="brief-addr">{{briefAddr}}</view>
+        </view>
+        <view class="right">
+            <image class="navigate" src="{{navigateImag}}" mode="aspectFit" bindtap="goDetail"></image>
+        </view>
+    </view>
+</view>

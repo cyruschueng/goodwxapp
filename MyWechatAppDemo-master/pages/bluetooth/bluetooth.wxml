@@ -1,0 +1,3 @@
+<!--pages/bluetooth/bluetooth.wxml-->
+<button bindtap='scan'>scan</button>
+<button wx:for="{{devices}}" wx:key="item" bindtap='connect' data-device-id='{{item.deviceId}}' style="color:{{item.deviceId==selectedDeviceId?'green':''}};">{{item.RSSI + ':' +item.name}}</button>

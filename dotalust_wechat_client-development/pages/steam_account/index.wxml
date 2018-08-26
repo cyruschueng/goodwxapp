@@ -1,0 +1,58 @@
+<import src="../../components/dialog/dialog.wxml"/>
+
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view class="steam-accounts">
+  <image src="../../assets/images/dota2-logo.png" class="logo"></image>
+
+  <view class="steam-accounts__section">
+    <view class="container">
+      <view class="page-title">Steam 帐号管理</view>
+
+      <scroll-view scroll-y style="height: 560rpx"
+                  enable-back-to-top
+                  class="steam-accounts__items">
+          <view class="steam-accounts__account-item {{account.valid ? '' : 'invalid'}} {{account.readyToRemove ? 'to-remove' : ''}}"
+                bindlongtap="showRemoveIcon"
+                bindtouchend="touchend"
+                data-index="{{index}}"
+                wx:for="{{accounts}}" 
+                wx:key="steamAccountsList" 
+                wx:for-item="account">
+            <view class="default-mark" 
+                  wx:if="{{account.default}}"></view>
+
+            <view class="remove-icon"
+                  data-index="{{index}}"
+                  bindtap="confirmForDeleteAccount">
+              <view class="slash slash-a"></view>
+              <view class="slash slash-b"></view>
+            </view>
+
+            <view class="account-digest" bindtap="confirmForSwitchAccount" data-index="{{index}}">
+              <image src="{{account.avatars.medium}}" 
+                    class="avatar"></image>
+              <text class="name">{{account.displayName}}</text>
+              <view class="id">
+                <text class="title">ID: </text>
+                <text class="value" decode="true"> {{account.accountId}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="steam-accounts__account-item plus">
+            <navigator url="/pages/steam_account/new"
+                       hover-class="none"
+                       class="plus-icon">
+              <view class="vertical-line"></view>
+              <view class="line"></view>
+            </navigator>
+          </view>
+      </scroll-view>
+
+      <text class="helper-tip">
+        点击切换当前帐号, 长按删除现有帐号
+      </text>
+    </view>
+  </view>
+</view>

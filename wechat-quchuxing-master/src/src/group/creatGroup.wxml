@@ -1,0 +1,20 @@
+<view class="body">
+	<view class="header">创建群</view>
+	<view class="from">
+		<view class="input">
+			<input value="{{ name }}" bindinput="getName" placeholder="输入群名称" />
+		</view>
+		<view class="input" bindtap="getAddress">
+			<input value="{{ address }}" placeholder="群位置" />
+		</view>
+		<picker bindchange="bindGroupChange" value="{{group_active_index}}" range="{{group_active}}">
+			<view class="input" style="color: {{ group_active_index == 0 ? '#737373' : '#484848'}};">{{group_active[group_active_index]}}</view>
+		</picker>
+		<view class="input">
+			<input bindinput="getPassword" placeholder="输入群密码(不填为无密码)" />
+		</view>
+	</view>
+</view>
+<view class="foot_btn">
+	<button bindtap="submit">确认</button>
+</view>

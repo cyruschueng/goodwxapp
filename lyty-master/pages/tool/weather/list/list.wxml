@@ -1,0 +1,12 @@
+<!--list.wxml-->
+<!--城市列表-->
+<view class="city-container">
+  <view class="search-coantainer">
+    <input type="text"  bindblur="blur" value="{{city||''}}"/>
+    <button size="mini" class="search" bindtap="search"></button>
+  </view>
+  <view class="hot-container">
+    <button size="mini" wx:for="{{cityLists}}" wx:key="{{index}}" bindtap="select" id="{{item}}">{{item}}</button>
+  </view>
+  
+</view>

@@ -1,0 +1,117 @@
+<div ng-controller="audioController" style="height: 100%;">
+    <div class="container" ng-controller="multipleAudioController">
+        <div class="row">
+
+            <div class="weui_cells seline">
+                <div class="weui_cell seline" ng-repeat="course in songs">
+                    <div class="weui_cell_hd" style="width:45px;" ng-if="course.type==2">
+                        <img  class="img-circle img-responsive" src="http://wx.qlogo.cn/mmopen/oYwP0cFmRU1XiaPWibnicfa29BAyrj6RCqZPr9ZlP90VQmSw47J0VQkzd7mycjj4Je0VwfkKM8Mm7EYkfwu6Tzx8NlQ9mWlPoEU/0">
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div ng-if="course.type==2" style="padding-left:5px;padding-right:45px;">
+                            <div class="col-xs-10" style="padding-right:5px;">
+                                <div class="row" style="background: #eee;padding:5px 0;">
+                                    <div class="col-xs-2" style="height:24px; line-height: 24px;width:24px;">
+                                    <span ng-click="load(course)"
+                                          ng-if="!playing || course.id!=song.id"
+                                          class="fa fa-play text-primary"
+                                          style="font-size: 18px;padding:2px 5px;"></span>
+                                    <span ng-click="pause()"
+                                          ng-if="playing && course.id==song.id"
+                                          class="fa fa-pause text-primary"
+                                          style="font-size: 18px;padding:2px 5px;"></span>
+                                    </div>
+                                    <div class="col-xs-10" style="height:24px; line-height: 24px;padding-left:10px;">
+                                        <div class="player">
+                                            <div class="xl-progress" style="margin: 0;">
+                                                <div style="width:100%;" class="xl-progress-bar" xl-progress-bar>
+                                                    <div class="played" ng-style="{'margin-left':course.id==song.id?progress*progressWidth+'px':0}"  ></div><!--style="margin-left:{{progress*progressWidth+'px'}}"-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-2 text-left" style="padding-right:5px;">
+                                {{course.duration|formattime}}'
+                            </div>
+                        </div>
+                        <div ng-if="course.type==3" style="padding-left:45px;padding-right:45px;">
+                            <img style="width:100%;" src="{{course.cover|resourceUrl}}">
+                        </div>
+                        <div ng-if="course.type==4" style="font-size:13px;padding-left:45px;padding-right:45px;" ng-bind-html="course.content|trustAsHtml">
+                        </div>
+                    </div>
+                    <div class="weui_cell_ft" ng-if="course.type==2">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="position:absolute; bottom: 0;left: 0; width: 100%; background-color: #fff;">
+        <iframe id="fr" src="javascript:parent.audio" frameborder="0" style="height: 1px; line-height: 1px;"></iframe>
+        <div style="background-color: #eee; position: fixed;bottom: 0;width: 100%;">
+            <div class="container-fluid" >
+                <div class="row">
+                    <div class="col-xs-12" style="width:100%;">
+                        <div class="player" ng-show="song">
+                            <!--歌曲图片-->
+                            <div class="row" style="padding-top:5px;padding-bottom:5px;">
+                                <div class="col-xs-3">
+                                    <div class="album_img" ng-class="{true:'active',false:''}[playing]">
+                                        <img  ng-src="{{song.categoryInfo.miniImgUrl}}" class="" alt="{{song.title}}"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-9">
+                                    <!--进度条-->
+                                    <div class="xl-progress">
+                                        <span class="current" ng-bind="song.currentTime|formattime"></span>
+
+                                        <div class="xl-progress-bar" xl-progress-bar>
+                                            <div class="played" style="margin-left:{{progress*progressWidth+'px'}}"></div>
+                                        </div>
+                                        <span class="duration" ng-bind="song.time|formattime"></span>
+                                    </div>
+
+                                    <span ng-bind="song.title|cut:true:10:'...'" style="height:22px; line-height: 22px;" ></span>
+                                    <!--操作区-->
+                                    <div style="display: inline-block" class="text-center pull-right">
+                                        <!--<button type="button" ng-click="prev()" style="border: none;" ng-class="{true:'',false:'disabled'}[hasPrev]"
+                                                class="btn btn-default"><i class="fa fa-step-backward"></i></button>-->
+                                        <span ng-click="play()"
+                                              ng-if="!playing"
+                                              class="fa fa-play"
+                                              style="font-size: 18px;padding:2px 5px;"></span>
+                                        <span ng-click="pause()"
+                                              ng-if="playing"
+                                              class="fa fa-pause"
+                                              style="font-size: 18px;padding:2px 5px;"></span>
+                                        <span ng-click="next()"
+                                              ng-class="{true:'',false:'disabled'}[hasNext]"
+                                              class="fa fa-step-forward"
+                                              style="font-size: 18px;padding:2px 5px;"  ></span>
+                                        <span ng-click="playMode=!playMode">
+                                            <i class="fa fa-refresh "
+                                               title="单曲循环"
+                                               ng-if="!playMode"
+                                               style="font-size: 18px;padding:2px 5px;"></i>
+                                            <i class="fa fa-repeat btnPlay"
+                                               title="循环播放"
+                                               ng-if="playMode"
+                                               style="font-size: 18px;padding:2px 5px;"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,35 @@
+<!--pages/rich/rich.wxml-->
+<view class='content'>
+  <view class='btnGroup'>
+    <navigator url='../prize/prize' open-type="redirect" class='black'>
+      <view>奖品列表</view>
+    </navigator>
+    <view>花漾大礼</view>
+    <navigator url='../game/game' open-type="redirect" class='black'>
+      <view>返回抽奖</view>
+    </navigator>
+  </view>
+  
+
+  <view class="img_detail">
+      <view class='center'>【温馨提示】</view> 
+      <text>1、花漾大礼将在“我的必赢”下拉列表显示，请在三十分钟内支付邮费，否则商品将过期不可邮寄；
+        2、每集齐女人心8块拼图，可兑换一次花漾大礼；
+        3、确认兑换后，将消除一套拼图，无论是否领取花漾大礼，消除后的祝福字不返还。
+      </text>
+  </view>
+
+   <view class='imglist'> 
+    <view>   
+      <view wx:for="{{listnum}}" wx:for-item="num" wx:for-index="idx"  
+      class='imgItem {{num==0?"filter":""}}'>
+        <image src='http://www.zyylpt.com/resources/mobile/game/img/new_pic/H{{idx}}.jpg'></image>
+        <text class='numbox'>{{num}}个</text>
+      </view> 
+    </view>  
+  </view>
+
+  <view class='top_prize' bindtap='exchange'>
+    兑换大奖
+  </view> 
+</view>

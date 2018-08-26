@@ -1,0 +1,73 @@
+<view class="outer">
+  <view class="pages">
+    <button open-type="contact" class="contact_btn">
+      <image src="../../images/index/help_left.png"></image>
+    </button>
+    <view class="info-box">
+      <view class="book_name">《{{book_name}}》</view>
+      <image bindtap="showSave" class="camera" src="../../images/article/camera.png"></image>
+      <view class="user-box">
+        <image class="head_img_wrap" src="../../images/article/Mask.png"></image>
+        <image class="head_img" src="{{head_img}}"></image>
+        <view class="user_score"><text>{{user.score||0}}</text>分</view>
+        <view class="nickname">{{nickname}}</view>
+      </view>
+      <view class="bar-box">
+        <image wx:if="{{haveAudio}}" class="bar_play" src="{{!pauseArr[0]?'../../images/article/button_play.png':'../../images/article/button_pause.png'}}" bindtap="myPlay"></image>
+      </view>
+      <view wx:if="{{user.score>80}}" class="bar_text">{{haveAudio?'发音标准，语速适中，重读和连续较准确。':'快去阅读绘本，看看你能排第几？'}}</view>
+      <view wx:elif="{{user.score>=60&&user.score<=80}}" class="bar_text">{{haveAudio?'对单词发音、连续，重读进行针对模仿和提高。':'快去阅读绘本，看看你能排第几？'}}</view>
+      <view wx:else="{{user.score<60}}" class="bar_text">{{haveAudio?'多听多模仿，单词发音和连续需特别加强。':'快去阅读绘本，看看你能排第几？'}}</view>
+    </view>
+    <view class="ranking">
+      <image class="rank_title" src="../../images/article/title.png"></image>
+      <view class="ranking-box">
+        <view class="text" wx:if="{{!haveList}}">还没有人读过此绘本，快来抢占榜首吧～</view>
+        <view wx:if="{{haveList}}" wx:for="{{ranklistdatas}}" wx:key="{{item}}" class="list" data-item="{{item}}" wx:for-index="ind">
+          <view class="{{ind>2?'index':'index_1'}}">{{ind+1}}</view>
+          <view class="nickname">{{item.nickname}}</view>
+          <view class="score">{{item.score}}</view>
+          <view class="tag"><image src="{{!pauseArr[ind+1]?'../../images/article/button_play.png':'../../images/article/button_pause.png'}}" data-ind="{{ind+1}}" bindtap="auPlay" data-src="{{item.audio_json}}"></image></view>
+        </view>
+      </view>
+    </view>
+    <view class="app-box">
+      <image class="logo" src="../../images/article/logo.png"></image>
+      <text>小学图书馆一键“搬”回家</text>
+      <image class="load" src="../../images/article/load.png" bindtap="showInfo"></image>
+    </view>
+    <view class="info_wrap" wx:if="{{infoStatus}}">
+      <view class="info">
+        <image class="info_bg" src="../../images/article/popup_bg.png"></image>
+        <image class="button_off" src="../../images/article/button_close.png" bindtap="hideInfo"></image>
+        <view class="total">
+          <view>一款专门为中国孩子量身打造的学习英语的在线阅读产品</view>
+          <view>【自主学习能力】</view><view>引进原版RAZ系列，科学的分级阅读体系；</view>
+          <view>【练就地道美式英语】</view><view>采用国际先进的语音识别技术，让孩子开口说英语；</view>
+          <view>【提高学习兴趣】</view><view>亲子PK互动游戏，让孩子在玩耍之余快乐地学习英语；</view>
+          <view>亿万孩子学习英文的阅读神器，您还在等什么？扫码解锁吧！ </view>
+          <image class="qr_code" src="../../images/article/qr_code.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="saveInfo" wx:if="{{showSave}}">
+      <view class="share-box">
+        <view class="head_bg"></view>
+        <image class="head_img" src="{{head_img}}"></image>
+        <view class="nickname">{{nickname}}</view>
+        <image class="button_close" src="../../images/library/button_close.png" bindtap="hideSave"></image>
+        <image class="raz_text" src="../../images/library/raztext.png"></image>
+        <image class="score_bg" src="../../images/library/score_bg.png"></image>
+        <view class="score">{{user.score}}</view>
+        <image class="code_bg" src="../../images/library/codeBg.png"></image>
+        <image class="code" src="https://qnfile.abctime.com/mini_mainCode.jpg"></image>
+        <view class="info">长按扫码，免费领取RAZ原版绘本</view>
+      </view>
+      <image class="button_send" src="../../images/library/button_send.png" bindtap="saveImg"></image>
+    </view>
+  </view>
+  <view id="canvas-box" wx:if="{{saveStatus}}">
+  <!--<view id="canvas-box">-->
+    <canvas canvas-id="shareCanvas" id="shareCanvas"/>
+  </view>
+</view>

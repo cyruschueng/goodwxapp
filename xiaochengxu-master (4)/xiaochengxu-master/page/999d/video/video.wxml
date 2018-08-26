@@ -1,0 +1,84 @@
+
+<!--<scroll-view scroll-y="true" style="height:100%" upper-threshold="50" class="video" lower-threshold="100" bindscrolltolower="scrolltolower">-->
+<view class="section">
+  <video hidden="{{hidden ? false : true}}" class="video-source" id="video-source" src="{{videoData.play_url.SD}}" binderror="videoErrorCallback" controls autoplay>
+  </video>
+</view>
+<view class="video">
+  <view class="video-options">
+    <view class="options-item" bindtap="collect">
+      <block wx:if="{{iscollect}}">
+        <icon class="shoucan-icon"></icon>
+        <text>收藏</text>
+      </block>
+      <block wx:else>
+        <icon class="shoucan-selected-icon"></icon>
+        <text class="shoucan-text-color">已收藏</text>
+      </block>
+    </view>
+
+    <view class="options-item" >
+      <block>
+      <button class="button-share" open-type="share">
+        <icon class="share-icon"></icon>
+        <text>分享</text>
+      </button>
+        
+      </block>
+    </view>
+
+  </view>
+  <view class="video-message">
+    <text class="video-title">{{videoData.title}}</text>
+    <view class="video-count">
+      <icon class="bofang-icon size25"></icon>
+      {{videoData.play_count}}
+      <icon class="timeing-icon size25 m_l_30"></icon>
+      {{videoData.duration}}
+    </view>
+  </view>
+  <view class="video-team">
+    <block wx:if="{{videoData.uid!=0}}">
+      <navigator  url="../team/team?uid={{videoData.uid}}">
+        <image src="{{videoData.user_avatar}}"></image>
+        <text>{{videoData.publisher}}</text>
+      </navigator>
+    </block>
+    <block wx:else>
+      <image src="{{videoData.user_avatar}}"></image>
+      <text>{{videoData.publisher}}</text>
+    </block>
+  </view>
+  <view class="video-tab">
+    <view class="main-title">
+      <text>视频推荐</text>
+    </view>
+    <view class="video-tab-content">
+      <view wx:for="{{ recommendData }}" wx:key="{{item.id}}" class="tab-item">
+        <view class="item-box item-left">
+          <navigator open-type="redirect" url="../video/video?video_id={{item.id}}">
+            <image src="{{item.img}}"></image>
+          </navigator>
+        </view>
+        <view class="item-box item-right">
+          <navigator open-type="redirect" url="../video/video?video_id={{item.id}}">
+            <text>{{item.title}}</text>
+          </navigator>
+          <view class="v-item-count">
+            <icon class="bofang2-icon size25"></icon>
+            {{item.play_count}}次播放
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{hotshidden}}" class="box-more">
+    <view wx:if="{{hothidden}}">
+      <image src="/image/loading.gif" mode="aspectFill" /> 加载中...
+    </view>
+    <view wx:else>
+      <text> 没有更多了 </text>
+    </view>
+  </view>
+</view>
+<loading hidden="{{hidden}}"></loading>

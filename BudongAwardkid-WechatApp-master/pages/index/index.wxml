@@ -1,0 +1,20 @@
+<!--index.wxml-->
+
+<view class="container">
+  <view class="missions">
+    <view class="item" wx:for="{{missionItems}}" wx:key="item" bindtap="onMissionItemTap" data-mission-id="{{item.id}}">
+      <image src="{{item.avatarUrl}}" mode="aspectFit" lazy-load="true" class="avatar" />
+      <view class="intro">
+        <text class="title">{{item.title}}</text>
+        <view class="author">
+          <span class="nick">{{item.nick}}<small> {{item.sex}} / {{item.age}}</small></span>
+        </view>
+        <view class="affix">
+          <span wx:for="{{item.tags}}" wx:key="item" class="tag">{{item}}</span>
+          <span class="count">题目{{item.questionCount}} / 参与{{item.playerCount}}</span>
+        </view>
+      </view>
+    </view>
+    <span class="loading {{missionIsEnd ? 'isend' : ''}}">{{missionIsEnd ? '已加载全部' : '正在载入更多...'}}</span>
+  </view>
+</view>

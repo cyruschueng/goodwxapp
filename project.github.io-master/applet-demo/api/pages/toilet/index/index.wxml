@@ -1,0 +1,64 @@
+<view class="container" wx:if="{{onLine && yesAuth}}">
+    <!--顶部基本信息-->
+    <view class="zan-panel" wx:if="{{size > 0}}">
+        <view class="zan-cell s-height">
+            <view class="zan-cell__bd">为你推荐附近的{{size}}个公共厕所</view>
+        </view>
+    </view>
+
+    <!--视图滚动区域-->
+    <scroll-view class="scroll" scroll-y="true" wx:if="{{size > 0}}">
+        <view class="zan-panel">
+            <view class="zan-cell zan-cell--access" wx:for="{{list}}" wx:key="unique" data-id="{{item.id}}" bindtap="tapItem">
+                <view class="zan-cell__bd">
+                    {{item.name}}
+                    <view class="address">{{item.briefAddr}}</view>
+                </view>
+                <view class="zan-cell__ft">相距{{item.distance}}米</view>
+            </view>
+        </view>
+    </scroll-view>
+
+    <!--底部说明信息-->
+    <view class="zan-panel bottom-desc" wx:if="{{size > 0}}">
+        <view class="zan-cell__bd">点击查询结果之后将会进行路径规划</view>
+    </view>
+
+    <!--查无结果处理界面-->
+    <view class="zan-panel no-data" wx:if="{{size == 0}}">
+        <image src="../../../images/Sorry.png" mode="aspectFit"></image>
+        <view class="zan-cell__bd">我真的尽力了，附近1000米没有厕所</view>
+        <view class="zan-btns">
+            <button class="zan-btn" bindtap="doRefresh">要不！刷新试试</button>
+        </view>
+    </view>
+</view>
+
+<!--没有权限-->
+<view class="container error" wx:if="{{noAuth}}">
+    <view class="zan-panel">
+        <image src="../../../images/Sorry.png" mode="aspectFit"></image>
+        <view class="zan-cell__bd error-info">不是我不帮你，你连定位权限都不开启，我就没法了。</view>
+        <view class="zan-btns">
+            <button class="zan-btn" bindtap="doAuth">要不！重新获取权限</button>
+        </view>
+    </view>
+</view>
+
+<!--没有网络显示-->
+<view class="container error" wx:if="{{!onLine}}">
+    <view class="zan-panel">
+        <image src="../../../images/Sorry.png" mode="aspectFit"></image>
+        <view class="zan-cell__bd error-info">在这个网络不可缺少的时代，居然没有连网，我也帮不了你了。</view>
+        <view class="zan-btns">
+            <button class="zan-btn" bindtap="doRefresh">要不！刷新试试</button>
+        </view>
+    </view>
+</view>
+
+<!--刷新、定位按钮按钮-->
+<view class="handle" wx:if="{{onLine && yesAuth}}">
+
+    <image class="refresh" src="../../../images/refresh.png" mode="aspectFit" bindtap="doRefresh"></image>
+
+</view>

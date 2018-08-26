@@ -1,0 +1,15 @@
+<alert show="{{alert.show}}" type="{{alert.type}}" title="{{alert.title}}"></alert>
+<!--注册信息  -->
+<view  class='register' wx:if="{{1}}">
+  <view class='login'>
+    <input type='number' class='phone input' value='{{phone}}' placeholder="请输入手机号" bindinput='input_phone' />
+    <input type='number' class='yzm input' value='{{ValidCode}}' placeholder="验证码" bindinput='inputValidCode' />
+    <view wx:if="{{!validCodeShow}}" catchtap='getValidCode' class='get_yzm'>获取验证码</view>
+    <view wx:if="{{validCodeShow}}" class='get_yzm active'>{{validCodeTime}}s后再试</view>
+  </view>
+  <view class='login_btn' catchtap='verifyPhone'>会员注册</view>
+  
+</view>
+
+
+<view class='beizhu'>请进行手机验证，完成注册成为会员后，可以进行自助点餐、排队等本店提供的功能，方便我们提供更方便、快捷、优质的服务给您!</view>

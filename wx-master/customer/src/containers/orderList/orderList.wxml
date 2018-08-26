@@ -1,0 +1,29 @@
+<view class="noList" style="height: {{windowHeight}}px" hidden="{{orderList.length>0}}">
+	<image src="../../../static/images/img_noList@3x.png" class="icon"></image>
+	<p>暂无接车单！</p>
+</view>
+
+<view hidden="{{orderList.length==0}}">
+
+	<scroll-view class="scrollView" style="height: {{windowHeight}}px" scroll-y="true" scroll-top="{{scrollTop}}" bindscroll="scroll" bindscrolltolower="pullUpLoad">
+		<view class="list">
+			<view class="item" wx:for-items="{{orderList}}" wx:key="{{item.id}}" data-itemId="{{item.id}}" bindtap="itemClick">
+				<div class="topside">
+					<p class="garageName">{{item.garageName}}</p>
+					<p class="toBeConfirme status1" wx-if="{{item.status==1 || item.status==2 || item.status==3}}">检车报价中</p>
+					<p class="toBeConfirme status2" wx-if="{{item.status==4}}">待同意</p>
+					<p class="toBeConfirme status3" wx-if="{{item.status==5}}">已同意</p>
+					<p class="confirmed status4" wx-if="{{item.status==6}}">不同意</p>
+				</div>
+				<div class="underneath">
+					{{item.createdDateStr}}
+				</div>
+			</view>
+		</view>
+		<view class="pullUpTitle">
+			<view>{{loadMoreData}}</view>
+			<!--<view>{{refreshTime}}</view>-->
+		</view>
+	</scroll-view>
+
+</view>

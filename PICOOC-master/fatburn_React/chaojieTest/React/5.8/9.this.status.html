@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../build/react.js"></script>
+    <script type="text/javascript" src="../build/react-dom.js"></script>
+    <!--<script type="text/javascript" src="../build/browser.min.js"></script>-->
+    <script type="text/javascript" src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/jsx">
+        var Component = React.createClass({
+            getInitialState:function(){
+                return {liked:false};
+            },
+            choose:function(event){
+                this.setState({liked:!this.state.liked});
+            },
+            render: function(){
+                var text = this.state.liked ? "like" : "notLike";
+                return (
+                        <p onClick={this.choose}>hello {text}</p>
+                );
+            }
+        });
+        ReactDOM.render(
+                <Component />,
+                document.getElementById('example')
+        );
+    </script>
+</body>
+</html>

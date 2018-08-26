@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>LayIM 移动版</title>
+
+    <link rel="stylesheet" href="../build/css/layui.mobile.css">
+    <script src="../build/layui.js"></script>
+</head>
+<body>
+<script>
+    layui.config({
+        base: '../rc/'
+    }).extend({
+        rmlib: 'rmlib',
+        protobuf: 'protobuf',
+        socket: 'socket',
+    });
+
+    layui.use(['socket', 'mobile', 'jquery'], function () {
+        var socket = layui.socket,
+            mobile = layui.mobile,
+            layim = mobile.layim;
+        //基础配置
+        layim.config({
+            init: {
+                //设置我的基础信息
+                mine: {
+                    "username": "访客一" //我的昵称
+                    , "id": "fk1" //我的ID
+                    , "avatar": "http://tp4.sinaimg.cn/1345566427/180/5730976522/0" //我的头像
+                }
+            }
+        });
+        //创建一个会话
+        layim.chat({
+            id: 'zxkf1'
+            , name: '在线客服一'
+            , type: 'kefu' //friend、group等字符，如果是group，则创建的是群聊
+            , avatar: 'http://tp1.sinaimg.cn/1571889140/180/40030060651/1'
+        });
+        //  融云socket
+        socket.config({
+            //融云生产环境秘钥
+            key: 'y745wfm8yrxfv',
+            // 访客1 token（由唯一ID和共用AppSecret生成）
+            token: "UXPCFEMByVyW+7YQ1Zj1/S5Zt1+6VbTAmrd1hcw7oARfVp8VRRyIfaIJrA8y4+FWZSZ45s7peZBPpBngM8waBQ==",
+            layim: layim
+        });
+    });
+
+
+</script>
+</body>
+</html>

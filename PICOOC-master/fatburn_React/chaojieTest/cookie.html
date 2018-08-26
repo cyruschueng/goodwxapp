@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" src="../js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="../js/public.js"></script>
+<script type="text/javascript">
+    var data = {
+        a:1,
+        b:2
+    };
+    data = JSON.stringify(data);
+
+    setCookie("key", data, 1);
+    var key = getCookie("key");
+    key = JSON.parse(key);
+    console.log(key.a);
+</script>
+</body>
+</html>

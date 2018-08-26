@@ -1,0 +1,18 @@
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+
+<view class="container">
+        <form bindsubmit="submitForm">
+                <view class='h0'>预订人信息</view>
+                <view class='title'>预订人</view>
+                <view class="input-code">
+                        <input class="input-login" name="name" value="{{ name }}"   placeholder="请输入预订人" />
+                </view>
+                <view class='title'>手机号</view>
+                <view class="input-code">
+                         <input class="input-login" name="tel" value="{{ tel }}" bindinput="bindKeyInput" maxlength="11" type="number" placeholder="请输入手机号码" />
+                        
+                </view> 
+                <button class="login-btn" type="primary" formType="submit">提交</button>
+        </form>
+</view>

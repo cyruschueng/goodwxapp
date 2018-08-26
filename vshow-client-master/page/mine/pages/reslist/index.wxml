@@ -1,0 +1,28 @@
+<view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">问题列表</view>
+    <view class="weui-panel__bd">
+        <navigator wx:for="{{ quizList }}" url="../result/index?index={{ index }}" wx:key="{{ item._id }}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{item.author.avatarUrl}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{ item.quizType}}</view>
+                <view class="weui-media-box__desc">{{ item.quizText }}</view>
+            </view>
+        </navigator>
+
+        <!-- 没有的时候 -->
+        <navigator wx:if="{{ !quizList.length }}" url='../vquiz/index'  class="weui-media-box">暂时没有问题，去提一个吧</navigator>
+
+    </view>
+</view>
+
+<view class="footer">
+  <view hidden="{{ !isLoading }}" class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  <view class="weui-loadmore weui-loadmore_line">
+      <view hidden="{{ hasMore }}" class="weui-loadmore__tips weui-loadmore__tips_in-line">加载完毕</view>
+  </view>
+</view>

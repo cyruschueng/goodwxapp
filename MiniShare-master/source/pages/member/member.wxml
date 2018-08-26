@@ -1,0 +1,52 @@
+<view class="page">
+    <view class='page__hd' style='background:#4D9CFB;padding:2vh;'>
+      <view style='text-align:center;'>
+        <image src="{{UserInfo.avatarUrl}}" style='height:20vh;width:20vh;border-radius:10vh;' ></image>
+      </view>
+      <view style='text-align:center;color:white;'>
+      {{UserInfo.nickName}}
+      </view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="/pages/mypost/mypost?operation=V" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">我的投票</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"><text  style='color:white' decode='true'>&nbsp;</text></view>
+            </navigator>
+            <navigator url="/pages/mypost/mypost?operation=P" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">我的相册</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"><text  style='color:white' decode='true'>&nbsp;</text></view>
+            </navigator>
+            <navigator url="/pages/mypost/mypost?operation=N" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">我的通知</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"><text  style='color:white' decode='true'>&nbsp;</text></view>
+            </navigator>
+        </view>
+
+        <view class="weui-cells__title">关于我们</view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="/pages/content/content?keycode=aboutus" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">关于{{copyright.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"><text  style='color:white' decode='true'>&nbsp;</text></view>
+            </navigator>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">客服支持</view>
+                <view class="weui-cell__ft"><contact-button></contact-button></view>
+            </view>
+            <navigator url="/pages/content/content?keycode=privacy" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">条款与声明</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"><text  style='color:white' decode='true'>&nbsp;</text></view>
+            </navigator>
+        </view>
+
+
+        <view class="weui-msg__extra-area">
+            <view class="weui-footer">
+                <view class="weui-footer__links">
+                    <navigator url="/pages/content/content?keycode=company" class="weui-footer__link">{{copyright.name}}</navigator>
+                </view>
+                <view class="weui-footer__text">Copyright © 2008-2018 {{copyright.website}}</view>
+            </view>
+        </view>
+    </view>
+</view>

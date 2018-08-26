@@ -1,0 +1,40 @@
+<view class="calendar-root">
+    <view class="calendar-navbar">
+        <view class="calendar-navbar-button" bindtap="goToday" hover="true" hover-class="view-hover">今日</view>
+        <view class="calendar-navbar-button" bindtap="goLastMonth" hover="true" hover-class="view-hover">{{"<"}}</view>
+        <view class="calendar-navbar-date">{{dateData.date}}</view>
+        <view class="calendar-navbar-button" bindtap="goNextMonth" hover="true" hover-class="view-hover">{{">"}}</view>
+        <picker class="calendar-navbar-button" mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
+            <view hover="true" hover-class="view-hover">跳转</view>
+        </picker>
+    </view>
+    <view class="calendar-head">
+        <view wx:for="一二三四五六日" wx:key="*this">{{item}}</view>
+    </view>
+    <view class="calendar-body">
+        <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
+            <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
+                <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
+                    <view hidden="{{!dateData.arrIsShow[row * 7 + col]}}">
+                        <view class="calendar-body-day">
+                            {{dateData.arrDays[row * 7 + col]}}
+                        </view>
+                        <view class="calendar-body-dayex">
+                            {{dateData.arrInfoExShow[row * 7 + col]}}
+                        </view>
+                        <view class="calendar-body-workturn" style="color:{{workTurnData.arrWorkTurn[row * 7 + col] === '休' ? '#09BB07' : '#e64340'}}" hidden="{{!isWorkTurn}}">
+                            {{workTurnData.arrWorkTurn[row * 7 + col]}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="calendar-detail">
+        <view class="calendar-detail-day">{{detailData.curDay}}</view>
+        <view class="calendar-detail-info1">{{detailData.curInfo1}}</view>
+        <view class="calendar-detail-info2">{{detailData.curInfo2}}</view>
+    </view>
+    
+    <view style="height:140rpx;"></view>
+</view>

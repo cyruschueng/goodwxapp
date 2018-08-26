@@ -1,0 +1,15 @@
+<!--pages/noticeInfo/noticeInfo.wxml-->
+<import src="/template/mainInfo.wxml"/>
+<template is="mainInfo" data="{{infoData}}"/>
+
+ <view class="viewerList" wx:if="{{viewers}}">
+    <text class="secName" wx:if="{{infoData.classify == '1'}}">已查看{{viewers.total_person}}人</text>
+    <text class="secName" wx:if="{{infoData.classify == '2'}}">已报名{{viewers.total_person}}人</text>
+    <block wx:for="{{viewers.person_status}}" wx:for-item="viewer" wx:key="time">
+      <view class="viewer">
+        <image src="{{viewer.person_image}}" mode='aspectFit'></image>
+        <text class="ml5" style="flex:1">{{viewer.person_nicename}}</text>
+        <text class="c-gray f12 tr ml5">{{viewer.person_time}}</text>
+      </view>
+    </block>
+  </view>

@@ -1,0 +1,75 @@
+<view class="musicList {{music_play?'music_play':'stop'}}"  bindtap='bindPlay'></view> 
+<view class="container {{music==true?'fixed':''}}" >
+    <view class='edit' bindtap='editTap'><image src="../img/setting.png" mode='widthFix'></image></view>
+    <view class='header'>
+        <view class='bgImage' wx:if="{{bgImg}}">
+            <view class='bg'></view>
+            <image src="{{bgImg}}" mode='aspectFill'></image>
+        </view>
+        <view class='bgImage' wx:else>
+            <view class='bg'></view>
+            <image src="{{userInfo.avatarUrl}}" mode='aspectFill'></image>
+        </view>
+        <view class='headerInform'>
+            <image class='avatarUrl' src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
+            <view class='niceName'>{{userInfo.nickName}}</view>
+            <view class='id'>ID:{{member_number}}</view>
+            <view class='niceInform'>
+                <view class='niceFun'>
+                    <image src="../img/money.png" mode='widthFix'></image>
+                    积分：{{photo_fans_count}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='top'>
+          <view class='navbar'>
+                <form report-submit="true" bindsubmit="navbar" class="formSubmit one {{now==1?'active':''}}" data-now='1'>
+                    <button class="submit one {{now==1?'active':''}}" formType="submit">
+                    <image src="../img/1422830-200.png" mode="widthFix"></image>我的照片墙</button>
+                </form>
+                <form report-submit="true" bindsubmit="navbar" class="formSubmit two {{now==2?'active':''}}" data-now='2'>
+                    <button class="submit two {{now==2?'active':''}}" formType="submit">
+                    <image src="../img/1419919-200.png" mode="widthFix"></image>我的照片集</button>
+                </form>
+          </view> 
+        <!--1  -->
+        <view class='content' wx:if="{{now==1}}">
+              <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
+                <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoindex='{{index}}'>
+                    <image class='dels' src="../img/dels.png" mode="aspectFill"></image>
+                </view>
+                <view class='addTimes'>
+                    <view class='addTime'>
+                        <view class='timeBig'>{{item.day}}</view>
+                        <view class='timeTitle'>{{item.add_time[1]}}/{{item.add_time[0]}}</view>
+                    </view>
+                </view>
+                <view class='line'></view>
+                <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
+                        mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
+            </view>
+        </view> 
+        <!--2  -->
+        <view class='content' wx:else>
+              <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
+                <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoIndex='{{index}}'>
+                    <image class='dels' src="../img/dels.png" mode="widthFix"></image>
+                </view>
+                <view class='addTimes'>
+                    <view class='addTime'>
+                        <view class='timeBig'>{{item.day}}</view>
+                        <view class='timeTitle'>{{item.add_time[1]}}/{{item.add_time[0]}}</view>
+                    </view>
+                </view>
+                <view class='line'></view>
+                <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
+                        mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap1'></image>
+            </view>
+        </view> 
+    </view>
+</view>
+<!--新增  -->
+<view class='addNew'>
+    <image src='../img/addNew.png' mode='widthFix' bindtap='newPhotos'></image>
+</view>

@@ -1,0 +1,32 @@
+ <import src="../dining-room/dining-room-tiem/dining-room-tiem-template.wxml" /> 
+
+<view class='page_row'>
+  <view class="search">
+   <form bindreset="backHomepage" class='foo'>
+    <view class="search_arr">
+        <icon class="searchcion" size='20' type='search' bindtap="selectAddress"></icon>
+        <input class='inputs' placeholder="输入商家" auto-focus bindinput="searchbusiness"/>
+    </view>
+    <button class='user-cancel' form-type="reset">取消</button>
+  </form> 
+  </view>
+ 
+  <view class='clearFileHistoryWarp'>
+    <text class='record'>{{busarr.length>0?'商家列表':'历史记录'}}</text>
+    <text bindtap='sweepAway' class='clearFileHistory'>清除</text>
+  </view>
+  
+  <!-- 商家列表 -->
+   <view  wx:if="{{busarr.length>0}}" wx:for="{{busarr}}"  wx:key="{{index}}" class='record_rwap'> 
+       <template is="tpeMerchant" data="{{item}}" />   
+  </view>
+
+   <!--历史记录-->
+  <view  wx:if="{{busarr.length==0}}" class='record_rwap'>
+    <block wx:for="{{historyarr}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+      <view class='record_text'>
+        <text class='record_text_xw' id="{{idx}}" bindtap='clickannal'>{{item}}</text>
+      </view>
+    </block>
+  </view>
+</view>

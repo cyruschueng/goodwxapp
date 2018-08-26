@@ -1,0 +1,49 @@
+<import src="../templates/bookInfoTpl/bookInfoTpl.wxml" />
+<view class="page">
+  <view wx:if="{{barInfo.name.length>0}}">
+    <!--书吧信息-->
+    <!--照片-->
+    <view class="margin-bottom-10">
+      <image src="{{barInfo.picture}}" class="bar-img-nor-barbook" mode="aspectFill"></image>
+    </view>
+    <!--搜索-->
+    <view class="index-search-botton white-bg">
+      <view class="index-search-input" bindtap="searchBook">
+        <view class="index-search-bar__box weui-flex">
+          <view class="bar-img weui-flex__item">
+            <text class="index-search-font">搜索你喜欢的书籍</text>
+          </view>
+          <view class="bar-img weui-flex__item text-right padding-top-5">
+            <image src="/images/search_icon.png" class="opt-icon-sma"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--书吧信息-->
+    <view class="white-bg margin-bottom-20">
+      <view wx:if="{{barInfo.intro&&barInfo.intro!='undefined'}}" class=" border-bottom margin-left-40 margin-right-40 padding-bottom-30 bar-text">
+        <text>{{barInfo.intro}}</text>
+      </view>
+      <view class="margin-left-40 margin-right-40 padding-top-30 padding-bottom-30">
+        <view class="text-oneline margin-bottom-10 bar-font" style="display:flex;align-items:center;" bindtap="callPhonenum" data-phonenum="{{barInfo.phonenum}}">
+          <image src="/images/ic_tel.png" class="opt-icon-sma"></image>
+          <text class="margin-left-10 bar-text">{{barInfo.phonenum}}</text>
+        </view>
+        <view class="text-oneline margin-bottom-10 bar-font" style="display:flex;align-items:center;" bindtap="getMapPosition" data-lon="{{barInfo.lon}}" data-lat="{{barInfo.lat}}" data-name="{{barInfo.name}}" data-address="{{barInfo.address}}">
+          <image src="/images/ic_address.png" class="opt-icon-sma"></image>
+          <text class="margin-left-10 bar-text">{{barInfo.address}}</text>
+        </view>
+        <view wx:if="{{barInfo.distance}}" class="text-oneline margin-bottom-10 bar-font" style="display:flex;align-items:center;" bindtap="getMapPosition" data-lon="{{barInfo.lon}}" data-lat="{{barInfo.lat}}" data-name="{{barInfo.name}}" data-address="{{barInfo.address}}">
+          <image src="/images/ic_distance.png" class="opt-icon-sma"></image>
+          <text class="margin-left-10 bar-text">{{barInfo.distance}}米</text>
+        </view>
+      </view>
+    </view>
+    <!--图书推荐-->
+    <view class="white-bg">
+      <block wx:for="{{bookInfos}}">
+        <template is="bookInfoIndex" data="{{...item}}" />
+      </block>
+    </view>
+  </view>
+</view>

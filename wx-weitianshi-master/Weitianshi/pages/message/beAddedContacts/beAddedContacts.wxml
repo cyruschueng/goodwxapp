@@ -1,0 +1,33 @@
+<!--pages/message/beAddedContacts/beAddedContacts.wxml-->
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <import src="/pages/Template/Template.wxml" />
+  <view class="browseMeTitle flex" style="justify-content: space-between;">
+    <view class="title flex">
+      <view class="block"></view>
+      加我为好友
+    </view>
+    <view class="num">
+      <!--动态改变数字-->
+      共
+      <label>{{count}}</label> 个</view>
+  </view>
+
+  <!--资本对接-->
+  <view class="s_frame" hidden="{{contacts=='' || !contacts}}">
+    <scroll-view style="height:1108rpx;" scroll-y="true" bindscrolltolower='loadMore'>
+      <block wx:for="{{contacts}}" wx:key="{{contacts}}">
+        <view class='investorCard'>
+          <view class="t-investorColor" hover-class='t-hoverColor'>
+            <template is='InvestorCardOfMy' data='{{item,user_id,user_mobile}}'></template>
+            <view class="t-alineHeight"></view>
+            <template is='cardBottom1' data='{{item,user_id,user_mobile}}'></template>
+          </view>
+        </view>
+      </block>
+      <template is="theBottom" wx:if="{{jiandi==true}}"></template>
+    </scroll-view>
+
+  </view>
+  <template is="isEmpty" data="{{emptyNumber:contacts}}"></template>
+</view>

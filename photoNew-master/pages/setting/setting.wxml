@@ -1,0 +1,21 @@
+<!--pages/setting/setting.wxml-->
+<view class='noOrder' wx:if="{{photoList==false}}">
+    <view class="noOrder2" style="font-size:26rpx;text-align:center;padding:20rpx;margin-top:0;box-sizing:border-box;">
+        你还没有上传照片！
+    </view>
+</view>
+<view class="container" wx:else>
+    <view class='item' wx:for="{{photoList}}" wx:key="{{index}}" data-pic_id='{{item.pic_id}}'>
+        <image class='del' bindtap='dels' data-pic_id='{{item.pic_id}}' src="https://gcdn.playonwechat.com/photo/close.png"></image>
+        <view class='niceImg'>
+            <image src="{{item.url}}" data-picture='{{item.url}}' mode='aspectFit' bindtap='prewImg'></image>
+        </view>
+        <view class='timeWho'>
+            <image src="{{item.avatarurl}}"  mode='aspectFit' ></image>
+            <view>{{item.add_time}}</view>
+        </view>
+    </view>
+</view>
+<!-- <view class='foot'>
+    <view class='button' bindtap='back'>确定</view>
+</view> -->

@@ -1,0 +1,144 @@
+{include file="../templates/manage/user/customization/weixinheddinlike/admin/header.html" /}
+      <section id="main-content">
+          <section class="wrapper">
+
+              <div class="row">
+                  <div class="col-lg-9 main-chart">
+                  
+                  	<div class="row mtbox">
+                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                  			<div class="box1">
+					  			<span class="li_cloud"></span>
+					  			<h3>{$web.count.alluser}</h3>
+                  			</div>
+					  			<p>{$web.count.alluser} 个微信用户在使用.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class=" li_heart"></span>
+					  			<h3>+{$web.count.allmatch}</h3>
+                  			</div>
+					  			<p>{$web.count.allmatch} 对被暗恋匹配成功.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_stack"></span>
+					  			<h3>-</h3>
+                  			</div>
+					  			<p>被分享次数.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_news"></span>
+					  			<h3>+{$web.count.allgroup}</h3>
+                  			</div>
+					  			<p>在 {$web.count.allgroup} 个群中被使用.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_data"></span>
+					  			<h3>-</h3>
+                  			</div>
+					  			<p>敬请期待...</p>
+                  		</div>
+                  	
+                  	</div><!-- /row mt -->	
+                  
+                      
+                      <div class="row mt">
+                      <!-- SERVER STATUS PANELS -->
+                      	<div class="col-md-4 col-sm-4 mb">
+                      		<div class="white-panel pn donut-chart">
+                      			<div class="white-header">
+                    <a href="./config.html"><h5>配置信息</h5></a>
+                      			</div>
+								<div class="row">
+									<div class="col-sm-6 col-xs-6 goleft">
+										<p><i class="fa fa-database"></i> Config</p>
+									</div>
+	                      		</div>
+								<canvas id="serverstatus01" height="120" width="120"></canvas>
+								<script>
+									var doughnutData = [
+											{
+												value: 70,
+												color:"#68dff0"
+											},
+											{
+												value : 30,
+												color : "#fdfdfd"
+											}
+										];
+										var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
+								</script>
+	                      	</div><! --/grey-panel -->
+                      	</div><!-- /col-md-4-->
+                      	
+
+                      	<div class="col-md-4 col-sm-4 mb">
+                      		<div class="white-panel pn">
+                      			<div class="white-header">
+						  			<a href="./clear.html"><h5>清除数据</h5></a>
+                      			</div>
+								<div class="row">
+									<div class="col-sm-6 col-xs-6 goleft">
+										<p><i class="fa fa-heart"></i> clear</p>
+									</div>
+									<div class="col-sm-6 col-xs-6"></div>
+	                      		</div>
+	                      		<div class="centered">
+										<img src="/assets/boostrap/adminstyle/dashgum/img/ui-danro.jpg" width="120">
+	                      		</div>
+                      		</div>
+                      	</div><!-- /col-md-4 -->
+                      	
+						<div class="col-md-4 mb">
+							<!-- WHITE PANEL - TOP USER -->
+							<div class="white-panel pn">
+								<div class="white-header">
+                    <a href="./account.html"><h5>账号管理</h5></a>
+								</div>
+								<p><img src="/assets/boostrap/adminstyle/dashgum/img/ui-zac.jpg" class="img-circle" width="80"></p>
+								<p><b>{$web.global.name}</b></p>
+								<div class="row">
+									<div class="col-md-6">
+										<p class="small mt">当前权限</p>
+										<p>系统管理员</p>
+									</div>
+								</div>
+							</div>
+						</div><!-- /col-md-4 -->
+                      	
+
+                    </div><!-- /row -->
+                    
+                  </div><!-- /col-lg-9 END SECTION MIDDLE -->
+                  
+                  
+      <!-- **********************************************************************************************************************************************************
+      RIGHT SIDEBAR CONTENT
+      *********************************************************************************************************************************************************** -->                  
+                  
+                  <div class="col-lg-3 ds">
+                    <!--COMPLETED ACTIONS DONUTS CHART-->
+						<h3>最新用户信息</h3>
+                                        
+
+                      {volist name="$web.alluser" id="vo" offset="0" length='15'}
+                      <div class="desc">
+                        <div class="thumb">
+                          <span class="badge bg-theme"><img alt="avatar" style="height: 20px;width: 20px;" src="{$vo.avatarUrl}"></span>
+                        </div>
+                        <div class="details">
+                          <p><muted>{$vo.nickName}</muted><br/>
+                             <a href="javascript:;">来自 {$vo.province}</a><br/>
+                          </p>
+                        </div>
+                      </div>
+                      {/volist}
+                  </div><!-- /col-lg-3 -->
+              </div><! --/row -->
+          </section>
+      </section>
+
+{include file="../templates/manage/user/customization/weixinheddinlike/admin/foolter.html" /}

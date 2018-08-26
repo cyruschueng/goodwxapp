@@ -1,0 +1,37 @@
+<!--pages/queryzaocao/queryzaocao.wxml-->
+<form bindsubmit='queryBox' style=' padding-top: 50rpx;'>
+  <view style=' padding-top: 50rpx;'>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" type='text' name='xhinput' auto-focus value='20183128070469' placeholder="请输入学号" />
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button bindtap='query' formType="submit">查询次数</button>
+    </view>
+  </view>
+  <view class="btn-area">
+    <button bindtap='queryDetail' formType="submit">查询详细</button>
+  </view>
+  <loading hidden="{{hiddenLoading}}">正在查询..</loading>
+</form>
+
+<view class="content">
+  <view style="flex:1;height:20px;justify-content: center;">{{name}}</view>
+  <view style="flex:1;height:20px;align-items: center;">{{sclass}}</view>
+  <view style="flex:1;height:20px;align-items: center;">{{cishu}}</view>
+</view>
+
+<view class="weui-panel__bd">
+  <block wx:if="{{diaryList.length>0}}">
+    <navigator class="weui-media-box weui-media-box_text" wx:for="{{diaryList}}" wx:key="diaryItem">
+      <view class="content">
+        <view style="flex:1;height:20px;justify-content: center;">{{item.xuhao}}</view>
+        <view style="flex:1;height:20px;align-items: center;">{{item.name}}</view>
+        <view style="flex:1;height:20px;align-items: center;">{{item.time}}</view>
+      </view>
+    </navigator>
+  </block>
+</view>

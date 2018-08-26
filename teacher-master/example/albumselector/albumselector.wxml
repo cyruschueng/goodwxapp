@@ -1,0 +1,32 @@
+<view class='help'>
+<button class='kefu-btn' open-type='contact'><view class='xm-kefu'></view></button>
+</view>
+<view class="page">
+  <view>
+    <form bindsubmit="submit" report-submit>
+      <view class='xm-class-item'>
+        <block wx:for="{{myAlbums}}">
+          <view class='xm-class-cell' hover-class='btn_hover' bindtap="navigate" id="{{item._id}}">
+            <view class='xm-class-excel'>{{item.name}}</view>
+            <view class='xm-class-more'> </view>
+          </view>
+        </block>
+        <view class='xm-class-cell' wx:if="{{show_add}}" bindtap='showAdd'>
+          <view class='xm-class-handcreate' style="width: 100%;">
+            添加相册
+          </view>
+          <view class='xm-class-more'> </view>
+        </view>
+
+        <view class='xm-class-cell' wx:else>
+          <view class='xm-class-handcreate' style="width: 100%;display:flex;">
+
+            <input placeholder="相册名称" value="{{name}}" name="name" auto-focus/>
+            <button size='mini' formType="submit" style='background-color:#1e90ff;color:white;margin-right:0px;'>添加</button>
+          </view>
+          <view class='xm-class-more'> </view>
+        </view>
+      </view>
+    </form>
+  </view>
+</view>

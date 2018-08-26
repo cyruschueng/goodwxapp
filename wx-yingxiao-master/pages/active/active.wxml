@@ -1,0 +1,33 @@
+<!--pages/active/active.wxml-->
+<view class='container'>
+  <view class='bindtips' wx:if="{{tobindphone!='0'}}">
+    <view class='bindtip'>
+      <view class='bindleft'>
+        <image src='/pages/source/images/phone.png'></image>
+        <text>请绑定手机号使用更多功能.</text>    
+      </view>
+      <view class='bindright' bindtap='bindphone'>立即绑定</view>  
+    </view>
+  </view>
+  <view class='activeList'>
+    <view class='active' wx:if="{{active!=''}}" wx:for="{{active}}" wx:key="{{*this}}">
+      <image src='{{item.img}}'></image>
+      <view class='wrap'>
+        <view class='activeTitle'>{{item.title}}</view>
+        <view class='time'>
+          <text>{{item.starttime}}</text>
+          <text>至</text>
+          <text>{{item.endtime}}</text>
+        </view>
+      </view>
+      <view class='cat'>
+        <view style='{{item.status=="1"?"background:rgba(255,0,0,.7)":"background:rgba(144,144,144,.7)"}}'>{{item.cat}}</view>
+        <view class='status'>{{status[item.status]}}</view>
+      </view>
+    </view>
+    <view class='null'>
+      <image src='/pages/source/images/noactive.png'></image>
+      <view>暂时还没有活动开启</view>
+    </view>
+  </view>
+</view>

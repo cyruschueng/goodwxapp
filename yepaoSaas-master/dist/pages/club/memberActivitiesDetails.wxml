@@ -1,0 +1,54 @@
+<!--pages/club/memberActivitiesDetails.wxml-->
+
+
+<view class='bg-view' wx:if='{{ activities != null }}'>
+
+  <view class='title-view'>
+    <view>
+      <button class='share-btn' open-type='share'>
+        <image class='share-icon' src='../../images/icon/club/share.png' ></image>
+      </button>
+      <image class='img' mode='aspectFill' src='{{ activities.titleImg }}'></image>
+      <view wx:if='{{ !clock }}' class='down-view'>
+        {{ activities.timeTitle }}
+        <view class='timer-text'>{{ days }}</view>天
+        <view class='timer-text'>{{ hour }}</view>时 
+        <view class='timer-text'>{{ mints }}</view>分 
+        <view class='timer-text'>{{ second }}</view>秒 
+      </view>
+      <view wx:else class='down-view'>活动已结束</view>
+    </view>
+  </view>
+
+  <view class='introduction-view'>
+    <view class='fs36 whiteColor'>{{ activities.title  }}</view>
+    <view class='intr-text'>简介：{{ activities.introduction }}</view>
+    <view>
+      <image class='people-icon' src='../../images/icon/club/people.png'></image>
+      <text>{{ activities.nowNum }}/{{ activities.totalNum }}</text>
+    </view>
+  </view>
+
+  <view class='card-view' wx:if='{{ activities.cards.length > 0 }}'>
+  
+    <view class='card-item' data-cards='{{ item }}' wx:for='{{ activities.cards }}' wx:key='{{ index }}' bindtap='bindCardItemTap'>      
+      <image class='card-bgimg' src='../../images/icon/club/card_bg.jpg'></image>
+      <view class='name-view'>
+        <view class='name'>{{ item.cardName }}</view>
+        <text class='originalPrice'>原价：{{ item.originalPrice }}</text>
+        <text class='currentPrice'>现价：{{ item.currentPrice }}</text>
+      </view>
+      <view class='buy-btn'>立即购买</view>
+    </view>
+  
+  </view>
+
+  <view class='content-view'>
+    <view class='title'>活动详情</view>
+    <view class='content'>{{ activities.activitiesDetails }}</view>
+  </view>
+
+</view>
+
+<!-- 认证弹窗 -->
+<certificationModal modal-hidden="{{ is_modal_Hidden }}" modal-isCertificationMem="{{ isCertificationMem }}" /> 

@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class='v-container'>
+  <button class='top-text' open-type='share' plain='true'>添加群聊</button>
+  <view class='line'></view>
+  <view class="v-container bottom-half">
+    <view wx:if="{{has_list}}" class='q-list'>
+      <block wx:for="{{q_list}}" wx:key="*this">
+        <view class='s_item' id='{{item.group_id}}' style='background-color:{{item.color}}' bindtap='toNoteList'>
+          <view class="q_item h-container">
+            <view class='h-container'>
+              <image wx:if='{{item.read_status == 1}}' class="q_icon" src="../../assets/images/red.png'"></image>
+              <image wx:else class="q_icon" src="../../assets/images/grey.png"></image>
+            </view>
+            <open-data class="q_title" type="groupName" open-gid="{{item.open_gid}}"></open-data>
+            <!--<text class='q_title'>{{item.group_name}}</text>-->
+          </view>
+          <view class='extra h-container'>
+            <text class='time'>{{item.active}}</text>
+          </view>
+        </view>
+        <view class='line'></view>
+      </block>
+    </view>
+
+    <view wx:else class='v-container tip'>
+      <text>暂时没有群聊信息</text>
+      <text>请分享后查看</text>
+    </view>
+  </view>
+</view>

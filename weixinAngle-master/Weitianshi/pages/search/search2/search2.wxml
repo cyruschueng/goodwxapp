@@ -1,0 +1,126 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+
+<view wx:if="{{nonet}}">
+  <template is="newSearch2" data="{{text:'搜索项目、投资机构、投资人、FA'}}"></template>
+  <view hidden='{{show}}'>
+    <view class="searchContent">搜索指定内容</view>
+    <view class='searchBox flex'>
+      <view class="searchPro" bindtap='jumpToSearch' data-current="1">项目</view>
+      <view class='searchLine'></view>
+      <view bindtap='jumpToSearch' data-current="2">投资机构</view>
+      <view class='searchLine'></view>
+      <view class='searchPer' bindtap='jumpToSearch' data-current="3">投资人</view>
+    </view>
+    <view class="searchContent contentAfter" bindtap='jumpToSearch' data-current="4">FA(融资顾问)</view>
+  </view>
+
+  <view wx:if="{{show}}">
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab == 0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>
+      <view class="swiper-tab-list {{currentTab == 1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">项目</view>
+      <view class="swiper-tab-list {{currentTab == 2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">投资机构</view>
+      <view class="swiper-tab-list {{currentTab == 3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">投资人</view>
+      <view class="swiper-tab-list {{currentTab == 4 ? 'on' : ''}}" data-current="4" bindtap="swichNav">FA</view>
+    </view>
+
+    <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1020rpx" bindchange="bindChange">
+      <swiper-item data-current='0'>
+        <scroll-view style="height:100%;" scroll-y="true" wx:if="{{(projects_list.length != 0 || investments_list.length != 0 ||investors_list.length != 0 || fa_list.length != 0) && showSth == true}}">
+          <view class="outStyleBox1" id="projects" wx:if="{{projects_list.length != 0}}">
+            <view class="blockTitle2">项目</view>
+            <template is="shopProject" data="{{myProject:projects_list,currentTab,index,currentTab:0,number:3,showAfter}}"></template>
+            <view class="outPadding" bindtap='jumpToSearch' data-current="1" wx:if="{{searchData.projects_list.list.length >= 3}}">
+              <view class="more">更多</view>
+            </view>
+          </view>
+          <view class="outStyleBox1" id="investment" wx:if="{{investments_list.length != 0}}">
+            <view class="blockTitle2">投资机构</view>
+            <template is="investment" data="{{investment_list:investments_list,index,currentTab:0,number:3}}"></template>
+            <view class="outPadding" bindtap='jumpToSearch' data-current="2" wx:if="{{searchData.investments_list.list.length >= 3}}">
+              <view class="more">更多</view>
+            </view>
+          </view>
+          <view class="outStyleBox1" id="investor" wx:if="{{investors_list.length != 0}}">
+            <view class="blockTitle2">投资人</view>
+            <template is='investorModel' data='{{personList:investors_list,user_id,currentTab:0,number:3}}'></template>
+            <view class="outPadding" bindtap='jumpToSearch' data-current="3" wx:if="{{searchData.investors_list.list.length >= 3}}">
+              <view class="more" bindtap="toMember">更多</view>
+            </view>
+          </view>
+          <view class="outStyleBox1" id="faPerson" wx:if="{{fa_list.length != 0}}">
+            <view class="blockTitle2">FA(融资顾问)</view>
+            <template is="investorModel" data="{{personList:fa_list,user_id,currentTab:0,number:3}}"></template>
+            <view class="outPadding" bindtap='jumpToSearch' data-current="4">
+              <view class="more" wx:if="{{searchData.fa_list.list.length >= 3}}" bindtap="toMember">更多</view>
+            </view>
+          </view>
+          <view class="t-noContent" wx:if="{{projects_list.length ==0 &&investments_list.length == 0 && investors_list.length == 0 && fa_list.length == 0}}">暂无数据</view>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item data-current='1' bindscrolltolower='loadMore'>
+        <scroll-view style="height:100%;" scroll-y="true" bindscrolltolower='loadMore' data-current='1'>
+          <view class="outStyleBox" wx:if="{{projects_list.length != 0}}">
+            <template is="shopProject" data="{{myProject:projects_list}}"></template>
+          </view>
+          <template is="isEmpty" data="{{emptyNumber:projects_list}}"></template>
+          <template is="theBottom" wx:if="{{atBottom == true && projects_list !=''}}"></template>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item data-current='2'>
+        <scroll-view style="height:100%;" scroll-y="true" bindscrolltolower='loadMore' data-current='2'>
+          <view class="outStyleBox1" wx:if="{{investments_list.length != 0}}">
+            <template is="investment" data="{{investment_list:investments_list,index}}"></template>
+          </view>
+          <template is="isEmpty" data="{{emptyNumber:investments_list}}"></template>
+          <template is="theBottom" wx:if="{{atBottom == true && investments_list !=''}}"></template>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item data-current='3' bindscrolltolower='loadMore'>
+        <scroll-view style="height:100%;" scroll-y="true" bindscrolltolower='loadMore' data-current='3'>
+          <view class="outStyleBox" wx:if="{{investors_list.length != 0}}">
+            <template is='investorModel' data='{{personList:investors_list,user_id}}'></template>
+          </view>
+          <template is="isEmpty" data="{{emptyNumber:investors_list!=''}}"></template>
+          <template is="theBottom" wx:if="{{atBottom == true && investors_list != ''}}"></template>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item data-current='4' bindscrolltolower='loadMore'>
+        <scroll-view style="height:100%;" scroll-y="true" bindscrolltolower='loadMore' data-current='3'>
+          <view class="outStyleBox" wx:if="{{fa_list.list.length != 0}}">
+            <template is="investorModel" data="{{personList:fa_list,user_id}}"></template>
+          </view>
+          <template is="isEmpty" data="{{emptyNumber:fa_list !=''}}"></template>
+          <template is="theBottom" wx:if="{{atBottom == true && fa_list != ''}}"></template>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!--投资人  -->
+  <template name="investorModel">
+    <block wx:for="{{personList}}" wx:key="{{index}}">
+      <view class="t-outsideBox" data-id="{{item.user_id}}" catchtap="userDetail" hidden="{{currentTab == 0 && index >= number}}">
+        <view class="t-applyMyProject t-contacts-detailm">
+          <view class="t-introduceBox flex">
+            <image src="{{item.investor_logo_url}}" class="t-userPic" wx:if="{{item.investor_logo_url}}"></image>
+            <view class="t-userName">{{item.investor_name}}</view>
+            <view class="t-userPart flex" wx:if="{{item.authentication[0].group_title}}">
+              <image class="t-renzheng" wx:if="{{item.authentication[0].group_title=='投资人'}}" src="/img/img-touziren@2x.png"></image>
+              <image class="t-renzheng" wx:if="{{item.authentication[0].group_title=='买方FA'}}" src="/img/img-maifang1@2x.png"></image>
+              <image class="t-renzheng" wx:if="{{item.authentication[0].group_title=='卖方FA'}}" src="/img/img-maifang2@2x.png"></image>
+              <image class="t-renzheng" wx:if="{{item.authentication[0].group_title=='创业者'}}" src="/img/img-chuangyezhe1@2x.png"></image>
+            </view>
+            <view class="t-user_text" wx:if="{{item.investor_logo_text}}">{{item.investor_logo_text}}</view>
+          </view>
+          <view class="t-careerCompany flex">
+            <view class="t-userPosition">{{item.investor_career}}</view>
+            <view class="t-userCompany1" wx:if="{{item.investor_company}}">·{{item.investor_company}}</view>
+          </view>
+        </view>
+        <view class="t-alineHeight"></view>
+      </view>
+
+    </block>
+  </template>
+</view>

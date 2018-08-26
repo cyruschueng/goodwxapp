@@ -1,0 +1,128 @@
+<import src="/wux/notification/notification.wxml"/>
+<template is="notification" data="{{ ...$wux.notification }}"/>
+<import src="/zanui/toast/index.wxml"/>
+<template name="weCropper">
+  <canvas
+    class="cropper"
+    disable-scroll="true"
+    bindtouchstart="clipTouchStart"
+    bindtouchmove="clipTouchMove"
+    bindtouchend="clipTouchEnd"
+    style="width:{{width}}px;height:{{height}}px;"
+    canvas-id="{{id}}">
+  </canvas>
+</template>
+<!--
+<view class="cropper-wrapper c_flex" wx:if="{{isClip}}">
+  <template is="weCropper" data="{{...cropperOpt}}"/>
+  <view class="cropper-buttons">
+    <view
+      class="upload"
+      bindtap="uploadTap">
+      换个头像
+    </view>
+
+    <view
+      class="getCropperImage"
+      bindtap="getCropperImage">
+      开始制作
+    </view>
+  </view>
+</view>-->
+
+
+  <view class="mainBox">
+    <!-- <view bindtap="scanImage" style="padding: 40rpx 0 40rpx 530rpx;">
+      <button class="weui-btn mini-btn" type="primary" size="mini">预览头像</button>
+    </view> -->
+
+    <!--<form bindsubmit="scanImage" report-submit="true" style="width: 100%;">
+      <view style="padding: 40rpx 0;float: left;margin-left: 160rpx;">
+        <button class="weui-btn mini-btn" type="primary" size="mini" form-type="submit" style="width:250rpx;height:80rpx;line-height:80rpx;">方形头像</button>
+      </view>
+
+      <view style="clear: both;"></view>
+    </form>
+  -->
+    <view style="width: 100%;height: auto">
+      <view style="padding-top:15px;padding-bottom:15px;">
+
+        <view class="avatar-base">
+          <view class="avatar-squ {{!isCircle ? 'avatar-active':''}}" bindtap="changeSqu">
+            方形头像
+          </view>
+          <view class="avatar-cir {{isCircle ? 'avatar-active':''}}" bindtap="changeCircle">
+            圆形头像
+          </view>
+
+        </view>
+      </view>
+    </view>
+
+    <!-- 头像动作画布 -->
+    <view style="position:relative;margin-top:9%;">
+      <image src="{{backgroundSrc}}"
+             style="width:{{avatarCanvasWidth}}px;height:{{avatarCanvasWidth }}px;{{isCircle?'border-radius: 50%;':''}}margin: 0 auto;display: block;"></image>
+
+      <canvas disable-scroll="true" canvas-id="avatar" bindtouchmove="avatarTouchMove" bindtouchstart="avatarTouchStart"
+              bindtouchend="avatarTouchEnd"
+              style="width:{{avatarCanvasWidth}}px;height:{{avatarCanvasWidth}}px;position: absolute;top:0;left: 5%;background-color:transparent;">
+      </canvas>
+    </view>
+
+    <!--<view class="avatarBox avatarBoxChild" wx:if="{{avatarBoxChild}}">-->
+      <!--<scroll-view scroll-x style="background-color: transparent;width: 100vw;">-->
+        <!--<view style="width:{{100*urls.length}}rpx;" class="flex_row">-->
+          <!--<block wx:for="{{iconList}}" wx:key="item">-->
+            <!--<vidw data-avatarpath="{{'http://icons.maiyizhi.cn/'+item}}" bindtap="selectAvatar"-->
+                  <!--style=" margin: 9px 5px 0 5px; padding: 10rpx;">-->
+              <!--<image class="avatarBoxChildImage" style="width: 95rpx;height: 95rpx;"-->
+                     <!--src="{{'http://icons.maiyizhi.cn/'+item}}"/>-->
+            <!--</vidw>-->
+          <!--</block>-->
+        <!--</view>-->
+      <!--</scroll-view>-->
+      <!--&lt;!&ndash;<view class="avatarBtnBox" bindtap="avatarBtn">&ndash;&gt;-->
+      <!--<view class="avatarBtnBox">-->
+        <!--<view>定</view>-->
+      <!--</view>-->
+    <!--</view>-->
+
+
+    <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+      <view class="zan-dialog__mask" catchtap="toggleDialog"/>
+      <view class="zan-dialog__container">
+        <scroll-view class="scroll" scroll-x wx:if="{{showDialog}}" style="background-color: #262626;">
+          <view style="width:{{100*urls.length}}rpx;" class="flex_row">
+            <block wx:for="{{iconList}}" wx:key="item">
+              <vidw data-avatarpath="{{'http://icons.maiyizhi.cn/'+item}}" bindtap="selectAvatar"
+                    style="  padding: 10rpx;">
+                <image style="width: 85rpx;height: 85rpx;" src="{{'http://icons.maiyizhi.cn/'+item}}"/>
+              </vidw>
+            </block>
+          </view>
+        </scroll-view>
+
+      </view>
+    </view>
+    <view style=" z-index:1;margin-top: 7%;">
+      <view class="avatarBox" style="padding: 5px 0;height:50px;">
+        <view class="flex_row">
+          <block wx:for="{{urls}}" wx:key="value">
+            <view style="margin: 5.5rpx 5.5rpx;background-color: #fff;"
+                  data-index="{{index}}">
+              <image class="avatar" src="{{item}}" bindtap="itemClick" data-index="{{index}}"
+                     style="width: 70rpx;height: 70rpx;"></image>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="btn-image">
+        <view class="upload-avatar" bindtap="uploadOriginalImage">{{backgroundSrc?'换个头像':'选择头像'}} </view>
+        <view class="download-phone" bindtap="scanImage"> 保存到手机</view>
+      </view>
+    </view>
+
+  </view>
+<template is="zan-toast" data="{{ zanToast }}"></template>
+

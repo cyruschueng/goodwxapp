@@ -1,0 +1,132 @@
+<view class='container' style="overflow:{{overflow}}">
+  <view class='swiperWrap'>
+    <swiper class='swiper' bindchange='swiperChange' current='{{current}}'>
+      <swiper-item wx:for="{{detail.goods_img}}" wx:key="{{index}}">
+        <image src='{{item.goods_img}}'></image>
+      </swiper-item>
+    </swiper>
+    <view class='current'>{{current+1}}/{{imgLen}}</view>
+  </view>
+  <view class='item'>
+    <view class='leftItem'>
+       <view class='itemTitle'>{{detail.goods_name}}</view> 
+      <view class='prc'>
+        <text>¥{{detail.goods_price}}</text>
+        <!--拼团销量  -->
+        <text>已团:{{detail.group.spell_deadline}}件</text>
+        <text>{{detail.group.total_count_num}}人团</text>
+      </view>
+    </view>
+  </view>
+  <view class='break'></view>
+  <view class='groupInfo' wx:if="{{hasList!=0}}">
+    <view class='groupTitle'>
+      <view>正在拼团{{detail.salesvolume}}人</view>
+      <view bindtap='more' wx:if="{{isshort!='1'}}">
+        <text>查看更多</text>
+        <image src="/pages/source/images/foward.png"></image>
+      </view>
+    </view>
+    <view class='groupList' wx:for="{{lastgroup}}" wx:if="{{item.status=='0'}}" wx:key="{{*this}}">
+      <view class='listLeft'>
+        <view>
+          <image src='{{item.header}}'></image>
+        </view>
+        <view class='grouper'>
+          <view>{{item.nickname}}</view>
+          <view>还差{{item.total_count_num-item.group_num}}人,<text wx:if="{{item.day!=0}}">剩余{{item.day}}天</text> {{item.hour}}小时{{item.minute}}分{{item.second}}秒</view>
+        </view>
+      </view>
+      <view class='listRight'>
+        <view class='togroup' bindtap='togroup' data-id='{{item.id}}'>去参团</view>
+      </view>
+    </view>
+  </view>
+  <view class='break'></view>
+  <view class='info'>
+    <view class='infoTitle'>
+      <view>商品详情</view>
+    </view>
+    <view class='imgbox' wx:for="{{detail.img}}" wx:key="id">
+      <image src='{{item.img}}' mode='widthFix'></image>
+    </view>
+  </view>
+  <view class='btnList'>
+    <view class='btn'>
+      <view>
+        <view class='server'>
+          <contact-button></contact-button>
+          <contact-button></contact-button>
+          <contact-button></contact-button>
+        </view>
+        <text>客服</text>
+        <image src='/pages/source/images/servise.png'></image>
+        <button open-type=''></button>
+      </view>
+    </view>
+    <view class='addto' bindtap='sub'>
+      <view>¥{{detail.goods_price}}</view>
+      <view>单独购买</view>
+    </view>     
+    <view class='tobuy' bindtap='startGroup'>
+      <view>¥{{detail.group.group_price}}</view>
+      <view>{{slogan}}</view>
+    </view>    
+  </view>
+</view>
+<view class='wrap' wx:if="{{hidden=='1'}}">
+  <view class='more'>
+    <view class='moreTitle'>
+      <text>正在开团</text>
+      <image bindtap='close' src='/pages/source/images/close.png'></image>
+    </view>
+    <view class='moreList'>
+      <view class='moreItem groupList' wx:for="{{more}}" wx:key='*this'>
+        <view class='listLeft'>
+          <view>
+            <image src='{{item.header}}'></image>
+          </view>
+          <view class='grouper'>
+            <view>{{item.nickname}}</view>
+             <view>还差{{item.total_count_num-item.group_num}}人,<text wx:if="{{item.day!=0}}">剩余{{item.day}}天</text> {{item.hour}}小时{{item.minute}}分{{item.second}}秒</view>
+          </view>
+        </view>
+        <view class='listRight'>
+          <view class='togroup' bindtap='togroup'  data-id='{{item.id}}'>去参团</view>
+        </view>        
+      </view>
+    </view>
+    <view class='moreFooter'></view>
+  </view>
+</view>
+<view wx:if="{{hidden=='2'}}" class='model'>
+  <view class='select'>
+    <view class='info'>
+       <image src='{{detail.goods_img[0].goods_img}}'></image>
+      <view>¥{{price*num}}</view>
+      <view>选择{{seletedColor}}、{{seletedSize}}</view>
+      <image bindtap='close' src='/pages/source/images/close.png'></image>
+    </view>
+    <view class='scroll'>
+      <view class='color'>
+        <view>套系</view>
+        <view>
+          <text class=' {{index==colorCurrent?"colorSel":"a1"}}' wx:key="*this"  wx:for="{{detail.color}}" bindtap='changeColor' data-index='{{index}}'>{{item.attr_value}}</text>    
+        </view>     
+      </view>
+      <view class='size'>
+        <view>备注</view>
+        <view>
+          <text class='colorSel' wx:for="{{detail.size}}" class='{{index==sizeCurrent?"sizeSel":""}}' wx:key="index" bindtap='changeSize' data-index='{{index}}'>{{item.attr_value}}</text>      
+        </view>
+      </view>   
+      <view class='cal' wx:if="{{subtype=='1'}}">
+        <view bindtap='add'>+</view>
+        <view>{{num}}</view>
+        <view bindtap='reverse'>-</view>
+      </view>    
+      <view class='white'></view>         
+    </view>
+    <view class='btn-buy' bindtap='tobuy'>{{tip}}</view>      
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#content{
+			font-size: 50px;
+		}
+
+	</style>
+</head>
+<body>
+	<div id='content'></div>
+	<button id="btn">加载更多</button>
+
+	<script type="text/javascript">
+		var contentDiv = document.getElementById('content');
+		var btnDiv = document.getElementById('btn');
+		var num = 4;
+		var curr =1;
+		// contentDiv.innerHTML = render()
+
+
+		var arr = [ 1,2,3,4,5,'6',7,8,9,10,11,'jakjllll',9,'zhang','good'];
+		var render = function(curr){
+			var str = '';
+			var last = curr * num ;
+			last = last > arr.length?arr.length:last;
+			for (var i = curr*num-num; i <last; i++) {
+				str += '<li>'+ arr[i] +'</li>'
+			};
+			return str;
+		}
+
+		contentDiv.innerHTML = render(curr)
+		btnDiv.onclick = function(){
+			curr++;
+			contentDiv.innerHTML += render(curr)
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!--pages/result/result.wxml-->
+<view class="container">
+    <view class='header'>
+        <view class='left public'>
+            <view class='leftBg'>
+                  <image class='hat' wx:if="{{result != 'tie'}}" 
+                    src="http://ovhvevt35.bkt.clouddn.com/chengyu/hat.png" mode='widthFix'></image>
+                  <image class='avatarUrl' wx:if="{{winner_info}}" src="{{winner_info.avatarurl}}" mode='widthFix'></image>
+                  <image class='avatarUrl' wx:else src="{{houseImg}}" mode='widthFix'></image> 
+                  <view class='textName' wx:if="{{winner_info.wx_name}}">{{winner_info.wx_name}}</view>
+                  <view class='textName' wx:else>{{houseName}}</view>
+            </view>
+        </view>
+        <!--胜利  -->
+         <view class='win' wx:if="{{winner_info.mid==mid}}">
+            <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/music/win.png" mode='widthFix'></image> 
+        </view> 
+        <!--失败  -->
+        <view class='win' wx:if="{{loser_info.mid==mid}}">
+            <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/music/false.png" mode='widthFix'></image> 
+        </view>
+        <view class='right public'>
+            <view class='rightBg'>
+                  <!-- <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/chengyu/hat.png" mode='widthFix'></image> -->
+                  <image class='avatarUrl' wx:if="{{loser_info.avatarurl}}" src="{{loser_info.avatarurl}}" mode='widthFix'></image>
+                  <image class='avatarUrl' wx:else src="{{otherImg}}" mode='widthFix'></image>
+                  <view class='textName' wx:if="{{loser_info.wx_name}}">{{loser_info.wx_name}}</view>
+                  <view class='textName' wx:else>{{otherName}}</view>
+            </view>
+        </view> 
+    </view>
+    <!--wx:if="{{winner_info.mid==mid}}"  -->
+    <view class='line'>
+        <view class='finish' >
+            <view  wx:if="{{houseNum>otherNum}}" class='nowResult' style='width:{{(otherNum/(otherNum+houseNum))*675}}rpx'></view>
+            <view  wx:if="{{houseNum<otherNum}}" class='nowResult' style='width:{{(houseNum/(otherNum+houseNum))*675}}rpx'></view>
+            <view  wx:if="{{houseNum==otherNum}}" class='nowResult' style='width:50%'></view>
+        </view>
+        <view class='resultNum'>
+            <view wx:if="{{winner_info}}">
+                <view wx:if="{{houseNum>otherNum}}">{{houseNum}}<text>分</text></view>
+                <view wx:else>{{otherNum}}<text>分</text></view>
+            </view>
+            <view wx:else>
+                <view >{{otherNum}}<text>分</text></view>
+            </view>
+            <view wx:if="{{loser_info}}">
+                <view wx:if="{{houseNum<otherNum}}">{{houseNum}}<text>分</text></view>
+                <view wx:else>{{otherNum}}<text>分</text></view>
+            </view>
+            <view wx:else>
+                <view>{{otherNum}}<text>分</text></view>
+            </view>
+            
+        </view>
+    </view>
+    <view class='gift'>
+        <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/gift.png" mode='widthFix'></image>
+    </view>
+    <view class='integral'>
+        <view class='img'>
+            <image src="http://ovhvevt35.bkt.clouddn.com/music/jinbi.png" mode='widthFix' style='width:70rpx'></image>
+            <text wx:if="{{loser_info.mid==mid}}">+{{loser_info.plus_exp}}</text>
+            <text wx:if="{{winner_info.mid==mid}}">+{{winner_info.plus_gold}}</text> 
+            <text wx:if="{{result=='tie'}}">平局</text>
+        </view>
+        <view class='img exp'>
+            <image src="http://ovhvevt35.bkt.clouddn.com/music/exp.png" mode='widthFix'></image> 
+            <text wx:if="{{loser_info.mid==mid}}">+{{loser_info.plus_exp}}</text>
+            <text wx:if="{{winner_info.mid==mid}}">+{{winner_info.plus_exp}}</text> 
+            <text wx:if="{{result=='tie'}}">平局</text>
+        </view>
+        <image class='line' src="http://ovhvevt35.bkt.clouddn.com/chengyu/line.png" mode='widthFix'></image>
+    </view>
+    <view class='foot'>
+        <view class='button'>
+            <view class='star' bindtap='starTap'>
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button formType="submit" class="submit" style='border-radius:0'>
+                      继续游戏
+                  </button>
+              </form>
+            </view>
+            <view class='out' wx:if="{{winner_info.mid==mid}}">
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button open-type='share'  data-type="0">
+                    <button formType="submit" class="submit" style='border-radius:0'>
+                        <button>
+                            <image class='share' src="http://ovhvevt35.bkt.clouddn.com/music/share.png" mode='widthFix'></image>
+                        炫耀一下
+                      </button>
+                    </button>
+                  </button>
+              </form>
+            </view>
+            <view class='out' wx:if="{{loser_info.mid==mid}}">
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button formType="submit" class="submit" style='border-radius:0'>
+                      <button open-type='share'  data-type="0">
+                        <button>
+                            <image class='share' src="http://ovhvevt35.bkt.clouddn.com/music/share.png" mode='widthFix'></image>
+                            分享结果
+                        </button>
+                      </button>
+                  </button>
+              </form>
+            </view>
+            <view class='out' wx:if="{{result=='tie'}}">
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button formType="submit" class="submit" style='border-radius:0'>
+                      <button open-type='share'  data-type="0">
+                         <button>
+                            <image class='share' src="http://ovhvevt35.bkt.clouddn.com/music/share.png" mode='widthFix'></image>
+                            分享结果
+                         </button>
+                      </button>
+                  </button>
+              </form>
+            </view>
+            <view class='shareTitle'>炫耀一下，可得30金币</view>
+        </view>
+    </view>
+</view>
+<!--失败  -->
+<view class='bg' wx:if="{{game==false}}">
+    <view class='zindex'>
+          <image class='hat' src="http://ovhvevt35.bkt.clouddn.com/chengyu/false.png" mode='widthFix'></image>
+    </view>
+</view>

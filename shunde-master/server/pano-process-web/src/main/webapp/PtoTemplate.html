@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PTO模板管理</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<form id="ptoCreateForm" method="post">
+    <br/> <br/> <label for="deviceId">设备ID</label> <input type="text"
+                                                          name="deviceId" id="deviceId"/>
+    <br/> <br/> <label>模板类型</label>
+    <input type="radio" name="ptoType" value="indoor" checked> 室内
+    <input type="radio" name="ptoType" value="outdoor"> 室外<br>
+
+    <br/> <br/> <label
+        for="template">模板</label>
+    <textarea name="template" id="template" rows="30" cols="200"></textarea>
+    <br/> <br/>
+    <input type="button"  onclick="submitFunction()" value="创建或更新"/>
+    <!--<button type="submit">创建或更新</button>-->
+</form>
+<!--<iframe id="id_iframe" name="submit_iframe" style="display:none;"></iframe>-->
+
+<script type="text/javascript">
+    function submitFunction() {
+        $.ajax({
+            type: "POST",
+            url:"/rest/pto/create",
+            dataType: 'JSON',
+
+            data:$('#ptoCreateForm').serialize(),// 要提交的表单
+            success: function(result) {
+                var msg2 = result.data.deviceId;
+                alert(result.msg
+                    +"\ndeviceId: "+result.data.deviceId
+                    +"\nptoType: "+result.data.ptoType);}
+        });
+
+    }
+</script>
+</body>
+</html>

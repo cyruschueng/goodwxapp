@@ -1,0 +1,17 @@
+<!-- 新建账本入口 -->
+ <view class="newAccount-container"> 
+  <view class='head-container'>
+    <image class="head-picture" src="{{head_picture_url}}"></image>
+  </view>
+  <view>
+    <input class='location-button' cursor-spacing='100' placeholder='{{location}}' placeholder-style='color: rgb(160, 160, 160);' focus="{{locationFocus}}" bindblur='getLocation' bindtap='locationFocus'></input>
+  </view>
+  <view> 
+    <picker mode="date" value="{{dates}}" start="2000-01-01" end="2100-12-31" bindchange="bindDateChange">
+      <button class='time-button {{active1}}'>{{dates}}</button>
+    </picker>  
+  </view> 
+  <view class='finish-button-container'>
+    <button class='finish-button' bindtap='newAccount'>完成</button>
+  </view>
+</view>

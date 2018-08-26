@@ -1,0 +1,137 @@
+<!--pages/product/product.wxml-->
+<import src="/utils/wxParse/wxParse.wxml" />
+
+<view class='page skin-{{skin}}'>
+  <view class='main-content-section'>
+    <view class='swiper-section'>
+      <swiper class='swiper' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" indicator-active-color='#ff5f8d' circular="{{circular}}">
+        <block wx:for="{{images}}" wx:key="{{index}}">
+          <swiper-item>
+            <image src="{{item}}" class="swiper-image" mode='aspectFill' bindtap="previewImage" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <image class="swiper-cart-image" src="{{cartimage}}" bindtap='cartTab'></image>
+    </view>
+
+    <view class='price-name'>
+      <view class='price-section'>
+        <text class='price-text_1'>￥</text>
+        <text class='price-text_2'>{{price}}</text>
+      </view>
+      <view class='name-section'>
+        <text class='name-text ellipsis2'>{{goodsName}}</text>
+      </view>
+      <text class='postage-text'>免邮费</text>
+    </view>
+
+    <view class='goods-choose-section' bindtap='chooseCountTab'>
+      <view class='goods-choose'>
+        <text class='goods-choose-text-1'>已选择:</text>
+        <text class='goods-choose-text-2'>{{attr}}</text>
+      </view>
+      <image class='goods-choose-arrow' src="{{arrowImage}}"></image>
+    </view>
+
+    <view class='comment-section' wx:if="{{commentList.length>0}}" bindtap='commentTab'>
+      <view class='comment-top'>
+        <text class='goods-choose-text-1'>买家评价{{commentCount}} | 销量{{productSaleQty}}</text>
+        <image class='goods-choose-arrow' src="{{arrowImage}}"></image>
+      </view>
+
+      <block wx:for="{{commentList}}" wx:key="{{item.CommentId}}">
+        <view class="comment-item {{index+1 == commentList.length ? '' : 'list-item-line'}}">
+          <view class='comment-head-name'>
+            <image class="comment-head-image" src="{{item.CustomerAvatar}}"></image>
+
+            <view class='comment-item-name-star'>
+              <text class='comment-item-name'>{{item.CustomerName}}</text>
+              <view class='star'>
+                <block wx:for="{{[0,0,0,0,0]}}" wx:for-item="star" wx:for-index="starsindex" wx:key="*this">
+                  <image class="star-item" src="{{item.Rate>=starsindex+1 ? fullStar : noStar}}"></image>
+                </block>
+              </view>
+            </view>
+          </view>
+          <text class='comment-item-content'>{{item.Content}}</text>
+          <text class='comment-item-attr'>{{item.CommentTime+'  '+item.ProductAttr}}</text>
+          <view class='comment-item-image'>
+            <block wx:if="{{item.Images.length>0}}" wx:for="{{item.Images}}" wx:for-item="images" wx:key="{{index}}">
+              <image class='comment-item-image-item' src="{{images}}" mode='aspectFill'></image>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+
+
+    <view class='imagetext-section'>
+      <view class='imagetext-title'>
+        <text class='imagetext-title-text'>图文详情</text>
+      </view>
+
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+  </view>
+
+  <view class='buy-bottom-section'>
+    <view class='buy-bottom-collection' bindtap='collectionTab'>
+          <image class='buy-collection-image' src='{{isCollected ? collectionAfter :collectionBefore}}'></image>
+          <text>收藏</text>
+    </view>
+    <view class='buy-bottom-service'>
+      <view class='buy-bottom-service-frame'>
+        <view class='buy-bottom-service'>
+          <image class='buy-collection-image' src='{{findService}}'>客服</image>
+          <text>客服</text>
+        </view>
+        <button class='contact-btn' open-type="contact"></button>
+      </view>
+    </view>
+    <view class='buy-addcart-btn' bindtap='addCartTab'>加入购物车</view>
+    <view class='buy-btn' bindtap='buyTab'>立即购买</view>
+  </view>
+</view>
+
+<modal id="modalCart">
+  <view class='dialog-info-part skin-{{skin}}'>
+    <view class='dialog-image-top'>
+      <image class="dialog-image" src="{{firstImage}}" mode='aspectFill'></image>
+      <view class='dialog-price'>
+        <view class='price-section'>
+          <text class='price-text_1'>￥</text>
+          <text class='price-text_3'>{{price}}</text>
+        </view>
+        <view class='dialog-goods-count'>库存{{inventoryCount}}件</view>
+      </view>
+      <image class="dialog-close-btn" src="{{dialogClose}}" bindtap='closeDialogTab'></image>
+    </view>
+
+    <view class='dialog-dimensions-part'>
+      <text class='dialog-dimensions-text '>规格：</text>
+      <view class='flex flex-wrap mt5'>
+        <text class='product-attr-item {{attr.Selected?"selected":""}}' wx:key="Value" wx:for="{{dimensionslist}}" wx:for-item="attr" bindtap="showProduct" data-product-id="{{attr.Value}}">{{attr.Text}}</text>
+      </view>
+    </view>
+
+    <view class='dialog-goods-count-part'>
+      <text class='dialog-dimensions-text'>数量：</text>
+      <view class='product-qty flex  mt5'>
+        <button disabled='{{productQty<2}}' bindtap='minusProductQty'>-</button>
+        <input value='{{productQty}}' disabled='true'></input>
+        <button disabled='{{productQty>99}}' bindtap='addProductQty'>+</button>
+      </view>
+    </view>
+
+    <view class='dialog-bottom-buy' wx:if="{{dialogType==1}}">
+      <view class='buy-addcart-btn' bindtap='dialogAddCartTab'>加入购物车</view>
+      <view class='buy-btn' bindtap='dialogBuyTab'>立即购买</view>
+    </view>
+
+
+    <view class='dialog-bottom-buy' wx:if="{{dialogType==2 || dialogType==3}}">
+      <view class='buy-btn' bindtap='dialogToBuyTab'>确认</view>
+    </view>
+
+  </view>
+</modal>

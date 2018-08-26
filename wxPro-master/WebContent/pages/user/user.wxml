@@ -1,0 +1,29 @@
+<!--user.wxml-->
+<import src="/pages/template/blog_list_item.wxml" />
+<import src="/pages/template/post_btn.wxml" />
+<import src="/pages/template/float_comment.wxml" />
+
+<view class="container">
+  <view class="column_view column_left user_info">
+    <image class="user_avatar" src="{{userInfo.imgUrl}}" background-size="cover"></image>
+    <view class="column_view column_space_between">
+      <view class="user_info_right">
+        <text class="user_nickname">{{userInfo.nickname}}</text>
+        <view class="column_view column_left level_view">
+          <text class="">Lv{{userInfo.level || 0}}</text>
+          <image class="honor_icon" src="{{honors[0 | (userInfo.level/ 5)]}}"></image>
+          <text class="iconfont icon-liked like_me">{{userInfo.userLikes || 0}}</text>
+        </view>
+      </view>
+      <text wx:if="{{userInfo.hasFollow == 0}}" catchtap="catchFollowTap" class="follow">＋关注</text>
+      <text wx:if="{{userInfo.hasFollow == 1}}" catchtap="catchFollowTap" class="follow followed">已关注</text>
+    </view>
+  </view>
+
+  <view wx:for="{{blogs}}" wx:key="blogId" class="column_view column_left column_top list_item" style="display:{{hidePost ? 'none' : 'flex'}}" data-blogid='{{item.blogId}}' bindtap="bindListTap">
+    <template is="blog_list_item" data="{{item: item, index: index, showUser: false, hidePost: hidePost}}" />
+  </view>
+</view>
+
+<template is="post_btn" data="{{hidePost: hidePost}}" />
+<template is="float_comment" data="{{hidePost: hidePost, showComment: showComment, floatCommentContent: floatCommentContent}}" />

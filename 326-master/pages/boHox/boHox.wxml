@@ -1,0 +1,60 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+<!--top  str-->
+    <view class='panel flexCenter  Skin'>
+    <view class='panelL'>
+      <image class="imgL"src="/images/hlxZC.png"></image>
+    </view>
+    <view class='panelL'>
+      <view>PN:{{boHDevice.pn}}</view>
+      <view>地址:{{boHDevice.devaddr}}</view>
+    </view>
+        <view class='flexV1 deviceDetMode mr03'>
+        <template is="tapMenu" data="{{tapBox: tapBox}}"/> 
+      </view>
+  </view>
+<!--更新时间-->
+<view class='flexCenter padding015 Skin2'>更新时间：{{nowdate}}</view>
+<!--图表、数据 -->
+<template is="tabPage" data="{{tabBox: tabBox}}"/>
+  <view class='panel flexCenter bgColorCD pd051' hidden='{{chartNavHid}}'>
+    <!--下拉菜单str  -->
+  <dl class="dropdownMenu dropdownMenu1">
+    <dt data-index="0" bindtap="tapMainMenuHHH">
+      <view class="dropdownMenutitle font09">
+        {{titleConInp[0]}}
+      <image class="imgxs ml03"src="/images/arrow_expanded.png"></image>
+      </view>
+    </dt>
+    <dd  class="{{subMenuDisplay[0]}} bgColor0 maxh12">
+      <ul>
+        <li class="{{subMenuHighLight[0][0]}}"  data-index="0-0" bindtap="tapSubMenuHHH" id='{{titleConInp}}'  wx:for="{{titleConInp}}" wx:for-index="index"   wx:for-item="titleConInp">
+          <view>{{titleConInp}}</view>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+  </view>
+    <!--图表 -->
+  <view class='width100 mainCharData flexColumn flexv1' hidden='{{chartNavHid}}'>
+    <template is="kalendar" data="{{kalendar: cdate}}"/>
+    <view class='mainCharData flexColumn flexv1 cir'  hidden='{{chartHide}}'>
+      <view class='ecBar'>
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+      </view>
+    </view>
+   </view>
+<!--数据 -->
+<view class='width100 flexColumn flexv1' hidden='{{datNav}}'>
+  <template is="kalendar" data="{{kalendar: cdate}}"/>
+  <template is="slider" data="{{slider: slider}}"/>
+  <!--参数表 -->
+  <view class='paraList flexv1' style="overflow:auto">
+    <view id='{{index}}'  wx:for="{{invParaDetail}}" wx:for-index="index"   wx:for-item="invParaDetail">
+      <view>{{invParaDetail.title}}</view>
+      <view>{{invParaDetail.unit}}</view>
+    </view>
+  </view>
+</view>
+</view>
+<template is="operaModel" data="{{modelDat: modelDat}}"/>

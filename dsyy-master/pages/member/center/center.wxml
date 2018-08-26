@@ -1,0 +1,31 @@
+<!--center.wxml-->
+<view class="page">
+  <view class="center-background" style="background:url('{{bg}}');background-size:contain;">
+    <view class="center-text">
+      <image src="{{userInfo.avatar}}" class="center-photo"></image>
+      <image src="{{level_image}}" class="center-level-image"></image>
+      <view class="center-name">{{userInfo.nick_name}}</view>
+    </view>
+  </view>
+  <view class="white-bg center-notice">
+    <view wx:for="{{notice}}">
+      <view wx:if="{{item.show}}" class="border-bottom margin-left-30 margin-right-30 center-notice-list" data-url="{{item.url}}" bindtap="jumpUrl">
+        <image src="{{item.img}}" class="center-notice-img margin-right-20"></image>
+        <view class="float-left">
+          {{item.title}}
+        </view>
+        <view class="float-right">
+          <view wx:if="{{item.current_level_image&&item.future_level_image}}">
+            <image src="{{item.current_level_image}}" class="level-image"></image>
+            -
+            <image src="{{item.future_level_image}}" class="level-image"></image>
+            <image src="/images/more.png" class="more"></image>
+          </view>
+          <view wx:else>
+            <image src="/images/more.png" class="more"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

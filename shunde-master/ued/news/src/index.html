@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>全景新闻</title>
+    <style type="text/css">html {height: 100%;margin: 0;} body {height: 100%;margin: 0;}</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+</head>
+<body>
+<link href="./css/loading.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    html{font-size:14px;color:#ffffff;font-family: Microsoft YaHei;}
+    .trump-control-bottom{zoom:1 !important;}
+    .trump-play-controller{zoom:1 !important;}
+    .trump-play-controller *{opacity: 0;}
+    .trump-play-controller{background: url("./home.bundle/home/images/btn_play.png") no-repeat center center/42px 42px;}
+    #newsLists .panoListHover:hover{
+        background: #ffffff;
+    }
+</style>
+<audio id="audio" style="display:none">
+</audio>
+<div style="width:100%;height:100%;position: absolute;">
+    <div id="appContainer" style="position: absolute;width: 100%; height: 100%;"></div>
+    <div id="vizenLoadingDiv" style="position:absolute;width:100%;height:100%;background: #000000;"></div>
+    <script src="//webapp.pano.pingtan.visualbusiness.cn/engine/css/loading_controlled.js"></script>
+</div>
+
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js" /> 
+<script src="http://map.qq.com/api/js?v=2.exp"></script>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<script src="http://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
+<!-- <script type="text/javascript" src="./libs/appengine_web.js"></script> -->
+<script type="text/javascript" src="./home.bundle/common/share.js"></script>
+<script type="text/javascript">
+    window.shareInfo = {
+        url:window.location.href,
+        title:document.title,
+        desc:document.title,
+        img:""
+    }
+    window.shareConfig = function(){
+        getShareInfoSub(shareInfo.url, shareInfo.title, shareInfo.desc, shareInfo.img);
+    }
+    window.urlProvider = function(urlName){
+        var url = '';
+        switch (urlName){
+            case 'news':
+                url = window.location.protocol +'//pano.pingtan.visualbusiness.cn/pano-news-web/rest/album/view/';
+            break ;
+            case 'prenews':
+                url = window.location.protocol +'//pano.pingtan.visualbusiness.cn/pano-news-web/rest/album/preView/';
+            break ;
+            case 'source':
+                url = window.location.protocol +'//'+ window.location.host;
+            break ;
+            case 'panotiles':
+                url = window.location.protocol + '//tiles.pano.pingtan.visualbusiness.cn/';
+            break;
+        }
+        return url;
+    }
+    window.loadScript = function(src, loadcall){
+        var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.onload = function(){
+                loadcall && loadcall();
+            }
+            script.onerror = function(){
+                console.error('error')
+            }
+
+            script.src  = src;
+        document.getElementsByTagName('body')[0].insertAdjacentElement('beforeEnd', script);
+    }
+    window.loadScript(window.urlProvider('source') + '/engine/vizengine_web.js', function(){
+        new com.appengine.App(document.getElementById("appContainer"),"home.bundle");
+    })
+    // window.loadScript('//webapp.pano.pingtan.visualbusiness.cn/engine/vizengine_web.js', function(){
+    //     new com.appengine.App(document.getElementById("appContainer"),"home.bundle");
+    // })
+</script>
+</body>
+</html>

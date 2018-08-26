@@ -1,0 +1,69 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ListTemplate.master.cs"
+    Inherits="SfSoft.web.MasterPage.ListTemplate" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>EMC</title>
+    <link href="/emc/css/emccss.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/js/popup.js"></script>
+
+    <script type="text/javascript" src="/js/popupclass.js"></script>
+
+    <script type="text/javascript" src="/js/checkform.js"></script>
+
+    <script src="../js/jquery.js" type="text/javascript"></script>
+
+    <script  type="text/javascript">
+
+
+        function ShowSearchDiv() {
+            var div_id = "divSearchCondition";
+            var div_obj = $("#" + div_id);
+            var windowWidth = document.body.clientWidth;
+            var windowHeight = document.body.clientHeight;
+            var popupHeight = div_obj.height();
+            var popupWidth = div_obj.width();
+            //添加并显示遮罩层   
+            $("<div id='mask'></div>").addClass("mask")
+                                  .width(windowWidth + document.body.scrollWidth)
+                                  .height(windowHeight + document.body.scrollHeight)
+                                  .click(function() { hideDiv(div_id); })
+                                  .appendTo("tempdiv")
+                                  .fadeIn(200);
+            div_obj.css({ "position": "absolute" })
+               .animate({ left: 2, top: 28, opacity: "show" }, "slow");
+
+        }
+        function hideDiv() {
+            var div_id = "divSearchCondition";
+            $("#mask").remove();
+            $("#" + div_id).animate({ left: 0, top: 0, opacity: "hide" }, "slow");
+        }
+
+        function Add_Form() {
+            document.location = 'update.aspx?mode=add&ID=';
+        }
+
+        function Return_List() {
+            document.location = 'browse.aspx';
+        }
+    </script>
+
+</head>
+<body>
+    <form id="form1" runat="server" style="padding: 2px 2px 2px 2px">
+    <div id="tempdiv">
+    </div>
+    <div id="ToolBarsDiv" class="toolbars">
+        <asp:PlaceHolder ID="phToolBars" runat="server"></asp:PlaceHolder>
+    </div>
+ 
+    <asp:Panel ID="panelMain" runat="server" >
+        <asp:ContentPlaceHolder ID="PageBody" runat="server">
+        </asp:ContentPlaceHolder>
+    </asp:Panel>
+    </form>
+</body>
+</html>

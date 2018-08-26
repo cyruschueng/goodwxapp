@@ -1,0 +1,34 @@
+<div class="page" ng-controller="habitsDetailController">
+    <div class="page__bd" >
+        <div class="weui-tab">
+            <div class="weui-navbar">
+                <div ng-repeat="item in data.tabs.names" se-select-navbar="{{$index}}"
+                     ng-class="{true:'se-weui-bar__item',false:''}[$index==0]"
+                     class="weui-navbar__item " style="background-color: #fff; position:static ">
+                    <span class="se-weui-bar__item_on"> {{item}} </span>
+                </div>
+            </div>
+            <div class="weui-tab__panel" style="padding-top:10px; height:900px; overflow:auto" when-scrolled="loadMore()">
+                <div  ng-hide="data.tabs.tabActiveIndex != 0"  style="padding-top:20px;">
+                    <div ng-include="'./views/gardenia/habits/template/habitdetail.html'"></div>
+                </div>
+                <div  ng-hide="data.tabs.tabActiveIndex != 1" >
+                    <div ng-include="'./views/gardenia/habits/template/rank.html'" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="habit-join_wrap" ng-if="data.habit.isJoin==false">
+        <div class="weui-flex">
+            <div class="weui-flex__item">
+                <div class="habit-join_wrap__title" style="text-align: center">{{data.habit.info.title}}</div>
+                <div class="habit-join_wrap__desc" style="text-align: center">已有有{{data.habit.info.join_num}}人加入</div>
+            </div>
+            <div class="weui-flex__item">
+                <div style="width:100%;height:100%; display: flex;justify-content: center; align-items: center;">
+                    <a href="#habitjoin" class="habit-join_wrap__input weui-btn  weui-btn_mini">加入</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<!--pages/now/index.wxml-->
+<!--背景-->
+<view class="filter-bg" style="background-image: url({{audio.picUrl}});">
+</view>
+<!--歌曲圆圈信息-->
+<view class="cover">
+  <view class="cicle-infor {{rotate==true?'rotate':''}}" style=" background-image: url({{audio.picUrl}})">
+  </view>
+</view>
+
+<view class="musicdata">
+  <view>{{audio.name}}</view>
+  <view>{{audio.author}}</view>
+  <view class="lrc">{{lrc}}</view>
+</view>
+
+
+
+<!--上一曲 下一曲操作-->
+<view class="controls">
+  <!--滑动条-->
+  <view class="slider">
+    <slider bindchange="sliderChange" value="{{value}}" max="{{max}}" />
+    <view class="time">
+      <view>
+        {{time}}
+      </view>
+      <view>
+        {{alltime}}
+      </view>
+    </view>
+
+  </view>
+  <image class="audio-btn" bindtap="comment" src="../../images/comment.png"></image>
+  <image class="audio-btn" bindtap="audioPlay" hidden="{{isplaying}}" src="../../images/play.png"></image>
+  <image class="audio-btn" bindtap="audioPause" hidden="{{!isplaying}}" src="../../images/pause.png"></image>
+  <image class="audio-btn" bindtap="audioNext" src="../../images/next.png"></image>
+</view>

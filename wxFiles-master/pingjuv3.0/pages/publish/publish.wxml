@@ -1,0 +1,85 @@
+<view class="head" style="padding-left:40rpx">
+  <image class="icon" src="/img/localgreen.png"></image>
+  <view class="text" bindtap="changeCity">当前城市：{{city}}</view>
+  <image class="con" src="/img/dropdown_green.png" bindtap="changeCity"></image>
+  <view style="clear:both"></view>
+</view>
+<view class="lpanel">
+  <picker class="item" bindchange="bindPickerType" value="{{flag}}" range="{{plist[0].list}}">
+    <image class="icon" src="{{plist[0].icon}}"></image>
+    <view class="title">{{plist[0].name}}</view>
+    <view class="value">{{plist[0].value}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" bindchange="bindPickerNum" value="{{flag}}" range="{{plist[1].list}}">
+    <image class="icon" src="{{plist[1].icon}}"></image>
+    <view class="title">{{plist[1].name}}</view>
+    <view class="value">{{plist[1].value}}人
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" mode="date" value="{{plist[2].value}}" start="{{plist[2].startDate}}" end="2100-01-01" bindchange="bindDateChange">
+    <image class="icon" src="{{plist[2].icon}}"></image>
+    <view class="title">{{plist[2].name}}</view>
+    <view class="value">{{plist[2].value}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" mode="time" value="{{plist[3].value}}" start="{{plist[3].startTime}}" bindchange="bindTimeChange">
+    <image class="icon" src="{{plist[3].icon}}"></image>
+    <view class="title">{{plist[3].name}}</view>
+    <view class="value">{{plist[3].value}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" bindchange="bindPickerBudget" value="{{flag}}" range="{{plist[4].list}}">
+    <image class="icon" src="{{plist[4].icon}}"></image>
+    <view class="title">{{plist[4].name}}</view>
+    <view class="value">{{plist[4].value}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+    <picker class="item" bindchange="bindPickerGender" value="{{flag}}" range="{{plist[6].list}}">
+    <image class="icon" src="{{plist[6].icon}}"></image>
+    <view class="title">{{plist[6].name}}</view>
+    <view class="value">{{plist[6].value}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <picker class="item" bindchange="bindPickerGeneral" value="{{flag}}" range="{{plist[7].list}}">
+    <image class="icon" src="{{plist[7].icon}}"></image>
+    <view class="title">{{plist[7].name}}</view>
+    <view class="value">{{plist[7].value}}
+      <image class="pull" src="/img/right_pull.png"></image>
+    </view>
+    <view style="clear:both"></view>
+  </picker>
+  <view class="item">
+    <image class="icon" src="{{plist[5].icon}}"></image>
+    <view class="title">{{plist[5].name}}</view>
+    <view style="clear:both;height:100rpx;padding-left:70rpx;">
+      <input type="text" name="address" placeholder="输入详细活动地址" bindinput="addressInput" />
+    </view>
+    <view style="clear:both"></view>
+  </view>
+
+
+  <view class="item">
+    <image class="icon" src="{{plist[8].icon}}"></image>
+    <view class="title">{{plist[8].name}}</view>
+    <view style="clear:both;height:180rpx;padding-left:70rpx;">
+      <textarea  type="text" name="des" placeholder="再补充一下活动内容吧~(12-500字)" bindinput="desInput" style="height:90px" />
+    </view>
+    <view style="clear:both"></view>
+  </view>
+</view>
+<view class="btn" style="background:#fff">
+  <view bindtap="publishBtn" bindtap="submit" style="font-size:35rpx">点击发布</view>
+</view>

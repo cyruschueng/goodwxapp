@@ -1,0 +1,36 @@
+<!--pages/weddingTalent/clearing.wxml-->
+
+<view class='body'>
+  
+  <checkbox-group bindchange="checkboxChange">
+  <view class='payment-cell' wx:for="{{ paymentList }}" wx:for-item="pay" wx:key="{{ index }}">
+    <checkbox class='checkbox' value="{{ pay.name }}" checked="{{ pay.checked }}"/>
+    <image class='cellImg' src='{{ pay.imgUrl }}' mode='aspectFill'></image>
+    <view class='text'>
+      <view>{{ pay.title }}</view>
+      <view class='second-txt-color'> 
+        <text>{{ pay.name }} {{ pay.floor }}</text>
+        <text style='margin-left:30rpx;'>{{ pay.floorHeight }}</text>
+      </view>
+      <view class='price'>¥ {{ pay.price }} <text class='second-txt-color' style='float:right;'>x{{ pay.nums }}</text> </view>
+    </view>
+  </view>
+  </checkbox-group>
+
+  <!-- 结算 -->
+  <view class='weui-footer weui-footer_fixed-bottom settlement-view'>
+    <view class='weui-flex'>
+      <view>
+        <checkbox class='settlement-checkbox' value="{{ pay.name }}" checked="{{ pay.checked }}"/> 
+        <text style='float:left;'>全选</text>
+      </view>
+      <view class='weui-flex__item'>
+        <view class='price-text'>合计：<text class='price'>¥ {{ totalPrice }}</text></view>
+      </view>
+      <view>
+        <view class='settlement-btn' >提交</view>
+      </view>
+    </view>
+  </view> 
+
+</view>

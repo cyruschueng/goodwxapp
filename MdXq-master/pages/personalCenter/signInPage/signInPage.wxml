@@ -1,0 +1,32 @@
+<import src='../../homepage/recommendTemplate/recommendTemplate.wxml'/>
+ <view wx:if='{{NotSignIn}}' class='NotSignIn'>暂不能签到，请联系客服</view> 
+<view class='signInPage' wx:else>
+   <view class='NoticeBox'>
+    <text>签到蜜豆币:
+    </text>
+    <text class='NoticeNum'>{{sign_honey_bean}}</text>
+  </view> 
+  <view class='signInBgBox'>
+     <image class='signInBg' src='../../images/sign.gif'>
+     </image>
+  </view>
+  <view class='signInBox'>
+    <view wx:for='{{signPool}}' wx:for-index='index' wx:for-item='item' wx:key='index' class='signInTime {{index==0?"signInTimeFinished1":""}} {{index==1?"signInTimeFinished2":""}} {{index==2?"signInTimeFinished3":""}} {{index==4?"signInTimeFinished4":""}}' bindtap='signInClick' data-pool_id='{{item.pool_id}}'>
+    <!-- wx:if='{{item.state==1}}' -->
+      <view  wx:if='{{item.state==1}}'>{{item.sign_honey_bean}}</view>
+      <image  src='../../images/money.png' wx:if='{{item.state==1}}'></image>
+    </view>
+    <view class='signInTime signInTimeCurrent' wx:for='{{signPoolIng}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+      <view style='margin-left:-55rpx;'>正在生长</view>
+      <image src='../../images/money1.png' class='signInTimeCurrentImg'></image>
+    </view>
+  </view>
+</view>
+<view class='recommendTemplateBox'>
+  <view class='recommand'>
+    <image src='../../images/recommand.png'></image>
+  </view>
+  <view class='recommendTemplate' wx:for='{{recommendGoodsInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+    <template is='recommendTemplate' data='{{...item}}'/>
+  </view>
+</view>

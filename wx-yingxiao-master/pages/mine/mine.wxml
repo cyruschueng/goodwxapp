@@ -1,0 +1,95 @@
+<!--pages/mine/mine.wxml-->
+<view class='container'>
+  <view class='banner' wx:if="{{header}}">
+       <image src='{{header}}' class='userheader'></image>   
+     <view class='username'>{{userName}}</view> 
+  </view>
+  <view class='bindtips' wx:if="{{tobindphone!='0'}}">
+    <view class='bindtip'>
+      <view class='bindleft'>
+        <image src='/pages/source/images/phone.png'></image>
+        <text>请绑定手机号使用更多功能.</text>    
+      </view>
+      <view class='bindright' bindtap='bindphone'>立即绑定</view>  
+    </view>
+    <view class='break'></view>
+  </view>
+  <view class='withdrawTitle' bindtap='toorderlistAll'>
+    <view>我的订单</view>
+    <view>
+      <text>全部订单</text>
+      <image src='/pages/source/images/foward.png'></image>
+    </view>   
+  </view>
+  <view class='statusList'>
+    <view class='status' wx:for="{{statusList}}" wx:key="{{index}}" bindtap='toorderlist' data-index='{{index}}'>
+      <image src='{{item.img}}'></image>
+      <view>{{item.title}}</view>
+    </view>
+  </view>
+  <view class='break'></view>
+  <view class='functionList'>
+    <view class='fun' wx:for="{{functionList}}" wx:key="{{index}}"  bindtap='tonotice' data-index='{{index}}'>
+      <image src='{{item.img}}'></image>
+      <view>{{item.title}}</view>
+    </view>
+  </view>
+  <view class='break'></view>
+  <view class='active'>
+    <view class='activeTitle'>我参加的活动</view>
+    <view class='activeList'>
+      <view class='activeItem' wx:for="{{active}}" wx:key="{{index}}" bindtap='tocheck' data-key='{{index}}'>
+        <image src='{{item.img}}'></image>
+        <view>{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='break' style='height:30rpx;'></view>
+  <view class='menu'>
+    <view class='menuTitle' bindtap='topaycar'>
+      <view class='paycar'>
+        <text>我的购物车</text>
+        <view>{{cart_num}}</view>
+      </view>      
+      <image src='/pages/source/images/foward.png'></image>
+    </view>  
+    <view class='menuTitle' bindtap='tocollection'>
+      <text>我的收藏</text>
+      <image src='/pages/source/images/foward.png'></image>
+    </view>
+    <view class='menuTitle' bindtap='address'>
+      <text>收货地址</text>
+      <image src='/pages/source/images/foward.png'></image>
+    </view>
+    <view class='menuTitle' bindtap='setting'>
+      <text>安全设置</text>
+      <image src='/pages/source/images/foward.png'></image>
+    </view>
+    <view class='menuTitle contact'>
+      <text>在线客服</text>
+      <image src='/pages/source/images/foward.png'></image>
+      <view>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>             
+      </view>
+    </view>            
+  </view>
+  <view class='break' style='height:30rpx;'></view>  
+</view>

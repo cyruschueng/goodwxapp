@@ -1,0 +1,97 @@
+<import src="/template/tabBar.wxml" /> 
+<import src="/template/listStyle.wxml" /> 
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<!--top str -->
+  <view class='h7 flexBetw Skin pdr1 pdl1 borderD'>
+    <image class='imgxs15' src='/images/back.png' bindtap='userback'></image>
+    <view></view>
+    <view></view>
+  </view>
+<!--top end -->
+<!--sec1 str  -->
+  <view class='h15 flexBetw Skin pd11'>
+    <view class='flex'>
+      <image class='imgL' src='/images/userW.png'></image>
+      <view class='flexColumn ml03'>
+        <view>{{accountArrOne.usr}}</view>
+        <view class='color2'>{{accountArrOne.role==0?'电站业主':accountArrOne.role==1?'厂家账户':accountArrOne.role==2?'管理员':accountArrOne.role==3?'集团账号':'电站浏览账号'}}</view>
+        <!-- <view>状态：{{accountArrOne.enable==false?'关闭':'开启'}}</view> -->
+        <view>状态：{{statusEnable}}</view>
+      </view>
+    </view>
+    <view class='flex bgColorH br03 flexCenter' bindtap='stationTap' data-uid='{{accountArrOne.uid}}'>
+      <view>登入用户</view>
+      <image class='imgxxs ml03' src='/images/white_next.png'></image>
+    </view>
+  </view>
+  <!--sec1 end  -->
+  <!--sec2 str  -->
+  <view class='h8 flex1 flex bg256 mb02'>
+    <view class='flexColumn flexCenter borderR'>
+      <view>电站总数</view>
+      <view>{{accountArrOne.plants}}</view>
+    </view>
+    <view class='flexColumn flexCenter borderR'>
+      <view>设备总数</view>
+      <view>{{accountArrOne.devices}}</view>
+    </view>
+    <view class='flexColumn flexCenter borderR' hidden='{{userCountH}}'>
+      <view>用户数</view>
+      <view>{{userTotal?userTotal:'0'}}</view>
+    </view>
+  </view>
+  <!--sec2 end  -->
+  <!-- sec3 str   -->
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1 modeldrawer_content'>
+    <view>用户名称</view>
+    <view>{{accountArrOne.usr}}</view>
+  </view>
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1'>
+    <view>用户类型</view>
+    <view>{{accountArrOne.role==0?'电站业主':accountArrOne.role==1?'厂家账户':accountArrOne.role==2?'经销商':accountArrOne.role==3?'集团账号':'电站浏览账号'}}</view>
+  </view>
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1' bindtap='editU' data-uid='{{accountArrOne.uid}}' data-id='enableId' dataDat='{{accountArrOne.enable}}'>
+    <view>用户状态</view>
+    <view class='flex flexCenter'>
+      <!-- <view>{{accountArrOne.enable=='false'?'关闭':'开启'}}</view> -->
+      <view>{{statusEnable}}</view>
+      <image class='imgxxs ml03' src='/images/next.png'></image>
+    </view>
+  </view>
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1' bindtap='editU' data-uid='{{accountArrOne.uid}}' data-id='descId'>
+    <view>备注</view>
+    <view class='flex flexCenter mwidth65'>
+      <view>{{accountArrOne.desc}}</view>
+      <image class='imgxxs ml03' src='/images/next.png'></image>
+    </view>
+  </view>
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1 mt02 mb02' bindtap='groupClasspag' data-uid='{{accountArrOne.uid}}' data-id='groupId'>
+    <view>用户分组</view>
+    <view class='flex flexCenter mwidth65'>
+      <view>{{accountArrOne.group?accountArrOne.group:''}}</view>
+      <image class='imgxxs ml03' src='/images/next.png'></image>
+    </view>
+  </view>
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1' bindtap='editU' data-uid='{{accountArrOne.uid}}' data-id='pwdId'>
+    <view>重置密码</view>
+    <image class='imgxxs' src='/images/next.png'></image>
+  </view>
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1' bindtap='editU' data-uid='{{accountArrOne.uid}}' data-id='mobilId'>
+    <view>手机</view>
+    <view class='flex flexCenter'>
+      <view>{{accountArrOne.mobile}}</view>
+      <image class='imgxxs ml03' src='/images/next.png'></image>
+    </view>
+  </view>
+  <view class='h7 flexBetw bg256 borderB pdr1 pdl1' bindtap='editU' data-uid='{{accountArrOne.uid}}' data-id='emailId'>
+    <view>邮箱</view>
+    <view class='flex flexCenter mwidth65'>
+      <view>{{accountArrOne.email}}</view>
+      <image class='imgxxs ml03' src='/images/next.png'></image>
+    </view>
+  </view>
+  <!-- sec3 end   -->
+  <template is="errTip" data="{{errBox: errBox}}"/> 
+</view>
+

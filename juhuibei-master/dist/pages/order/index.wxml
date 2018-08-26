@@ -1,0 +1,39 @@
+<view class="page">
+  <view wx:if="{{title || desc}}" class="example__head">
+        <view wx:if="{{title}}" class="example__head--title">{{title}}</view>
+        <view wx:if="{{title && desc}}" class="example__head--line"></view>
+        <view wx:if="{{desc}}" class="example__head--desc">{{desc}}</view>
+    </view>
+    <view class="page__bd pay-box">
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">付款金额</view>
+                    <view class="weui-form-preview__value_in-hd">¥29.00</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">订单编号</view>
+                    <view class="weui-form-preview__value">{{order_sn}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">购买详情</view>
+                    <view class="weui-form-preview__value">升级微信请柬付费请柬</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">升级功能</view>
+                    <view class="weui-form-preview__value">永久保存使用</view>
+                    <view class="weui-form-preview__value">开放所有人浏览</view>
+                    <view class="weui-form-preview__value">无限转发浏览次数</view>
+                    <view class="weui-form-preview__value">可使用所有风格模板</view>
+                    <view class="weui-form-preview__value">可自定义请柬背景音乐</view>
+                    <view class="weui-form-preview__value">可选更多背景音乐等</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <view class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='payOrder'>立即支付</view>
+            </view>
+        </view>
+    </view>
+</view>

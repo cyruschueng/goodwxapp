@@ -1,0 +1,81 @@
+<view class="friendsRank_box">
+    <view class="rank_top">
+        <view class="rank_img">
+            <image src="{{user.faceUrl}}"></image>
+        </view>
+        <view class="rank_name">{{user.nickName}}</view>
+          <view class="snowflakes">
+            <view class="snowflake snowflake{{item % 10}}" wx:for="{{ snowflakeCount }}" ></view>
+        </view>
+
+        <view class="flow">
+            <view class="img"></view>
+            <view class="img2"></view>
+            <view class="img3"></view>
+        </view>
+    </view>
+    <view class="rank_count">
+        <view>
+            <view>{{info.maxStep}}</view>
+            <text>日最高步数</text>
+        </view>
+        <view>
+            <view>{{info.currentStep}}</view>
+            <text>当前步数</text>
+            <view class="count_border border_left"></view>
+            <view class="count_border border_right"></view>
+        </view>
+        <view>
+            <view>{{info.careCount}}</view>
+            <text>点赞数</text>
+        </view>
+    </view>
+    <view class="rank_title">
+        荣誉勋章
+        <view>
+            <text>{{count}}</text>
+            /{{medal.length}}
+        </view>
+    </view>
+    <scroll-view scroll-x="true" class="medal_type" style="width:{{screenWidth}}px">
+        <view bindtap='showCard' class="medal medal{{item.v}}{{item.on?'_on':''}}" data-index="{{index}}" wx:for-index="index" wx:for="{{medal}}"></view>
+
+    </scroll-view>
+    <view class="rank_title" wx:if="info.lastPK!=null">
+        PK记录<view >></view>
+    </view>
+    <view class="rank_item" wx:if="{{info.lastPK!=null&&info.lastPK.shareType==2}}" bindtap="goHistory">
+        <view class="groupImg imgG{{info.lastPK.faceList.length>9?'9':info.lastPK.faceList.length}}" >
+            <image src="{{item}}" wx:for="{{info.lastPK.faceList}}"></image>
+        </view>
+
+
+
+
+        <view class="item_name"><open-data type="groupName" open-gid="{{info.lastPK.openGId}}"></open-data></view>
+        <view class="item_right">第{{info.lastPK.rank}}名</view>
+    </view>
+    <view class="rank_item" wx:if="{{info.lastPK!=null&&info.lastPK.shareType!=2}}" bindtap="goHistory">
+        <image src="{{info.lastPK.targetFaceUrl}}"></image>
+        <view class="item_name">{{info.lastPK.targetNickName}}</view>
+        <view class="item_right"><text wx:if="{{info.lastPK.rank==1}}">胜利</text><text wx:if="{{info.lastPK.rank!=1}}">失败</text></view>
+    </view>
+    <view class="noPk_box"   wx:if="{{info.lastPK==null}}"><text class="noPk">没有PK记录</text></view>
+    <view class="rank_share">
+        <button class="rank_btn" open-type="share">发起挑战</button>
+    </view>
+</view>
+
+
+<canvas class="card" canvas-id="myCanvas" wx:if="{{canvasShow}}" />
+
+
+<view class="card {{card.on?'':'gray'}}" wx:if="{{isShowCard}}">
+    <view class="x" bindtap='close'></view>
+    <view class="xz_img medal{{card.v}}{{card.on?'_on':''}}"></view>
+    <view class="xz_shadow"></view>
+    <view class="xz_title"> {{card.t}}</view>
+    <view class="xz_content">「日步数超过{{card.v}}步」</view>
+    <button class="xz_btn" bindtap="saveImg" wx:if="{{card.on}}" data-card="{{card}}">保存</button>
+    <button class="xz_btn"  wx:if="{{!card.on}}">未得到</button>
+</view>

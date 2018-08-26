@@ -1,0 +1,263 @@
+/**index.wxss**/
+@import "../template/template.wxss";
+page{
+  background-color: #fff;
+}
+.container{
+  font-size: 26rpx;
+  overflow: hidden;
+  background-color: #fff;
+}
+.management{
+    display: flex;
+    justify-content: space-between;
+    height: 90rpx;
+    padding:20rpx;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 9;
+}
+.management .left{
+  width: 50rpx;
+  height: 50rpx;
+  z-index: 1;
+  border-radius: 50%;
+  background: url(https://friend-check.playonwechat.com/static/images/stop_music.png) no-repeat;
+  background-size: 100%;
+}
+.left.music_play{
+  background: url(https://friend-check.playonwechat.com/static/images/music.png) no-repeat;
+  background-size: 100%;
+  -webkit-animation: music 3s linear infinite;
+  animation: music 3s linear infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+@-webkit-keyframes music{
+    0%{
+        -webkit-transform:rotate(0);
+        transform:rotate(0)
+    }
+    to{
+        -webkit-transform:rotate(-3turn);
+        transform:rotate(-3turn)
+    }
+}
+@keyframes music{
+    0%{
+        -webkit-transform:rotate(0);
+        transform:rotate(0)
+    }
+    to{
+        -webkit-transform:rotate(-3turn);
+        transform:rotate(-3turn)
+    }
+}
+.right image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.notice{
+  text-align: left;
+  margin: 40rpx 0 100rpx 0;
+  color: #626262;
+  padding-left: 40rpx;
+}
+.buttons{
+  padding-bottom:40rpx; 
+  color: #626262;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.buttons view.active{
+  display: block;
+  width: 260rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  padding: 0 20rpx;
+  background: #666;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+.checkboxs{
+  margin-bottom: 100rpx;
+}
+.buttons view.active{
+  background: #ff999a;
+  margin-top:20rpx;
+}
+.buttons form button{
+  font-size: 26rpx;
+  margin: 0;
+  padding: 0;
+  background: #ff999a;
+  color: #fff;
+  line-height: inherit;
+}
+button::after{
+  content: none;
+}
+.photo{
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  height: 700rpx;
+}
+.photo .thumb{
+  width: 90%;
+  height: 700rpx;
+  border: 2rpx solid #e8ecff; 
+  border-radius: 16rpx;
+  box-shadow:5rpx 5rpx 5rpx 5rpx #e8ecff;
+}
+.icon image{
+    width: 60rpx;
+    height: 60rpx;
+}
+@-webkit-keyframes an_photo{
+    0%{
+        opacity:0
+    }
+    to{
+        opacity:1
+    }
+}
+@keyframes an_photo{
+    0%{
+        opacity:0
+    }
+    to{
+        opacity:1
+    }
+}
+@-webkit-keyframes beat{
+    0%{
+        -webkit-transform:scale(1);
+        transform:scale(1)
+    }
+    5%{
+        -webkit-transform:scale(1.04);
+        transform:scale(1.04)
+    }
+    10%{
+        -webkit-transform:scale(1.02);
+        transform:scale(1.02)
+    }
+    15%{
+        -webkit-transform:scale(1.04);
+        transform:scale(1.04)
+    }
+    50%{
+        -webkit-transform:scale(1);
+        transform:scale(1)
+    }
+    to{
+        -webkit-transform:scale(1);
+        transform:scale(1)
+    }
+}
+@keyframes beat{
+    0%{
+        -webkit-transform:scale(1);
+        transform:scale(1)
+    }
+    5%{
+        -webkit-transform:scale(1.04);
+        transform:scale(1.04)
+    }
+    10%{
+        -webkit-transform:scale(1.02);
+        transform:scale(1.02)
+    }
+    15%{
+        -webkit-transform:scale(1.04);
+        transform:scale(1.04)
+    }
+    50%{
+        -webkit-transform:scale(1);
+        transform:scale(1)
+    }
+    to{
+        -webkit-transform:scale(1);
+        transform:scale(1)
+    }
+}
+.checkboxs{
+  text-align:center;
+  margin:0 0 30rpx 0;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.checkboxs image{
+  width: 50rpx;
+  height: 50rpx;
+  position: relative;
+  top: 18rpx;
+  z-index: 1;
+}
+.photo .index{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0,0,0,0.3); */
+}
+.photo .play{
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  margin: 0 auto;
+  z-index: 6; 
+  top: 50%; 
+  left: 50%;  
+  -webkit-transform: translate(-50%,-50%);  
+  -ms-transform: translate(-50%,-50%);  
+  transform: translate(-50%,-50%)
+}
+.pretty{
+  background: #e4e4e4;
+}
+.triangle:before{
+	border-top:8px solid #fff;
+	top:100%;
+	left:46%;
+}
+.triangle:after{
+	border-top:8px solid #e4e4e4;
+	top:99%;
+	left:46%;
+}
+form{
+  display:block;
+  width:260rpx;
+  height:62rpx;
+  line-height:62rpx;
+  border-radius:30rpx!important;
+  background:#ff999a;
+  color:#fff;
+  text-align:center;
+  cursor:pointer;
+  padding:0 20rpx;
+  margin-top: 20rpx;
+}
+.buttona{
+    border-radius: 30rpx;
+}
+button{
+  background-color:#ff999a;
+  font-size:26rpx;
+  margin: 0!important;
+  line-height:inherit;
+  padding:0!important;
+  border-radius: 10rpx;
+  color: #fff;
+}
+button::after{
+  content: none;
+}
+.button-hover{
+  background: #ff999a!important;
+  color: #fff!important;
+}

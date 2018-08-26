@@ -1,0 +1,20 @@
+<!--pages/goodsPass/goodsPass.wxml-->
+<view class='df  fdy fxyc mt30'>
+        <image src='{{userInfo.avatarUrl}}' class='gicon'></image>
+        <view class='score'>{{userInfo.nickName}} 获得分数 : {{ginfo.ga_score}}</view>
+</view>
+<view wx:if="{{ispass}}" >
+  <image class='okbg' src='https://wxapp.haizeihuang.com/wannengdequan_php/images/tupianwenzi-huode.png'></image>
+</view>
+<view wx:else>
+    <image class='okbg' src='https://wxapp.haizeihuang.com/wannengdequan_php/images/tupianwenzi-shibai.png'></image>
+</view>
+
+<view class='df fxc'>
+  <view class='df fxyc mt20 pimgWrap'>
+    <image src='{{ginfo.g_img2}}' class='pimg'></image>
+  </view>
+</view>
+
+<view wx:if="{{ispass}}" class='submit-ok' bindtap='toAddress'>马上领取</view>
+<view wx:else class='submit-fail' bindtap='toIndex'>返回首页</view>

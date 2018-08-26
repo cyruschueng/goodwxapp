@@ -1,0 +1,79 @@
+<!--pages/myPuzzles/myPuzzles.wxml-->
+<view class='container W bgf f14'>
+  <view class='F_ h40 lh40 tc c9 b bgf bbe'>
+    <view class="tab-item {{currentTab==0?'active':''}} f" data-current="0" bindtap="switchNav">我发出的</view>
+    <view class="tab-item {{currentTab==1?'active':''}} f" data-current="1" bindtap="switchNav">我参与的</view>
+  </view>
+  <!-- <swiper class="f bgmain F W bge" current="{{currentTab}}" bindchange="switchTab"> -->
+    <!-- <swiper-item class="F" wx:for="{{[0,1]}}"> -->
+      <!-- <block wx:if="{{currentTab==0}}"> -->
+        <scroll-view class='H F' scroll-y="true" bindscrolltolower="scrollToBottom">
+          <view class="pt20 pb20 bbox F_ jcc bge">
+            <image class="w50 h50 r bgc" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../image/head.png'}}"></image>
+            <view class="W tc mt10">{{userInfo.nickName}}共发出</view>
+            <view class='F_ f12 c9 tc mt20'>
+              <view class="f">金额(元)</view>
+              <view class="f">数量(个)</view>
+            </view>
+            <view class='F_ f18 tc b mt5'>
+              <view class="f">{{moneyTotal}}</view>
+              <view class="f">{{numTotal}}</view>
+            </view>
+
+          </view>
+          <view class="f bgf p0-10 bbox" wx:if="{{arrSendList.length>0}}">
+            <block wx:for="{{arrSendList}}">
+              <view class="bbe p5-0" bindtap="urlTarget" data-url='beginPuzzles' data-id="{{item.id}}">
+                <view class="F_">
+                  <view class='dib'>
+                    <image class='w40 h40 mr10 r4' src="{{imgDir+item.pic}}"></image>
+                  </view>
+                  <view class='f'>
+                    <view class="F_ h20">
+                      <view class="f c3">{{item.group_num_finish}}/{{item.group_num}} 组</view>
+                      <view class="pl10 b">共{{item.money}}元</view>
+                    </view>
+                    <view class="F_ h20 f12">
+                      <view class="f c7">{{item.money_eachGroup}}元/组</view>
+                      <view class="pl10">{{item.add_time}}</view>
+                    </view>                  
+                  </view>
+                </view>
+              </view>
+            </block>          
+          </view>
+
+          <view class="f bgf p0-10 bbox" wx:elif="{{arrPlayList.length>0}}">
+            <block wx:for="{{arrPlayList}}">
+              <view class="bbe p5-0" bindtap="urlTarget" data-url='beginPuzzles' data-id="{{item.act_id}}">
+                <view class="F_">
+                  <view class='dib'>
+                    <image class='w40 h40 mr10 r4' src="{{imgDir+item.act_info.pic}}"></image>
+                  </view>
+                  <view class='f'>
+                    <view class="F_ h20">
+                      <view class="f c3">{{item.use_time}}秒 (第{{item.get_ranking}}名)</view>
+                      <view class="pl10 b">{{item.get_award}}元</view>
+                    </view>
+                    <view class="F_ h20 f12">
+                      <view class="f c7">{{item.create_time}}</view>
+                      <view class="pl10"></view>
+                    </view>                  
+                  </view>
+                </view>
+              </view>
+            </block>          
+          </view>
+
+          <view class="pt50 c7 tc">暂无</view>
+        </scroll-view>
+      <!-- </block> -->
+
+      <!-- <block wx:if="{{currentTab==1}}">
+        <scroll-view class='H' scroll-y="true" bindscrolltolower="scrollToBottom">
+          我收到的
+        </scroll-view>
+      </block>
+    </swiper-item>
+  </swiper> -->
+</view>

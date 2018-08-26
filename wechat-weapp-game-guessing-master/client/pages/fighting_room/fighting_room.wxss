@@ -1,0 +1,193 @@
+@import "../../utils/animate.wxss";
+@import "../../utils/base_bg.wxss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60rpx;
+  font-size: 32rpx;
+}
+.header view{
+  text-align: center;
+}
+
+.header image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 6rpx solid #fff;
+}
+
+.header .countdown {
+  font-size: 70rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.animated {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.lightSpeedIn-left {
+  animation-name: lightSpeedIn-left;
+  animation-timing-function: ease-out;
+}
+
+@keyframes lightSpeedIn-left {
+  from {
+    transform: translate3d(-600%, 0, 0) skewX(-15deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: skewX(15deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: skewX(-5deg);
+    opacity: 1;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.lightSpeedIn-right {
+  animation-name: lightSpeedIn-right;
+  animation-timing-function: ease-out;
+}
+
+@keyframes lightSpeedIn-right {
+  from {
+    transform: translate3d(600%, 0, 0) skewX(15deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: skewX(-15deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: skewX(5deg);
+    opacity: 1;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.body {
+  text-align: center;
+}
+
+.body .title {
+  width: 80%;
+  margin: 80rpx auto;
+}
+
+.body .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.answer {
+  display: flex;
+  justify-content: space-between;
+  color: #3883fa;
+  background: #fff;
+  border-radius: 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin: 40rpx 0;
+  position: relative;
+}
+
+.answer view {
+  text-align: center;
+}
+
+.right {
+  /*选择正确的答案颜色*/
+  background: #3ede58;
+  color: #fff;
+}
+
+.error {
+  /*选择错误的答案颜色*/
+  background: #e53117;
+  color: #fff;
+}
+
+.invisible {
+  display: none;
+}
+
+.sign {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 50rpx;
+  position: absolute;
+  height: 100rpx;
+  line-height: 100rpx;
+  left: 5%;
+}
+
+.process {
+  width: 28rpx;
+  height: 560rpx;
+  border-radius: 17rpx;
+  border: 6rpx solid #89d693;
+  background: #15120b;
+  transform: rotate(-180deg);
+  margin: 0 30rpx;
+}
+
+.process_son {
+  width: 28rpx;
+  border-radius: 14rpx;
+  background: #3ede58;
+}
+
+.summarize {
+  position: absolute;
+  top: 0rpx;
+  z-index: 1000;
+  width: 100%;
+  text-align: center;
+}
+
+.body_summarize {
+  margin-top: 200rpx;
+}
+
+.exp {
+  display: flex;
+  justify-content: center;
+  font-size: 40rpx;
+  margin: 100rpx 0;
+}
+
+.body_summarize button {
+  font-weight: bold;
+  width: 60%;
+  margin-top: 40rpx;
+  color: #fff;
+  height: 92rpx;
+  line-height: 80rpx;
+  background: transparent;
+  border: 6rpx solid #fff;
+}
+
+.animated_zoomIn {
+  animation-duration: 1.5s;
+}

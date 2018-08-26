@@ -1,0 +1,58 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">项目名称：{{result.title}}</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">项目类型：{{result.protype}}</view>
+      <view class="weui-panel__hd">客户ID：{{trueowner.objectId}}</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">项目需求：</view>
+          <view class="weui-media-box__title weui-media-box__title_in-text">{{result.content}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">项目预算：</view>
+          <view class="weui-media-box__title weui-media-box__title_in-text">{{result.budget}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">项目周期：</view>
+          <view class="weui-media-box__title weui-media-box__title_in-text">{{pro_owner.id}}{{result.days}}天</view>
+        </view>
+        <block wx:if="{{owner.objectId == ownerid}}">
+          <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text">招募到的开发者：</view>
+            <block wx:for="{{people}}">
+              <view bindtap="userDetail" data-developerid="{{item.objectId}}" class="weui-media-box__title weui-media-box__title_in-text">{{item.objectId}}</view>
+            </block>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="weui-btn-area">
+            <block wx:if="{{result.status=='开发中'}}">
+              <button class="weui-btn" type="warn" disabled="true">已开发中 请选择其他项目</button>
+            </block>
+            <block wx:elif="{{result.status =='完成'}}">
+              <button class="weui-btn" type="warn" disabled="true">已完成该项目</button>
+            </block>
+            <block wx:else>
+              <block wx:if="{{isSelected}}">
+                <button bindtap="chatroom" class="weui-btn" type="primary">进入沟通频道</button>
+              </block>
+              <block wx:else>
+                <block wx:if="{{isJoinin}}">
+                  <button class="weui-btn" type="primary" disabled="true">已参加 等待客户选择</button>
+                </block>
+                <block wx:else>
+                  <form bindsubmit="joinin" report-submit='true'>
+                    <button form-type="submit" bindtap="" class="weui-btn" data-owner="{{owner}}" type="primary">参加项目</button>
+                  </form>
+                </block>
+              </block>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

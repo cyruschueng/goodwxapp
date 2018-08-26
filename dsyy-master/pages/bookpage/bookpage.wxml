@@ -1,0 +1,103 @@
+<view class="book-bg">
+  <view class="book-seize"></view>
+  <view class="book padding-top-30 padding-bottom-30 white-bg padding-left-30 padding-right-30 margin-bottom-20">
+    <view class="book-img">
+      <image src="{{bookInfo.images_medium}}" class="book-img-detial" mode="aspectFill"></image>
+    </view>
+    <view class="book-info">
+      <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{bookInfo.title}}</view>
+      <view class="text-oneline margin-bottom-10 book-font">{{bookInfo.subtitle}}</view>
+      <view wx:if="{{bookInfo.author}}" class="text-oneline margin-bottom-10 book-font">作者：{{bookInfo.author}}</view>
+      <view wx:if="{{bookInfo.pages}}" class="text-oneline margin-bottom-10 book-font">页数：{{bookInfo.pages}}页</view>
+      <view wx:if="{{bookInfo.publisher}}" class="text-oneline margin-bottom-10 book-font">出版社：{{bookInfo.publisher}}</view>
+      <view wx:if="{{bookInfo.pubdate}}" class="text-oneline margin-bottom-10 book-font">出版日期：{{bookInfo.pubdate}}</view>
+    </view>
+  </view>
+  <view wx:if="{{bookInfo.summary}}" class="white-bg padding-left-30 padding-right-30">
+    <view class="line-text border-bottom font-common">简介</view>
+    <view class="book-font padding-top-30 padding-bottom-30 book-summary" >
+      {{bookInfo.summary}}
+    </view>
+  </view>
+  <view wx:if="{{bookInfo.summary}}" class="book-seize"></view>
+  <view wx:if="{{barInfos.length>0}}" class="white-bg padding-left-30 padding-right-30">
+    <view class="line-text border-bottom weui-flex">
+      <view class="weui-flex__item font-common">附近拥有此书的书吧</view>
+      <view class="weui-flex__item text-right">
+        <image src="/images/more.png" class="more"></image>
+      </view>
+    </view>
+    <view wx:for="{{barInfos}}" class="book-font weui-flex" style="height:70rpx;">
+      <view class="weui-flex__item " bindtap="intoBar" data-barid="{{item.id}}">
+        <view class="bar-num display margin-top-20 margin-bottom-20 margin-right-20">{{index+1}}</view>
+        <view class="line-text display margin-right-30">{{item.name}}</view>
+        <view wx:if="{{item.distance}}" class="line-text display bar-distance">{{item.distance}}m</view>
+      </view>
+      <view class="weui-flex__item text-right line-text">
+        <view class="line-text display margin-right-30 book-bar-icon" bindtap="getMapPosition" data-lon="{{item.lon}}" data-lat="{{item.lat}}" data-name="{{item.name}}" data-address="{{item.address}}">
+          <image src="/images/bar-navigation.png" class="book-bar-img"></image>
+        </view>
+        <view class="line-text display book-bar-icon" bindtap="callPhonenum" data-phonenum="{{item.phonenum}}">
+          <image src="/images/bar-tel.png" class="book-bar-img"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{barInfos.length>0}}" class="book-seize"></view>
+  <view wx:if="{{reaction.length==0}}" class="white-bg padding-left-30 padding-right-30">
+    <view class="line-text border-bottom">书评</view>
+    <view class="text-center padding-top-40 padding-bottom-40">
+      <image src="{{img}}" class="book-reaction-no-img"></image>
+      <view class="book-reaction-no-word">
+        暂时木有书评，快来写一条吧…
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    <view wx:for="{{reaction}}">
+      <view class="white-bg padding-left-30 padding-right-30">
+        <view class="border-bottom">
+          <view class="read-user-img float-left margin-top-30 margin-bottom-30 margin-right-30">
+            <image src="{{item.userInfo.avatar}}" class="read-photo" mode="aspectFill"></image>
+          </view>
+          <view class="read-user-word float-left">{{item.userInfo.nick_name}}</view>
+          <view class="read-user-time float-right">{{item.twInfo.create_time}}</view>
+          <view class="clear"></view>
+        </view>
+        <view class="padding-top-30 padding-bottom-30">
+          <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{item.twInfo.title}}</view>
+          <view class="{{item.twInfo.see?'':'text-fourline'}} book-font weui-flex padding-top-30 margin-bottom-30">
+            {{item.twInfo.intro}}
+          </view>
+          <view wx:if="{{item.twInfo.intro.length>120}}">
+            <view wx:if="{{item.twInfo.see}}" class="text-oneline look-font" bindtap="transformationFalse" data-id="{{item.twInfo.id}}" data-index="{{index}}">收起</view>
+            <view wx:else class="text-oneline look-font" bindtap="transformationTrue" data-id="{{item.twInfo.id}}" data-index="{{index}}">查看</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="book-seize"></view>
+    </view>
+  </view>
+  <view class="book-seat"></view>
+  <view class="white-bg weui-flex book-shara-box border-top">
+    <view class="book-share1" bindtap="getScan">
+      <image src="/images/book-borrow.png" class="share-img margin-right-50"></image>
+    </view>
+    <view class="book-share2" bindtap="getScan">
+      借阅
+    </view>
+    <view class="book-share3" bindtap="addReaction">
+      <image src="/images/book-reaction.png" class="share-img"></image>
+    </view>
+    <view class="book-share4" bindtap="addReaction">
+      写书评
+    </view>
+    <button class="book-share5 book-shara-background-green" open-type="share">
+      <image src="/images/book-share.png" class="share-img"></image>
+    </button>
+    <button class="book-share6 book-shara-background-green" open-type="share">
+      分享
+    </button>
+  </view>
+</view>

@@ -1,0 +1,18 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '数据参考'}}"/>
+
+  <view class="page-body">
+    <view class="page-section page-section-spacing">
+      <view class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
+        <text>{{text}}</text>
+      </view>
+      <button disabled="{{!canAdd}}" bindtap="add">前进</button>
+      <button disabled="{{!canRemove}}" bindtap="remove">后退</button>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

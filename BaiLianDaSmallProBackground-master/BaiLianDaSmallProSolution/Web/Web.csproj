@@ -1,0 +1,483 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39D08232-E6E6-478B-8D59-99C0BB65613C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web</RootNamespace>
+    <AssemblyName>Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\LayUI\Content\commonJs\myAjax.js" />
+    <Content Include="Areas\LayUI\Content\commonJs\myFormat.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\layui.css" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\layui.mobile.css" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\code.css" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\laydate\default\font.css" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\laydate\default\laydate.css" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\layer\default\icon-ext.png" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\layer\default\icon.png" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\layer\default\layer.css" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\layer\default\loading-0.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\layer\default\loading-1.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\css\modules\layer\default\loading-2.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\font\iconfont.svg" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\0.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\1.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\10.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\11.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\12.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\13.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\14.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\15.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\16.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\17.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\18.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\19.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\2.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\20.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\21.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\22.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\23.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\24.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\25.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\26.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\27.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\28.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\29.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\3.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\30.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\31.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\32.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\33.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\34.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\35.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\36.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\37.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\38.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\39.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\4.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\40.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\41.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\42.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\43.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\44.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\45.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\46.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\47.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\48.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\49.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\5.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\50.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\51.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\52.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\53.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\54.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\55.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\56.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\57.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\58.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\59.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\6.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\60.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\61.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\62.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\63.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\64.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\65.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\66.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\67.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\68.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\69.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\7.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\70.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\71.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\8.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\images\face\9.gif" />
+    <Content Include="Areas\LayUI\Content\LayUI\layui.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\all-mobile.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\all.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\carousel.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\code.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\element.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\flow.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\form.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\jquery.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\laydate.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\layedit.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\layer.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\laypage.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\laytpl.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\mobile.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\mobile\layer-mobile.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\mobile\layim-mobile-open.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\mobile\upload-mobile.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\mobile\zepto.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\table.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\tree.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\upload.js" />
+    <Content Include="Areas\LayUI\Content\LayUI\lay\modules\util.js" />
+    <Content Include="Areas\LayUI\Content\toolJs\dateHelper.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\font_eolqem241z66flxr.css" />
+    <Content Include="Content\css\images.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\message.css" />
+    <Content Include="Content\css\news.css" />
+    <Content Include="Content\css\user.css" />
+    <Content Include="Content\font\demo.css" />
+    <Content Include="Content\font\demo_fontclass.html" />
+    <Content Include="Content\font\demo_symbol.html" />
+    <Content Include="Content\font\demo_unicode.html" />
+    <Content Include="Content\font\iconfont.css" />
+    <Content Include="Content\font\iconfont.js" />
+    <Content Include="Content\font\iconfont.svg" />
+    <Content Include="Content\images\face.jpg" />
+    <Content Include="Content\images\userface1.jpg" />
+    <Content Include="Content\images\userface2.jpg" />
+    <Content Include="Content\images\userface3.jpg" />
+    <Content Include="Content\images\userface4.jpg" />
+    <Content Include="Content\images\userface5.jpg" />
+    <Content Include="Content\js\bodyTab.js" />
+    <Content Include="Content\js\index.js" />
+    <Content Include="Content\js\leftNav.js" />
+    <Content Include="Content\js\menu.js" />
+    <Content Include="Content\js\nav.js" />
+    <Content Include="Content\layui\css\layui.css" />
+    <Content Include="Content\layui\css\layui.mobile.css" />
+    <Content Include="Content\layui\css\modules\code.css" />
+    <Content Include="Content\layui\css\modules\laydate\icon.png" />
+    <Content Include="Content\layui\css\modules\laydate\laydate.css" />
+    <Content Include="Content\layui\css\modules\layer\default\icon-ext.png" />
+    <Content Include="Content\layui\css\modules\layer\default\icon.png" />
+    <Content Include="Content\layui\css\modules\layer\default\layer.css" />
+    <Content Include="Content\layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="Content\layui\css\modules\layer\default\loading-1.gif" />
+    <Content Include="Content\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="Content\layui\font\iconfont.svg" />
+    <Content Include="Content\layui\layui.js" />
+    <Content Include="Content\layui\lay\modules\code.js" />
+    <Content Include="Content\layui\lay\modules\element.js" />
+    <Content Include="Content\layui\lay\modules\flow.js" />
+    <Content Include="Content\layui\lay\modules\form.js" />
+    <Content Include="Content\layui\lay\modules\jquery.js" />
+    <Content Include="Content\layui\lay\modules\laydate.js" />
+    <Content Include="Content\layui\lay\modules\layedit.js" />
+    <Content Include="Content\layui\lay\modules\layer.js" />
+    <Content Include="Content\layui\lay\modules\layim.js" />
+    <Content Include="Content\layui\lay\modules\laypage.js" />
+    <Content Include="Content\layui\lay\modules\laytpl.js" />
+    <Content Include="Content\layui\lay\modules\mobile.js" />
+    <Content Include="Content\layui\lay\modules\tree.js" />
+    <Content Include="Content\layui\lay\modules\upload.js" />
+    <Content Include="Content\layui\lay\modules\util.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Content\font\iconfont.eot" />
+    <Content Include="Content\font\iconfont.ttf" />
+    <Content Include="Content\font\iconfont.woff" />
+    <Content Include="Content\json\images.json" />
+    <Content Include="Content\json\linksList.json" />
+    <Content Include="Content\json\message.json" />
+    <Content Include="Content\json\newsList.json" />
+    <Content Include="Content\json\systemParameter.json" />
+    <Content Include="Content\json\userface.json" />
+    <Content Include="Content\json\usersList.json" />
+    <Content Include="Areas\LayUI\Views\web.config" />
+    <Content Include="Areas\LayUI\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\LayUI\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiHome\Index.cshtml" />
+    <Content Include="Areas\LayUI\Content\LayUI\font\iconfont.eot" />
+    <Content Include="Areas\LayUI\Content\LayUI\font\iconfont.ttf" />
+    <Content Include="Areas\LayUI\Content\LayUI\font\iconfont.woff" />
+    <Content Include="Areas\LayUI\Views\LayUiSystem\ChangePwd.cshtml" />
+    <Content Include="Content\layui\font\iconfont.eot" />
+    <Content Include="Content\layui\font\iconfont.ttf" />
+    <Content Include="Content\layui\font\iconfont.woff" />
+    <Content Include="Areas\LayUI\Views\LayUiAdminUserInfo\Index.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdminUserInfo\Add.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdminLogin\Login.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdv\AdvertisingSpaceIndex.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdv\AddAdvertisingSpace.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdv\EditAdvertisingSpace.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdv\AdvContentIndex.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdv\AddAdvContent.cshtml" />
+    <Content Include="Areas\LayUI\Views\LayUiAdv\EditAdvContent.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="SmallProResource\app.js" />
+    <Content Include="SmallProResource\images\avtar1.jpg" />
+    <Content Include="SmallProResource\images\buy.png" />
+    <Content Include="SmallProResource\images\index1.jpg" />
+    <Content Include="SmallProResource\images\index2.jpg" />
+    <Content Include="SmallProResource\images\index3.jpg" />
+    <Content Include="SmallProResource\images\map.png" />
+    <Content Include="SmallProResource\images\phone.png" />
+    <Content Include="SmallProResource\images\shop.png" />
+    <Content Include="SmallProResource\images\subscribe.png" />
+    <Content Include="SmallProResource\pages\index\index.js" />
+    <Content Include="SmallProResource\pages\main\main.js" />
+    <Content Include="SmallProResource\pages\pay\pay.js" />
+    <Content Include="SmallProResource\utils\util.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\LayUI\Controllers\LayUiAdminLoginController.cs" />
+    <Compile Include="Areas\LayUI\Controllers\LayUiAdminUserInfoController.cs" />
+    <Compile Include="Areas\LayUI\Controllers\LayUiAdvController.cs" />
+    <Compile Include="Areas\LayUI\Controllers\LayUiHomeController.cs" />
+    <Compile Include="Areas\LayUI\Controllers\LayUiMenuController.cs" />
+    <Compile Include="Areas\LayUI\Controllers\LayUiSystemController.cs" />
+    <Compile Include="Areas\LayUI\LayUIAreaRegistration.cs" />
+    <Compile Include="Areas\LayUI\Models\Advs\EditAdvContentModel.cs" />
+    <Compile Include="Areas\LayUI\Models\BaseReturnModel.cs" />
+    <Compile Include="Areas\LayUI\Models\ListResult.cs" />
+    <Compile Include="Areas\LayUI\Models\ListSearch.cs" />
+    <Compile Include="Areas\LayUI\Models\Menus\MenuModel.cs" />
+    <Compile Include="Areas\LayUI\Models\Systems\CheckOldPwdModel.cs" />
+    <Compile Include="Areas\LayUI\MyAreasModule\MyConsts.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PayController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
+    <Compile Include="Controllers\ShareController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Filters\AdminAuthorizeAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\BaseAdminWebController.cs" />
+    <Compile Include="Infrastructure\CurrentWebContext.cs" />
+    <Compile Include="InstanceMangers\InstanceManger.cs" />
+    <Compile Include="Models\BaseReturnModel.cs" />
+    <Compile Include="Models\Bases\AccessTokenModel.cs" />
+    <Compile Include="Models\Bases\ErrorModel.cs" />
+    <Compile Include="Models\Bases\OpenIdModel.cs" />
+    <Compile Include="Models\Bases\UpdateBaseInfoModel.cs" />
+    <Compile Include="Models\MyException.cs" />
+    <Compile Include="Models\MyProException.cs" />
+    <Compile Include="Models\Pays\PayModel.cs" />
+    <Compile Include="Models\Pays\PayParamModel.cs" />
+    <Compile Include="Models\Pictures\PictureModel.cs" />
+    <Compile Include="Models\Shares\AddShareInfoModel.cs" />
+    <Compile Include="Models\Shares\AddShareLogInfoModel.cs" />
+    <Compile Include="Models\Shares\AESModel.cs" />
+    <Compile Include="Models\SystemConst.cs" />
+    <Compile Include="Models\Tests\FirstTestParamModel.cs" />
+    <Compile Include="Models\Tests\SecondTestParaModel.cs" />
+    <Compile Include="Models\Tests\TestModel.cs" />
+    <Compile Include="Models\Tests\ThirdTestParaModel.cs" />
+    <Compile Include="Models\Users\UserInfoModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="SmallProResource\app.json" />
+    <Content Include="SmallProResource\app.wxss" />
+    <Content Include="SmallProResource\pages\index\index.wxml" />
+    <Content Include="SmallProResource\pages\index\index.wxss" />
+    <Content Include="SmallProResource\pages\main\main.json" />
+    <Content Include="SmallProResource\pages\main\main.wxml" />
+    <Content Include="SmallProResource\pages\main\main.wxss" />
+    <Content Include="SmallProResource\pages\pay\pay.json" />
+    <Content Include="SmallProResource\pages\pay\pay.wxml" />
+    <Content Include="SmallProResource\pages\pay\pay.wxss" />
+    <Content Include="SmallProResource\project.config.json" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\LayUI\Views\LayUiMenu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseDatabase\BaseDatabase.csproj">
+      <Project>{1ff28313-bb97-440e-a215-23b35228c356}</Project>
+      <Name>BaseDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyUntil\MyUntil.csproj">
+      <Project>{83e2904b-7fbc-4938-9f91-5df8f792a9ff}</Project>
+      <Name>MyUntil</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51193</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51193/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

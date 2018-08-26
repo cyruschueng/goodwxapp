@@ -1,0 +1,63 @@
+<view class="padding-md text-center" style="background:#4d5d6c;">
+  <image src="/img/coffee.png" style="height:160rpx;width:160rpx;" mode="aspectFill"></image>
+  <view class="font-lg font-white">{{msg.name}}</view>
+  <view class="todobtn" style="border:1px solid #4d5d6c ">{{msg.value}}</view>
+</view>
+<picker bindchange="bindPayChange" value="{{flag3}}" range="{{pay}}">
+  <view class="panel panel-between">
+    <view class="font-md">支付方式</view>
+    <view class="panel-end">
+      <view class="font-md margin-right-sm">{{title3}}</view>
+      <image src="/img/right.png" class="icon-md" ></image>
+    </view>
+  </view>
+</picker>
+<view class="panel font-md text-center margin-top-sm">
+  <view class="padding-sm font-lg">-常客卡购买须知与使用说明-</view>
+  <view class="font-md" style="line-height:50rpx;text-align:left">
+    <text> {{msg.remark}} </text>
+  </view>
+</view>
+
+<view style='height:100rpx'></view>
+<view class="payforfix panel-between">
+  <view class="font-lg margin-left-md" style="line-height:100rpx;">单价: <text class="font-lg font-danger bold">￥{{msg.price}}</text></view>
+  <view class="paybtn bg-card" bindtap="payfor">立即购买</view>
+</view>
+
+<view class="payment-panel {{dopay ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+
+  <view class="input-panel">
+    <view class="user-tit">
+      <view class="con">
+        <image src="{{head}}"></image>
+        <view class="tit">请输入支付密码</view>
+      </view>
+      <image style="width:40rpx;height:40rpx;margin-top: 15rpx;" src="/img/close.png" bindtap="concelPay"></image>
+    </view>
+    <view class="txt-panel">
+      <view class="tit">{{msg.name}}</view>
+      <view class="pri">￥{{isBj ? total:msg.price*msg.discount}}</view>
+    </view>
+    <view class="num-penel">
+      <view class="item" wx:for="{{pwdl}}"><view class="ku" wx:if="{{item}}" ></view></view>
+    </view>
+    <view class="text-panel">
+      BigJA 会员余额支付
+    </view>
+  </view>
+  <view class="number-panel">
+    <view data-num="1" bindtap="clickNum">1</view>
+    <view data-num="2" bindtap="clickNum">2</view>
+    <view data-num="3" bindtap="clickNum" style="border-right:none">3</view>
+    <view data-num="4" bindtap="clickNum">4</view>
+    <view data-num="5" bindtap="clickNum">5</view>
+    <view data-num="6" bindtap="clickNum" style="border-right:none">6</view>
+    <view data-num="7" bindtap="clickNum">7</view>
+    <view data-num="8" bindtap="clickNum">8</view>
+    <view data-num="9" bindtap="clickNum" style="border-right:none">9</view>
+    <view data-num="#" bindtap="clickNum" style="background:#f3f3f3"></view>
+    <view data-num="0" bindtap="clickNum">0</view>
+    <view data-num="c" bindtap="clickNum" style="border-right:none;background:#f3f3f3"><image style="margin-top:40rpx;width:60rpx;height:60rpx;" src="/img/shanchu.png"></image></view>
+  </view>
+</view>

@@ -1,0 +1,115 @@
+<!-- 
+经典店铺模板  model
+-->
+<template name="classicStoreModel">
+  <!-- 搜索框 start -->
+<view class="search-panel" bindtap='navToSearch'>
+  <view class="search panel-center item-center">
+    <image class="icon-lg" src="/img/search.png"></image>
+    <view class='margin-left-sm'>搜索商品</view>
+  </view>
+</view>
+<!-- 搜索框 end -->
+
+<!-- 轮播图 start -->
+<swiper class="swiper" wx:if="{{imgUrls.length > 0}}" indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color='#fff' autoplay="true" >
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{ip+item.imagePath}}" class="slide-image" style='swiper' mode='aspectFill' style='width:100%' data-url='{{item.carouselPath}}' bindtap='nav' />
+    </swiper-item>
+  </block>
+</swiper>
+<!-- 轮播图 end -->
+<view class='panel-center'>
+  <view class='iconst' data-id='1' bindtap='navToCustomer'>
+    <image src='/img/other/q1.png' style='height:80rpx;width:80rpx'></image>
+    <view>企业介绍</view>
+  </view>
+  <view class='iconst' data-id='2' bindtap='navToCustomer'>
+    <image src='/img/other/q4.png' style='height:80rpx;width:80rpx'></image>
+    <view>分类</view>
+  </view>
+  <button class='iconst but' data-id='3' open-type='contact'>
+    <image src='/img/other/q3.png' style='height:80rpx;width:80rpx'></image>
+    <view>联系方式</view>
+  </button>
+  <view class='iconst' data-id='4' bindtap='navToCustomer'>
+    <image src='/img/other/q2.png' style='height:80rpx;width:80rpx'></image>
+    <view>售后服务</view>
+  </view>
+</view>
+
+<view class='' wx:for="{{list}}" wx:for-item="it" wx:for-index="in">
+  <!-- 分类 start -->
+  <!-- <view class='category-panel' style='background:url({{ip+it.imagePath}});background-size:cover' data-id='{{it.categoryTwoId}}' bindtap='navToCategory'>
+    <view class='panel-center item-center categoryback'>
+      <view class='text-center'>
+        <view class='font-white font-40 '>{{it.categoryTwoName}}</view>
+        <view class='font-white margin-top-xs'>{{it.subName}}</view>
+        <view class='font-white margin-top-xs'>more >></view>
+      </view>
+    </view>
+  </view> -->
+  <!-- 分类 end -->
+
+  <!-- 商品 start -->
+  <!-- <view>
+    <scroll-view class="shop-panel scroll-x" scroll-x="true">
+      <view class='scroll-x-control goods' wx:for="{{it.goods}}" wx:for-item="li" data-id='{{li.commodityId}}' bindtap='navToGoods'>
+        <image src='{{ip+li.imagePath}}' mode='aspectFill'></image>
+        <view class='tit ell'>{{li.commodityName}}</view>
+        <view class='con'>
+          <text class='pri font-danger' wx:if="{{li.isDiscount == 1}}">￥{{li.commodityPrice * li.commodityDiscount}}</text>
+          <text class='pri font-danger' wx:if="{{li.isDiscount == 0}}">￥{{li.commodityPrice}}</text>
+          <text class='txt font-default' wx:if="{{li.isDiscount == 1}}">￥{{li.commodityPrice}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view> -->
+</view>
+
+<view style='background:#f3f3f3 ;padding:20rpx 30rpx;' class='font-default' >全部商品</view>
+
+<view class='panelShops' wx:if="{{glist.length > 0}}">
+  <view class='items' style='width:{{innerWidth/2-2}}px' wx:for="{{glist}}" data-id='{{item.commodityId}}' bindtap='navToGoods'>
+    <image src='{{ip+item.imagePath}}' style='width:{{innerWidth/2-2}}px;height:{{innerWidth/2-2}}px;display:block' mode='aspectFill'></image>
+    <view class='con' style='width:{{innerWidth/2-2}}px;' >
+      <view class='ell bold'>{{item.commodityName}}</view>
+      <view class='margin-top-xs'>
+        <text class='font-lg font-danger bold' wx:if="{{item.isDiscount == 1}}">￥{{item.commodityPrice * item.commodityDiscount}}</text>
+          <text class='font-lg font-danger bold' wx:if="{{item.isDiscount == 0}}">￥{{item.commodityPrice}}</text>
+          <text class='font-sm font-default through' wx:if="{{item.isDiscount == 1}}">￥{{item.commodityPrice}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view style='padding:40rpx;text-align:center' class='font-default' wx:if="{{!loading}}">到底啦</view>
+</template>
+
+<!--
+鮮花店模板
+-->
+<template name="flowerStore">
+<view class='flot'>
+  <!-- 轮播图 start -->
+  <swiper class="swiper" wx:if="{{imgUrls.length > 0}}" indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color='#fff' autoplay="true" >
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{ip+item.imagePath}}" class="slide-image" style='swiper' mode='aspectFill' style='width:100%;' data-url='{{item.carouselPath}}' bindtap='nav' />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 轮播图 end -->
+  <view class='flotSearch'>
+    <view class='panel-center sea item-center' bindtap='navToSearch'>
+      <image class="icon-lg" src="/img/search.png"></image>
+      <view class='margin-left-sm'>搜索商品</view>
+    </view>
+  </view>
+</view>
+</template>

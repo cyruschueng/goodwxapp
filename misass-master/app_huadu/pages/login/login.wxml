@@ -1,0 +1,16 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  <text class="h2">请先绑定您的手机号！</text>
+  <view class="login-input">
+    <view>
+      <input type='number' bindblur='getPhone' placeholder='输入会员手机号' value="{{phone}}"></input>
+    </view>
+    <view>
+      <input type='number' bindblur='getCode' placeholder='输入验证码'>输入验证码</input>
+      <button wx:if='{{flag == 1}}' value="{{flag}}" bindtap='sendCode' class="get-code">获取验证码</button>
+      <button wx:if='{{flag == -1}}' value="{{flag}}" class="get-code">发送中</button>
+      <button wx:if='{{flag == 0}}' disabled class="get-code bg-default">{{second}}s</button>
+    </view>
+  </view>
+  <button class="login-btn" bindtap='toIndex'>绑定</button>
+</view>

@@ -1,0 +1,18 @@
+<view class="audio-box" bindtap="play">
+    <view class="audio-ani-box" wx:if="{{!audioAni}}">
+        <view class="line line1 start"></view>
+        <view class="line line2 start"></view>
+        <view class="line line3 start"></view>
+    </view> 
+    <view class="audio-ani-box play" wx:if="{{audioAni}}">
+        <view class="line line1 start"></view>
+        <view class="line line2 start"></view>
+        <view class="line line3 start"></view>
+    </view>
+    <view class="audio-font">点击播放</view>
+    <view class="audio-time">{{ time }}"</view>
+</view>
+
+<audio src="{{url}}" id="myAudio" bindpause="pause"></audio>
+
+<c-resouce message="{{ message }}" icon="{{ icon }}" nick-name="{{ nickName }}"></c-resouce>

@@ -1,0 +1,41 @@
+<!--guess.wxml-->
+
+<view class="toolbar">
+  <button class="button float left" hover-class="active" bindtap="onCoins">
+    <span><em>咚豆</em><var>{{coins}}</var></span>
+  </button>
+  <button class="button right">
+    <span><strong>{{timeText}}</strong></span>
+  </button>
+</view>
+
+<view class="audiobar">
+  <view class="leftside">
+    <button class="button skip" hover-class="active" bindtap="onSkip">
+      <span>跳过 <var>-30</var></span>
+    </button>
+    <button class="button tip" hover-class="active" bindtap="onTip">
+      <span>提示 <var>-50</var></span>
+    </button>
+  </view>
+  <view class="rightside">
+    <button class="button share" hover-class="active" open-type="share">
+      <span>分享</span>
+    </button>
+  </view>
+  <view class="mp3tvbox">
+    <mc-player id="player"></mc-player>
+  </view>
+</view>
+
+<view class="titlewords">
+  <button class="item" hover-class="active" wx:for="{{titleWords}}" wx:key="item" data-index="{{index}}"  bindtap="onTitleChoice" animation="{{item.animate}}"><em>{{item.text}}</em></button>
+</view>
+
+<view class="allwords">
+  <button class="item" hover-class="active" wx:for="{{allWords}}" wx:key="item" data-index="{{index}}" bindtap="onAllChoice" animation="{{item.animate}}"><em>{{item.text}}</em></button>
+</view>
+
+<mc-result id="result" bind_continue="onContinue" bindreload="onReload"></mc-result>
+<mc-coins id="coins"></mc-coins>
+<mc-toast id="toast"></mc-toast>

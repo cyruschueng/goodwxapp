@@ -1,0 +1,112 @@
+
+<!-- <view class="panel" style='padding-top:0'>
+  <view class='pitem pactive'>帮我送</view>
+  <view class='pitem pdef'>帮我取</view>
+</view> -->
+
+<view class='panel-between item-center'>
+  <image src='/img/icon/qi.png' class='icon-qi margin-left-md'></image>
+  <view class='margin-right-md padding-sm' style='border-radius:5rpx;width:550rpx;background:#f3f3f3;'>
+    <view class='pbtn'>
+      <view class='item' data-type='1' bindtap='getWxAddress'>使用微信地址</view>
+      <view class='item margin-left-md' data-type='1' bindtap='getMapAddress'>使用地图选点</view>
+    </view>
+    <view class='margin-top-xs font-def'>{{submitData.startAddress.provinceName ? submitData.startAddress.provinceName+submitData.startAddress.cityName+ submitData.startAddress.countyName:'请选择一个起点地址'}}</view>
+    <view class='panel-start item-center margin-top-xs' wx:if="{{submitData.startAddress.provinceName}}">
+      <view>详细地址:</view>
+      <input class='font-def margin-left-sm' value='{{submitData.startAddress.detailInfo}}' bindinput='startAddressInput' placeholder='详细地址：楼层门牌号'></input>
+    </view>
+  </view> 
+</view> 
+<view class='panel-between item-center margin-top-md'>
+  <image src='/img/icon/zhong.png' class='icon-qi margin-left-md'></image>
+  <view class='margin-right-md padding-sm' style='border-radius:5rpx;width:550rpx;background:#f3f3f3;'>
+    <view class='pbtn'>
+      <view class='item' data-type='2' bindtap='getWxAddress'>使用微信地址</view>
+      <view class='item margin-left-md' data-type='2' bindtap='getMapAddress'>使用地图选点</view>
+    </view>
+    <view class='margin-top-xs font-def'>{{submitData.endAddress.provinceName ? submitData.endAddress.provinceName+submitData.endAddress.cityName+ submitData.endAddress.countyName:'请选择一个起点地址'}}</view>
+    <view class='panel-start item-center margin-top-xs' wx:if="{{submitData.endAddress.provinceName}}">
+      <view>详细地址:</view>
+      <input class='font-def margin-left-sm' value='{{submitData.endAddress.detailInfo}}' bindinput='endAddressInput' placeholder='详细地址：楼层门牌号'></input>
+    </view>
+  </view> 
+</view>
+<view class='panel panel-between' wx:if="{{submitData.distance}}" style='padding-bottom:0'>
+  <view>起终点距离:{{submitData.distance < 1000 ? submitData.distance+'m':(submitData.distance/1000)+'km'}}</view>
+  <view class='font-danger bold'>26元</view>
+</view>
+<view class='panel ' style='padding-bottom:0'>
+  <view class='panel-between item-center bottom-line' style='background:#f3f3f3;line-height:90rpx;border-radius:5rpx'>
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/qr2.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>起点联系人</view>
+    </view>
+    <view  class=' margin-right-sm'><input style='text-align:right' placeholder='起点联系人手机号(必填)' value='{{submitData.startPhone}}' bindinput='startPhoneInput'></input></view>
+  </view>
+</view>
+
+<view class='panel' style='padding-top:0'>
+  <view class='panel-between item-center' style='background:#f3f3f3;line-height:90rpx;border-radius:5rpx'>
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/qr1.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>终点联系人</view>
+    </view>
+    <view  class=' margin-right-sm'><input style='text-align:right' placeholder='终点联系人手机号(必填)' bindinput='endPhoneInput' value='{{submitData.endPhone}}'></input></view>
+  </view>
+</view>
+
+
+
+<picker bindchange="dateLimitChange" value="{{dlFlag}}" range="{{dateLimit}}">
+<view class='panel' style='padding:0 30rpx'>
+  <view class='panel-between item-center bottom-line' style='background:#f3f3f3;line-height:90rpx;border-radius:5rpx'>
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/time2.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>送达时间</view>
+    </view>
+    <view  class='panel-end margin-right-sm item-center'>
+      <view class='font-def margin-right-sm'>{{dateLimit[dlFlag]}}</view>
+      <image src='/img/icon/right.png' class='icon-md'></image>
+    </view>
+  </view>
+</view>
+</picker>
+<picker bindchange="goodsSizeChange" value="{{glFlag}}" range="{{goodsSize}}">
+<view class='panel' style='padding-top:0'>
+  <view class='panel-between item-center' style='background:#f3f3f3;line-height:90rpx;border-radius:5rpx'>
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/size.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>物品大小</view>
+    </view>
+    <view  class='panel-end margin-right-sm item-center'>
+      <view class='font-def margin-right-sm'>{{goodsSize[glFlag]}}</view>
+      <image src='/img/icon/right.png' class='icon-md'></image>
+    </view>
+  </view>
+</view>
+</picker>
+
+<view class='panel' style='padding-top:0'>
+  <view class='panel-between item-center' style='background:#f3f3f3;line-height:90rpx;border-radius:5rpx'>
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/sj.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>赏金</view>
+    </view>
+    <view  class=' margin-right-sm'><input type='number' style='text-align:right' placeholder='给派件小哥的打赏' bindinput='priceInput'></input></view>
+  </view>
+</view>
+<view class='panel' style='padding-top:0'>
+  <view class='panel-between item-center' style='background:#f3f3f3;line-height:90rpx;border-radius:5rpx'>
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/bz.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>备注信息</view>
+    </view>
+    <view  class=' margin-right-sm'><input style='text-align:right' placeholder='填写备注信息(选填)'></input></view>
+  </view>
+</view>
+
+<view class='panel' style='padding-top:0'>
+  <view class='font-def' style='text-align:center'>为用户更好的体验，平台将收取0.00元服务费</view>
+  <view class='blbtn margin-top-xs'>立即发布</view>
+</view>

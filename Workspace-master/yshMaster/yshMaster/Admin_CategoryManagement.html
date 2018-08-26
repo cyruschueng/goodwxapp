@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>Form Layouts</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script type="text/javascript">
+			if(!getuserInfo()[0] || getuserInfo()[0].user_id == 0) {
+				top.window.location.href = 'Admin_Login.html';
+			}
+		</script>
+	</head>
+
+	<body class="children-body">
+
+		<!--body wrapper start-->
+		<section class="">
+			<!-- page start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading">
+							商品分类管理
+						</header>
+						<div class="panel-body">
+							<form class="form-horizontal" role="form">
+								<div class="row clearfix">
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-5">分类名称:</label>
+											<div class="col-lg-7">
+
+												<input type="text" class="form-control" id="txt_catename">
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="col-sm-5 control-label col-lg-5">是否最后一级:</label>
+											<div class="col-lg-7">
+
+												<select class="form-control m-bot15" id="sel_IsLaseCate">
+													<option value="-1">全部</option>
+													<option value="1">是</option>
+													<option value="0">否</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="text-right">
+											<button class="btn btn-info" type="button" id="btn_Search">搜索</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
+
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<div class="panel-heading">
+							<div class="text-right">
+								<button class="btn btn-success" type="button" id="btn_AddCate">添加</button>
+							</div>
+						</div>
+						<div class="panel-body">
+							<table id="bs" class="table table-striped table-condensed table-hover talbe-border" data-side-pagination="server">
+								<thead>
+									<tr>
+										<!--<th data-field="status" data-align="center" data-checkbox="true"></th>-->
+										<th data-field="CateName" data-align="center">名称</th>
+										<th data-field="LastCate" data-align="center" data-formatter="lastcateFormatter">是否最后一级</th>
+										<th data-field="Published" data-align="center" data-formatter="publishedFormatter">已发布</th>
+										<th data-field="DisplayOrder" data-align="center" data-formatter="displayFormatter">显示顺序</th>
+										<th data-field="Id" data-align="center" data-formatter="operationFormatter">操作</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+					</section>
+
+					<!--body wrapper end-->
+
+				</div>
+				<!-- main content end-->
+				<!-- Modal -->
+				<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" data-backdrop="static">
+					<div class="modal-dialog" style="width:60%;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+								<label id="lbl_IdValue" hidden="hidden"></label>
+								<h4 class="modal-title" id="md_title">编辑分类</h4>
+							</div>
+							<div class="modal-body">
+								<div class=" form">
+									<form class="cmxform form-horizontal adminex-form" id="sub_form">
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">名称:</label>
+											<div class="col-lg-9">
+												<input class="form-control" id="in_catename" type="text" name="in_catename" maxlength="20" />
+
+											</div>
+											<div class="col-lg-1">
+												<span style="color: red;">*</span>
+											</div>
+										</div>
+
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">父级分类:</label>
+											<div class="col-lg-9">
+												<select class="form-control input-lg m-bot15" id="ParentCategory">
+
+												</select>
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">是否设为最后一级:</label>
+											<div class="col-lg-9">
+												<lable class="checkbox-inline">
+													<input type="checkbox" id="IsLastCate" value="" onclick="checkClick();">
+												</lable>
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">国标码:</label>
+											<div class="col-lg-9">
+												<input class="form-control " id="in_GBGoodsId" name="in_GBGoodsId" maxlength="8" />
+											</div>
+											<div class="col-lg-1">
+												<span style="color: red;">*</span>
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">已发布:</label>
+											<div class="col-lg-9">
+												<label for="cname" class="control-label" id="md_dpbt">启用</label>
+											</div>
+										</div>
+
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">显示顺序:</label>
+											<div class="col-lg-9">
+												<input class="form-control " id="in_DisplayOrder" name="in_DisplayOrder" value="0" />
+											</div>
+											<div class="col-lg-1">
+												<span style="color: red;">*</span>
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">图片:</label>
+											<div class="col-lg-9">
+												<div class="image_container">
+													<img id="preview" style="width: 150px ;height:200px;" src="">
+													<!--<span style="color: red;">*</span>-->
+												</div>
+												<input type="file" id="file_upload">
+												<!--<div id="div_msg" style="color: red; display: none;"></div>-->
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">描述:</label>
+											<div class="col-lg-9">
+												<!--<textarea  style="resize: none;" class="form-control ckeditor" name="editor_descript" rows="6" id="editor_descript"></textarea>-->
+												<iframe scrolling="no" frameborder='0' style="width: 100%;height: 500px;" name="irm" id="irm"></iframe>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+
+								<button type="button" class="btn btn-success" id="btn_save">保存</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal -->
+			</div>
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+
+		<script src="js/layer.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/bootstrapValidator.js"></script>
+		<script src="plugins/ckeditor/ckeditor.js"></script>
+		<script src="js/select2.min.js"></script>
+		<script>
+			var checkList = new Array();
+			var $table = $("#bs");
+			var img_url = "";
+			var pictureID = 0;
+
+			function operationFormatter(value, row, index) {
+				var result = [
+					'<button onclick="gotoEdit(' + value + ')" class="btn btn-info">编辑</button>'
+				];
+				return result.join(" ");
+			}
+
+			function publishedFormatter(value, row, index) {
+				var result = '';
+				if(value == '1') {
+					result = [
+						'<button onclick="gotodelete(' + 0 + ',' + row.Id + ')" class="btn btn-primary">禁用</button>'
+					];
+				} else {
+					result = [
+						'<button onclick="gotodelete(' + 1 + ',' + row.Id + ')" class="btn btn-success">启用</button>'
+					];
+				}
+				return result;
+			}
+
+			function lastcateFormatter(value, row, index) {
+				var result = '';
+				if(value == '1') {
+					result = '是';
+				} else {
+					result = '否';
+				}
+				return result;
+			}
+
+			function displayFormatter(value, row, index) {
+//				console.log(row);
+				var result = [
+					'<input type="text" value="' + value + '" onBlur="changeDisplay(this,' + row.Id + ',' + row.DisplayOrder + ')">'
+				];
+				return result;
+			}
+			//编辑
+			function gotoEdit(Id) {
+				getDataList(yshurl + "Pro_InsertComPictureIfNull", {
+					cateId: Id
+				}, function(d) {
+					getDataList(yshurl + "AM_GetCategoryById", {
+						cateId: Id
+					}, function(d) {
+//						console.log(d.aaData[0].CateName);
+						$("#lbl_IdValue").val(Id);
+						$("#in_catename").val(d.aaData[0].CateName);
+						//$("#editor_descript").val(d.aaData[0].Description);
+						//CKEDITOR.instances.editor_descript.setData(d.aaData[0].Description);
+						document.getElementsByTagName("iframe")[0].contentWindow.postMessage(decodeURI(d.aaData[0].Description), imgurl + "/Editor.html");
+						$("#ParentCategory").val(d.aaData[0].ParentCategoryId);
+						$("#in_GBGoodsId").val(d.aaData[0].GBGoodsId);
+						$("#in_DisplayOrder").val(d.aaData[0].DisplayOrder);
+						if(d.aaData[0].Picurl == '') {
+							$("#preview").attr("src", "");
+						} else {
+							$("#preview").attr("src", imgurl + d.aaData[0].Picurl);
+						}
+						img_url = d.aaData[0].Picurl;
+						pictureID = d.aaData[0].PictureId;
+						if(d.aaData[0].LastCate == '1') {
+							$("#IsLastCate").attr("checked", true);
+						} else {
+							$("#IsLastCate").attr("checked", false);
+						}
+						if(d.aaData[0].Published == '1') {
+							$("#md_dpbt").text('启用');
+						} else {
+							$("#md_dpbt").text('禁用');
+						}
+					});
+				});
+				$("#md_title").html('编辑分类');
+				$("#myModal").modal("show");
+			}
+			//禁用
+			function gotodelete(publish, Id) {
+				getDataList(yshurl + "checkTheCate", {
+					cateId: Id
+				}, function(res) {
+					if(res.aaData[0].count != 0) {
+						ysh_alert("该分类正在被使用，不允许禁用！", "error")
+					} else {
+						ysh_confirm("确定要这样做吗？", "确定", "取消", function(ret) {
+							if(ret) {
+								getDataList(yshurl + "AM_UpdateCatePublishByid", {
+									published: publish,
+									cateId: Id
+								}, function(d) {
+									var options = $table.bootstrapTable('getOptions');
+									var offset = (options.pageNumber - 1) * options.pageSize;
+									//getdata(offset);
+									window.location.reload()
+								});
+							}
+						});
+					}
+				}, true)
+			}
+			//顺序编辑
+			function changeDisplay(obj, Id, old_displayorder) {
+				var res = /^[1-9]\d*|0$/;
+				if(!res.test($(obj).val())) {
+					ysh_alert("请输入非负整数", "warning");
+					$(obj).val(old_displayorder);
+				} else {
+					getDataList(yshurl + "AM_UpdateDispalyOrderById", {
+						DisplayOrder: $(obj).val(),
+						cateId: Id
+					}, function(d) {
+						var options = $table.bootstrapTable('getOptions');
+						var offset = (options.pageNumber - 1) * options.pageSize;
+						getdata(offset);
+					});
+				}
+			}
+			//初始化
+			$(function() {
+				$('select').select2();
+				$(".select2").css("width","100%");
+				leftCancelShade('myModal');
+				checkList = new Array();
+				$table.bootstrapTable({
+					pagination: true, //分页
+					onCheck: function(row) {
+						checkList.push(row.Id);
+						$.unique(checkList);
+						console.log(checkList);
+					},
+					onUncheck: function(row) {
+						$.unique(checkList);
+						var pIndex = $.inArray(row.Id, checkList);
+						checkList.splice(pIndex, 1);
+						console.log(checkList);
+					},
+					onCheckAll: function(rows) {
+						$.each(rows, function(index) {
+							checkList.push(rows[index].Id);
+						});
+						$.unique(checkList);
+						console.log(checkList);
+					},
+					pageList: [10],
+					onUncheckAll: function(rows) {
+						checkList = new Array();
+						console.log(checkList);
+					},
+					escape: true
+				});
+				window.localStorage.removeItem("msgdata");
+				getdata(0);
+				bindcategorylist();
+				//上传图片
+				upLoadHeadImg("file_upload", "preview", 150, 150, function(data) {
+					console.log(data);
+					getDataList(imgurl + "/upload/base64", {
+						img: data
+					}, function(d) {
+						var index = d.aaData[0].indexOf('/');
+						console.log(d.aaData[0].substring(index));
+						img_url = d.aaData[0].substring(index);
+						$("#preview").attr("src", imgurl + d.aaData[0].substring(index));
+					});
+				});
+				$("#irm").attr("src", imgurl + "/Editor.html");
+			});
+			var getdata = function(offset) {
+				var data = new Array();
+				var totalcount = 0;
+				condition = {
+					CateName: $("#txt_catename").val(),
+					LastCate: $("#sel_IsLaseCate").val()
+				}
+				condition.p_limit = $table.bootstrapTable('getOptions').pageSize;
+				//console.log($table.bootstrapTable('getOptions'));
+				condition.p_offset = offset;
+				var options = $table.bootstrapTable('getOptions');
+				if(offset == 0) {
+					options.pageNumber = 1;
+					$table.bootstrapTable('refreshOptions', options);
+				}
+				getDataList(yshurl + "AM_GetCateGoryList", condition, function(d) {
+					data = d.many[0];
+					totalcount = d.many[1][0].totalcount;
+					//console.log(d.many);
+				});
+				var pdata = {
+					total: totalcount,
+					rows: data
+				};
+				$table.bootstrapTable('load', pdata);
+				setIframeHeight();
+			};
+			
+			//分页点击
+			$table.on('page-change.bs.table', function(e, number, size) {
+				var os = (number - 1) * size;
+				window.location.hash = number;
+				getdata(os);
+			});
+			// onhashchange可以监控hash变化
+		    window.onhashchange = function() {
+		        var hash = window.location.hash;
+		        var id;
+		        if(hash != ""){
+		        	id = parseInt(hash.substr(1));
+		        } else{
+		        	id = 1
+		        }
+		        var os = (id - 1) * 10;
+				getdata(os);
+		       	$("ul.pagination").children().eq(id).addClass("active").siblings().removeClass("active");
+		    };
+		    
+			//搜索
+			$("#btn_Search").click(function() {
+				getdata(0);
+			});
+			//父级分类下拉列表
+			function bindcategorylist() {
+				getDataList(yshurl + "AM_GetParentCategorylist", null, function(d) {
+					if(d.state == 0 && d.aaData.length > 0) {
+						var htmlstr = '<option value="0">全部</option>';
+						for(var i = 0; i < d.aaData.length; i++) {
+							htmlstr += '<option value="' + d.aaData[i].Id + '">' + d.aaData[i].CateName + '</option>';
+						}
+						$("#ParentCategory").html(htmlstr);
+					} else {
+						console.log("获取分类列表接口出错");
+					}
+				});
+			}
+			//关闭后事件
+			$('#myModal').on('hidden.bs.modal', function() {
+				clear();
+				$("#div_msg").hide();
+			});
+			//关闭时事件
+			$('#myModal').on('hide.bs.modal', function() {
+				$('#sub_form').data('bootstrapValidator').resetForm();
+			});
+			//清空
+			function clear() {
+				$("#lbl_IdValue").val('');
+				$("#in_catename").val('');
+				$("#editor_descript").val('');
+				//$("#ParentCategory").val(d.aaData[0].ParentCategoryId);
+				$("#in_GBGoodsId").val('');
+				$("#in_DisplayOrder").val('0');
+				//CKEDITOR.instances.editor_descript.setData('');
+				document.getElementsByTagName("iframe")[0].contentWindow.postMessage(decodeURI(''), imgurl + "/Editor.html");
+				$("#preview").attr("src", "");
+				img_url = '';
+				pictureID = 0;
+				$("#md_dpbt").text('启用');
+			}
+			//添加
+			$("#btn_AddCate").click(function() {
+				$("#myModal").modal('show');
+				$("#md_title").html('新增分类');
+			});
+			//表单验证
+			$('#sub_form').bootstrapValidator({
+				message: '错误',
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+				fields: {
+					in_catename: {
+						validators: {
+							notEmpty: {
+								message: '名称不能为空'
+							},
+							stringLength: {
+								max: 20,
+								message: '名称长度不能超过20位'
+							},
+						}
+					},
+					in_GBGoodsId: {
+						validators: {
+							notEmpty: {
+								message: '国标码不能为空'
+							},
+							numeric: {
+								message: '国标码必须为数字'
+							},
+							stringLength: {
+								min: 8,
+								max: 8,
+								message: '国标码为8位数字组成'
+							},
+							callback: {
+								message: '国标码重复',
+								callback: function(value, validator) {
+									var ret = true;
+									if($("#IsLastCate").attr("checked") == "checked") {
+										ret = true;
+									} else {
+										var lbid = $("#lbl_IdValue").val() == '' ? '-1' : $("#lbl_IdValue").val();
+										getDataList(yshurl + "AM_CheckGBGoodsId", {
+											GBGoodsId: value,
+											cateID: lbid
+										}, function(d) {
+											console.log(d.aaData.length);
+											if(d.aaData.length > 0) {
+												ret = false;
+											} else {
+												ret = true;
+											}
+										});
+									}
+									return ret;
+								}
+							}
+						}
+					},
+					in_DisplayOrder: {
+						validators: {
+							notEmpty: {
+								message: '显示顺序不能为空'
+							},
+							integer: {
+								message: '显示顺序必须为数字'
+							}
+						}
+					}
+				}
+			});
+			//保存
+			function CateSave() {
+				$('#sub_form').data('bootstrapValidator').validate();
+				//				if ($("#preview").attr("src") == "") {
+				//					$("#div_msg").html("图片不能为空");
+				//					$("#div_msg").show();
+				//					return;
+				//				} else {
+				//					$("#div_msg").hide();
+				//				}
+				$('#sub_form').data('bootstrapValidator')
+					.updateStatus('in_GBGoodsId', 'NOT_VALIDATED')
+					.validateField('in_GBGoodsId');
+				if($("#sub_form").data('bootstrapValidator').isValid()) {
+					var id = $("#lbl_IdValue").val();
+					var da = {
+						CateName: $("#in_catename").val(),
+						Description: decodeURI(window.localStorage.getItem("msgdata")), //CKEDITOR.instances.editor_descript.getData(), 
+						GBGoodsId: $("#in_GBGoodsId").val(),
+						ParentCategoryId: $("#ParentCategory").find("option:selected").val(),
+						DisplayOrder: $("#in_DisplayOrder").val(),
+						PictureUrl: img_url,
+						LastCate: $("#IsLastCate").attr("checked") == "checked" ? '1' : '0'
+					}
+
+					if(id == '') { //新增
+						getDataList(yshurl + "AM_InsetCateGory", da, function(d) {
+							if(d.aaData[0][0].InsertID > 0) {
+								$('#myModal').modal('hide');
+								getdata(0);
+								ysh_msg("新增成功");
+							} else {
+								ysh_msg("新增失败");
+							}
+						});
+					} else { //修改
+						da.cateId = id;
+						da.pictureID = pictureID;
+						getDataList(yshurl + "AM_UpdateCateGoryById", da, function(d) {
+							if(d.state == 0) {
+								$('#myModal').modal('hide');
+								var options = $table.bootstrapTable('getOptions');
+								var offset = (options.pageNumber - 1) * options.pageSize;
+								getdata(offset);
+								ysh_msg("更新成功");
+							} else {
+								ysh_msg("更新失败");
+							}
+						});
+					}
+				}
+			}
+			$("#btn_save").click(function() {
+				CateSave();
+			});
+			//check点击
+			function checkClick() {
+				$('#sub_form').data('bootstrapValidator')
+					.updateStatus('in_GBGoodsId', 'NOT_VALIDATED')
+					.validateField('in_GBGoodsId');
+			}
+		</script>
+	</body>
+
+</html>

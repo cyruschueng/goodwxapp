@@ -1,0 +1,265 @@
+<style lang="less" rel="stylesheet/less">
+    @icon_mr:10px;
+
+    .demon-cell {
+        padding:20rpx;
+        /*border-bottom:1px solid #dddddd;*/
+        position: relative;
+        &:after{
+            position: absolute;
+            content: '';
+            bottom:0;
+            left:20rpx;
+            right:20rpx;
+            border-bottom:1px solid #dddddd;
+        }
+        &:last-child{
+            &:after{
+                left:0;
+                right:0;
+            }
+        }
+        /*文字组合样式*/
+        &.text{
+            .demon-cell__title,.demon-cell__desc{
+                display: flex;
+                align-items: flex-start;
+            }
+            .demon-cell__title__icon i,.demon-cell__desc__icon i{
+                font-size: 25px;
+            }
+            .demon-cell__title {
+                margin-bottom: 15rpx;
+                .demon-cell__title__icon {
+                    margin-right: @icon_mr;
+                }
+                .demon-cell__title__text {
+                    font-size: 15px;
+                    line-height: 23px;
+                    color: #333;
+                }
+            }
+            .demon-cell__desc {
+                .demon-cell__desc__icon {
+                    vertical-align: top;
+                    height:100%;
+                    margin-right: @icon_mr;
+                }
+                .demon-cell__desc__text {
+                    font-size: 14px;
+                    line-height: 21px;
+                    color: #666;
+                }
+
+            }
+        }
+
+        /*图文组合*/
+        &.imgText{
+            display: flex;
+            height:200rpx;
+            .demon-cell__img{
+                width: 230rpx;
+                height:160rpx;
+                margin-right:20rpx;
+            }
+            .demon-cell__content{
+                flex:1;
+                position: relative;
+            }
+        }
+
+        /*文章组合*/
+        &.activity{
+            display: flex;
+            height:200rpx;
+            .demon-cell__img{
+                width: 230rpx;
+                height:160rpx;
+                margin-right:20rpx;
+            }
+            .demon-cell__content{
+                flex:1;
+                position: relative;
+
+                .demon-cell__content__title{
+                    font-size:15px;
+                    line-height:23px;
+                    color: #333333;
+                }
+                .demon-cell__content__btns{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    position: absolute;
+                    bottom:0;
+                    width:100%;
+                    view{
+                        font-size:12px;
+                        color: #666666;
+
+                    }
+                }
+            }
+        }
+
+        /*用户列表*/
+        &.user{
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            padding:30rpx;
+            .demon-cell__hd{
+                width:70rpx;
+                height:70rpx;
+                margin-right:20rpx;
+                border-radius:100%;
+                overflow: hidden;
+            }
+            .demon-cell__bd{
+                flex:1;
+                font-size:16px;
+                color: #333333;
+                font-weight: bold;
+            }
+            .demon-cell__ft{
+                i.iconfont{
+                    font-weight: bold;
+                    color: #969696;
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon-cell {{type}}">
+        <!--文字组合-->
+        <block wx:if="{{type=='text'}}">
+            <view class="demon-cell__title">
+                <block wx:if="{{title_icon !=''}}">
+                    <view class="demon-cell__title__icon">
+                        <i class="iconfont {{title_icon}}"></i>
+                    </view>
+                </block>
+                <view class="demon-cell__title__text">
+                    <slot name="title"></slot>
+                </view>
+            </view>
+            <view class="demon-cell__desc">
+                <block wx:if="{{desc_icon !=''}}">
+                    <view class="demon-cell__desc__icon">
+                        <i class="iconfont {{desc_icon}}"></i>
+                    </view>
+                </block>
+                <view class="demon-cell__desc__text" data-lineSize="2">
+                    <slot name="desc"></slot>
+                </view>
+            </view>
+        </block>
+
+        <!--图文组合-->
+        <block wx:if="{{type=='imgText'}}">
+            <view class="demon-cell__img">
+                <slot name="img"></slot>
+            </view>
+            <view class="demon-cell__content">
+                <slot name="content"></slot>
+            </view>
+        </block>
+
+        <!--文章组合-->
+        <block wx:if="{{type == 'activity'}}">
+            <view class="demon-cell__img">
+                <image class="activity__img" src="{{img}}"/>
+            </view>
+            <view class="demon-cell__content">
+                <view class="demon-cell__content__title" data-lineSize="2">
+                    {{title}}
+                </view>
+                <view class="demon-cell__content__btns">
+                    <slot></slot>
+                </view>
+            </view>
+        </block>
+
+        <!--用户列表-->
+        <block wx:if="{{type=='user'}}">
+            <view class="demon-cell__hd">
+                <!--<image src="{{img}}" mode="aspectFill" lazy-load="true"/>-->
+                <slot name="demon-cell__hd"></slot>
+            </view>
+            <view class="demon-cell__bd">
+                <!--{{nickName}}-->
+                <slot name="demon-cell__bd"></slot>
+            </view>
+            <view class="demon-cell__ft" :class="{'error' : status}">
+                <slot name="demon-cell__ft"></slot>
+                <!--<block wx:if="{{status}}">-->
+                    <!--删除此人-->
+                <!--</block>-->
+                <!--<block wx:if="{{!status}}">-->
+                    <!--批准加入-->
+                <!--</block>-->
+            </view>
+        </block>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {
+            type: {
+                type: String,
+                default: ''
+            },
+            title_icon: {
+                type: String,
+                default: ''
+            },
+            desc_icon: {
+                type: String,
+                default: ''
+            },
+            img: {
+                type: String,
+                default: ''
+            },
+            title: {
+                type: String,
+                default: ''
+            },
+            receiveNum: {
+                type: Number,
+                default: 0
+            },
+            shareNum: {
+                type: Number,
+                default: 0
+            },
+            readNum: {
+                type: Number,
+                default: ''
+            },
+            nickName: {
+                type: String,
+                default: ''
+            },
+            status: {
+                type: Number,
+                default: 0
+            }
+        }
+
+        data = {}
+
+        events = {}
+
+        methods = {}
+
+        onLoad() {
+
+        }
+    }
+</script>

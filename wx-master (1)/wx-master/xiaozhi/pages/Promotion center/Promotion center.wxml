@@ -1,0 +1,92 @@
+<!-- ===========推广中心======pages/Promotion center/Promotion center.wxml-->
+<view class='container' >
+  <!--头部信息-->
+  <view class="head-area">
+    <view class="head-info row">
+      <navigator url='../login/login'>
+        <view class="head-portrait">
+          <image class="name" src="{{avatarUrl}}"></image>
+        </view>
+      </navigator>
+      <view class='head-info column'>
+        <!-- <view class="headText">{{nickName}} <text style='font-size:28rpx;'>[{{display?Mer:"未实名"}}]</text> </view> -->
+         <view class="headText">{{nickName}} <text style='font-size:28rpx;'>[{{display?mer:"未登陆"}}]</text> </view>
+          <view wx:if="{{!display}}" class='row lr'>
+            <view><navigator url='../regist/regist'>注册</navigator></view>
+            <view><navigator url='../login/login'>登陆</navigator></view>
+          </view>
+        <view wx:if="{{display}}">
+          <view class='phone' >{{phone}}</view>
+          <view class='stati row'>
+            <view class='num'>还款中<text>{{num}}</text>笔</view>
+            <view class='money'>还款中金额<text>{{money}}</text>元</view>
+           
+          </view>
+        </view>
+      </view>
+    </view>  
+    <view class='logout' catchtap='catchLogout' wx:if="{{display}}">{{logout}}</view>
+  </view>
+
+  <!--content主体部分-->
+    <view class='content pos-r' >
+      <view class="content1 pos-r" >
+        <view style='padding-top:68rpx; color:#0298ff; font-size:32rpx;'><text>累计交易：</text></view>
+        <view class="accumulated">￥ <text>{{totalMoney?totalMoney:0}}</text></view>
+        <view class='cash' catchtap="onSkip" data-title="wallet">去提现</view>
+        <image class="top" src='../../images/promotion/new.png'></image>
+      </view>
+      <view class="content1">
+        <view class="promote">我的推广</view>
+           <!-- <block wx:for="{{key}}" wx:key="{{item.index}}">
+              <view class='pos-r'>
+                  <view class='left row pos-r'data-index="{{index}}" catchtap='ontip' data-id='1'>
+                    <image class="iconDiamond" src='{{key[index].src}}'></image>
+                    <text>{{key[index].grade}}</text>
+                    <text class='rate'>费率:{{key[index].rate}}</text>
+                  </view>
+                <view class='right'>{{key[index].num}}人</view>  
+              </view>  
+          </block> -->
+        <view class='pos-r bt'>
+          <view class='left row pos-r'data-index="0" catchtap='ontip' >
+            <image class="iconDiamond" src='../../images/areaLogo/province.png'></image>
+            <text>省级代理</text>
+            <text class='rate'>费率:0.55%</text>
+          </view>
+          <view class='right'>{{pro.length}}人</view>  
+          <image src='../../images/areaLogo/arrow.png' class='arrow'></image>
+        </view>  
+
+        <view class='pos-r bt'>
+          <view class='left row pos-r'data-index="1" catchtap='ontip' >
+            <image class="iconDiamond" src='../../images/areaLogo/city.png'></image>
+            <text>市级代理</text>
+            <text class='rate'>费率:0.61%</text>
+          </view>
+          <view class='right'>{{city.length}}人</view>  
+          <image src='../../images/areaLogo/arrow.png' class='arrow'></image>
+        </view>  
+
+        <view class='pos-r bt'>
+            <view class='left row pos-r'data-index="2" catchtap='ontip' >
+              <image class="iconDiamond" src='../../images/areaLogo/county.png'></image>
+              <text>县级代理</text>
+              <text class='rate' >费率:0.7%</text>
+            </view>
+          <view class='right'>{{count.length}}人</view>  
+          <image src='../../images/areaLogo/arrow.png' class='arrow'></image>
+        </view> 
+
+        <view class='pos-r bt'>
+          <view class='left row pos-r'data-index="3" catchtap='ontip' >
+            <image class="iconDiamond" src='../../images/areaLogo/member.png'></image>
+            <text>普通会员</text>
+            <text class='rate'>费率:1.0%</text>
+          </view>
+          <view class='right'>{{mer.length}}人</view> 
+          <image src='../../images/areaLogo/arrow.png' class='arrow'></image> 
+        </view>  
+      </view>
+    </view>
+</view>

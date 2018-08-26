@@ -1,0 +1,12 @@
+<scroll-view class="switch-tab" scroll-x="{{true}}" style="height:80rpx">
+  <view wx:for="{{props.tabs}}"
+    catchtap="handleTab"
+    wx:key="{{index}}" 
+    class="item {{index === props.index ? 'active' : ''}}"
+    style="{{'width: ' +  100 / props.tabs.length + '%'}}"
+    data-index="{{index}}">
+    <text
+      class="content">{{item}}
+    </text>
+  </view>
+</scroll-view>

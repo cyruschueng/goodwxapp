@@ -1,0 +1,18 @@
+<view class = "container-default">
+  <!-- tab-head\tab-head-item类写在app.wxss中，作为全局样式方便使用 -->
+  <view class="tab-head">
+      <view class="tab-head-item {{currentTab==0?'active':''}}" data-current="0" bindtap="switchNav">全部项目</view>
+      <view class="tab-head-item {{currentTab==1?'active':''}}" data-current="1" bindtap="switchNav">我管理的</view>
+  </view>
+  <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchHeadTab">
+    <swiper-item>
+      <scroll-view scroll-y="true" class="scroll-content">
+        <project-info-card bindtap="viewProject"></project-info-card>
+        <project-info-card></project-info-card>
+        <project-info-card></project-info-card>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item></swiper-item>
+  </swiper>
+  <button class="weui_btn_mini" type="primary" bindtap="createProject">新建项目</button>
+</view>

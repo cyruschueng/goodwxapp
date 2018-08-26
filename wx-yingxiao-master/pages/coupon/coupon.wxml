@@ -1,0 +1,57 @@
+<view class='container'>
+  <view class='top'></view>
+  <view class='header'>
+    <view wx:for="{{menu}}" wx:key='index' bindtap='selMenu' data-index='{{index}}'>
+      <text class='{{menuCurrent==index?"sel":""}}'>{{item}}</text>
+    </view>
+  </view>
+  <swiper style='height:{{height[heightCurrent]}}rpx' current='{{swiperCurrent}}' bindchange='changeCurrent' data-index='{{menuCurrent}}'>
+    <swiper-item >
+      <view class='board'>
+        <view class='coupon {{item.name=="0"?"shop":"online"}}' wx:if="{{item.isOverdate=='0'}}" wx:for='{{coupon}}' wx:key='index'>
+          <view class=''>
+            <view>{{type[item.name]}}</view>
+            <view>
+              <text>¥</text>
+              <text>{{item.num}}</text>       
+            </view> 
+          </view>
+          <view class='Right'>
+            <view class='tip' wx:if="{{overdate[index]=='1'}}">快过期</view>
+            <view class='demand'>{{item.demand}}</view>
+            <view class='info'>{{item.info}}</view>
+            <view class='time'>{{item.time}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{isNull=='1'}}" class='null'>
+        <image src='/pages/source/images/without.png'></image>
+        <view>您还没有优惠券</view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class='board'>
+        <view class='coupon overdate' wx:if="{{item.isOverdate=='1'}}" wx:for='{{coupon}}' wx:key='index'>
+          <view class=''>
+            <view>{{type[item.name]}}</view>
+            <view>
+              <text>¥</text>
+              <text>{{item.num}}</text>       
+            </view> 
+          </view>
+          <view class='Right'>
+            <view class='tip' wx:if="{{overdate[index]=='1'}}">快过期</view>
+            <view class='demand'>{{item.demand}}</view>
+            <view class='info'>{{item.info}}</view>
+            <view class='time'>{{item.time}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{isNull=='1'}}" class='null'>
+        <image src='/pages/source/images/without.png'></image>
+        <view>您还没有过期优惠券</view>
+      </view>             
+    </swiper-item>
+  </swiper>
+
+</view>

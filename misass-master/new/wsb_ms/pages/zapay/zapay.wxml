@@ -1,0 +1,37 @@
+<!--pages/zapay/zapay.wxml-->
+<view class='pay'>
+    <view class='pay_title'>
+          <view>请在<text>{{minute}}</text>分<text>{{second}}</text>秒内完成支付,逾期订单将自动取消</view>
+          <view>
+            <text>订单号:</text>
+            <text>{{num}}</text>
+          </view>
+          <view>
+            <text>商品名称:</text>
+            <text>{{name}}</text>
+          </view>
+    </view>
+    <view class='pay_content'>
+          <view>
+            <text>应付金额:</text>
+            <text>{{money}}</text>
+          </view>
+          <view class='pay_type'>
+            <view>
+                <icon class='iconfont icon-wx wxColor'></icon>
+                <text>微信支付</text>
+            </view>
+            <icon class='iconfont {{!_wxChange?"icon-checked":"icon-check"}}' bindtap='wxChange'></icon>
+          </view>
+          <view class='pay_type'>
+             <view>
+                <icon class='iconfont icon-ali aliColor'></icon>
+                <text>支付宝支付</text>
+            </view>
+            <icon class='iconfont {{_wxChange?"icon-checked":"icon-check"}}' bindtap='wxChange'></icon>
+          </view>
+    </view>
+    <view class='pay_footer' bindtap='payType'>
+       <button>确认支付</button>
+    </view>
+</view>

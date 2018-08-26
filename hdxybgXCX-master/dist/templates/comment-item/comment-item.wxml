@@ -1,0 +1,20 @@
+
+<template name="comment-item">
+<!-- 评论 --> 
+<view class='weui-flex comment-item' wx:for="{{ comments }}" wx:for-item="cmts" wx:key="{{ index }}" wx:if='{{ comments.length > 0 }}'>
+  <view>
+    <image class='avatar' src='{{ cmts.avatar }}'></image>
+  </view>
+  
+  <view class='weui-flex__item comment-text'>
+    <text>{{ cmts.name }}</text>
+    <view class='header-start-icon' style='float:right;'>
+      <block wx:for="{{ cmts.score }}" wx:for-item="score" wx:key="{{ index }}">
+      <image src='{{ score == "red" ? "../../images/start-red.png" : "../../images/start.png" }}'></image> 
+      </block>
+    </view> 
+    <view class='lit-text comment-text-desc'>{{ cmts.desc }}</view>
+  </view>
+
+</view>
+</template>

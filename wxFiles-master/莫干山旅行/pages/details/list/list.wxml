@@ -1,0 +1,24 @@
+<import src="../../../wxParse/wxParse.wxml"/> 
+<view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<view class="Page" wx:else>
+  <scroll-view scroll-y="true" class="list" style="height:{{scrollHeight}}px;">
+    <view class="header">
+      <image class="img" src="{{list_img}}" mode="aspectFill"></image>
+      <view class="title">{{list_title}}</view>
+    </view>
+    <view class="intro" wx:if="{{isContent}}">
+      <template is="wxParse" data="{{wxParseData:list_content.nodes}}"/>
+    </view>
+    <view class="intro" wx:else>{{list_intro}}</view>
+      
+      <block wx:for="{{detail_list}}" wx:key="*this">
+        <navigator url="{{'../../live/food/merchants/merchants?id='+item.id}}" class="detail_list" style="{{'background-image:url('+item.img+');'}}">
+         <view class="mask"></view>
+          <view class="title"> — {{item.title}} —</view>
+        </navigator>
+      </block>
+  </scroll-view>
+</view>

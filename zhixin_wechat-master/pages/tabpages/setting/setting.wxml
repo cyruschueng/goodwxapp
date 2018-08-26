@@ -1,0 +1,38 @@
+<!--setting.wxml-->
+
+<import src="../../common/bottom_tabbar.wxml" />
+
+<view class="container">
+    <scroll-view class='setting-page-scroll' scroll-y="true">
+
+        <view class='upper-box'>
+            <image class='userInfo-avatar-image' src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+            <view class="userInfo-name">
+                <text class="title">{{userInfo.nickName}}</text>
+            </view>
+        </view>
+
+        <view class='settings-container'>
+            <!-- 具体的每个条目 -->
+            <view wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="gray-space-small"></view>
+                <view class="setting-items-container" wx:for="{{item.list_tool}}" wx:key="{{index}}" wx:for-item="i" data-log="{{i.name}}" data-url="{{i.url}}" bindtap="goToPage">
+                    <view class="setting-item-box">
+                        <image class='setting-item-image' src="{{i.img}}" />
+                        <view class='setting-item-text'>
+                            <text class="title">{{i.name}}</text>
+                        </view>
+                    </view>
+
+                    <view style='padding-right:40rpx'>
+                        <image class='setting-item-image' src="../../image/arrows_square_right_64px.png"></image>
+                    </view>
+
+                </view>
+            </view>
+        </view>
+
+    </scroll-view>
+
+    <template is="bottom_tabBar" data="{{bottom_tabBar}}"/>
+</view>

@@ -1,0 +1,23 @@
+<template name="selectUser">
+  <view class="container" wx:if="{{showEditUser}}">
+    <view class="weui-cells weui-cells_after-title">
+      <block wx:if="{{list.length>0}}" wx:for="{{list}}" wx:key="{{item.idx}}" wx:for-index="idx">
+        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="selectUser" data-avatar="{{item.avatar}}" data-name="{{item.name}}">
+          <view class="weui-cell__hd">
+            <image src="{{item.avatar}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{item.name}}</view>
+        </view>
+      </block>
+      <block wx:if="{{list.length == 0}}">
+        <view class="flex_center" style="height:200rpx;" >
+          <view style="">
+            暂时还没成员呢
+          </view>
+        </view>
+      </block>
+    </view>
+    <button bindtap="edit" class="weui-btn" style="width: 80%;" type="primary">编辑成员</button>
+    <!-- <button catchtap="back" class="weui-btn" type="default" plain="true" style="width: 80%;">返回</button> -->
+  </view>
+</template>

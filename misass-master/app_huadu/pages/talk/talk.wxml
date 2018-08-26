@@ -1,0 +1,29 @@
+<!--pages/talk/talk.wxml-->
+<view class="container">
+  <view class="talk-box">
+    <view class="time-box">
+      <text class="time">18:00</text>
+    </view>
+
+    <block wx:for="{{messageList}}">
+      <view wx:if="{{item.wecha_id == wechaId}}"  class="talk-content-my">
+        <view class="words">
+          <text>{{item.value}}</text>
+        </view>
+        <image class="head" src="{{item.img}}"></image>
+      </view>
+      <view wx:if="{{item.wecha_id != wechaId}}" class="talk-content-he">
+        <image class="head" src="{{item.img}}"></image>
+        <view class="words">
+          <text>{{item.value}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="send-box">
+    <input bindinput='getValue' class="input" value="{{value}}"></input>
+    <view>
+      <image bindtap='sendMessage' class="send" src="../../img/send.png"></image>
+    </view>
+  </view>
+</view>

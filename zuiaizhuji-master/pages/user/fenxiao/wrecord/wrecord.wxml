@@ -1,0 +1,21 @@
+<!--pages/user/fen/wrecord/wrecord.wxml-->
+ <block wx:if="{{data_list.txlist == null}}">
+<view class="zanwu tc">
+  <text class="iconfont icon-kongbaiyemian"></text>
+  <view class="f18">您暂时还没有提现记录</view>
+</view>
+</block>
+<block wx:else>
+<view class="wrlist">
+<block wx:for="{{data_list.txlist}}">
+  <view class="gridXb wr-item flex">
+    <image src="{{data_list.headimgurl}}" class="avatar" mode="aspectFill"></image>
+    <view class="sub ml10">
+      <text class="f18 fr red">{{item.money}}</text>
+      <view class="big-font">提现</view>
+      <view class="linght"><text class="fr green">{{item.txstatus}}</text><text>{{item.txtime}}</text></view>
+    </view>
+  </view>
+</block>
+</view>
+ </block>

@@ -1,0 +1,21 @@
+<!--pages/tixian/tixian.wxml-->
+<view class="container">
+	<view class="nowAllMoney">
+		<view class="nowMoney">钱包当前余额：{{money}}元</view>
+		<view class="sunAll" bindtap='allMoney'>全部提现</view>
+	</view>
+	<view class="addMoney">
+		<view class="addTitle">	提现金额:</view>
+		<view class="charge-layout">
+			<view class="currency">￥	</view>
+			<input type="number" focus="" class="addNum" placeholder-class="addNumPlaceholder"
+			bindinput="bindKeyInput" placeholder="" value="{{_money}}" />
+		</view>
+	</view>
+  <navigator class="nextPageView" url="../notice/notice">
+		<view class="moneyDetail">充值提现规则说明</view>
+		<view class="headerIcon">	?</view>
+	</navigator>
+  <view class="nextRed">(提现收取5%的手续费)请至少提现1.06元</view>
+	<view class="onGoAddMoney" bindtap='tixian'>立即提现</view>
+</view>

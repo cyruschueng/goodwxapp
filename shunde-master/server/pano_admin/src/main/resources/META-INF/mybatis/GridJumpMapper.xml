@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vizen.sd.repository.mysql.mapper.GridJumpMapper">
+  <resultMap id="BaseResultMap" type="com.vizen.sd.repository.mysql.domain.GridJump">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="jump_mark" jdbcType="VARCHAR" property="jumpMark" />
+    <result column="jump_grid_id" jdbcType="BIGINT" property="jumpGridId" />
+    <result column="jump_grid_code" jdbcType="VARCHAR" property="jumpGridCode" />
+    <result column="jump_pano_id" jdbcType="VARCHAR" property="jumpPanoId" />
+    <result column="jump_pano_name" jdbcType="VARCHAR" property="jumpPanoName" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="grid_id" jdbcType="BIGINT" property="gridId" />
+    <result column="grid_code" jdbcType="VARCHAR" property="gridCode" />
+    <result column="projcet_id" jdbcType="BIGINT" property="projcetId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, jump_mark, jump_grid_id, jump_grid_code, jump_pano_id, jump_pano_name, position, 
+    grid_id, grid_code, projcet_id
+  </sql>
+  <select id="selectByExample" parameterType="com.vizen.sd.repository.mysql.domain.GridJumpCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from grid_jump
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.vizen.sd.repository.mysql.domain.GridJumpCriteria">
+    delete from grid_jump
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.vizen.sd.repository.mysql.domain.GridJump">
+    insert into grid_jump
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jumpMark != null">
+        jump_mark,
+      </if>
+      <if test="jumpGridId != null">
+        jump_grid_id,
+      </if>
+      <if test="jumpGridCode != null">
+        jump_grid_code,
+      </if>
+      <if test="jumpPanoId != null">
+        jump_pano_id,
+      </if>
+      <if test="jumpPanoName != null">
+        jump_pano_name,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="gridId != null">
+        grid_id,
+      </if>
+      <if test="gridCode != null">
+        grid_code,
+      </if>
+      <if test="projcetId != null">
+        projcet_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="jumpMark != null">
+        #{jumpMark,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpGridId != null">
+        #{jumpGridId,jdbcType=BIGINT},
+      </if>
+      <if test="jumpGridCode != null">
+        #{jumpGridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpPanoId != null">
+        #{jumpPanoId,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpPanoName != null">
+        #{jumpPanoName,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="gridId != null">
+        #{gridId,jdbcType=BIGINT},
+      </if>
+      <if test="gridCode != null">
+        #{gridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projcetId != null">
+        #{projcetId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vizen.sd.repository.mysql.domain.GridJumpCriteria" resultType="java.lang.Long">
+    select count(*) from grid_jump
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update grid_jump
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.jumpMark != null">
+        jump_mark = #{record.jumpMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jumpGridId != null">
+        jump_grid_id = #{record.jumpGridId,jdbcType=BIGINT},
+      </if>
+      <if test="record.jumpGridCode != null">
+        jump_grid_code = #{record.jumpGridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jumpPanoId != null">
+        jump_pano_id = #{record.jumpPanoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jumpPanoName != null">
+        jump_pano_name = #{record.jumpPanoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gridId != null">
+        grid_id = #{record.gridId,jdbcType=BIGINT},
+      </if>
+      <if test="record.gridCode != null">
+        grid_code = #{record.gridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projcetId != null">
+        projcet_id = #{record.projcetId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update grid_jump
+    set id = #{record.id,jdbcType=BIGINT},
+      jump_mark = #{record.jumpMark,jdbcType=VARCHAR},
+      jump_grid_id = #{record.jumpGridId,jdbcType=BIGINT},
+      jump_grid_code = #{record.jumpGridCode,jdbcType=VARCHAR},
+      jump_pano_id = #{record.jumpPanoId,jdbcType=VARCHAR},
+      jump_pano_name = #{record.jumpPanoName,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      grid_id = #{record.gridId,jdbcType=BIGINT},
+      grid_code = #{record.gridCode,jdbcType=VARCHAR},
+      projcet_id = #{record.projcetId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vizen.sd.repository.mysql.domain.GridJump">
+    update grid_jump
+    <set>
+      <if test="jumpMark != null">
+        jump_mark = #{jumpMark,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpGridId != null">
+        jump_grid_id = #{jumpGridId,jdbcType=BIGINT},
+      </if>
+      <if test="jumpGridCode != null">
+        jump_grid_code = #{jumpGridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpPanoId != null">
+        jump_pano_id = #{jumpPanoId,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpPanoName != null">
+        jump_pano_name = #{jumpPanoName,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="gridId != null">
+        grid_id = #{gridId,jdbcType=BIGINT},
+      </if>
+      <if test="gridCode != null">
+        grid_code = #{gridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projcetId != null">
+        projcet_id = #{projcetId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

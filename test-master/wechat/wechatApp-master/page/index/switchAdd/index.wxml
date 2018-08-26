@@ -1,0 +1,32 @@
+<view class="switchAdd">
+
+  <view  class="top">
+  
+    <view catchtap="location" class="city border"><text>{{add}}</text><image mode="scaleToFill" src="https://lingju360.natappvip.cc/miniapp/resources/image/add/s.png"></image></view>
+
+  </view>
+
+
+  <view class="add_ul">
+
+    <view catchtap="changeAdd" class="add_li ac {{ index == active ? 'aaa':'' }}" wx:for-items="{{ addList  }}" data-id="{{index}}">
+
+      <image wx:if="{{index != active}}" mode="scaleToFill" src="https://lingju360.natappvip.cc/miniapp/resources/image/add/a2.png"></image>
+      <image wx:if="{{index == active}}" mode="scaleToFill" src="https://lingju360.natappvip.cc/miniapp/resources/image/add/a.png"></image>
+
+      <view class="tit ac">{{item.busname}}</view>
+      <view class="t">{{item.address}}</view>
+
+      <view class="i_btn i_btn2">
+        <view class="text2" catchtap="setAdd" data-address="{{item.address}}" data-linkphone="{{item.linkphone}}" data-endTime="{{item.endTime}}" data-startTime="{{item.startTime}}" data-shopId="{{item.id}}" data-bizId="{{item.bizId}}" data-busname="{{item.busname}}">进入门店</view>
+      </view>
+
+      <view class="num">
+        {{item.distance}} <text>Km</text>
+      </view>
+
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,51 @@
+<!--pages/post/post.wxml-->
+<view class="container">
+  <form catchsubmit="formSubmit">
+    <input class="title" name="title" placeholder="来个醒目的标题" value="" maxlength="30" />
+    <textarea class="desc" name="content" placeholder="缤纷世界你我共享" value="" maxlength="500" />
+
+    <picker class="" bindchange="bindPickerChange" value="{{index}}" range="{{blogType}}">
+      <view class="type_tab">
+        标签：{{blogType[index]}}
+      </view>
+    </picker>
+
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title desc">添加图片</view>
+              <view class="weui-uploader__info">{{imageList.length}}/9</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files">
+                <block wx:for="{{imageList}}" wx:for-item="image">
+                  <view class="weui-uploader__file">
+                    <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="column_view column_left location">
+      <input class="title" name="shopName" placeholder="店铺名称" value="" maxlength="30" />
+    </view>
+
+    <view class="column_view column_left location" catchtap="catchMap">
+      <image src="{{location ? '/img/market1.png' : '/img/market.png'}}" mode="aspectFill" class="location_icon" />
+      <text class="">{{location ? location.name + "\n经度:" + location.longitude + " \t 纬度:" + location.latitude : '店铺所在位置'}}</text>
+    </view>
+
+    <view class="">
+      <button type="primary" formType="submit">发表</button>
+    </view>
+  </form>
+</view>

@@ -1,0 +1,67 @@
+<view class="topBar">
+    <view class="share-list list-btn" bindtap="chooseTab" data-tab="share">
+        <view class="share-btn {{activeTab === 'share' ? 'active-btn' : ''}}">本月分享榜</view>
+    </view> 
+    <view class="master-list list-btn" bindtap="chooseTab" data-tab="master">
+        <view class="master-btn {{activeTab === 'master' ? 'active-btn' : ''}}">本月达人榜</view>
+    </view>
+</view>
+
+<view class="myInfo list-item" wx:if="{{!!myInfo.avatarUrl}}">
+    <image class="word-me" src="../../../images/word-me.png"></image>
+    <image class="headImg" src="{{myInfo.avatarUrl ? myInfo.avatarUrl : 'https://image.qunmee.com/wxapp/vote1487761693548.jpg'}}" mode="aspectFill"></image>
+    <image class="leftBottomSide" src="../../../images/leftBottomSide.png"></image>
+    <image class="rightTopSide" src="../../../images/rightTopSide.png"></image>
+    <view class="userName">{{myInfo.nickName}}</view>
+    <view class="shareTimes-wrapper" wx:if="{{activeTab === 'share'}}">分享次数<text class="shareTimes">{{myInfo.shareCount}}</text></view>
+    <view class="shareTimes-wrapper" wx:elif="{{activeTab === 'master'}}">采纳次数<text class="shareTimes">{{myInfo.acceptCount}}</text></view>
+</view>
+
+<view class="rank-list">
+    <block wx:for="{{rankList}}" wx:key="{{index}}" wx:for-item="listItem">
+        <view class="list-item list-item-rank" wx:if="{{activeTab === 'share'}}">
+            <image wx:if="{{index < 3}}" class="rank-img" src="{{'../../../images/rank' + index + '.png'}}"></image>
+            <view class="rank-num" wx:if="{{index > 2}}">{{index + 1}}</view>
+            <image class="headImg" src="{{listItem.avatarUrl ? listItem.avatarUrl : 'https://image.qunmee.com/wxapp/vote1487761693548.jpg'}}" mode="aspectFill" mode="aspectFill"></image>
+            <view class="userName">{{listItem.nickName}}</view>
+            <view class="shareTimes-wrapper">分享次数<text class="shareTimes">{{listItem.shareCount}}</text></view>
+        </view>
+        <view class="list-item list-item-rank" wx:elif="{{activeTab === 'master'}}">
+            <image wx:if="{{index < 3}}" class="rank-img" src="{{'../../../images/rank' + index + '.png'}}"></image>
+             <view class="rank-num" wx:if="{{index > 2}}">{{index + 1}}</view>
+            <image class="headImg" src="{{listItem.avatarUrl}}" mode="aspectFill"></image>
+            <view class="userName">{{listItem.nickName}}</view>
+            <view class="shareTimes-wrapper">采纳次数<text class="shareTimes">{{listItem.acceptCount}}</text></view>
+        </view>
+    </block>
+    <view style="text-align:center" wx:if="{{!!myInfo.avatarUrl && empty}}">
+        <image class="noContents" src="{{dataEmpty}}"></image>
+        <view class="noText"><text>暂时还没有排名~</text></view>
+    </view>
+</view>
+
+<view class="shareRules-wrapper" bindtap="showRules">
+    <image class="shareRules" src="../../../images/shareRules.png"></image>
+</view>
+
+<view class="rule-detail-wrapper" hidden="{{ifShowRule}}">
+        <text class="rule-title">问技规则</text>
+        <text class="rule-detail">1.读取自然月达人分享总次数及被采纳总次数。评选本月1日起到至今时间内前20名达人。\n
+            2.达人分享总次数及被采纳总次数相同者按达标时间先后排序。\n
+            3.同一问题分享次数为1，重复分享不累计。\n
+            4.排行榜前20名将获得问技达人签约，发放荣誉奖章并签署长期合作。\n
+        </text>
+        <view class="rule-btn1" bindtap="hideRules">我知道了</view>
+        <view class="rule-close-wrapper" bindtap="hideRules">
+            <image class="rule-close" src="../../../images/wrong.png"></image>
+        </view>
+</view>
+<view class="rule-wrapper-flex" hidden="{{ifShowRule}}"></view>
+
+
+
+
+
+
+
+ 

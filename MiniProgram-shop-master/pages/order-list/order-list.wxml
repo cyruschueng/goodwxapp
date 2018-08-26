@@ -1,0 +1,39 @@
+<!--pages/order-List/order-list.wxml-->
+<view class='container'>
+  <view class='navbar'>
+    <view class="navbar-item {{currentTab==index?'active':''}}" wx:for='{{navbar}}' wx:key='list_code' data-id='{{index}}' bindtap='navbar'>{{item}}</view>
+  </view>
+  <view class='margin-top'></view>
+  <view class='order-list' wx:for='{{lists}}' wx:key='code' wx:for-item='list' data-id='{{list.id}}' data-index='{{index}}'>
+    <view class='order-hd'>
+      <view class='time'>{{list.add_time}}</view>
+      <view class='state'>{{list.zhuangtai}}</view>
+    </view>
+    <view class='goods-list' bindtap='order_details' data-id='{{list.id}}' data-nopay='{{list.orderState}}'>
+      <view class='goods-items' wx:for='{{list.goods}}' wx:key='code' wx:for-item='item'>
+        <image class='goods-img' src='{{item.thumb}}'></image>
+        <view class='goods-text'>
+          <view class='goods-title'>{{item.goods_name}}</view>
+          <view class='goods-num'>
+            <view class='goods-price'>￥{{item.price}}</view>
+            <view class='sale-num'>X{{item.num}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='total-price'>合计：
+      <text>￥{{list.total_price}}</text>
+    </view>
+    <view class='order-manage' wx:if='{{list.orderState}}'>
+      <view class='cancel-order' bindtap='deleteOrder' data-id='{{list.id}}' data-index='{{index}}'>取消订单</view>
+      <view class='toPay' data-id='{{list.id}}' bindtap='submitPay'>支付</view>
+    </view>
+    <form bindsubmit="formSubmit" data-id='{{list.id}}' wx:if='{{list.isMessage}}'>
+      <view class='message'>
+        <textarea name='content' placeholder='请输入您对本次交易的评论'></textarea>
+        <button data-id='{{list.id}}' form-type='submit'>提交</button>
+      </view>
+    </form>
+  </view>
+  <view class='section-ft'>已经没有新数据了</view>
+</view>

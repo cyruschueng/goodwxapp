@@ -1,0 +1,12 @@
+<!--pages/mien/mien_list/mien_list.wxml-->
+<view class="list-content">
+  <view class="list flex gridXb" wx:for="{{data}}" wx:key="*this">
+    <image class="left-img" src="{{hostUrl}}{{item.cover}}" mode="aspectFill "></image>
+    <view class="right-content " catchtap="onNavigateTap" data-url="article?id={{item.id}} ">
+      <view class="lineText f16 ">{{item.title}}</view>
+      <view class="text-content mt5 lineText2 grey ">{{item.description}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="nothing tc grey " hidden="{{hasMore}}">没有更多了</view>

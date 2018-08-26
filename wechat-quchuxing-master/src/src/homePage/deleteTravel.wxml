@@ -1,0 +1,73 @@
+<view class="title">{{ orders.startTime1 }} 行程已结束</view>
+<view class="details">
+	<view class="location_list">
+		<view class="list_icon">
+			<image src="../../images/icon_end@3x.png"></image>
+		</view>
+		<block wx:if="{{ type == 'owners' }}">
+			<view class="list_address">{{ orders.startAddress }}</view>
+		</block>
+		<block wx:if="{{ type == 'passenger' }}">
+			<view class="list_address">{{ orders.startAddress }} 上车</view>
+		</block>
+	</view>
+	<view class="location_list">
+		<view class="list_icon">
+			<image src="../../images/icon_star@3x.png"></image>
+		</view>
+		<block wx:if="{{ type == 'owners' }}">
+			<view class="list_address">{{ orders.endAddress }}</view>
+		</block>
+		<block wx:if="{{ type == 'passenger' }}">
+			<view class="list_address">{{ orders.endAddress }} 下车</view>
+		</block>
+	</view>
+	<view class="travel_info">
+		<view class="seats">乘车人数 <text class="text_style">{{ orders.seats }}</text></view>
+		<block wx:if="{{ type == 'owners' }}">
+			<view class="price">收入: <text class="text_style">{{ orders.price }}</text></view>
+		</block>
+		<block wx:if="{{ type == 'passenger' }}">
+			<view class="price">实付款: <text class="text_style">{{ orders.price }}</text></view>
+		</block>
+	</view>
+</view>
+<view class="commpany_info">
+	<block wx:if="{{ type == 'passenger' }}">
+		<view class="commpany_info_title">车主</view>
+		<view class="commpany_info_details">
+			<view class="commpany_img">
+				<image src="{{ orders.driverPicture }}"></image>
+			</view>
+			<view class="commpany_details">
+				<view class="name">{{ orders.driverName }}</view>
+				<view class="sexandtime">
+					<view>34岁</view>
+					<view>{{ orders.lastTimeOnline }}</view>
+				</view>
+				<block wx:if="{{ orders.carNumber != null ||  orders.car != null }}">
+					<view class="car_code">{{ orders.carNumber }} {{ orders.car }}</view>
+				</block>
+			</view>
+		</view>
+	</block>
+	<block wx:if="{{ type == 'owners' }}">
+		<view class="commpany_info_title">乘客</view>
+		<view class="passenger_list" wx:for-items="{{ passenger }}" wx:key="{{ index }}">
+			<view class="list_left">
+				<view class="passenger_img">
+					<image src="{{ item.passengerPicture }}"></image>
+				</view>
+				<view class="passenger_info">
+					<view class="nameofnum">{{ item.nickName }}<text>{{ item.bookSeats }}人乘车</text></view>
+					<view class="passenger_time">{{ item.startTime }} 上车</view>
+				</view>
+			</view>
+			<view class="list_right">实付款: {{ item.price }}</view>
+		</view>
+	</block>
+</view>
+<view class="foot_btn">
+	<button class="customer_service" bindtap="callCustomerService">客服</button>
+	<button class="delete" bindtap="{{ type == 'owners' ? 'deleteOverTraveId' : 'passengerDeleteTravel' }}">删除行程</button>
+</view>

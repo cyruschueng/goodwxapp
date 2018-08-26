@@ -1,0 +1,46 @@
+<import src="../item/templateItem.wxml" />
+<import src="../item/emptyList.wxml" />
+<import src="/zanui/tab/index.wxml" />
+<import src="../../wux/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view class="container">
+    <!--<template is="zan-tab" data="{{tab: tabs, componentId: 'tabs'}}"></template>-->
+    <navigator url="{{url}}" wx:if="{{hasDetail}}" style="margin: 25.7rpx 0 12.7rpx 0;" class="flex_row_center">
+        <view class="flex_center" style="position:relative;height: 80rpx;border-radius: 10rpx;background: #383a39;width: 300rpx;">
+            <view style="color:#fff;font-size:13px;">{{text}}</view>
+            <view class="zan-arrow" style=""></view>
+            <view style="clear: both;"></view>
+        </view>
+    </navigator>
+    <navigator url="/pages/webview/webview?key={{key}}" wx:else style="margin: 25.7rpx 0 12.7rpx 0;" class="flex_row_center">
+        <view class="flex_center" style="position:relative;height: 80rpx;border-radius: 10rpx;background: #383a39;width: 300rpx;">
+            <view style="color:#fff;font-size:13px;">使用帮助</view>
+            <view class="zan-arrow" style=""></view>
+            <view style="clear: both;"></view>
+        </view>
+    </navigator>
+
+
+    <view style="padding-top: 13rpx;" class="grid-view">
+        <view  class="bigItem" bindtap="selectTemplate" id="0">
+            <view>
+                <image class="avatar" src="http://icons.maiyizhi.cn/tianjian.png{{gridPicSize}}" mode="aspectFill"></image>
+            </view>
+            <view class="name">从空白创建</view>
+        </view>
+        <block wx:for="{{list}}" wx:key="{{item.idx}}" wx:for-index="idx">
+            <template is="big-item-with-icon"  data="{{item: item, gridPicSize: gridPicSize}}" />
+        </block>
+    </view>
+    <!-- FooterView -->
+    <view class="">
+        <view wx:if="{{hasMore}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+        <view wx:elif="{{list.length>3}}" class="weui-loadmore weui-loadmore_line">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">更多模板正在路上...</view>
+        </view>
+    </view>
+
+</view>

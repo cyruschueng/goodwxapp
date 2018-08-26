@@ -1,0 +1,69 @@
+<view class="takeittit panel-between ">
+<view style='width:100%'>
+  <view class="sreach panel-start item-center" style='width:100%'>
+    <image class="icon-md margin-left-lg" src="/img/sear.png"></image>
+    <input  class="font-md margin-left-sm" bindinput='search'  placeholder="店铺名称" />
+  </view>
+  </view>
+  
+</view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+
+<view class="panel font-lg bottom-line" wx:if="{{nearShop.length > 0}}">
+  离您最近
+</view>
+<view class="panel bottom-line shop-list panel-between" data-index="{{nearShop[0].id}}" bindtap="navToShop" wx:if="{{nearShop.length > 0}}">
+  <image class="shop-img" src="{{url+nearShop[0].shopimage}}" mode="aspectFill"></image>
+  <view class="shop-panel">
+    <view class="blod font-lg ellipsis">{{nearShop[0].shopname}}</view>
+    <view class="font-md margin-top-xs">距您: {{nearShop[0].distance}}</view>
+    <view class="margin-top-xs shop-con panel-start">
+      <view class="item bg-user font-xs">会</view>
+      <view class="item bg-filter font-xs">减</view>
+      <view class="item bg-inbox font-xs">折</view>
+    </view>
+    <view class="panel-start margin-top-xs">
+      <image mode="aspectFill" src="/img/location.png" class="icon-lg"></image>
+      <view class="font-sm font-default ellipsis margin-left-xs" style="width:350rpx">{{nearShop[0].shopaddresscity}}{{nearShop[0].shopaddressdistrict}}{{nearShop[0].shopaddressstreet}}{{nearShop[0].shopaddressstreetNumber}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="panel font-lg bottom-line margin-top-sm" wx:if="{{nearShop.length > 1}}">
+  其他门店
+</view>
+<view class="panel bottom-line shop-list panel-between" wx:for="{{nearShop}}" wx:if="{{nearShop.length > 1 && index > 0}}" data-index="{{item.id}}" bindtap="navToShop">
+  <image class="shop-img" src="{{url+item.shopimage}}" mode="aspectFill"></image>
+  <view class="shop-panel">
+    <view class="blod font-lg ellipsis">{{item.shopname}}</view>
+    <view class="font-md margin-top-xs">距您: {{item.distance}}</view>
+    <view class="margin-top-xs shop-con panel-start">
+      <view class="item bg-user font-xs">会</view>
+      <view class="item bg-filter font-xs">减</view>
+      <view class="item bg-inbox font-xs">折</view>
+    </view>
+    <view class="panel-start margin-top-xs">
+      <image mode="aspectFill" src="/img/location.png" class="icon-lg"></image>
+      <view class="font-sm font-default ellipsis margin-left-xs" style="width:350rpx">{{item.shopaddresscity}}{{item.shopaddressdistrict}}{{item.shopaddressstreet}}{{item.shopaddressstreetNumber}}</view>
+    </view>
+  </view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && nearShop.length != 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && nearShop.length == 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">没有搜索到相关店铺</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && nearShop.length == 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">附近没有店铺</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

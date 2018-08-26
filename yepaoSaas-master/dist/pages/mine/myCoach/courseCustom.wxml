@@ -1,0 +1,52 @@
+<!--pages/myCoach/courseCustom.wxml-->
+
+<view class='bg-view'>
+  
+  <!-- 周历 -->
+  <view class='weui-flex calendar-bgview'>
+    <view class='weui-flex__item' wx:for='{{ weekData }}' wx:key='{{ index }}'>
+      <!-- 周 -->
+      <view>{{ item.week }}</view>
+      <!-- 日期 -->
+      <view class="{{ item.selected ? 'today__item' : 'day__item' }}" data-yearmonthday='{{ item.yearMonthDay }}' id='{{ index }}' bindtap='bindCalendarTodayTap'>{{ item.day }}</view>
+    </view>
+  </view>
+
+  <!-- 级别 -->
+  <view class='weui-flex level-view'>
+    <view class='weui-flex__item' wx:for='{{ levelItem }}' wx:key='{{ index }}'>
+      <view class='course-btn-item' id='{{ index }}' bindtap='bindCourseBtnTap'>
+        <view class='course-btn-icon' style='{{ item.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
+          <image hidden='{{ !item.selected }}' src='../../../images/icon/checked.png'></image>
+        </view>
+        <text>{{ item.level }}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 全身定制 -->
+  <view class='personal-view' >
+    <!-- btn -->
+    <view class='personal-btn-view'>
+      <!-- 全身 -->
+      <block wx:for='{{ bodyItem }}' wx:key='{{ index }}'>
+      <view class='course-btn-item {{ item.styles }}' id='{{ index }}' bindtap='bindCourseBtnItemTap'>
+        <view class='course-btn-icon' style='{{ item.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
+          <image hidden='{{ !item.selected }}' src='../../../images/icon/checked.png'></image>
+        </view>                        
+        <text>{{ item.body }}</text>
+      </view>
+      </block>
+    
+    </view>
+
+    <!-- bg img -->
+    <image class='personal-bgimg' src='{{ muscleManImg }}'></image>
+
+    <!-- foot-view -->
+    <view class='foot-view' bindtap='bindMakeUpTap'>{{ footBtnTitle }}</view>
+
+  </view>
+
+
+</view>

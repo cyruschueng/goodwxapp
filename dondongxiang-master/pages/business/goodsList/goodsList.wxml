@@ -1,0 +1,47 @@
+<view class="search-box">
+  <view class="search-input">
+    <image class="search-icon" src="/images/business/shop/icon_normal_search.png"></image>
+    <view class="input-block">
+      <input bindinput='inputvalue' type='text' placeholder='输入你想搜索的产品名'></input>
+    </view>
+  </view>
+</view>
+<view class="filter-box">
+  <view class="filter-item">
+      <text class='item-text'>综合</text>
+  </view>
+  <view class="filter-item">
+      <text class='item-text'>销量</text>
+  </view>
+  <view class="filter-item">
+      <text class="item-text item-price">价格</text>
+  </view>
+  <view class="filter-item active" bindtap='changeActive'>
+      <text class="item-text item-sec">筛选</text>
+  </view>
+</view>
+<view class="goods-box">
+  <view class="relative-box">
+
+      <view hidden='{{selectlistshow}}' bindtap='selectlisthide' class='selectlist-hide'></view>
+      <view hidden='{{selectlistshow}}' class='selectlist'>
+          <block wx:for="{{classlist}}" wx:key="">
+              <view data-id='{{item.cat_id}}' bindtap='classtab' class='col-list'>{{item.cat_name}}</view>
+          </block>
+      </view>
+
+
+      <view class="goods-list">
+        <block wx:for="{{goodslist}}" wx:key="">
+          <view class="goods-item" data-index="{{item.goods_id}}" bindtap="goodsDetail">
+            <view class="goods-item-block">
+              <image src="{{item.img_url}}" style='height:190px;'></image>
+              <view class="goods-title">{{item.goods_name}}</view>
+              <view class="goods-price">￥{{item.price}}/台</view>
+            </view>
+          </view>
+        </block>
+        <view class="load-more" hidden='{{loadtext}}'>没有更多数据</view>
+      </view>
+  </view>
+</view>

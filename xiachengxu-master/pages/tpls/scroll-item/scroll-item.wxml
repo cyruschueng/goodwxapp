@@ -1,0 +1,16 @@
+<import src="../foot/foot-item-tpl.wxml" />
+<import src="../redpack/redpack.wxml" />
+<import src="../nextInfo/index.wxml" />
+<import src="../order/order-tpl.wxml" />
+
+
+<template name='scroll-item'>
+  <scroll-view scroll-y catchscrolltolower='{{hasMore ? "loadMoreData" : ""}}'>
+    <block wx:for="{{data}}" wx:key="index" wx:for-item="p">
+      <template wx:if='{{type=="wallet"}}' is="redpack" data="{{...p}}"></template>
+      <!--绑定事件不能直接在 template 上绑定，可以嵌套一层view来绑定-->
+      <template wx:else is="foot-item" data="{{...p, type, from}}"></template>
+    </block>
+    <template wx:if='{{type!="wallet"}}' is='next-info' data='{{hasMore}}'></template>
+  </scroll-view>
+</template>

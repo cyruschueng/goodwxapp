@@ -1,0 +1,88 @@
+<view class="container">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-section-title center">
+        <text>上下左右滚动</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view scroll-y scroll-x style="height: 300rpx;">
+          <view style="width:1000rpx" class="scroll-view-item demo-text-1"></view>
+          <view class="scroll-view-item demo-text-2"></view>
+          <view class="scroll-view-item demo-text-3"></view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title center">
+        <text>手动设置竖向滚动条位置</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view scroll-y scroll-x scroll-top="{{dyncData['scrollTop1']}}" scroll-left="{{dyncData['scrollLeft1']}}" style="height: 300rpx;">
+          <view style="width:1000rpx" class="scroll-view-item demo-text-1"></view>
+          <view class="scroll-view-item demo-text-2"></view>
+          <view class="scroll-view-item demo-text-3"></view>
+        </scroll-view>
+      </view>
+      <view class="weui-btn-area">
+        <view class="weui-flex">
+          <view class="weui-flex__item center">
+            <button data-name="scrollTop1" bindtap="plusDyncData" class="weui-btn mini-btn" size="mini">横向自动</button>
+          </view>
+          <view class="weui-flex__item  center">
+            <button data-name="scrollLeft1" bindtap="plusDyncData" class="weui-btn mini-btn" size="mini">竖向自动</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title center">
+        <text>滚动到视图</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view scroll-y enable-back-to-top scroll-into-view="{{dyncData['scrollIntoView1']}}" scroll-with-animation style="height: 300rpx;">
+          <view class="scroll-view-item demo-text-1"></view>
+          <view class="scroll-view-item demo-text-1"></view>
+          <view class="scroll-view-item demo-text-1"></view>
+          <view class="scroll-view-item demo-text-1"></view>
+          <view id="scrollIntoView1" class="scroll-view-item demo-text-2"></view>
+          <view class="scroll-view-item demo-text-3"></view>
+        </scroll-view>
+      </view>
+      <view class="weui-btn-area">
+        <view class="weui-flex">
+          <view class="weui-flex__item center">
+            <button data-name="scrollIntoView1" data-value="scrollIntoView1" bindtap="setDyncData" class="weui-btn mini-btn" size="mini">一下滚动到倒数第二个子组件</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title center">
+        <text>Vertical Scroll\n纵向滚动，带底、顶部滚动测试</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view deltaY="10" scroll-y style="height: 300rpx;" bindscrolltoupper="scrollToSide" bindscrolltolower="scrollToSide" bindscroll="scroll">
+          <view id="demo1" class="scroll-view-item demo-text-1"></view>
+          <view id="demo2" class="scroll-view-item demo-text-2"></view>
+          <view id="demo3" class="scroll-view-item demo-text-3"></view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title center">
+        <text>Horizontal Scroll\n横向滚动</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view class="scroll-view_H" scroll-x bindscroll="scroll" style="width: 100%">
+          <view id="demo1" class="scroll-view-item_H demo-text-1"></view>
+          <view id="demo2" class="scroll-view-item_H demo-text-2"></view>
+          <view id="demo3" class="scroll-view-item_H demo-text-3"></view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,92 @@
+<import src="../tpls/activity/activity.wxml" />
+<import src="../tpls/products/products-tpl.wxml" />
+<import src="../tpls/redpack-info/redpack-info.wxml" />
+<import src="../tpls/tip-info/tip.wxml" />
+
+
+<view class='container redpack'>
+  <view class='redpack-top'>
+    <image src='../../images/icon/top.png' mode='aspectFill'></image>
+    <view class='content'>
+      <view class='user-list'>
+        <view class='user-list-item'>
+          <image src='../../images/icon/logo.png'></image>
+          <view class='own'>团长</view>
+        </view>
+        <view class='user-list-item' wx:for='{{existList}}' wx:key='index'>
+          <image src='../../images/icon/logo.png'></image>
+        </view>
+        <view class='empty' wx:for='{{remainList}}' wx:key='index'>?</view>
+      </view>
+      <view wx:if='{{!complete}}'>
+        <view class='info'>还差{{remainList.length}}人即可瓜分50元红包，快邀好友来拆</view>
+        <view class='time'>{{remainMill}}后结束</view>
+      </view>
+      <view class='result' wx:else>
+        <view wx:if='{{hasMe}}'>
+          <view class='result-title'>恭喜你，已成功分到红包~</view>
+          <view class='result-wrapper'>
+            <image src='../../images/icon/completeback.png' mode='aspectFit'></image>
+            <view class='result-detail'>
+              <view>恭喜你获得：</view>
+              <view class='bonus'>现金红包￥20元</view>
+              <view class='btn'>去往我的钱包查看</view>
+            </view>
+          </view>
+        </view>
+        <view wx:else>
+          <view class='result-title'>很遗憾瓜分红包失败</view>
+          <view class='info'>2017/12/07 10:56:34失败</view>
+        </view>
+      </view>
+      <view class='share' wx:if='{{!complete}}'>
+        <!-- 如果这个拼团里的人有我则显示邀请微信好友否则则是一起拆红包  -->
+        <view wx:if='{{hasMe}}'>
+          <image src='../../images/icon/wechat.png' mode='aspectFit'></image>
+          邀请微信好友一起拆
+        </view>
+        <view wx:else catchtap='insertCampaign'>一起拆红包</view>
+      </view>
+      <view wx:if='{{!isOwn || complete}}' class='newpack' catchtap='addCampaign'>拆一个新红包</view>
+    </view>
+  </view>
+  <view wx:if='{{complete}}' class='result-list'>
+    <text class='list-title'>看好友手气</text>
+    <view class='list-item' wx:for='{{userList}}' wx:key='index'>
+      <view class='list-item-user'>
+        <image src='{{item.avatarUrl}}' mode='aspectFill'></image>
+        {{item.nickName}}
+      </view>
+      <view class='item-bonus'>
+        {{item.bonus}}
+        <view wx:if='{{item.isBest}}' class='best'>
+          <image src='/images/icon/phone.png' mode='aspectFill'></image>
+          手气最佳
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- <view class='recommend'>
+    <view class='recommend-title'>推荐商品</view>
+    <template is='products' data='{{productsArr: products}}'></template>
+  </view> -->
+  <view class='rule' bindtap='showRules'>
+    活动规则
+  </view>
+  <view class='rule-container' wx:if='{{isShowRule}}' catchtap='closeRule'>
+    <view class='rule-wrapper'>
+      <view class='close-btn'>
+        <image src='/images/icon/close.png' mode='aspectFill'></image>
+      </view>
+      <view class='rule-content'>
+        <view class='rule-title'>拆红包规则</view>
+        <view class='rule-item' wx:for='{{ruleList}}' wx:key='key'>
+          {{item}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--得到红包提示  -->
+  <template wx:if='{{showRedPackInfo}}' is='redpack' data='{{num:3}}'></template>
+  <template wx:elif='{{isShowTip}}' is='tip-info' data='{{content: tipInfo}}'></template>
+</view>

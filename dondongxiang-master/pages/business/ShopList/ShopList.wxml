@@ -1,0 +1,63 @@
+<!--pages/business/ShopList/ShopList'.wxml-->
+<view class='search-block'>
+    <image class='searchmap' bindtap='getuserloation' src='/images/main/config/icon_distance.png'></image>
+    <view class='search-input'>
+        <image class='sea-icon' src='/images/business/shop/icon_normal_search.png'></image>
+        <input class='text' bindinput='getsearch' placeholder='输入商家名，品类或商圈' type='text'></input>
+    </view>
+    <view class='search-data'>
+        <view class='col-tab'>
+            <text class='text'>全部</text>
+            <image class='icon' src='/images/business/shop/icon_filter_arrow.png'></image>
+        </view>
+        <view class='col-tab'>
+            <text class='text'>附近</text>
+            <image class='icon' src='/images/business/shop/icon_filter_arrow.png'></image>
+        </view>
+        <view class='col-tab'>
+            <text class='text'>智能排序</text>
+            <image class='icon' src='/images/business/shop/icon_filter_arrow.png'></image>
+        </view>
+        <view class='col-tab'>
+            <text class='text'>筛选</text>
+            <image class='icon' src='/images/business/shop/icon_filter_arrow.png'></image>
+        </view>
+    </view>
+</view>
+<view class='row-view'>
+  <block wx:for="{{shoplist}}" wx:key="">
+    <view data-index="{{item.shop_id}}" class='row-list' bindtap='viewMoreGoods'>
+      <view class='col-xs-8'>
+          <view class='shopimg'><image src='{{item.img_url}}'></image></view>
+          <view class='col-body'>
+              <view class='name'>{{item.name}}</view>
+              <view class='shopinfo'>
+                  <view class='goodicon'>
+                      <image src='/images/friends/icon_home_favor.png'></image>
+                      <image src='/images/friends/icon_home_favor.png'></image>
+                      <image src='/images/friends/icon_home_favor.png'></image>
+                      <image src='/images/friends/icon_home_favor.png'></image>
+                      <image src='/images/friends/icon_home_favor.png'></image>
+                  </view>
+                  <text class='mean'>￥{{item.shop_grade}}/人</text>
+              </view>
+              <view class='xs-info'>
+                  <text style='margin-right:10px;'>月销 {{item.per_consumption}}</text>
+                  <text>赞 {{item.lovers}}</text>
+              </view>
+              <view class='pay-info'>
+                  <text class='mag'>买</text>
+                  <text class='pyif'>买单立减8折</text>
+              </view>
+          </view>
+      </view>
+      <view class='col-xs-2'>
+          <text>{{item.address}}</text>
+          <text class='map'>551m</text>
+      </view>
+    </view>
+  </block>
+  <view class='row-list' hidden='{{alldata}}' style='text-align:center'>
+      <text>没有更多数据</text>
+  </view>
+</view>

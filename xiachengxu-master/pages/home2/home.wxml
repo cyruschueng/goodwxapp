@@ -1,0 +1,158 @@
+<import src="../tpls/products/products-tpl.wxml" />
+<import src="../tpls/products/products-tpl-simple.wxml" />
+<import src="../tpls/nextInfo/index.wxml" />
+<import src="../tpls/activity/activity.wxml" />
+
+
+<view class='container indexContainer' hidden='{{!loadingHidden}}'>
+  <view class='degree' wx:if='{{info.state && info.state != 100}}' catchtap='completeInformation'>
+    <text>您的资料完善度是{{info.state}}%</text>
+    <view>
+      <text>点击完善</text>
+      <image src='/images/icon/arrow@right.png' mode='aspectFit'></image>
+    </view>
+  </view>
+  <view class='header'>
+    <view class='store-desc'>
+      <image src='{{storeInfo.storeBoardContentList[0].mediaUrl}}' mode='aspectFill'></image>
+      <view class='store-info-wrapper'>
+        <view class='store-info'>
+          <view class='store-info-left'>
+            <image src='{{storeInfo.storeLogo}}' mode='aspectFill'></image>
+            <view class='store-info-left-name'>
+              <text>{{storeInfo.storeName}}</text>
+              <text class='store-name'>{{storeInfo.brandName}}</text>
+            </view>
+          </view>
+          <form class='attention' bindsubmit='attentionTap' report-submit='true'>
+            <button class='form_button' form-type='submit'>
+              <text wx:if='{{!storeInfo.attenStatus}}'>+ 关注</text>
+              <text wx:else>已关注</text>
+            </button>
+          </form>
+        </view>
+      </view>
+
+      <!-- <view class='store-introduce'>
+        <view class='{{isCollapse?"text-slice":""}}'>{{storeInfo.storeIntro}}</view>
+        <form report-submit class='collapse' bindsubmit='collapse'>
+          <button class='form_button' form-type='submit'>
+            <view class='spread' wx:if='{{isCollapse}}'>
+              展开
+              <image src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+            </view>
+            <view class='packup' wx:else>
+              收起
+              <image src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+            </view>
+          </button>
+        </form>
+      </view> -->
+    </view>
+    <view class='store-address-phone'>
+      <view>
+        <image src='/images/icon/location.png' mode='aspectFit'></image>
+        <text>{{storeInfo.location}}</text>
+      </view>
+      <image catchtap='callPhone' data-phone='{{storeInfo.phoneNumber}}' src='/images/icon/phone.png' mode='aspectFit'></image>
+    </view>
+  </view>
+  <view class='products-container'>
+    <view class='event-container'>
+      <view class='event-item'>
+        <view class='event-access' data-index='0' catchtap='showEventList'>
+          <text>店长推荐</text>
+          <view>
+            <text>更多</text>
+            <image src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+          </view>
+        </view>
+        <swiper autoplay circular>
+          <swiper-item class='back_img' wx:for='{{recommend_swiper}}' wx:key='index'>
+            <image ontap='showDetailPopup' src='{{item.imgUrl}}' data-link='{{item.link}}' data-id='{{item.id}}' mode='aspectFill' data-name='{{item.name}}'></image>
+          </swiper-item>
+        </swiper>
+        <template wx:if='{{recommendProducts.length}}' is="products" data='{{type: "home", data: recommendProducts, listIndex: 0}}'></template>
+      </view>
+      <view class='event-item'>
+        <view class='event-access' data-index='1' catchtap='showEventList'>
+          <text>优惠商品</text>
+          <view>
+            <text>更多</text>
+            <image src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+          </view>
+        </view>
+        <swiper autoplay circular>
+          <swiper-item wx:for='{{discount_swiper}}' wx:key='index'>
+            <image ontap='showDetailPopup' data-link='{{item.link}}' data-id='{{item.id}}' src='{{item.imgUrl}}' mode='aspectFill' data-name='{{item.name}}'></image>
+          </swiper-item>
+        </swiper>
+        <template wx:if='{{discountProducts.length}}' is="products" data='{{type: "home", data: discountProducts, listIndex: 1}}'></template>
+      </view>
+      <view class='event-item'>
+        <view class='event-access' data-index='2' catchtap='showEventList'>
+          <text>最新商品</text>
+          <view>
+            <text>更多</text>
+            <image src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+          </view>
+        </view>
+        <swiper autoplay circular>
+          <swiper-item wx:for='{{new_swiper}}' wx:key='index'>
+            <image ontap='showDetailPopup' src='{{item.imgUrl}}' data-link='{{item.link}}' data-id='{{item.id}}' src='{{item.imgUrl}}' mode='aspectFill' data-name='{{item.name}}'></image>
+          </swiper-item>
+        </swiper>
+        <template wx:if='{{newProducts.length}}' is="products" data='{{type: "home", data: newProducts, listIndex: 2}}'></template>
+      </view>
+    </view>
+
+    <!--简约商品列表  -->
+    <view wx:if='{{storeInfo.storeTemplate.templateId == "theme_simple"}}'>
+      <block wx:for='{{recommendProducts}}' wx:key='index'>
+        <template is='product-simple' data='{{product: item}}'></template>
+      </block>
+      <template is='next-info' data='{{hasMore: params[0].hasMore, data: recommendProducts}}'></template>
+    </view>
+  </view>
+
+
+  <!-- 导购欢迎界面  -->
+  <view wx:if='{{showGuide}}' class='guide-modal'>
+    <view class='guide-modal-mask'></view>
+    <view class='guide-modal-content'>
+      <form report-submit bindsubmit='closeGuide'>
+        <button form-type='submit' class='form_button'>
+          <image src='/images/icon/close.png' mode='aspectFit'></image>
+        </button>
+      </form>
+      <view class='guide-content'>
+        <image src='{{employee.remark}}' mode='aspectFill'></image>
+        <view class='guide-center'>
+          <view class='guide-user'>
+            <image src='{{userInfo.avatarUrl}}' mode='aspectFill'></image>
+            <view class='guide-user-info'>
+              <text>{{userInfo.nickName}} 您好!</text>
+              <text>欢迎来到本店</text>
+            </view>
+          </view>
+          <view class='guide-employee'>
+            <text>我是您的专属导购{{employee.nickName}}，有什么问题可以随时找我!</text>
+            <image src='{{employee.headImage}}' mode='aspectFill'></image>
+          </view>
+        </view>
+      </view>
+      <form class='guide-bottom' report-submit bindsubmit='closeGuide'>
+        <button form-type='submit' class='form_button'>
+          <text>立刻逛逛</text>
+        </button>
+      </form>
+    </view>
+  </view>
+
+  <!-- 活动红包弹出  -->
+  <template wx:if='{{isShowActivity}}' is='activity'></template>
+
+  <!--浮层弹窗  -->
+  <view class='popup' wx:if='{{isShowPopup}}'>{{tip}}</view>
+
+</view>

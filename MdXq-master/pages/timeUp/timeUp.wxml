@@ -1,0 +1,24 @@
+<import src='../newProducts/newProductsTemplate/newProductsTemplate.wxml'/>
+<view class='timeUp'>
+  <view class='newProductsTop'>
+    <image src='../images/demo1.png'></image>
+  </view>
+  <view class='timeUpTimeBox'>
+    <view>———距离活动结束还有———</view>
+    <view class='timeBox'>
+      <text>01</text>
+      <text>天</text>
+      <text>01</text>
+      <text>时</text>
+      <text>01</text>
+      <text>分</text>
+      <text style='background-color:#FC4349;'>01</text>
+      <text>秒</text>
+    </view>
+  </view>
+  <view class='newProductsGoodsBox'>
+    <block wx:for='{{timeUpInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+      <template is = 'newProductsTemplate' data='{{...item,isTimeUp}}'/>
+    </block>
+  </view>
+</view>

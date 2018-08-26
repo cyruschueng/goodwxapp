@@ -1,0 +1,49 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="search_frame">
+    <label class="searchBox flex">
+      <input class="search" placeholder="请输入项目介绍、项目名称、公司" bindinput="searchSth" />
+    </label>
+    <view class="esc" bindtap="searchEsc">取消</view>
+  </view>
+  <view style="height:112rpx;"></view>
+  <scroll-view style="height:1200rpx;" scroll-y="true" bindscrolltolower='myPublicProject' wx:if="{{myProject.length !=0}}">
+    <view class='outBox'>
+      <block wx:for="{{myProject}}" wx:key="{{index}}">
+        <view class='insideBox' data-id="{{item.project_id}}" hover-class='t-hoverColor' bindtap="detail">
+          <view class="describle" wx:if="{{item.pro_intro != ''}}">{{item.pro_intro}}</view>
+          <image src="/img/img-dujia@2x.png" class="projectDetailType" wx:if="{{item.is_exclusive == 1}}"></image>
+          <view class='flex industryBox'>
+            <block wx:for="{{item.pro_industry}}" wx:key="{{index}}" wx:for-item='industry'>
+              <view class="allIndustry">{{industry.industry_name}}</view>
+            </block>
+          </view>
+          <view class='flex otherInfo'>
+            <view class="allProjectDetail flex " wx:if="{{item.pro_area != ''||item.pro_finance_stock_after!=0||item.pro_stage!=''||item.pro_scale!=''}}">
+              <view class="projectDetailLine" wx:if="{{item.pro_scale != ''}}">{{item.pro_scale.scale_money}} </view>
+              <view class="projectDetailLine" wx:if="{{item.pro_finance_stock_after != ''}}">· {{item.pro_finance_stock_after}}% </view>
+              <view class="projectDetailLine" wx:if="{{item.pro_stage != ''}}"> · {{item.pro_stage.stage_name}}</view>
+              <view class="projectDetailLine" wx:if="{{item.pro_area != ''}}">· {{item.pro_area.area_title}}</view>
+            </view>
+          </view>
+          <view class="star" catchtap="clickProject" data-id="{{item.project_id}}" wx:if="{{otherPerson == false}}" data-top="{{item.is_top}}" hover-class="t-hoverColor" hover-stop-propagation="true">
+            <image src="/img/btn-zhiding@2x.png" class="starPic" wx:if='{{item.is_top == 0}}'></image>
+            <image src="/img/btn-quxiao@2x.png" class="starPic" wx:if='{{item.is_top == 1}}'></image>
+          </view>
+          <view class="top" data-id="{{item.project_id}}" wx:if="{{otherPerson == true}}">
+            <image src="/img/img-tuijian@2x.png" class="topPic" wx:if="{{item.is_top == 1 }}"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <!--搜索结果无-->
+  <view class="nullState" wx:if="{{empty == '1'}}">
+    <view class="nullState_text">
+      <view>暂无数据</view>
+    </view>
+  </view>
+  <!--没有更多-->
+  <view class="error" wx:if="{{error==1}}">{{error_text}}</view>
+</view>

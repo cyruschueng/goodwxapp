@@ -1,0 +1,1363 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<title>全新致炫 不要压力 放大马力</title>
+		<link rel="stylesheet" href="https://cdn.zwmedia.com.cn/Public/Home/Default/Css/font-awesome-4.5.0/css/font-awesome.min.css">
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?880f696a04bb1e3deb43f60228e9a490";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+				-webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+			}
+			
+			html,
+			body {
+				margin: 0px 0 0;
+				color: #404040;
+				min-width: 320px;
+				font-family: SimHei, Arial, Helvetica, sans-serif;
+				background-color: #000;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				-moz-user-select: none;
+				/*火狐*/
+				-webkit-user-select: none;
+				/*webkit浏览器*/
+				-ms-user-select: none;
+				/*IE10*/
+				-khtml-user-select: none;
+				/*早期浏览器*/
+				user-select: none;
+			}
+			
+			#loading {
+				width: 100%;
+				height: 100%;
+				color: #fff;
+				text-align: center;
+				background-color: #000;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				z-index: 10005;
+				left: 0px;
+			}
+			
+			#loading img {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -12px;
+				margin-top: -12px;
+				width: 24px;
+				height: 24px;
+			}
+			
+			.main {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.userFormPage {
+				position: absolute;
+				z-index: 10000;
+				left: 0%;
+				top: 0%;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.main .userFormPage .userForm {
+				position: absolute;
+				left: 0px;
+				top: 5%;
+				text-align: center;
+			}
+			
+			.formBox {
+				position: relative;
+				width: 90%;
+				margin: auto;
+			}
+			
+			.bg-ws {
+				width: 90%;
+				height: 100%;
+				margin: auto;
+				background: rgba(125, 200, 230, 0.3);
+				border-radius: 10px;
+			}
+			
+			.jxsTel {
+				display: none;
+				width: 100%;
+				background: #E7E7E7;
+				border: none;
+				color: #A9A9A9;
+				font-family: "微软雅黑", "宋体", sans-serif;
+				margin: auto;
+				margin-top: 4%;
+				line-height: 200%;
+				border-radius: 5px;
+				margin-bottom: 3%;
+			}
+			
+			#userName {
+				margin-top: 12px;
+			}
+			
+			.formBox input,
+			.formBox select {
+				font-size: 16px;
+				width: 99%;
+				color: black;
+				padding: 5px 0;
+				padding-left: ;
+				border-radius: 5px;
+				border: none;
+				font-family: "微软雅黑", "宋体", sans-serif;
+				margin-top: 4%;
+			}
+			
+			.formBox input {
+				background: white;
+				color: rgb(154, 168, 55);
+			}
+			
+			#btn-check {
+				border-radius: 5px;
+				background-color: lightgray;
+				line-height: 200%;
+				color: white;
+				display: inline-block;
+				width: 48.5%;
+			}
+			
+			.formBox select {
+				background-color: white;
+				height: 30px;
+				color: rgb(154, 168, 55);
+			}
+			
+			#submitBtn {
+				display: block;
+				cursor: pointer;
+				width: 40%;
+				height: 40px;
+				line-height: 42px;
+				font-size: 20px;
+				border-radius: 10px;
+				color: white;
+				margin: auto;
+				background-color: lightgray;
+				margin-top: 5%;
+				margin-bottom: 5%;
+			}
+			
+			/*zw--修改*/
+			
+			.header-img {
+				width: 100%;
+				height: 100%;
+				display: none;
+			}
+			
+			.header-img img {
+				width: 100%;
+			}
+			
+			.page03Bg {
+				width: 100%;
+				height: 100%;
+			}
+			
+			#userName,
+			#sex,
+			#province,
+			#city,
+			#carType,
+			#jingxiaoshang,
+			.btn-check {
+				display: inline-block;
+				width: 48.5%;
+			}
+			
+			#checkNumber {
+				display: inline-block;
+				width: 48.5%;
+			}
+			
+			#checkColor {
+				display: none;
+				color: red;
+				visibility: visible;
+				position: absolute;
+				top: 20%;
+				right: 10%;
+			}
+			
+			.car-tips {
+				position: absolute;
+				top: 0%;
+				left: 0%;
+				width: 100%;
+				height: 100%;
+				display: table;
+				/*border-radius: 5px;*/
+				display: none;
+				background: rgba(0, 0, 0, 0.7);
+				z-index: 10002;
+			}
+			
+			.car-tips div {
+				margin: auto;
+				width: 60%;
+				margin-top: 25%;
+				background: white;
+				text-align: center;
+				padding-top: 35px;
+				padding-bottom: 35px;
+				padding-left: 10px;
+				padding-right: 10px;
+				border-radius: 10px;
+			}
+			
+			.car-tips p {
+				display: inline-block;
+				margin: auto;
+				letter-spacing: 3px;
+				text-align: left;
+				color: #03A9F4;
+			}
+			
+			.nah {
+				font-size: 16px;
+				position: relative;
+				width: 100%;
+				height: 44px;
+				line-height: 44px;
+				text-align: center;
+				background-color: white;
+				z-index: 99999;
+				border-bottom: 1px solid #CDCDCD;
+			}
+			
+			.nah i {
+				position: absolute;
+				color: #737373;
+				top: 11.5px;
+				font-size: 22px;
+				float: left;
+				width: 18%;
+				-webkit-text-stroke: 2px;
+				-webkit-text-stroke-color: white;
+			}
+			
+			.nah span {
+				color: black;
+				display: inline-block;
+				width: 100%;
+			}
+			
+			#disclaimer {
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.7);
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 99999999999;
+				display: none;
+			}
+			
+			.disclaimer_info {
+				width: 88%;
+				position: absolute;
+				left: 6%;
+				top: 2%;
+			}
+			
+			.mianze_bg {
+				width: 100%;
+			}
+			
+			.disclaimer_container {
+				width: 86%;
+				height: ;
+				position: absolute;
+				top: 17%;
+				left: 7%;
+				height: 76%;
+			}
+			
+			.disclaimer_info p {
+				margin-top: 15px;
+				width: 100%;
+				font-size: 12px;
+				line-height: 18px;
+				color: gray;
+			}
+			
+			.disclaimer_info p span {
+				display: inline-block;
+				text-indent: 2em;
+			}
+			
+			.close_alt {
+				width: 10%;
+				position: absolute;
+				top: 2%;
+				right: 3%;
+			}
+			
+			#prevent {
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.7);
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 99999999999;
+				display: none;
+			}
+			
+			.prevent_info {
+				width: 100%;
+				position: absolute;
+				top: 2%;
+			}
+			
+			.prevent_info .close_alt {
+				top: 20%;
+			}
+			
+			.prevent_bg {
+				width: 100%;
+			}
+			
+			.prevent_container {
+				width: 74%;
+				position: absolute;
+				top: 39%;
+				left: 12.5%;
+				height: 53%;
+				/*display: none;*/
+			}
+			
+			.moveOn {
+				width: 10%;
+				position: absolute;
+				top: 92%;
+				left: 45%;
+				display: none;
+			}
+			
+			.mianze_intro {
+				width: 15%;
+				position: absolute;
+				bottom: 6%;
+				right: 12%;
+				z-index: 10001;
+				display: none;
+			}
+			
+			.prevent_list {
+				width: 15%;
+				position: absolute;
+				bottom: 6%;
+				left: 12%;
+				z-index: 10001;
+				display: none;
+			}
+			
+			.mianzeOrder1 {
+				width: 20px;
+				position: absolute;
+				top: -2px;
+				left: 0;
+			}
+			
+			.mianzeOrder2 {
+				width: 20px;
+				position: absolute;
+				top: -2px;
+				left: 0;
+			}
+			
+			.mianzeOrder3 {
+				width: 20px;
+				position: absolute;
+				top: -2px;
+				left: 0;
+			}
+			
+			.yySuccess_wraper {
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.7);
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 999999999;
+				display: none;
+			}
+			
+			.yySuccess_wraper .yySuccess_info {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			
+			.yySuccess_info .yySuccess {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 10%;
+			}
+			
+			.yySuccess_info .close_alt {
+				top: 27%;
+				right: 5%;
+			}
+			
+			.yySuccess_container {
+				width: 70%;
+				position: absolute;
+				top: 42%;
+				left: 15%;
+				z-index: 99999;
+			}
+			
+			.yySuccess_container p {
+				width: 100%;
+				text-align: center;
+				color: rgb(112, 92, 174);
+				font-size: 20px;
+				margin-bottom: 11px;
+			}
+			
+			.yySuccess_container span {
+				width: 100%;
+				color: gray;
+				font-size: 12px;
+				line-height: 20px;
+			}
+			
+			.yySuccess_container .yySuccess_container_bottom {
+				font-size: 14px;
+			}
+			@media only screen and (min-width: 350px) and (max-width: 410px) {
+				.disclaimer_info p {
+					font-size: 14px;
+					line-height: 24px;
+				}
+				.mianzeOrder1 {
+					width: 24px;
+					position: absolute;
+					top: 0px;
+					left: 0;
+				}
+				.mianzeOrder2 {
+					width: 24px;
+					position: absolute;
+					top: 0px;
+					left: 0;
+				}
+				.mianzeOrder3 {
+					width: 24px;
+					position: absolute;
+					top: 0px;
+					left: 0;
+				}
+				.yySuccess_container p {
+					width: 100%;
+					text-align: center;
+					color: rgb(112, 92, 174);
+					font-size: 22px;
+					margin-bottom: 10px;
+				}
+				.yySuccess_container span {
+					width: 100%;
+					color: gray;
+					font-size: 14px;
+					line-height: 22px;
+				}
+				.yySuccess_container .yySuccess_container_bottom {
+					font-size: 16px;
+				}
+			}
+			
+			@media only screen and (min-width: 410px) and (max-width: 450px) {
+				.disclaimer_info p {
+					font-size: 14px;
+					line-height: 24px;
+				}
+				.mianzeOrder1 {
+					width: 24px;
+					position: absolute;
+					top: 0px;
+					left: 0;
+				}
+				.mianzeOrder2 {
+					width: 24px;
+					position: absolute;
+					top: 0px;
+					left: 0;
+				}
+				.mianzeOrder3 {
+					width: 24px;
+					position: absolute;
+					top: 0px;
+					left: 0;
+				}
+				.yySuccess_container p {
+					width: 100%;
+					text-align: center;
+					color: rgb(112, 92, 174);
+					font-size: 24px;
+					margin-bottom: 10px;
+				}
+				.yySuccess_container span {
+					width: 100%;
+					color: gray;
+					font-size: 16px;
+					line-height: 26px;
+				}
+				.yySuccess_container .yySuccess_container_bottom {
+					font-size: 16px;
+				}
+			}
+			
+			#prevent_table {
+				width: 100%;
+				text-align: center;
+				font-size: 16px;
+				line-height: 30px;
+				color: rgb(173, 173, 174);
+			}
+			
+			#prevent_table span {
+				display: inline-block;
+				color: white;
+				width: 24px;
+				height: 24px;
+				line-height: 24px;
+				border-radius: 12px;
+				background-color: rgb(112, 92, 174);
+			}
+		</style>
+
+		<link rel="stylesheet" href="css/animate.min.css" />
+
+	</head>
+
+	<body>
+
+		<div id="loading"><img src="images/loading.gif" /></div>
+
+		<div class="header-img">
+			<!-- <img src="images/shareIcon.jpg"> -->
+		</div>
+
+		<div class="main">
+
+			<!-- 用户提交数据begin -->
+			<div class="userFormPage" id="userFormPage">
+				<img src="" class="page03Bg" id="m-bg">
+				<div class="userForm">
+					<div class="bg-ws">
+						<div class="formBox">
+							<input name="userName" onchange="changecheck()" type="text" maxlength="11" placeholder="&nbsp;姓名" id="userName" onkeyup="value=value.replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,''))">
+							<select name="sex" onchange="changecheck()" id="sex" class="form-control">
+								<option>性别</option>
+								<option>男</option>
+								<option>女</option>
+							</select>
+
+							<!--<input name="channel" type="hidden" id="channel" maxlength="2" value="" placeholder="渠道标识" >-->
+
+							<input name="mobile" onchange="changecheck()" oninput="checkN(this.id)" type="tel" id="mobile" maxlength="11" placeholder="&nbsp;请输入手机号码">
+
+							<span style="position: relative;">
+              					<input type="tel" maxlength="4" onchange="changecheck()" oninput="checkT(this.id)" name="checkNumber" id="checkNumber" placeholder="&nbsp;验证码" />
+								<i class="fa fa-exclamation" id="checkColor"></i>
+              				</span>
+							<span class="btn-check" id="btn-check">获取验证码</span>
+
+							<select name="province" onchange="changecheck()" id="province" class="form-control">
+								<option>请选择省份</option>
+							</select>
+
+							<select name="city" onchange="changecheck()" id="city" class="form-control">
+								<option>城市</option>
+							</select>
+							
+							<select name="jingxiaoshang" onchange="changecheck()" id="jingxiaoshang" class="form-control">
+								<option>选择经销商</option>
+							</select>
+							
+							<select name="carType" onchange="changecheck()" id="carType" class="form-control">
+								<option>意向车型</option>
+							</select>
+							
+							<div class="jxsTel">经销商电话</div>
+
+						</div>
+
+						<span id="submitBtn">去试驾</span>
+
+					</div>
+
+				</div>
+
+			</div>
+			<!-- 用户提交数据end -->
+
+		</div>
+
+		<div class="car-tips">
+			<div>
+				<p>恭喜您提交成功</p>
+			</div>
+
+		</div>
+
+		<div id="disclaimer">
+			<div class="disclaimer_info">
+				<img src="images/mianze_bg.png" alt="" class="mianze_bg" />
+				<img src="images/close_alt.png" alt="" class="close_alt" />
+				<div class="disclaimer_container scroll" style="overflow-y:scroll; -webkit-overflow-scrolling: touch;">
+					<p>
+						<span style="position: relative;">
+						您已离开招商银行信用卡，跳转至招商银行信用卡以外的网页，该网页收集的相关信息，目的在于帮助您参与活动。您一旦决定登陆或使用任何所链接的网站，应当注意可能会受到适用于该网站的任何条款和条件的限制，同时应自行采取预防措施以便在登陆或使用该网站时避免病毒或其他破坏性因素。对于您登陆或使用所链接网站所产生的任何损失，招商银行信用卡不承担任何责任。
+						<img src="images/mianzeOrder1.png" alt="" class="mianzeOrder1"/>
+					</span>
+						<br />
+						<span style="position: relative;">
+						本网站所收集的信息，仅限于第三方平台收集的试驾留咨相关资料。这些信息包括个人信息和非个人信息，个人信息是指识别个人身份的资讯。非个人信息是指与个人身份无关的资讯。招商银行不获取任何相关资料，也不会将您的个人资料提供给第三方合作品牌。
+						<img src="images/mianzeOrder2.png" alt="" class="mianzeOrder2"/>
+					</span style="position: relative;">
+					<br />
+					<span style="position: relative;">
+						该活动由上海掌握广告传播有限公司发起并组织实施，招行银行对活动流程及礼品、售后服务不承担责任，如有需要，请联系上海掌握广告传播有限公司，联系方式：021-62457922。
+						<img src="images/mianzeOrder3.png" alt="" class="mianzeOrder3"/>
+					</span>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="prevent">
+			<div class="prevent_info">
+				<img src="images/prevent_bg.png" alt="" class="prevent_bg" />
+				<img src="images/close_alt.png" alt="" class="close_alt" />
+				<img src="images/moveOn.png" alt="" class="moveOn" />
+				<p style="width: 74%;text-align: center;position: absolute;top: 60%;left:12.5%;color: rgb(112,92,174);font-size: 20px;line-height: 30px;display: none;">中奖名单6月16日揭晓<br />敬请期待~</p>
+				<div class="prevent_container scroll1" style="overflow-y:scroll; -webkit-overflow-scrolling: touch;">
+					<table id="prevent_table" cellspacing="10px">
+						<tr>
+							<td style="color: rgb(220, 95, 163);">排序</td>
+							<td style="color: rgb(220, 95, 163);">姓名</td>
+							<td style="color: rgb(220, 95, 163);">手机</td>
+						</tr>
+						<tr>
+							<td><span>1</span></td>
+							<td>王*</td>
+							<td>158****5759</td>
+						</tr>
+						<tr>
+							<td><span>2</span></td>
+							<td>刘**</td>
+							<td>183****9596</td>
+						</tr>
+						<tr>
+							<td><span>3</span></td>
+							<td>张**</td>
+							<td>183****6701</td>
+						</tr>
+						<tr>
+							<td><span>4</span></td>
+							<td>符*</td>
+							<td>158****7121</td>
+						</tr>
+						<tr>
+							<td><span>5</span></td>
+							<td>杨*</td>
+							<td>139****0203</td>
+						</tr>
+						<tr>
+							<td><span>6</span></td>
+							<td>钟*</td>
+							<td>158****5058</td>
+						</tr>
+						<tr>
+							<td><span>7</span></td>
+							<td>陈*</td>
+							<td>180****1123</td>
+						</tr>
+						<tr>
+							<td><span>8</span></td>
+							<td>胡*</td>
+							<td>135****0991</td>
+						</tr>
+						<tr>
+							<td><span>9</span></td>
+							<td>蒋**</td>
+							<td>130****5513</td>
+						</tr>
+						<tr>
+							<td><span>10</span></td>
+							<td>刘**</td>
+							<td>138****4029</td>
+						</tr>
+						<tr>
+							<td><span>11</span></td>
+							<td>李**</td>
+							<td>186****0429</td>
+						</tr>
+						<tr>
+							<td><span>12</span></td>
+							<td>查*</td>
+							<td>153****5582</td>
+						</tr>
+						<tr>
+							<td><span>13</span></td>
+							<td>张**</td>
+							<td>187****6811</td>
+						</tr>
+						<tr>
+							<td><span>14</span></td>
+							<td>陈*</td>
+							<td>139****8964</td>
+						</tr>
+						<tr>
+							<td><span>15</span></td>
+							<td>白*</td>
+							<td>138****5578</td>
+						</tr>
+						<tr>
+							<td><span>16</span></td>
+							<td>李**</td>
+							<td>152****2385</td>
+						</tr>
+						<tr>
+							<td><span>17</span></td>
+							<td>喻**</td>
+							<td>139****6920</td>
+						</tr>
+						<tr>
+							<td><span>18</span></td>
+							<td>刘**</td>
+							<td>182****3586</td>
+						</tr>
+						<tr>
+							<td><span>19</span></td>
+							<td>赵**</td>
+							<td>137****3162</td>
+						</tr>
+						<tr>
+							<td><span>20</span></td>
+							<td>张**</td>
+							<td>132****6331</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<img src="images/mianze_intro.png" alt="" class="mianze_intro" />
+		<img src="images/prevent_list.png" alt="" class="prevent_list" />
+		<div class="yySuccess_wraper">
+			<div class="yySuccess_info">
+				<img src="images/yySuccess.png" alt="" class="yySuccess" />
+				<img src="images/close_alt.png" alt="" class="close_alt" />
+				<div class="yySuccess_container">
+					<p>
+						尊敬的客户
+						<br />您已成功预约试驾！
+					</p>
+					<span style="width: 90%;margin-left: 5%;display: inline-block;margin-bottom: 10px;">
+					赠送200元的游戏手柄活动已结束，获奖名可在本页面内查询。
+				</span>
+					<span class="yySuccess_container_bottom" style="color: rgb(210,98,159);display: inline-block;width: 90%;margin-left: 5%;">
+					稍后请留意您的短信，我们还有精心准备的小礼品送上哦！
+				</span>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="https://cdn.zwmedia.com.cn/Public/Home/Default/Js/jquery-1.9.1.min.js"></script>
+	<script src="https://cdn.zwmedia.com.cn/Public/Home/Default/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="javascript/main.js"></script>
+	<script type="text/javascript" src="javascript/jquery.cookie.js"></script>
+	<script type="text/javascript">
+//		$(function () {
+//            $.ajax({
+//
+//                url : 'data/userinfodata.php',
+//                data : {action:'checkUserUnique'},
+//                type : 'post',
+//                success : function(res) {
+//                    if (res.trim() == 'true')
+//                        showmsg('该设备已经参加过该活动!请勿重新提交！');
+//                }
+//            })
+//        })
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg); //匹配目标参数
+			if(r != null) return unescape(r[2]);
+			return null; //返回参数值
+		}
+		
+	    var part1 =  new RegExp('zhwzpush');
+		var ch = getUrlParam('ch');
+		var source = getUrlParam('source');
+		if(ch == '004020') {
+			$('#m-bg').attr('src', 'images/car-bg.png');
+		} else if(ch == '004021') {
+				
+			if (part1.test(source)){
+				$('#m-bg').attr('src', 'images/car-bg3.png');
+				$('.bg-ws').css('background-color', 'rgba(127, 192, 218,0.3)');
+				$('.car-tips p').css('color', 'rgb(112,92,174)');		
+			}else{
+				$('#m-bg').attr('src', 'images/car-bg4.png');
+				$('.bg-ws').css('background-color', 'rgba(190,198,83,0.3)');
+				$('.car-tips p').css('color', 'rgb(190,198,83)');	
+			}
+		} else {
+			$('#m-bg').attr('src', 'images/car-bg2.png');
+			$('.bg-ws').css('background-color', 'rgba(137,48,39,0.3)');
+			$('.car-tips p').css('color', 'rgb(137,48,39)');
+		}
+		
+	    
+		if(part1.test(source)) {
+			$(".mianze_intro").show();
+			$(".prevent_list").show();
+		}
+
+		//2016-01-27 add begin
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return unescape(r[2]);
+			return null;
+		}
+		var mark = GetQueryString("ch");
+		$("#channel").val(mark);
+		//2016-01-27 add end
+
+		var site = {
+			_init: function() {
+				$('#loading').fadeOut(600);
+				ready();
+			}
+		};
+
+		var isCommit = false;
+
+		$('.car-tips').click(function() {
+
+			$('.car-tips').hide();
+		});
+
+		function showmsg(msg) {
+
+			if(msg) {
+				$('.car-tips p').html(msg);
+				if(isCommit) {
+					$('.car-tips').show();
+				} else {
+
+					$('.car-tips').show();
+
+					setTimeout(function() {
+						$('.car-tips').hide();
+					}, 3500);
+					return;
+				}
+
+			} else {
+				$('.car-tips').show();
+				setTimeout(function() {
+					$('.car-tips').hide();
+				}, 3500);
+				return;
+			}
+		}
+
+		//验证手机号
+		function isPhoneNo(phone) {
+			var pattern = /^1[34578]\d{9}$/;
+			return pattern.test(phone);
+		}
+        var is_commit = false;
+		function checkN(thisInput) {
+             is_commit = false;
+			var ss = '#' + thisInput;
+			var val = $(ss).val();
+
+			if(!isPhoneNo(val)|| is_commit) {
+				$('.btn-check').css('background-color', 'lightgray');
+			} else {
+
+				$.ajax({
+
+					url : 'data/userinfodata.php',
+					data : {action:'checkTel', ch:ch, tel: val},
+					type : 'post',
+					success : function(res) {
+                        var data = eval("("+res+")");
+						if (data.status == 1) {
+
+							showmsg(data.info);
+                            $('.btn-check').css('background-color', 'lightgray');
+							is_commit = true;
+						}
+					}
+				})
+				//获取验证码颜色
+				if(ch == '004020') {
+
+					$('.btn-check').css('background-color', '#8AB8FF');
+
+				} else if(ch == '004021') {
+					if (part1.test(source)){
+						$('.btn-check').css('background-color', 'rgb(112,92,174)');
+					}else{
+						$('.btn-check').css('background-color', 'rgb(190,198,83)');
+					}
+					
+
+				} else {
+
+					$('.btn-check').css('background-color', 'rgb(137,48,39)');
+
+				}
+
+			}
+		}
+
+		function checkT(thisInput) {
+
+			var ss = '#' + thisInput;
+			var val = $(ss).val() + $('#mobile').val().toString();
+			if(val != $.cookie('checkNum')) {
+				$('#checkColor').attr('class', 'fa fa-exclamation');
+				$('#checkColor').css('color', 'red');
+				$('#checkColor').show();
+			} else {
+				$('#checkColor').attr('class', 'fa fa-check');
+				$('#checkColor').css('color', 'green');
+				$('#checkColor').show();
+			}
+		}
+
+		function changecheck() {
+			var name = $('#userName').val();
+			var sex = $('#sex').val();
+			var mobile = $('#mobile').val();
+			var checkNum = $('#checkNumber').val();
+			var province = $('#province').val();
+			var city = $('#city').val();
+			var cartype = $('#carType').val();
+			var jxNum = $('#jingxiaoshang option:selected').text();
+
+			if(!name || !sex || !mobile || !checkNum || !province || !city || !cartype) {
+				$('#submitBtn').css('background-color', 'lightgray');
+			} else {
+
+				if(jxNum == '选择经销商') {
+					$('.jxsTel').hide();
+					$('#submitBtn').css('background-color', 'lightgray');
+				} else {
+
+					$('.jxsTel').show();
+					//试驾按钮颜色
+					if(ch == '004020') {
+
+						$('#submitBtn').css('background-color', '#8AB8FF');
+						$(".formBox select").css('color', '#8AB8FF');
+
+					} else if(ch == '004021') {
+
+						
+						if (part1.test(source)){
+							$('#submitBtn').css('background-color', 'rgb(112,92,174)');
+							$(".formBox select").css('color', 'rgb(112,92,174)');
+						}else{
+							$('#submitBtn').css('background-color', 'rgb(190,198,83)');
+							$(".formBox select").css('color', 'rgb(190,198,83)');
+						}
+
+					} else {
+
+						$('#submitBtn').css('background-color', 'rgb(137,48,39)');
+						$(".formBox select").css('color', 'rgb(137,48,39)');
+
+					}
+
+				}
+
+			}
+		}
+
+		if(ch == '004020') {
+
+			$(".formBox input").css('color', '#8AB8FF');
+			document.styleSheets[0].addRule('.formBox input::-webkit-input-placeholder', 'color: #8AB8FF');
+			document.styleSheets[0].insertRule('.formBox input::-webkit-input-placeholder { color: #8AB8FF }', 0);
+			$(".formBox select").css('color', '#8AB8FF');
+
+		} else if(ch == '004021') {
+				
+			if (part1.test(source)){
+				$(".formBox select").css('color', 'rgb(112,92,174)');
+				$(".formBox input").css('color', 'rgb(112,92,174)');
+				document.styleSheets[0].addRule('.formBox input::-webkit-input-placeholder', 'color: rgb(112,92,174)');
+				document.styleSheets[0].insertRule('.formBox input::-webkit-input-placeholder { color: rgb(112,92,174) }', 0);		
+			}else{
+				$(".formBox select").css('color', 'rgb(190,198,83)');
+				$(".formBox input").css('color', 'rgb(190,198,83)');
+				document.styleSheets[0].addRule('.formBox input::-webkit-input-placeholder', 'color: rgb(190,198,83)');
+				document.styleSheets[0].insertRule('.formBox input::-webkit-input-placeholder { color: rgb(190,198,83) }', 0);
+
+			}
+		} else {
+			$(".formBox select").css('color', 'rgb(137,48,39)');
+			$(".formBox input").css('color', 'rgb(137,48,39)');
+			document.styleSheets[0].addRule('.formBox input::-webkit-input-placeholder', 'color: rgb(137,48,39)');
+			document.styleSheets[0].insertRule('.formBox input::-webkit-input-placeholder { color: rgb(137,48,39) }', 0);
+		}
+
+		document.onreadystatechange = function() {
+			if(document.readyState == "complete") {
+				site._init();
+				$("body").addClass("bodyContainer");
+			}
+		};
+
+		var wait = 60;
+		var isSend = false;
+
+		function time(o) {
+			if(wait == 0) {
+				o.innerHTML = "获取验证码";
+				if(ch == '004020') {
+
+					$('.btn-check').css('background-color', '#8AB8FF');
+
+				} else if(ch == '004021') {
+
+					
+					if (part1.test(source)){
+						$('.btn-check').css('background-color', 'rgb(112,92,174)');
+					}else{
+						$('.btn-check').css('background-color', 'rgb(190,198,83)');
+					}
+				} else {
+
+					$('.btn-check').css('background-color', 'rgb(137,48,39)');
+
+				}
+				wait = 60;
+				isSend = false;
+			} else {
+				o.innerHTML = "重新发送(" + wait + ")";
+				$('.btn-check').css('background-color', 'lightgray');
+				wait--;
+
+				setTimeout(function() {
+						time(o);
+					},
+					1000);
+			}
+		};
+
+		$('.btn-check').click(function() {
+			tel = $('#mobile').val();
+
+			if(tel && /^1[3|4|5|8|7]\d{9}$/.test(tel)) {
+				if(!isSend) {
+				    if (!is_commit){
+                        isSend = true;
+                        var url = 'data/userinfodata.php';
+                        var Num = "";
+                        for(var i = 0; i < 4; i++) {
+                            Num += Math.floor(Math.random() * 10);
+                        }
+                        $.cookie('checkNum', Num + tel.toString(), {
+                            path: '/',
+                            expires: 5 * 60 * 1000
+                        });
+                        var data = {
+                            action: 'sendmsg',
+                            tel: tel.toString(),
+                            num: Num.toString()
+                        };
+
+                        ///发送post请求
+                        $.post(url, data, function(res) {
+                            //处理返回值
+                        });
+                        time(this);
+					}
+				}
+			} else {
+				var msg = '手机号码不正确';
+				showmsg(msg);
+			}
+		});
+
+		function ready() {
+			winW = $(window).width();
+			winH = $(window).height();
+			if(moudle_code == '004020') {
+
+				document.title = "雷凌大空间 任你尽情舒展";
+			} else if(moudle_code == '004021') {
+
+				document.title = "全新致炫 不要压力 放大马力";
+			} else {
+
+				document.title = "雷凌Turbo 换芯上市";
+			}
+
+			setTimeout('loadselect();', 1000);
+
+			$('#submitBtn').click(function() {
+
+				var username = $.trim($('#userName').val());
+				if(username.toString() == '') {
+					var msg = '请输入姓名!';
+					showmsg(msg);
+					return;
+				}
+
+				if(String(username).length > 10) {
+					var msg = '姓名字数最多10个！';
+					showmsg(msg);
+					$('#username').val("");
+					return;
+				}
+
+				var gender = $('#sex option:selected').text();
+				if(gender.toString() == '性别') {
+					var msg = '请选择性别';
+					showmsg(msg);
+					return;
+				}
+
+				var mobile = $.trim($('#mobile').val());
+				if(mobile.toString() == '') {
+					var msg = '请输入手机号码！';
+					showmsg(msg);
+					return;
+				}
+
+				if(!validatemobile(mobile)) {
+					var msg = '手机号码不正确！';
+					showmsg(msg);
+					$('#mobile').val("");
+					return;
+				}
+
+				var checkNum = $('#checkNumber').val();
+				if(checkNum.toString() == '') {
+					var msg = '请输入验证码';
+					showmsg(msg);
+					return;
+				} else if(checkNum.toString() + mobile.toString() != $.cookie("checkNum")) {
+					var msg = '验证码错误';
+					showmsg(msg);
+					return;
+				}
+
+				var series_code = $('#carType option:selected').val();
+				if(series_code.toString() == '') {
+					var msg = '请选择意向车型';
+					showmsg(msg);
+					$('#carType').focus();
+					return;
+				}
+				var series_name = $('#carType option:selected').text();
+				var province_code = $('#province option:selected').val();
+				if(province_code.toString() == '') {
+					var msg = '请选择省份！';
+					showmsg(msg);
+					$('#province').focus();
+					return;
+				}
+				var province_name = $('#province option:selected').text();
+				var city_code = $('#city option:selected').val();
+				if(city_code.toString() == '') {
+					var msg = '请选择城市！';
+					showmsg(msg);
+					$('#city').focus();
+					return;
+				}
+				var city_name = $('#city option:selected').text();
+				var dealer = $('#jingxiaoshang option:selected').val();
+				if(dealer.toString() == '') {
+					var msg = '请选择经销商！';
+					showmsg(msg);
+					$('#jingxiaoshang').focus();
+					return;
+				}
+				var dealer_code = dealer.toString().split('||')[1].toString();
+				var business_phone = dealer.toString().split('||')[0].toString();
+
+				var channel = $('#channel').val();
+				var source = getUrlParam('source');
+				var db = {
+					action: 'add',
+					username: username.toString(),
+					mobile: mobile.toString(),
+					gender: gender.toString(),
+					dealer_code: dealer_code.toString(),
+					province_code: province_code.toString(),
+					province_name: province_name.toString(),
+					series_code: series_code.toString(),
+					series_name: series_name.toString(),
+					city_code: city_code.toString(),
+					city_name: city_name.toString(),
+					business_phone: business_phone.toString(),
+					channel: channel,
+					ch: moudle_code,
+					rnd: Math.random(),
+					source: source,
+				};
+				$('.car-tips').off('click');
+				$("#submitBtn").css("pointer-events", "none");
+				$.post('data/userinfodata.php', db, function(data) {
+					if($.trim(data.toString()) == 'success') {
+						$("#userName").val("");
+						$("#mobile").val("");
+						$("#carType").val("");
+						$("#province").val("");
+						$("#city").val("");
+						$("#jingxiaoshang").val("");
+						$("#checkNumber").val("");
+						$("#checkColor").hide();
+						$('.jxsTel').html('经销商电话');
+
+						$('#submitBtn').html('预约成功');
+						//var msg = '恭喜您提交成功，请尽快去预约的4S店试驾。试驾完成后,请到乐天邦[个人中心]提交试驾信息。感谢您的配合';
+						var msg = '恭喜您提交成功，请尽快去预约的4S店试驾。试驾完成后,请按照短信要求提交相关试驾信息。感谢您的配合';
+
+						if(part1.test(source)) {
+
+							$(".yySuccess_wraper").show();
+						} else {
+
+							showmsg(msg);
+						}
+						$(".yySuccess_info").attr("class", "yySuccess_info animated zoomIn");
+						$('.car-tips').click(function() {
+							$('.car-tips').hide();
+							window.history.go(-1);
+						});
+
+					} else {
+						$("#submitBtn").css("pointer-events", "auto");
+						$('.car-tips').on('click');
+						showmsg(data);
+
+					}
+				});
+			});
+		}
+	</script>
+
+	<script type="text/javascript">
+		function getCookie(name) {
+			var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+			if(arr = document.cookie.match(reg))
+				return unescape(arr[2]);
+			else
+				return null;
+		}
+		if(moudle_code == '004020') {
+
+			document.title = "雷凌大空间 任你尽情舒展";
+		} else if(moudle_code == '004021') {
+
+			document.title = "全新致炫 不要压力 放大马力";
+		} else {
+
+			document.title = "雷凌Turbo 换芯上市";
+		}
+
+		var navih = '<div class="nah"><i class="fa fa-chevron-left"></i><span class = "head-name">' + document.title + '</span></div>';
+		if(getCookie('user_platform_code') == 'MSYHC') {
+
+			$('body').prepend(navih);
+		}
+		$('.nah i').click(function() {
+			window.history.go(-1);
+		});
+
+		$(".mianze_intro").click(function() {
+			$("#disclaimer").show();
+			$(".disclaimer_info").attr("class", "disclaimer_info animated zoomIn");
+		});
+
+		$(".prevent_list").click(function() {
+			$("#prevent").show();
+			$(".prevent_info").attr("class", "prevent_info animated zoomIn");
+		});
+
+		$(".close_alt").click(function() {
+			$(this).parent().removeClass('zoomIn animated');
+			$(this).parent().addClass('zoomOut animated');
+			$(this).parent().parent().fadeOut(300);
+		});
+
+		//解决遮盖层与底层滑动问题
+		var overscroll = function(el) {
+			el.addEventListener('touchstart', function() {
+				var top = el.scrollTop,
+					totalScroll = el.scrollHeight,
+					currentScroll = top + el.offsetHeight;
+				if(top === 0) {
+					el.scrollTop = 1;
+				} else if(currentScroll === totalScroll) {
+					el.scrollTop = top - 1;
+				}
+			});
+			el.addEventListener('touchmove', function(evt) {
+				if(el.offsetHeight < el.scrollHeight) {
+					evt._isScroller = true;
+				}
+			});
+		}
+		overscroll(document.querySelector('.scroll'));
+		overscroll(document.querySelector('.scroll1'));
+		document.body.addEventListener('touchmove', function(evt) {
+			if(!evt._isScroller) {
+				evt.preventDefault();
+			}
+		});
+	</script>
+
+</html>

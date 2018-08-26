@@ -1,0 +1,98 @@
+<div >
+    <div class=" container" style="padding-top:10px;" ng-controller="personalViewController">
+        <div class="row" style="padding-bottom:15px; border-bottom:1px solid #eee; padding-top:10px;">
+            <div class="col-xs-3">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img style="width:50px; height:50px;" ng-src="{{info.wxUserInfo.headImgUrl}}">
+                    </div>
+                </div>
+                <div class="row" style="padding-top:10px;">
+                    <div class="col-xs-12 ">
+                        <span class="glyphicon glyphicon-map-marker text-primary" style="font-size:12px;"></span>
+                        <span style="font-size:12px;">{{info.wxUserInfo.city}}</span>
+                    </div>
+                </div>
+                <div ng-hide="info.player.age==0" class="row" style="padding-top:10px;">
+                    <div class="col-xs-12 ">
+                        <span style="font-size:12px;">{{'孩子'+info.player.age+'岁'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-9">
+                <div class="row">
+                    <div class="col-xs-12 text-primary text-left" >{{info.wxUserInfo.nickName}}</div>
+                    <div class="col-xs-12 text-left" style="padding-top:5px;">{{info.comment}}</div>
+                    <div ng-repeat="media in info.medias">
+                        <div ng-show="media.mediaType==1" class="col-xs-12 text-left" style="padding-top:10px;">
+                            <img style="width:80%;" ng-src="{{media.mediaUrl|resourceUrl}}"></img>
+                        </div>
+                        <div ng-show="media.mediaType==2" class="col-xs-12 text-left" style="padding-top:10px;">
+                            <div player-link player="player" ng-model="media.mediaUrl">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 text-left" style="padding-top:10px;">
+                        <span class="glyphicon glyphicon-dashboard" style="font-size:11px;"></span>
+                        <span style="font-size:11px;">{{info.releaseTime}}</span>
+                        <span se-like
+                              ng-class="{true:'btn btn-xs btn-success glyphicon glyphicon-heart',false:'btn btn-xs btn-default glyphicon glyphicon-heart'}[info.isLike]"
+                              style="padding:0 6px; font-size:11px;"
+                              data-showLike="{{'likeWrap'+info.fileId}}"
+                              data-fileId="{{info.fileId}}"
+                                >
+                                {{info.likeNumber}}
+                            </span>
+                            <span se-comment
+                                  class="btn btn-xs btn-primary glyphicon glyphicon-comment"
+                                  style="padding:0 6px; font-size:11px;"
+                                  data-showComment="{{'commentWrap'+info.fileId}}"
+                                  data-fileId="{{info.fileId}}"
+                                    >
+                                {{info.commentNumber}}
+                            </span>
+                    </div>
+                    <div class="col-xs-12 text-left" style="padding-top:10px;word-break: break-all; word-wrap:break-word;">
+                        <div style="padding-bottom:5px;">
+                            <p style="font-size:11px;" id="{{'likeWrap'+info.fileId}}">
+                                <span ng-show="info.likeNumber!=0" class="glyphicon glyphicon-heart" style="font-size:12px; color:#f00;"></span>
+                                    <span ng-repeat="like in info.likes">
+                                        <span>{{like.nickName}}</span>
+                                    </span>
+                            </p>
+                        </div>
+                        <div style="padding-top:5px;border-top:1px solid #eee;" id="{{'commentWrap'+info.fileId}}">
+                            <div ng-repeat="comment in info.comments">
+                                <p style="font-size:11px;">
+                                    <span class="text-primary">{{comment.nickName}}</span>:
+                                    {{comment.details}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center" style="color:#888; padding-top:15px;">
+                ~~~~~~~~ 快来给我们点个赞呗！~~~~~~~~
+            </div>
+        </div>
+        <div id="actionSheet_wrap">
+            <div class="weui_mask_transition" id="mask"></div>
+            <div class="weui_actionsheet" id="weui_actionsheet">
+                <div class="weui_actionsheet_menu">
+                    <div class="text-right" style="padding-right:5px;"><span id="btnClose" class="glyphicon glyphicon-remove"></span></div>
+                    <div class="weui_actionsheet_cell">
+                        <textarea id="commentContext" class="weui_textarea" placeholder="请输入评论" style="padding:0 10px;" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="weui_actionsheet_action">
+                    <input type="button" class="btn btn-lg btn-default disabled" style="width:100%;" id="actionsheet_submit" value="提交" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="audio"></audio>
+</div>

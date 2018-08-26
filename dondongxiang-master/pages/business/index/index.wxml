@@ -1,0 +1,48 @@
+<view class="item-box">
+    <view class='relative-box'>
+        <view class="block-title">找合作</view>
+        <view class="block-body">
+          <block wx:for="{{user_info}}" wx:key="">
+            <view data-index="{{item.user_id}}" class='col-list' bindtap='detailsTap'>
+                <view class='xs-item'>
+                    <view class="coo-name">{{item.nickname}}</view>
+                    <view class="coo-centent">
+                        <text>{{item.position}}</text><text class='divide'>|</text>{{item.company}}<text></text>
+                    </view>
+                    <view class='tion-desc'>{{item.introduce}}</view>
+                </view>
+                <view class='photo-img'>
+                    <image class='img' src='{{item.headimgurl}}'></image>
+                    <image class='vipimg' src='/images/icon_cooperation_vip.png'></image>
+                </view>
+            </view>
+          </block>
+        </view>
+    </view>
+    <view class="block-btn" bindtap='viewMoreCooperation'>查看更多</view>
+</view>
+<view class="item-box">
+    <view class='relative-box'>
+        <view class="block-title">找门店</view>
+        <view class="block-body">
+            <view class='store-list'>
+              <block wx:for="{{shop_info}}" wx:key="">
+                <view class='one-product' data-index='{{item.shop_id}}' bindtap="shoplist">
+                    <view class='product-img'><image src='{{item.img_url}}'></image></view>
+                    <view class='price-wrap'>
+                        <view class='col-body'>
+                            <view class='name'>{{item.name}}</view>
+                            <view class='xs-info'>
+                                <text style='margin-right:10px;'>月销 {{item.per_consumption}}</text>
+                                <text>赞 {{item.lovers}}</text>
+                            </view>
+                            <view class='pay-info'>{{item.address}}</view>
+                        </view>
+                    </view>
+                </view>
+              </block>
+            </view>
+        </view>
+    </view>
+    <view class="block-btn" bindtap='viewMoreList'>查看更多</view>
+</view>

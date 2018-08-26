@@ -1,0 +1,189 @@
+ @keyframes spaceboots {
+  0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+  10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+  30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+  40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+  50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+  70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+  80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+  90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+  100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.steam-accounts {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.steam-accounts .logo {
+   width: 100vw; 
+   height: 76vw;
+   display: block;
+}
+
+.steam-accounts__section {
+  width: 100%; 
+  height: calc(110vh - 76vw);
+  background: linear-gradient(to bottom, #080808, #501B04);
+  top: -10vh; 
+  position: relative; 
+  overflow: hidden; 
+}
+
+.steam-accounts__section .container {
+  width: calc(100% - 40rpx);
+  height: calc(100% - 20rpx);
+  border-radius: 10rpx;
+  background-color: #EFEFF4;
+  margin: 0 auto;
+}
+
+.steam-accounts .page-title {
+  display: block; 
+  margin: 0 auto;
+  padding: 30rpx 0;
+  text-align: center;
+  font-size: 40rpx;
+  line-height: 56rpx;
+  border-bottom: 1px dashed #B2B2B2;
+  position: relative;
+}
+
+.steam-accounts__items {
+  width: calc(100% - 40rpx);
+  margin: 0 auto;
+  background-color: #EFEFF4;
+}
+
+.steam-accounts__account-item {
+  float: left; 
+  width: 200rpx;
+  height: 216rpx;
+
+  text-align: center;
+  font-size: 20rpx;
+  line-height: 28rpx;
+
+  border-radius: 10rpx;
+  background-color: #EFEFF4;
+  margin: 20rpx calc((100% - 600rpx) / 6);
+  box-shadow: inset 1rpx 1rpx 8rpx rgba(0, 0, 0, 0.15), 8rpx 8rpx 8rpx rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.steam-accounts__account-item .default-mark {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 60rpx solid #EFC6D5;
+  border-right: 60rpx solid transparent;   
+}
+
+.steam-accounts__account-item.invalid {
+  filter: opacity(40%)
+}
+
+.steam-accounts__account-item.to-remove {
+  background-color: #969696;
+
+  animation-name: spaceboots;
+  animation-duration: 1.2s;
+  transform-origin: 50% 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+}
+
+.steam-accounts__account-item.to-remove .remove-icon {
+  display: block;
+}
+
+.steam-accounts__account-item.to-remove .account-digest {
+  opacity: 0.1;
+}
+
+.steam-accounts__account-item .avatar {
+  display: block;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100%;
+  margin: 20rpx auto 10rpx auto;
+}
+
+.steam-accounts__account-item .name {
+  display: block;
+  margin: 0 auto;
+  max-height: 56rpx;
+  overflow: hidden;
+}
+
+.steam-accounts__account-item .remove-icon {
+  position: absolute;
+  width: 150rpx;
+  height: 150rpx;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  margin: auto;
+  z-index: 2;
+  display: none;
+}
+
+.steam-accounts__account-item .remove-icon .slash {
+  background-color: #FFFFFF;
+  position: relative;
+  transform: rotate(45deg);
+  border-radius: 10rpx;
+}
+
+.steam-accounts__account-item .remove-icon .slash-a {
+  width: 20rpx;
+  height: 155rpx;
+  left: calc(50% - 10rpx);
+}
+
+.steam-accounts__account-item .remove-icon .slash-b {
+  width: 155rpx;
+  height: 20rpx;
+  top: calc(-50% - 10rpx);
+}
+
+.steam-accounts__account-item.plus {
+  display: flex;
+  align-items: center;
+}
+
+.steam-accounts__account-item .plus-icon {
+  width: 155rpx;
+  height: 155rpx;
+  margin: 0 auto;
+}
+
+.steam-accounts__account-item .vertical-line {
+  width: 10rpx;
+  height: 155rpx;
+  background-color: #979797;
+  position: relative;
+  left: calc(50% - 5rpx);
+}
+
+.steam-accounts__account-item .line {
+  width: 155rpx;
+  height: 10rpx;
+  background-color: #979797;
+  position: relative;
+  top: calc(-50% - 5rpx);
+}
+
+.steam-accounts .helper-tip {
+  display: block;
+  color: #888888;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 12rpx;
+}

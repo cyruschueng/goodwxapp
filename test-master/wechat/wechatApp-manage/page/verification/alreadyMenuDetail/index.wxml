@@ -1,0 +1,80 @@
+<view>
+      <view class='al_detail'>
+        <view class='al_detail_msg'>
+          <view>订单编号：{{totalOrder.orderNo}}</view>
+          <view>
+            <view class='msgs'><text decode='{{true}}'>总&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</text><text class='t_ts'>￥{{totalOrder.actualMoney}}</text></view>
+            <view class='msgs'>就餐桌号：{{totalOrder.deskNo}}号桌</view>
+            <view class='msgs'>就餐人数：{{totalOrder.useNum}}人</view>
+            <view class='msgs'>就餐时间：{{totalOrder.createdDate}}</view>
+          </view>
+          <view class='clearfix'>
+              <view catchtap='gopay'>
+                 收款
+              </view>
+          </view>
+        </view>
+      </view>
+
+<view class="neworderlist">
+
+
+
+  <view class='_border'>
+    <view class='menu_list'>
+
+      <view class='tag'>
+        <text>消费明细</text>
+      </view>
+
+      <view class='goods_t_t clearfix'>
+        <view>
+          <text>商品</text>
+        </view>
+        <view>
+          <text>单价</text>
+          <text>数量</text>
+          <text>金额</text>
+        </view>
+      </view>
+      <!--商品列表  -->
+      <view class='goodslist'>
+        <view wx:for='{{orderMenuList}}' wx:key="{{index}}">
+          <view class='li clearfix'>
+            <view>
+              <text>{{item.menuName}}</text>
+            </view>
+            <view>
+              <text>￥{{item.price}}</text>
+              <text>{{item.weight}}</text>
+              <text>￥{{item.price * item.weight}}</text>
+            </view>
+          </view>
+          <view class='tast'>
+            <view wx:if="{{item.menuSpecName}}">
+              <text>规格：{{item.menuSpecName}}</text>
+            </view>
+            <view wx:if="{{item.flavour}}">
+              <text>做法：{{item.flavour}}</text>
+            </view>
+          </view>
+
+        </view>
+      </view>
+
+      <view class='total_m'>
+        <view>合计金额：
+          <text>￥{{totalOrder.checkoutMoney}}</text>
+        </view>
+         
+         <view wx:if="{{totalOrder.specialMoney ==0 ? false : true}}">减免金额：<text>￥{{totalOrder.specialMoney}}</text></view>
+         <view wx:if="{{totalOrder.discountMoney ==0 ? false : true}}">折扣金额：<text>￥{{totalOrder.discountMoney}}</text></view>
+         <view wx:if="{{totalOrder.roundingMoney ==0 ? false : true}}">舍入金额：<text>￥{{totalOrder.roundingMoney}}</text></view>
+      </view>
+
+    </view>
+  </view>
+
+
+</view>
+</view>

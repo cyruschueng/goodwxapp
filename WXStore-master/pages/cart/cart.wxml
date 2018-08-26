@@ -1,0 +1,36 @@
+<!--pages/cart/cart.wxml-->
+<wxs module="filters" src="../../utils/tools.wxs"></wxs>
+<view class="container">
+  <view class='cart' wx:for="{{cartArr}}" wx:key='item.id'>
+    <view class='cart-item'>
+      <checkbox class='cart-cb' value="{{item.id}}" data-index='{{index}}' data-checked='{{item.checked}}' checked="{{item.checked == '1'}}" bindtap='goodsChecked' />
+      <view class='cart-goods'>
+        <image class='cart-img' data-id="{{item.id}}" bindtap='goodsInfo' src='{{item.imgUrl}}' mode='aspectFill'></image>
+        <view class='goods'>
+          <view class='goods-name'>{{item.title}}</view>
+          <view class='goods-line'>
+            <view class='goods-price'>￥{{filters.toFix(item.price)}}</view>
+            <view class='goods-num'>
+              <button class='goods-btn btn-minus' data-index='{{index}}' data-num='{{item.num}}' bindtap='numSub'>-</button>
+              <view class='num'>{{item.num}}</view>
+              <button class='goods-btn btn-add' data-index='{{index}}' bindtap='numAdd'>+</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cart-fixbar">
+  <view class="allSelect">
+    <checkbox class='cart-cb' data-select="{{allSelect}}" bindtap="allSelect" checked="{{allSelect}}" />
+    <view class="allSelect-text">全选</view>
+  </view>
+  <view class="count">
+    <text>合计：￥</text>{{filters.toFix(priceCount)}}
+  </view>
+  <view class="order" catchtap='naviToPay'>
+    去结算
+    <text class="allnum">({{goodsNum}})</text>
+  </view>
+</view>

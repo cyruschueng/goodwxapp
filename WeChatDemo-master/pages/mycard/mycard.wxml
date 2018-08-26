@@ -1,0 +1,51 @@
+<!--pages/mycard/mycard.wxml-->
+<view class='page'>
+  <view class='page__bd' style='padding:40px 22px;'>
+    <view style="background:url('{{backimg}}') no-repeat;" class='my_info'>
+      <view class='person'>
+        <view class='person_name'>{{info.name}}</view>
+        <view class='person_info'>
+          <view class='title_img'>
+            <view class='img'>
+              <image style='height:100%;width:100%;' src='../../image/iphone.png'></image>
+            </view>
+            <view class='mark'>电话</view>
+            <view class='company'>{{tel}}</view>
+          </view>
+          <view class='title_img'>
+            <view class='img'>
+              <image style='height:100%;width:100%;' src='../../image/major.png'></image>
+            </view>
+            <view class='mark'>专业</view>
+            <view class='company'>{{info.zhuanye_info.name}}</view>
+          </view>
+          <view class='title_img'>
+            <view class='img'>
+              <image style='height:100%;width:100%;' src='../../image/person.png'></image>
+            </view>
+            <view class='mark'>行业</view>
+            <view class='company'>{{info.hangye_info.name}}</view>
+          </view>
+          <view class='title_img' wx:if="{{info.company != null}}">
+            <view class='img'>
+              <image style='height:100%;width:100%;' src='../../image/company.png'></image>
+            </view>
+            <view class='mark'>公司</view>
+            <view class='company'>{{info.company}}</view>
+          </view>
+        </view>
+      </view>
+      <view style='position:absolute;right:25px;top:25px;'>
+        <view class='head_portrait' wx:if="{{info.headImg != null}}">
+          <image style='width:100%;height:100%;' src='{{info.headImg}}'></image>
+        </view> 
+      </view>
+    </view>
+  </view>
+  <view class='qrcode'>
+    <view class='my_card'>校友会名片</view>
+    <view class='qrcode_img'>
+      <image style='widht:100%;height:100%;' src='{{smallimg}}'></image>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,156 @@
+<import src="../../style/footer.wxml" />
+
+<view class="page">
+  <scroll-view lower-threshold="800" bindscrolltolower="pullUpLoad" upper-threshold="0" scroll-y="true" style="height: {{windowHeight}}px;  ">
+    <view class="page__bd">
+
+      <!--<button type="primary" bindtap="toAddDiary" hover-class="other-button-hover"> 增加日记 </button>-->
+      <view class="weui-panel">
+       <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="输入名字" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">输入名字进行搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+
+        <view class="weui-panel__hd">日志列表</view>
+        <view class="weui-panel__bd">
+<block wx:if="{{diaryList.length>0}}">
+  <view class="weui-media-box weui-media-box_text" wx:for="{{diaryList}}" wx:key="diaryItem"   >
+    <text class="classname" bindtap="toModifyDiary"  data-name="{{item.name}}"     data-date="{{item.date}}" data-timeA="{{item.time1}}" data-timeB="{{item.time2}}" data-timeC="{{item.time3}}" >
+      <text class="weui-media-box__title weui-media-box__title_in-text"  bindtap="toModifyDiary" >
+              {{item.date}}  {{item.name}}
+      </text>
+            
+      <text   bindtap="toModifyDiary" >【打卡时间】正常：{{item.time1}}  |  夜间：{{item.time2}}  |  通宵：{{item.time3}}</text>
+     
+    </text>
+  </view>
+</block>
+<block wx:else>
+           <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text">
+             数据查询中.....</view>
+            <view class="weui-media-box__desc"></view>
+
+          </view>
+</block>
+
+        </view>
+      </view>
+    </view>
+    <view class="page__ft">
+      <view class="page__bd page__bd_spacing">
+        <view class="weui-footer ">
+          <view class="weui-footer__text">Copyright © 2016- 大木君</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+
+<view class="js_dialog" id="androidDialog1" style="opacity: 1;" wx:if="{{writeDiary}}">
+  <view class="weui-mask"></view>
+  <view class="weui-dialog weui-skin_android">
+    <view class="weui-dialog__hd"><strong class="weui-dialog__title">日志详细</strong>  </view>
+    <form bindsubmit="addDiary" report-submit="true">
+    <view  style="display:flex;">日期: <input name="title" style="width:150rpx" value="{{nowDate}}" />  </view>
+    <view  style="display:flex;">姓名: {{nowName}}   </view>
+    <view  style="display:flex;">打卡: 正常：{{t1}} 夜间：{{t2}} 通宵：{{t3}} </view>
+<view class="classname"></view>
+      <view class="section" style="border-top:1px solid #000000" >
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" style="display:flex;">
+          
+            任务1：{{array[index]}}
+         
+        </picker>
+      </view>
+
+ <view  style="display:flex;">正常：<input name="title" style="width:50rpx" placeholder="0.0" />夜间：<input name="title" style="width:50rpx"/> 通宵：<input name="title" style="width:50rpx"/>   </view>
+
+ <view class="section" style="border-top:1px solid #000000" >
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" style="display:flex;">
+          
+            任务2：{{array[index]}}
+         
+        </picker>
+      </view>
+
+ <view  style="display:flex;">正常：<input name="title" style="width:50rpx" />夜间：<input name="title" style="width:50rpx"/> 通宵：<input name="title" style="width:50rpx"/>   </view>
+ <view class="section" style="border-top:1px solid #000000" >
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" style="display:flex;">
+          
+            任务3：{{array[index]}}
+         
+        </picker>
+      </view>
+
+ <view  style="display:flex;">正常：<input name="title" style="width:50rpx" />夜间：<input name="title" style="width:50rpx"/> 通宵：<input name="title" style="width:50rpx"/>   </view>
+ <view class="section" style="border-top:1px solid #000000" >
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" style="display:flex;">
+          
+            任务4：{{array[index]}}
+         
+        </picker>
+      </view>
+
+ <view  style="display:flex;">正常：<input name="title" style="width:50rpx" />夜间：<input name="title" style="width:50rpx"/> 通宵：<input name="title" style="width:50rpx"/>   </view>
+
+
+      
+      <view class="weui-dialog__ft" style="border-top:1px solid #000000" >
+        <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="noneWindows">取消</view>
+        <button loading="{{loading}}" class="weui-dialog__btn weui-dialog__btn_primary" formType="submit">提交</button>
+      </view>
+    </form>
+  </view>
+</view>
+
+
+
+
+
+<view class="js_dialog" id="androidDialog2" style="opacity: 1;" wx:if="{{modifyDiarys}}">
+  <view class="weui-mask"></view>
+  <view class="weui-dialog weui-skin_android">
+    <view class="weui-dialog__hd"><strong class="weui-dialog__title">修改日记</strong>  </view>
+    <form bindsubmit="modifyDiary">
+      <view class="weui-dialog__bd">
+        <view class="weui-cells__title">标题</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="title" value="{{nowTitle}}" placeholder="请输入标题" />
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells__title">日记内容</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" name="content" value="{{nowContent}}" placeholder="请输入日记内容" style="height: 3.3em" />
+              <view class="weui-textarea-counter">0/200</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-dialog__ft">
+        <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="noneWindows">
+        取消</view>
+        <button loading="{{loading}}" class="weui-dialog__btn weui-dialog__btn_primary" 
+        formType="submit">提交</button>
+      </view>
+    </form>
+  </view>
+</view>

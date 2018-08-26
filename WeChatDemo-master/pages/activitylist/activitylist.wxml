@@ -1,0 +1,53 @@
+<!--pages/activitylist/activitylist.wxml-->
+<view class='page'>
+  <view class='page_bd'>
+    <view class='activity'>
+      <block wx:for="{{activitylist}}"  wx:for-item="activity">
+        <view class='actitle'>
+          <view class='actitle2'>
+            <text style='font-size:14px;color:#999999;'>{{activity.date}}</text>
+          </view>
+        </view>
+        <navigator url='../activityinfo/activityinfo?id={{activity.id}}' open-type='navigate' hover-class="navigator-hover">
+          <view class='acontent'>
+            <view class='content'>
+              <!-- <text style='font-size:10px;'>{{activity.date}}</text> -->
+              <text style='font-size:25px;font-family:"黑体"'>{{activity.day}}</text>
+              <text style='font-size:13px;'>{{activity.week}}</text>
+            </view>
+            <view class='content2'>
+              <view style='display: flex;flex-direction:column;height:100%;padding-left:8%;'>
+                <view class='content2-mes'>
+                  <text style='font-size:16px;color:#333333;display:block;width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>{{activity.title}}</text>
+                </view>
+                <view class='content2-people' style=''>
+                  <text style='font-size:12px;color:#999999;'>已有</text>
+                  <text style='font-size:20px;color:#2ebd59;'>{{activity.baoming}}</text>
+                  <text style='font-size:12px;color:#999999;'>人加入</text>
+                </view>
+                <view class='content2-time'>
+                  <view class='message' style='justify-content: flex-start;'>
+                    <text class='time' style="width:8%;" >时间　</text>
+                    <text class='time' style="width:80%;">{{activity.date}}</text>
+                  </view>
+                  <view class='message'  style='justify-content: flex-start;width:100%;'>
+                    <text class='time' style="width:8%;">地点　</text>
+                    <text class='time' style='display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>{{activity.address}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view style='width:23%;padding:10px;' wx:if='{{false}}'>
+              <view style='height:100%;width:100%;'>
+                <image src='{{src}}{{activity.imgsrc}}' mode='{{mode}}' style='height:90px;width:90px;'></image>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+    <view style='padding:15px 15px;'>
+      <button class="weui-btn" type="primary" style='background-color:#2ebd59;' bindtap="createac">创建活动</button>
+    </view>
+  </view>
+</view>

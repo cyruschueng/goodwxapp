@@ -1,0 +1,22 @@
+<import src="/zanui/toast/index.wxml" />
+<view class="container page__bd" style="position: relative;">
+    <view class="flex_row_center">
+        <image lazyload="true" bindtap="preview" mode="aspectFit" src="{{pic_url}}" style="width:{{width}}rpx;max-width:750rpx;height: {{height}}rpx;margin:0 {{margin}}rpx;margin-top: 30rpx;"></image>
+    </view>
+    <view style="margin-top: 30rpx;height: 230rpx;">
+        <form bindsubmit="save" report-submit="true">
+            <button class="weui-btn" form-type="submit" type="primary" style="width:600rpx;height: 88rpx;line-height:88rpx;">
+                保存到相册
+            </button>
+        </form>
+        <view class="flex_center">
+            <form bindsubmit="select" report-submit="true">
+                <button open-type="share" class="weui-btn" form-type="submit" type="default" style="width:600rpx;margin-left:20rpx;height: 88rpx;line-height:88rpx;margin-top: 20rpx;">
+                    邀请朋友玩
+                </button>
+            </form>
+        </view>
+
+    </view>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

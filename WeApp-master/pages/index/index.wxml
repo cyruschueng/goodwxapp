@@ -1,0 +1,274 @@
+<!-- flower_container.wxml -->
+<view class="container flower_container">
+  <!-- <view class="flower-header-bg" background-size="contain" /> -->
+  <view class="flower-header-bg" />
+
+  <view class="flower-list-content">
+    <!-- <view class="userinfo"> -->
+    
+      <view class="userinfo">
+        <view class="flex-view-item">    
+        <view wx:if="{{hasUserInfo}}" class="userinfo-title">
+          <view>
+            <text class="info-text">{{currentTitle}}粉丝</text>
+          </view>
+          <text class="info-nickName">{{userInfo.nickName}}</text>
+        </view>
+        </view>
+        <view class="flex-view-item">
+          <button class="grant-btn" size="mini" type="primary" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登陆授权 </button>
+          <block wx:else>
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+          </block>
+        </view>
+        <view class="flex-view-item">
+          <view class="userinfo-favstar">
+            <text class="info-favStar">守护明星:</text>
+            <picker bindchange="everStarChange" value="{{everStarIndex}}" range="{{everStarnames}}">
+              <view>
+                <text class="info-favStar">{{everStarnames[everStarIndex]}}</text>
+                <image class="drop_down" src="../images/drop_down.png" />
+              </view>
+            </picker>
+            <text class="info-text">贡献值: {{everStarContris[everStarIndex]}}</text>
+          </view>
+        </view>
+      </view>
+    <!-- </view> -->
+
+
+    <!-- <picker bindchange="everStarChange" value="{{everStarIndex}}" range="{{everStarnames}}"> -->
+
+    <!-- <view>
+        <image class="drop_down" src="../images/drop_down.png" />
+      </view> -->
+    <!-- </picker> -->
+    <!-- <view class="userinfo-favstar">
+        <text class="info-favStar">守护明星:</text>
+        <picker bindchange="everStarChange" value="{{everStarIndex}}" range="{{everStarnames}}">
+          <view>
+            <text class="info-favStar">{{everStarnames[everStarIndex]}}</text>
+            <image class="drop_down" src="../images/drop_down.png" />
+          </view>
+        </picker>
+        <text class="info-text">贡献值: {{everStarContris[everStarIndex]}}</text>
+      </view> -->
+    <!-- </view> -->
+
+
+    <!--滑动tab区域-->
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">最热网红</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">头牌明星</view>
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">贡献排行</view>
+    </view>
+    <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 300}}px" bindchange="bindChange">
+
+      <!--最热网红-->
+      <swiper-item>
+        <picker bindchange="whTypeChange" value="{{whTypeIndex}}" range="{{whCategories}}">
+          <view class="picker">
+            {{whCategories[whTypeIndex]}}
+            <image class="drop_down" src="../images/drop_down.png" />
+          </view>
+        </picker>
+        <block wx:if="{{numWH > 0}}">
+          <button class="add_btn" bindtap="addWH" type="warn">添加网红</button>
+        </block>
+        <view class="page">
+          <view class="page__hd">
+            <!-- <view class="page__title">赶快为你感兴趣的网红添加数据吧！</view> -->
+            <view wx:if="{{numWH==0}}" class="page__desc">赶快为你感兴趣的网红添加数据吧！</view>
+          </view>
+          <view class="page__bd page__bd_spacing">
+            <view wx:if="{{numWH==0}}" class="add_star">
+              <button class="add_btn" bindtap="addWH" type="warn">添加网红</button>
+            </view>
+            <scroll-view wx:else class="main-rank-list" scroll-y style="height:{{winHeight - 350}}px">
+              <block wx:for-items="{{whsList}}" wx:for-item="item" wx:key="item">
+                <view class="rank-item">
+                  <block wx:if="{{index == 0}}" class="rank-item">
+                    <text class="rank-item-pos" style="color:#C40000;">1</text>
+                  </block>
+                  <block wx:elif="{{index == 1}}" class="rank-item">
+                    <text class="rank-item-pos" style="color:#4A90E2;">2</text>
+                  </block>
+                  <block wx:elif="{{index == 2}}" class="rank-item">
+                    <text class="rank-item-pos" style="color:#707070;">3</text>
+                  </block>
+                  <block wx:else class="rank-item">
+                    <text class="rank-item-pos">{{index+1}}</text>
+                  </block>
+                  <image class="rank-item-portrait" src="{{item.avatar}}" mode="aspectFill"/>
+                  <view class="rank-item-info">
+                    <view wx:if="{{item.openid==openid}}">
+                      <text class="rank-item-info-name" style="color:red;">{{item.whname}}</text>
+                    </view>
+                    <view wx:else>
+                      <text class="rank-item-info-name">{{item.whname}}</text>
+                    </view>
+                    <text class="rank-item-flowernum">{{item.flowernum}}</text>
+                  </view>
+                  <view wx:if="{{item.floweredWHToday==true}}">
+                    <image data-name="{{item.whname}}" bindtap="unflowerWH" class="iflove" src="{{item.floweredWHToday?'../images/love.png':'../images/nolove.png'}}" />
+                  </view>
+                  <view wx:if="{{item.floweredWHToday==false||item.floweredWHToday==undefined}}">
+                    <image data-name="{{item.whname}}" bindtap="flowerWH" class="iflove" src="{{item.floweredWHToday?'../images/love.png':'../images/nolove.png'}}" />
+                  </view>
+                </view>
+              </block>
+            </scroll-view>
+          </view>
+        </view>
+      </swiper-item>
+      <!--头牌明星-->
+      <swiper-item>
+        <picker bindchange="starTypeChange" value="{{starTypeIndex}}" range="{{starCategories}}">
+          <view class="picker">
+            {{starCategories[starTypeIndex]}}
+            <image class="drop_down" src="../images/drop_down.png" />
+          </view>
+        </picker>
+        <!-- 前三名 -->
+    <scroll-view scroll-y style="height:{{winHeight - 350}}px">
+        <view class="top3-list">
+          <block wx:for-items="{{top3Stars}}" wx:for-item="item" wx:key="item">
+
+            <view wx:if="{{index == 0}}" class="rank-item">
+              <text class="rank-item-pos" style="color:#C40000;">1</text>
+              <image class="rank-item-portrait" src="{{item.avatar}}" mode="aspectFill"/>
+              <view class="rank-item-info">
+                <text class="rank-item-info-name">{{item.starname}}</text>
+                <text class="rank-item-flowernum">{{item.flowernum}}</text>
+              </view>
+              <view wx:if="{{item.floweredToday==true}}">
+                <image data-name="{{item.starname}}" bindtap="unflowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+              <view wx:if="{{item.floweredToday==false||item.floweredToday==undefined}}">
+                <image data-name="{{item.starname}}" bindtap="flowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+            </view>
+            <view wx:if="{{index == 1}}" class="rank-item">
+              <text class="rank-item-pos" style="color:#4A90E2;">2</text>
+              <image class="rank-item-portrait" src="{{item.avatar}}" mode="aspectFill"/>
+              <view class="rank-item-info">
+                <text class="rank-item-info-name">{{item.starname}}</text>
+                <text class="rank-item-flowernum">{{item.flowernum}}</text>
+              </view>
+              <view wx:if="{{item.floweredToday==true}}">
+                <image data-name="{{item.starname}}" bindtap="unflowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+              <view wx:if="{{item.floweredToday==false||item.floweredToday==undefined}}">
+                <image data-name="{{item.starname}}" bindtap="flowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+            </view>
+            <view wx:if="{{index == 2}}" class="rank-item">
+              <text class="rank-item-pos" style="color:#707070">3</text>
+              <image class="rank-item-portrait" src="{{item.avatar}}" mode="aspectFill"/>
+              <view class="rank-item-info">
+                <text class="rank-item-info-name">{{item.starname}}</text>
+                <text class="rank-item-flowernum">{{item.flowernum}}</text>
+              </view>
+              <view wx:if="{{item.floweredToday==true}}">
+                <image data-name="{{item.starname}}" bindtap="unflowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+              <view wx:if="{{item.floweredToday==false||item.floweredToday==undefined}}">
+                <image data-name="{{item.starname}}" bindtap="flowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+            </view>
+          </block>
+        </view>
+        <!-- 领奖台式排序 -->
+        <!-- <view class="top-1">
+             <view class="user-portrait-1" style="background: url({{userInfo.avatarUrl}}) no-repeat center center;background-size: cover;">
+              <image class="user-rank-icon" src="../images/img_reward_one.png" />
+            </view>
+            <view>
+              <text class="user-name-1">迪丽热巴</text>
+            </view>
+            <text class="user-flowernum-1">1131</text> 
+          </view>
+          <view class="top-2">
+             <view class="user-portrait-2" style="background: url({{userInfo.avatarUrl}}) no-repeat center center;background-size: cover;">
+              <image class="user-rank-icon" src="../images/img_reward_two.png" />
+            </view>
+            <view>
+              <text class="user-name-1">迪丽热巴</text>
+            </view>
+            <text class="user-flowernum-1">1131</text> 
+          </view>
+          <view class="top-3">
+          
+            <view class="user-portrait-3" style="background: url({{userInfo.avatarUrl}}) no-repeat center center;background-size: cover;">
+              <image class="user-rank-icon" src="../images/img_reward_three.png" />
+            </view>
+            <view>
+              <text class="user-name-1">迪丽热巴</text>
+            </view>
+            <text class="user-flowernum-1">1131</text>
+          </view>
+        </view> -->
+        <!-- 其他排行 -->
+        <view class="main-rank-list">
+          <block wx:for-items="{{otherStars}}" wx:for-item="item" wx:key="item">
+            <view class="rank-item">
+              <text class="rank-item-pos">{{index+4}}</text>
+              <image class="rank-item-portrait" src="{{item.avatar}}" mode="aspectFill"/>
+              <view class="rank-item-info">
+                <text class="rank-item-info-name">{{item.starname}}</text>
+                <text class="rank-item-flowernum">{{item.flowernum}}</text>
+              </view>
+              <view wx:if="{{item.floweredToday==true}}">
+                <image data-name="{{item.starname}}" bindtap="unflowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+              <view wx:if="{{item.floweredToday==false||item.floweredToday==undefined}}">
+                <image data-name="{{item.starname}}" bindtap="flowerStar" class="iflove" src="{{item.floweredToday?'../images/love.png':'../images/nolove.png'}}" />
+              </view>
+            </view>
+          </block>
+        </view>
+    </scroll-view>        
+      </swiper-item>
+      <!--贡献排行-->
+      <swiper-item>
+        <scroll-view class="main-rank-list" scroll-y style="height:{{winHeight - 350}}px">
+          <block wx:for-items="{{supportersList}}" wx:for-item="item" wx:key="item">
+            <view class="rank-item">
+              <block wx:if="{{index == 0}}" class="rank-item">
+                <text class="rank-item-pos" style="color:#C40000;">1</text>
+              </block>
+              <block wx:elif="{{index == 1}}" class="rank-item">
+                <text class="rank-item-pos" style="color:#4A90E2;">2</text>
+              </block>
+              <block wx:elif="{{index == 2}}" class="rank-item">
+                <text class="rank-item-pos" style="color:#707070;">3</text>
+              </block>
+              <block wx:else class="rank-item">
+                <text class="rank-item-pos">{{index+1}}</text>
+              </block>
+
+              <image class="rank-item-portrait" src="{{item.avatar}}" mode="aspectFill"/>
+              <view class="rank-item-info">
+                <view wx:if="{{item.openid==openid}}">
+                  <text class="rank-item-info-name" style="color:red;">{{item.username}}</text>
+                </view>
+                <view wx:else>
+                  <text class="rank-item-info-name">{{item.username}}</text>
+                </view>
+                <text class="rank-item-flowernum">{{item.contribution}}</text>
+              </view>
+              <view wx:if="{{item.openid==openid}}">
+                <text class="rank-item-info-title" style="color:red;">{{item.title}}</text>
+              </view>
+              <view wx:else>
+                <text class="rank-item-info-title">{{item.title}}</text>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+
+  </view>
+
+</view>

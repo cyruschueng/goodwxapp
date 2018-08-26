@@ -1,0 +1,17 @@
+<!--pages/joinShop/joinShop.wxml-->
+<view class='container'>
+  <swiper indicator-dots='true' indicator-color='#878590' indicator-active-color='#080806' autoplay='true' interval='3000' duration='500' class='hd-slide'>
+    <block wx:for='{{imgUrl}}' wx:key='unique'>
+      <swiper-item>
+        <image src='{{item.thumb}}' class='slide-image'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <form bindsubmit="formSubmit">
+    <block wx:for='{{input_items}}' wx:key='code'>
+      <input type='text' name="{{item.name}}" placeholder='{{item.placeholder}}' data-id='{{index}}' bindblur='inputFn'></input>
+    </block>
+    <textarea name="content" placeholder='请输入您的公司及品牌' bindblur='inputFn' data-id='4'></textarea>
+    <button formType="submit">提交按钮</button>
+  </form>
+</view>

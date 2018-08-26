@@ -1,0 +1,114 @@
+<!--pages/talents/talentComparison.wxml-->
+
+<view class='body'>
+
+  <view class='compList-view' hidden='{{ !showBigVideoHidden }}'>
+  <block wx:for="{{ comparisons }}" wx:key="{{ index }}" wx:for-index='compIndex' wx:for-item="comp">
+  <view class='panel' style='{{ index%2 == 0 ? "float:left;" : "float:right;" }}'>
+
+    <!-- 头部 -->
+    <view class='panel-title'>
+      <image class='avatar' mode='aspectFill' src='{{ comp.title.avatar }}'></image>
+      <view class='main-txt-color'>{{ comp.title.username }}<text class='identity'>{{ comp.title.identity }}</text></view>
+      <view class='second-txt-color'>从业{{ comp.title.experience }}年</view>
+      <view class='second-txt-color'>交易记录：{{ comp.title.transaction }}</view>
+      <view class='second-txt-color'>
+        <text >综合评分：{{ comp.title.score }}分</text>
+        <view class='header-start-icon'>
+          <block wx:for="{{ comp.title.scores }}" wx:for-item="score" wx:key="{{ index }}">
+            <image src='{{ score == "red" ? "../../images/start-red.png" : "../../images/start.png" }}'></image>
+          </block> 
+        </view> 
+      </view>
+    </view>
+
+    <!-- 个人简介 -->
+    <view class='introduce'>
+      <view class='title' style='border-left: 3px #FDBD76 solid;'>
+        <text>个人简介</text>
+      </view>
+      <view class='third-txt-color content' style='{{ comp.introduce.introduceHidden ? "overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;" : "" }}'>{{ comp.introduce.text }}</view>
+      <view class='pack-up' id='{{ compIndex }}' bindtap='bindIntroduceHiddenTap'>{{ comp.introduce.introduceHidden ? '展开' : '收起' }}<image src='{{ comp.introduce.introduceHidden ? "../../images/pack-down.png" : "../../images/pack-up.png" }}'></image></view>
+    </view>
+
+    <!-- 风格 -->
+    <view class='style' wx:if='{{ comp.style.styles.length > 0 }}'>
+      <view class='title' style='border-left: 3px #77C34F solid;'>
+        <text>风格</text>
+      </view>
+      <view class='content'>
+        <view class='style-btn' wx:for="{{ comp.style.styles }}" wx:key="{{ index }}">{{ item }}</view>
+      </view>
+    </view>
+
+    <!-- 作品展示 -->
+    <view class='show' wx:if='{{ comp.show.showImgs.length > 0 }}'>
+      <view class='title' style='border-left: 3px #3699FF solid;'>
+        <text>作品展示</text>
+      </view>
+      <view class='content'>
+        <block wx:for="{{ comp.show.showImgHidden ? comp.show.showImgs : comp.show.allShowImgs }}" wx:key="{{ index }}">
+        <image class='show-img' src='{{ item.imgsrc }}' mode='aspectFill' id='{{ index }}' data-compindex='{{ compIndex }}' bindtap='bindShowImgTap'>
+          <image class='show-video-icon' wx:if='{{ item.vediosrc }}' src='../../images/video-icon.png'></image>
+        </image>
+        </block>
+      </view>
+      <view class='pack-up' id='{{ compIndex }}' bindtap='bindShowImgHiddenTap' wx:if='{{ comp.show.allShowImgs.length > 2  }}'>
+        {{ comp.show.showImgHidden ? '展开' : '收起' }}
+        <image src='{{ comp.show.showImgHidden ? "../../images/pack-down.png" : "../../images/pack-up.png" }}'></image>
+      </view>
+    </view>
+
+    <!-- 评论 -->
+    <view class='comment' wx:if='{{ comp.comment.coms.length > 0 }}'>
+      <view class='title'>
+        <text>评论</text>
+      </view>
+      <view class='content' style='{{ index == comp.comment.coms.length ? "border-bottom-style: none;" : "" }}' wx:for="{{ comp.comment.showAllComsHidden ? comp.comment.allComs : comp.comment.coms }}" wx:key="{{ index }}" wx:for-item="com">
+        <view>
+          <image class='comment-avatar' src='{{ com.avatar }}'></image>
+          <text class='comment-username'>{{ com.name }}</text>
+          <view class='header-start-icon'>
+            <block wx:for="{{ com.score }}" wx:for-item="score" wx:key="{{ index }}">
+            <image src='{{ score == "red" ? "../../images/start-red.png" : "../../images/start.png" }}'></image>
+            </block>
+          </view> 
+        </view>
+        <view class='third-txt-color'>{{ com.desc }}</view>
+      </view>
+      <view class='pack-up' id='{{ compIndex }}' bindtap='bindShowComsHiddenTap'>
+        {{ comp.comment.showAllComsHidden ? '收起' : '展开' }}
+        <image src='{{ comp.comment.showAllComsHidden ? "../../images/pack-up.png" : "../../images/pack-down.png" }}'></image>
+      </view>
+    </view>
+    
+  </view>
+  </block>
+  </view>
+
+  <!-- 弹窗 -->
+  <view class='showVideo' hidden='{{ showBigVideoHidden }}'>
+    <!-- index -->
+    <view class='numberText'>
+      <text>{{ showBigIndex }}</text>/{{ showBigUrlsBrowse.length }}
+      <text class='hiddenVideo' bindtap='bindPackupVideo'>X</text>
+    </view>
+    <!-- 视频 -->
+    <view class="we-container">
+      <view class="we-wrapper"
+        bindtouchstart="touchstart"
+        bindtouchmove="touchmove"
+        bindtouchend="touchend"
+        animation="{{ animationData }}">
+        <block wx:for="{{ showBigUrlsBrowse }}" wx:key="{{ index }}">
+        <view class="we-slide" >
+          <video class='video' wx:if='{{ item.vediosrc }}' id="{{ index }}" src="{{ item.vediosrc }}"></video>
+          <image class='video' wx:else id="{{ index }}" src="{{ item.imgsrc }}"></image>
+        </view>
+        </block>
+      </view> 
+    </view> 
+    <view class='foot-view'>{{ showBigTime }}</view>
+  </view> 
+
+</view>

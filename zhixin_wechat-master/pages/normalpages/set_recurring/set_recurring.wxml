@@ -1,0 +1,32 @@
+<!--pages/normalpages/set_recurring/set_recurring.wxml-->
+
+<view class="container">
+    <!-- 周期选择 -->
+    <radio-group class="radio-group" bindchange="radioChange">
+        <view class="content-box">
+        
+            <view class="head-body-top">
+                <view class="title-text">
+                    每周
+                </view>
+
+                <view class="day-selector">
+                    <view class="day-box" wx:for="{{weekVisual}}" wx:key="{{index}}" id="{{item.id}}" data-date="{{item}}" bindtap="onSelectDay">
+                        <view class="day-item {{item.selected?'day-item-selected':''}}">{{item.value}}</view>
+                        <view class="day-item-tips">
+                            <text>{{item.hasparts}}</text>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="gray-space-small"></view>
+            </view>
+        </view>
+
+    </radio-group>
+
+    <view class="foot-box">
+        <button class='single-confirm-btn' type='primary' size='default' bindtap='onConfirm'>确定</button>
+    </view>
+
+</view>

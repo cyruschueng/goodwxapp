@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS搜索</title>
+</head>
+
+<body>
+    <input id="key-word" class="key-word" value="请输入搜索内容" />
+    <button id="search-button">搜索</button>
+    <div id="content">
+        <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如1234abcd啊啊啊啊</p>
+        <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如1234abcd啊啊啊啊</p>
+        <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如1234abcd啊啊啊啊</p>
+        <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如1234abcd啊啊
+            < d d>啊啊</p>
+    </div>
+    <script>
+    function $(id) {
+        return document.getElementById(id)
+    }
+    var putWordsObj = $('key-word');
+    putWordsObj.onfocus = function() {
+        if (this.value == '请输入搜索内容') this.value = '';
+    }
+    putWordsObj.onblur = function() {
+        if (!this.value) this.value = '请输入搜索内容';
+    }
+    //search
+    $('search-button').onclick = function() {
+        var content = $('content').innerHTML;
+        console.log(content);
+        var keyWord = $('key-word').value;
+        content = search_do(content, keyWord);
+        $('content').innerHTML = content;
+    }
+
+    function search_do(content, keyWord) {
+        var keyWordArr = keyWord.replace(/[\s]+/g, ' ').split(' ');
+        var re;
+        for (var n = 0; n < keyWordArr.length; n++) {
+            //re = new RegExp(">[\s\S]*?"+keyWordArr[n]+"[\s\S]*?<\S","gmi");
+            re = new RegExp("" + keyWordArr[n] + "", "gmi");
+            content = content.replace(re, '<span style="color:#0f0;background-color:#ff0">' + keyWordArr[n] + '</span>');
+        }
+        return content;
+    }
+    </script>
+</body>
+
+</html>

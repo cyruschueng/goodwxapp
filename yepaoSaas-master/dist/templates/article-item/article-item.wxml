@@ -1,0 +1,21 @@
+
+
+
+<template name='article-item'>
+
+  <view class='article-cell' hidden='{{ !title }}' data-title='{{ title }}' data-mesgtype='{{ mesgType }}' id='{{ mesgId }}' bindtap='bindArticleCellTap'>
+  
+    <image class='left-icon' src='{{ leftImg }}'></image>
+
+    <view class='right-view'>
+      <view class='up-view'>
+        <text>{{ title }}</text>
+        <text class='time-text'>{{ time }}</text>
+      </view>
+      <view class='down-view'>{{ content }}</view>
+      <view wx:if='{{ newMessNum > 0 }}' class='remind-rou {{ newMessNum.length > 2 ? "remind-rou-long" : "" }}'>{{ newMessNum }}</view>
+    </view>
+    
+  </view>
+
+</template>

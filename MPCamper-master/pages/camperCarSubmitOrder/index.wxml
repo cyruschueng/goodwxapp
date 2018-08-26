@@ -1,0 +1,105 @@
+<import src="../../components/calendar/calendar.wxml" />
+<import src="../../components/toast/toast.wxml" />
+
+<template is="toast" data="{{ ...$wux.toast }}" />
+<template is="calendar" data="{{ ...$wux.calendar.start }}" />
+<template is="calendar" data="{{ ...$wux.calendar.end }}" />
+
+<view class="container">
+        <view class="page__bd">
+                <view class="weui-form-preview">
+                        <view class="weui-form-preview__hd_e">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview_columm__label">
+                                                <text class="title">{{camperCarDetail.CampOwerName}}</text>
+                                                <text class="info">{{camperCarDetail.BedNum}}张床 宜住{{camperCarDetail.FitCheckNum}}人</text>
+                                        </view>
+                                        <view class="weui-form-preview__value_in-hd">
+                                                <image style="width:50px; height:50px;border-radius: 50%;" src='{{camperCarDetail.Logo}}' mode='aspectFill'></image>
+                                        </view>
+                                </view>
+                        </view>
+
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">{{camperCarDetail.CamperTypeName}}</view>
+                                        <view class="weui-form-preview__value_in-hd">¥{{camperCarDetail.DailyPrice}}/晚</view>
+                                </view>
+                        </view>
+
+                        <view class='line'></view>
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">入住日期</view>
+                                        <view class="weui-form-preview__value" bindtap="openCalendarS">{{ start || '选择入住日期' }}</view>
+                                </view>
+                        </view>
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">退房日期</view>
+                                        <view class="weui-form-preview__value" bindtap="openCalendarS">{{ end || '选择退房日期' }}</view>
+                                </view>
+                        </view>
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">开具发票 需要支付￥10邮费</view>
+                                        <view class="weui-form-preview__value">
+                                                <checkbox-group bindchange="checkboxChange">
+                                                        <checkbox value="发票" />
+                                                </checkbox-group>
+                                        </view>
+                                </view>
+
+                                <view class="weui-form-preview__item" wx:if="{{showInvoiceAddress}}">
+                                        <view class="weui-form-preview__label_e">{{invoiceInfo}}</view>
+                                        <view class="weui-form-preview__value" bindtap="chooseInvoice">{{invoiceEdit}}</view>
+                                </view>
+                                <view class="weui-form-preview__item" wx:if="{{showInvoiceAddress}}">
+                                        <view class="weui-form-preview__label_e">{{addressInfo}}</view>
+                                        <view class="weui-form-preview__value" bindtap="chooseAddress">{{addressEdit}}</view>
+                                </view>
+
+                        </view>
+
+                        <view class='line'></view>
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">预订人信息</view>
+                                        <view class="weui-form-preview__value" bindtap='modifyUserInfo'>{{NickName}}（{{Phone}}）</view>
+                                </view>
+                        </view>
+                        <view class='line'></view>
+
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">房费({{day}}晚)</view>
+                                        <view class="weui-form-preview__value">￥{{roomPrice}}</view>
+                                </view>
+                                <view class="weui-form-preview__item" wx:if="{{showInvoiceAddress}}">
+                                        <view class="weui-form-preview__label_e">发票邮费</view>
+                                        <view class="weui-form-preview__value">￥{{postage}}</view>
+                                </view>
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">押金</view>
+                                        <view class="weui-form-preview__value">￥{{foregift}}</view>
+                                </view>
+                        </view>
+                        <view class='line'></view>
+                </view>
+                <view class="h3">退订政策</view>
+                <view class="content">暂不支持退订！特殊情况，请联系客服。</view>
+        </view>
+
+</view>
+
+<view class="content-b">
+        <view class="content-c ">
+                <view class='content-left'>
+                        <text class="title">实付款：</text>
+                        <text class="content-title">￥{{totalPrice}}</text>
+                </view>
+                <view class='content-right' bindtap="submitOrder">
+                        <button style="width:100px;line-height: 40px; height: 40px;font-size: 30rpx;" type="warn">确认预订</button>
+                </view>
+        </view>
+</view>

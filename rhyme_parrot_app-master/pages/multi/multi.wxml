@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<!-- <import src='../../component/toast/toast.wxml'/> -->
+<view class="container">
+    <view class='nav' style='position: relative;padding-bottom:0;margin-bottom:10px;'>
+      <view class='nav-top'>
+        <view class="help" bindtap='openHelp'>使用说明</view>
+        <search bind:onSearch="searchRequest" searchKey="{{searchKey}}" maxlength="17"></search>
+        <button class='shareBtn' id="shareBtn" open-type="share" hover-class="other-button-hover">
+        <image src="{{shareIcon}}"></image>分享
+        </button>
+      </view>
+    </view>
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+      <view class="modal-content">
+        <view class='modal-content-item'>多押鹦鹉是一款支持多押的押韵工具。</view>
+        <view class='modal-content-item'>它可以把你输入的文字自动切分为多个词，对每个词分别押韵，得到候选词语，供你选择、组合出满意的押韵句子。</view>
+        <view class='modal-content-item'>你可以滑动候选的押韵词语，向下翻页寻找满意的词，也可以点击一些词把它们加入你的心动区，以后慢慢挑选</view>
+        <view  class='modal-content-item'>如果你对文字的切分不满意，也可以自己用空格切分，最多支持单个词语五押。</view>
+         <view  class='modal-content-item'>tengyu.site提供技术支持，欢迎提建议和转发。</view>
+      </view>
+      <view class="modal-footer">
+        <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">知道了，去试试</view>
+      </view>
+    </view>
+
+    <view class='love-area'><image class="love-icon" src="{{loveIcon}}"></image>我的心动区</view>
+    <view class='selected-result' style='height:{{mulTiHei}}px'>
+      <scroll-view class='multi-item' scroll-y="true" wx:for="{{list}}" wx:for-index="idx"  wx:for-item="item" style="width:{{mulTiItemW*list[idx].cands[0].length}}px" scroll-top="{{list[idx].scrollTop}}" id="{{idx}}">
+        <text selectable='true' class="item-cand" wx:for="{{item.select}}"  wx:for-index="sidx" wx:for-item="selected" bindtap="del" id="{{idx}}-{{sidx}}" >{{selected}}</text>
+      </scroll-view>
+    </view>
+    <view class='love-area'><image class="love-icon" src="{{noticeIcon}}"></image>点击心动区词语，可以删除当前选择的词语</view>
+    <view class='search-result' style='height:{{mulTiHei}}px'>
+      <view  class='multi-item' scroll-y="true" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" style="width:{{mulTiItemW*item.cands[0].length}}px" id="{{idx}}" >
+        <picker-view indicator-style="height:{{mulTiItemW + 15}}px;" style="width: 100%; height: {{mulTiHei}}px;line-height:{{mulTiItemW + 15}}px" value="{{value}}" bindchange="loadMore" id="{{idx}}">
+          <picker-view-column>
+            <text selectable='true' wx:for="{{item.cands}}" wx:for-index="cidx" wx:for-item="cand" bindtap="select" id="{{idx}}-{{cand}}"  bindtap='select'>{{cand}}</text>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </view>
+</view>
+
+

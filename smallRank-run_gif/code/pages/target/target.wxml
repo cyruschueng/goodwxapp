@@ -1,0 +1,31 @@
+<view class="target_box">
+  <view class="target_item" wx:for="{{list}}" wx:for-index="index" bindtap='select' data-goal="{{item.goal}}">
+  <view class="selectcol" wx:if="{{item.goal==select}}"></view>
+    <view class="imgs">{{item.rank}}</view>
+    <view class="goal">
+      <view class="num">{{item.goal}}</view>
+      <view class="name">{{item.title}}</view>
+    </view>
+    <view class="select" wx:if="{{item.goal==select}}">
+      <view class="square"><text>当前目标</text></view>
+      <view class="triangle"></view>
+    </view>
+  </view>
+  <!-- <view class="zdy" bindtap='showzdy'>
+    <view class="left">
+      <view class="left_s">自定义目标</view>
+      <view class="left_x">设定目标步数</view>
+    </view>
+    <view class="right1">> </view>
+    <view class="right2"> {{zdyGoal}} </view>
+  </view> -->
+</view>
+<!-- <view class="menceng">
+<view class="set">
+  <view class="set_title">自定义目标</view>
+  <view class="set_goal">{{zdyGoal}}/view>
+  <view class="set_text"></view>
+  <view class="set_slider"></view>
+  <button class="set_btn">保存</button>
+</view>
+</view> -->

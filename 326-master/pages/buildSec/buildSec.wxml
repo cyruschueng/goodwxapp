@@ -1,0 +1,26 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+<!--创建电站str  -->
+<form bindreset="formReset">  
+<view class='buildSec'>
+    <view class='flexA flex'>电站名称
+    <view class='color3'>*</view>
+  </view>
+  <input class='pd05' placeholder='请输入电站名称' name="staName" bindinput='staNameInput'/>
+  <view>电站描述</view>
+  <textarea class='pd05' type="text" placeholder='请输入电站描述' name="staDesc" bindinput='staDescInput'></textarea>
+  <view>电站图片</view>
+  <view class='bgColor0 flexBetw flexCenter' catchtap="chooseImageTap">电站图片
+    <view class='flexCenter'>
+      <image class="imgL"src="{{logo}}"></image>
+      <image class="imgxs"src="/images/next.png"></image>
+    </view>
+  </view>
+</view>
+  <!--创建电站end  -->
+  <view class='flex flexCenter '>
+       <button formType="submit" disabled='{{buildSecdis}}' class='Skin  br02 btn' bindtap='listPage'>完成</button>
+      </view> 
+    </form>   
+  <template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

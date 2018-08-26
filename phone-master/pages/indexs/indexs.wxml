@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+    <view class='management'>
+        <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
+        <view class='right' wx:if="{{self}}" bindtap='management'>照片管理</view>
+        <view class='right' wx:else bindtap='mySelf'>我也要玩</view>
+    </view>
+    <view class='photo'>
+        <image wx:for="{{photos}}" data-index='{{index+1}}' data-position='{{item.position}}' 
+              class="item{{item.position}} small {{move==false?'ball':''}}" bindtap='prewImg' data-picture='{{item.photo_url}}'
+               mode='aspectFill' src="{{item.photo_url}}" ></image>
+    </view>
+    <view class='notice'>注：自己可以上传多张，每个朋友只能上传一张</view>
+    <view class='buttons'>
+        <view class='active' bindtap='upPhoto'>上传照片</view>
+        <view class='active' wx:if="{{self}}"><button form-type="submit" open-type='share'>邀请好友拼图</button></view>
+        <view class='active' wx:if="{{self}}" bindtap='produce'>生成照片墙</view>
+    </view>
+</view>

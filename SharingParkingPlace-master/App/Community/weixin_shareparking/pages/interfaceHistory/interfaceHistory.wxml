@@ -1,0 +1,24 @@
+<import src="../../style/footer.wxml" />
+
+<view class="page__bd">
+    <view class="page__hd i-header">
+      <view class="i-header-h1 h50">河长制助手——</view>
+      <view class="i-header-h1">新型河道水污检测与管理系统</view>
+    </view>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+        <view class="weui-cells__title" style='text-align:center'>报警历史记录</view>
+        <view class="weui-cells__tips">
+          <view>将所有的检测指标从云服务器获取之后，对比用户按照每条河流每个指标设置的域值，分析处理后在界面实时地显示报警状态、报警类别，并会同时地通过微信、邮件等方式向河道的负责人发送报警信息进行处理。确认消除警报后将记录添加至历史记录中。\n</view>
+
+        </view>
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap='switchTab'>查看历史报警信息</button>
+        </view>
+    </form>
+</view>
+
+
+<template is="foot" />
+

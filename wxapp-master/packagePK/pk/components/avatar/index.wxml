@@ -1,0 +1,12 @@
+<view class="avatar-wrap" animation="{{animationData}}">
+    <view class="avatar">
+        <image class="avatar-img" src="{{userInfo.headImgUrl ? userInfo.headImgUrl : 'https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67ed6c38a55.png'}}"></image>
+        <view wx:if="{{isMaker}}" class="maker">擂主</view>
+    </view>
+    <view class="nick-name">{{userInfo.nickName ? userInfo.nickName : '？？？'}}</view>
+    <view hidden="{{isHiddenOtherInfo}}">
+        <view class="province">来自{{userInfo.province}}</view>
+        <view class="level">Lv.{{userInfo.level.now || userInfo.level}}</view>
+        <view class="appearance-fee">出场费：{{userInfo.appearanceFee}}两银子</view>
+    </view>
+</view>

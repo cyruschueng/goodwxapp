@@ -1,0 +1,27 @@
+<view class="make-motto">
+  <view class="card-bg">
+    <view class="card">
+      <view class="banner">
+        <image class="banner-image" bindtap="onTapBanner" src="{{bannerUrl}}" mode="widthFix" />
+        <image class="banner-qrcode" bindtap="onTapQrcode" src="{{qrcodeUrl}}" mode="widthFix" />
+      </view>
+
+      <view class="quotes-symbol">
+        <image class="icon-quotes" src="{{iconQuotesUrl}}" mode="widthFix" />
+      </view>
+
+      <view class="quotes">{{motto}}</view>
+
+      <view class="extra-info">
+        <text class="quotes-time">{{creTime}}</text>
+        <text class="quotes-source">{{mottoSource}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="motto-btns">
+    <button type="primary" bindtap="creImage">生成图片</button>
+  </view>
+
+  <canvas canvas-id="canvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"></canvas>
+</view>

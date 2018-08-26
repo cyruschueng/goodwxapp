@@ -1,0 +1,38 @@
+<view class="wrap" bindtouchend="cleared">
+  <view class="calendarBox">
+    <view class="exchange">
+      <view class="{{selected?'selected type':'type'}}" bindtap="tabchange">纸票</view>
+      <view class="{{selected1?'selected type':'type'}}" bindtap="tabchange1">电票</view>
+    </view>
+    <view class="chooseBox">
+      <view class="last" bindtap="last" bindtouchstart="changeLeft"><image src="../../image/last.png" style="opacity:{{lightleft}}"></image></view>
+      <view class="next" bindtap="next" bindtouchstart="changeRight"><image src="../../image/next.png" style="opacity:{{lightright}}"></image></view>
+
+      <picker mode="selector" bindchange="bindPickerChange2" value="{{order}}" range="{{ym2}}" class="choose">
+        <view class="picker">{{ym2[order]}}</view>
+      </picker>
+
+      <picker mode="selector" bindchange="bindPickerChange" value="{{order}}" range="{{ym}}" class="choose" style="display:none;">
+        <view class="picker">{{ym[order]}}</view>
+      </picker>
+    </view>
+
+    <view class="dayBox">
+      <view class="dayItem" wx:for="{{day}}" wx:key="id"><text>{{item.day}}</text></view>
+    </view>
+    <view class="dateBox">
+      <view class="dayLimit">
+        <view class="dateItem" wx:for="{{calendarData}}" wx:key="index">
+          <view class="circle {{ym[order]+'-'+((index+1)-times)==now?today:''}}">
+            <text class="day">{{item==0?'':(index+1)-times}}</text>
+            <text class="accural">{{item==0||item==-1?'':item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view>
+    <loading wx:if="{{showLoading}}">加载中</loading>
+  </view>
+</view>

@@ -1,0 +1,77 @@
+<view class="page">
+  <view class="book-seize"></view>
+  <view class="white-bg padding-left-30 padding-right-30">
+    <view class="border-bottom">
+      <view class="read-user-img float-left margin-top-30 margin-bottom-30 margin-right-30">
+        <image src="{{reaction.userInfo.avatar}}" class="read-photo" mode="aspectFill"></image>
+      </view>
+      <view class="read-user-word float-left">{{reaction.userInfo.nick_name}}</view>
+      <view class="read-user-time float-right">{{reaction.twInfo.create_time}}</view>
+      <view class="clear"></view>
+    </view>
+    <view class="padding-top-30 padding-bottom-30">
+      <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{reaction.twInfo.title}}</view>
+      <view class="{{reaction.twInfo.see?'':'text-fourline'}} book-font weui-flex padding-top-30 margin-bottom-30">
+        {{reaction.twInfo.intro}}
+      </view>
+      <view wx:if="{{reaction.twInfo.intro.length>120}}">
+        <view wx:if="{{reaction.twInfo.see}}" class="text-oneline look-font" bindtap="transformationFalse">收起</view>
+        <view wx:else class="text-oneline look-font" bindtap="transformationTrue">查看</view>
+      </view>
+      <view wx:if="{{reaction.twStepInfos.length>0}}">
+        <view class="book-font weui-flex padding-top-30">
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files">
+              <block wx:for="{{reaction.twStepInfos}}">
+                <view class="weui-uploader__file">
+                  <image class="weui-uploader__img" src="{{item.img}}" mode="aspectFill" />
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{reaction.twInfo.book_id!=null}}">
+        <view wx:for="{{bookInfo}}" wx:for-index="id">
+          <view wx:if="{{reaction.twInfo.book_id==item.id}}">
+            <view class="white-bg margin-top-20 add-book-detail padding-top-40 padding-bottom-20 border-t" bindtap="jumpBookInfo" data-bookid="{{item.id}}">
+              <view class="book-img">
+                <image src="{{item.images_medium}}" class="book-img-detial" mode="aspectFill"></image>
+              </view>
+              <view class="book-info">
+                <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{item.title}}</view>
+                <view wx:if="{{item.summary}}" class="text-threeline margin-bottom-10 book-font">{{item.summary}}</view>
+                <view wx:else>
+                  <view class="text-oneline margin-bottom-10 book-font">{{item.subtitle}}</view>
+                  <view class="text-oneline margin-bottom-10 book-font">作者：{{item.author}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="book-seat"></view>
+  <view class="white-bg weui-flex book-shara-box border-top">
+    <!-- <view class="book-share1" bindtap="getScan">
+      <image src="/images/book-borrow.png" class="share-img margin-right-50"></image>
+    </view>
+    <view class="book-share2" bindtap="getScan">
+      借阅
+    </view> -->
+    <view class="book-share3" bindtap="addReaction">
+      <image src="/images/book-reaction.png" class="share-img"></image>
+    </view>
+    <view class="book-share4" bindtap="addReaction">
+      书评
+    </view>
+    <button class="book-share5 book-shara-background-green" open-type="share">
+      <image src="/images/book-share.png" class="share-img"></image>
+    </button>
+    <button class="book-share6 book-shara-background-green" open-type="share">
+      分享
+    </button>
+  </view>
+</view>

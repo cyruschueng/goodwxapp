@@ -1,0 +1,58 @@
+<!--pages/prize/prize.wxml-->
+<view>
+
+  <view class='btnGroup'>
+    <navigator url='' class='black'><view>奖品列表</view></navigator>
+    <navigator url='../rich/rich' open-type="redirect" class='black'><view>花漾大礼</view></navigator>
+    <navigator url='../game/game' open-type="redirect" class='black'><view>返回抽奖</view></navigator>
+  </view>
+  <text class='rule_text'>{{prizeText}}
+  </text>
+  <view>
+    <view class='rule_list_title content_center'>
+      <view>编号</view>
+      <view>奖品名称</view>
+      <view class='m_l_15'>中奖时间</view>
+      <view>寄送</view>
+    </view>
+     <!-- <text  data-id="{{item.id}}" bindtap='send'>寄送</text> -->
+    <view class='rule_list_content '>
+      <view wx:if="{{unde}}" class='center f_c_c' >您的奖品列表为空！！</view>
+      <view  wx:for="{{rule_list_content}}" class=''><!--//>奖品列表-->
+        <text style="width:16%">{{index+1}}</text>
+        <text class="prizename" bindtap='showdetail' 
+        data-prize="{{item.market_price}}" data-good_name="{{item.good_name}}"  
+        data-dsc="{{item.good_dsc}}">{{item.good_name}}
+        </text>
+        <text class='timeformat'>{{item.time}}</text>
+         <text  data-id="{{item.id}}" bindtap='send'>寄送</text><!-- -->
+      </view>
+    </view>
+    <view class="section"> 
+      <picker bindchange="bindPickerChange" value="{{indexs}}" range="{{pageNum}}">
+        <view class="picker" wx:if="{{pageNum!=''}}">
+          {{pageNum[indexs]}}共{{totalNam}}页
+        </view>
+      </picker>
+    </view>  
+  </view>
+
+</view>
+<view class="modal" wx:if="{{ismodal}}">
+  <view class='modal-dialog'>
+    <view class='modal-title' >
+       {{modaltitle}}
+    </view>
+    <view class='contentdateil'>{{modalcontent}}</view>
+    <view class='textsize'>
+      为您节省{{prize}}元
+    </view>
+    <view  class='colse content_center m_10'>
+      <!-- <button type='warn' size='mini'>点击查看</button> -->
+      <button type='warn' size='mini' bindtap='modalhide'>关闭</button> 
+    </view>  
+  </view>
+</view>
+
+
+

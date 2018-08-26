@@ -1,0 +1,74 @@
+<!--pages/personage/personage.wxml-->
+<view class="personage-toubu">
+</view>
+<view class="userinfo">
+  <text class="userinfo-nickname">wx11111</text>
+  <image class="userinfo-avatar" src="/images/iconfont/touxiang.png" background-size="cover"></image>
+</view>
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">时间轴</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">交易记录</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">基本信息</view>
+</view>
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <!-- 时间轴 -->
+  <swiper-item class="case">
+    <view class='track'>
+      <view class='x1'>
+        <image src='/images/iconfont/house.png' class='x2'></image>
+        <view class='x3'>2017-11-14 12:19</view>
+      </view>
+      <view class='x4'>
+      <image src='/images/iconfont/touxiang.png' class='x6'></image>
+        <view class='x5'>到访门店</view>
+        <view class='x7'>万博欧时力店</view>
+      </view>
+    </view>
+    <view class='wire'></view>
+  </swiper-item>
+  <!-- 交易记录 -->
+  <swiper-item class="case">
+    <view class='record'>
+      <view class='e1'>商品名称：gdf</view>
+      <view class='e2'>交易金额：$50</view>
+      <view class='e3'>交易数量：45</view>
+      <view class='e4'>2015年6月6日</view>
+    </view>
+  </swiper-item>
+  <!-- 基本信息 -->
+  <swiper-item class="case">
+    <view class='o1'>
+      <view class='p1'>
+        <text class='te1'>微信昵称：</text>
+        <text class='te2'>wx11111</text>
+      </view>
+    </view>
+    <view class='o2'>
+      <view class='p2'>
+        <text class='te1'>微信头像：</text>
+        <image class="te3" src="/images/iconfont/touxiang.png" background-size="cover"></image>
+      </view>
+    </view>
+    <view class='o1'>
+      <view class='p1'>
+        <text class='te5'>姓名：</text>
+        <text class='te2'></text>
+      </view>
+    </view>
+    <view class='o1'>
+      <view class='p1'>
+        <text class='te4'>手机号：</text>
+        <text class='te2'></text>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
+
+
+<view class='tian'>
+  <image src='/images/iconfont/hua.png' class='h1'></image>
+  <view class='liao'></view>
+  <image src='/images/iconfont/lian.png' class='h1'></image>
+  <image src='/images/iconfont/jia.png' class='h1'></image>
+</view>

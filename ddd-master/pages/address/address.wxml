@@ -1,0 +1,50 @@
+<!--pages/address/address.wxml-->
+<view class='df fyc baseArea'>
+    <view class='h3 fc-000'>收货人 :</view>
+    <input
+      data-inputType='username'
+      bindinput='saveAddressInfo'>
+    </input>
+</view>
+<view class='df  fyc baseArea'>
+    <view class='h3 fc-000'>手机号 :</view>
+    <input
+      type='number'
+      data-inputType='telNumber'
+      bindinput='saveAddressInfo'>
+    </input>
+</view>
+
+<view class="df baseArea">
+  <view class="info df f1 fyc splitLine">
+    <view class="mr20 h3">选择省份:</view>
+    <picker  bindchange="bindPickerChange" value="{{provinceId}}" range="{{province}}">
+      <view class="picker h3">
+        {{province[provinceId]}}
+      </view>
+    </picker>
+  </view>
+  <view class="info df f1 fyc ">
+    <view class="mr20 h3 ml30">选择城市:</view>
+    <picker  bindchange="bindPickerCity" value="{{cityId}}" range="{{city[provinceId].cities}}">
+      <view class="picker h3">
+        {{city[provinceId].cities[cityId]}}
+      </view>
+    </picker>
+
+  </view>
+</view>
+
+<view class='df fyc baseArea'>
+    <view class='h3 fc-000' >详细地址 :</view>
+</view>
+<textarea
+  class='minput'
+  data-inputType='addressDetailInfo'
+  bindinput='saveAddressInfo'>
+</textarea>
+
+
+<view class="df fxyc">
+    <button class='mt80 addressSubmit' bindtap='onAddressSubmit'></button>
+</view>

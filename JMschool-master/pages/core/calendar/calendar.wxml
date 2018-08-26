@@ -1,0 +1,62 @@
+<!--index.wxml-->
+<view class="calendar-root">
+
+    <view class="calendar-title">
+        <text class="year">2017-2018学年度</text>
+        <text class="semester">第一学期</text>
+         <!-- <button class="changestyle" bindtap="changeStyle">{{styleshow}}</button>  -->
+    </view>
+
+    <view class="{{onehidden}}">
+    <view class="calendar-navbar">
+        <view class="calendar-navbar-button" bindtap="goToday">今日</view>
+        <view class="calendar-navbar-button" bindtap="goLastMonth">{{"<"}}</view>
+        <view class="calendar-navbar-date">{{date}}</view>
+        <view class="calendar-navbar-button" bindtap="goNextMonth">{{">"}}</view>
+        <picker class="calendar-navbar-button" mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">跳转</picker>
+    </view>
+
+    <view class="calendar-head">
+        <view wx:for="日一二三四五六" wx:key="*this">{{item}}</view>
+    </view>
+
+    <view class="calendar-body">
+      <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
+          <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
+            <view class="calendar-body-item" wx:if="{{arrIsShow[row *7 +col]}}" data-day-index="{{row*7+col}}">
+              <view class="{{infoIsShow[row*7+col]}} calendar-body-day">
+                  <view class="{{isToday[row*7+col]}}">{{arrDays[row*7+col]}}</view>
+              </view>
+              <view class="calendar-body-dayex">
+                {{arrInfoEx[row*7+col]}}
+              </view>
+            </view>
+          </view>
+        </view>
+    </view>
+    </view>
+
+    <view class="{{twohidden}}">
+
+        <view class="months" wx:for="{{months}}" wx:key="monthsId" wx:for-item="m" data-index="{{index}}">
+            <text class="monthName">{{m}}</text>
+            <view class="week">
+            <view class="weekName" wx:key="weekNameId" wx:for="{{weekName}}" wx:for-item="w">{{w}}</view>
+            </view>
+                <view class="month-body">
+                   <view class="month-body-y" wx:for="123456" wx:key="123456Id" wx:for-index="y">
+                       <view class="month-body-x {{arrMonth[index].febIsShow[y*7+x]}}" wx:for="1234567" wx:key="1234567Id" wx:for-index="x">
+                            <view class="month-body-item " wx:if="{{arrMonth[index].arrIsShow2[y*7+x]}}">
+                                <view class="{{arrMonth[index].infoIsShow2[y*7+x]}}  month-body-day">
+                                <view class="{{arrMonth[index].isEnd[y*7+x]}}">{{arrMonth[index].arrDays2[y*7+x]}}</view>
+                                </view>
+                                <view class="month-body-dayex {{arrMonth[index].isEnd[y*7+x]}}">{{arrMonth[index].arrInfoEx2[y*7+x]}}</view>
+                            </view>
+                        </view>
+                        <view class="weekNum {{arrMonth[index].numIsShow[y*7+6]}} {{arrMonth[index].febWIsShow[y*7+6]}}">第{{arrMonth[index].weekNum[y*7+6]}}周</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+            
+</view>

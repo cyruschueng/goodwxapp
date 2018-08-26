@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn1">jsonp</button>
+<button id="btn2">cors</button>
+<script type="text/javascript" src="jquery-1.11.1.js"></script>
+<script type="text/javascript">
+    $('#btn1').on('click', function(){
+        $.getJSON('http://localhost:3000/ajax/jsonp?callback=?',{userName:'lili', age:18}, function(data){
+            console.log(data);
+        });
+    });
+    $('#btn2').on('click', function(){
+        $.post('http://localhost:3000/ajax/cors',{userName:'lili', age:20}, function(data){
+            console.log(data);
+        });
+    });
+</script>
+</body>
+</html>

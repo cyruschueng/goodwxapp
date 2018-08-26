@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "管理用户列表";
+}
+
+@section headerCss{
+
+}
+<blockquote class="layui-elem-quote">说明：增删改查系统管理员</blockquote>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>管理员列表</legend>
+</fieldset>
+
+<div class="searchTool layui-form" style="margin-left:18px;">
+    <div class="layui-inline">
+        <input class="layui-input" id="userName" autocomplete="off" placeholder="请输入用户名">
+    </div>
+    <div class="layui-inline">
+        <button class="layui-btn searchBtn" data-type="reload">搜索</button>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn" href="/layui/LayUiAdminUserInfo/Add" data-type="add">新增</a>
+    </div>
+</div>
+<table class="layui-hide" id='adminUserInfos' lay-filter="adminUserInfos"></table>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+</script>
+
+@section footerJs{
+    <script>
+        layui.config({
+            base: '/Areas/LayUI/Content/commonJs/'
+            , version: '1515376178710'
+        }).extend({
+            myFormat: 'myFormat',
+            myAjax: 'myAjax'
+        });
+    </script>
+    <script>
+        layui.use(['table', 'myFormat','myAjax'], function () {
+            var table = layui.table, form = layui.form;
+            var myFormat = layui.myFormat;
+            var aj = layui.myAjax;
+
+            table.render({
+                elem: '#adminUserInfos'
+                , url: '/layui/LayUiAdminUserInfo/List'
+                , cols: [[
+                    { type: 'checkbox', fixed: 'left' },
+                    { field: 'Id', width: 80, title: '序号', fixed:true }
+                    , { field: 'UserName', width: 150, title: '用户名' }
+                    , { field: 'LoginSuccessTimes', width: 150, title: '登录次数' }
+                    , { field: 'LastLoginIp', width: 150, title: '登录IP' }
+                    , { field: 'LastLoginDate', width: 180, title: '最后成功登录时间', templet: "<div>{{getDate(d.LastLoginDate)}}</div>"}
+                    , {
+                        field: 'CreateOn', width: 180, title: '创建时间', templet: "<div>{{getDate(d.CreateOn)}}</div>"
+                        }
+                    , { fixed: 'right', width: 90, align: 'center', toolbar: '#bar', title: '操作' }
+
+                ]]
+                , page: true
+                , height: 'full-200'
+                , id: "dataTable"
+            });
+
+            //监听工具条
+            table.on('tool(adminUserInfos)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                        aj.postNoSyncReq('/layui/LayUiAdminUserInfo/Delete', { id: data.Id });
+                    });
+                }
+            });
+
+            var $ = layui.$, active = {
+
+                reload: function () {
+                    var userName = $('#userName');
+                    //执行重载
+                    table.reload('dataTable', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            userName: userName.val()
+                        }
+                    });
+                }
+            }
+
+            $('.searchTool .searchBtn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+    </script>
+}

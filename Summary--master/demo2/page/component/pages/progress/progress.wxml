@@ -1,0 +1,56 @@
+<view class="spacing">
+  <view class="weui-flex">
+    <view class="weui-flex__item">
+      <progress style="color:red" percent="30" backgroundColor="{{backgroundColor}}" activeColor="{{activeColor}}" show-info="{{showInfo}}" active="{{active}}" stroke-width="{{strokeWidth}}" />
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells">
+  <view class="weui-cell weui-cell_switch">
+    <view class="weui-cell__bd">显示百分比</view>
+    <view class="weui-cell__ft">
+      <switch data-name="showInfo" checked="{{showInfo}}" bindchange="onSwitchChange" />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_switch">
+    <view class="weui-cell__bd">进度条动画</view>
+    <view class="weui-cell__ft">
+      <switch data-name="active" checked="{{active}}" bindchange="onSwitchChange" />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view class="weui-label">进度条宽度</view>
+    </view>
+    <view class="weui-cell__bd">
+      <slider data-name="strokeWidth" bindchange="onSliderChange" value="{{strokeWidth}}" show-value min="2" max="20" />
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">进度条前景色</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group data-name="activeColor" bindchange="onRadioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['#10AEFF','#ff00ff','#aaAEFF']}}" wx:key="value">
+                    <radio class="weui-check" value="{{item}}" checked="{{item == activeColor}}"/>
+                    <view class="weui-cell__bd" style="color:{{item}}">{{item}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item == activeColor}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
+                </label>
+  </radio-group>
+</view>
+
+<view class="weui-cells__title">背景色</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group data-name="backgroundColor" bindchange="onRadioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['#ccc','#eee','#aaa']}}" wx:key="value">
+                    <radio class="weui-check" value="{{item}}" checked="{{item == backgroundColor}}"/>
+                    <view class="weui-cell__bd" style="color:{{item}}">{{item}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item == backgroundColor}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
+                </label>
+  </radio-group>
+</view>

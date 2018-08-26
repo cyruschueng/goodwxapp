@@ -1,0 +1,58 @@
+<!--index.wxml-->
+<view class="container fullPage">
+  <view class="sort" wx:if="{{hasOrderList}}">
+
+       <view class="sortTop">
+            <view class="sortBtn {{sortChoosed=='dateType'?'active':''}}" bindtap="_chooseSort" data-type="dateType"><text>{{sortData.dateType.text}}</text><image src="../../../images/ic_down.png"></image></view>
+						<view class="sortBtn {{sortChoosed=='status'?'active':''}}" bindtap="_chooseSort" data-type="status"><text>{{sortData.status.text}}</text><image src="../../../images/ic_down.png"></image></view>
+						<view class="sortInput" bindtap='_toSearch'><image src="../../../images/icon_search.png"></image></view>
+			 </view>
+
+			 <view class="sortPlant" wx:if="{{sortChoosed}}">
+			     <view class="{{sortData[sortChoosed].code==sortOptions[sortChoosed][0].code?'selected':''}}" data-code="{{sortOptions[sortChoosed][0].code}}" data-text="{{sortOptions[sortChoosed][0].text}}" bindtap="_sortSelect" wx:key="{{sortOptions[sortChoosed][0].text}}">{{sortOptions[sortChoosed][0].text}}</view>
+					 <view style="clear:both;width:0;height:0;margin:0;"></view>
+           <view class="{{sortData[sortChoosed].code==item.code?'selected':''}}" wx:for="{{sortOptions[sortChoosed]}}" wx:if="{{index>0}}" data-code="{{item.code}}" data-text="{{item.text}}" bindtap="_sortSelect" wx:key="{{item.text}}">{{item.text}}</view>
+			 </view>
+			 <view class="sortShadow" wx:if="{{sortChoosed}}"></view>
+
+	</view>
+	<view class="container fullPage" wx:if="{{!hasOrderList}}">
+		<view class="firstIn">
+			<view class="import vc">
+				<view class="tipImg">
+					<image src="../../../images/img.png" mode="aspectFit">
+					</image>
+				</view>
+				<view class="add_tip"><image bindtap="toCreateOrder" src="../../../images/creater.png"></image></view>
+			</view>
+		</view>
+	</view>
+	<view wx:else class="fullPage scroller_container">
+	  <view class='middleLine'><view class="middle_text">共{{fullListSize}}个订单</view></view>
+		<view wx:for="{{list}}" wx:key="{{list}}" data-status="{{item.status}}" data-step="{{item.orderStep}}" data-id="{{item.id}}" bindtap="_toDetail">
+			<view class="item">
+						<view class="left">
+							<view class="carName">{{item.autoModelChnName}}</view>
+							<view class="userInfo space-between">
+                  <view class="info"><text>{{item.userName?item.userName:''}}</text><text>{{item.vehicleLicenceCode?item.vehicleLicenceCode:''}}</text></view>
+                  <view class="date"><text>{{item.dateStr}}</text></view>
+              </view>
+						</view>
+						<view class="right">
+							<view class="status status1" wx:if="{{item.status==1}}"><image src="../../../images/ic_state1.png"></image></view>
+							<view class="status status2" wx:if="{{item.status==2}}"><image src="../../../images/ic_state2.png"></image></view>
+							<view class="status status3" wx:if="{{item.status==3}}"><image src="../../../images/ic_state3.png"></image></view>
+							<view class="status status4" wx:if="{{item.status==4}}"><image src="../../../images/ic_state4.png"></image></view>
+							<view class="status status5" wx:if="{{item.status==5}}"><image src="../../../images/ic_state5.png"></image></view>
+							<view class="status status6" wx:if="{{item.status==6}}"><image src="../../../images/ic_state6.png"></image></view>
+              <view class="status status6" wx:if="{{item.status==7}}"><image src="../../../images/ic_state7.png"></image></view>
+						</view>
+			</view>
+		</view>
+		<view class="weui-loadmore" wx:if="{{isLoadMore}}">
+			<view class="weui-loading"></view>
+			<view class="weui-loadmore__tips">正在加载</view>
+		</view>
+
+	</view>
+</view>

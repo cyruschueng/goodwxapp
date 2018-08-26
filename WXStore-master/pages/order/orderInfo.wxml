@@ -1,0 +1,30 @@
+<!--pages/order/orderInfo.wxml-->
+<wxs module="filters" src="../../utils/tools.wxs"></wxs>
+<view class="container">
+  <view class='orderItem'>
+    <view style='display: flex;flex-direction: row; justify-content: space-between;'>
+      <view class='orderNo'>订单号：{{orderInfo.orderNo||'00000000'}}</view>
+    </view>
+    <view wx:for="{{orderInfo.goods}}" wx:key="item.id" data-id='{{item.id}}' class='orderInfo' catchtap='goodsInfo'>
+      <image mode='aspectFit' src='{{item.imgUrl||"../images/head.png"}}'></image>
+      <view class='order-info'>
+        <view class='order-title'>{{item.title}}</view>
+        <view class='order-count'>
+          <view class='order-price'>￥{{item.price}}</view>
+          <view class='order-num'>x{{item.num}}</view>
+          <view class='order-all'>总价：{{filters.toFix(item.num * item.price)}}</view>
+        </view>
+
+      </view>
+    </view>
+    <view class='order-count'>
+      <view class='order-status'>订单状态：{{orderInfo.status}}</view>
+    </view>
+    <view class='address'>
+      <view>收货地址:{{orderInfo.address.provinceName+orderInfo.address.cityName+orderInfo.address.countyName+orderInfo.address.detailInfo}}</view>
+      <view>收货人姓名:{{orderInfo.address.userName}}</view>
+      <view>联系方式:{{orderInfo.address.telNumber}}</view>
+      <view>邮政编码:{{orderInfo.address.postalCode}}</view>
+    </view>
+  </view>
+</view>

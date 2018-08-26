@@ -1,0 +1,44 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="s_frame" hidden="{{metList=='' || !metList}}">
+    <scroll-view style="height:1108rpx;" scroll-y="true" bindscrolltolower='loadMore'>
+      <view class="t-outBox">
+        <view class="t-insideBox t-project-detailm">
+          <view data-project="{{projectMessage.project_id}}" catchtap="projectDetail">
+            <view class="flex">
+              <view class="t-describle" wx:if="{{projectMessage.pro_intro != ''}}">{{projectMessage.pro_intro}}</view>
+              <image src="/img/img-dujia@2x.png" class="t-projectDetailType" wx:if="{{projectMessage.is_exclusive == 1}}"></image>
+            </view>
+            <view class="t-allIndustry flex" style="text-align:left">
+              <block wx:for="{{projectMessage.pro_industry}}" wx:key="{{index}}" wx:for-item='industry'>
+                <label class="t-noLight">{{industry.industry_name}}</label>
+              </block>
+            </view>
+            <view class="allProjectDetail flex" wx:if="{{projectMessage.pro_area != ''||projectMessage.pro_stage!=''||projectMessage.pro_scale!=''}}">
+              <view class="t-projectDetailLine" wx:if="{{projectMessage.pro_scale != ''}}">{{projectMessage.pro_scale.scale_money}}</view>
+              <view class="t-projectDetailLine" wx:if="{{projectMessage.pro_stage != ''}}">· {{projectMessage.pro_stage.stage_name}}</view>
+              <view class='t-projectDetailLine'>· {{projectMessage.pro_area.area_title}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="titleNum">
+        <template is="allNumber" data="{{count:count,text:'约谈您的项目'}}"></template>
+      </view>
+      <block wx:for="{{metList}}" wx:key="{{metList}}">
+        <view class='investorCard'>
+          <view class="t-investorColor" hover-class='t-hoverColor'>
+            <template is='InvestorCard' data='{{item,user_id,user_mobile}}'></template>
+            <view class="t-alineHeight"></view>
+            <template is='cardBottom1' data='{{item,user_id,user_mobile}}'></template>
+          </view>
+        </view>
+      </block>
+      <template is="theBottom" wx:if="{{jiandi==true}}"></template>
+    </scroll-view>
+  </view>
+  <template is="isEmpty" data="{{emptyNumber:metList}}"></template>
+  <!--没有更多-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

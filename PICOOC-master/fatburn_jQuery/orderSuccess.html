@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <title>支付</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="format-detection"content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ppublic.css">
+    <link rel="stylesheet" type="text/css" href="css/orderSuccess.css?v=1">
+</head>
+<body>
+<section class="container">
+    <aside class="row sucess">
+        <img src="image/withoutCamp/order1.png" alt=""><br>
+        <span class="span1">恭喜您下单成功!</span><br>
+    </aside>
+    <aside class="row leadQuestion">
+        <p>立即填写<span class="greenfont">《入营前调查问卷》</span></p>
+        <p>获取您的专属定制服务</p>
+    </aside>
+    <aside class="row questionImg">
+        <img class="Img1" src="image/withoutCamp/bg14.png">
+    </aside>
+    <aside class="row">
+        <div class="viewOrder toQuestion">立即填写问卷</div>
+    </aside>
+</section>
+
+</body>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" id="script1"></script>
+<script>
+    if(getParamByUrl("webver")>2){
+        if(getParamByUrl("os")=="android"){
+            $("#script1").attr("src","jsv1/orderSuccess.js?v=16");
+        }
+        else{
+            var mobileApp=window.webkit.messageHandlers;
+            $("#script1").attr("src","jsv1/orderSuccess.js?v=16");
+        }
+    }
+    else{
+        $("#script1").attr("src","js/orderSuccess.js?v=16");
+    }
+</script>
+<!--<script type="text/javascript" src="js/orderSuccess.js?v=15"></script>-->
+
+<script>
+    $(function(){
+        $("body").css("height",$(window).height());
+    });
+    //百度统计上传代码
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAutoPageview', false]);
+    _hmt.push(['_trackPageview', location.pathname]);
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+</script>
+</html>

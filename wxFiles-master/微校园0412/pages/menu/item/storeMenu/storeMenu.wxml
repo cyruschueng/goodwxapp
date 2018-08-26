@@ -1,0 +1,103 @@
+<view class="dm">
+  <view class="tit flex-start item-center">
+    <image src="/images/yinhua.png" style="width:230rpx;height:80rpx;" mode="aspectFill"></image>
+    <view style="color:#fff;line-height:85rpx;height:80rpx;margin-left:-40rpx;width:300rpx;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;">{{dianming}}</view>
+  </view>
+  <view bindtap="call" class="tit flex-start item-center">
+    <view style="color:#06c1ae">联系商家</view>
+  </view>
+</view>
+<view class="dmc" style="height:{{innerHeight-100}}px">
+  <scroll-view scroll-y="true" class="dleft" style="height:{{innerHeight-50}}px">
+    <view class="item" style="{{curNav == item.id ? 'background:#fff':''}}" wx:for="{{navList}}" bindtap="selectNav" data-id="{{item.id}}" data-index="{{item.index}}">
+      {{item.name}}
+    </view>
+  </scroll-view>
+  <scroll-view class="dright" scroll-y="true" style="height:{{innerHeight-100}}px; width:{{innerWidth-80}}px">
+    <view class="panel" style="padding-top:0rpx;padding-bottom:0rpx;">
+      <block wx:for="{{foods}}" id="{{item.id}}">
+        <view class="item bottom-line">
+          <view class="tit">
+            <image src="{{item.img}}"></image>
+            <view class="con">
+              <view class="t1">{{item.name}}</view>
+              <view class="t2">月售:{{item.sales}}</view>
+              <view style="height:40rpx;line-height:40rpx;margin-top:86rpx;position:absolute;" wx:if="{{item.discount == 1}}"><text class="t3">¥ {{item.price}}</text></view>
+              <view style="height:40rpx;line-height:40rpx;margin-top:86rpx;position:absolute;" wx:if="{{item.discount != 1}}"><text  class="t3">¥ {{item.dis}}</text><text style="font-size:26rpx;text-decoration: line-through;margin-left:10rpx;color:#aaa">￥{{item.price}}</text></view>
+            </view>
+          </view>
+          <view class="btngroup">
+            <image src="/images/menu/add2.png" class="rel" wx:if="{{item.num>0}}" bindtap="minusGoods" data-id = "{{item.id}}"  data-name="{{item.name}}"></image>
+            <view style="color:#919191;font-size:14px;line-height:45rpx;padding-right:10rpx;padding-left:10rpx;width:30rpx;text-align:center" class="nums" wx:if="{{item.num>0}}" >{{item.num}}</view>
+            <image src="/images/menu/add.png" class="adds" bindtap="addCart" data-id = "{{item.id}}" data-index="{{index}}"  data-name="{{item.name}}" ></image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>
+<view class="dmb">
+  
+</view>
+
+<view class="container" >
+<!--店名-->
+
+<!--cart opacity end-->
+<view class="blank" style="display:{{blankHeight}}" bindtap="showCartGoods"></view>
+
+<!-- cart -->
+<view class="cart">
+
+
+<!--购物车icon-->
+<view class="gouwuche_icon" bindtap="showCartGoods"  style="margin-bottom:{{cartIconStyle}}">
+	<view class="gouwuche_Img">
+		<image class="gimg" src="/images/menu/gwc.png" mode="aspectFill"></image>
+	</view>
+	<view class="gouwuche_Num">
+		<text class="gouwucheTxt">{{totalCount}}</text>
+	</view>
+</view>
+<!--购物车icon end-->
+
+
+	<view class="cartObject" style="display:{{castListStyle}}">
+		<view class="clear" >
+			<view class="Triangle"></view>
+			<image class="clearImg" src="/images/menu/clear.png" mode="aspectFit"></image>
+			<view class="clearText" bindtap="clearCart">清空购物车</view>
+		</view>
+
+
+		<block wx:for="{{cart}}" wx:key="cart"  class="cartBlock">
+			<view class="goods">
+				<view class="goodsName">{{item.name}}</view>
+				<view class="goodsPrice">¥{{item.sum}}</view>
+				<image src="/images/menu/add2.png" class="minusButton" bindtap="minusGoods" data-id = "{{item.id}}"></image>
+				<view style="color:#919191;padding-right:20rpx;padding-left:20rpx" class="goodsNum">{{item.num}}</view>
+				<image src="/images/menu/add.png" class="addButton" bindtap="addGoods" data-id="{{item.id}}"></image>
+			</view>
+		</block>
+	</view>                        
+
+
+
+<!--底部购物车-->
+<view class="bottomCart" bindtap="bottomCart" >
+	<view class="zongji">
+		<text style="color:#fff" >¥</text>
+		<text class="zongjiPrice" style="color:#fff">{{totalPrice}}</text>
+	</view>
+	<view class="{{jscss}}" bindtap="jiesuan">
+	  <view class="jiesuan_text" >结算</view>
+	</view>
+</view>
+<!--底部购物车 end-->
+
+
+
+</view>
+<!--cart  end-->
+
+</view>

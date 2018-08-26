@@ -1,0 +1,230 @@
+<!--pages/beginPuzzles/beginPuzzles.wxml-->
+<view class="container W H oh bge">
+  <view class="container W H f14">
+    <scroll-view class="H scroll bbox" scroll-y="true">
+      <view class="pr">
+        <image class="W" mode='' src="{{posterSrc}}" style="height:{{phoneInfo.windowWidth}}px"></image>
+
+        <view class="pa B0 W bgopacity9 p10 F_ bbox cf" wx:if="{{curGroup.list.length>0 && !bigButton.show}}">
+          <view class="f12 W4 F">
+            <view class="f">还差{{5-curGroup.list.length}}人拼图</view>
+            <view class="f">即可瓜分赏金</view>
+          </view>
+          <view class="f"></view>
+          <view class="W4 F_">
+            <block wx:for="00000" wx:for-index="index">
+            <image class="w25 h25 r" src="{{curGroup.list[index]?curGroup.list[index].user_info.avatarUrl:'../../image/head.png'}}" mode='scaleToFill'></image>
+          </block>
+          </view>                    
+        </view>
+        <view class="pa B0 W bgopacity9 p10 F_ bbox cf" wx:elif="{{bigButton.show}}">
+          <view class="W tc">
+            {{bigButton.content}}
+          </view>                    
+        </view>
+        <view class="pa B0 W bgopacity9 p10 F_ bbox cf" wx:else>
+          <view class="W tc">
+            5人一组比速度，越快赏金越高
+          </view>                    
+        </view>
+
+      </view>
+      <view class="F_ jcc p10-0 bgf">
+        <!-- <block wx:if="{{hasMe}}">
+          <view class="r cf f16 W7 p10-0 bgyellow tc" bindtap="openPuzzle">用时{{personalPuzzles.use_time}}秒</view>
+        </block>
+        <block wx:else>
+          <view class="r cf f16 W7 p10-0 bgyellow tc" bindtap="openPuzzle">{{curGroup.is_finish?"活动已结束":"开始拼图赢赏金"}}</view>
+        </block> -->
+
+        <view class="r cf f16 W9 p10-0 {{bigButton.bg}} tc" bindtap="openPuzzle">{{bigButton.text}}</view>
+
+      </view>
+      <view class="F_ h40 lh40 bgf bte">
+        <view class="f tc" bindtap="urlTarget" data-url="index">
+          <icon class="iconfont icon-homepage f20 mr5 vb cyellow"></icon>
+          <text class='f dib lh30'>首页</text>
+        </view>
+        <view class="f tc" bindtap='urlTarget' data-url="index">
+          <icon class="iconfont icon-manage f20 mr5 vb cyellow"></icon>
+          <text class='f dib lh30'>发海报</text>
+        </view>
+        <view class="f tc dn" bindtap="">
+          <icon class="iconfont icon-redpacket f20 mr5 vb cyellow"></icon>
+          <text class='f dib lh30'>提现</text>
+        </view>
+        <view class="f tc" bindtap="">
+          <button class="W H bbox " open-type='share' plain='true' style="border:none;color:#000;font-size:28rpx;line-height:40px">
+            <icon class="iconfont icon-share f20 mr5 vb cyellow"></icon>分享</button>
+        </view>
+      </view>
+      <view class="F_ bgf p5-10 mt5 bbox h50 c7">
+        <view class="h40">
+          <image class="w40 h40 bd" src="{{ainfo.user_info.logo? imgDir+ainfo.user_info.logo : ainfo.user_info.avatarUrl}}"></image>
+        </view>
+        <view class="f pl10 F">
+          <view class="f f16 b cmain">{{ainfo.user_info.nick_name}}</view>
+          <view class="f f12 F ell">
+            距您{{userDistance}}km
+          </view>
+        </view>
+        <view class="pl10 f14 " bindtap="openInitiatorModal">
+          联系TA
+        </view>
+        <view>
+          <icon class="iconfont icon-enter pl10 c7 lh30 f18"></icon>
+        </view>
+      </view>
+      <view class='p0-10 bbox bgf' wx:if="{{ainfo.description}}">
+        <view class="W p10-0 c7 bbox mt5 bbe f15 F_">
+          <view class="f">海报描述</view>
+          <navigator url="/pages/complain/complain">
+            <view class="f12">投诉</view>
+          </navigator>
+        </view>
+        <view class="W lh20 p10 bge c7 bbox mt10">{{ainfo.description}}</view>
+        <view class="W h10"></view>
+      </view>
+
+      <block wx:for="{{ainfo.description_pic}}">
+        <view class="W bbox bgf {{index>0?'mt-5':''}}">
+          <image class="W" mode="widthFix" src="{{imgDir+item.pic}}" bindtap="priviewImg" data-index="{{index}}" data-src="{{imgDir+item.pic}}"></image>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <!--  -->
+  <view class='W F bgopacity9 pa L0 T0 z2 cf f14 bbox' wx:if="{{showPuzzle}}">
+    <view class="F_ jcc f12 p20-0">
+      <view class="r bf dib p0-70 h30 lh15">
+        <icon class="iconfont icon-time f16 vb ell"></icon>
+        用时{{useTime}}秒
+      </view>
+    </view>
+
+    <view class="W tc cc pt10">点击两张图片交换位置</view>
+
+    <view class="F_ jcc pt10">
+      <view class="w270 h270 bbox pr">
+        <block wx:for="{{arrPic}}">
+          <!-- <view class="C4 h90 dib m0 bbox {{preIndex === index ? 'bRose' : 'bc'}}"> -->
+          <image class="C4 h90 dib m0 bbox {{preIndex === index ? 'bRose' : 'bc'}}" src="{{arrPic[index]}}" data-index="{{index}}" data-src="{{arrPic[index]}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          <!-- </view> -->
+        </block>
+      </view>
+
+    </view>
+
+    <view class="f W tc cc pt10">
+      <view class='h10'></view>
+    </view>
+
+    <view class="F_ jcc f16 p20-0">
+      <view class="r dib pl30 pr30 h40 lh40 bg2" bindtap="cancelGame">
+        <icon class="iconfont icon-prompt f20 vb"></icon>
+        放弃挑战
+      </view>
+    </view>
+  </view>
+
+  <!--  -->
+  <view class="h0">
+    <canvas class="w270 h270 bggreen z1" canvas-id="myCanvas" style="display: block!important;"></canvas>
+  </view>
+</view>
+
+<!-- 拼图成功  -->
+<view class="pa L0 T0 container W bgopacity9" wx:if="{{showSuccessModal}}">
+  <view class="f  F_ f14 jcc">
+    <view class="W9 mt010 bgRose r4 p10 cf">
+      <block wx:if="{{curGroup.is_finish}}">
+        <view class="pt30 pb30 tc">拼图成功，用时{{personalPuzzles.use_time}}秒，本组还差{{10-curGroup.list.length}}人拼图即可获得赏金</view>
+      </block>
+      <block wx:else>
+        <view class="pt30 pb30 tc">拼图成功，用时{{personalPuzzles.use_time}}秒，您获得{{personalPuzzles.get_award}}元赏金已存入余额</view>
+      </block>
+      <view class="W tc bbox">
+        <block wx:for="00000" wx:for-index="index">
+          <image class="w25 h25 r mr5" src="{{curGroup.list[index]?curGroup.list[index].user_info.avatarUrl:'../../image/head.png'}}" mode='scaleToFill'></image>
+        </block>        
+      </view>
+      <view class="F_ pt30 pb30">
+        <block wx:if="1">
+          <button class="W9 p0-80 r f14" type='primary' open-type='share'>邀请微信好友一起拼</button>
+        </block>
+        <block wx:else>
+          <button class="W9 p0-80 r f14" type='primary' bindtap="">立即提现</button>
+        </block>
+      </view>
+    </view>
+    <view class='F_ jcc fss'>
+      <image class="w50 h50" src='../../image/close.png' bindtap="closeSuccessModal"></image>
+    </view>
+  </view>
+</view>
+
+<!-- 联系TA  -->
+<view class="pa L0 T0 container W bgopacity9" wx:if="{{showInitiatorModal}}">
+  <view class="f  F_ f14 jcc">
+    <view class="W9 mt010 bge r4 p10 c9">
+      <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+        <label class="tr w60 c9">微信号</label>
+        <view class='f pl5 ell'>
+          <input class='ell' type='text' disabled='true' value="{{ainfo.user_info.wx}}"></input>
+        </view>
+      </view>
+      <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+        <label class="tr w60 c9">联系人</label>
+        <view class='f pl5'>
+          <input class='ell' type='text' disabled='true' value="{{ainfo.user_info.name}}"></input>
+        </view>
+      </view>
+      <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4" bindtap="contactPoster">
+        <label class="tr w60 c9">联系电话</label>
+        <view class='f pl5'>
+          <input class='ell' type='tel' disabled='true' value="{{ainfo.user_info.mobile}}"></input>
+        </view>
+      </view>
+      <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4 dn">
+        <label class="tr w60 c9">详细地址</label>
+        <view class='f pl5'>
+          <input class='ell' type='text' disabled='true' value="{{ainfo.user_info.address}}"></input>
+        </view>
+      </view>
+      <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4" bindtap="openMap">
+        <label class="tr w60 c9">海报位置</label>
+        <view class='f pl5'>
+          <input class='ell' type='button' disabled='true' placeholder='' value="{{ainfo.user_info.address?ainfo.user_info.address:''}}"></input>
+        </view>
+        <view class="pl5">
+          <icon class="iconfont icon-coordinates f20"></icon>
+        </view>
+      </view>
+      <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4 dn">
+        <label class="tr w60 c9">距离限制</label>
+        <view class='f pl5'>
+          <input class='ell' type='digit' placeholder='只有距您这个范围内的人才可以参与'></input>
+        </view>
+      </view>
+      <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4 dn">
+        <label class="tr w60 c9">Logo：</label>
+        <view class='f pl5 bbox h40'>
+          <image class="w35 h35 m2 r" mode="aspectFill" src="{{logo}}"></image>
+        </view>
+      </view>
+
+      <view class="mt10 bge r4  pr" bindtap="openMap">
+        <map class="W h220" longitude="{{userLng}}" latitude="{{userLat}}" markers="{{markers}}"  controls="{{controls}}" scale="12" show-location='true' bindtap="openMap"></map>
+        <!-- <view class='W H pa L0 T0 bgopacity' bindtap="openMap"></view> -->
+      </view> 
+    </view>
+     <!-- <view class="W9 mt10 bge r4 p10">
+      <map class="W h220" longitude="{{userLng}}" latitude="{{userLat}}" markers="{{markers}}"  controls="{{controls}}" scale="12" show-location='true'></map>
+    </view>  -->
+
+    <view class='F_ jcc fss'>
+      <image class="w45 h45" src='../../image/close.png' bindtap="closeInitiatorModal"></image>
+    </view>
+  </view>
+</view>

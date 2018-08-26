@@ -1,0 +1,24 @@
+<!--pages/myactivity/myactivity.wxml-->
+<view class='app'>
+
+<!--活动样式模板  -->
+<template name="activity">
+  <view class='act-box' data-id='{{id}}' bindtap='navigateTo'>
+    <view class='act-bg' style='background: url("{{image}}") center / cover no-repeat'>
+      <view class='cover-bg'></view>
+      <view class='act-sta'>
+      {{msg}}
+      </view>
+    </view>
+    <view class='act-title'>{{title}}</view>
+  </view>
+</template>
+
+<view wx:for='{{myList}}'>
+  <template is='activity' data='{{...item}}'></template>
+</view>
+
+<view class='load-more'>
+        <view class='more-inner'><icon type='waiting' size='16' color='#ccc'></icon>暂无更多活动</view>
+      </view>
+</view> 

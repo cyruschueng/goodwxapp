@@ -1,0 +1,17 @@
+<!--pages/allpaiming/allpaiming.wxml-->
+<view class='lb'>
+    <text>排名</text>
+    <view>用户</view>
+    <text>得分</text>
+  </view>
+<block wx:for='{{users}}'>
+  
+  <view class='lb'>
+    <text>{{index+1}}</text>
+    <view class='userinfo'>
+      <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+      <text>{{item.nickName}}</text>
+    </view>
+    <text>{{item.score}}</text>
+  </view>
+</block>

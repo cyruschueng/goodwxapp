@@ -1,0 +1,16 @@
+<!--pages/search/search.wxml-->
+<view class='page skin-{{skin}} pl15 pr15'>
+  <view class='search'>
+    <image src='http://res.o2o.com.cn:8082/img/c865b1495d834199a3b5bbb900bc8e70'></image>
+    <input placeholder='请输入直播内容' placeholder-style="color:#e1e1e1" focus='true' confirm-type="search" bindconfirm='search' bindinput="input"></input>
+  </view>
+
+  <view class='mt15 flex flex-row-between flex-column-center'>
+    <view class='text-white'>历史搜索</view>
+    <image class='icon-remove' bindtap='removeHistories' src='http://res.o2o.com.cn:8082/img/31fb9ad302274ba2a8bd98e65f4764e2'></image>
+  </view>
+
+  <view class='search-histories'>
+    <view id="histroy-item" class='search-history-item' wx:key="*this" wx:for="{{histories}}" bindtap='search' data-keywords="{{item}}">{{item}}</view>
+  </view>
+</view>

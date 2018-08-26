@@ -1,0 +1,51 @@
+<!--=======账户=========pages/account/account.wxml-->
+<view class='container'>
+  <!--头部信息-->
+  <view class="head-area">
+    <view class="head-info row">
+      <navigator url='../login/login'>
+        <view class="head-portrait">
+          <image class="name" src="{{avatarUrl}}"></image>
+        </view>
+      </navigator>
+      <view class='head-info column'>
+        <view class="headText">{{nickName}} <text style='font-size:28rpx;'>[{{display?mer:"未登录"}}]</text> </view>
+        <view class='phone' wx:if="{{display}}">{{phone}}</view>
+        <view class='stati row' wx:if="{{display}}">
+          <view class='num'>共交易<text>{{num}}</text>笔</view>
+          <view class='money'>交易金额<text>{{money}}</text>元</view>
+        </view>
+      </view>
+    </view>  
+    <view class='logout' catchtap='catchLogout' wx:if="{{display}}">{{logout}}</view>
+  </view>
+
+  <!--账户功能列表-->
+  <view class='content' style='width:100%;'>
+    <view class='content-menu'>
+      <block wx:for="{{func}}" wx:key="{{item.index}}">
+        <view class='top row pos-r' data-title="{{func[index].url}}" catchtap="onSkip">
+          <image class="img" src='{{func[index].src}}'></image>
+          <text class='func'>{{func[index].txt}}</text>
+          <image src="{{func[index].arrowSrc}}" class='arrow'></image>
+        </view>
+      </block>   
+    </view>  
+  </view>
+  <view class='bot' bindtap='bindlogin'>登陆</view> 
+</view>
+ 
+<!-- //弹窗 -->
+  <view class="box-wrapper" wx:if="{{showModalStatus}}"> 
+    <view class='box-content pos-r'>
+      <view class='tips'>提示</view>
+      <view class='tips1 tipsb'>亲爱的用户:</view>
+      <view class='tips1'>如果您第一次使用该产品，请进行 <text class='remind'>注册</text>!</view>
+      <view class='tips1'>如果您已经有账号，请<text class='remind'>登录</text>！</view>
+      <view class='bottom row'>
+          <button type="default" class="regist" catchtap="regist">注册</button> 
+          <button type="default" class="login" catchtap="login">登录</button> 
+      </view>
+      <image class='close' catchtap='close' src='../../images/index/close.png'></image>
+    </view>
+  </view>

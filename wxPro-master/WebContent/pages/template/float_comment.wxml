@@ -1,0 +1,8 @@
+<template name="float_comment">
+  <view class="full_cover" style="display:{{(hidePost || !showComment) ? 'none' : 'flex'}}" catchtap="formReset" catchtouchmove="contentFocus">
+    <form catchsubmit="formSubmit" catchreset="formReset" class="comment_form" catchtap="contentFocus">
+      <textarea class="comment_content" disabled="{{showComment ? false : true}}" name="content" placeholder="点评一下" value="{{floatCommentContent}}" maxlength="500" />
+      <button type="primary" formType="submit">发表评论</button>
+    </form>
+  </view>
+</template>

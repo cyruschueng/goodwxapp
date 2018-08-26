@@ -1,0 +1,287 @@
+
+<!-- 公共部分 start -->
+<view class="head">
+  <image class="header" src="{{pjmsg.icon}}" data-uid="{{pjmsg.uid}}" data-audit="-5" bindtap="navToFinduser"></image>
+  <image wx:if="{{pjmsg.sex == '女'}}" class="gender" src="/img/female.png"></image>
+  <image wx:if="{{pjmsg.sex == '男'}}" class="gender" src="/img/male.png"></image>
+  <view class="right">
+    <view class="title">
+      <block wx:if="{{types == 'meact' || types == 'taact'}}">{{titleLabel[0]}}</block>
+      <block wx:if="{{types == 'apply'}}">{{titleLabel[0]}}</block>
+      <block wx:if="{{types == 'finish' || types == 'mefinish'}}">{{titleLabel[2]}}</block>
+    </view>
+    <view class="mes">
+      <view class="li">
+        <view style="font-size:40rpx;" wx:if="{{pjmsg.by_now_day == '' || pjmsg.by_now_day == null}}">0</view>
+        <view style="font-size:40rpx;" wx:if="{{pjmsg.by_now_day != '' && pjmsg.by_now_day != null}}">{{pjmsg.by_now_day}}</view>
+        <view style="font-size:25rpx;">(天)</view>
+      </view>
+      <view class="dot">:</view>
+      <view class="li">
+        <view style="font-size:40rpx;" wx:if="{{pjmsg.by_now_hour == '' || pjmsg.by_now_hour == null}}">0</view>
+        <view style="font-size:40rpx;" wx:if="{{pjmsg.by_now_hour != '' && pjmsg.by_now_hour != null}}">{{pjmsg.by_now_hour}}</view>
+        <view style="font-size:25rpx;">(时)</view>
+      </view>
+      <view class="dot">:</view>
+      <view class="li">
+        <view style="font-size:40rpx;" wx:if="{{pjmsg.by_now_minute == '' || pjmsg.by_now_minute == null}}">0</view>
+        <view style="font-size:40rpx;" wx:if="{{pjmsg.by_now_minute != '' && pjmsg.by_now_minute != null}}">{{pjmsg.by_now_minute}}</view>
+        <view style="font-size:25rpx;">(分)</view>
+      </view>
+    </view>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<block wx:for="{{iconList}}">
+  <view class="linebar" bindtap="showDetail" wx:if="{{item.en == pjmsg.general}}">
+    <image class="icon" src="{{item.url}}"></image>
+    <view class="title" style="color:{{item.color}};margin-top:25rpx">{{item.cn}}</view>
+    <view class="text">{{showTxt}}
+      <image src="{{show == true ? drop[1]:drop[0]}}" style="width:25rpx;height:20rpx;margin-top:10rpx;margin-left:20rpx;"></image>
+    </view>
+    <view style="clear:both"></view>
+  </view>
+</block>
+<view class="show {{show == true? '':'hidden'}}">
+  <view class="item" wx:for="{{msglist}}">
+    <image src="{{item.url}}"></image>
+    <view class="value" style="float:left;margin-left:20rpx; width:600rpx;">{{item.value}}</view>
+    <view style="clear:both"></view>
+  </view>
+</view>
+
+<!-- 公共部分 end -->
+
+<!--我发布的 start -->
+<view class="delbtn" bindtap="deletepj" id="{{pjmsg.id}}" wx:if="{{types == 'meact' || types == 'mefinish'}}">
+  <view class="text">
+    <image src="/img/del.png"></image>
+    <view>删除活动</view>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<view style="clear:both;background:#f2f2f2;height:25rpx;"></view>
+
+<!-- 已开始 已成功 start-->
+<block wx:if="{{types == 'finish' || types == 'mefinish'}}">
+  <image class="qi" src="/img/qi.png"></image>
+  <view style="padding:10px;">
+    参加人员（<text>{{boy.length + girl.length}}</text>）
+  </view>
+  <view wx:if="{{boy.length == 0 && girl.length == 0}}" style="height:100rpx; background:#f2f2f2;text-align:center;padding-top:50rpx;">
+    <view style="font-size:40rpx;">
+      无人员参加
+    </view>
+  </view>
+  <view class="pli">
+    <view class="li"  wx:for="{{boy}}">
+      <image class="header" src="{{item.avatar}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser"></image>
+      <image class="gender" src="/img/male.png"></image>
+      <view class="title">
+        <view bindtap="navToFinduser" data-uid="{{item.uid}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.name}}</view>
+        <view bindtap="navToFinduser" data-uid="{{item.uid}}" style="color:#888888">{{item.city}} {{item.age}}
+        </view>
+      </view>
+      <view style="float:right;margin-top:40rpx;color:#888888" wx:if="{{aid == uid}}">{{item.mobile}}
+        <text  bindtap="phoneCall" data-number="{{item.mobile}}">拨打</text> |
+        <text data-uid="{{item.uid}}" data-fmobile="{{item.mobile}}" data-fname="{{item.name}}" bindtap="addToBook">保存</text>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+   <view class="li"  wx:for="{{girl}}">
+      <image class="header" src="{{item.avatar}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser"></image>
+      <image class="gender" src="/img/female.png"></image>
+      <view class="title">
+        <view bindtap="navToFinduser" data-uid="{{item.uid}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.name}}</view>
+        <view bindtap="navToFinduser" data-uid="{{item.uid}}" style="color:#888888">{{item.city}} {{item.age}}
+        </view>
+      </view>
+      <view style="float:right;margin-top:40rpx;color:#888888" wx:if="{{aid== uid}}">{{item.mobile}}
+        <text  bindtap="phoneCall" data-number="{{item.mobile}}">拨打</text> |
+        <text data-uid="{{item.uid}}" data-fmobile="{{item.mobile}}" data-fname="{{item.name}}" bindtap="addToBook">保存</text>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+  </view>
+  
+</block>
+
+<!-- 已开始 已成功 end-->
+<block wx:if="{{types == 'meact'}}">
+  <view class="titlebar-li">
+    <view class="{{actFlag[0] == 1 ? 'active':''}}" data-set="0" bindtap="changeActTap">全部</view>
+    <view class="{{actFlag[1] == 1 ? 'active':''}}" data-set="1" bindtap="changeActTap">只看男生</view>
+    <view class="{{actFlag[2] == 1 ? 'active':''}}" data-set="2" bindtap="changeActTap">只看女生</view>
+    <view class="{{actFlag[3] == 1 ? 'active':''}}" data-set="3" bindtap="changeActTap">已同意的</view>
+  </view>
+  <view style="clear:both"></view>
+  <view class="pli">
+    <block wx:if="{{actFlag[0] == 1}}">
+      <view class="li" wx:for="{{boy}}" >
+        <image class="header" src="{{item.avatar}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser"></image>
+        <image class="gender" src="/img/male.png"></image>
+        <view class="title">
+          <view data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.name}}</view>
+          <view style="color:#888888" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.city}} {{item.age}}</view>
+        </view>
+        <view class="btn-theme-xs" style="float:right;" wx:if="{{item.audit == 0}}" id="{{item.uid}}" bindtap="agreeBind">同意</view>
+        <view class="btn-default-xs" style="float:right;" wx:if="{{item.audit == 1}}">已同意</view>
+        <view style="color:#888888;float:right;margin-left:20rpx;" wx:if="{{item.audit == 2 || item.audit == 3 && item.uid == aid}}">已取消</view>
+        <view style="clear:both"></view>
+      </view>
+      <view class="li" wx:for="{{girl}}" >
+        <image class="header" src="{{item.avatar}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser"></image>
+        <image class="gender" src="/img/female.png" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser"></image>
+        <view class="title">
+          <view data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.name}}</view>
+          <view style="color:#888888" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.city}} {{item.age}}</view>
+        </view>
+        <view class="btn-theme-xs" style="float:right;" wx:if="{{item.audit == 0}}" id="{{item.uid}}" bindtap="agreeBind">同意</view>
+        <view class="btn-default-xs" style="float:right;" wx:if="{{item.audit == 1}}">已同意</view>
+        <view style="color:#888888;float:right;margin-left:20rpx;" wx:if="{{item.audit == 2 || item.audit == 3 && item.uid == aid}}">已取消</view>
+        <view style="clear:both"></view>
+      </view>
+      <view wx:if="{{boy.length == 0 && girl.length == 0}}" class="" style="clear:both;height:200rpx; background:#f2f2f2;text-align:center;padding-top:50rpx;">
+        <view style="font-size:40rpx;">
+          暂无人员报名
+        </view>
+        <view style="color:#888888; padding-top:30rpx;">去看看大家都参加了什么</view>
+      </view>
+    </block>
+    <block wx:if="{{actFlag[1] == 1}}">
+      <view class="li" wx:for="{{boy}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">
+        <image class="header" src="{{item.avatar}}"></image>
+        <image class="gender" src="/img/male.png"></image>
+        <view class="title">
+          <view>{{item.name}}</view>
+          <view style="color:#888888">{{item.city}} {{item.age}}</view>
+        </view>
+        <view class="btn-theme-xs" style="float:right;" wx:if="{{item.audit == 0}}" id="{{item.uid}}" bindtap="agreeBind">同意</view>
+        <view class="btn-default-xs" style="float:right;" wx:if="{{item.audit == 1}}">已同意</view>
+        <view style="color:#888888;float:right;margin-left:20rpx;" wx:if="{{item.audit == 2 || item.audit == 3 && item.uid == aid}}">已取消</view>
+        <view style="clear:both"></view>
+      </view>
+      <view wx:if="{{boy.length == 0 }}" class="" style="clear:both;height:200rpx; background:#f2f2f2;text-align:center;padding-top:50rpx;">
+        <view style="font-size:40rpx;">
+          暂无人员报名
+        </view>
+        <view style="color:#888888; padding-top:30rpx;">去看看大家都参加了什么</view>
+      </view>
+    </block>
+    <block wx:if="{{actFlag[2] == 1}}">
+      <view class="li" wx:for="{{girl}}" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">
+        <image class="header" src="{{item.avatar}}" ></image>
+        <image class="gender" src="/img/female.png"></image>
+        <view class="title">
+          <view>{{item.name}}</view>
+          <view style="color:#888888">{{item.city}} {{item.age}}</view>
+        </view>
+        <view class="btn-theme-xs" style="float:right;" wx:if="{{item.audit == 0}}" id="{{item.uid}}" bindtap="agreeBind">同意</view>
+        <view class="btn-default-xs" style="float:right;" wx:if="{{item.audit == 1}}">已同意</view>
+        <view style="color:#888888;float:right;margin-left:20rpx;" wx:if="{{item.audit == 2 || item.audit == 3 && item.uid == aid}}">已取消</view>
+        <view style="clear:both"></view>
+      </view>
+      <view wx:if="{{girl.length == 0}}" class="" style="clear:both;height:200rpx; background:#f2f2f2;text-align:center;padding-top:50rpx;">
+        <view style="font-size:40rpx;">
+          暂无人员报名
+        </view>
+        <view style="color:#888888; padding-top:30rpx;">去看看大家都参加了什么</view>
+      </view>
+    </block>
+    <block wx:if="{{actFlag[3] == 1}}">
+      <view class="li" wx:for="{{girl}}" wx:if="{{item.audit == 1}}" >
+        <image class="header" data-aid="{{item.aid}}" data-uid="{{item.uid}}" data-audit="{{item.audit}}" bindtap="navToFinduser" src="{{item.avatar}}"></image>
+        <image class="gender" src="/img/female.png"></image>
+        <view class="title">
+          <view data-uid="{{item.uid}}" data-aid="{{item.aid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.name}}</view>
+          <view style="color:#888888">
+          {{item.city}} {{item.age}}
+          </view>
+        </view>
+        <view style="float:right;margin-top:40rpx;color:#888888">{{item.mobile}}
+          <text data-number="{{item.mobile}}" bindtap="phoneCall" >拨打</text> | 
+          <text data-uid="{{item.uid}}" data-fmobile="{{item.mobile}}" data-fname="{{item.name}}" bindtap="addToBook">保存</text>
+        </view>
+        <view style="clear:both"></view>
+      </view>
+      <view class="li" wx:for="{{boy}}" wx:if="{{item.audit == 1}}" >
+        <image class="header" src="{{item.avatar}}" data-aid="{{item.aid}}" data-audit="{{item.audit}}" data-uid="{{item.uid}}" bindtap="navToFinduser"></image>
+        <image class="gender" src="/img/male.png"></image>
+        <view class="title">
+          <view data-uid="{{item.uid}}" data-aid="{{item.aid}}" data-audit="{{item.audit}}" bindtap="navToFinduser">{{item.name}}</view>
+          <view style="color:#888888">
+          {{item.city}} {{item.age}}
+          </view>
+        </view>
+        <view style="float:right;margin-top:40rpx;color:#888888">{{item.mobile}}
+          <text data-number="{{item.mobile}}" bindtap="phoneCall" >拨打</text>  |
+          <text data-uid="{{item.uid}}" data-fmobile="{{item.mobile}}" data-fname="{{item.name}}" bindtap="addToBook">保存</text>
+        </view>
+        <view style="clear:both"></view>
+      </view>
+      <view  wx:if="{{boy.length == 0 && girl.length == 0}}" style="clear:both;height:200rpx; background:#f2f2f2;text-align:center;padding-top:50rpx;">
+        <view style="font-size:40rpx;">
+          暂无人员报名
+        </view>
+        <view style="color:#888888; padding-top:30rpx;">去看看大家都参加了什么</view>
+      </view>
+    </block>
+  </view>
+</block>
+
+<!--我发布的 end -->
+
+<!--他人活动 start -->
+<block wx:if="{{types == 'taact'}}">
+  <view class="titlebar">
+    <view style="text-align:left;margin-left:15px">报名人员</view>
+  </view>
+  <view style="clear:both"></view>
+  <view class="pli">
+    <view class="li" wx:for="{{boy}}">
+      <image class="header" src="{{item.avatar}}"></image>
+      <image class="gender" src="/img/male.png"></image>
+      <view class="title">
+        <view style="float:left">{{item.name}}</view>
+        <view style="color:#888888;float:left;clear:both">{{item.city}} {{item.age}} 
+        </view>
+      </view>
+      <view style="color:#06c1ae;float:right;margin-left:20rpx;" data-aid="{{item.aid}}" data-uid="{{item.uid}}" wx:if="{{item.audit == 0 && item.uid == aid}}" bindtap="backApply">取消报名</view>
+        <view style="color:#888888;float:right;margin-left:20rpx;" wx:if="{{item.audit == 2 || item.audit == 3 && item.uid == aid}}">已取消</view>
+      <view style="clear:both"></view>
+    </view>
+    <view class="li" wx:for="{{girl}}">
+      <image class="header" src="{{item.avatar}}"></image>
+      <image class="gender" src="/img/female.png"></image>
+      <view class="title">
+        <view style="float:left">{{item.name}}</view>
+        <view style="color:#888888;float:left;clear:both">{{item.city}} {{item.age}} 
+        </view>
+      </view>
+      <view style="color:#06c1ae;float:right;margin-left:20rpx;" wx:if="{{item.audit == 0 && item.uid == aid}}" bindtap="backApply">取消报名</view>
+        <view style="color:#888888;float:right;margin-left:20rpx;" wx:if="{{item.audit == 2 || item.audit == 3 && item.uid == aid}}">已取消</view>
+      <view style="clear:both"></view>
+    </view>
+  </view>
+  <view wx:if="{{boy.length == 0 && girl.length == 0}}" style="height:100rpx; background:#f2f2f2;text-align:center;padding-top:50rpx;">
+    <view style="font-size:40rpx;">
+      暂无人员报名
+    </view>
+  </view>
+
+  
+  <view wx:if="{{thisid == false && aid != uid}}" class="btn btn-theme" bindtap="joinBtnOnClick">
+    <view style="font-size:35rpx" >报名参加</view>
+  </view>
+
+  <view wx:if="{{thisid == true && aid != uid}}" class="btn">
+    <view style="font-size:35rpx">已报名</view>
+  </view>
+  </block>
+
+ <view wx:if="{{boy.length != 0 || girl.length != 0}}" style="height:100rpx; background:#f2f2f2;text-align:center;padding-top:50rpx;">
+    <view style="font-size:30rpx; color:#888">
+      没有更多了
+    </view>
+  </view>
+<!--他人活动 end -->

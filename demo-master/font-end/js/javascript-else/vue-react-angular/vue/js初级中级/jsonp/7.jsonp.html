@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+function fn1(data) {
+	var oUl1 = document.getElementById('ul1');
+	var html = '';
+	for (var i=0; i<data.length; i++) {
+		html += '<li>'+data[i]+'</li>';
+	}
+	oUl1.innerHTML = html;
+}
+function fn2(data) {
+	var oUl2 = document.getElementById('ul2');
+	var html = '';
+	for (var i=0; i<data.length; i++) {
+		html += '<li>'+data[i]+'</li>';
+	}
+	oUl2.innerHTML = html;
+}
+function fn3(data) {
+	var oUl3 = document.getElementById('ul3');
+	var html = '';
+	for (var i=0; i<data.length; i++) {
+		html += '<li>'+data[i]+'</li>';
+	}
+	oUl3.innerHTML = html;
+}
+</script>
+<script>
+window.onload = function() {
+	
+	var oBtn1 = document.getElementById('btn1');
+	
+	var oBtn2 = document.getElementById('btn2');
+	
+	oBtn1.onclick = function() {
+		
+		var oScript = document.createElement('script');
+		oScript.src = 'getData.php?callback=fn1';
+		document.body.appendChild(oScript);
+		
+	}
+	
+	var oBtn2 = document.getElementById('btn2');
+	
+	oBtn2.onclick = function() {
+		
+		var oScript = document.createElement('script');
+		oScript.src = 'getData.php?t=str&callback=fn2';
+		document.body.appendChild(oScript);
+		
+	}
+	
+	var oBtn3 = document.getElementById('btn3');
+	
+	oBtn3.onclick = function() {
+		
+		var oScript = document.createElement('script');
+		oScript.src = 'getData.php?callback=fn3';
+		document.body.appendChild(oScript);
+		
+	}
+	
+}
+</script>
+</head>
+
+<body>
+	<input type="button" id="btn1" value="加载数字" />
+    <ul id="ul1"></ul>
+    <input type="button" id="btn2" value="加载字母" />
+    <ul id="ul2"></ul>
+    <input type="button" id="btn3" value="加载字母" />
+    <ul id="ul3"></ul>
+</body>
+</html>

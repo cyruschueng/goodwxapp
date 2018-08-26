@@ -1,0 +1,41 @@
+<view class="container_index">
+<scroll-view scroll-y="true" style="height:100vh;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{scrollY}}">
+  <swiper class="swiprer_box" indicator-dots="{{indicatorDots}}"
+          autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="item.url">
+      <swiper-item>
+        <navigator url="{{item.link}}" hover-class="navigator-hover">
+          <image src="{{item.url}}" class="slide-image"/>
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+ <!-- <view class="menu_item">-->
+    <ul class="course_title">
+      <scroll-view scroll-x class="scroll-header {{scrollTop>150? 'topnav' : ''}}">
+        <li class="{{activeId==0?'active_li':''}}" data-id="0"  bindtap="readDetail">全部</li>
+       <li  wx:for="{{coursetypes}}" wx:for-index="index" wx:for-item="item" wx:key="coursetypeuid" bindtap="readDetail" data-id="{{item.coursetypeuid}}" data-coursetypename="{{item.coursetypename}}" class="{{activeId==item.coursetypeuid?'active_li':''}}">
+         {{item.coursetypename}}
+       </li>
+      </scroll-view>
+    </ul>
+<!--  </view>-->
+
+  <view class="courseList"  wx:if="{{courseListLength}}">
+    <view  class="course_item"  wx:for="{{courseList}}" wx:for-index="index" wx:for-item="item" wx:key="item.course_id" data-id="{{item.course_id}}" data-coursetypename="item.teacher_name" bindtap="fotableinfo">
+      <image class="course_img" src="https://dev.classchimp.cn{{item.cover}}"></image>
+      <text class="course_name">课程名称:{{item.hot_course_name}}</text>
+      <text class="course_price">￥:{{item.price}}</text>
+    </view>
+  </view>
+  <view class="course_null" wx:else>
+    <image class="course-empty" src="../../images/course-empty.png"></image>
+  </view>
+  <view class="com-widget-goTop my" bindtap="my">
+    <view class="icon">
+        <image src="/images/icon_my.png" alt="" class="icon_img"></image>
+        <view>我的</view>
+    </view>
+  </view>
+</scroll-view>
+</view>

@@ -1,0 +1,39 @@
+﻿<div class="container" style="padding-top:15px;">
+    <div class="row" ng-controller="winController">
+        <div class="col-xs-12" ng-if="info.userTaskClass.mTask.completedNumber==info.themeNumber && info.state==1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    
+                </div>
+                <div class="panel-footer text-center">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input ng-click="disAgreen()" ng-checked="!disagree" type="checkbox">接受
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input ng-click="disAgreen()" ng-checked="disagree" type="checkbox">不接受
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 text-center">
+                <input ng-click="sumit()" type="button"  class="weui_btn weui_btn_primary" ng-show="!disagree" value="确认" />
+                <input type="button" class="weui_btn weui_btn_disabled  weui_btn_primary" value="确认" ng-show="disagree"  >
+            </div>
+        </div>
+        <div class="col-xs-12 text-center" ng-if="info.userTaskClass.mTask.completedNumber!=info.themeNumber && info.state==1">
+            挑战时间还未达到活动要求（12个月）
+        </div>
+        <div class="col-xs-12 text-center" ng-if="info.state==2">
+            你已申请退款
+        </div>
+    </div>
+</div>

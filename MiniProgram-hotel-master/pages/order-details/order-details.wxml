@@ -1,0 +1,46 @@
+<!--pages/order-details/details.wxml-->
+<view class='container'>
+  <view class='order-state'>
+    <image class='order-state-img' src='{{order_state_img}}'></image>
+    <view class='order-state-text'>
+      <view class='order-state-title'>{{order_state_title}}</view>
+      <view class='order-state-explain'>{{order_state_explain}}</view>
+    </view>
+  </view>
+  <view class='user-info' bindtap='toCall'>
+    <image src='/image/address.png'></image>
+    <text class='name'>{{name}}</text>
+    <text>{{phone}}</text>
+  </view>
+  <view class='order-list'>
+    <view class='order-list-title'>{{goods_list_title}}</view>
+    <view class='order-item' wx:for='{{items}}' wx:key='code'>
+      <image class='goods-img' src='{{item.url}}'></image>
+      <view class='order-text'>
+        <view class='goods-title'>{{item.goods_title}}</view>
+        <view class='goods-num'>
+          <view class='goods-price'>￥{{item.goods_price}}</view>
+          <view class='sale-volume'>X{{item.sale_volume}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='hotel-time'>入住时间：{{hotel_time}}</view>
+  <view class='leave-time'>离店时间：{{leave_time}}</view>
+  <view class='goods-totalPrice'>
+    <view>商品总额</view>
+    <view>￥{{goods_totalPrice}}</view>
+  </view>
+  <view class='discount'>
+    <view>满减</view>
+    <view>-￥{{discount}}</view>
+  </view>
+  <view class='totalPrice'>
+    <view>合计</view>
+    <view>￥{{totalPrice}}</view>
+  </view>
+  <view class='remarks'>
+    <view>备注</view>
+    <view>{{remarks}}</view>
+  </view>
+</view>

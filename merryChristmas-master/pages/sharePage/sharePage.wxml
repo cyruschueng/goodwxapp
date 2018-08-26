@@ -1,0 +1,27 @@
+<import src="/Template/Template.wxml" />
+<!--分享按钮  -->
+<form report-submit='true' bindsubmit="formSubmit">
+  <button formType='submit' class='shareButton' open-type="share"></button>
+</form>
+
+<!--抽奖按钮  -->
+<form report-submit='true' bindsubmit="formSubmit">
+  <button formType='submit' class='rewardButton' bindtap='reward'>抽奖</button>
+</form>
+
+
+<!--绑定手机码  -->
+<view class='goToBindPhone' bindtap='goToBindPhone'></view>
+
+<!--抽奖记录  -->
+<view class='rewardLog' bindtap='goRewardLog'>您的抽奖记录</view>
+
+<!--绑定手机号码  -->
+<!-- <button class='phoneButton' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提供手机号,以便活动方联系您</button> -->
+
+<!--报错提示  -->
+<template is='errorHide' data='{{error,error_text}}'></template>
+
+<image class='backPic' src='/img/rewardPage.jpg'></image>
+
+<view class='numxx'>{{remain_count}}</view>

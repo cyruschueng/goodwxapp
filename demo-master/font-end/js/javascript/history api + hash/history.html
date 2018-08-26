@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>history</title>
+</head>
+
+<body>
+    <div>histroy</div>
+    <div onclick="tohistroy()">tohistroy1</div>
+    <div>
+        <a href="www.baidu.com">baidu</a>
+    </div>
+    <script type="text/javascript">
+        function tohistroy() {
+            console.log(0);
+            var stateObj = { foo: "bar" };
+            history.pushState(stateObj, "page 2", "history1.html");
+        }
+        window.onpopstate = function(event) {
+            console.log("location: " + document.location + ", state: " + JSON.stringify(event.state))
+        }
+    </script>
+</body>
+
+</html>

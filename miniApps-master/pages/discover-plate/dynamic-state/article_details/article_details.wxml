@@ -1,0 +1,69 @@
+<import src="../../../index/merchant-particulars/comment-template/comment-template.wxml" />
+<view class='detail'>
+
+  <view class='title'>{{details.title}}</view>
+
+  <view class='top' wx:if="{{_id}}">
+    <view class='avatar'>
+      <image src='{{userInfo.iconUrl}}' mode="aspectFill" class='avaterimg'></image>
+    </view>
+    <view class='name'>
+      <view class='username'>{{userInfo.nickName}}</view>
+      <view class='storename'>{{details.timeDiffrence}}</view>
+    </view>
+    <view class='homefollow'>
+      <!-- <image src='' class='home'>home</image>
+      <image src='' class='follow'>follow</image> -->
+    </view>
+  </view>
+
+  <view class='mid'>
+    <view wx:for="{{details.content}}" wx:key="{{index}}">
+      <view wx:if="{{item.type == 'text'}}" class='midtext'>{{item.value}}</view>
+      <view wx:if="{{item.type == 'img'}}" class='mindill'>
+        <image src='{{item.value}}' mode="aspectFill" class='midimg'></image>
+        <view class='imgnote' wx:if="{{item.txt}}">{{item.txt}}</view>
+      </view>
+    </view>
+    <view wx:if="{{_id}}" class='scanpraise'>
+      <view class='scan'>
+        <image src='/images/icon/tuoyuan_w.png' class='tuoyuanhits'></image>
+        {{details.scan}}
+      </view>
+      <view class='praise' id="{{details.id}}">
+        {{details.zan}}
+        <image wx:if="{{details.isZan}}" src='/images/icon/home_zaned.png' class='homezan' catchtap='quxiaozanwz'></image>
+        <image wx:else src='/images/icon/home_zan.png' class='homezan' catchtap='dianzanwz'></image>
+      </view>
+    </view>
+     <view class='sharetitle'>文章评论</view>
+     <view class='sharebox'>
+      <!-- <button wx:if="{{_id}}" class='sharebut' bindtap='share' plain="true" data-name="shareBtn" open-type="share">
+        <image class='shareimgl' src='/images/icon/find_article_wechat.png'></image>
+        <image class='shareimgr' src='/images/icon/find_article_mine.png'></image>
+      </button>
+      <view class='text_wx'>微信</view>
+      <view class='text_pyq' bindtap='share'>朋友圈</view> -->
+    </view> 
+
+  </view>
+
+  <view wx:if="{{_id}}" class='but'>
+    <block wx:for="{{cmtdata.list}}" wx:key="{{index}}">
+      <template is="commentItem" data="{{item}}"></template>
+    </block>
+    <view class='total-comment' hidden='{{totalComment}}' catchtap='jumpTotalComment'>
+      <view class='total-center' wx:if="{{cmtdata.list.length>6}}">
+        <text>查看全部<text>{{cmtdata.total}}</text>条评论</text>
+      </view>
+    </view>
+    <form class='commentBox {{isComment ? "show" : "hide"}}'>
+      <textarea class="commentArea" placeholder='请输入评论' focus="{{isComment}}" bindinput="getCommentVal" cursor-spacing="50rpx" show-confirm-bar="false" fixed="true"></textarea>
+      <button form-type="reset" catchtap="setcmtadd">发送</button>
+    </form>
+  </view>
+</view>
+<view class='botton-comment' bindtap='showAreatext'>
+  <image class='comment-images' src='/images/icon/write.png'></image>
+  <text class='reviewyan'>写评论</text>
+</view>

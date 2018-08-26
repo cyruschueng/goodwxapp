@@ -1,0 +1,166 @@
+/* color */
+.bg-f1f0ec{background-color: #f1f0ec;}
+.green,.correct-green .score{color: #19b200;}
+.orange,.correct-orange .score{color: #ffa647;}
+.red,.correct-red .score{color: #f00;}
+.green-bg,.correct-green .audio-btn2{background-color: #19b200!important;}
+.orange-bg,.correct-orange .audio-btn2{background-color: #ffa647!important;}
+.red-bg,.correct-red .audio-btn2{background-color: #f00!important;}
+.c-999896{color: #999896;}
+
+/* font */
+.fs-24{font-size: 0.24rem;}
+.fs-30{font-size: 0.3rem;}
+.lh-36{line-height: 0.36rem;}
+
+/* margin/padding */
+.p-lr30{padding-left: 0.3rem;padding-right: 0.3rem;}
+.p-t20{padding-top: 0.2rem;}
+.p-b20{padding-bottom: 0.2rem;}
+.m-r30{margin-right: 0.3rem;}
+.p-30{padding: 0.3rem;}
+.m-30{margin: 0.3rem;}
+
+/* border */
+.bdb-f1f0ec{border-bottom: 1px solid #f1f0ec;}
+
+.maxw-560{max-width: 5.6rem;}
+
+/*用户信息*/
+.p30{padding: 0.3rem;}
+.user_avatar{width: 1.2rem;height: 1.2rem;border-radius: 50%;overflow: hidden;background-color: #fff;}
+.user_avatar img{width: 100%;min-height: 100%;display: block;}
+.user_score{position: absolute;top: 0.58rem;right: 0.3rem;}
+.fs-36{font-size:0.36rem;}
+.lh70{line-height: 0.7rem;}
+.maxw-530{max-width: 5.3rem;}
+
+/**/
+.list-item2{width: 100%;min-height: 1.4rem;}
+.list-item-l{float: left;width: 82%;margin-right: -0.4rem;padding:0.36rem 0.3rem;min-height: 1.4rem;display: table;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+box-sizing:border-box;}
+.d-table-cell{ vertical-align: middle; display: table-cell;}
+.list-item-r{float: right;width: 18%;text-align: center;}
+.list-item-r .score{margin-top: 0.05rem;display: block;font-size: 0.26rem;}
+.audio-btn2,.audio-btn2:before,.audio-btn2:after{width: 0.68rem;height: 0.68rem;border-radius: 50%; overflow: hidden;background: url(../js/audiojs/audio2.png) 0 0 no-repeat;background-size: 1.5rem 2.5rem;}
+.list-item2 .audio-btn2{position: relative;left: 0;top: 0;margin: 0 auto;margin-top: 0.2rem;overflow: hidden;background-color: #cccbc8;}
+.audio-btn2:before{content: '';position: absolute;left: 0;top: 0;background-position-y:-0.68rem;}
+.audio-btn2:after{content: '';position: absolute;left: 0;top: 0;background-position-y:-1.36rem; opacity: 1; }
+.audio-playing.audio-btn2:before{
+    -webkit-animation: opacityAnimat 0.8s linear infinite;
+    -moz-animation: opacityAnimat 0.8s linear infinite;
+    animation: opacityAnimat 0.8s linear infinite;
+}
+.audio-playing.audio-btn2:after{
+    -webkit-animation: opacityAnimat 0.8s 0.2s linear infinite;
+    -moz-animation: opacityAnimat 0.8s 0.2s linear infinite;
+    animation: opacityAnimat 0.8s 0.2s linear infinite;
+}
+.audio-loading.audio-btn2{background-image: none;}
+.audio-loading.audio-btn2:before{
+    background-position:right 0;
+    -webkit-animation: rotateAnimat 1s linear infinite;
+    -moz-animation: rotateAnimat 1s linear infinite;
+    animation: rotateAnimat 1s linear infinite;
+}
+.audio-error.audio-btn2{
+    background-image: url(../js/audiojs/audio2.png);
+    background-position-x: right;
+    background-position-y: -0.68rem;
+    -moz-animation:none;-webkit-animation:none;animation:none;
+}
+.audio-loading.audio-btn2:after,.audio-error.audio-btn2:after,.audio-error.audio-btn2:before{display: none;-moz-animation:none;-webkit-animation:none;animation:none;}
+/*.list-item.read-here{color: #19b200;box-shadow:inset 0px -1px 10px #ebebeb;}*/
+
+/*显示*/
+@-webkit-keyframes opacityAnimat{
+    0%{ opacity: 1;}
+    30%{ opacity: 1;}
+    100%{ opacity: 0;}
+}
+@keyframes opacityAnimat{
+    0%{ opacity: 1;}
+    30%{ opacity: 1;}
+    100%{ opacity: 0;}
+}
+/*旋转*/
+@-webkit-keyframes rotateAnimat{
+    0%{ -moz-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    100%{ -moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+}
+@keyframes rotateAnimat{
+    0%{ -moz-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    100%{ -moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+}
+#debug{width: 100%;position: absolute;left: 0;bottom: 0;z-index: 99999;}
+
+/*音频组件*/
+.audioBox{font-size: 0.24rem;line-height: 0.4rem;background-color: #fff; border-radius: 4px; padding: 0.24rem;height: 0.4rem;}
+/*.audioBox audio{display: none;}*/
+.audioBox .audioBtn{
+    float: left;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url(../js/audiojs/audio.png) -0.02rem 0.03rem no-repeat;
+    background-size: 1rem 2rem;
+}
+.audioBox .playing{
+    background: url(../js/audiojs/audio.png) 0 -0.60rem no-repeat;
+    background-size: 1rem 2rem;
+}
+.audioBox .audio-loading{
+    background: url(../../common/images/loading.gif) 0 0.05rem no-repeat;
+    background-size: 0.3rem 0.3rem;
+}
+.audioBox .taskBoxLinks {
+    position: relative;
+    float: left;
+    width: 4rem;
+    height: 0.14rem;
+    margin: 0.13rem 0.2rem;
+    background: #f1f0ec;
+    border-radius: 0.07rem;
+}  
+.audioBox .taskBoxLinks h3{
+    border-radius: 0.07rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0.14rem;
+    width: 0;
+    background: #d9f6d4;
+    z-index: 1;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}  
+.audioBox .taskBoxLinks i{
+    background: url(../js/audiojs/audio.png) 0 -1.17rem no-repeat;
+    background-size: 1rem 2rem;
+    position: absolute;
+    width: 0.36rem;
+    height: 0.36rem;
+    right: -0.19rem;
+    top: -0.12rem;
+} 
+.audioBox .timeBox {float: left;}
+.audioBox .currentTime {
+    color: #41403e;
+    font-style: normal;
+}
+.audioBox .f-error_icon {
+    display: inline-block;
+    color: #ffffff;
+    font-weight: bold;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 50%;
+    background-color: #ff2a2a;
+    text-align: center;
+    font-family: Arial;
+}
+.audioBox .duration {
+    font-weight: normal;
+    color: #999896;
+}

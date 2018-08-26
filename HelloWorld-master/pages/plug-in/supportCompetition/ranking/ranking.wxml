@@ -1,0 +1,58 @@
+<!--pages/supportCompetition/ranking/ranking.wxml-->
+<view class='page'>
+  <view class='topBox tc'>
+    <view class=' flex '>
+      <view class='sub'>
+        <text class='paiming'>排名：</text>
+        <text>{{myrank.rank}}</text>
+      </view>
+      <view class='myPicBox'>
+        <image class='myPic' src='{{myrank.headimgurl}}' mode='aspectFill'></image>
+      </view>
+      <view class='sub'>
+        <text class='paiming'>人气值：</text>
+        <text>{{myrank.get_num}}</text>
+      </view>
+    </view>
+    <view class='mt10'>{{myrank.nickname}}</view>
+  </view>
+
+  <view class='rankBox'>
+      <view class='rankol flex tc'>
+        <view class='rankLi'>
+          <image class='secondPic' src='http://www.ixiaochengxu.cc/resource/images/plug-in/set-like/2.png' mode='aspectFill'></image>
+          <image class='starPic mt10' src='{{rankhead[1].headimgurl}}' mode='aspectFill'></image>
+          <view class='name mt10 lineText'>{{rankhead[1].nickname}}</view>
+          <view class='rqVal mt10 lineText'>{{rankhead[1].get_num}}人气</view>
+        </view>
+        <view class='rankLi firstBox'>
+          <image class='firstPic' src='http://www.ixiaochengxu.cc/resource/images/plug-in/set-like/1.png' mode='aspectFill'></image>
+          <image class='starPic mt10' src='{{rankhead[0].headimgurl}}' mode='aspectFill'></image>
+          <view class='name mt10 lineText'>{{rankhead[0].nickname}}</view>
+          <view class='rqVal mt10 lineText'>{{rankhead[0].get_num}}人气</view>
+        </view>
+        <view class='rankLi'>
+          <image class='secondPic' src='http://www.ixiaochengxu.cc/resource/images/plug-in/set-like/3.png' mode='aspectFill'></image>
+          <image class='starPic mt10' src='{{rankhead[2].headimgurl}}' mode='aspectFill'></image>
+          <view class='name mt10 lineText'>{{rankhead[2].nickname}}</view>
+          <view class='rqVal mt10 lineText'>{{rankhead[2].get_num}}人气</view>
+        </view>
+      </view>
+   <block wx:if="{{ranklist}}" wx:for="{{ranklist}}" wx:key="{{index}}">
+      <view class='rankList'>
+        <view class='rankItem flex'>
+          <view class=' itemLf sub flex'>
+            <view class='mingci mr5'>{{item.rawno}}</view>
+            <image class='starPic mr15' src='{{item.headimgurl}}' mode='aspectFill'></image>
+            <view class='tname sub'>
+              <view class='starNam'>{{item.nickname}}</view>
+              <view class='time'>{{item.truetime}}</view>
+            </view>
+          </view>
+          <view class='rqVal'>获得{{item.get_num}}人气</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>

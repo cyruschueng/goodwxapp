@@ -1,0 +1,143 @@
+<view class="form">
+	<view class="form_list" data-id="header_img" bindtap="getHeaderImg">
+		<view class="list_name">头像</view>
+		<view class="list_right">
+			<view class="list_img">
+				<image src="{{ userInfo.picture }}"></image>
+			</view>
+			<view class="list_icon">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view>
+
+	<view class="form_list" data-type="text" data-id="name" bindtap="gotoEdit">
+		<view class="list_name">昵称</view>
+		<view class="list_right">
+			<view class="list_right_title">{{ userInfo.nickName }}</view>
+			<view class="list_icon">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view>
+
+	<view class="form_list" data-type="text" data-id="sex" bindtap="gotoEdit">
+		<view class="list_name">性别</view>
+		<view class="list_right">
+			<view class="list_right_title">{{ userInfo.textSex }}</view>
+			<view class="list_icon">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view>
+
+	<view class="form_list" data-type="text" data-id="age" bindtap="gotoEdit">
+		<view class="list_name">年龄</view>
+		<view class="list_right">
+			<view class="list_right_title">{{ userInfo.age || '0' }}岁</view>
+			<view class="list_icon">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="form form_active">
+	<view class="form_list" bindtap="gotoSesameCertification">
+		<view class="list_name">芝麻信用</view>
+		<block wx:if="{{ userInfo.zmxy_status != 0 }}">
+			<view class="list_right">
+				<view class="list_right_title certification_active">已认证</view>
+				<view class="list_icon">
+					<image src="../../images/icon_return_left@3x.png"></image>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="list_right">
+				<view class="list_right_title">未认证</view>
+				<view class="list_icon">
+					<image src="../../images/icon_return_left@3x.png"></image>
+				</view>
+			</view>
+		</block>
+	</view>
+
+	<view class="form_list">
+		<view class="list_name">车主认证</view>
+		<block wx:if="{{ userInfo.status != 1 }}">
+			<view class="list_right">
+				<view class="list_right_title certification_active">已认证</view>
+				<view class="list_icon">
+					<image src="../../images/icon_return_left@3x.png"></image>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="list_right" bindtap="gotoOwnersCertification">
+				<view class="list_right_title">未认证</view>
+				<view class="list_icon">
+					<image src="../../images/icon_return_left@3x.png"></image>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>
+
+<!-- <view class="form form_active">
+	<view class="form_list" data-id="car_img" bindtap="gotoEdit">
+		<view class="list_name">爱车照片</view>
+		<view class="list_right">
+			<view class="list_img list_car_img">
+				<image src="../../images/img_mine.jpg"></image>
+			</view>
+			<view class="list_icon">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view>
+</view> -->
+
+<view class="pop_up_layer" style="width: {{ width }}px; height: {{ height }}px" hidden="{{ submit_active }}">
+	<view class="input_box">
+		<view class="submit_title">{{ title }}</view>
+		<block wx:if="{{ code_id != 'sex' }}">
+			<view class="submit_input">
+				<input value="{{ input_value }}" bindblur="getInputDetail" type="text" focus="true" placeholder="请输入{{ title }}"/>
+			</view>
+		</block>
+		<block wx:else>
+			<radio-group class="radio-group" bindchange="radioChange">
+			  <label class="radio" wx:for="{{ items }}" wx:key="{{ index }}">
+			    <radio value="{{ item.name }}" checked="{{ item.checked }}"/>{{item.value}}
+			  </label>
+			</radio-group>
+		</block>
+		<view class="submit_btn">
+			<button bindtap="closeEdit">取消</button>
+			<button bindtap="submit">确定</button>
+		</view>
+	</view>
+</view>
+
+<!-- <view class="form">
+	<view class="form_list">
+		<view class="list_name">家乡</view>
+		<view class="list_right">
+			<view class="list_right_title">北京市</view>
+			<view class="list_icon">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view>
+
+	<view class="form_list">
+		<view class="list_name">职业</view>
+		<view class="list_right">
+			<view class="list_right_title">工程师</view>
+			<view class="list_icon">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view>
+</view> -->

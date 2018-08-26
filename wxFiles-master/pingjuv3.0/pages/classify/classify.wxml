@@ -1,0 +1,69 @@
+<view class="search" style="background:#fafafa">
+  <text style="color:#8d8e92;float:left" bindtap="navToCity">{{city}}</text>
+  <image src="/img/dropdown.png" style="width:20rpx;height:20rpx;margin-top:5px;float:left;margin-right:20rpx" bindtap="navToCity"></image>
+  <image src="/img/follow.png" style="width:30rpx;height:30rpx;float:left;margin-top:6rpx;"></image>
+  <view >当前萍聚类型：{{key}}</view>
+  <view style="clear:both"></view>
+</view>
+<view class="its">
+<block wx:for="{{typeList}}" wx:for-item="it">
+    <view class="items" bindtap="selectType" id="{{it.id}}">
+        <view>{{it.name}}</view><image src="{{it.open == true ? drop[1]:drop[0]}}"></image>
+    </view>
+</block>
+    <view class="ite {{toShow.open == true ? '' : 'close'}}" wx:for="{{toShow.list}}" id="{{index}}" bindtap="doselect">
+        <view class="title">{{item}}</view>
+        <image wx:if="{{index == toShow.active}}" src="/img/true.png"></image>
+        <view style="clear:both"></view>
+    </view>
+    <view style="clear:both"></view>
+</view>
+<view class="panel">
+  <block wx:for="{{iconList}}" wx:for-item="ic"  >
+    <block wx:for="{{list}}" wx:for-item="it" wx:if="{{it.general == ic.en}}" >
+    <view class="item" id="{{benid == it.uid ? 'meact':'taact'}}" data-id="{{it.id}}" data-uid="{{it.uid}}" bindtap="navToDetail" >
+      <view class="head" style="background:{{ic.color}}"></view>
+      <view class="msg">
+        <view class="line">
+          <image class="header" src="{{it.icon}}"></image>
+          <image wx:if="{{it.sex == '男'}}" class="gender" src="/img/male.png"></image>
+          <image wx:if="{{it.sex == '女'}}" class="gender" src="/img/female.png"></image>
+          <view class="dot">
+            <image src="/img/dot.png"></image>
+            <view>已报名人数:{{it.apply_total}}</view>
+          </view>
+          <image class="type" src="{{ic.url1}}"></image>
+          <view style="position:relative;left:350rpx;top:-70rpx;color:{{ic.color}}">{{it.general_title}}</view>
+        </view>
+        
+        <view class="line-msg">
+          <image src="/img/clock.png"></image>
+          <view class="title">时间：{{it.open_date}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/localtion.png"></image>
+          <view class="title">地点：{{it.address}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/money.png"></image>
+          <view class="title">预算金额：{{it.budget}}</view>
+        </view>
+        <view class="line-msg" style="padding-bottom:15px;border-bottom:1px solid #f2f2f2">
+          <image src="/img/flag.png"></image>
+          <view class="title">开支性质：{{it.expend_title}}</view>
+        </view>
+        <view style="clear:both"></view>
+        <view class="link">查看详情
+          <image src="/img/right.png" style="margin-top:1rpx;width:30rpx;height:30rpx;"></image>
+        </view>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+    <view style="clear:both;height:25rpx;"></view>
+  </block></block>
+</view>
+<view wx:if="{{list.length == 0}}" class="soli">
+    <view class="title">没有该类型的萍聚</view>
+    <view class="notice">去其他城市看看吧</view>
+    <image src="/img/none.png"></image>
+</view>

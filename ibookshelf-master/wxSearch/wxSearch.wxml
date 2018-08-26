@@ -1,0 +1,38 @@
+<template name="wxSearch">
+  <view class="wxSearch" style="display:{{wxSearchData.view.isShow ? 'block':'none'}};height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
+    <view class="wxSearchInner">
+
+      <view class="wxSearchMindKey">
+        <view class="wxSearchMindKeyList">
+          <block wx:for="{{wxSearchData.mindKeys}}" wx:key="mindKey">
+            <view class="wxSearchMindKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
+          </block>
+        </view>
+      </view>
+
+      <!--<view class="wxSearchKey" style="display:{{wxSearchData.view.isShowSearchKey ? 'block':'none'}}">
+        <text class="wxSearchTitle">热门搜索</text>
+        <view class="wxSearchKeyList">
+          <block wx:for="{{wxSearchData.keys}}" wx:key="key">
+            <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
+          </block>
+        </view>
+      </view>-->
+
+      <view wx:if="{{wxSearchData.his[0]}}" class="wxSearchHistory" style="display:{{wxSearchData.view.isShowSearchHistory ? 'block':'none'}}">
+        <view class="wxSearchHistoryTitle">
+          <text class="wxSearchTitle">搜索历史</text>
+          <view class="wxSearchTitle" bindtap="wxSearchDeleteAll">清空</view>
+        </view>
+        <view class="wxSearchHistoryList">
+          <block wx:for="{{wxSearchData.his}}" wx:key="his">
+            <view class="wxSearchHistoryItem">
+              <text class="wxSearchHistoryItemText" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</text>
+              <image class='delete-img' src="resource/delete.png" bindtap="wxSearchDeleteKey" data-key="{{item}}"></image>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

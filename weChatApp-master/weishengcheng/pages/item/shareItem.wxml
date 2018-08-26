@@ -1,0 +1,48 @@
+<template name="share_item">
+    <view class="detail-item">
+        <view class="grid-view">
+        <view style="padding:0 15rpx 0 15rpx;width:82rpx; ">
+            <image class="" lazyload="true" mode="aspectFill" src="{{item.user.avatar}}" style="width:82rpx;height:82rpx;" />
+        </view>
+        <view data-url="{{item.link}}" style="padding-right:25rpx;" class="flex_all" catchtap="view">
+            <view class="b_flex">
+                <view class="news_name">{{item.user.name}}</view>
+            </view>
+
+            <view class="news_text">{{item.content}}</view>
+
+            <view wx:if="{{item.pics.length==4}}" class="news_media" style="max-width: 65%;">
+                <block wx:if="{{item.video.url}}" >
+                    <video src="{{item.video.url}}" objectFit="cover" style="width:96%;position:static;"></video>
+                </block>
+                <block wx:for="{{item.pics}}" wx:key="{{item.url}}" wx:for-item="pic" wx:for-index="idx">
+                    <image lazyload="true" mode="aspectFill" wx:if="{{item.pics.length==1 && pic.width>pic.height}}" src="{{pic.url}}?imageView2/1/w/{{oneSize}}/h/{{pics[index][idx]['size']}}" class="pic" style="height: {{oneSize/pixelRatio*pic.height/pic.width}}px;width:{{oneSize/pixelRatio}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                    <image lazyload="true" mode="aspectFill" wx:elif="{{item.pics.length==1 && pic.height>=pic.width}}" src="{{pic.url}}?imageView2/1/w/{{pics[index][idx]['size']}}/h/{{oneSize}}" class="pic" style="height: {{oneSize/pixelRatio}}px;width:{{oneSize/pixelRatio*pic.width/pic.height}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                    <image lazyload="true" mode="aspectFill" wx:elif="{{item.pics.length==2 || item.pics.length==4}}" src="{{pic.url}}?imageView2/1/w/{{twoSize}}/h/{{twoSize}}" class="pic" style="height: {{twoSize/pixelRatio}}px;width:{{twoSize/pixelRatio}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                    <image lazyload="true" mode="aspectFill" wx:else src="{{pic.url}}?imageView2/1/w/{{threeSize}}/h/{{threeSize}}" class="pic" style="height: {{threeSize/pixelRatio}}px;width:{{threeSize/pixelRatio}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                </block>
+            </view>
+            <view wx:else class="news_media">
+                <block wx:if="{{item.video.url}}" >
+                    <video src="{{item.video.url}}" objectFit="cover" style="width:96%;position:static;"></video>
+                </block>
+                <block wx:for="{{item.pics}}" wx:key="{{item.url}}" wx:for-item="pic" wx:for-index="idx">
+                    <image lazyload="true" mode="aspectFill" wx:if="{{item.pics.length==1 && pic.width>pic.height}}" src="{{pic.url}}?imageView2/1/w/{{oneSize}}/h/{{pics[index][idx]['size']}}" class="pic" style="height: {{oneSize/pixelRatio*pic.height/pic.width}}px;width:{{oneSize/pixelRatio}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                    <image lazyload="true" mode="aspectFill" wx:elif="{{item.pics.length==1 && pic.height>=pic.width}}" src="{{pic.url}}?imageView2/1/w/{{pics[index][idx]['size']}}/h/{{oneSize}}" class="pic" style="height: {{oneSize/pixelRatio}}px;width:{{oneSize/pixelRatio*pic.width/pic.height}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                    <image lazyload="true" mode="aspectFill" wx:elif="{{item.pics.length==2 || item.pics.length==4}}" src="{{pic.url}}?imageView2/1/w/{{twoSize}}/h/{{twoSize}}" class="pic" style="height: {{twoSize/pixelRatio}}px;width:{{twoSize/pixelRatio}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                    <image lazyload="true" mode="aspectFill" wx:else src="{{pic.url}}?imageView2/1/w/{{threeSize}}/h/{{threeSize}}" class="pic" style="height: {{threeSize/pixelRatio}}px;width:{{threeSize/pixelRatio}}px;" data-index="{{index}}-{{idx}}" catchtap="preview" />
+                </block>
+            </view>
+            <view class="news_info">
+                <view class="time" style="float: left;padding-top: 8px;">{{item.time_str?'':''}}</view>
+                <view class="zan" style="float: right;padding:5px;" catchtap="zan" data-index="{{index}}">
+                    <image  src="http://icons.maiyizhi.cn/zan1.png" class="zanIcon" wx:if="{{!item.hasZan}}"></image>
+                    <image  src="http://icons.maiyizhi.cn/zan2.png" class="zanIcon" wx:else></image>
+                    <text  wx:if="{{item.zans}}">{{item.zans}}</text>
+                </view>
+                <view style="clear: both;"></view>
+            </view>
+        </view>
+    </view>
+    </view>
+</template>

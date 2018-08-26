@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<!--公共头部-->
+<include src="../header/header.wxml"/>
+<view class="container">
+    <block wx:for="{{advertisementinfo}}">
+        <view class="list" id="{{item.id}}" bindtap="tiaoDetail" data-sta="{{item.status}}" data-carid="{{item.car_model_id}}">
+              <image src="{{item.ad_img_url}}"></image>
+              <text>{{item.ad_description}}</text>
+              <block wx:if="{{item.status==1}}">
+                <image src="{{imagesUrl}}levin/img/look.png" class="look"></image>
+              </block>
+        </view> 
+    </block>       
+</view>

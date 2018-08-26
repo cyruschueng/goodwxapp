@@ -1,0 +1,32 @@
+<view class="container" style="height:572px">
+	<view class="top-tip">	{{name}}的生日群	</view>
+	<view class="top-layout">
+		<!-- <view class="count-tip">1人已加入</view> -->
+	</view>
+	<view class="bg-layout">
+		<image class="my-avatar" src="{{userInfo.avatarUrl}}"></image>
+		<view class="name"></view>
+		<view class="birth-layout">
+			<view class="label">	生日</view>
+			<view class="chooseDate">
+         <picker mode="date" value="{{birth_year}}{{birth_month}}{{birth_day}}" start="" end="" bindchange="bindDateChange">
+              <view class="weui-input">{{birth_year}}-{{birth_month}}-{{birth_day}}</view>
+          </picker>
+      </view>
+		</view>
+		<view class="phone-layout">
+			<view class="label">手机</view>
+			<input bindinput="bindPhoneInput" class="input-phone" placeholder="开启你的祝福墙 (选填)"
+			placeholder-style="input-class" value="{{phone}}" />
+		</view>
+		<view class="hint-tip">
+			<image class="hidden-img" src="/images/uncheck_tip.png"></image>
+			<!-- <view class="hidden-tip">其他人不可见我的出生年份</view> -->
+		</view>
+		<view class="share" bindtap='sendShare'>	加入生日群</view>
+	</view>
+	<view class="tip-layout">
+		<view class="text1">	•群里生日早知道</view>
+		<view class="text1">•姓名打分大比拼</view>
+	</view>
+</view>

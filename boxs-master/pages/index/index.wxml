@@ -1,0 +1,59 @@
+<!--index.wxml-->
+<view class='dialog' wx:if="{{showDialog}}">
+    <image src='{{head_adver}}'></image>
+</view>
+<view  wx:if="{{!luggageList}}" style="text-align:center;padding:30rpx 0;font-size:32rpx;">
+     <view class="classname">你还没有行李箱，快去新建</view>
+</view>
+<view class="container" wx:else>
+    <view class='header' wx:if="{{edit}}">
+        <view class='sets' bindtap='editTap'>完成</view> 
+    </view>
+    <view class='header' wx:else>
+        <view class='sets' bindtap='editTap'>删除</view> 
+    </view>
+    <block> 
+        <view class='item' wx:for="{{luggageList}}">
+            <view class='logo del' wx:if="{{edit}}" bindtap='delNow' 
+                  data-index='{{index}}' data-lu_id='{{item.lu_id}}'>
+                <image src="../image/del.png" mode="widthFix"></image>
+            </view>
+            <block wx:else>
+                <view class='logo' wx:if="{{item.color==1 || item.color==''}}">
+                    <image src="../image/box1.png" mode="widthFix"></image>
+                </view>
+                <view class='logo' wx:if="{{item.color==2}}">
+                    <image src="../image/box2.png" mode="widthFix"></image>
+                </view>
+                <view class='logo' wx:if="{{item.color==3}}">
+                    <image src="../image/box3.png" mode="widthFix"></image>
+                </view>
+                <view class='logo' wx:if="{{item.color==4}}">
+                    <image src="../image/box4.png" mode="widthFix"></image>
+                </view>
+                <view class='logo' wx:if="{{item.color==5}}">
+                    <image src="../image/box5.png" mode="widthFix"></image>
+                </view>
+                <view class='logo' wx:if="{{item.color==6}}">
+                    <image src="../image/box6.png" mode="widthFix"></image>
+                </view>
+                <view class='logo' wx:if="{{item.color==7}}">
+                    <image src="../image/box7.png" mode="widthFix"></image>
+                </view>
+            </block>
+            <view class='content' bindtap='travelInform' data-lu_id='{{item.lu_id}}'>
+                <view class='text'>
+                    <view class='title'>{{item.luggage_name}}</view>  
+                    <view class='remarks'>{{item.desc}}</view>
+                </view>
+            </view>
+            <view class='set' bindtap='setting' data-lu_id='{{item.lu_id}}' 
+                  data-name="{{item.luggage_name}}" data-desc='{{item.desc}}'>
+                <image src="../image/setting.png" mode="widthFix"></image>
+            </view>
+        </view>
+    </block>
+</view>
+<view class='footer'>
+    <image src="../image/add.png" mode='widthFix' bindtap='addNew'></image>
+</view>

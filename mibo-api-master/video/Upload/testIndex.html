@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>图片上传</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+        body {
+            font-size: 9pt;
+        }
+
+        input {
+            background-color: #924bff;
+            border: 1px inset #CCCCCC;
+        }
+
+        .web_content {
+            border: solid chocolate 2px;
+            padding: 50px;
+            margin: 100px auto;
+            width: 60%;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        function uploadAct() {
+            var upfile = $('#upfile');
+            var path = upfile.val();
+            var arr = path.split('\\'); //注split可以用字符或字符串分割
+            var fileName = arr[arr.length-1];
+            $("#sign").val(fileName);
+            $("#upform").submit();
+            return true;
+        }
+
+    </script>
+</head>
+
+<body>
+<div class="web_content">
+    <h1>图片上传</h1>
+    <form enctype="multipart/form-data" method="post" name="upform" action="upload.php" onsubmit="return uploadAct();">
+        上传文件:
+        <input id='upfile' name="upfile" type="file">
+        <input type="submit" value="上传"><br>
+        <input type="hidden" name="sign" id="sign" value="">
+        允许上传的文件类型为:image/jpg, image/jpeg, image/png, image/pjpeg, image/gif, image/bmp, image/x-png
+    </form>
+</div>
+
+
+</body>
+</html>

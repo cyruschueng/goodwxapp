@@ -1,0 +1,35 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--热门领域  -->
+  <scroll-view scroll-y="true" bindscrolltolower='loadMore' scroll-top="{{scroll}}" class="scrollStyle">
+    <view class="outStyleBox1">
+      <view class="outPadding">
+        <view class="flex title">
+          <view class="blockTitle">热门领域</view>
+        </view>
+        <view class="blockIntro">* 近期创投媒体热议领域</view>
+        <view class="industryTitleBlock flex">
+          <view class="industryTitle">领域</view>
+          <view class="industryTitle">已投机构</view>
+          <view class="industryTitle">创业项目</view>
+          <view class="industryTitle">媒体热度</view>
+        </view>
+      </view>
+      <block wx:for="{{industry_list}}" wx:key="{{index}}">
+        <view class="industryContentBlock flex" data-id="{{item.industry_id}}" hover-class='t-hoverColor' bindtap="toIndustrySearch">
+          <view class="industryContentTitle">{{item.industry_name}}</view>
+          <view class="industryContent">{{item.investment_num}}</view>
+          <view class="industryContent">{{item.event_num}}</view>
+          <view class="industryContent flex">
+            <view class="industryNum">{{item.media_hot}}</view>
+            <image src="/img/icon-jiantouxia@2x.png" class="arrow" wx:if="{{item.status == 2}}"></image>
+            <image src="/img/icon-jiantoushang@2x.png" class="arrow" wx:if="{{item.status == 1}}"></image>
+            <view class="up" wx:if="{{item.status == 1}}">{{item.media_fix}}</view>
+            <view class="down" wx:if="{{item.status == 2}}">{{item.media_fix}}</view>
+          </view>
+        </view>
+      </block>
+
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <title>updateUsePhone</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="format-detection"content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ppublic.css">
+
+    <style type="text/css">
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="phone">
+<br>
+<br>
+<button id="btn">updateUsePhone</button>
+</body>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="jsv2/public.js"></script>
+<script>
+    $(function(){
+
+        $('#btn').unbind('click').click(function(){
+            appFc.updateUsePhone($('#phone').val());
+            /*if(getParamByUrl("os")=="android"){
+                mobileApp.updateUsePhone($('#phone').val());
+            }
+            else{
+                window.webkit.messageHandlers.updateUsePhone.postMessage($('#phone').val());
+            }*/
+        });
+
+    })
+
+</script>
+</html>

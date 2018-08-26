@@ -1,0 +1,15 @@
+<!--pages/introduce/moodspage/moods.wxml-->
+<view class='row-page'>
+    <view class="col-list" wx:for="{{friendsData}}">
+        <view  bindtap='detailsTap' class='datainfo'  data-inindex="{{item.user_id}}">
+            <view class='label-img'><image src='{{item.headimgurl}}'></image></view>
+            <view class='col-right'>
+                <view class='name'>{{item.nickname}}</view>
+                <view class='rectext'>{{item.company}}</view>
+            </view>
+        </view>
+        <view class='right-phone' bindtap='dialphone' data-index="{{item.mobile}}">
+            <image src='/images/icon_shop_mobile.png'></image>
+        </view>
+    </view>
+</view>

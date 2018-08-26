@@ -1,0 +1,47 @@
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="padding-md" wx:for="{{list}}">
+  <view class="font-sm">{{item.gettype == 1 ? '新用户奖励':''}}{{item.gettype == 2 ? '邀请新用户获得奖励':''}}</view>
+  <view class="bg-white box-shadow" style="border-radius: 10px">
+    <view class="{{item.type == 1 ? 'coupon1':''}} {{item.type == 2 ? 'coupon2':''}} {{item.type == 3 ? 'coupon3':''}}">
+      <view class="coupon-panel {{item.type == 1 ? 'coupon-bg1':''}} {{item.type == 2 ? 'coupon-bg2':''}} {{item.type == 3 ? 'coupon-bg3':''}} ">
+        <view class="padding-top-sm padding-left-sm padding-right-sm panel-between">
+          <image src="/img/bg-logo-w.png" class="icon-ic"></image>
+          <view class="font-white font-lg">{{item.type == 1 ? '折扣券':''}}{{item.type == 2 ? '直减券':''}}{{item.type == 3 ? '满减券':''}}</view>
+        </view>
+        <view class="font-white padding-left-sm panel-between item-center">
+          <view style="text-align:right">
+            <text class="font-50"></text> <text class="font-60">{{item.type == 1 ? item.couponprice*10+'折':''}}{{item.type == 2 ? '￥'+item.couponprice:''}}{{item.type == 3 ? '￥'+item.bprice:''}}</text>
+          </view>
+          <view style="text-align:right" class="margin-right-sm">
+            <text class="margin-left-sm font-xs" decode="true">{{item.type == 2 ? '使用立减'+item.couponprice+'元':''}}{{item.type == 1 ? '使用可享'+(item.couponprice*10)+'折优惠':''}}{{item.type == 3 ? '满￥'+item.tprice+'减￥'+item.bprice:''}}
+            仅限 <text wx:for="{{item.range}}" wx:for-item="it">{{' '+it}}</text> 使用</text>
+          </view>
+          
+        </view>
+      </view>
+    </view>
+    <view class="coupon-control panel-center">
+      <view class="item font-md font-default">
+        {{item.day}}天后过期
+      </view>
+      <view data-id="{{item.id}}" bindtap="useCoupon" class="item font-md cou-color1 {{item.type == 1 ? 'cou-color1':''}} {{item.type == 2 ? 'cou-color2':''}} {{item.type == 3 ? 'cou-color3':''}}">
+        立即使用
+      </view>
+    </view>
+  </view>
+
+ 
+</view>
+ <view class="null-panel" wx:if="{{!loading && list.length == 0}}">
+  <image src="/img/couponnull.png" mode="aspectFill"></image>
+  <view class="font-md font-default">好可惜哦，没有优惠券!</view>
+</view> 
+
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && list.length > 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

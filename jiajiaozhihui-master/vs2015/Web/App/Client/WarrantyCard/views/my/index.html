@@ -1,0 +1,60 @@
+﻿<div class="page" style="padding-bottom:50px;">
+    <div class="page__hd">
+        <h1 class="page__title">神尔国学机保障卡登记信息</h1>
+        <p class="page__desc"></p>
+    </div>
+    <div class="page__bd">
+        <div ng-repeat="m in info">
+            <div class="weui-cells__title"><span class="fa fa-id-card-o"></span> 神尔国学机保障卡{{$index+1}}</div>
+            <div class="weui-cells" >
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>姓名</p>
+                    </div>
+                    <div class="weui-cell__ft">{{m.userName}}</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>手机</p>
+                    </div>
+                    <div class="weui-cell__ft">{{m.telephone}}</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>机器码</p>
+                    </div>
+                    <div class="weui-cell__ft">{{m.machineCode}}</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>保修有效期</p>
+                    </div>
+                    <div class="weui-cell__ft">{{m.orderDate|date:'yyyy-MM-dd'+" 至 "+ getDate(m.orderDate,545)|date:'yyyy-MM-dd' }}</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>注册地址</p>
+                    </div>
+                    <div class="weui-cell__ft">{{m.province + m.city+ m.address}}</div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="info.length==0" >
+            <div class="weui-cells" >
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p class="weui-cells__tips" style="text-align: center">暂时还没有保修卡登记信息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page_ft">
+        <div class="weui-cells__tips">
+            <p >1:国学机保修时间由原来的1年延长至1年半<p>
+            <p >2:你还可以关注下面的【家教智慧】微信号，回复7将为你提供更多的国学教材升级服务<p>
+        </div>
+
+        <img src="/app/Client/WarrantyCard/imgs/jiajiaozhihui.jpg" style=" width:100%;" />
+    </div>
+</div>

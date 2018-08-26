@@ -1,0 +1,15 @@
+<view class="container remain">
+	<view class="cont">
+		<view class="til">账户余额（元）</view>
+		<text class="yue">{{total}}<text class="yue_a">元</text></text>
+		<view class="til">提现金额（元）</view>
+		<view class="botin">
+			<input class="ctrol {{isfocus?'ctrol_foucs':''}}" disabled="{{total<1?'disabled':''}}" data-type="m" bindfocus="infocus" bindinput="vchange" bindblur="outblur" value="{{money}}" type="number" />
+			<view class="inall" bindtap="inall">全部提现</view>
+		</view>
+		<view class="error" hidden="{{iserror}}">*单次提取红包金额不得低于1元</view>
+		<view class="fee">需要支付{{fee}}服务费</view>
+		<view class="btn" bindtap="tixian">提现</view>
+	</view>
+	<text class="bottip">提现到微信钱包 1-5个工作日到账</text>
+</view>

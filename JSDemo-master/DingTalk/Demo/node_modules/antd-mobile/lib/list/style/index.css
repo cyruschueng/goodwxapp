@@ -1,0 +1,258 @@
+.hairline-remove-right-bottom {
+  border-bottom: 0;
+}
+.hairline-remove-right-bottom:after {
+  display: none;
+}
+.hairline-remove-right-bottom-bak:after {
+  display: none;
+}
+.hairline-remove-left-top:before {
+  display: none;
+}
+.am-list-header {
+  padding: 30px 30px 18px 30px;
+  font-size: 28px;
+  color: #888;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+}
+.am-list-footer {
+  padding: 18px 30px 30px 30px;
+  font-size: 28px;
+  color: #888;
+}
+.am-list-body {
+  position: relative;
+  background-color: #fff;
+  border-top: 1PX solid #ddd;
+}
+.am-list-body:after {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 100%;
+  border-bottom: 1PX solid #ddd;
+}
+.am-list-body div:not(:last-child) .am-list-line:after {
+  display: block;
+  position: absolute;
+  content: '';
+  left: 0;
+  bottom: 0;
+  right: auto;
+  top: auto;
+  width: 100%;
+  border-bottom: 1PX solid #ddd;
+}
+.am-list-item {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 30px;
+  min-height: 88px;
+  background-color: #fff;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: background-color 200ms;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* list左图片显示*/
+}
+.am-list-item .am-list-ripple {
+  position: absolute;
+  background: transparent;
+  display: inline-block;
+  overflow: hidden;
+  will-change: box-shadow, transform;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  cursor: pointer;
+  border-radius: 100%;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+}
+.am-list-item .am-list-ripple.am-list-ripple-animate {
+  background-color: rgba(158, 158, 158, 0.2);
+  -webkit-animation: ripple 1s linear;
+          animation: ripple 1s linear;
+}
+.am-list-item.am-list-item-top .am-list-line {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.am-list-item.am-list-item-top .am-list-line .am-list-arrow {
+  margin-top: 4px;
+}
+.am-list-item.am-list-item-middle .am-list-line {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.am-list-item.am-list-item-bottom .am-list-line {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+.am-list-item.am-list-item-error .am-list-line .am-list-extra {
+  color: #f50;
+}
+.am-list-item.am-list-item-error .am-list-line .am-list-extra .am-list-brief {
+  color: #f50;
+}
+.am-list-item.am-list-item-active {
+  background-color: #ddd;
+}
+.am-list-item.am-list-item-disabled .am-list-line .am-list-content,
+.am-list-item.am-list-item-disabled .am-list-line .am-list-extra {
+  color: #bbb;
+}
+.am-list-item img {
+  width: 44px;
+  height: 44px;
+  vertical-align: middle;
+}
+.am-list-item .am-list-thumb:first-child {
+  margin-right: 30px;
+}
+.am-list-item .am-list-thumb:last-child {
+  margin-left: 16px;
+}
+.am-list-item .am-list-line {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  padding-right: 30px;
+  min-height: 88px;
+  overflow: hidden;
+  /* list左侧主内容*/
+  /* list右补充内容*/
+  /* 辅助性文字*/
+  /* list右侧箭头*/
+}
+.am-list-item .am-list-line .am-list-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #000;
+  font-size: 34px;
+  line-height: 1.5;
+  text-align: left;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.am-list-item .am-list-line .am-list-extra {
+  -ms-flex-preferred-size: 36%;
+      flex-basis: 36%;
+  color: #888;
+  font-size: 32px;
+  line-height: 1.5;
+  text-align: right;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.am-list-item .am-list-line .am-list-title {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.am-list-item .am-list-line .am-list-brief {
+  color: #888;
+  font-size: 30px;
+  line-height: 1.5;
+  margin-top: 12px;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.am-list-item .am-list-line .am-list-arrow {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-left: 16px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%2216%22%20height%3D%2226%22%20viewBox%3D%220%200%2016%2026%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Cg%20id%3D%22UI-KIT_%E5%9F%BA%E7%A1%80%E5%85%83%E4%BB%B6%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%229.9%E5%9F%BA%E7%A1%80%E5%85%83%E4%BB%B6%22%20transform%3D%22translate(-5809.000000%2C%20-8482.000000)%22%20fill%3D%22%23C7C7CC%22%3E%3Cpolygon%20id%3D%22Disclosure-Indicator%22%20points%3D%225811%208482%205809%208484%205820.5%208495%205809%208506%205811%208508%205825%208495%22%3E%3C%2Fpolygon%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  visibility: hidden;
+}
+.am-list-item .am-list-line .am-list-arrow-horizontal {
+  visibility: visible;
+}
+.am-list-item .am-list-line .am-list-arrow-vertical {
+  visibility: visible;
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.am-list-item .am-list-line .am-list-arrow-vertical-up {
+  visibility: visible;
+  -webkit-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+.am-list-item .am-list-line-multiple {
+  padding: 25px 30px 25px 0;
+}
+.am-list-item .am-list-line-multiple .am-list-content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.am-list-item .am-list-line-multiple .am-list-extra {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.am-list-item .am-list-line-wrap .am-list-content {
+  white-space: normal;
+}
+.am-list-item .am-list-line-wrap .am-list-extra {
+  white-space: normal;
+}
+.am-list-item select {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  font-size: 34px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+}
+@-webkit-keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+            transform: scale(2.5);
+  }
+}
+@keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+            transform: scale(2.5);
+  }
+}

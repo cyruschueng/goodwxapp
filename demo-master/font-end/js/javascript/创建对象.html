@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 原始方式
+		/*
+		var a = {};
+		// var a = new Object;
+		a.name = 'zhangjiayuan';
+		a.age = '25'
+		a.showName = function(){
+			document.write()(this.name)
+		}
+		a.showName();
+		*/
+
+		// 工厂方式
+		/*
+		function person(){
+			var a = new Object;
+			a.name = 'zhangjiayuan';
+			a.age = '25'
+			a.showName = function(){
+				document.write(this.name)
+			}
+			return a;
+		};
+
+		var a1 = person();
+		var a2 = person();
+		a1.showName();
+		document.write("<br />");
+		a2.showName();
+		*/
+
+		// 工厂方式，带参数
+	/*	function person(name,age){
+			var a = new Object;
+			a.name = name;
+			a.age = age;
+			a.showName = function(){
+				document.write(this.name)
+			}
+			return a;
+		};
+
+		var a1 = person('zhangjiayuan','25');
+		a1.showName();*/
+
+		// 工厂方式，工厂函数外定义对象方法
+		/*function person(name,age){
+			var a = new Object;
+			a.name = name;
+			a.age = age;
+			a.showName = showName;
+			return a;
+		};
+		function showName(){
+			document.write(this.name)
+		};
+
+		var a1 = person('zhangjiayuan','25');
+		a1.showName();*/
+
+		// 构造函数
+		/*function Person(name,age){
+			this.name = name;
+			this.age = age;
+			this.showName = showName;
+		};
+		function showName(){
+			console.log(this)
+			document.write(this.name)
+		};
+
+		var a1 = new Person('zhangjiayuan','25');
+		a1.showName();*/
+
+		// 原型函数
+		/*function Person(){};
+		Person.prototype.name ='zhangjiayuan';
+		Person.prototype.age = 25;
+		Person.prototype.showName = showName;
+		function showName(){
+			console.log(this)
+			document.write(this.name)
+		};
+
+		var a1 = new Person();
+		a1.showName();*/
+
+		// 原型函数
+		/*function Person(){};
+		Person.prototype.name ='zhangjiayuan';
+		Person.prototype.age = 25;
+		Person.prototype.like = new Array('wushu','sport')
+		Person.prototype.showName = showName;
+		function showName(){
+			console.log(this)
+			document.write(this.name)
+		};
+
+		var a1 = new Person();
+		var a2 = new Person();
+		a1.age=26;	
+		//age是原始值，like是引用值	
+		// document.write(a1.age);
+		// document.write(a2.age);
+		a1.like.push('code');
+		document.write(a1.like);
+		document.write(a2.like);*/
+
+		// 构造函数和原型函数混合,每个对象都具有自己的对象属性实例
+		/*function Person(name,age){			
+			this.name =name;
+			this.age = age;
+			this.like = new Array('wushu','sport')			
+		};
+		Person.prototype.showName = function(){
+			console.log(this)
+			document.write(this.name)
+		};
+
+		var a1 = new Person('zhangjiayuan','25');
+		var a2 = new Person('zhangjiayuan','25');
+		a1.age=26;	
+		//age是原始值，like是引用值	
+		document.write(a1.age);
+		document.write(a2.age);
+		a1.like.push('code');
+		document.write(a1.like);
+		document.write('<br/>')
+		document.write(a2.like);*/	
+
+
+		// 动态原型方法，模仿其他对象函数
+	/*	function Person(name,age){			
+			this.name =name;
+			this.age = age;
+			this.like = new Array('wushu','sport');
+
+			if(typeof Person._initialized =='undefined'){
+				Person.prototype.showName = function(){
+					console.log(this);
+					document.write(this.name);
+				}
+				Person._initialized = true;
+			}
+		};
+		
+
+		var a1 = new Person('zhangjiayuan','25');
+		var a2 = new Person('zhangjiayuan','25');
+		a1.age=26;	
+		//age是原始值，like是引用值	
+		document.write(a1.age);
+		document.write(a2.age);
+		a1.like.push('code');
+		document.write(a1.like);
+		document.write('<br/>')
+		document.write(a2.like);*/	
+
+		// 混合工厂方式		
+		/*function person(){
+			var a = new Object;
+			a.name = 'zhangjiayuan';
+			a.age = '25'
+			a.showName = function(){
+				document.write(this.name)
+			}
+			return a;
+		};
+		// 创建假构造函数，只返回另一种对象的新实例
+		var a1 = new person();
+		var a2 = new person();
+		a1.showName();
+		document.write("<br />");
+		a2.showName();*/
+
+		// 采用哪种方式
+		// 如前所述，目前使用最广泛的是混合的构造函数/原型方式。此外，动态原始方法也很流行，在功能上与构造函数/原型方式等价。可以采用这两种方式中的任何一种。不过不要单独使用经典的构造函数或原型方式，因为这样会给代码引入问题
+		
+	</script>
+</body>
+</html>

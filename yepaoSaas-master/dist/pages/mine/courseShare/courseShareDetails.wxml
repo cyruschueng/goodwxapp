@@ -1,0 +1,36 @@
+<!--pages/mine/courseShare/courseShareDetails.wxml-->
+
+<import src="../../../templates/imgText-item/imgText-item.wxml"/>
+
+<view class='bg-view' hidden='{{ !showVideoHidden }}'>
+
+  <block wx:for='{{ shareDetailList }}' wx:for-item='detail' wx:key='{{ index }}'>
+  <view class='shareDetail-cell'>
+    <view class='shareDetail-cell-title'>{{ detail.time }}</view>
+    <template is="imgText-item" data="{{ ...detail }}"/>
+  </view>
+  </block>
+  
+</view>
+
+<!-- 视频 弹窗 -->
+<view class='popUps-bgview' hidden='{{ showVideoHidden }}'>
+  <!-- 收起按钮   -->
+  <image class='popUps-cancel-btn' src='../../../images/icon/delete_back.png' bindtap='bindCloseVideoShowTap'></image>
+
+  <!-- 视频   -->
+  <view class="we-container">
+    <view class="we-wrapper"
+      bindtouchstart="touchstart"
+      bindtouchmove="touchmove"
+      bindtouchend="touchend"
+      animation="{{ animationData }}">
+      <block wx:for="{{ videoUrlsBrowse }}" wx:key="{{ index }}">
+      <view class="we-slide" >
+        <video class='video' autoplay='false' id="{{ index }}" src="{{ item.srcString }}" bindended='bindVideoPalyEnded'></video>
+      </view>
+      </block>
+    </view> 
+  </view> 
+  
+</view>   

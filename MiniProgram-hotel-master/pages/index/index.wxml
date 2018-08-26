@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<view class="container">
+  <swiper indicator-dots='true' indicator-color='#f7e68a' indicator-active-color='#ffffff' autoplay='true' interval='3000' duration='500' class='hd-slide'>
+    <block wx:for='{{imgUrl}}' wx:key='unique'>
+      <swiper-item>
+        <image src='{{item}}' class='slide-image'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <form>
+    <view class='search'>
+    <icon type='search' size='16' class='search-icon'></icon>
+      <input class='search-input' type='text' placeholder='输入搜索'></input>
+      <button class='search-button'>搜索</button>
+    </view>
+  </form>
+  <view class='service-list'>
+    <view class='service-item' wx:for='{{serviceList}}' wx:key='code' bindtap='hotel_list'>
+      <image src='{{item.img}}'></image>
+      <view class='service-title'>{{item.title}}</view>
+    </view>
+  </view>
+  <view class='hotel-list'>
+    <view class='hotel-item' wx:for='{{lists}}' wx:key='code' data-id='{{item.id}}' bindtap='toReserve'>
+      <image src='{{item.url}}'></image>
+      <view class='hotel-title'>{{item.title}}</view>
+      <view class='number'>
+        <view class='price'>￥{{item.price}}</view>
+        <view class='sale-num'>销量：{{item.num}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='section-ft'>没有更多啦</view>
+</view>

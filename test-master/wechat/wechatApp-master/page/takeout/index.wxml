@@ -1,0 +1,107 @@
+<view class="scroll-main">
+  <view class="zz"></view>
+  <view class="zz2"></view>
+  <scroll-view scroll-y="true">
+    <view wx:key="*this" wx:for-items="{{menu}}" data-name="{{item.name}}" class="{{item.name == '特价'  ? 'hot2' : ''}} +  {{item.name == '活动'  ? 'hot' : ''}} + {{activeCategoryId == item.name ? 'active' : ''}}" bindtap="tabClick">
+      {{item.name}}
+    </view>
+  </scroll-view>
+
+
+
+  <view class="right-scroll">
+
+    <view>
+
+      <view style="display:none" class="title">{{activeCategoryId}}</view>
+
+      <view class="list">
+
+        <view wx:for-items="{{menudata}}" data-id="{{item.id}}" wx:key="{{index}}" class="li {{activeCategoryId == item.menuTypeName ? 'display_block' : 'display_none'}}">
+          <view class="image_box" data-id="{{item.id}}" catchtap="imgbox">
+            <image src="https://flashgoing.oss-cn-shenzhen.aliyuncs.com/{{item.picture}}" mode="widthFix"></image>
+          </view>
+
+          <view class="more">
+            <view class="t1">{{item.name}}</view>
+            <view class="t2">月售74份</view>
+            <view class="t3">
+              <view class="n">￥</view>
+              <view>{{item.price}}</view>
+            </view>
+          </view>
+          <image class="jia" data-id="{{item.id}}" data-price="{{item.price}}" data-menuPicture="{{item.picture}}" data-name="{{item.name}}" catchtap="add" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jian.png"></image>
+          <image class="jia jian" wx:if="{{buymenu[item.id].num}}" data-name="{{item.name}}" data-id="{{item.id}}" data-menuPicture="{{item.picture}}" data-price="{{item.price}}" catchtap="minus" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jia.png"></image>
+          <text class="jia num" wx:if="{{buymenu[item.id].num}}">{{ buymenu[item.id].num }}</text>
+
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+
+</view>
+
+<view class="footer">
+  <view class="num" wx:if="{{num}}">{{num}}</view>
+  <image wx:if="{{!num}}" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/shop.png"></image>
+  <view catchtap="" wx:if="{{num}}" class="rmb">¥{{price}}</view>
+  <view class="sub" catchtap="settle" wx:if="{{num}}">选好了</view>
+  <view class="sub no" wx:if="{{!num}}">未选菜品</view>
+</view>
+
+
+
+<!-- 购物车 -->
+<view wx:if="{{show}}" catchtap="changeshow" class="mask-layer-box"></view>
+
+
+
+<view class="yes-select-menu-box {{ show ? 'ani' :''}}">
+  <view class="yes-select-menu">
+    <text class="f_l">我的菜单</text>
+    <view catchtap="clear" class="f_r cl">
+      <image src="https://lingju360.natappvip.cc/miniapp/resources/image/new/de.png"></image> 清空</view>
+  </view>
+
+  <scroll-view class="ul_menu" scroll-y="true">
+    <view class="li_menu" wx:for-items="{{buymenu}}" wx:if="{{item.num}}">
+      {{item.menuName}}{{item.name}}
+      <text class="f_r">¥{{item.price*item.num}}</text>
+      <image class="jia" data-id="{{item.menuId}}" data-name="{{item.menuName}}{{item.name}}" data-price="{{item.price}}" catchtap="add" src="https://lingju360.natappvip.cc/miniapp/resources/image/common/add.png"></image>
+      <image class="jia jian" data-id="{{item.menuId}}" data-name="{{item.menuName}}{{item.name}}" data-price="{{item.price}}" catchtap="minus" src="https://lingju360.natappvip.cc/miniapp/resources/image/common/minus.png"></image>
+      <text class="jia num">{{ item.num }}</text>
+    </view>
+  </scroll-view>
+
+  <view class="input_box">
+    <input placeholder="备注" />
+  </view>
+
+</view>
+
+
+
+<!-- 图片悬浮窗 -->
+<view catchtap="hideImg" class="zzzz" wx:if="{{showMaxImg}}"></view>
+<view class="max_box {{ showMaxImg ? 'anni' :''}}" wx:if="{{1}}">
+  <view wx:if="{{maxImg.menuPicture}}" class="img_box">
+    <image src="https://flashgoing.oss-cn-shenzhen.aliyuncs.com/{{maxImg.menuPicture}}" mode="widthFix"></image>
+  </view>
+
+  <view class="more">
+    <view class="t1">{{maxImg.menuName}}</view>
+    <view class="t2">月售74份</view>
+    <view class="t3">
+      <view class="n">￥</view>
+      <view>{{maxImg.price}}</view>
+    </view>
+  </view>
+
+  <image class="jia" data-id="{{maxImg.menuId}}" data-price="{{maxImg.price}}" data-menuPicture="{{maxImg.menuPicture}}" data-name="{{maxImg.menuName}}" catchtap="add" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jian.png"></image>
+  <image class="jia jian" wx:if="{{buymenu[maxImg.menuId].num}}" data-name="{{maxImg.name}}" data-menuPicture="{{maxImg.menuPicture}}" data-id="{{maxImg.menuId}}" data-price="{{maxImg.price}}" catchtap="minus" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jia.png"></image>
+  <text class="jia num" wx:if="{{buymenu[maxImg.menuId].num}}">{{ buymenu[maxImg.menuId].num }}</text>
+
+
+</view>

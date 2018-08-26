@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view  wx:if="{{!luggageInform}}" style="text-align:center;padding:30rpx 0;font-size:32rpx;">
+     <view class="classname">你还没有物品分类，快去新建~~</view>
+</view>
+<view class="boxs" wx:else>
+    <view class="container" wx:for="{{luggageInform}}"  wx:key="{{index}}" 
+          data-cat_id="{{item.cat_id}}" data-indexF='{{index}}'>
+          <view class='header'> {{item.cat_name}}</view> 
+          <view class='item' wx:for="{{item.goods}}"  wx:for-item="newItem" 
+              data-inx="{{index}}" data-g_id="{{newItem.g_id}}">
+              <view class='logo' wx:if="{{newItem.checked==0}}" bindtap='checkedTap' data-result="1" 
+                   data-g_id='{{newItem.g_id}}' data-childindex="{{index}}" 
+                   data-checked="{{newItem.checked}}" data-cat_id="{{item.cat_id}}">
+                  <image src="../image/rol.png" mode="widthFix"></image>
+              </view>
+              <view class='logo del' wx:else bindtap='checkedTap' data-result="0" data-g_id='{{newItem.g_id}}'
+                    data-childindex="{{index}}" data-checked="{{newItem.checked}}" data-cat_id="{{item.cat_id}}">
+                  <image src="../image/rols.png" mode="widthFix"></image>
+              </view>
+              <view class='content'>
+                  <view class='text'>
+                      <view class='title'>{{newItem.goods_name}}</view>  
+                  </view>
+              </view>
+              <view class='set' bindtap='setting' data-cat_id='{{item.cat_id}}' 
+                    data-lu_id="{{lu_id}}" data-cat_name='{{item.cat_name}}' data-g_id="{{newItem.g_id}}"
+                    data-goods_name='{{newItem.goods_name}}'>
+                 <image src="../image/setting.png" mode="widthFix"></image>
+              </view>
+          </view>
+      </view>
+</view>
+<view class='footer'>
+    <!-- <image src="../image/reset.png" mode='widthFix' bindtap='reset'></image> -->
+    <image src="../image/adds.png" mode='widthFix' bindtap='addNew'></image>
+    <image src="../image/like.png" mode='widthFix' bindtap='liveList'></image>
+</view>

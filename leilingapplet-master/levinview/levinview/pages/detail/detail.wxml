@@ -1,0 +1,54 @@
+<!--detail.wxml-->
+<view class="wrap">
+  <include src="../header/header.wxml" />
+  <view class="container">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff" indicator-color="#ddd">
+      <block wx:for="{{banner}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="blink_wrap">
+      <view class="blink" style="background: #fff url({{imagesUrl}}title.png) no-repeat left top;  background-size: 700rpx 700rpx;">
+        <view class="ld">
+          <text>车型亮点</text>
+        </view>
+        <view class="listText">
+          <block wx:for="{{content}}">
+            <text style=" background: url({{imagesUrl}}circle.png) no-repeat 20rpx 10rpx;background-size: 10rpx 10rpx;">{{item}}</text>
+          </block>
+        </view>
+        <view class="picker_wrap">
+          <picker bindchange="bindModelChange" value="{{iModel}}" range="{{arrayModel}}">
+            <view class="picker picker2" style=" background: url({{imagesUrl}}down2.png) no-repeat 400rpx;background-size: 30rpx auto;">
+              {{arrayModel[iModel]}}
+            </view>
+          </picker>
+          <block wx:if="{{city=='选择城市'}}">
+            <view class="picker picker2" bindtap="bindSChange1" style="background: #CCC url({{imagesUrl}}down2.png) no-repeat 400rpx;background-size: 30rpx auto;">
+              请先选择城市
+            </view>
+          </block>
+          <block wx:else>
+            <picker bindchange="bindSChange" value="{{iS}}" range="{{arrayS}}">
+              <view class="picker picker2" style="  background: url({{imagesUrl}}down2.png) no-repeat 400rpx;background-size: 30rpx auto;">
+                {{arrayS[iS]}}
+              </view>
+            </picker>
+          </block>
+        </view>
+        <view class="info">
+          <text class="tel text" style="background: url({{imagesUrl}}tel.png) no-repeat left;background-size: 50rpx auto;" bindtap="call">{{tel}}</text>
+          <text class="address text" style="background: url({{imagesUrl}}home.png) no-repeat left;background-size: 50rpx auto;">{{address}}</text>
+          <view class="map" bindtap="showMap">
+            <image src="{{imagesUrl}}address2.png"></image><text>附近的店</text>>
+          </view>
+        </view>
+        <view class="next" bindtap="next">
+          <image src="{{imagesUrl}}next.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

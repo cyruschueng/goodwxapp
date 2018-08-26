@@ -1,0 +1,99 @@
+<!--pages/details/details.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
+
+<view class='container'>
+  <!-- 底部导航 -->
+  <view class='ft-nav'>
+    <view class='contact'>
+      <image src='/image/kf.png'></image>
+      <view>客服</view>
+      <button class='contact-button' open-type='contact'></button>
+    </view>
+    <view class='toIndex' bindtap='toIndex'>
+      <image src='/image/shop.png'></image>
+      <view>店铺</view>
+    </view>
+    <view class='toShopcart' bindtap='toShopcart'>加入购物车</view>
+    <view class='toBuy' bindtap='toBuy'>立即购买</view>
+  </view>
+  <!-- 导航结束 -->
+  <!-- 底部动画块 -->
+  <view class='shade' animation="{{animationData_2}}"></view>
+  <view class='animation' animation="{{animationData_1}}">
+    <view class='animation-info'>
+      <image class='animation-goods-img' src='{{goods_img}}'></image>
+      <view class='animation-text'>
+        <view class='animation-title'>{{title}}</view>
+        <view class='animation-price'>￥{{price}}</view>
+      </view>
+      <view class='animation-close' bindtap='animation_close'>X</view>
+    </view>
+    <view class='animation-num'>
+      <view>数量</view>
+      <view class='animation-num-content'>
+        <view class='animation-stock'>库存：{{stock}}</view>
+        <view class='change-num'>
+          <view class='minus' bindtap='minusCount'>-</view>
+          <input class='input-number' value='{{goods_num}}' bindblur='changeNumFn'></input>
+          <view class='plus' bindtap='addCount'>+</view>
+        </view>
+      </view>
+    </view>
+    <view class='animation-toShopCart animation-ft' wx:if='{{actionBuy}}' bindtap='submitOrder'>加入购物车</view>
+    <view class='animation-toPay animation-ft' wx:else bindtap='submitBuy'>下一步</view>
+  </view>
+  <!-- 底部动画块结束 -->
+  <view class='details-hd'>
+    <swiper indicator-dots='{{indicator_dots}}' indicator-color='#878590' indicator-active-color='#080806' autoplay='{{autoplay}}' interval='3000' duration='500' class='hd-slide'>
+      <block wx:for='{{imgUrl}}' wx:key='swiper_code'>
+        <swiper-item>
+          <image src='{{item}}' class='slide-image'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='hd-content'>
+      <view class='goods-title'>{{title}}</view>
+      <view class='goods-price'>￥{{price}}</view>
+      <view class='freight'>运费:{{freight}}
+        <text>库存:{{stock}}</text>
+      </view>
+      <view class='share'>
+        <image src='/image/share.png'></image>
+        <text>分享</text>
+        <button open-type='share'></button>
+      </view>
+    </view>
+  </view>
+  <view class='evaluate'>
+    <view class='evaluate-title'>
+      <image src='/image/pl.png'></image>
+      <text>评价</text>
+    </view>
+    <view class='evaluate-content'>
+      <view class='evaluate-num' bindtap='setOnOff'>评价({{evaluate_num}})<text>(展开/关闭)</text></view>
+      <view class='evaluate-wrap' wx:if='{{isOnOff}}'>
+        <view class='evaluate-list' wx:for='{{evaluate_list}}' wx:key='evaluateCode'>
+          <view class='evaluateP'>
+            <view class='evaluateName'>{{item.nickname}}</view>
+            <view>{{item.inputtime}}</view>
+          </view>
+          <view class='evaluateInfo'>{{item.content}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='bd-title'>
+    <image src='/image/xq.png'></image>
+    <text>详情</text>
+  </view>
+  <view class='bd-content-title'>产品详情</view>
+  <view class='bd-content'>
+    <!-- 文本编辑插件 -->
+    <view>
+      <!--这里data中article为bindName-->
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+    <!-- 文本编辑插件 -->
+  </view>
+
+</view>

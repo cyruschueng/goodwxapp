@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<view class="container">
+  <dialog title="{{modalTitle}}" show="{{showModalStatus}}" >
+    <radio-group bindchange="radioChange">
+      <label class="radio" wx:for="{{radioItems}}">
+        {{item.name}}<radio  class='ui-radio' value='{{item.value}}' checked='{{item.checked}}'/>
+      </label>
+    </radio-group>
+  </dialog> 
+  <view class='nav'>
+      <view class='nav-top'>
+        <view class="disc active-color" bindtap='openToastPannel'>
+          使用说明
+        </view>    
+        <search placeholder='搜你想押韵的，如山' bind:onSearch="searchRequest" searchKey="{{searchKey}}"></search> 
+        <button class='shareBtn' id="shareBtn" open-type="share" hover-class="other-button-hover">
+          <image src="{{shareIcon}}"></image>分享
+        </button> 
+      </view>
+    <view class='set' >
+       <view class='set-item' bindtap='showModal' id="source">
+         <image class='set-btn'src='{{setIcon}}'></image> 
+        搜索
+        <view class='active-color'>{{querySelected[param.source]}}</view> 
+      </view>
+      <view class='set-item' bindtap='showModal' id="use">
+        按<view class='active-color'>{{querySelected[param.use]}}</view>搜索</view>
+      <view class='set-item' bindtap='showModal' id="merged_by">
+         <view class='mergeChange' hidden="{{param.merged_by == 'false'}}">按<view class='active-color'>{{querySelected[param.merged_by]}}</view>合并</view>
+         <view hidden="{{param.merged_by !=  'false'}}">不合并</view>
+      </view> 
+    </view>  
+  </view> 
+  <scroll-view class='list-wrap' scroll-y="true" style="height: {{100}}vh;" bindscrolltolower="loadMore" bindscroll="scroll" scroll-top="{{scrollTop}}">
+    <loading hidden="{{!hasRefesh}}">
+      加载中...
+    </loading>
+    <view class='item'  wx:for="{{list}}" bindtap='openDeatil' id="{{index}}">
+      <view class='item-l'>
+        <image class="item-l-img  {{arr[index] ? 'product_image loaded':'place_image hidden'}}" mode="aspectFit" src="{{arr[index] ? list[index].pic : 'https://www.tengyu.site/h5/images/placeholder.jpg'}}"></image>      
+      </view> 
+      <view class='item-c'>
+        <text class='item-c-vulue' selectable='true'>{{item.lyric}}</text>
+        <text class='item-c-name' selectable='true' >{{item.title}}  {{item.author}}</text>
+        <view></view>
+      </view>
+       <view class='item-r'>
+        <view class='tag active-color' wx:if="{{param.use == 'char'}}">{{item.char}}</view>
+        <view class='tag active-color' wx:if="{{param.use == 'pinyin'}}">{{item.pinyin}}</view>
+        <view class='tag active-color' wx:if="{{param.use == 'rhyme'}}">{{item.rhyme}}</view> 
+      </view> 
+    </view>
+  </scroll-view>
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showDeatil}}"></view>
+    <view class="modal-dialog" wx:if="{{showDeatil}}">
+      <view class="modal-title">
+        <view class='tips'><image class="love-icon" src="{{noticeIcon}}"></image>可以长按复制在浏览器搜索哦</view>
+      </view>
+      <view class="modal-content">
+        <view class='modal-content-item-wrap'>
+          <text class='modal-content-item-name'>歌词/诗词：</text><text class='modal-content-item-content'>{{detail.lyric}}</text>
+        </view>
+        <view class='modal-content-item-wrap'>
+          <text class='modal-content-item-name'>歌名/诗名：</text><text class='modal-content-item-content' selectable='true'>{{detail.title}}</text>
+        </view>
+        <view class='modal-content-item-wrap'>
+          <text class='modal-content-item-name'>作者：</text><text class='modal-content-item-content' selectable='true'>{{detail.author}}</text>
+        </view>
+        <view class='modal-content-item-wrap-url'>
+          搜索歌词/诗词：<text class='modal-content-item-content' selectable='true'>{{detail.url}}</text>
+        </view>
+        <view class='modal-content-item-wrap-url'>
+          搜索歌名/诗名作者：<text class='modal-content-item-content' selectable='true'>{{detail.url_annotate}}</text>
+        </view>
+      </view>
+    </view>
+</view>
+
+

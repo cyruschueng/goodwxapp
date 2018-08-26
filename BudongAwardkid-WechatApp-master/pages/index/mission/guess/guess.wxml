@@ -1,0 +1,28 @@
+<!--pages/index/mission/guess/guess.wxml-->
+
+<view class="container">
+  <view class="titlebar">
+    <view class="author">
+      <image src="{{missionInfo.author.header}}" mode="aspectFit" lazy-load="true" class="header" />
+      <em class="duration">{{missionInfo.questionIndex}} / {{missionInfo.questionCount}}</em>
+    </view>
+    <view class="coins">
+      金币：{{coins}}
+    </view>
+  </view>
+  <view class="player">
+    <span class="disc {{playing ? 'playing' : ''}}">
+      <dfn class="centre"></dfn>
+    </span>
+    <span class="actions">
+      <span bindtap="onTip" class="button"> <em>提示</em> <small>-30</small> </span>
+      <span bindtap="onSkip" class="button down"> <em>跳过</em> <small>-30</small> </span>
+      <span bindtap="onReplay" class="button {{playing?'':'disabled'}}"> <em>重听</em> <small>-30</small> </span>
+    </span>
+  </view>
+  <view class="controls">
+    <form>
+      <input bindinput="onSubjectInput" placeholder="点这里输入答案，这是一个{{missionInfo.category}}" confirm-type="done" bindconfirm="onSubjectSubject" />
+    </form>
+  </view>
+</view>

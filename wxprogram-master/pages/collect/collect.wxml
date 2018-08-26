@@ -1,0 +1,49 @@
+<view class='containers'>
+  <view class='collect' wx:for='{{collect}}' wx:key='{{item}}' bindtap='select' id='{{item.shop.shopId}}'>
+    <view class='banner'>
+      <image src='{{item.shop.surface}}' mode='widthFix' lazy-load='true'></image>
+      <view class='price'>{{item.shop.minimumCharge}}</view>
+    </view>
+    <view class='detail'>
+      <view class='title'>{{item.shop.shopName}}</view>
+      <view class='grade'>
+        <text class='star'>
+          <text wx:for='{{item.shop.stars}}' wx:key='ns' class='iconfont icon-star'></text>
+          <text wx:if='{{item.shop.half}}' class='iconfont icon-starhalf'></text>
+        </text>({{item.shop.score}}分)
+      </view>
+      <!--<view class='distance' wx:if='{{item.shop.distance > 100000}}'>>100km</view>
+      <view class='distance' wx:else>{{item.shop.distance}}m</view>-->
+    </view>
+    <view wx:for='{{selected}}' wx:key='sl' wx:for-item='sl'>
+      <view wx:if='{{item.shop.shopId == sl}}' class="dialog">
+        <view class='counter'></view>
+      </view>
+    </view>
+  </view>
+  <view class='load'>没有更多了~</view>
+</view>
+
+<view class='edit'>
+   <view class='{{showedit?"editButton":"hide"}}' bindtap='edit'>编辑</view> 
+   <view class='{{showedit?"hide":"editButton"}}'>
+      <text bindtap='cancel'>取消</text>
+      <text bindtap='selectall'>全选</text>
+      <text bindtap='removeCollect'>删除</text>
+  </view>
+</view>
+
+<view class='{{confirmdiag?"box":"hideBox"}}'>
+  <view class='confirm'>
+      <view class='title'>确定取消收藏吗？</view>
+      <view class='checkbox'>
+        <text class='checked' bindtap='checked'>
+          <text class='{{noalert?"Isright":"Noright"}}'>✔️</text>
+        </text>不再提示
+      </view>
+      <view class='button'>
+          <view class='cancel' bindtap='cancelDialog'>取消</view>
+          <view class='sure' bindtap='sureRemove'>确定</view>
+      </view>
+  </view>
+</view>

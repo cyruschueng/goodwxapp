@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>退货管理</title>
+    <!--pickers css-->
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/select2.min.css" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/modernizr.min.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <!--pickers plugins-->
+    <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <!--bootstrap Table-->
+    <script src='js/bootstrap-table.js'></script>
+    <script src='js/bootstrap-table-zh-CN.js'></script>
+    <script src='js/bootstrap-editable.js'></script>
+    <script src='js/bootstrap-table-editable.js'></script>
+    <!--pickers initialization-->
+    <script src="js/pickers-init.js"></script>
+    <!--common scripts for all pages-->
+    <script src="js/layer.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/ysh_comm.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/adddate.js"></script>
+
+    <script type="text/javascript">
+        checkPermission();
+    </script>
+    <style>
+        .btn-border{
+            border: 1px solid #999999;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body class="children-body">
+
+<section>
+    <!--body wrapper start-->
+    <section>
+        <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        退货管理
+                    </header>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" id="condition">
+                            <div class="row clearfix">
+                                <div class="row" style="height: 14px;"></div>
+                                <div class="row">
+                                    <div class="col-lg-1 control-label" style="text-align: right;">退货状态</div>
+                                    <div class="col-lg-2" style="text-align: right;">
+                                        <select class="form-control m-bot15" id="returnStatus">
+                                            <option value="0">所有</option>
+                                            <option value="1">待审核</option>
+                                            <option value="4">拒绝</option>
+                                            <option value="2">处理中,买家未发货</option>
+                                            <option value="5">处理中,买家已发货</option>
+                                            <option value="3">完成</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="col-lg-1 control-label" style="text-align: right;">成交时间</div>-->
+                                    <!--<div class="col-lg-2">-->
+                                        <!--<input type="text" size="16" class="form-control" id="dealTimeStart" onclick="SelectDate(this,'yyyy-MM-dd')" />-->
+                                    <!--</div>-->
+                                    <!--<div class="col-lg-1" style="text-align: center;">-->
+                                        <!--<label style="padding-top: 7px;">到</label>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-lg-2">-->
+                                        <!--<input type="text" size="16" class="form-control" id="dealTimeEnd" onclick="SelectDate(this,'yyyy-MM-dd')" />-->
+                                    <!--</div>-->
+                                    <!--<div class="col-lg-1"></div>-->
+                                    <div class="col-lg-1" style="text-align: center;"><button class="btn btn-info" onclick="initSearch('#1')" type="button">搜索</button></div>
+
+                                </div>
+                                <div class="row">
+
+                                </div>
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-body">
+                        <table id='goodstable' class="table table-bordered table-striped table-condensed ysh_table">
+                            <thead>
+                            <tr>
+                                <th data-width="8%" data-field="Code" data-align="center">用户</th>
+                                <th data-width="8%" data-field="Code" data-align="center">电话</th>
+                                <th data-width="8%" data-field="Code" data-align="center">商品名称</th>
+                                <th data-width="8%" data-field="Code" data-align="center">退货申请时间</th>
+                                <th data-width="8%" data-field="Code" data-align="center">退货原因</th>
+                                <th data-width="8%" data-field="Code" data-align="center">退货状态</th>
+                                <th data-width="8%" data-field="Code" data-align="center">详情</th>
+                                <th data-width='121px' data-field="pic" data-align="center">操作</th>
+                            </tr>
+
+
+                            </thead>
+                            <tbody id="view">
+
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div style="height: 30px;">总共<span id="pageTotal"></span>页，<span id="itemTotal"></span>条记录，每页显示10条</div>
+                            </div>
+                            <div class="col-lg-7" style="text-align: right;">
+                                <ul class="pagination pagination-lg" id="paginator"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="rordHandleModel" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">选择操作</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <span>
+                        <input type="radio" name="rordhandle" class="rord-radio" data-statu="4">
+                    </span>
+                    <span>拒绝退货</span>
+                    <textarea class="form-control" placeholder="请填写拒绝退货的原因"></textarea>
+                </div>
+                <div class="form-horizontal">
+                    <span>
+                        <input type="radio" name="rordhandle" class="rord-radio" data-statu="2">
+                    </span>
+                    <span>允许退货</span>
+                    <textarea class="form-control" placeholder="请填写退货寄送的地址"></textarea>
+                </div>
+                <div class="form-horizontal">
+                    <span>
+                        <input type="radio" name="rordhandle" class="rord-radio" data-statu="3">
+                    </span>
+                    <span>直接退款，结束流程</span>
+                    <!--<textarea class="form-control" placeholder="请填写退货寄送的地址"></textarea>-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnRordHandle" type="button" class="btn btn-success btn-rord-handle">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="closeRordModel" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">请填写驳回，并关闭退货流程的原因</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <textarea class="form-control close-reason" placeholder="请填写驳回，并关闭退货流程的原因"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnCloseRord" type="button" class="btn btn-success btn-rord-handle">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+<script src="js/layer.js"></script>
+<script src="js/laytpl.js"></script>
+<script src="js/ysh_comm.js"></script>
+<script src="script/returnMange.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('select').select2();
+    })
+</script>
+<!--data-->
+<script type="text/html" id="tpl">
+    <tr>
+        <td>{{d.Username}}</td>
+        <td>{{d.phonenumb}}</td>
+        <td>{{d.ProductName}}</td>
+        <td>{{d.CreatedOnUtc}}</td>
+        <td>{{d.Remark||'暂无'}}</td>
+        {{# if(d.ReturnStatus2 == 1){}}
+            <td><span style="color: #D9534F;">申请退货中</span></td>
+        {{#}else if(d.ReturnStatus2 == 2){}}
+            <td style="word-break:break-all;max-width: 200px;"><span style="color: #3C763D;">退货处理中,买家未发货</span></td>
+        {{#}else if(d.ReturnStatus2 == 3){}}
+            <td><span style="color: #555;">退货已完成</span></td>
+        {{#}else if(d.ReturnStatus2 == 4){}}
+            <td><span style="color: #555;">退货已驳回</span></td>
+        {{#}else if(d.ReturnStatus2 == 5){}}
+            <td><span style="color: #3C763D;">退货处理中,买家已发货,{{d.ShipItem}}</span></td>
+        {{#}}}
+        <td><span data-ordid="{{d.OrderId}}" class="to-ord-detail btn btn-border">订单详情</span></td>
+        {{# if(d.ReturnStatus2 == 1){}}
+            <td><span class="rordhancle btn btn-border" data-id="{{d.Id}}">选择操作</span></td>
+        {{#}else if(d.ReturnStatus2 == 5){}}
+            <td><span class="endrord btn btn-border" data-id="{{d.Id}}">结束流程</span></td>
+        {{#}else if(d.ReturnStatus2 == 3){}}
+            <td></td>
+        {{# }else if(d.ReturnStatus2 == 2){}}
+            <td><span class="closerord btn btn-border" data-id="{{d.Id}}">关闭流程</span></td>
+        {{# }else{}}
+            <td></td>
+        {{#}}}
+    </tr>
+</script>

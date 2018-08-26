@@ -1,0 +1,25 @@
+<view class="container">
+	<view class="header-nav">
+		<view class="search-container search-active">
+        <icon size="15" type="search"></icon>
+        <input focus="" type="text" confirm-type="search" bindinput="searchInputEvent"
+        placeholder="搜索亲友生日" placeholder-style="color:#999999;" value=""/>
+      </view>
+      <view class="search" bindtap='quxiao'>取消</view>
+	</view>
+  <!--list  -->
+  <view class='allList'>
+      <view class="item-layout" wx:for="{{goodList}}" bindtap='goodInform' data-idol_id="{{item.idol_id}}">
+          <image class="avatar" src="{{item.avatar}}"></image>
+          <view class="right-layout">
+              <view class="right-top-layout">
+                <view class="name">{{item.name}}</view>
+                <view class="num">{{item.wish_count}}k</view>
+                <image class="star" src="../images/star.png"></image>
+              </view>
+              <view class="birth">{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日</view>
+              <view class="desc">{{item.desc}}</view>
+          </view>
+      </view>
+  </view>
+</view>

@@ -1,0 +1,47 @@
+<view class='panel panel-between bottom-line'>
+  <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/qr2.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>默认起点联系人</view>
+    </view>
+  <input style='text-align:right' type='number' bindinput='startPhoneInput' placeholder='默认起点电话' value='{{startPhone}}'></input>
+</view>
+<view class='panel panel-between bottom-line'>
+  <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/qr1.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>默认终点联系人</view>
+    </view>
+  <input style='text-align:right' type='number' bindinput='endPhoneInput' placeholder='默认终点电话' value='{{endPhone}}'></input>
+</view>
+
+<picker bindchange="dateLimitChange" value="{{dlFlag}}" range="{{dateLimit}}">
+
+  <view class='panel panel-between item-center bottom-line margin-top-md' >
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/time2.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>送达时间</view>
+    </view>
+    <view  class='panel-end margin-right-sm item-center'>
+      <view class='font-def margin-right-sm'>{{dateLimit[dlFlag]}}</view>
+      <image src='/img/icon/right.png' class='icon-md'></image>
+    </view>
+  </view>
+
+</picker>
+<picker bindchange="goodsSizeChange" value="{{glFlag}}" range="{{goodsSize}}">
+
+  <view class=' panel panel-between item-center'>
+    <view class='panel-start  margin-left-sm item-center'>
+      <image src='/img/icon/size.png' class='icon-md'></image>
+      <view class=' margin-left-sm'>物品大小</view>
+    </view>
+    <view  class='panel-end margin-right-sm item-center'>
+      <view class='font-def margin-right-sm'>{{goodsSize[glFlag]}}</view>
+      <image src='/img/icon/right.png' class='icon-md'></image>
+    </view>
+  </view>
+
+</picker>
+
+<view class='padding-md margin-top-md' >
+  <button type='primary' class='font-lg' bindtap='saveSetting'>保存默认设置</button>
+</view>

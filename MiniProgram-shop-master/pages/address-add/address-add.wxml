@@ -1,0 +1,37 @@
+<!--pages/myInfo-address-add/myInfo-address-add.wxml-->
+<view class='container'>
+  <form bindsubmit='formSubmit'>
+    <view class='form-item'>
+      <label>收货人</label>
+      <input type='text' placeholder='输入收货人' name='fullname' value='{{fullname}}' bindinput='userNameFn'></input>
+    </view>
+    <view class='form-item'>
+      <label>联系电话</label>
+      <input type='text' placeholder='手机号' name='phone'  value='{{phone}}' maxlength='11' bindinput='telFn'></input>
+    </view>
+    <view class='form-item'>
+      <label>邮政编码</label>
+      <input type='text' placeholder='邮政编码' name='zip_code' value='{{zip_code}}' bindinput='codeFn'></input>
+    </view>
+    <view class='form-item'>
+      <label>省</label>
+      <picker mode="region" bindchange="bindRegionChange" custom-item="{{customItem}}" name='province'>{{region[0]}}</picker>
+    </view>
+    <view class='form-item'>
+      <label>市</label>
+      <picker mode="region" bindchange="bindRegionChange" custom-item="{{customItem}}" name='city'>{{region[1]}}</picker>
+    </view>
+    <view class='form-item'>
+      <label>区</label>
+      <picker mode="region" bindchange="bindRegionChange" custom-item="{{customItem}}" name='country'>{{region[2]}}</picker>
+    </view>
+    <view class='form-textarea'>
+      <textarea placeholder='请填写详细地址，不少于5个字' placeholder-class='textareaStyle' name='address' value='{{address}}' bindinput='addressFn'></textarea>
+    </view>
+    <view class='switch'>
+      <label>设为默认</label>
+      <switch color='#de2022' checked='{{checkedState}}' bindchange='changeState'></switch>
+    </view>
+    <button class='section-ft' form-type='submit'>确认</button>
+  </form>
+</view>

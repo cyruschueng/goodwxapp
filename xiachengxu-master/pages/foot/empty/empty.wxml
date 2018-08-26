@@ -1,0 +1,15 @@
+<template name='empty'>
+  <view class='container empty'>
+    <image src='/images/icon/empty.png' mode='aspectFit'></image>
+    <view wx:if='{{!from}}'>
+      您还没有浏览过商品，
+      <text catchtap='goHome'>逛一逛</text>
+    </view>
+    <view wx:elif='{{from == "back"}}'>
+      店铺还没有数据
+    </view>
+    <view wx:else>
+      店铺还未有客户预约
+    </view>
+  </view>
+</template>

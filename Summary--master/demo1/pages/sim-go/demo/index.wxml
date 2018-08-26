@@ -1,0 +1,32 @@
+
+<!--pages/sim-go/demo/index.wxml-->
+<view class="weui-cells__title">撰写博客</view>
+
+<!--单行文本-->
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view class="weui-label">标题</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input bindinput="bindUserInput" data-field="title" class="weui-input" placeholder="请输入文本" />
+    </view>
+  </view>
+</view>
+
+<!--多行文本-->
+<view class="weui-cells__title">内容</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <textarea bindinput="bindUserInput" data-field="content" class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+            <view class="weui-textarea-counter">0/200</view>
+        </view>
+    </view>
+</view>
+<!--按钮-->
+<view class="weui-btn-area">
+  <button bindtap="bindSave" class="weui-btn" type="primary">保存</button>
+  <button class="weui-btn" type="default">取消</button>
+</view>
+

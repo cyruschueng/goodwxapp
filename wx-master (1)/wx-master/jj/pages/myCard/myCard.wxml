@@ -1,0 +1,80 @@
+<!--我的银行卡pages/myCard/myCard.wxml-->
+<view class='container'>
+<view wx:if="{{!showModalStatus}}">
+<view class='correlate'>关联的储蓄卡（结算卡）</view>
+  <view class="correlate1" wx:if="{{show}}" >+您还没有关联储蓄卡（结算卡）</view>
+  <view calss="cashCard" wx:else>
+      <view class='content row pos-r' bindtap='tap' data-index="{{index}}" style="background:rgba({{userData.r}},{{userData.g}},{{userData.b}},{{userData.a}})">
+        <view class='left'>
+          <!-- <view class='bank'>{{bank}}</view> -->
+           <view class='bank_logo row'>
+            <image src="http://ppp.zhybpay.com:1177{{userData.logo}}" class='logo'></image>
+            <view class='bank'>{{userData.bank}}</view>
+          </view>
+          <view class='cardType'>储蓄卡</view>
+          <view class='cardNo'>{{bankCard}}</view>
+        </view>
+        <view class='right'>
+          <view class='dele' catchtap='amend' data-statu="open">修改</view>
+        </view>
+      </view>
+  </view>
+  <view class='correlate correlateCard'>关联的信用卡</view>
+   <view class='correlate creditCard' bindtap='add' data-statu="open">+添加信用卡</view>
+    <view wx:for="{{list}}" wx:key="{{item.index}}">
+      <view wx:if="{{show1}}" class='content row pos-r' bindtap='tap' data-index="{{index}}" style="background:rgba({{list[index].r}},{{list[index].g}},{{list[index].b}},{{list[index].a}})">
+        <view class='left'>
+          <!-- <view class='bank'>{{list[index].bankName}}</view> -->
+           <view class='bank_logo row'>
+            <image src="http://ppp.zhybpay.com:1177{{list[index].logo}}" class='logo'></image>
+            <view class='bank'>{{list[index].bankName}}</view>
+          </view>
+          <view class='cardType'>{{list[index].acctType?"信用卡":"储蓄卡"}}</view>
+          <view class='cardNo'>{{cardId[index]}}</view>
+        </view>
+        <view class='right'>
+           <block wx:if="{{list[index].state=='还款中'}}">
+              <image class='sta' src='../../images/repaymentOnGoing.png'></image>
+            </block>
+          <view class='dele' catchtap='alter' data-index="{{index}}" data-statu="open">删除</view>
+        </view>
+      </view>
+    </view>
+</view>
+   
+  <!-- 删除信用卡
+   <view animation="{{animation}}" class="drawer_box1" wx:if="{{showModalStatus1}}">
+    <!--content-->
+    <!-- <view class='mask pos-r' >
+      <view class='alterCard'>
+      是否删除此信用卡
+      </view>
+        <view class='row bottom'>
+          <button type="default" class="btn_cancel btn_ok" bindtap="cancelDele" data-statu="open" >取消</button> 
+          <button type="default" class="btn_ok" bindtap="sureDele" data-statu="close">确定</button> 
+        </view>
+      </view> -->
+    <!-- </view> --> 
+    <!-- 修改储蓄卡 -->
+    
+     <view animation="{{animation}}" class="drawer_box1" wx:if="{{showModalStatus}}">  
+<!-- <view class="drawer_box1" wx:if="{{showModalStatus}}">  -->
+    <!--content-->
+    <view class='mask pos-r row1' >
+      <view class='card col row'>
+      <text class="txt">卡号</text>
+      <input class='input' maxlength="19" placeholder='银行卡号'  placeholder-class='plac' bindinput="getCard" bindblur='queryCard'/>
+    </view>
+    <view class='bank1 bank col row row1'>
+      <text class="txt">开户银行</text>
+      <input class='input' placeholder='请选择开户银行' disabled='true' placeholder-class='plac' value="{{valueBankName}}"/>
+    </view>
+        <view class='row bottom row1'>
+          <button type="default" class="btn_cancel btn_ok" bindtap="cancelAdd" data-statu="open" >取消</button> 
+          <button type="default" class="btn_ok" bindtap="sureAdd" data-statu="close">确定</button> 
+        </view>
+      </view>
+    </view>
+  </view>
+
+

@@ -1,0 +1,13 @@
+<import src="discount-template/discount-template.wxml" />
+<block wx:for="{{ticket_list}}" wx:key="index">
+  <template is="discountList" data="{{item}}"></template>
+</block>
+<view class='already-past-wrap' bindtap="toDueList">
+  <view class='already-past-due'>
+    <text>查看过期/已用劵</text>
+  </view>
+</view>
+<view class='placeholder' wx:if="{{ticket_list.length<1}}">
+  <image src="/images/icon/zhanweitu.png"></image>
+</view>
+

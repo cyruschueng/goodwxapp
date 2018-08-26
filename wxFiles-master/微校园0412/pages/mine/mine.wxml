@@ -1,0 +1,128 @@
+
+<!--背景图-->
+<view class="top">
+  <image mode="aspectFill" class="top-bgImg" src="{{bgImg}}"> </image>
+  <view class="top_avatar">
+    <image class="avatar" src="{{head}}"></image>
+    <view style="text-align:center">{{name}}</view>
+  </view>
+
+
+</view>
+
+<view class="panel flex-between bottom-line item-center" bindtap="navToPayment">
+  <view class="flex-start">
+    <image class="icon-sm" style="margin-top:5rpx" src="/images/oll.png"></image>
+    <view style="margin-left:30rpx;font-size:30rpx;height:40rpx;line-height:40rpx;">我的卡包</view>
+  </view>
+  <image class="icon-sm" src="/images/mine/fl.png"></image>
+</view>
+<view class="panel flex-between bottom-line item-center" bindtap="{{user.bell == 1 ? 'navToRecharge':'notIn'}}">
+  <view class="flex-start">
+    <image class="icon-sm" style="margin-top:5rpx" src="/images/ol.png"></image>
+    <view style="margin-left:30rpx;font-size:30rpx;height:40rpx;line-height:40rpx;">充值</view>
+  </view>
+  <image class="icon-sm" src="/images/mine/fl.png"></image>
+</view>
+<!--配送地址-->
+<view class="panel flex-between margin-xs bottom-line item-center" bindtap="distributionAddress">
+  <view class="flex-start">
+    <image class="icon-sm" style="margin-top:5rpx" src="/images/mine/address_icon.png"></image>
+    <view style="margin-left:30rpx;font-size:30rpx;height:40rpx;line-height:40rpx;">我的收货地址</view>
+  </view>
+  <image class="icon-sm" src="/images/mine/fl.png"></image>
+</view>
+<view class="panel flex-between margin-xs bottom-line item-center" wx:if="{{showo}}" bindtap="{{ftype == 1 ? 'navToSend':'navSecond'}}">
+  <view class="flex-start">
+    <image class="icon-sm" style="margin-top:5rpx" src="/images/ps.png"></image>
+    <view style="margin-left:30rpx;font-size:30rpx;height:40rpx;line-height:40rpx;">配送方</view>
+  </view>
+  <image class="icon-sm" src="/images/mine/fl.png"></image>
+</view>
+<view class="panel flex-between bottom-line item-center" wx:if="{{showp}}" bindtap="{{sh ? 'showModelsh':'navToRun'}}">
+  <view class="flex-start">
+    <image class="icon-sm" style="margin-top:5rpx" src="/images/paotui.png" ></image>
+    <view style="margin-left:30rpx;font-size:30rpx;height:40rpx;line-height:40rpx;">成为配送员</view>
+  </view>
+  <image class="icon-sm" src="/images/mine/fl.png"></image>
+</view>
+
+
+
+
+<view class="panel flex-between margin-xs bottom-line item-center" bindtap="scan">
+  <view class="flex-start">
+    <image class="icon-sm" style="margin-top:5rpx" src="/images/sys.png"></image>
+    <view style="margin-left:30rpx;font-size:30rpx;height:40rpx;line-height:40rpx;">扫一扫</view>
+  </view>
+  <image class="icon-sm" src="/images/mine/fl.png"></image>
+</view>
+
+<view class="panel margin-xs flex-between bottom-line item-center" bindtap="navToAbout">
+  <view class="flex-start">
+    <image class="icon-sm" style="margin-top:5rpx" src="/images/about.png"></image>
+    <view style="margin-left:30rpx;font-size:30rpx;height:40rpx;line-height:40rpx;">关于我们</view>
+  </view>
+  <image class="icon-sm" src="/images/mine/fl.png"></image>
+</view>
+
+<!--客服-->
+<!--<view class="customerService">
+<contact-button class="contact-button" type="default-light" size="20" session-from="weapp"></contact-button>
+  <text class="customerService_text">客服</text>
+</view>-->
+
+<view class="payment-panel pmhidden" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="pay-style">
+    <view class="tex bottom-line">
+      <view class="t1">请选择支付方式</view>
+      <image style="width:40rpx;height:40rpx;" src="/images/d1.png"></image>
+    </view>
+    <view class="item bottom-line">
+      <image src="/images/order/woju2.png"></image>
+      <view class="tit">余额支付</view>
+    </view>
+    <view class="item">
+      <image  src="/images/order/wx.png"></image>
+      <view class="tit">微信支付</view>
+    </view>
+  </view>
+</view>
+
+
+<view class="payment-panel pmhidden" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+
+  <view class="input-panel">
+    <view class="user-tit">
+      <view class="con">
+        <image src="{{head}}"></image>
+        <view class="tit">请输入支付密码</view>
+      </view>
+      <image style="width:40rpx;height:40rpx;margin-top: 15rpx;" src="/images/d1.png"></image>
+    </view>
+    <view class="txt-panel">
+      <view class="tit">某某某阿达</view>
+      <view class="pri">￥20.00</view>
+    </view>
+    <view class="num-penel">
+      <view class="item" wx:for="{{6}}"><view class="ku"></view></view>
+    </view>
+    <view class="text-panel">
+      蜗居校园余额支付
+    </view>
+  </view>
+  <view class="number-panel">
+    <view data-num="7" bindtap="clickNum">7</view>
+    <view data-num="8" bindtap="clickNum">8</view>
+    <view data-num="9" bindtap="clickNum" style="border-right:none">9</view>
+    <view data-num="4" bindtap="clickNum">4</view>
+    <view data-num="5" bindtap="clickNum">5</view>
+    <view data-num="6" bindtap="clickNum" style="border-right:none">6</view>
+    <view data-num="1" bindtap="clickNum">1</view>
+    <view data-num="2" bindtap="clickNum">2</view>
+    <view data-num="3" bindtap="clickNum" style="border-right:none">3</view>
+    <view data-num="#" bindtap="clickNum" style="background:#f3f3f3"></view>
+    <view data-num="0" bindtap="clickNum">0</view>
+    <view data-num="c" bindtap="clickNum" style="border-right:none;background:#f3f3f3"><image style="width:40rpx;height:40rpx;" src="/images/del.png"></image></view>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+
+<view wx:if="{{type == 2}}">
+  <input class="myName" id="brandName" value="{{team_name}}"  maxlength="20" bindinput="warNameEdit" placeholder="请输入战队名" />
+</view>
+<view wx:if="{{type == 3}}">
+  <input class="myName" id="createPerson" value="{{team_founder}}" maxlength="40" bindinput="createPersonEdit" placeholder="请输入机构创始人" />
+</view>
+<view wx:if="{{type == 4}}">
+  <input class="myName" id="name" value="{{user_real_name}}" maxlength="20" bindinput="userNameEdit" placeholder="请输入姓名" />
+</view>
+<view wx:if="{{type == 5}}">
+  <input class="myName" id="company" value="{{user_company_name}}" maxlength="40" bindinput="companyEdit" placeholder="请输入公司名称" />
+</view>
+<view wx:if="{{type == 6}}">
+  <input class="myName" id="brand" value="{{user_brand}}" maxlength="40" bindinput="brandEdit" placeholder="请输入品牌" />
+</view>
+<view wx:if="{{type == 7}}">
+  <input class="myName" id="position" value="{{user_company_career}}" maxlength="40" bindinput="positionEdit" placeholder="请输入职位" />
+</view>
+<view class="btn" bindtap="save">保存</view>
+<!--错误提示-->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>

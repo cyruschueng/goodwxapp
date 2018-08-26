@@ -1,0 +1,70 @@
+<view class="page">
+  <scroll-view scroll-x="true" class="fui-tab-scroll">
+    <text data-cateid="0" bindtap="bindTab" class="item {{cateid == 0 ? 'active' : ''}}">全部优惠券</text>
+    <block wx:for="{{cates}}" wx:key="">
+      <text bindtap="bindTab" class="item {{cateid == item.id ? 'active' : ''}}" data-cateid="{{item.id}}">{{item.name}}</text>
+    </block>
+  </scroll-view>
+  <view class="coupon-container coupon-index-list" wx:if="{{total > 0}}">
+    <block wx:for="{{list}}">
+      <view bindtap="jump" class="coupon-index-list-a {{item.isdisa ? 'disa' : item.color}}" data-id="{{item.isdisa ? '' : item.id}}">
+        <view class="fui-list coupon-list">
+          <i class="coupon-top-i"></i>
+          <i class="coupon-bot-i"></i>
+          <view class="coupon-ling" wx:if="{{item.isdisa}}">
+            <image src="{{approot}}template/mobile/default/static/images/coupon/end.png"></image>
+          </view>
+          <view class="fui-list-inner coupon-index-list-left">
+            <b class="tagtitle">{{item.tagtitle}}</b>
+            <div class="coupon-index-list-info fui-list noclick">
+              <div class="fui-list-media">
+                <image src="{{item.thumb || approot + 'template/mobile/default/static/images/coupon/coupon-list-img.png'}}"></image>
+              </div>
+              <div class="fui-list-inner">
+                <view class="h3">{{item.couponname}}</view>
+                <view class="coupon-full">
+                  <text wx:if="{{item.backtype == 0}}">{{item.deduct}}</text>
+                  <text wx:elif="{{item.backtype == 1}}">{{item.discount}}折</text>
+                  <text wx:elif="{{item.backtype == 2}}">
+                    <block wx:if="{{item.backmoney && item.backmoney > 0}}">
+                      送
+                      <text>{{item.backmoney}}</text>元余额
+                    </block>
+                    <block wx:elif="{{item.backcredit && item.backcredit > 0}}">
+                      送
+                      <text>{{item.backcredit}}</text>积分
+                    </block>
+                    <block wx:elif="{{item.backredpack && item.backredpack > 0}}">
+                      送
+                      <text>{{item.backredpack}}</text>元红包
+                    </block>
+                  </text>
+                  {{item.title2}}
+                </view>
+                <view class="coupon-time">{{item.usestr}}</view>
+              </div>
+            </div>
+          </view>
+          <view class="fui-list-media coupon-index-list-right">
+            <view class="forth0 circle coupon-list-canvas">
+              <canvas canvas-id="coupon-{{item.id}}" style="width:300px; height:150px" wx:if="{{!item.isdisa}}">
+                <view style="padding-top: 35rpx">剩余</view>
+                <view>{{item.lastratio}}%</view>
+              </canvas>
+            </view>
+            <view class="coupon-list-ling">{{item.isdisa ? '已发完' : '立即' + item.gettypestr}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <navigator hover-class="none" url="/pages/sale/coupon/my/index/index" class="fui-dot">
+    <image src="/static/images/icon-white/people.png"></image>
+  </navigator>
+  <view class="fui-loading empty" wx:if="{{loaded && list.length > 0}}">
+    <view class="text">没有更多了</view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{total <= 0 && !loading}}">
+    <view class="text">没有数据</view>
+  </view>
+</view>

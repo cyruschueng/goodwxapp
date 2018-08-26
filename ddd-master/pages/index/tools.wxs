@@ -1,0 +1,32 @@
+// var foo = "'hello world' from tools.wxs";
+// var bar = function (d) {
+//   return d;
+// }
+// module.exports = {
+//   FOO: foo,
+//   bar: bar,
+// };
+// module.exports.msg = "some msg";
+
+var isMask = function (userInfo){
+  if (userInfo.u_level == 1){
+    if (userInfo.u_ticket){
+      return false
+    }else{
+      return true
+    }
+  }else{
+    return false
+  }
+}
+
+var isLevel = function(userInfo){
+    if(userInfo&&userInfo.u_level > 0){
+      return true
+    }else{
+      return false
+    }
+}
+
+module.exports.isMask = isMask;
+module.exports.isLevel = isLevel;

@@ -1,0 +1,46 @@
+<!--pages/home/onlinePaymentForClass.wxml-->
+
+<import src="../../templates/remind-box/remind-box.wxml"/>
+
+<view class='bg-view'>
+
+  <view class='recocell-view weui-flex'>
+
+    <view class='head-img-view'>
+      <image mode='aspectFill' src='{{ classInfo.headimg }}'></image>
+    </view>
+
+    <view class='weui-flex__item'>
+      <view class='name-text'>{{ classInfo.courseName }}</view>
+      <view class='info-text'> 
+        ¥{{ classInfo.price }}
+        <text>共{{ classInfo.courseTime }}课时</text>
+      </view>
+    </view>
+    
+  </view>
+
+  <view class='order-cell-view'>
+    <view bindtap='bindSelectCoach'>
+      教练选择
+      <image class='right-icon' src='../../images/icon/arrow_right.png'></image>
+      <text class='mainColor'>{{ classInfo.coachName }}</text>
+    </view>
+    <view>课程类型 <text class='whiteColor'>{{ classInfo.classType }}</text> </view>
+    <view>订单号 <text class='whiteColor'>{{ classInfo.orderNo }}</text> </view>
+    <view>订单金额 <text class='mainColor'>¥{{ classInfo.price }}</text> </view>
+  </view>
+
+  <view class='check-text weui-flex__item' bindtap='bindCheckedTap'>
+    <image class='checked-icon' src='../../images/icon/{{ classInfo.checked ? "checked" : "unchecked" }}.png'></image>
+    阅读并同意<text class='mainColor'>《课程购买协议》</text>
+  </view>
+
+  <view class='foot-view' bindtap='bindPaymentTap'>微信支付</view>
+
+  <!-- 提醒 -->
+  <view>
+    <template is='remind-box' data='{{ remindText }}'/>
+  </view>
+
+</view>

@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "后台登录";
+}
+
+<div id="login-box" style="display:none;">
+    <form class="layui-form layui-form-pane" style="padding-top:1.5rem;">
+        @Html.AntiForgeryToken()
+        <div class="layui-form-item" style="width:330px;margin-left:auto;margin-right:auto;">
+            <label class="layui-form-label">账号：</label>
+
+            <div class="layui-input-inline">
+                <input type="text" name="account" class="layui-input" placeholder="账号" autocomplete="on" />
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:330px;margin-left:auto;margin-right:auto;">
+            <label class="layui-form-label">密码：</label>
+
+            <div class="layui-input-inline">
+                <input type="password" name="pwd" class="layui-input" placeholder="密码" />
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:90px;margin-left:auto;margin-right:auto;">
+            <button class="layui-btn" lay-submit lay-filter="login">立即登录</button>
+        </div>
+    </form>
+</div>
+@section footerJs{
+    <script>
+        layui.config({
+            base: '/Areas/LayUI/Content/commonJs/'
+            , version: '1515376178709'
+        }).extend({
+            myAjax: 'myAjax'
+        });
+    </script>
+    <script>
+        //Demo
+        layui.use(['form', 'jquery', 'myAjax'], function () {
+            var form = layui.form;
+            var $ = layui.jquery;
+            var aj = layui.myAjax;
+            layer.open({
+                type: 1,
+                title: '用户登录',
+                closeBtn: 0,
+                maxmin: true,
+                shade: 0.8,
+                skin: 'layui-layer-rim',
+                shadeClose: false, //点击遮罩关闭层
+                area: ['375px', '230px'],
+                content: $('#login-box')
+            });
+            form.on('submit(login)', function (data) {
+                layer.load();
+                aj.postNoSyncReq('/layui/LayUiAdminLogin/Login', data.field, function (data) {
+                    aj.dealResult(data, function () {
+                        window.location = '/admin';
+                    }, function () {
+                        layer.closeAll('loading');
+                        layer.msg(data.ReturnMsg, function () {
+                            window.location = window.location;
+                        })
+                    });
+                });
+                return false;
+            });
+        });
+    </script>
+}
+

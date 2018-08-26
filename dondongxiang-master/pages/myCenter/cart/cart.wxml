@@ -1,0 +1,62 @@
+<!--pages/myCenter/cart/cart.wxml-->
+<checkbox-group wx:if="{{gwcData.length!=0}}" bindchange="checkboxChange" style="margin-bottom:80rpx" checked="{{offon}}">
+  <label class="checkbox" wx:for="{{gwcData}}">
+  <!-- {{check==true?'success':''}} -->
+    <icon type="{{item.type}}" size="20" color="red"/>
+    <checkbox value="{{item.goods_spu_id}}" checked="{{offon}}"/>
+        <view class='gwc_list'>
+            <view class='gwc_img'>
+            <image catchtap='msg' data-id="{{item.goods_id}}" data-uid="{{item.uid}}" src='{{item.image}}'></image>
+            </view>
+            <view class='gwc_msg'>
+                  <view class='gwc_name'>
+                  {{item.name}}
+                  </view>
+                  <view class='gwc_pic'>
+                      <view class='gwc_pic_now'>
+                          ￥{{item.price}}
+                      </view>           
+                        <view class='del' catchtap='removee' data-id="{{item.goods_spu_id}}" data-idnex="{{index}}">
+                          <image src='../image/del.png'></image>
+                      </view>  
+                  </view>
+                  <view class='cz_sp'>
+    
+                  <view class='cz'>
+                    <view class='del_num' catchtap='delNum' data-id="{{item.goods_spu_id}}">
+                          <image src='../image/remove.png'></image>
+                    </view>
+                    <view class='num'>
+                        {{item.number}}
+                    </view>
+                     <view class='add_num' catchtap='addNum' data-id="{{item.goods_spu_id}}" data-stock="{{item.stock}}">
+                          <image src='../image/add.png'></image>
+                    </view>
+                  </view>
+                  <view class='specs'>
+                  {{item.specs}}
+                  </view>
+              </view>
+            </view>
+            
+        </view>
+  </label>
+</checkbox-group>
+<view class='box' wx:else>
+    <view class='img_box'>
+    <image src='../../../images/null.png'></image>
+    </view>
+    <button class='btn' style='background:#1AAD16;color:#fff' bindtap='shop'>去购物</button>
+    </view>
+<view class='foot'>
+<!-- <view class='all_count' bindtap='allchecked'>
+   <icon type="{{mtype}}" size="20" color="red"/> 全选
+  </view> -->
+  <view class='foot_count'>
+    总计￥ <text>{{count}}</text>  
+  </view>
+  <view class='goPay' bindtap='goPay' style='background:#1AAD16'>
+        去结算
+  </view>
+</view>
+  <!-- <loading hidden="{{hiddenLoading}}">正在加载</loading>  -->

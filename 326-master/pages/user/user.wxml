@@ -1,0 +1,74 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<import src="/template/listStyle.wxml" />  
+<view class="container">
+<!--导航str  -->
+  <view class='flex h8 Skin flexCenter'>
+    <view class='flex bgColor0 br03 pt01 pdlr0 tab-left' bindtap="tabFun">
+      <view class="br03 pd03 width5 flexCenter {{tabBox.tabArr1.curHdIndex==index? 'active' : ''}}" data-id="{{index}}" wx:for="{{userTop}}" wx:key="{{index}}" wx:for-item="userTop">{{userTop.val}}</view>
+    </view>
+    <view class='fRIx'>
+      <view  bindtap='addUserpage' wx:if="{{roleVal == ''?false:true}}">
+        <image class='imgxs15' src="/images/addm.png"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 导航 end -->
+  <!--搜索框str  -->
+  <view class="searchWrapper flex bgColor0 borderB">  
+      <view class='flexCenter width3 color0' bindtap='addGroupShow' wx:if="{{roleVal == ''?true:false}}">
+        <image class='imgxs15' src="/images/add_group.png"></image>
+      </view>
+      <template is="Input" data="{{inputBox: inputBox}}"/>  
+      <view class='flexCenter width3 color0' bindtap='usrSearch'>搜索</view>
+  </view>  
+<!--搜索框end  -->
+<!--提示栏 str  -->
+<view class='flex h8 bgColor0 justi borderC'>
+  <view class='width10 justi' >
+    <image class='imgxs15' src="/images/{{roleImg}}"></image>
+  </view>
+  <view class='flexv1 justi pdl1'>
+    {{groupTitle}}
+  </view>
+  <view class='justi width20' bindtap='userDetailpage'>
+    <image class='imgxs' src="/images/tab_equipment_checked.png"></image>
+    <view >管理</view>
+  </view>
+</view>
+<!--提示栏 end  --> 
+
+<!--管理页、电站业主页列表 --> 
+<view  class='flexv1 modeldrawer_content pb1' bindchange="enableChange" wx:if='{{userLisIf}}'>
+  <template is="userList" data="{{userList: userList}}"/> 
+</view> 
+<!--分组页面-->
+<view  class='flexv1 modeldrawer_content pb1' wx:if="{{userGroup}}" >
+  <view class='flexColumn' wx:for="{{AccountGroup}}" wx:key="{{index}}" wx:for-item="AccountGroup">
+    <!--列表列str  --> 
+    <view class='width100 bgColor0 justi pd05 borderR borderE'>
+      <view class='width10 justi' bindtap="tapMainMenu" data-index="{{index}}">
+        <image class='imgxxs' src="/images/{{subMenuDisplay[index]=='show'?'arrow_expanded.png':'arrow_unexpanded.png'}}" ></image>
+      </view>
+      <view class='width10 justi' bindtap="tapMainMenu" data-index="{{index}}">
+        <image class='imgxs15' src="/images/{{roleImg}}"></image>
+      </view>
+      <view class='flexv1 justi pdl1' bindtap="tapMainMenu" data-index="{{index}}">
+        {{AccountGroup.name}}
+      </view>
+      <view class='justi width20' bindtap="groupLisDetail" data-index="{{index}}">
+        <view class='mr1'>{{AccountGroup.memberCount}}</view>
+        <image class='imgxs' src="/images/tab_equipment_checked.png"></image>
+      </view>
+    </view>
+    <!--分组页的下拉列表  -->
+    <view  class='width100 {{subMenuDisplay[index]}}'>
+      <template is="userList" data="{{userList: userList}}"/>  
+    </view> 
+  </view>
+</view> 
+
+<!--mask-->
+<template is="showModal" data="{{modelBox: modelBox}}"/> 
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

@@ -1,0 +1,20 @@
+<!--pages/personal/winegroup/winegroup.wxml-->
+<view class='httitle'>我的社群(共{{length}}条)</view>
+<block wx:if="{{message}}">
+<view class='nohuati t2'>{{message}}</view>
+</block>
+<block wx:if="{{!message}}">
+<view class='card'>
+  <block wx:for="{{weixins}}" wx:key="index">
+    <view class='wbox' id="{{item.id}}" bindtap='clickWeixin'>
+      <view class='title'>群名称：{{item.wname}}</view>
+      <view class='remarks'>
+        <view class='icon'>
+          <text class='name'>群主微信号：{{item.weino}}</text>
+        </view>
+        <view class='time'>{{item.created_at}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+</block>

@@ -1,0 +1,37 @@
+<!--pages/fua/fua.wxml-->
+<view class='askRoot ovh'>
+  <view class='df fyc baseInfo mt60'>
+      <image bindtap="" class="userIcon" src="{{userInfo.avatarUrl}}"></image>
+      <!-- <text class="userName h4 ml20 fc-fff">{{userInfo.nickName}}</text> -->
+      <text class='h5 fc-fff ml40'>万能的圈啊 <text class='fc-fffd6c'>{{cd}}</text> 秒帮我做个选择</text>
+  </view>
+
+  <!--  答题内容页面 开始 -->
+  <view class='questionArea mx24 mt60'>
+      <view class='mx36 ovh'>
+          <view class='mt40 tac h4 '>{{answer.a_progress}}. {{answer.q_title}}</view>
+          <view
+            class='mt40 por'
+            wx:for="{{[1,2,3,4]}}"
+            wx:for-index="idx"
+            wx:key="qid"
+            wx:for-item="qid"
+          >
+            <view
+               wx:if='{{isOver&&sqid == qid}}'
+              data-qid='{{qid}}' bindtap='checkAsk' class='qitem qitem-ok'>
+              <text class='pl30'>{{answer['q_an'+qid]}}</text>
+            </view>
+
+            <view  wx:else data-qid='{{qid}}' bindtap='checkAsk' class='qitem qitem-normal'>
+              <text class='pl30'>{{answer['q_an'+qid]}}</text>
+            </view>
+          </view>
+      </view>
+  </view>
+  <!--  答题内容页面 结束 -->
+  <view class='df fxc mt60'>
+      <view  bindtap='toIndex' class='tryItAsk'></view>
+  </view>
+
+</view>

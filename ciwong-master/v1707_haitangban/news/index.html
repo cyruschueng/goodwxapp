@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="../common/js/jquery.min.js"></script>
+
+    <script src="../common/js/common.js"></script>
+
+    <script src="js/hammer.min.js"></script>
+
+</head>
+
+<body>
+    <div class="loading">
+        <div class="load-inner">
+            <img style="display:none" src="../common/images/loading.gif" alt="">
+            <span>加载中...</span>
+        </div>
+    </div>
+    <!--loading end-->
+    <div class="dialog" style="display:none;">
+        <div class="dialog-inner"> <span>暂无信息~</span>
+        </div>
+    </div>
+    <!--dialog end-->
+    <div class="m-error" style="display:none;">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.reload()">重 试</div>
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div>
+    <!--error end-->
+    <div class="wrap word-wrap" id="app" style="display:none">
+        <div class="mlr30">
+            <div class="mt40 mb30" id="audioArr">
+                <!--<audio src="http://rimg2.ciwong.net/cwf/6v68/tools/audios/16518/014/155014/a4c34842f285bc023418bec8fbe0f85e.mp3" preload="auto"></audio>-->
+            </div>
+            <div class="mt60" style="width:100%;" id="imgArr">
+                <!--<img src="" alt="" onclick="hammerClass(this)">-->
+            </div>
+            <div class="mt50 video" id="videoArr">
+
+            </div>
+            <div class="mt50 mb50">
+                <h3 style="text-align:center; font-weight: bold;" class="mb50" id="name"></h3>
+                <div class="fs-30" id="content"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+            var log = '异常log';
+            // APP数据集合
+            var apiData = {
+                newsData: ''
+            };
+            // 设置超时报错
+            var firstTimer = setTimeout(function () {
+                if (apiData.newsData === '') {
+                    $.error('Api请求超时')
+                    return;
+                }
+            }, 10000)
+
+            var clientId = $common.getUrlParaBase64('clientId') || '';     // 20000
+            var userId = $common.getUrlParaBase64('userId') || '';         // 543758688
+            var versionId = $common.getUrlParaBase64('versionId') || '';     // 5471729092046869662  #versionId=5471729092046869662
+            var brandId = $common.getUrlParaBase64('brandId') || '';        //524726977
+
+            // 请求数据 http://prevm.teacher.jiaofuyun.com/v1706_moliban/news/index.html#versionId=5471729092046869662&brandId=524726977&clientId=20000
+            var url = HOST + 'h5/v1/package/ArticlesData' + '?versionId=' + versionId + '&brandId=' + brandId + '&clientId=' + clientId;
+            $common.ajax(url, function (response) {
+                var json = typeof response == 'string' ? JSON.parse(response) : response;
+                if ((json.errcode == undefined || json.errcode != 0) || !json.data) { // 返回错误
+                    $.error(json.msg || log)
+                } else {
+                    dataReady(json.data);
+                }
+            }, userId)
+
+            function dataReady(data) {
+                $('.loading').hide();
+                if (!data) {
+                    return;
+                }
+                $('.wrap').show();
+
+                apiData.newsData = data;
+
+                var newsData = apiData.newsData;
+
+                document.title = newsData.name;
+
+                $('#name').html(newsData.name);
+                $('#content').html(newsData.content);
+
+                var audioParts = newsData.parts[2].list;
+                var imgParts = newsData.parts[0].list;
+                var videoParts = newsData.parts[1].list;
+
+
+                //音频
+                for (var i = 0; i < audioParts.length; i++) {
+                    if (audioParts[i].http_mp3_url) {
+                        var audioContent = "";
+                        //   audioContent = '<audio src='+ audioParts[i].http_mp3_url+' preload="auto"></audio>'
+
+                        audioContent = '<div class="audioBox mt30 ml20 clearfix">' +
+                            '<div class="audioBtn"></div>' +
+                            '<div class="taskBoxLinks"><h3><i></i></h3></div>' +
+                            '<div class="timeBox"><em class="currentTime"></em><strong class="duration"></strong></div>' +
+                            '<div class="loadError fl ml20"></div>' +
+                            '<audio src=' + audioParts[i].http_mp3_url + ' preload="auto"></audio>'
+                        $('#audioArr').append(audioContent);
+                    }
+                }
+                // 初始化音频组件2
+                $('.audioBox .taskBoxLinks').each(function () {
+                    new AudioClass(this)
+                });
+
+
+
+                //图片
+                for (var i = 0; i < imgParts.length; i++) {
+                    if (imgParts[i].url) {
+                        var imgContent = "";
+                        imgContent = '<img src=' + imgParts[i].url + '></img>'
+                        $('#imgArr').append(imgContent)
+                    }
+                }
+
+
+                //视频
+                for (var i = 0; i < videoParts.length; i++) {
+                    if (videoParts[i].letv) {
+                        var videoContent = "";
+                        videoContent = '<iframe id="video_iframe" style="width:6.7rem;height:3.77rem;" src=http://yuntv.letv.com/bcloud.html?uu=2bfc338ed7&vu=' + videoParts[i].letv + '&width=100%&height=100% frameborder=0 allowfullscreen></iframe>'
+                        $('#videoArr').append(videoContent)
+
+                    }
+                }
+
+            }
+        })
+
+    </script>
+    <!-- 音频插件 -->
+    <script src="js/audiojs/hoasou.audio.js"></script>
+</body>
+</html>

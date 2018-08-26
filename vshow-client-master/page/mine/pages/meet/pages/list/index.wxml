@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="list">
+    <navigator class="item" url="../chat/index?id={{ item['half']._id }}" wx:for="{{ matchList }}" wx:key="{{ item._id }}">
+      <view class="panel_hd">
+        <image class="panel_hd_thumb" src="{{ item['half'].avatarUrl }}" />
+      </view>
+
+      <view class="panel_bd">
+        <view class="panel_title">
+          <text class="panel_title_text">{{ item['half'].nickName }}</text>
+          <text class="panel_title_time">{{ item.cretime }}</text>
+        </view>
+        <view class="panel_desc">TA: 好一起玩网球吧,组个团,我们还都挺年轻d</view>
+      </view>
+    </navigator>
+
+    <view class="loadmore_tips">· 我是有底线的 ·</view>
+  </view>
+</view>

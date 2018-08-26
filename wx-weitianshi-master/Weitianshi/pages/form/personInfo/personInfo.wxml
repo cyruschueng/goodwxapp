@@ -1,0 +1,28 @@
+<include src='/utils/wxml/common' />
+
+<view wx:if="{{nonet}}">
+  <view wx:if="{{type == 0}}">
+    <input class="myName" id="name" value="{{user_name}}" maxlength="20" bindinput="nameEdit" placeholder="请输入姓名" />
+  </view>
+  <view wx:if="{{type == 2}}">
+    <input class="myName" id="brand" value="{{user_brand}}" maxlength="40" bindinput="brandEdit" placeholder="请输入品牌" />
+  </view>
+  <view wx:if="{{type == 3}}">
+    <input class="myName" id="company" value="{{user_company}}" maxlength="40" bindinput="companyEdit" placeholder="请输入公司" />
+  </view>
+  <view wx:if="{{type == 4}}">
+    <input class="myName" id="career" value="{{user_career}}" maxlength="40" bindinput="careerEdit" placeholder="请输入职位" />
+  </view>
+  <view wx:if="{{type == 5}}">
+    <input class="myName" id="email" value="{{user_email}}" bindinput="emailEdit" placeholder="请输入邮箱" />
+  </view>
+  <view wx:if="{{type == 6}}">
+    <input class="myName" id="weChat" value="{{user_weChat}}" maxlength="40" bindinput="weChat" placeholder="请输入微信" />
+  </view>
+  <view wx:if="{{type == 7}}">
+    <textarea bindinput="personDescrible" class="myDescrible" maxlength="500" placeholder="请输入个人描述" value="{{user_describle}}" />
+  </view>
+  <view class="btn" hover-class='t-other-button-hover' bindtap="save">保存</view>
+  <!--错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

@@ -1,0 +1,22 @@
+<!-- <text>pages/index/search/search.wxml</text> -->
+<view class='verification'>
+  <view class='verification-inside'>
+    <view class='inputBox'>
+      <text>消费金额(元):</text>
+      <input class="accountInp" type='digit' placeholder="输入消费金额" maxlength="12" bindinput="bindinput" />
+    </view>
+
+    <view>
+      <view class="discountInfo">
+        <text class="discountTicket">{{ticketsinfo.skuName}}</text>
+        <text class="discountMoney discountMoney">-{{ticketsinfo.couponAmount}}</text>
+      </view>
+    </view>
+
+    <view class="paymentBox">
+      <text>实际需付款（元）</text>
+      <text class="actualAmount">{{pay}}</text>
+    </view>
+    <span catchtap='confirm' class="okBtn {{okhx?'look':''}}">确认核销</span>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+<view class="container">
+<form bindsubmit='formSubmit'>
+<view style='text-align:center'>
+<text>注册</text>
+</view>
+<view style="margin:50rpx 0">
+  <view class="weui-cells" style="margin-top:0">
+  <image src='{{icon_mobile}}' mode="widthFix" class='mobile'></image>
+  <view class="weui-cell_input">
+  <input placeholder="手机号" class="weui-input" value=""  bindinput="mobileInput" name="mobile" type="number" maxlength="11" style="padding-left:12%;"/>
+  </view>
+  </view>
+  <view class="weui-cells" style="margin-top:10rpx">
+  <view class="weui-cell_input">
+  <input placeholder="请输入验证码" class="weui-input" value="" name="yzm" bindinput="yzmInput" style="z-index:1;"/>
+  <image src="{{code}}" mode="widthFix" class="yzm" bindtap="getCode"></image>
+  </view>
+  </view>
+  <view class="weui-cells" style="margin-top:10rpx">
+  <image src='{{icon_pin}}' mode="widthFix" class='pin'></image>
+  <view class="weui-cell_input">
+  <input placeholder="短信验证码" class="weui-input" value="" name="pin" bindinput="pinInput" style="z-index:1;padding-left:12%"/>
+  <button bindtap="getSmsCode" style="margin-top:10rpx;z-index:2" class="get_verify_code" disabled="{{disable}}">{{btn_code_text}}</button>
+  <input hidden="yes" value="{{wxid}}" name='wxid' />
+  </view>
+  </view>
+  <button  type="primary" style="margin-top:100rpx" form-type="submit">提交</button>
+  </view>
+</form>
+</view>

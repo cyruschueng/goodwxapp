@@ -1,0 +1,17 @@
+<template name="coinItems">
+  <view class="coin-item" data-currencyid="{{currencyId}}" data-marketid="{{marketId}}" data-symbol="{{symbol}}" data-market="{{marketShowName}}" bindtap="redirectToDetail">
+    <view class="coin-info">
+      <view class="item-left">
+        <view class="item-rank">{{showName}}</view>
+        <view class="item-name">{{symbol}}</view>
+        <view class="item-cap">{{showVolume}}</view>
+      </view>
+      <view class="item-right">
+        <view class="item-price">{{priceShow}}</view>
+        <view wx:if="{{percentChange>=0}}" class="{{trendIncreaseCss}}">+{{percentChange}}%</view>
+        <view wx:if="{{percentChange<0}}" class="{{trendDecreaseCss}}">{{percentChange}}%</view>
+      </view>
+    </view>
+    <view class="item-line"></view>
+  </view>
+</template>

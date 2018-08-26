@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn1">get请求方式1</button>
+<button id="btn2">get请求方式2</button>
+<button id="btn3">post请求方式1</button>
+<button id="btn4">post请求方式2</button>
+<script type="text/javascript" src="jquery-1.11.1.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //get请求方式1
+        $('#btn1').on('click', function(){
+            $.get('/get/ajax?superStar=liuyifei', function(data){
+                console.log(data);
+            });
+        });
+        
+        //get请求方式2
+        $('#btn2').on('click', function(){
+            $.ajax({
+                type:'get',
+                url:'/get/ajax',
+                data:'superStar=liuyifei',
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        });
+        
+        //post请求方式1
+        $('#btn3').on('click', function(){
+            $.post('/ajax/post', 'userName=liMing&age=12', function(data){
+                console.log(data);
+            });
+        });
+        
+        //post请求方式2
+        $('#btn4').on('click', function(){
+            $.ajax({
+                type:'post',
+                url:'/ajax/post',
+                data:{userName:'liMing', age:12},
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

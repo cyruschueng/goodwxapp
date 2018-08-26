@@ -1,0 +1,30 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{show}}">
+  <block wx:if="{{list.length > 0}}">
+    <block wx:for="{{list}}">
+      <view class="fui-list-group">
+        <view class="fui-list address-item">
+          <view class="fui-list-media" data-index="{{index}}" bindtap="select">
+            <radio color="#fd5454" checked="{{item.isdefault > 0 ? true : false}}" class="zoom-70" name="default" />
+          </view>
+          <view class="fui-list-inner" data-index="{{index}}" bindtap="select">
+            <view class="title">{{item.realname}} {{item.mobile}}</view>
+            <view class="text">{{item.province}} {{item.city}} {{item.area}} {{item.address}}</view>
+          </view>
+          <navigator hover-class="none" open-type="redirect" class="fui-list-angle" url="/pages/member/address/post?id={{item.id}}&type=order">
+            <image src="/static/images/icon/edit.png" class="image-48"></image>
+          </navigator>
+        </view>
+      </view>
+    </block>
+  </block>
+  <view class="fui-loading empty" wx:if="{{list.length < 1 && loaded}}">
+    <view class="text">没有数据</view>
+  </view>
+  <view class="fui-navbar">
+    <navigator hover-class="none" open-type="redirect" class="nav-item i_btn btn-danger" url="/pages/member/address/post?type=order">
+      <image class="image-48" src="/static/images/icon-white/add.png"></image>
+      <text>添加收货地址</text>
+    </navigator>
+  </view>
+</view>

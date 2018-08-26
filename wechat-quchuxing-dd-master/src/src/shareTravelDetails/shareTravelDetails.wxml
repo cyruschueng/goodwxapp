@@ -1,0 +1,113 @@
+<map id="map"
+	longitude="{{ longitude }}"
+	latitude="{{ latitude }}"
+	scale="{{ scale }}"
+	controls="{{controls}}"
+	bindcontroltap="controltap"
+	markers="{{markers}}"
+	bindmarkertap="markertap"
+	polyline="{{polyline}}"
+	show-location
+	style="width: 100%; height: 240px;"></map>
+
+<view class="body">
+	<view class="body_header">
+		<view class="travel_title">
+			<view class="travel_time">{{ travel.startTimeTxt }}</view>
+			<view class="check_then_trip">查看更多行程 ></view>
+		</view>
+		<view class="travel_address">
+			<view class="start_addr">{{ travel.startAddress }}</view>
+			<view class="address_icon">
+				<image src="../../images/icon_arrow_black@3x.png"></image>
+			</view>
+			<view class="end_addr">{{ travel.endAddress }}</view>
+		</view>
+	</view>
+	<view class="body_container">
+		<view class="content_title">
+			<block wx:if="{{ options.travelType == 0 }}">
+				<view class="owner_img">
+					<image src="{{ travel.driverPicture }}"></image>
+				</view>
+			</block>
+			<block wx:if="{{ options.travelType == 1 }}">
+				<view class="owner_img">
+					<image src="{{ travel.passengerPicture }}"></image>
+				</view>
+			</block>
+			<view class="owner_right">
+				<view class="owner_info">
+					<view class="name">{{ travel.nickname }}</view>
+					<view class="sex">
+						<image src="../../images/img_men@3x.png"></image>
+					</view>
+					<block wx:if="{{ travel.car }}">
+						<view class="owner_carCode">{{ travel.car }}</view>
+					</block>
+				</view>
+				<view class="speak_prompt">
+					<image src="../../images/img_pop@3x.png"></image>
+					<view>点赞领最高66元红包 可提现哦</view>
+				</view>
+			</view>
+		</view>
+		<view class="content_head">
+			<view class="passersby_like">
+				<block wx:if="{{ share_info.isLiked }}">
+					<image src="../../images/btn_liked@3x.png"></image>
+				</block>
+				<block wx:else>
+					<image bindtap="postLike" src="../../images/btn_like@3x.png"></image>
+				</block>
+				<view class="ok_like">{{ awardFriends.length }}人已点赞</view>
+				<block wx:if="{{ awardFriends.length != 0 }}">
+					<view class="like_list_title">点赞的好友</view>
+				</block>
+			</view>
+			<view class="like_list">
+				<view class="like_list_li" wx:for-items="{{ awardFriends }}" wx:key="{{ index }}">
+					<image src="{{ item.picture }}"></image>
+					<view class="like_price">￥{{ item.billMoney }}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="body_foot">
+		<view class="foot_title">独乐乐不如众乐乐</view>
+		<view class="foot_input">
+			<!-- <view class="input_phone">
+				<input placeholder="输入领奖手机号" />
+			</view> -->
+			<button class="foot_btn" open-type="{{ login_active ? 'share' : ''}}" bindtap="isLogin">
+				<view>分享红包</view>
+			</button>
+		</view>
+		<view class="foot_btn_text">下载趣出行，红包到账先知道</view>
+	</view>
+	<view class="share_App">分享规则套路深，请App内查看 ></view>
+	<view class="foot_img">
+		<image src="../../images/img_endbg@3x.png"></image>
+	</view>
+</view>
+<view class="submit">
+	<block wx:if="{{ options.travelType == 0 }}">
+		<view class="travel_info">
+			<view>余座: {{ travel.surplusSeats }}个</view>
+			<view>车费: {{ travel.travelPrice }} 元/每座</view>
+		</view>
+		<block wx:if="{{ unpaidOrder.ordersId == null }}">
+			<view class="submit_btn" bindtap="submit">订座</view>
+		</block>
+		<block wx:else>
+			<view class="submit_btn" bindtap="gotoPay">去支付</view>
+		</block>
+	</block>
+	<block wx:if="{{ options.travelType == 1 }}">
+		<view class="travel_info">
+			<view>乘车: {{ travel.seats }}人</view>
+			<view>车费: {{ travel.travelPrice }}元</view>
+		</view>
+		<view class="submit_btn" bindtap="grabAsingLe">抢单</view>
+	</block>
+</view>

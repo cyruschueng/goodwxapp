@@ -1,0 +1,34 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <template is='search' data='{{SearchInit,currentTab,hidden}}'></template>
+  <scroll-view scroll-y="true" scroll-top="1668" bindscrolltolower='loadMore' style='height:570px'>
+    <view class="aBox"></view>
+    <template is="searchNothing" data="{{empty:investorList}}"></template>
+    <block wx:for="{{investorList}}" wx:key="{{investorList}}">
+      <view class='investorCard'>
+        <view class="t-investorColor" hover-class='t-hoverColor'>
+          <template is='InvestorCard' data='{{item}}'></template>
+          <view class="t-alineHeight"></view>
+          <template is='cardBottom1' data='{{item,user_id}}'></template>
+        </view>
+      </view>
+    </block>
+    <view class="high"></view>
+    <!--下面的浮动按钮-->
+    <view class="floatBtn">
+      <view class="accreditation flex" wx:if="{{status == 0 ||status ==3}}">
+        <view>认证投资人、买家FA才可申请查看</view>
+        <view class="toAccreditation" bindtap="toAccreditation">立即认证</view>
+      </view>
+    </view>
+  </scroll-view>
+
+
+  <template name="searchNothing">
+    <view class="searchNothing" wx:if="{{empty.length == 0}}"> registerModalShow : true
+      <view class="searchLine"></view>
+      <view class="classname">暂时没有符合该条件的数据</view>
+    </view>
+  </template>
+</view>

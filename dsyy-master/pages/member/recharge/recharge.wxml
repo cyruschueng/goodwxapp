@@ -1,0 +1,37 @@
+<!--充值中_Start-->
+<view wx:if="{{show}}" class="page">
+  <view class="padding-top-20 recharge-title">借书卡充值</view>
+  <view class="recharge-money">￥{{money}}</view>
+  <view class="white-bg border-t border-bottom margin-top-20 recharge-label padding-left-30 padding-right-30">
+    <view class="recharge-label-left">收款方</view>
+    <view class="recharge-label-right">读书有益</view>
+  </view>
+  <view class="padding-left-30 padding-right-30 padding-top-40">
+    <button wx:if="{{money}}" class="recharge-button" type="primary" bindtap="openMember">立即支付</button>
+  </view>
+  <view class="recharge-explain">
+    <!-- 支付安全由中国人民财产保险股份有限公司承保 -->
+  </view>
+</view>
+<!--充值中_End-->
+<!--充值成功_Start-->
+<view wx:else class="white-bg recharge-success">
+    <view class="page" style="height:20rpx;"></view>
+    <view class="recharge-success-img">
+      <image src="/images/recharge_successfully.png" class="recharge-success-image"></image>
+    </view>
+    <view class="recharge-success-title margin-top-50">
+      <view class="recharge-success-title-money margin-right-20">{{money}}元</view>
+      <view wx:if="{{upgrade}}" class="recharge-success-title-yes">升级成功</view>
+      <view wx:else class="recharge-success-title-yes">充值成功</view>
+    </view>
+    <view wx:if="{{upgrade}}" class="recharge-success-prompt margin-top-20" style="font-size:20rpx;">
+        我们会在1-7个工作日内把升级前的会员卡费用退还到您的账户,请注意查收
+        <view wx:if="{{arrhythmia}}" class="recharge-title margin-top-10">
+          退款失常，请联系系统管理员
+        </view>
+    </view>
+    <view wx:else class="recharge-success-prompt margin-top-20">充值成功啦，去借书吧，用知识武装自己</view>
+    <view class="recharge-success-button" bindtap="borrowBook">去借书</view>
+</view>
+<!--充值成功_End-->

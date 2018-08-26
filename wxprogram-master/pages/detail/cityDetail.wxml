@@ -1,0 +1,56 @@
+<!--pages/experience/cityDetail.wxml-->
+<view class='containers' bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd'>
+  <view class="{{flag?'scrollArea':'hide'}}">
+    <view class='time'>
+      <view>当前北京时间</view>
+      <view class='timeNow'>{{cityinfo.bjTime}}</view>
+      <view>当前{{cityinfo.name}}时间为{{cityinfo.localTime}}，比北京时间慢 {{cityinfo.timeDifference}} 小时</view>
+    </view>
+    <view class='moneyExchange'>
+      <view class='title'>货币转换</view>
+      <view class='money'>
+        <text>1{{cityinfo.currencyName}} = {{currency}}人民币\n</text>
+        <text>1人民币 = {{revertc}}{{cityinfo.currencyName}}</text>
+      </view>
+      <form class='exchange'>
+        <view class='input'>
+          <view class='{{eu}}'>
+            <input bindfocus='changeChecked' bindinput="currencychange" class='{{checked?"checked":""}}' name='eu' type='digit' size='10' value="{{emoney}}"/><label class='moneyType'>{{cityinfo.currencyName}} {{cityinfo.currency}}</label>
+          </view>
+          <view class='{{rmb}}'>
+            <input bindfocus='changeChecked1' bindinput="currencychange" class='{{checked1?"checked":""}}' name='rmb' type='digit' size='10' value="{{cmoney}}"/><label class='moneyType'>人民币</label>
+          </view>
+        </view>
+        <view class='submitBtn'>
+          <button class='iconfont icon-zhuanhuan' bindtap='changeplace' size='mini'>
+          </button>
+        </view>
+      </form>
+
+      <view class='annotation'>数据仅供参考，交易时以银行柜台成交价为准</view>
+    </view>
+  </view>
+
+  <view class='section'>
+    <view class='title'>
+      {{cityinfo.name}}
+    </view>
+    <view class='banner'>
+      <image src='{{cityinfo.detailList[0].pic}}' mode='widthFix'></image>
+    </view>
+    <view class='content'>
+      <view wx:for='{{cityinfo.detailList}}' wx:key='{{item}}' wx:for-index='index'>
+        <view wx:if='{{index == 0 }}' class='text'>
+          <text>{{cityinfo.name}}</text>
+          {{item.info}}
+        </view>
+        <view wx:if='{{index != 0 }}' class='text'>
+          <view wx:if='{{item.pic}}' class='banner'>
+            <image src='{{item.pic}}' mode='widthFix'></image>
+          </view>
+          {{item.info}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

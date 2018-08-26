@@ -1,0 +1,81 @@
+<import src="../../../../wxParse/wxParse.wxml"/> 
+<view class="Page">
+  <view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  <scroll-view class="list" scroll-y="true" style="height:{{scrollHeight}}px;" wx:else>
+    <swiper class="swiper" autoplay="true" interval="3000" duration="500" indicator-dots="{{indicator_dots}}" wx:if="{{imgs.length > 1}}">
+      <block wx:for="{{imgs}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" mode="aspectFill" class="img" binderror="errImg" data-err-img="imgs[{{index}}].img" wx:if="{{item.length > 0}}"/>
+          <image src="../../../../image/default" mode="aspectFill" class="img" wx:else></image>        
+        </swiper-item>
+      </block>
+    </swiper>
+    <image src="{{imgs[0]}}" class="oneImg"  mode="aspectFill" wx:else></image>
+    <!--标题头-->
+    <view class="meta">
+      <view class="name_groups">
+        <view class="name">{{title}}</view>
+        <view class="btn_groups">
+          <button class="btn" plain="true" open-type="share">
+            <image src="../../../../image/share_icon.png" class="icon1"></image>
+          </button>
+          <image src="../../../../image/collection_icon.png" class="icon2" bindtap="addTrait" wx:if="{{isCollect == 0}}"></image>
+          <image src="../../../../image/collecton_active_icon.jpg" class="icon2" bindtap="deleteTrait" wx:else></image>
+          <image src="../../../../image/location_icon.png" class="icon3" bindtap="tomap" wx:if="{{isTomap}}"></image>
+        </view>
+      </view>
+      <!--景点介绍-->
+      <view class="title_groups">
+          <view class="icon"></view>
+          <view class="title">详细介绍</view>
+      </view>
+      <view class="profile" wx:if="{{profile.length >0}}">{{profile}}</view>
+      <view class="profile"  wx:else>无</view>
+    </view>
+    
+    <!--景点贴士-->
+      <view class="supplement">
+        <view class="title_groups">
+          <view class="icon"></view>
+          <view class="title">相关贴士</view>
+        </view>
+        <view class="text" wx:if="{{content.length > 0}}">
+          <template is="wxParse" data="{{wxParseData:merchants_tips.nodes}}"/>
+        </view>
+        <view class="text" wx:else >无</view>
+      </view>
+      
+
+      <!--商户详情-->
+      <view>
+        <view class="title_groups" wx:if="{{!ismerchantsDetails && !telphone && !email && !website}}">
+          <view class="icon"></view>
+          <view class="title">其他信息</view>
+        </view>
+        <view class="merchantsDetails" wx:if="{{ismerchantsDetails}}">
+          <view style="flex:0 0 40rpx"></view>
+          <view class="content">
+            <view class="address"  wx:if="{{address}}" style="background-image:url('https://smallapp.dragontrail.cn/assets/images/smallapp/address.png')">{{address}}</view>
+
+            <view class="telphone" wx:if="{{telphone}}" style="background-image:url('https://smallapp.dragontrail.cn/assets/images/smallapp/telphone.png')">{{telphone}}</view>
+          
+            <view class="email" wx:if="{{email}}"  style="background-image:url('https://smallapp.dragontrail.cn/assets/images/smallapp/email.png')">{{email}}</view>
+          
+            <view class="website" wx:if="{{website}}" style="background-image:url('https://smallapp.dragontrail.cn/assets/images/smallapp/website.png')">{{website}}</view>
+            <view class="edge2"></view>
+          </view>
+          <view style="flex:0 0 40rpx"></view>
+        </view>
+        <view class="text" wx:else>无</view>
+
+        </view>
+
+
+        
+      
+    
+  </scroll-view>
+</view>

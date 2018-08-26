@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>chart1</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="图像，图表可视化">
+    <meta name="keyword" content="图像，图表可视化">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style type="text/css">
+    .filter-container,
+    .pagination-container {
+        margin: 30px;
+    }
+
+    .cover-wrapper img {
+        width: 60px;
+        height: 40px;
+        border-radius: 2px;
+    }
+    /*上传图片样式*/
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+
+    .avatar {
+        width: 178px;
+        height: 178px;
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="app-container">
+            <div class="filter-container">
+                <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="el-icon-edit">新增</el-button>
+                <el-button class="filter-item" style="margin-left: 10px;margin-right: 250px" @click="handleBatchDelete" type="primary" icon="el-icon-edit">批量删除</el-button>
+                <el-select v-model="order" placeholder="排序">
+                    <el-option v-for="item in orders" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
+                <el-input v-model="searchInput" placeholder=" 搜索" style="width: 350px"></el-input>
+                <el-button class="filter-item" style="margin-left: 10px;" @click="handleSearch" type="primary" icon="el-icon-edit">搜索</el-button>
+            </div>
+            <el-table :data="list" border style="width: 100%" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="55">
+                </el-table-column>
+                <el-table-column label="信息" prop="" min-width="150">
+                    <template scope="scope">
+                        <div :title="scope.row.sort">
+                            <div class="cover-wrapper">
+                                <img :src="scope.row.url_path">
+                            </div>
+                            <!-- <div class="des-text" v-text="scope.row.description"></div> -->
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="monitor_time" label="显示时长">
+                </el-table-column>
+                <el-table-column prop="display" label="是否显示">
+                </el-table-column>
+                <el-table-column label="排序" prop="sort" width="80" align="center">
+                    <template scope="scope">
+                        <el-input class="sort-input" v-model="scope.row.sort" @blur="sortFormat(scope.$index,scope.row)" @change="selectRow(scope.$index,scope.row)">
+                        </el-input>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" width="300">
+                    <template scope="scope">
+                        <el-button size="small" :plain="true" type="info" @click="handleEdit(scope.row)">编辑</el-button>
+                        <el-button size="small" :plain="true" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="pagination-container">
+                <template>
+                    <div class="block">
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10, 15, 20, 30]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+                        </el-pagination>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+            <el-form :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="100px" style='width: 400px; margin-left:50px;'>
+                <el-form-item label="上传图片" prop="url_path">
+                    <el-upload class="avatar-uploader" action="/uploadImage" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                        <img v-if="temp.path" :src="logoImg(temp.path)" class="avatar">
+                        <span v-test="temp"></span>
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item label="显示时长" prop="monitor_time">
+                    <el-input v-model="temp.monitor_time" placeholder="请输入内容"></el-input>
+                </el-form-item>
+                <el-form-item label="是否显示">
+                    <el-switch v-model="temp.display"></el-switch>
+                </el-form-item>
+                <el-form-item label="排序" prop="sort">
+                    <el-input v-model="temp.sort" placeholder="请输入内容"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取消</el-button>
+                <el-button v-if="dialogStatus=='create'" type="primary" @click="createData">确定</el-button>
+                <el-button v-else type="primary" @click="updateData">确定</el-button>
+            </div>
+        </el-dialog>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.17.1/axios.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                textMap: {
+                    update: '编辑',
+                    create: '新增'
+                },
+                dialogFormVisible: false,
+                dialogStatus: '',
+                temp: {
+                    id: undefined,
+                    monitor_time: '',
+                    display: false, //0,1
+                    sort: '',
+                    path:'',
+                    url_path: '',
+                },
+                rules: {
+                    url_path: [{ required: true, message: 'type is required', trigger: 'change' }],
+                    monitor_time: [{ required: true, message: 'type is required', trigger: 'change' }],
+                    display: [{ required: true, message: 'timestamp is required', trigger: 'change' }],
+                    sort: [{ required: true, message: 'title is required', trigger: 'change' }]
+                },
+                page: 1,
+                pageSize: 10,
+                total: '',
+                searchInput: '',
+                order: '', //order asc   desc                
+                orders: [{
+                    value: 'asc',
+                    label: '升序'
+                }, {
+                    value: 'desc',
+                    label: '降序'
+                }],
+                list: [
+                    /* {
+                         sort: '1', //排序
+                         display: '1', //是否显示
+                         monitor_time: '2', //显示时长
+                     }, {
+                         sort: '1', //排序
+                         display: '1', //是否显示
+                         monitor_time: '2', //显示时长
+                     }*/
+                ],
+            }
+        },
+        created: function() {
+            this.getList();
+        },
+        methods: {
+            logoImg: function (imgUrl) {
+                if(!imgUrl){
+                    return '/downloadImage?filename='+ imgUrl;
+                }else{
+                    return '';
+                }
+            },
+            getList: function() {
+                var that = this;
+                axios.get('/readImage', {
+                    params: {
+                        page: this.page,
+                        count: this.pageSize
+                    }
+                }).then(function(res) {
+                    if (res.data.code === '000000') {
+                        that.list = res.data.data.images;
+                        that.total = res.data.data.total;
+                        console.log(that.list);
+                    }
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            },
+            handleAvatarSuccess(res, file) {                
+                this.temp.path = res;
+                console.log(this.temp.path);
+            },
+            beforeAvatarUpload(file) {
+                console.log(file);
+                // var isJPG = file.type === 'image/jpeg';
+                // var isLt2M = file.size / 1024 / 1024 < 2;
+
+                // if (!isJPG) {
+                //     this.$message.error('上传头像图片只能是 JPG 格式!');
+                // }
+                // if (!isLt2M) {
+                //     this.$message.error('上传头像图片大小不能超过 2MB!');
+                // }
+                // return isJPG && isLt2M;
+            },
+            handleCreate: function() { //新增
+                this.resetTemp();
+                this.dialogFormVisible = true;
+                this.dialogStatus = 'create';
+                this.$nextTick(() => {
+                    this.$refs['dataForm'].clearValidate()
+                })
+            },
+            handleEdit: function(row) {
+                console.log(row);
+                this.temp = row;
+                this.dialogFormVisible = true;
+                this.dialogStatus = 'update';
+                this.$nextTick(() => {
+                    this.$refs['dataForm'].clearValidate()
+                })
+            },
+            resetTemp() {
+                this.temp = {
+                    id: undefined,
+                    monitor_time: '',
+                    display: false, //0,1
+                    sort: '',
+                    path:'',
+                    url_path: '',
+                }
+            },
+            createData: function() { //新增数据
+                var that = this;
+                axios.post('/insertImage', {
+                    sort:that.temp.sort,
+                    monitor_time:that.temp.monitor_time,
+                    display: that.temp.display,
+                    url_path: that.temp.path,
+                }).then(function(res) {
+                    if (res.data.code === '000000') {
+                    }
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            },
+            updateData: function() { //更新数据
+                var that = this;
+                axios.post('/insertImage', {
+                    sort:that.temp.sort,
+                    monitor_time:that.temp.monitor_time,
+                    display: that.temp.display,
+                    url_path: that.temp.path,
+
+                }).then(function(res) {
+                    if (res.data.code === '000000') {
+                    }
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            },
+            handleDelete: function(index, row) {
+                console.log(1)
+                /* return;
+                var _this = this;
+                console.log(row.id);
+                this.$confirm('确认删除此文章？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(function() {
+                    var reqUrl = '/bservice/deletedata/';
+                    var reqData = {
+                        ids: [row.id],
+                        type: '1' //1 已发2 审核中3 驳回4 草稿
+                    };
+                    $.ajax({
+                        url: reqUrl,
+                        type: 'post',
+                        data: reqData,
+                        dataType: 'json',
+                        scriptCharset: 'utf-8',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(res) {
+                            console.log(res);
+                            if (res.code == '000000') {
+                                if (_this.tableData.length == 1 && _this.currentPage > 1) {
+                                    _this.currentPage--;
+                                }
+                                _this.tableRefresh();
+                                _this.$message({
+                                    type: 'success',
+                                    message: '删除成功!',
+                                    customClass: 'msg-fixed'
+                                });
+                            }
+                        },
+                        error: function(res) {
+                            console.log('error');
+                        }
+                    });
+                })
+            }*/
+            },
+            handleBatchDelete: function() {
+                console.log(1)
+                /*  var _this = this;
+                  if (this.multipleSelection && this.multipleSelection.length > 0) {
+                      var ids = [];
+                      this.multipleSelection.forEach(function(item, index) {
+                          ids.push(item.id);
+                      });
+                      this.$confirm('确认删除这些文章吗？', '提示', {
+                          confirmButtonText: '确定',
+                          cancelButtonText: '取消',
+                          type: 'warning'
+                      }).then(function() {
+                          var reqUrl = '/bservice/deletedata/';
+                          var reqData = {
+                              ids: ids,
+                              type: '1' //1 已发2 审核中3 驳回4 草稿
+                          }
+                          $.ajax({
+                              url: reqUrl,
+                              type: 'post',
+                              data: reqData,
+                              dataType: 'json',
+                              type: 'post',
+                              scriptCharset: 'utf-8',
+                              headers: {
+                                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                              },
+                              success: function(res) {
+                                  console.log(res);
+                                  if (res.code == '000000') {
+                                      if (ids.length >= _this.tableData.length && _this.currentPage > 1) {
+                                          _this.currentPage--;
+                                      }
+                                      _this.tableRefresh();
+                                      _this.$message({
+                                          type: 'success',
+                                          message: '删除成功!',
+                                          customClass: 'msg-fixed'
+                                      });
+                                  } else {
+                                      _this.$message({
+                                          type: 'error',
+                                          message: res.code,
+                                          customClass: 'msg-fixed'
+                                      });
+                                  }
+                              },
+                              error: function(res) {
+                                  console.log('error');
+                              }
+                          });
+                      })
+                  } else {
+                      _this.$message({
+                          type: 'warning',
+                          message: '请选择要删除的文章！',
+                          customClass: 'msg-fixed'
+                      });
+                  }*/
+            },
+            handleCurrentChange: function() {
+
+            },
+            handleSizeChange: function() {
+
+            },
+            handleSearch: function() {
+
+            },
+
+            handleSelectionChange: function() {
+
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!--pages/OrderDetails/OrderDetails.wxml-->
+<view class="container">
+
+<view  class="OrderDetailsTop">
+<block wx:if="{{order.status==3}}">
+<view  class="fl">交易成功</view>
+<image class="fr" style="width:115rpx;height:105rpx;" src="/images/4.jpg"></image>
+</block>
+<block wx:if="{{order.status==2}}">
+<view  class="fl">卖家已发货</view>
+<image class="fr" style="width:115rpx;height:105rpx;" src="/images/3.jpg"></image>
+</block>
+<block wx:if="{{order.status==1}}">
+<view  class="fl">买家已付款</view>
+<image class="fr" style="width:115rpx;height:105rpx;" src="/images/1.jpg"></image>
+</block>
+<block wx:if="{{order.status==0}}">
+<view  class="fl">等待买家付款</view>
+<image class="fr" style="width:115rpx;height:105rpx;" src="/images/2.jpg"></image>
+</block>
+
+</view>
+
+<view class="AddAddress">
+
+<view class="HaveAddress">
+<image class="fl HaveAddressLogo" style="width:33rpx;height:39rpx;" src="/images/36.jpg"></image>
+<view class="HaveAddressText fl">
+<text style="font-size:32rpx;">{{order.addressname}} </text><text style="font-size:30rpx;float:right">{{order.addressphone}}\n</text>
+<view style="font-size:34rpx;clear:both;padding-top:10rpx">{{order.addressdetail}}</view>
+</view>
+</view>
+<!--end HaveAddress-->
+</view>
+<!--end AddAddress-->
+
+
+<view class="ShopList" >
+<!--
+<view class="ShopListTop">
+<image style="width:42rpx;height:42rpx;" src="/images/20_1.jpg"></image>
+<view class="fr" style="font-size:28rpx;color:#ff7a92">交易已取消</view>
+</view>-->
+<!--end ShopListTop-->
+<view class="ShopListMid" wx:for="{{ops}}">
+<image class="fl" style="width:179rpx;height:179rpx;" src="{{item.image}}"></image>
+<view class="ShopListMidText">
+<view style="height:145rpx">{{item.name}} x{{item.count}}<view>付款方式：{{item.payfs}}</view><view>预定日期：{{item.ydrq}}</view></view>
+<view>¥ {{item.price}}/件</view>
+</view>
+<!--end ShopListMidText-->
+
+</view>
+<!--end ShopListMid-->
+<view class="ShopListFoot">
+
+<view class="fr" style="font-size:28rpx;">总计：<text style="color:#ff7a92">¥ {{order.actualpay}}</text></view>
+
+</view>
+<!--end ShopListFoot-->
+</view>
+<!--end ShopList-->
+
+<view class="ContactConsulting">
+<view style="border-right:1rpx solid #e0e0e0;color:#000000"><image style="width:44rpx;height:44rpx;" src="/images/38.jpg"></image>联系卖家</view>
+<view style="color:#000000"><image style="width:45rpx;height:44rpx;" src="/images/39.jpg"></image>联系卖家</view>
+</view>
+
+<view class="OrderDetailsFoot">
+<view style="height:50rpx">订单编号 ：{{order.ordernumber}}</view>
+<view style="height:50rpx">支付方式 ：微信</view>
+<view style="height:50rpx">下单时间 ：{{order.time}}</view>
+
+<!--待发货-->
+<view style="height:50rpx">付款时间 ：{{order.updatetime}}</view>
+
+<!--待收货  待评价-->
+<view style="height:50rpx">物流方式 ：{{order.company}}</view>
+<view style="height:50rpx">物流单号 ：{{order.wlnumber}}</view>
+</view>
+
+<view class="ShopListMidFoot">
+<block wx:if="{{order.status==0}}">
+<view bindtap="pay" wx:if="{{opslength==item.Index}}">去付款</view>
+<view bindtap="cancel" wx:if="{{opslength==item.Index}}">取消订单</view>
+</block>
+<block wx:if="{{order.status==0}}">
+<view  bindtap="pay" >立即付款</view>
+</block>
+<block wx:if="{{order.status==1}}">
+<view  bindtap="txfh">提醒发货</view>
+</block>
+<block wx:if="{{order.status==2}}">
+<view bindtap="sure">确认收货</view>
+<view class="cancel" bindtap="wl" id="{{order.id}}">查看物流</view>
+</block>
+<block wx:if="{{order.status==3}}">
+<!--<view bindtap="OrderEvaluate">立即评价</view>-->
+</block>
+</view>
+<!--end ShopListMidFoot-->
+
+</view>
+<!--end container-->

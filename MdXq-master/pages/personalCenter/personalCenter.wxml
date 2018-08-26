@@ -1,0 +1,77 @@
+<view class='personalCenter'>
+  <view class='personalCenterTopBox'>
+    <view class='personalCenterTop'>
+      <view class='personalCenterTopLeft' bindtap='goSettingsPage'>
+        <image src='{{picture}}'></image>
+      </view>
+      <view class='personalCenterTopCenter'>
+        <view class='centerLine'>
+          <text>昵称：</text>
+          <text>{{nickname}}</text>
+        </view>
+        <view class='centerLine'>
+          <text>等级：</text>
+          <text wx:if='{{level==1}}'>普通用户</text>
+          <text wx:if='{{level==2}}'>黑钻会员</text>
+          <text wx:if='{{level==3}}'>天使堡主</text>
+        </view>
+        <view class='signInBox' bindtap='goSignIn'>
+          <image src='../images/signIn.png'></image>
+        </view>
+      </view>
+      <!-- <view class='personalCenterTopRight' bindtap='goSettingsPage'>
+        <image src='../images/setting.png'></image>
+      </view> -->
+    </view>
+  </view>
+  <view class='orderManagement'>
+   <view class='orderManagementRow' bindtap='goOrderDetails' data-orderDetailsID='{{0}}'>
+    <image src='../images/orderImg/order2.png'></image>
+    <view>待付款</view>
+   </view>
+   <view class='orderManagementRow' bindtap='goOrderDetails' data-orderDetailsID='{{1}}'>
+    <image src='../images/orderImg/order1.png'></image>
+    <view>待发货</view>
+   </view>
+   <view class='orderManagementRow' bindtap='goOrderDetails' data-orderDetailsID='{{2}}'>
+    <image src='../images/orderImg/order3.png'></image>
+    <view>待收货</view>
+   </view>
+   <view class='orderManagementRow' bindtap='goOrderDetails' data-orderDetailsID='{{3}}'>
+    <image src='../images/orderImg/order4.png'></image>
+    <view>全部订单</view>
+   </view>
+  </view>
+  <view class='orderManagementBottom'>
+    <view class='bottomLineBox' bindtap='goDiscountCoupon'>
+      <text>优惠券</text>
+      <image src='../images/leftArrow.png'></image>
+    </view>
+    <view class='bottomLineBox' bindtap='groupBooking'>
+      <text>我的拼团</text>
+      <image src='../images/leftArrow.png'></image>
+    </view>
+    <view class='bottomLineBox' bindtap='goMyCollect'>
+      <text>我的收藏</text>
+      <image src='../images/leftArrow.png'></image>
+    </view>
+    <view class='bottomLineBox' bindtap='myGiftBag'>
+      <text>我的礼包</text>
+      <image src='../images/leftArrow.png'></image>
+    </view>
+    <!-- <view class='bottomLineBox' bindtap='webView'>
+      <text>我的webView</text>
+      <image src='../images/leftArrow.png'></image>
+    </view> -->
+    <view class='bottomLineBox' bindtap='rechargeClick'>
+      <text>充值蜜豆币</text>
+      <image src='../images/leftArrow.png'></image>
+      <text class='residueMoney' wx:if='{{recharge_balance!=null}}'>余{{recharge_balance}}</text>
+       <text class='residueMoney' wx:else>余0</text>
+    </view>
+    <view class='bottomLineBox' bindtap='contactCustomerService'>
+      <text>联系客服</text>
+      <image src='../images/leftArrow.png'></image>
+    </view>
+  </view>
+</view>

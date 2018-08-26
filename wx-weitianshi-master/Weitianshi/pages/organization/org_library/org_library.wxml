@@ -1,0 +1,24 @@
+<import src="/pages/Template/Template.wxml" />
+
+
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--筛选和搜索  -->
+  <template is='search' data='{{SearchInit,linkDataShow,currentTab,hidden:true}}'></template>
+  <!-- <template is='searchResult' data='{{SearchInit}}'></template> -->
+
+  <!--投资机构  -->
+  <scroll-view scroll-y="true" bindscrolltolower='loadMore' scroll-top="{{scroll}}" style="height:1100rpx">
+    <view class="topPic" bindtap="guideHelp">
+      <image src="{{imgUrls}}" class="topPic"></image>
+    </view>
+    <view class="outStyleBox1" id="investment">
+      <template is="investment" data="{{investment_list}}"></template>
+    </view>
+    <!--暂无内容  -->
+    <view class="hasNothing" wx:if="{{investment_list.length ==0}}">暂无数据</view>
+  </scroll-view>
+
+  <!--错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

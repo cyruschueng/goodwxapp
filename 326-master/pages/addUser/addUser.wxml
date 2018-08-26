@@ -1,0 +1,46 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+<!--top str -->
+  <view class='h8 flexBetw Skin pdr1 pdl1'>
+    <image class='imgxs15' src='/images/back.png' bindtap='userback'></image>
+    <view>添加用户</view>
+    <view></view>
+  </view>
+<!--top end -->
+  <!--列表str  -->
+    <view class='flexv1'>
+    <form bindsubmit="addUserSubmit" bindreset="formReset">
+      <view class='flexBetw h8 bg256 mt05 mb05 pdr1 pdl1'>
+        <view>用户类型</view>
+        <view class='color0'>{{roleVal=='0'?'电站业主':'管理员'}}</view>
+      </view>
+      <view class='flexBetw h8 bg256 pdr1 pdl1 borderB'>
+        <view>用户名称</view>
+        <input type="text"  class='flexv1 h100 textRight' placeholder='请输入账号' placeholder-class='flexD' name='addUname' id='addUname'></input>
+      </view>
+      <view class='flexBetw h8 bg256 pdr1 pdl1 borderB'>
+        <view>密码</view>
+        <input type="password"  class='flexv1 h100 textRight' placeholder='请输入密码' placeholder-class='flexD' name='addUpwd' id='addUpwd'></input>
+      </view>
+      <view class='flexBetw h8 bg256 pdr1 pdl1 borderB'>
+        <view>确认密码</view>
+        <input type="password"  class='flexv1 h100 textRight' placeholder='请再次输入密码' placeholder-class='flexD' name='addUpwdy' id='addUpwdy'></input>
+      </view>
+      <view class='flexBetw h8 bg256 pdr1 pdl1 borderB'>
+        <view>邮箱</view>
+        <input type="text"  class='flexv1 h100 textRight' placeholder='请输入邮箱' placeholder-class='flexD' name='addUemail' id='addUemail'></input>
+      </view>
+      <view class='flexBetw h8 bg256 pdr1 pdl1 borderB'>
+        <view>手机号</view>
+        <input type="text"  class='flexv1 h100 textRight' placeholder='请输入手机号' placeholder-class='flexD' name='addUNum' id='addUNum'></input>
+      </view>
+      <view class='flex'>
+        <button class='modelbtn_ok Skin' formType="submit">确定</button>
+        <button class='modelbtn_ok Skin' formType="reset">重置</button>
+      </view>
+      </form>
+    </view>
+  <!--列表end  -->
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>
+

@@ -1,0 +1,327 @@
+page{
+  width:100%;
+  height:100%;
+  background: #1EB7DE;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-weight:500;
+  background-image: url("https://qnfile.abctime.com/ocean_bg.png");
+  background-size: 100% 100%;
+  /*display:flex;!*Flex布局*!*/
+  /*display: -webkit-flex; !* Safari *!*/
+  /*align-items:center;!*指定垂直居中*!*/
+}
+.wrap{
+  width:100%;
+}
+/*倒计时*/
+.count_down{
+  display: block;
+  font-size:36rpx;
+  margin: auto;
+  padding-top:18rpx;
+  padding-bottom:16rpx;
+  color: #2B2B2B;
+}
+.ipx{
+  padding-top:86rpx;
+  padding-bottom:46rpx;
+}
+.count_time{
+  color: white;
+}
+/*中间主干*/
+.main{
+  width:100%;
+  height:940rpx;
+}
+.main .scroll-img{
+  float: right;
+  width:16rpx;
+  height:800rpx;
+  margin-top:70rpx;
+}
+/*library盒子*/
+.content-box{
+  width: 666rpx;
+  height:940rpx;
+  float: left;
+  background-image: url('https://qnfile.abctime.com/bookshelf_o.png');
+  background-size: 100% 100%;
+  margin: auto;
+  margin-left:40rpx;
+
+}
+/*书架*/
+.books-box{
+  /*background: url('../../images/shelf/bookshelf_o.png') no-repeat;*/
+  /*background-size: cover;*/
+}
+.books-box .lis{
+  margin:auto;
+  width:556rpx;
+  text-align: left;
+}
+.book_blue{
+  background-image: url('https://qnfile.abctime.com/book_blue.png');
+  background-size: cover;
+}
+.book_yellow{
+  background-image: url('https://qnfile.abctime.com/book_yellow.png');
+  background-size: cover;
+}
+
+.books-box .li{
+  float: left;
+  width:264rpx;
+  height:338rpx;
+  margin-top:50rpx;
+  margin-bottom:30rpx;
+  margin-right:14rpx;
+  position: relative;
+}
+.books-box .li image{
+  margin-top:28rpx;
+  margin-left:36rpx;
+  width:200rpx;
+  height:200rpx;
+}
+.books-box .li view{
+   /* display: table-cell;  */
+  /* vertical-align: middle; */
+  text-align: center;
+  line-height:24rpx;
+  margin-left:28rpx;
+  font-size:24rpx;
+}
+.books-box .li .book_name{
+  /*margin:auto;*/
+  width:215rpx;
+  height:48rpx;
+  display: flex;
+  align-items: center;
+}
+.books-box .li .book_name text{
+  display: block;
+  width:100%;
+}
+/*已读绘本得分*/
+.books-box .li .score_bg{
+  /*display: block;*/
+  margin: 0;
+  margin-left:9rpx;
+  margin-top:5rpx;
+  width:120rpx;
+  height:120rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.books-box .li .score{
+  margin: 0;
+  margin-top:28rpx;
+  margin-left:9rpx;
+  width:80rpx;
+  height:120rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size:28rpx;
+}
+.hidden{
+  display: none;
+}
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+/*书架header*/
+.shelf_head{
+  width:100%;
+  text-align: center;
+}
+/*主题标识*/
+.scene_title{
+  display: flex;
+  text-align: left;
+}
+.scene_title image{
+  display: inline-block;
+  margin-top:40rpx;
+  margin-left:36rpx;
+  /*line-height:50rpx;*/
+  width:26rpx;
+  height:26rpx;
+}
+.scene_title text{
+  display: inline-block;
+  width:340rpx;
+  margin-top:22rpx;
+  margin-left:18rpx;
+  line-height:50rpx;
+  font-size:32rpx;
+  color: #FFFFFF;
+}
+/*cid选择区域*/
+.cid_one{
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  background-color:black;
+  width:260rpx;
+  height:50rpx;
+  margin: auto;
+  margin-top:22rpx;
+  border-radius: 20rpx;
+  padding-left:20rpx;
+  /*border-bottom:2rpx solid rgb(255, 255, 255);*/
+}
+.cid{
+  padding-left:40rpx;
+  color:rgb(34, 154, 181);
+  height:50rpx;
+  line-height:50rpx;
+  text-align: center;
+}
+.cid_box{
+  position: absolute;
+  z-index: 100;
+  justify-content: space-between;
+  background-color:black;
+  width:280rpx;
+  height:500rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 10rpx 0 0;
+  overflow: scroll;
+  margin-left:195rpx;
+  margin-top:10rpx;
+  /*margin-left:500rpx;*/
+}
+.cid_select{
+  margin: auto;
+  /*z-index: 100;*/
+  /*position: absolute;*/
+  /*width:214rpx;*/
+  /*height:500rpx;*/
+  /*border-radius: 20rpx;*/
+  /*overflow: scroll;*/
+  /*margin-top:20rpx;*/
+  /*小程序中z-index和absolute需要同时存在，元素才能脱离文档。*/
+}
+.select_one{
+  position: static;
+  text-align: center;
+  background-color:#000;
+  width:280rpx;
+  /*脱离文档后元素width不能再用百分比。*/
+  height:63rpx;
+  line-height:60rpx;
+  color:#D7A944;
+}
+.cid_image{
+  z-index: 100;
+  position: absolute;
+  right:5rpx;
+  width: 38rpx;
+  height: 22rpx;
+  margin: 0;
+  padding:10rpx 20rpx 4rpx 0;
+  transition: All 0.4s ease;
+  -webkit-transition: All 0.4s ease;
+}
+/*逆时针旋转图片90°*/
+.rotateLeft{
+  -webkit-transform-origin: 30% 55%;
+  transform-origin: 30% 55%;
+  transform: rotate(180deg);
+}
+/*下方nav*/
+.btn21{
+  width:560rpx;
+  height:130rpx;
+  margin: auto;
+  text-align: center;
+  position: relative;
+}
+.btn21 image{
+  position: absolute;
+  left: 0;
+  width:560rpx;
+  height:110rpx;
+  margin-top:20rpx;
+}
+.btn21 text{
+  display: block;
+  position: absolute;
+  left: 0;
+  width:560rpx;
+  height:110rpx;
+  margin-top:18rpx;
+  line-height: 110rpx;
+  color: #953821;
+  font-size:40rpx;
+}
+.btn-box{
+  width: 100%;
+  height: 150rpx;
+  background: darkseagreen;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.btn-box .bar_btn{
+  width:200rpx;
+  height:100rpx;
+  font-size:30rpx;
+  /*margin-left:20rpx;*/
+  margin: auto;
+  margin-top:20rpx;
+  padding:20rpx;
+}
+/*弹框提示*/
+.modal-box{
+  position: fixed;
+  top: 30%;
+  margin-left:75rpx;
+  width: 600rpx;
+  height: 390rpx;
+}
+.modal-box .modal_bg{
+  width: 600rpx;
+  height: 390rpx;
+}
+.modal-box .modal_btn{
+  position: absolute;
+  width:240rpx;
+  height:110rpx;
+  top: 246rpx;
+  left: 180rpx;
+}
+.modal-box .text{
+  position: absolute;
+  width:460rpx;
+  font-size: 28rpx;
+  color: #953821;
+  letter-spacing: 4rpx;
+  line-height: 50rpx;
+  top:40rpx;
+  left:70rpx;
+}
+.modal-box text{
+  display: block;
+  text-align: center;
+}
+.modal-box text.title{
+  font-size:36rpx;
+  margin-bottom:10rpx;
+}
+.modal-box text .four{
+  display: inline;
+  font-size:36rpx;
+  color:#FFA900;
+}

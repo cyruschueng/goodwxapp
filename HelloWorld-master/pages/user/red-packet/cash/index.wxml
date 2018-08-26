@@ -1,0 +1,19 @@
+<!--pages/user/red-packet/cash/index.wxml-->
+<form bindsubmit='formSubmit' report-submit='{{true}}'>
+    <view class="m15">
+        <view class="cash-money-bg">
+            <view class="cash-money f20">可提现金额：
+                <text>￥{{balance_money}}</text>
+            </view>
+        </view>
+        <view class="cash-account" catchtap='chooseAccount'>
+            <view>提现账户</view>
+            <view class="arrowR right-more {{cash_type == 0 ? '' : 'hidden'}}">{{bank_name}} {{bank_no}} <text hidden="{{bank_no != ''}}">请选择账号</text></view>
+            <view class="arrowR right-more {{cash_type == 1 ? '' : 'hidden'}}">余额账号 {{true_name || '点击填写真实姓名'}}</view>
+        </view>
+        <!-- <view class="tc mt10" wx:if="{{showHasRecord == '' ? false : true}}"><text class="blue">{{showHasRecord}}</text></view> -->
+        <view>
+            <button form-type='submit' class="cash-btn" disabled='{{!canIUseCash}}'>申请提现</button>
+        </view>
+    </view>
+</form>

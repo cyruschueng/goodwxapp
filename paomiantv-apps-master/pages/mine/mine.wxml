@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="mine__info">
+    <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+    <view class="nickname">{{userInfo.nickName}}</view>
+    <view class="mine__info_bar">
+      <view class="mine__info_bar_item" bindtap="linkToRecord">
+        <image class="record" src="/assets/record.png"></image>
+        <text>记录</text>
+      </view>
+      <view class="mine__info_bar_item" bindtap="linkToMoney">
+        <text class="money">{{balance}}</text>
+        <text>我的余额</text>
+      </view>
+      <view class="mine__info_bar_item clear">
+        <contact-button size="12" class='pos' type="default-light" session-from="weapp"></contact-button>
+        <contact-button size="12" class='pos' style='top:30rpx;left:100rpx;' type="default-light" session-from="weapp"></contact-button>
+        <image class="service icon_kf" src="/assets/service.png"></image>
+        <text>客服</text>
+      </view>
+    </view>
+  </view>
+  <view class="help__list">
+    <button class='help__list_item' open-type="share">
+      <image src="/assets/share.png"></image>
+      <view>推荐给老友</view>
+      <image class="arrow" src="/assets/arrow_right.png"></image>
+    </button>
+
+    <!-- <view class="help__list_item" bindtap="">
+      <image src="/assets/share.png"></image>
+      <view>推荐给老友</view>
+      <image class="arrow" src="/assets/arrow_right.png"></image>
+    </view> -->
+    <view class="help__list_item" bindtap="linkToQuestion">
+      <image src="/assets/question.png"></image>
+      <view>常见问题</view>
+      <image class="arrow" src="/assets/arrow_right.png"></image>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+<!--pages/person/person.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录 </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class='menuItems'>
+    <button class='menuItem' bindtap='orderManage'>订单管理</button>
+    <button class='menuItem' bindtap='addressManage'>地址管理</button>
+    <button class='menuItem' bindtap='userCommend'>用户推荐</button>
+    <button class='menuItem' bindtap='returnMoney'>返佣现金</button>
+  </view>
+</view>

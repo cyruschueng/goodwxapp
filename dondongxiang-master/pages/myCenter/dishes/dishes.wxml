@@ -1,0 +1,17 @@
+<view class="container">
+		<block wx:for="{{dishesList[curIndex]}}" wx:key="">
+			  <view class="flex-wrap" catchtap="selectDish" data-dish="{{item.id}}">
+            <view class="flex-item">
+                <text class="flex-title">{{item.name}}</text>
+                <text class='msgpay'>￥{{item.price}}原价：({{item.oldprice}}元)</text>
+                <text class="title">{{item.textone}}</text>
+                <text class="title">{{item.texttwo}}</text>        
+            </view>
+            <view class="add-btn">
+                <icon type="{{item.status ? 'success' : 'circle'}}" color="orange" size="30"></icon></view> 
+            </view>
+		</block>
+</view>
+<view class="cartpay">
+    <button class="total" type="primary" bindtap='pay'>确定</button>
+</view>

@@ -1,0 +1,77 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="musicList {{music_play?'music_play':'stop'}}"  bindtap='bindPlay'></view> 
+<view class='navflex'>
+    <view class='flex {{type=="new"?"active":""}}' data-type='new' bindtap='newList'><text>最新</text></view>
+    <view class='flex two {{type=="hot"?"active":""}}' data-type='hot' bindtap='newList'><text>最热</text></view>
+    <view class='flex {{type=="activity"?"active":""}}' data-type='activity' bindtap='newList'><text>活动</text></view>
+</view> 
+<view class="container">
+    <view class='guizze'>
+        <view class='newRules' wx:if="{{type == 'activity' && thumb}}" bindtap='newRules1'>活动规则！</view>
+    </view>
+    <block wx:if="{{allList}}">
+        <view class='item' wx:for="{{allList}}" wx:key="{{index}}">
+            <view class='top'>
+                <!-- <view class='shanchu' bindtap='shanchu' data-pw_id='{{pw_id}}' data-index='{{index}}'>
+                    <image class='dels' src="../img/dels.png" mode='widthFix'></image>
+                </view> -->
+                <image class='niceImg' src="{{item.avatarurl}}"></image>
+                <view class='niceNames'>
+                     <view class='nickName'>{{item.wx_name}}</view> 
+                    <view class='nickName'>
+                        <text wx:if="{{item.type=='image'}}">照片墙 </text>
+                        <text wx:else>相册集</text>
+                    </view>
+                </view>
+                <view class='addTime'>{{item.add_time}}</view>
+            </view>
+            <form report-submit="true" bindsubmit="informSquare" class='mid'  data-name="{{item.name}}" 
+                  data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">
+                  <button class="submit" formType="submit">
+                  <image src="{{item.thumb}}" mode="widthFix"></image></button>
+            </form>
+            <view class='btm'>
+                <view class='left' bindtap='informSquare'  data-name="{{item.name}}" 
+                      data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">
+                    <image src="../img/7.png" mode='widthFix'></image>
+                   <text class='textBlock'>{{item.click_count}}次</text> 
+                </view>
+                <view class='right'>
+                    <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}' 
+                           data-index="{{index}}">
+                        <image src="../img/983476-200.png"></image>
+                        <text class='textBlock'>{{item.thumb_count}}</text>
+                    </view>
+                </view>
+                <view class='chart' bindtap='share' >
+                    <button open-type='share' data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' style='background:#fff'
+                            data-image="{{item.thumb}}" data-name="{{item.name}}" data-temp_id="{{item.temp_id}}">
+                        <image src="../img/1227062-200.png"></image>
+                    </button>
+                </view>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{allList==false }}">
+        <view style="text-align:center;font-size:24rpx;padding:30rpx;margin-top:90rpx"> 暂时没有照片信息！ </view>
+    </block>
+</view>
+<!--参与 活动海报  --> 
+<view class='bg' wx:if="{{join==false}}"  bindtap='activeClose' > 
+    <view class='activity'  style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/poster.png?{{num}}) no-repeat;background-size: cover;'> 
+          <view class='activityClose' bindtap='activeClose' style='top:30rpx;right:60rpx;'> 
+              <image src="../img/error.png" mode='widthFix'></image> 
+          </view>
+          <button class='inGroup' bindtap='activeIn'>参与活动</button> 
+    </view> 
+</view>
+<!--完成 弹出海报 -->
+<view class='bg' wx:if="{{win==true}}"  bindtap='activeClose'> 
+    <view class='activity'   
+          style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/card.png?{{num}}) no-repeat;background-size: cover;'> 
+          <view class='activityClose' bindtap='activeClose' > 
+              <image src="../img/error.png" mode='widthFix'></image> 
+          </view>
+          <button class='inGroup' bindtap='chart'>立即领取</button> 
+    </view> 
+</view>

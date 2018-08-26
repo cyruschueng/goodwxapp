@@ -1,0 +1,61 @@
+<view class='container user-container' hidden='{{!loadingHidden}}'>
+  <view class='user-info'>
+    <image src='{{info.faceImage || userInfo.avatarUrl}}' mode='aspectFill'></image>
+    <text>{{userInfo.nickName}}</text>
+    <view class='bind' ontap='showUserInfo'>
+      信息完整度 {{info.state}}%
+      <image src='../../images/icon/arrow@right.png'></image>
+    </view>
+  </view>
+  <view class='attention'>
+    <view class='attention-item'>
+      <view class='attention-item-title'>
+        <text>关注的店铺</text>
+        <!-- <image src='/images/icon/arrow@right.png' mode='aspectFill'></image> -->
+      </view>
+      <view class='attention-item-list' wx:if='{{storeList.length}}'>
+        <view wx:for='{{storeList}}' wx:key='index' class='attention-item-content' data-id='{{item.storeNo}}' catchtap='selectStore'>
+          <image src='{{item.imageUrl}}' mode='adpectFill'></image>
+          <text>{{item.storeName}}</text>
+        </view>
+      </view>
+      <view class='no-data' wx:else>
+        <text>暂无关注店铺</text>
+      </view>
+    </view>
+    <view class='attention-item'>
+      <view class='attention-item-title'>
+        <text>我的私人导购</text>
+        <!-- <image src='/images/icon/arrow@right.png' mode='aspectFill'></image> -->
+      </view>
+      <view class='attention-item-list' wx:if='{{guideList.length}}'>
+        <view class='attention-item-content' wx:for='{{guideList}}' wx:key='index'>
+          <image src='{{item.headImage}}' mode='adpectFill'></image>
+          <text>{{item.nickName}}</text>
+        </view>
+      </view>
+      <view class='no-data' wx:else>
+        <text>暂无导购</text>
+      </view>
+    </view>
+
+  </view>
+  <view class='options'>
+    <view class='weui-cell weui-cell_access option' wx:for='{{options}}' wx:key='index'>
+      <form report-submit='true' bindsubmit='enter' data-type='{{item.type}}'>
+        <button form-type='submit' class='form_button'>
+          <view class="weui-cell__bd">
+            <image src='{{item.icon}}' mode='aspectFill'></image>
+            <text>{{item.name}}</text>
+          </view>
+        </button>
+      </form>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+
+  </view>
+</view>
+
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

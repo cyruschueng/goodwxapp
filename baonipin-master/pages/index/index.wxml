@@ -1,0 +1,98 @@
+<!--index.wxml-->
+ <view class="container">
+      <view class='box'>
+            <view class='logo'>
+                <image wx:if="{{userInfo}}" src="{{userInfo.avatarUrl}}" mode='widthFix'></image> 
+                <image wx:else src="https://qncdn.playonwechat.com/nice/users.png" mode='widthFix'></image>   
+            </view>
+            <view class='list'>
+                <!--text  -->
+                <view class='li' wx:if="{{text}}">
+                    <label>设置文字</label>
+                    <picker bindchange="bindPickerChange1" value="{{index}}" range="{{textList}}" class='lei img'>
+                          <image src='../images/img.png' mode='widthFix'></image>
+                    </picker>
+                    <input type="text" wx:if="{{options}}" placeholder='' value='{{textList[wenzi]}}' disabled></input>
+                    <input type="text" wx:else bindinput="word" placeholder='请输入文字' value=''></input>
+                </view>
+                <!--img  -->
+                <view class='li' wx:if="{{img}}">
+                    <label>上传图片</label>
+                    <view bindtap="seeImg" class='lei img'>
+                          <image src='../images/img.png' mode='widthFix'></image>
+                    </view>
+                    <view bindtap="phone" class='nowimg'>
+                        <image wx:if="{{tempFilePaths}}" src='{{tempFilePaths}}' mode='widthFix'></image>
+                        <image wx:else src='../images/add.png' mode='widthFix'></image>
+                    </view>
+                </view>
+                <!--voice  -->
+                <view class='li' wx:if="{{voice}}">
+                    <label>设置口令</label>
+                    <picker bindchange="bindPickerChange3" value="{{index}}" range="{{speak}}" class='lei img'>
+                          <image src='../images/img.png' mode='widthFix'></image>
+                    </picker>
+                    <input type="text" wx:if="{{speakAll}}"  placeholder='' value='{{speak[shuo]}}' disabled></input>
+                    <input type="text" wx:else bindinput="speakmove" placeholder='' value='{{speakmove}}'></input>
+                </view>
+                <!--face  -->
+                <view class='li' wx:if="{{voice}}">
+                    <label>设置颜值口令</label>
+                    <picker bindchange="bindPickerChange3" value="{{index}}" range="{{speak}}" class='lei img'>
+                          <image src='../images/img.png' mode='widthFix'></image>
+                    </picker>
+                    <input type="text" wx:if="{{speakAll}}"  placeholder='' value='{{speak[shuo]}}' disabled></input>
+                    <input type="text" wx:else bindinput="speakmove" placeholder='' value='{{speakmove}}'></input>
+                </view>
+                <view class='little ques'>小伙伴们拼对{{leixing}}即可获得随机红包
+                      <image src="../images/question-icon.png" mode="widthFix"></image>  
+                </view>
+                <!--赏金  -->
+                <view class='li' wx:if="{{play}}">
+                    <label>总赏金</label><text class='lei active' bindtap='play'>拼</text>
+                    <input type="number" placeholder='填写金额' bindinput="money1" value='{{money1}}'></input>
+                    <text style='padding-right:20rpx'>元</text>  
+                </view>
+                <view class='li' wx:else>
+                    <label>单个赏金</label><text class='lei' bindtap='play'>普</text>
+                    <input type="number" placeholder='填写金额' bindinput="money2" value='{{money2}}'></input>
+                    <text style='padding-right:20rpx'>元</text>  
+                </view>
+
+                <view class='li'>
+                    <label>数量</label>
+                    <input type="number" placeholder='填写数量' bindinput="num" value="{{num}}"></input>个
+                </view>
+                <view class='li tiaozhan'>
+                    <label>挑战时间</label>
+                    <picker bindchange="bindPickerChange2" value="{{index}}" range="{{array}}">
+                        <view class="picker">
+                            {{array[index]}}
+                        </view>
+                    </picker>
+                </view>
+                <view class='little'>需支付￥0.00{{}}服务费，优先使用余额￥0.00{{}}</view>
+                <!--生成红包  -->
+                 
+                 <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+                    <button class="submit button active" formType="submit">生成红包</button>
+                </form> 
+                <!--红包类型  -->
+                 <!-- <form report-submit="true" wx:for="{{typeP}}" bindtap='formSubmit' 
+                      data-type='{{item.typei}}' class="formSubmit button {{item.active?'active':'hide'}}">
+                      <button class="submit" formType="submit">{{item.red}}</button>
+                </form>   -->
+                <view class='pin'>
+                    <view class="type" bindtap='change' wx:for="{{typeP}}" data-index='{{index}}'>{{item.title}}</view>
+                </view>
+            </view>
+      </view>
+      <view class='bottom'>
+          <view class='foot'>
+              <navigator class='tab' wx:for="{{footList}}" url="{{item.url}}">
+                  <image src="{{item.img}}" mode='widthFix'></image>
+                  <view>{{item.title}}</view>
+              </navigator> 
+          </view>
+      </view>
+</view> 

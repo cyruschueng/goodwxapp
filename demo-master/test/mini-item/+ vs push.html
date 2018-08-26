@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+    +的时间小于
+    function String() {
+        this._strings_ = new Array();
+    };
+    String.prototype.append = function(str) {
+        this._strings_.push(str)
+    };
+    String.prototype.toString = function(str) {
+        this._strings_.join('')
+    }
+
+    var d1 = new Date();
+    var str;
+    for (var i = 10000; i >= 0; i--) {
+        str += 'china';
+    }
+    var d2 = new Date();
+    document.write("+:" + (d2.getTime() - d1.getTime()) + 'milliseconds')
+
+
+
+    var d1 = new Date();
+    var string = new String();
+    for (var i = 10000; i >= 0; i--) {
+        string.append('china')
+    };
+    string.toString();
+    var d2 = new Date();
+    document.write("<br/>" + "string:" + (d2.getTime() - d1.getTime()) + 'milliseconds');
+    </script>
+</body>
+
+</html>

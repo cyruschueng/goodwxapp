@@ -1,0 +1,28 @@
+ <scroll-view scroll-y="true" style="height:100%">
+
+    <view  wx:for="{{songDataList}}" wx:for-index="idx" wx:key="{{item.id}}" class="songlist-item">
+         <view data-idx="{{idx}}" bindtap="goSong">
+            <view  class="item-box ibl">
+                <image src="{{item.thumb?item.thumb:'http://thumb.media.999d.com/xiaochengxu/defulat.jpg'}}"></image>
+            </view>
+            <view class="item-box ibr">
+                <text class="item-album-name">{{item.title}}</text>
+                <text class="item-singer">演唱者：{{item.singer}}</text>
+                <view class="item-download">下载：{{item.download_count}}次</view>
+            </view>
+        </view>
+        <!--</navigator>-->
+
+    </view>
+
+    <view hidden="{{hotshidden}}" class="box-more">
+        <view wx:if="{{hothidden}}">
+            <image src="../../images/loading.gif"/>
+                加载中...
+        </view>
+        <view wx:else>
+            <text> 没有更多了 </text>
+        </view>
+    </view> 
+
+</scroll-view>

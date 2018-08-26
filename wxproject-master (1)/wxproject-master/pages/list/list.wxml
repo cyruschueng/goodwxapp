@@ -1,0 +1,13 @@
+<!--pages/list/list.wxml-->
+<view>
+  <view class='listTitle'>
+    <text>主题列表</text>
+    <image src='../../images/bofang1.png'></image>
+  </view>
+  <navigator wx:for='{{list}}' wx:key='{{index}}' class='song' url='../detail/detail?songid={{item.songid}}&singerid={{item.singerid}}&id={{item.id}}'>
+    <text class='count'>{{index+1}}</text>
+    <text class='songname'>{{item.songname}}</text>
+    <text class='singername'>{{item.singername}}</text>
+    <text class='time'>{{item.seconds}}</text>
+  </navigator>
+</view>

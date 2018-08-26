@@ -1,0 +1,72 @@
+<!--list.wxml-->
+<view class='select_box'>
+  <view class="select_left {{addClass?'current':''}}" bindtap='select_left'>智力排行榜</view>
+  <view class="select_right {{addClass1?'current':''}}" bindtap='select_right'>毅力排行榜</view>
+  <view class="select_center {{addClass2?'current':''}}" bindtap='select_center'>好友排行榜</view>
+  <view class='clearfix'></view>
+</view>
+
+<view class="showarea {{showView?'show':''}}">
+<view  class="list1" wx:for-items='{{items}}' style='background-color:{{item.color}}'>
+  <view class="content_left">
+    <image src='{{item.pic}}' class="pic"></image>
+    <view class="name">{{item.username}}</view>
+  </view>
+  <view class="content_right">
+    <view class="name">获得 <text style='font-size:18px;color:#fff000'>{{item.successnum}}</text> 个公仔</view>
+    <image src='{{item.pics}}' class='medals'></image>
+  </view>
+</view>
+
+<view class='list2' wx:for-items='{{items1}}'>
+  <view class="content_left">
+    <image src='{{item.pic}}' class="pic"></image>
+    <view class="name1">{{item.username}}</view>      
+  </view>
+  <view class="content_right">
+    <view class="name1">获得 <text style='font-size:18px'>{{item.successnum}}</text> 个公仔</view>
+    <view class='num'>{{index+4}}</view>
+  </view>
+</view>
+<view wx:if="{{more}}" class='loadMore' bindtap='loadMore'>点击加载更多</view>
+<view wx:if="{{nomore}}" class='loadMore' bindtap='loadMore'>没有更多</view>
+</view>
+
+<view class="showarea {{showView1?'show':''}}">
+<view  class="list1" wx:for-items='{{items2}}' style='background-color:{{item.color}}'>
+  <view class="content_left">
+    <image src='{{item.pic}}' class="pic"></image>
+    <view class="name">{{item.username}}</view>
+  </view>
+  <view class="content_right">
+    <view class="name">已挑战 <text style='font-size:18px;color:#fff000'>{{item.num}}</text> 次</view>
+    <image src='{{item.pics}}' class='medals'></image>
+  </view>
+</view>
+<view class='list2' wx:for-items='{{items3}}'>
+  <view class="content_left">
+    <image src='{{item.pic}}' class="pic"></image>
+    <view class="name1">{{item.username}}</view>      
+  </view>
+  <view class="content_right">
+    <view class="name1">已挑战 <text style='font-size:18px'>{{item.num}}</text> 次</view>
+    <view class='num'>{{index+4}}</view>
+  </view>
+</view>
+<view wx:if="{{more1}}" class='loadMore' bindtap='loadMore1'>点击加载更多</view>
+<view wx:if="{{nomore1}}" class='loadMore' bindtap='loadMore1'>没有更多</view>
+</view>
+
+
+<view class="showarea {{showView2?'show':''}}">
+<view class='list2' wx:for-items='{{items4}}'>
+  <view class="content_left">
+    <image src='{{item.pic}}' class="pic"></image>
+    <view class="name1">{{item.username}}</view>      
+  </view>
+  <view class="content_right">
+    <view class="name1">获得 <text style='font-size:18px'>{{item.successnum}}</text> 个公仔</view>
+    <view class='num'>{{index+1}}</view>
+  </view>
+</view>
+</view>

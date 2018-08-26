@@ -1,0 +1,88 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>模块化</title>
+</head>
+<body>
+ 	<script type="text/javascript">
+ 		// http://www.ruanyifeng.com/blog/2012/10/javascript_module.html
+
+
+ 		// 一、原始写法,模块就是实现特定功能的一组方法。
+　　function m1(){
+　　　　//...
+　　}
+　　function m2(){
+　　　　//...
+　　}
+
+
+// 二、对象写法,模块写成一个对象。
+　　var module1 = new Object({
+　　　　_count : 0,
+　　　　m1 : function (){
+　　　　　　//...
+　　　　},
+　　　　m2 : function (){
+　　　　　　//...
+　　　　}
+　　});
+　　module1.m1();
+
+　　module1._count = 5;// 写法会暴露所有模块成员
+
+
+
+// 三、立即执行函数写法,使用"立即执行函数"。
+　　var module1 = (function(){
+　　　　var _count = 0;
+　　　　var m1 = function(){
+　　　　　　//...
+　　　　};
+　　　　var m2 = function(){
+　　　　　　//...
+　　　　};
+　　　　return {
+　　　　　　m1 : m1,
+　　　　　　m2 : m2
+　　　　};
+　　})();
+
+　　console.info(module1._count); //undefined，外部代码无法读取内部的_count变量。
+
+
+// 四、放大模式，如果一个模块很大，必须分成几个部分，或者一个模块需要继承另一个模块。
+// 上面的代码为module1模块添加了一个新方法m3()，然后返回新的module1模块。
+　　var module1 = (function (mod){
+　　　　mod.m3 = function () {
+　　　　　　//...
+　　　　};
+　　　　return mod;
+　　})(module1);
+
+
+
+
+// 五、宽放大模式（Loose augmentation）
+// 有时无法知道哪个部分会先加载。如果采用上一节的写法，第一个执行的部分有可能加载一个不存在空对象
+// 与"放大模式"相比，＂宽放大模式＂就是"立即执行函数"的参数可以是空对象。
+　　var module1 = ( function (mod){
+　　　　//...
+　　　　return mod;
+　　})(window.module1 || {});
+
+
+
+// 六、输入全局变量
+// 独立性，模块内部最好不与程序的其他部分直接交互。
+// 为了在模块内部调用全局变量，必须显式地将其他变量输入模块。
+　　var module1 = (function ($, YAHOO) {
+　　　　//...
+　　})(jQuery, YAHOO);
+
+ 	</script>
+</body>
+</html>

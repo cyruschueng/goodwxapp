@@ -1,0 +1,55 @@
+<!--pages/myCenter/shop/GoodsAdmin/GoodsAdmin.wxml-->
+<view class='Goods-bar'>
+    <view data-current="0" bindtap='changeType' class="tab-xs-4 {{currentTab==0 ? 'active' : ''}}">
+<!-- <<<<<<< .mine
+        <text class='initl'>出售中<text class='msg'>{{sellingnumber}}</text></text>
+======= -->
+        <text class='initl'>出售中<text class='msg'>({{sellsum}})</text></text>
+
+    </view>
+    <view data-current="1" bindtap='changeType' class="tab-xs-4 {{currentTab==1 ? 'active' : ''}}">
+        <text class='initl'>下架</text>
+    </view>
+</view>
+<view class='Goods-item'>
+    <view class="col-xs {{currentindex==0 ? 'active' : ''}}">
+        <view class='good-list' wx:for="{{prolist}}" wx:key="">
+            <view class='good-img'><image src='{{item.img_url}}'></image></view>
+            <view class='good-info' data-goodsid="{{item.goods_id}}" bindtap='goodsdest'>
+                <view class='name'>{{item.goods_name}}</view>
+                <view class='price'>￥{{item.price}}</view>
+                <view class='stat-info'>
+                    <text style='padding-right:5px;'>已售：{{item.sales_num}}</text>
+                    <text>库存：{{item.stock_number}}</text>
+                </view>
+            </view>
+            <image class='arrowicon' src='/images/myCenter/arrow.png'></image>
+            <view class='item-bar'>
+                <view data-goodsid="{{item.goods_id}}" bindtap='goodsedit' class='bar-btn'>编辑</view>
+                <view data-goodsid="{{item.goods_id}}" bindtap='goodsxj' class='bar-btn'>下架</view>
+                <view data-goodsid="{{item.goods_id}}" bindtap='goodsdel' class='bar-btn' style='background:#f41213'>删除</view>
+            </view>
+        </view>
+        <view class='footmsgtext' hidden='{{footmsgtext}}'>没有更多数据啦</view>
+    </view>
+    <view class="col-xs {{currentindex==1 ? 'active' : ''}}">
+      <block wx:for="{{soldoutlist}}" wx:key="">
+        <view class='good-list initl' data-goodis="{{item.goods_id}}">
+            <view class='good-img'><image src='{{item.img_url}}'></image></view>
+            <view class='good-info'>
+                <view class='name'>{{item.goods_name}}</view>
+                <view class='price'>￥{{item.price}}</view>
+                <view class='stat-info'>
+                    <text style='padding-right:5px;'>已售：{{item.sales_num}}</text>
+                    <text>库存：{{item.stock_number}}</text>
+                </view>
+            </view>
+            <view class='foot-bar'>
+                <text class='barbtn addbtn' data-goodsid="{{item.goods_id}}" bindtap='goodputaway'>上架</text>
+                <text class='barbtn delbtn' data-goodsid="{{item.goods_id}}" bindtap='goodsdel'>删除</text>
+            </view>
+        </view>
+      </block>
+      <view class='footmsgtext' hidden='{{soldmsgtext}}'>没有更多数据啦</view>
+    </view>
+</view>

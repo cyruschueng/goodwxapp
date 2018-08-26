@@ -1,0 +1,53 @@
+<view class='detail-wrapper' hidden='{{!loadingHidden}}'>
+  <view class='detail-top'>
+    <view class='detail-top-left'>
+      <image src='{{detail.storeLogo}}' data-storeno='{{"B02S0002"}}' catchtap='clickStoreHandle' mode='aspectFill'></image>
+    </view>
+    <view class='detail-top-right'>
+      <view class='store-name' data-storeno='{{detail.storeNo}}' catchtap='clickStoreHandle'>{{detail.storeName}}</view>
+      <view class='products-desc'>
+        {{detail.postContent}}
+      </view>
+    </view>
+  </view>
+
+  <view class='products-imgs'>
+    <view class='products-image' wx:for='{{detail.postPics}}' wx:key='index'>
+      <image data-id='{{item.goodsId}}' catchtap='tapProductHandle' src='{{item.postPic}}' mode='widthFix'></image>
+    </view>
+
+  </view>
+  <view class='info'>
+    <view class='info-left'>
+      <text>{{detail.createTime}}</text>
+      <view class='view-num'>
+        <image src='/images/icon/eye.png' mode='aspectFit'></image>
+        <text>{{detail.viewCount}}</text>
+      </view>
+    </view>
+    <view class='info-right' data-id='{{detail.postId}}' catchtap='likeTapHandle'>
+      <text>{{detail.likeCount}}</text>
+      <image src='{{detail.likeStatus?"/images/icon/like@active.png":"/images/icon/like.png"}}' mode='aspectFit'></image>
+    </view>
+  </view>
+
+  <view class='options'>
+    <view class='option' catchtap='redirectHome' data-storeno='{{"B02S0002"}}'>
+      <image src='/images/tab/home.png' mode='aspectFill'></image>
+      <text>首页</text>
+    </view>
+    <view class='option' data-phone='{{detail.phoneNumber}}' catchtap='makePhone'>
+      <image src='/images/icon/phone_discover.png' mode='aspectFill'></image>
+      <text>咨询</text>
+    </view>
+    <view class='option'>
+      <button form-type='submit' open-type='share' class='form_button'>
+        <image src='/images/icon/share.png' mode='aspectFill'></image>
+        <text>分享</text>
+      </button>
+    </view>
+    <view class='appoint-btn' catchtap='appointProducts'>
+      预约到店
+    </view>
+  </view>
+</view>

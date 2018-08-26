@@ -1,0 +1,10 @@
+<!--pages/user/cash-rule/index.wxml-->
+<view class="cash-rule tc">提现规则</view>
+<view class="rule-cont">
+  <view>1. <text class='red' wx:if="{{min_cash_withdrawal_money != 0}}">满 {{min_cash_withdrawal_money}} 元可提现</text>
+            <text wx:else>未设置提现最小金额</text>
+  </view>
+  <view>2. 上一次提现完成，才能进行下一次提现</view>
+  <view>3. 满足上述要求的账户提现时，仅支持一次性全部提现福包余额</view>
+  <view wx:if="{{customer_service_phone == '' ? false : true}}">4. 客服电话：{{customer_service_phone}}</view>
+</view>

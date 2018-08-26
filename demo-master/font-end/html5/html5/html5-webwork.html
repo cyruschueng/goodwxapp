@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p>计数:
+        <output id="result"></output>
+    </p>
+    <button onclick="startWorker()">开始 Worker</button>
+    <button onclick="stopWorker()">停止 Worker</button>
+    <br />
+    <br />
+    <script>
+    var w;
+
+    function startWorker() {
+        if (typeof(Worker) !== "undefined") {
+            if (typeof(w) == "undefined") {
+                w = new Worker("http://www.w3school.com.cn/example/html5/demo_workers.js");
+            }
+            w.onmessage = function(event) {
+                document.getElementById("result").innerHTML = event.data;
+            };
+        } else {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+        }
+    }
+
+    function stopWorker() {
+        w.terminate();
+    }
+    </script>
+</body>
+
+</html>
+
+<!-- 服务器demo_workers.js -->
+<script type="text/javascript">
+var i = 0;
+
+function timedCount() { i = i + 1;
+    postMessage(i);//postMessage() 方法用于向 HTML 页面传回一段消息。
+    setTimeout("timedCount()", 500); }
+timedCount();
+</script>

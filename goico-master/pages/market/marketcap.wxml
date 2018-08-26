@@ -1,0 +1,63 @@
+<!--pages/market/marketcap.wxml-->
+<import src="../template/coin-items/coin-items.wxml" />
+<form>
+  <view class="toolkit">
+    <view class="left-tool">
+      <view class="search-btn"  bindtap="goSearch">
+        <icon type="search" class="search-img" size="15" color="#999"></icon>
+      </view>
+      <view class='switch-line' wx:if="{{!searchPanelShow}}">
+        <view bindtap="bindSelectedScope">
+          <label class="tool-label" style="color: {{btnStatus.selected}}">自选</label>
+        </view>
+        <view bindtap="sortByRank">
+          <label class="tool-label" style="color: {{btnStatus.rank}}">市值</label>
+        </view>
+        <view class="rate-sort-container" bindtap="sortByChange">
+          <label class="tool-label" maxlength="20" style="color: {{btnStatus.change}}">涨幅</label>
+          <view class="sort-img-view">
+            <image wx:if="{{ scope != 'change' }}" id="sort-img" src="/images/icons/arrow_default.png"></image>
+            <image wx:else id="sort-img" src="/images/icons/arrow_{{params.direction}}.png"></image>
+          </view>
+        </view>
+
+        <picker class="picker" wx:if="{{marketPicker}}" bindchange="bindPickerChange" value="{{marketIndex}}" range="{{markets}}" range-key="showname">
+          <view class="tool-label" style="color: {{btnStatus.markets}}">
+            {{markets[marketIndex].showname}}
+            <image class="dropdown-img" wx:if="{{scope == 'markets' && markets.length > 1}}" src="/images/icons/chevron_down_small_black.png"></image>
+          </view>
+        </picker>
+
+        <view wx:else data-marketid="{{markets[marketIndex].market_id}}" bindtap="marketsClick">
+          <label class="tool-label" style="color: {{btnStatus.markets}}">{{markets[marketIndex].showname}} </label>
+          <image wx:if="{{markets.length > 1}}" class="dropdown-img" src="/images/icons/chevron_down_small_gray.png"></image>
+        </view>
+      </view>
+
+      <view class='switch-line' wx:else>
+        <input class="search-input" value="{{keyword}}" type="text" confirm-type="search" bindconfirm='search' placeholder="输入币名" placeholder-class="placeholder" focus="{{focus}}" bindinput="onBindInput"/>
+        <button id="cancel-btn" wx:if="{{searchPanelShow}}" plain="true" formType="reset" bindtap="onCancelImgTap">
+          <image src="/images/buttons/close_btn.png" class="xx-img" ></image>
+        </button>
+      </view>
+    </view>
+    <view class="right-tool">
+      <view class="veritcal-seperate"></view>
+       <button id="share-btn" open-type="share" plain="true">
+        <image class="share-img" src="/images/buttons/share_btn_small.png"></image>
+      </button> 
+    </view>
+  </view>
+</form>
+<view class="cap-view"> 
+  <block wx:for="{{currencyData}}" wx:for-item="currency" wx:key="item">
+    <template is="coinItems" data="{{...currency}}"></template>
+  </block>
+
+  <view wx:if="{{scope == 'selected'}}" bindtap="goAddSelected" class="add-select-btn">
+    <view>添加, 编辑自选行情</view>
+     <image class="detail" src="/images/icons/detail_small.png"></image> 
+     <view class="add-selected-bottom"></view>
+  </view>
+<!-- </scroll-view> -->
+</view> 

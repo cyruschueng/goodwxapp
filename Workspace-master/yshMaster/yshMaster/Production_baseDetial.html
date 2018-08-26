@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>生产基地管理</title>
+		<link rel="stylesheet" type="text/css" href="js/ios-switch/switchery.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" href="js/control/css/zyUpload.css" type="text/css">
+		<link href="js/iCheck/skins/flat/green.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		<!--百度地图-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=M1y9cKcVm2bdLTYcve2cXooMu4mzkxno  "></script>
+		<script src="http://api.map.baidu.com/library/MarkerTool/1.2/src/MarkerTool_min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.4/src/CityList_min.js"></script>
+		<script type="text/javascript" src="js/tuodong.js"></script>
+
+		<!--百度地图end-->
+	</head>
+
+	<body style="background: #EFF0F4;">
+		<section class="panel">
+			<div class="panel-body">
+				<div class="page-heading">
+					<h3>生产基地</h3>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">生产基地管理</a>
+						</li>
+						<li class="active">生产基地</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="wrapper">
+			<section class="panel">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-2" style="text-align: left;">
+							<h3>基本信息</h3>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>基地名称</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="pName" type="text" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+						<div class="col-lg-1" style="text-align: right;">
+							<span>基地地址</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="pArea" id="num" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>基地类型</span>
+						</div>
+						<div class="col-lg-3">
+							<select id="pType" class="form-control m-bot15 formData"></select>
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+						<div class="col-lg-1" style="text-align: right;">
+							<span>经营者</span>
+						</div>
+						<div class="col-lg-3">
+							<select id="Puser" class="form-control m-bot15 formData">
+								
+							</select>
+							
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>基地介绍</span>
+						</div>
+						<div class="col-lg-3">
+							<textarea id="Pmsg" style="resize: none;" rows="6" class="form-control Climate" id="goodDetial" name="goodDetial"></textarea>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>基地图片</span>
+						</div>
+						<div id="pic1" style="display: none">
+						</div>
+						<div id="pic2" style="display: none">
+							<div class="col-lg-3">
+								<div id="zyUpload" class="zyUpload" url="1"></div>
+								上传图片大小不超过<span style="color: red;padding-top: 10px;">2M</span>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;"></div>
+						<button id="changePic" style="display: none;" class="btn btn-warning" onclick="changePic()">修改图片</button>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-2" style="text-align: left;">
+							<h3>生长环境</h3>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>地块信息</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="BaseTab" type="text" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+						<div class="col-lg-1" style="text-align: right;">
+							<span>所属农场</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="BaseFram" id="num" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>原产地</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="Provenance" type="text" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+						<div class="col-lg-1" style="text-align: right;">
+							<span>日照</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="Sunshine" id="num" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>湿度</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="Humidity" type="text" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+						<div class="col-lg-1" style="text-align: right;">
+							<span>空气质量</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="Atmosphere" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>气候特征</span>
+						</div>
+						<div class="col-lg-3">
+							<textarea id="Climate" style="resize: none;" rows="6" class="form-control Climate" id="goodDetial" name="goodDetial"></textarea>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-1" style="text-align: right;">
+							<span>面积</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="Area" type="text" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+						<div class="col-lg-1" style="text-align: right;">
+							<span>承包人</span>
+						</div>
+						<div class="col-lg-3">
+							<input id="Contractor" class="form-control formData">
+						</div>
+						<div class="col-lg-1">
+							<span style="color:red">*</span>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="form-group">
+							<label class="col-md- col-sm-1 control-label">地理位置</label>
+							<div class="col-md-6 col-sm-6">
+								<input type="text" id="Coordinates" class="form-control formData" />
+							</div>
+							<div style="float: left;width: 5px; padding-left: 15px;">
+								<div style="margin-left: -15px;font-size: 20px;"><span style="color: red;">*</span></div>
+							</div>
+							<tr>
+								<td>
+									<input type="button" class="remooa" value="开始标注" id="biaozhu" onclick="show()" style="width:100px;height:30px;">
+								</td>
+							</tr>
+						</div>
+					</div>
+					<div class="show_map remooa">
+						<div id="show_map" style="width:786px;margin-left: ;"></div>
+						<div id="drag">
+							<div class="title">
+								<h2>1.选择位置>2.标注位置>3.保存位置</h2>
+								<div>
+									<a class="max" href="javascript:;" title="最大化"></a>
+									<a class="revert" href="javascript:;" title="还原"></a>
+									<a class="close" href="javascript:;" title="关闭"></a>
+								</div>
+							</div>
+							<div class="content">
+								<div id="f_container">
+									<div id="container"></div>
+								</div>
+								<div id="allmap" style="width:596px;height:360px;"></div>
+								<div style="margin-top: 10px;text-align: right">
+									<input type="hidden" id="lat"> <input type="hidden" id="lng">
+									<input type="button" onclick="showMap();" class="btn" value="保存">
+									<input type="button" onclick="dhide()" class="btn" value="取消">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="height: 14px;"></div>
+					<div class="row">
+						<div class="col-lg-6" style="text-align: right;">
+							<button id="saveButton" class="btn btn-primary">保存</button>
+						</div>
+					</div>
+			</section>
+		</section>
+		<div class="row" style="height: 500px;"></div>
+	</body>
+
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/ysh_comm.js"></script>
+	<script src="js/layer.js"></script>
+	<script src="js/laytpl.js"></script>
+	<script src="script/Production_baseDetial.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+	<!-- 引用核心层插件 -->
+	<script type="text/javascript" src="js/core/zyFile.js"></script>
+	<!-- 引用控制层插件 -->
+	<script type="text/javascript" src="js/control/js/zyUpload.js"></script>
+	<!-- 引用初始化JS -->
+	<script type="text/javascript" src="js/zyUpload.js"></script>
+	<script src="js/select2.min.js"></script>
+	
+	<script type="text/javascript">
+		checkPermission();
+		$(function(){
+			$('select').select2();
+		})
+	</script>
+
+</html>

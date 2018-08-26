@@ -1,0 +1,41 @@
+<view class='dynamic' catchtap='isplusf'>
+
+  <image wx:if="{{coverimg}}" catchtap='getcover' class='dynamic_cover' src='{{coverimg}}'></image>
+  <image wx:else catchtap='getcover' class='dynamic_cover' src='/images/icon/set_cover.png'></image>
+  <input bindblur="bindblurinput" placeholder-class="phcolor" value='{{title}}' class='title' type='text' placeholder='请输入标题'></input>
+
+  <view wx:for="{{content}}" wx:key="{{index}}">
+    <view class='box' wx:if="{{item.type == 'img'}}">
+      <image class='childimg' id="{{index}}" catchtap='changepicture' src='{{item.value}}'></image>
+      <input id="{{index}}" catchtap='illustrate' class='childimgtext'  disabled='true' placeholder='图片简介' value='{{item.txt}}'></input>
+      <view class='clear'></view>
+    </view>
+    <view class='box' wx:if="{{item.type == 'text'}}">
+      <textarea class='childtext' disabled='true' maxlength="-1" id="{{index}}" catchtap='modify'>{{item.value}}</textarea>
+    </view>
+  </view>
+
+  <view class='addit'>
+      <button class='addimg _img' catchtap='clickimg'>添加图片</button>
+      <button class='addimg _text' catchtap='clicktxt'>添加文字</button>
+  </view>
+
+  <!-- <view wx:if="{{isplus}}" id="" catchtap='clickplus' class='add'>+</view>
+  <view wx:else class='img_txt'>
+    <image catchtap='clickimg' class='addimg' src='/images/icon/send_photo.png'></image>
+    <image catchtap='clicktxt' class='addtxt' src='/images/icon/send_txt.png'></image>
+  </view> -->
+
+  <view wx:for="{{butt}}" wx:key="{{index}}">
+    <button form-type="submit" id="{{index}}" catchtap='FormSubmit' class="submit {{index==2?'bred':''}}"> {{item}} </button>
+  </view>
+
+</view>
+
+
+<!-- 
+    <view wx:if="{{isplus}}" id="{{index}}" catchtap='clickplus' class='add'>+</view>
+    <view wx:else class='img_txt'>
+      <image catchtap='clickimg' class='addimg' src='/images/icon/send_photo.png'></image>
+      <image catchtap='clicktxt' class='addtxt' src='/images/icon/send_txt.png'></image>
+    </view> -->

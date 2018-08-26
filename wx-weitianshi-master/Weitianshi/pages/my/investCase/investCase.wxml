@@ -1,0 +1,19 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <scroll-view style="height:100%;" scroll-y="true">
+    <!--已发布的项目-->
+    <block wx:for="{{invest_case}}" wx:key="{{pro_id}}" wx:for-item="myProject">
+      <template is="projectList" data="{{myProject:myProject,index:index}}"></template>
+    </block>
+
+    <!--空状态-->
+    <view wx:if="{{myProject==''}}">
+      <image class="empty" src="/img/empty.png"></image>
+    </view>
+  </scroll-view>
+
+  <view style="height:98rpx;"></view>
+  <!-- 按钮一号 -->
+  <template is="buttonOne" data="{{text:buttonOneText,btnName:'buttonOne',disabled}}"></template>
+</view>

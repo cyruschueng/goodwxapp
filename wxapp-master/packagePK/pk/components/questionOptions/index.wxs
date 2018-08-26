@@ -1,0 +1,23 @@
+/**
+    @file 问题选项样式
+    @author hurry
+    @date 2018/02/01
+*/
+module.exports = {
+    getClassName: function (index, selectedIndex, isQuestionOver, result) {
+        if (isQuestionOver && result) {
+            if (result.correctOption === index + 1) {
+                // 正确选项
+                return 'win';
+            } else if (result.enemyOption === index + 1 || selectedIndex === index + 1) {
+                // 错误答案
+                return 'wrong';
+            }
+            // 隐藏项
+            return 'hidden';
+        } else if (selectedIndex === index + 1) {
+            return 'selected';
+        }
+        return '';
+    }
+};

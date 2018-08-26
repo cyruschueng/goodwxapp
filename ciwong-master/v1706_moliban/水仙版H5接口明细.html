@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+	
+</body>
+</html>
+<div style="display: none;">
+2017-05-15 09:28:46
+同步一下状态：
+1、pc、ios已经发布就绪。
+2、android端周末加班解决了遗留问题，今天会进行发布验证。
+
+附：迭代计划
+ 1、开发&&自测时间：3月29日~4月26日
+ 2、集成测试时间：4月27日~28日（即五一节前准备好测试包）
+ 3、测试时间：5月2日~5月9日
+ 4、发布时间：5月10日
+
+* 接口的通用依赖参数：clientId、userId、versionId、doWorkId
+
+1、获取用户信息（用户ID、头像、昵称、班级、学校）：http://192.168.18.218:4000/%E7%94%A8%E6%88%B7/%E6%9F%A5%E8%AF%A2%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF.html
+听说模考详情页和分享页
+	2、获取听说模考试卷信息（包括总分）：http://eapi.ciwong.com/v1/tools/listen_speak_examination?versionId=
+	3、获取听说模考用户答案（包括用户总得分）/老师选题（checkResouresIds）/当前批改状态（workStatus）：:http://eapi.ciwong.com/gateway/h5/epaperwork/v2/getDoWorkInfo?doWorkId=7280776464164833
+跟读详情页和分享页
+	4、获取单词跟读试卷信息：http://121.14.117.254:8069/Package/SyncFollowReadData
+	5、获取单词跟读用户答案（包括用户总得分）：同上
+	6、获取句子跟读试卷信息：http://121.14.117.254:8069/Package/SyncFollowReadDataText?versionId=
+	7、获取句子跟读用户答案（包括用户总得分）：同上
+学习记录
+	8、获取学习记录列表(resourceName/actualScore/submitDate/comment/workId)：http://eapi.ciwong.com/v2/epaperwork/submit_work_records?brandId=&isOnline=&page=&pageSize
+
+* 匿名访问的接口：
+http://123.56.154.119:8877/gateway/v5/user/getUserInfo?clientId=20000&userId=580826062&brandId=524726977&uin=580826062
+http://123.56.154.119:8877/gateway/v1/tools/listen_speak_examination?clientId=20000&userId=580826062&versionId=4657056784883491176
+http://123.56.154.119:8877/gateway/h5/epaperwork/v2/getDoWorkInfo?clientId=20000&userId=580826062&doWorkId=4286012342226373
+http://123.56.154.119:8877/gateway/v5/epaperwork/getWorkAnswers?clientId=20000&userId=580826062&doWorkId=4286012342226373
+
+
+---------------------------h5页面----------------------------------------------
+* 所有分享页的url中?后面的参数要base64加密
+
+测试地址：单词跟读详情页  pageType=1 , 其他参数相应传入url
+http://123.56.154.119:8877/v1704_shuixianban/reading/?pageType=1&clientId=&userId=&brandId=&versionId=&doWorkId=
+
+测试地址：单词跟读分享页  pageType=2 , 其他参数相应传入url
+http://123.56.154.119:8877/v1704_shuixianban/reading/?pageType=2&clientId=&userId=&brandId=&versionId=&doWorkId=
+
+测试地址：句子跟读详情页  pageType=3 , 其他参数相应传入url
+http://123.56.154.119:8877/v1704_shuixianban/reading/?pageType=3&clientId=&userId=&brandId=&versionId=&doWorkId=
+
+测试地址：句子跟读分享页  pageType=4 , 其他参数相应传入url
+http://123.56.154.119:8877/v1704_shuixianban/reading/?pageType=4&clientId=&userId=&brandId=&versionId=&doWorkId=
+
+测试地址：听说模考详情页  参数相应传入url
+http://123.56.154.119:8877/v1704_shuixianban/ls/?clientId=&userId=&brandId=&versionId=&doWorkId=
+
+测试地址：听说模考分享页  参数相应传入url
+http://123.56.154.119:8877/v1704_shuixianban/lsShare/?clientId=&userId=&brandId=&versionId=&doWorkId=
+
+测试地址：学习记录  参数相应传入url
+http://123.56.154.119:8877/v1704_shuixianban/learningRecord/?accessToken=&clientId=&userId=&brandId=
+
+----------------------h5页面测试---------------------------------------------------
+句子跟读
+http://123.56.154.119:8877/v1704_shuixianban/reading/?pageType=4&clientId=20001&userId=580826062&brandId=524726977&versionId=5591984421102960308&doWorkId=4669778583013656
+单词跟读
+http://123.56.154.119:8877/v1704_shuixianban/reading/?pageType=2&clientId=20001&userId=580826062&brandId=524726977&versionId=4657056784883491176&doWorkId=5367833363045466
+学习记录 
+http://123.56.154.119:8877/v1704_shuixianban/learningRecord/?accessToken=409d78d5149b416097f369b945309a996f85d22d&clientId=20001&userId=98547&brandId=524726977&pageSize=4
+听说模考
+http://123.56.154.119:8877/v1704_shuixianban/lsShare/?clientId=20001&userId=580826062&brandId=524726977&versionId=4685756989046890030&doWorkId=4286012342226373
+
+
+在线作答全题型答案
+http://prevm.teacher.jiaofuyun.com/v1704_shuixianban/onlinePaper/paperResult.html#clientId=20001&userId=581072411&brandId=524726977&versionId=634828917904331620&doWorkId=3568054775787603

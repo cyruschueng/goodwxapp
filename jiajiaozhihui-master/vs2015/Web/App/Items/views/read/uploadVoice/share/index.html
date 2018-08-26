@@ -1,0 +1,23 @@
+<div class="container" ng-controller="uploadShareController">
+    <div class="row" style="padding-top:15px;">
+        <div class="col-xs-12 text-center">
+            <img style="width:80%;" show-image data-url="{{info.loadingImage()}}"  >
+        </div>
+    </div>
+    <div class="row" style=" padding-top:15px;">
+        <div class="col-xs-6 text-center">
+            <span name="myvoice" ng-click="info.testPlayVoice()" class="btn btn-xs btn-danger glyphicon glyphicon-headphones">&nbsp;播放</span>
+        </div>
+        <div class="col-xs-6 text-center">
+            <span ng-show="info.type==0">类型：诵读</span>
+            <span ng-show="info.type==1">类型：故事</span>
+        </div>
+    </div>
+    <div class="row" style="padding-top:15px; padding-bottom:15px;">
+        <div class="col-xs-12">
+            我的感想
+            <hr style="margin-top:5px;">
+            <div class="weui_cells_tips" >{{info.content}}</div>
+        </div>
+    </div>
+</div>

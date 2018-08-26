@@ -1,0 +1,53 @@
+<view class="login_box" wx:if="{{login}}">
+    <view class="login_info">
+        <image class="userinfo-avatar" background-size="cover" src="/images/info.jpg"></image>
+        <text>最初的守望</text>
+        <text>133****5555</text>
+    </view>
+    <view class="product_nopay"><!--wx:for="{{}}" wx:for-index="index" wx:for-item="item" wx:key=""-->
+        <view class="product_info"><!--wx:for="{{}}" wx:for-index="index" wx:for-item="i" wx:key=""-->
+            <view class="product_item">
+                <image src="../../images/444.png"></image>
+                <view class="product_item_info">
+                    <view class="product_name">
+                        Reader: The Toys - 绘本：玩具总动员{{i.coursename}}
+                    </view>
+                    <view class="product_teachername">
+                        主讲老师:Lowell{{i.teacher_name}}
+                    </view>
+                </view>
+            </view>
+            <view class="product_item">
+                <image src="../../images/444.png"></image>
+                <view class="product_item_info">
+                    <view class="product_name">
+                        Reader: The Shark King’s Cave - 绘本：王
+                        者荣耀鲨的洞穴
+                    </view>
+                    <view class="product_teachername">
+                        主讲老师:Jimmy
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="pay_box">
+        <view class="pay_total">
+            <span>合计  </span>
+            <span>￥ 9766.00</span>
+        </view>
+    </view>
+    <view class="pay_box">
+        <view class="wx_pay">
+            <span>微信支付 </span>
+            <radio class="radio" value="" checked="true"/>
+        </view>
+    </view>
+    <view class="pay_body">
+        <button class="price">￥ 3000{{courseInfo.price}}</button>
+        <button class="btn_pay" bindtap="goPay">去支付</button>
+    </view>
+</view>
+<view class="login_box" wx:else>
+
+</view>

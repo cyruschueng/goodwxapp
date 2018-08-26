@@ -1,0 +1,264 @@
+<!--index.wxml-->
+<!-- 超级复杂的页面 -->
+
+<import src="../../common/bottom_tabbar.wxml" />
+
+<view class="container">
+    <!-- Tab头 -->
+    <view class="tab">
+        <block wx:for="{{indexTabData}}" wx:key="{{index}}">
+            <view class="tab-list {{currentTabIdx===index ? 'current-highlight': ''}}" data-current="{{index}}" bindtap="onSwitchIndexTab">{{item.name}}</view>
+        </block>
+    </view>
+
+    <view class='gray-space'></view>
+
+    <!-- 以下是Tab内容 -->
+
+    <!-- 1、课程tab -->
+    <view wx:if="{{indexTabData[0].selected}}" class='tab-item'>
+
+        <!-- 次级标签 -->
+        <view class='course-tab-container'>
+            <!-- 左边 -->
+            <view class='course-tab-left'>
+                <view wx:if="{{courseTabData[0].display}}" id="{{courseTabData[0].type}}" class="course-tab-item-left {{courseTabData[0].selected?'':'unselected'}}" bindtap='onSelectCourseTabItem'>
+                    {{courseTabData[0].name}}({{userInfo.teacherCourseSet.length}})
+                </view>
+                <view class="course-tab-item-split"> | </view>
+                <view wx:if="{{courseTabData[1].display}}" id="{{courseTabData[1].type}}" class="course-tab-item-left {{courseTabData[1].selected?'':'unselected'}}" bindtap='onSelectCourseTabItem'>
+                    {{courseTabData[1].name}}
+                </view>
+            </view>
+            <view class='course-tab-right'>
+                <view wx:if="{{courseTabData[2].display}}" id="{{courseTabData[2].type}}" class="course-tab-item-right {{courseTabData[2].selected?'':'unselected'}}" bindtap='onSelectCourseTabItem'>
+                    {{courseTabData[2].name}}
+                </view>
+            </view>
+
+        </view>
+
+        <!-- 所有课程标签 -->
+        <view wx:if="{{courseTabData[0].selected}}" class='course-content'>
+
+            <!-- 1.1、没有课程的时候 -->
+            <view wx:if="{{userInfoLocal.teacherCourseSet.length === 0}}" class='course-content'>
+
+                <view class='course-create-contanier' bindtap='onCreatedNewCourse'>
+                    <image class='course-create-image-btn' src='../../image/plus_64px1.png'> </image>
+                    <view class='course-create-text'>
+                        <text>创建课程</text>
+                    </view>
+                </view>
+
+            </view>
+
+            <!-- 1.2、有课程，显示列表 -->
+            <scroll-view wx:else class="scroll-view-container" scroll-y>
+                <view wx:for='{{userInfo.teacherCourseSet}}' wx:key='{{index}}' class='course-content-container'>
+                    <!-- 第一行 -->
+                    <view id='{{index}}' class='course-list-item-container' bindtap='onSelectCourse'>
+                        <view class='course-list-item-name'>
+                            {{item.name}}
+                        </view>
+                        <view class='course-list-item-details'>
+                            详情 >
+                        </view>
+                    </view>
+                    <!-- 第二行 -->
+                    <view id='{{index}}' class='course-list-item-container'>
+
+                        <button id='{{index}}' class='course-list-item-action' open-type='share'>
+                            <image class='forward-image' src='../../image/forward.png'></image>
+                            <view>
+                                邀请学生加入课程
+                            </view>
+                        </button>
+
+                        <button id='{{index}}' class='course-list-item-action' open-type='share'>
+                            <image class='forward-image' src='../../image/forward.png'></image>
+                            <view>
+                                邀请教师共同管理
+                            </view>
+                        </button>
+                    </view>
+                    <view class='gray-space-small'></view>
+                </view>
+
+            </scroll-view>
+
+        </view>
+
+        <!-- 点击每日课程 -->
+        <view wx:if="{{courseTabData[1].selected}}" class='course-content'>
+            <!-- 日历控制 -->
+            <view class="date-control-box" bindtap='onCalendarHead'>
+                <picker mode="date" value="{{selectedDate}}" start="2015-09-01" end="2099-12-31" bindchange="onSelectMonthYear">
+                    <view class="date-picker-box">
+                        <view class='date-picker-item-text'>
+                            <text>{{currentYear}} 年</text>
+                        </view>
+
+                        <view class='date-picker-item-text'>
+                            <text>{{currentMonth}} 月</text>
+                        </view>
+                    </view>
+                </picker>
+
+                <view class='month-box' bindtap="onToThisMonth">
+                    <view class="month-item {{currentMonth!==todayMonth || currentYear!==todayYear?'this-month':''}} ">按月</view>
+                </view>
+            </view>
+
+            <!-- 日历头 -->
+            <view class="calendar-panel" bindtap='onCalendarHead'>
+                <view class="calendar-box">
+                    <view class="calendar-weekday-head">日</view>
+                    <view class="calendar-weekday-head">一</view>
+                    <view class="calendar-weekday-head">二</view>
+                    <view class="calendar-weekday-head">三</view>
+                    <view class="calendar-weekday-head">四</view>
+                    <view class="calendar-weekday-head">五</view>
+                    <view class="calendar-weekday-head">六</view>
+                    <!-- calendar-rest-day -->
+                </view>
+            </view>
+
+            <!-- 默认日历列表，按周显示日历 -->
+            <view wx:if="{{showWeekView}}" class='weekday-view-box'>
+
+                <!-- 按周显示的日历面板 -->
+                <view class="calendar-panel">
+
+                    <!-- 日历中每天的显示，只循环当前选中这一周 -->
+                    <view class="calendar-box">
+                        <view class="calendar-weekday-normal" wx:for="{{selectedWeek}}" wx:key="{{index}}" data-date="{{item}}" bindtap="onSelectDateItem">
+
+                            <!-- 日历上每天的日期 -->
+                            <view class='calender-date-item'>
+                                <view class="{{item.inThisMonth?'':'not-in-this-month-date'}} {{item.value==selectedDate?'active-date':'nomal-date'}}">
+                                    {{item.date}}
+                                </view>
+                            </view>
+
+                            <!-- 日历每天下段标注 -->
+                            <view class='calender-date-marker' wx:if="{{item.hasCourse}}">
+                                {{item.courseIdString}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <view class='gray-space-small'></view>
+
+                <!-- 当点击日历时，当天的具体课程 -->
+                <view wx:if="{{selectedDateCourse.length>0}}" class='course-content'>
+                    <view id='{{item.idx}}' wx:for='{{selectedDateCourse}}' wx:key='{{index}}' class='course-content-container' bindtap='onSelectLesson'>
+                        <!-- 第一行 -->
+                        <view class='course-list-item-container'>
+                            <view class='lesson-list-item-name'>
+                                课程名字：
+                            </view>
+                            <view class='lesson-list-item-value'>
+                                {{item.course.name}}
+                            </view>
+                        </view>
+                        <!-- 第二行 -->
+                        <view class='course-list-item-container'>
+                            <view class='lesson-list-item-name'>
+                                上课时间：
+                            </view>
+                            <view class='lesson-list-item-value'>
+                                {{item.course.startTime}}
+                            </view>
+                        </view>
+                        <!-- 第三行 -->
+                        <view class='course-list-item-container'>
+                            <view class='lesson-list-item-name'>
+                                上课地址：
+                            </view>
+                            <view class='lesson-list-item-value'>
+                                {{item.course.location.name}}
+                            </view>
+                        </view>
+                        <view class='gray-space-small'></view>
+                    </view>
+                </view>
+
+                <view wx:else class='course-content'>
+                    <image class='image-coffee' src='../../image/coffee.png' />
+                    <view>
+                        今天没有课哦~~~
+                    </view>
+                </view>
+            </view>
+
+            <!-- 当选则按月浏览时，按月显示日历，同时显示整月的标注 -->
+            <view wx:else class='weekday-view-box'>
+                <swiper class="calender-swiper" indicator-dots="{{false}}" vertical="true" circular="{{true}}" autoplay="{{false}}" bindchange="onChangeVerticalSwiper">
+                    <block wx:for="{{calendars}}" wx:key="{{index}}">
+                        <swiper-item id="{{item}}">
+                            <!-- 正常的日历面板 -->
+                            <view class="calendar-panel">
+                                <!-- 日历中每天的显示 -->
+                                <view class="calendar-box" wx:for="{{dateList}}" wx:key="{{index}}" wx:for-item="week">
+                                    <view class="calendar-weekday-normal" wx:for="{{week}}" wx:key="{{index}}" data-date="{{item}}" bindtap="onSelectDateItem">
+
+                                        <!-- 日历上每天的日期 -->
+                                        <view class='calender-date-item'>
+                                            <view class="{{item.inThisMonth?'':'not-in-this-month-date'}} {{item.value==selectedDate?'active-date':'nomal-date'}}">
+                                                {{item.date}}
+                                            </view>
+                                        </view>
+
+                                        <!-- 日历每天下段标注 -->
+                                        <view class='calender-date-marker' wx:if="{{item.hasCourse}}">
+                                            {{item.courseIdString}}
+                                        </view>
+
+                                    </view>
+                                </view>
+                            </view>
+                        </swiper-item>
+                    </block>
+                </swiper>
+
+            </view>
+
+        </view>
+
+    </view>
+
+    <!-- 2、通知tab -->
+    <view wx:if="{{indexTabData[1].selected}}" class='tab-item'>
+
+        <!-- 有自己的通知 -->
+        <view wx:if="{{currentNoticeSet.length > 0}}" class='course-create-contanier' bindtap='onCreatedNewNotice'>
+            <image class='course-create-image-btn' src='../../image/plus_64px1.png'> </image>
+            <view class='course-create-text'>
+                <text>创建通知</text>
+            </view>
+        </view>
+
+        <!-- 没有属于自己的通知 -->
+        <view wx:else class='course-create-contanier' bindtap='onCreatedNewNotice'>
+            <image class='course-create-image-btn' src='../../image/plus_64px1.png'> </image>
+            <view class='course-create-text'>
+                <text>创建通知</text>
+            </view>
+        </view>
+
+    </view>
+
+    <!-- 3、作业tab -->
+    <view wx:if="{{indexTabData[2].selected}}" class='tab-item'>
+        {{indexTabData[2].type}}
+        <button type='primary' bindtap='onReviewHomework'>批改作业Test</button>
+        <view>
+            {{indexTabData[0].type}}
+        </view>
+        <button type='primary' bindtap='onReviewLesson'>评价课堂表现Test</button>
+    </view>
+
+    <template is="bottom_tabBar" data="{{bottom_tabBar}}"/>
+</view>

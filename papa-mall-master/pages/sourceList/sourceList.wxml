@@ -1,0 +1,48 @@
+<!--pages/sourceList.wxml-->
+<view class="container">
+    <!--分类导航  -->
+    <scroll-view scroll-x="true" style="width: 100%;white-space:nowrap;">
+        <!-- tab -->
+        <view class="tab">
+            <view class="tab-nav font-12">
+                <view wx:for="{{tabnav.tabitem}}" wx:key="{{index}}" bindtap="typeSeclect" data-id="{{item.id}}" data-index="{{index}}" class="tab-item">{{item.type_name}}</view>
+                <view>
+                    <view class="tab-line" style="width:{{100/tabnav.tabnum}}%;transform:translateX({{100*showtab}}%);"></view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <!--品牌列表  -->
+    <view class='brands-wrap'>
+        <view class='items-brands'>
+            <view class="item-brands" wx:for="{{brandsList}}" wx:key="{{index}}" data-id='{{item.id}}' data-index="{{index}}" bindtap='brandsSelect'>
+                <view class="item-tag {{brandsIndex == index?'active':''}}">
+                    <text>{{item.brands_name}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--资源列表  -->
+    <view class='source-wrap'>
+        <view class='items-source'>
+            <view class='item-source' wx:for="{{supplyList}}" wx:key="{{index}}" bindtap='goSourceDetail' data-id='{{item.id}}'>
+                <view>
+                    <image class='img source-img' src="{{item.supply_img_url}}"></image>
+                </view>
+                <view class='source-price'>
+                    <text class='font-20 font-orange'>￥{{item.supply_price}} </text>
+                    <text class='font-10 font-grey'>起</text>
+                </view>
+                <view>
+                    <text class='source-banner'>{{item.supply_banner}}</text>
+                </view>
+                <view class='source-name'>
+                    <text>{{item.supply_name}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+	<view class='section-title'>
+		<text>{{reachBottomText}}</text>
+	</view>
+</view>

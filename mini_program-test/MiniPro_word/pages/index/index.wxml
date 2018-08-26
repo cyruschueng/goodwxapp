@@ -1,0 +1,27 @@
+<view class="pages">
+    <!--<view wx:if="{{ipX}}" style="height: 200rpx;"></view>-->
+    <audio src="{{audioSrc}}" id="startAudio" style="display: none;"></audio>
+    <image class="{{ipX?'logo_p':'logo'}}" mode="widthFix" src="../../images/logo_bg.png"></image>
+    <view class=" {{ipX?'heart-box_p':'heart-box'}}" bindtap="showHeart">
+        <image src="../../images/heart.png"></image>
+        <text>{{heartNum}}</text>
+    </view>
+    <image class="{{ipX?'refresh_p':'refresh'}}" src="../../images/refresh.png"></image>
+    <button open-type="contact" class="contact_btn">
+        <image src="../../images/help.png"></image>
+    </button>
+    <image class=" {{ipX?'tomain_p':'tomain'}}" src="../../images/tomainMini.png" bindtap="toMain"></image>
+    <view class="foot-box">
+        <image class="test-box" bindtap="toTest" src="../../images/button_start.png"></image>
+        <image class="rank-box" bindtap="toRank" src="../../images/button_rank.png"></image>
+</view>
+<view wx:if="{{showHeart}}" class="heartModal">
+    <image src="../../images/popup.png"></image>
+    <view>分享到群聊可获得额外的复活心</view>
+</view>
+<view wx:if="{{addHeart}}" class="addModal">
+    <image class="bg" src="../../images/popup_life.png"></image>
+    <view>分享奖励复活<image class="heart_sm" src="../../images/heart_sm.png"></image>+1</view>
+    <image class="button_ok" src="../../images/button_ok.png" bindtap="hideAdd"></image>
+</view>
+</view>

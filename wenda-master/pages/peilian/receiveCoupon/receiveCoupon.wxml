@@ -1,0 +1,48 @@
+<view class="topBanner"></view>
+<view wx:if="{{id}}" class="myCoupon" data-node="myCoupon">
+    <view class="price"><view class="price_icon">¥</view><view data-node="priceNum" class="priceNum">{{priceNum}}</view></view>
+    <view class="desc">
+        <view class="title" data-node="title">{{title}}</view>
+        <view class="text" data-node="content">{{content}}</view>
+        <view class="text">有效期至 <view data-node="overTime" class="overTime">{{time}}</view></view>
+    </view>
+    <view class="experience" bindtap="experienceEv">立即体验</view>
+</view>
+<view wx:elif="{{!id}}" class="lootAll" data-node="lootAll"></view>
+<view class="coupon_list">
+    <view class="top_title">
+        <view class="left_line"></view>
+        <view class="middle_text">看看谁领福利了</view>
+        <view class="right_line"></view>
+    </view>
+    <view class="list_item" wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+        <image class="headImg" src="{{item.avatarUrl}}"/>
+        <view class="info">
+            <view class="nickName">{{item.nickName}}</view>
+            <view class="getTime" data-node="getTime">{{item.createTime}}</view>
+        </view>
+        <view class="price"><view class="price_icon">¥</view><view data-node="couponValue" class="couponValue">{{item.value / 100}}</view></view>
+    </view>
+</view>
+<view class="active_rule" bindtap="showRulesEv">活动规则</view>
+    <view class="rule-wrapper {{showRules ? '' : 'hide'}}"></view>
+    <view class="rule-detail-wrapper textFontR {{showRules ? '' : 'hide'}}">
+        <view class="rule-title">活动规则</view>
+        <view class="rule-detail textFontR">
+            <view class="rule-item">1.优惠券发放到已授权登录的微信号账户上。</view>
+            <view class="rule-item">2.下载问技陪练APP用微信授权登录，可在“我的” - “优惠券”中查看已获得的优惠券。</view>
+            <view class="rule-item">3.下单支付时可以选择使用已获得的优惠券。</view>
+            <view class="rule-item">4.每次支付时限制使用一张优惠券，优惠券不找零。</view>
+            <view class="rule-item">5.问技陪练保留法律范围内允许的对优惠券的解释权。</view>
+        </view>
+        <view class="rule-btn textFontR" bindtap="hideRulesEv">我知道了</view>
+        <view class="rule-close"></view>
+        <view class="rule-close-cover" bindtap="hideRulesEv"></view>
+</view>
+<view class="bottom_ad">
+    <view class="wenji_logo"></view>
+    <view class="desc">
+        <view class="title">问技陪练 ---王者荣耀开黑上分必备神器</view>
+        <view class="text">请下载APP使用优惠券</view>
+    </view>
+</view>

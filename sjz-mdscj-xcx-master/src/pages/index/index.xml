@@ -1,0 +1,34 @@
+<form bindsubmit="formSubmit" report-submit='true'>
+  <button formType="submit" class="formIdBtn">
+    <view class="wrap">
+      <image class="banner" src="../../images/banner.jpg" />
+      <block wx:if="{{false}}">
+        <view class="list">
+          <list key="products"/>
+        </view>
+      </block>
+
+      <view class="mod-groups bg-t">
+        <view class="group-title"></view>
+        <view class="groups-list bg-t">
+          <view class="list-item style-2" wx:for="{{props.dataProTuan}}" wx:key="id">
+            <navigator url="/pages/product/detail?id={{item.id}}">
+              <view class="pro-tag" wx:if="{{item.promotion.promotionType === 'TUAN'}}">{{item.promotion.groupNum}}人团</view>
+              <view class="pro-img">
+                <view class="img-mask" wx:if="{{item.amount !== undefined && !(item.amount > 0)}}"><view></view></view>
+                <image src="{{item.imgUrl}}"   lazy-load="{{true}}" />
+              </view>
+              <view class="pro-info">
+                <view class="pro-title">{{item.name}}</view>
+                <view class="pro-sub-title">{{item.subName}}</view>
+                <view class="pro-price"><text class="price-curr">￥<text>{{item.priceCurrent}}</text></text><text class="price-old">单买价<text>{{item.priceOld}}</text></text></view>
+                <view class="pro-btn"><text class="num">{{item.promotion.groupNum}}人团</text><text class="txt">{{item.promotion.promotionType === 'TUAN' ? '去开团' : '去购买'}}</text></view>
+              </view>
+            </navigator>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </button>
+</form>

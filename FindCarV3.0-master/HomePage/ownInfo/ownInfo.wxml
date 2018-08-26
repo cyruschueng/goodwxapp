@@ -1,0 +1,36 @@
+<!--HomePage/ownInfo/ownInfo.wxml-->
+<form class="wrapper" bindsubmit="submitCompanyInfo">
+  <view class="avatar-wrapper">
+    <image class="avatar" src="{{lgSrc || '/Images/HeadPortrait.jpg'}}" bindtap="selectImg"></image>
+  </view>
+
+  <view class="info-wrapper">
+    <view class="info-list">
+      <image class="icon" src="../icon/gongS.png"></image>
+      <text class="desc">公司名称：</text>
+      <input class="info" name="company_name" value="{{companyInfo.name}}" placeholder="请输入公司名称" />
+    </view>
+    <view class="info-list">
+      <image class="icon" src="../icon/PersonalCenter.png"></image>
+      <text class="desc">联系人：</text>
+      <input class="info" name="charge_person" value="{{companyInfo.charge_person}}" placeholder="请输入联系人" />
+    </view>
+    <view class="info-list">
+      <image class="icon" src="../icon/phone.png"></image>
+      <text class="desc">联系电话：</text>
+      <input class="info" name="phone" value="{{companyInfo.phone}}" type="number" placeholder="请输入联系电话" />
+    </view>
+    <view class="info-list">
+      <image class="icon" src="../icon/beiPhone.png"></image>
+      <text class="desc">备用电话：</text>
+      <input class="info" name="phone_2" value="{{companyInfo.phone_2}}" type="number" placeholder="请输入备用电话" placeholder-style="font-weight: normal;" />
+    </view>
+  </view>
+
+  <view class="remark">
+    <text class="title">简介</text>
+    <textarea class="memo" name="introduce" value="{{companyInfo.introduce}}" placeholder="请输入简介" />
+  </view>
+
+  <button class="submit" form-type="submit">保存</button>
+</form>

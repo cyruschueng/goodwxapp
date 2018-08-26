@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Css/weui.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+        <div class=" container" style=" padding-top:50px;">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+                        <div class="weui-msg__text-area">
+                        <h2 class="weui-msg__title">操作成功</h2>
+                        <p class="weui-msg__desc"></p>
+                    </div>
+                        <div class="weui-msg__opr-area">
+                        <p class="weui-btn-area">
+                            
+                        </p>
+                    </div>
+                        <div class="weui-msg__extra-area">
+                        <div class="weui-footer">
+                            <p class="weui-footer__links">
+                                
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.js"></script>
+        <script>
+
+            $(function () {
+                var r = GetQueryString("r");
+                if (r == 1) {
+                    $(".weui-icon_msg").removeClass("weui-icon-warn").addClass("weui-icon-success");
+                    $(".weui-msg__title").text("操作成功！");
+                } else if(r==2) {
+                    $(".weui-icon_msg").removeClass("weui-icon-success").addClass("weui-icon-warn");
+                    $(".weui-msg__title").text("数据与存在！");
+                } else if (r == 0) {
+                    $(".weui-icon_msg").removeClass("weui-icon-success").addClass("weui-icon-warn");
+                    $(".weui-msg__title").text("操作失败！");
+                }
+                function GetQueryString(name) {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) return unescape(r[2]); return null;
+                }
+            })
+        </script>
+</body>
+</html>

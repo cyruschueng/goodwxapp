@@ -1,0 +1,36 @@
+<form class="make" bindsubmit="creImg" report-submit>
+  <view class="make-hd"></view>
+
+  <view class="make-bd">
+    <view class="make-input-box">
+      <view class="input-tips f15 g87 lh1">请输入标题</view>
+      <view class="input-bg bgf">
+        <input class="input" name="title" value="{{barrages[curBarrageIndex]}}" focus="{{isFocus}}" placeholder="请不要超过两行文字" />
+      </view>
+    </view>
+    <view class="make-output-box bgf">
+      <textarea class="textarea f13" name="content" maxlength="-1" placeholder="这里输入信的内容" />
+    </view>
+
+    <view class="select-style">
+      <view class="style-title f14">样式选择</view>
+      <scroll-view class="style-list" scroll-x>
+
+        <view class="scroll-box" style="width: {{scrollWidth}}px">
+          <view class="style-item {{ item.active && 'active' }}" wx:for="{{ bgList }}" data-index="{{index}}" bindtap="selectBg" wx:key="{{ item.id }}">
+            <image class="style-item-img" mode="widthFix" src="{{item.src}}"></image>
+          </view>
+        </view>
+        
+      </scroll-view>
+
+    </view>
+  </view>
+
+  <view class="menu-fixed hid bgf">
+    <button class="btn-creImg fr tc" disabled="{{ disabled }}" form-type="submit">{{ creBtnTxt }}</button>
+  </view>
+</form>
+
+<canvas canvas-id="myCanvas" style="width: 750px; height: {{ canvasHeight }}px; position: absolute; left: -1000px; top: 2000px" />
+<!--position: absolute; left: -1000px; top: -2000px-->

@@ -1,0 +1,37 @@
+<view class='headbg'>
+    <view class="head">
+        <view class="{{isselect == 1 ?'onselect':''}}" bindtap='onrules'>限时答题
+            <text></text>
+        </view>
+        <view class="{{isselect == 2 ?'onselect':''}}" bindtap='onruless'>自由答题
+            <text></text>
+        </view>
+    </view>
+</view>
+<view wx:if="{{isselect == 1}}" class='timerule'>
+    <view class='title'>限时答题规则</view>
+    <view class='lastdetail'>
+        <text>1.</text>每题答题时间为10秒，10秒内可任意选择及修改答案，倒计时结束后公布答题结果，答对则进入到下一题，答错则遗憾出局；
+    </view>
+    <view class='lastdetail'>
+        <text>2.</text>通关即得奖金（本期总奖金÷本期通关人数）；
+    </view>
+    <view class='lastdetail'>
+        <text>3.</text>奖金会存入“我的余额”中，当余额超过10元即可申请提现，客服审核通过后，会将申请的金额通过微信进行发放。
+    </view>
+</view>
+<view wx:if="{{isselect == 2}}" class='timerule'>
+    <view class='title'>自由答题规则</view>
+    <view class='lastdetail'>
+        <view>答题前</view>
+        每期答题，系统免费赠送每人3次答题机会，还可以通过分享给不同好友，来获得额外5次答题机会；
+    </view>
+    <view class='lastdetail'>
+        <view>答题中</view>
+        每题答题时间为10秒，点选即出结果。答对，进入下一题；答错，可通过分享到不同群复活，最多2次机会，复活后可继续答题；当复活机会用光或退出答题视为闯关失败；
+    </view>
+    <view class='lastdetail'>
+        <view>答题后</view>
+        通关即得奖金（本期总奖金÷本期人数上限），奖金会存入“我的余额”中，当余额超过10元即可申请提现，客服审核通过后，会将申请的金额通过微信进行发放。
+    </view>
+</view>

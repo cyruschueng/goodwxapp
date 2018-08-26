@@ -1,0 +1,15 @@
+<!--pages/ballroom/allBallroomList.wxml-->
+
+<view class='body'>
+
+<view class='middle-cell' wx:for="{{ ballrooms }}" wx:for-item="ball" wx:key="*this" data-ballroomid='{{ ball.ballroomId }}' bindtap='goBallroomPage'>
+    <image class='middle-cell-left-img' src='{{ ball.imgUrl }}'></image>
+    <view class='middle-cell-middle-text'>
+      <text>{{ ball.name }} {{ ball.level }}F</text>
+      <text class='lit-text'>桌数：{{ ball.tabNums }}桌</text>
+      <text class='lit-text'>层高：{{ ball.highLevel }}m</text>
+    </view>
+    <view class='middle-cell-right-button'>查看</view>
+</view>
+
+</view>

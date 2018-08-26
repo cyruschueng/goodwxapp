@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "广告内容列表";
+}
+
+@section headerCss{
+
+}
+<blockquote class="layui-elem-quote">说明：增删改查广告内容</blockquote>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>广告内容列表</legend>
+</fieldset>
+
+
+<div class="searchTool layui-form" style="margin-left:18px;">
+    <div class="layui-inline">
+        <input class="layui-input" id="contentJsonKeyword" autocomplete="off" placeholder="请输入关键词">
+    </div>
+    <div class="layui-inline">
+        <select id="advertisingSpaceInfoSign" lay-verify="" lay-search>
+            <option value="">请选择要搜索的广告位</option>
+            @foreach (var item in ViewBag.AdvertisingSpaceSelectItemList as List<SelectListItem>)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="layui-inline">
+        <button class="layui-btn searchBtn" data-type="reload">搜索</button>
+    </div>
+
+    <div class="layui-inline">
+        <a class="layui-btn" href="/layui/LayUiAdv/AddAdvContent" data-type="add">新增</a>
+    </div>
+</div>
+
+<table class="layui-hide" id='table' lay-filter="table"></table>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+</script>
+
+@section footerJs{
+    <script>
+        layui.config({
+            base: '/Areas/LayUI/Content/commonJs/'
+            , version: '1515376178710'
+        }).extend({
+            myFormat: 'myFormat',
+            myAjax: 'myAjax'
+        });
+    </script>
+    <script>
+        layui.use(['table', 'myFormat','myAjax'], function () {
+            var table = layui.table, form = layui.form;
+            var myFormat = layui.myFormat;
+            var aj = layui.myAjax;
+
+            table.render({
+                elem: '#table'
+                , url: '/layui/LayUiAdv/AdvContentList'
+                , method:"post"
+                , cols: [[
+                    { type: 'checkbox', fixed: 'left' },
+                    { field: 'Id', width: 80, title: '序号', fixed:true }
+                    , { field: 'Sign', width: 150, title: '广告位标识' }
+                    , { field: 'AdvSpaceTitle', title: '广告位标题' }
+                    , { field: 'ContentJsonKeyword', title: '关键词',width:100 }
+                    , { field: 'Title', title: '广告名称' }
+                    , { field: 'Size', width: 100, title: '尺寸' }
+                    , { field: 'BeginDatetime', width: 180, title: '开始时间', templet: "<div>{{getDate(d.BeginDatetime)}}</div>" }
+                    , { field: 'EndDateTime', width: 180, title: '结束时间', templet: "<div>{{getDate(d.EndDateTime)}}</div>"}
+                    , { field: 'CreateOn', width: 180, title: '创建时间', templet: "<div>{{getDate(d.CreateOn)}}</div>"}
+                    , { fixed: 'right', width: 180, align: 'center', toolbar: '#bar', title: '操作' }
+
+                ]]
+                , page: true
+                , height: 'full-180'
+                , id: "advContentTable"
+            });
+
+            //监听工具条
+            table.on('tool(table)', function (obj) {
+                var data = obj.data;
+
+                switch (obj.event) {
+                    case 'del':
+                        layer.confirm('真的删除行么', function (index) {
+                            obj.del();
+                            layer.close(index);
+                            aj.postNoSyncReq('/layui/LayUiAdv/DeleteAdvContent', { id: data.Id });
+                        });
+                        break;
+
+                    case 'edit':
+                        window.location = '/layui/LayUiAdv/EditAdvContent?id=' + data.Id;
+                        break;
+                    default: break;
+                }
+            });
+
+            var $ = layui.$, active = {
+
+                reload: function () {
+                    var contentJsonKeyword = $('#contentJsonKeyword');
+                    var advertisingSpaceInfoSign = $("#advertisingSpaceInfoSign");
+                    //执行重载
+                    table.reload('advContentTable', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            contentJsonKeyword: contentJsonKeyword.val(),
+                            advertisingSpaceInfoSign: advertisingSpaceInfoSign.val()
+                        }
+                    });
+                }
+            }
+
+            $('.searchTool .searchBtn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+    </script>
+}

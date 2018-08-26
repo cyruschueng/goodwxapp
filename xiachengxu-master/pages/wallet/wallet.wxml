@@ -1,0 +1,44 @@
+<import src="./empty/empty.wxml" />
+<import src="../tpls/redpack/redpack.wxml" />
+<import src="../tpls/scroll-item/scroll-item.wxml" />
+
+
+<view class='container wallet'>
+  <view class='navbar'>
+    <view class="navbar-item" wx:for="{{navbar}}" wx:key="idx" wx:for-index="idx" data-idx="{{idx}}" bindtap="switchNav">
+      <text class="navbar-text {{currentNavbar==idx ? 'active ' : ' '}}">{{item}}</text>
+    </view>
+  </view>
+  <view hidden='{{!loadingHidden}}'>
+    <view class='card-wrapper'>
+      <swiper class='tab-content' current='{{currentNavbar}}' duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+        <swiper-item>
+          <template wx:if='{{cardList.length}}' is='scroll-item' data='{{type: "wallet", hasMore: params[0].hasMore, data: cardList}}'></template>
+          <template wx:else is='empty'></template>
+        </swiper-item>
+        <swiper-item>
+          <template wx:if='{{uselessCardList.length}}' is='scroll-item' data='{{type: "wallet", hasMore: params[1].hasMore, data: uselessCardList}}'></template>
+          <template wx:else is='empty'></template>
+        </swiper-item>
+      </swiper>
+    </view>
+    <!--没有此类红包提示  -->
+    <template wx:if='{{currentNavbar==0&&cardList.length==0 || currentNavbar==1&&uselessCardList.length==0}}' is='empty'></template>
+    <view class='qrcode' wx:if='{{isShowQrCode}}'>
+      <view class='qrcode-cover' catchtap='closeQrCode'></view>
+      <view class='qrcode-wrapper'>
+        <view class='logo'>
+          <image src='/images/icon/brand.png' mode='aspectFill'></image>
+          <text>三叶草</text>
+        </view>
+        <view class='qrcode-content'>
+          <image src='/images/icon/barcode.png' mode='aspectFit'></image>
+          <image src='/images/icon/qrcode.png' mode='aspectFit'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<loading hidden='{{loadingHidden}}'>加载中...</loading>

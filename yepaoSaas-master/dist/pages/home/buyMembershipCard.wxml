@@ -1,0 +1,40 @@
+<!--pages/home/buyMembershipCard.wxml-->
+
+<view class='bg-view'>
+
+  <view class='car-cell-view'>
+    <block wx:for='{{ carList }}' wx:key='{{ index }}'>
+    <view class='car-cell' id='{{ index }}' bindtap='bindCarCellTap'>
+      <image mode='aspectFill' class='bg-img' src='{{ item.bgimg }}'></image>
+      <view class='info-view'>
+        <view><image class='icon-img' src='../../images/icon/home/car/yepao_logo.png'></image></view>
+        
+        <view class='car-type-view'>{{ item.carName }}</view>
+        <view>¥{{ item.carPrice }}</view>
+      </view>
+      <image wx:if='{{ item.checked }}' class='check-icon' src='../../images/icon/home/car/card_choose.png'></image>
+    </view>
+    </block>
+  </view>
+
+  <view class='buy-foot-view'>
+    <view class='weui-flex check-view'>
+      
+      <view bindtap='bindProtocolCheckedTap'>
+        <image class='check-icon' src='../../images/icon/{{ protocolChecked ? "checked" : "unchecked" }}.png'></image>
+      </view>
+      
+      <view class='check-text weui-flex__item'>阅读并同意<text class='mainColor'>《会员卡购买协议》</text></view>
+
+    </view>
+    <view class='weui-flex buy-view'>
+      <view class='weui-flex__item'>
+        <view class='price-btn'>总计¥{{ totalPrice }}</view> 
+      </view>
+      <view class='weui-flex__item'>
+        <view class='buy-btn' bindtap='bindBuyBtnTap'>立即购买</view>
+      </view>
+    </view>
+  </view>
+
+</view>

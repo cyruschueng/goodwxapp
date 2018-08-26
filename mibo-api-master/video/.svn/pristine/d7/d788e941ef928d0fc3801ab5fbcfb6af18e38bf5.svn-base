@@ -1,0 +1,28 @@
+<?php
+
+class Model_AppConfig extends PhalApi_Model_NotORM {
+
+    protected function getTableName($id) {
+        return 'app_config';
+    }
+
+    public function getAppConfig($os) {
+        $config = $this->getORM()->select('config')->where('os',$os)->fetchOne();
+        $config = json_decode($config['config'], true);
+        return $config;
+    }
+
+    public function getPayType($os) {
+        $config = $this->getORM()->select('config')->where('os', $os)->fetchOne();
+        $config = json_decode($config['config'], true);
+        $pay['pay_type'] = isset($config['pay_type']) ? $config['pay_type'] : '1,2';
+        $pay['is_auditing'] = isset($config['is_auditing']) ? $config['is_auditing'] : '0';
+        return $pay;
+    }
+
+
+
+
+
+
+}

@@ -1,0 +1,42 @@
+<form bindsubmit="onPushSubmit" report-submit="true">
+    <view class="massage imgs mt10" wx:if="{{userInfo.is_manager}}">
+        <picker mode='selector' range='{{depts}}' range-key='title' catchchange='onDeptChange'>
+            {{depts[deptIndex].title}}
+        </picker>
+    </view>
+
+    <radio-group class="massage mt10" catchchange='onChange' data-name='score'>
+        <label class="flex radio-item">
+            <radio value="10" />
+            <text class="f18">+10</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="5" checked='true' />
+            <text class="f18">+5</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="3" />
+            <text class="f18">+3</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="2" />
+            <text class="f18">+2</text>
+        </label>
+        <input type='number' value='{{score}}' name='score' hidden='true' />
+    </radio-group>
+
+
+    <view class="massage mt10">
+        <textarea placeholder="请输入原因,至少8个字" placeholder-class="linght" name="remark" maxlength="255" />
+    </view>
+    <!--图片-->
+    <view class="massage imgs mt10">
+        <image src="{{item}}" mode="aspectFill" wx:for="{{pictures}}" wx:key="*this" data-index="{{index}}" catchlongtap="onDeleteImgTap" catchtap="onPreviewTap"></image>
+        <view class="imgs-add iconfont icon-add" catchtap="onOpenPictureTap" wx:if="{{pictures.length<6}}"></view>
+    </view>
+    <view class="ml10 mr10 mt5 f12 linght">温馨小提示：长按可以删除图片哦~</view>
+
+    <view class="m20">
+        <button type="primary" hover-class="none" form-type="submit" disabled='{{!userInfo}}'>提交</button>
+    </view>
+</form>

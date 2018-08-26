@@ -1,0 +1,453 @@
+﻿<!DOCTYPE html >
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../js/audio.min.js" type="text/javascript"></script>
+    <link href="../css/layoutit.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/button.css" rel="stylesheet" type="text/css" />
+    <link href="../css/libao.css" rel="stylesheet" type="text/css" />
+    <style>
+        
+        .group1,.group2,.group3,.group4,.group5{ display:none;}
+        .group_button2,.group_button3,.group_button4,.group_button5{ display:none;}
+        .media{ border-bottom:1px solid #eee; border-top:1px solid #eee;}
+        .media-body{ padding-top:5px;}
+        .media-body h4{ font-size:16px; }
+    </style>
+    <script charset="utf-8">
+        $(function () {
+            var cur_src = "";
+            var audios = audiojs.createAll({
+                trackEnded: function () {
+                    var next = $(".on").parent().parent().parent().next().children().children().children();
+                    if (!next.length) next = $('.music_switch').first();
+                    $(".music_switch").removeClass("on");
+                    next.addClass("on");
+                    var src = encodeURI(next.data("src"));
+                    $(".music_switch").data("switch", "on");
+                    next.data("switch", "off");
+                    $(".music_switch").css("background-position", "0px 0px");
+                    next.css("background-position", "0px -41px");
+                    cur_src = src;
+                    audio.load(src);
+                    audio.play();
+                }
+            });
+            var audio = audios[0];
+
+            $(audio).css("display", "none");
+            $(".music_switch").click(function () {
+                $(".music_switch").css("background-position", "0px 0px");
+                var status = jQuery(this).data("switch");
+                var src = encodeURI(jQuery(this).data("src"));
+                if (status == "on") {
+                    jQuery(this).data("switch", "off");
+                    $(this).css("background-position", "0px -41px");
+                    if (cur_src != src) {
+                        cur_src = src;
+                        $(".music_switch").removeClass("on");
+                        $(this).addClass("on");
+                        audio.load(src);
+                    }
+                    audio.play();
+                } else {
+                    jQuery(this).data("switch", "on");
+                    $(this).css("background-position", "0px 0px");
+                    audio.playPause();
+                }
+            });
+
+            $(".group_button1").click(function () {
+                $(".group1").css("display", "block");
+                $(".group_button1").css("display", "none");
+                $(".group_button2").css("display", "block");
+            });
+            $(".group_button2").click(function () {
+                $(".group2").css("display", "block");
+                $(".group_button2").css("display", "none");
+                $(".group_button3").css("display", "block");
+            });
+            $(".group_button3").click(function () {
+                $(".group3").css("display", "block");
+                $(".group_button3").css("display", "none");
+                $(".group_button4").css("display", "block");
+            });
+            $(".group_button4").click(function () {
+                $(".group4").css("display", "block");
+                $(".group_button4").css("display", "none");
+            });
+        })
+    </script>
+</head>
+<body style=" margin-left:0px;">
+    <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1045 三字经.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            三字经
+		            </h4> 
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1046 爱我你就抱抱我.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            爱我你就抱抱我
+		            </h4> 
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1047 找朋友.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            找朋友
+		            </h4> 
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1048 蓝精灵.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            蓝精灵
+		            </h4>
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1049 小燕子.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            小燕子
+		            </h4>
+	            </div>
+            </div>
+            <div class="media">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1050 丢手绢.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            丢手绢
+		            </h4>
+	            </div>
+            </div>
+             <a href="javascript:void(0)" id="" class="button button-block button-rounded button-highlight button-large group_button1" style=" height:30px; line-height:30px;  font-size:13px; margin-top:10px;">加载更多...</a>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1051 娃哈哈.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            娃哈哈
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1052 拔萝卜.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            拔萝卜
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1053 三个和尚.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            三个和尚
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1054 我最棒.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            我最棒
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1055 春天在哪里.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            春天在哪里
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group1" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1056 圣诞老公公.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            圣诞老公公
+		            </h4>
+	            </div>
+            </div>
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button2" style=" height:30px; line-height:30px; font-size:13px; margin-top:10px;">加载更多...</a>
+
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1057 世上只有妈妈好.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            世上只有妈妈好
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1058 弟子规.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            弟子规
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1059 数鸭子.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            数鸭子
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1060 小兔子乖乖.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            小兔子乖乖
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2" >
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1061 喜洋洋与灰太狼.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            喜洋洋与灰太狼
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group2">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1062 我爱洗澡.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            我爱洗澡
+		            </h4>
+	            </div>
+            </div>
+
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button3" style=" height:30px; line-height:30px;  font-size:13px; margin-top:10px;">加载更多...</a>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1063 爸爸妈妈听我说.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            爸爸妈妈听我说
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1064 更上一层楼.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            更上一层楼
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1065 悯农童声唱唐诗.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            悯农童声唱唐诗
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1066 放学歌.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            放学歌
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1067 机器猫.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            机器猫
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group3">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1068 妈妈你别说我小.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            妈妈你别说我小
+		            </h4>
+	            </div>
+            </div>
+            <a href="javascript:void(0)" class="button button-block button-rounded button-highlight button-large group_button4" style=" height:30px; line-height:30px;  font-size:13px; margin-top:10px;">加载更多...</a>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1069 小手拍拍.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            小手拍拍
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1070 好孩子要诚实.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            好孩子要诚实
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1072 我爱北京天安门.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            我爱北京天安门
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1073 妈妈你歇歇吧.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            妈妈你歇歇吧
+		            </h4>
+	            </div>
+            </div>
+            <div class="media group4">
+	             <a href="javascript:void(0)" class="pull-left">
+                    <div class="music_switch_back">
+                        <div class="music_switch" data-switch="on"  data-src="../../upload/voice/ergo/1074 我的好妈妈.mp3"></div>
+                    </div>
+                 </a>
+	            <div class="media-body">
+		            <h4 class="media-heading">
+			            我的好妈妈
+		            </h4>
+	            </div>
+            </div>
+
+		</div>
+	</div>
+</div>
+<audio id="audio" style=" display:none;" >
+    <source src="../../upload/voice/ergo/1074 我的好妈妈.mp3"  type="audio/mpeg" />
+</audio>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<!--top str -->
+  <view class='h8 flexBetw Skin pdr1 pdl1'>
+    <image class='imgM' src='/images/exit.png' bindtap='ListAdmOut'></image>
+    <view>概况</view>
+    <image class='imgxs15' src='/images/userimg.png' bindtap='ListAdmcenter'></image>
+  </view>
+<!--top end -->
+<!--nav1 str -->
+  <view class='flexColumn m5 bgColorEF br03 h25'>
+    <view class='flexBetw pd07 borderD font10 h50'>
+      <view>当前功率：</view>
+      <view class='color3'>{{EnergyQuintetOneDay.outputPower?EnergyQuintetOneDay.outputPower:'0.0kW'}}</view>
+    </view>
+    <view class='flex1 flex h50'>
+      <view class='flexColumn flex1 flexCenter  borderR'>
+        <view class='mb01'>当日发电({{EnergyQuintetOneDay.energyTodayUnit?EnergyQuintetOneDay.energyTodayUnit:'kWh'}})</view>
+        <view class='color6'>{{EnergyQuintetOneDay.energyToday?EnergyQuintetOneDay.energyToday:'0.0'}}</view>
+      </view>
+      <view class='flexColumn flex1 flexCenter'>
+        <view class='mb01'>累计发电({{PlantsEnergyTotalUnit?PlantsEnergyTotalUnit:'kWh'}})</view>
+        <view class='color7'>{{PlantsEnergyTotal?PlantsEnergyTotal:'0.0'}}</view>
+      </view>
+    </view>
+  </view>
+<!--nav2 end -->
+<!-- nav3 str -->
+  <view class='flex flex1 bg256 mb05' >
+    <view class='flexColumn flexCenter' bindtap='listAdmTap' id="{{index}}" wx:for="{{listAdmBox}}" wx:key="{{index}}" wx:for-item="listAdmBox">
+      <image class='imgxs15' src='{{listAdmBox.pic}}'></image>
+      <view>{{listAdmBox.label}}</view>
+      <view class='color8'>{{listAdmBox.val}}</view>
+    </view>
+  </view>
+  <!-- nav3 end -->
+  <view class='flexv1 flexColumn'>
+    <image style="width:100%;height:85%"   src='/images/guangfu.png'></image>
+  </view>
+  <template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

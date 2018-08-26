@@ -1,0 +1,105 @@
+<!--index.wxml-->
+<view class="{{isTanchuang?'bgH':'bg'}}">
+  <view class='headline'>
+    <image src='http://yukicomic-pic.oss-cn-hangzhou.aliyuncs.com/XCX_rongyao/logo.png' class='logo'></image>
+  </view>
+  <navigator url='../regulation/regulation' class='rule'>
+    <view class='wenhao'>?</view>
+    <view class='textt'>规则玩法</view>
+  </navigator>
+  <view class='userInfo'>
+    <view class='ufleft'>
+      <image src='{{userInfo.avatarurl}}' class='uImg'></image>
+      <view class='uname'>
+        <view class='name'>{{userInfo.nickname}}</view>
+        <view class='sheng'>
+          <view>剩余次数</view>
+          <view class='numt'>{{chance}}</view>
+          <view>次</view>
+          </view>
+      </view>
+    </view>
+    <button  open-type="share" hover-class="none" class='sharebtn'></button>
+  </view>
+  <view bindtap='startGame' class='startGame'></view>
+  <view class='list'>
+    <view class='imgList'>
+      <image wx:if="{{rankingShow}}" src='../../img/rankingList.png' class='imgList'></image>
+       <view class='imgList' bindtap='rankingList' wx:else></view> 
+    </view>
+    <view class='imgList'>
+      <image src='../../img/mentalList.png' class='imgList' wx:if="{{mentalShow}}"></image>
+      <view class='imgList' bindtap='mentalList' wx:else></view> 
+    </view>
+    <view class='imgList'>
+      <image src='../../img/awardAll.png' class='imgList' wx:if="{{awardShow}}"></image>
+      <view class='imgList' bindtap='awardAll' wx:else></view> 
+    </view>
+  </view>
+  <!-- 排行榜 -->
+   <scroll-view scroll-y class='rankingList' wx:if="{{rankingShow}}">
+    <view class='llist' wx:for="{{rankingList}}">
+      <view class='lll'>
+        <view class='xuhao'>{{index+1}}</view>
+        <image src='{{item.avatarurl}}' class='listImg'></image>
+        <view class='plays'>{{item.nickname}}</view>
+      </view>
+      <view class='llr'>
+        <view class='llrup'>获得奖品{{item.gift}}件</view>
+        <view class='llrdown'>价值{{item.sum}}元</view>
+      </view>
+    </view>
+  </scroll-view> 
+  <!-- 脑力排行榜 -->
+  <scroll-view scroll-y class='rankingList' wx:if="{{mentalShow}}">
+    <view class='llist'  wx:for="{{mentalList}}">
+      <view class='lll'>
+        <view class='xuhao'>{{index+1}}</view>
+        <image src='{{item.avatarurl}}' class='listImg'></image>
+        <view class='plays'>{{item.nickname}}</view>
+      </view>
+      <view class='llr'>
+        <view class='llrdown'>答对{{item.total}}道题</view>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 奖品 -->
+  <view class='awardlist' wx:if="{{awardShow}}">
+    <view class='guanzhu'>
+      <view class='gztext'>关注公众号挑选您的奖品</view>
+      <button open-type="contact" hover-class="none" class='gzbtn'>立即关注</button> 
+    </view>
+    <view class='goodShow'>
+      <image src='../../img/left.png' class='arrows'></image>
+      <view class='lunbo'>
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" >
+          <block wx:for="{{giftList}}" wx:key="idx" wx:for-item="itemName">
+            <swiper-item class="swiper-box">
+              <image src="{{itemName.url}}" class='goodsImg'/>
+              <view class='shuoming'>{{itemName.introduction}}</view>
+            </swiper-item>
+          </block>
+        </swiper> 
+      </view>
+      <image src='../../img/right.png' class='arrows'></image>
+    </view>
+    <view class='miaoshu'>
+      <view class='gang'></view>
+      <view class='wenzi'>产品介绍</view>
+      <view class='gang'></view>
+    </view>
+    <view class='goodsMiaoshu'>
+    {{announcement}}
+    </view>
+  </view>
+</view>
+
+<!-- 遮罩 -->
+<view wx:if="{{isTanchuang}}" class='mask'></view>
+<!-- 弹框 -->
+<view wx:if="{{isTanchuang}}" class='popup'>
+  <image src='../../img/close.png' class='close' bindtap='closePopup'></image>
+  <view class='tt1'>分享到群挑战机会+1</view>
+  <view class='tt2'>　</view>
+  <button class='answerBtn-right tt3' hover-class="none" open-type="share">确定</button>
+</view>

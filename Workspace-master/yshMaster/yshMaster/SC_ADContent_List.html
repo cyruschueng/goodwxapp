@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>广告位管理</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			  <script src="js/html5shiv.js"></script>
+			  <script src="js/respond.min.js"></script>
+			  <![endif]-->
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+		<!--common scripts for all pages-->
+		<script src="js/layer.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/MD5.js"></script>
+		<script src="js/select2.min.js"></script>
+		
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+		<section>
+			<div>
+				<section class="panel">
+					<div class="panel-body">
+						<div class="page-heading">
+							<h3>广告内容列表</h3>
+						</div>
+					</div>
+				</section>
+				<section class="wrapper">
+					<section class="panel">
+						<div class="panel-body">
+							<form class="form-horizontal" role="form" id="condition">
+								<div class="row">
+									<div class="col-lg-3">
+										<input type="text" class="form-control" placeholder="店铺名称" id="Store" name="Store">
+									</div>
+									<div class="col-lg-3">
+										<div class=" form-group">
+											<label class="col-sm-3 control-label col-lg-3 ">渠道</label>
+											<div class="col-lg-9 ">
+												<select class="form-control m-bot15 " id="Channel" name="Channel">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">类型</label>
+											<div class="col-lg-9">
+												<select class="form-control m-bot15" id="ADType" name="ADType">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 text-center">
+										<div class="col-lg-2 col-lg-offset-1">
+											<button class="btn btn-info" type="button" onclick="Query()">搜索</button>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-2">
+									</div>
+									<div class="col-lg-10"></div>
+								</div>
+							</form>
+						</div>
+					</section>
+					<section class="panel">
+						<div class="panel-heading text-right">
+							<button class="btn btn-success" type="button" onclick="AddAd()">添加</button>
+						</div>
+						<div class="panel-body">
+							<table id="AD" class="table table-striped table-condensed table-hover talbe-border">
+								<thead>
+									<tr>
+										<th data-field="Store" data-align="center">店铺名称</th>
+										<th data-field="TYPE" data-align="center">广告类型</th>
+										<th data-field="StartDate" data-align="center">开始播放日期</th>
+										<th data-field="DueDate" data-align="center">结束播放日期</th>
+										<th data-field="Times" data-align="center">播放频率</th>
+										<th data-field="Content" data-align="center" data-formatter="imgFormatter">广告内容</th>
+										<th data-field="FilePath" data-align="center">链接地址</th>
+										<th data-field="Status" data-align="center">状态</th>
+										<th data-field="PauseReason" data-align="center">暂停原因</th>
+										<th data-field="Channel" data-align="center">渠道</th>
+										<th data-field="ADId" data-align="center" data-formatter="operationFormatter">操作</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</section>
+				</section>
+			</div>
+		</section>
+		<!-- Modal -->
+		<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+						<h4 class="modal-title">绑定广告位</h4>
+					</div>
+					<div class="modal-body">
+						<div class=" form">
+							<form class="cmxform form-horizontal adminex-form">
+								<div class="form-group ">
+									<label for="cname" class="control-label col-lg-3">广告位容器:</label>
+									<div class="col-lg-9">
+										<select class="form-control " id="adPositions" name="">
+											<!--<option value="0">请选择</option>-->
+										</select>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div style="width: 550px;height: 800px;margin: 20px auto;text-align: center;">
+							<strong>广告位示意图</strong>
+							<img src="images/adcs.jpg" alt="" style="width: 100%;height: 100%;margin-top: 14px;"/>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" onclick="boundADposition()">绑定</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal -->
+		<script>
+			var $table = $("#AD");
+			var checkList = new Array();
+			var dataTotal = 0;
+			var condition = "condition";
+			//构建select
+			function appendSelectList(f1, array) {
+				f1.append("<option value=0>全部</option>");
+				if(array != null && array != undefined) {
+					if(array.length > 0) {
+						$.each(array, function(i, v) {
+							f1.append("<option value=" + v.value + ">" + v.text + "</option>");
+						});
+					}
+				}
+			}
+
+			function imgFormatter(value, row, index) {
+				var result = ['<img src="', value, '" height="60" width="60"/>'];
+				return result.join("");
+			}
+
+			//查询调数据
+			function Query() {
+
+				var search = convertParams(condition);
+				getDataList(yshurl + "SC_ADContent_List_GetContentTotal", search, function(d) {
+					dataTotal = d.aaData[0].TotalNum;
+				});
+				//查询后使页面跳转到第一页    
+				var options = $table.bootstrapTable('getOptions');
+				options.pageNumber = 1;
+				search = initPageInfo(search);
+				getDataList(yshurl + "SC_ADContent_List_GetContentInfo", search, function(d) {
+					if($.isArray(d.aaData) && d.aaData.length > 0) {
+						$.each(d.aaData, function(i, v) {
+							if(v.LinkType == 1) {
+								v.Store = v.AlterStoreName
+							}
+							//限制地址路径超长影响页面布局
+							if(v.FilePath.length > 20){
+								v.FilePath = v.FilePath.substr(0, 20) + "...";
+							}
+						});
+					}
+					$table.bootstrapTable('refreshOptions', options);
+
+					loadData($table, {
+						total: dataTotal,
+						rows: d.aaData
+					});
+					//checkList清0
+					checkList.length = 0;
+				});
+			}
+			//翻页时获取数据
+			function getData(params) {
+				getDataList(yshurl + "SC_ADContent_List_GetContentInfo", params, function(d) {
+
+					if($.isArray(d.aaData) && d.aaData.length > 0) {
+						$.each(d.aaData, function(i, v) {
+							if(v.LinkType == 1) {
+								v.Store = v.AlterStoreName
+							}
+							//限制地址路径超长影响页面布局
+							if(v.FilePath.length > 20){
+								v.FilePath = v.FilePath.substr(0, 20) + "...";
+							}
+						});
+					}
+
+					var tableData1 = {
+						total: dataTotal,
+						rows: d.aaData
+					};
+					loadData($table, tableData1);
+				});
+			}
+
+			//初始化分页数据
+			function initPageInfo(res) {
+				res.PageIndex = 0;
+				res.PageSize = 10;
+				return res;
+			}
+
+			//表格样式
+			function rowStyle(row, index) {
+				var classes = ['active', 'success', 'info', 'warning', 'danger'];
+				if(index % 2 === 0) {
+					return {
+						classes: 'warning'
+					};
+				} else
+					return {
+						classes: 'info'
+					};
+			}
+
+			//跳转到编辑页面
+			function JumpToEdit(Id) {
+				location.href = "Admin_Customer_Edit.html?UserId=" + Id;
+			}
+
+			//操作字段格式
+			function operationFormatter(value, row, index) {
+				var result = [
+					'<button class="btn btn-warning" onclick="EditAd(', row.Id, ')">修改</button>&nbsp;','<button class="btn btn-danger"  href="javascript:void(0)" onclick="DeleteAd(', row.Id, ')">删除</button>'
+				];
+				if(row.Isposition == 0){
+					result.unshift('<button class="btn btn-success" onclick="showADPosition(', row.Id, ')">绑定广告位</button>&nbsp;')
+				} else {
+					result.unshift('<button class="btn btn-danger" onclick="relieveADposition(', row.Id, ')">解绑广告位</button>&nbsp;')
+				}
+				
+				return result.join('');
+			}
+
+			//表格加载数据
+			function loadData(f1, data) {
+				f1.bootstrapTable('load', data);
+				var hashTemp = window.location.hash || "1"
+
+				hashTemp = hashTemp.replace("#", "")
+				$(".pagination").find('a').each(function() {
+					if($(this).text() == hashTemp)
+						$(this).click()
+				})
+			}
+
+			//跳转增加广告内容
+			function AddAd() {
+				location.href = "SC_ADContent_Edit.html?Id=0&name=Add"
+			}
+
+			//跳转编辑广告内容
+			function EditAd(Id) {
+				location.href = "SC_ADContent_Edit.html?Id=" + Id + "&name=Edit"
+			}
+			
+			//绑定广告位
+			var contentId;
+			function showADPosition(Id){
+				contentId = Id;
+				getChannelSelect(function(ret){
+					var str = ""
+					for(var num in ret.aaData) {
+						str += "<option value=" + ret.aaData[num].Id + ">" + ret.aaData[num].DivId + "</option>"
+					}
+					$("#adPositions").empty();
+					$("#adPositions").append(str)
+				})
+				$('#myModal').modal('show');
+				leftCancelShade("myModal")
+			}
+			
+			//点击绑定
+			function boundADposition(){
+				var url = yshurl + "UpdateADcontentPosition";
+				var param = {
+					PositionId: $("#adPositions").val(),
+					contentId: contentId
+				}
+				if($("#adPositions").val() != 0){
+					getDataList(url, param, function(msn){
+						if(msn.state == 0){
+							ysh_msg('编辑成功');
+							$('#myModal').modal('hide');
+							location.reload();
+						}
+					})
+				}
+			}
+			
+			//解除绑定广告位
+			function relieveADposition(Id){
+				var url = yshurl + "UpdateADcontentPosition";
+				var param = {
+					PositionId: 0,
+					contentId: Id
+				}
+				getDataList(url, param, function(msn){
+					if(msn.state == 0){
+						ysh_msg('解绑广告位成功');
+						$('#myModal').modal('hide');
+						location.reload() 
+					}
+				})
+			}
+			
+			//获取渠道下拉
+			function getChannelSelect(callback) {
+				var url = yshurl + "SelectADposisitListForCT"
+				var param = {}
+				getDataList(url, param, function(ret) {
+					callback && callback(ret)
+				}, true)
+			}
+			
+			//删除广告内容
+			function DeleteAd(Id) {
+				ysh_confirm("是否确认删除所选广告内容？", "确认", "取消", function(res) {
+					if(res) {
+						getDataList(yshurl + "SC_ADContent_List_DeleteADContentsRelation", {
+							CID: Id
+						}, function(d) {
+							getDataList(yshurl + "SC_ADContent_List_DeleteADContents", {
+								CID: Id
+							}, function(d) {
+								ysh_msg("删除广告成功！");
+								Query();
+							});
+						});
+					}
+				});
+			}
+
+			//初始化数据
+			$(function() {
+				$('select').select2();
+				
+				//初始化广告内容查询条件数据
+				getDataList(yshurl + "SC_ADContent_List_GetSearchInfo", {}, function(d) {
+					if(d.state == 0) {
+						appendSelectList($("#Channel"), d.many[0]);
+						appendSelectList($("#ADType"), d.many[1]);
+					} else
+						ysh_alert("系统服务出错，请刷新或联系客服");
+				});
+
+				var res = convertParams(condition);
+				res1 = initPageInfo(res);
+				var hash = window.location.hash;
+				res1.PageIndex = (parseInt(hash.substr(1,1000000)) - 1) * 10 || 0;
+				getDataList(yshurl + "SC_ADContent_List_GetContentInfo", res1, function(d) {
+				
+					if($.isArray(d.aaData) && d.aaData.length > 0) {
+						$.each(d.aaData, function(i, v) {
+							if(v.LinkType == 1) {
+								v.Store = v.AlterStoreName
+							}
+							//限制地址路径超长影响页面布局
+							if(v.FilePath.length > 20){
+								v.FilePath = v.FilePath.substr(0, 20) + "...";
+							}
+						});
+					}
+					//获取总条数
+					getDataList(yshurl + "SC_ADContent_List_GetContentTotal", res, function(d) {
+						dataTotal = d.aaData[0].TotalNum;
+					});
+					var tableData = {
+						total: dataTotal,
+						rows: d.aaData
+					};
+					$table.bootstrapTable({
+						onCheck: function(row) {
+							checkList.push(row.Id);
+							$.unique(checkList);
+						},
+						onUncheck: function(row) {
+							$.unique(checkList);
+							var pIndex = $.inArray(row.Id, checkList);
+							checkList.splice(pIndex, 1);
+						},
+						onCheckAll: function(rows) {
+							$.each(rows, function(index) {
+								checkList.push(rows[index].Id);
+							});
+							$.unique(checkList);
+						},
+						onUncheckAll: function(rows) {
+							$.unique(checkList);
+							var filterarray = $.grep(checkList, function(value) {
+								var isDel = false;
+								for(var i = 0; i < rows.length; i++) {
+									if(rows[i].Id == value) {
+										isDel = true;
+										break;
+									}
+								}
+								return !isDel;
+							});
+							checkList = filterarray;
+						},
+						escape: true,
+						sidePagination: 'server',
+						pagination: true,
+						pageSize: 10,
+						pageNumber: 1,
+						pageList: [10]
+					});
+					loadData($table, tableData);
+					
+					// 控制翻页事件
+					$table.on('page-change.bs.table', function(e, number, size) {
+						res1.PageIndex = (number - 1) * size;
+						res1.PageSize = size;
+						window.location.hash = number;
+						getData(res1);
+					});
+					
+					// onhashchange可以监控hash变化
+					window.onhashchange = function() {
+						var hash = window.location.hash;
+						var id;
+						if(hash != "") {
+							id = parseInt(hash.substr(1));
+						} else {
+							id = 1
+						}
+						res1.PageIndex = (id - 1) * 10;
+						res1.PageSize = 10;
+						getData(res1);
+						$("ul.pagination").children().eq(id).addClass("active").siblings().removeClass("active");
+					};
+				});
+				setIframeHeight();
+			});
+		</script>
+	</body>
+
+</html>

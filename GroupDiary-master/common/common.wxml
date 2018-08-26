@@ -1,0 +1,174 @@
+<!--公告模板-->
+
+<!--搜索框-->
+<template name="search-bar">
+  <view class="search-bar">
+    <form bindreset="onSearchCancle">
+      <view class="search-content">
+        <view class="search-input">
+          <image class="icon" mode="aspectFill" src="/images/icon_search.png"></image>
+          <input class="input" focus="true" confirm-type="search" bindinput="onInput" bindconfirm="onSearch" placeholder="搜索" />
+          <button class="search-cancle" form-type="reset">
+            <image class="cancel-icon" src="/images/cancel.png" mode="aspectFit" />
+          </button>
+        </view>
+      </view>
+    </form>
+  </view>
+</template>
+
+<!--
+courseImg: 课程图片
+courseName: 课程名称
+courseNum: 课时
+time: 起止时间
+studentNum: 学生人数
+-->
+<template name="course-item">
+  <view class="course-item">
+    <image class="course-avatar" src="{{courseImg}}" mode="aspectFill"></image>
+    <view class="course-info" style="flex:1;">
+      <label class="multi-primary-text single-line-text">{{courseName}}</label>
+      <label class="multi-secondy-text" style="margin-bottom:15rpx;">{{time}}</label>
+      <label class="multi-secondy-text">{{studentNum}}</label>
+    </view>
+    <view style="flex-direction:column;">
+      <label wx:if="{{joinStatus==4 && activityType==2 && recordType==1}}" class="course-num">报名审核中</label>
+      <label wx:elif="{{recordType==50 && status >=12}}">{{courseTime}}课时</label>
+      <!--发动态按钮-->
+      <label wx:elif="{{joinFlag==1}}" class="right-layout right-btn text-align-center" catchtap="rightBtnClick" data-project-id="{{id}}" data-navigate-type="{{navigateType}}" data-activity-status="{{joinStatus}}" data-record-type="{{recordType}}">发动态</label>
+      <!--参加按钮-->
+      <!--普通活动未结束、报名活动报名中、被邀请 三种情况下显示参加按钮-->
+      <label wx:elif="{{status<12&&(inviteFlag==1||activityType==1||status==4)}}" class="right-layout right-btn text-align-center" catchtap="rightBtnClick" data-project-id="{{id}}" data-navigate-type="{{navigateType}}" data-activity-status="{{joinStatus}}"
+        data-record-type="{{recordType}}">参加</label>
+    </view>
+  </view>
+</template>
+
+<!--顶部搜索跳转按钮的样式模版-->
+<template name="search-tab">
+  <view class="search-bar" bindtap="toSearchPage">
+    <view class="search-tab">
+      <image class="search-icon" src="/images/icon_search.png"></image>
+      <view class="multi-secondy-text">搜索</view>
+    </view>
+  </view>
+</template>
+
+<!--九宫格图片显示-->
+<template name="multi-pic-view">
+  <block wx:for-items="{{imageList}}" wx:key="{{image}}" wx:for-item="image">
+    <view class="weui-uploader__file">
+    <image class="weui-uploader__img" mode="aspectFill" src="{{image}}" data-src="{{image}}" data-list-index="{{listIndex}}" data-index="{{index}}" bindtap="previewImage" bindlongtap="deleteImage"/>
+  </view>
+  </block>
+</template>
+
+<!--添加图片按钮-->
+<template name="add-pic-view">
+  <view class="weui-uploader__input-box">
+    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+  </view>
+</template>
+
+<!--地址栏-->
+<template name="address">
+  <view class="address" wx:if="{{address!=''&&address!=null}}" bindtap="navigateToAddress" data-lat="{{lat}}" data-lng="{{lng}}" data-address="{{address}}" data-addressName="{{addressName}}">
+    <image class="address-icon " mode="aspectFill " src="/images/icon_location.png " />
+    <view class="address-text">{{address}}</view>
+  </view>
+</template>
+<template name="user-info-template">
+  <view class="user-info-container">
+
+    <!--动态头部的发起人信息-->
+    <image class="dynamic-user-avatar" src="{{userImg}}"></image>
+    <view class="user-info">
+      <label class="dynamic-user-name">{{name}}</label>
+      <label class="dynamic-user-send">{{sendTime}}</label>
+    </view>
+  </view>
+</template>
+
+<!--动态列表的项-----start-->
+<template name="dynamic-item">
+  <block wx:for-items="{{dynamicList}}" wx:for-item="dynamic" wx:key="{{dynamic.id}}">
+    <view class="dynamic-item">
+      <template is="user-info-template" data="{{userImg:dynamic.createUserImg,name: dynamic.createUserName,sendTime:dynamic.createTime}}"></template>
+<view wx:if="{{dynamic.flowTypeKey=='TD_AN_A_DT_TD'}}" class="dynamic-content-container">
+
+  <!--动态的内容部分-->
+  <template is="file-list" data="{{...dynamic,defaultShowAll,imagePrefix}}"></template>
+  <template is="address" data="{{lat:dynamic.lat,lng:dynamic.lng,address:dynamic.address,addressName:dynamic.addressName}}"></template>
+</view>
+<template wx:elif="{{dynamic.flowTypeKey=='TD_AN_A_HD_HD'}}" is="dynamic-activity" data="{{...dynamic,formatTime:dynamic.beginTime+' - '+dynamic.endTime,hintLabel:actionHintLabel}}"></template>
+<template wx:elif="{{dynamic.flowTypeKey=='TD_AN_A_GG_GG'}}" is="dynamic-notice" data="{{...dynamic,hintLabel:noticeHintLabel}}"></template>
+<template wx:elif="{{dynamic.flowTypeKey=='TD_AN_A_TP_TP'}}" is="dynamic-vote" data="{{...dynamic,activityImg:dynamic.coverImg,formatEndTime:dynamic.endTime,hintLabel:voteHintLabel,endVoteTimeLabel:endVoteTimeLabel}}"></template>
+<template wx:elif="{{dynamic.recordType==54}}" is="dynamic-signin" data="{{...dynamic}}"></template>
+
+<!--recordType == 54 说明是签到-->
+<view wx:if="{{dynamic.recordType != 54}}" class="comment-container">
+
+  <!--动态的评论部分-->
+  <view class="comment-icon-container">
+
+    <!--点赞，评论图标行-->
+    <view bindtap="commentDynamic" data-item-id="{{dynamic.id}}" style="display:flex;align-items:center;">
+      <image class="star-icon" src="/images/pinlun.png"></image>
+      <label class="star-num-text">{{dynamic.commentCount== 0 ? '评论' : dynamic.commentCount}}</label>
+    </view>
+    <view style="display:flex;align-items:center;margin-right:60rpx;" bindtap="starDynamic" data-item-id="{{dynamic.id}}" data-item-star-status="{{dynamic.likeStatus}}" data-item-type="{{dynamic.recordType}}">
+      <image class="star-icon" src="{{dynamic.likeStatus==1? '/images/star.png': '/images/unstar.png' }}"></image>
+      <label class="star-num-text">{{dynamic.likeCount==0 ? '赞':dynamic.likeCount}}</label>
+    </view>
+    <label wx:if="{{canDel && currentUserId== dynamic.createUserId}}" class="action-dynamic-del" bindtap="delActionDynamic" data-dynamic-id="{{dynamic.id}}" data-project-item-id="{{dynamic.recordId}}">删除</label>
+  </view>
+  <view class="avater-and-comment">
+    <view class="star-user-avatar-container">
+      <!--点赞人头像-->
+      <view class="like">
+        <image wx:if="{{dynamic.likeList.length>0}}" class="icon" src="/images/icon_like.png" />
+        <block wx:for-items="{{dynamic.likeList}}" wx:for-item="likeName">
+          <view class="name">{{likeName}}</view>
+          <view wx:if="{{index!=dynamic.likeList.length-1}}" class="comma">,</view>
+          <!--<image class="comment-user-avatar-img" src="{{comment}}" bindtap="previewImage" data-comment-user-img="{{comment}}" data-item-id="{{dynamic.id}}"></image>-->
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!--评论-->
+  <view style="background-color:#f8f8f8;flex-direction: column;">
+    <view wx:if="{{dynamic.showCommentInput}}" class="input-layout" style="padding-top:10rpx;padding-bottom:10rpx;">
+      <input bindinput="inputCommentDynamic" style="background-color:white;flex:1;margin-right:10rpx;font-size:30rpx;" focus='true' confirm-type="done" bindconfirm="sendDynamicComment" bindfocus="onInputFocus" bindblur="onInputBlur" data-item-id="{{dynamic.id}}"
+        data-item-type="{{dynamic.recordType}}" cursor-spacing='10' placeholder="{{replyUserName!=null&&replyUserName!=''?'回复 '+replyUserName:'输入评论内容'}}" />
+      <label class="comment-user-name" style="display:flex;" data-item-id="{{dynamic.id}}" data-item-type="{{dynamic.recordType}}" bindtap="sendDynamicComment">确定</label>
+    </view>
+    <view wx:if="{{dynamic.briefCommentList!=null&&dynamic.briefCommentList.length>0}}">
+      <block wx:for-items="{{(!dynamic.showAllComment) ?dynamic.briefCommentList: dynamic.commentList}}" wx:for-item="commentItem">
+        <view class="comment-content-container" bindtap="commentDynamic" data-item-id="{{dynamic.id}}" data-reply-user-name="{{commentItem.userName}}" data-reply-id="{{commentItem.dynamicId}}" data-reply-user-id="{{commentItem.createUserId}}">
+          <view class="comment-user-name-container">
+            <label class="comment-user-name">{{commentItem.userName}}</label>
+            <label wx:if="{{commentItem.replyUserName!=null && commentItem.replyUserName !=''}}" style="font-size:24rpx;white-space:nowrap;">回复</label>
+            <label wx:if="{{commentItem.replyUserName!=null && commentItem.replyUserName !=''}}" class="comment-user-name">{{commentItem.replyUserName}}</label>
+          </view>
+          <label class="comment-content">:{{commentItem.content}}</label>
+        </view>
+      </block>
+    </view>
+    <label wx:if="{{dynamic.commentCount>3 && !dynamic.showAllComment }}" style="margin-left:100rpx;" class="comment-user-name" bindtap="showMoreComment" data-item-id="{{dynamic.id}}">{{moreCommentLabel}}</label>
+  </view>
+  <view>
+  </view>
+</view>
+</view>
+<view style="height:10rpx;width:100%;background-color:#ebebf1;"></view>
+</block>
+</template>
+
+<!--空白页面-->
+<template name="empty-page">
+  <view class="empty-page">
+    <view class="empty-text">{{text}}</view>
+  </view>
+</template>

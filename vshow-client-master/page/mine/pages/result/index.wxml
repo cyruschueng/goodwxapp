@@ -1,0 +1,22 @@
+<view class="weui-article">
+    <view class="weui-article__h1">您的问题是：{{ result.quizText }}</view>
+    <view  class="weui-article__section">
+        <!-- 回答问题列表 -->
+        <view wx:for="{{result.ask}}" wx:key="{{ item._id }}"  class="weui-article__section bge">
+            <view class="weui-article__h3">来自{{ item.isAnonym? '匿名': item.author.nickName }}回答：</view>
+            <view class="weui-article__p">
+                {{ item.cont }}
+            </view>
+            <view class="weui-article__p">
+                {{ item.cretime }}
+            </view>
+        </view>
+        <view wx:if="{{!result.ask.length}}"  class="weui-article__section">
+            <view class="weui-article__h3">暂时没有用户回答，转发让更多人回答你的问题吧</view>
+            <view class="weui-article__p">
+                <button open-type="share" style="margin-top: 40px;" bindtap="share" type='primary'>转发</button>
+            </view>
+        </view>
+      <!-- 回答问题列表 -->
+    </view>
+</view>

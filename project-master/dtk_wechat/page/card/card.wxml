@@ -1,0 +1,59 @@
+<import src="../../templates/personalInfo.wxml"/>
+<view class="listBox" hidden="{{listBox}}">
+  <!--<view class="list-title">
+    <view class="list-title-box">
+      <button type="red" hover-class="other-button-hover" bindtap="addList"><image style="width:32rpx; height:32rpx;" src="{{imgsrc}}"></image> 增加业务推广</button>
+    </view>
+  </view>
+  -->
+  <view class="swiper-tab">  
+    <view class="swiper-tab-list"><text data-current="0" bindtap="swichNav" class="{{currentTab==0 ? 'on' : ''}}">全部</text></view>  
+    <view class="swiper-tab-list"><text data-current="1" bindtap="swichNav" class="{{currentTab==1 ? 'on' : ''}}">我的</text></view> 
+    <view class='addbusiness' bindtap="addList"><image src="../../image/addbusiness.png"></image></view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight}}rpx" bindchange="bindChange">  
+    <swiper-item>
+      <view hidden="{{nothing}}">
+        <template is="nothing"></template>
+      </view>
+      <!-- 资金业务=全部  begin -->
+      <view class='newscard clearfix' wx:for="{{msgAllList}}"  wx:key="id" id="{{item.id}}"  bindtap="listClick" >
+        <image class='newscard-image' src="{{item.creator.avatar}}"></image>
+        <image class="delete" wx:if="{{item.ad_status==0}}" src="../../image/delete.png"></image>
+        <view class='newscard-main' style='float:left;width:500rpx;'>
+          <view class='list-all-main-title clearfix'>
+            <text class='list-all-title-box fontsize'>{{item.creator.name}}</text>
+            <text class='list-all-title-time'>{{item.update_datetime}}</text>
+          </view>
+          <view class="card-right"><text>{{item.ad_comment}}</text></view>
+        </view>
+      </view>
+      <!-- 资金业务=全部  end -->
+    </swiper-item>  
+    <swiper-item> 
+      <!-- 资金业务=我的  begin -->
+      <!-- 没有数据显示 -->
+      <view hidden="{{nothing}}">
+        <template is="nothing"></template>
+      </view>
+      <view class='newscard clearfix' wx:for="{{msgList}}"  wx:key="id" id="{{item.id}}"  data-adstatus="{{item.ad_status}}"  bindtap="listClick" bindtouchend="touchend"  bindlongtap="mylongtap" style='padding:0 30rpx;'>
+        <image class="delete" wx:if="{{item.ad_status==0}}" src="../../image/delete.png"></image>
+        <view class='newscard-main'>
+          <view class='list-all-main-title clearfix'>
+            <image class="newscard-image-me" src="../../image/newscard.png"></image>
+            <text class='list-all-title-box fontsize'>业务内容</text>
+            <text class='list-all-title-time'>{{item.update_datetime}}</text>
+          </view>
+          <view class="card-right"><text>{{item.ad_comment}}</text></view>
+        </view>
+      </view>
+      <!-- 资金业务=我的  end --> 
+    </swiper-item> 
+  </swiper>
+  
+  
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>
+

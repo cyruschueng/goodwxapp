@@ -1,0 +1,52 @@
+<!--pages/home/home.wxml-->
+
+
+<view class='bg-view'>
+
+  <!-- logo -->
+  <view class='logo-view'>
+    <image class='logo-img' src='../../images/card_logo.png'></image>
+  </view>
+
+  <!-- tab -->
+  <view class='tab-view'>
+  
+    <view class='weui-flex'>
+      <view id='classSchedule' bindtap='bindNavigatorTap' class='weui-flex__item tab-item border-right'>
+        <image class='tab-icon' src='../../images/icon/home/schedule.png'></image>
+        <view>课程表</view>
+      </view>
+      <view id='../mine/courseShare/courseShare' bindtap='bindNavigatorTap' class='weui-flex__item tab-item border-right'>
+        <image class='tab-icon' src='../../images/icon/home/class_share.png'></image>
+        <view>课程共享</view>
+      </view>
+    </view>
+
+    <view class='weui-flex'>
+      <view id='myClass' bindtap='bindNavigatorTap' class='weui-flex__item tab-item'>
+        <image class='tab-icon' src='../../images/icon/home/order_class.png'></image>
+        <view>我的约课</view>
+      </view>
+      <view id='personalTrainer' bindtap='bindNavigatorTap' class='weui-flex__item tab-item'>
+        <image class='tab-icon' src='../../images/icon/home/mycoach.png'></image>
+        <view>我的教练</view>
+      </view>
+    </view>
+
+    <view class='weui-flex'>
+      <view id='recommendedCourses' bindtap='bindNavigatorTap' class='weui-flex__item tab-item'>
+        <image class='tab-icon' src='../../images/icon/home/recommend.png'></image>
+        <view>推荐课程</view>
+      </view>
+      <view class='weui-flex__item tab-item border-right' id='buyMembershipCard' bindtap='bindNavigatorTap'>
+        <image class='tab-icon' src='../../images/icon/home/online_card.png'></image>
+        <view>在线购卡</view>
+      </view> 
+    </view>
+
+  </view>
+
+</view>
+
+<!-- 认证弹窗 -->
+<certificationModal modal-hidden="{{ is_modal_Hidden }}" modal-isCertificationMem="{{ isCertificationMem }}" />  

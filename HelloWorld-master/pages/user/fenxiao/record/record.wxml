@@ -1,0 +1,28 @@
+<!--pages/user/fen/record/record.wxml-->
+<view class="record">
+  <block wx:if="{{data_list == null}}">
+  <view class="zanwu tc">
+    <text class="iconfont icon-kongbaiyemian"></text>
+    <view class="f18">您暂时还没有分销记录</view>
+  </view>
+  </block>
+  <block wx:else>
+    <view class="rtit tc grey flex">
+      <view class="from">来自</view>
+      <view class="time">时间</view>
+      <view class="sub sum">金额</view>
+      <view class="states">状态</view>
+    </view>
+
+    <view class="rbody tc">
+    <block wx:for="{{data_list}}">
+      <view class="ritem flex">
+        <view class="from">{{item.providemoneyname}}</view>
+        <view class="time">{{item.strctime}}</view>
+        <view class="sub sum">{{item.tcamount}}</view>
+        <view class="states red">{{item.tcstatus}}</view>
+      </view>
+    </block>
+    </view>
+  </block>
+</view>

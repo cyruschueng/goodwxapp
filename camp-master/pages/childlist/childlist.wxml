@@ -1,0 +1,41 @@
+<view class="page-childlist">
+    <scroll-view class="child-records" style="height:{{height}}" scroll-y="{{true}}" bindscrolltolower="getNext">
+        <block wx:for="{{children}}" wx:key="index">
+            <template is="child" data="{{...item}}"></template>
+        </block>
+    </scroll-view>
+    <view class="add-child" bindtap="toEdit">
+        <view class="btn"> 
+            <image class="add-logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            <text class="zan-font-16">添加孩子</text>
+        </view>
+    </view>
+</view>
+
+
+<template name="child">
+    <view class="child-record zan-panel">
+        <view class="name line">
+            <image class="field-logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            <text class="zan-font-14">姓名 : </text>
+            <text class="zan-font-14">{{name}}</text>
+        </view>
+        <view class="birthday line">
+            <image class="field-logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            <text class="zan-font-14">性别 : </text>
+            <text class="zan-font-14">{{sex}}</text>
+        </view>
+        <view class="sex line">
+            <image class="field-logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            <text class="zan-font-14">生日 : </text>
+            <text class="zan-font-14">{{birthday}}</text>
+        </view>
+
+        <view class="editBtn" bindtap="toEdit">
+            <image class="edit-logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+        </view>
+        
+    </view>
+</template>
+
+

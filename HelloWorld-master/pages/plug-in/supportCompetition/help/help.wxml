@@ -1,0 +1,81 @@
+<view class='page'>
+  <view class='mainBox tc'>
+
+    <view class='topBox flex'>
+      <view class='sub'>
+        <text class='name'>排名：</text>
+        <text class='num'>{{helplike.rank}}</text>
+      </view>
+      <view class='myPicBox'>
+        <image class='myPic' src='{{helplike.headimgurl}}' mode='aspectFill'></image>
+      </view>
+      <view class='sub'>
+        <text class='name'>人气值：</text>
+        <text class='num'>{{helplike.get_num}}</text>
+      </view>
+    </view>
+
+    <view class='nickname lineText'>{{helplike.nickname}}</view>
+
+    <view class='inventBox'>
+      <view>
+        <text>您的好友 “ </text>
+        <text class='friName lineText'>{{helplike.nickname}}</text>
+        <text> ” 邀您帮TA抢好礼</text>
+      </view>
+
+      <view>人气越多奖励越大！</view>
+    </view>
+
+    <!--帮ta抢一次  -->
+    <block wx:if="{{like.end}}">
+    <view class='overtips'>活动已结束</view>
+    </block>
+    <block wx:else>
+    <button class='btn aleady'  wx:if="{{ishelp}}">帮TA抢一次</button>
+
+    <button class='btn helpBtn' catchtap='help' disabled='{{disable}}' wx:else>帮TA抢一次</button>
+
+    <button class='btn partBtn' catchtap='toindex'>我也要参加</button>
+    </block>
+    
+
+    <!--帮抢好友  -->
+    <view class='helpFri'>
+
+      <view class='flex'>
+        <view class='aliLf sub'>
+          <view class='cir kxcircle'></view>
+          <view class='cir sxcircle moveLf'></view>
+        </view>
+        <view class='helpTit'>帮抢团</view>
+        <view class='aliRg sub'>
+          <view class='cir sxcircle moveRg'></view>
+          <view class='cir kxcircle'></view>
+        </view>
+      </view>
+
+      <scroll-view class='scrollView' scroll-y>
+        <block wx:if="{{helphead}}" wx:for="{{helphead}}" wx:key="{{index}}">
+          <image class='hfPic' src='{{item.headimgurl}}' mode='aspectFill'></image>
+        </block>
+      </scroll-view>
+
+
+    </view>
+
+  </view>
+
+
+  <!--帮抢弹窗  -->
+  <view class='shade_bg' hidden='{{!helpuser}}' catchtap='hidehelp'>
+    <view class='modal'>
+      <view class='moaCon tc'>
+        <image class='qiangPic' src='{{helplike.headimgurl}}' mode='aspectFill'></image>
+        <view class='rqplus'>帮抢成功，人气 +1</view>
+      </view>
+    </view>
+  </view>
+
+
+</view>

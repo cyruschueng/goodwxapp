@@ -1,0 +1,34 @@
+<view class="container">
+	<view class="normal-birth" bindtap='edit' wx:for="{{allList}}" data-mid="{{item.mid}}">
+		<view class="birth-member-info" >
+			<view class="avatar">
+				<image src="{{item.avatar}}"></image>
+			</view>
+			<view class="detail-box">
+				<view class="mate-name" data-friendunionid="otzCvuGQ6jNis59doRLx_IdakI6A"
+				data-index="0" data-nickname="">
+					<text wx:if="{{item.nickname}}">{{item.nickname}}</text>
+          <text wx:else>设置本群昵称</text>
+          <image src="../images/edit.png"></image>
+				</view>
+				<view class="mate-birth">	微信名字：{{item.wx_name}}</view>
+			</view>
+		</view>
+	</view>
+</view>
+<!--弹窗  -->
+<view class='bg' wx:if="{{showModalStatus}}"></view>
+<view class="drawer_box" wx:if="{{showModalStatus}}">  
+  <!--drawer content-->  
+  <view class="drawer_title">TA在本群的昵称</view> 
+  <view class='little'>所有群内成员都可以看到你设置的昵称</view> 
+  <view class="drawer_content">  
+    <view class="top grid">  
+      <input class="input_base input_h30 col-1" name="rName" bindinput='name' placeholder="设置在本群的昵称"></input>  
+    </view> 
+  </view>  
+  <view class='button'>
+      <view class="btn_no" bindtap="btn_no" data-statu="close">取消</view>  
+      <view class="btn_ok" bindtap="btn_ok" data-statu="close">保存</view>  
+  </view>
+</view>  

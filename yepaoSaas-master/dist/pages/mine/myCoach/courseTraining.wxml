@@ -1,0 +1,92 @@
+<!--pages/myCoach/courseTraining.wxml-->
+
+<import src="../../../templates/courseTraining-item/courseTraining-item.wxml"/>
+<import src="../../../templates/videoPopups-item/videoPopups-item.wxml"/>
+
+<view class='bg-view' hidden='{{ !showVideoHidden }}'>
+
+  <!-- 头部 -->
+  <view class='title-view'>
+    <view class='course-item-view'>
+      <block wx:for='{{ courseItem }}' wx:key='{{ index }}'>
+        <view class='course-item'>{{ item }}</view>
+      </block>
+    </view>
+    <view class='course-level-view'>
+      <view>训练强度：{{ courseLevel }}</view>
+      <view class='second-txt-fscolor'>
+        训练间的休息时长：{{ courseRTime }}
+        <image class='shareIcon' src='../../../images/icon/share.png' bindtap='bindCourseSharedTap'></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 课程 cell -->
+  <view class='course-cell-view'>
+    
+    <template is="courseTraining-item" data="{{ courseTrainingList, courseShare }}"/>
+
+  </view>
+
+  <!-- foot-view -->
+  <view class='foot-view' bindtap='bindMakeUpTap'>
+    {{ courseShare ? '立即分享' : '开始' }}
+  </view>
+
+  <!-- 分享 成功 提醒 -->
+  <view wx:if='{{ courseShareSuccess }}' class='share-success-remind-view'>
+    <!-- <view class='share-success-remind-btn'>您已将选中视频分享给{{ shareMemName }}</view> -->
+    <view class='share-success-remind-btn'>视频分享成功!</view> 
+  </view>
+
+</view>
+
+<!-- 视频 弹窗 -->
+
+<!-- <template is="videoPopups-item" data="{{ showVideoHidden, videoUrlsBrowse, videoIconUrl  }}"/> -->
+
+<view class='popUps-bgview' hidden='{{ showVideoHidden }}'>
+   <!-- 收起按钮  -->
+  <image class='popUps-cancel-btn' src='../../../images/icon/delete_back.png' bindtap='bindCloseVideoShowTap'></image>
+
+  <video class='video' 
+        autoplay='false' 
+        id="{{ videoIndex }}" 
+        src="{{ videoUrlsBrowse[videoIndex].srcString }}" 
+        bindended='bindVideoPalyEnded'
+        bindfullscreenchange='bindVideoFullscreenChange'>
+    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" bindtap='bindPreVideoTap'>
+      <cover-image class="pre-btn-img" src="../../../images/icon/mine/prev_video.png" />
+    </cover-view>
+    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" bindtap='bindNextVideoTap'>
+      <cover-image class="next-btn-img" src="../../../images/icon/mine/next_video.png" />
+    </cover-view>
+  </video>
+
+  <view class='foot-view weui-flex'>
+    <view id="{{ videoIndex }}" class="pre-btn weui-flex__item" bindtap='bindPreVideoTap'>上一个</view>
+    <view id="{{ videoIndex }}" class="pre-btn weui-flex__item" bindtap='bindNextVideoTap'>下一个</view>
+  </view>
+
+
+   <!-- 视频  -->
+  <!-- <view class="we-container">
+    <view class="we-wrapper"
+      bindtouchstart="touchstart"
+      bindtouchmove="touchmove"
+      bindtouchend="touchend"
+      animation="{{ animationData }}">
+      <block wx:for="{{ videoUrlsBrowse }}" wx:key="{{ index }}">
+      <view class="we-slide" >
+        <video class='video' autoplay='false' id="{{ index }}" src="{{ item.srcString }}" bindended='bindVideoPalyEnded'>
+          <cover-view class="pre-btn">上一个</cover-view>
+          <cover-view class="next-btn">下一个</cover-view>
+        </video>
+      </view>
+      </block>
+    </view> 
+  </view>  -->
+  
+</view> 
+
+

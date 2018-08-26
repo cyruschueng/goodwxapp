@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<view class="page"> 
+
+  <!--案例-->
+  <view class="al">
+    <text>全部案例</text>
+  </view>
+  <!--横线-->
+  <view class="aaaa"></view>  
+
+  <!--案例资讯-->
+
+<block wx:for="{{list_}}" wx:key='id' wx:for-item='anli'>
+  <navigator url='/pages/anli_detail/anli_detail?anli_id={{anli.id}}'>
+  <view class="alzx">
+    <view class="alzx_img">
+      <image src="{{imgurl+anli.img}}" style="width:198rpx;height:166rpx;"></image>
+    </view>
+    <view class="alzx_txt">
+      <view class="alzx_txt1">
+        <text class="txt1">名称：</text><text class="txt2">{{anli.name}}</text>
+      </view>
+      <view class="alzx_txt3">
+        <text class="txt1">类型：</text><text class="txt1">{{anli.cate_name}}</text>
+      </view>
+      <view class="alzx_txt3">
+        <text class="txt1">功能：</text><text class="txt1">{{anli.funcs}}</text>
+      </view>
+    </view>
+  </view>
+  </navigator>
+   <view class="aaaa"></view>  
+</block>
+</view> 

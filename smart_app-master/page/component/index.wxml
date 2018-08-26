@@ -1,0 +1,89 @@
+<view class="index">
+  <view class="index-hd">
+    <!-- <image class="index-logo" src="resources/kind/logo_data0.png"></image> -->
+    <!-- <image class="image-logo" src="resources/kind/logo_data_long0.png"></image> -->
+    <!-- <view>{{countnum}}</view>  -->
+    <!-- <view>
+      <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="weixinlogin"> 微信登陆 你好 {{nickName}}</button>
+    </view> -->
+
+    <!-- <open-data type="groupName" open-gid="xxxxxx"></open-data> -->
+    <!-- <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="weixinlogin"> 微信登陆 </button> -->
+    <!-- <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="scanlogin"> 扫码登陆 </button>   -->
+    <!-- <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="onlyscanlogin"> 拍照登陆 </button>    -->
+    <!-- <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="onlyscanlogin"> 拍照登陆 </button>    -->
+    <!-- <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="sports"> 运动控制 </button>      -->
+
+    <!-- <view class="index-desc">以下将展示小程序官方组件能力，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见小程序开发文档。</view> -->
+    <!-- 小数据顾问 -->
+    <!-- 1 为数据需求人员提供专业数据支持和咨询，通过系统针对性测试，辅助决策。  -->
+    <!-- 2 为投资者接受教育群体，提供客观测试。 -->
+    <!-- <view class="index-desc">本应用为数据需求人员、投资者接受教育群体提供针对性教育测试,提供专业数据支持和咨询.</view> -->
+    <!-- <view class="index-desc">v1.4.2</view> -->
+    <!-- <view class="page-section-ctn"> -->
+    <!-- <image class="image" src="{{pic}}"/>  -->
+    <!-- <view>{{nickName}} 
+         <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="restart">登陆</button>  -->
+    <!-- <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="quit">注销</button> -->
+    <!-- </view>            -->
+    <!-- </view> -->
+
+    <view class="page-body">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" vertical="{{vertical}}">
+        <block wx:for="{{imgUrls}}">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" width="355" height="auto" />
+            <!-- <image src="{{item}}" class="slide-image"  /> -->
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- <button bindtap="changeIndicatorDots"> indicator-dots </button> -->
+      <!-- <button bindtap="changeAutoplay"> autoplay </button> -->
+      <!-- <slider bindchange="intervalChange" show-value min="500" max="2000" /> interval -->
+      <!-- <slider bindchange="durationChange" show-value min="1000" max="10000" /> duration -->
+
+    </view>
+
+  </view>
+  <view class="index-bd">
+    <view class="kind-list">
+      <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+        <view class="kind-list-item">
+          <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
+            <view class="kind-list-text">{{item.name}}</view>
+            <image class="kind-list-img" src="resources/kind/{{item.id}}.png"></image>
+          </view>
+          <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
+              <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
+                <!-- <navigator url="pages/{{page}}/{{page}}" class="navigator"> -->
+                <navigator url="pages/{{page}}/{{page}}" class="navigator">
+                  <!-- <view class="navigator-text">{{page}} {{pagesname}}</view> -->
+                  <view class="navigator-text">{{page}}</view>
+                  <view class="navigator-arrow"></view>
+                </navigator>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="index-help">
+    <view class="index-desc">v1.4.4</view>
+    <!-- <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="help">  -->
+    人寿车险咨询，此处有客服->
+    <contact-button type="default" size="30" session-from="weapp"></contact-button>
+    <view/>
+    <button class="mini-btn" type="primary" size="mini" plain="true" bindtap="weixinlogin">
+      微信登陆 你好 {{nickName}}
+    </button>
+    <!-- </button>  -->
+  </view>
+
+  <!-- This is our View -->
+<view> Hello {{u_name}}! </view>
+<button bindtap="changeName"> Click me! </button>
+
+</view>

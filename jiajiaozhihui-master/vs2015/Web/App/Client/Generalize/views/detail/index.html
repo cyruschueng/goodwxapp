@@ -1,0 +1,66 @@
+﻿<div class="page" ng-controller="detailController">
+    <form name="detailForm" ng-submit="submitForm(detailForm.$valid)"  novalidate name="loginForm">
+        <div ng-include="'./views/detail/header.html'"></div>
+        <div class="page__hd" style="text-align: center">
+            <img id="groupSrc" ng-click="chooseImage1()" class="img-responsive" style="width:50%;"  src="{{info.img_url}}" />
+            <div ng-if="info.img_url!=''" style="color:#999; font-size:13px;">点上面的图片，可以进行修改</div>
+        </div>
+        <div class="page__bd">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" ng-model="info.title" name="title" id="title" required placeholder="请输入班级名称">
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">群类型</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" ng-model="info.catalogue" ng-options="m.value as m.name for m in grade"></select>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">班级</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input"   type="text"   ng-model="info.class_name" name="classname" id="classname" required placeholder="请输入班级">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">有效期</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="date" ng-model="info.valid_date" name="validdate" id="validdate" required placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">状态</label></div>
+                    <div class="weui-cell__bd">
+                        <p class="text-primary" ng-if="info.is_act==1">使用中</p>
+                        <p class="text-muted" ng-if="info.is_act==0 && isValidDate(info.valid_date)==false">过期</p>
+                        <p class="text-muted" ng-if="info.is_act==0 && isValidDate(info.valid_date)==true">等待中</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">
+            <div class="form-error"
+                 ng-show="(detailForm.title.$invalid && detailForm.title.$dirty && !detailForm.title.$focused) || (detailForm.title.$invalid && submitted)">
+                <span ng-show="detailForm.title.$error.required">用户名不能为空</span>
+            </div>
+            <div class="form-error"
+                 ng-show="(detailForm.classname.$invalid && detailForm.classname.$dirty && !detailForm.classname.$focused) || (detailForm.classname.$invalid && submitted)">
+                <span ng-show="detailForm.classname.$error.required">班级不能为空</span>
+            </div>
+        </div>
+    </form>
+
+    <div ng-show="showLoadding" style="position:fixed; top:0; left:0; height: 100%; width: 100%;">
+        <div style="height: 100%; width: 100%; display: flex;align-items: center">
+            <div class="weui-loadmore" >
+                <i class="weui-loading"></i>
+                <span class="weui-loadmore__tips">正在处理中，请稍等</span>
+            </div>
+        </div>
+    </div>
+</div>

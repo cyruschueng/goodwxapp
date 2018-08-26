@@ -1,0 +1,99 @@
+<!--pages/FAIndustryAlliance/FAIndustryAllianceRegister/FAIndustryAllianceRegister.wxml-->
+<view class="classname">
+
+  <view class="personList presonBottom">
+    <view class="userBox">
+      <view class="userNameContent flex" bindtap="writeNewThing" data-type="{{0}}">
+        <view class="personListTile">姓名*</view>
+        <!-- <view class="flex"> -->
+        <input class='personName' type="text" value="{{user_real_name}}" bindblur="slectInput" maxlength="20" placeholder='请输入真实姓名' placeholder-class="placeStyle"></input>
+        <!-- <view class="personListContent" wx:if="{{!user_info.user_real_name}}">请输入姓名</view>
+          <view class="personListContentAfter" wx:if="{{user_info.user_real_name}}">{{user_info.user_real_name}}</view> -->
+        <!-- <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image> -->
+        <!-- </view> -->
+      </view>
+    </view>
+    <view class="userBox ">
+      <view class="userPhoneContent flex" bindtap="writeNewThing" data-type="{{1}}">
+        <view class="personListTile">手机号*</view>
+        <input class='personName' type="number" value="{{user_mobile}}" bindblur="slectInput" maxlength="40" placeholder='请输入手机号码' placeholder-class="placeStyle"></input>
+        <!-- <view class="flex">
+          <view class="personListContent" wx:if="{{!user_info.user_mobile}}">请输入手机号码</view>
+          <view class="personListContent" wx:if="{{user_info.user_mobile}}">{{user_info.user_mobile}}</view>
+          <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view> -->
+      </view>
+    </view>
+    <view class="userBox ">
+      <view class="userPhoneContent flex" bindtap="writeNewThing" data-type="{{1}}">
+        <view class="personListTile">验证码*</view>
+        <view class="personCode">
+         <view class="presonCode1" wx:if="{{personCode==true}}" bindtap="Code">获取验证码</view>
+          <input class='personName' type="text" placeholder='{{personTime}}s' placeholder-class="{{codeColor?'placeStyle':'placeStyle1'}}" bindfocus="personNo"  wx:if="{{personCode==false}}"></input> 
+         <!-- <input class="personName" wx:if="{{personCode==false}}">{{personTime}}s</input> -->
+        </view>
+        <!-- <view class="flex">
+          <view class="personListContent" wx:if="{{!user_info.user_mobile}}">请输入手机号码</view>
+          <view class="personListContent" wx:if="{{user_info.user_mobile}}">{{user_info.user_mobile}}</view>
+          <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view> -->
+      </view>
+    </view>
+  </view>
+
+  <view class="personList">
+    <view class="userBox">
+      <view class="userCompanyContent flex" bindtap="writeNewThing" data-type="{{3}}">
+        <view class="personListTile">公司*</view>
+        <input class='personName' type="text" value="{{user_company_name}}" bindblur="slectInput" maxlength="40" placeholder='请输入公司全称' placeholder-class="placeStyle"></input>
+        <!-- <view class="flex">
+          <view class="personListContent" wx:if="{{!user_info.user_company_name}}">请输入公司</view>
+          <view class="personListContentAfter" wx:if="{{user_info.user_company_name}}">{{user_info.user_company_name}}</view>
+          <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view> -->
+
+      </view>
+    </view>
+    <view class="userBox">
+      <view class="userBrandContent flex" bindtap="writeNewThing" data-type="{{2}}">
+        <view class="personListTile">品牌</view>
+        <input class='personName' type="text" value="{{user_brand}}" bindblur="slectInput" maxlength="40" placeholder='请输入公司品牌，如微天使' placeholder-class="placeStyle"></input>
+        <!-- <view class="flex">
+          <view class="personListContent" wx:if="{{!user_info.user_brand}}">请输入品牌</view>
+          <view class="personListContentAfter" wx:if="{{user_info.user_brand}}">{{user_info.user_brand}}</view>
+          <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view> -->
+      </view>
+    </view>
+
+    <view class="userBox">
+      <view class="userPositionContent flex" bindtap="writeNewThing" data-type="{{4}}">
+        <view class="personListTile">职位*</view>
+        <input class='personName' type="text" value="{{user_company_career}}" bindblur="slectInput" maxlength="40" placeholder='请输入您的职位' placeholder-class="placeStyle"></input>
+        <!-- <view class="flex">
+          <view class="personListContent" wx:if="{{!user_info.user_company_career}}">请输入职位</view>
+          <view class="personListContentAfter" wx:if="{{user_info.user_company_career}}">{{user_info.user_company_career}}</view>
+          <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view> -->
+      </view>
+    </view>
+    <view class="userBox">
+      <view class="userEmailContent flex" bindtap="writeNewThing" data-type="{{5}}">
+        <view class="personListTile">邮箱</view>
+        <input class='personName' type="text" value="{{user_email}}" bindblur="slectInput" maxlength="40" placeholder='请输入您常用的邮箱' placeholder-class="placeStyle"></input>
+        <!-- <view class="flex">
+          <view class="personListContent" wx:if="{{!user_info.user_email}}">请输入邮箱</view>
+          <view class="personListContentAfter" wx:if="{{user_info.user_email}}">{{user_info.user_email}}</view>
+          <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view> -->
+      </view>
+    </view>
+
+
+  </view>
+
+  <!--错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>
+
+<view class="btn" bindtap="submit">提交</view>

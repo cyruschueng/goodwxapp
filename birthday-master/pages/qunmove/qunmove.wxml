@@ -1,0 +1,27 @@
+<view class="container">
+	<view class="name-layout">
+		<view class="name-label">{{group_name}}</view>
+		<view class="label">	成员·{{members.length}}</view>
+	</view>
+	<!--content  -->
+  <view class="content">
+      <view class="list-layout">
+        <view class="item-layout" wx:for="{{members}}" bindtap='checked'
+              data-index="{{index}}" data-mid="{{item.mid}}" >
+          <image class="choose" wx:if="{{mid == item.mid}}" src="../images/birthwall_checkeda.png"></image>
+          <image class="choose" wx:else src="../images/birthwall_unchecked.png"></image>
+          <view class="main-layout">
+            <image class="avatar" src="{{item.avatar}}"></image>
+            <view class="right-layout">
+              <view class="name">{{item.name}}</view>
+              <view class="birth">{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日</view>
+            </view>
+          </view>
+        </view>
+      </view>
+ </view>
+	<view class="btn-layout">
+		<view class="cancel" bindtap='quxaio'>取消</view>
+		<view class="confirm" bindtap='setting'>设为群主</view>
+	</view>
+</view>

@@ -1,0 +1,41 @@
+<!--pages/appointment/appoinment.wxml-->
+<view class='container-full'>
+  <view class='white'></view>
+  <picker range='{{orderName}}' bindchange='checkOrder' value='orderCurrent'>
+    <view class='picker'> 
+      <view>选择订单</view>
+      <view>
+        <text wx:if="{{orderCurrent=='-1'}}">请选择订单</text>
+        <text wx:if="{{orderCurrent!='-1'}}">{{orderName[orderCurrent]}}</text>
+        <image src='/pages/source/images/foward.png'></image>
+      </view>  
+    </view>
+  </picker>
+  <picker range='{{states.name}}' bindchange='checkStates'>
+  <view class='picker'>
+    <view>预约项目</view>
+    <view>
+      <text wx:if="{{stateCurrent=='-1'}}">请选择项目</text>
+      <text wx:if="{{stateCurrent!='-1'}}">{{states.name[stateCurrent]}}</text>
+      <image src='/pages/source/images/foward.png'></image>
+    </view>  
+  </view>
+  </picker> 
+  <picker class='date' mode='date' bindchange='checkDate'>
+    <view class='picker' style='border-bottom:{{none}}'>
+      <view>选择时间</view>
+      <view>
+        <text wx:if="{{dateCurrent=='-1'}}">请选择时间</text>
+        <text wx:if="{{dateCurrent!='-1'}}">{{date}}</text>
+        <image src='/pages/source/images/foward.png'></image>
+      </view>  
+    </view>
+  </picker> 
+  <view class='timepicker' wx:if="{{dateCurrent=='1'}}">
+    <view class='{{index==timeCurrent?"timeSel":"timeTab"}}' wx:for="{{timeTab}}" wx:key='index' bindtap='subTime' data-index='{{index}}'>
+      <view class='time'>{{item.time}}</view>
+      <view class='number'>{{item.mumber}}人</view>
+    </view>
+  </view>
+  <view class='btn' bindtap='appointment'>立即预约</view>
+</view>

@@ -1,0 +1,22 @@
+<view class="wrap">
+    <view class="bg">
+        <view class="cid_text">{{cidText}}</view>
+        <image class="shelf_bg" src="../../images/library/shelf_bg.png"></image>
+        <image class="shelf_bg" src="../../images/library/shelf_bg.png"></image>
+        <image class="shelf_bg" src="../../images/library/shelf_bg.png"></image>
+        <view class="books-box">
+            <view wx:for="{{books}}" wx:key="{{item}}" class="lis" data-item="{{item}}">
+                <view class="li">
+                    <image class="book_bg" src="{{item.max_score>0?'../../images/library/book_y.png':'../../images/library/book_b.png'}}"></image>
+                    <view wx:if="{{item.max_score>0}}" class="max-box">
+                        <image class="max_bg" src="../../images/library/max_bg.png"></image>
+                        <view>{{item.max_score}}</view>
+                    </view>
+                    <image class="cover_pic" src="{{item.pic}}" data-book-id="{{item.id}}" data-book-pic="{{item.pic}}" bindtap="toReading"></image>
+                    <view class="cover_name">
+                        <view style="margin: auto;">{{item.book_name}}</view></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

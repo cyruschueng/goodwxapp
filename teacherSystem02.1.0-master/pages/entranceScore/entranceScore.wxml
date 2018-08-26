@@ -1,0 +1,77 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="wrap">
+    <view class="classInfo flex">
+      <view>{{classStr}}</view>
+      <image src="../images/menu.gif" bindtap="powerDrawer" data-statu="{{isopen}}" wx:if="{{!showModalStatus}}"></image>
+    </view>
+    <view class="choise flex">
+      <view class="choiseItem" bindtap="getClass" data-id="class">{{classInn}}<image src="../images/arrow.gif"></image></view>
+      <view class="choiseItem choiseItem1" bindtap="getKejie" data-id="kejie">{{kejieInn}}<image src="../images/arrow.gif"></image></view>
+    </view>
+    <form bindsubmit="saveScore">
+      <view class="thead flex">
+        <view class="sNumber">序号</view>
+        <view class="sName">姓名</view>
+        <view class="sSchool">得分</view>
+      </view>
+      <view class="tbody" style="height:{{resultH}}px">
+        <view class="tbody-row flex" wx:for="{{studentsList}}" wx:key="id">
+          <input type="hidden" class="hidInp" name="datas[{{index}}][sClassCode]" value="{{item.sClassCode}}" />
+          <input type="hidden" class="hidInp" name="datas[{{index}}][nLessonNo]" value="{{item.nLessonNum}}" />
+          <input type="hidden" class="hidInp" name="datas[{{index}}][sCardCode]" value="{{item.sCardCode}}" />
+          <input type="hidden" class="hidInp" name="datas[{{index}}][sStudentCode]" value="{{item.sStudentCode}}"/>
+          <input type="hidden" class="hidInp" name="datas[{{index}}][ScoreType]" value="{{item.ScoreType}}" />
+          <view class="sNumber">{{index+1}}</view>
+          <view class="sName">{{item.sName}}</view>
+          <view class="sSchool">
+            <input type="digit" bindblur="checkScore" step="0.1" value="{{item.Score}}" name="datas[{{index}}][Score]" placeholder="{{item.tipText}}" disabled="{{item.disable}}" />
+            </view>
+        </view>
+      </view>
+
+      <view class="btn">
+        <button formType="submit" class="loginBtn" hover-class="hoverLogin">保存</button>
+      </view>
+    </form>
+  </view>
+
+  <!-- 弹窗 -->
+  <view class="float" wx:if="{{show}}" data-id="float" bindtap="closeFloat">
+    <view class="floatWrap">
+      <view class="arrows arrowT"><image class="arrowT" src="../images/arrow-t.png"></image></view>
+      <view class="floatC">
+        <view class="floatC-item" wx:for="{{arr}}" data-id="{{item.id}}" bindtap="getIndex">{{item.value}}</view>
+      </view>
+      <view class="arrows arrowB"><image class="arrowB" src="../images/arrow-b.png"></image></view>
+    </view>
+  </view>
+
+
+
+  <!-- 导航 -->
+   <view animation="{{animationData}}" class="mainMenu drawer_attr_box" wx:if="{{showModalStatus}}" bindtap="closeNav" data-id="closeNav">
+    <view class="menu" data-id="menu">
+        <view class="userinfo flex">
+            <view class="Avatar">
+                <image src="../images/noface.png" mode='widthFix'></image>
+            </view>
+            <view class="name">{{teacherName}}</view>
+        </view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SchoolCollection/SchoolCollection'>学校信息收集</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClassEntryGrade/SelectClassEntryGrade'>学员资料查询</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClass/SelectClass'>班级成绩录入</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/PicClassList/PicClassList'>定制图片生成</navigator></view>
+        <view class="quit tac"><button class="btn" bindtap="unlogin" hover-class="hoverLogin">退出登录</button></view>
+    </view>
+  </view>
+
+
+  <!-- 导航tab -->
+  <view class="tabBar flex">
+    <view class="tabItem " bindtap="changeColor" wx:for="{{tabBarArr}}" data-id="{{index}}" wx:key="id">
+      <view class="icon"><image class="icon1" mode="aspectFit" src="{{item.iconSrc}}"></image></view>
+      <view class="txt" style="color:{{item.changeTextColor}}">{{item.txt}}</view>
+    </view>
+  </view>
+</view>

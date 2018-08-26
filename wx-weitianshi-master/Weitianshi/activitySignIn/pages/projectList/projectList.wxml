@@ -1,0 +1,9 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<!-- <view wx:if="{{nonet}}"> -->
+  <scroll-view bindscrolltolower="loadMore"  style="height:1200rpx;" scroll-y="true">
+    <template is="personModal" data="{{list:applyList,type:1,push_id:0}}"></template>
+    <template is="hasNothing" data="{{emptyNumber:applyList}}"></template>
+    <template is="theBottom" wx:if="{{atBottom == true}}"></template>
+  </scroll-view>
+<!-- </view> -->

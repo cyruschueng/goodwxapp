@@ -1,0 +1,27 @@
+<!--pages/hotel-details/hotel-details.wxml-->
+<view class='container'>
+  <swiper indicator-dots='true' indicator-color='#f7e68a' indicator-active-color='#ffffff' autoplay='true' interval='3000' duration='500' class='hd-slide'>
+    <block wx:for='{{imgUrl}}' wx:key='unique'>
+      <swiper-item>
+        <image src='{{item}}' class='slide-image'></image>
+      </swiper-item>
+    </block>
+  </swiper> 
+  <view class='section-hd'>
+    <view class='hotel-title'>{{hotel_title}}</view>
+    <view class='price'>￥{{price}}</view>
+    <view class='collection'>
+      <image src='/image/star.png' wx:if='{{collection}}'></image>
+      <image src='/image/star.png' wx:else></image>
+    </view>
+  </view>
+  <view class='sales-volume'>销量：{{sales_volume}}</view>
+  <view class='discount'>促销：<text>直降：{{discount}}元</text></view>
+  <view class='section-bd'>
+    <view class='section-bd-title'>房间介绍</view>
+    <view>
+    <!-- 文本编辑插件的位置 -->
+    
+    </view>
+  </view>
+</view>

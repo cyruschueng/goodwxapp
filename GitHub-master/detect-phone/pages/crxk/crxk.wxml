@@ -1,0 +1,58 @@
+<!--pages/crxk/crxk.wxml-->
+<view class='crxk-root'>
+  <view class='crxk-top'>
+    <image class='crxk-img' mode='aspectFit' src='/static/images/apple.png'></image>
+    <view class='crxk-title'>
+      <text class='crxk-title-s'>经鉴定，您的设备为</text>
+      <text class='crxk-title-s'>{{model}}</text>
+    </view>
+    <text class='crxk-share'>已转发100W+</text>
+  </view>
+  <view class='crxk-phone'>
+    <view class='crxk-phone-item'>
+      <text>手机品牌</text>
+      <text>{{brand}}</text>
+    </view>
+    <view class='crxk-line'></view>
+    <view class='crxk-phone-item'>
+      <text>手机型号</text>
+      <text>{{model}}</text>
+    </view>
+    <view class='crxk-line'></view>
+    <view class='crxk-phone-item'>
+      <text>客户端平台</text>
+      <text>{{platform}}</text>
+    </view>
+    <view class='crxk-line'></view>
+    <view class='crxk-phone-item'>
+      <text>操作系统版本</text>
+      <text>{{system}}</text>
+    </view>
+    <view class='crxk-line'></view>
+    <view class='crxk-phone-item'>
+      <text>微信号版本</text>
+      <text>{{version}}</text>
+    </view>
+    <view class='crxk-line'></view>
+
+  </view>
+  <button open-type="share" class='crxk-btn bg'>分享到群里，偷看大家在用什么手机</button>
+  <button open-type="share" class='crxk-btn'>分享给朋友，看看朋友在用什么手机</button>
+  <view class='phone-list'>
+    <scroll-view class='show-phones' scroll-y>
+      <view class='phones-item' wx:for="{{phones}}">
+        <image src="{{item.avatarUrl}}" class='avatar'></image>
+        <view class='item-centure'>
+          <view class='userName'>
+            <text>{{item.userName}}</text>
+          </view>
+        </view>
+        <view class='phone-model'>
+          <text>{{item.model}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <button class='crxk-btn'>刷新页面，查看更多朋友信息</button>
+  <button open-type="share" class='crxk-btn'>看见的朋友少？再次转发</button>
+</view>

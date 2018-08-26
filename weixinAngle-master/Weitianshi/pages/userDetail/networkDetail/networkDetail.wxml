@@ -1,0 +1,167 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view id="my">
+
+  <!--我的名片-->
+  <template is="userInfo" data="{{user:user,blue:blue,count:count,text:'加他为人脉',show:0,IdentificationShow:2,playTime:1}}"></template>
+  <view style='background:white'>
+    <view class="contactIcon flex">
+      <view class="littleBox">
+        <image src="/img/iocn-weixin@2x.png" class="messageIconStyle"></image>
+      </view>
+      <view class="littleBox">
+        <image src="/img/icon-maimai@2x.png" class="messageIconStyle"></image>
+      </view>
+      <view class="littleBox">
+        <image src="/img/icon-zhihu@2x.png" class="messageIconStyle"></image>
+      </view>
+      <view class="littleBox">
+        <image src="/img/icon-weibo@2x.png" class="messageIconStyle"></image>
+      </view>
+      <view class="littleBox">
+        <image src="/img/icon-qq@2x.png" class="messageIconStyle"></image>
+      </view>
+      <view class="littleBox">
+        <image src="/img/icon-linkedin@2x.png" class="messageIconStyle"></image>
+      </view>
+    </view>
+    <view class="contactLine"></view>
+    <view class="user_down flex">
+      <view class="user_popularity user_tips contacts-sentimentm" bindtap="popularity">
+        <view wx:if="{{user.user_popularity}}">{{user.user_popularity}}</view>
+        <label class="popularityNum" wx:if="{{count.user_view_new && show ==1}}">+{{count.user_view_new}}</label>
+        <label class="popularityNum" wx:if="{{count.user_view_new==0 || show ==0}}"></label>
+        <view wx:if="{{!user.user_popularity}}" class="popularity-Num">{{count.user_view_all}}</view>
+        <view class="popularity-people">浏览过</view>
+      </view>
+      <!--加我为人脉-->
+      <view class="user_attention user_tips contacts-requestm" bindtap="attention">
+        <view wx:if="{{user.user_attention}}">{{user.user_attention}}</view>
+        <label class="attentionNum" wx:if="{{count.user_followed_new && show ==1}}">+{{count.user_followed_new}}</label>
+        <label class="popularityNum" wx:if="{{count.user_followed_new==0 || show ==0}}"></label>
+        <view wx:if="{{!user.user_attention}}" class="attention-Num">{{count.user_followed_all}}
+        </view>
+        <view class="attention-people">Ta的好友</view>
+      </view>
+      <!-- 潜在项目 -->
+      <view class="user_potential user_tips potential-projectm" bindtap="pushTo">
+        <view wx:if="{{user.user_potential}}">{{user.user_potential}}</view>
+        <label class="potentialNum" wx:if="{{count.project_push_new && show == 1}}">+{{count.project_push_new}}</label>
+        <label class="popularityNum" wx:if="{{count.project_push_new==0 || show ==0}}"></label>
+        <view wx:if="{{!user.user_attention}}" class="attention-Num">{{count.project_push_all}}</view>
+        <view class="potential-content">收到项目</view>
+      </view>
+    </view>
+  </view>
+  <view class="downBox">
+    <!--个人描述-->
+    <template is="userIntro" data="{{user:user}}"></template>
+
+    <!--项目店铺-->
+    <template is="financingProject" data="{{project_info:project_info,text:'项目店铺',canEdit:1,count:count}}"></template>
+
+    <!--成功案例-->
+    <template is="investProject" data="{{invest_case:invest_case,canEdit:canEdit}}"></template>
+
+    <!--投资需求-->
+    <template is="InvestInfo" data="{{invest:invest}}"></template>
+
+    <!--资源需求-->
+    <!-- <template is="resourceInfo" data="{{resource:resource}}"></template> -->
+    <view style="height:88rpx;"></view>
+  </view>
+  <!--加人脉按钮-->
+  <view class="flex t-aboutNetwork">
+    <view class="t-flexBox" hover-class="t-hoverColor" bindtap="moreProject">
+      <image src='/img/icon-shouye@2x.png' class='t-shopPic'></image>
+      <view class='t-shopBlock'>首页</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox" plain="{{true}}" catchtap="shareSth" data-clickid="{{user.user_id}}">
+      <view class='t-shopBlock' hover-class="t-hoverColor">
+        <image src='/img/icon-erweima12.png' class='t-shopPic'></image>
+        二维码</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox" hover-class="t-hoverColor">
+      <image src='/img/icon-fenxiang@2x.png' class='t-shopPic'></image>
+      <button open-type='share' class='t-shopBlock'>分享</button>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox" wx:if="{{button_type==0}}" bindtap="addPerson" hover-class="t-hoverColor">
+      <image src='/img/icon-jiarenmai@2x.png' class='t-shopPic'></image>
+      <view class='t-shopBlock'>加好友</view>
+    </view>
+    <view class="t-flexBox" wx:if="{{button_type==2}}">
+      <image src='/img/icon-daitongguo@2x.png' class='t-shopPic'></image>
+      <view class='t-shopBlock' style="color:#cccccc">待通过</view>
+    </view>
+    <view class="t-flexBox" wx:if="{{button_type==3}}" bindtap="addPerson" hover-class="t-hoverColor">
+      <image src='/img/icon-jiarenmai@2x.png' class='t-shopPic'></image>
+      <view class='t-shopBlock'>加好友</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox" wx:if="{{button_type==1}}" data-telephone="{{user.user_mobile}}" catchtap="telephone" hover-class="t-hoverColor">
+      <image src='/img/icon-dadianhua1.png' class='t-shopPic'></image>
+      <view class='t-shopBlock'>打电话</view>
+    </view>
+    <view class="t-line"></view>
+    <view bindtap="pushProjectTo" class='t-creatProject' hover-class="t-redColor">提交项目</view>
+  </view>
+
+  <!-- button_type==0  0申请加人脉按钮，1不显示任何按钮  2待验证   3同意加为人脉  4加为单方人脉 -->
+  <!-- <view class="floatBtn flex addPerson" wx:if="{{button_type==0||button_type==3||button_type == 4}}">
+    <view class="flex pushProjectBox" hover-class='t-other-button-hover'>
+      <image src="/img/icon-tuisong-w@2x.png" class="iconStyle"></image>
+      <view class="pushProjectTo pushprojectm" bindtap="pushProjectTo">提交项目</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="flex addPersonBox" hover-class='t-other-button-hover'>
+      <image src="/img/icon-jiarenmai-w@2x.png" class="iconStyle"></image>
+      <view class="addPersonBtn add-contactsm" bindtap="addPerson">加人脉</view>
+    </view>
+  </view> -->
+  <!--button-type == 2 待验证状态  -->
+  <!-- <view class="floatBtn flex addPerson" wx:if="{{button_type==2}}">
+    <view class="flex pushProjectBox" data-id="{{user.user_id}}" hover-class='t-other-button-hover'>
+      <image src="/img/icon-tuisong-w@2x.png" class="iconStyle"></image>
+      <view class="pushProjectTo pushprojectm" bindtap="pushProjectTo">提交项目</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="flex addPersonBox">
+      <image src="/img/icon-daiyanzheng@3x.png" class="iconStyle"></image>
+      <view class="addPersonBtn">待验证</view>
+    </view>
+  </view> -->
+  <!-- <view class="floatBtn flex pushPro" wx:if="{{button_type==1}}" data-id="{{user.user_id}}" hover-class='t-other-button-hover'>
+    <image src="/img/icon-tuisong-w@2x.png" class="iconStyle"></image>
+    <view class="pushProjectAfter pushprojectm" bindtap="pushProjectTo">提交项目</view>
+  </view> -->
+  <!-- <view class="flex t-aboutNetwork" wx:if="{{button_type==1}}" data-id="{{user.user_id}}">
+    <view class="t-flexBox1" hover-class="t-hoverColor" bindtap="moreProject">
+      <image src='/img/icon-shouye@2x.png' class="t-shopPic1"></image>
+      <view class='t-shopBlock'>首页</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox1" plain="{{true}}" catchtap="shareSth" data-clickid="{{user.user_id}}">
+      <view class='t-shopBlock' hover-class="t-hoverColor">
+        <image src='/img/icon-erweima12.png' class='t-shopPic1'></image>
+        二维码</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox1" bindtap="maintainProject" hover-class="t-hoverColor">
+      <image src='/img/icon-fenxiang@2x.png' class='t-shopPic1'></image>
+      <button open-type='share' class='t-shopBlock'>分享</button>
+    </view>
+    <view class="t-line"></view>
+    <view bindtap="pushProjectTo" class='t-creatProject' hover-class="t-redColor">提交项目</view>
+  </view> -->
+  <!--错误提示  -->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+  <!-- 客服 -->
+  <button open-type="contact" class="t-contact" bindtap='contactTap'>
+    <image class="service" wx:if="{{bindContact==false}}" src="/img/btn-lianxikefu@2x.png"></image>
+    <image class="service" wx:if="{{bindContact==true}}" src="/img/img-kefu-s@2x.png">
+    </image>
+  </button>
+</view>

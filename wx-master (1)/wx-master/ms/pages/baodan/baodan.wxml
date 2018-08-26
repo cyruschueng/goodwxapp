@@ -1,0 +1,61 @@
+<!--pages/baodan/baodan.wxml-->
+<view class='container'>
+ 
+  <block wx:if="{{show}}">
+    <image class='null' src='../../images/null.png'></image>
+    <view style='width:100%; text-align:center;font-size:30rpx; font-weight:700;'>没有相关保单</view>
+  </block>
+
+  <block wx:else>
+    <view wx:for="{{detailOrder}}" wx:key="{{item.id}}">
+      <view class='content row' catchtap='ontip' data-index = "{{index}}">
+        <view class='logo'>
+          <image src='../../images/baodan/1.png'></image>
+        </view>
+        <view class='user cloumn'>
+          <view>姓名：{{item.RealName}}</view>
+          <view>保单号：{{item.SafeId}}</view>
+        </view>
+        <view class='img'>
+          <image src='../../images/baodan/2.png'></image>
+        </view>
+      </view>
+    </view>
+  </block>
+  <button class='buy' catchtap='buy'>追加购买</button>
+
+</view>
+
+<view class='showmodal' wx:if="{{visible}}">
+  <view class='mask'>
+    <block wx:if="{{card}}">
+      <button class='choose' catchtap='choose'>选择支付信用卡</button>
+    </block>
+    
+    <view wx:else class='content row pos-r' catchtap='choose' style="background:rgba({{listData.r}},{{listData.g}},{{listData.b}},{{listData.a}})">
+      <view class='left'>
+         <view class='bank_logo'>
+            <!-- <image src="http://ppp.zhybpay.com:4003{{listData.logo}}" class='logo'></image> -->
+            <view class='bank'>{{listData.bankName}}</view>
+          </view>
+        <view class='cardType'>信用卡</view>
+        <view class='cardNo'>{{cardId}}</view>
+      </view>
+      <!-- <view class='right'>
+        <view class='sta'>{{listData.state?"":"还款中"}}</view>
+      </view> -->
+    </view>
+    <block wx:if="{{!card}}"> 
+    <view style='width:80%; margin:0 auto;line-height:50rpx;color:#5271ff; font-size:30rpx; '>3.5元/份</view>
+    <view class='column'>
+      <input class='cvn' placeholder='请输入信用卡的CVN' maxlength='3' bindinput='cvn' focus="true" bindblur='blurCvn'value='{{cvn}}'></input>
+      <input class='date' placeholder='请输入信用卡背面的有效日期' maxlength='4' focus="{{focus}}" bindinput='date' value='{{date}}'></input>
+    </view>
+    </block> 
+    <view class='bot row'>
+    <button catchtap='cancel'>取消</button>
+    <button catchtap='sure' disabled='{{dis}}'>确认</button>
+    </view>
+  </view>
+</view>
+

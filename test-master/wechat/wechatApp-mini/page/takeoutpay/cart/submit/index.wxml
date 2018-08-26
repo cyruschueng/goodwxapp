@@ -1,0 +1,108 @@
+<alert show="{{alert.show}}" type="{{alert.type}}" title="{{alert.title}}"></alert> 
+<view class='bac'>
+
+<view class='_border'>
+
+  <view class='order_num'>
+   订单编号：<text>{{orderMembers.orderNo}}</text>
+</view>
+
+<view class='order_c clearfix'>
+
+  <view class='order_c_d'>
+    <view><text class='' decode="{{true}}">总 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 价：</text><text class='red'>¥{{all}}</text></view>
+    <view wx:if='{{checkOrder}}'>就餐桌号：{{deskNo ? deskNo : '暂无'}}</view>
+    <view wx:if='{{checkOrder}}'>就餐人数：{{usenum ? usenum + '人' : '暂无'}}</view>
+    <view wx:if='{{!checkOrder}}'>就餐桌号：{{catDesk.deskNo ? catDesk.deskNo : '暂无'}}</view>
+    <view wx:if='{{!checkOrder}}'>就餐人数：{{catDesk.useNum ? catDesk.useNum + '人' : '暂无'}}</view>
+    <view>点菜数量：{{num}}份</view>
+    <view>下单时间：{{orderMembers.lastUpdatedDate}}</view>
+  </view>
+<!--以下二维码  -->
+  <view wx:if='{{!checkOrder}}'>
+  <view class="qrCode" wx:if="{{src}}">
+    <image src="{{src}}"></image>
+  </view>
+  </view>
+</view>
+
+<view class='tishi'>
+  温馨提示：{{checkOrder ? '点击下方自助下单可立即下单' :'请尽快联系服务员前来扫描下单' }}
+</view>
+
+</view>
+
+</view>
+
+<view class="submit">
+  
+
+
+
+<view class='_border'>
+<view  class="table">
+
+  <view class="hander li">
+      <text>菜品名称</text>
+      <text>单价</text>
+      <text>份数</text>
+  </view>
+
+
+   <view class="body isflavour li" wx:key="{{item.index}}" data-id="{{item.id}}" wx:for="{{orderbuymenu}}" wx:if="{{item.weight == 0 ? false: true}}">
+      
+      <view class='menu'>
+        <text>{{item.menuName}}</text>
+        <text>¥ {{item.price}}</text>
+        <view>
+          <image hidden='{{item.weight == 0 ? true: false}}'  class="jia" data-menuId="{{item.menuId}}" data-menuSpecId="{{item.menuSpecId}}" data-flavour="{{item.flavour}}" data-id="{{item.id}}" data-index="{{item.index}}" data-weight="{{item.weight}}" catchtap="del"  src="https://lingju360.com/miniapp/resources/image/new/jia.png"></image>
+          <text  hidden='{{item.weight == 0 ? true: false}}'>{{item.weight}}</text>
+          <image class="jia" data-id="{{item.id}}" data-index="{{item.index}}" data-menuId="{{item.menuId}}" data-menuSpecId="{{item.menuSpecId}}" data-flavour="{{item.flavour}}"  data-isneedweigh="{{item.isNeedWeigh}}" data-weight="{{item.weight}}" catchtap="add"  src="https://lingju360.com/miniapp/resources/image/new/jian.png"></image>
+        </view>
+      </view>
+
+       <view class='menuSpecName' wx:if="{{item.menuSpecName ? true : false}}">规格：{{item.menuSpecName}}</view>
+      <view class='flavour' wx:if="{{item.flavour ? true : false}}">口味：{{item.flavour}}</view> 
+      
+  </view> 
+
+
+  <view class="foot">
+    总金额： <text>¥ {{all}}</text>
+  </view>
+
+  <view class='tishi'>
+  说明：本页面显示的金额，仅为此次点菜消费金额，并非最终结账金额
+</view>
+</view>
+
+  
+
+</view>
+
+
+</view>
+
+
+
+<view class="footer">
+
+  <view wx:if='{{checkOrder}}' class='sub_box ' catchtap='tohome' >
+    <view class="sub" >返回首页</view>
+  </view>
+
+  <view wx:if='{{checkOrder}}' class='sub_box ' catchtap='subcheckOrder' >
+    <view class="sub" >自助下单</view>
+  </view>
+
+
+
+  <view wx:if='{{!checkOrder}}' class='sub_box ' catchtap='back' >
+    <view class="sub" >继续点菜</view>
+  </view>
+
+  <view wx:if='{{!checkOrder}}' class='sub_box sub_box_2' catchtap='cancel' >
+    <view class='sub' >取消订单</view>
+  </view>
+
+</view>

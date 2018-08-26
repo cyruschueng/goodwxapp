@@ -1,0 +1,224 @@
+@import '../tpls/nextInfo/index.wxss';
+@import '../tpls/foot/foot-item-tpl.wxss';
+@import './empty/empty.wxss';
+@import '../common/css/weui.wxss';
+
+page {
+  height: 100%;
+}
+
+.cart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.cart-store-list {
+  background-color: #f5f5f5;
+}
+
+.cart-store {
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+
+.cart-store-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25rpx 0;
+  margin: 0 25rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+.cart-store-info .store-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cart-store-info .store-name image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+}
+
+.cart-store-info .enter-store {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 24rpx;
+  color: #e4393c;
+}
+
+.enter-store text {
+  color: #919191;
+  font-size: 28rpx;
+}
+
+.enter-store image {
+  width: 40rpx;
+  height: 40rpx;
+  transform: rotate(-90deg);
+}
+
+.cart-products-item .item {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.slide-animate {
+  transition: left 0.4s ease-in;
+}
+
+.item-product .left-box, .item-product .left-box image {
+  border-radius: 0;
+}
+
+.appoint {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 25rpx;
+}
+
+.appoint-store-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 0 0 70%;
+}
+
+.appoint-store-info .appoint-store-address, .appoint-store-phone {
+  font: 28rpx/normal PingFang-SC-Regular;
+  color: #333;
+}
+
+.appoint-store-address {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appoint-btn {
+  flex: 1;
+  text-align: right;
+}
+
+.appoint-btn text {
+  display: inline-block;
+  width: 156rpx;
+  height: 62rpx;
+  text-align: center;
+  background-color: #000;
+  border-radius: 4rpx;
+  font: 24rpx/62rpx PingFang-SC-Regular;
+  color: #fff;
+}
+
+.order-btn {
+  display: none;
+}
+
+.right-box .price {
+  font: 32rpx/normal PingFang-Regular;
+  color: #ff5757;
+}
+
+/*引导提示  */
+
+.appoint-guide {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.appoint-guide-wrapper {
+  position: absolute;
+  top: -420rpx;
+  animation: slide-down 1s ease-in forwards;
+}
+
+@keyframes slide-down {
+  from {
+    top: -420rpx;
+  }
+
+  to {
+    top: 0rpx;
+  }
+}
+
+.appoint-guide-content {
+  height: 100rpx;
+  line-height: 50rpx;
+  padding: 30rpx;
+  background-color: #fff;
+}
+
+.appoint-guide-btn {
+  margin: 100rpx auto;
+  width: 200rpx;
+  height: 56rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border: 2rpx solid #fff;
+  color: #fff;
+  border-radius: 8rpx;
+}
+
+/*删除样式  */
+
+.cart-product-wrapper {
+  margin-left: 25rpx;
+  border-bottom: 2rpx dashed #d2d2d2;
+}
+
+.cart-products-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 230rpx;
+}
+
+.posit {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 120rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.del {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #e64340;
+  height: 100%;
+  z-index: 4;
+  color: #fff;
+}

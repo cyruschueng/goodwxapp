@@ -1,0 +1,41 @@
+<!--pages/word/word.wxml-->
+<!-- bindscrolltoupper="scrolltoupper" -->
+<!-- <loading hidden="{{loadingHidden}}">正在加载..</loading> -->
+<scroll-view class='scrollView' scroll-y="true" enable-back-to-top="true"  bindscrolltolower="scrolltolower">
+    <block wx:for-items="{{list}}" wx:key='{{item.id}}'>
+        <!-- 分割线 -->
+        <view class='divLine'></view>
+        <!-- 整体item样式 -->
+        <view class='containsView'>
+            <!-- 顶部样式 -->
+            <view class='topContainsView'>
+                <image class='profileImage' src='{{item.profile_image}}'/>
+                <view class='topRightView'>
+                    <text class='topRightName'>{{item.name}}</text>
+                    <text class='topRightTime'>{{item.passtime}}</text>
+                </view>
+            </view>
+            <!-- 中间内容 -->
+            <text class='centerContent'>{{item.text}}</text>
+            <!-- 底部view样式 -->
+            <view class='bottomView'>
+                <view class='bottomItemView'>
+                    <image class='bottomItemImage' src='../../image/ding.png'></image>
+                    <text class='bottomItemText'>{{item.love}}</text>
+                </view>
+                <view class='bottomItemView'>
+                    <image class='bottomItemImage' src='../../image/cai.png'></image>
+                    <text class='bottomItemText'>{{item.hate}}</text>
+                </view>
+                <view class='bottomItemView'>
+                    <image class='bottomItemImage' src='../../image/share.png'></image>
+                    <text class='bottomItemText'>{{item.repost}}</text>
+                </view>
+                <view class='bottomItemView'>
+                    <image class='bottomItemImage' src='../../image/comment.png'></image>
+                    <text class='bottomItemText'>{{item.comment}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+</scroll-view>

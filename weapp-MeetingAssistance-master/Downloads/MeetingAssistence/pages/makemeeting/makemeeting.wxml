@@ -1,0 +1,52 @@
+<!--pages/makemeeting/makemeeting.wxml-->
+<form bindsubmit="formsubmit" report-submit="true">
+<view class="section">
+  <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="date" value="{{date}}" start="2017-07-01" end="2020-01-01" bindchange="bindDateChange">
+              <view class="weui-input">{{date}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前时间</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+              <view class="weui-input">{{time}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+  </view>
+</view>
+<view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" auto-focus placeholder="{{location}}" name="place" disabled="{{isDisabled}}" />
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="page-section-title">会面内容</view>
+      <view class="textarea-wrp">
+        <textarea auto-focus="true" style="height: 3em" name="textarea"/>
+      </view>
+    </view>
+</view>
+
+<!--<text>时间</text>
+<input placeholder="输入会面时间" type="text" name="time" />-->
+ <button bindtap="setlocation">设置地点</button> 
+<button form-type="submit" type="primary"> 发送会面邀请 </button>
+
+</form>

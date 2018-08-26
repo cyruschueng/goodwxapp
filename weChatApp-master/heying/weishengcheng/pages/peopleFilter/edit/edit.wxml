@@ -1,0 +1,39 @@
+<import src="/zanui/toast/index.wxml" />
+<view class="container page__bd" >
+    <form bindsubmit="formSubmit">
+        <view style="margin-top:10px;position:relative" >
+            <view class="contain">
+                <image lazyload="true" mode="aspectFit" data-src="{{content[0].preview.url}}" src="{{content[0].preview.url}}" wx:if="{{content.length==1}}" style="width:{{size.width}}rpx;height:{{size.height}}rpx;margin-bottom: 20rpx;max-height:750rpx;" />
+            </view>
+
+            <view bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" wx:if="{{content.length>1}}">
+                <view class="moban" style="height:{{450*size.height/size.width}}rpx;">
+                    <block wx:for-index="index" wx:for="{{content}}" wx:key="index">
+                        <view class="{{lb[index]}}">
+                            <image src="{{item.preview.url}}"  />
+                        </view>
+                    </block>
+                </view>
+
+                <view class='left' bindtap='scrollLeft' style="height:{{0.9*450*size.height/size.width}}rpx;top:{{0.5*45*size.height/size.width+30}}rpx;"></view>
+                <view class='right' bindtap='scrollRight' style="height:{{0.9*450*size.height/size.width}}rpx;top:{{0.5*45*size.height/size.width+30}}rpx;"></view>
+            </view>
+
+            <view style="width: 100%;margin-top: 10rpx;" class="flex_center zan-form">
+              <view style="width: 90%;" class="zan-cell zan-form__item">
+                <text class="zan-form__title" style="max-width: 80%;">上传个人照片（清晰的正面头像照）：</text>
+                <view class="weui-cell__bd" style="height: auto;line-height: auto;margin-left: 8px;" bindtap="uploadOriginalImage">
+                    <view class="weui-uploader__input-box" style="width:100px;height:100px;">
+                        <view class="weui-uploader__input"></view>
+                    </view>
+                </view>
+              </view>
+            </view>
+
+            <view style="width: 100%;margin-top: 40rpx;display: none;">
+                <button disabled="{{disabled}}" class="weui-btn" type="primary" style="width: 80%;" formType="submit">生成图片</button>
+            </view>
+        </view>
+    </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

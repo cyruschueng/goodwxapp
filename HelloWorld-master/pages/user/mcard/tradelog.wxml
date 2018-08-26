@@ -1,0 +1,17 @@
+<!--正在加载-->
+<view class="loding linght tc mt10" wx:if="{{!isLoaded}}">
+    <text class="iconfont icon-jiazai mr10 f18"></text>
+    <text>正在加载</text>
+</view>
+<view class="list" wx:else>
+    <view class="list-item" wx:for="{{data}}" wx:key="{{item.id}}">
+         <!-- <image src="src" class="avatar"></image>  -->
+        <view class="content">
+            <view class="lineText" style="margin-right:65px;">{{item.remark}}</view>
+            <view class="mt5 time linght">{{item.cTime}}</view>
+        </view>
+        <view class="{{item.type==1?'blue':'red'}} type">
+            {{item.type==1?'+':'-'}}{{item.amount}}
+        </view>
+    </view>
+</view>

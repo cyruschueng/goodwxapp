@@ -1,0 +1,64 @@
+<!--pages/integral-goods/index.wxml-->
+<view class="integral-goods-img">
+    <swiper class='swiper-goods-img' data-urls='{{gallery}}' catchtap='onPreviewTap'>
+        <swiper-item wx:for='{{gallery}}' wx:key='{{index}}'>
+            <image src="{{item}}" mode="aspectFill" data-index='{{index}}'></image>
+        </swiper-item>
+    </swiper>
+
+</view>
+
+<view class="goods-msg">
+    <view class="flex">
+        <view class="goods-name sub mr10">{{title}}</view>
+        <view class="red f14">剩余{{stock}}件</view>
+    </view>
+    <view class="f14 red integral-num">
+        <text class="f24 mr5">{{sale_price}}</text>
+        <text>积分</text>
+        <text class="delLine grey ml10">￥{{market_price}}</text>
+    </view>
+</view>
+
+<view class="exchange-time">
+    <text class="iconfont icon-time"></text> 兑换时间：
+    <block wx:if='{{is_end_time}}'>已结束</block>
+    <block wx:else>{{end_time_text}}</block>
+</view>
+
+<view class="mt10 exchange-note">
+    <view class="exchange-note-tit">
+        <text class="mr5 iconfont icon-shuoming"></text>截止时间
+    </view>
+    <view class="mt15">
+        <rich-text nodes='{{body}}'></rich-text>
+    </view>
+</view>
+
+
+<!-- 兑换提示 -->
+<form report-submit='true' bindsubmit='onExchangeSubmit'>
+    <view class="floatBox integral-pop" hidden='{{!isShowExchangeDialog}}'>
+        <view class="integral-cont mid">
+            <view class="integral-cont-tit">确认兑换该商品么？</view>
+            <view class="flex">
+                <button class="sub cancel-btn" data-type="cancel" form-type='submit'>取消</button>
+                <button class="sub confirm-btn" form-type='submit'>确认</button>
+            </view>
+        </view>
+        <view class="floatBox floatBoxBg"></view>
+    </view>
+</form>
+
+<!-- 底部按钮 -->
+<form report-submit='true' bindsubmit='onSetValueTap' data-name='isShowExchangeDialog' data-value='{{true}}'>
+    <view class="fiexd-box">
+        <view class="integral-bottom">
+            <button class="integral-btn" form-type='submit' disabled='{{!hasExchange}}' wx:if='{{!exchange}}'>马上兑换</button>
+            <button class="redeem-code" catchtap='onCopyTap' data-data='{{exchange.key}}' wx:else>兑换码：{{exchange.key}}</button>
+        </view>
+    </view>
+</form>
+
+<!-- 文字提示 -->
+<view class="font-tips mid" hidden='{{!isShowCopyTips}}'>复制成功</view>

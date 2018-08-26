@@ -1,0 +1,15 @@
+<view class="Page">
+    <view wx:if="{{remind}}" class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+    <view class="tips" wx:else>
+      <block wx:for="{{tips}}" wx:key="*this">
+       <navigator url="{{'tips_content/tips_content?id='+item.id+'&name='+item.name}}" class="tips_item" style="{{'background-color:'+item.color}}">
+        <view class="classname"></view>
+        <image src="{{item.icon}}" class="icon"></image>
+        <view class="title">{{item.name}}</view>
+       </navigator>
+      </block>
+    </view>
+</view>

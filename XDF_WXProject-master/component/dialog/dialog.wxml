@@ -1,0 +1,16 @@
+<view class='wx_dialog_container' hidden="{{!isShow}}">
+    <view class='wx-mask' catchtouchmove='maskTouch'></view>
+    <view class='wx-dialog'>
+        <image mode='aspectFit' class='rule-txt' src="/res/ruleTxt.png"></image>
+        <view bindtap='hideDialog' class='wx-dialog-close-btn'>
+            <image class='close-img-btn' mode='aspectFit' src='/res/close_img.png'></image>
+        </view>
+        <view class='wx-dialog-content'>{{ content }}</view>
+
+        <view class='wx-dialog-footer'>
+            <view class='wx-dialog-btn' catchtap='_cancelEvent'>{{ "cancelText" }}</view>
+            <view class='wx-dialog-btn' catchtap='_confirmEvent'>{{ 'confirmText' }}</view>
+        </view>
+
+    </view>
+</view>

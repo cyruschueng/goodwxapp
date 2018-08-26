@@ -1,0 +1,43 @@
+.done-toast {
+  transition: opacity 1s 2s linear;
+}
+
+.error:before, .error::after{
+  content:'';
+  height:8px;
+  width:40px;
+  display:block;
+  background:#fff;
+  border-radius:10px;
+  position:absolute;
+  top:16px;
+  left:50%;
+  transform:rotate(-45deg);
+}
+
+.error::after{
+  transform:rotate(45deg);
+}
+
+.done-toast{
+  .normal{
+    width: 60%;
+    padding: px2rem(20);
+    margin: 0 auto;
+  }
+
+  .customized{
+    position: fixed;
+    z-index: 50000;
+    top: 100px;
+    left: 40%;
+    width: 50%;
+    min-height: 0;
+    background: rgba(40, 40, 40, 0.75);
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    padding: 20px;
+    margin-top: 25%;
+  }
+}

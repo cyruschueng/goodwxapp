@@ -1,0 +1,26 @@
+<!--pages/mine/myMember/infoTransfer.wxml-->
+
+<view class='bg-view'>
+
+  <view class='infoTransfer-bgview'>
+
+    <block wx:for='{{ infoTranList }}' wx:key='{{ index }}'>
+    <view class='infoTransfer-cell' id='{{ index }}' bindtap='bindInfoCellTap'>
+      
+      <image wx:if='{{ item.checked }}'  class='checked-icon' src='../../images/icon/checked.png'></image>
+      <view wx:else class='checked-view'></view>
+
+      <text class='name-text'>{{ item.name }}</text>
+      <image class='gender-icon' src='../../../images/icon/mine/{{ item.gender }}.png'></image>
+
+      <!-- <text class='info-text'>跟单员：{{ item.merchandiser }} <text class='mainColor'>({{ item.merserStatus }})</text></text> -->
+    </view>
+    </block>
+
+  </view>
+
+  <view class='foot-view' bindtap='bindSpecifiedTap'>指定移交</view>
+
+</view>
+
+

@@ -1,0 +1,82 @@
+<!--index.wxml-->
+<view class='allbg'>
+    <view class='weui-flex__item2'>
+      <image bindtap='shareBtn' class='score_img' src='/style/images/score.png'></image>
+      <view class='scorebox'>{{score}}</view>
+    </view>
+  <form bindsubmit="obtainFormId" report-submit="true">
+    <view class='weapbox2'>
+      <view class='guanshu'>第 <text style='color:red'>{{item.id}}</text> 首</view>
+      <view class='imgbox'>
+        <image bindtap='playMusic' class="playMusic {{showView?'show':''}}" src="/style/images/start_button.png"></image>
+        <image bindtap='stopMusic' class="stopMusic {{showView1?'show':''}}" src="/style/images/pause_button.png"></image>
+        <image bindtap='replay' class="replay {{showView2?'show':''}}" src="/style/images/pause_button.png"></image>
+        <image data-sd="{{an}}" class='imgbox_bg {{rotate}}' src='/style/images/music_bg2.gif'></image>
+      </view>
+      <!-- btnbox -->
+      <view class='btnbox'>
+        <view class="weui-flex">
+          <view class="weui-flex__item">
+            <view class="placeholder">
+              <button bindtap='Remind' formType="submit" class='btntype btn_info' type="primary"> 提示 </button>
+            </view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="placeholder" >
+              <button id='1' class='btntype btn_share' formType="submit" type="warn" open-type="share" >求助</button>
+            </view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="placeholder" >
+              <button id='2' class='btntype btn_share fenxiang' formType="submit"  open-type="share" >分享+30</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- inputbox -->
+      <view class='inputbox'>
+        <view class='weui-flex__item1'>
+          <view class='input_itme' id="str_{{index+1}}" bindtap='Dogofunc' data-num="{{index+1}}" wx:for="{{CD}}">
+            <view wx:if="{{index==0}}" data-num="{{index+1}}">
+               {{str_1}}
+            </view>
+            <view wx:if="{{index==1}}" data-num="{{index+1}}">
+               {{str_2}}
+            </view>
+            <view wx:if="{{index==2}}" data-num="{{index+1}}">
+               {{str_3}}
+            </view>
+            <view wx:if="{{index==3}}" data-num="{{index+1}}">
+               {{str_4}}
+            </view>
+             <view wx:if="{{index==4}}" data-num="{{index+1}}">
+               {{str_5}}
+            </view>
+            <view wx:if="{{index==5}}" data-num="{{index+1}}">
+               {{str_6}}
+            </view>
+            <view wx:if="{{index==6}}" data-num="{{index+1}}">
+               {{str_7}}
+            </view>
+            <view wx:if="{{index==8}}" data-num="{{index+1}}">
+               {{str_9}}
+            </view>
+            <view wx:if="{{index==9}}" data-num="{{index+1}}">
+               {{str_10}}
+            </view> 
+          </view>
+          
+        </view>       
+      </view>
+      <view class='mihuo'>
+        <view class='viewbox' wx:for="{{mihuo}}" wx:key="mihuo" wx:for-index="idx" wx:for-item="item">
+          <button formType="submit" id='mihuo_{{idx+1}}' disabled="{{disabled_1}}" bindtap='Doasfunc' data-num="{{idx+1}}" data-key="{{item}}" type="default">{{item}}</button>
+        </view>
+      </view>
+    </view>
+    <button class="qunfa" open-type="contact" formType="submit">
+      <image src="../../style/images/wxlogo.png" class="wxlogo"></image>
+      <text class="tishi">1</text>
+    </button>
+  </form>
+</view>

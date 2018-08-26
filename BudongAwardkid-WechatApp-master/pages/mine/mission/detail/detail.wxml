@@ -1,0 +1,22 @@
+<!--pages/mine/mission/detail/detail.wxml-->
+
+<view class="container">
+  <view class="questions">
+    <view class="item" wx:for="{{questionItems}}" wx:key="item">
+      <button class="delete" bindtap="onQuestionDelete" data-question-id="{{item.id}}">删除</button>
+      <span class="title" bindtap="onQuestionPlay" data-question-id="{{item.id}}">
+        <em wx:if="{{item.playing}}">播放中</em>
+        {{item.title}}
+        <small>{{item.tip}}</small>
+      </span>
+    </view>
+    <view class="item create">
+      <text class="title" bindtap="onQuestionAdd">添加新题目</text>
+    </view>
+  </view>
+  <view class="controls">
+    <button type="default" bindtap="onShareToTimeline" class="share"> 分享到朋友圈 </button>
+    <button type="primary" open-type="share" class="share"> 分享至好友/群 </button>
+  </view>
+</view>
+

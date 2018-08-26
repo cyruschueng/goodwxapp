@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5BAAF46E-2B2D-4380-9B34-A85147FA043B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ShenerWeiXin</RootNamespace>
+    <AssemblyName>ShenerWeiXin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LitJson">
+      <HintPath>..\lib\Web\bin\LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin">
+      <HintPath>..\packages\Senparc.Weixin.4.16.9\lib\net45\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP">
+      <HintPath>..\packages\Senparc.Weixin.MP.14.7.1\lib\net45\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activity\SubscribeActivity.cs" />
+    <Compile Include="Common\Location\BaiDuApi.cs" />
+    <Compile Include="Common\Location\Reustl\BaiDuResult.cs" />
+    <Compile Include="Common\Message.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Interface\IFollower.cs" />
+    <Compile Include="Interface\IGrade.cs" />
+    <Compile Include="Interface\ILinkContent.cs" />
+    <Compile Include="Interface\IScore.cs" />
+    <Compile Include="Interface\IShareContent.cs" />
+    <Compile Include="Interface\ISubscribeActivity.cs" />
+    <Compile Include="Interface\IUser.cs" />
+    <Compile Include="Interface\IViewContent.cs" />
+    <Compile Include="LocationService.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageHandlersII\CustomMessageContext.cs" />
+    <Compile Include="MessageHandlersII\CustomMessageHandler.cs" />
+    <Compile Include="MessageHandlersII\CustomMessageHandler_Events.cs" />
+    <Compile Include="Score\Score.cs" />
+    <Compile Include="Share\ShareContent.cs" />
+    <Compile Include="Share\ViewContent.cs" />
+    <Compile Include="User\Follower.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\ItemUser.cs" />
+    <Compile Include="User\NoNFollower.cs" />
+    <Compile Include="User\UserInfo.cs" />
+    <Compile Include="MessageHandlers\CustomMessageContext.cs" />
+    <Compile Include="MessageHandlers\CustomMessageHandler.cs" />
+    <Compile Include="MessageHandlers\CustomMessageHandler_Events.cs" />
+    <Compile Include="Utilities\Server.cs" />
+    <Compile Include="WxApi\WxJs\Config\WxJsConfig.cs" />
+    <Compile Include="WxApi\WxJs\Enums.cs" />
+    <Compile Include="WxApi\WxJs\Exception\WxJsException.cs" />
+    <Compile Include="WxApi\WxJs\WeixXinJsAPI.cs" />
+    <Compile Include="WxApi\WxJs\WeixXinJsAPI2.cs" />
+    <Compile Include="WxApi\WxOAuth\Config\WxOAuthConfig.cs" />
+    <Compile Include="WxApi\WxOAuth\Exception\WxOAuthException.cs" />
+    <Compile Include="WxApi\WxOAuth\OAuthHelper\BaseOAuth.cs" />
+    <Compile Include="WxApi\WxOAuth\OAuthHelper\OAuthResult.cs" />
+    <Compile Include="WxApi\WxOAuth\OAuthHelper\Enum.cs" />
+    <Compile Include="WxApi\WxOAuth\OAuthHelper\Helper.cs" />
+    <Compile Include="WxApi\WxOAuth\OAuthHelper\testAuth.cs" />
+    <Compile Include="WxApi\WxOAuth\OAuthHelper\UserInfoOAuth.cs" />
+    <Compile Include="WxApi\WxPay\Config\WxPayConfig.cs" />
+    <Compile Include="WxApi\WxPay\Exception\WxPayException.cs" />
+    <Compile Include="WxApi\WxPay\Lib\Log.cs" />
+    <Compile Include="WxApi\WxPay\Lib\Notify.cs" />
+    <Compile Include="WxApi\WxPay\Lib\NotifyEventArgs.cs" />
+    <Compile Include="WxApi\WxPay\Lib\OrderQuery.cs" />
+    <Compile Include="WxApi\WxPay\Lib\PayApi.cs" />
+    <Compile Include="WxApi\WxPay\Lib\PayData.cs" />
+    <Compile Include="WxApi\WxPay\Lib\PayResult.cs" />
+    <Compile Include="WxApi\WxPay\Lib\ResultNotify.cs" />
+    <Compile Include="WxApi\WxPay\WeiXinJSPayAPI.cs" />
+    <Compile Include="WXConfig.cs" />
+    <Compile Include="WXHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{5EACB3A3-EEC9-45EA-BC4D-C01A10327F8E}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{5044DD41-FFA3-414B-9179-AF0F0150BD74}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{30D552D0-2399-42A7-8FEA-AFD213B9E840}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{0C42E84A-AC10-4CBB-A27F-EFEA3683088F}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SfEmc\SfEmc.csproj">
+      <Project>{37b7f2a9-8501-4ba0-9cab-e6e167015efd}</Project>
+      <Name>SfEmc</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WxApi\WxOAuth\Entity\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="config.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

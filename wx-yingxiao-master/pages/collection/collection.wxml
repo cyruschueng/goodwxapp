@@ -1,0 +1,44 @@
+ <view class="container">
+  <view class='collection'>
+    <view class='detail' wx:for="{{detail}}" wx:key="index" wx:if="{{index!=cancelCurrent}}" bindlongpress='cancel' data-index='{{index}}' hover-class='hover' bindtap='todetail' data-id='{{item.goods_id}}'>
+      <view class='detailLeft'>
+        <image src='{{item.goods_img}}'></image>
+        <view class='title'>{{item.goods_name}}</view>
+      </view>
+      <view class='detailRight'>
+        <view>¥{{item.goods_price}}</view>
+      </view>     
+    </view>
+    <view class='null' wx:if="{{isNull=='1'}}">
+      <image src='/pages/source/images/without.png'></image>
+      <view>您没有收藏商品,去逛逛吧</view>
+    </view>
+  </view>
+  <view class='wrap'></view>
+  <view class='push'>
+    <view class="info-item">
+      <view class="info-title">
+        <text>{{textTitle1}}</text>
+      </view>
+      <view class='info-list'>
+        <view class="item-card" wx:for="{{childItem}}" wx:key="index" bindtap='todetail' data-id='{{item.id}}'>
+          <image src="{{item.goods_img}}"></image>
+          <view class='itemTitle'>{{item.goods_name}}</view>
+          <view class='itemPrice'>
+            <text>¥{{item.goods_price}}</text>  
+            <text>销量:{{item.salesvolume}}</text>  
+          </view>
+        </view>    
+      </view>
+    </view> 
+  </view>
+</view> 
+<view class='model' wx:if="{{isShow=='1'}}">
+  <view class='window'>
+    <view>是否取消收藏</view>
+    <view>
+      <view hover-class='hover' bindtap='sureCancel'>是</view>
+      <view hover-class='hover' bindtap='close'>否</view>    
+    </view>
+  </view>
+</view>

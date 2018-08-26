@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    var colors = ["red", "blue", "green"]; //object
+    console.log(JSON.stringify(colors)); //'["red", "blue", "green"]'
+    console.log(typeof(JSON.stringify(colors))); //string
+
+
+
+    var colors = '["red", "blue", "green"]'; //string
+    console.log(JSON.parse(colors));
+    console.log(typeof(JSON.parse(colors))); //object
+
+
+
+    var colors = '["red", "blue", "green"]'; //string
+    console.log(eval(colors));
+    console.log(typeof(eval(colors))); //object
+
+
+
+
+    var colors = '["red", "blue", "green"]'; //string
+    console.log(JSON.stringify(colors)); //"[\"red\", \"blue\", \"green\"]"
+    console.log(typeof(JSON.stringify(colors))); //string
+
+
+
+    var colors = ["red", "blue", "green"]; //object
+    console.log(eval(colors)); //["red", "blue", "green"]
+    console.log(typeof(eval(colors))); //object
+
+
+
+    var colors = ["red", "blue", "green"];
+    console.log(JSON.parse(colors)); //Uncaught SyntaxError: Unexpected token r in JSON at position 0
+    console.log(typeof(JSON.parse(colors)));
+    </script>
+</body>
+
+</html>

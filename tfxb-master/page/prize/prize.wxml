@@ -1,0 +1,110 @@
+<view class='slbd pageswitch {{pageKey}} prize'>
+    <view class='page-menu'>
+        <view class="flex-box menu-main">
+            <view class='flex-item menu-item menu-left' bindtap='tapMenuShowLeft'>
+                <image class='img-gift' src="{{menuImgLeft}}" mode="widthFix"></image>
+            </view>
+            <view class='flex-item menu-item menu-right' bindtap='tapMenuShowRight'>
+                <image class='img-my' src="{{menuImgRight}}" mode="widthFix"></image>
+            </view>
+        </view>
+    </view>
+    <view class='page-body'>
+        <scroll-view class='prize-scroll' scroll-y="true">
+        <view class='page-plate plate-left'>
+            <view class='pack-body'>
+                <view class='pack-con'>
+                    <view class='pack-row' wx:for="{{packListArr}}" wx:key="{{index}}">
+                        <image class='img-pack' src="{{item}}" mode="widthFix"></image>
+                    </view>
+                </view>
+                <view class='pack-rule'>
+                    <view class='rule-title'>游戏规则</view>
+                    <view class='rule-con'>
+                        <view class='rule-row' wx:for="{{ruleListArr}}" wx:key="{{index}}">{{item}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='page-plate plate-right {{rightKey}}'>
+            <!-- 倒计时 -->
+            <view class='plate-box box-count'>
+                <image class='img-count' src="../../asset/image/prize-countdown.png" mode="widthFix"></image>
+                <view class='vhcenter count-bd'>
+                    <view class='vhcon count-con clearfix'>
+                        <text class='time-cell time-day'>{{countDownDay}}</text>
+                        <text class='time-cell time-hour'>{{countDownHour}}</text>
+                        <text class='time-cell time-minute'>{{countDownMinute}}</text>
+                        <text class='time-cell time-sec'>{{countDownSec}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class='plate-box box-mygift'>
+                <view class='mygift-content'>
+                    <view class='mygift-list'>
+                        <view class='mygift-li' wx:for="{{mygiftRedPackList}}" wx:key="{{index}}">
+                            <view class='flex-box mygift-raw'>
+                                <view class='gift-hd'>
+                                    <image class='img-redpack' src="../../asset/image/prize-redpack.png" mode="widthFix"></image>
+                                </view>
+                                <view class='flex-item gift-bd'>{{item.title}}（{{item.desc}}）</view>
+                                <view class='gift-ft'>
+                                    <button class="hidebtn gift-btn {{item.isGet ? 'hasget' : ''}}" data-gifttitle="{{item.title}}" data-giftid="{{item.giftId}}" data-isget="{{item.isGet}}" bindtap="acceptTheGift">{{item.isGet ? '已领取' : '领取'}}</button>
+                                </view>
+                            </view>
+                        </view>
+                        <view class='mygift-li' wx:for="{{mygiftBagList}}" wx:key="{{index}}">
+                            <view class='flex-box mygift-raw'>
+                                <view class='gift-hd'>{{item.title}}</view>
+                                <view class='flex-item gift-bd'>{{item.desc}}</view>
+                                <view class='gift-ft'>
+                                    <button class="hidebtn gift-btn {{item.isGet ? 'hasget' : ''}}" data-gifttitle="{{item.title}}" data-giftid="{{item.giftId}}" data-isget="{{item.isGet}}" bindtap="acceptTheGift">{{item.isGet ? '已领取' : '领取'}}</button>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='plate-box box-end'>
+                <view class='end-content'>
+                    <image class='img-welcome' src="../../asset/image/prize-welcome.png" mode="widthFix"></image>
+                    <button class='hidebtn welcome-btn btnclick-anim' bindtap="">
+                        <image class='img-comebtn' src="../../asset/image/prize-comebtn.png" mode="widthFix"></image>
+                    </button>
+                </view>
+            </view>
+        </view>
+        </scroll-view>
+    </view>
+</view>
+<!-- 领取奖品弹窗 -->
+<view class='page-pop pop-form {{popShowClass}}'>
+    <view class='form-body vhcenter'>
+        <image class='vhcon img-form' src="../../asset/image/prize-form.png" mode="widthFix"></image>
+        <view class='form-con'>
+            <view class='form-words'>
+                <view>获得终极大礼包“{{popGiftTitle}}” </view>
+                <view>请填写您的身份信息领取奖品</view>
+                <view class='words-small'>逾期无效（截止时间农历正月初十中午12:00）</view>
+            </view>
+            <view class='form-in'>
+                <view class='flex-box formin-row'>
+                    <view class='formin-title'>姓 名：</view>
+                    <view class='flex-item formin-con'>
+                        <input value="{{mygiftNameInVal}}" bindinput="inputMygiftName" placeholder=""/>
+                    </view>
+                </view>
+                <view class='flex-box formin-row'>
+                    <view class='formin-title'>手机号：</view>
+                    <view class='flex-item formin-con'>
+                        <input value="{{mygiftTelInVal}}" bindinput="inputMygiftTel" placeholder=""/>
+                    </view>
+                </view>
+            </view>
+            <view class='form-submit'>
+                <button class='hidebtn formin-btn' data-giftid="{{theGiftId}}" bindtap="submitTheGift"></button>
+            </view>
+            <image class='form-close' src="../../asset/image/icon-close.png" bindtap="pagePopClose" mode="widthFix"></image>
+        </view>
+    </view>
+</view>

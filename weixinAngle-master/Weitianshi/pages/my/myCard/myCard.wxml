@@ -1,0 +1,94 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--我的名片-->
+  <template is="userInfo" data="{{user:user,canEdit:canEdit,blue:blue,count:count,text:'加我为人脉',show : 1,IdentificationShow :1,playTime:0}}"></template>
+  <view class="contactIcon flex">
+    <view class="littleBox">
+      <image src="/img/iocn-weixin@2x.png" class="messageIconStyle"></image>
+    </view>
+    <view class="littleBox">
+      <image src="/img/icon-maimai@2x.png" class="messageIconStyle"></image>
+    </view>
+    <view class="littleBox">
+      <image src="/img/icon-zhihu@2x.png" class="messageIconStyle"></image>
+    </view>
+    <view class="littleBox">
+      <image src="/img/icon-weibo@2x.png" class="messageIconStyle"></image>
+    </view>
+    <view class="littleBox">
+      <image src="/img/icon-qq@2x.png" class="messageIconStyle"></image>
+    </view>
+    <view class="littleBox">
+      <image src="/img/icon-linkedin@2x.png" class="messageIconStyle"></image>
+    </view>
+  </view>
+  <view class="downBox">
+    <!--个人描述  -->
+    <template is="userIntro" data="{{user:user,canEdit:canEdit,playTime:1}}"></template>
+    <!--项目店铺  -->
+    <template is="financingProject" data="{{project_info:project_info,text:'项目店铺',canEdit:canEdit,count:count,playTime:1}}"></template>
+    <!-- 成功案例   -->
+    <template is="investProject" data="{{invest_case:invest_case,canEdit:canEdit,playTime:1}}"></template>
+    <!--  投资需求-->
+    <template is="InvestInfo" data="{{invest:invest,canEdit:canEdit,playTime:1}}"></template>
+    <view style='height:104rpx;'></view>
+    <view class="flex t-aboutNetwork" wx:if="{{!options}}">
+      <view class="t-flexBox1" hover-class="t-hoverColor" bindtap="moreProject">
+        <image src='/img/icon-shouye@2x.png' class="t-shopPic1"></image>
+        <view class='t-shopBlock'>首页</view>
+      </view>
+      <view class="t-line"></view>
+      <view class="t-flexBox1" plain="{{true}}" catchtap="shareSth" data-clickid="{{user.user_id}}">
+        <view class='t-shopBlock' hover-class="t-hoverColor">
+          <image src='/img/icon-erweima12.png' class="t-shopPic1"></image>
+          二维码</view>
+      </view>
+      <view class="t-line"></view>
+      <view class="t-flexBox1" bindtap="avatarEdit" hover-class="t-hoverColor">
+        <image src='/img/icon-bianji1@2x.png' class="t-shopPic1"></image>
+        <view class='t-shopBlock'>编辑</view>
+      </view>
+      <view class="t-line"></view>
+      <button open-type='share' class='t-creatProject' hover-class="t-redColor">分享名片</button>
+    </view>
+    <!--我的人脉和加入人脉-->
+    <view class="aboutNetwork flex" wx:if="{{options}}">
+      <view bindtap="myNetwork">我的人脉</view>
+      <view bindtap="addNetwork">加入人脉</view>
+    </view>
+  </view>
+  <view class="showModal" hidden="{{modal==0}}" bindtap="hideModal">
+    <image src="{{shareModal}}"></image>
+  </view>
+
+  <!--税号-->
+  <view class="modalBox" hidden="{{modalBox==0}}">
+    <view class="IdentificationNum">
+      <view class="flex">
+        <label class="oneLine"></label>
+        <view class="IdentificationTitle">公司税号</view>
+        <label class="oneLine"></label>
+      </view>
+      <view class="IdentificationNumText">*未办理三证合一、五证合一的公司不适用此税号</view>
+      <view class="IdentificationNumCompany" wx:if="{{modalStyle == 0}}">
+        <view class="companyTitle">公司</view>
+        <view class="companyName">{{data.com_name}}</view>
+        <view class="companyTitle">税号</view>
+        <text class="IdentificationNumber">{{tax_member}}</text>
+        <view class="modalBtn flex">
+          <view class="modalYes" bindtap="copyNum" hover-class="t-hoverColor">复制税号</view>
+          <view class="modalYes" bindtap="laterOn" hover-class="t-hoverColor">确定</view>
+        </view>
+      </view>
+      <view class="IdentificationNumCompany" wx:if="{{modalStyle == 1}}">
+        <view class="informationText">暂未查询到税号</view>
+        <view class="informationText">请先完善公司全称或稍后再试</view>
+        <view class="informationBtn flex">
+          <view class="informationYes" catchtap="writeInformation" hover-class="t-hoverColor">去完善</view>
+          <view class="informationYes" catchtap="laterOn" hover-class="t-hoverColor">稍后再试</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

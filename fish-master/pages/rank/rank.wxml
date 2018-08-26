@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="rank">
+  <view class="top-rank">
+      <view class="title">今天全球排行榜</view>
+      <view class="detail">
+        <view class="top-group">
+            <image src="" mode="" wx:if="{{topGroup.url}}"></image>
+            <view class="top-group-head" wx:else>{{topGroup.headName}}</view>
+            <view class="top-group-name">
+              冠军群: {{topGroup.name}}
+            </view>
+          </view>
+          <view class="top-user">
+            <image src="" mode="" wx:if="{{topUser.avatar_url}}"></image>
+            <view class="top-user-head" wx:else>{{topUser.headName}}</view>
+            <view class="top-user-name">
+              最佳群成员: {{topUser.user.name}}
+            </view>
+          </view>
+      </view>
+    </view>
+    <view class="group-list">
+        <scroll-view scroll-y lower-threshold="50">
+          <view class="title">
+            <view class="rank">排名</view>
+            <view class="profile">群名</view>
+            <view class="counts">生宝宝数</view>
+          </view>
+            <view class="group-item"
+              wx:for="{{groups}}"
+              wx:key="{{item.id}}"
+            >
+              <view class="rank">{{index + 1}}</view>
+              <view class="name">{{item.name}}</view>
+              <view class="counts">{{item.counts}}</view>
+          </view>
+          </scroll-view>
+      </view>
+      <view class="play" bindtap="play">发起挑战</view>
+</view>

@@ -1,0 +1,14 @@
+<!--snackbar.wxml-->
+<template name="snackbar">
+	<view  class="{{snackEnable ? 'snack-bar':'snack-bar-hide'}}" style="{{style_snackbar}}" animation="{{animationData}}">
+		<view  class="snack-title snack-text" >
+			{{snack_title}}
+		</view>
+		<view  class="snack-action snack-text" hover="true" hover-class="hover-action" catchtap="{{onActionClick}}" style="{{style_snack_action}}">
+			{{snack_action}}
+		</view>
+		<!-- 自定义增加的关闭ico，需要在使用的页面绑定cancelSnackBarTap点击事件函数，调用snackbar.js的hide()方法 -->
+		<view class="snack-cancel snack-text" hover-class="hover-cancel" catchtap="{{cancelSnackBarTap}}">取消</view>
+		<!-- <icon class="snack-cancel" type="cancel" size="18" catchtap="{{cancelSnackBarTap}}"/> -->
+	</view>
+</template>

@@ -1,0 +1,67 @@
+﻿<div class="container" ng-controller="editPersonalController">
+    <form name="formIndex" ng-submit="update(formIndex.$invalid)" novalidate="novalidate">
+        <div class="row">
+            <div ng-include="'views/my/personal/edit/header.html'"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" >
+
+                <div class="weui_cells_title">基本信息</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">昵称</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input text-right" style="color:#444;" ng-disabled="true" value="{{userInfo.nickName}}" type="text" />
+                        </div>
+                    </div>
+                    <div class="weui_cell ">
+                        <div class="weui_cell_hd"><label class="weui_label">省</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input text-right" style="color:#444;" ng-disabled="true" value="{{userInfo.province}}" type="text" />
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">市</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input text-right" style="color:#444;" ng-disabled="true" value="{{userInfo.city}}" type="text" />
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">孩子年龄</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input name="childAge" class="weui_input text-right"
+                                   style="color:#888;" ng-model="userInfo.childAge"
+                                   placeholder="请输入孩子年龄" type="number" max="20" min="1" />
+                        </div>
+                    </div>
+                    <div class="weui_cell weui_cell_select" style="padding: 10px 15px; ">
+                        <div class="weui_cell_hd"><label  class="weui_label">孩子性别</label></div>
+                        <div  class="weui_cell_bd weui_cell_primary">
+                            <select  se-select class="weui_select" name="select1"  ng-model="selectSex" ng-options="s.value for s in sex" >
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">手机号码</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input name="telephone" class="weui_input text-right"
+                                   style="color:#888;" ng-model="userInfo.telephone"
+                                   placeholder="请输入手机号码" type="tel" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div ng-show="formIndex.childAge.$error.number &&formIndex.childAge.$dirty ">
+                    <div class="alert alert-danger">请输入数字</div>
+                </div>
+                <div ng-show="formIndex.childAge.$error.min &&formIndex.childAge.$dirty ">
+                    <div class="alert alert-danger">年龄最小值为1</div>
+                </div>
+                <div ng-show="formIndex.childAge.$error.max &&formIndex.childAge.$dirty ">
+                    <div class="alert alert-danger">年龄最大值为20</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

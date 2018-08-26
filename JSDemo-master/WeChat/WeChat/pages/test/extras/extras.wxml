@@ -1,0 +1,37 @@
+<!--pages/test/extras/extras.wxml-->
+<view class="group">
+  <block wx:for="{{iconSize}}">
+    <icon type="success" size="{{item}}" />
+  </block>
+</view>
+
+<view class="group">
+  <block wx:for="{{iconType}}">
+    <icon type="{{item}}" size="20" />
+  </block>
+</view>
+
+<view class="group">
+  <block wx:for="{{iconColor}}">
+    <icon type="success" size="20" color="{{item}}" />
+  </block>
+</view>
+
+<view class="group">
+  <block wx:for="{{iconColor}}">
+    <icon type="success_no_circle" size="20" color="{{item}}" />
+  </block>
+</view>
+
+<view class="text-view">
+  <text>{{text}}</text>
+  <view class="horizontalViewContainer">
+    <button class="button one_two" bindtap="add" hover-class="button-hover">add line</button>
+    <button class="button one_two" bindtap="remove" hover-class="button-hover">remove line</button>
+  </view>
+</view>
+
+<view class="group">
+  <rich-text nodes="{{nodes}}"></rich-text>
+  <input class="input" placeholder="enter your name" placeholder-class="input-placeholder" maxlength="10" confirm-type="go" bindinput="bindKeyInput" />
+</view>

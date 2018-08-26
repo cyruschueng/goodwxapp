@@ -1,0 +1,30 @@
+<view class="Page">
+  <view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  <scroll-view scroll-y="true" class="list" style="height:{{scrollHeight}}px;" wx:else>
+    <swiper class="swiper" indicator-dots="true" wx:if="{{swiper_img.length > 0}}">
+      <block wx:for="{{swiper_img}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" mode="aspectFill" class="img" binderror="errImg" data-err-img="swiper_img[{{index}}].img"/>        
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="meta">
+      <view class="name">- {{name}} -</view>
+      <view class="profile">{{profile}}</view>
+    </view>
+    <view class="details">
+      <block wx:for="{{details}}" wx:key="*this">
+        <navigator url="{{'../../live/food/merchants/merchants?id='+item.id}}" class="img_groups" style="{{'background-image:url('+item.img+');'}}">
+          <view class="title_groups">
+            <view class="title">{{item.title}}</view>
+            <image src="../../../image/arrow3.png" class="arrow"></image>
+          </view>       
+        </navigator>
+      </block>
+      
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,57 @@
+<!-- 轮播图 start -->
+<swiper style='width:100%;height:700rpx' indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color='#fff' autoplay="true" >
+  <block>
+    <swiper-item>
+      <image src="/images/index/shili.jpg" class="slide-image"  mode='aspectFill' style='width:100%;height:700rpx'/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class='panele'>
+  <view class='sm'>
+    <view class='dm'>丽芙女装</view>
+      <view class='dh' bindtap="call">
+        <view style='font-size:26rpx'>18857818257</view>
+        <image src='/images/shop/dianhua.png' style='margin-left:20rpx;width:40rpx;height:40rpx'></image>
+      </view>
+  </view>
+  <view class='dz'>江户大道世纪国际广场二号楼东区18号</view>
+</view>
+<view class='panel'>
+  <view class='font-el bold'>2017秋季新款女装外套韩版双排扣中长女款中长袖</view>
+  <view class='margin-top-xs font-md font-default'>秋季新款女装外套韩版，现正火热促销中，抓紧抢购吧。</view>
+  <view class='panel-between'>
+    <view><text class='font-danger font-50 bold'>￥35</text><text class='margin-left-xs font-default font-sm through' >￥55</text></view>
+    <view class='panel-end item-center font-default' wx:if="{{store.minMailPrice != null || store.maxWeight != null}}">
+      <icon type="success" size="15" color="#ff4040"/>
+      <view class='margin-left-xs font-sm' wx:if="{{store.minMailPrice > 0}}">{{'满￥'+store.minMailPrice}}包邮</view>
+      <view class='margin-left-xs font-sm' wx:if="{{store.maxWeight > 0}}">{{'小于'+store.minMailPrice}}g包邮</view>
+    </view> 
+  </view>
+</view>
+
+<view class='panel panel-between item-center margin-top-sm bottom-line' bindtap='openCan'>
+  <view>产品参数</view>
+  <image src='/images/shop/{{showCan ? "drop1":"drop"}}.png' class='icon-md'></image>
+</view>
+
+<view class='panel' style='padding-bottom:0'>商品详情</view>
+<view class='panel'>
+  <import src="../../wxParse/wxParse.wxml" />
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>
+
+
+<view style='height:100rpx;'></view>
+<view class='bottom-bar'>
+  <view class='smbtn' open-type='contact'>
+    <image src='/images/shop/kefu.png' class='icon-lg margin-top-xs'></image>
+    <view class='font-22 font-default' >客服</view>
+  </view>
+  <view class='smbtn' bindtap='switchToCart'>
+    <image src='/images/shop/cart.png' class='icon-lg margin-top-xs'></image>
+    <view class='font-22 font-default' >购物车</view>
+  </view>
+  <view class='incart'  bindtap='tempDu'>加入购物车</view>
+  <view class='buybtn'  bindtap='tempDu'>立即购买</view>
+</view>

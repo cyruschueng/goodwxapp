@@ -1,0 +1,32 @@
+<view class="continer">
+    <view class="header-nav">
+      <view class="search-container search-active">
+        <icon size="15" type="search"></icon>
+        <input focus="" type="text" confirm-type="search" bindinput="searchInputEvent"
+        placeholder="搜索亲友生日" placeholder-style="color:#999999;" value=""/>
+      </view>
+      <view class="search" bindtap='quxiao'>取消</view>
+    </view>
+    <view class="searchCont">
+        <view class="searchCont" wx:if="{{friendList}}"> 
+            <view data-id="index" class="searchItem clearfix" bindtap="inform"
+              wx:for="{{friendList}}" data-mf_id="{{item.mf_id}}" data-url="{{item.avatar}}">
+                <view class="left">
+                  <view class="avatar">
+                     <image src="{{item.avatar}}" mode='widthFix'></image>
+                  </view>
+                  <view class="msg">
+                    <view class="name"> {{item.name}}</view>
+                    <view class="date"> {{item.birthday}}</view>
+                  </view>
+                </view>
+                <view class="right">
+                  <view class="day"><text style="font-size: 19px;">{{item.surplus_day}}</text> 天 </view>
+                  <view class="nextBirthday"> 距{{item.age}}岁生日 </view>
+                </view>
+            </view>
+        </view>
+        <view class='noData' wx:if="{{noData}}">查无此人!</view>
+    </view>
+</view>
+

@@ -1,0 +1,24 @@
+<import src="./selectedIcon.wxml" />
+<wxs src="./index.wxs" module="util" />
+<view class="question-options-wrap">
+    <view
+        class="item {{item.length > 8 && 'item-max'}} {{util.getClassName(index, selectedIndex, isQuestionOver, result)}}"
+        wx:for="{{options}}"
+        wx:key="*this"
+        data-index="{{index + 1}}"
+        bindtap="onOptionTap"
+        animation="{{animationData[index]}}"
+    >
+        <template
+            wx:if="{{isQuestionOver && result && selectedIndex === index + 1}}"
+            is="selectedIcon"
+            data="{{ ...{className: 'left', isSelected: (selectedIndex === index + 1) ? selectedIndex === result.correctOption : false} }}"
+        />
+        {{item}}
+        <template
+            wx:if="{{isQuestionOver && result && result.enemyOption === index + 1}}"
+            is="selectedIcon"
+            data="{{ ...{className: 'right', isSelected: (result.enemyOption === index + 1) ? result.enemyOption === result.correctOption : false} }}"
+        />
+    </view>
+</view>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+
+	// 作用域链，执行环境，活动对象，
+	// 全局对象，局部对象
+
+		/*var sMessage = "hello world";
+
+		function sayHelloWorld() {
+		  alert(sMessage);
+		}
+		sayHelloWorld();
+
+
+		var a  =1;		
+		function add(b,c){
+			function addAll(){
+				return a+b+c;
+			}
+			return addAll();
+		}
+		console.log(add(2,3))*/
+
+		/*function say(){
+			var num = 123;
+			var sayAlert = function(){
+				alert(num)
+			}
+			num++;
+			return sayAlert;
+		}
+
+		var sayContent = say();
+		// alert(sayContent);
+		sayContent();*/
+
+
+
+
+		/*var name  ="the window";	
+		var obj = {
+			name:"my",
+			getNameFunc:function(){
+				return function(){
+					return this.name
+				}
+			}
+		}
+		alert(obj.getNameFunc()())	
+
+
+		var name  ="the window";	
+		var obj = {
+			name:"my",
+			getNameFunc:function(){
+				var that = this;
+				return function(){
+					return that.name
+				}
+			}
+		}
+		alert(obj.getNameFunc()())	*/
+
+
+
+//去除内存泄漏
+function assignHandler(){
+var element = document.getElementById("someElement");
+var id = element.id;
+element.onclick = function(){
+alert(id);
+};
+element = null;
+}
+	</script>
+
+</body>
+</html>

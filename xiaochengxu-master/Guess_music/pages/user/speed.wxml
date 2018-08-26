@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class='allbg'>
+ <form bindsubmit="obtainFormId" report-submit="true">
+  <view class='weapbox'>
+    <view wx:if="{{user.lv > lv_data.lv}}">
+      <button formType="submit"  class='speed_btn' wx:for="{{speed_arr}}" wx:key="app" wx:for-index="idx" wx:for-item="item" bindtap='goPlay' data-lv='{{lv_data.lv}}' data-speed="{{item}}">{{item}}</button>
+    </view>
+    <view wx:else class='noend'>
+      <view wx:for="{{speed_arr}}" wx:key="app" wx:for-index="idx" wx:for-item="item">
+        <view wx:if="{{user.speed <= item}}" class='speed_btn disable'>{{item}}</view>
+        <button formType="submit" wx:else class='speed_btn' bindtap='goPlay' data-lv='{{lv_data.lv}}' data-speed="{{item}}">{{item}}</button>
+      </view>
+
+    </view>
+  </view>
+  </form>
+</view>

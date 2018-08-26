@@ -1,0 +1,23 @@
+<!--pages/mine/score/score.wxml-->
+
+<view class="container">
+  <view class="score">
+    <image src="{{avatarUrl}}" class="avatar" />
+    <view class="desc">
+      你一共闯过了 <strong>{{missionCount}}</strong> 个关卡，
+      答对 <strong>{{questionCount}}</strong> 道题目，
+      全国排名第 <strong>{{rankInAll}}</strong> 位，
+      好友排名第 <strong>{{rankInFriend}}</strong> 位
+    </view>
+  </view>
+  <view class="missions">
+    <view class="item" wx:for="{{friendItems}}" wx:key="item">
+      <image src="{{item.header}}" mode="aspectFit" lazy-load="true" class="header" />
+      <text class="point">{{item.questionCount}}</text>
+      <text class="nick">{{item.nick}}</text>
+    </view>
+  </view>
+  <view class="controls">
+    <button type="primary" bindtap="onShareTap"> 分享至朋友圈 </button>
+  </view>
+</view>

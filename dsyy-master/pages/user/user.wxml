@@ -1,0 +1,54 @@
+<view wx:if="avatar!=''&&nick_name!=''">
+  <view class="page" style="height:20rpx;"></view>
+  <form bindsubmit="formSubmit">
+    <view class="padding-left-30 padding-right-30">
+      <view class="weui-cells_after-title user-view border-bottom">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label user-view-word">头像</view>
+          </view>
+          <view class="weui-cell__bd text-right user-view-img">
+            <image src="{{avatar}}" class="user-view-photo"></image>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells_after-title user-list border-bottom">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label user-list-word">姓名</view>
+          </view>
+          <view class="weui-cell__bd text-right">
+            <input name="nick_name" class="weui-input" placeholder="{{nick_name}}" disabled="true" />
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells_after-title user-list border-bottom">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label user-list-word">电话</view>
+          </view>
+          <view class="weui-cell__bd text-right">
+            <input name="phonenum" class="weui-input" placeholder="{{phonenum==''||phonenum=='undefined'?'请填写电话':phonenum}}" />
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells_after-title user-list border-bottom">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label user-list-word">性别</view>
+          </view>
+          <view class="weui-cell__bd text-right">
+            <input name="gender" class="weui-input" placeholder="{{gender_f}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="user-button" form-type="submit">提交</button>
+    </view>
+  </form>
+</view>
+<!-- 黑框提示并消失 -->  
+<toast hidden="{{toastHidden}}" bindchange="toastChange">  
+    {{notice_str}}  
+</toast>  

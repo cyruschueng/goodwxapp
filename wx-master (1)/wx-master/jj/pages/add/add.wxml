@@ -1,0 +1,88 @@
+<!--======选择信用卡====pages/add/add.wxml-->
+<view class='container'>
+  <view class='input-wrapper'>
+    <view class='card col row'>
+      <text class="txt">卡号</text>
+      <input class='input' maxlength="19" value="{{card}}"placeholder='银行卡号'  placeholder-class='plac' bindinput="getCard" bindblur='blurCard'/>
+    </view>
+    <view class='bank col row'>
+      <text class="txt">开户银行</text>
+      <input class='input' placeholder='请选择开户银行' disabled='true' placeholder-class='plac' value="{{valueBankName}}"/>
+    </view>
+    <view class='tele col row'>
+      <text class="txt">手机号</text>
+      <input class='input' placeholder='预留手机号'  placeholder-class='plac' bindinput="tele" maxlength="11"/>
+    </view>
+  <view class='tele col row'>
+    <text class="txt">账单日</text>
+    <picker bindchange="bindPickerChange" mode="selector" value="{{index}}" range="{{arr}}" >
+      <view class="input" style='line-height:45rpx;'>{{arr[index]}}日</view>
+    </picker>
+  </view>
+  <view class='tele col row'>
+    <text class="txt">还款日</text>
+    <picker bindchange="bindPickerChange1" mode="selector" value="{{index1}}" range="{{arr1}}" >
+      <view class="input" style='line-height:50rpx;'>{{arr1[index1]}}日</view>
+    </picker>
+  </view>
+  </view>
+  
+    <button class='submit' data-statu="open" catchtap='next' disabled='{{next_disa}}'>下一步</button>
+
+<!--测试所用-->
+    <!-- <button class='submit'  catchtap='list' >信用卡列表</button> -->
+<text>提示：为了验证用户的真实性，绑卡成功将执行一笔  <text class='obvious'>10</text> 元的交易，其中<text class='obvious'>2</text> 元用于信用卡的验证，剩余<text class='obvious'>8</text> 元将返回到钱包，请到钱包内查询。</text>
+
+ <!--弹窗提醒扣款区域-->
+  <!-- <view class='remind' wx:if="{{remind-show}}">
+    <view class='remind-content'>
+      <view class=''>添加信用卡会扣款10元，其中2元用于信用卡鉴权，剩余8元会返回到钱包,添加成功后可到钱包内查看</view>
+    </view>
+  </view> -->
+
+<!--弹窗 添加信用卡-->
+  <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+    <!--content-->
+    <view class='mask'>
+      <view wx:if="{{wallets_password_flag}}" class="wallets-password">
+
+          <view class='tele col row'>
+            <text class="txt txt1 txt2">CVN2</text>
+            <input class='input cvn' placeholder='信用卡背面三位数'  placeholder-class='plac' bindinput="cvn" maxlength="3"/>
+          </view>
+          <view class='tele col row'>
+            <text class="txt txt1 txt2">有效日期</text>
+            <input class='input cvn' placeholder='mmyy'  placeholder-class='plac' maxlength='4' bindinput="date"/>
+
+          </view>
+    <view class="tele col row">
+      <text class="txt txt1 txt2 code">验证码</text>
+      <input type="number"  bindinput="getCode" value="{{code}}" placeholder="请输入验证码" maxlength='6' class='input cvn'/>
+      <button class=" sendCode" catchtap="sendCode" disabled='{{disa}}'>{{getBtnText}}</button> 
+      </view>
+    </view>
+        
+        <view class='row bottom'>
+          <button type="default" class="btn_cancel btn_ok" bindtap="cancel" data-statu="open" >取消</button> 
+          <button type="default" class="btn_ok" bindtap="sure" data-statu="close" disabled="{{dis}}">确定</button> 
+        </view>
+      </view>
+      </view>
+    </view>
+    
+ <!--验证码发送区-->
+      <view class='msg' wx:if="{{show}}">
+        <view class='msg-mask'>
+        <view class='title'>扣款验证码</view>
+            <view class='row' style='width:90%;margin:0 auto; border-bottom:2rpx solid #ccc;'>
+              <text class='CODE'>扣款验证码：</text>
+              <input maxlength='6' type='number' bindinput='CODE' value='{{Code}}' class='kCode' placeholder='扣款验证码'></input>
+            </view>
+            <view class='row'>
+              <button class='btn' catchtap='msg_cancel'>取消</button>
+              <button class='btn'catchtap='msg_sure' disabled='{{msg_disable}}'>确认</button>
+            </view>
+        </view>
+      </view>
+
+    

@@ -1,0 +1,22 @@
+<!--pages/count/count.wxml-->
+<view class='container'>
+
+  <view class='head row'>
+    <image class='avatar' src='{{imgUrl}}'></image>
+    <view class='column'>
+      <text class='nickName'>{{nickName}}[{{mer}}]</text>
+      <text>{{phone}}</text>
+    </view>
+  </view>
+  
+  <!--数据列表-->
+  <view class='content'>
+    <block wx:for="{{arr1}}" wx:key="{{item.id}}">
+      <view class='item row pos-r'>
+        <image src="{{item.src}}"></image>
+        <view class='dec'>{{item.dec}}</view>
+        <view class='num'>{{item.num}}</view>
+      </view>
+    </block>
+  </view>
+</view>

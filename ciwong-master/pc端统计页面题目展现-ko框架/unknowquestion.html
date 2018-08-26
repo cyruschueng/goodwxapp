@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=8" /> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <title>pc端统计页面题目展现</title>
+  	<script src="http://cdn.static.runoob.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/knockout/3.2.0/knockout-min.js"></script>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    body,
+    html {
+        background-color: #fff;
+    }
+    
+    .mt10 {
+        margin-top: 10px;
+    }
+    
+    .ml20 {
+        margin-left: 20px;
+    }
+    
+    .clearfix {
+        zoom: 1;
+    }
+    
+    .clearfix:after {
+        content: "";
+        display: block;
+        visibility: hidden;
+        height: 0;
+        clear: both;
+    }
+    
+    .anTxt {
+        text-align: center;
+        margin: 0 6px;
+        padding: 2px 0;
+        border: 0;
+        border-bottom: 1px solid #aaa;
+    }
+    
+    .questionDetailBox {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 1140px;
+        padding: 10px 0;
+        font-family: 'Microsoft YaHei';
+    }
+    
+    .questionDetailBox img {
+        max-width: 100%;
+        display: inline-block;
+        height: auto;
+    }
+    
+    .questionDetailBox .attBox {
+        position: relative;
+        z-index: 0;
+        overflow: hidden;
+    }
+    
+    .questionDetailBox .attBox img {
+        max-width: 500px;
+        display: inline-block;
+        height: auto;
+    }
+    
+    .questionDetailBox .attBox embed,
+    .questionDetailBox .attBox object {
+        position: relative;
+        z-index: 0;
+    }
+    
+    .questionDetailBox .attBox audio {
+        width: 260px;
+        height: 30px;
+    }
+    
+    .qdItem {
+        padding: 20px 38px;
+        font-size: 14px;
+        color: #333;
+        line-height: 24px;
+        background-color: #f9f9f9;
+        border-top: 1px solid #ebebeb;
+        clear: both;
+        word-break: break-word;
+    }
+    
+    .qdTitle {
+        background-color: #fff;
+        border: 0;
+    }
+    
+    .vAlingM {
+        vertical-align: middle;
+    }
+    
+    .qdiHead {
+        font-size: 16px;
+        color: #19b200;
+    }
+    
+    .qdiBody .qdiVideo {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    
+    .qdiBody .qdivTxt {
+        vertical-align: middle;
+        display: inline-block;
+        max-width: 80%;
+    }
+    
+    .qdiBody .qdiVideo i {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -14px 0 0 -14px;
+        background: url(images/vPlayer.png) center no-repeat;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .qdiBody .qdiVideo img {
+        min-width: 100%;
+        min-height: 100%;
+        max-width: 120%;
+        display: block;
+    }
+    
+    .qdiBody .qdiVideo span {
+        min-width: 100%;
+        min-height: 100%;
+        max-width: 120%;
+        display: block;
+    }
+    /*视频弹出层*/
+    
+    .videoBoxLayer {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 99999;
+    }
+    
+    .videoBoxLayer .vBg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        background-color: #666\9;
+        opacity: 0.6;
+        z-index: 1;
+    }
+    
+    .videoBoxLayer .vClose {
+        position: absolute;
+        right: 10px;
+        top: 0;
+        color: #fff;
+        font-size: 50px;
+        font-family: 'Verdana', 'arial', 'Microsoft YaHei';
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    .videoBoxLayer .vPlayer {
+        position: relative;
+        z-index: 2;
+        max-width: 1140px;
+        margin: 10% auto 0;
+        width: 100%;
+        height: 80%;
+    }
+    
+    .videoBoxLayer .vPlayer>* {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <!--ko if:viewModel.msg-->
+    <div style="margin: 100px auto;font-size:18px;text-align:center;color:#777;">
+        <div data-bind="html:viewModel.msg"></div>
+    </div>
+    <!--/ko-->
+    <div class="questionDetailBox">
+        <!--ko foreach:question-->
+        <!-- ko template:{ name:'question-template'} -->
+        <!-- /ko -->
+        <!--/ko-->
+    </div>
+    <!-- 弹出层 -->
+    <div class="videoBoxLayer" id="videoBoxLayer">
+        <div class="vBg" onclick="closePlayer()"></div>
+        <div class="vClose" onclick="closePlayer()">×</div>
+        <div class="vPlayer" id="videoBoxLayer_vPlayer"></div>
+    </div>
+    <!--附件模板-->
+    <script type="text/html" id="attachmentsTemplage">
+        <div data-bind="visible: $data.file_url" class="attBox">
+            <!--ko if:$data.file_type == 1 && $data.file_url-->
+            <img style="margin-left: 0" data-bind=" attr: { src: $data.file_url }" />
+            <!--/ko-->
+            <!--ko if:$data.file_type == 2 && $data.file_url-->
+            <div style="width: 385px;" data-bind="html:audioToHtml($data)"></div>
+            <!--/ko-->
+            <!--ko if:$data.file_type == 3 && $data.file_url-->
+            <div data-bind="html:objectToHtml($data)"></div>
+            <!--/ko-->
+            <!--ko if:$data.file_type == 4 && $data.file_url-->
+            <a data-bind=" attr: {  href: $data.file_url },text:$data.name"></a>
+            <!--/ko-->
+        </div>
+    </script>
+    <!--解题视频模板-->
+    <script type="text/html" id="video-template">
+        <!--ko if:video_unique-->
+        <div class="qdItem">
+            <div class="qdiHead">视频讲解</div>
+            <div class="qdiBody mt10 clearfix">
+                <div class="qdiVideo" data-bind="event: { click: viewModel.openPlayer.bind($data, video_unique) }"><i></i><img data-bind="attr:{src:cover_url || 'images/pic.png'}" alt=""></div>
+            </div>
+        </div>
+        <!--/ko-->
+    </script>
+    <!--选择题模板-->
+    <script id="question-choice-template" type="text/html">
+        <!--ko with:question-->
+            <div class="qdItem qdTitle">
+                <div data-bind="html:stem"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:attachments } -->
+                <!-- /ko -->
+                <!--ko foreach:options-->
+                <div><span data-bind="text:optionValue[$index()]"></span>、<span data-bind="html:stem"></span></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <!--/ko-->
+            </div>
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">解析</div>
+                <div class="qdiBody" data-bind="html:solving_idea || '(无)'"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+            </div>
+            <!--/ko-->
+            <!--ko foreach:explain_videos-->
+                <!-- ko template:{ name:'video-template'} -->
+                <!-- /ko -->
+            <!--/ko-->
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">答案</div>
+                <div class="qdiBody">
+                    <!--ko foreach:answers-->
+                    <p>
+                        <span data-bind="html:optionValue[$data.index]+'、'"></span>
+                        <span data-bind="html:$data.stem || '(无)'"></span>
+                        <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                        <!-- /ko -->
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <div class="qdItem">
+                <div class="qdiHead">考点</div>
+                <div class="qdiBody">
+                    <!--ko foreach:points-->
+                    <p>
+                        <span data-bind="html:$data"></span>
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!--/ko-->
+            <!--ko if:$data.video_extension-->
+                <!--ko if:$data.video_extension.teacherName-->
+                <div class="qdItem">
+                    <div class="qdiHead">讲师</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.teacherTitle + '--' +$data.video_extension.teacherName"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">关联的信息</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.relatedInfo"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">对应书本页码和题号</div>
+                    <div class="qdiBody" data-bind="html:'第'+$data.video_extension.pageNumber+'页第'+$data.video_extension.questionNumber+'题'"></div>
+                </div>
+                <!--/ko-->
+            <!--/ko-->
+        <!--/ko-->
+    </script>
+    <!--填空题模板-->
+    <script id="question-filling-template" type="text/html">
+        <!--ko with:question-->
+            <div class="qdItem qdTitle">
+                <div data-bind="html:stem"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <!--ko foreach:options-->
+                <div><span data-bind="text:($index()+1)"></span>、<span data-bind="html:stem"></span></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <!--/ko-->
+            </div>
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">解析</div>
+                <div class="qdiBody" data-bind="html:solving_idea || '(无)'"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+            </div>
+            <!--/ko-->
+            <!--ko foreach:$data.explain_videos-->
+            <!-- ko template:{ name:'video-template'} -->
+            <!-- /ko -->
+            <!--/ko-->
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">答案</div>
+                <div class="qdiBody">
+                    <!--ko foreach:answers-->
+                    <p>
+                        <span data-bind="html:($index()+1)+'、'"></span>
+                        <span data-bind="html:$data.stem || '(无)'"></span>
+                        <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                        <!-- /ko -->
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <div class="qdItem">
+                <div class="qdiHead">考点</div>
+                <div class="qdiBody">
+                    <!--ko foreach:points-->
+                    <p>
+                        <span data-bind="html:$data"></span>
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!--/ko-->
+            <!--ko if:$data.video_extension-->
+                <!--ko if:$data.video_extension.teacherName-->
+                <div class="qdItem">
+                    <div class="qdiHead">讲师</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.teacherTitle + '--' +$data.video_extension.teacherName"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">关联的信息</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.relatedInfo"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">对应书本页码和题号</div>
+                    <div class="qdiBody" data-bind="html:'第'+$data.video_extension.pageNumber+'页第'+$data.video_extension.questionNumber+'题'"></div>
+                </div>
+                <!--/ko-->
+            <!--/ko-->
+        <!--/ko-->
+    </script>
+    <!--复合题模板-->
+    <script id="question-cloze-template" type="text/html">
+        <!--ko with:question-->
+            <div class="qdItem qdTitle">
+                <div data-bind="html:stem"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <!--ko foreach:options-->
+                <div><span data-bind="text:($index()+1)"></span>、<span data-bind="html:stem"></span></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <!--/ko-->
+            </div>
+            <!--ko foreach:explain_videos-->
+            <!-- ko template:{ name:'video-template'} -->
+            <!-- /ko -->
+            <!--/ko-->
+            <!--ko foreach:children-->
+            <div class="qdItem" style="position:relative;">
+                <div class="qdiHead" data-bind="text:optionValue2[$index()]" style="font-size:20px;position:absolute;left:20px;">解析</div>
+                <div class="clearfix" style="margin-left:20px;border: 1px solid #ebebeb;box-shadow: 1px 1px 2px #eee;">
+                    <!-- ko template:{ name:'question-template',data:$data} -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!--/ko-->
+        <!--/ko-->
+    </script>
+    <!--子题目模板-->
+    <script id="question-children-template" type="text/html">
+        <!--ko if:$data-->
+            <div class="qdItem qdTitle" style="padding-top:10px;padding-bottom:10px;">
+                <div data-bind="html:stem"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <!--ko foreach:options-->
+                <div><span data-bind="text:($index()+1)"></span>、<span data-bind="html:stem"></span></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <!--/ko-->
+            </div>
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">解析</div>
+                <div class="qdiBody" data-bind="html:solving_idea || '(无)'"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+            </div>
+            <!--/ko-->
+            <!--ko foreach:$data.explain_videos-->
+                <!-- ko template:{ name:'video-template'} -->
+                <!-- /ko -->
+            <!--/ko-->
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">答案</div>
+                <div class="qdiBody">
+                    <!--ko foreach:answers-->
+                    <p>
+                        <span data-bind="html:($index()+1)+'、'"></span>
+                        <span data-bind="html:$data.stem || '(无)'"></span>
+                        <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                        <!-- /ko -->
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <div class="qdItem">
+                <div class="qdiHead">考点</div>
+                <div class="qdiBody">
+                    <!--ko foreach:points-->
+                    <p>
+                        <span data-bind="html:$data"></span>
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!--/ko-->
+            <!--ko if:$data.video_extension-->
+                <!--ko if:$data.video_extension.teacherName-->
+                <div class="qdItem">
+                    <div class="qdiHead">讲师</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.teacherTitle + '--' +$data.video_extension.teacherName"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">关联的信息</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.relatedInfo"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">对应书本页码和题号</div>
+                    <div class="qdiBody" data-bind="html:'第'+$data.video_extension.pageNumber+'页第'+$data.video_extension.questionNumber+'题'"></div>
+                </div>
+                <!--/ko-->
+            <!--/ko-->
+        <!--/ko-->
+    </script>
+    <!--简答题模板-->
+    <script id="question-shortanswer-template" type="text/html">
+        <!--ko with:question-->
+            <div class="qdItem qdTitle">
+                <div data-bind="html:stem"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+            </div>
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">解析</div>
+                <div class="qdiBody" data-bind="html:solving_idea || '(无)'"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+            </div>
+            <!--/ko-->
+            <!--ko foreach:$data.explain_videos-->
+            <!-- ko template:{ name:'video-template'} -->
+            <!-- /ko -->
+            <!--/ko-->
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">答案</div>
+                <div class="qdiBody">
+                    <!--ko foreach:answers-->
+                    <p>
+                        <span data-bind="html:$data.stem || '(无)'"></span>
+                        <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                        <!-- /ko -->
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <div class="qdItem">
+                <div class="qdiHead">考点</div>
+                <div class="qdiBody">
+                    <!--ko foreach:points-->
+                    <p>
+                        <span data-bind="html:$data"></span>
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!--/ko-->
+            <!--ko if:$data.video_extension-->
+                <!--ko if:$data.video_extension.teacherName-->
+                <div class="qdItem">
+                    <div class="qdiHead">讲师</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.teacherTitle + '--' +$data.video_extension.teacherName"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">关联的信息</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.relatedInfo"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">对应书本页码和题号</div>
+                    <div class="qdiBody" data-bind="html:'第'+$data.video_extension.pageNumber+'页第'+$data.video_extension.questionNumber+'题'"></div>
+                </div>
+                <!--/ko-->
+            <!--/ko-->
+        <!--/ko-->
+    </script>
+    <!--判断题模板-->
+    <script id="question-checking-template" type="text/html">
+        <!--ko with:question-->
+            <div class="qdItem qdTitle">
+                <div data-bind="html:stem"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+                <span><input class="vAlingM" type="radio" disabled /></span> <span>正确</span>
+                <span class="ml20"><input class="vAlingM" type="radio" disabled /></span> <span>错误</span>
+            </div>
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">解析</div>
+                <div class="qdiBody" data-bind="html:solving_idea || '(无)'"></div>
+                <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                <!-- /ko -->
+            </div>
+            <!--/ko-->
+            <!--ko foreach:$data.explain_videos-->
+            <!-- ko template:{ name:'video-template'} -->
+            <!-- /ko -->
+            <!--/ko-->
+            <!--ko with:ref_info-->
+            <div class="qdItem">
+                <div class="qdiHead">答案</div>
+                <div class="qdiBody">
+                    <!--ko foreach:answers-->
+                    <p>
+                        <span data-bind="html:$data.stem==undefined ? '(无)' : $data==1 ? '错误' : '正确' "></span>
+                        <!-- ko template:{ name:'attachmentsTemplage',foreach:$data.attachments } -->
+                        <!-- /ko -->
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <div class="qdItem">
+                <div class="qdiHead">考点</div>
+                <div class="qdiBody">
+                    <!--ko foreach:points-->
+                    <p>
+                        <span data-bind="html:$data"></span>
+                    </p>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!--/ko-->
+            <!--ko if:$data.video_extension-->
+                <!--ko if:$data.video_extension.teacherName-->
+                <div class="qdItem">
+                    <div class="qdiHead">讲师</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.teacherTitle + '--' +$data.video_extension.teacherName"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">关联的信息</div>
+                    <div class="qdiBody" data-bind="html:$data.video_extension.relatedInfo"></div>
+                </div>
+                <!--/ko-->
+                <!--ko if:$data.video_extension.relatedInfo-->
+                <div class="qdItem">
+                    <div class="qdiHead">对应书本页码和题号</div>
+                    <div class="qdiBody" data-bind="html:'第'+$data.video_extension.pageNumber+'页第'+$data.video_extension.questionNumber+'题'"></div>
+                </div>
+                <!--/ko-->
+            <!--/ko-->
+        <!--/ko-->
+    </script>
+    <!-- 问题整合模板 -->
+    <script id="question-template" type="text/html">
+        <!--注册组件 1：单选/多选 -->
+        <!--ko if: $data.qtype==1 || $data.qtype==2 -->
+        <div data-bind='component: { name: "question-choice",params:{ question:$data } } '></div>
+        <!-- /ko -->
+        <!-- 填空题 -->
+        <!--ko if: $data.qtype==3 -->
+        <div data-bind='component: { name: "question-filling",params:{ question:$data } } '></div>
+        <!-- /ko -->
+        <!-- 完形填空/阅读理解 -->
+        <!--ko if: $data.qtype==4 || $data.qtype==5 -->
+        <div data-bind='component: { name: "question-cloze",params:{ question:$data } } '></div>
+        <!-- /ko -->
+        <!-- 简答题/题型7 -->
+        <!--ko if: $data.qtype==6 || $data.qtype==7 -->
+        <div data-bind='component: { name: "question-shortanswer",params:{ question:$data } } '></div>
+        <!-- /ko -->
+        <!-- 判断题/题型8 -->
+        <!--ko if:$data.qtype==8 -->
+        <div data-bind='component: { name: "question-checking",params:{ question:$data } } '></div>
+        <!-- /ko -->
+    </script>
+    <script>
+    var debug
+    if(!window.external.webLoadCompleted) debug = true; // 开启调试
+    // 字母选项
+    var optionValue = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        // 圆圈数字选项
+    var optionValue2 = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫', '⑬', '⑭', '⑮', '⑯', '⑰', '⑱', '⑲', '⑳']
+        // ko视图模型
+    var viewModel = {
+        question: ko.observableArray([]), // 题目信息
+        msg: ko.observable('题目载入中...') // 提示信息
+    }
+
+    // 注册 选择题 组件
+    ko.components.register('question-choice', {
+        template: {
+            element: 'question-choice-template'
+        }
+    });
+    // 注册 填空题 组件
+    ko.components.register('question-filling', {
+        template: {
+            element: 'question-filling-template'
+        }
+    });
+    // 注册 复合题（完形填空、阅读理解） 组件
+    ko.components.register('question-cloze', {
+        template: {
+            element: 'question-cloze-template'
+        }
+    });
+    // 注册 简答题 组件
+    ko.components.register('question-shortanswer', {
+        template: {
+            element: 'question-shortanswer-template'
+        }
+    });
+    // 注册 判断题 组件
+    ko.components.register('question-checking', {
+        template: {
+            element: 'question-checking-template'
+        }
+    });
+
+    // 页面加载完成执行函数
+    window.onload = function() {
+        // 嵌入C++程序头代码
+        window.external.webLoadCompleted && window.external.webLoadCompleted();
+
+        // 启动ko
+        ko.applyBindings(viewModel);
+        // 测试：获取数据
+        debug && getJson('950460940485655016', '0');
+    }
+    // 打开视频 
+    viewModel.openPlayer = function(id) {
+        var player = document.getElementById('videoBoxLayer')
+        var html = '<embed src="http://yuntv.letv.com/bcloud.swf" allowfullscreen="true" quality="high" width="100%" height="96%" align="middle" allowscriptaccess="always" flashvars="uu=2bfc338ed7&amp;vu=' + id + '&amp;auto_play=1&amp;width=820&amp;height=630" type="application/x-shockwave-flash">';
+        var player_info = document.getElementById('videoBoxLayer_vPlayer')
+        player_info.innerHTML = html
+        player.style.display = 'block'
+    }
+    // 关闭视频 
+    function closePlayer() {
+        var player = document.getElementById('videoBoxLayer')
+        player.style.display = 'none'
+        document.getElementById('videoBoxLayer_vPlayer').innerHTML = '' // 清空视频以免关闭窗口后继续播放
+    }
+    // 获取答案列表
+    // answerIdArr:正确答案选项组，options：题目选项
+    function getAnswer(answerIdArr, options) {
+        var arr = [];
+        for (var i = 0; i < answerIdArr.length; i++) {
+            for (var j = 0; j < options.length; j++) {
+                if (options[j].id == answerIdArr[i]) {
+                    options[j].index = j;
+                    arr.push(options[j]);
+                    break;
+                }
+            };
+        }
+        return arr != [] ? arr : null;
+    }
+    // ajax请求函数
+    function getAjax(url, success, error) {
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    typeof success == 'function' ? success(xmlhttp.responseText) : (success = xmlhttp.responseText);
+                } else {
+                    typeof error == 'function' ? error(xmlhttp.responseText) : (error = xmlhttp.responseText);
+                }
+            }
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+    // 视频模板
+    function objectToHtml(data) {
+        var objectHtml;
+        if (data.file_url.indexOf('letv') > -1) {
+            var letvid = data.file_url.substring(7);
+            objectHtml = "<embed data-bind='visible: $data.file_type == 3 && $data.file_url'  wmode='opaque'  src=\"http://yuntv.letv.com/bcloud.swf\" allowFullScreen=\"true\" quality=\"high\"  width=\"640\" height=\"360\" align=\"middle\" allowScriptAccess=\"always\" flashvars=\"uu=2bfc338ed7&vu=" + letvid + "&auto_play=0&gpcflag=1&width=640&height=360\" type=\"application/x-shockwave-flash\"></embed>";
+        } else {
+            objectHtml = "<object data-bind='visible: $data.file_type == 3 && $data.file_url' wmode='opaque' classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' width='400' height='370' id='sea'>" + "<param name='movie' value='" + data.file_url + "'/>" + "<param name='menu' value='false' />" + "<param name='bgcolor' value='#FFFFFF' />" + "<param name='flashvars' value='HomePageLoaderXML=swf/data.xml' />" + "<!--[if !IE]>-->" + "<object type='application/x-shockwave-flash' data='" + data.file_url + "'width='400' height='370'>" + "   <param name='menu' value='false' />" + "    <param name='bgcolor' value='#FFFFFF' />" + "    <param name='flashvars' value='HomePageLoaderXML=swf/data.xml' />" + "    <!--<![endif]-->" + "    <!--[if !IE]>-->" + "</object>" + "<!--<![endif]-->" + "</object>";
+        }
+        return objectHtml;
+    }
+    // 音频模板
+    function audioToHtml(data) {
+        var html = '';
+        var random = Math.random().toString().substr(2);
+        var ua = navigator.userAgent
+        if(ua.indexOf("MSIE 6.0")>-1 || ua.indexOf("MSIE 7.0")>-1 || ua.indexOf("MSIE 8.0")>-1){
+            html = '<audio src="'+data.file_url+'" controls="controls">\
+						<embed src="'+data.file_url+'"  controls="controls" autoplay=false>\
+							<object type="application/x-shockwave-flash" name="audioPlayer_' + random + '" style="outline: none" data="http://style.ciwong.net/tools/scripts/plugins/audioPlayer/player.swf" width="200" height="24" id="audioPlayer_' + random + '"><param name="bgcolor" value="#FFFFFF"><param name="wmode" value="transparent"><param name="menu" value="false"><param name="flashvars" value="player=http://style.ciwong.net/tools/scripts/plugins/audioPlayer/player.swf&amp;leftbg=0xcef4da&amp;lefticon=0x647062&amp;voltrack=0xacb8aa&amp;volslider=0xc4d0c3&amp;rightbg=0x61d26a&amp;rightbghover=0x84e45e&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x408d05&amp;track=0xFFFFFF&amp;border=0xffffff&amp;loader=0xc7e795&amp;tracker=0x6dae05&amp;titles=听力原文&amp;soundFile=' + data.file_url + '&amp;playerID=audioPlayer_' + random + '"></object>\
+						</embed>\
+            		</audio>';
+        }else{
+        	html = '<object type="application/x-shockwave-flash" name="audioPlayer_' + random + '" style="outline: none" data="http://style.ciwong.net/tools/scripts/plugins/audioPlayer/player.swf" width="200" height="24" id="audioPlayer_' + random + '"><param name="bgcolor" value="#FFFFFF"><param name="wmode" value="transparent"><param name="menu" value="false"><param name="flashvars" value="player=http://style.ciwong.net/tools/scripts/plugins/audioPlayer/player.swf&amp;leftbg=0xcef4da&amp;lefticon=0x647062&amp;voltrack=0xacb8aa&amp;volslider=0xc4d0c3&amp;rightbg=0x61d26a&amp;rightbghover=0x84e45e&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x408d05&amp;track=0xFFFFFF&amp;border=0xffffff&amp;loader=0xc7e795&amp;tracker=0x6dae05&amp;titles=听力原文&amp;soundFile=' + data.file_url + '&amp;playerID=audioPlayer_' + random + '"></object>'
+        }
+        return html;
+    }
+    // 数据回调函数
+    function callback(json){
+        typeof json == 'string' && (json = $.parseJSON(json))
+        if (json.errcode) {
+            viewModel.msg(json.msg ? '(╯﹏╰) &nbsp;  题目不存在或已丢失~ ，错误信息：' + json.msg : '(╯﹏╰) &nbsp;  题目不存在或已丢失~') // 提示信息
+            return;
+        }
+        // 解析数据
+        var jsonData = json.data || json || [];
+        // 解析正确答案
+        if (jsonData[0] && jsonData[0].ref_info && jsonData[0].ref_info.answers && jsonData[0].options) {
+            var results = getAnswer(jsonData[0].ref_info.answers, jsonData[0].options)
+            if (results && typeof results == 'object' && results.length > 0) jsonData[0].ref_info.answers = results;
+        }
+        if (jsonData[0] == undefined) {
+            viewModel.msg('(╯﹏╰) &nbsp;  题目不存在或已丢失~') // 提示信息
+        } else {
+            viewModel.msg('') // 提示信息
+        }
+        viewModel.question(jsonData)
+
+        console && console.log && console.log('当前获取数据：\n', jsonData)
+    }
+    // 获取数据接口
+    function getJson() {
+        var json = arguments;
+        if (!json[0]) { // json[0]:题目ID,json[1]:视频ID,json[2]:tokenId
+            viewModel.msg('(╯﹏╰) &nbsp;  题目获取失败~') // 提示信息
+            return;
+        }
+        var vid = json[0];
+        // 调试接口：获取测试数据
+        if (location.href.split('?type=')[1]) {
+            var vidArr = [
+                '950460940485655016', // 题型type=1
+                '950460940485549812', // 题型type=2
+                '606485218040362181', // 题型type=3
+                '950460940485473305', // 题型type=4
+                '609631243413090360', // 题型type=5
+                '603281493293029603', // 题型type=6
+                '950460940485579194',
+                '609631016657650521' // 题型type=8
+            ]
+            vid = vidArr[parseInt(location.href.split('?type=')[1]) - 1 || 0];
+            json[1] = '5623658280358666577';
+        }
+        var url = "http://eapi.ciwong.com/v1/question/GetVideoQuestionByVersions?question_ver=" + vid + "&video_ver=" + json[1] + "&" + json[2];
+        if(!debug){   
+            getAjax(url, function(json) {
+                callback(json)
+            }, function(error) {
+                viewModel.msg('(╯﹏╰) &nbsp;  题目不存在或已丢失~，错误信息：服务器请求失败') // 提示信息
+            })
+        }else{
+            var data = {"data":[{"attachments":[{"file_type":3,"file_url":"letv://7c1d20fa1f","position":2}],"children":null,"is_objective":1,"options":[{"attachments":[{"file_type":2,"file_url":"http://rimg2.ciwong.net/cwf/6v68/tools/editor/1689/000/10000/4dc368708d23977393ae3271824fe10e.mp3","position":2}],"id":"950460955559090598","stem":""},{"attachments":[{"file_type":1,"file_url":"http://rimg2.ciwong.net/cwf/6v68/tools/editor/1689/000/10000/d0d02bce2d43d55344ce688d75f739a2.png","position":2}],"id":"950460955559090599","stem":""}],"parent_version":"0","question_ref_sorce":0.0,"ref_info":{"answers":["",""],"attachments":[{"file_type":3,"file_url":"letv://66a8d73155","position":2}],"solving_idea":"解题思路（<span>视频</span>、文字）<br />\n&nbsp;","points":["123"]},"sid":0,"stem":"31、题干（视频），选项（<span>部分图片、音频<span>、视频</span></span>）<input class='anTxt' readonly='true' data-blankinput='1' value='1' type='text' />&nbsp;，解题思路（<span>视频</span>、文字）---客观题<input class='anTxt' readonly='true' data-blankinput='2' value='2' type='text' />&nbsp;<br /><br/><br /><br/>&nbsp;","qtype":3,"explain_videos":[{"video_id":"0","video_ver":"0","cover_url":"http://rimg2.ciwong.net/cwf/6v68/tools/images/161124/014/155014/df192285c930a2db6b32b0d885ac4ebe.png","video_filename":"视频:视频2","duration":"0","video_unique":"66a8d73155"}],"id":"855789107375195169","version_id":"950460940485664670"}],"ret":0,"errcode":0,"msg":"success"}
+
+            callback(data)
+        }
+
+    }
+    </script>
+</body>
+
+</html>

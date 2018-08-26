@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" manifest="../common.appcache">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>听说模考</title>
+
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+     <div class="loading" style="display:block;">
+        <div class="load-inner">
+            <img style="width:1px;height: 1px;position: absolute;left: -9999px;top:-9999px;" src="../common/images/loading.gif" alt="">
+            <span style="text-align: center;">加载中...</span>
+        </div>
+    </div> 
+    <!--loading end-->
+    <div class="dialog" style="display:none;">
+        <div class="dialog-inner">
+            <span>暂无信息~</span>
+        </div>
+    </div><!--dialog end-->
+    <div class="m-error" style="display:none;">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.reload()">重 试</div> 
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div><!--error end-->
+
+    <div class="wrap word-wrap" id="app" style="display:none;">
+        <!--老师点评-->
+        <div id="teacherComment"></div>
+        <!-- userinfo -->
+        <div class="p30 bg-f1f0ec clearfix" v-if="userInfo">
+            <div class="user_score fs-24"><span class="fs-36 green">{{answers.actualScore || 0}}</span> 分 <span v-if="answers.workScore">/ 总分：{{answers.workScore || 0}} 分</span></div>
+            <div class="user_avatar fl"><img :src="userInfo.avatar || '../common/images/default.jpg'" alt=""></div>
+            <div class="fl ml20 maxw-530">
+                <div class="fs-36 lh70">{{userInfo.nickName || userInfo.realName}} &nbsp;</div>
+                <div class="col-999896 mt10 fs-24 lh30" v-for="item in userInfo.classes">{{item.schoolName}} &nbsp; {{item.className}}</div>
+            </div>
+        </div>
+        <!-- parts -->
+        <div v-for="part in exampaper.parts">
+            <div class="tit1 bdt4-f1f0ec">{{part.module_type_name}}</div>
+            <div v-for="question in part.children">
+                <question :question="question" :questionnum="getQuestionNo" :showrefanswers="showRefAnswers" :index="$index+1"></question>
+            </div>
+        </div>
+        <!-- parts end -->
+    </div>
+
+    
+    <script> var app_interaction = location.href.split('wappid=')[1]?false:true; // 是否与APP交互 </script>
+    <!--<script src="../common/js/adaptive.js"></script>
+    <script src="../common/js/jquery.min.js"></script>
+    <script src="../common/js/cordova.min.js"></script>
+    <script src="../common/js/vue.min.js"></script>-->
+    <!--公共js打包压缩成build-->
+    <script src="../common/js/build.min.js"></script>
+
+    <!--通用函数-->
+    <script src="../common/js/common.js"></script>
+    <script src="../common/components/ls_question.js"></script>
+    <script src="js/index.js"></script>
+    <!-- 音频插件 -->
+    <script src="js/audiojs/hoasou.audio.js"></script>
+    <!-- 图片放大插件 -->
+    <script src="js/hammer.min.js"></script>
+    <!--end 通用函数-->
+</body>
+</html>

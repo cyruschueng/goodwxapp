@@ -1,0 +1,38 @@
+﻿<div class="page" ng-controller="detailController">
+    <div class="page__hd" style="background:#fff;">
+        <img style="width:100%;" ng-src="{{productInfo.info.productImgUrl}}" />
+    </div>
+    <div class="page__bd" >
+        <div class="weui-cells">
+          <div class="weui-cell">
+              <div class="weui-cell__bd">
+                  <p>{{productInfo.info.productName}}</p>
+              </div>
+          </div>
+          <div class="weui-cell">
+              <div class="weui-cell__bd">
+                  <p>价格：{{productInfo.info.price|currency:'￥'}}</p>
+              </div>
+          </div>
+          <div class="weui-cell">
+              <div class="weui-cell__bd">
+                  <div class="weui-row">
+                      <div class="weui-col-50">
+                          运费：0.00
+                      </div>
+                      <div class="weui-col-50">
+                          销量：14303件
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <article class="weui-article">
+            <div ng-bind-html="productInfo.info.productDetail"></div>
+        </article>
+    </div>
+    <div class="page__ft">
+
+    </div>
+    <div ng-include="'../items/views/book/detail/footer.html'"></div>
+</div>

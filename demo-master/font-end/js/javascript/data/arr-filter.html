@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-for="item in arrFruit">{{item.name}}</p>
+        <div @click="filter">过滤</div>
+    </div>
+</body>
+
+</html>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        arrFruit:[{
+                "name": "apple",
+                "count": 2
+            }, {
+                "name": "orange",
+                "count": 5
+            }, {
+                "name": "pear",
+                "count": 3
+            }, {
+                "name": "orange",
+                "count": 16
+            }]
+    },
+    created: function() {},
+    mounted: function() {},
+    computed: {},
+    watch: {},
+    computed: {
+        // arrFruits: function() {
+        //     var arrFruits = this.arrFruit.filter(function(item) {
+        //             return item.name === "orange"
+        //         })
+        //     return arrFruits;
+        // }
+    },
+    methods: {
+        filter: function() {
+            var arrs = [];
+            arrs = this.arrFruit.filter(function(item) {
+                if (item.name != "orange") {
+                    return false;
+                }
+                return true;
+            })
+            return this.arrFruit = arrs
+        },
+    }
+})
+</script>

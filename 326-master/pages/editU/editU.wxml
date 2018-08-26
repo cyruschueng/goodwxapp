@@ -1,0 +1,63 @@
+<import src="/template/tabBar.wxml" /> 
+<import src="/template/listStyle.wxml" /> 
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<!--top str -->
+  <view class='h7 flexBetw Skin pdr1 pdl1 borderD'>
+    <image class='imgxs15' src='/images/back.png' bindtap='userAdmInfoback'></image>
+    <view></view>
+    <view></view>
+  </view>
+<!--top end -->
+<!-- sec1 str   -->
+<view class='flexv1 modeldrawer_content'>
+<!--开启禁用状态 str -->
+  <radio-group wx:if="{{userStaIf}}" bindchange="radioStaChange">
+    <view class='flexBetw pdr1 pdl1 pd11 borderB bg256'>
+      <view>开启</view>
+      <radio value='openSta'/>
+    </view>
+    <view class='flexBetw pdr1 pdl1 pd11 width100 borderB bg256'>
+      <view>关闭</view>
+      <radio value='closeSta'/>
+    </view>
+</radio-group>
+<!--开启禁用状态 end -->
+<!--备注 str -->
+  <view wx:if="{{userdescIf}}">
+    <view class='pdr1 pdl1 pd11 borderB bg256'>
+      <input placeholder='备注' class='h100 wh100' bindinput='descInput'  type='text'></input>
+    </view>
+</view>
+<!--备注 end -->
+<!--重置密码 str -->
+  <view wx:if="{{userpwdIf}}">
+    <view class='pdr1 pdl1 pd11 borderB bg256'>
+      <input type='text' placeholder='请输入密码' class='h100 wh100' bindinput='pwdInput' ></input>
+    </view>
+    <view class='pdr1 pdl1 pd11 borderB bg256'>
+      <input type='text' placeholder='确认密码' class='h100 wh100' bindinput='upwdInput'></input>
+    </view>
+</view>
+<!--重置密码 end -->
+<!--手机 str -->
+  <view wx:if="{{usermobilIf}}">
+    <view class='pdr1 pdl1 pd11 borderB bg256'>
+      <input type='text' placeholder='请输入手机号' class='h100 wh100' bindinput='mobileInput' ></input>
+    </view>
+</view>
+<!--手机 end -->
+<!--邮箱 str -->
+  <view wx:if="{{useremailIf}}">
+    <view class='pdr1 pdl1 pd11 borderB bg256'>
+      <input type='text' placeholder='请输入邮箱' class='h100 wh100' bindinput='emailInput' ></input>
+    </view>
+</view>
+<!--邮箱 end -->
+<view class='flexCenter'>
+  <button class='btns Skin mt05' bindtap='editUserAdmInfo'>确定</button>
+</view>
+</view>
+<!-- sec1 end   -->
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

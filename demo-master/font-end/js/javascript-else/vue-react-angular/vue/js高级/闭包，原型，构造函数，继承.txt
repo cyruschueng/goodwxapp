@@ -1,0 +1,42 @@
+闭包，原型，构造函数，继承
+
+-------------------------闭包
+
+1.闭包是可访问上一层函数作用域里变量的函数，即便上一层函数已经关闭。
+2.闭包就是一个函数引用另一个函数的变量，因为变量被引用着所以不会被回收，因此可以用来封装一个私有变量。这是优点也是缺点，不必要的闭包只会增加内存消耗。
+3.或者说闭包就是子函数可以使用父函数的局部变量，还有父函数的参数。
+
+
+----arguments、callee、caller
+
+函数内部两个特殊的对象： arguments 和 this。
+1.arguments类数组对象
+2.callee是arguments的属性，该属性是一个指针，指向拥有这个 arguments 对象的函数。
+3.caller（ECMAScript 5 规范化的函数对象属性）这个属性中保存着调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，它的值为 null 。
+
+
+
+------------constructor：
+
+JavaScript中的constructor对象的constructor属性用于返回创建该对象的函数，也就是我们常说的构造函数。
+
+在JavaScript中，每个具有原型的对象都会自动获得constructor属性。除了arguments、Enumerator、Error、Global、Math、RegExp、Regular Expression等一些特殊对象之外，其他所有的
+
+JavaScript内置对象都具备constructor属性。例如：Array、Boolean、Date、Function、Number、Object、String等。所有主流浏览器均支持该属性。
+
+
+
+--------------prototype
+
+创建了一个新函数，就会根据一组特定的规则为该函数创建一个 prototype 属性，这个属性指向函数的原型对象。
+在默认情况下，所有原型对象都会自动获得一个 constructor（构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。
+Person.prototype.constructor 指向 Person 。
+
+instance.constructor.prototype = instance.__proto__
+
+每个函数就是一个对象（Function），函数对象都有一个子对象 prototype对象，类是以函数的形式来定义的。prototype表示该函数的原型，也表示一个类的成员的集合。
+
+在通过new创建一个类的实例对象的时候，prototype对象的成员都成为实例化对象的成员。
+1、该对象被类所引用，只有函数对象才可引用；
+2、在new实例化后，其成员被实例化，实例对象方可调用。
+同时，函数是一个对象，函数对象若直接声明成员，不用被实例化即可调用。

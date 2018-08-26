@@ -1,0 +1,21 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<!--index.wxml-->
+<view class="container">
+<view style="background-color:rgba(256,256,256,.3);color:#808080;padding:1rem;font-size:0.9rem" bindtap='mapModd'>点击修改电站位置</view>
+<map style="width: 100%; height: {{windowHeight-170}}px;" latitude="{{latitude}}" 
+  longitude="{{longitude}}" markers="{{markers}}" circles="{{circles}}" 
+  scale="{{scale}}" polyline="{{polyline}}"  
+  show-location include-points="{{markers}}">
+</map>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+    </view>
+    <view class="weui-cell__bd  pAb05">
+      <slider value="{{scale}}" color='#1169EE' min="5" max="18" step="1" data-name="scale" bindchange="onSliderChange" show-value/>
+    </view>
+  </view>
+</view>
+</view>
+

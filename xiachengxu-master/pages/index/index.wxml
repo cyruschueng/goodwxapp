@@ -1,0 +1,48 @@
+<import src="../tpls/products/products-tpl.wxml" />
+
+
+<!--index.wxml-->
+<view class="container protal" wx:if='{{!hasStoreNo}}' hidden='{{!loadingHidden}}'>
+  <swiper circular indicator-dots='true' autoplay='true' interval="3000">
+    <block wx:for='{{swiperList}}' wx:key='{{index}}'>
+      <!-- <swiper-item wx:if='{{!item.goodsId}}'>
+        <image catchtap='storeHandle' src='{{item.imageUrl}}' mode='aspectFill' data-storeno='{{item.storeNo}}'></image>
+      </swiper-item> -->
+      <swiper-item class='back_img'>
+        <image catchtap='storeHandle' src='{{item.imgUrl}}' mode='aspectFill' data-storeno='{{item.storeNo}}'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- <view wx:if='{{!userInfo.mobile || !userInfo.faceImage}}' class='degree' catchtap='completeInformation'>
+    <text>您尚未完善资料{{userInfo.state}}%</text>
+    <view>
+      <text>点击完善</text>
+      <image src='/images/icon/arrow@right.png' mode='aspectFit'></image>
+    </view>
+  </view> -->
+  <view class='store-container'>
+    <view class='store-item' wx:for='{{storeList}}' wx:key='index'>
+      <view class='item-header' data-storeno='{{item.storeNo}}' catchtap='storeHandle'>
+        <view>
+          <image src='/images/icon/store.png' mode='aspectFit'></image>
+          <text>{{item.storeName}}</text>
+        </view>
+        <view>
+          进店
+          <image src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+        </view>
+      </view>
+      <view class='item-brand back_img' catchtap='storeHandle' data-storeno='{{item.storeNo}}'>
+        <image src='{{brandPicMap[index]}}' mode='aspectFill'></image>
+      </view>
+      <view class='store-list'>
+        <template is="products" data='{{type: "index", data: item.goodsList}}'></template>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<loading hidden="{{loadingHidden}}">
+  {{storeNo}}加载中...
+</loading>

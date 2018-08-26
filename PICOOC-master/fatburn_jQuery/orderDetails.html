@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+	<head>
+	<title>订单详情</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+    <link rel="stylesheet" type="text/css" href="css/comment.css">
+    <link rel="stylesheet" type="text/css" href="css/orderDetails.css?v=15">
+	</head>
+	<body>
+		<section class="container" style="visibility:hidden;">
+<!--             <button id="btn1" style="position: absolute; top: 0;left: 0;">btn1</button>
+            <button id="btn2" style="position: absolute; top: 2rem;left: 0;">遮罩</button> -->
+            <!--我的订单-->
+            <aside class="row order common">
+                <div class="row col-xs-12 col-sm-12 orderDetail">
+                    <div class="col-xs-8 col-sm-8 left">订单编号：<span id="orderId"></span></div>
+                    <div class="col-xs-4 col-sm-4 right" id="orderStatus"></div>
+                </div>
+                <div class="row col-xs-12 col-sm-12 info">
+                    <div class="col-xs-3 col-sm-3 infoImg"><img id="orderImg" src=""></div>
+                    <div class="col-xs-9 col-sm-9 infoDesc">
+                        <h3 id="orderName"></h3>
+                        <div class="infoDesc_bottom">
+                        <p class="campBegin">开营时间：<span id="beginTime"></span></p>
+                        <p class="price" id="price">¥<span id="totalPrice"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+<!--             <aside class="row common">
+                <div class="col-xs-12 col-sm-12">为<span id="userName">Emma</span>购买</div>
+            </aside> -->
+            <aside class="row common content content5">
+                <div class="row col-xs-12 col-sm-12">
+                    <div class="col-xs-5 col-sm-5 left">参营人</div>
+                    <div class="col-xs-7 col-sm-7 right" id="userName"></div>
+                </div>
+            </aside>
+            <aside class="row common content content1">
+                <div class="row col-xs-12 col-sm-12 content1-padding">
+                    <div class="col-xs-5 col-sm-5 left">手机号</div>
+                    <div class="col-xs-7 col-sm-7 right" id="phoneNum"></div>
+                </div>
+                <div class="row col-xs-12 col-sm-12 wechat content1-padding" style="display:none">
+                    <div class="col-xs-5 col-sm-5 left">微信号</div>
+                    <div class="col-xs-7 col-sm-7 right" id="wechatNum"></div>
+                </div>
+            </aside>
+            <aside class="row common content content2">
+                <div class="row col-xs-12 col-sm-12">
+                    <div class="col-xs-5 col-sm-5 left">支付方式</div>
+                    <div class="col-xs-7 col-sm-7 right">微信支付</div>
+                </div>
+            </aside>
+            <aside class="row common content content3">
+                <div class="row col-xs-12 col-sm-12">
+                    <div class="col-xs-5 col-sm-5 left">商品总额</div>
+                    <div class="col-xs-7 col-sm-7 right right2">¥<span id="origPrice"></span></div>
+                    <div class="col-xs-5 col-sm-5 left">优惠券</div>
+                    <div class="col-xs-7 col-sm-7 right right2">-¥<span id="couponPrice"></span></div>
+                    <div class="col-xs-6 col-sm-6 left"></div>
+                    <div class="col-xs-6 col-sm-6 right right2 right3"><span>实付款</span>&emsp;<span id="currentPrice"></span></div>
+                </div>
+            </aside>
+            <aside class="row common content content4 service">
+                <div class="row col-xs-12 col-sm-12 contact">
+                    <img src="image/withoutCamp/order3.png"> <span>咨询售后客服</span>
+                </div>
+            </aside>
+            <aside class="row common content status" style="display:none;">
+                <div class="row col-xs-12 col-sm-12">
+                    <div class="row col-xs-6 col-sm-6 left">
+                        <div class="col-xs-12 col-sm-12 time">待付款剩余时间</div>
+                        <div class="col-xs-12 col-sm-12 timeNum"><span id="hour"></span><span id="minute"></span><span id="second"></span></div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 right">
+                        <span class="cancel" orderId="" goodsId="">取消订单</span>&emsp;<span class="gotoPay">去支付</span>
+                    </div>
+                </div>
+            </aside>
+		</section>
+        <aside class="row fixbg">
+            <div class="col-xs-12 col-sm-12 fixbg-main">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 fixbg-main-t"></div>
+                    <div class="col-xs-12 col-sm-12 fixbg-main-btn">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 fixbg-main-btn1"></div>
+                            <div class="col-xs-6 col-sm-6 fixbg-main-btn2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <aside class="row fixBg">
+            <div class="col-xs-12 col-sm-12 fixBg-main">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 fixBg-top">
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-12 fixBg-p"></div>
+                            
+                        </div>
+                    </div>
+                    <!-- <div class="col-xs-12 col-sm-12 fixBg-btn">我知道了</div> -->
+                </div>
+            </div>
+            
+        </aside>
+        <aside class="row errorAlert">
+            <div class="col-xs-12 col-sm-12 error-main">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 error-main-t"></div>
+                    <div class="col-xs-12 col-sm-12 error-main-btn">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 error-main-btn1">我知道了</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/fastclick.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+    <script type="text/javascript" id="script1"></script>
+    <script>
+        if(getParamByUrl("webver")>2){
+            if(getParamByUrl("os")=="android"){
+                $("#script1").attr("src","jsv1/orderDetails.js?v=41");
+            }
+            else{
+                var mobileApp=window.webkit.messageHandlers;
+                $("#script1").attr("src","jsv1/orderDetails.js?v=41");
+            }
+        }
+        else{
+            $("#script1").attr("src","js/orderDetails.js?v=41");
+        }
+    </script>
+    <!--<script type="text/javascript" src="js/orderDetails.js?v=40"></script>-->
+    <script>
+    //百度统计上传代码
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAutoPageview', false]);
+        _hmt.push(['_trackPageview', location.pathname]);
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</html>

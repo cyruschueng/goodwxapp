@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>商品规格编辑</title>
+		<link rel="stylesheet" type="text/css" href="js/ios-switch/switchery.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="js/iCheck/skins/flat/green.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script type="text/javascript">
+		
+			checkPermission();
+		</script>
+	</head>
+
+	<body style="background: #EFF0F4;">
+		<section>
+			<div>
+				<section class="panel">
+					<div class="panel-body">
+						<div class="page-heading">
+							<h3>商品规格</h3>
+							<ul class="breadcrumb">
+								<li>
+									<a href="#">商品管理</a>
+								</li>
+								<li class="active">商品规格</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section class="wrapper">
+					<section class="panel">
+						<div class="panel-body" id="Specifications">
+
+						</div>
+					</section>
+				</section>
+			</div>
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/ios-switch/switchery.js"></script>
+		<script src="js/ios-switch/ios-init.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/laytpl.js"></script>
+		<script src="script/goodsSpecificationsEditor.js"></script>
+		<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
+		<script src="js/bootstrapValidator.js"></script>
+		<script src="js/select2.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				$('select').select2();
+				setIframeHeight();
+			});
+		</script>
+	</body>
+	<script type="text/html" id="goodsSpecificationsTpl">
+		<div class="row" style="height: 14px;"></div>
+		<div class="row">
+			<div class="col-lg-1" style="text-align: right;margin-top: 7px;">规格</div>
+			<div class="col-lg-3" style="text-align: right;">
+				<input id="specificationsName" value="{{d.Specifications}}" name="specificationsName" type="text" class="form-control formData">
+			</div>
+			<div class="col-lg-1" style="text-align: left;color: red;">
+
+			</div>
+
+			<div class="col-lg-1" style="text-align: right;margin-top: 7px">
+				<span>规格单位</span>
+			</div>
+			<div id="UnitInit" flag='0'>
+				<div class="col-lg-1">
+					<input id="UnitEnty" onchange="this.value=this.value.replace(/[^0123456789.]/g, '')" maxlength="18" type="number" class="form-control formData" value="{{d.UnitEnty||1}}">
+				</div>
+				<div class="col-lg-1" style="text-align: center;margin-top: 7px">
+					<span>公斤/每</span>
+				</div>
+			</div>
+			<div class="col-lg-1" style="text-align: right;">
+				<select class="form-control m-bot15 formData" id="unit" name="unit" onchange="changeUnit(this.value)"></select>
+			</div>
+
+			<div class="col-lg-1" style="text-align: left;color: red;">
+				<span>*</span>
+			</div>
+		</div>
+		<div class="row" style="height: 14px;"></div>
+		<div class="row">
+			<div class="col-lg-1" style="text-align: right;margin-top: 7px">
+				<span>规格库存</span>
+			</div>
+			<div class="col-lg-3">
+				<input id="StockQuantity" value="{{d.StockQuantity||0}}" type="number" class="form-control formData">
+			</div>
+			<div class="col-lg-1" style="text-align: left;color: red;">
+				<span>*</span>
+			</div>
+		</div>
+		<div class="row" style="height: 7px;"></div>
+		<div class="row">	
+			<div class="col-lg-1" style="text-align: right;margin-top: 7px">
+				<span>规格价格</span>
+			</div>
+			<div class="col-lg-3">
+				<input id="Price" value="{{d.Price||0.00}}" class="form-control formData" type="number">
+			</div>
+			<div class="col-lg-1" style="text-align: left;color: red;">
+				<span>*</span>
+			</div>
+		</div>
+		<div class="row" style="height: 7px;"></div>
+		<div class="row">	
+			<div class="col-lg-1" style="text-align: right;margin-top: 7px">
+				<span>结算价格</span>
+			</div>
+			<div class="col-lg-3">
+				<input id="StateMent" value="{{d.StateMent||0.00}}" class="form-control formData" type="number">
+			</div>
+			<div class="col-lg-1" style="text-align: left;color: red;">
+				<span>*</span>
+			</div>
+		</div>
+		<div class="row" style="height: 7px;"></div>
+		<div class="row">
+			<div class="col-lg-1" style="text-align: right;">
+				<span>是否使用积分</span>
+			</div>
+			<div class="col-lg-1">
+				<input id="isusepoint" type="checkbox">
+			</div>
+		</div>
+		<div class="row" style="height: 7px;"></div>
+		<div class="row">
+			<div class="col-lg-1" style="text-align: right;">
+				<span>规格图片</span>
+			</div>
+			<div id="img">
+
+			</div>
+			<div class="col-lg-3" id="zyButton" style="display: none;">
+				<div id="zyUpload" class="zyUpload" url="1"></div>
+				上传图片大小不超过<span style="color: red;padding-top: 10px;">2M</span>
+			</div>
+		</div>
+		<div class="row" style="height: 7px;"></div>
+		<div class="row">
+			<div class="col-lg-1" style="text-align: right;"></div>
+			<div id="cButton" class="col-lg-3">
+				<button onclick="changeImg()">修改图片</button>
+			</div>
+		</div>
+		<div class="row" style="height: 14px;"></div>
+		<div class="row">
+			<div class="col-lg-4" style="text-align: right;"></div>
+			<div class="col-lg-8">
+				<button class="btn btn-primary saveButton" onclick="formCheck()">保存</button>
+			</div>
+		</div>
+		<div class="row" style="height: 20px;">
+
+		</div>
+	</script>
+
+</html>

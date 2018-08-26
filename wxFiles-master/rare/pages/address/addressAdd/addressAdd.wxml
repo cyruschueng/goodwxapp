@@ -1,0 +1,43 @@
+<view class="pan ">
+  <form bindsubmit="{{opty == 'insert' ? 'submit':'update'}}" report-submit="true">
+    <view>
+      <view class="pull-left">收货人</view>
+      <input bindinput="name" class="pull-left" data-se="1" style="margin-left:70rpx;width:450rpx" value="{{name}}" placeholder="姓名" auto-focus="{{so==1 ? 'true':'false'}}" bindfocus="blur" />
+      <view class="clear-both"></view>
+      <view data-sets="update" class="bottom-line" style="margin-top:30rpx;margin-bottom:30rpx;{{so==1? 'border-bottom:1px solid #e6bfae':''}}"></view>
+    </view>
+
+    <view>
+      <view class="pull-left">手机号码</view>
+      <input class="pull-left" bindinput="phone" data-se="2" style="margin-left:30rpx;width:450rpx" value="{{tel}}" placeholder="11位手机号" bindfocus="blur" type="number" maxlength="11" />
+      <view class="clear-both"></view>
+      <view data-sets="update" class="bottom-line" style="margin-top:30rpx;margin-bottom:30rpx;{{so==2? 'border-bottom:1px solid #e6bfae':''}}"></view>
+    </view>
+
+    <view bindtap="navToArea">
+      <view class="pull-left">地区信息</view>
+      <view class="pull-left" style="margin-left:30rpx; color:#aaa">
+        <text wx:if="{{province == ''}}">地区信息</text>
+        <text wx:if="{{province != ''}}">{{province}} {{city == '市辖区' || city == '县' ? '':city}} {{area}}</text>
+      </view>
+      <view class="clear-both"></view>
+      <view data-sets="update" class="bottom-line" style="margin-top:30rpx;margin-bottom:30rpx;"></view>
+    </view>
+
+    <view>
+      <view class="pull-left">详细地址</view>
+      <input bindinput="address" class="pull-left" value="{{address}}" data-se="3" style="margin-left:30rpx;width:450rpx" placeholder="街道门牌信息" bindfocus="blur" />
+      <view class="clear-both"></view>
+      <view data-sets="update" class="bottom-line" style="margin-top:30rpx;margin-bottom:30rpx;{{so==3? 'border-bottom:1px solid #e6bfae':''}}"></view>
+    </view>
+  <view>
+      <view class="pull-left">默认地址</view>
+      
+      <switch name="swit" color="#e6bfae" class="pull-left" style="margin-left:30rpx;" />
+      <view class="clear-both"></view>
+      <view data-sets="update" class="bottom-line" style="margin-top:30rpx;margin-bottom:30rpx;{{so==3? 'border-bottom:1px solid #e6bfae':''}}"></view>
+    </view>
+
+    <button form-type="submit" style="margin-top:60rpx;">保存地址</button>
+  </form>
+</view>

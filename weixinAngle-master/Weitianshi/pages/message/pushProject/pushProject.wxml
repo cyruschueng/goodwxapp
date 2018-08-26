@@ -1,0 +1,93 @@
+<import src="/pages/Template/Template.wxml" />
+ <include src='/utils/wxml/common' />
+ <view wx:if="{{nonet}}">
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">提交给我的项目</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我提交的项目</view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:570px" bindchange="bindChange">
+  <!--推送给我的项目  -->
+  <swiper-item>
+    <scroll-view bindscrolltolower="loadMore" scroll-top="{{scroll}}" scroll-y="true">
+      <template is="allNumber" data="{{count:count1,text:'提交给我的项目'}}"></template>
+      <block wx:for="{{pushToList}}" wx:key="{{index}}">
+        <view wx:if="{{item.handle_status != 2}}">
+          <view class="outBox" data-project="{{item.project_id}}" catchtap="projectDetail">
+            <view class="redPoint" wx:if="{{item.message_status == 0}}"></view>
+            <view class="insideBox" hover-class='t-hoverColor'>
+              <view>
+                <view class="flex">
+                  <view class="describle" wx:if="{{item.pro_intro != ''}}">{{item.pro_intro}}</view>
+                  <image src="/img/img-dujia@2x.png" class="projectDetailType" wx:if="{{item.is_exclusive == 1}}"></image>
+                  <image src="/img/img-feidujiaqianyue@2x.png" class="projectDetailType" wx:if="{{item.is_exclusive == 2}}"></image>
+                </view>
+                <view class="allIndustry" style="text-align:left">
+                  <block wx:for="{{item.pro_industry}}" wx:key="{{index}}" wx:for-item='industry'>
+                    <label class="{{industry.is_match == 1 ? 'hightLight':'noLight'}}" wx:if="{{index < item.pro_industry.length-1}}">{{industry.industry_name}}、</label>
+                    <label class="{{industry.is_match == 1 ? 'hightLight':'noLight'}}" wx:if="{{index == item.pro_industry.length-1}}">{{industry.industry_name}}</label>
+                  </block>
+                </view>
+                <view class="allProjectDetail flex" wx:if="{{item.pro_area != ''||item.pro_finance_stock_after!=0||item.pro_stage!=''||item.pro_scale!=''}}">
+                  <view class="{{item.pro_scale.is_match == 1 ? 'projectDetailLight' : 'projectDetailLine'}}" wx:if="{{item.pro_scale != ''}}">{{item.pro_scale.scale_money}}</view>
+                  <view class="{{item.pro_finance_stock_after.is_match == 1 ? 'projectDetailLight' : 'projectDetailLine'}}" wx:if="{{item.pro_finance_stock_after != ''}}">{{item.pro_finance_stock_after}}%</view>
+                  <view class="{{item.pro_stage.is_match == 1 ? 'projectDetailLight' : 'projectDetailLine'}}" wx:if="{{item.pro_stage != ''}}">{{item.pro_stage.stage_name}}</view>
+                  <view class="{{item.pro_area.is_match == 1 ? 'projectDetailLight' : 'projectDetailLine'}}" wx:if="{{item.pro_area != ''}}">{{item.pro_area.area_title}}</view>
+                </view>
+                <view class="flex otherInfo">
+                  <view>
+                    <image src="{{item.user.investor_logo_url}}" class="others_pic" wx:if="{{item.user.investor_logo_url}}" />
+                    <view class="user_apply flex" wx:if="{{item.user.investor_logo_text}}">{{item.user.investor_logo_text}}</view>
+                  </view>
+                  <view>
+                    <view class="flex userInfo">
+                      <view class="userName">{{item.user.user_name}}</view>
+                      <view class="userCareer">{{item.user.user_career}}</view>
+                      <view class="userCompany" style="text-align:left">{{item.user.user_company}}</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <!--推送给我的项目  -->
+              <view class="projectInfo flex">
+                <view class="seeNum">{{item.view_count}}人看过项目</view>
+                <view class="interest flex">
+                  <view class="addProjectTo not-interestedm" catchtap="addProjectLibrary" data-push="{{item.push_id}}" data-project="{{item.project_id}}" wx:if="{{item.import_status  == 0}}" hover-class="t-hoverColor" hover-stop-propagation="true">加入项目库</view>
+                  <view class="haveInterest" wx:if="{{item.import_status  == 1}}">已加入</view>
+                  <view class="btnNoInterest not-interestedm" catchtap="noInteresting" data-push="{{item.push_id}}" wx:if="{{item.handle_status == 0||item.handle_status == 3}}" data-status="{{2}}" data-project="{{item.project_id}}" hover-class="t-hoverColor">没兴趣</view>
+                  <view class="btnHaveInterest interestedm" catchtap="interesting" data-push="{{item.push_id}}" wx:if="{{item.handle_status == 0||item.handle_status == 3}}" data-status="{{1}}" data-project="{{item.project_id}}" hover-class="t-other-button-hover">联系项目方</view>
+                  <view class="haveInterest " wx:if="{{item.handle_status == 1}}" hover-class="t-hoverColor">感兴趣</view>
+                </view>
+              </view>
+            </view>
+            <view id="time">{{item.created_at}}</view>
+          </view>
+        </view>
+      </block>
+      <view class="highBox"></view>
+      <template is="hasNothing" data="{{emptyNumber:pushToList}}"></template>
+    </scroll-view>
+  </swiper-item>
+  <!--我推送的项目 -->
+  <swiper-item>
+    <scroll-view scroll-y="true" scroll-top="{{scroll}}" bindscrolltolower="moreForApply">
+      <template is="allNumber" data="{{count:count,text:'我提交的项目'}}"></template>
+      <template is="pushProjectTo" data="{{contentList:pushProjectList,record_id:0,type:1}}"></template>
+      <template is="hasNothing" data="{{emptyNumber:pushProjectList}}"></template>
+    </scroll-view>
+  </swiper-item>
+</swiper>
+<!--没有更多-->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+<!--模态框  -->
+<view class="modalBox" hidden="{{modalBox==0}}">
+  <view class="classname" bindtap="closeModal">
+    <image src="/img/icon-guanbi@2x.png" class="close"></image>
+  </view>
+  <view class="contactModalBox">
+    <view class="modalTitle">联系项目方</view>
+    <textarea class="modalContent" placeholder="请描述您的意向约谈时间，方式" bindinput="contentProject" />
+    <view class="modalTips">微天使将为您联系项目方并安排约谈或添加FA哥微信：weitianshicn</view>
+    <button class="btn" bindtap="yesBtn" hover-class='t-other-button-hover' disabled="{{disabled}}">确定</button>
+  </view>
+</view>
+</view>

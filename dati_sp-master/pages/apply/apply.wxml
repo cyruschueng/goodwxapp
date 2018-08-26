@@ -1,0 +1,45 @@
+<view class="container">
+  <form bindsubmit="formSubmit">
+  <input hidden value="{{openid}}" name="openid"/>
+    <block wx:for="{{aq_arr}}" wx:for-index="i" wx:key="*this">
+      <view class='weui-cells'>
+        <view class='weui-cell_input'>
+          <input value="" placeholder="问题{{i+1}}" class="weui-input" name="row[{{i}}][question]" />
+          <input value="{{right}}" hidden name="row[{{i}}][right]" />
+          <radio-group bindchange="radioChange">
+            <radio value='1'>
+              <input value="" placeholder="答案A" class="weui-input" name="row[{{i}}][answer][1]" />
+            </radio>
+            <radio value='2'>
+              <input value="" placeholder="答案B" class="weui-input" name="row[{{i}}][answer][2]" />
+            </radio>
+            <radio value='3'>
+              <input value="" placeholder="答案C" class="weui-input" name="row[{{i}}][answer][3]" />
+            </radio>
+          </radio-group>
+          <button wx:if="{{i>1}}" bindtap="btnDelAq" id="{{i}}">删除</button>
+        </view>
+      </view>
+    </block>
+    <view>
+      <button bindtap='btnAddAq' type="primary">增加题目</button>
+    </view>
+    <view style="margin-top:20rpx;">
+      <view class="picker_left">
+        <view class="weui-cells__title">出题日期</view>
+        <picker mode="date" value="{{date}}" start="{{today}}" bindchange="bindDateChange" name="date">
+          <view class='picker'>{{date}}</view>
+        </picker>
+      </view>
+      <view class="picker_right">
+        <view class="weui-cells__title">出题时间</view>
+        <picker mode="time" value="{{time}}" bindchange="bindTimeChange" name="time">
+          <view class='picker'>{{time}}</view>
+        </picker>
+      </view>
+    </view>
+    <view style='margin-top:200rpx'>
+      <button type="primary" form-type='submit'>提交</button>
+    </view>
+  </form>
+</view>

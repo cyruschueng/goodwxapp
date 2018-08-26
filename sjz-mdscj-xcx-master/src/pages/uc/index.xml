@@ -1,0 +1,64 @@
+<form bindsubmit="formSubmit" report-submit='true'>
+  <button formType="submit" class="formIdBtn">
+    <view class="uc">
+    <view class="user">
+      <view class="user-head">
+        <view class="bg"></view>
+        <image src="{{props.user.avatar}}"/>
+      </view>
+      <text class="user-name">{{props.user.nickname}}</text>
+    </view>
+
+    <view class="orders-icon mod-box">
+      <navigator class="item" open-type="navigate" url="/pages/order/list?type=SUBMITTED">
+        <view class="iconfont icon-daifukuan"></view>
+        <text>待付款</text>
+      </navigator>
+      <navigator class="item" open-type="navigate" url="/pages/order/list?type=WAIT_SHIPPING">
+        <view class="iconfont icon-wodedingdan14"></view>
+        <text>待发货</text>
+      </navigator>
+      <navigator class="item" open-type="navigate" url="/pages/order/list?type=SHIPPED">
+        <view class="iconfont icon-daishouhuo"></view>
+        <text>待收货</text>
+      </navigator>
+      <navigator class="item" open-type="navigate" url="/pages/order/list?type=RETURN">
+        <view class="iconfont icon-my-tuikuantuihuo"></view>
+        <text>退款/售后</text>
+      </navigator>
+    </view>
+
+    <view class="groups">
+      <navigator open-type="navigate" url="/pages/order/list">
+        <view class="cell">
+          <text class="iconfont icon-dingdan icon icon-order"></text>
+          <view>我的订单</view>
+          <text class="iconfont icon-unie93d arrow"></text>
+        </view>
+      </navigator>
+      <navigator class="cell" open-type="navigate" url="/pages/order/orderGroup">
+        <view class="cell">
+          <text class="iconfont icon-tuandui1 icon icon-group"></text>
+          <view>我的团</view>
+          <text class="iconfont icon-unie93d arrow"></text>
+        </view>
+      </navigator>
+      <navigator class="cell" open-type="navigate" url="/pages/address/list">
+        <view class="cell">
+          <text class="iconfont icon-dizhi icon icon-address"></text>
+          <view>收货地址</view>
+          <text class="iconfont icon-unie93d arrow"></text>
+        </view>
+      </navigator>
+      <navigator class="cell" open-type="navigate" url="/pages/coupons/list">
+        <view class="cell">
+          <text class="iconfont icon-gouwuche icon icon-coupon"></text>
+          <view>我的优惠券</view>
+          <text class="iconfont icon-unie93d arrow"></text>
+        </view>
+      </navigator>
+    </view>
+
+</view>
+  </button>
+</form>

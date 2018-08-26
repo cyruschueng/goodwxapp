@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  <view bindtap="viewTap">click me</view>
+  <view class="setdatakeys">
+  <text>名字一：{{ array[0].name }}</text>, 
+  <text>名字二：{{ array[1].name }}</text>,
+  <text>名字三：{{ obj.name }}</text>,
+  <text>年龄：{{ obj.age }}</text>
+  <button bindtap="switchName">调换名字</button>
+  </view>
+</view>

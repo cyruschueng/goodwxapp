@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class='heard_box'>
+<view class='heard'>
+  <image class="pic" src='{{imgUrl}}'></image>
+  <image class="ranking_img" src='../images/ranking.png'></image>
+  <view class='ranking_text'>第  <text style='font-size:24px;'>{{rank}}</text>  名</view>
+</view>
+<view class='service_box'>
+  <button open-type="contact" formType="submit">
+    <image class='service' src='../images/service.png'></image>
+  </button>
+</view>
+</view>
+<view class='play_box'>
+  <view class='play_left'>已挑战：<text class='color'>{{num}}</text><text class='ci'> 次</text></view>
+  <view class='play_right'>获得公仔：<text class='color'>{{successnum}}</text><text class='ci'> 个</text></view>
+  <view class='clearfix'></view>
+</view>
+<view class='more_play'>
+  <view class='more_playText'>-----更多智力挑战-----</view>
+  <view class='jump_more' wx:for-items="{{items}}">
+    <image class='more_photo' src='{{item.img}}'></image>
+    <view class='detail_box'>
+      <view class='more_name'>{{item.name}}</view>
+      <view class='detail'>{{item.num}}万人在玩</view>
+      <view class='detail'>海量资源等你来挑战</view>
+    </view>
+    <view class='go' bindtap='more_play'  data-appid="{{item.appids}}">去挑战</view>
+  </view>
+</view>

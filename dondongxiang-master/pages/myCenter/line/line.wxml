@@ -1,0 +1,24 @@
+<view class="container" style='background-color: #ffffff;'>
+    <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+    <view class='flex-datainfo'>
+        <view class='milidatanum'>市场存量：{{allnumber}} 可购买冬瓜数量：{{canbuynumber}}</view>
+        <view class='milidatanum'>个人存量：{{oneselfnumber}} 上架：{{putaway}} </view>
+        <view class='milidatanum'>参考最低价：{{100}} 最高价：{{200}}</view>
+        <view class="flex-row btnpad">
+            <text class='btn delbtn'>价格：</text>
+            <input class='datanub' placeholder="输入价格" bindinput='buypriceInput' value='{{buyprice}}'></input>
+            <text class='btn addbtn' bindtap='QueryCurrencyPrice'>查询</text>
+        </view>
+        <view class="flex-row btnpad">
+            <text class='btn delbtn'>数量：</text>
+            <input class='datanub' placeholder="输入数量" bindinput='buynumberInput' value="{{buynumber}}"></input>
+            <text class='btn addbtn' bindtap='SoldOutCurrency'>下架</text>
+        </view>
+        <view class='flex-row'>
+            <view bindtap='pay' class='foot-btn'>购买</view>
+            <view class='foot-btn'>上架出售</view>
+        </view>
+    </view>
+</view>
+<import src="/utils/template/backhome.wxml" />
+<template is="comm-newsdata"/>

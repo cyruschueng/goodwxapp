@@ -1,0 +1,92 @@
+<!--pages/order/order.wxml-->
+
+<view class="card">
+  <view  wx:for="{{order}}" wx:for-item="it" bindtap="order" id="{{it.id}}"  class=" item ">
+    <view  class="flex-between item-center {{it.status == '待付款' ? 'bg-card':''}} {{it.status == '完成' ? 'bg-folder':''}} {{it.status == '配送中' ? 'bg-eye':''}} {{it.status == '待接手' ? 'bg-cart':''}}" style="padding:15rpx;line-height:24rpx;border-radius:10px 10px 0 0">
+      <view class="flex-start item-center">
+        <image style="width:70rpx;height:60rpx;border:1px solid #fff" src="{{url}}{{it.shop.imagec.url}}"></image>
+        <view style="width:400rpx;color:#fff;margin-left:20rpx;margin-top:8rpx">
+          <view style="font-size:28rpx;font-weight:bold;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;height:32rpx;line-height:32rpx">{{it.shop.name}}</view>
+          <view style="font-size:26rpx;padding-top:10rpx">{{it.time}}</view>
+        </view>
+      </view>
+      <view style="font-size:30rpx;color:#fff">{{it.status}}</view>
+    </view>
+    <view class="capanel">
+      <view class="gra">
+        <view class="csitem flex-between" wx:for="{{it.ops}}" wx:for-item="li">
+          <view style="position:relative" class="flex-start">
+            <image mode="aspectFill" style="width:85rpx;height:75rpx;padding:20rpx" src="{{url}}{{li.product.imagec.url}}"></image>
+            <view style="position:relative;font-size:28rpx;margin-left:10rpx;margin-top:20rpx;font-weight:bold;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;width:400rpx">{{li.product.name}}</view>
+          </view>
+          <view style="text-align:right">
+            <view style="font-size:35rpx;color:#ee5353;text-align:right;padding-right:20rpx;margin-top:16rpx">￥{{li.product.price}}</view>
+            <view style="font-size:26rpx;text-align:right;padding-right:20rpx;color:#919191">{{li.count}}份</view>
+          </view>
+        </view>
+      </view>
+      <view style="border-top:1px solid #e1e1e1;margin-top:20rpx;padding:20rpx 0 0 0;">
+        <view style="font-size:28rpx">总计(<text style="font-size:26rpx">含餐盒费￥{{it.boxprice}},配送费￥{{it.sendprice}}</text>) <text style="color:#ee5353">￥{{it.sum}}</text>
+          <view data-index="{{it.shop.id}}" catchtap="navtos" style="margin-top:-8rpx;float:right;font-size:27rpx;border-radius:10rpx; width:130rpx;line-height:50rpx;border:1px solid #d1d1d1;text-align:center">再来一单</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!-- <view class="panel margin-xs" wx:for="{{order}}" wx:for-item="it" bindtap="order" id="{{it.id}}">
+  <view class="tit bottom-line flex-between" style="padding:20rpx;">
+    <view class="flex-start">
+      <image mode="aspectFill" style="width:60rpx;height:50rpx;" src="{{url}}{{it.shop.imagec.url}}"></image>
+      <view style="font-size:32rpx;margin-left:30rpx">{{it.shop.name}}</view>
+    </view>
+    <view style="font-size:28rpx;color:#919191">
+      {{it.time}}
+    </view>
+  </view>
+  <view style="padding:20rpx;background:#f2f2f2" >
+    <view class="flex-between bottom-line" style="padding-bottom:20rpx" wx:for="{{it.ops}}" wx:for-item="li">
+      <view class="flex-start">
+        <image style="width:150rpx;height:150rpx" src="{{url}}{{li.product.imagec.url}}"></image>
+        <view style="margin-left:20rpx;font-size:32rpx">{{li.product.name}}</view>
+      </view>
+      <view >
+        <view style="color:red;text-align:right">￥{{li.product.price}}</view>
+        <view style="font-size:30rpx;text-align:right">{{li.count}}份</view>
+      </view>
+    </view>
+  </view>
+  <view style="xmargin-top:20rp;" class="flex-between">
+    <view style="font-size:32rpx">支付金额(<text style="font-size:26rpx">含餐盒费￥{{it.boxprice}},配送费￥{{it.sendprice}}</text>) <text style="color:red">￥{{it.sum}}</text></view>
+    <view style="color:#ff9900;font-size:30rpx">{{it.status}}</view>
+  </view>
+</view> -->
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{order.length!=0 }}">
+  <image class="line margin-top-sm" src="/images/line.png"></image>
+  <view class=" margin-left-sm" style="font-size:30rpx; color:#888">一言不合就扯我(⊙o⊙)</view>
+  <image class="line margin-left-sm margin-top-sm" src="/images/line.png"></image>
+</view>
+<view wx:if="{{order.length==0 && showl}}" class="sorry">
+  <view class="sorry">
+    <image class="sorry_img" src="/images/index/sorry.gif" style="padding-bottom:40rpx;width:120rpx;height:120rpx"></image>
+  </view>
+  <view class="sorry">
+    <text>我带上你，你带上钱，一起下个单吧</text>
+  </view>
+</view>
+<!--<block wx:for="{{order}}" wx:key="order">
+  <view class="order" bindtap="order" id="{{item.id}}">
+    <view class="time">{{item.time}}</view>
+    <view class="hr1"></view>
+    <view class="name">{{item.name}}</view>
+    <view class="content">{{item.content}}</view>
+    <view class="hr2"></view>
+    <view class="status">
+      <text class="diandiantext">金额: </text>
+      <view class="ordersum" style="padding-left: 0rpx">{{item.sum}}</view>
+      <view class="orderstatus">{{item.status}}</view>
+    </view>
+
+  </view>
+</block>-->

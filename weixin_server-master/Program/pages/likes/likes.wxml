@@ -1,0 +1,85 @@
+<!--index.wxml-->
+<include src="../../templates/header" />
+<block wx:if="{{showStatus}}">
+<view class="start-like-bg">
+</view>
+<view class="start-like-window">
+  <view class="start-like-window-div">
+    <view class="start-like-cloce"  bindtap="showStatus"><icon type="clear" size="40" color="red"/></view>
+    <view class="start-like-body">
+      <image class="start-like-body-icon" src="{{status.avatarurl}}"></image>
+      <text class="start-like-body-nickname">{{status.nickname}}</text>
+      <block wx:if="{{status.gender == 2}}">
+        <text class="start-like-body-h1">是否偷偷暗恋她?</text>
+      </block>
+      <block wx:else>
+        <text class="start-like-body-h1">是否偷偷暗恋他?</text>
+      </block>
+      <form bindsubmit="likesubmit" report-submit="true">
+        <button class="start-like-body-submit" formType="submit">偷偷暗恋</button>
+      </form>
+      <block wx:if="{{status.gender == 2}}">
+        <text class="start-like-body-span">只有她也暗恋你,我们才会通知你.</text>
+      </block>
+      <block wx:else>
+        <text class="start-like-body-span">只有他也暗恋你,我们才会通知你.</text>
+      </block>
+
+    </view>
+  </view>
+</view>
+</block>
+<view class="body-user-info-like">
+  <image src="{{config.likebgurl}}" class="likes-header-bg"></image>
+  <view class="likes-userinfo">
+    <view class="likes-header-texts">
+      <open-data class="likes-header-text-title" type="groupName" open-gid="{{opengid}}" />
+      <text class="likes-header-text-subtitle">暗恋榜单</text>
+      <text class="likes-header-text-description">只有互相暗恋，才会通知双方，不在群内公开</text>
+    </view>
+  </view>
+</view>
+<view class="body">
+  <view class="body-container">
+
+    <scroll-view scroll-y style="height: 600rpx" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" >
+    <block wx:for="{{GDetail}}">
+    <view class="like-new-list">
+      <view class="like-new-list-include">
+
+        <view class="like-new-icon">
+          <image class="like-new-icon-max" src="{{item.weixinuser.avatarUrl}}"></image>
+        </view>
+        <view class="like-new-content">
+
+            <view class="like-new-content-text">
+              <text class="like-new-content-text-title-x">{{item.weixinuser.nickName}}</text>
+              <text class="like-new-content-text-content">已被{{item.count}}人暗恋</text>
+            </view>
+            <view class="like-new-content-button">
+            <block wx:if="{{item.islike == 2}}">
+              <text class="like-new-content-button-success like-new-like-button-public">互相暗恋</text>
+            </block>
+            <block wx:if="{{item.islike == 1}}">
+              <text  bindtap="likeshe" class="like-new-content-button-already like-new-like-button-public">已暗恋</text>
+            </block>
+            <block wx:if="{{item.islike == 0}}">
+              <view class="like-new-content-button-primary like-new-like-button-public"  data-index="{{index}}" data-nickname="{{item.weixinuser.nickName}}" data-avatarurl="{{item.weixinuser.avatarUrl}}" data-gender="{{item.weixinuser.gender}}" data-toid="{{item.uid}}" data-uid="{{uid}}" data-likestatus="{{item.islike}}" bindtap="likeshe" >
+                <image class="like-new-content-like-icon" src="../../imgs/icon/like.png"></image>
+                <text class="like-new-content-like-text"> 暗恋</text>
+              </view>
+            </block>
+            </view>
+
+        </view>
+      </view>
+    </view>
+    </block>
+    </scroll-view>
+    <view class="body-foolter">
+      <button class="body-to-search"  open-type="share" >分享到群里</button>
+      <button class="body-to-search-old" bindtap="toindex" >我参加过的群</button>
+      <text class="body-to-search-description">等目标头像出现在上面,你就可以点暗恋了</text>
+    </view>
+  </view>
+</view>

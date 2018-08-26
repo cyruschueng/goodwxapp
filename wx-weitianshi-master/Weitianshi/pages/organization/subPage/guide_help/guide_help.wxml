@@ -1,0 +1,20 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="content">
+    <view class="howTo">“如何寻找项目的潜在投资者？”</view>
+    <block wx:for="{{project}}" wx:key="{{index}}">
+      <view class="contentBox">
+        <view class="title">{{item.num}}、
+          <label class="littleTitle">【{{item.title}}】</label>投资方的投资思路</view>
+        <view class="investmentSpecial">
+          <label class="special">投资特点：</label>{{item.special}}</view>
+        <view class="project">典型机构：{{item.organization}}</view>
+        <!-- <view class="project">投资项目：{{item.projectList}}</view> -->
+      </view>
+    </block>
+  </view>
+  <view class="classname">
+    <image src="/img/img-fageerweima.png" class="QR"></image>
+    <view class="weChat">添加FA哥微信了解更多</view>
+  </view>
+</view>

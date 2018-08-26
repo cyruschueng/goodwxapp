@@ -1,0 +1,38 @@
+<import src="/zanui/toast/index.wxml" />
+<!--index.wxml-->
+<view class="container page__bd" >
+  <view class="weui-cells__title"></view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">类型</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker range="{{types}}" range-key="name"  bindchange="typeChange">
+            <view wx:if="{{app[type].list[index].typeIndex}}">
+              <view class="weui-select weui-select_in-select-after" style="text-align:right;">{{types[app[type].list[index].typeIndex].name}}</view>
+            </view>
+            <view wx:else>
+              <view class="weui-select weui-select_in-select-after" style="color: #999;text-align:right;">请选择</view>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title"> </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title"> </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <textarea placeholder="" name="message" id="message" value="{{app[type].list[index].message}}" bindinput="bindContent"  style="height: 80px;margin: 8px 0;"></textarea>
+        </view>
+      </view>
+    </view>
+    <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

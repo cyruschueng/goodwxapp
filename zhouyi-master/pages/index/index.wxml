@@ -1,0 +1,138 @@
+<!--pages/use/use.wxml-->
+<view class="container">
+    <!-- <view class="example">
+        <view class="marquee_box"> -->
+            <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
+              <text>{{broadcasting}}</text>
+              <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{broadcasting}}</text>
+            </view>
+        <!-- </view>
+    </view> -->
+    <form catchsubmit="formSubmit" catchreset="formReset" style='margin-top:60rpx;'>
+      <view class="inputALL">
+          <view class="page-section">
+                <view class="page-section-title">姓氏</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                      <input class="weui-input" bindinput="txtFname" name="txtFname" 
+                             placeholder="姓氏（只能输入中文）" value="{{txtFname}}" />
+                    </view>
+                  </view>
+                </view>
+            </view>
+            <view class="page-section">
+                <view class="page-section-title">名字</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                      <input class="weui-input" type="text" bindinput="txtLname" type="text" name="txtLname" 
+                             placeholder="名字（只能输入中文）" value='{{txtLname}}' />
+                    </view>
+                  </view>
+                </view>
+            </view>
+            <view class="page-section">
+                <view class="page-section-title">性别</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <radio-group class="group" bindchange="radioChange">
+                    <view class="label-2" wx:for="{{radioItems}}">
+                      <radio id="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></radio>
+                      <label class="label-2-text" for="{{item.name}}"><text>{{item.name}}</text></label>
+                    </view>
+                  </radio-group>
+                </view>
+            </view>
+            <view class="page-section">
+                <view class="page-section-title">历法</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <radio-group class="group" bindchange="timeChange">
+                    <view class="label-2" wx:for="{{radiolifas}}">
+                      <radio id="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></radio>
+                      <label class="label-2-text" for="{{item.name}}"><text>{{item.name}}</text></label>
+                    </view>
+                  </radio-group>
+                </view>
+            </view>
+            <view class="page-section">
+                <view class="page-section-title">出生日期</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                    <picker mode="date" value="{{date}}" start="1927-01-01" 
+                            end="2020-01-01" bindchange="bindDateChange">
+                            <input type="text"  placeholder='请选择出生日期' value='{{date}}' disabled></input>
+                    </picker>
+                    </view>
+                  </view>
+                </view>
+            </view>
+            <!-- <view class="page-section">
+                <view class="page-section-title">历法</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <radio-group class="group" bindchange="shichen">
+                    <view class="label-2" wx:for="{{sclist}}">
+                      <radio id="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></radio>
+                      <label class="label-2-text" for="{{item.name}}"><text>{{item.name}}</text></label>
+                    </view>
+                  </radio-group>
+                </view>
+            </view> -->
+
+            <view class="page-section">
+                <view class="page-section-title">出生时间</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                        <input type="text"  placeholder='请选择出生时间' value='{{time}}' disabled></input>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+            </view>
+            <view class="page-section">
+                <view class="page-section-title">出生省份</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                      <picker bindchange="provinces"  range="{{provinces}}" class='lei img' range-key="{{'name'}}">
+                          <input type="text"  data-sid="{{citys[index1].sid}}" 
+                          placeholder='请选择出生省份' value='{{provinces[index1].name}}' disabled></input>
+                    </picker>
+                    </view>
+                  </view>
+                </view>
+            </view>
+            <view class="page-section">
+                <view class="page-section-title">出生城市</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                      <picker bindchange="citys"  range="{{citys}}" class='lei img' range-key="{{'name'}}">
+                          <input type="text"  placeholder='请选择出生城市' 
+                            data-sid="{{citys[index2].sid}}" value='{{citys[index2].name}}' disabled></input>
+                    </picker>
+                    </view>
+                  </view>
+                </view>
+            </view>
+            <view class="page-section" wx:if="{{countys}}">
+                <view class="page-section-title">出生地点</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                      <picker bindchange="countys"  range="{{countys}}" class='lei img' range-key="{{'name'}}">
+                          <input type="text"  data-sid="{{citys[index3].sid}}"
+                          placeholder='请选择出生地区' value='{{countys[index3].name}}' disabled></input>
+                    </picker>
+                    </view>
+                  </view>
+                </view>
+            </view>
+        </view>
+        <view class="btn-area">
+            <button type="primary" formType="submit">查看结果</button>
+        </view>
+    </form>
+</view>

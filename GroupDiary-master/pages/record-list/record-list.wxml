@@ -1,0 +1,28 @@
+<import src="../../common/common.wxml" />
+
+<view wx:if="{{recordList.length>0}}">
+  <view wx:for="{{recordList}}" wx:key="{{item.id}}" class="record">
+    <image class="user-img" src="{{item.createUserImg}}" mode="aspectFit" />
+    <view class="content">
+      <view class="user-name">{{item.createUserName}}</view>
+      <view wx:if="{{item.content!=''}}" class="text">{{item.content}}</view>
+      <view wx:if="{{item.fileList.length>0}}" class="image">
+        <template is="multi-pic-view" data="{{imageList:item.fileList,listIndex:index}}" />
+      </view>
+      <view wx:if="{{item.address!=''}}" class="address" bindtap="openLocation" id="{{index}}">
+        <image class="icon" src="/images/icon_location_blue.png" mode="aspectFit" />
+        <view class="name">{{item.addressName!=null&&item.addressName.length>0?item.addressName:item.address}}</view>
+      </view>
+      <view class="bottom">
+        <view class="date">{{item.date}}</view>
+        <view wx:if="{{item.createUserId==userId}}" class="delete" bindtap="deleteRecord" id="{{index}}">删除</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:elif="{{canShowEmpty}}">
+  <template is="empty-page" data="{{text:'点击右下方的按钮，记录您的群印记'}}" />
+</view>
+<button class="create-button" bindtap="navigateToCreate">
+    <image class="img" src="/images/icon_write.png" mode="aspectFit"/>
+</button>

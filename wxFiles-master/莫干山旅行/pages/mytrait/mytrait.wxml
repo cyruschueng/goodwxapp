@@ -1,0 +1,50 @@
+
+<view class="swiper-tab" >
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav" style="border-right:1rpx solid rgb(230, 230, 230);">
+      <image src="../../image/mytrait_icon1_on.png" class="img" bindtap="swichNav" data-current="0" wx:if="{{currentTab == 0}}"></image>
+      <image src="../../image/mytrait_icon1.png" class="img" bindtap="swichNav" data-current="0" wx:else></image>
+      <view class="title" bindtap="swichNav" data-current="0">我的行程</view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+    <image src="../../image/mytrait_icon2_on.png" class="img" bindtap="swichNav" data-current="1" wx:if="{{currentTab == 1}}"></image>
+      <image src="../../image/mytrait_icon2.png" class="img" bindtap="swichNav" data-current="1" wx:else></image>
+      <view class="title" bindtap="swichNav" data-current="1">已到达行程</view>
+    </view>
+</view>
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange">
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:1200rpx;" class="list">
+        <block wx:for="{{mytrait}}" wx:key="id">
+          <navigator class="item">
+            <image class="poster" src="{{item.img}}" mode="aspectFill" bindtap="skip" data-id="{{item.place_id}}" binderror="errImg" data-err-img="mytrait[{{index}}].img" wx:if="{{item.img.length > 0}}"></image>
+            <image class="poster" src="../../image/default.png" mode="aspectFill" bindtap="skip" data-id="{{item.place_id}}" wx:else></image>
+            <view class="title_group">
+              <view class="title">{{item.title}}</view>
+              <image src="../../image/arrow.png" class="icon"></image>
+            </view>
+            <image id="{{item.id}}" src="../../image/delete_icon.png" class="delete" bindtap="delete"></image>
+          </navigator>
+        </block>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:1200rpx;" class="list">
+        <block wx:for="{{reached}}" wx:key="id">
+          <view class="date" wx:if="{{item.arrived_time != reached[index-1].arrived_time}}">
+            <image src="../../image/mytrait_icon3.png" class="icon"></image>
+            <view class="text">{{item.arrived_time}}</view>
+          </view>
+          <navigator url="" class="item" data-id="{{item.place_id}}" bindtap="skip">
+            <image class="poster" src="{{item.img}}" mode="aspectFill" binderror="errImg" data-err-img="reached[{{index}}].img" wx:if="{{item.img.length > 0}}"></image>
+            <image class="poster" src="../../image/default.png" mode="aspectFill" wx:else></image>
+           <view class="title_group">
+              <view class="title">{{item.title}}</view>
+              <image src="../../image/arrow.png" class="icon"></image>
+            </view>
+          </navigator>
+        </block>
+      </scroll-view>
+    </swiper-item>
+    
+</swiper>

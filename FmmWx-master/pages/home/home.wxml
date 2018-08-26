@@ -1,0 +1,60 @@
+<scroll-view class="container" scroll-y="true" scroll-into-view="{{toView}}"  scroll-top="{{scrollTop}}" bindscroll="scroll">
+
+<block wx:if="{{arrHomeCarousel.length>0}}">
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-box" id="top">
+  <block wx:for-items="{{arrHomeCarousel}}" wx:key="index">
+    <swiper-item id="{{item.contentId}}" bindtap="tapCarousel">
+      <image mode="scaleToFill" class="slide-image" src="{{item.url}}" />
+      <text class="slide-title"> {{item.title}}</text>
+    </swiper-item>
+  </block>
+</swiper>
+</block>
+
+    <view wx:if="{{noticeList}}" class="notice">
+      <view class="notice_iteml">公告:</view>
+      <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="3000">
+        <navigator wx:for-items="{{noticeList}}" wx:key="id" url="/pages/notice/show?id={{item.id}}" open-type="navigate">
+          <swiper-item >
+            <view class="notice_itemr">{{item.title}}</view>
+          </swiper-item>
+        </navigator>
+      </swiper>
+    </view>
+
+
+<view class="like-title">猜你喜欢</view>
+
+ <view class="weui-grids">
+  <block wx:for-items="{{arrHomeList}}" wx:key="index" >
+    <view class="myweui-grid" id="{{item.contentId}}" bindtap="tapPush">
+      <image class="myweui-grid__icon" src='{{item.url}}' />
+      <view class="myweui-grid__label">{{item.title}}</view>
+      <view class= "myweui-grid__subview"> 
+        <view class='myweui-grid__subviewlabel'>￥{{item.price}}/{{item.unit}} </view>
+        <view class='myweui-grid__subviewsublabel'>已售{{item.saled}}/{{item.stock}} </view>
+      </view>
+      <block wx:if="{{item.saleType==1}}">
+        <image class="hot-icon" src="../../images/hot.png"></image>
+      </block>
+      <block wx:elif="{{item.saleType==2}}">
+        <image class="hot-icon" src="../../images/cheap.png"></image>
+      </block>
+      <block wx:else>
+      </block>
+
+    </view>
+  </block>
+</view>  
+
+<view class="pull-title">
+  <block wx:if="{{loadfinish}}">
+    已经全部加载完毕
+  </block>
+  <block wx:else>
+    上拉刷新
+  </block>
+</view>
+
+</scroll-view>

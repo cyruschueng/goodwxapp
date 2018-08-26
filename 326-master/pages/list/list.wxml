@@ -1,0 +1,46 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<import src="/template/listStyle.wxml" />  
+
+<view class="container">
+<!--固定的页头 str  -->
+  <view class='Skin'>
+  <view class='showAllisCl pdlr05' bindtap='QRcode'>
+    <view class='flex flex1 Skin1 br03 pd12 mt05 mb05'>
+      <view class='justi'> <image class='imgM mr03' src='/images/rongliang.png'></image>总当前功率：</view>
+      <view class='flex flexD'>
+          <view class='powerNum flexCenter'>{{listNavData.outPutT}}kW</view>
+      </view>
+    </view>
+  </view>
+    <view class='flex1 flex' bindtap='QRcode'>
+      <view class='flex flexwrap'>
+        <template is="listNav" data="{{listNavData: listNavData}}"/>
+      </view>
+    </view> 
+  <!--搜索框  -->
+  <view class="searchWrapper Skin flex ">  
+    <template is="Input" data="{{inputBox: inputBox}}"/>  
+    <view class='flexCenter width3' bindtap='mapPage'>
+      <image class="imgxs15"src="/images/addm.png"></image>
+    </view>
+  </view>  
+<!--下拉菜单  -->
+    <view class='h8' class='orderFilter bg256 color9  borderB'>
+    <template is="tapMenu" data="{{tapBox: tapBox}}"/>   
+  </view> 
+</view>
+<!--电站列表-->
+<template is="listStyle" data="{{stationBox: stationBox}}" wx:if='{{secBuild}}'/> 
+<!--一键创建电站 wx:if='{{secBuild}}' -->
+ <view class='flex flexCenter flexColumn  mt46' bindtap='mapPage0' wx:if="{{noStation}}">
+  <image class='imgL' src='/images/wudianzhan.png'></image>
+  <view class='mt05 br03 pd03 Skin'>一键创建电站</view>
+</view> 
+<view class='errTip'>
+    <view class='block'  wx:if="{{showRegTopTips}}">{{errorRegMsg}}</view> 
+</view>
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>
+
+

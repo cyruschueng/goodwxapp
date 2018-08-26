@@ -1,0 +1,24 @@
+<!--pages/friends/friends.wxml-->
+<view class='search-block'>
+    <view class='search-info'>
+        <image class='sea-icon' src='/images/business/shop/icon_normal_search.png'></image>
+        <input class='text' bindinput='getinputval' type='text' placeholder='可查找公司名，姓名'></input>
+    </view>
+</view>
+<view class="container">
+    <block wx:for="{{reqdata}}" wx:key="">
+      <view class='item-list'>
+          <view class='body-cent' data-indexid="{{item.user_id}}" bindtap='detailsTap'>
+              <view class='fripic'><image src="{{item.headimgurl}}"></image></view>
+              <view class='rightcent'>
+                  <view class='frititle'>{{item.nickname}}</view>
+                  <view class='fritext'>{{item.company}}</view>
+              </view>
+              
+          </view>
+          <view class='right-phone' bindtap='dialphone' data-index="{{item.mobile}}"><image src="/images/main/config/mobile_icon.png"></image></view>
+      </view>
+    </block>
+    <view hidden='{{msgtext}}' style='text-align:center;padding:80px;background:#fff;'>没有相关数据</view>
+</view>
+ 

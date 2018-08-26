@@ -1,0 +1,59 @@
+<!--analysisReport.wxml-->
+<view class="container">
+<!-- 	<view class="pz_canvas_full" style="">
+		<canvas canvas-id="areaCanvasFull" disable-scroll="true" class="" style="" bindtouchstart=""></canvas>
+		<view class="pz_canvas_fullview" wx:if="{{analysisData.length > 0}}" catchtap="restoreviewTap">
+			<text>restore</text>
+		</view>
+	</view> -->
+	<!-- canvas图表区域 -->
+	<view class="pz_canvas" style="width:{{windowWidth}}px;transform: rotate({{chartsDeg}}deg);" wx:if="{{analysisData.list.length > 0}}">
+		<canvas canvas-id="analysisCanvas" disable-scroll="true" class="canvas" style="width:{{windowWidth}}px" bindtouchstart=""></canvas>
+<!-- 		<view class="pz_canvas_fullview" wx:if="{{analysisData.list.length > 0}}" catchtap="fullviewTap">
+			<text>FULL</text>
+		</view> -->
+	</view>
+	<view class="pz_analysis_listr_loading" hidden="{{analysisLoadShowed}}">
+		<view class="sk-circle">
+		  <view class="sk-circle1 sk-child"></view>
+		  <view class="sk-circle2 sk-child"></view>
+		  <view class="sk-circle3 sk-child"></view>
+		  <view class="sk-circle4 sk-child"></view>
+		  <view class="sk-circle5 sk-child"></view>
+		  <view class="sk-circle6 sk-child"></view>
+		  <view class="sk-circle7 sk-child"></view>
+		  <view class="sk-circle8 sk-child"></view>
+		  <view class="sk-circle9 sk-child"></view>
+		  <view class="sk-circle10 sk-child"></view>
+		  <view class="sk-circle11 sk-child"></view>
+		  <view class="sk-circle12 sk-child"></view>
+		</view>
+		<view class="pz_analysis_listr_loading_text">
+			<text>焦点头条分析中...</text>
+		</view>
+	</view>
+	<!-- 详情列表区域 -->
+	<view class="pz_analysis_list_wrap" hidden="{{!analysisLoadShowed}}">
+		<scroll-view scroll-y style="height:{{scrollHeight}}px;" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="">
+			<view class="pz_analysis_list_head" >
+				<view class="pz_analysis_list_head_title">焦点头条</view>
+				<view class="pz_analysis_list_head_des">{{analysisData.description}}</view>
+			</view>
+		  <view wx:for="{{analysisData.list}}" wx:key="analysisId" wx:for-index="idx" wx:for-item="analysisItem">
+		  	<view class="pz_analysis_list" hover-class="pz_analysis_list_hover" data-id="{{analysisItem.id}}" data-label="{{analysisItem.label}}" data-key="{{analysisItem.key}}" bindtap="analysisDetailTap">
+		  		<view class="pz_analysis_list_left" style="background-color:{{rankColorDefault[analysisItem.key]}};">
+		  			<view class="">{{analysisItem.key}}</view>
+		  		</view>
+		  		<view class="pz_analysis_list_item">
+		  		  <view class="pz_analysis_list_title">{{analysisItem.title}}</view>
+		  		</view>
+		  		<view class="pz_analysis_list_bottom" catchtap="">
+		  			<view class="pz_analysis_list_media">{{analysisItem.media_name_sign}}</view>
+		  			<view class="pz_analysis_list_publish_at">{{analysisItem.publish_at}}</view>
+		  			<view class="pz_analysis_list_right">{{analysisItem.label_total_media_num}}条相似</view>
+		  		</view>
+		  	</view>
+		  </view>
+		</scroll-view>
+	</view>
+</view>

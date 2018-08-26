@@ -1,0 +1,32 @@
+<template name="rank-item">
+    <view class="rank-item">
+        <view class="mask  {{isMyRank ? 'my-rank' : ''}}"></view>
+        <view class="content">
+            <view class="user-avatar">
+                <image src="{{item.headImgUrl}}"></image>
+            </view>
+            <view class="player-info">
+                <view class="name-info">
+                    <text class="name">{{item.nickName}}</text>
+                    <text class="level">LV.{{item.level.now}}</text>
+                </view>
+                <view class="grade-info">
+                    <text class="grade">{{gradeText}}</text>
+                    <view class="star">
+                        <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b33e38a48.png"></image>
+                        <text>x{{item.star}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="right-line"></view>
+            <view class="rank" wx:if="{{!isMyRank}}">
+                <image wx:if="{{item.index < 4}}" src="{{rankImage}}"></image>
+                <text wx:else>{{item.index}}</text>
+            </view>
+            <view class="rank world-rank" wx:else>
+                <text class="my-worldrank">{{item.index}}</text>
+                <text class="text-rank">世界排名</text>
+            </view>
+        </view>
+    </view>
+</template>

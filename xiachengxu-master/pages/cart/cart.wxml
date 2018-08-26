@@ -1,0 +1,58 @@
+<import src="../tpls/nextInfo/index.wxml" />
+<import src="../tpls/foot/foot-item-tpl.wxml" />
+<import src="./empty/empty.wxml" />
+
+<view class='container cart-container' hidden='{{!loadingHidden}}'>
+  <view wx:if='{{showGuide && !first_show && allProducts.length}}' class='appoint-guide'>
+    <view class='appoint-guide-wrapper'>
+      <view class='appoint-guide-content'>
+        预约成功后，店铺会提前为您准备好预约的商品，到店即可试穿，体验女王般的购物体验!
+      </view>
+      <view class='appoint-guide-btn' catchtap='closeGuide'>我知道了</view>
+    </view>
+  </view>
+  <view class='cart-store-list' wx:if='{{allProducts.length}}'>
+    <view class='cart-store' wx:for='{{allProducts}}' wx:key='index'>
+      <view wx:if='{{item.goodsList.length}}' class='cart-store-info' data-storeno='{{item.storeNo}}' catchtap='enterStore'>
+        <view class='store-name'>
+          <image src='/images/icon/store.png' mode='aspectFit'></image>
+          <text>{{item.storeName}}</text>
+        </view>
+        <view class='enter-store'>
+          <text>进店</text>
+          <image src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+        </view>
+      </view>
+      <view wx:if='{{item.goodsList.length}}' class='cart-products'>
+        <view class='cart-product-wrapper' wx:for='{{item.goodsList}}' wx:key='index' wx:for-item='product'>
+          <view class='cart-products-item'>
+            <template is="foot-item" data='{{...product, type: "cart", from: "", left: slideLeft, current}}'>
+            </template>
+            <view class='posit' data-name='{{product.goodsName}}' data-id='{{product.goodsId}}' data-storeno='{{item.storeNo}}' catchtap='deleteProduct'>
+              <view class='del'>删除</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if='{{item.goodsList.length}}' class='appoint'>
+        <view class='appoint-store-info'>
+          <view class='appoint-store-address'>
+            地址：{{item.location}}
+          </view>
+          <view class='appoint-store-phone' catchtap='call' data-phone='{{item.storeInfo.mobile}}'>
+            联系方式：{{item.phoneNumber}}
+          </view>
+        </view>
+        <view class='appoint-btn' data-id='{{item.storeNo}}' catchtap='appointStoreProducts'>
+          <text>一键预约</text>
+        </view>
+      </view>
+    </view>
+    <!-- <template is='next-info' data='{{hasMore, data: allProducts}}'></template> -->
+  </view>
+  <template wx:else is='empty'></template>
+</view>
+
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

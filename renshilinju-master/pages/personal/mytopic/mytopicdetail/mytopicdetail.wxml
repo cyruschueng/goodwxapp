@@ -1,0 +1,67 @@
+<!--pages/personal/mytopic/mytopicdetail/mytopicdetail.wxml-->
+
+<view class="card" id="{{postlist.id}}">
+  <view class="things" bindtap="details">
+    <!-- <block wx:if="{{postlist.leixing=='post'}}"> -->
+      <view class='user'>
+        <image class='userasset' src="{{postlist.userasset}}" alt="" />
+        <view class='ubox'>
+          <view class='name t2'>{{postlist.username}}</view>
+          <text class="things-name t2">{{postlist.title}}</text>
+          <image class='asset' src="{{postlist.asset}}" alt="" />
+          <view class='time t3'>{{postlist.time}}</view>
+        </view>
+
+      </view>
+    <!-- </block> -->
+    <!-- <block wx:if="{{postlist.leixing!='post'}}"> -->
+      <!-- <view class='user'>
+        <image class='userasset' src="{{postlist.userasset}}" alt="" />
+        <view class='ubox'>
+          <view class='name t2'>{{postlist.username}}</view>
+          <text class="things-name t2">{{postlist.title}}</text>
+          <view class='time t3'>{{postlist.time}}</view>
+        </view>
+
+      </view> -->
+    <!-- </block> -->
+  </view>
+</view>
+<view class='allmessage'>
+  <view class='mbox'>
+    <view class='mtitle t2'>全部留言（{{commentlenght}}）</view>
+    <view class='post t2' bindtap="powerDrawer" data-statu="open">发留言</view>
+  </view>
+  <!--mask-->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+  <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+    <!--drawer content-->
+    <view class="drawer_title">发布留言</view>
+    <view class="drawer_content">
+      <view class="section">
+        <textarea bindinput="getComment" value="{{title}}" auto-height placeholder="请输入您的内容" focus="{{focus}}" />
+      </view>
+    </view>
+    <view class='btnbox'>
+      <view class="btn_no" bindtap="powerDrawer" data-statu="close">取消</view>
+      <view class="btn_ok" bindtap="postComment" data-title="{{title}}" data-statu="close">确定</view>
+    </view>
+  </view>
+  <block wx:for="{{commentlists}}" wx:key="index">
+    <view class='user'>
+      <image class='userasset' src="{{avatar}}" alt="" />
+      <view class='ubox'>
+        <view class='name t2'>{{name}}</view>
+        <text class="things-name t2">{{item.title}}</text>
+        <view class='time t3'>30分钟前</view>
+      </view>
+    </view>
+  </block>
+</view>
+<view class="btn">
+  <button class='gogroup' bindtap="back">返回</button>
+  <button class='back' open-type='share'>转发到微信</button>
+</view>

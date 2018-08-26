@@ -1,0 +1,67 @@
+<import src="../../wux/dialog/dialog.wxml" />
+<view class="container page__bd" style="position: relative;">
+  <view class="flex_row_center" style="background-color: #fffbf2;">
+    <image lazyload="true" bindtap="preview" mode="aspectFit" src="../../styles/xiexiegewei.jpg" style="width:100%;"></image>
+  </view>
+  <image src="{{bg}}" style="width:80px;height:80px;" class="myimg" />
+  <view style="">
+    <view style="background-color:#876e5a;color:white;text-align:center;padding:6px">
+      有
+      <text id="allread">{{len}}</text>人偷偷的关(xi)心(huan)
+      <text id="uname">{{name}}</text>
+    </view>
+    <view class="weui-grids">
+      <block wx:for="{{list}}" wx:key="*this" wx:for-index="index">
+        <view class="weui-grid" style="  padding:5px;width:20%;border-right:none;border-bottom:none;" hover-class="weui-grid_active">
+          <image class="weui-grid__icon" src="{{item.avatar}}" lazy-load="true" style="border-radius: 50%;" />
+          <view class="weui-grid__label">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view style="position: fixed;bottom: 0;right:0;z-index:20; width:50%;" class="flex_center">
+    <form bindsubmit="share" report-submit="true" style="width:100%">
+      <button plain class="formidBtn" form-type="submit" style="border:none;width:100%;">
+        <view style="height: 100rpx;line-height:100rpx;text-align:center;background-color:#e8d147;color: #fff;width:100%;">我也要玩</view>
+      </button>
+    </form>
+  </view>
+  <view style="position: fixed;bottom: 0;z-index:20; width:50%;" class="flex_center">
+    <navigator url="/pages/tuijian/tuijian" style="width:100%">
+      <button plain class="formidBtn" style="border:none;width:100%;">
+        <view style="height: 100rpx;line-height:100rpx;text-align:center;background-color:#876e5a;color: #fff;width:100%;">更多好玩</view>
+      </button>
+    </navigator>
+  </view>
+</view>
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+    <view class="weui-grids">
+      <view catchtap="itemClick" data-index="0" class="weui-grid" hover-class="weui-grid_active">
+        <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/shezhi.png" />
+        <view class="weui-grid__label">群聊设置</view>
+      </view>
+      <view catchtap="itemClick" data-index="1" class="weui-grid" hover-class="weui-grid_active">
+        <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/tianjiawenzi.png" />
+        <view class="weui-grid__label">加文字消息</view>
+      </view>
+      <view catchtap="itemClick" data-index="1" class="weui-grid" hover-class="weui-grid_active">
+        <image class="weui-grid__icon" src="http://icons.maiyizhi.cn/tianjiawenzi.png" />
+        <view class="weui-grid__label">取消</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="share-wrapper" wx:if="{{showSharebutton}}" >
+  <view class="container">
+    <dialog id='dialog'  
+      content='转发给朋友，看看谁关心你'
+      bind:shareToMoments="shareToMoments"  
+      bind:shareToChats="shareToChats" 
+      bind:showSharebutton="_showSharebutton"
+      bind:toggleSharePopup="toggleSharePopup">
+    </dialog>
+  </view>
+</view>

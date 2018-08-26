@@ -1,0 +1,44 @@
+<import src="../item/emptyList.wxml" />
+<view class="container page__bd">
+    <view wx:if="{{!tuijian.is_verify}}">
+        <!-- 轮播图 -->
+        <swiper wx:if="{{tuijian.slide.length>0}}" indicator-dots="ture" autoplay="true" interval="5000" duration="1000" id="slide" circular="true">
+            <block wx:for="{{tuijian.slide}}" wx:key="{{item.pic}}">
+                <swiper-item>
+                    <image lazyload="true" src="{{item.pic}}{{slidePicSize}}" class="slide-image" data-url="{{item.url}}" data-appid="{{item.appid}}" bindtap="swipeUrl" />
+                </swiper-item>
+            </block>
+        </swiper>
+        <view style="margin-top: {{tuijian.slide.length>0?0:15}}px;">
+            <view wx:if="{{tuijian.slide.length>0}}" class="title" style="margin: 7px 0 7px 12px;">更多好玩</view>
+            <view class="flex_row" style="flex-wrap:wrap;margin-left: 10rpx;">
+                <block wx:for="{{tuijian.tuijian}}" wx:key="{{item.idx}}" wx:for-index="idx">
+                    <view class="block" wx:if="{{item.type=='tap'}}" bindtap="{{item.event}}" data-appid="{{item.appid}}" data-preview="{{item.preview}}" style="background-color: {{item.background}};">
+                        <view class="flex_center space_between">
+                            <view style="font-size: 38rpx;color: {{item.color}}">{{item.name}}</view>
+                            <view class="icon" hover-class="weui-grid_active"  style="background-color: {{item.iconBackground}};">
+                                <image src="{{item.pic}}" />
+                            </view>
+                        </view>
+                        <view style="font-size: 26rpx;color: {{item.iconBackground}}">{{item.desc}}</view>
+                    </view>
+
+                    <navigator class="block" url="{{item.url}}" wx:elif="{{item.type=='link'}}" style="background-color: {{item.background}};">
+                        <view class="flex_center space_between">
+                            <view style="font-size: 38rpx;color: {{item.color}}">{{item.name}}</view>
+                            <view class="icon" hover-class="weui-grid_active"  style="background-color: {{item.iconBackground}};">
+                                <image src="{{item.pic}}" />
+                            </view>
+                        </view>
+                        <view style="font-size: 26rpx;color: {{item.iconBackground}}">{{item.desc}}</view>
+                    </navigator>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="weui-tab__content" >
+            <template is="empty_list" data="{{title: '敬请期待哦'}}" />
+        </view>
+    </view>
+</view>

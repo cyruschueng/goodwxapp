@@ -1,0 +1,27 @@
+<view class="photo-bg full_page"></view>
+<view class="photo">
+  <view class="photo_list relative">
+    <navigator
+      wx:for="{{photoList}}"
+      wx:key="{{item.pid}}"
+      data-index="{{ index }}"
+      bindtap="recSawNum"
+      class="photo_item bgf"
+      url="/page/photo/pages/{{item.url}}"
+    >
+      <view class="photo_item_hd f15">
+        <image class="author_avatar" src="{{item.avatarUrl}}"></image>
+        <text class="author_name">{{item.text}}</text>
+      </view>
+
+      <view class="photo_item_bd">
+        <image class="prim_img" src="{{item.imgPath}}" mode="widthFix"></image>
+      </view>
+
+      <view class="photo_item_ft f12">
+        <view class="saw_num" style="background-image: url({{icon_saw}})">{{item.sawNum}}</view>
+        <view class="time">{{item.time}}</view>
+      </view>
+    </navigator>
+  </view>
+</view>

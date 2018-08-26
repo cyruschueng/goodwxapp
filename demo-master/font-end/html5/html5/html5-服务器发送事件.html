@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>获得服务器更新</h1>
+    <div id="result"></div>
+    <script>
+    if (typeof(EventSource) !== "undefined") {
+        var source = new EventSource("/example/html5/demo_sse.php");
+        source.onmessage = function(event) {
+            document.getElementById("result").innerHTML += event.data + "<br />";
+        };
+    } else {
+        document.getElementById("result").innerHTML = "抱歉，您的浏览器不支持 server-sent 事件 ...";
+    }
+    </script>
+</body>
+
+</html>
+
+
+<!-- PHP 代码 (demo_sse.php)：
+<?php
+header('Content-Type: text/event-stream');
+header('Cache-Control: no-cache');
+
+$time = date('r');
+echo "data: The server time is: {$time}\n\n";
+flush();
+?> -->

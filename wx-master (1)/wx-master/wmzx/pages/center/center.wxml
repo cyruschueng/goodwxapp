@@ -1,0 +1,37 @@
+<!-- ===========推广中心======pages/Promotion center/Promotion center.wxml-->
+<view class='container'>
+  <block wx:if="{{show}}">
+    <button class='share' open-type="share">点击推广</button>
+    <image class='qrcode' src='../../images/qrcode.jpg'></image>
+    <text class='scane'>扫码下载APP</text>
+    <view class='myPromotion' catchtap='promote'> 我的推广 </view>
+  </block>
+  <block wx:else>
+    <view class='head'>
+      <text>邀请好友（人数）</text>
+      <view class='row'>
+        <view class='num'>直推人数
+          <text style='font-weight:bold;'>{{zt}}人</text>
+        </view>
+        <view class='num'>间推人数
+          <text style='font-weight:bold;'>{{jt}}人</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='list row'>
+      <block wx:for="{{num}}" wx:key="{{item.id}}">
+        <view class='{{item.classN==true?"active":""}}' catchtap='choosed' data-index="{{index}}">{{item.ag}}</view>
+      </block>
+    </view>
+    <image class='null' src="../../images/null.png" wx:if="{{show2}}"></image>
+    <block wx:for="{{user}}" wx:key="{{item.id}}" wx:if="{{!show2}}">
+      <view class='row memberList'>
+        <view class='name'>{{item.realname?item.realname:"未实名"}}</view>
+        <view class='mer'>{{item.sort}}</view>
+        <view class='tele'>{{item.username}}</view>
+        <view class='state'>{{item.state}}</view>
+      </view>
+    </block>
+  </block>
+</view>

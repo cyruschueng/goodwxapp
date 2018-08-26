@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+   	<meta charset="utf-8">
+   	<title>微信编辑器,微信图文编辑器,微信排版工具,图文排版工具,模板多样使用方便</title>
+   	<meta name="Keywords" content="微信编辑器，微信编辑器，微信图文编辑器，微信图文美化编辑器，微信排版工具，微信编辑工具，图文排版工具，最方便的微信编辑器，微信自动回复" />
+	<meta name="Description" content="微信编辑器排版工具提供美化微信图文消息的功能，模板多样且样式漂亮，可轻松编辑非常美观的微信图文消息。" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   	<link href="./css/bootstrap3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" >
+	<link rel="stylesheet" type="text/css" href="./css/135.css" />
+	<!--link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css" /-->
+	<!--link rel="stylesheet" type="text/css" href="./css/jquery.jgrowl.css" /-->
+   	<!--[if lt IE 9]>
+        <script>
+            (function(){if(e = "abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i–){document.createElement_x(e[i])}})()
+        </script>
+ 	<![endif]-->
+	<script type="text/javascript" src="./css/jquery.min.js"></script>
+	<script type="text/javascript" src="./css/bootstrap3.3.2/js/bootstrap.min.js"></script>
+
+<style>
+* {margin:0;padding:0;box-sizing: border-box!important;-webkit-box-sizing: border-box!important;word-wrap: break-word!important;}
+body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;}
+body{margin: 0 0;font-size:14px;background-image:none;background-color:#C9B3A5;line-height:inherit}
+.135editor{max-width:100% !important;}
+h1,h2,h3,h4,h5,h6{font-weight:400;font-size:18px}
+
+p{clear:both;margin:0 0;font-size:14px;}
+::-webkit-scrollbar {
+    width: 8px;
+}
+h1,h2,h3,h4,h5,h6{font-weight:400;font-size:18px}
+.otf-poptools{width:200px;}
+.otf-poptools span{margin:0 5px;cursor:pointer;}
+ 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 8px #645654; /*rgba(60,60,60,0.5)*/
+}
+.popover{max-width:360px;}
+.modal-backdrop.in {opacity: 0.9;}
+.alert-warning {
+	background-color: rgba(255,255,255,0.4);
+	border: 0 none;
+	color: #3a3332;
+}
+a {
+    color: #2fa4e7;
+    text-decoration: none;
+}
+#header-breadcrumb{display: none;}
+.footer-bottom{padding:2px;font-size:80%;}
+#maincontent {margin:0;padding:0;}
+
+#left-sidebar .ui-portlet{margin:0px;}
+#left-side-affix{box-shadow:0 0 3px rgba(0, 0, 0, 0.15);}
+#left-sidebar .btn-group .btn{padding:4px 16px;}
+
+.mix{display: none;}
+
+.cke_reset_all, .cke_reset_all *{
+	position: initial;
+}
+.affix{top:0px;background-color:#FFF;z-index:100;position: fixed;}
+.col-xs-6 {width: 49%;}
+.color-swatch{width:20px;height:20px;border-radius:3px;cursor: pointer;float:left;margin:4px 2px;}
+.color-box {width:16px;height:16px;cursor: pointer;border:solid 1px #ddd;margin-top:3px;float: left;margin-right:5px;}
+.color-swatch:hover,.color-swatch.active {	
+	-webkit-transform:scale(1.1);-moz-transform:scale(1.1);-ms-transform:scale(1.1);
+	-o-transform:scale(1.1);transform:scale(1.1);
+	-webkit-box-shadow:inset 1px 1px 1px #5b616d,0 0 5px #45bcda;
+	-moz-box-shadow:inset 1px 1px 1px #5b616d,0 0 5px #45bcda;
+	box-shadow:inset 1px 1px 1px #5b616d,0 0 5px #45bcda;
+}
+.col-sm-4,.col-sm-6,.col-sm-2{padding-right: 5px;padding-left: 5px;}
+#params-setting ul{padding:0;}
+#params-setting .title{font-size:16px;font-weight:bold;padding-bottom:3px;margin-bottom:5px;margin-top:15px;border-bottom:1px solid #DDD;}
+#params-setting li{list-style:none;}
+#params-setting label{display:block;line-height:18px;font-weight:normal;}
+#params-setting input{margin-right:5px;margin-top:3px;float:left;}
+.cke_button__source_label{display:none;}
+.cke_combo__font .cke_combo_text{padding-left:5px;width:60px;}
+.cke_combo__styles .cke_combo_text{width:80px;}
+.cke_chrome {border: none;box-shadow: 0 0 1px 1px rgba(172,181,194,0.56);}
+#editor-styles .nav > li > a{padding:10px 5px;text-align:center;}
+
+#editor-tpls-list .style-list .content, #template-modal-body .style-list .content{cursor: pointer;margin-top:20px;padding: 0 5px;overflow-x:hidden;overflow-y:hidden;box-shadow: 0 0 3px rgb(170, 170, 170);}
+#editor-tpls-list .style-list .tools,#template-modal-body .style-list .tools{display:none;}
+#editor-tpls-list .row{margin:0 -5px;}
+#editor-tpls-list .col-md-6{padding:0 5px;}
+.popover-content .btn{width:70px;margin-top:3px;padding: 1px 5px;}
+#more-popover .popover-content{padding: 5px 5px;width:160px;max-width:360px;height:120px;}
+
+#insert-style-list li .btn{display:none;}
+#insert-style-list li:hover .btn{display:inline;}
+#insert-style-list li {position:relative;}
+#insert-style-list .ui-portlet-list > li *{max-width: 100%!important;box-sizing: border-box!important;-webkit-box-sizing: border-box!important;word-wrap: break-word!important;}
+#insert-style-list .ui-portlet-list > li p{clear:both;margin:0 0;line-height: 1.6;}
+#insert-style-list .ui-portlet-list > li .origin{position:absolute;top:5px;right:5px;height:20px;color:#FFF;font-weight:bold;font-size:12px;padding:2px}
+
+#editor-tpls-navtab > li {padding:0 0;}
+
+.editor-nav .fa{width:18px;text-align:center;margin:0 auto;}
+
+#bg-choose .default,#bg-choose .chooser{width:20px;height:20px;margin:5px;cursor:pointer;border-radius:2px;}
+</style>
+<script>
+var BASEURL = "";
+var current_editor;
+var current_active_135item = null;
+</script>
+</head>
+<body style="overflow-y: hidden;"  oncontextmenu="window.event.returnValue=false;">
+<div id="full-page" class="bg" style="min-width:1200px;">
+
+<div style="height:48px;">
+    <div style="width:1060px;margin:10px auto;">
+        <div class="logo2 fl">
+            <a href="#http://www.135editor.com/">
+                <img src="images/wwei.wxlogo.png" alt="微信编辑器" >
+            </a>
+        </div>
+        <ul class="fr nav  editor-nav">
+            <li>
+                <a href="#/users/login" onclick="return publishController.open_dialog(this.href,{title:&#039;登录&#039;,selector:&#039;#login-form&#039;,width:550});"
+                style="padding:10px;">
+                    登录
+                </a>
+            </li>
+            <li>
+                <a href="#/users/register" onclick="return publishController.open_dialog(this.href,{title:&#039;注册&#039;,selector:&#039;#register-form&#039;,width:550});"
+                style="padding:10px;">
+                    注册
+                </a>
+            </li>
+        </ul>
+        <ul class="fr nav editor-nav">
+           
+            <li>
+                <a href="#" id="link-133" data-id="133" ref="bbs" class=" ui-menu-last"
+                target="_blank">
+                    交流论坛
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+    <div class="box p-r"><!--box start-->
+      
+      <div class="fl w0 p-r">
+      	<!-- <div class="p-a" style="width:80px;left:-80px;">
+      		<a href="#editor-template" class="filter btn-block btn btn-primary" onclick="return brushOff();" role="tab" data-toggle="tab"  data-filter="all" >样式</a>
+          	<a class="filter btn-block btn btn-warning" data-filter=".brush" onclick="return brushOn();" role="tab" data-toggle="tab" href="#editor-template">样式刷</a>
+      	</div> -->
+        <div class="w1 fl">
+          <div class="n1">分类</div>
+          <ul class="n1-1" style="height:503px;">
+          		<!-- <li class="active "><a href="#editor-template" class="filter"  data-filter="all" role="tab" data-toggle="tab"> 全部</a></li> -->
+          	
+			  <li>
+					    <a class="filter" data-filter=".tagtpl-107" role="tab" data-toggle="tab" href="#editor-template"> 标题 </a>
+					</li><li>
+					    <a class="filter" data-filter=".tagtpl-109" role="tab" data-toggle="tab" href="#editor-template"> 正文 </a>
+					</li><li>
+					    <a class="filter" data-filter=".tagtpl-151" role="tab" data-toggle="tab" href="#editor-template"> 图片样式 </a>
+					</li><li>
+					    <a class="filter" data-filter=".tagtpl-111" role="tab" data-toggle="tab" href="#editor-template"> 特殊场景 </a>
+					</li>			<li><a href="#image-list" role="tab" data-toggle="tab">图片素材</a></li>
+            <li id="tab-tpl-trigger"><a href="#editor-tpls" role="tab" data-toggle="tab">模板</a></li>
+          </ul>
+        </div>
+        <div class="w2 fl">
+          <div class="n2">
+          	样式展示区
+          </div>
+          <div id="insert-style-list" class="item tab-content">
+          
+          						
+					<div id="editor-template" class="tab-pane active">
+						
+			  			
+				  		<div  class="ui-portlet clearfix ">
+		<ul class="editor-template-list ui-portlet-list">	
+			<li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="126" title="点击插入此内容">
+				<section class="135editor">
+					<fieldset style="border: 0px; margin: 5px 0px; box-sizing: border-box; padding: 0px;">    
+						<section style="height: 1em; box-sizing: border-box;">        
+							<section style="height: 100%; width: 1.5em; float: left; border-top-width: 0.4em; border-top-style: solid; border-color: rgb(249, 110, 87); border-left-width: 0.4em; border-left-style: solid; box-sizing: border-box;"></section>        
+							<section style="height: 100%; width: 1.5em; float: right; border-top-width: 0.4em; border-top-style: solid; border-color: rgb(249, 110, 87); border-right-width: 0.4em; border-right-style: solid; box-sizing: border-box;"></section>        
+							<section style="display: inline-block; color: transparent; clear: both; box-sizing: border-box;"></section>    
+						</section>    
+						<section style="margin: -0.8em 0.1em -0.8em 0.2em; padding: 0.8em; border: 1px solid rgb(249, 110, 87); border-radius: 0.3em; box-sizing: border-box;">        
+							<section placeholder="四角宽边框的样式" style="color: rgb(51, 51, 51); font-size: 1em; line-height: 1.4; word-break: break-all; word-wrap: break-word;" class="135brush">            四角宽边框的样式        </section>    
+						</section>    
+						<section style="height: 1em; box-sizing: border-box;">        
+							<section style="height: 100%; width: 1.5em; float: left; border-bottom-width: 0.4em; border-bottom-style: solid; border-color: rgb(249, 110, 87); border-left-width: 0.4em; border-left-style: solid; box-sizing: border-box;"></section>        
+							<section style="height: 100%; width: 1.5em; float: right; border-bottom-width: 0.4em; border-bottom-style: solid; border-color: rgb(249, 110, 87); border-right-width: 0.4em; border-right-style: solid; box-sizing: border-box;"></section>    
+						</section>
+					</fieldset>
+				</section>
+			</li>
+			<li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="5" title="点击插入此内容">
+								<section class="135editor"><blockquote class="135brush" style="white-space: normal;font-size: 14px; line-height: 25px; margin: 2px 0px; padding: 10px 10px; border: 2px dashed #dedcde;max-width: 100%;"><p placeholder="虚线框内容，作为摘要或段落内容。">虚线框内容，作为摘要或段落内容。</p></blockquote></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="39" title="点击插入此内容">
+								<section class="135editor"><section style="max-width: 100%;margin: 0.8em 0px 0.5em; overflow: hidden; "><section placeholder="请输入标题" style="box-sizing: border-box !important;  height:36px;display: inline-block;color: #FFF; font-size: 16px;font-weight:bold; padding:0 10px;line-height: 36px;float: left; vertical-align: top; background-color: rgb(249, 110, 87); " class="135brush">请输入标题</section><section style="box-sizing: border-box !important; display: inline-block;height:36px; vertical-align: top; border-left-width: 9px; border-left-style: solid; border-left-color: rgb(249, 110, 87); border-top-width: 18px !important; border-top-style: solid !important; border-top-color: transparent !important; border-bottom-width: 18px !important; border-bottom-style: solid !important; border-bottom-color: transparent !important;"></section></section></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="24" title="点击插入此内容">
+								<section class="135editor"><section class="135brush" style="margin: 3px; padding: 15px;color: rgb(62, 62, 62); line-height: 24px;box-shadow: rgb(170, 170, 170) 0px 0px 3px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-box-shadow: rgb(170, 170, 170) 0px 0px 3px;"><p>边框阴影内容区域</p></section></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="14" title="点击插入此内容">
+								<section class="135editor"><blockquote style="border-width: 1px 1px 1px 5px; border-style: solid; border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(159, 136, 127); border-radius: 3px; padding: 10px; margin: 10px 0px;"><h4 class="135brush" style="color: rgb(159, 136, 127); font-weight: bold; font-size: 18px; margin: 5px 0px; border-color: rgb(159, 136, 127);">标题文字</h4><section class="135brush" data-style="color:inherit;font-size:14px;" style="color: inherit;font-size:14px"><p>内容描述.</p></section></blockquote></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="33" title="点击插入此内容">
+								<section class="135editor"><h2 style="margin: 8px 0px 0px; padding: 0px; font-weight:bold;font-size:16px;line-height:28px;  max-width: 100%;color:rgb(0, 112, 192); min-height: 32px;border-bottom: 2px solid rgb(0, 112, 192); text-align: justify;"><span class="autonum" placeholder="1" style="background-color:rgb(0, 112, 192); border-radius:80% 100% 90% 20%; color:rgb(255, 255, 255); display:block; float:left; line-height:20px; margin:0px 8px 0px 0px; max-width:100%; padding:4px 10px; word-wrap:break-word !important">1</span><strong class="135brush" data-brushtype="text">第一标题</strong></h2></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="2185" title="点击插入此内容">
+								<section class="135editor"><section style="color: inherit; font-size: 16px; padding: 5px 10px 0px 35px; margin-left: 27px; border-left-width: 2px; border-left-style: dotted; border-left-color: rgb(228, 228, 228);"><section class="autonum" style="width: 32px; height: 32px; margin-left: -53px; margin-top: 23px; color: rgb(202, 251, 215); text-align: center; line-height: 32px; border-top-left-radius: 16px; border-top-right-radius: 16px; border-bottom-right-radius: 16px; border-bottom-left-radius: 16px; background: rgb(14, 184, 58);">1</section><section class="135brush" style="margin-top: -30px;padding-bottom: 10px; color: inherit;"><p style="clear: both; line-height: 1.5em; font-size: 14px; color: inherit;"><span style="color:inherit; font-size:16px"><strong class="135title" style="color:inherit">如何进入【微信编辑器】？</strong></span></p><p style="clear: both; line-height: 1.5em; font-size: 14px; color: inherit;">网页搜索“微信编辑器”，点击第一条搜索结果即可进入编辑器页面</p></section></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="32" title="点击插入此内容">
+								<section class="135editor"><blockquote style="margin: 3px; padding: 10px 15px; border-width: 3px; border-color: rgb(107, 77, 64); border-top-left-radius: 50px; border-bottom-right-radius: 50px; box-shadow: rgb(165, 165, 165) 5px 5px 2px; background-color: rgb(250, 250, 250);"><section class="135brush" data-style="margin-top: 15px; margin-bottom: 0px; padding: 0px; color: rgb(107, 77, 64); line-height: 2em; font-size: 20px; border-color: rgb(107, 77, 64);font-size: 18px;font-weight:bold;"><p style="margin-top: 15px; margin-bottom: 0px; padding: 0px; color: rgb(107, 77, 64); line-height: 2em; font-size: 20px; border-color: rgb(107, 77, 64);"><span style="font-size:18px"><strong style="border-color:rgb(107, 77, 64); color:inherit">读而思</strong></span></p></section><p style="margin-top: -10px; margin-bottom: 0px; padding: 0px; line-height: 2em; min-height: 1.5em; color: inherit;"><span style="font-size:12px"><strong class="135brush" data-brushtype="text" style="background-color:rgb(107, 77, 64); border-bottom-left-radius:20px; border-bottom-right-radius:20px; color:rgb(224, 209, 202); font-size:13px; padding:0px 15px">duersi</strong></span></p><section class="135brush" data-style="margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 2em; font-size: 14px; min-height: 1.5em; color: inherit;"><p><span style="font-size:14px">编辑完成后，将内容复制粘贴到微信后台素材管理的编辑器中即可。</span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 2em; font-size: 16px; min-height: 1.5em; color: inherit;"><span style="font-size:14px"></span></p></section></blockquote></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="2" title="点击插入此内容">
+								<section class="135editor"><h2 class="135brush" data-bcless="darken" placeholder="深色边框标题" style="margin: 10px 0px; padding: 10px; font-size: 16px; line-height: 25px; text-shadow: rgb(34, 95, 135) 0px 1px 0px; color: rgb(202, 251, 215); border-radius: 4px; box-shadow: rgb(153, 153, 153) 2px 2px 4px; border-left-width: 10px; border-left-style: solid; border-color: rgb(10, 137, 43); background-color: rgb(14, 184, 58);">深色边框标题</h2></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="391" title="点击插入此内容">
+								<section class="135editor"><fieldset style="margin: 2em 1em 1em; padding: 0px; border: 0px rgb(255, 179, 167); border-image-source: none; max-width: 100%; box-sizing: border-box; color: rgb(62, 62, 62); font-size: 16px; line-height: 25px; word-wrap: break-word !important;"><section style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box; line-height: 1.4; margin-left: -0.5em;"><section style="max-width: 100%; box-sizing: border-box; border-color: rgb(0, 0, 0); padding: 3px 8px; border-radius: 4px;color: rgb(167, 23, 0); font-size: 1em;display: inline-block; -webkit-transform: rotateZ(-10deg);transform: rotate(-10deg);transform-origin: left center 0; -webkit-transform-origin: 0% 100%; word-wrap: break-word !important; background-color: rgb(255, 179, 167);"><span style="color:rgb(255, 255, 255)">微信编辑器</span></section></section><section class="135brush" style="max-width: 100%; box-sizing: border-box; padding: 22px 16px 16px; border: 1px solid rgb(255, 179, 167);color: rgb(0, 0, 0); font-size: 14px;margin-top: -24px;"><p style="line-height:24px;"><span style="color:rgb(89, 89, 89); font-size:14px">微信编辑器提供非常好用的微信图文编辑器。可以随心所欲的变换颜色调整格式，更有神奇的自动配色方案。</span></p></section></fieldset></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="30" title="点击插入此内容">
+								<section class="135editor"><fieldset style="margin: 0px; padding: 5px; border: 1px solid rgb(204, 204, 204); max-width: 100%; color: rgb(62, 62, 62); line-height: 24px; text-align: justify; box-shadow: rgb(165, 165, 165) 5px 5px 2px; background-color: rgb(250, 250, 250);"><legend style="margin: 0px; padding: 0px;  text-align: left;margin-left: 20px;width: auto;"> <strong><strong style="background-color:rgb(255, 255, 245); color:rgb(102, 102, 102); line-height:20px"><span class="135brush" data-brushtype="text" style="background-color:red; border-bottom-left-radius:3em 1em; border-bottom-right-radius:0.5em 2em; border-top-left-radius:0.5em 4em; border-top-right-radius:3em 1em; box-shadow:rgb(165, 165, 165) 4px 4px 2px; color:white; max-width:100%; padding:4px 10px; text-align:justify">公告通知</span></strong></strong> &nbsp; &nbsp; </legend><section class="135brush" data-style="margin-top: 2px; margin-bottom: 0px; padding: 0px; max-width: 100%; min-height: 1.5em; line-height: 2em;font-weight:bold;"><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; max-width: 100%; min-height: 1.5em; line-height: 2em;">各位小伙伴们，微信图文美化编辑器正式上线了，欢迎大家多使用多提供反馈意见。使用<span style="color:inherit"><strong>谷歌与火狐浏览器</strong></span>，可获得与手机端一致的显示效果。ie内核的低版本浏览器可能有不兼容的情况</p></section></fieldset></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-111-brush tagtpl-111" data-id="46" title="点击插入此内容">
+								<section class="135editor"><section style="text-align: left;"><section style="display: inline-block; line-height: 20px; vertical-align: top; margin-top: 0.5em; text-align: center;"><img src="http://mmbiz.qpic.cn/mmbiz/MVPvEL7Qg0EmGultAbZy6tmUIxPWnw9iaLEvswCQUUK0k4rPOicLo8SMm0pJOkgsVHg5qDgb0paoeAmW1YTgQRcQ/640" style="vertical-align:top; width:40px"><br><span class="135brush" data-brushtype="text" placeholder="微信编辑器" style="font-size:12px; line-height:30px">微信编辑器</span></section><section style="background-image:url(http://mmbiz.qpic.cn/mmbiz/MVPvEL7Qg0EmGultAbZy6tmUIxPWnw9iaIlnFWUEOLQMyRuiaZqhFtx2ria5fDpE1ZJiaPttmsZzlWRkwiamEdRia0Rg/640);background-repeat: no-repeat; display:inline-block; margin-top:1.8em; vertical-align:top; width:20px;padding:10px 0px"></section><section class="135brush" data-ct="fix" style="display: inline-block;width: 65%; margin-top: 0.7em; margin-left: -0.4em; padding: 1em; background-color: rgb(255, 228, 200); border-radius: 1em; font-size: 1em; font-style: normal; color: inherit;"><p placeholder="请输入对话">请输入对话</p></section></section></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="43" title="点击插入此内容">
+								<section class="135editor"><section style="margin: 2px 0.8em 1em 0; text-align: center; font-size: 1em; vertical-align: middle; white-space: nowrap;"><section style="height: 0px; white-space: nowrap; /* margin: 0px 1em; */ border-top: 1.5em solid rgb(71, 193, 168); border-bottom: 1.5em solid rgb(71, 193, 168); border-left-width: 1.5em ! important; border-left-style: solid ! important; border-right-width: 1.5em ! important; border-right-style: solid ! important; border-color: rgb(71, 193, 168);"></section><section style="height: 0; white-space: nowrap; margin: -2.75em 1.65em;border-top: 1.3em solid #ffffff;border-bottom: 1.3em solid #ffffff;border-left: 1.3em solid transparent;border-right: 1.3em solid transparent;"></section><section style="height: 0px; white-space: nowrap; margin: 0.45em 2.1em; vertical-align: middle; border-top: 1.1em solid rgb(71, 193, 168); border-bottom: 1.1em solid rgb(71, 193, 168); border-left-width: 1.1em ! important; border-left-style: solid ! important; border-right-width: 1.1em ! important; border-right-style: solid ! important; border-color: rgb(71, 193, 168);"><section class="135brush" data-ct="fix" placeholder="一行短标题" style="max-height: 1em; padding: 0px; margin-top: -0.5em; color: rgb(254, 255, 253); font-size: 1.2em; line-height: 1em; white-space: nowrap; overflow: hidden; font-style: normal;">一行短标题</section></section></section></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107tagtpl-151-brush tagtpl-151" data-id="131" title="点击插入此内容">
+								<section class="135editor"><fieldset style="border: none rgb(252, 180, 43); margin: 0.3em 0px; padding-bottom: 1.5em; font-size: 14px; font-weight: bold; text-align: center; text-decoration: inherit; box-sizing: border-box;"><img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPgOiaYOTqESWT5q8TRibbhbZml9cwbY66AlG3kkwBI5w3iayvMhOUo4HIhcwTk1YqIaOsst9gavkbUoQ/0" style="border-radius:50%; color:inherit; height:112px; margin-right:10px; vertical-align:middle; width:112px"><section style="border-left-width: 1px; border-left-style: solid; border-color: rgb(211,172,156); padding-left: 1em; text-align: left; display: inline-block; height: 6em; vertical-align: top;color: rgb(211,172,156); margin-top: 1em;"><h2 class="135brush" data-brushtype="text" style="width: 100%; overflow: hidden; height: 50%; font-size: 1.5em; margin-top: -0.15em; border-color: rgb(211,172,156); color: inherit;margin-bottom:0.5em;">计划</h2><section class="135brush" data-style="font-size: 16px;" style="font-size: 16px; border-color: rgb(211,172,156); color: inherit;"><p>=Planning=</p></section></section></fieldset></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="6" title="点击插入此内容">
+								<section class="135editor"><h2 class="135brush" placeholder="请输入标题" style="white-space: normal; font-size: 16px; margin: 10px 0px; padding: 10px; max-width: 100%; border-top:solid 2px;border-left:0px; border-bottom:solid 2px; line-height: 25px; color: rgb(109, 151, 200);font-weight:bold; text-align: center;">请输入标题</h2></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="3" title="点击插入此内容">
+								<section class="135editor"><section style="max-width: 100%; margin: 2px; padding: 0px;">    <section style="max-width: 100%;margin-left:1em; line-height: 1.4em;">        <span style="font-size:14px"><strong style="color:rgb(62, 62, 62); line-height:32px; white-space:pre-wrap"><span class="135brush" data-brushtype="text" data-mce-style="color: #a5a5a5;" placeholder="关于微信编辑器" style="background-color:rgb(86, 159, 8); border-radius:5px; color:rgb(255, 255, 255); padding:4px 10px">关于微信编辑器</span></strong></span>    </section>    <section class="135brush" data-style="color:rgb(89, 89, 89); font-size:14px; line-height:28px" style="font-size: 1em; max-width: 100%; margin-top: -0.7em; padding: 10px 1em; border: 1px solid rgb(192, 200, 209); border-radius: 0.4em; color: rgb(51, 51, 51); background-color: rgb(239, 239, 239);">        <p>            <span placeholder="提供非常好用的微信文章编辑工具。">非常好用的在线图文编辑工具</span>        </p>    </section></section></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="23" title="点击插入此内容">
+								<section class="135editor"><blockquote class="135brush" style="orphans: 2; white-space: normal; widows: 2; font-size: 14px; line-height: 22.39px;margin: 10px 0px; padding:15px 20px 15px 45px; outline: 0px; border: 0px currentcolor; color: rgb(62, 62, 62); vertical-align: baseline; background-image: url(http://www.wx135.com/img/bg/left_quote.jpg); background-color: rgb(241, 241, 241); background-position: 1% 5px; background-repeat: no-repeat no-repeat;">这里插入分号引用样式的内容。</blockquote></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="134" title="点击插入此内容">
+								<section class="135editor"><fieldset style="clear: both; padding: 0px; border: 0px none; margin: 1em 0px 0.5em;"><section style="border-top-width: 2px; border-top-style: solid; border-color: rgb(142, 201, 101); font-size: 1em; font-weight: inherit; text-decoration: inherit; color: rgb(255, 255, 255); box-sizing: border-box;"><section class="135brush" data-brushtype="text" style="padding: 0px 0.5em; background-color: rgb(142, 201, 101); display: inline-block; font-size: 16px;">微信编辑器</section></section></fieldset></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="4012" title="点击插入此内容">
+								<section class="135editor"><fieldset style="margin: 0.5em 0px; padding: 0px; max-width: 100%; box-sizing: border-box; color: rgb(62, 62, 62); line-height: 25px; white-space: normal; border: 0px rgb(238, 222, 176); word-wrap: break-word !important;"><section style="margin: 0px; padding: 0px; width: 100%; box-sizing: border-box;display: inline-block; text-align: center; word-wrap: break-word !important;"><img src="http://mmbiz.qpic.cn/mmbiz/ugnYPLVSd8sGQrPwFE4piaiacUlJzd4hzQdOmBvuLH3B2u7ibUpZtb3pNswd8rkCPZrbYbiayWzsIbuLX3hL7yW2sw/0" style="box-sizing:border-box; color:inherit; height:65px; margin:0px auto; padding:0px; visibility:visible !important; width:60px; word-wrap:break-word !important"></section><section style="margin: -2.3em 0px 0px; padding: 2em 0px 0px; max-width: 100%; box-sizing: border-box; min-height: 15em; font-size: 1em;  font-weight: inherit; text-decoration: inherit; color: rgb(131, 104, 28); border-color: rgb(238, 222, 176); word-wrap: break-word !important; background-image: url(http://mmbiz.qpic.cn/mmbiz/ugnYPLVSd8sGQrPwFE4piaiacUlJzd4hzQAFQAnTZcCvVibdU0HJP8yRxNE4EKn3BzPNFfiaPfYjPrKSmw3R37UhTg/0); background-color: rgb(238, 222, 176); background-repeat: repeat;"><section style="margin: 0.3em auto; padding: 0.5em; max-width: 100%; box-sizing: border-box; width: 7em; height: 3.5em; line-height: 2em; overflow: hidden; -webkit-transform: rotate(-5deg); font-size: 32px;  font-weight: inherit; text-align: center; text-decoration: inherit; color: inherit; word-wrap: break-word !important; background-image: url(http://mmbiz.qpic.cn/mmbiz/ugnYPLVSd8sGQrPwFE4piaiacUlJzd4hzQJcg4iaDEDM8hlMPKhqt7PlOVBRTMMGIcPJl4JsjIYaYzAG1XT064fwg/0); background-repeat: no-repeat;background-size: contain;"><section style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important;"><span class="135title" style="box-sizing:border-box; color:inherit; margin:0px; max-width:100%; padding:0px; word-wrap:break-word !important">公告</span></section></section><section style="margin: 0px; padding: 1em; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important;"><section class="135brush" style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important; color: inherit;"><p>本背景可以换色哦~</p></section></section></section></fieldset><p></p></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-151-brush tagtpl-151" data-id="2392" title="点击插入此内容">
+								<section class="135editor"><fieldset style="border: none; margin: 0.8em 0px 0.3em; box-sizing: border-box; padding: 0px;"><section style="line-height: 0; box-sizing: border-box;"><img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPgOiaYOTqESWT5q8TRibbhbZmTRklnQU6b8uD81kef2dtFHurhJEsWm24dI0TiaAdD0WFt46A7Er1QOw/0" style="border:0px; box-sizing:border-box; display:inline-block; height:auto !important; width:100%"></section><section style="width: 30%; display: inline-block; float: left; text-align: right; margin: 15px 0px 0px; padding: 0px; box-sizing: border-box;"><section style="float: right; text-align: center; margin-top: -15px; box-sizing: border-box;"><section style="width: 1px; height: 1.2em; margin-left: 50%; background-color: rgb(102, 102, 102); box-sizing: border-box;"></section><section style="width: 2em; height: 2em; border: 1px solid rgb(102, 102, 102); border-radius: 50%; line-height: 2em; font-size: 1em;font-weight: inherit; text-decoration: inherit; box-sizing: border-box;"><section class="135brush" data-brushtype="text" style="box-sizing: border-box;">简</section></section><section style="width: 2em; height: 2em; border: 1px solid rgb(102, 102, 102); margin-top: 2px; border-radius: 50%; line-height: 2em; font-size: 1em;  font-weight: inherit; text-decoration: inherit; box-sizing: border-box;"><section class="135brush" data-brushtype="text" style="box-sizing: border-box;">单</section></section></section></section><section style="width: 65%; float: left; margin-top: 20px; line-height: 1.5em; margin-left: 5%; padding: 0px; font-size: 1em;  font-weight: inherit; text-decoration: inherit; color: rgb(39, 44, 51); box-sizing: border-box;"><section style="box-sizing: border-box;"><section class="135brush" data-brushtype="text" style="box-sizing:border-box; font-size:175%;margin:5px 0px">Cafe</section><section class="135brush" data-brushtype="text" style="box-sizing: border-box;font-size:16px">伟提尼亚记忆</section></section></section></fieldset></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="25" title="点击插入此内容">
+								<section class="135editor"><section style="font-size: 1em; white-space: normal; margin: 1em 0px 0.8em; text-align: center; vertical-align: middle;"><section style="height: 0px; margin: 0px 1em; border: 1.5em solid rgb(255, 202, 0); border-left-color: transparent !important;border-right-color: transparent !important;"></section><section style="height: 0px; margin: -2.75em 1.65em; border-width: 1.3em; border-style: solid; border-color: rgb(255, 255, 255) transparent;"></section><section style="height: 0px; margin: 0.45em 2.1em; vertical-align: middle; border:1.1em solid rgb(255, 202, 0); border-left-color: transparent !important;  border-right-color: transparent !important;"><section class="135brush" data-brushtype="text" placeholder="一行短标题" style="max-height: 1em; padding: 0px; margin-top: -0.5em; color: rgb(255, 255, 255); font-size: 1.2em; line-height: 1em; overflow: hidden;">一行短标题</section></section></section></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="7" title="点击插入此内容">
+								<section class="135editor"><blockquote style="white-space: normal; margin: 5px 0px 0px; padding: 10px; max-width: 100%; border-left-width: 5px; border-left-style: solid; border-left-color: rgb(0, 176, 80); line-height: 25px; color: rgb(102, 102, 102);"><p class="135brush" placeholder="请输入内容内容。">请输入内容内容。</p></blockquote></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="3052" title="点击插入此内容">
+								<section class="135editor"><blockquote class="135bg" style="max-width: 100%; padding: 5px 15px; border: none rgb(255, 129, 36);word-wrap: break-word !important; box-sizing: border-box !important;background-size: cover; background-image: url(https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPiaB5wTN4rt8SiaLwWPOGjzsz00t8qibibYMxV7vxJvA80XReHDajF0cqmLWMibicUuzlEXRpvGukdOVSxA/0);"><section class="135brush" style="color:#ffffff"><p style="text-align: center; color: inherit;"></p><p style="margin-top: 0px; margin-bottom: 0px; max-width: 100%; word-wrap: normal; min-height: 1em; white-space: pre-wrap; line-height: 1.75em; text-align: center; box-sizing: border-box !important;"><span style="font-size:18px"><strong>雪花动态背景样式，请输入文字</strong></span></p></section></blockquote></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="2490" title="点击插入此内容">
+								<section class="135editor"><section style="border: 3px solid rgb(255, 129, 36); padding: 5px;"><section data-bcless="lighten" style="border: 1px solid rgb(255, 158, 87); padding: 15px; text-align: center; color: inherit;"><p class="135title" style="color: inherit;">微信编辑器</p><p style="color:inherit; font-size:24px"><strong style="color:inherit"><span class="135brush" data-brushtype="text" style="color:inherit; font-size:24px">操作方便才是硬道理</span></strong></p></section></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="49" title="点击插入此内容">
+								<section class="135editor"><p class="135brush" placeholder="请输入标题" style="max-width: 100%; word-wrap: normal; min-height: 1em; white-space: pre-wrap;line-height: 25px;font-size:20px;box-sizing:border-box !important;text-shadow:rgb(0, 187, 236) 1px 0px 4px, rgb(0, 187, 236) 0px 1px 4px, rgb(0, 187, 236) 0px -1px 4px, rgb(0, 187, 236) -1px 0px 4px; word-wrap:break-word !important;color:rgb(255, 255, 255);font-weight:bold;">请输入标题</p></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="4017" title="点击插入此内容">
+								<section class="135editor"><fieldset style="margin: 0.5em 0px; padding: 0px; max-width: 100%; box-sizing: border-box; color: rgb(62, 62, 62); font-size: medium; line-height: 25px; white-space: normal; border: none rgb(255, 175, 205); word-wrap: break-word !important; text-align: right;"><section style="margin: 0px; padding: 1.5em 0px; max-width: 100%; box-sizing: border-box; width: 12.5em; height: 9.3em;  text-align: center; color: rgb(175, 0, 66); word-wrap: break-word !important; background-image: url(https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjxFuq93OVYKgv5yURhwD85BtS4pLH7HgotCCMjVpdp5fGoyeWUHb5ILcC7KJme6f4A3d1eia7xypA/0); background-color: rgb(255, 175, 205); background-size: cover;display:inline-block"><section style="margin: 0px 0px 0px 20px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 160px; overflow: hidden; -webkit-transform: rotate(-13deg); font-size: 22px;  font-weight: inherit; text-decoration: inherit; color: rgb(255, 255, 255); word-wrap: break-word !important;"><section class="135title" style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important;">肆意</section></section><section style="margin: 10px 20px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 150px; overflow: hidden; -webkit-transform: rotate(-15deg);  font-weight: inherit; text-decoration: inherit; color: rgb(255, 255, 255); word-wrap: break-word !important;"><section class="135brush" data-brushtype="text" style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important;"><p>青春，背景色你的地盘你做主</p></section></section></section></fieldset></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="27" title="点击插入此内容">
+								<section class="135editor"><section style="border-color:transparent transparent rgb(0, 112, 192); border-style:solid; border-width:12px; float:none; font-size:medium; height:0px; margin:-15px auto 0px 90px; orphans:2; text-align:-webkit-auto; widows:2; width:0px"></section><p class="135brush" data-brushtype="text" style="margin-top: -1px; margin-bottom: 0px;orphans: 2; widows: 2; min-height: 30px; visibility: visible; height: 30px; line-height: 30px; color: rgb(255, 255, 255); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; box-shadow: rgba(0, 0, 0, 0.14902) 1px 1px 3px; font-size: 15px; text-align: center; background-color: rgb(0, 112, 192);font-size:14px; font-weight:bold">点击标题下「蓝色微信名」可快速关注</p></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="1873" title="点击插入此内容">
+								<section class="135editor"><section style="max-width: 100%; color: rgb(62, 62, 62); margin: 0px; border-radius: 2em; height: 2.5em;line-height: 2.5em; color: rgb(255, 255, 255);  font-size: 13.33px; word-wrap: break-word !important; box-sizing: border-box !important; background-color: rgb(189, 221, 34);"><img src="http://mmbiz.qpic.cn/mmbiz/MVPvEL7Qg0EPD5jh0tV8WnQUh5DoR7UqXe88UP9HuYEcO8vV2H4JYaRAAF8m0dg1916mgEu3ia5MggE6TGEkDog/640" style="border:0px rgb(189, 221, 34); box-sizing:border-box !important; float:left; height:auto !important; margin:5px 10px; vertical-align:top; visibility:visible !important; width:auto !important; word-wrap:break-word !important"><p class="135brush" style="max-width: 100%; color: inherit; display: inline-block; font-size:16px; ">关注一下又不会怀孕！</p></section></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="704" title="点击插入此内容">
+								<section class="135editor"><section style="margin: 10px 0px; padding: 50px 0px; color: rgb(202, 251, 215); text-align: center; background-color: rgb(14, 184, 58);"><span style="border:1px solid rgb(202, 251, 215); font-size:18px; line-height:42px; padding:10px 15px">微信编辑器</span><section class="135brush" style="margin-top:30px;"><p>秒刷，最易用的图文排版工具</p></section></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="132" title="点击插入此内容">
+								<section class="135editor"><fieldset style="border: 0px; text-align: center; box-sizing: border-box; padding: 0px;"><section style="display: inline-block; box-sizing: border-box; color: inherit;"><section class="135brush" data-brushtype="text" style="margin: 0.2em 0px 0px; padding: 0px 0.5em 5px; max-width: 100%; color: rgb(107, 77, 64); font-size: 1.8em; line-height: 1; border-bottom-width: 1px; border-bottom-style: solid; border-color: rgb(107, 77, 64);">微信编辑器</section><section class="135brush" data-brushtype="text" style="margin: 5px 1em; font-size: 1em; line-height: 1; color: rgb(107, 77, 64); box-sizing: border-box; border-color: rgb(107, 77, 64);">做最易用的编辑器</section></section></fieldset></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="44" title="点击插入此内容">
+								<section class="135editor"><p><span style="border-color:rgb(30, 155, 232); color:rgb(30, 155, 232); font-size:4em; font-weight:bolder; line-height:1em; vertical-align:middle">“</span><span class="135brush" data-brushtype="text" style="color:inherit; font-size:2em; font-style:normal; line-height:1.2em; vertical-align:middle">标题</span><span class="135brush" data-brushtype="text" style="border-color:rgb(30, 155, 232); color:rgb(30, 155, 232); font-size:2em; font-style:normal; line-height:1.2em; vertical-align:middle">标题</span><span style="border-color:rgb(30, 155, 232); color:rgb(30, 155, 232); font-size:4em; font-weight:bolder; line-height:1em; vertical-align:middle">”</span></p></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-111-brush tagtpl-111" data-id="141" title="点击插入此内容">
+								<section class="135editor"><section class="135brush" placeholder="上下渐变格式内容" style="padding: 8px 30px; font-weight: bold; max-width: 100%; min-height: 1.5em; white-space: pre-wrap; line-height: 2em; color: rgb(116, 185, 11); border-color: rgb(229, 243, 208); background-image: -webkit-linear-gradient(top, rgb(230, 249, 202), rgb(207, 233, 167)); background-color: rgb(255, 255, 220);"><p>上下渐变格式内容</p></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class=" col-xs-12 brush mix tagtpl-111-brush tagtpl-111" data-id="1474" title="点击插入此内容">
+								<section class="135editor"><section style="border-style: solid;border-width: 1px;border-left-width:60px;border-color:#A40000;color:#A40000;padding-left:20px;padding-top:10px;"><section style="border-bottom:2px solid #A40000;clear:both;float:left;"><section style="font-size:24px;font-weight:bold;float:left;">New /<br>Spring</section><section class="135title" style="font-size:20px;margin-left:45px;margin-top:5px;font-weight:bold;float:left;">春.<br>新年快乐2015</section></section><p style="clear:both"></p><p class="135brush" data-brushtype="text">提子135 &nbsp;&nbsp; HAPPY NEW YEAR&nbsp;<i>!!!</i></p></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="2446" title="点击插入此内容">
+								<section class="135editor"><section style="padding: 0px 8px; border-left-width: 3px; border-left-style: solid; border-color: rgba(163, 163, 163, 0.843137); font-size: 22px; font-weight: inherit; text-align: inherit; text-decoration: inherit; box-sizing: border-box;"><section style="line-height: 1.4; box-sizing: border-box; color: inherit;"><section class="135brush" data-brushtype="text" style="border-color: rgb(117, 117, 118); color: rgb(117, 117, 118); font-size: 20px;">标题</section></section><section class="135brush" data-style="border-color: rgb(117, 117, 118); color: inherit; font-size: 12px;" style="color: rgb(117, 117, 118); line-height: 1.4; margin-top: 5px; padding-left: 3px; font-size: 14px; font-weight: inherit; text-align: inherit; text-decoration: inherit; box-sizing: border-box; border-color: rgb(117, 117, 118);"><p style="border-color: rgb(117, 117, 118); color: inherit; font-size: 12px;">内容描述</p></section></section></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-111-brush tagtpl-111" data-id="52" title="点击插入此内容">
+								<section class="135editor"><blockquote style="white-space: normal; margin: 0px; padding: 12px 15px; border: 0px solid rgb(208, 218, 254); color: rgb(0, 45, 207); min-height: 1em; text-align: justify; background-image: -webkit-linear-gradient(left, rgb(207, 217, 255), rgb(158, 179, 253), rgb(207, 217, 255)); background-color: rgb(255, 255, 240);"><section class="135brush" style="border-color: rgb(208, 218, 254); color: inherit;"><p style="border-color: rgb(208, 218, 254); color: inherit;">渐变背景内容</p></section></blockquote></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="125" title="点击插入此内容">
+								<section class="135editor"><p class="135brush" data-brushtype="text" style="margin: 2px 5px 0px 0px; padding: 0px;color:rgb(75, 92, 196); float:left; font-size:2.7em; line-height:1em; margin-right:5px">        秒刷    </p><section class="135brush" data-style="clear:none;">        <p style="clear:none;">            选择需要应用样式的文字，然后选择要使用的样式，即可实现秒刷效果。秒刷支持所有样式，如有使用遇到问题，欢迎加入QQ群 <strong>149659920</strong>，将问题反馈给我们        </p>        <p style="clear:none;color:red;">            回车使下沉占两行的文字独自为一个段落，然后再使用秒刷。建议下沉的为一个或者2个文字，不要多了。        </p>    </section></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="2178" title="点击插入此内容">
+								<section class="135editor"><section data-bcless="true" style="font-size:20px; background: rgb(223, 240, 203);border:0 none;"><span class="135brush" style="background:rgb(255, 255, 255); color:rgb(150, 206, 84); display:inline-block; padding:0px 15px 0px 0px">微信编辑器</span><span style="background:none repeat scroll 0 0 #fff; display:inline-block; margin-left:5px">&nbsp;</span><span style="background:none repeat scroll 0 0 #fff; display:inline-block; margin-left:5px">&nbsp;</span><span style="background:none repeat scroll 0 0 #fff; display:inline-block; margin-left:5px">&nbsp;</span></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-111-brush tagtpl-111" data-id="2527" title="点击插入此内容">
+								<section class="135editor"><section class="135bg" data-original-title="" style="padding:20px;margin-left: auto;margin-right: auto;margin-top: 10px;background-image: url(https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPgOiaYOTqESWT5q8TRibbhbZmBEz2ztYStjwljjJEfakqX1WFDPIClDC5LwE2fmWia9iaxjONRHK9mniag/0);background-size: auto;background-position: 49% 50%;background-repeat: no-repeat;color:#FFF" title=""><section style="border: 2px solid rgb(117, 117, 118); height: 8px; border-radius: 99px; box-sizing: border-box; color: inherit;"><section style="width: 15%; height: 100%; color: rgb(245, 245, 245); border-color: rgb(117, 117, 118); background-color: rgb(117, 117, 118);"></section></section><section style="margin: 5px auto; font-size: 85%; color: inherit;"><section style="float: right; color: inherit;"><span style="color:rgb(38, 38, 38)">剩余 6 天</span></section><section style="color: inherit;"><span style="color:rgb(38, 38, 38)">已进行&nbsp;15%</span></section></section><p style="color: inherit;"></p><section class="135brush" style="color: inherit;"><p style="color: inherit;"><span style="color:rgb(38, 38, 38)">使用说明： 如要修改进度条的进度，请点击工具条左上角的“html”按钮，然后查找 “width: 15%;”,将15修改成对应的百分比数字即可。</span></p><p style="color: inherit;"></p><p style="color: inherit;"><span style="color:rgb(38, 38, 38)">以下是更多文字内容</span></p></section></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class=" col-xs-12  mix  tagtpl-151" data-id="2405" title="点击插入此内容">
+								<section class="135editor"><section style="width: 10em; height: 10em; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; margin: 0px auto; background-image: url(http://img.wx135.com/files/users/925/images/201501/f7253e69b1dc56e37d0fa969.jpg
+); background-size: cover; box-sizing: border-box; background-position: 17.740384615384627% 0%; background-repeat: no-repeat no-repeat;">&nbsp;</section>
+</section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="9" title="点击插入此内容">
+								<section class="135editor"><p class="135brush" data-brushtype="text" placeholder="请输入标题" style="max-width: 100%; line-height: 24px;font-weight:bold; background-color: rgb(244, 156, 4); color: rgb(255, 255, 255); border-radius: 45%; text-align: center; margin:10px 0px;padding: 10px 15px;">请输入标题</p></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="31" title="点击插入此内容">
+								<section class="135editor"><fieldset style="padding: 5px; border: 1px solid rgb(204, 204, 204); line-height: 24px; color: inherit; background-color: rgb(254, 254, 254);"><legend style="margin: 0px 0px 0px 15px; padding: 0px; width: auto; font-size: 16px; color: inherit;"> <span style="color:inherit; margin:0px; padding:0px"><strong style="color:rgb(102, 102, 102); margin:15px 8px 0px 0px"><span class="135brush" data-brushtype="text" style="background-color:rgb(145, 168, 252); border-color:rgb(145, 168, 252); border-radius:5px; color:rgb(255, 255, 255); padding:4px 10px">提子135</span> &nbsp;</strong><span class="135brush" data-brushtype="text" style="border-color:rgb(145, 168, 252); color:rgb(145, 168, 252); margin:0px; padding:0px">ID:tizi135 &nbsp;</span></span> </legend><section class="135brush" data-style="text-indent: 2em;;" style="margin: 15px; margin-bottom: 0px; padding: 0px; line-height: 2em; color: rgb(62, 62, 62); font-size: 14px;"><p style="text-indent: 2em; color: inherit;">提子135平台是一个互联网运营平台，为运营者提供图文编辑工具，运营经验，收录公众号，定制开发微网站等服务，让运营更轻松高效。</p></section></fieldset></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="4013" title="点击插入此内容">
+								<section class="135editor"><fieldset style="margin: 0.5em 0px; padding: 0px; max-width: 100%; box-sizing: border-box; color: rgb(62, 62, 62); font-family: inherit; font-size: medium; line-height: 25px; white-space: normal; border: none rgb(254, 253, 254); word-wrap: break-word !important;"><section style="margin: 0px; padding: 3.8em 0px; max-width: 100%; box-sizing: border-box; width: 12.5em; height: 12.5em; float: right; text-align: center; word-wrap: break-word !important; background-image: url(http://mmbiz.qpic.cn/mmbiz/ugnYPLVSd8u7P43JibrNCMp1ZAASjRDmxzOF85PQ6kXpnpasOJyVaLRuialiaxw4Sgn7FJOoMXiaJDGLslic8jyaDeQ/0); background-size: cover;"><section style="margin: 0px 0px 0px 16px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 140px; overflow: hidden; -webkit-transform: rotate(-13deg); font-size: 22px; font-family: inherit; font-weight: inherit; text-decoration: inherit; color: rgb(102, 102, 102); word-wrap: break-word !important;"><section class="135title" style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important; color: inherit;">Tips</section></section><section style="margin: 10px 20px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 150px; overflow: hidden; -webkit-transform: rotate(-15deg); font-size: 14px; font-family: inherit; font-weight: inherit; text-decoration: inherit; color: rgb(102, 102, 102); word-wrap: break-word !important;"><section class="135brush" style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important; color: inherit;"><p>我是图片不能换色哦</p></section></section></section></fieldset><p></p><p></p></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109tagtpl-151-brush tagtpl-151" data-id="7237" title="点击插入此内容">
+								<section class="135editor"><section style="margin: 3px;background-color: #fff;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);"><img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPiazjsibqzMEbFXfnLK8n31va0VxKrnKt6jgJV0lXPicDReRNujpZcTjhIrER92pAnJ44ADEAkET3YuA/0" style="width:100%"><section class="135brush" data-type="main"><p style="line-height: 1.35em; margin-top: 10px; overflow: hidden; padding: 0px 16px; word-wrap: break-word;"><span style="line-height:1.35em">135原创，图文样式排版。</span></p><p style="line-height: 1.35em; margin-top: 10px; overflow: hidden; padding: 0px 16px; word-wrap: break-word;">底下为作者信息</p></section><section style="background: none repeat scroll 0 0 #fafafa;border-top: 1px solid #f2f2f2;color: #999;padding: 16px; 15px;"><img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPiazjsibqzMEbFXfnLK8n31varDasdXuq4ickQRyw81IN3MseODRupKZMaqqCnEyWH3mCvfIPhQnibOWQ/0" style="float:left; height:34px; margin-right:10px; width:34px"><section class="135brush" data-style="clear: none;line-height:17px;padding:0 0;font-size:12px;"><p style="clear: none;font-size:12px;line-height:17px;padding:0 0;margin:0 0;"><strong>简单易用的才是最好的</strong></p><p style="clear: none;font-size:12px;line-height:17px;padding:0 0;margin:0 0;">微信编辑器</p></section></section></section><p></p></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-111-brush tagtpl-111" data-id="26" title="点击插入此内容">
+								<section class="135editor"><section style="font-size: 16px; white-space: normal; margin:10px 0px; border: 1px solid rgb(201, 201, 201); text-align: center;"><section style="border: 0.1em solid rgb(255, 202, 0); margin: 1em auto; width: 12em; height: 12em; border-radius: 6em;"><section style="display: table; max-height: 11em; background-color: rgb(255, 202, 0); border-radius: 5.5em; height: 11em; width: 11em; margin: 0.5em;"><section class="135brush" data-brushtype="text" style="display: table-cell; vertical-align: middle; max-height: 11em; margin: 1em; padding: 1em; color: rgb(255, 255, 255); font-size: 1.5em; line-height: 1.2em; ">135<br>编辑器</section></section></section><section class="135brush" data-style="font-size: 1em;" style="display: inline-block; color: white; background-color: rgb(255, 202, 0); line-height: 1em; border-radius: 1em; margin: 1em 1em 2em; max-width: 100%; padding: 0.5em 1em; font-size: 1em;"><p>微信编辑器，您的微信文章可以更精彩！</p></section></section></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="2390" title="点击插入此内容">
+								<section class="135editor"><fieldset style="border: 0px rgb(107, 77, 64); text-align: center; margin: 0.8em 0px 0.5em; box-sizing: border-box; padding: 0px;"><section style="color: rgb(107, 77, 64); display: inline-block; width: 1em; font-size: 2.5em; font-weight: inherit; line-height: 1em; vertical-align: top; text-align: inherit; text-decoration: inherit; box-sizing: border-box; border-color: rgb(107, 77, 64);"><section class="135brush" data-brushtype="text" style="box-sizing: border-box; color: inherit; border-color: rgb(107, 77, 64);">两字</section></section><section class="135title" style="display: inline-block; margin-left: 0.5em; margin-top: 0.2em; text-align: left; box-sizing: border-box; color: inherit;"><section style="box-sizing: border-box; color: inherit;"><section class="135brush" data-brushtype="text" style="background-color:rgb(107, 77, 64); border-color:rgb(107, 77, 64); box-sizing:border-box; color:rgb(224, 209, 202); display:inline-block; font-size:2em; font-weight:inherit; line-height:1; padding:0.1em; text-align:inherit; text-decoration:inherit">副标题1</section></section><section style="color: rgb(107, 77, 64); margin: 0.5em 0px; font-size: 1.5em; line-height: 1em; font-weight: inherit; text-align: inherit; text-decoration: inherit; box-sizing: border-box; border-color: rgb(107, 77, 64);"><section class="135brush" data-brushtype="text" style="box-sizing: border-box; color: inherit; border-color: rgb(107, 77, 64);">副标题2</section></section></section></fieldset></section>
+															</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="28" title="点击插入此内容">
+								<section class="135editor"><p class="135brush" style="margin-top: 0px; margin-bottom: 0px; font-size: 15.555556297302246px; padding: 0px; max-width: 100%; min-height: 1.5em; line-height: 2em; word-wrap: break-word; word-break: normal; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; color: rgb(255, 255, 255);text-shadow: rgb(30, 34, 30) 0px 1px 1px; text-align: center; background-color: rgb(89, 150, 235);">↓↓↓ 点击"阅读原文" 【查看更多信息】 &nbsp;</p></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-109-brush tagtpl-109tagtpl-151-brush tagtpl-151" data-id="7313" title="点击插入此内容">
+								<section class="135editor"><section style="background-color: #fff;border: 1px solid #dbdbdb;margin: 0 0 2px 4px;"><img alt="" src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPgOiaYOTqESWT5q8TRibbhbZmgw9cyToBld9E6Jia8Vcb7N0c7icYlDutU3GZxPrqmkia4nTYYicUvYibYsw/0" style="width:100%" title="" vspace="0" border="0"><h2 class="135brush" data-brushtype="text" style="margin:10px 0;font-size:20px;padding: 3px 10px 2px;">图片标题</h2><section class="135brush" style="padding: 3px 10px 15px;"><p>图片内容描述，支持多段落。</p></section></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-111-brush tagtpl-111" data-id="128" title="点击插入此内容">
+								<section class="135editor"><fieldset style="border: none; margin: 0.8em 0px 0.3em; box-sizing: border-box; padding: 0px;"><section class="135brush" data-brushtype="text" style="width: 2.5em; height: 2.5em; margin: 0px auto 1px; border-radius: 100%; line-height: 2.5em; box-sizing: border-box; overflow: hidden; font-size: 40px;  text-align: center; text-decoration: inherit; color: rgb(255, 255, 255); background-color: rgb(195, 39, 43); border-color: rgb(195, 39, 43);">135</section><section style="font-size: 1em;  font-weight: bold; text-align: center; text-decoration: inherit; color: rgb(255, 255, 255); border-color: rgb(195, 39, 43); box-sizing: border-box;"><section style="width: 0px; margin: 0px auto; border-bottom: 0.5em solid rgb(195, 39, 43); border-top-color: rgb(195, 39, 43); border-left: 1em solid transparent ! important; border-right: 1em solid transparent ! important; box-sizing: border-box;height: 10px;"></section><section class="135brush" data-brushtype="text" style="padding: 0.5em; line-height: 1.2em; font-size: 1em;  box-sizing: border-box; background-color: rgb(195, 39, 43);">做最好用的编辑器</section></section></fieldset></section>
+															</li><li class=" col-xs-12 brush mix tagtpl-107-brush tagtpl-107" data-id="7308" title="点击插入此内容">
+								<section class="135editor"><h2 class="135brush" data-brushtype="text" style="padding-bottom: 9px;border-bottom: 1px solid #eee;argin-top: 20px;margin-bottom: 10px;font-weight: 500;line-height: 1.1;font-size: 22px;">极简标题</h2></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li><li class="itembg2 col-xs-12 brush mix tagtpl-109-brush tagtpl-109" data-id="7282" title="点击插入此内容">
+								<section class="135editor"><section><section style="width:48%;display:inline-block;float:left;"><section style="padding:20px 25px;border:1px solid #e7e7e7;text-align:center;"><p><img src="#http://img.wx135.com/135editor/logo-135-web.png" style="height:50px; margin-bottom:15px"></p><h3 class="134title" style="font-size:16px;font-weight:bold;margin:0 0 10px 0;">微信编辑器</h3><section class="135brush" data-style="clear:none;"><p style="clear:none;margin:0 0;line-height:1.5em;">生而排版</p><p style="clear:none;margin:0 0;line-height:1.5em;"><span style="text-align:center">为你而美</span></p></section></section></section><section style="margin-left:4%;width:48%;display:inline-block;text-align:center;"><section style="padding:20px 25px;border:1px solid #e7e7e7;"><p><img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPiazjsibqzMEbFXfnLK8n31vao2YXGwz6wxT8wBGG0FRkuzvGvIztzq8Re1R50omeH8KoicjL2HBx7gQ/0" style="height:50px; margin-bottom:15px"></p><h3 class="134title" style="font-size:16px;font-weight:bold;margin:0 0 10px 0;">秒刷</h3><section class="135brush" data-style="clear:none;margin:0 0;line-height:1.5em;"><p style="clear:none;margin:0 0;line-height:1.5em;">一键排版</p><p style="clear:none;margin:0 0;line-height:1.5em;">珍惜生命</p></section></section></section><p style="height:2px;clear:both;"></p></section></section>
+								 <div class="origin" style="background:#ed603a;">原创</div> 							</li></ul>
+</div>						<div class="alert alert-warning">
+							<p>登录后前往样式中心，可收藏显示更多样式，定制个人专属的样式操作列表。<a  href="/users/login?referer=/style-center?cate_id=1" target="_blank">立即登录</a></p>
+						</div>
+					</div>
+								<div id="image-list" class="tab-pane">
+						<div  class="ui-portlet clearfix ">
+		<ul class="editor-template-list ui-portlet-list">	<li class="col-xs-12 mix " data-id="1877"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPhuxibIOsThcH7HF1lpQ0Yvk8ibWicecsL1Yjic7yqaDZ9uibiaabxzWpKdEv7KUShP04icChRLWeUnuc9JA/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="701"  title="点击插入此内容">
+								<img src="http://mmbiz.qpic.cn/mmbiz/agEQQ7NdJSOribEoESibK9ibbyDu4CdOibnyj30ic0Aq8mIYrIEsicAe2YW6cfmcxIWPQYQZiaOxJAarb3EGnTUxMZBPQ/640?tp=webp">
+							</li><li class="col-xs-12 mix " data-id="54"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjliadCG0pgyFENOr7l5khHkXsLRJEiaBJaoq2AGBEqz4OClydB4SWInQg/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="55"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjSxpib87ZpPcshjNxefaxLW8pn10tI7EibIs11SM9TP3a0iaiaibNJmzXgMQ/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="62"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjAfwuHRrfV14ibicllm5iamibibmrMpJhan2IIBlhkoYwpPHBicRcaeicpgWlw/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="65"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjP6oWfFhgvWJ9JfIgMw45RW9iarQt3ZGllQkEMZHQQiaXBwzUW0yxsIxg/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="90"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjBeibJtibCz1RN99t14yzvFx9Q9WEB1JjfGtPRbYybTnhaB2S63JGOyPA/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="104"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjmjibYQqEUSPqK0iaedRKVR107Z0w3P4plqYCM9DUhJGgtA3D42TjVLUw/0">
+							</li><li class="col-xs-12 mix " data-id="105"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjsOQU8xGXiaYXYfiboMoAJmrrTzOJ4mX819vjhjXhoDgIsepAtK6Ky68A/0">
+							</li><li class="col-xs-12 mix " data-id="107"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjXc01N4CGdhLm59FIUSibLQjhlhkcuzuurHmhHdqb66kGTxlUCYzv84w/0">
+							</li><li class="col-xs-12 mix " data-id="108"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQj9ZsjTUI4j16icc2t7iatj8iaL2sS40l0HUxnGmlEVJACDuFKunPjExywg/0">
+							</li><li class="col-xs-12 mix " data-id="109"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjjPeCP8EVibp2UHHb7dKFpaSFEtuTTUib9hQicMDMQjHx2zE3yahKticurA/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="110"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQj3FXAw5fz5kjSMB2jeKEicTibnkOtbibXLbE5jhHFvnGiaibzRMSq3bJpAdQ/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="114"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjOjIEA1OjSicXHcia9Mj9RQjTd27UxU0Hy1UUUAlH7u5lJCAKlzp87Dl4PX41STaeoXvne6RPyul1Q/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="241"  title="点击插入此内容">
+								<img src="#http://img.wx135.com/files/201412/6c30531a8c718a37868c4822.gif">
+							</li><li class="col-xs-12 mix " data-id="1316"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOcD1ye93rZDfEXg2d9FMYkiaIM48BfIJ9sKzc6yaI3Niaic6oTibIq6U2NQ/0">
+							</li><li class="col-xs-12 mix " data-id="1214"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpficBEM0Lm42qUwhkCQeqDqibd5eQ7seWicQficqtoNo2w1xsKzdJLW9MRA/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1297"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOtJu3Oqt3r9SQOdRjXBsIHUvB41X3cANVjPRDIpT1Kr5aeSPW4QI1XA/0">
+							</li><li class="col-xs-12 mix " data-id="1298"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOlZI3nW5EvqsHia0MZ4NfhLxtic3X2rlkAAB6TzXBa9bvQsN3kg7gH1Zg/0">
+							</li><li class="col-xs-12 mix " data-id="1299"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOTlRn50fjrLdYrGMGs4GbEKc0txNh1kccfwiad1w5PQItoVwEeXeAXGg/0">
+							</li><li class="col-xs-12 mix " data-id="1286"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOMVfaSpIJG7ZCkeDf5YRHWETuVfib4rXMAyD63FqjIe9oMthycVlLfBA/0">
+							</li><li class="col-xs-12 mix " data-id="1287"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOHvGapuSxbJHNEtEC058Pu66s1p1ZCMiae8BNxia5Bd0OJBQDqb1YXOgw/0">
+							</li><li class="col-xs-12 mix " data-id="1293"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOT3w6SHZOnuLxSoIHof9Gt4fUTSI8vFNG2GLqHaM3RNxBf6Vl8ibuwpg/0">
+							</li><li class="col-xs-12 mix " data-id="1306"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOS2LEvFliagWaKypFS5I9WiaPIwbfib5ViaFRpsWK8088R5Zw9by6tW621w/0">
+							</li><li class="col-xs-12 mix " data-id="1309"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjicgXX0GuXGoicWxso5uicHnOBNKcJ0cCev2hexicw5CXdncLaHwrXK6gCWeskg1x4Ria8Zib95ic5xxcqQ/0">
+							</li><li class="col-xs-12 mix " data-id="1342"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpNkaSe1ryqXSFkphB7EQLFT34NHCA4oQPh4QrJdNvQS11MiatXLV2CDQ/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1345"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpouT8vEjNUJv7WZPW2QwAgYR5WV7kibqh5KF6qYgRL6tfTH2BuZoQBJg/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1355"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpgFrV3wWETRRu639SUOYrjfEV7wn1x5e8xWM793f4x6LPoZd5TBYTeA/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1356"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKp81YvTE2bl8XR6Iiaz7fBDOjmaXP5Lva5caD4tRZbE5unmcenrs9ibDZg/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1357"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpdvsL95VZU29WK5P51H6SMMZLeqiaK3yfMUotPwOQiav0iaMy6Q2h8mh1w/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1361"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKp76ic8ArnB7GLRicSUWfAJicVCcbzBl5cbNQMWsicXDGY15UmPtS46GHfIg/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1367"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpy2TJFZmr4jHv3fRia7rkQP3Rk5Zp0xEiaUpLlvQ0klvMYoPdRehzVnfw/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1369"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpK5VzybhOUaWbfMW2hZeT34KnoEXkWbbobCPSiaD3XcDHMkRyWu8CXaw/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1371"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpFQC3fxiasRic9zLSvOL0qNeLBVBXf8exSicl85ZJZA35wpHfYfK0ibcwlw/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1455"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpSpN2MyEyGSKiciaRTg4vA5Ry5FRZibCR0PpWAOMiclh9ZaqNvKfdF34pdg/0/mmbizgif">
+							</li><li class="col-xs-12 mix " data-id="1486"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpb0J4icBhmNwR5yyddib3l6iaVxeQvb3IWiaBMPbTAPGIJLkRLzBzciaMEiag/0">
+							</li><li class="col-xs-12 mix " data-id="1487"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPjhXdiaw8ibquYYw8MI1InGKpjBDKBeTndywvia3C1akicvEpCMjicefLbcDNlPdnhhgCuSWctrwndZquQ/0">
+							</li><li class="col-xs-12 mix " data-id="2834"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPgyAr0KrpUkmdGZr1Wa1gFjEqNwMnDC7e1c22mPD5LiczMz9uALmCeNBu568mMAW52rhwszAUJdjXQ/0">
+							</li><li class="col-xs-12 mix " data-id="3735"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPhleFOX35XdtnYXZ1uPOoDGDAtFwCC8bvQmUyic9RUaPaUZcgViar2aEGNeGL42wT9IpXGqdXFuJUvQ/0">
+							</li><li class="col-xs-12 mix " data-id="3736"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPhleFOX35XdtnYXZ1uPOoDGfBDJNcg1ZQSjSYRAcYl6mzUV2XVVgfZZfbwwMPSIKjKAssj0AEsD5A/0">
+							</li><li class="col-xs-12 mix " data-id="4010"  title="点击插入此内容">
+								<img src="#https://mmbiz.qlogo.cn/mmbiz/cZV2hRpuAPg5mD5uO1zkBXpytf39ZpZuKJnNLyHxL2A7IicpiaA0fbv9KZmibJts9rfgl5AIFEkDWE73biaAmsr2vQ/0">
+							</li></ul>
+</div>					</div>
+					
+					<div class="tab-pane" id="editor-tpls" style="padding:0px 0px;position:relative;">
+				    	<ul id="editor-tpls-navtab" class="nav nav-tabs" style="border:0 none;">
+						  						  <li class="ignore">
+						    <a href="#recommend-tpl-list-1" role="tab" data-toggle="tab">系统推荐</a>
+						  </li>						  
+						</ul>
+						<div class="tab-content"  style="padding:0 10px;overflow-x:hidden;" id="editor-tpls-list"></div>					
+				  </div>	
+          </div>
+        </div>
+        <div class="w3 fl">
+          <!--div class="editor1 fl">
+          	
+          </div-->
+          <div class="editor2 p-r fl"><!--editor2 start-->
+         
+            <form action="" class="form-horizontal editorBox" role="form" target="_blank" id="WxMsgViewForm" method="post" accept-charset="utf-8">
+		            <script id="WxMsgContent" type="text/plain" style="width:500px;height:510px;"></script>
+		            <input type="hidden" name="template_id" id="template_id" />
+				<input type="hidden" name="template_name"  id="template_name"/>
+				<input type="hidden" name="msg_id" />
+		            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+				        <h4 class="modal-title">保存模板</h4>
+				      </div>
+				      <div class="modal-body">
+				        <p><input type="text" placeholder="请输入模板名称后点击保存" name="template_name" id="dialog-template-name" class="form-control"></p>
+				        <p><label><input type="checkbox" name="push_tpl_center" value="1">发布到模板中心(不勾选时存为私人模板)</label> <a href="/audit-rules.html" target="_blank">审核规则</a> </p>
+				        <p><label id="auto_cover_tpl" class="hidden"><input type="checkbox" name="auto_cover_tpl" checked="checked" value="1">覆盖原有模板</label></p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				        <button type="button" id="dialog-save-template" class="btn btn-primary">保存</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+			
+            <div class="editorslide">
+              <ul>
+                <li><a href="javascript:;" id="copy-editor-html" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="right" title="复制内容"><i  class="glyphicon glyphicon-copy"></i></a></li>
+                <!--li><button type="button" id="save-as-template" class="btn btn-default btn-xs" ><i data-toggle="tooltip" data-placement="right" title="存为模板" class="fa fa-save"></i></button></li-->
+                
+                <li><a href="javascript:;" id="clear-editor" class="btn btn-default btn-xs" ><i data-toggle="tooltip" data-placement="right"  title="清空内容" class="glyphicon glyphicon-ban-circle"></i></a></li>
+                <!--li><button type="button" id="html-to-image" class="btn btn-default btn-xs" ><i  data-toggle="tooltip" data-placement="right"  title="长微博图文" class="fa fa-image"></i></button></li-->
+                
+                <li><a href="javascript:;"id="html-more-popover"  data-container="#more-popover" 
+	       			data-toggle="popover" data-placement="right" data-content="更多"  class="btn btn-default btn-xs" ><i  data-toggle="tooltip" data-placement="right" class="glyphicon glyphicon-object-align-top" title="更多操作" ></i></a></li>
+                
+                
+              </ul>
+            </div>
+            </form>
+          </div><!--editor2 end-->
+        </div>
+      </div>
+      
+    
+    </div><!--box end-->
+  </div>
+
+<div  id="more-popover">
+	<small  id="more-popover-content" style="margin-right:30px;display:none;">
+					<button class="btn btn-default btn-xs" id="set-image-radius"> 图片圆形  </button>
+					 <button class="btn btn-default btn-xs" id="set-image-border"> 图片边框 </button>
+					 
+						<button class="btn btn-default btn-xs" id="flat-strip-radius"> 去圆角</button>
+						<button class="btn btn-default btn-xs" id="flat-add-radius"> 加圆角</button>
+						<button class="btn btn-default btn-xs" id="flat-strip-border"> 去边框</button>
+						<!--  <button class="btn btn-default btn-xs" id="flat-add-border"> 加边框</button>  -->
+						<button class="btn btn-default btn-xs" id="flat-strip-shadow"> 去阴影 </button>
+						<button class="btn btn-default btn-xs" id="flat-add-shadow"> 加阴影 </button>
+						
+						<button class="btn btn-default btn-xs" id="135-random-color"> 
+						随机换色
+						</button>
+	</small>
+</div>
+<section id="color-plan" style="width:120px;position:fixed;top:58px;right:-5px;height:320px;text-align: center;">
+	<div class="panel panel-primary" style="border:0 none;background: transparent;">
+	  <div class="panel-heading"  style="background:rgba(58,51,50,0.8);border:0 none;color:#dad9d8;height: 52px;padding: 15px;"><h3 class="panel-title">配色方案</h3></div>
+	  <div class="panel-body" style="padding:0;background:rgba(58,51,50,0.5);">
+	    <ul class="clearfix" style="list-style:none;padding:10px 10px;margin:0 0;">
+            <li class="color-swatch" style="background-color: #ac1d10"></li>
+            <li class="color-swatch" style="background-color: #d82821;"></li>
+            <li class="color-swatch" style="background-color: #ef7060;"></li>
+            <li class="color-swatch" style="background-color: #fde2d8;"></li>
+            
+            <li class="color-swatch" style="background-color: #d32a63;"></li>
+            <li class="color-swatch" style="background-color: #eb6794;"></li>
+            <li class="color-swatch" style="background-color: #f5bdd1;"></li>            
+            <li class="color-swatch" style="background-color: #ffebf0;"></li>
+            
+            
+            
+            <li class="color-swatch" style="clear:left;background-color: #e2561b;"></li>
+            <li class="color-swatch" style="background-color: #ff8124;"></li>
+            <li class="color-swatch" style="background-color: #fcb42b;"></li>
+            <li class="color-swatch" style="background-color: #feecaf;"></li>
+            
+            <li class="color-swatch" style="clear:left;background-color: #0c8918;"></li>
+            <li class="color-swatch" style="background-color: #80b135;"></li>
+            <li class="color-swatch" style="background-color:#c2c92a;"></li>
+            <li class="color-swatch" style="background-color:#e5f3d0;"></li>
+            
+            <!-- <li class="color-swatch" style="clear:left;background-color: #1f877a;"></li>
+            <li class="color-swatch" style="background-color: #27abc1;"></li>
+            <li class="color-swatch" style="background-color: #5acfe1;"></li>
+            <li class="color-swatch" style="background-color: #b6f2ea;"></li> -->
+            
+            <li class="color-swatch" style="clear:left;background-color:#374aae;"></li>
+            <li class="color-swatch" style="background-color:#1e9be8;"></li>
+            <li class="color-swatch" style="background-color:#59c3f9;"></li>
+            <li class="color-swatch" style="background-color:#b6e4fd;"></li>
+
+            <li class="color-swatch" style="clear:left;background-color:#5b39b4;"></li>
+            <li class="color-swatch" style="background-color: #4c6ff3;"></li>
+            <li class="color-swatch" style="background-color:#91a8fc;"></li>
+            <li class="color-swatch" style="background-color:#d0dafe;"></li>
+            
+            <!-- 紫色 -->
+            <li class="color-swatch" style="clear:left;background-color:#8d4bbb;"></li>
+            <li class="color-swatch" style="background-color: rgb(166, 91, 203);"></li>
+            <li class="color-swatch" style="background-color:#cca4e3;"></li>
+            <li class="color-swatch" style="background-color: rgb(190, 119, 99);"></li>
+            
+            <li class="color-swatch" data-color="#efefef" style="clear:left;background-color:#3c2822;"></li>
+            <li class="color-swatch" style="background-color:#6b4d40;"></li>
+            <li class="color-swatch" style="background-color:#9f887f;"></li>
+            <li class="color-swatch" style="background-color:#d7ccc8;"></li>
+            
+        	<li class="color-swatch" style="background-color: #212122;"></li>
+        	<li class="color-swatch" style="background-color: #757576;"></li>
+        	<li class="color-swatch" style="background-color: #c6c6c7"></li>
+        	<li class="color-swatch" style="background-color: #f5f5f4"></li>
+        	
+        </ul>
+        <div style="margin:5px 15px;color:#dad9d8;line-height:32px;text-align: center;position:relative;" >
+        	<input id="Side-ColorPicker"  class="colorPicker form-control" style="font-size:12px;width:90px;padding:4px 8px 4px 18px;height:24px;line-height:16px" id="custom-color" value="#B6BD79" />
+        	<i title="选择要调色的样式或者勾选“全文换色”后可进行换色" data-toggle="tooltip" data-container="body" data-placement="left"  style="position:absolute;left:5px;color:#333;cursor:pointer;top:5px;" class="fa fa-question-circle"></i>
+        </div>
+        <hr style="margin:2px 20px;border-color:#453d3b;"/>
+        <div style="margin:5px 15px;color:#dad9d8;line-height:32px;text-align: center;"><label style="cursor:pointer;"><input style="margin-top:8px;" type="checkbox" id="replace-color-all" value="1"> 全文换色</label></div>
+	  </div>
+	</div>        
+</section>
+
+
+
+
+	<script type="text/javascript" src="./js/ueditor1_4_3/ueditor.config.js"></script>
+	<script type="text/javascript" src="./js/ueditor1_4_3/ueditor.all.min.js"></script>
+<script src="./css/dd42cb832b.js" type="text/javascript"></script>
+<script>
+//window.localStorage.loadFeeds = 'true';
+
+function openFeedsModal(){
+	//$('#feedsModal').modal('show');
+}
+
+$(function(){
+	
+	//var html = $('#insert-style-list').html();
+	//$('#insert-style-list').html(parseHtml(html,"rgb(255, 129, 36)","#FFF"));
+	
+	/*重置高度
+	$(window).resize(function(){
+		var win_height = $(window).height();
+		$('#full-page').height(win_height);
+		var area_height = win_height-156;
+		
+		if(area_height > 800){
+			area_height = 800;
+		}
+		
+		$('#WxMsgContent,.edui-editor-iframeholder').height(area_height-8);
+		$('.item,.n1-1').height(area_height);
+		$('.editor2').height(area_height);
+	}).trigger('resize');
+	
+	$('.autonum').on('mousewheel', function(event) {
+		if(event.deltaY < 0) { //向下滚动
+			$(this).html( parseInt($(this).html()) - 1);
+		}
+		else{
+			$(this).html( parseInt($(this).html()) + 1);
+		}
+	    return false;
+	}).tooltip({'title':'上下滚动鼠标，可调整序号大小',container: 'body'});
+	*/
+	
+	current_editor = UE.getEditor('WxMsgContent');
+	
+		
+	current_editor.ready(function(){
+		//current_editor.addListener('ready', resetHandler);
+		setTimeout(function(){
+				//current_editor.execCommand('drafts');
+				//current_editor.execCommand( 'focus' );
+				var editor_document = current_editor.selection.document;
+				if( window.localStorage){ // 本地临时存储编辑器内容
+					if(typeof window.localStorage._135content != "undefined"){
+						//alert(window.localStorage._135content);
+						setEditorHtml(window.localStorage._135content);
+						$(editor_document).find('.135editor').each(function(){
+							$(this).removeAttr('style');
+						});
+					}
+					setInterval(function(){
+						window.localStorage._135content = getEditorHtml();
+					},10000);			
+				}
+		},100);
+        
+	});
+	window.onbeforeunload = function(event){
+		var html = getEditorHtml();
+		if(html != ""){
+			if( window.localStorage){
+				localStorage._135content = html;
+			}
+			event.returnValue = "即将离开页面，是否确认编辑的内容已使用并废弃？";   
+		}
+	}
+	
+	//$('#html-more-popover').data('content',$('#more-popover-content').html());
+	$('#html-more-popover').popover({trigger:"hover"}).on('shown.bs.popover', function () {
+		var $this = $(this);
+		$('#more-popover .popover-content').html($('#more-popover-content').html());
+	})
+	
+	$('.editor-template-list').mixItUp({
+    	layout:{display:'block'},
+    	callbacks:{}
+    });
+	
+	//$('#left-side-affix').width($('#left-sidebar').width());
+	$('.popover-trigger').popover({trigger:"hover"});
+	$('#btn-help').popover();
+	$('#editor-type-pop').popover({
+	  trigger: 'hover'
+	});
+	
+	
+});
+</script>
+
+  
+<script src="./css/b7422eb402.js" type="text/javascript"></script>
+<script type="text/javascript" src="./css/less-1.7.0.min.js"></script>
+<script type="text/javascript" src="./js/ueditor1_4_3/third-party/zeroclipboard/ZeroClipboard.min.js"></script>
+	
+<script>
+var less_parser = new less.Parser;
+ZeroClipboard.config( { swfPath: "./js/ueditor1_4_3/third-party/zeroclipboard/ZeroClipboard.swf" } );
+
+$(function(){
+	
+
+	// var $colors = jsColorPicker('.colorPicker',{
+	$('.colorPicker').colorPicker({
+	    customBG: '#222',
+	    init: function(elm, colors) { // colors is a different instance (not connected to colorPicker)
+	      elm.style.backgroundColor = elm.value;
+	      elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
+	    }
+	    /*,displayCallback:function(colors, mode, options){
+	    	setBackgroundColor($(this).val(),'#FFF', 'all');
+	    }*/
+	});
+	
+	
+	
+	$(document).on('click','#flat-strip-shadow',function(){
+		var html = getEditorHtml();
+		var obj = $('<div>'+html+'</div>');
+		obj.find('*').css('box-shadow','');
+		var newHtml = obj.html();
+		setEditorHtml(newHtml);
+	});
+	
+	$(document).on('click','#flat-add-shadow',function(){
+		var html = getEditorHtml();
+		var obj = $('<div>'+html+'</div>');
+		
+		obj.find('*').each(function(){			
+					if( $(this).css('background-color') == 'transparent' ||  $(this).css('background-color') == '' ){
+					}
+					else{
+						$(this).css('box-shadow','rgba(205, 205, 205,0.9) 2px 3px 2px');
+					}
+		});
+		obj.find('hr').each(function(){
+			$(this).css('box-shadow','rgba(205, 205, 205,0.9) 1px 1px 2px');
+		})
+		var newHtml = obj.html();
+		setEditorHtml(newHtml);
+	});	
+	
+	
+	$(document).on('click','#set-image-radius',function(){
+		var html = getDealingHtml();	
+		var obj = $('<div>'+html+'</div>');
+		obj.find('img').css('border-radius','50%');
+		setDealingHtml(obj.html())
+		obj = null;
+	});
+	$(document).on('click','#set-image-border',function(){
+		var html = getDealingHtml();	
+		var obj = $('<div>'+html+'</div>');
+		obj.find('img').css({"background-color":"#fff","border-radius":"4px","max-width":"100%","padding":"4px","border":"1px solid #ddd"});
+		setDealingHtml(obj.html())
+		obj = null;
+	})
+	
+	$(document).on('click','#flat-add-radius',function(){
+		var html = getDealingHtml();	
+		var obj = $('<div>'+html+'</div>');
+		obj.find('*').each(function(){
+			if( $(this).css('background-color') != 'transparent' &&  $(this).css('background-color') != '' ){
+				$(this).css('border-radius','4px');
+			}			
+		});
+		setDealingHtml(obj.html())
+		obj = null;
+	});
+	
+	$(document).on('click','#flat-strip-radius',function(){
+		var html = getDealingHtml();	
+		var obj = $('<div>'+html+'</div>');
+		obj.find('*').css('border-radius','');
+		setDealingHtml(obj.html())
+		obj = null;
+	});
+	
+	$(document).on('click','#flat-add-border',function(){
+		var html = getDealingHtml();	
+		var obj = $('<div>'+html+'</div>');
+		obj.find('*').each(function(){
+			if( $(this).css('background-color') != 'transparent' &&  $(this).css('background-color') != '' ){
+				$(this).css('border','1px solid #efefef');
+			}			
+		});
+		//obj.find('.135editor').css('border','1px solid #efefef');
+		setDealingHtml(obj.html())
+		obj = null;
+	});
+	$(document).on('click','#flat-strip-border',function(){
+		var html = getDealingHtml();	
+		var obj = $('<div>'+html+'</div>');
+		
+		obj.find('*').each(function(){
+			//if( $(this).css('background-color') == 'transparent' ||  $(this).css('background-color') == ''  ){
+			//}
+			//else{
+				$(this).css('border','');
+				$(this).css('border-width','0');
+			//}
+		});
+		
+		setDealingHtml(obj.html())
+		obj = null;
+	})
+
+	$(document).on('click','#insert-style-list .ui-portlet-list > li',function(){
+		//data-135editor=\"true\"
+		//多插入一个空行，防止有时无法选择到底部了，或者两个元素中间不方便插入内容。
+		
+		if($(this).hasClass('ignore')){
+			return false;
+		}
+		
+		var ret = false;
+		var num = parseInt($(this).find('.autonum:first').text());
+		
+		if(typeof num != "undefined") {
+			$(this).find('.autonum:first').find('.autonum:first').text(num+1);
+		}
+		var style_item = $(this).find('.135editor:first');
+		
+		if(style_item.size()){
+			// insertHtml( $(this).html() + "<p>&nbsp;</p>"); 包含收藏夹的删除按钮等 
+			ret = insertHtml("<section class=\"135editor\">" + style_item.html() + "</section><p><br/></p>"); 
+		}
+		else{ //最外围包装135editor容器
+			ret = insertHtml("<section class=\"135editor\">" + $(this).html() + "</section><p><br/></p>"); 
+		}
+		
+		if(ret){			
+			if(typeof num != "undefined") {
+				$(this).find('.autonum:first').text(num+1);
+			}
+			style_click($(this).data('id'));
+		}
+		
+	});
+
+	$('.color-swatch').click(function(){
+		$('.color-swatch').removeClass('active');
+		$(this).addClass('active');
+		var color = $(this).data('color'); //data-color为前景色，bgcolor为背景色，或者无背景文字的前景色
+		var bgcolor = $(this).css('backgroundColor');
+		if(!color)  color = '#FFF';
+		setBackgroundColor(bgcolor,color, true);
+		if( ! current_active_135item ) {
+			$('.editor-template-list li > .135editor').each(function(){
+				parseObject($(this),bgcolor,color);
+			})
+		}
+	});
+	
+	$(document).on('click','#135-random-color',function(){
+		var html = getDealingHtml();	
+		var obj = $('<div>'+html+'</div>');
+		var bgcolors = ['#5BB75B','#2E8BCC','#F09609','#E51400','#7B4F9D','#E671B8','#008641','#20608E','#FFC40D'];
+		
+		var rd = Math.floor(Math.random() * ( bgcolors.length));
+		var used = [];
+		var current_bgcolor = bgcolors[rd];
+		var components = obj.find('.135editor').each(function(i){
+			if(i%random_color_step == 0){
+				do
+				{
+					rd = Math.floor(Math.random() * ( bgcolors.length));
+				}
+				while(jQuery.inArray(rd,used) != -1);
+				
+				used[used.length] = rd;
+				if( used.length == bgcolors.length ){
+					used = [];
+				}				
+				
+				current_bgcolor = bgcolors[rd];
+			}
+			$(this).html(parseHtml($(this).html(),current_bgcolor,current_select_color));
+		});
+		
+		setDealingHtml(obj.html())
+		obj = null;
+	});
+	
+	$('#tab-tpl-trigger').click(function(){
+		if($('#editor-tpls-list').html()==""){
+			$('#editor-tpls-list').html('正在加载').load('/editor_styles/myTemplates?suffix=-1 #tpl-tab-content',function(){
+				$('#editor-tpls-list').find('.col-md-3').removeClass('col-md-3').addClass('col-md-6');
+				/*if( $('#favorite-tpl-list-1').find('.editor-style-content').size() ==0 ){
+					$('#favorite-tpl-list-li').remove();
+				}
+				if( $('#personal-tpl-list-1').find('.editor-style-content').size() ==0 ){
+					$('#personal-tpl-list-li').remove();
+				}*/
+				$('#editor-tpls-navtab a:first').tab('show');				
+			})
+		}		
+	})
+	
+	$('#clear-editor').click(function(){
+		if(confirm('是否确认清空内容，清空后内容将无法恢复')){
+			setEditorHtml("");
+		}		
+	});
+	
+	$('#load-template-modal').click(function(){		
+		if( window.localStorage){ // 是否打开选择模板的弹窗			
+			if(this.checked){
+				window.localStorage.loadFeeds = "true";
+			}
+			else{
+				window.localStorage.loadFeeds = "false";
+			}
+		}
+	})
+	
+	if(typeof localStorage.loadFeeds == "undefined" ||  window.localStorage && window.localStorage.loadFeeds == "true")
+	{
+		openFeedsModal();
+	}
+	else{
+		$('#load-template-modal').attr('checked',false);
+	}
+	
+	
+	$(document).on('click','#tpl-tab-content .editor-style-content',function(){ //选中模板后设置编辑器的内容		
+		setEditorHtml($(this).html());
+	
+		var id = parseInt($(this).data('id'));
+		if(id > 0){
+			$('#template_id').val( id );
+			$('#auto_cover_tpl').removeClass('hidden');
+		}
+		else{
+			$('#template_id').val('');
+			$('#auto_cover_tpl').addClass('hidden');
+		}
+		
+		$('#template_name').val($(this).data('name'));
+		$('#dialog-template-name').val($(this).data('name'));
+		$('#feedsModal').modal('hide');
+	});
+	
+	$(document).on('click','#tpl-tab-content .template-cover',function(){ //选中模板后设置编辑器的内容	
+		var tid = $(this).data('id');
+		var obj = $('#template-'+tid);
+		
+		setEditorHtml(obj.html());
+		
+		var id = parseInt(obj.data('id'));
+		
+		if(id > 0){
+			$('#template_id').val(id);
+			$('#auto_cover_tpl').removeClass('hidden');
+		}
+		else{
+			$('#template_id').val('');
+			$('#auto_cover_tpl').addClass('hidden');
+		}
+		
+		$('#template_name').val(obj.data('name'));
+		$('#dialog-template-name').val(obj.data('name'));
+		$('#feedsModal').modal('hide');
+	});
+	
+	/*
+	$('#save-as-template').click(function(){
+		saveTemplate(this.form);
+	});
+	
+	$('#html-to-image').click(function(){
+		this.form.action = '/downloads/htmlToImage';
+		this.form.submit();
+	});*/
+	var client = new ZeroClipboard( $('#copy-editor-html') );
+	client.on( 'ready', function(event) {
+		client.on( 'copy', function(event) {
+	  		event.clipboardData.setData('text/html', getEditorHtml());
+	  		event.clipboardData.setData('text/plain', getEditorHtml());
+	  		showSuccessMessage("已成功复制到剪切板");
+		});
+	});
+	
+	if($.cookie('bgimg')) {
+		$('#bg-img').attr('src',$.cookie('bgimg'));
+	}
+
+	$('#bg-choose .chooser').click(function(){
+		$('#bg-img').attr('src',$(this).data('url'));
+		$.cookie('bgimg',$(this).data('url'));
+	});
+	
+	$('#bg-choose .default').click(function(){
+		$('#bg-img').removeAttr('src',"");
+		$.cookie('bgimg',null);
+	});
+	
+	// client.on( 'error', function(event) {
+	// 	ZeroClipboard.destroy();
+	// } );
+});
+
+</script>
+<div id="bg-choose" title="点击更换编辑器背景图" data-toggle="tooltip" data-placement="right" data-container="body" style="position:fixed;bottom:28px;left:0px;z-index:10;height:auto;width:30px;border:0;padding:0;background:rgba(58,51,50,0.5);">
+	
+	<div class="default" style="background:#c9b3a5;"></div>
+	<div class="chooser" style="background:#584446;" data-url="http://img.wx135.com/135editor/tpl/bg.jpg"></div>
+	<div class="chooser" style="background:#ba907b;" data-url="http://img.wx135.com/135editor/bg1.jpg"></div>
+	<div class="chooser" style="background:#fcdebd;" data-url="http://img.wx135.com/135editor/bg2.jpg"></div>
+	<div class="chooser" style="background:#b0bbb7;" data-url="http://img.wx135.com/135editor/bg3.jpg"></div>
+</div>
+
+<img id="bg-img" style="position:fixed;top:0px;left:0px;z-index:-2;height:auto;width:100%;border:0;">
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>商品规格管理</title>
+		<link rel="stylesheet" type="text/css" href="js/ios-switch/switchery.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" href="js/control/css/zyUpload.css" type="text/css">
+		<link href="js/iCheck/skins/flat/green.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body style="background: #EFF0F4;">
+		<section>
+			<div>
+				<section class="panel">
+					<div class="panel-body">
+						<div class="page-heading">
+							<h3>商品规格</h3>
+							<ul class="breadcrumb">
+								<li>
+									<a href="#">商品管理</a>
+								</li>
+								<li class="active">商品规格</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section class="wrapper">
+					<section class="panel">
+						<div class="panel-body">
+							<div id="goodMessage">
+
+							</div>
+
+							<div id="Specifications">
+
+							</div>
+							
+							<div class="row" style="height: 28px;"></div>
+							<div class="row" style="height: 14px;width: 100%;border-top:solid #000 1px;margin:0 auto;"></div>
+							<div class="row" style="height: 28px;"></div>
+							
+							<div class="row">
+								<div class="col-lg-1" style="text-align: right;">
+									<div style="margin-top: 7px;">商品规格</div>
+								</div>
+								<div class="col-lg-2">
+									<input id="specificationsName" type="text" class="form-control formData">
+								</div>
+								<div class="col-lg-1">
+									<span style="color:red">*</span>
+								</div>
+
+								<div class="col-lg-1">
+									<select class="form-control m-bot15 formData" id="unit" onchange="changeUnit(this.value)"></select>
+								</div>
+								<div id="UnitInit" style="display: none;" flag='0'>
+									<div class="col-lg-1" style="text-align: center;">
+										<div style="margin-top: 7px;">/</div>
+									</div>
+									<div class="col-lg-1">
+										<input id="UnitEnty" onchange="this.value=this.value.replace(/[^123456789xX]/g, '')" onkeypress="this.value=this.value.replace(/[^123456789xX]/g, '')" maxlength="18" class="form-control formData" value="1">
+									</div>
+									<div class="col-lg-1" style="text-align: center;">
+										<div style="margin-top: 7px;">公斤</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" style="height: 14px;"></div>
+							<div class="row">
+								<div class="col-lg-1" style="text-align: right;">
+									<div style="margin-top: 7px;">规格库存</div>
+								</div>
+								<div class="col-lg-2">
+									<input id="StockQuantity" type="number" id="num" min="0" class="form-control formData">
+								</div>
+								<div class="col-lg-1">
+									<span style="color:red">*</span>
+								</div>
+							</div>
+							<div class="row" style="height: 14px;"></div>
+							<div class="row">
+								<div class="col-lg-1" style="text-align: right;">
+									<div style="margin-top: 7px;">规格价格</div>
+								</div>
+								<div class="col-lg-2">
+									<input id="Price" type="number" class="form-control formData">
+								</div>
+								<div class="col-lg-1">
+									<span style="color:red">*</span>
+								</div>
+							</div>
+							<div class="row" style="height: 14px;"></div>
+							
+							<div class="row">
+								<!--结算价格-->
+								<div class="col-lg-1" style="text-align: right;">
+									<div style="margin-top: 7px;">结算价格</div>
+								</div>
+								<div class="col-lg-2">
+									<input type="number" class="form-control formData" id="StateMent" name="StateMent">
+								</div>
+								<div class="col-lg-1"><span style="color: red;">*</span></div>
+							</div>
+							<div class="row" style="height: 14px;"></div>
+							<div class="row">
+								<div class="col-lg-1" style="text-align: right;">
+									<span>使用积分</span>
+								</div>
+								<div class="col-lg-1">
+									<input type="checkbox" id="isusepoint" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-1" style="text-align: right;">
+									<div style="margin-top: 14px;">规格图片</div>
+								</div>
+								<div class="col-lg-3">
+									<div id="zyUpload" class="zyUpload" url="1"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-1" style="text-align: right;">
+									<div style="margin-top: 7px;">添加规格</div>
+								</div>
+								<div class="col-lg-6" style="text-align: left;">
+									<button class="btn btn-primary" onclick="formCheck()">保存</button>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="height: 14px;"></div>
+					</section>
+				</section>
+			</div>
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+		<!-- 引用核心层插件 -->
+		<script type="text/javascript" src="js/core/zyFile.js"></script>
+		<!-- 引用控制层插件 -->
+		<script type="text/javascript" src="js/control/js/zyUpload.js"></script>
+		<!-- 引用初始化JS -->
+		<script type="text/javascript" src="js/zyUpload.js"></script>
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/ios-switch/switchery.js"></script>
+		<script src="js/ios-switch/ios-init.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/laytpl.js"></script>
+		<script src="script/goodsSpecifications.js"></script>
+		<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
+		<script src="js/select2.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('select').select2();
+				setIframeHeight();
+			});
+		</script>
+	</body>
+
+	<script id="goodMessageTpl" type="text/html">
+		<div class="row">
+			<div class="col-lg-1" style="text-align: right;margin-top: 7px;">
+				<span>商品编号</span>
+			</div>
+			<div class="col-lg-2">
+				<!--<span>{{d.Code}}</span>-->
+				<input type="text" readonly="readonly" class="form-control formData" name="" id="" value={{d.Code}} />
+			</div>
+			<div class="col-lg-1" style="text-align: right;margin-top: 7px;">
+				<span>商品名称</span>
+			</div>
+			<div class="col-lg-2">
+				<input type="text" readonly="readonly" class="form-control formData" name="" id="" value={{d.ProductName||"匿名商品"}} />
+				<!--<span>{{d.ProductName||"匿名商品"}}</span>-->
+			</div>
+		</div>
+	</script>
+	<script id="goodMessageTpl" type="text/html">
+		<div class="row">
+			<div class="col-lg-1" style="text-align: right;">
+				<span>商品编号</span>
+			</div>
+			<div class="col-lg-4">
+				<span>{{d.Code}}</span>
+			</div>
+			<div class="col-lg-1" style="text-align: right;">
+				<span>商品名称</span>
+			</div>
+			<div class="col-lg-3">
+				<span>{{d.ProductName||"匿名商品"}}</span>
+			</div>
+		</div>
+	</script>
+	<script id="goodsSpecificationsTpl" type="text/html">
+		<div class="deletebox">
+			<div class="row" style="height: 14px;"></div>
+			<div class="row">
+				<div class="col-lg-1" style="text-align: right;"></div>
+				<div class="col-lg-1" style="text-align: right;">
+					<span>商品规格</span>
+				</div>
+				<div class="col-lg-1">
+					<!--<input type="hidden" value="" />-->
+					<span>{{d.Specifications||"匿名规格"}}</span>{{d.MeasureName}}
+				</div>
+			</div>
+			<!--<div class="row" style="height: 14px;"></div>-->
+			<div class="row">
+				<div class="col-lg-1" style="text-align: right;"></div>
+				<div class="col-lg-1" style="text-align: right;">
+					<span>规格库存</span>
+				</div>
+				<div class="col-lg-3">
+					<span>{{d.StockQuantity||0}}</span>
+				</div>
+			</div>
+			<!--<div class="row" style="height: 7px;"></div>-->
+			<div class="row">
+				<div class="col-lg-1" style="text-align: right;"></div>
+				<div class="col-lg-1" style="text-align: right;">
+					<span>规格价格</span>
+				</div>
+				<div class="col-lg-3">
+					<span>{{d.Price||0.00}}</span>元
+				</div>
+			</div>
+			
+			<!--结算价格-->
+			<div class="row">
+				<div class="col-lg-1" style="text-align: right;"></div>
+				<div class="col-lg-1" style="text-align: right;">
+					<span>结算价格</span>
+				</div>
+				<div class="col-lg-3">
+					<span>{{d.StateMent||0.00}}</span>元
+				</div>
+				<div class="col-lg-1" style="text-align: right;">
+					<button class="btn btn-primary" onclick="window.location.href='goodsSpecificationsEditor.html?id={{d.Id}}'">编辑</button>
+				</div>
+				<div class="col-lg-1" style="text-align: right;">
+					<button class="btn btn-primary" onclick="Delete({{d.Id}})">删除</button>
+				</div>
+			</div>
+			
+			
+			<div class="row" style="height: 14px;"></div>
+			<div class="row">
+				<div class="col-lg-1" style="text-align: right;"></div>
+				<div class="col-lg-1" style="text-align: right;">
+					<span>规格图片</span>
+				</div>
+				{{# for(var i = 0, len = d.img.length; i
+				< len; i++){ }} <div class="col-lg-2">
+					<img style="width: 150px;height:150px;" src="{{seturl + d.img[i]}}" />
+			</div>
+			{{# } }}
+		</div>
+		</div>
+	</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!--pages/keep/keep.wxml-->
+<view class='box'>
+    <view class='tabs'>
+        <view class="tab-item  {{value == 1?'active':'default'}}" bindtap='keyword' data-value="1">我收到的</view>
+        <view class="tab-item  {{value == 2?'active':'default'}}" bindtap='keyword' data-value="2">我发出的</view>
+    </view>
+    <view class='content'>
+         <view class='avatarUrl'> 
+            <image src="{{userInfo.avatarUrl}}" mode='widthFix'></image> 
+         </view>
+         <view class='avatarUrl'> 
+            <view class='nickName'>{{userInfo.nickName}}
+                <text wx:if="{{value == 1}}"> 收到</text>
+                <text wx:if="{{value == 2}}"> 发出</text>
+               （元）
+            </view> 
+         </view>
+         <view class='give'>{{total_money}}</view>
+         <view class='num'>数量<text>{{total_count}}</text>个</view>
+    </view>
+    <!--收到  -->
+    <view class='keepList' wx:if="{{value == 1}}">
+        <view class='itemkeep' wx:for="{{receive_list}}" bindtap='inform' data-index='{{index}}' data-red_id='{{item.red_id}}'>
+            <view class='sum item'>
+                <view class='left'>{{item.content}}</view>
+                <view class='right'>￥{{item.money}}</view>
+            </view> 
+            <view class='time item'>
+                <view class='left'>{{item.receive_time}}</view>
+                <view class='right'>{{item.receive_count}}/{{item.total_count}}</view>
+            </view>
+        </view>
+    </view>
+    <!--发出  -->
+    <view class='keepList' wx:if="{{value == 2}}">
+        <view class='itemkeep' wx:for="{{send_list}}" bindtap='inform' data-index='{{index}}' data-red_id='{{item.red_id}}'>
+            <view class='sum item'>
+                <view class='left'>{{item.content}}</view>
+                <view class='right'>￥{{item.total_money}}</view>
+            </view> 
+            <view class='time item'>
+                <view class='left'>{{item.add_time}}</view>
+                <view class='right'>{{item.receive_count}}/{{item.total_count}}</view>
+            </view>
+        </view>
+    </view>
+</view>

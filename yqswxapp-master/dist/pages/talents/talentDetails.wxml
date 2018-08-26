@@ -1,0 +1,192 @@
+<!--pages/talents/talentDetails.wxml-->
+<import src="../../templates/comment-item/comment-item.wxml"/>
+<import src="../../templates/scorestart/scorestart.wxml"/>
+
+<!-- body -->
+<view class='detailsBody' wx:if='{{ tatDetl != null }}'>
+
+<!-- 头部图片 -->
+<view class='head-title'>
+  <image class='title-bgimg' mode='aspectFill' src='../../images/1.jpg'></image> 
+  <view class='title-boder-view'>
+    <view class='title-boder'>
+      <text >{{ tatDetl.perDesc }}</text>
+      <text style='display:block;'>{{ tatDetl.perTimer }}</text>
+    </view>
+  </view>
+</view>  
+
+<!-- 名字等 -->
+<view class='talent-info weui-flex'>
+  <view>
+    <image class='avatar' mode='aspectFill' src='{{ tatDetl.avatar }}'></image>
+  </view>
+  <view class='info-text weui-flex__item'>
+    <view style='margin-top: 10rpx;'>
+     <text class='fs30'>{{ tatDetl.name }}</text>
+     <text style='margin-left:30rpx;'>{{ tatDetl.occupation }}</text>
+    </view>
+    <view class='lit-text' style='margin-top: 10rpx;'>{{ tatDetl.experience }}</view>
+    <view class='lit-text'>{{ tatDetl.transaction }}</view>
+    <view class='lit-text'>
+      <text>综合评分：{{ tatDetl.scoreNum }}分</text>
+      
+      <!-- <template is="scorestart" data="{{ score }}"/> -->
+      <!-- <view class='header-start-icon'>
+        <block wx:for="{{ tatDetl.score }}" wx:key="{{ index }}">
+        <image src='{{ item == "red" ? "../../images/start-red.png" : "../../images/start.png" }}'></image> 
+        </block>
+      </view> -->
+
+    </view>
+  </view>
+  <view class='comparison-view'>
+    <view class='comparison' bindtap='goTalentComparisonPage'>对比</view>
+  </view>
+  
+</view>
+
+<!-- 选择 使用时间 -->
+<view class='talent-time' hidden='{{ prePageType == "home" }}'>
+  <view class='img-title-arrow-cell' bindtap='bindSelectTalentTimeTap'>
+    <image class='left-icon' src='../../images/tal-time.png'></image>
+    <text class='left-text'>选择使用时间</text>
+    <image class='right-icon' src='../../images/arrow-right.png'></image>
+    <text class='right-text'>{{ selectTimes.startTime ? selectTimes.startTime + '-' : '' }}{{ selectTimes.endTime }}</text>
+  </view>
+  <view class='talent-time-content'>
+    <view>档期已被占用时间</view>
+    <view class='talent-time-item' wx:if='{{ tatDetl.reservedList.length > 0 }}' >
+      <block wx:for='{{ tatDetl.reservedList }}' wx:key='*this'>
+      <text>{{ item }}</text>
+      </block>
+    </view>
+    <view style='color: #999999;' wx:if='{{ tatDetl.reservedList.length <= 0 }}'>无</view>
+    <view class='talent-time-icon'>
+      <image src='../../images/round.png'></image>
+      <text>请选择未被占用的时间</text>
+    </view>
+  </view>
+</view>
+
+<!-- 个人简介 -->
+<view class='talent-desc'>
+  <view class='img-text-title'>
+    <image class='icon' src='../../images/talent-desc.png'></image>
+    <text>个人简介</text>
+  </view>
+  <view class='desc-rich-view'>
+    <!-- <rich-text nodes="{{ introduce }}"></rich-text> -->
+    <text>{{ tatDetl.introduce }}</text>
+  </view> 
+</view>
+
+<!-- 个人作品 -->
+<view class='talent-works' wx:if='{{ tatDetl.mypics.length > 0 || tatDetl.myvideos.length > 0 }}'>
+  <view class='img-text-title'>
+    <image class='icon' src='../../images/talent-works.png'></image>  
+    <text>个人作品</text>
+  </view> 
+
+  <view class='works' bindtap='goMorePicPage' wx:if='{{ tatDetl.mypics.length > 0 }}'>
+    <view class='works-title'>
+      <view class="weui-cell__ft weui-cell__ft_in-access " >
+        <text style='float:left;color:black;margin-left:15rpx;'>我的图片</text>
+        <text class='fs24'>查看更多</text>
+      </view>
+    </view>
+    <view class='works-img' style='border-bottom: 1px #f1f1f1 solid;'>
+      <block wx:for="{{ tatDetl.mypics }}" wx:key="*this">
+      <image class='image' mode='aspectFill' src='{{ item.src }}'></image>
+      </block>
+    </view>
+  </view>
+  
+  <view class='works' bindtap='goMoreVideoPage' wx:if='{{ tatDetl.myvideos.length > 0 }}'>
+    <view class='works-title'>
+      <view class="weui-cell__ft weui-cell__ft_in-access " >
+        <text style='float:left;color:black;margin-left:15rpx;'>我的视频</text>
+        <text class='fs24'>查看更多</text>
+      </view>
+    </view>
+    <view class='works-img'>
+      <block wx:for="{{ tatDetl.myvideos }}" wx:key="*this">
+      <image class='image' mode='aspectFill' src='{{ item.imgsrc }}'>
+        <image class='show-video-icon' src='../../images/video-icon.png'></image>
+      </image>
+      </block>
+    </view>
+  </view>
+
+</view>
+
+<!-- 评论 -->
+<view class='comment-view' wx:if='{{ comments.length > 0 }}'>
+  <view class='img-text-title'>
+    <image class='icon' src='../../images/comment-red.png'></image>  
+    <text>评论</text>
+    <!-- <image class='edit-img' src='../../images/edit.png' bindtap='goCommentPage'></image> -->
+  </view> 
+
+  <!-- <view wx:if='{{ comments.length == 0 }}' class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无评论</view> -->
+
+  <template is="comment-item" data="{{ comments }}"/>
+
+  <!-- 查看更多 -->
+  <view class='pack-up' wx:if='{{ comments.length >= 3 }}' bindtap="bindMoreCommentTap">{{ showAllcomment ? "收起全部评论" : "查看全部评论" }}<image src='{{ showAllcomment ? "../../images/pack-up.png" : "../../images/pack-down.png" }}'></image>
+  </view>
+
+  <view class='empty-view'></view>
+  <view class='empty-view'></view>
+
+</view> 
+
+<!-- body -->
+</view>
+
+<!-- foot预约 电话联系 -->
+<view class='weui-footer weui-footer_fixed-bottom appointment' wx:if='{{ tatDetl != null }}' hidden='{{ tatDetl.phonecall == null }}'>
+  <view class='phonecall' bindtap='bindPhoneCallTap'>
+    <image src='../../images/phone.png'></image>
+    <text>电话联系</text>
+  </view>
+  <view class='{{ tatDetl.freeStatus ? "appointment-btn" : "notAppointment-btn" }}' bindtap='bindApptmentTap' hidden='{{ prePageType == "home" }}'>{{ tatDetl.freeStatus ? "立即预约" : "已被预约" }}</view>
+</view>
+
+<!-- 选择 使用时间 弹窗 -->
+<view class='select-time-picker-bgview' hidden='{{ selectTimes.selectTimePickerHidden }}'>
+  <view class='select-time-view'>
+    <view class='weui-flex title-view'>
+      <view class='weui-flex__item' style='text-align:left;' bindtap='bindSelectTimeCancelTap'>取消</view>
+      <view class='weui-flex__item'>{{ selectTimes.reservedDate }}</view>
+      <view class='weui-flex__item' style='text-align:right;' bindtap='bindSelectTimeConfirmTap'>确定</view>
+    </view>
+
+    <!-- 选择器 -->
+    <view class='time-picker-bgview'>
+      <picker-view indicator-class="time-picker-column-view"  value="{{ selectTimeValue }}" bindchange="bindTimePickerChange">
+        <!-- 开始时间 -->
+        <picker-view-column>
+          <view>开始</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{ selectTimes.startHour }}" wx:key='*this'>{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{ selectTimes.startMint }}" wx:key='*this'>{{ item }}</view>
+        </picker-view-column>
+        <!-- 结束时间 -->
+        <picker-view-column>
+          <view>结束</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{ selectTimes.endHour }}" wx:key='*this'>{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{ selectTimes.endMint }}" wx:key='*this'>{{ item }}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,44 @@
+<view class='fix-top'>
+  <view class='panel-between item-center' style='background:#444444;padding:0 30rpx 20rpx 30rpx'>
+    <view>
+      <picker value='{{iconFlag}}' range='{{iconArray}}' bindchange='iconChange'>
+        <view class='panel-start item-center'>
+          <image src='/img/fl.png' style='width:35rpx;height:35rpx'></image>
+          <view class='color-white' style='font-size:32rpx;margin-left:20rpx'>{{iconArray[iconFlag]}}</view>
+        </view>
+      </picker>
+    </view>
+    <view class='search panel-start item-center'>
+      <image src='/img/search.png' style='width:40rpx;height:40rpx;margin-left:30rpx'></image>
+      <input style='width:400rpx;margin-left:30rpx' placeholder='输入关键字搜索'></input>
+    </view>
+  </view>
+</view>
+<view style='height:90rpx'></view>
+
+<!-- 列表  -->
+<view style='padding:30rpx' >
+  <view class='jdlist' wx:for="{{list[iconFlag]}}" bindtap='navToShop'>
+    <view class='jdbg' style='background-image:url({{item.image}});background-size:cover; background-position: center;'></view>
+    <view class='jbpanel panel-between item-center'>
+      <view style='width:450rpx;'>
+        <view class='ell-1' style='font-size:32rpx'>{{item.title}}</view>
+        <view style='font-size:22rpx;color:#888888'>{{item.subTitle}}</view>
+      </view>
+      <view class='panel-end item-center'>
+        <image src='{{iconList[iconFlag].image}}' style='width:60rpx;height:60rpx;margin-right:10rpx'></image>
+        <view wx:if="{{item.price != 0}}"><text style='font-size:24rpx;color:#CC3333'>￥</text> <text style='font-size:34rpx;font-weight:bold;color:#CC3333'>{{item.price}}</text> <text style='font-size:20rpx;color:#888888'>起</text></view>
+        
+      </view>
+      
+    </view>
+  </view>
+</view>
+
+
+
+<view class='panel-center item-center' style='padding:30rpx;padding-top:0'>
+  <image src='/img/l1.png' style='width:200rpx;height:20rpx'></image>
+  <view style='margin:0 30rpx;color:#888888'>没有更多了</view>
+  <image src='/img/l2.png' style='width:200rpx;height:20rpx'></image>
+</view>

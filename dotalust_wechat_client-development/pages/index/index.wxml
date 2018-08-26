@@ -1,0 +1,76 @@
+<import src="../../components/refresher/refresher.wxml"/>
+
+<view class="person" style="position: absolute; height: 100%; {{ $wux.refresher.style }}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+  <template is="refresher" data="{{ ...$wux.refresher }}"/>
+
+  <image src="../../assets/images/shadow_demon.png" class="logo"></image>
+  <view class="container">
+     <view class="person__summary">
+      <image src="{{avatars.medium}}" class="person__summary__avatar"></image>
+      <text class="person__summary__title">近20场战绩</text>
+
+      <view class="person__summary__container">
+        <view class="winning-percentage-and-kda">
+          <view class="winning-percentage item">
+            <text class="value">{{summary.winningPercentage}}%</text>
+            <text class="title">天梯胜率</text>
+          </view>
+
+          <view class="kda item">
+            <text class="value">{{summary.kdaAvg}}</text>
+            <text class="title">KDA</text>
+          </view>
+        </view>
+
+        <view class="others">
+          <view class="item">
+            <text class="value">{{summary.killsCountAvg}}</text>
+            <text class="title">场均击杀</text>
+          </view>
+
+          <view class="item">
+            <text class="value">{{summary.deathsCountAvg}}</text>
+            <text class="title">场均死亡</text>
+          </view>
+
+          <view class="item">
+            <text class="value">{{summary.assistsCountAvg}}</text>
+            <text class="title">场均助攻</text>
+          </view>
+
+          <view class="item">
+            <text class="value">{{summary.goldPerMinuteAvg}}</text>
+            <text class="title">场均GPM</text>
+          </view>
+
+          <view class="item">
+            <text class="value">{{summary.heroHealingAvg}}</text>
+            <text class="title">场均治疗</text>
+          </view>
+
+          <view class="item">
+            <text class="value">{{summary.heroDamageAvg}}</text>
+            <text class="title">场均伤害</text>
+          </view>
+
+          <view class="item">
+            <text class="value">{{summary.lastHitsCountAvg}}</text>
+            <text class="title">场均补刀</text>
+          </view>
+
+          <view class="item">
+            <text class="value">{{summary.experiencePerMinuteAvg}}</text>
+            <text class="title">场均XPM</text>
+          </view>
+        </view>
+      </view>
+
+      <button class="share-personal-summary">转发到微信群, 与好友PK</button>
+
+      <navigator url="/pages/steam_account/index" hover-class="none">
+        <text class="switch-steam-account">切换Steam帐号</text>
+      </navigator>
+    </view>  
+  </view>
+
+</view>

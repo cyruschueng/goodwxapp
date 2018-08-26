@@ -1,0 +1,264 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>VBPANO数据管理平台——数据统计</title>
+		<link rel="stylesheet" href="../styles/common.css">
+		<style>
+			html,body {
+				margin: 0;
+			}
+			body {
+				padding: 0 20px;
+			}
+			.btn-export {
+				position: absolute;
+				left: 820px;
+				top: 72px;
+			}
+			.doughnut2d-container {
+				width: 360px;
+				height: 270px;
+				border:  1px solid #e2e6ec;
+				border-radius: 4px;
+			}
+			.column2d-container {
+				width: 510px;
+				height: 270px;
+				border: 1px solid #e2e6ec;
+				border-radius: 4px;
+
+			}
+			#province-chart-container {
+				position: absolute;
+				left: 20px;
+				top: 120px;
+			}
+			#panoNo-chart-container {
+				position: absolute;
+				left: 20px;
+				top: 416px;
+			}
+			#type-chart-container {
+				position: absolute;
+				top: 120px;
+				left: 400px;
+			}
+			#typePano-chart-container {
+				position: absolute;
+				top: 416px;
+				left: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="descrip">数据概括</div>
+		</div>
+		<button type="button" class="btn btn-success btn-export">导出数据</button>
+		<div class="doughnut2d-container" id="province-chart-container">
+		</div>
+		<div class="column2d-container" id="type-chart-container">
+		</div>
+		<div class="doughnut2d-container" id="panoNo-chart-container"></div>
+		<div class="column2d-container" id="typePano-chart-container">
+		</div>
+		<script type="text/javascript" src="../scripts/lib/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="../scripts/lib/fusioncharts.js"></script>
+		<script src="../scripts/lib/fusioncharts.theme.fint.js?cacheBust=56"></script>
+		<script type="text/javascript" src="../scripts/lib/fusioncharts-jquery-plugin.js"></script>
+		<script>
+			FusionCharts.ready(function () {
+    var chart1 = new FusionCharts({
+        type: 'doughnut2d',
+        renderAt: 'province-chart-container',
+        width: '360',
+        height: '270',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": {
+                "caption": "全国省份项目数量统计",
+                // "subCaption": "Last year",
+                "paletteColors": "#79c8ff,#f97956,#b5a0df,#7cde99,#fec958",
+                "bgColor": "#f8f9fa",
+                "showBorder": "1",
+                "borderColor":"#e2e6ec",
+                "use3DLighting": "0",
+                "showShadow": "0",
+                "enableSmartLabels": "0",
+                "startingAngle": "310",
+                "showLabels": "0",
+                // "showPercentValues": "0",
+                "showValues": "0",
+                // "placevaluesInside": "1",
+                
+                "exportEnabled": "1",
+                "exportAtClientSide": "1",
+
+                "showLegend": "1",
+                "legendShadow": "0",
+                "legendBorderAlpha": "0",
+                "legendPosition": "right",
+                "legendIconScale": "1",
+                "legendBgColor": "#f8f9fa",
+                "legendCaptionFontSize": "12",
+                "legendItemFontColor": "#838d9b",
+
+                "enableMultiSlicing": "0",
+
+                // "defaultCenterLabel": "总项目数量: 1540",
+                // "centerLabel": "$label项目数量: $value",
+                "centerLabelBold": "1",
+                "showTooltip": "0",
+                "decimals": "0",
+                "captionFontSize": "14",
+                "subcaptionFontSize": "14",
+                "subcaptionFontBold": "0"
+            },
+            "data": [
+                {
+                    "label": "北京 35%",
+                    "value": "35%"
+                }, 
+                {
+                    "label": "上海 10%",
+                    "value": "10%"
+                }, 
+                {
+                    "label": "苏州 20%",
+                    "value": "20%"
+                }, 
+                {
+                    "label": "西藏 20%",
+                    "value": "20%"
+                },
+                {
+                	"label": "其它 15%",
+                	"value": "15%"
+                }
+            ]
+        }
+    }).render();
+	var chart2 = new FusionCharts({
+        type: 'doughnut2d',
+        renderAt: 'panoNo-chart-container',
+        width: '360',
+        height: '270',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": {
+                "caption": "全国省份项目数量统计",
+                "paletteColors": "#79c8ff,#f97956,#b5a0df,#7cde99,#fec958",
+                "bgColor": "#f8f9fa",
+                "showBorder": "1",
+                "borderColor":"#e2e6ec",
+                "startingAngle": "20",
+                "showPercentValues": "1",
+                "showPercentInTooltip": "0",
+                "enableSmartLabels": "0",
+                "enableMultiSlicing": "0",
+                "decimals": "1",
+                "pieRadius": "60",
+                //Theme
+                "theme": "fint"
+            },
+            "data": [
+                {
+                    "label": "北京",
+                    "value": "350"
+                }, 
+                {
+                    "label": "上海",
+                    "value": "100"
+                }, 
+                {
+                    "label": "苏州",
+                    "value": "200"
+                }, 
+                {
+                    "label": "西藏",
+                    "value": "200"
+                },
+                {
+                	"label": "其它",
+                	"value": "150",
+                	"isSliced": "1"
+                }
+            ]
+        }
+    }).render();
+	var chart3 = new FusionCharts({
+	    type: 'column2d',
+	    renderAt: 'type-chart-container',
+	    width: '510',
+	    height: '270',
+	    dataFormat: 'json',
+	    dataSource: {
+	        "chart": {
+	            "caption": "项目前五的类型",
+	            "paletteColors": "#5ac05e",
+	            "labelFontSize": "12",
+	            "labelFontColor": "#838d9b",
+	            "showBorder": "1",
+                "borderColor":"#e2e6ec",
+	            "theme": "fint"
+	        },
+
+	        "data": [{
+		            "label": "景区",
+		            "value": "3900"
+		        }, {
+		            "label": "酒店",
+		            "value": "2810"
+		        }, {
+		            "label": "博物馆",
+		            "value": "2000"
+		        }, {
+		            "label": "商家",
+		            "value": "1400"
+		        }, {
+		            "label": "其他",
+		            "value": "1700"
+		        }
+		    ]
+	   	}
+	}).render();
+	var chart4 = new FusionCharts({
+	    type: 'column2d',
+	    renderAt: 'typePano-chart-container',
+	    width: '510',
+	    height: '270',
+	    dataFormat: 'json',
+	    dataSource: {
+	        "chart": {
+	            "caption": "场景点前五的类型",
+	            "paletteColors": "#6bbef9",
+	            "labelFontSize": "12",
+	            "labelFontColor": "#838d9b",
+	            "showBorder": "1",
+                "borderColor":"#e2e6ec",
+	            "theme": "fint"
+	        },
+
+	        "data": [{
+		            "label": "商家",
+		            "value": "2800"
+		        }, {
+		            "label": "景区",
+		            "value": "2030"
+		        }, {
+		            "label": "酒店",
+		            "value": "1460"
+		        }, {
+		            "label": "博物馆",
+		            "value": "800"
+		        }, {
+		            "label": "其他",
+		            "value": "400"
+		        }
+		    ]
+	   	}
+	}).render();
+});
+		</script>
+	</body>
+</html>

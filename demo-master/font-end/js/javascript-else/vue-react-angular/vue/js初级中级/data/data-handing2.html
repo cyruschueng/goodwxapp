@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript">
+        //定义变量，保存选中的标签
+        var selectLi;
+        //定义变量，保存修改了的标签
+        var editedLi=false;
+        window.onload=function()
+        {
+            //新增li标签到末尾
+            document.getElementById("insertEnd").onclick = insertEndclick;
+            //新增li标签到指定位置
+            var liObj=document.getElementsByTagName("li");
+            for(var i=0;i<liObj.length;i++)
+            {
+                liObj[i].onclick = liChoose;
+            }
+            document.getElementById("insert").onclick = insertThere;
+            //删除指定标签
+            document.getElementById("delete").onclick = deleteli;
+            //修改指定标签内容
+            document.getElementById("edit").onclick = editLi;
+            //将选中的该标签变为文本框进行内容修改
+            document.getElementById("edit2").onclick = editLi2;
+            //将文本框中的内容保存
+            document.getElementById("save").onclick = saveLi;
+
+        }
+
+        //新增li标签到末尾
+        function insertEndclick()
+        {
+            var result = prompt("需要插入的li标签文本：", "小黑");
+            if (result)
+            {
+                var newli = document.createElement("li");
+                newli.innerHTML = result;
+                newli.onclick = liChoose;
+                document.getElementById("ulList").appendChild(newli);
+            }
+        }
+
+        //新增li标签到指定位置
+        function insertThere()
+        {
+            if (selectLi)
+            {
+                var result = prompt("需要插入的li标签文本：", "小黑");
+                if (result) {
+                    var newli = document.createElement("li");
+                    newli.innerHTML = result;
+                    //需要给新增的li标签设置点击事件
+                    newli.onclick = liChoose;
+                    document.getElementById("ulList").insertBefore(newli, selectLi);
+                }
+            }
+            else
+            {
+                alert("请先选择要插入的位置");
+            }
+        }
+
+        //高亮选中的标签
+        function liChoose()
+        {
+            var ul = document.getElementsByTagName("li")
+            for (var i = 0; i < ul.length; i++)
+            {
+                ul[i].style.backgroundColor = "white";
+            }
+            this.style.backgroundColor = "yellow";
+            selectLi = this;
+        }
+
+        //删除指定标签
+        function deleteli()
+        {
+            if (selectLi)
+            {
+                selectLi.parentElement.removeChild(selectLi);
+            }
+            else
+            {
+                alert("请先选中要删除的标签");
+            }
+        }
+
+        //修改指定标签
+        function editLi()
+        {
+            if(selectLi)
+            {
+                var result = prompt("输入修改内容", "大白");
+                if(result)
+                {
+                    selectLi.innerHTML = result;
+                }
+            }
+            else
+            {
+                alert("请选择要修改的标签");
+            }
+        }
+
+        //将选中的该标签变为文本框进行内容修改
+        function editLi2()
+        {
+            if(selectLi)
+            {
+                //创建一个文本框
+                var newli = document.createElement("input");
+                newli.type = "text";
+                //将文本框内容设置为li标签的文本值
+                newli.value = selectLi.innerHTML;
+                //将文本框添加到li标签内部
+                selectLi.removeChild(selectLi.childNodes[0]);
+                selectLi.appendChild(newli);
+                editedLi = true;
+            }
+        }
+
+        //将文本框中的内容保存
+        function saveLi()
+        {
+            if (editedLi)
+            {
+                var editValue = selectLi.childNodes[0].value;
+                selectLi.innerHTML = editValue;
+            }
+            else
+            {
+                alert("没有标签在编辑状态");
+            }
+        }
+        
+
+    </script>
+</head>
+<body>
+    <div>
+        <input type="button" id="insertEnd" value="新增到末尾" />
+        <input type="button" id="insert" value="新增到指定位置" />
+        <input type="button" id="delete" value="删除" />
+        <input type="button" id="edit" value="修改" />
+        <input type="button" id="edit2" value="将选中标签变为文本标签进行修改" />
+        <input type="button" id="save" value="保存" />
+    </div>
+    <ul id="ulList">
+        <li>小猫</li>
+        <li>小鱼</li>
+        <li>小狗</li>
+        <li>大象</li>
+        <li>树懒</li>
+    </ul>
+</body>
+</html>k

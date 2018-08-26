@@ -1,0 +1,59 @@
+<!--page/component/pages/movable-view/movable-view.wxml-->
+<view class="container">
+  <view class="page-body">
+
+<view class="page-section">
+  <view class="page-section-spacing center">
+    <movable-area style="height: 200px;width: 200px;background: red;">
+      <movable-view damping="{{damping}}" friction="{{friction}}" inertia="{{inertia}}" out-of-bounds="{{outOfBounds}}" x="{{pos.x}}" y="{{pos.y}}" style="height: 50px; width: 50px; background: blue;" direction="{{direction}}">
+      </movable-view>
+    </movable-area>
+  </view>
+  <view class="weui-btn-area">
+      <view class="weui-flex">
+        <view class="weui-flex__item center">
+          <button data-name="pos" data-value="{{target}}" bindtap="setNameValue" class="weui-btn mini-btn" size="mini">单击移至(30px, 30px)</button>
+        </view>
+      </view>
+    </view>
+</view>
+<view class="page-section" style="margin-top: 40rpx">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">使用惯性</view>
+      <view class="weui-cell__ft">
+        <switch data-name="inertia" checked="{{inertia}}" bindchange="onSwitchChange" />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">充许越界</view>
+      <view class="weui-cell__ft">
+        <switch data-name="outOfBounds" checked="{{outOfBounds}}" bindchange="onSwitchChange" />
+      </view>
+    </view>
+  </view>
+</view>
+<view class="page-section">
+  <view class="page-section-title">
+    <text>阻尼系数</text>
+    <text class="info">{{damping}}</text>
+  </view>
+  <slider data-name="damping" bindchange="onSliderChange" value="{{damping}}" show-value min="10" max="100" />
+  <view class="page-section-title">
+    <text>摩擦系数</text>
+    <text class="info">{{friction}}</text>
+  </view>
+  <slider data-name="friction" bindchange="onSliderChange" value="{{friction}}" show-value min="1" max="10" />
+  <view class="page-section-title">
+    <text>滑动方向</text>
+    <text class="info">{{direction}}</text>
+  </view>
+<radio-group data-name="direction" class="radio-group" bindchange="onRadioChange">
+  <label class="radio" wx:for="{{['all', 'vertical','horizontal','none']}}" wx:key="*this">
+    <radio value="{{item}}" checked="{{item == direction}}"/>{{item}}
+  </label>
+</radio-group>
+</view>
+
+  </view>
+</view>

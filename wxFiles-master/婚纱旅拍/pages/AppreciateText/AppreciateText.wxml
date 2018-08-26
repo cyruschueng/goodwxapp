@@ -1,0 +1,20 @@
+<!--pages/AppreciateText/AppreciateText.wxml-->
+<scroll-view class="container scrollBox" bindscroll="EventHandle" scroll-y="true" scroll-top="{{ScrollTop}}">
+
+
+<block wx:for="{{list}}">
+<view class="main" id="main" bindtap="show" id="{{index}}">
+<view class="ImgBox"><image mode="widthFix" src="{{item}}"></image></view>
+</view>
+<!--end main-->
+</block>
+
+
+<view class="BackTop {{BackFlag?'':'hidden'}}" bindtap="BackTop">
+<view style="padding-top:8rpx">∧</view>
+<view>顶部</view>
+</view>
+<!--end BackTop-->
+
+</scroll-view>
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>history</title>
+</head>
+
+<body>
+    <div>histroy</div>
+    <div onclick="history2()">tohistroy2</div>
+    <div onclick="toBack()">BACK</div>
+    <div>
+        <a href="www.baidu.com">baidu</a>
+    </div>
+    <script type="text/javascript">
+    function history2() {
+        var stateObj = { foo: "bar" };
+        history.replaceState(stateObj, "page 3", "history2.html");
+    }
+    function toBack(){
+    	window.history.back();
+    }
+    window.onpopstate = function(event) {
+        console.log("location: " + document.location + ", state: " + JSON.stringify(event.state))
+    }
+    </script>
+</body>
+
+</html>

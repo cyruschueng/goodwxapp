@@ -1,0 +1,27 @@
+<!--pages/user/notice/notice.wxml-->
+<view class="nav-btn-group">
+  <view class="btn-group">
+    <view class="flex-row">
+      <view class="{{notice=='comment'?'on':''}}" bindtap="bindChangeNotice">评论</view>
+      <view class="{{notice=='comment'?'':'on'}}" bindtap="bindChangeNotice">私信</view>
+    </view>
+  </view>
+</view>
+
+<scroll-view class="content" wx:if="{{notice == 'comment'}}">
+  <view class="item" wx:for="{{list}}" wx:key="index" data-index="{{index}}" bindtap="bindToReplay">
+    <view class="tip" wx:if="{{item.isRead == 0}}"></view>
+    <image src="{{item.actUser.profileImage}}"></image>
+    <view class="nick">{{item.actUser.nickName}}</view>
+    <view class="time">{{item.actDate}}</view>
+  </view>
+</scroll-view>
+
+<scroll-view class="content" wx:if="{{notice != 'comment'}}">
+  <view class="item" wx:for="{{list}}" wx:key="index" data-index="{{index}}" bindtap="bindToReplay">
+    <view class="tip" wx:if="{{item.isRead == 0}}"></view>
+    <image src="{{item.profile_image}}"></image>
+    <view class="nick">{{item.nick_name}}</view>
+    <view class="time">{{item.chat_date}}</view>
+  </view>
+</scroll-view>

@@ -1,0 +1,36 @@
+<!--pages/home/personalTrainer.wxml-->
+
+<view class='bg-view'>
+
+
+  <view class='personal-cell-view' wx:if='{{ personalList.length > 0 }}'>
+
+    <view class='remind-text'>请在剩余期限内上完私教课</view>
+
+    <block wx:for='{{ personalList }}' wx:key='{{ index }}'>
+    <view class='personal-cell'>
+      <!-- 头像 -->
+      <view class='head-view'>
+        <image class='personal-headimg'
+                mode='aspectFill'
+                src='{{ item.headImg != "" ? item.headImg : "../../images/icon/default_headimg.png" }}'></image>
+        <text>{{ item.coachName }}</text>
+        <image data-telephone='{{ item.telephone }}' class='tel-icon' src='../../images/icon/telephone.png'></image>
+      </view>
+
+      <view class='class-view'>
+        <view class='fs34'>私教课程： <text class='whiteColor'>{{ item.className }}</text> </view>
+        <view class='fs30'>
+          剩余： <text class='whiteColor'> <text class='mainColor'>{{ item.remainTimes }}</text> /{{ item.buyTimes }}节</text>
+          <text class='fs28 ft-right'>剩余期限：{{ item.remainDays }}天</text>
+        </view>
+      </view>
+      
+    </view>
+    </block>
+  
+  </view>
+
+  <view class='remind-text' wx:else>暂未绑定教练</view>
+
+</view>

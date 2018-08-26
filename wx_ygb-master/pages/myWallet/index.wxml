@@ -1,0 +1,21 @@
+<view class="wallet-header">
+    <view class="header-icon"></view>
+    <view class="header-p">我的钱包</view>
+    <view class="header-p1">{{ money }}
+        <view class="min">元</view>
+    </view>
+    <view class="header-btn" bindtap="toTx">提现</view>
+</view>
+
+<view class="wallet-title">交易记录</view>
+<view class="wallet-item" >
+    <view class="item" wx:for="{{recordsList}}" wx:key="{{index}}">
+        <image wx:if="{{item.type == 1}}" class="item-logo" src="{{item.advertiserIcon}}"></image>
+        <image wx:if="{{item.type == 2}}" class="item-logo" src="https://1251097942.cdn.myqcloud.com/1251097942/platform/miniApp/shake_broadcast_images/tx.png"></image>
+        <view class="item-font">
+            <view class="font-p">{{item.advertiserName}}红包</view>
+            <view class="font-p1">{{ item.createTime }}</view>
+        </view>
+        <view class="item-m">{{ item.money }}</view>
+    </view>
+</view>

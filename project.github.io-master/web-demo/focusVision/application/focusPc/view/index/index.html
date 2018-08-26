@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <title>计算机视觉与三维检测工作室</title>
+    <meta name="Keywords" content="计算机视觉与三维检测工作室,湖南文理学院，物理与电子科学学院，黎小琴，肖瑶" />
+    <meta name="Description" content="计算机视觉与三维检测工作室" />
+    <link rel="stylesheet" href="{$Think.server.script_name}/../pc/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="{$Think.server.script_name}/../pc/css/rocketTop.css">
+    <style>
+        .tuchu{
+            color: #2F83DB;
+        }
+    </style>
+</head>
+<body>
+<div id="shape">
+    <div class="shapeColor">
+        <div class="shapeFly">
+        </div>
+    </div>
+</div>
+<!--top_start-->
+<div class="top_box">
+    <div class="top_minbox">
+        <div class="top_left">
+            <a href="{$Think.server.script_name}/focusPc/index/index"><img class="logo" src="{$Think.server.script_name}/../pc/img/logo.png" alt="计算机视觉与三维检测工作室" title="计算机视觉与三维检测工作室" /></a>
+            <div class="top_adBox">
+                <h2>给机器以<span class="tuchu">“视觉”</span></h2>
+                <h2>让TA<span class="tuchu">“理解”</span>我们的世界</h2>
+            </div>
+        </div>
+        <img style="z-index:20px;height:60px;position: absolute;top:15px;right: 60px;" src="{$Think.server.script_name}/../pc/img/code2.png" alt=""><div style="display: inline-block;position: absolute;z-index:20px;right: 20px;top:75px;">扫一扫，进入手机网站</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!--nav_start-->
+<div class="nav_box">
+    <ul class="nav_minbox" id="nav"><li>
+        <a class="navcur" href="{$Think.server.script_name}/focusPc/index/index" title="网站首页">网站首页</a></li><li>
+        <a href="{$Think.server.script_name}/focusPc/about/index" title="关于我们" >关于我们</a>
+        <dl class="nav2_box">
+
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/about/index" title="工作室简介" class="bgNone">工作室简介</a>
+            </dd>
+
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/about/culture" title="工作室文化" >工作室文化</a>
+            </dd>
+
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/about/honor" title="荣誉资质" >荣誉资质</a>
+            </dd>
+
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/news/index" title="新闻资讯" >新闻资讯</a>
+        <dl class="nav2_box">
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/teacher/index" title="师资力量" >师资力量</a>
+        <dl class="nav2_box">
+            {volist name="teachersort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/teacher/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/student/index" title="学生团队" >学生团队</a>
+        <dl class="nav2_box">
+            {volist name="studentsort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/student/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/equipment/index" title="设备展示" >设备展示</a>
+        <dl class="nav2_box">
+            {volist name="equipmentsort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/equipment/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/cases/index" title="学生作品" >学生作品</a>
+        <dl class="nav2_box">
+
+            {volist name="casesort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/cases/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/technology/index" title="教学资源" >教学资源</a>
+        <dl class="nav2_box">
+
+            {volist name="technologysort" id="vo"}
+            <dd>
+                <a {if condition="($vo.url)!=1"} href=//{$vo.url} target="_blank"{else/} href="{$Think.server.script_name}/focusPc/technology/index/sortid/{$vo.id}" {/if} title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/online/index" title="在线留言" >在线留言</a>
+        <dl class="nav2_box">
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/contact/index" title="联系我们" >联系我们</a>
+        <dl class="nav2_box">
+        </dl>
+    </li><div class="clear"></div></ul>
+    <div class="nav2_bgcolor"></div>
+</div>
+
+<div class="banner" id="banner">
+    <ul class="list">
+    {volist name="$bannerAraay" id="vo"}
+    <li><img src="{$vo.url}" title="" alt="" /></li>
+    {/volist}
+    </ul>
+    <div class="tip"></div>
+</div>
+
+<!-- 设备展示 -->
+<div class="index_probox">
+    <div class="index_prominbox">
+        <div class="index_proleft">
+
+            <ul class="index_prolist_box">
+                <div class="index_prolist_name">设备展示<p>EQUIPMENT</p></div>
+                <ul class="index_prolist_box2">
+
+                    {volist name="equipmentsort" id="vo"}
+                    <li>
+                        <a href="{$Think.server.script_name}/focusPc/equipment/index/equipmentsort/{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+                    </li>
+                    {/volist}
+
+
+                </ul>
+                <li class="index_proad">我们拥有<br />先进的硬件设施</li>
+            </ul>
+        </div>
+        <div class="index_proright">
+
+            <ul class="index_proimg_box">
+                {volist name="equipment_list" id="vo"}
+                <li class="lookmore">
+                    <a href="{$Think.server.script_name}/focusPc/equipment/info/id/{$vo.id}" title="{$vo.name}">
+                        <img src="{$vo.img}" alt="" />
+                        <p>{$vo.name}</p>
+                        <div class="lookmoreshow" style="display:none;width:254px;height:191px;position: relative;bottom:230px;right: 0px;z-index: 10;background: rgba(0,0,0,.8);">
+                            <div style="padding-top:80px;box-sizing:border-box;line-height: 191px;text-align: center;color: #fff;font-size: 18px;">
+                                <img src="{$Think.server.script_name}/../static/img/lookmore.png" style="width: 40px;height: 40px;border:none;margin: 0 auto;">
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                {/volist}
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<!--师资力量-->
+<div class="iadv">
+    <div class="iyoushi">
+        <div class="youshi1"></div>
+        <div class="youshi2">
+            <font></font>师资力量</div>
+    </div>
+    <div class="wrap">
+        <div class="youshi3">
+            <h2>一起学习<font>一起成长</font>一起拼搏</h2>
+        </div>
+        <div class="head">
+            <h2>我们</h2>
+        </div>
+        <div class="iproduct unit">
+            <div class="tod">
+                <ul>
+                    {volist name="teacher_list" id="vo"}
+                    <li class="lookmore2">
+                        <a href="{$Think.server.script_name}/focusPc/teacher/teacher_info/id/{$vo.id}"><img src="{$vo.headurl}"><span class="t">{$vo.name}</span>
+                        <div class="lookmoreshow2" style="display:none;width:130px;height:155px;position: relative;bottom:180px;right: 0px;z-index: 10;background: rgba(0,0,0,.8);">
+                            <div style="padding-top:60px;box-sizing:border-box;text-align: center;color: #fff;font-size: 18px;">
+                                <img src="{$Think.server.script_name}/../static/img/lookmore.png" style="width: 40px;height: 40px;border:none;margin: 0 auto;">
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    </li>
+                    {/volist}
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <i class="v1"></i>
+            <i class="v2"></i>
+            <i class="v3"></i>
+            <i class="v4"></i>
+        </div>
+    </div>
+</div>
+<!--case_start-->
+<div class="index_case">
+
+    <div class="in_case_box">
+        <div class="in_case_title">
+            <h1>学生团队</h1>
+            <h2 class="case_name">STUDENT</h2>
+        </div>
+        <div class="icaseMaxBox" id="icaseMaxBox">
+            <div class="iCaseWrap">
+                <ul class="in_case_img clearfix" id="icaseScroll">
+                    {volist name="student_list" id="vo"}
+                    <li class="lookmore3">
+                        <a href="{$Think.server.script_name}/focusPc/student/student_info/id/{$vo.id}" title="{$vo.name}">
+                            <img src="{$vo.headurl}" alt="{$vo.name}" />
+                            <p>{$vo.name}</p>
+                            <div class="lookmoreshow3" style="display:none;width:260px;height:200px;position: relative;bottom:250px;right: 0px;z-index: 10;background: rgba(0,0,0,.8);">
+                                <div style="padding-top:80px;box-sizing:border-box;text-align: center;color: #fff;font-size: 18px;">
+                                    <img src="{$Think.server.script_name}/../static/img/lookmore.png" style="width: 40px;height: 40px;border:none;margin: 0 auto;">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+            <div class="spanBox"></div>
+        </div>
+
+    </div>
+</div>
+<div class="icase_btbg"></div>
+<!--inews_start-->
+<div class="inews_box">
+    <div class="inews_box2 clearfix">
+
+        <div class="inews_Left">
+
+            <img  src="{$Think.server.script_name}/../static/img/teacher8.jpg" alt="" title="" >
+        </div>
+        <div class="inews_right">
+            <h1 class="clearfix"><span>NEWS</span><font>新闻资讯</font><a href="{$Think.server.script_name}/focusPc/news/index">+</a></h1>
+            <ul class="inews_content">
+
+
+                {volist name="news_list" id="vo"}
+                <li class="inews_laset clearfix">
+                    <a href="{$Think.server.script_name}/focusPc/news/news_info/id/{$vo.id}" title="">{$vo.title}</a>
+                    <font>{$vo.date}</font>
+                </li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+</div>
+<!--inews2-->
+<div class="inewsTwo w1100">
+
+    <h1>技术创新，是我们不断前进的动力</h1>
+    <div class="wrap clearfix">
+
+        <div class="icomment">
+            <div class="head">
+                <h2>学生作品</h2>
+                <a href="{$Think.server.script_name}/focusPc/cases/index" class="mo">更多 +</a>
+            </div>
+            <div class="main">
+                <div class="box">
+                    <dl class="list" id="icomment">
+                        {volist name="case_list" id="vo"}
+                        <dd class="item">
+                            <div class="img"><a href="{$Think.server.script_name}/focusPc/case/case_info/id/{$vo.id}"><img src="{$vo.img}" title="{$vo.title}" alt="{$vo.title}" /></a></div>
+                            <h3 style="height: 20px;overflow:hidden;"><a href="case_info.html" title="{$vo.title}">{$vo.title}</a></h3>
+                            <p style="height: 40px;">{$vo.des}</p>
+                        </dd>
+                        {/volist}
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa fr">
+            <div class="tik">
+                <span>教学资源<b></b></span>
+                <a href="{$Think.server.script_name}/focusPc/technology/index" class="mo">更多 +</a>
+            </div>
+            <div class="comt">
+                <ul>
+                    {volist name="technology_list" id="vo"}
+
+                    <li class="">
+                        <div class="a1"><a href="{$Think.server.script_name}/focusPc/technology/technology_info/id/{$vo.id}" title="{$vo.title}" >{$vo.title}</a></div>
+                    </li>
+
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--iabout-->
+<div class="iabout w1100">
+
+    <div class="iaboutTitle">
+        <h1>给机器以“视觉”<font>让TA理解我们的世界</font></h1>
+        <h2>Many years of industry experience, skilled</h2>
+    </div>
+    <div class="iaboutBox clearfix">
+        <img alt=""  src="{$Think.server.script_name}/../static/img/teacher10.jpg"  />
+        <div class="iaboutContent">
+            <h1>计算机视觉与三维检测工作室</h1>
+
+            <h6 style="height: 210px;overflow:hidden;">　　{$us.des}</h6>
+            <a href="{$Think.server.script_name}/focusPc/about/index">查看更多>></a>
+        </div>
+    </div>
+</div>
+<!--icontact-->
+<div class="iMaxContact">
+    <div class="icontact clearfix">
+        <div class="icontBox">
+
+            <h1>CONTACT US<font>联系我们</font></h1>
+            <h2 ig-phone>{$us.phone}</h2>
+
+            <h4><strong>计算机视觉与三维检测工作室</strong><br />
+                联系人：{$us.person}<br />
+                联系电话：{$us.phone}<br />
+                联系邮箱：{$us.email}<br />
+                地　址：{$us.address}<br /></h4>
+        </div>
+        <div class="imessage">
+
+            <div class="recommend-form">
+                <div class="head">
+                    <h2>在线留言</h2>
+                    <p>MESSAGE</p>
+                </div>
+                <form name='formPost' id='formPost' action='{$Think.server.script_name}/focusPc/online/post' method='POST' enctype='multipart/form-data'>
+
+                    <div class="main">
+                        <div class="row-1 ico-name required">
+                            <input type="text" class="txt" name="name"  placeholder="姓名" maxlength="5" />
+
+                        </div>
+                        <div class="row-1 ico-phone required">
+                            <input type="text" class="txt" name="phone"  placeholder="联系电话"  />
+
+                        </div>
+                        <div class="row-1 ico-email required">
+                            <input type="text" class="txt" name="email"  placeholder="电子邮箱"  />
+
+                        </div>
+                        <div class="row-1 ico-map">
+                            <input type="text" class="txt" name="address" placeholder="联系地址" />
+                        </div>
+                        <div class="row-2">
+                            <textarea class="text" placeholder="请填写您的需求信息..." name="des"></textarea>
+                        </div>
+                        <div class="row-3">
+                            <input type="submit" class="submit" value="提交" />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <input type="hidden" id="NavigateUrl" name="NavigateUrl" value="" />
+                </form>
+                <script type='text/javascript'> JsReady(function(){ fillFormValue(); });  </script>
+
+            </div>
+        </div>
+        <!-- imessageEnd -->
+    </div>
+</div>
+
+<!-- footer -->
+<!-- footer -->
+<div class="footer">
+    <div class="foot_box w1100">
+        <div class="bt_nav">
+            <a href="{$Think.server.script_name}/focusPc/index/index" title="网站首页">网站首页</a>
+
+            <a href="{$Think.server.script_name}/focusPc/about/index" title="关于我们" class="btNavTitle">关于我们</a>
+
+            <a href="{$Think.server.script_name}/focusPc/teacher/index" title="师资力量" class="btNavTitle">师资力量</a>
+
+            <a href="{$Think.server.script_name}/focusPc/student/index" title="学生团队" class="btNavTitle">学生团队</a>
+
+            <a href="{$Think.server.script_name}/focusPc/equipment/index" title="设备展示" class="btNavTitle">设备展示</a>
+
+            <a href="{$Think.server.script_name}/focusPc/cases/index" title="成功案例" class="btNavTitle">成功案例</a>
+
+            <a href="{$Think.server.script_name}/focusPc/technology/index" title="技术中心" class="btNavTitle">技术中心</a>
+
+            <a href="{$Think.server.script_name}/focusPc/news/index" title="新闻资讯" class="btNavTitle">新闻资讯</a>
+
+            <a href="{$Think.server.script_name}/focusPc/online/index" title="在线留言" class="btNavTitle">在线留言</a>
+
+            <a href="{$Think.server.script_name}/focusPc/contact/index" title="联系我们" class="btNavTitle">联系我们</a>
+        </div>
+    </div>
+    <div style="width: 100%;height: 10px;background:url({$Think.server.script_name}/../static/img/index_youshi.gif);">
+
+    </div>
+    <div class="bottom" style="text-align: center;">
+        <p>版权所有：计算机视觉与三维检测工作室<br/>
+            联系电话：{$us.phone}<br/>
+            联系地址：{$us.address}<br/>
+            技术支持：电信13103班肖瑶</p>
+        <div class="erwei"><img src="{$Think.server.script_name}/../pc/img/code.png" alt="">手机网站二维码</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script src="{$Think.server.script_name}/../pc/js/jquery-3.2.0.min.js"></script>
+<script src="{$Think.server.script_name}/../pc/js/app.js"></script>
+<script type="text/javascript">
+    $(".lookmore").hover(function(){
+        $(".lookmoreshow").eq($(this).index()).css('display','block');
+    });
+    $(".lookmore").mouseleave(function(){
+        $(".lookmoreshow").eq($(this).index()).css('display','none');
+    })
+
+    $(".lookmore2").hover(function(){
+        $(".lookmoreshow2").eq($(this).index()).css('display','block');
+    });
+    $(".lookmore2").mouseleave(function(){
+        $(".lookmoreshow2").eq($(this).index()).css('display','none');
+    })
+
+    $(".lookmore3").hover(function(){
+        $(".lookmoreshow3").eq($(this).index()).css('display','block');
+    });
+    $(".lookmore3").mouseleave(function(){
+        $(".lookmoreshow3").eq($(this).index()).css('display','none');
+    })
+</script>
+<script type="text/javascript" src="{$Think.server.script_name}/../pc/js/rocketTop.js"></script>
+</body>
+</html>

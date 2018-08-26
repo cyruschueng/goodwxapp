@@ -1,0 +1,25 @@
+<view class="outer-container">
+    <view class="page-save-info">
+        <view class="user-avatar">
+            <view class="box">
+                <image src="{{profile.headImgUrl}}"></image>
+                <view class="user-name">{{profile.nickName}}</view>
+            </view>
+        </view>
+        <view class="text-label {{isHTC ? 'is-htc' : ''}}">
+            <image class="dot-left" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a697eca18159.png"></image>
+            {{userUniqText}}
+            <image class="dot-right" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a697eca4b7b0.png"></image>
+        </view>
+        <canvas canvas-id="info-canvas"></canvas>
+    <view class="bottom-wrapper" wx:if="{{shareShow && saveImg}}">
+        <view class="save-pic" bindtap="saveInfoImg">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a697ec9cd5b7.png"></image>
+                保存到相册
+        </view>
+        <view class="text-info">保存图片，然后分享给好友吧！</view>
+        </view>
+    </view>
+    <canvas canvas-id="saveinfo-canvas" class="saveinfo-canvas"></canvas>
+</view>
+

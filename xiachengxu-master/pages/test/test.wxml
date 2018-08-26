@@ -1,0 +1,6 @@
+<view class='container'>
+  <view class='imgWrap {{current == index && (isFinish == 0 ? "slideLeftTopOut" : isFinish == 1 ? "slideRightTopOut" : isFinish == 2 ? "slideRightBottomOut" : isFinish == 3 ? "slideLeftBottomOut" : "")}}' wx:for='{{imgArr}}' wx:key='index' data-id='{{index}}'
+    bindtouchstart='touchS' bindtouchmove='touchM' bindtouchend='touchE' style='left: {{current == index && slideLeft}}rpx; top: {{current == index && slideTop}}rpx'>
+    <image src='{{item}}'></image>
+  </view>
+</view>

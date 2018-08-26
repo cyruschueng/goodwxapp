@@ -1,0 +1,31 @@
+<!--pages/myInfo-address/myInfo-address.wxml-->
+<view class='container'>
+  <view class='section-ft' bindtap='add_address'>添加新地址</view>
+
+  <view class='address-list'>
+    <view class='address-item' wx:for='{{items}}' wx:key='code' data-id='{{item.id}}'>
+      <view class='contact'>
+        <view class='name'>{{item.fullname}}</view>
+        <view class='phone'>{{item.phone}}</view>
+      </view>
+      <view class='address'>{{item.city}}{{item.county}}{{item.address}}</view>
+      <view class='item-ft'>
+        <view class='item-ft-left' data-id='{{item.id}}' data-index='{{index}}' bindtap='bindCheck'>
+          <icon wx:if="{{item.selectStatus}}" type="success_circle" color="#de2022" size='23'/>
+          <icon wx:else type="circle" color="#de2022" size='23'/>
+          <text>默认地址</text>
+        </view>
+        <view class='item-ft-right'>
+          <view class='edit' data-id='{{item.id}}' data-index='{{index}}' bindtap='add_address'>
+            <image src='/image/edit.png'></image>
+            <text>编辑</text>
+          </view>
+          <view class='delete' data-id='{{item.id}}' data-index='{{index}}' bindtap='delete_address'>
+            <image src='/image/delete.png'></image>
+            <text>删除</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

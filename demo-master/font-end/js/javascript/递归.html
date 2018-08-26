@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+	//在严格模式下，不能通过脚本访问 arguments.callee ，访问这个属性会导致错误。
+	//命名函数表达式,严格模式和非严格模式下都行得通
+	
+	var factorial = (function f(num){//f() 的命名函数表达式
+		if (num <= 1){
+				return 1;
+		} else {
+			return num * f(num-1);
+		}
+	});
+
+</script>
+</body>
+
+</html>

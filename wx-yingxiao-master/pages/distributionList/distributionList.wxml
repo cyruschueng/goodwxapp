@@ -1,0 +1,34 @@
+<view class='container' wx:if="{{unbind!='1'}}">
+  <view class='banner'>
+    <view class='title'>账户可用佣金</view>
+    <view class='num' bindtap='{{getMoney}}' style='background:{{bg}}'>¥{{sum}}</view>
+    <view class='tip'>大于1元可提现</view>
+  </view>
+  <view class='list'>
+    <view class='listTitle'>
+      <text>我分销的商品</text>
+    </view>
+    <view class='null' wx:if="{{isNull=='1'}}">
+      <image src='/pages/source/images/without.png'></image>
+      <view>您没有分销商品,去逛逛吧</view>
+    </view>
+    <view class='listInfo'>
+      <view class='listItem' wx:for="{{detail}}" wx:key="*this" bindtap='todis_detail' data-id='{{item.id}}'>
+        <view>
+          <image src='{{item.user_list.header}}'></image>
+          <text class='goods'>{{item.user_list.nickname}}</text>
+        </view>
+        <view>
+          <text class='money'>¥{{item.share_money}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='nonetip'  wx:if="{{unbind=='1'}}">
+    <view class='null'>
+      <image src='/pages/source/images/without.png'></image>
+      <view>您没有成为分销商,请前往绑定</view>
+      <view class='bind' bindtap='bindphone'>成为分销商</view>
+    </view>
+</view>

@@ -1,0 +1,52 @@
+<!--pages/realName/realName.wxml-->
+<!--======选择信用卡====pages/add/add.wxml-->
+<view class='container'>
+  <view class='input-wrapper'>
+    <view class='realName col row'>
+      <text class="txt">姓名</text>
+      <input class='input' placeholder='请输入真实姓名' focus='true' confirm-type="done" bindconfirm="firm" placeholder-class='plac' bindinput="getName" bindblur='nameLength' maxlength="8"/>
+    </view>
+    <view class='ID col row'>
+      <text class="txt">身份证号</text>
+      <input class='input' placeholder='请输入身份证号' focus='{{focus}}' confirm-type="done" bindconfirm="firm1" placeholder-class='plac' value="{{ID}}" bindinput="ID" maxlength="18"/>
+    </view>
+    <view class='card col row'>
+      <text class="txt">银行卡号</text>
+      <input class='input' placeholder='请输入结算到帐的银行卡号' focus='{{focus1}}' confirm-type="done" bindconfirm="firm2" placeholder-class='plac' value="{{card}}" bindinput="card" bindblur='blur' maxlength="19"/>
+    </view>
+    <view class='tele col row'>
+      <text class="txt">预留手机号</text>
+      <input class='input' placeholder='请输入结算银行卡预留手机号' focus='{{focus2}}' confirm-type="done"  placeholder-class='plac' bindinput="tele" maxlength="11"/>
+    </view>
+    <view class='bank col row'>
+      <text class="txt">开户银行</text>
+      <input class='input' placeholder='请输入开户银行' disabled='true' placeholder-class='plac' value="{{valueBankName}}"/>
+    </view>
+     <view class='area col row'>
+      <view class="txt">所属地区</view>
+      <picker bindchange="bindPickerChange1" value="{{index}}" range="{{provinces}}">
+        <view class="picker">
+          {{provinces[index]?provinces[index]:"请选择"}}
+        </view>
+      </picker>
+       <picker bindchange="bindPickerChange2" value="{{index}}" range="{{citys}}">
+        <view class="picker">
+          --{{citys[index1]?citys[index1]:"请选择"}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerChange3" value="{{index}}" range="{{countys}}">
+        <view class="picker">
+          --{{countys[index2]?countys[index2]:"请选择"}}
+        </view>
+      </picker> 
+    </view>
+    <view class='bank col row'>
+      <text class="txt">详细地址</text>
+      <input class='input' placeholder='请输入详细地址'  placeholder-class='plac' value="{{detail}}" bindinput='bindDetail'/>
+    </view>
+  </view>
+  <form class="form "bindsubmit="formSubmit">
+    <button form-type='submit' class='submit' name="submit">认证</button>
+  </form>
+  <!-- <view class='tips'>请您在进行实名认证之前，确认您 <text>是否已经注册及登陆</text> ，否则你将不能进入本程序的功能区。</view> -->
+</view>

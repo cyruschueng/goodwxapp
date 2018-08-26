@@ -1,0 +1,15 @@
+<!--pages/detail/detail.wxml-->
+<view wx:for='{{detailArr}}' wx:key='{{index}}' class='song'>
+  <image src='{{item.albumpic_big}}' class='bigImg'></image>
+  <view  class='songname'>
+  <text>{{item.songname}}</text>
+  </view>
+   <view  class='singername'>
+  <text>歌手：{{item.singername}}</text>
+  <view class='img'>收藏
+  <image class='icon' src='../../images/collectStart.png'></image>
+  </view>
+  </view>
+  <audio controls='true' src='{{item.url}}' author='{{item.singername}}'
+  poster='{{item.albumpic_small}}' name='{{item.songname}}' class='info' bindended="MusicEnd"></audio>
+</view>

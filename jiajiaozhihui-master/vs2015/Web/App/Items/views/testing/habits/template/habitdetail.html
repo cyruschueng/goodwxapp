@@ -1,0 +1,162 @@
+<div >
+    <div class="recommend" ng-repeat="item in habits" >
+        <div class="weui-flex">
+            <div>
+                <div class="placeholder recommend-head">
+                    <img src="{{item.headImgUrl}}" />
+                </div>
+            </div>
+            <div class="weui-flex__item">
+                <div class="recommend-head__nickname">{{item.nickName}}</div>
+                <div class="recommend-head__time">{{item.createDate}}</div>
+            </div>
+        </div>
+        <div class="weui-flex">
+            <div class="weui-flex__item">
+                <div class="recommend-message">{{item.message}}</div>
+            </div>
+        </div>
+        <div class="weui-flex">
+            <div class="weui-flex__item">
+                <div class=" recommend-target" >
+                    <div class="recommend-target__content">
+                        <img class="recommend-target__image" src="./imgs/gardenia/tagar.png" />
+                        <div style="position:absolute; top:1rem; width:100%;color:#fff; font-size:1rem; " >
+                            <div style="text-align:center">{{item.target.finish}}</div>
+                        </div>
+                        <div style="position:absolute; top:4.5rem;width:100%;color:#AEDC94" >
+                            <div style="text-align:center">坚持目标{{item.target.aim}}天</div>
+                            <div style="text-align:center;font-size:30rpx;">{{item.target.title}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-flex__item">
+                <img class="recommend-target__image"  src="{{item.target.image}}" />
+            </div>
+        </div>
+        <div class="weui-flex">
+            <div se-habit-like="{{$index}}"
+                 data-habitid="{{item.habitId}}"
+                 data-detailid="{{item.id}}"
+                 class="weui-flex__item recommend-action">
+                <div ng-class="{true:'habit-liked',false:''}[item.like.isLike]"  class="recommend-action__like  fa fa-heart ">点赞</div>
+            </div>
+            <!--无权限评论-->
+            <div ng-if="data.memberInfo.state!=1" class="weui-flex__item recommend-action" se-member-action="{{data.memberInfo.state}}">
+                <view class="recommend-action__comment fa fa-comment-o">评论</view>
+            </div>
+            <!--有权限评论-->
+            <div ng-if="data.memberInfo.state==1"
+                 se-habit-comment=""
+                  data-maxlenght="200"
+                  data-habitid="{{item.habitId}}"
+                  data-detailId="{{item.id}}"
+                  data-index="{{$index}}"
+                  class="weui-flex__item recommend-action">
+                <view class="recommend-action__comment fa fa-comment-o">评论</view>
+            </div>
+        </div>
+
+        <div class="weui-flex recommend-like"
+             style="align-items: center;padding-top:5px;padding-bottom:5px;background: #eee;padding:5px;"
+             ng-if="item.like.list.length>0">
+            <div style="margin-right:5px">
+                <div class="fa fa-heart-o" style="padding:0;color:#f60"></div>
+            </div>
+            <div class="weui-flex__item">
+                <div class="recommend-like__header">
+                    <img ng-repeat="item in item.like.list"  src="{{item}}" />
+                </div>
+            </div>
+            <div ng-if="item.like.length>9"><div class="recommend-like__more"  >9</div></div>
+        </div>
+        <div ng-if="item.comment.length>0">
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__bd" style="background: #eee;padding:5px">
+                    <!--无权限评论-->
+                    <div ng-if="data.memberInfo.state!=1"
+                         class="weui-form-preview__item"
+                         se-member-action="{{data.memberInfo.state}}"
+                         ng-repeat="comment in item.comment">
+                        <label class="weui-form-preview__label recommend-comment__header">{{comment.name+': '}}</label>
+                        <span class="weui-form-preview__value recommend-comment__message">{{comment.message}}</span>
+                    </div>
+                    <!--有权限评论-->
+                    <div ng-if="data.memberInfo.state==1"
+                         class="weui-form-preview__item"
+                         se-habit-reply=""
+                         data-maxlenght="200"
+                         data-habitid="{{item.habitId}}"
+                         data-detailid="{{item.id}}"
+                         data-index="{{$parent.$index}}"
+                         data-nickName="{{comment.name}}"
+                         data-commentid="{{comment.id}}"
+                         ng-repeat="comment in item.comment">
+                        <label class="weui-form-preview__label recommend-comment__header">{{comment.name+': '}}</label>
+                        <span class="weui-form-preview__value recommend-comment__message">{{comment.message}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="comment">
+    <div class="weui-mask" id="habitCommentMask" style="display: none"></div>
+    <div class="weui-actionsheet" id="habitComment" style="margin-bottom:50px;">
+        <div class="weui-actionsheet__title">
+            <p class="weui-actionsheet__title-text">评论</p>
+        </div>
+        <div class="weui-actionsheet__menu">
+            <div class="weui-flex">
+                <div class="weui-flex__item">
+                    <div style="padding-left:5px; padding-right:5px;">
+                        <textarea id="commentContext" cols="10" class="weui-textarea"
+                                  style="overflow-y:hidden;height:20px; line-height: 1.4;">
+                        </textarea>
+                    </div>
+                    <p style="text-align: right; color:#666;padding-top:10px;">
+                        <span id="habitCommentInputNum">1</span>/<span id="habitCommentMaxLenght"></span>
+                    </p>
+                </div>
+                <div style="padding:15px 5px 5px 0;">
+                    <span id="habitCommentSend" class="weui-btn weui-btn_mini weui-btn_primary weui-btn_disabled">发送</span>
+                </div>
+            </div>
+        </div>
+        <div class="weui-actionsheet__action">
+            <div class="weui-actionsheet__cell" id="habitCommentCancel">取消</div>
+        </div>
+    </div>
+</div>
+
+<div class="reply">
+    <div class="weui-mask" id="habitReplyMask" style="display: none"></div>
+    <div class="weui-actionsheet" id="habitReply" style="margin-bottom:50px;">
+        <div class="weui-actionsheet__title">
+            <p class="weui-actionsheet__title-text">回复</p>
+        </div>
+        <div class="weui-actionsheet__menu">
+            <div class="weui-flex">
+                <div class="weui-flex__item">
+                    <div style="padding-left:5px; padding-right:5px;">
+                        <textarea id="replyContext" cols="10" class="weui-textarea"
+                                  style="overflow-y:hidden;height:20px; line-height: 1.4;">
+                        </textarea>
+                    </div>
+                    <p style="text-align: right; color:#666;padding-top:10px;">
+                        <span id="habitReplyInputNum">1</span>/<span id="habitReplyMaxLenght"></span>
+                    </p>
+                </div>
+                <div style="padding:15px 5px 5px 0;">
+                    <span id="habitReplySend" class="weui-btn weui-btn_mini weui-btn_primary weui-btn_disabled">发送</span>
+                </div>
+            </div>
+        </div>
+        <div class="weui-actionsheet__action">
+            <div class="weui-actionsheet__cell" id="habitReplyCancel">取消</div>
+        </div>
+    </div>
+</div>
+

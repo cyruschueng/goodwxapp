@@ -1,0 +1,49 @@
+<!--index.wxml-->
+<loading wx:if="{{isloading!=0}}">正在加载</loading>
+<view class="container" wx:if="{{ishidden=='1'}}">
+  <!-- 顶部图片(轮播)   -->
+  <swiper class='header' autoplay indicator-dots indicator-active-color='#38adff' indicator-color='#fff' circular>
+     <swiper-item wx:for="{{swiperItem}}" wx:key="*this">
+      <image src='{{item.img}}'></image>
+     </swiper-item>
+  </swiper>
+  <!-- 按钮组  -->
+  <view class='nav'>
+    <view class="menu" wx:for="{{menu}}" bindtap='toUrl' wx:key="index" data-id='{{item.id}}'>
+      <image src="{{item.imageSrc}}"></image>
+      <text class="menuTitle">{{item.title}}</text>
+    </view>
+  </view>
+  <!-- 经过数据渲染的列表  -->
+  <view class='wrap'>
+    <view class="info-item">
+      <view class="info-title">
+        <text>{{textTitle1}}</text>
+      </view>
+      <view class='info-list'>
+        <view class="item-card" wx:for="{{childItem}}" wx:key="index" bindtap='todetail' data-index='{{index}}'>
+          <image wx:if="{{item.goods_img}}" src="{{item.goods_img}}"></image>   
+          <view class='itemTitle'>{{item.goods_name}}</view>
+          <view class='itemPrice'>¥{{item.goods_price}}</view>
+          <view class='itemStatus'>
+            <text>销量:{{item.salesvolume}}</text>
+          </view> 
+        </view>    
+      </view>
+    </view> 
+  </view>
+  <!--图片盒子  -->
+  <view class='imgbox'>
+    <view class='imgItem' wx:for="{{swiperItem}}" style='width:{{imgboxLength}}' wx:key="*this">
+      <image src='{{item.img}}'></image>
+    </view>
+  </view>
+  <!--单行文本  -->
+  <view class='slogan'>
+    <view>这里是我们的单行文本,文本将在超出容器后显示,
+    这一条就是一条测试的文本</view>
+  </view>
+  <view class='bannerList'>
+    <view class='bannnerImg'></view>
+  </view>
+</view>

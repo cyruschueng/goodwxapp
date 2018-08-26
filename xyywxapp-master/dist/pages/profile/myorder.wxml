@@ -1,0 +1,48 @@
+<!--pages/profile/myorder.wxml-->
+
+<import src="../../templates/myorder-item/myorder-item.wxml"/>
+
+<view class="weui-tab">
+  <view class="weui-navbar">
+      <block wx:for-items="{{ navbarTabs }}" wx:key="{{ index }}">
+          <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="navbarTabClick">
+              <view class="weui-navbar__title">{{ item }}</view>
+          </view>
+      </block>
+      <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+  </view>
+  <view class="weui-tab__panel">
+
+    <!-- 选项一的内容 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}" style='border-top-style:none;'>
+
+      <template is="myorder-item" data="{{ orderList }}"/>
+      <view class='remind-empty-view' wx:if='{{ orderList.length <= 0 }}'>暂无待付款订单...</view>
+
+    </view>
+    <!-- 选项一结束 -->
+    
+    <!-- 选项二的内容 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}" style='border-top-style:none;'>
+
+      <template is="myorder-item" data="{{ orderList }}"/>
+      <view class='remind-empty-view' wx:if='{{ orderList.length <= 0 }}'>暂无付尾款订单...</view>
+
+    </view>
+    <!-- 选项二结束 -->
+
+    <!-- 选项三开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}" style='border-top-style:none;'>
+
+      <template is="myorder-item" data="{{ orderList }}"/>
+      <view class='remind-empty-view' wx:if='{{ orderList.length <= 0 }}'>暂无待评价订单...</view>
+
+    </view>
+    <!-- 选项三结束 -->
+
+  </view>
+</view>
+
+
+
+

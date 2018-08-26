@@ -1,0 +1,31 @@
+<!--pages/voteInfo/voteInfo.wxml-->
+<view class="container">
+  <view class="voteTitle">{{infoData.title}}</view>
+  <view class="voteDesc">{{infoData.content}}</view>
+  <view class="voteType"><text>[{{infoData.vote_classify == '0'? '单选':'多选'}}]</text><text wx:if="{{infoData.anonymous == '1'}}">[匿名]</text></view>
+  <view class="tr f12" style="width: 100%;">
+    <text>{{infoData.author}}\n{{infoData.build_time}}</text>
+  </view>
+  <view class="outDate" wx:if="{{infoData.active_time_flag == 0}}">
+    <span class="iconfont icon-yiguoqi"></span>
+  </view>
+</view>
+
+<view class="voteOptions" style="margin:0">
+    <block wx:for="{{options}}" wx:key="vote_name"  wx:for-index="index" wx:for-item="item">
+      <view class="voteoption {{item.heshan == 1 ? 'active':''}}" bindtap="{{infoData.active_flag == 1 ? 'vote' : ''}}"  data-votename="{{item.vote_name}}" data-idx="{{index}}">
+        <view class="optionData">
+          <view class="voteOptiontxt"><span class="iconfont icon-gou mr5" style="color:#319eff" wx:if="{{item.heshan == 1}}"></span><text>{{item.vote_name}}</text></view>
+          <progress percent="{{item.vote_per}}" show-info active="{{progressActive}}"/>
+        </view>
+        <view class="votersList" wx:if="{{item.vote_per > 0}}" catchtap="{{item.vote_person_image ?'toVotersInfo' :''}}" data-votename="{{item.vote_name}}">
+          <block wx:for="{{item.vote_person_image}}" wx:for-item="voterItem"  wx:for-index="voterIdx"  wx:key="*this">
+            <image src="{{voterItem.person_image}}" mode="aspectFill"></image>
+          </block>
+        </view>
+      </view>
+    </block>   
+</view>
+
+<button type="primary" class="btnFooter" disabled='{{applyDisabled}}' hidden="{{submitHidden}}" bindtap="voteSubmit">确定</button>
+

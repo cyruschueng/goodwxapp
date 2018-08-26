@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+</html>
+
+
+<script type="text/javascript">
+   cost leftFilterData =  function() {
+            var arr = [],
+                _self = this;
+            //多重数组简化为一纬数组
+            for (var key in this.applic) {
+                if (this.applic.hasOwnProperty(key))
+                    jisuan(this.applic[key]);
+            };
+
+            function jisuan(obj) {
+              arr.push(obj);
+                if (obj && obj.children && (obj.children && obj.children.length > 0)) {
+                    for (var j = 0; j < (obj.children && obj.children.length); j++) {
+                        arr.push(obj.children[j]);
+                        var objMid = obj.children[j];
+                        jisuan(objMid);
+                    }
+                }
+            }
+            
+            arr = Array.from(new Set(arr));
+            //过滤
+            return arr.filter(function(item) {
+                //根据搜索条件进行过滤
+                if (_self.sousuo) {
+                    if (item.children && _self.isparment) {
+                        //如果部门不选则过滤掉
+                        return false;
+                    }
+                    return item.label && !!~item.label.indexOf(_self.sousuo)
+                } else {
+                    return true
+                }
+            });
+        }
+
+</script>
+
+        

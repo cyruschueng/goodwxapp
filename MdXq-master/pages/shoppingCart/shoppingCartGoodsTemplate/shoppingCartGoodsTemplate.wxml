@@ -1,0 +1,32 @@
+<template name='shoppingCartGoodsTemplate'>
+  <view class='shoppingCartGoodsTemplateBox'>
+    <view class='choose'>
+       <checkbox-group bindchange='checkedClick' data-cart_id='{{cart_id}}' data-checked='{{checked}}'  wx:if='{{checked==1}}'>
+        <checkbox  checked='checked'></checkbox>
+      </checkbox-group>
+      <checkbox-group bindchange='checkedClick' data-cart_id='{{cart_id}}' data-checked='{{checked}}'  wx:else>
+        <checkbox></checkbox>
+      </checkbox-group> 
+    </view>
+    <view class='goodsImg'>
+      <image src='{{exhibition}}'></image>
+    </view>
+    <view class='goodsInfo'>
+      <text>{{product_name}}</text>
+      <text>{{content}}{{unit}}</text>
+      <text>¥{{member_price}}</text>
+    </view>
+    <!-- <view class='deleteImg' bindtap='deleteShoppingCart' data-cart_id='{{cart_id}}'>
+      <image src='../images/delete.png'></image>
+    </view> -->
+    <view class="stepper">  
+        <!-- 减号 -->  
+        <text class="{{minusStatus}}" bindtap="bindMinus" data-cart_id='{{cart_id}}' wx:if='{{currentIndex==index}}'  data-index='{{index}}'>-</text> 
+        <!-- <text class="{{minusStatus}}" data-cart_id='{{cart_id}}' wx:else  data-index='index'>-</text>  -->
+        <!-- 数值 -->
+        <input type="number" bindc='quantityNum' bindchange="bindManual" disabled='disabled' value="{{quantity}}" />  
+        <!-- 加号 -->  
+        <text class="normal" data-index='{{index}}' data-cart_id='{{cart_id}}' bindtap="bindPlus">+</text>  
+    </view>  
+  </view>
+</template>

@@ -1,0 +1,31 @@
+<!--pages/searchResult/searchResult.wxml-->
+<view class='.page skin-{{skin}}'>
+  <view class='search'>
+    <image src='http://res.o2o.com.cn:8082/img/c865b1495d834199a3b5bbb900bc8e70'></image>
+    <input placeholder='请输入直播内容' placeholder-style="color:#e1e1e1" confirm-type="search" bindconfirm='search' bindinput="input" value='{{input}}'></input>
+  </view>
+
+  <view class='tabs' hidden='true'>
+    <view class="tab-item {{currentTabIndex==index?'active':''}}" data-current-index="{{index}}" bindtap="swichTab" wx:key="tabType" wx:for="{{tabs}}">
+      {{item.title}}
+    </view>
+  </view>
+
+  <swiper class='tabs-content mt15' current="{{currentTabIndex}}" bindchange="switchTabContent" style='height:{{tabContentHeight}}rpx;'>
+    <swiper-item wx:key="{{item.tabType}}" wx:for="{{tabs}}">
+      <scroll-view class='tabs-content-scroll-view' scroll-y="true" bindscrolltolower="scrollToBottom" data-tab-index="{{index}}">
+        <view class='tabs-content-container'>
+          <block wx:if="{{item.tabType==0}}">
+            <include src="children/products/products.wxml" />
+          </block>
+          <block wx:elif="{{item.tabType==1}}">
+            <include src="children/rooms/rooms.wxml" />
+          </block>
+          <block wx:elif="{{item.tabType==2}}">
+            <include src="children/zhubos/zhubos.wxml" />
+          </block>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

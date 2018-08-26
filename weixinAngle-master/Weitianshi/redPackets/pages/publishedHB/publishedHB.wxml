@@ -1,0 +1,29 @@
+<import src="/redPackets/resource/Template/Template.wxml" />
+<!--错误提示  -->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+<view>
+  <open-data type='groupName' open-gid='G6zcd0WFWnIXAEjI4CQAzZbAsrn4'></open-data>
+  <template is="openHB" data="{{bg_hongbao2:bg_hongbao2,kaiStyle:kai,open,personInfo:personInfo}}"></template>
+  <form report-submit='true' bindsubmit='formsubmit' wx:if="{{show}}">
+    <button form-type='submit' open-type="share">
+      <image class="openZhuan" src="{{zhuanfa}}"></image>
+    </button>
+  </form>
+</view>
+<view class="modalBox" wx:if="{{!show}}">
+  <image class="tankuang" src="{{tankuang}}"></image>
+  <view class="getMoney">￥
+    <label>{{bounce_money}}</label>
+  </view>
+  <view class="getName" wx:if="{{personInfo.is_card == 2}}">
+    <checkbox class="checkM" checked/> 添加
+    <label>{{personInfo.user.user_real_name}}</label>
+    投资名片
+  </view>
+  <form report-submit='true' bindsubmit='makeSure'>
+    <button form-type='submit' hover-class='buttonOne'>
+      <image class="btnSure" src="{{queding}}" wx:if="{{bindContact == false}}"></image>
+      <image src="{{openHover}}" class="btnSure" wx:if="{{bindContact == true}}"></image>
+    </button>
+  </form>
+</view>

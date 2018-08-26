@@ -1,0 +1,28 @@
+
+<template name='customerTrack-item'>
+
+<view class='cus-cell weui-flex'>
+
+  <view>
+    <image class='headimg' mode='aspectFill' src='{{ headimg }}'></image>
+  </view>
+
+  <view class='weui-flex__item'>
+    <view class='name-view'>
+      <text>{{ name }}</text>
+      <image wx:if='{{ gender == "boy" }}' class='gener-icon' src='../../../images/icon/mine/boy.png'></image>
+      <image wx:else class='gener-icon' src='../../../images/icon/mine/girl.png'></image>
+    </view>
+    <view class='info-text'>
+      <text>成交卡种：{{ cardType }}</text>
+      <text>{{ remainNum }}</text>
+    </view>
+  </view>
+
+  <view>
+    <image hidden='{{ !telephoneHidden }}' class='telephone-icon' src='../../../images/icon/mine/telephone.png' id='{{ phonecall }}' bindtap='bindPhonecall'></image>
+  </view>
+
+</view>
+
+</template>

@@ -1,0 +1,80 @@
+<view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部订单</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1"
+bindtap="swichNav">待付款</view>
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2"
+bindtap="swichNav">已出票</view>
+      <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">已取消</view>
+  </view>
+
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange" >
+      <swiper-item>
+        <!-- 全部订单 -->
+          <view class='allOrder'>
+            <view class='orderType' wx:for='{{orders}}' wx:key='{{item}}'>
+              <view class='status'>{{item.stateMsg}}</view>
+              <view class='btn'>
+                <view wx:if="{{item.state == 0}}" class="button" bindtap='gopay' id='{{item.orderId}}' data-shopid='{{item.shopId}}'>去支付</view>
+                <view wx:if="{{item.state == -1 || item.state == 2 || item.state == -2}}" class="button" bindtap='buyagain' id='{{item.shopId}}'>再次购买</view>
+              <view wx:if="{{item.state == 2}}" class="button2" bindtap='checksuccess' id='{{item.orderId}}'>查看票据</view>
+              </view>
+              <view class='messages'>
+                <view class='title'>{{item.name}}</view>
+                <view>使用日期：<text>{{item.day || '以实体票为准'}} {{item.timeslot}}</text></view>
+                <view>份数：<text>{{item.nums}}</text>张</view>
+                <view>总额：<text>€{{item.amount}}</text></view>
+              </view>
+            </view>
+          </view>
+      </swiper-item>
+      <swiper-item>
+          <view class='allOrder'>
+            <view class='orderType' wx:for='{{orders}}' wx:key='{{item}}' wx:if="{{item.state == '0'}}">
+              <view class='status'>{{item.stateMsg}}</view>
+              <view class='btn'>
+                <view wx:if="{{item.state == 0}}" class="button" bindtap='gopay' id='{{item.orderId}}' data-shopid='{{item.shopId}}'>去支付</view>
+              </view>
+              <view class='messages'>
+                <view class='title'>{{item.name}}</view>
+                <view>使用日期：<text>{{item.day}} {{item.timeslot}}</text></view>
+                <view>份数：<text>{{item.nums}}</text>张</view>
+                <view>总额：<text>€{{item.amount}}</text></view>
+              </view>
+            </view>
+          </view>
+      </swiper-item>
+      <swiper-item>
+          <view class='allOrder'>
+            <view class='orderType' wx:for='{{orders}}' wx:key='{{item}}' wx:if="{{item.state == '2'}}">
+              <view class='status'>{{item.stateMsg}}</view>
+              <view class='btn'>
+              <view class="button" bindtap='buyagain' id='{{item.shopId}}' data-name='{{item.name}}'>再次购买</view>
+              <view class="button2" bindtap='checksuccess' id='{{item.orderId}}'>查看票据</view>
+              </view>
+              <view class='messages'>
+                <view class='title'>{{item.name}}</view>
+                <view>使用日期：<text>{{item.day}} {{item.timeslot}}</text></view>
+                <view>份数：<text>{{item.nums}}</text>张</view>
+                <view>总额：<text>€{{item.amount}}</text></view>
+              </view>
+            </view>
+          </view>
+      </swiper-item>
+      <swiper-item>
+          <view class='allOrder'>
+            <view class='orderType' wx:for='{{orders}}' wx:key='{{item}}' wx:if="{{item.state == '-1' || item.state == -2}}">
+              <view class='status'>{{item.stateMsg}}</view>
+              <view class='btn'>
+              <view class="button" bindtap='buyagain' id='{{item.shopId}}' data-name='{{item.name}}'>重新购买</view>
+              </view>
+              <view class='messages'>
+                <view class='title'>{{item.name}}</view>
+                <view>使用日期：<text>{{item.day}} {{item.timeslot}}</text></view>
+                <view>份数：<text>{{item.nums}}</text>张</view>
+                <view>总额：<text>€{{item.amount}}</text></view>
+              </view>
+            </view>
+          </view>
+      </swiper-item>
+  </swiper>
+

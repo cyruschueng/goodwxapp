@@ -1,0 +1,57 @@
+@import '../../style/mixins';
+@import '../../style/themes/default';
+
+@tagPrefixCls: am-tag;
+
+.@{tagPrefixCls} {
+  display: inline-block;
+  position: relative;
+  font-size: @font-size-base;
+  text-align: center;
+  padding: 0 @h-spacing-lg;
+  height: @tag-height;
+  line-height: @tag-height;
+  border-radius: @radius-sm;
+  box-sizing: border-box;
+
+  &&-small {
+    height: @tag-height-sm;
+    line-height: @tag-height-sm;
+    padding: 0 @h-spacing-sm;
+    font-size: @font-size-icontext;
+  }
+
+  &-normal {
+    background-color: @fill-base;
+    color: @color-text-caption;
+    border: @border-width-sm solid @border-color-base;
+  }
+
+  &-active {
+    background-color: @fill-base;
+    color: @tag-color;
+    border: @border-width-sm solid @tag-color;
+  }
+
+  &-disabled {
+    color: @color-text-disabled;
+    background-color: @fill-disabled;
+    border: @border-width-sm solid @fill-disabled;
+  }
+
+  &-close {
+    position: absolute;
+    top: -18px;
+    left: -20px;
+    color: @color-text-placeholder;
+
+    &:active {
+      color: @color-text-caption;
+    }
+
+    .am-icon {
+      background-color: @fill-base;
+      border-radius: 18px;
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<view class="container">
+    <view class='nicePhoto'>
+        <view class='index' wx:if="{{type=='h5'}}" bindtap='seeH5' ></view>
+        <image wx:if="{{type=='h5'}}" class='play' src="../img/sanjiao.png" mode='widthFix' bindtap='seeH5' > </image> 
+        <image wx:if="{{type=='h5'}}" class='fengmian' src="{{info.thumb}}" mode='widthFix' bindtap='seeH5' ></image>
+        <image wx:else src="{{info.thumb}}" class='fengmian' mode='widthFix' bindtap='prewimg' data-temp_id="{{temp_id}}" 
+                data-url='{{info.thumb}}'></image>
+    </view>
+    <view class="tops {{type!='h5'?'border':''}}">
+        <view class='nowInform'>
+            <view class='top'>
+                <image class='niceImg' src="{{info.avatarurl}}"></image>
+                <view class='niceNames topnice'>
+                    <view class='nickName nice'>{{info.wx_name}}</view> 
+                    <view class='nickName'>
+                        <text wx:if="{{type=='image'}}">照片墙 </text><text wx:else>相册集</text>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class='lowNight'>
+              阅读 {{info.click_count}} 
+              <view class='zan' bindtap='zanTap' data-type='photowall' data-index='{{item.index}}'
+                    data-object_id='{{pw_id}}'>
+                    <image src="../img/983476-200.png"></image>{{info.thumb_count}}
+              </view>
+            </view> -->
+            <view class='left' bindtap='informSquare'  data-name="{{name}}" 
+                  data-pw_id='{{pw_id}}' data-type='photowall'>
+                <image src="../img/7.png" mode='widthFix'></image>
+                {{info.click_count}}次
+            </view>
+            <view class='right'>
+                <view class='zan' bindtap='zanTap' data-type='photowall' data-index='{{index}}'
+                      data-object_id='{{pw_id}}'>
+                    <image src="../img/983476-200.png"></image>{{info.thumb_count}}
+                </view>
+            </view>
+        </view>
+        
+    </view>
+    <!--button  -->
+    <view class='production' wx:if="{{type=='h5'}}" bindtap='production' data-type="{{type}}">制作相册集</view>
+    <view class='production' wx:else bindtap='production' data-type="{{type}}">制作照片墙</view>
+
+
+    <!-- 关闭评论 -->
+      <!-- <view class='content'>
+        <view class='title'>最新留言</view>
+        <block wx:if="{{comment_list}}">
+            <view wx:for="{{comment_list}}" class='chartItem' data-comment_id='{{item.comment_id}}'>
+                <view class='chartTop'>
+                    <image class='niceImgs' src="{{item.avatarurl}}" mode='widthFix'></image>
+                    <view class='niceNames'>
+                        <view class='nickName one' >{{item.wx_name}}</view>
+                        <view class='nickName two'>{{item.add_time}}</view>
+                    </view>
+                    <view class='zan' bindtap='zanTap1' data-type='comment' data-index='{{index}}'
+                          data-object_id='{{item.comment_id}}'><image src="../img/zan.png"></image>{{item.thumb_count}}</view>
+                </view>
+                <view class='chartText'>{{item.comment}}</view>
+            </view>
+        </block> 
+        <block wx:if="{{comment_list.length<1}}">
+            <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 快来成为第一个帮Ta评论的人吧！ </view>
+        </block>
+    </view>   -->
+</view>
+<!--关闭评论  -->
+  <!-- <view class='footer' bindtap='writeTap'>
+    <view class='foot'>
+        <image src="../img/1162232-200.png" mode='widthFix'></image>
+        <view class='placeholder'>写留言...</view>
+        <view class='pinglun'>评论</view>
+    </view>
+</view>   -->
+

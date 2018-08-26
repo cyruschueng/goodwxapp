@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>滚动加载</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+    	* {
+			margin:0;
+			padding: 0;
+		}
+		#wrapper {
+			width: 80%;
+			height: 500px;
+			background-color: #d6edff;
+			margin: 0 auto;
+		}
+		#wrapper ul {
+			width: 100%;
+			padding-bottom: 50px;
+			list-style: none;
+		}
+		#wrapper ul li {
+			width: 80%;
+			height: 60px;
+			display: block;
+			background-color: pink;
+			margin: 5px auto;
+			text-align: center;
+		}
+		#wrapper ul .loading , #wrapper ul .success , #wrapper ul .before {
+			position: absolute;
+			left: calc(50% - 16px);
+			bottom: 10px;
+		}
+		#wrapper ul .loading {
+			animation: spin 1s linear infinite;
+		}
+		@keyframes spin
+		{
+		    0%   {transform: rotate(0deg);}
+		    100% {transform: rotate(360deg);}
+		}
+		[v-cloak] {
+			display: none;
+		}
+    </style>
+    <script src="https://cdn.bootcss.com/iScroll/5.2.0/iscroll.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+</head>
+
+<body>
+    <h1 style="text-align: center">滚动加载</h1>
+    <div id="wrapper" v-cloak>
+        <ul>
+            <img class="loading" src="images/scroll/loading.svg" v-if="static == 1">
+            <img class="success" src="images/scroll/success.svg" v-if="static == 2">
+            <img class="before" src="images/scroll/before.svg" v-if="static == 0">
+            <li v-for="li in lis">{{li.name}}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    var w = new Vue({
+        el: "#wrapper",
+        data: {
+            static: "",
+            lis: [
+                { name: "1" },
+                { name: "2" },
+                { name: "3" },
+                { name: "4" },
+                { name: "5" },
+                { name: "6" },
+                { name: "7" },
+                { name: "8" },
+                { name: "9" },
+                { name: "0" },
+            ]
+        }
+    })
+    </script>
+    <script>
+    var myscroll;
+    //是否正在加载中	true表示正在加载  false表示没有加载
+    var is_r = false;
+    window.onload = function() {
+        setTimeout(function() {
+            myscroll = new IScroll("wrapper", {
+                topOffset: 0,
+                //上拉时触发
+                onScrollMove: function() {
+                    w.static = 0;
+                    //如果上拉高度 大于 (内容高度 - wrapper高度) 50px 以上  且是未刷新状态时触发 ; 
+                    if (this.y <= (this.wrapperH - this.scroller.clientHeight - 50) && is_r == false) {
+                        //正在加载状态
+                        is_r = true;
+                        setTimeout(function() {
+                            //这里表示数据加载成功后
+                            for (var i = 0; i < 3; i++) {
+                                w.lis.push({ name: "+" });
+                            }
+                            //这里表示渲染完成后刷新wrapper
+                            setTimeout(function() {
+                                console.log("刷新wrapper");
+                                //显示加载成功状态图标 (没有更多数据时候的提示作用)
+                                w.static = 2;
+                                setTimeout(function() {
+                                    w.static = "";
+                                }, 500)
+                                //加载完成状态
+                                is_r = false;
+                                myscroll.refresh();
+                            }, 0)
+                        }, 2000)
+
+                    }
+                },
+                onScrollEnd: function() {
+                    //上拉之后如果触发刷新则 状态图标值为1 显示loading状态
+                    if (is_r == true) {
+                        w.static = 1;
+                    }
+                }
+            });
+        }, 0);
+    }
+    </script>
+</body>
+
+</html>
+
+<!-- http://www.sucaihuo.com/js/2370.html -->
+
+
+<!-- https://www.cnblogs.com/sichaoyun/p/6647458.html -->
+
+
+<!-- http://blog.csdn.net/qq_16559905/article/details/70160807 -->
+
+
+<!-- https://mp.weixin.qq.com/s/2-utimMTf2CwgNmbSUaNJA -->

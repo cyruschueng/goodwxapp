@@ -1,0 +1,41 @@
+<view class="container">
+    <view class='management'>
+        <view class="left {{music_play?'music_play':'stop'}}" bindtap="bindPlay"></view>
+        <view class='right' wx:if="{{self}}" bindtap='management' >
+            <image src="../img/photoEdit.png" mode="widthFix"></image>
+        </view>  
+    </view>
+    <view class='photo'>
+         <image class='thumb' src='{{thumb}}' mode='aspectFit'></image> 
+    </view>
+    <view class='notice'>注：此模板可以上传{{photoInform.counts.length}}张照片</view>
+    <view class='buttons'>
+        <!--wx:if="{{!finish && self}}"   -->
+        <button class='translate icon'  wx:if="{{self}}"  open-type='share' style='background:none'>
+            <image src="../img/inter.png" mode='widthFix'></image>
+            <view>邀请</view>
+        </button> 
+        <view class='active buttona' bindtap='savePhoto' wx:if="{{finish && self && button}}">生成照片墙</view>
+        <view class='active buttonb' wx:if="{{!button}}">生成照片墙</view>   
+        <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{!finish}}">
+            <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
+        </form>
+        <view class='active buttona' bindtap='myplay' wx:if="{{!self}}">我也要玩</view> 
+        <view class='code icon' bindtap='friends' wx:if="{{self}}">
+            <image src="../img/ewm.png" mode='widthFix'></image>
+            <view>二维码</view>
+        </view>
+        <!-- <view class='active' wx:if="{{!finish && self}}">
+            <button  open-type='share'>邀请好友拼图</button>  
+        </view>
+        <view class='active' bindtap='friends' wx:if="{{self}}">生成朋友圈海报</view>  -->
+        
+    </view>
+    <view class='checkboxs' wx:if="{{finish && self}}">
+            <image  wx:if="{{checkboxs==1}}"  bindtap="Change" data-check='0' 
+                    src="../img/checka.png" mode='widthFix'></image>
+            <image wx:else  bindtap="Change" data-check='1' 
+                    src="../img/check.png"  mode='widthFix'></image>
+          同意生成照片墙展示在首页
+    </view>
+</view>

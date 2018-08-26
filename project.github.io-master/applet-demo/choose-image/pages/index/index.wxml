@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="section_add" bindtap="showType">
+     <image src="../../assets/icons/add.png"></image>选择图片
+  </view>
+
+  <view class="show" hidden="{{showImgHideen}}">
+      <view wx:for="{{srcArr}}" wx:key="unique" class="imgBlock">
+          <view class="deleteImg" bindtap="deleteImg" data-index="{{index}}">
+              <image src="../../assets/icons/deleteImg.png"></image>
+          </view>
+          <image src="{{item}}"></image>
+      </view>
+  </view>
+</view>

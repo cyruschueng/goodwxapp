@@ -1,0 +1,52 @@
+<!--pages/myCenter/shop/chatblock/chatblock.wxml-->
+<view class='chatview'>
+    <block wx:for="{{carList}}" wx:key="">
+        <view class='section-worp'>
+            <view class='block-hd'>
+                <view class='checkbox'>
+                    <icon bindtap='checkshop' data-index='{{index}}' wx:if="{{item.selected}}" size='20' color='orange' type='success' data-shopid="{{item.shop_id}}"></icon>
+                    <icon bindtap='checkshop' data-index='{{index}}' wx:else size='20' color='orange' type='circle' data-shopid="{{item.shop_id}}"></icon>
+                </view>
+                <image class='chat-icon' src='/images/icon_goods_cert.png'></image>
+                <text>{{item.shop_name}}</text>
+                <image class='arrow' src='/images/myCenter/arrow.png'></image>
+            </view>
+            <block wx:for="{{item.data}}" wx:key="">
+                <view class='block-cent'>
+                    <view class='checkbox'>
+                        <icon wx:if="{{item.check}}" bindtap='goodcheck' data-id="{{item.index}}" data-index='{{index}}' size='20' color='orange' type="success"></icon>
+                        <icon wx:else type="circle" bindtap='goodcheck' data-id="{{item.index}}"  data-index='{{index}}' size='20' color='orange'></icon>
+                    </view>
+                    <view class='row-cent'>
+                        <view class='pro-img'><image src='{{item.img_url}}'></image></view>
+                        <view class='chat-info'>
+                            <view class='name'>{{item.goods_name}}</view>
+                            <view class='desc'>库存：111+{{item.index}}</view>
+                        </view>
+                    </view>
+                    <view class='proiteminfo'>
+                        <view class='price'>¥{{item.goods_price}}.00</view>
+                        <view class='sumadd'>
+                            <view class='delsum' bindtap='minusCount'>-</view>
+                            <input class='input' value='{{item.total_num}}'></input>
+                            <view class='addsum' bindtap='addCount'>+</view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+</view>
+
+<view class='chatfootber'>
+    <view class='checkbox'>
+        <icon bindtap="selectAll" size='25' color='orange' wx:if="{{selectAllStatus}}" type="success_circle"></icon>
+        <icon bindtap="selectAll" size='25' color='orange' wx:else type="circle"></icon>
+        全选
+    </view>
+    <view class='payinfo'><view>合计：{{totalPrice}}元</view><text>不含运费</text></view>
+    <view class='rigthbtn'>
+        <view class='btn edit'>编辑</view>
+        <view bindtap='gocart' class='btn'>结算(4)</view>
+    </view>
+</view>

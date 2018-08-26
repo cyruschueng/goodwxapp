@@ -1,0 +1,228 @@
+<!--pages/prize/detail/detail.wxml-->
+<!-- <login-tips show="{{loginShow}}" bind:onSubmit='_onSubmit'></login-tips> -->
+<view class='askhead'>
+    <view class='askheadimg'>
+        <image mode='aspectFill' src='{{userInfo.img}}'></image>
+    </view>
+    <view class='askheadtxt'>{{userInfo.name}}</view>
+    <view class='askshare'>
+        <button open-type="share">
+            <image src='http://i1.dd-img.com/assets/image/1523850973-91042a27663460ca-30w-30h.png'></image>邀请好友
+        </button>
+    </view>
+</view>
+<view class='askallnumber'>
+    <view class='askallnumberlist'>
+        <view class='askblack' wx:if="{{!useramount}}">0</view>
+        <view class='askblack' wx:else>{{useramount.answer_count}}</view>
+        <view class='askgray'>闯关次数</view>
+    </view>
+    <view class='askallborder'></view>
+    <view class='askallnumberlist'>
+        <view class='askblack' wx:if="{{!useramount}}">0</view>
+        <view class='askblack' wx:else>{{useramount.access_count}}</view>
+        <view class='askgray'>通关次数</view>
+    </view>
+    <view class='askallborder'></view>
+    <view class='askallnumberlist'>
+        <view class='askblue' wx:if="{{!useramount}}">0.00</view>
+        <view class='askblue' wx:else>{{useramount.amount}}</view>
+        <view class='askgray'>我的余额(元)</view>
+    </view>
+</view>
+<view class='askmain'>
+    <view wx:if="{{!prizetimelast}}" class='asklist'>
+        <view class='asklistimg'>
+            <image src='http://i1.dd-img.com/assets/image/1523871261-e8bb61e66849b55a-710w-355h.png'></image>
+            <view class='asklisttxtbg'></view>
+            <view class='asklistlogo'>
+                <image src='http://i1.dd-img.com/assets/image/1523871261-46bb1cf80956b172-100w-120h.png'></image>
+            </view>
+            <view class='asklisttxt'>
+                <view class='asklisttitle'>限时答题</view>
+                <view class='asklistnav'>邦老师正在积极筹备活动，敬请期待…</view>
+            </view>
+        </view>
+        <view class='askmoney'>
+            <view class='askmoneyleft'>
+                <view class='askmoneytitle'>本期奖金</view>
+                <view class='askmoneynum'>--</view>
+            </view>
+            <view class='askmoneyright'>
+                <view class='askmoneytime askmoneygraybtn'>敬请期待..</view>
+            </view>
+        </view>
+    </view>
+    <view wx:else class='asklist'>
+        <view class='asklistimg'>
+            <image mode='widthFix' src='{{prizetimelast.forcus}}'></image>
+            <view class='asklisttxtbg'></view>
+            <view class='asklistlogo'>
+                <image mode='widthFix' src='{{prizetimelast.logo}}'></image>
+                <text>独家冠名</text>
+            </view>
+            <view class='asklisttxt'>
+                <view class='asklisttitle'>限时答题</view>
+                <view class='asklistnav'>{{prizetimelast.support_desc}}</view>
+            </view>
+        </view>
+        <view class='askmoney'>
+            <view class='askmoneyleft'>
+                <view class='askmoneytitle'>本期奖金</view>
+                <view class='askmoneynum'>{{prizetimelast.money}}元</view>
+            </view>
+            <view wx:if="{{Istimestatus==1}}" class='askmoneyright'>
+                <view class='askmoneytitle'>距离开始还有</view>
+                <view class='askmoneytime'>
+                    <block wx:if="{{downTime.day>0}}">{{downTime.day}}天</block>
+                    <!-- <block wx:else></block> -->
+                    {{downTime.hour}}:{{downTime.minute}}:{{downTime.second}}
+                </view>
+            </view>
+            <view wx:if="{{Istimestatus==2}}" class='askmoneyright'>
+                <view class='askmoneytitle'>距离开始还有</view>
+                <view class='askmoneytime'>{{downTime.second}}</view>
+            </view>
+
+            <view wx:if="{{Istimestatus==3}}" class='askmoneyright'>
+                <view class='askmoneytitle'>稍后公布结果</view>
+                <view class='askmoneytime'>答题进行中</view>
+            </view>
+            <block wx:if="{{Istimestatus==-1 }}">
+                <view wx:if="{{prizetimelast.user.obtain_money == '0.00'}}" class='askmoneyright'>
+                    <view class='askmoneytitle'>与{{prizetimelast.money}}元擦肩而过</view>
+                    <view class='askmoneytime'>已结束</view>
+                </view>
+                <view wx:else class='askmoneyright'>
+                    <view class='askmoneyred'>恭喜通关</view>
+                    <view class='askmoneytimered'>获得{{prizetimelast.user.obtain_money}}元</view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <!-- <view class='asklist'>
+        <view class='asklistimg'>
+            <image src='http://i1.dd-img.com/assets/image/1523861895-5b462a7a6bf11c78-710w-355h.png'></image>
+            <view class='asklisttxtbg'></view>
+            <view class='asklistlogo'>
+                <image src='http://i1.dd-img.com/assets/image/1523863781-b927199401762fe3-100w-120h.png'></image>
+                <text>独家冠名</text>
+            </view>
+            <view class='asklisttxt'>
+                <view class='asklisttitle'>限时答题</view>
+                <view class='asklistnav'>New e-Golf你知道多少？敢来挑战吗？</view>
+            </view>
+        </view>
+        <view class='askmoney'>
+            <view class='askmoneyleft'>
+                <view class='askmoneytitle'>本期奖金</view>
+                <view class='askmoneynum'>50,000元</view>
+            </view>
+            <view class='askmoneyright'>
+                <view class='askmoneytitle'>距离开始还有</view>
+                <view class='askmoneytime'>23:22:25</view>
+            </view>
+        </view>
+    </view> -->
+    <view wx:if="{{!prizerealllast}}" class='asklist'>
+        <view class='asklistimg'>
+            <image src='http://i1.dd-img.com/assets/image/1523871261-44056c0c275fb263-710w-355h.png'></image>
+            <view class='asklisttxtbg'></view>
+            <view class='asklistlogo'>
+                <image src='http://i1.dd-img.com/assets/image/1523871261-46bb1cf80956b172-100w-120h.png'></image>
+            </view>
+            <view class='asklisttxt'>
+                <view class='asklisttitle'>自由答题</view>
+                <view class='asklistnav'>邦老师正在积极筹备活动，敬请期待…</view>
+            </view>
+        </view>
+        <view class='askmoney'>
+            <view class='askmoneyleft'>
+                <view class='askpasstitle'>本期奖金</view>
+                <view class='askpassmoneynum'>--</view>
+            </view>
+            <view class='askmoneyright'>
+                <view class='askmoneytime askmoneygraybtn'>敬请期待..</view>
+            </view>
+        </view>
+    </view>
+    <view wx:else class='asklist'>
+        <view class='asklistimg'>
+            <image src='http://i1.dd-img.com/assets/image/1523861895-0203fbecaa877b06-710w-355h.png'></image>
+            <view class='asklisttxtbg'></view>
+            <view class='asklistlogo'>
+                <image src='http://i1.dd-img.com/assets/image/1523863780-e7840b5075b70cdb-100w-120h.png'></image>
+                <text>独家冠名</text>
+            </view>
+            <view class='asklisttxt'>
+                <view class='asklisttitle'>自由答题</view>
+                <view class='asklistnav'>{{prizerealllast.support_desc}}</view>
+            </view>
+        </view>
+        <view class='askmoney'>
+            <view class='askmoneyleft'>
+                <view class='askpasstitle'>本期{{prizerealllast.limit_join_num}}人平分</view>
+                <view class='askpassmoneynum'>{{prizerealllast.money}}元</view>
+            </view>
+            <view wx:if="{{IsPasstatus==1}}" class='askmoneyright'>
+                <view class='askpassnum'>您有{{prizerealllast.answer_num}}次机会</view>
+                <view class='askpasstime' bindtap='reallanswer'>开始答题</view>
+            </view>
+            <view wx:if="{{IsPasstatus==2}}" class='askmoneyright'>
+                <view class='askpassnum'>您有{{prizerealllast.answer_num}}次机会</view>
+                <view class='askpasstime askpasstimepink'>{{timer.num}}</view>
+            </view>
+            <view wx:if="{{IsPasstatus==3}}" class='askmoneyright'>
+                <view class='askpassnum'>机会用光了</view>
+                <view class='askpasstime'>求助于好友0/{{prizerealllast.limit_share}}</view>
+            </view>
+            <block wx:if="{{IsPasstatus==-1}}">
+                <view wx:if="{{prizerealllast.user_money==0}}" class='askmoneyright'>
+                    <view class='askpassnum'>奖金被分完了</view>
+                    <view class='askpasstime askpasstimepink'>已结束</view>
+                </view>
+                <view wx:else class='askmoneyright'>
+                    <view class='askmoneyred'>恭喜通关</view>
+                    <view class='askmoneytimered'>获得{{prizerealllast.user.obtain_money}}元</view>
+                </view>
+            </block>
+
+        </view>
+    </view>
+    <!-- <view class='asklist'>
+        <view class='asklistimg'>
+            <image src='http://i1.dd-img.com/assets/image/1523861895-0203fbecaa877b06-710w-355h.png'></image>
+            <view class='asklisttxtbg'></view>
+            <view class='asklistlogo'>
+                <image src='http://i1.dd-img.com/assets/image/1523863780-e7840b5075b70cdb-100w-120h.png'></image>
+                <text>独家冠名</text>
+            </view>
+            <view class='asklisttxt'>
+                <view class='asklisttitle'>自由答题</view>
+                <view class='asklistnav'>Mission E的神秘，邀你来挑战！</view>
+            </view>
+        </view>
+        <view class='askmoney'>
+            <view class='askmoneyleft'>
+                <view class='askpasstitle'>本期1000人平分</view>
+                <view class='askpassmoneynum'>50,000元</view>
+            </view>
+            <view class='askmoneyright'>
+                <view class='askpassnum'>您还有3次机会</view>
+                <view class='askpasstime'>开始答题</view>
+            </view>
+        </view>
+    </view> -->
+    <view class='ask-rule' bindtap='onRule'>答题规则</view>
+</view>
+<view class='askgetmoneybg'></view>
+<view class='askgetmoney' wx:if="{{useramount.amount_status == 1 &&useramount.amount>useramount.fetch_lowest}}" bindtap="amountmoneyto">立即提现</view>
+<view class='askgetmoney askgetstart' wx:elif="{{useramount.amount_status ==2}}">提现审核中</view>
+<view wx:else class='askgetmoney askgetmoneyoff' bindtap="amountmoneyup">立即提现</view>
+<view class='askpopup' wx:if="{{amountmoneyup == 1}}">
+    <view class='askpopupbg'></view>
+    <view class='askpopupmain'>
+        <view class='askpopuptext'>余额大于10元可以提现</view>
+        <view class='askpopupbtn' bindtap="amountmoneyclose">我知道了</view>
+    </view>
+</view>

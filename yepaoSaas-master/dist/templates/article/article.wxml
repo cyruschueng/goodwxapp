@@ -1,0 +1,34 @@
+<template name="article">
+
+  <!-- title -->
+  <view class="article-title">{{ title }}</view>
+
+  <!-- 作者 简介 -->
+  <view wx:if="{{ author }}" class='author-introduction-view'>{{ author }}</view>
+  <view wx:if="{{ introduction }}" class='author-introduction-view'>简介：{{ introduction }}</view>
+
+  <!-- 第一张 海报 -->
+  <view class="poster-image-container">
+    <image class="poster-image" src="{{ poster }}" mode="{{ ac === 'CT'? 'widthFix': 'aspectFill' }}" catchtap="{{ previewPosterImage || 'previewPosterImage' }}" data-src="{{ poster }}"/>
+  </view>
+    
+  <!-- 正文 -->
+  <view class="article-contents">
+    <block wx:if="{{ contents.length === 0 }}">
+    </block>
+    <block wx:for="{{ contents }}" wx:for-index="idx" wx:for-item="c" wx:key="idx">
+      <block wx:if="{{ c.types === 'image' }}">
+        <image src="{{ c.src }}" mode="aspectFill" catchtap="{{ previewImages || 'previewImages' }}" data-idx="{{ idx }}" data-src="{{ c.src }}"/>
+      </block>
+      <!-- <block wx:elif="{{ c.type === 'chart' && showChartContent }}">
+          <canvas canvas-id="{{ c.chartId }}" class="chart-canvas"></canvas>
+      </block> -->
+      <block wx:else>
+        <view class="{{ c.styleClass }} content-text-section">
+          <text>{{ c.content }}</text>
+        </view>
+      </block>
+    </block>
+  </view>
+  
+</template>

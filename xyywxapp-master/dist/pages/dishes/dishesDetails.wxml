@@ -1,0 +1,75 @@
+<!--pages/dishes/dishesDetails.wxml-->
+
+<view  wx:if='{{ dishes.dishesList.length > 0 }}' >
+
+<view class='body' >
+  
+  <!-- 头部 滚轮 -->
+  <view class='title-img'>
+  <view class='title-swiper-view'>
+    <swiper autoplay="true" bindchange='bindDishesImgSwiperChange'>
+    <block wx:for="{{ dishesImgUrls }}" wx:for-item='img' wx:key='{{ index }}'>
+      <swiper-item>
+        <image mode='aspectFill' src="{{ img.img }}" class="slide-image"/>
+      </swiper-item>
+    </block>
+    </swiper>
+  </view>
+  <view class='title-bottom-view'>{{ dishesImgUrls[dishesImgIndex].name }}</view>
+  </view>
+
+  <!-- 套餐名 -->
+  <view class='title'>
+    <text>{{ dishes.name }}</text>
+    <text class='price'> ¥ {{ dishes.price }}</text>
+    <image class='comment-icon' src='../../images/comment-gray.png' bindtap='goDishesCommentPage'></image>
+  </view>
+
+  <!-- 各个菜品 -->
+  <view class='textarea-view'>
+  <block wx:for="{{ dishes.dishesList }}" wx:key="{{ index }}">
+    <view class='textContent' wx:if='{{ item.list.length > 0 }}'>
+      <view class='typeName-view'>
+        <view class='line'>1</view>
+        <text>{{ item.name }}</text>
+        <view class='line'>1</view>
+      </view>
+      <view class='dishesName-view'>
+      <block wx:for='{{ item.list }}' wx:for-item='dishesInfo' wx:key='{{ index }}'>
+        <view data-dishesinfo='{{ dishesInfo }}' bindtap='bindDishesNameTap'>{{ dishesInfo.name }}</view>
+      </block>
+      </view>
+    </view>
+  </block> 
+  </view>
+
+  <!-- 附加信息 -->
+  <view class='foot-view second-txt-color'>
+    附加信息: 可与商家联系更改菜单
+  </view>
+
+</view>
+
+<view class='join-view' hidden='{{ prepagetype == "home" }}'>
+  <view class='join-btn' bindtap='bindJoinShoppingcarTap'>加入购物车</view>
+</view>
+
+<!-- 弹窗 查看 菜品详情 -->
+<view class='dishes-tc-view' hidden='{{ dishesTcHiddent }}'>
+  <view class='dishes-view'>
+  <!-- style='background-image: url( {{ dishesTc.img }} )' -->
+    <view class='img-view' >
+      <image mode='widthFix' src='{{ dishesTc.img }}'></image>
+    </view> 
+    <view class='first-name'>{{ dishesTc.name }}</view>
+    <view class='details-view'>主要食材：<text>{{ dishesTc.ingredient }}</text></view>
+  </view>
+  <!-- 关闭 按钮 -->
+  <view class='close-icon-view'>
+    <image src='../../images/dis-hidden.png' bindtap='bindCloseDishesDetailsTap'></image>
+  </view>
+</view>
+
+
+
+</view>

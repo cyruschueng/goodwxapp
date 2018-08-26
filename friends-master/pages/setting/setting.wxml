@@ -1,0 +1,98 @@
+<view>
+	<view class="popup theme-switch-float">
+		<view class="box">
+			<view class="rank border-line-top border-line-bottom">
+				<button class="rank-title btn-null" form-type="submit">
+					<text class="iconfont icon-close">
+						<text style="display:none;">
+						</text>
+						<text>
+						</text>
+					</text>
+				</button>
+			</view>
+			<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+				<view class="scroll-view">
+					<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+						<view style="height: 100%;">
+							<view class="option-list">
+								<view class="item-null">
+									<view>
+										一题都没猜对也是一种技术
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="popup theme-switch-float">
+		<view class="box">
+			<view class="rank border-line-top border-line-bottom">
+				<button class="rank-title btn-null" form-type="submit">
+					<text class="text">
+						<text>
+							我已猜过的
+						</text>
+					</text>
+					<text class="iconfont icon-close">
+						<text style="display:none;">
+						</text>
+						<text>
+						</text>
+					</text>
+				</button>
+			</view>
+			<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+				<view class="scroll-view">
+					<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+						<view style="height: 100%;">
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+		<view class="htitlechoices" style="background:#fff;" wx:for="{{quesition}}" data-index="{{index}}" wx:if="{{index+1==quesitionIndex?true:false}}">
+          <view class="header-title">
+              <view class="htitle ">
+                {{item.title}}
+              </view>
+              <view class="pagenumber">
+                题目{{quesitionIndex}}/{{quesition.length}}
+              </view>
+          </view>
+     <view class="option-list">
+          <view wx:for="{{item.choices}}"  wx:for-item="choices" 
+              data-checked="{{choices.checked}}"  data-c_id="{{choices.c_id}}"
+              data-index="{{index}}" class="item min-height-150" bindtap='checked'>
+              <view class="item-info">
+                <view class="item-title only-title">
+                  {{choices.choice_title}}
+                </view>
+              </view>
+            <view class="bounceIn cover-result cover-green choose {{choices.checked == true?'show':'hidden'}}" 
+                  data-id="{{choices.c_id}}">
+                <view class="cover-img">
+                  <image mode="widthFix" src="{{userInfo.avatarUrl}}"></image>
+                </view>
+                <view class="cover-title">
+                  设置成功
+                </view>
+            </view> 
+          </view>
+      </view>
+		<view class="pagination col-3">
+      <!-- <button form-type="submit" wx:else class="btn btn-null btn-2 false btn-green3" bindtap='next'>
+				下一题
+			</button> -->
+		</view>
+		<view class="footer">
+			<view class="logo">
+            <text class='color'>印</text>朋友印象
+        </view>
+		</view>
+	</view>
+</view>

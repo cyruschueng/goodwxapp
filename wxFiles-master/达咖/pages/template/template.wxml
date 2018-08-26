@@ -1,0 +1,135 @@
+<template name="blockTool1">
+<view class="panel-center margin-bottom-sm margin-top-sm" wx:if="{{bt.product.length > 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <image src="{{url + bt.icon}}" class="icon-lg margin-left-sm"></image>
+  <view class="font-lg  margin-left-xs">{{bt.name}}</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+<view class="panel panel-between home-first bottom-line" wx:if="{{bt.product.length > 0}}">
+  <view class="scroll-x zt-height">
+    <view class="item scroll-x-control" wx:for="{{bt.product}}" wx:if="{{index <9}}" data-shopid="{{item.shopid}}" data-shop="{{item}}" bindtap="goToShopBuy">
+      <image  mode="aspectFill" src="{{url + item.image}}"></image>
+      <view class="zt-panel panel-between">
+        <view class="it text-center">
+          <view class="font-22">{{item.name}}</view>
+        </view>
+        <view class="it text-center">
+          <view class="font-22">￥{{item.price}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='panel font-md' style='text-align:center;color:#888' data-index='{{index}}' bindtap='seeMore'>查看更多</view>
+</template>
+
+<template name="blockTool2">
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{bt.product.length > 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <image src="{{url + bt.icon}}" class="icon-lg margin-left-sm"></image>
+  <view class="font-lg  margin-left-xs">{{bt.name}}</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+<view class="panel home-second panel-between bottom-line" wx:if="{{bt.product.length > 0}}">
+  <view class="item" >
+    <view class="panel-center">
+      <view class="font-md">专属特价</view>
+      <image class="icon-md" src="/img/fire.png"></image>
+      <view class="font-danger font-xs">火热进行中</view>
+    </view>
+    <view class="panel-between item-center margin-top-sm" data-shopid="{{bt.product[0].shopid}}" data-shop="{{bt.product[0]}}" bindtap="goToShopBuy">
+      <view class="goods-content-sm ">
+        <view class="font-md ellipsis">{{bt.product[0].name}}</view>
+        <view class="font-md font-default">销量:{{bt.product[0].sales}}</view>
+        <view class="font-lg font-danger">
+          ￥{{bt.product[0].price*bt.product[0].discount}}
+        </view>
+      </view>
+      <image  mode="aspectFill" class="goods-img-sm" src="{{url+bt.product[0].image}}"></image>
+    </view>
+  </view>
+  <view class="item">
+    <view class="panel-center">
+      <view class="font-md">专属特价</view>
+      <image class="icon-md" src="/img/fire.png"></image>
+      <view class="font-danger font-xs">火热进行中</view>
+    </view>
+    <view class="panel-between margin-top-sm">
+      <view class="goods-content-xs"  data-shopid="{{bt.product[1].shopid}}" data-shop="{{bt.product[1]}}" bindtap="goToShopBuy">
+        <image  mode="aspectFill" src="{{url+bt.product[1].image}}"></image>
+        <view class="con">
+          <view class="font-md ellipsis">{{bt.product[1].name}}</view>
+          <view class="font-danger font-lg">￥{{bt.product[1].price*bt.product[1].discount}}</view>
+        </view>
+      </view>
+      <view class="goods-content-xs"  data-shopid="{{bt.product[2].shopid}}" data-shop="{{bt.product[2]}}" bindtap="goToShopBuy">
+        <image  mode="aspectFill" src="{{url+bt.product[2].image}}"></image>
+        <view class="con">
+          <view class="font-md ellipsis">{{bt.product[2].name}}</view>
+          <view class="font-danger font-lg">￥{{bt.product[2].price*bt.product[2].discount}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='panel font-md' data-index='{{index}}' style='text-align:center;color:#888' bindtap='seeMore'>查看更多</view>
+</template>
+
+<template name="blockTool3">
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{bt.product.length > 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <image src="{{url + bt.icon}}" class="icon-lg margin-left-sm"></image>
+  <view class="font-lg  margin-left-xs">{{bt.name}}</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+<view style='width:100%;background:#ffffff;padding:20rpx 0;' class='bottom-line'>
+  <view style='display:inline-block; width:50%' data-shopid="{{bt.product[0].shopid}}" data-shop="{{bt.product[0]}}" bindtap="goToShopBuy">
+    <view style='padding:20rpx;padding-right:1px;overflow:hidden;height:250rpx'>
+      <image style='width:100%;height:250rpx' src='{{url + bt.product[0].image}}' mode='aspectFill'></image>
+      <view style='background:rgba(0,0,0,0.5);position:relative;top:-80rpx;height:80rpx;line-height:80rpx;' class='panel-between'>
+        <view class="font-white font-md ellipsis" style='margin-left:10rpx;width:55%'>{{bt.product[0].name}}</view>
+        <view class="font-white font-lg" style='margin-right:10rpx;width:30%;text-align:right'>￥{{bt.product[0].price*bt.product[0].discount}}</view>
+      </view>
+    </view>
+  </view>
+  <view style='display:inline-block; width:50%' data-shopid="{{bt.product[1].shopid}}" data-shop="{{bt.product[1]}}" bindtap="goToShopBuy">
+    <view style='padding:20rpx;padding-left:1px;overflow:hidden;height:250rpx'>
+      <image style='width:100%;height:250rpx' src='{{url + bt.product[1].image}}' mode='aspectFill'></image>
+      <view style='background:rgba(0,0,0,0.5);position:relative;top:-80rpx;height:80rpx;line-height:80rpx;' class='panel-between'>
+        <view class="font-white font-md ellipsis" style='margin-left:20rpx;width:55%'>{{bt.product[1].name}}</view>
+        <view class="font-white font-lg" style='margin-right:20rpx;width:30%;text-align:right'>￥{{bt.product[1].price*bt.product[1].discount}}</view>
+      </view>
+    </view>
+  </view>
+  <view style='padding:0 20rpx;margin-top:-5rpx'>
+    <view style='display:inline-block; width:33.3%' data-shopid="{{bt.product[2].shopid}}" data-shop="{{bt.product[2]}}" bindtap="goToShopBuy">
+      <view style='padding-right:1px;overflow:hidden;height:200rpx'>
+        <image style='width:100%;height:200rpx' src='{{url + bt.product[2].image}}' mode='aspectFill'></image>
+        <view style='background:rgba(0,0,0,0.5);position:relative;top:-80rpx;height:80rpx;line-height:80rpx;' class='panel-between'>
+          <view class="font-white font-md ellipsis" style='margin-left:20rpx;width:55%'>{{bt.product[2].name}}</view>
+          <view class="font-white font-lg" style='margin-right:20rpx;width:30%;text-align:right'>￥{{bt.product[2].price*bt.product[2].discount}}</view>
+        </view>
+      </view>
+    </view>
+  <view style='display:inline-block; width:33.3%' data-shopid="{{bt.product[3].shopid}}" data-shop="{{bt.product[3]}}" bindtap="goToShopBuy">
+      <view style='padding:0 1px;overflow:hidden;height:200rpx'>
+        <image style='width:100%;height:200rpx' src='{{url + bt.product[3].image}}' mode='aspectFill'></image>
+        <view style='background:rgba(0,0,0,0.5);position:relative;top:-80rpx;height:80rpx;line-height:80rpx;' class='panel-between'>
+          <view class="font-white font-md ellipsis" style='margin-left:20rpx;width:55%'>{{bt.product[3].name}}</view>
+          <view class="font-white font-lg" style='margin-right:20rpx;width:30%;text-align:right'>￥{{bt.product[3].price*bt.product[3].discount}}</view>
+        </view>
+      </view>
+    </view>
+  <view style='display:inline-block; width:33.3%' data-shopid="{{bt.product[4].shopid}}" data-shop="{{bt.product[4]}}" bindtap="goToShopBuy">
+      <view style='padding-left:1px;overflow:hidden;height:200rpx'>
+        <image style='width:100%;height:200rpx' src='{{url + bt.product[4].image}}' mode='aspectFill'></image>
+        <view style='background:rgba(0,0,0,0.5);position:relative;top:-80rpx;height:80rpx;line-height:80rpx;' class='panel-between'>
+          <view class="font-white font-md ellipsis" style='margin-left:20rpx;width:55%'>{{bt.product[4].name}}</view>
+          <view class="font-white font-lg" style='margin-right:20rpx;width:30%;text-align:right'>￥{{bt.product[4].price*bt.product[4].discount}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='panel font-md' style='text-align:center;color:#888' data-index='{{index}}' bindtap='seeMore'>查看更多</view>
+</template>

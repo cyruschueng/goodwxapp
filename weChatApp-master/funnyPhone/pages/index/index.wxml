@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+    <!-- <block wx:else> -->
+      <image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="works">作品数量</text>
+    <!-- </block> -->
+  </view>
+  <view class="works-wrapper">
+    <view class='work-item' wx:for="{{works}}" wx:key="work" catchtap="goDetail">
+     <view class="main">
+          <view class='icon' data-current="{{index}}" id="{{index}}" catchtap='tapePlay'>
+            <image src='../../svg/play(3).svg' wx:if="{{index != currentIndex}}"></image>
+            <image src='../../svg/pause-circle.svg' wx:else="{{index === currentIndex}}"></image>
+          </view>
+          <view class="workInfor">
+              <view class="name">{{item.callName}}</view>
+              <view class="remarks">{{item.remarks}}</view>
+          </view>
+          <view class="time">0:00</view>
+          <button class="share" open-type="share" catchtap="stop">
+              <image src='../../svg/share.svg'></image>
+              <text>分享</text>
+          </button>
+     </view>
+     <view class="zan-cell zan-cell--access addition">
+        <view class="zan-cell__bd related" >
+          <view>0人听过</view>
+          <view>0人赞过</view>
+          <view>0条评论</view>
+        </view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>  
+  </view>
+  <view class="add" catchtap="goProduce">
+    <view class="zan-icon zan-icon-add"></view>
+  </view>
+</view>

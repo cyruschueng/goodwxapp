@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='home_top'>
+    <image src='../../images/home_1.png'/>
+  </view>
+  <view class='home_bootom'>
+      <view class='home_list' wx:for="{{listArr}}" wx:for-item="list" wx:key="*this"  bindtap='homeDetail' data-index='{{index}}'>
+        <image class='home_list_img' src='{{list.imgSrc}}'/>
+        <view class='home_list_detail'>
+          <text>{{list.name}}</text>
+          <text>{{list.explain}}</text>
+          <view class='home_detail_price'>
+             <text>{{list.price}}</text>
+             <text>元起</text>
+          </view>
+        </view>
+      </view>
+  </view>
+</view>

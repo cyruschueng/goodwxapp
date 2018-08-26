@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<input id="file_upload" type="file" />
+		<div class="image_container">
+			<img id="preview" hidden="hidden">
+			<button onclick="saveImg()">保存</button>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/ysh_comm.js"></script>
+	<script>
+		var imgTempData = null
+		$(document).ready(function() {
+				upLoadHeadImg("file_upload", "preview", 50, 50, function(data) {
+					if (data)
+						imgTempData = data
+				})
+			})
+			//保存本地图片
+		function saveImg() {
+			if (!imgTempData) {
+				alert("没有获取到图片信息")
+			} else {
+				var url = "http://f.yshfresh.com/upload/base64"
+				var param = {
+					img: imgTempData
+				}
+				getDataList(url, param, function(ret) {}, true)
+			}
+		}
+	</script>
+
+</html>

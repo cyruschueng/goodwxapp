@@ -1,0 +1,77 @@
+<view class="map">
+  <map name="line_map"
+  latitude="{{lineInfo.start[1]}}"
+  longitude="{{lineInfo.start[0]}}"
+  markers="{{markers}}"
+  polyline="{{polyline}}"></map>
+</view>
+<view class="line_info">
+  <view class="line_name">{{ lineInfo.groupTitle }}</view>
+  <view class="line_people_num">
+    <view class="car_bg">车主100</view>
+    <view class="people_bg">乘客100</view>
+  </view>
+  <view class="line_introduction">{{ lineInfo.groupNotice }}</view>
+</view>
+<view class="dividing_line"></view>
+<view class="group_members">
+  <view class="group_members_left">
+    <view>群成员</view>
+    <view>共200人</view>
+  </view>
+  <view class="group_members_right">
+    <view class="group_member_img">
+      <image src="../../images/btn_join_mini@3x.png"></image>
+      <image src="../../images/icon_noone@3x.png"></image>
+    </view>
+    <view class="group_member_img">
+      <image src="../../images/btn_join_mini@3x.png"></image>
+      <image src="../../images/icon_notwo@3x.png"></image>
+    </view>
+    <view class="group_member_img">
+      <image src="../../images/btn_join_mini@3x.png"></image>
+      <image src="../../images/icon_nothree@3x.png"></image>
+    </view>
+  </view>
+</view>
+<view class="dividing_line"></view>
+<view class="switch_tab {{ !pageDisplay ? 'fixed_switch_tab' : '' }}">
+  <view class="switch">
+    <view data-id="0" class="travel {{ code_type == '0' ? 'switch_selected' : '' }}" bindtap="switch_code">车主行程</view>
+    <view data-id="1" class="wallet {{ code_type == '1' ? 'switch_selected' : '' }}" bindtap="switch_code">乘客行程</view>
+  </view>
+  <view class="switch_date">
+    <view wx:for-items="{{ switch_date }}" wx:key="{{ index }}" class="date_list {{ date_pattern_type == item.date_pattern ? 'date_bg' : '' }}" data-type="{{ item.date_pattern }}" bindtap="clickDate">{{ item.week_txt }}</view>
+  </view>
+</view>
+<view class="line_code">
+  <view class="line_code_list" wx:for="{{ dateTravel }}" wx:for-item="date" wx:key="{{ index }}">
+    <view class="timeline">{{ date.time }}</view>
+    <scroll-view scroll-x="true" style="white-space: nowrap; display: flex; height: 220px;" >
+        <view class="line_list" wx:for-items="{{ date.time_line }}" wx:key="{{ index }}">
+          <view class="line_img">
+            <image src="../../images/btn_join_mini@3x.png"></image>
+          </view>
+          <view class="line_time">
+            <image src="../../images/icon_time@3x.png"></image>
+            <view>{{ item.startTime }}</view>
+          </view>
+          <view class="line_address">
+            <image src="../../images/icon_start@3x.png"></image>
+            <view class="address">{{ item.startAddress }}</view>
+          </view>
+          <view class="line_address">
+            <image src="../../images/icon_end@3x.png"></image>
+            <view class="address">{{ item.endAddress }}</view>
+          </view>
+          <view class="seat">
+            <view>{{ code_type == 0 ? '余座' : '乘车' }}</view>
+            <view class="jianju">{{ item.surplusSeats }}</view>
+            <view>{{ code_type == 0 ? '每座' : '车费' }}</view>
+            <view>{{ item.price }}</view>
+            <view>元</view>
+          </view>
+        </view>
+    </scroll-view>
+  </view>
+</view>

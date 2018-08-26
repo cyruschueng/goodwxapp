@@ -1,0 +1,55 @@
+<import src="/pages/Template/Template.wxml" />
+<scroll-view style="height:1108rpx;" scroll-y="true" bindscrolltolower='loadMore'>
+  <image src="{{signIndentityCard}}" class="activityImg">
+    <image class="activityUrl" wx:if='{{userInfo.user_logo_url}}' src="{{userInfo.user_logo_url}}"></image>
+    <view class="activityUrl" wx:if='{{userInfo.user_logo_text}}'>{{userInfo.user_logo_text}}</view>
+    <view class="activityName">{{userInfo.user_name}}</view>
+    <view class="activityCom">{{userInfo.user_company_name}}</view>
+    <view class="activityMobile flex">
+      <view class="activityMobile1">手机</view>
+      <view class="activityMobile2">{{userInfo.user_mobile}}</view>
+      <view wx:if="{{!userInfo.user_mobile}}" style="font-size:14px;color:#cccccc;">暂未填写</view>
+    </view>
+    <view class="activityChat flex">
+      <view class="activityMobile1">微信</view>
+      <view class="activityMobile2">{{userInfo.user_wechat}}</view>
+      <view wx:if="{{!userInfo.user_wechat}}" style="font-size:14px;color:#cccccc;">暂未填写</view>
+    </view>
+    <view class="activityMail flex">
+      <view class="activityMobile1">邮箱</view>
+      <view class="activityMobile2">{{userInfo.user_email}}</view>
+      <view wx:if="{{!userInfo.user_email}}" style="font-size:14px;color:#cccccc;">暂未填写</view>
+    </view>
+    <view class="activityCareer flex">
+      <view class="activityMobile1">职位</view>
+      <view class="activityMobile2">{{userInfo.user_company_career}}</view>
+      <view wx:if="{{!userInfo.user_company_career}}" style="font-size:14px;color:#cccccc;">暂未填写</view>
+    </view>
+    <view class="activityacName">{{activity.activity_title}}</view>
+    <view class="activityacTime">{{activity.start_time || '暂时未定'}} ~ {{activity.end_time || '暂时未定'}}</view>
+    <view class="activityContent">{{activity.activity_address}}</view>
+  </image>
+  <view class="selectProject flex">
+    <label style="width:26rpx;height:2rpx;background:#333;margin-right:20rpx"></label>
+    已签到用户
+    <label style="width:26rpx;height:2rpx;background:#333;margin-left:20rpx;"></label>
+  </view>
+  <!-- 已经报名用户列表 -->
+  <block wx:for="{{investorList}}" wx:key="{{investorList}}">
+    <view class='investorCard'>
+      <view class="t-investorColor" hover-class='t-hoverColor'>
+        <template is='InvestorCard' data='{{item,user_id}}'></template>
+        <view class="t-alineHeight"></view>
+        <template is='cardBottom1' data='{{item,user_id}}'></template>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<view style='height:128rpx;'></view>
+<!-- 操作按钮 -->
+<view class="activityBottom flex">
+  <button class="activityMeet" disabled='true' style='border-color:#ccc;' bindtap='goToActivityAgenda'>活动议程</button>
+  <button class="activityWei" bindtap='goToIndex'>去微天使看看</button>
+</view>
+<!--报错  -->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>

@@ -1,0 +1,21 @@
+requir.js使用方法：
+
+ html引入require.js：
+
+<script src="lib/js/require.js" data-main="js/main"></script>
+
+在main.js 配置：
+
+require.config({
+    baseUrl: 'lib/js',
+});
+require(['jquery','common','arttemplate','fastclick','lazyLoadImg',"test"], function($,common,arttemplate,fastclick,lazyLoadImg,test){
+    var module = (function(method){
+        
+	method.getDetail = function(){
+            
+        };
+        method.getDetail();
+        //return method;
+    })(window.module || {});
+});

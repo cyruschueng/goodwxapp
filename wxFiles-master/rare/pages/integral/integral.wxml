@@ -1,0 +1,33 @@
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="bgs">
+    <image src="/img/jbg.png"></image>
+    <view class="tit">
+      <text style="font-size:34rpx;">我的积分：</text>{{integral}}
+    </view>
+    <view class="bpu">{{vip[vflag]}}</view>
+  </view>
+
+  <view class="pl">
+
+    <view class="pal" wx:for="{{list}}" id="{{index}}" bindtap="navToIntegral">
+      <image class="img" src="{{item.icon}}"></image>
+      <view class="ppp">
+        <view class="title">
+          {{item.msgcontent}}
+        </view>
+        <view class="six">
+          <text>数量 X1</text>
+          <text style="text-decoration:line-through">\n￥{{item.sellprice}}</text>
+        </view>
+
+        <view >
+          <view class="pull-left sd">积分：{{item.integral}}</view>
+          <view class="pull-right btt">兑换</view>
+        </view>
+      </view>
+
+      <view class="clear-both"></view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,61 @@
+<import src="/zanui/toast/index.wxml" />
+<import src="../selectUser/selectUser" />
+<!--index.wxml-->
+<view class="container page__bd" wx:if="{{!showEditUser}}">
+  <view class="weui-cells__title"></view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+
+    <view class="weui-cells__title"> </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <!-- <navigator class="weui-cell weui-cell_access" style="height:60px;line-height:60px;" hover-class="weui-cell_active" url="/pages/jietu/selectUser/selectUser?from={{app_name}}_{{type}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">发送人</view>
+        </view>
+        <view class="weui-cell__bd special_flex" style="margin-right:25rpx;">
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{app[type].list[index].name}}</view>
+          <view class="weui-cell__hd" style="width: 50px;height: 50px;">
+            <image style="width: 50px;height: 50px;" src="{{app[type].list[index].avatar?app[type].list[index].avatar:'http://icons.maiyizhi.cn/default_avatar.png'}}" mode="aspectFill"></image>
+          </view>
+        </view>
+      </navigator> -->
+
+      <view class="weui-cell weui-cell_access" catchtap="showEditUser" style="height:60px;line-height:60px;">
+        <view class="weui-cell__hd">
+          <view class="weui-label">发送人</view>
+        </view>
+        <view class="weui-cell__bd special_flex" style="margin-right:25rpx;">
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{app[type].list[index].name}}</view>
+          <view class="weui-cell__hd" style="width: 50px;height: 50px;">
+            <image style="width: 50px;height: 50px;" src="{{app[type].list[index].avatar?app[type].list[index].avatar:'http://icons.maiyizhi.cn/default_avatar.png'}}" mode="aspectFill"></image>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{isself}}" class="weui-cells__title"></view>
+      <view wx:if="{{isself}}" class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">是否发送失败</view>
+          <view class="weui-cell__ft">
+            <switch bindchange="switchChange" name="isFail" checked="{{app[type].list[index].isFail}}" />
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">语音时长</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="a_flex">
+            <slider class="flex_all" style="margin:15px 0;" min="1" max="60" value="{{app[type].list[index].voice_length}}" bindchange="sliderChange" />
+            <text style="width: 100rpx;margin-left: 45rpx;">{{app[type].list[index].voice_length}}秒</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<template is="selectUser" data="{{showEditUser:showEditUser,list:list}}"></template>

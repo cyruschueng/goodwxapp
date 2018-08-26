@@ -1,0 +1,65 @@
+<image style="width:100%;" src="{{goodsUrl}}{{info.cover}}"></image>
+<view class="padding-15 fontsize-30 bottom-line">
+  <view>{{info.title}} </view>
+  <view style="clear:both"></view>
+  <view style="color:rgba(255,57,60,1.00)">￥
+    <text style="font-size:50rpx;">6</text>.00
+    <view class="pull-righ fontsize-30" style="color:#888888;margin-top:15rpx;">快递:包邮</view>
+  </view>
+</view>
+<picker class="padding-15 bottom-line" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+  <view class="fontsize-30 pull-left">规格型号</view>
+  <view class="fontsize-30 pull-righ color-r8">
+    <view class="pull-left fontsize-30">{{array[index]}}</view>
+    <image class="pull-righ icon-25" src="/img/right.png" style="margin-top:9rpx;"></image>
+  </view>
+  <view style="clear:both"></view>
+</picker>
+<view class="padding-10 fontsize-30 bottom-line">
+  <view class="fontsize-30 pull-left" style="padding-left:10rpx; padding-top:10rpx;">数量</view>
+  <view class="pull-righ">
+    <image class="icon-60 pull-left" src="/img/rele.png" bindtap="releaseBtn"></image>
+    <input class="pull-left" type="number" style="width:120rpx;text-align:center" value="{{numValue}}" />
+    <image class="icon-60 pull-left" src="/img/addd.png" bindtap="addBtn"></image>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<view style="background:#f2f2f2;padding:10rpx;padding-right:15px;">
+  <view class="pull-righ  fontsize-30" style="color:#888888">本产品{{info.initNum}}起拍</view>
+  <view style="clear:both"></view>
+</view>
+<view class="padding-15 fontsize-30 bottom-line">
+  <view class="fontsize-30 pull-left">产品参数</view>
+  <view style="clear:both"></view>
+</view>
+<block wx:for="{{title}}" wx:for-item="{{ti}}" wx:for-index="tix">
+  <block wx:for="{{value}}" wx:for-item="{{va}}" wx:for-index="vax">
+    <view class="padding-10 fontsize-30 bottom-line" style="padding-left:30rpx; padding-right:30rpx;" wx:if="{{tix == vax}}">
+      <view class="fontsize-30 pull-left">{{title[tix]}}</view>
+      <view class="fontsize-30 pull-righ" style="color:#888888">{{value[vax]}}</view>
+      <view style="clear:both"></view>
+    </view>
+  </block>
+</block>
+<view class="bg-gray-line"></view>
+<view class="padding-15 fontsize-30 bottom-line">
+  <view class="fontsize-30 pull-left">图文信息</view>
+  <view style="clear:both"></view>
+</view>
+<view class="padding-15">
+  <import src="../../wxParse/wxParse.wxml" />
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>
+<view style="height:120rpx;"></view>
+<view class="fixed-bottom">
+  <view class="btn pull-left" style="border-right:1px solid #f2f2f2;padding-left:60rpx;padding-right:60rpx;background:#fff">
+    <contact-button type="default-dark" size="20" session-from="weapp" style="margin-top:15rpx;">
+    </contact-button>
+  </view>
+  <view class="btn pull-left" style="padding-left:65rpx;padding-right:65rpx;background:#fff" bindtap="phoneCall">
+    <image class="thicon" src="/img/phone_call.png" style="margin-top:15rpx;"></image>
+  </view>
+  <view class="btn btn-md btn-primary pull-right" bindtap="navToPaypage">立即购买</view>
+  <view class="btn btn-md btn-warring pull-right" bindtap="intoCart">加入进货单</view>
+  <view style="clear:both"></view>
+</view>

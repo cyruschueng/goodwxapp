@@ -1,0 +1,142 @@
+ <view class="order-bar panel-between">
+  <view class="item" wx:for="{{navBar}}" data-index="{{index}}" bindtap="changeBar">
+    <view class="{{item.active ? 'bar-active':'bar-default'}}">{{item.label}}</view>
+  </view>
+</view>
+<view style="height:100rpx;"></view> 
+
+
+<view class="order-panel" wx:if="{{!navBar[2].active}}" wx:for="{{orders}}" wx:for-item="it" wx:for-index="itIndex" >
+  <view class="content">
+    <view class="top panel-between {{it.status == 0 ? 'bg-card':''}}{{it.status == 1 ? 'bg-cart':''}}{{it.status == 2 ? 'bg-eye':''}} {{it.status ==4 ? 'bg-folder':''}}{{it.status ==5 ? 'bg-close':''}}" data-index="{{itIndex}}" bindtap="navToOrderdetail">
+      <view class="panel-start">
+        <image class="img" src="{{url}}{{it.shop.shopimage}}" mode="aspectFill"></image>
+        <view class="font-md font-white margin-top-xs ellipsis margin-left-sm" style="width:400rpx"><text decode="true">{{it.shop.shopname}}
+          <text class="font-xs ellipsis">{{it.createtime}}</text>
+          </text>
+        </view>
+      </view>
+      <view class="margin-top-xs font-md font-white"><text decode="true">{{it.status == 0 ? '待付款':''}}{{it.status == 1 && it.type != 1 ? '待接单':''}}{{it.status == 1 && it.type == 1 ? '已付款':''}}{{it.status == 2 ? '配送中':''}} {{it.status ==4 ? '已完成':''}}{{it.status ==5 ? '交易已关闭':''}}</text></view>
+    </view>
+    <view wx:if="{{it.reservetime}}" class='font-md' style='padding:20rpx 0 0 20rpx'>送达时间: {{it.reservetime}}</view>
+    <view class="panel-goods bottom-line" data-index="{{itIndex}}" bindtap="navToOrderdetail">
+      <view class="pgitem panel-between" wx:for="{{it.orderproduct}}" wx:for-item="li" wx:for-index="liIndex">
+        <view class="panel-start">
+          <image class="gimg" src="{{url + li.productimage}}"></image>
+          <view class="margin-left-sm" style="width:350rpx">
+            <view class="font-md bold">{{li.productname}}</view>
+            <view class="font-md font-default" style="margin-top:-20rpx">
+              <text wx:for="{{li.productattribute}}" wx:for-item="pa" wx:for-index="pai">
+                <text wx:for="{{li.attributeid}}" wx:for-item="ai" wx:for-index="aii">
+                  {{aii == pai ? pa.content[ai].label:''}}/
+                </text>
+              </text>
+            </view>
+          </view>
+        </view>
+        <view class="font-md margin-top-xs" style="text-align:right">
+          <view class="font-default">x{{li.number}}</view>
+          <view class="font-danger font-lg">￥{{li.productprice}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom panel-between item-center">
+      <view class="font-xs" style="width:350rpx">
+        共计{{it.count}}件商品 合计：<text class="font-danger">￥{{it.totalprice}}</text>
+      </view>
+      <view class="panel-end">
+        <!-- <view class="btn bg-db font-sm" wx:if="{{it.status == 0}}">取消订单</view> -->
+        <view class="btn bg-print font-sm" wx:if="{{it.status == 0}}" data-orderid="{{it.ordernumber}}" data-pay="{{it.vipdiscount}}" data-index='{{itIndex}}' catchtap="payfor">立即付款</view>
+        <!-- <view class="btn bg-laptop font-sm" wx:if="{{it.status == 2}}">确认收货</view> -->
+        <!-- <view class="btn bg-minus font-sm" wx:if="{{it.status == 4 || it.status == 5}}">删除订单</view> -->
+      </view>
+    </view>
+  </view>
+</view>
+<block wx:if="{{navBar[2].active}}">
+<view class='padding-md'  wx:for="{{orders}}" wx:for-item="it" wx:for-index="itIndex" wx:if="{{it.status != 0}}"> 
+  <view class='panel' style='border-radius:10px'>
+    <view class='panel-between padding-bottom-sm bottom-line'>
+      <view><text style='font-size:55px'>{{it.code}}</text>号</view>
+      <view class='font-md' style='text-align:right'>
+        <view class='font-warring' wx:if="{{it.status == 1}}">待取货</view>
+        <view class='font-default' wx:if="{{it.status != 1}}">已取货</view>
+        <view class='margin-top-xs' style='width:200rpx'>{{it.createtime}}</view>
+      </view>
+    </view>
+    <view class='bottom-line padding-xs'>
+      <view class='panel-between padding-top-xs padding-bottom-xs' wx:for="{{it.orderproduct}}" wx:for-item="li" wx:for-index="liIndex"> 
+        <view class='font-md bold'>{{li.productname}}</view>
+        <view class='font-md'>
+          <view style='display:inline-block' wx:for="{{li.productattribute}}" wx:for-item="pa" wx:for-index="pai">
+                <view style='display:inline-block' wx:for="{{li.attributeid}}" wx:for-item="ai" wx:for-index="aii">
+                  {{aii == pai ? pa.content[ai].label:''}}/
+                </view>
+              </view>
+        </view>
+        <view class='font-md'>x{{li.number}}</view>
+        <view class='font-md'>￥{{li.totalprice}}</view>
+      </view>
+    </view>
+    <view>
+      <view class='panel-between margin-top-sm'>
+        <view class='font-md bold'>合计</view>
+        <view class='font-md'>￥{{it.totalprice}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+</block>
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+
+<view class="null-panel" wx:if="{{!loading && orders.length == 0}}">
+  <image src="/img/orderkong.png" mode="aspectFill"></image>
+  <view class="font-md font-default">订单空的喔~!去下个单呗！</view>
+</view>
+
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && orders.length > 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+
+<!-- 支付 -->
+<view class="payment-panel {{dopay ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+
+  <view class="input-panel">
+    <view class="user-tit">
+      <view class="con">
+        <image src="{{head}}"></image>
+        <view class="tit">请输入支付密码</view>
+      </view>
+      <image style="width:40rpx;height:40rpx;margin-top: 15rpx;" src="/img/close.png" bindtap="concelPay"></image>
+    </view>
+    <view class="txt-panel">
+      <view class="tit">{{shopname}}</view>
+      <view class="pri">￥{{pays}}</view>
+    </view>
+    <view class="num-penel">
+      <view class="item" wx:for="{{pwdl}}"><view class="ku" wx:if="{{item}}" ></view></view>
+    </view>
+    <view class="text-panel">
+      BigJA 会员余额支付
+    </view>
+  </view>
+  <view class="number-panel">
+    <view data-num="1" bindtap="clickNum">1</view>
+    <view data-num="2" bindtap="clickNum">2</view>
+    <view data-num="3" bindtap="clickNum" style="border-right:none">3</view>
+    <view data-num="4" bindtap="clickNum">4</view>
+    <view data-num="5" bindtap="clickNum">5</view>
+    <view data-num="6" bindtap="clickNum" style="border-right:none">6</view>
+    <view data-num="7" bindtap="clickNum">7</view>
+    <view data-num="8" bindtap="clickNum">8</view>
+    <view data-num="9" bindtap="clickNum" style="border-right:none">9</view>
+    <view data-num="#" bindtap="clickNum" style="background:#f3f3f3"></view>
+    <view data-num="0" bindtap="clickNum">0</view>
+    <view data-num="c" bindtap="clickNum" style="border-right:none;background:#f3f3f3"><image style="margin-top:40rpx;width:60rpx;height:60rpx;" src="/img/shanchu.png"></image></view>
+  </view>
+</view>

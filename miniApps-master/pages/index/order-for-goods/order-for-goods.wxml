@@ -1,0 +1,49 @@
+<view>
+  <view class='particulars'>
+    <view class='particulars_details'>
+      <text class='particulars_text'>{{obj.inp}}元现金劵</text>
+      <text>￥{{obj.sell}}</text>
+    </view>
+  </view>
+  <view class='particulars'>
+    <view class='particulars_details'>
+      <text class='particulars_text'>数量</text>
+      <view class="stepper">
+        <!-- 减号 -->
+        <text wx:if="{{sostatus == 1}}" class="">-</text>
+        <text wx:if="{{isNew == 1}}" class="">-</text>
+        <text wx:else class="{{minusStatus}}" bindtap="bindMinus">-</text>
+        <!-- 数值 -->
+        <input wx:if="{{sostatus == 1}}" type="number" disabled='true' value="{{number}}" />
+        <input wx:if="{{isNew == 1}}" type="number" disabled='true' value="{{number}}" />
+        <input wx:else type="number" bindchange="bindManual" value="{{number}}" />
+        <!-- 加号 -->
+        <text wx:if="{{sostatus == 1}}" class="">+</text>
+        <text wx:if="{{isNew == 1}}" class="">+</text>
+        <text wx:else class="normal" bindtap="bindPlus">+</text>
+      </view>
+    </view>
+  </view>
+  <!-- <view class='particulars'>
+    <view class='particulars_details'>
+      <text class='particulars_text' bindtap="cellPhone">手机号</text>
+      <text>15827245422</text>
+    </view>
+  </view> -->
+  <view class='particulars'>
+    <view class='particulars_details particulars_fuhe'>
+      <text class='particulars_text'>小计</text>
+      <text class='subtotal'>¥{{paymentAmount}}</text>
+    </view>
+  </view>
+  <form report-submit="true">
+    <view class='affirm' catchtap='confirmPayment'>
+      <text>确认支付</text>
+      <text class='affirmNumber'>￥{{paymentAmount}}</text>
+    </view>
+  </form>
+  <!-- <view class='affirm' catchtap='confirmPayment'>
+    <text>确认支付</text>
+    <text class='affirmNumber'>￥{{paymentAmount}}</text>
+  </view> -->
+</view>

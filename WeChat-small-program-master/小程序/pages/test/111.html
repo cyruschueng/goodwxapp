@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    　<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Title</title>
+    <style>
+        .a{
+            background: white;
+        }
+        @media screen and (max-width: 1366px) {
+            .a{
+                background: red;
+            }
+        }
+        @media screen and (min-width: 1440px){
+            .a{
+                background: yellow;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="a">
+    ddadsasdasd
+</div>
+<script>
+    var a =[{name:'小明',classhours:'7.00'},{name:'小张',classhours:'16.00'},{name:'小王',classhours:'15.00'}];
+
+    var b = [10,8,10];
+    var ary =[];
+    for (var i = 0; i < a.length; i++) {
+        var cur = a[i];
+        for (var j = 0; j < b.length; j++) {
+            if(cur.classhours>b[j]){          //  用a.classhours 跟 b的每一项比较 如果大于b 弹出当前大于的姓名
+                console.log(cur.classhours,b[j])
+                alert(cur.name)
+                ary.push(cur.name)
+                console.log(ary)
+                break;
+            }
+        }
+    }
+  /*  a.map(function (item) {
+        for (var i = 0; i < b.length; i++) {
+            if(item.classhours >b[i]){
+                alert(item.name)
+                break
+            }
+        }
+    })*/
+</script>
+</body>
+</html>

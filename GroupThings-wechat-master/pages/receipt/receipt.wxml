@@ -1,0 +1,33 @@
+<!--pages/receipt/receipt.wxml-->
+<view class="container">
+    <block wx:for="{{mainList}}"  wx:for-item="receipt" wx:key="id">
+      <view class="indexItem" catchtap='toInfoHandle' data-type="{{receipt.classify}}" data-id="{{receipt.send_id}}"   data-idx="{{index}}" bindlongpress="delItem">
+        <view class="indexTitle">
+          <span class="iconfont icon-huodong mr5" style="color:#319eff" wx:if="{{receipt.classify == 2}}"></span>
+          <span class="iconfont icon-tongzhi mr5" style="color:#ff3131" wx:if="{{receipt.classify == 1}}"></span>
+          <span class="iconfont icon-toupiao mr5" style="color:#ff9800" wx:if="{{receipt.classify == 3}}"></span>
+          <text>{{receipt.title}}</text>
+        </view>
+        <view class="indexInfo" wx:if="{{receipt.content}}">{{receipt.content}}</view>
+        <view class="indexKeyWords" wx:if="{{receipt.keyWords}}">
+          <text>关键词：</text>
+          <block wx:for="{{receipt.keyWords}}" wx:for-item="keyWord" wx:key="*this">
+            <text class="mr5">{{keyWord}}</text>
+          </block>
+        </view>
+        <view class="indexFooter">
+          <view><span class="iconfont icon-user2 mr5"></span>{{receipt.author}}</view>
+          <view><span class="iconfont icon-shijian mr5"></span>{{receipt.build_time}}</view>
+        </view>
+      </view>
+    </block>
+  
+  <view class="tc" wx:if="{{isEmpty}}">
+    暂无数据...
+  </view>
+
+  <view class="tc" hidden="{{loadingHidden}}">
+    <image src="../../assets/imgs/loading.gif" class="loading"></image>
+  </view>
+  
+</view>

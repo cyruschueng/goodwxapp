@@ -1,0 +1,90 @@
+<!--pages/movie/movie.wxml-->
+<view class='movie-message'>
+  <view>
+    <image class="userinfo-avatar" src="/images/iconfont/user@default.jpg" background-size="cover"></image>
+  </view>
+   <view class='movie-monicker'>
+    <text class="userinfo-nickname">万博5+</text>
+   </view>
+   <view class='movie-ultimate'>
+     <view class='movie-synthesize1'>
+   <view class='b1'>浏览 {{data.storePvTotal}}</view>
+   <view class='b2'>收藏 {{data.storeFavorTotal}}</view>
+   </view>
+   <view class='movie-synthesize2'>
+   <view class='b3'>点赞 {{data.storeLikeTotal}}</view>
+   <view class='b4'>预约 {{data.storeBookingTotal}}</view></view>
+   </view>
+</view>
+<view class='movie-yom'>
+  <view class='movie-once1'>
+    <view class='movie-figure1 {{currentTab == 1 ? "active" : ""}}' bindtap='Seven'>7日</view>
+  </view>
+  <view class='movie-once2'>
+    <view class='movie-figure2 {{currentTab == 2 ? "active" : ""}}' bindtap="Thirty">30日</view>
+  </view>
+</view>
+<view class='movie-totality'>
+  <view class='movie-visitor'>
+    <view class='movie-visitor1'>访客</view>
+    <view class='movie-visitor2'>{{electricity.storeUvCount}}</view>
+    <view class='movie-visitor3'>日 00%</view>
+  </view>
+  <view class='movie-clientele'>
+    <view class='movie-clientele1'>预约客户</view>
+    <view class='movie-clientele2'>{{electricity.bookingUserCount}}</view>
+    <view class='movie-clientele3'>日 --</view>
+  </view>
+  <view class='movie-head-turn'>
+    <view class='movie-head-turn1'>回头率</view>
+    <view class='movie-head-turn2'>{{electricity.userRepeatRate}}%</view>
+    <view class='movie-head-turn3'>日 --</view>
+  </view>
+</view>
+<view class='movie-branch'>
+  <view class='movie-spot'></view>
+  <view class='movie-information'>访客</view>
+</view>
+<view class='movie-instance'>
+  <view class='movie-exhibition'>
+    <view class='movie-a'>昨日访问（人）</view>
+    <view class='movie-a1'>{{visitor.storeUvCount}}</view>
+  </view>
+  <view class='xian'></view>
+  <view class='movie-exhibition1'>
+      <view class='movie-a2'>昨日浏览（次）</view>
+      <view class='movie-a3'>{{visitor.storePvCount}}</view>
+  </view>
+</view>
+
+<view class='movie-branch'>
+  <view class='movie-spot'></view>
+  <view class='movie-information'>商品</view>
+</view>
+<view class='movie-instance'>
+  <view class='movie-exhibition'>
+    <view class='movie-a'>可展示商品总数（件）</view>
+    <view class='movie-a1'>{{commodity.storeGoodsTotal}}</view>
+  </view>
+  <view class='xian'></view>
+  <view class='movie-exhibition1'>
+      <view class='movie-a2'>近30日浏览-预约转化</view>
+      <view class='movie-a3'>{{commodity.goodsPv2bkRate}}%</view>
+  </view>
+</view>
+
+<view class='movie-branch'>
+  <view class='movie-spot'></view>
+  <view class='movie-information'>客户</view>
+</view>
+<view class='movie-instance'>
+  <view class='movie-exhibition'>
+    <view class='movie-a'>昨日新增客户（人）</view>
+    <view class='movie-a1'>{{clientele.userAddedCount}}</view>
+  </view>
+  <view class='xian'></view>
+  <view class='movie-exhibition1'>
+      <view class='movie-a2'>客户总数（人）</view>
+      <view class='movie-a3'>{{clientele.userTotalCount}}</view>
+  </view>
+</view>

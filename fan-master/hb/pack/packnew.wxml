@@ -1,0 +1,49 @@
+<!-- <view class="container packnew" style="background: url({{pageimg.topimg}}) no-repeat; background-size: 100% 180px;"> -->
+<view class="container packnew">
+	<image src="images/img01.png" class="botimg"></image>
+	<view class="topbox w100">
+		<view class="tbhead"><image class="tbimg" mode="aspectFit" style="background: #fff" src="{{userInfo.avatarUrl}}"></image></view>
+		<text class="tbtext">{{userInfo.nickName}}</text>
+	</view>
+	<view class="formbox">
+		<view class="fline">
+			<text class="ado">设置口令</text>
+			<input class="ctrol" data-type="w" bindblur="formInput" value="{{packword}}" type="text" placeholder="口令最大输入长度10" confirm-type="done" />
+			<view class="errormsg" hidden="{{errormsg.w}}">*口令最多输入16个字</view>
+		</view>
+		<text class="tiptext">小伙伴们说对口令就能获得随机的打赏</text>
+		<view class="fline">
+			<text class="ado">赏金(元)</text>
+			<input class="ctrol" data-type="m" bindblur="formInput" value="{{packmoney}}" type="number" placeholder="填写金额" />
+			<view class="errormsg" hidden="{{errormsg.m}}">*单个红包金额不可超过1万</view>
+		</view>
+		<view class="fline">
+			<text class="ado">数量(个)</text>
+			<input class="ctrol" data-type="n" bindblur="formInput" value="{{packnum}}" type="number" placeholder="填写数量" />
+			<view class="errormsg" hidden="{{errormsg.n}}">*单个红包数量不可超过500</view>
+		</view>
+		<text class="text01">需支付{{fee}}服务费,优先使用余额¥{{cost}}</text>
+		<view class="btnbox"><view class="btn" bindtap="newpack">生成口令红包</view></view>
+	</view>
+	<view class="bottip"><navigator url="/question/question" class="botlink">常见问题</navigator></view>
+	<view class="botnav">
+		<view class="nls">
+			<navigator url="/mine/index" class="nlslink">
+				<image style="background-color: #fff;" src="images/icon02a.png" class="nlsico"></image>
+				<text class="nlstext">我的记录</text>
+			</navigator>
+		</view>
+		<view class="nls">
+			<navigator url="/pages/index" class="nlslink">
+				<image style="background-color: #fff;" src="images/icon02b.png" class="nlsico"></image>
+				<text class="nlstext">余额提现</text>
+			</navigator>
+		</view>
+		<view class="nls">
+			<navigator url="/pages/index" class="nlslink">
+				<image style="background-color: #fff;" src="images/icon02c.png" class="nlsico"></image>
+				<text class="nlstext">个人账户</text>
+			</navigator>
+		</view>
+	</view>
+</view>

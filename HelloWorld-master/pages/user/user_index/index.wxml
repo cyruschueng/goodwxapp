@@ -1,0 +1,154 @@
+<view class="glo_load_view" wx:if="{{!is_loaded}}">
+    <view class="loding grey mt10 mb10 tc f14">
+        <text class="mr10 loading-icon"></text>
+        <text class="mt10">正在加载中...</text>
+    </view>
+</view>
+<block wx:else>
+    <view class="user_content">
+        <view class="user-elembg">
+            <image class="user-elem" src="http://ixiaochengxu.cc/resource/images/user/element-bg.png" mode='aspectFit'></image>
+            <image class="user-elem" src="http://ixiaochengxu.cc/resource/images/user/element-bg.png" mode='aspectFit'></image>
+        </view>
+        <view class="Member_head" catchtap="onNavigateTap" data-url="../user_edit/index">
+            <image class="userinfo-avatar" src="{{userInfo.headimgurl}}" mode="aspectFill"></image>
+            <view class="userinfo_name-box">
+                <view class="userinfo_name lineText">{{userInfo.nickname}}</view>
+                <view class="tongbu-btn" catchtap="onNavigateTap" data-name="wechat_info_sync">
+                    <text class="iconfont icon-tongbuxinxi"></text>
+                </view>
+                <text wx:if="{{userInfo.is_vip == 1}}" class='iconfont icon-vip' style='color:#F98821;'></text>
+            </view>
+        </view>
+
+        <!-- vip -->
+        <view class="vip-box" wx:if="{{is_open_card}}">
+            <view class="vip-cont">
+                <!-- 开通会员 -->
+                <block wx:if='{{card_info.status==0}}'>
+                    <view class="open-member">
+                        <view class="open-member-txt">
+                            <text class="iconfont icon-huiyuan"></text>会员特权</view>
+                        <view>
+                            <button class="open-member-btn" catchtap='onSetValueTap' data-name='card_info' data-value='{"show":true}' data-is-multi='true'>开通会员</button>
+                        </view>
+                    </view>
+                    <view class="f14 lineText">消费返积分，各种特权享不停</view>
+                </block>
+                <block wx:else>
+                    <view class="open-member" catchtap='onNavigateTap' data-url="../member/member-center/index">
+                        <view>
+                            <view>账户余额（元）</view>
+                            <view>￥
+                                <text class="vip-balance f20">{{card_info.recharge}}</text>
+                            </view>
+                        </view>
+                        <view>
+                            <button class="open-member-btn">充值有礼</button>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <!-- 开通会员 -->
+    <view class="open-member-pop floatBox" hidden='{{!card_info.show}}'>
+        <view class="pop-cont mid">
+            <view class="recharge-colse" catchtap='onSetValueTap' data-name='card_info' data-value='{"show":false}' data-is-multi='true'></view>
+            <view class='tc fb f18 mb15'>开通会员</view>
+            <input class="pop-tel-inp" placeholder="请输入您的姓名" placeholder-style='font-size:14px' maxlength='12' bindinput='onInputValue' data-name='card_name' />
+            <input class="pop-tel-inp" type='number' placeholder="请输入您的手机号" placeholder-style='font-size:14px' bindinput='onInputValue' data-name='phone' maxlength='11' />
+            <view class="pop-check-box flex mt10">
+                <input class="pop-tel-check sub mr10" type='number' placeholder="请输入验证码" placeholder-style='font-size:14px' bindinput='onInputValue' data-name='verify_code' maxlength='6' />
+                <button class="get-code" catchtap='onGetVerifyCodeTap' disabled='{{reload_verify_time}}'>{{reload_verify_time?reload_verify_time+'秒后重新获取':'获取验证码'}}</button>
+            </view>
+            <button class="pop-sure-btn" catchtap='onOpenTap'>确认</button>
+            <!-- 其他方式 -->
+            <view class="tc grey mt20 f14">其他方式</view>
+            <button class="get-weixintel" open-type='getPhoneNumber' bindgetphonenumber='onGetPhoneNumber'>获取微信手机号</button>
+        </view>
+        <view class="floatBox floatBoxBg" style='display:block;'></view>
+    </view>
+    <view class="my-menu">
+
+        <view class="my-menu-box gridXt">
+            <view class="forum-box menu-line gridXt">
+
+                <view class="my-menu-subitem" catchtap="onNavigateTap" data-url="../red-packet/packet/index" wx:if='{{is_open_wallet}}'>
+                    <!-- <image class="my-menu-img" src="http://ixiaochengxu.cc/resource/images/user/money.png" mode="aspectFit"></image> -->
+                    <text class="iconfont icon-fubao1"></text>
+                    <view class="lineText">福包</view>
+                </view>
+                <view class="my-menu-subitem" catchtap="onNavigateTap" data-url="../../integral/integral-mall/index" wx:if='{{is_open_score}}'>
+                    <!-- <image class="my-menu-img" src="http://ixiaochengxu.cc/resource/images/user/integral.png" mode="aspectFit"></image> -->
+                    <text class="iconfont icon-jifen"></text>
+                    <view class="lineText">积分商城</view>
+                </view>
+                <view class="my-menu-subitem" catchtap="onNavigateTap" data-url="../mcard/coupon" wx:if='{{is_open_coupon}}'>
+                    <!-- <image class="my-menu-img" src="http://ixiaochengxu.cc/resource/images/user/card-package.png" mode="aspectFit"></image> -->
+                    <text class="iconfont icon-kabao"></text>
+                    <view class="lineText">卡包</view>
+                </view>
+
+            </view>
+        </view>
+
+        <!-- 核销 -->
+        <template is="line_menu" wx:if="{{userInfo.exam}}" data="{{...heixiao}}" />
+
+        <block wx:for="{{menus}}" wx:key="{{index}}">
+            <!-- 单行链接 -->
+            <template is="line_menu" wx:if="{{item.type=='line'}}" data="{{...item}}" />
+            <!-- 列表组 -->
+            <template is="list_menu" wx:if="{{item.type=='list'}}" data="{{...item}}" />
+            <!-- 卡片 -->
+            <template is="card_menu" wx:if="{{item.type=='card'}}" data="{{...item}}" />
+        </block>
+
+    </view>
+    <view class="copyright grey">
+        <view class="copyright-text" wx:if="{{userInfo.app_copy_right}}" catchtap='onCompanyTap'>{{userInfo.app_copy_right}}</view>
+    </view>
+</block>
+
+
+<!-- 单行链接 -->
+<template name="line_menu">
+    <view class="my-menu-box links">
+        <view class="my-menu-item gridXt" wx:for="{{menus}}" wx:key="{{index}}" catchtap="onNavigateTap" data-name="{{item.name}}" data-url="/{{item.link}}">
+            <text class="iconfont {{item.icon?item.icon:'icon-circle'}} mr10"></text>
+            <text>{{item.text}}</text>
+        </view>
+    </view>
+</template>
+
+<!-- 列表组 -->
+<template name="list_menu">
+    <view class="my-menu-box">
+        <view class="my-menu-item {{isshow == true ? 'arrowR arrowRv' :'arrowR'}}" bindtap="onToggleTap" data-name="{{name}}">
+            <text class="iconfont {{icon?icon:'icon-circle'}} mr10"></text>
+            <text>{{text}}</text>
+        </view>
+        <view class="forum-box" wx:if="{{isshow}}">
+            <view class="my-menu-subitem gridXt" wx:for="{{menus}}" wx:key="{{index}}" catchtap="onNavigateTap" data-name="{{item.name}}" data-url="/{{item.link}}">
+                <text class="arrowL">{{item.text}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 卡片块 -->
+<template name="card_menu">
+    <view class="my-menu-box">
+        <view class="my-menu-item {{isshow == true ? 'arrowR arrowRv' :'arrowR'}}" bindtap="onToggleTap" data-name="{{name}}">
+            <text class="iconfont {{icon?icon:'icon-circle'}} mr10"></text>
+            <text>{{text}}</text>
+        </view>
+        <view class="forum-box menu-line gridXt" wx:if="{{isshow}}">
+            <view class="my-menu-subitem" wx:for="{{menus}}" wx:key="{{index}}" catchtap="onNavigateTap" data-name="{{item.name}}" data-url="/{{item.link}}">
+                <text class="iconfont {{item.icon?item.icon:'icon-circle'}}"></text>
+                <view class="lineText">{{item.text}}</view>
+            </view>
+        </view>
+    </view>
+</template>

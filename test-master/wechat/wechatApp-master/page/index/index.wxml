@@ -1,0 +1,133 @@
+<view wx:if="{{!memberId}}" catchtap="toLogin" class="toLogin"></view>
+
+<view class="top">
+  <view class="logo_box">
+    <image src="https://lingju360.natappvip.cc/miniapp/resources/image/i/logo.png"></image>
+  </view>
+  <navigator url="/page/index/switchAdd/index" hover-class="none">
+    <view class="tit">{{busname}}
+      <image mode="scaleToFill" src="https://lingju360.natappvip.cc/miniapp/resources/image/i/down.png"></image>
+    </view>
+  </navigator>
+
+
+  <view class="login_r" wx:if="{{username}}">
+    <text>{{username}}</text>
+  </view>
+
+  <navigator url="/page/login/index" hover-class="none">
+    <view class="login_r" wx:if="{{!username}}">
+      <text class="login">登录</text>
+      <text>注册</text>
+    </view>
+  </navigator>
+</view>
+
+<swiper class="swiper" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" />
+    </swiper-item>
+  </block>
+</swiper>
+
+
+<view class="main2">
+
+  <view class="li" catchtap="scan">
+    <image mode="widthFix" src="https://lingju360.natappvip.cc/miniapp/resources/image/index/i1.png"></image>
+    <text>扫一扫</text>
+  </view>
+
+  <navigator url="/page/takeaway/index">
+    <view class="li li_2">
+      <image mode="widthFix" src="https://lingju360.natappvip.cc/miniapp/resources/image/index/i2.png"></image>
+      <text>外卖</text>
+    </view>
+  </navigator>
+
+  <navigator url="/page/reserve/index" hover-class="none">
+    <view class="li">
+      <image mode="widthFix" src="https://lingju360.natappvip.cc/miniapp/resources/image/index/i3.png"></image>
+      <text>预约</text>
+    </view>
+  </navigator>
+
+  <view class="li li_2">
+    <image class="p4" mode="widthFix" src="https://lingju360.natappvip.cc/miniapp/resources/image/index/i4.png"></image>
+    <text>我的券</text>
+  </view>
+
+</view>
+
+<view class="btn_2">
+  <navigator url="/page/takeout/index" hover-class="none">
+    <view class="i_btn i_btn1">
+
+      <view class="text2">
+        <image mode="widthFix" src="https://lingju360.natappvip.cc/miniapp/resources/image/i/b1.png"></image>点菜</view>
+    </view>
+  </navigator>
+
+  <view class="i_btn i_btn2" catchtap="getQueueInfo">
+
+    <view class="text2">
+      <image mode="widthFix" src="https://lingju360.natappvip.cc/miniapp/resources/image/i/b2.png"></image>排队</view>
+  </view>
+</view>
+
+
+<view class="scroll_title">优惠抢购</view>
+
+<scroll-view scroll-x="true" style=" white-space: nowrap" class="scrollView">
+  
+
+  <view class="li" wx:for="{{4}}" wx:key="{{this}}">
+    <view class="t1"><text>25</text> 满300可用</view>
+    <view class="t2">限微信端会员使用</view>
+    <view class="t3">有效期 2017.08.20-2017.09.30</view>
+    <view class="lq"><text>立即</text><text>领取</text></view>
+  </view>
+
+</scroll-view>
+
+
+
+
+
+<view class="menu-recommended">
+  <view class="menu-recommended-left">
+
+    <view class="menu-recommended-left-top">
+      <view class="empty-box tt1">
+        <text>团购套餐</text>
+        <text class="t2">套餐不凑单 能量慢慢</text>
+      </view>
+    </view>
+    <view class="menu-recommended-left-bottom">
+      <image src="https://lingju360.natappvip.cc/miniapp/resources/image/i/2.png" mode="widthFix"></image>
+    </view>
+  </view>
+  <view class="menu-recommended-right">
+    <view class="menu-recommended-right-top li-1 b">
+      <view class="empty-box tt2">
+        <text class="">推荐套餐</text>
+        <text class="t2">强力推荐</text>
+      </view>
+      <view class="menu-img">
+        <image src="https://lingju360.natappvip.cc/miniapp/resources/image/i/1.png" mode="widthFix"></image>
+      </view>
+    </view>
+
+
+    <view class="menu-recommended-right-top li-1">
+      <view class="empty-box tt3">
+        <text class="">特价套餐</text>
+        <text class="t2">团购点餐更优惠</text>
+      </view>
+      <view class="menu-img img2">
+        <image src="https://lingju360.natappvip.cc/miniapp/resources/image/i/3.png" mode="widthFix"></image>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,84 @@
+<div class="page" ng-controller="coursesController">
+    <div class="page-header" style="background:#f60;">
+        <div style="color: #fff; font-size: 20px; padding: 10px 0;  text-align: center;">{{memberInfo.className}}</div>
+    </div>
+    <div class="page__bd">
+        <div style="position: relative;">
+            <img style="width:100%;" ng-src="{{courses.imgUrl}}">
+
+            <div class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb " ng-class="{true:'gardenia-img__active',false:''}[!audio.audio.paused]"
+                         style="border-radius:30px;width:60px; height: 60px;"
+                         src="imgs/gardenia/cd.png" alt="">
+                </div>
+                <div class="weui-media-box__bd player">
+                    <div class="xl-progress">
+                        <span style="width:20px" class="current" ng-bind="audio.currentTime | trackTime"></span>
+                        <div id="xl-progress-bar" class="xl-progress-bar" xl-progress-bar>
+                            <div class="played" style="margin-left:{{audio.progress*progressWidth+'px'}}"></div>
+                        </div>
+                        <span style="width:20px" class="duration" ng-bind="audio.duration|trackTime"></span>
+                    </div>
+                    <div class="text-center">
+                            <span check-member-audio="{{memberInfo.state}}" ng-click="audio.play()"
+                                  ng-if="audio.paused"
+                                  class="fa fa-play"
+                                  style="font-size: 18px;padding:2px 5px;color:#bbb"></span>
+                            <span ng-click="audio.pause()"
+                                  ng-if="!audio.paused"
+                                  class="fa fa-pause"
+                                  style="font-size: 18px;padding:2px 5px;color:#bbb">
+                            </span>
+                            <span ng-click="next()"
+                                  ng-class="{true:'',false:'disabled'}[hasNext]"
+                                  class="fa fa-step-forward"
+                                  style="font-size: 18px;padding:2px 5px;color:#bbb"  ></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel">
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <article class="weui-article" ng-if="courses.section.length>1">
+                        <h4>课程章节</h4>
+                        <div class="playlist">
+                            <ul style="padding-left:10px;">
+                                <li ng-click="play($index)"
+                                    ng-repeat=" itme in courses.section"
+                                    style="padding:5px 0; border-left:1px solid #ccc; position: relative; list-style-type:none;">
+                                    <span style="position:absolute; left: -5px;bottom: 8px;" ng-class="{true:'habit-liked',false:''}[index==$index]" class="fa fa-dot-circle-o"></span>
+                                    <a style="margin-left:15px;text-decoration:none;"
+                                       ng-class="{true:'habit-liked',false:''}[index==$index]">
+                                        <span style="font-size:14px;">{{itme.sectionName}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel">
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <article class="weui-article" ng-if="courses.section.length>1">
+                        <h4>课程介绍</h4>
+                        <div ng-bind-html="courses.detail|trustAsHtml"></div>
+                    </article>
+                    <article class="weui-article" ng-if="courses.teacher.detail!=''">
+                        <h4>讲师介绍</h4>
+                        <img ng-src="{{courses.teacher.imgUrl}}">
+                        <p style="padding:10px 0; width: 50%; text-align: center">
+                            <span class="text-success">{{courses.lecturer}}</span>
+                        </p>
+                        <div ng-bind-html="courses.teacher.detail|trustAsHtml"></div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

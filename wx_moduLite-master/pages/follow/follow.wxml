@@ -1,0 +1,81 @@
+<!--pages/follow/follow.wxml-->
+<view class='app'>
+  <!--收藏页模板  -->
+
+  <!--文章 收藏模板  -->
+    <template name="arircle-tmp">
+    <view class='tmp-main' data-type='{{type}}' data-resid='{{resourceid}}' data-id='{{id}}' bindtouchstart='mytouchstart'
+  bindtouchend='mytouchend' bindtap='mytouch'  bindlongtap='showSheet'>
+      <view class="tmp-name">{{title}}</view>
+    
+      <view class="tmp-bt">
+        <view class='tmp-type'>文章</view>
+        <view class='tmp-tips'>{{author}}</view>
+        <view class='time'>{{time}}</view>
+      </view>
+    </view>
+    </template>
+ 
+ 
+  <!--话题 收藏模板  -->
+  <template name="topic-tmp">
+  <view data-type='{{type}}' data-resid='{{resourceid}}' data-id='{{id}}' bindtouchstart='mytouchstart'
+  bindtouchend='mytouchend' bindtap='mytouch'  bindlongtap='showSheet'>
+    <view class='tmp-main clear'>
+      <view class='topic-img' style='background: rgba(125,125,125,0.3) url("{{image}}") center / cover no-repeat'></view>
+      <view class="tmp-name topic-name">{{title}}</view>
+    </view>
+    <view class="tmp-bt">
+      <view class='tmp-type'>话题</view>
+      <view class='tmp-tips'>{{join}}讨论</view>
+      <view class='time'>{{time}}</view>
+    </view>
+  </view>
+  </template>
+  
+
+  <!--活动 收藏模板  -->
+  <template name="activity-tmp">
+    <view class='activity-bg' style='background: url("{{image}}")  center / cover no-repeat'
+    data-type='{{type}}' data-resid='{{resourceid}}' data-id='{{id}}' bindtouchstart='mytouchstart'
+  bindtouchend='mytouchend' bindtap='mytouch'  bindlongtap='showSheet'>
+      <view class='bg-inner'>
+        <block wx:if='{{title}}'>
+        <view class="activity-name">{{title}}</view>
+        </block>
+        <block wx:else>
+        <view class="activity-name">该活动已删除</view>
+        </block>
+      </view>
+    </view>
+    <view class="tmp-bt">
+      <view class='tmp-type'>活动</view>
+      <view class='tmp-tips'>{{join}}参与</view>
+      <view class='time'>{{time}}</view>  
+    </view>
+  </template>
+
+
+<!--  -->
+<block wx:for='{{followList}}'>
+  <!-- <block wx:if='{{item.title}}'> -->
+  <view class='follow-item'>
+    <block wx:if='{{item.type == 1}}'>
+      <template is='arircle-tmp' data='{{...item}}'></template>
+    </block>
+
+    <block wx:if='{{item.type == 2}}'>
+      <template is='topic-tmp' data='{{...item}}'></template>
+    </block>
+
+    <block wx:if='{{item.type == 3}}'>
+      <template is='activity-tmp' data='{{...item}}'></template>
+    </block>
+  </view>
+  <!-- </block> -->
+</block>  
+
+  <view class='load-more'>
+        <view class='more-inner'><icon type='waiting' size='16' color='#ccc'></icon>暂无更多</view>
+      </view>
+</view>

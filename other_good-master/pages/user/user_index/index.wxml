@@ -1,0 +1,96 @@
+<!-- 单行链接 -->
+<template name="line_menu">
+    <view class="my-menu-box links">
+        <view class="my-menu-item gridXt" wx:for="{{menus}}" wx:key="{{index}}" catchtap="onNavigateTap" data-name="{{item.name}}" data-url="/{{item.link}}">
+            <text class="iconfont {{item.icon?item.icon:'icon-circle'}} mr10"></text> <text>{{item.text}}</text>
+        </view>
+    </view>
+</template>
+
+<!-- 列表组 -->
+<template name="list_menu">
+    <view class="my-menu-box">
+        <view class="my-menu-item {{isshow == true ? 'arrowR arrowRv' :'arrowR'}}" bindtap="onToggleTap" data-name="{{name}}">
+            <text class="iconfont {{icon?icon:'icon-circle'}} mr10"></text> <text>{{text}}</text>
+        </view>
+        <view class="forum-box" wx:if="{{isshow}}">
+            <view class="my-menu-subitem gridXt" wx:for="{{menus}}" wx:key="{{index}}" catchtap="onNavigateTap" data-name="{{item.name}}" data-url="/{{item.link}}">
+                <text class="arrowL">{{item.text}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 卡片块 -->
+<template name="card_menu">
+    <view class="my-menu-box">
+        <view class="my-menu-item {{isshow == true ? 'arrowR arrowRv' :'arrowR'}}" bindtap="onToggleTap" data-name="{{name}}">
+            <text class="iconfont {{icon?icon:'icon-circle'}} mr10"></text> <text>{{text}}</text>
+        </view>
+        <view class="forum-box menu-line gridXt" wx:if="{{isshow}}">
+            <view class="my-menu-subitem" wx:for="{{menus}}" wx:key="{{index}}" catchtap="onNavigateTap" data-name="{{item.name}}" data-url="/{{item.link}}">
+                <text class="iconfont {{item.icon?item.icon:'icon-circle'}}"></text>
+                <view class="lineText">{{item.text}}</view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<view class="glo_load_view" wx:if="{{!is_loaded}}">
+    <view class="loding grey mt10 mb10 tc f14">
+        <text class="mr10 loading-icon"></text>
+        <text class="mt10">正在加载中...</text>
+    </view>
+</view>
+<block wx:else>
+    <view class="user_content">
+        <view class="Member_head arrowR" catchtap="onNavigateTap" data-url="../user_edit/index">
+            <view class="Member_img domain flex">
+                <image class="userinfo-avatar mr15" src="{{userInfo.headimgurl}}" background-size="cover"></image>
+                <view class="userinfo_name sub">{{userInfo.nickname}}</view>
+                <block wx:if="{{userInfo.is_vip == 1}}">
+                    <view class="vip_ico">
+                        <image src="../../../images/ico_vip.png" background-size="cover"></image>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+
+    <view class="my-menu">
+
+        <view class="my-menu-box gridXt" style="margin-top:0;" wx:if="{{is_open_card}}">
+            <view class="forum-box menu-line gridXt">
+                <view class="my-menu-subitem" catchtap="onNavigateTap" data-url="../mcard/index">
+                    <text class="iconfont icon-huiyuanqia"></text>
+                    <view class="lineText">会员卡</view>
+                </view>
+                <view class="my-menu-subitem" catchtap="onNavigateTap" data-url="../mcard/recharge">
+                    <text class="iconfont icon-duoguan-chongzhi"></text>
+                    <view class="lineText">充值</view>
+                </view>
+                <view class="my-menu-subitem" catchtap="onNavigateTap" data-url="../mcard/tradelog">
+                    <text class="iconfont icon-yue"></text>
+                    <view class="lineText">{{card_info.recharge||"0"}}</view>
+                </view>
+                <view class="my-menu-subitem">
+                    <text class="iconfont icon-duoguan-jifen"></text>
+                    <view class="lineText">{{card_info.score||"0"}}</view>
+                </view>
+            </view>
+        </view>
+
+        <block wx:for="{{menus}}" wx:key="{{index}}">
+            <!-- 单行链接 -->
+            <template is="line_menu" wx:if="{{item.type=='line'}}" data="{{...item}}" />
+            <!-- 列表组 -->
+            <template is="list_menu" wx:if="{{item.type=='list'}}" data="{{...item}}" />
+            <!-- 卡片 -->
+            <template is="card_menu" wx:if="{{item.type=='card'}}" data="{{...item}}" />
+        </block>
+
+    </view>
+    <view class="copyright grey">
+        <view class="copyright-text" wx:if="{{userInfo.app_copy_right}}">{{userInfo.app_copy_right}}</view>
+    </view>
+</block>

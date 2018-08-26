@@ -1,0 +1,77 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <scroll-view style="height:100%;" scroll-y="true">
+    <view class="bigTitle">
+      <image src="{{banner_organization}}" class="bigTitle"></image>
+      <view class="searchSth" bindtap="allSearch">请输入机构名称，成员姓名，投资领域
+        <view class="searchImageBox">
+          <image src="/img/icon-sousuo@2x.png" class="searchImage"></image>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{show}}">
+      <!--投资风格  -->
+      <view class="outStyleBox">
+        <view class="blockTitle">投资风格</view>
+        <view class="blockIntro">* 机器人Angel深度挖掘机构投资风格</view>
+        <view class="flex investmentListBox">
+          <block wx:for="{{investormentList.style_list}}" wx:key="{{index}}">
+            <view class="investStyleBlock" data-style="{{item.style_id}}" hover-class='t-hoverColor' bindtap="toStyle">
+              <view class="investStyleTitle">{{item.style_name}}</view>
+              <view class="investStyleWord">
+                <label class="investStyleNum">{{item.investment_num}}</label> 个机构</view>
+            </view>
+          </block>
+        </view>
+      </view>
+
+      <!--热门领域  -->
+      <!--outStyleBox  -->
+      <view class="outStyleBox1">
+        <view class="outPadding">
+          <view class="flex title">
+            <view class="blockTitle">热门领域</view>
+            <view class="allThing" bindtap="toGoIndustry">全部
+              <label>（{{investormentList.industry_list.industry_total_num}}）</label>
+            </view>
+          </view>
+          <view class="blockIntro">* 近期创投媒体热议领域</view>
+          <view class="industryTitleBlock flex">
+            <view class="industryTitle">领域</view>
+            <view class="industryTitle">已投机构</view>
+            <view class="industryTitle">创业项目</view>
+            <view class="industryTitle">媒体热度</view>
+          </view>
+        </view>
+        <block wx:for="{{investormentList.industry_list.list}}" wx:key="{{index}}">
+          <view class="industryContentBlock flex" data-id="{{item.industry_id}}" hover-class='t-hoverColor' bindtap="toIndustrySearch">
+            <view class="industryContentTitle">{{item.industry_name}}</view>
+            <view class="industryContent">{{item.investment_num}}</view>
+            <view class="industryContent">{{item.event_num}}</view>
+            <view class="industryContent flex">
+              <view class="industryNum">{{item.media_hot}}</view>
+              <image src="/img/icon-jiantouxia@2x.png" class="arrow" wx:if="{{item.status == 2}}"></image>
+              <image src="/img/icon-jiantoushang@2x.png" class="arrow" wx:if="{{item.status == 1}}"></image>
+              <view class="up" wx:if="{{item.status == 1}}">{{item.media_fix}}</view>
+              <view class="down" wx:if="{{item.status == 2}}">{{item.media_fix}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+
+      <!--投资机构  -->
+      <view class="outStyleBox1" id="investment">
+        <view class="outPadding">
+          <view class="flex title">
+            <view class="blockTitle">投资机构</view>
+            <view class="allThing" bindtap="toGoInvestment">全部
+              <label>（{{investormentList.investment_list.investment_total_num}}）</label>
+            </view>
+          </view>
+        </view>
+        <template is="investment" data="{{investment_list}}"></template>
+      </view>
+    </view>
+  </scroll-view>
+</view>

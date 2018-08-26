@@ -1,0 +1,48 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<!--top str -->
+  <view class='h8 flexBetw Skin pdr1 pdl1'>
+    <image class='imgxs15' src='/images/back.png' bindtap='userDetailback'></image>
+    <view>{{uidarr.length}}个账户移动到</view>
+    <view></view>
+  </view>
+<!--top end -->
+<!--用户列表str  -->
+<view  class='modeldrawer_content'>
+  <view class='flex  bgColor0 borderF'>
+    <view class='width10 justi'>
+      <image class='imgM' src="/images/add_group.png"></image>
+    </view>
+    <view class='flexv1 justi pdl1'>
+      新建分组
+    </view>
+    <view class='width20 flexCenter'>
+      <image class='imgxs' src="/images/arrow_unexpanded.png"></image>
+    </view>
+  </view>
+  </view>
+  <!--未分组  -->
+  <view  class='modeldrawer_content borderB'>
+  <view class='flex  bgColor0'>
+    <view class='width10 justi'>
+      <image class='imgM' src="/images/icon_group.png"></image>
+    </view>
+    <view class='flexv1 justi pdl1'>
+      未分组
+    </view>
+  </view>
+  </view>
+  <!--循环  -->
+   <view class='flexv1 pb1'>
+    <view class='flex borderB  bgColor0 justi borderR' wx:for="{{AccountGroup}}" wx:key="{{index}}" wx:for-item="AccountGroup">
+      <view class='width10 justi'>
+        <image class='imgM' src="/images/icon_group.png"></image>
+      </view>
+      <view class='flexv1 justi pdl1' bindtap='groupCheck' data-id='{{AccountGroup.id}}' data-groupName='{{AccountGroup.name}}'>
+        {{AccountGroup.name}}
+      </view>
+    </view> 
+   </view>
+<!--用户列表end --> 
+</view>

@@ -1,0 +1,78 @@
+<view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<view class="page" wx:else>
+  <view class="header">
+  <!--搜索 -->
+    <view class="search_groups">
+      <icon class="icon-search" type="search" size="14"></icon>
+      <input type="text" class="input" value="{{search_inputVal}}" focus="{{search_inputShowed}}" bindinput="inputTyping" bindconfirm="search" confirm-type="search" placeholder="请输入您想搜索的内容"/>
+    </view>
+    <image src="../../../image/mapIcon.png" class="switch" mode="aspectFill" bindtap="switch" style="width:50rpx;height:54rpx" wx:if="{{isShowList}}"></image>
+    <image src="../../../image/list_icon.png" class="switch" mode="aspectFill" bindtap="switch" style="width:50rpx;height:51rpx" wx:else></image>
+  </view>
+    
+    <view class="page__bd page__bd_spacing">         
+      <!--列表框-->
+      <view class="list_groups">
+        
+        <picker bindchange="placeChange" value="{{placeIndex}}" range="{{_place}}" class="place">
+          <view class="title">{{_place[placeIndex]}}</view>
+          <image src="../../../image/triangle.png" class="icon"></image>
+        </picker>
+        
+        <picker bindchange="liveChange" value="{{liveIndex}}" range="{{_live}}" class="live">
+          <view class="title">{{_live[liveIndex]}}</view>
+          <image src="../../../image/triangle.png" class="icon"></image>        
+        </picker>
+        <picker bindchange="moreliveChange" value="{{moreliveIndex}}" range="{{_morelive}}" class="morelive">
+          <view class="title" wx:if="{{_morelive.length == 0}}">全部</view>
+          <view class="title">{{_morelive[moreliveIndex]}}</view>
+           <image src="../../../image/triangle.png" class="icon" wx:if="{{_morelive[moreliveIndex].length > 0}}"></image>
+        </picker>
+       
+
+        
+      </view>
+      
+      <view wx:if="{{isShowList}}"> 
+        <template is="placeShow" data="{{list}}"></template>
+      </view>
+      <view wx:else>
+        <template is="mapShow" data="{{markers,longitude,latitude,showModalStatus,tagLocation,noShowMap,mapHeight}}"></template>
+      </view>
+    </view>
+</view>
+
+<!--列表-->
+<template name="placeShow">
+  <scroll-view class="list" scroll-y="true" bindscrolltolower="lower" style="height:1000rpx;">
+    <block wx:for="{{list}}" wx:key="*this">
+      <navigator url="{{'merchants/merchants?id='+item.id}}" class="item" style="{{'background-image:url('+item.img+');'}}">
+        <view class="title_group">
+          <view class="title">{{item.title}}</view>
+          <image src="../../../image/arrow3.png" class="arrow"></image>
+        </view>
+      </navigator>
+    </block>
+  </scroll-view>
+</template>
+
+<!--地图-->
+<template name="mapShow">
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" markers="{{markers}}" bindmarkertap="markertap" show-location hidden="{{noShowMap}}"></map>
+  <!--已到达行程-->
+  <modal class="arrived" hidden="{{showModalStatus}}" no-cancel bindconfirm="cancel" confirmText="取消"> 
+    <scroll-view scroll-y="true">
+      <view class="header">
+        <image src="{{tagLocation.img}}" mode="aspectFill" class="img" bindtap="skip"></image>
+        <image class="icon2" src="../../../image/arrived_icon.png" wx:if="{{tagLocation.is_collect == 1}}" bindtap="arrived"></image>
+      </view>
+      <view class="title">{{tagLocation.title}}</view>
+      <view class="content">{{tagLocation.intro}}</view>
+    </scroll-view>
+  </modal>
+</template>
+
+

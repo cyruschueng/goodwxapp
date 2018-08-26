@@ -1,0 +1,94 @@
+<view class="fix-boxs">
+  <view class="relative-box">
+      <swiper indicator-dots="true" autoplay="true" interval="2000" duration="300" style='height:220px;'>
+        <swiper-item wx:for="{{goods_imgs}}" wx:key="">
+          <image src="{{item}}" class="slide-image" style='width:100%;'/>
+        </swiper-item>
+      </swiper>
+      <view class='pro-info'>
+          <view class="goods-title">{{goods_name}}</view>
+          <view class="goods-desc">{{goods_desc}}</view>
+          <view class="goods-price"><text>￥{{price}}</text>{{org_price}}</view>
+          <image class='voide-btn' src='/images/voide.png' bindtouchstart="touchdown" bindtouchend="touchup"></image>
+      </view>
+
+    <view class='activit-block'>
+        <view class='activit-row top-bor'>
+            <view class='col-left'>优惠卷</view>
+            <view class='col-right'>
+                <text class='sum'>￥50</text>
+                <text class='sum'>￥100</text>
+                <text class='sum'>￥200</text>
+                <text class='sum'>￥10</text>
+            </view>
+            <image class='activitarrow' src='/images/myCenter/arrow.png'></image>
+        </view>
+        <view class='activit-row'>
+            <view class='col-left'>活动</view>
+            <view class='col-right'>
+                <view class='info'><text>满减</text>全场满200立减20</view>
+                <view class='info'><text>包邮</text>全场满200立减20</view>
+            </view>
+            <image class='activitarrow' src='/images/myCenter/arrow.png'></image>
+        </view>
+    </view>
+
+      <view class="goods-tabs">
+          <view data-index="0" class="goods-tab-item {{tabindex==0?'active':''}}" bindtap='changeType'>销售排行</view>
+          <view data-index="1" class="goods-tab-item {{tabindex==1?'active':''}}" bindtap='changeType'>销售语音</view>
+      </view>
+    <view class='tab-blockbox'>
+      <view class="tab-block {{bodyindex==0?'active':''}}">
+        <block wx:for="{{goods_desc_imgs}}" wx:key="">
+        <image src="{{item}}" style='width:100%;'></image>
+        </block>
+        <view>{{material}}</view>
+        <view>{{stock_number}}</view>
+      </view>
+      <view class="tab-block {{bodyindex==1?'active':''}}">
+        <view class="rank-title">
+          <view class="rank-title-item">排名</view>
+          <view class="rank-title-item" style='left:80px;'>名称</view>
+        </view>
+        <view class="rank-list" style='margin-bottom:20px;'>
+           <block wx:for="{{voidelist}}" wx:for-index="voidid" wx:key="" > 
+            <view class="rank-item" data-index="{{voidid+1}}"  bindtap='changeCheck'>
+
+              <view wx:if="{{voidid+1==1}}" class="rank-num"><image src="/images/icon_rank_1.png"></image></view>  
+              <view wx:if="{{voidid+1==2}}" class="rank-num"><image src="/images/icon_rank_2.png"></image></view>  
+              <view wx:elif="{{voidid+1==3}}" class="rank-num"><image src="/images/icon_rank_3.png"></image></view>  
+              <view wx:else class="rank-num"><text>{{voidid+1}}</text></view>
+              <image class="rank-photo" src="{{item.voice_url}}"></image>
+              <view class="rank-name">{{item.nickname}}</view>
+              <view class="rank-voice" data-index="{{voidid+1}}" data-time="{{item.voice_length}}" data-key="{{item.headimgurl}}" bindtap="gotoPlay">
+                <view class="rank-voice-block">
+                  <image src="/images/{{checkvoide==voidid+1?'vodgif.gif':'icon_rank_voice.png'}}"></image>
+                  <view class="rank-voice-num">{{item.voice_length}}"</view>
+                  <view class="rank-voice-sign"></view>
+                </view>
+              </view>
+              <view class="check-box"><icon color='orange' size='25' type="{{checkstate==voidid+1?'success':'circle'}}"></icon></view>
+            </view>
+           </block> 
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view bindtap='gocart' class="cert-btn">
+  <image src="/images/myCenter/icon_goods_cert.png"></image>
+  <view  class="btn-text">购物车</view>
+  <view class="cert-num">{{goods_num}}</view>
+</view>
+<view class="other-btns">
+  <view class="add-cert-btn" bindtap='addcart'>加入购物车</view>
+  <view class="buy-btn" bindtap='showbuy'>立即购买</view>
+</view>
+
+<view wx:if="{{isSpeaking}}"  class="speak-style">
+  <image class="sound-style" src="/images/voice_icon_1.png" ></image>
+  <image wx:if="{{j==2}}" class="sound-style" src="/images/voice_icon_2.png" ></image>
+  <image wx:if="{{j==3}}" class="sound-style" src="/images/voice_icon_3.png" ></image>
+  <image wx:if="{{j==4}}" class="sound-style" src="/images/voice_icon_4.png" ></image>
+  <image wx:if="{{j==5}}"class="sound-style" src="/images/voice_icon_5.png" ></image>
+ </view>

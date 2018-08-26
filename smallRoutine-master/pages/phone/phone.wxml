@@ -1,0 +1,20 @@
+<!--pages/phone/phone.wxml-->
+<view class='body' style='height: {{windowHeight}}px'>
+  <form bindsubmit="formSubmit" bindreset="formReset" class='form'>
+    <view class="section flex_container">
+      <view class="section_title">手机号</view>
+      <input name="input" placeholder="请输入手机号" type="number" maxlength='11' placeholder-class='input_placeholder' bindblur="inputBlur" focus='true'/>
+      <view class='get_code_container'>
+        <view class="{{coutDownStatus ? 'get_code_start' : 'get_code'}}" bindtap='getCodeTap'>{{getCode}}</view>
+      </view>
+    </view>
+    <view class="section flex_container">
+      <view class="section_title">验证码</view>
+      <input name="code" placeholder="请输入验证码" placeholder-class='input_placeholder' maxlength='6'/>
+    </view>
+     <view class='tips'>{{message}}</view>
+    <view class="btn_area">
+      <button formType="submit">绑定</button>
+    </view>
+  </form>
+</view>

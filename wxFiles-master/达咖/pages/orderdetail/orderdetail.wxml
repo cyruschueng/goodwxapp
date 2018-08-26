@@ -1,0 +1,171 @@
+<view class="back panel-between">
+  <view class="item">
+    <view class="font-xl font-white">{{order.status == 0 ? '待付款':''}}{{order.status == 1 ? '待接单':''}}{{order.status == 2 ? '配送中':''}} {{order.status ==4 ? '已完成':''}}{{order.status ==5 ? '交易已关闭':''}}</view>
+    <view class="font-sm font-white forwidth">{{order.createtime}}</view>
+  </view>
+  <view class="item">
+    <image mode="aspectFill" src="{{url + order.shop.shopimage}}" class="imgs" bindtap="navToShop"></image>
+  </view>
+</view>
+<view class="dan">
+  <view class="item" >
+    <view class="cri"> <view wx:if="{{order.status > 0 && order.status != 5}}"></view></view>
+    <view class="font-sm">已付款</view>
+  </view>
+  <view class="item"  >
+    <view class="cri" ><view wx:if="{{order.status > 1 && order.status != 5}}"></view></view>
+    <view class="font-sm">已接单</view>
+  </view>
+  <view class="item" >
+    <view class="cri" ><view wx:if="{{order.status >= 2 && order.status != 5}}"></view></view>
+    <view class="font-sm">配送中</view>
+  </view>
+  <view class="item" >
+    <view class="cri" ><view wx:if="{{order.status == 4 && order.status != 5}}"></view></view>
+    <view class="font-sm">已完成</view>
+  </view>
+</view>
+
+<view class="panel panel-start margin-top-sm item-center">
+  <image src="/img/location1.png" class="icon-lg"></image>
+  <view style="width:600rpx" class="font-sm margin-left-sm">
+    <view class="bold">收货人: {{order.addressname}} {{order.addressphone}}</view>
+    <view>收货地址: {{order.address}}</view>
+  </view>
+</view>
+
+<view class="wm-panel margin-top-sm bottom-line">
+  <view class="titbar panel-start item-center bottom-line">
+    <image src="{{url + order.shop.shopimage}}" mode="aspectFill" class="titimg" bindtap="navToShop"></image>
+    <view class="font-md margin-left-sm" bindtap="navToShop">{{order.shop.shopname}}</view>
+  </view>
+  <view class="conbar">
+    <view class="item" wx:for="{{order.orderproduct}}">
+      <view class="panel-start">
+        <image src="{{url + item.productimage}}" mode="aspectFill"></image>
+        <view class="margin-left-sm t1">
+          <view class="bold font-md">{{item.productname}}</view>
+          <view class="font-md margin-top-sm font-default">
+            <text wx:for="{{item.productattribute}}" wx:for-item="pa" wx:for-index="pai">
+                <text wx:for="{{item.attributeid}}" wx:for-item="ai" wx:for-index="aii">
+                  {{aii == pai ? pa.content[ai].label:''}}/
+                </text>
+              </text>
+          </view>
+        </view>
+      </view>
+      <view class="content">
+        <view class="font-md">x{{item.number}}</view>
+        <view class="font-xl font-danger">￥{{item.productprice}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="panel" style="padding-top:0">
+     <view class="contxt panel-between item-center">
+      <view class="font-md">商品数量</view>
+      <view class="font-xs">x{{order.count}}</view>
+    </view> 
+    <!-- <view class="contxt panel-between item-center">
+      <view class="font-md">商品总价</view>
+      <view class="font-xs">￥{{order.goodsprice}}</view>
+    </view> -->
+    <view class="contxt panel-between item-center" wx:if="{{order.boxprice > 0}}">
+      <view class="font-md">餐盒费</view>
+      <view class="font-xs">￥{{order.boxprice}}</view>
+    </view>
+    <view class="contxt panel-between item-center" wx:if="{{order.shopcoupon > 0}}">
+      <view class="font-md">店铺满减</view>
+      <view class="font-xs">-￥{{order.shopcoupon}}</view>
+    </view>
+    <view class="contxt panel-between item-center" wx:if="{{order.sendprice > 0}}">
+      <view class="font-md">配送费</view>
+      <view class="font-xs">￥{{order.sendprice}}</view>
+    </view>
+    <view class="contxt panel-between item-center" wx:if="{{order.coupondiscount > 0}}">
+      <view class="font-md">优惠券</view>
+      <view class="font-xs">-￥{{order.coupondiscount}}</view>
+    </view>
+    <view class="contxt panel-between item-center" wx:if="{{order.vipdiscount > 0}}">
+      <view class="font-md">会员支付</view>
+      <view class="font-xs">-￥{{order.vipdiscount}}</view>
+    </view>
+    <view class="contxt panel-between item-center">
+      <view class="font-md bold">实付款</view>
+      <view class="font-lg font-danger bold">￥{{order.totalprice}}</view>
+    </view>
+  </view>
+</view>
+<view class="cantact">
+  <button style="border:none" bindtap='cantacts'>
+    <view class="item" >
+      <image src="/img/sj.png" class="icon-md"></image>
+      <view class="font-md margin-left-xs">联系商家</view>
+    </view>
+  </button>
+  <button open-type="contact" style="border:none">
+    <view class="item">
+      <image src="/img/kf.png" class="icon-md"></image>
+      <view class="font-md margin-left-xs">联系客服</view>
+    </view>
+  </button>
+</view>
+
+<view class="panel">
+  <view class="contxt panel-between item-center">
+    <view class="font-md">支付方式</view>
+    <view class="font-xs">{{order.vipdiscount > 0 ? 'BigJA会员支付':'微信支付'}}</view>
+  </view>
+  <view class="contxt panel-between item-center">
+    <view class="font-md">订单编号</view>
+    <view class="font-xs">{{order.ordernumber}}</view>
+  </view>
+  <view class="contxt panel-between item-center">
+    <view class="font-md">创建时间</view>
+    <view class="font-xs">{{order.createtime}}</view>
+  </view>
+</view>
+
+<view class="pfix">
+  <!-- <view class="pbtn bg-db font-sm" wx:if="{{order.status == 4 && order.status == 5}}" bindtap='againOrder'>再来一单</view> -->
+  <view class="pbtn bg-print font-sm" wx:if="{{order.status == 0}}" data-orderid="{{order.ordernumber}}" data-pay="{{order.vipdiscount}}" catchtap="payfor">立即付款</view>
+  <!-- <view class="pbtn bg-laptop font-sm" wx:if="{{order.status == 2}}">确认收货</view> -->
+</view>
+
+
+<!-- 支付 -->
+<view class="payment-panel {{dopay ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+
+  <view class="input-panel">
+    <view class="user-tit">
+      <view class="con">
+        <image src="{{head}}"></image>
+        <view class="tit">请输入支付密码</view>
+      </view>
+      <image style="width:40rpx;height:40rpx;margin-top: 15rpx;" src="/img/close.png" bindtap="concelPay"></image>
+    </view>
+    <view class="txt-panel">
+      <view class="tit">{{shopname}}</view>
+      <view class="pri">￥{{order.totalprice}}</view>
+    </view>
+    <view class="num-penel">
+      <view class="item" wx:for="{{pwdl}}"><view class="ku" wx:if="{{item}}" ></view></view>
+    </view>
+    <view class="text-panel">
+      BigJA 会员余额支付
+    </view>
+  </view>
+  <view class="number-panel">
+    <view data-num="1" bindtap="clickNum">1</view>
+    <view data-num="2" bindtap="clickNum">2</view>
+    <view data-num="3" bindtap="clickNum" style="border-right:none">3</view>
+    <view data-num="4" bindtap="clickNum">4</view>
+    <view data-num="5" bindtap="clickNum">5</view>
+    <view data-num="6" bindtap="clickNum" style="border-right:none">6</view>
+    <view data-num="7" bindtap="clickNum">7</view>
+    <view data-num="8" bindtap="clickNum">8</view>
+    <view data-num="9" bindtap="clickNum" style="border-right:none">9</view>
+    <view data-num="#" bindtap="clickNum" style="background:#f3f3f3"></view>
+    <view data-num="0" bindtap="clickNum">0</view>
+    <view data-num="c" bindtap="clickNum" style="border-right:none;background:#f3f3f3"><image style="margin-top:40rpx;width:60rpx;height:60rpx;" src="/img/shanchu.png"></image></view>
+  </view>
+</view>

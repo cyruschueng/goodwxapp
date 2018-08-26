@@ -1,0 +1,261 @@
+<import src="/pages/Template/Template.wxml" />
+<!--头部引导-->
+<!-- <view style="color:#fafafa;font-size:1rpx;">1</view> -->
+<template is="topBlock" wx:if='{{share_id}}'></template>
+<!--页面主体  -->
+<view id="myDetail">
+  <view class="weui-panel__bd">
+    <!--加锁状态下的名片-->
+    <view class="classname" wx:if="{{show_detail != 1}}">
+      <view class="projectDetailTop">
+        <view class="projectDetailBox">
+          <view>
+            <view class="flex">
+              <view class="describle">{{project.pro_intro}}</view>
+              <image src="/img/img-dujia@2x.png" class="projectDetailType" wx:if="{{project.is_exclusive == 1}}"></image>
+              <!-- <image src="/img/img-feidujiaqianyue@2x.png" class="projectDetailType" wx:if="{{project.is_exclusive == 2}}"></image> -->
+            </view>
+            <view class="flex allIndustry" wx:if="{{industy_sort.length != 0}}">
+              <!-- <view class="industry">{{industy_sort}}</view> -->
+              <block wx:for="{{pro_industry}}" wx:key="{{index}}">
+                <label class="industry">{{item.industry_name}}</label>
+              </block>
+            </view>
+            <view class="allProjectDetail flex" wx:if="{{project.pro_area != ''||project.pro_stage!=''||project.pro_scale!=''}}">
+              <view class="projectDetailLine" wx:if="{{project.pro_scale.scale_money}}">{{project.pro_scale.scale_money}}</view>
+              <!-- <view class="projectDetailLine" wx:if="{{project.pro_finance_stock_after!= 0}}">{{project.pro_finance_stock_after}}%</view> -->
+              <view class="projectDetailLine" wx:if="{{project.pro_stage.stage_name}}">· {{project.pro_stage.stage_name}}</view>
+              <view class="projectDetailLine" wx:if="{{project.pro_area.area_title}}">· {{project.pro_area.area_title}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="aline"></view>
+        <view class="otherInfo flex" bindtap="userDetail" data-id="{{user.user_id}}" hover-class='t-hoverColor'>
+          <view>
+            <image wx:if="{{user.user_avatar_url}}" class="others_pic" src="{{user.user_avatar_url}}" />
+            <view wx:if="{{!user.user_avatar_url}}" class="others_nopic">{{user.user_avatar_text}}</view>
+          </view>
+          <view>
+            <view class="userName">{{user.user_name}}</view>
+            <view class="flex userInfo">
+              <view class="userCareer">{{user.user_career}}</view>
+              <view class="userCompany">·{{user.user_company}}</view>
+              <view class="contactPersonBox flex">
+                <image src="/img/icon-jiantou.png" class="userIcon"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--项目亮点-->
+    <view class="brightBox" style="background: white;" wx:if="{{button_type != 1}}">
+      <!--项目亮点-->
+      <view class="brightPoint" wx:if="{{project.pro_goodness.length!=0}}">
+        <view class="brightPointBox flex">
+          <!-- <image src="/img/img-star.png" class="titlePic"></image> -->
+          <view class="title t-title345">投资亮点</view>
+        </view>
+        <!-- <view class="{{isChecked0?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+        <view class="brightUnfoldAfter" value="{{number}}">
+          <block wx:for="{{project.pro_goodness}}" wx:for-item="goodness" wx:key="{{index}}">
+            <view class="goodTitle1">
+              <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+              <view class="brightContent">
+                {{goodness.goodness_desc}}
+              </view>
+            </view>
+          </block>
+        </view>
+        <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked0 == true && textBeyond0==true}}" data-check="{{0}}">全部</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked0== false && textBeyond0==true}}" data-check="{{0}}">收起</label> -->
+      </view>
+      <!--市场概况pro_market_genera  -->
+      <view class="brightPoint" wx:if="{{project.pro_market_genera.length!=0}}">
+        <view class="brightPointBox flex">
+          <!-- <image src="/img/icon-shichanggaikuang@2x.png" class="titlePic"></image> -->
+          <view class="title t-title345">市场概况</view>
+        </view>
+        <!-- <view class="{{isChecked1?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+        <view class="brightUnfoldAfter" value="{{number}}">
+          <block wx:for="{{project.pro_market_genera}}" wx:for-item="goodness" wx:key="{{index}}">
+            <view class="goodTitle1">
+              <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+              <view class="brightContent">
+                {{goodness.goodness_desc}}
+              </view>
+            </view>
+          </block>
+
+        </view>
+        <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked1 == true && textBeyond1==true}}" data-check="{{1}}">收起</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked1== false && textBeyond1==true}}" data-check="{{1}}">全部</label> -->
+      </view>
+      <!--产品概况pro_service -->
+      <view class="brightPoint" wx:if="{{project.pro_service.length!=0}}">
+        <view class="brightPointBox flex">
+          <!-- <image src="/img/icon-chanpingaikuang@2x.png" class="titlePic"></image> -->
+          <view class="title t-title345">产品概况</view>
+        </view>
+        <!-- <view class="{{isChecked2?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+        <view class="brightUnfoldAfter" value="{{number}}">
+          <block wx:for="{{project.pro_service}}" wx:for-item="goodness" wx:key="{{index}}">
+            <view class="goodTitle1">
+              <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+              <view class="brightContent">
+                {{goodness.goodness_desc}}
+              </view>
+            </view>
+          </block>
+
+        </view>
+        <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked2 == true && textBeyond2==true}}" data-check="{{2}}">收起</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked2== false && textBeyond2==true}}" data-check="{{2}}">全部</label> -->
+      </view>
+      <!--商业模式 pro_business_model -->
+      <view class="brightPoint " wx:if="{{project.pro_business_model.length!=0}}">
+        <view class="brightPointBox flex">
+          <!-- <image src="/img/icon-shangyemoshi@2x.png" class="titlePic"></image> -->
+          <view class="title t-title345">商业模式</view>
+        </view>
+        <!-- <view class="{{isChecked3?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+        <view class="brightUnfoldAfter" value="{{number}}">
+          <block wx:for="{{project.pro_business_model}}" wx:for-item="goodness" wx:key="{{index}}">
+            <view class="goodTitle1">
+              <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+              <view class="brightContent">
+                {{goodness.goodness_desc}}
+              </view>
+            </view>
+          </block>
+
+        </view>
+        <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked3 == true && textBeyond3 == true}}" data-check="{{3}}">收起</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked3 == false && textBeyond3 == true}}" data-check="{{3}}">全部</label> -->
+      </view>
+    </view>
+    <!--三个tab页  -->
+    <include src='/utils/wxml/threeTab.wxml' />
+    <!-- <view class="projectScore" wx:if="{{score==true&&show_detail != 1}}" bindtap="projectRemark">项目评价</view> -->
+    <!--申请查看未能过-->
+    <view class="lockStyle" wx:if="{{show_detail != 1}}">
+      <image src="{{projectImg}}" class="lockImg"></image>
+      <view class="lockText">认证投资人和认证买方FA可以查看项目的完整信息</view>
+      <text class="lockText1">基本介绍\t\t \t\t\t\t\t\t\t\t\t\t·\t\t 更多产品 · 融资信息 · 核心团队 · 里程碑</text>
+      <!-- <view wx:if="{{button_type != 1}}"> -->
+      <view class="lockRenzheng" bindtap="toAccreditation" wx:if="{{status == 5 && button_type == 3}}">立即认证</view>
+      <!--申请中  -->
+      <view  wx:if="{{button_type == 0}}"></view>
+      <!-- 重新申请 -->
+      <view class="lockRenzheng1" bindtap="toAccreditation" wx:if="{{status == 0 ||status ==3}}" hover-class='t-other-button-hover'>立即认证</view>
+      <!-- <image class="lock" src="/img/img-suo2@2x.png"></image>
+      <image src="{{projectBack}}" class="lockBackground"> </image> -->
+    </view>
+    <!-- </view> -->
+    <view class="lockKong" wx:if="{{show_detail != 1}}"></view>
+  </view>
+</view>
+
+
+
+
+
+<!--邮箱-->
+<view class="modal" wx:if="{{sendPc == 1}}">
+  <view class="bpModal">
+    <view class="bpModalBox">
+      <view class="bpModalText">BP会发送到您的邮箱</view>
+      <input class="writeBpEmail" value="{{userEmail}}" bindinput="writeBpEmail" placeholder="请输入邮箱" />
+      <view class="choiceBox">
+        <view class="flex">
+          <view class="bpModalCancel" bindtap="bpModalCancel" data-index="0">取消</view>
+          <view class="bpModalSure {{checkEmail==true? '':'checkEmail'}}" bindtap="bpModalSure" data-index="0">发送</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--下面的浮动按钮-->
+<view class="floatBtn" wx:if="{{button_type != 1}}">
+  <!-- <view class="accreditation flex" wx:if="{{status == 0 ||status ==3}}">
+    <view>认证投资人、买家FA才可申请查看</view>
+    <view class="toAccreditation" bindtap="toAccreditation">立即认证</view>
+  </view>
+  <view class="accreditation flex" wx:if="{{status == 5 &&button_type == 3}}">
+    <view>认证投资人、买家FA才可申请查看</view>
+    <view class="toAccreditation identitym" bindtap="toAccreditation">立即认证</view>
+  </view>     -->
+  <!-- <view class="push project-applicationm" bindtap="applyProject" wx:if="{{button_type == 3}}" data-project="{{id}}">申请查看</view> 
+   <view class="push project-applicationm" bindtap="applyProject" wx:if="{{button_type == 2}}" data-project="{{id}}">重新申请</view> -->
+</view>
+<!-- <view class="pushing" wx:if="{{button_type == 0}}">申请中</view> 
+</view>
+
+<!-- <view class=" flex floatBtn flexBox">
+  <view class="collectBox" hover-class='t-hoverColor' bindtap="collectProject">
+    <image src="/img/icon-shoucang@2x.png" class="collectPic"></image>
+  </view>
+  <view class="contactProject" hover-class='t-other-button-hover' catchtap="contactPerson">联系项目方</view>
+  <view class='t-line'></view>
+  <view class="businessBook" catchtap="businessBook" hover-class='t-other-button-hover' wx:if="{{button_type == 1}}">商业计划书</view>
+   <view class="businessBook1" wx:if="{{button_type == 0}}">申请中</view> 
+   <view class="businessBook project-applicationm" hover-class='t-other-button-hover' bindtap="applyProject" wx:if="{{button_type == 3}}" data-project="{{id}}">申请查看</view>
+  <view class="businessBook project-applicationm" bindtap="applyProject" wx:if="{{button_type == 2}}" data-project="{{id}}" hover-class='t-other-button-hover'>重新申请</view> 
+</view> -->
+<view class="flex t-aboutNetwork">
+  <view class="t-flexBox" hover-class="t-hoverColor" bindtap="moreProject">
+    <image src='/img/icon-shouye@2x.png' class="t-shopPic"></image>
+    <view class='t-shopBlock'>首页</view>
+  </view>
+  <view class="t-line"></view>
+  <view class="t-flexBox">
+    <view class='t-shopBlock' wx:if="{{score}}" bindtap="projectRemark" hover-class="t-hoverColor">
+      <image src='/img/icon-pingjia@2x.png' class="t-shopPic"></image>
+      评价</view>
+  </view>
+  <view class="t-line"></view>
+  <view class="t-flexBox" hover-class="t-hoverColor">
+    <image src='/img/icon-fenxiang@2x.png' class="t-shopPic"></image>
+    <button class='t-shopBlock' open-type="share">分享</button>
+  </view>
+  <view class="t-line"></view>
+  <view class="t-flexBox" catchtap="businessBook" wx:if="{{button_type == 1}}" hover-class="t-hoverColor">
+    <image src='/img/icon-jihuashu@2x.png' class="t-shopPic"></image>
+    <view class='t-shopBlock'>商业计划书</view>
+  </view>
+  <view class="t-line" wx:if="{{button_type == 1}}"></view>
+  <view class="t-flexBox" bindtap="applyProject" wx:if="{{button_type == 3}}" data-project="{{id}}" hover-class="t-hoverColor">
+    <image src='/img/icon-shenqingchakan@2x.png' class="t-shopPic"></image>
+    <view class='t-shopBlock'>申请查看</view>
+  </view>
+  <view class="t-line" wx:if="{{button_type == 3}}"></view>
+  <view class="t-flexBox" wx:if="{{button_type == 0}}" hover-class="t-hoverColor">
+    <image src='/img/icon-shenqingchakan@2x.png' class="t-shopPic"></image>
+    <view class='t-shopBlock'>申请中</view>
+  </view>
+  <view class="t-line" wx:if="{{button_type == 0}}"></view>
+  <view class="t-flexBox" bindtap="applyProject" wx:if="{{button_type == 2}}" data-project="{{id}}" hover-class="t-hoverColor">
+    <image src='/img/icon-shenqingchakan@2x.png' class="t-shopPic"></image>
+    <view class='t-shopBlock'>重新申请</view>
+  </view>
+  <view class="t-line" wx:if="{{button_type == 2}}"></view>
+  <view class='t-creatProject' catchtap="contactPerson" hover-class="t-redColor">联系项目方</view>
+</view>
+<view class="modalBox" hidden="{{modalBox==0}}">
+  <view class="classname" bindtap="closeModal">
+    <image src="/img/icon-guanbi@2x.png" class="close"></image>
+  </view>
+  <view class="contactModalBox">
+    <view class="modalTitle">联系项目方</view>
+    <textarea class="modalContent" placeholder="请简要描述您的意向约谈时间,方式" bindinput="contentProject" />
+    <view class="modalTips">微天使将为您联系项目方并安排约谈或添加FA哥微信：weitianshicn</view>
+    <button class="btn" hover-class='t-other-button-hover' bindtap="yesBtn" disabled="{{disabled}}">确定</button>
+  </view>
+</view>
+<button open-type="contact" class="t-contact" bindtap='contactTap' wx:if="{{currentTab==0}}">
+  <image class="service" wx:if="{{bindContact==false}}" src="/img/btn-lianxikefu@2x.png"></image>
+  <image class="service" wx:if="{{bindContact==true}}" src="/img/img-kefu-s@2x.png">
+  </image>
+</button>
+<!--没有更多-->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>

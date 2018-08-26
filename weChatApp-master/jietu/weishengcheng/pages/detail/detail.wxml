@@ -1,0 +1,33 @@
+<import src="../item/newsItem.wxml" />
+<import src="../item/empty.wxml" />
+<import src="/zanui/toast/index.wxml" />
+<import src="../../wux/dialog/dialog.wxml"/>
+
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view class="container page__bd" bindlongtap="popupAdd">
+    <block wx:if="{{detail.content}}">
+        <template is="news_item" data="{{mode:'detail',isAndroid:isAndroid,padding:padding,index:99,item: detail,oneSize:oneSize,twoSize:twoSize,pixelRatio:pixelRatio,threeSize:threeSize}}" />
+    </block>
+    <view wx:else style="height:1000rpx;" class="flex_center">
+        <view class="weui-msg__icon-area" style="">
+            <image lazyload="true" style="width: 588rpx;height:269rpx;" src="http://icons.maiyizhi.cn/nocontent_list.png"></image>
+        </view>
+    </view>
+    <view bindtap="operate" wx:if="{{detail.content}}" class="flex_row" id="input-bg" style="position:fixed;bottom:0;width:100%;height:88.2rpx;background-color:#fafafa;border-top: 0.6px solid #cecece;">
+        <view disabled="true"  style="height:29px;line-height:29px;padding:0 18.1rpx;width:100%;border-radius:4px;border:0.6px solid #ddd;background-color: #fcfcfc;margin: 16.67rpx 0 16.67rpx 26.4rpx;color: #999;">评论</view>
+        <view style="width: 70rpx;margin: 16.67rpx 36.1rpx 16.67rpx 26.39rpx;"><image src="http://icons.maiyizhi.cn/biaoqinga.png" style="width:57.64rpx;height: 57.64rpx;"></image></view>
+    </view>
+</view>
+
+<view class="drawer_screen" bindtap="close"  wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+    <view class="drawer_content">
+        <view>点页面任何部分，修改该部分内容</view>
+        <view class='drawer_img'><image src="http://icons.maiyizhi.cn/dianjitishi_1.jpg"   style="width:500rpx;height:244rpx;"></image></view>
+        <view>制作完成之后，请用手机截屏来保存图片</view>
+    </view>
+    <view style="position: absolute;right:-35rpx;top:-35rpx;" bindtap="close">
+        <image src="http://icons.maiyizhi.cn/guanbi3.png" style="width:70rpx;height:70rpx;"></image>
+    </view>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

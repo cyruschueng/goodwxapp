@@ -1,0 +1,41 @@
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container bg256 h100">
+<!--top str -->
+  <view class='h5 flexS Skin pdr1 pdl1'>
+    <image class='imgxs15' src='/images/back.png' bindtap='userAdmInfoback'></image>
+  </view>
+  <!--圆环  -->
+  <view class='panel flex pAb05 Skin'>
+    <view class='panelL flexCenter'>
+      <image class="imgM"src="/images/gonglv.png"></image>
+      <view>当前功率({{webQueryPlants.outputPowerUnit?webQueryPlants.outputPowerUnit:'kW'}})</view>
+      <view class='color02'>{{webQueryPlants.outputPower}}</view>
+    </view>
+    <view class='panelC flexCenter cir'>
+          <canvas class="" style="width:80px; height:60px;" canvas-id="canvasArc"></canvas> 
+          <view class="circ">{{circ?circ:'0.0'}}%</view> 
+    </view>
+    <view class='panelL flexCenter'>
+      <image class="imgM"src="/images/rongliang.png"></image>
+      <view>装机容量({{webQueryPlants.nominalPowerUnit?webQueryPlants.nominalPowerUnit:'kW'}})</view>
+      <view class='color02'>{{webQueryPlants.nominalPower}}</view>
+    </view>
+  </view>
+  <!--发电str  -->
+  <view class='powerLisData flexBetw Gradient pd1'>
+    <template is="listNav" data="{{listNavData: listNavData}}"/>
+  </view>
+  <template is="calendar" data="{{calendar: calendar}}"/>
+    <!--图表 -->
+  <view class='mainCharData flexColumn flexv1 modeldrawer_content'>
+    <view class='width100 h100 cir'>
+  <view class='ecBar'>
+    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+  </view>
+    </view>
+  </view>
+  <view class='h15'></view>
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

@@ -1,0 +1,28 @@
+<!--pages/invitation/invitation.wxml-->
+<view class='page' style='height:100%;width:100%;'>
+  <view class='page_bd' style="height:100%;width:100%;background-image:url('{{topimg}}');background-repeat:no-repeat;background-size:100% 100%;">
+    <view style='width:70%;height:300px;margin:0 auto;padding-top:30px;display:flex;flex-direction: column;align-items:center;'>
+      <view class='headportrait'>
+        <image src='{{userInfo.avatarUrl}}' mode='{{mode}}' style='height:60px;width:60px;'></image>
+      </view>
+      <view class='name'>
+          <text style='font-size:20px;color:#ffffff;'>{{info.name}}</text>
+      </view>
+      <view style='display: flex;flex-direction: column;align-items: center;margin-top:5px;'>
+          <text style='font-size:15px;color:#ffffff;'>{{info.school_info.schoolname}}{{activityinfo.xiaoyouinfo.name}}</text>
+      </view>
+      <view style='margin-top:13px;text-align:center;'>
+        <text style='font-size:18px;color:#fff;'>您的校友邀请您参加{{activityinfo.date}}{{activityinfo.address}}的{{activityinfo.title}}</text>
+      </view>
+      <view style='margin-top:5px;'>
+        <text style='font-size:11px;color:#fff;'>{{activityinfo.content}}</text>
+      </view>
+    </view>
+    <view style='height:20%;width:36vw;padding-top:10px;margin:0 auto;'>
+        <image src='{{src}}' mode='{{mode}}' style='height:100%;width:100%;'></image>
+    </view>
+    <view style='width:100%;position:fixed; bottom:10px;'>
+      <button class="weui-btn" type="primary" style='background-color:#2ebd59;margin:0 20px;' open-type="share">分享活动</button>
+    </view>
+  </view>
+</view>

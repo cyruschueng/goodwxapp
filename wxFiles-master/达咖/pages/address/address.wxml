@@ -1,0 +1,20 @@
+<view class="padding-sm panel-between item-center">
+  <view class="font-md font-default" style="width:600rpx;">
+    <text style="color:#000">注意:</text>该地址列表为缓存地址,清空缓存将不复存在。若要地址多平台通用且实时存在，请以微信地址为主要地址入口。
+  </view>
+  <view bindtap="del">
+    <image src="/img/trash.png" class="icon-sm"></image><text class="font-xs"> 清空</text>
+  </view>
+</view>
+
+<view class="panel bottom-line" wx:for="{{list}}" data-index="{{index}}" bindtap="choose">
+  <view class="font-md bold">{{item.userName}},{{item.telNumber}}</view>
+  <view class="font-md">{{item.provinceName}} {{item.cityName}} {{item.countyName}} {{item.detailInfo}}</view>
+</view>
+
+<view class="margin-top-lg" style="text-align:center" wx:if="{{list.length == 0}}" >
+  <image src="/img/bglogo.png" style="width:180rpx;height:180rpx;"></image>
+  <view class="margin-top-xs font-md">您还没添加过地址！点右下角添加哦</view>
+</view>
+
+<view class="addAddress bg-inbox" bindtap="navToAdd">+</view>

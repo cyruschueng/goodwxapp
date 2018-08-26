@@ -1,0 +1,30 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{show}}">
+  <view class="fui-header">
+    <view class="searchbar">
+      <icon size="18" type="search" />
+      <input bindinput="search" name="search" bindfocus="bindSearch" placeholder="输入关键字进行搜索" />
+    </view>
+    <view class="{{search ? 'block' : 'none'}}">搜索</view>
+  </view>
+  <view class="fui-cell-group shop">
+    <block wx:for="{{list}}">
+      <view class="fui-list">
+        <view class="media">
+          <image class="image-48" src="/static/images/icon/shop.png"></image>
+        </view>
+        <view class="fui-list-inner" data-index="{{index}}" bindtap="select">
+          <view class="subtitle">{{item.storename}}</view>
+          <view class="text">{{item.realname}} {{item.mobile}}</view>
+          <view class="text">{{item.address}}</view>
+        </view>
+        <view class="fui-list-angle">
+          <image bindtap="phone" data-phone="{{item.mobile}}" src="/static/images/icon/tel.png" class="image-48 tel"></image>
+          <navigator hover-class="none" open-type="redirect" url="/pages/order/store/map?id={{item.id}}">
+            <image src="/static/images/icon/location.png" class="image-48 local"></image>
+          </navigator>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

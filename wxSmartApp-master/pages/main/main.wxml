@@ -1,0 +1,136 @@
+<!-- <image class="homeback" mode="widthFix" src="{{IMG_PATH}}/homeback.jpg"></image> -->
+<scroll-view class="scroll-box" scroll-y lower-threshold="50" bindscrolltolower="bindLower" bindscrolltoupper="bindUpper">
+  <view class="banner">
+    <swiper indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
+      <block wx:for="{{imgUrls}}" wx:key >
+        <swiper-item>
+          <image  src="{{item.img_url}}" class="slide-image" data-item="{{item}}" data-index="{{index}}" wx:key="{{index}}"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+     
+    <!-- 导航栏 -->
+    <view class='choose-type'>
+        <view class="">
+            <view class="status-btn {{status=='hot'?'on':''}}"  bindtap='bindStatus' data-status="hot">悬疑</view>
+        </view>
+        <view class="">
+            <view class="status-btn {{status=='new'?'on':''}}"  bindtap='bindStatus' data-status="new">内涵</view>
+        </view>
+           <view class="">
+            <view class="status-btn {{status=='video'?'on':''}}"  bindtap='bindStatus' data-status="video">视 频</view>
+        </view>  
+    </view>
+    
+    <!--视频  -->
+  <block wx:if="{{status=='video'}}">
+      <view class="section tc" wx:for='{{video_data}}' wx:key='id'>
+        <!-- <video id="myVideo" src="{{item}}" bindfullscreenchange="aa" bindplay="bindplayvideo"   ></video> -->
+        <view class='mengban' bindtap='mengbanbindtap' data-id='{{item.id}}'>
+          <image src='{{item.imgUrl}}' mode='aspectFill'></image>
+           <view class="nick">
+                <text>{{}}</text>
+              </view>
+              <view class="amount">
+                <text>浏览量:{{item.count}}</text>
+              </view>
+        </view>
+         <view class='username'></view> 
+      </view>
+     
+  </block>
+
+  <!-- 图片-->
+  <block wx:else>
+      <view class="images-box flex-box" >
+        <view class="box-1">
+          <view class="list-item" wx:for="{{arr1}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap="bindShareDetail">
+            <view class="classname">
+              <image src="{{item.imgUrl}}" mode="widthFix"></image>
+            </view>
+            <view class="info-content">
+             <view class="local">
+                <image src='{{item.user.profile_image?item.user.profile_image:"http://didicharging-v2.oss-cn-beijing.aliyuncs.com/code/niming.png"}}'></image>
+    
+              </view> 
+              <view class="nick">
+                <text>{{item.user.nick_name}}</text>
+                <!-- <text class="time-late">{{item.timeInfo}}</text> -->
+              </view>
+              <view class="amount">
+                <text>浏览量:{{item.readCount}}</text>
+              </view>
+
+            </view>
+          </view>
+        </view>
+        <view class="box-2">
+          <view class="list-item" wx:for="{{arr2}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap="bindShareDetail">
+            <image src="{{item.imgUrl}}" mode="widthFix"></image>
+            <view class="info-content">
+              <view class="local">
+                <image src='{{item.user.profile_image?item.user.profile_image:"http://didicharging-v2.oss-cn-beijing.aliyuncs.com/code/niming.png"}}'></image>
+                <!-- <text>{{item.address}}</text> -->
+              </view> 
+              <view class="nick">
+                <text>{{item.user.nick_name}}</text>
+                <!-- <text class="time-late">{{item.timeInfo}}</text> -->
+              </view>
+              <view class="amount">
+                <text>浏览量：{{item.readCount}}</text>
+              </view>
+
+            </view>
+          </view>
+        </view>
+      </view>
+  </block>
+  
+  
+</scroll-view>
+
+
+<!--  -->
+<view class="nav">
+<view class="" >
+    <image src="{{IMG_PATH}}/shoye2.jpg"></image>
+    <view>首页</view>
+  </view>
+  <view class="" bindtap="goToShare">
+    <image src="{{IMG_PATH}}/fangdian.png"></image>
+    <view>发布</view>
+  </view>
+   <view class="scanCode" bindtap="scanCode">
+    <image src="{{IMG_PATH}}/chudian.png"></image>
+     <view>扫一扫</view> 
+  </view>
+  <view class="" bindtap="goToMap">
+    <image src="{{IMG_PATH}}/laidian.png"></image>
+    <view>触电</view>
+  </view>
+
+  <view class="" bindtap="goToUser">
+    <image src="{{IMG_PATH}}/wode.png"></image>
+    <view>我的</view>
+  </view>
+
+</view>
+
+<!--发图成功后的提醒  -->
+<view class="mask {{openMask?'mask-on':''}}">
+  <view>
+     <view bindtap="bindCloseMask" class="close" ></view> 
+  </view>
+  <view class="img-box">
+    <image src="{{IMG_PATH}}/hongbao.png"></image>
+  </view>
+  <view class="content">
+    <view class="success">您已分享成功</view>
+    <view class="invite">快邀请你的小伙伴一起体验吧！</view>
+  </view>
+  <view class="invite-btn">
+    <button open-type="share" class="classname">邀请好友</button>
+  </view>
+</view>

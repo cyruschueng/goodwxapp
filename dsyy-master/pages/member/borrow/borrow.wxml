@@ -1,0 +1,38 @@
+<view wx:if="{{level>0}}">
+   <view wx:if="{{show}}"> 
+    <view class="page" style="height:20rpx;"></view>
+    <view class="margin-top-30 margin-left-30 margin-bottom-30 borrow-word">借书码</view>
+    <button bindtap="getCode" class="borrow-code">{{code}}</button>
+    <view class="borrow-time padding-left-10 margin-top-30 margin-left-30">提示：此码有效期为5分钟</view>
+    <button bindtap="getCode" class="borrow-button margin-top-30 margin-right-30">刷新</button>
+    <view class="clear"></view>
+    <view class="borrow-prompt">
+      <image src="{{image}}" class="borrow-prompt-image margin-top-50"></image>
+      <view class="margin-right-30 margin-left-30 card-text padding-left-20 padding-top-20 padding-right-20 padding-bottom-20">
+        <view>将本码展示给店员进行图书借阅</view>
+        <view>每生成一个借阅码只能借一本图书。</view>
+        <view>
+          您可以同时借阅<view class="keyword">{{count}}</view>本书，
+          已借阅<view class="keyword">{{count-count_borrow}}</view>本书，
+          还可以借阅<view class="keyword">{{count_borrow}}</view>本书
+        </view>
+      </view>
+    </view>
+  </view>
+   <view wx:else class="white-bg ban-borrow">
+    <view class="page" style="height:20rpx;"></view>
+    <view class="ban-borrow-img">
+      <image src="/images/no.png" class="ban-borrow-image"></image>
+    </view>
+    <view class="ban-borrow-prompt margin-top-20">{{msg}}</view>
+    <view wx:if="{{buttonshow}}" class="ban-borrow-prompt margin-top-20">如果还想借阅，请先还书，或者进行会员升级</view>
+    <view wx:else class="ban-borrow-prompt margin-top-20">如果还想借阅，请先还书</view>
+    <view wx:if="{{buttonshow}}" class="ban-borrow-button">
+      <view class="ban-borrow-button-back" bindtap="back">返回</view>
+      <view class="ban-borrow-button-upgrade" bindtap="upGrade">去升级</view>
+    </view>
+    <view wx:else class="ban-borrow-button">
+      <view class="ban-borrow-button-back-f" bindtap="back">返回</view>
+    </view>
+  </view> 
+</view>

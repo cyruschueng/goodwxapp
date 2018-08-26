@@ -1,0 +1,36 @@
+<view class="c-minheight wx-view_buWgC7 body-box" >
+    <view class="circle-box">
+        <canvas class="circle" style="z-index: -99; width:70px; height:70px;" canvas-id="canvasCircle"></canvas>
+        <canvas class="circle" style="width:70px; height:70px;" canvas-id="canvasArcCir"></canvas>
+        <view class="circle-num">{{progressTime}}</view>
+    </view>
+    <view class="c-minheight wx-view_v78qlX" >
+        <image class="wx-image_GK7Zvq"  mode="scaleToFill" src="{{ avatarUrl }}" style="background-size:  100% 100%; background-position:  0% 0%; background-repeat:  no-repeat; background-image: url({{ avatarUrl }}); "/>
+        <view class="c-minheight wx-view_Q9XpkE" >
+            <view class="c-minheight wx-view_6rAqYS" >
+                <view class="c-minheight wx-view_WWOiwX" >
+                    第{{questionIndex + 1}}题
+                </view>
+                <view class="c-minheight wx-view_GUnvzD" >
+                    第10题
+                </view>
+            </view>
+            <view class="c-minheight wx-view_YoTHoo">
+                <view class="bar" style="width: {{(questionIndex + 1) * 10}}%"></view>
+            </view>
+        </view>
+        <image class="wx-image_bXyQBb"  mode="aspectFill" src="http://qty83k.creatby.com/materials/111779/origin/6a3c4d338247b4a54f7c3fe9846c39f1_origin.png" style="background-size: cover; background-position: center center; background-repeat: no-repeat; background-image:          url(http://qty83k.creatby.com/materials/111779/origin/6a3c4d338247b4a54f7c3fe9846c39f1_origin.png); "/>
+    </view>
+    <view class="c-minheight wx-view_Yp5hav" >
+        <view class="c-minheight wx-view_paIQgd" >
+            {{currentContent}}
+        </view>
+    </view>
+    <view class="c-minheight wx-view_0lK4ul">
+        <view  wx:for="{{currentOptionList}}">
+            <view class="c-minheight wx-view_E9grNv" data-option="{{item.index}}" bindtap="selectOption" >
+                {{item.content}}
+            </view>
+        </view>
+    </view>
+</view>

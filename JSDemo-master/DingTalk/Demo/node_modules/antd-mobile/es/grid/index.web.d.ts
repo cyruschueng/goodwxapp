@@ -1,0 +1,21 @@
+/// <reference types="react" />
+import React from 'react';
+import { GridProps } from './PropsType';
+export default class Grid extends React.Component<GridProps, any> {
+    static defaultProps: {
+        data: never[];
+        hasLine: boolean;
+        isCarousel: boolean;
+        columnNum: number;
+        carouselMaxRow: number;
+        prefixCls: string;
+    };
+    state: {
+        initialSlideWidth: number;
+    };
+    componentDidMount(): void;
+    renderCarousel: (rowsArr: any, pageCount: any, rowCount: any) => any[];
+    renderItem: (dataItem: any, index: number, columnNum: number, renderItem: any) => JSX.Element;
+    getRows: (rowCount: any, dataLength: any) => any[];
+    render(): JSX.Element;
+}

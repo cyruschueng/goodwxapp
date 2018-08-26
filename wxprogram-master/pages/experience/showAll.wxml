@@ -1,0 +1,27 @@
+<view class="containers">
+    <view class='collect' wx:for='{{shops}}' wx:key='{{item}}' bindtap='enterdetail' id='{{item.shopId}}'>
+      <view wx:if='{{item.promotionTag.name}}' class='hot-recommend'>{{item.promotionTag.name}}</view>
+        <view class='banner'>
+          <image mode='widthFix' lazy-load='true' wx:if='{{item.surface}}' src='{{item.surface}}'></image>
+          <image mode='widthFix' lazy-load='true' wx:else src='../../images/logo-gray.png'></image>
+          <view wx:if='{{item.minimumCharge}}' class='price'>{{item.minimumCharge}}</view>
+        </view>
+        <view class='detail'>
+          <view class='title'>{{item.shopName}}</view>
+          <view class='grade'>
+            <text class='star'>
+              <text wx:for='{{item.stars}}' wx:key='ns' class='iconfont icon-star'></text>
+              <text wx:if='{{item.half}}' class='iconfont icon-217-star-half'></text>
+              <text>({{item.score}}分)</text>
+            </text>
+          </view>
+          <view class='distance' wx:if="{{item.distance >= 1000 && item.distance <= 100000}}">{{item.distance/1000}}km</view>
+          <view class='distance' wx:elif='{{item.distance > 100000}}'>>100km</view>
+          <view class='distance' wx:else>{{item.distance}}m</view>
+        </view>
+      </view>
+    <view class='{{isLoading?"loading":"hideLoding"}}'>
+      <text class='iconfont icon-loading'></text> 正在加载中~~~
+    </view>
+    <view class='more' wx:if="{{nomore}}">没有更多了~~~</view>
+</view>

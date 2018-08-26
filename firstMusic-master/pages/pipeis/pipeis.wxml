@@ -1,0 +1,51 @@
+<view class="container">
+      <view class='option'>
+            <view class='button' bindtap='outTap'>
+                <image src="http://ovhvevt35.bkt.clouddn.com/music/out.png" style='width: 28rpx;' mode='widthFix'></image>退出
+            </view>
+            <view class='button'>
+                <button open-type='share' style='border-radius:0'>
+                    <image src="http://ovhvevt35.bkt.clouddn.com/music/friend.png" mode='widthFix'></image>邀请
+                </button>
+            </view>
+      </view>
+     <view class='header'>
+        <view class='left public'>
+            <view class='leftBg bg'>
+                  <image src="{{houseImg}}" mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='leftInform inform'>
+            <view class='text name'>{{houseName}}</view>
+            <!-- <text wx:if="{{comeIn}}" style='color:red;font-size:26rpx;position:absolute;right:6rpx;top:32rpx;display:inline-block;width:200rpx;' >（房主）</text> -->
+            <!-- <view class='text little' style='color:red;' wx:if="{{comeIn}}">房主</view> -->
+        </view> 
+        <view class='wait'>
+           <view>VS</view> 
+        </view>
+        <view class='right public'>
+            <view class='rightBg bg'>
+                  <!--http://ovhvevt35.bkt.clouddn.com/music/user.png  -->
+                  <image src="{{otherImg}}" mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='rightInform inform'>
+            <view class='text name'>{{otherName}}</view>
+            <!-- <view class='text little'>来自：{{userInfo.province}}</view> -->
+        </view> 
+    </view>
+    <view class='star'>
+        <view class='match' bindtap='matchTap' wx:if="{{comeIn}}">开始比赛</view>
+        <view class='rulue'>听音乐猜歌名，共5首，每首20秒</view>    
+    </view>
+</view>
+ 
+<view class='bgs' wx:if="{{bg}}">
+ <view class='zindex zindex2'>
+        <view class='title'>好友正在对战或退出了房间</view>
+        <view class='check'>
+            <!-- <view class='one' bindtap='no'>继续邀请</view> -->
+            <view class='two' bindtap='outTap'>退出</view>
+        </view>
+    </view>
+</view>

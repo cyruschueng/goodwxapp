@@ -1,0 +1,46 @@
+<!--pages/content/content.wxml-->
+<image class='bg' src='../images/content_bg.png'></image>
+<view class='info_box'>
+<view class='scroll_area'>
+<view class='time'>
+  <view class='retime'>{{second}}</view>
+</view>
+  <image class='pic' src='{{pic}}'></image>
+  <view class='name'>{{name}}</view>
+  <view class='tip'>当前答题第 <text style='color:yellow'>{{x}}/12</text> 题</view>
+  <view class='question'>
+    <view class='title'>{{x}}、{{title}}</view>
+    <view data-num="1" class="select {{_num==1?'current':''}}" bindtap='anser' data-anser="{{a}}">A、{{a}}</view>
+    <view data-num="2" class="select {{_num==2?'current':''}}" bindtap='anser' data-anser="{{b}}">B、{{b}}</view>
+    <view data-num="3" class="select {{_num==3?'current':''}}" bindtap='anser' data-anser="{{c}}">C、{{c}}</view>
+    <view data-num="4" class="select {{_num==4?'current':''}}" bindtap='anser' data-anser="{{d}}">D、{{d}}</view>
+  </view>
+</view>
+</view>
+
+
+<view class='bg1'  wx:if="{{show}}">
+  <view class='content_box'>
+  <image class='hide' bindtap='yincang' src='../images/hide.png'></image>
+    <image class='lost' src='../images/lost.png'></image>
+    <view class='content_text'>回答错了哦~</view>
+    <view class='content_text1'>分享到不同的群，可获得挑战机会</view>
+    <button class='service' open-type="share" >转发到不同群</button>
+  </view>
+</view>
+
+<view class='bg1'  wx:if="{{show1}}">
+  <image class='bg1_img' src='../images/start_bg.png'></image>
+  <view class='startTime'>{{second1}}</view>
+</view>
+
+<view class='bg1'  wx:if="{{show2}}">
+  <view class='content_box'>
+  <image class='hide' bindtap='yincang' src='../images/hide.png'></image>
+    <image class='lost' src='../images/win.png'></image>
+    <view class='content_text'>恭喜你获得公仔~</view>
+    <view class='content_text1'>您的验证码：<text selectable='true'style='color:#ffb13d'>{{sdk}}</text></view>
+    <view class='content_text1'>长按复制验证码联系客服领奖</view>
+    <button class='service' open-type='contact' session-from='weapp' >联系客服兑奖</button>
+  </view>
+</view>

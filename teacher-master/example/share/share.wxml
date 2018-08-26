@@ -1,0 +1,70 @@
+<view class='help'>
+<button class='kefu-btn' open-type='contact'><view class='xm-kefu'></view></button>
+</view>
+<view class="page">
+  <view wx:if="{{loaded}}">
+    <view class='xm-homework-item'>
+
+      <view class='xm-homework-cell' >
+        <view class='xm-homework-title'> {{notify.type==0?notify.title:"班级通知"}}</view>
+      </view>
+
+      <view class='xm-homework-cell'  wx:if="{{notify.text_content}}" >
+        <view class='xm-homework-text_content'> <text style='line-height:35px'>{{notify.text_content}}</text></view>
+      </view>
+      <view class='xm-homework-cell' wx:if="{{notify.photo_content_url.length>0}}"  >
+             <block wx:for="{{notify.photo_content_url}}" wx:for-index="idx" wx:for-item="it">
+          <image wx:if="{{notify.photo_content_url.length==1}}" data-imgurls="{{notify.big_photo_content_url}}" catchtap="ListpreviewImage" mode="aspectFit" style="width:50%;margin-left:5px;height:150px;" data-imgUrl="{{notify.big_photo_content_url[idx]}}" src="{{it}}"></image>
+          <image wx:elif="{{notify.photo_content_url.length==2}}" data-imgurls="{{notify.big_photo_content_url}}" catchtap="ListpreviewImage" mode="aspectFit" style="width:27%;margin-left:5px;height:80px;width:80px" data-imgUrl="{{notify.big_photo_content_url[idx]}}" src="{{it}}"></image>
+          <image wx:elif="{{notify.photo_content_url.length==3}}" data-imgurls="{{notify.big_photo_content_url}}" catchtap="ListpreviewImage" mode="aspectFit" style="width:27%;margin-left:5px;height:80px;width:80px" data-imgUrl="{{notify.big_photo_content_url[idx]}}" src="{{it}}"></image>
+          <image wx:elif="{{notify.photo_content_url.length>4}}" data-imgurls="{{notify.big_photo_content_url}}" catchtap="ListpreviewImage" mode="aspectFit" style="width:27%;margin-left:5px;height:80px;width:80px" data-imgUrl="{{notify.big_photo_content_url[idx]}}" src="{{it}}"></image>
+        </block>
+          </view>
+
+          
+         <view class='xm-homework-cell' wx:if="{{notify.record_content_url}}">
+                <view style='margin-left:10px;width:100%' data-record_id="{{notify._id}}" data-record="{{notify.record_content_url}}" data-from="notify" class='xm-record-play-btn' bindtap='playStart' hover-class='xm-record-play-btn-hover'>
+                    <image animation="{{playAnimation}}" style='height:15px;width:15px;' src='../../image/record-msg.png'></image>
+                  <view>{{notify.record_duration}}'' </view>
+                </view>
+        </view>
+
+  <view class='xm-homework-cell' wx:if="{{notify.video_content_url}}">
+                <view style='text-align:center;width:100%;'>
+                    <video style='width:{{winWidth-30}}px' src='{{notify.video_content_url}}'></video>
+                </view>
+        </view>
+
+
+
+      <view class='xm-homework-cell' wx:if="{{notify.need_feedback}}">
+        <view class='xm-homework-end_day'> 截止日期：{{notify.end_day}}</view>
+      </view>
+
+      <view class='xm-homework-cell' wx:if="{{notify.need_feedback}}">
+        <view class='xm-homework-feedback_type'> 反馈方式：{{notify.feedback_type}}</view>
+      </view>
+      <view class='xm-homework-cell'>
+      <view style="width: 100%;">
+        <block wx:for="{{notifies}}" wx:key="id">
+           <button class="weui-btn btn_share_homework" id='{{item._id}}' data-gid='{{item.open_gid}}'  type="primary" open-type="share" style='background-color:#1e90ff;;width: 100%;font-size:16px' >     分享到微信群【<open-data type="groupName" open-gid="{{item.open_gid}}"></open-data>】</button> 
+
+          <!-- <button class="weui-btn" id='{{item._id}}'  type="primary" open-type="share" style='background-color:#1e90ff;;width: 100%;font-size:18px' bindtap="next">分享到"{{item.class_name}}"的班级群</button> -->
+        </block>
+        </view>
+      </view>
+
+      <view class='xm-homework-cell' >
+       <view bindtap='navigate' style='font-size:13px;color:#565555;text-align: center;margin-top:10px;width:100%'><icon type="warn" size="20"  color="#1e90ff" />全部分享后如没有跳转，<label style='color:#1e90ff'>请点击这里</label></view>   
+      </view>
+    </view>
+
+
+
+
+
+
+
+
+  </view>
+</view>

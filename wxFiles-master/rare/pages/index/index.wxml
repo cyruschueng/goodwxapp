@@ -1,0 +1,85 @@
+<view class="container-theme {{opq == 0? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;padding-top:250rpx;">
+  <view class="spinner-cube-grid {{opq == 0? '':'hidden'}}">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </view>
+</view>
+<view class="container {{opq == 1? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view style="padding:20rpx 30rpx 20rpx 30rpx">
+    <view style="height:65rpx; background: #e3e3e3; border-radius:5px;text-align:center" bindtap="navToSearch">
+      <image class="pull-left" style="width:40rpx;height:40rpx;margin-top:16rpx;margin-left:150rpx" src="/img/se1.png"></image>
+      <view class="pull-left" style="margin-top:10rpx;color:#888">大家正在搜:石榴石戒指</view>
+    </view>
+  </view>
+  <swiper indicator-dots="true" autoplay="true" interval="5000" duration="2000" style="height:450rpx;" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#e2906a" circular="true">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image id="{{item.msgId}}" src="{{item.topimg}}" bindtap="navToGoods" style="width:100%;" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <image style="height:250rpx;width:100%; position:relative;top:-40rpx;" src="/img/bg12.png"></image>
+  <view class="links" style="position:relative;top:-250rpx;">
+    <view class="item" data-ty="all" bindtap="navToAll">
+      <image src="/img/all.png"></image>
+      <view class="name">全部</view>
+    </view>
+    <view class="item" data-ty="cu" bindtap="navToAll">
+      <image src="/img/dol.png"></image>
+      <view class="name">促销</view>
+    </view>
+    <view class="item" bindtap="navToNotice">
+      <image src="/img/not.png"></image>
+      <view class="name">公告</view>
+    </view>
+  </view>
+  <view style="margin-top:-250rpx;"></view>
+
+  <block wx:for="{{ShopList}}">
+  <view class="image" id="{{index}}" bindtap="navToDoclassify">
+    <image src="/img/bg.png"></image>
+    <view class="lined">
+      <view>{{item.classname}}</view>
+    </view>
+    <view class="lkl">查看全部 ></view>
+  </view>
+
+  <view class="goods">
+    <block wx:for="{{ShopList[index].tmemessage}}">
+    <view class="good" id="{{item.msgId}}" bindtap="navToGoods">
+      <image class="image" src="{{item.icon}}"></image>
+      <view class="gob">
+        <view class="gtit">{{item.msgcontent}}</view>
+        <view class="col">
+          <text class="fontsize-26">￥</text>{{item.sellprice}}
+        </view>
+        <view class="col">
+          <text class="asf">SHOW NOW ></text>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+
+  </block>
+
+ 
+
+  <view class="nones">
+    <view class="li">
+      <view class="bgline"></view>
+    </view>
+    <view class="li" style="">没有更多了</view>
+    <view class="li">
+      <view class="bgline" style="margin-left:10rpx;"></view>
+    </view>
+  </view>
+
+</view>

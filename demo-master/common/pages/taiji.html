@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<style type="text/css">
+/*太极*/
+html,
+body,
+div,
+ :before,
+ :after {
+    box-sizing: border-box;
+    margin: 0;
+}
+html,
+body {
+    height: 100%;
+}
+#taiji {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-image: linear-gradient(0deg, black 50%, white 50%);
+    border-radius: 50%;
+    box-shadow: 5px 5px 40px #666666;
+    animation: spin 6s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+#taiji:hover {
+    transform: rotate(3600deg);
+}
+#taiji:before,
+#taiji:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    border-radius: 50%;
+    border-width: 35px;
+    border-style: solid;
+}
+#taiji:before {
+    left: 0;
+    border-color: black;
+    background-color: white;
+}
+#taiji:after {
+    right: 0;
+    border-color: white;
+    background-color: black;
+}
+.box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 600px;
+	height: 400px;
+}
+.box.css3{
+ background: gray
+}
+.box.canvas{
+ background: #EED2EE
+}
+.my-canvas{
+	
+    animation: spin 6s linear infinite;
+}
+</style>
+
+<body>
+	<p>css3</p>
+    <section class="box css3">
+    	
+        <div id="taiji"></div>
+    </section>
+    <p>canvas</p>
+    <section class="box canvas">
+        <canvas class="my-canvas" id="myCanvas" width="600" height="400">
+    </section>
+    </canvas>
+    <script type="text/javascript">
+    var c = document.getElementById("myCanvas");
+    var cxt = c.getContext("2d");
+    //绘制左侧的白色半圆直径都是150
+    cxt.fillStyle = "#FFFFFF	";
+    cxt.beginPath();
+    cxt.arc(300, 200, 150, 1.5 * Math.PI, Math.PI / 2, false);
+    cxt.closePath();
+    cxt.fill();
+    //绘制右侧的黑色半圆
+    cxt.fillStyle = "#000000";
+    cxt.beginPath();
+    cxt.arc(300, 200, 150, Math.PI / 2, 1.5 * Math.PI, false);
+    cxt.closePath();
+    cxt.fill();
+    //绘制下面的黑色圆
+    cxt.fillStyle = "#000000";
+    cxt.beginPath();
+    cxt.arc(300, 275, 75, 0, 2 * Math.PI, false);
+    cxt.closePath();
+    cxt.fill();
+    //绘制上面的白色圆
+    cxt.fillStyle = "#FFFFFF";
+    cxt.beginPath();
+    cxt.arc(300, 125, 75, 0, 2 * Math.PI, false);
+    cxt.closePath();
+    cxt.fill();
+    //绘制两个小圆
+    cxt.fillStyle = "FFFFFF";
+    cxt.beginPath();
+    cxt.arc(300, 275, 26, 0, 2 * Math.PI, false);
+    cxt.closePath();
+    cxt.fill();
+    //绘制黑色小圆
+    cxt.fillStyle = "#000";
+    cxt.beginPath();
+    cxt.arc(300, 125, 26, 0, 2 * Math.PI, false);
+    cxt.closePath();
+    cxt.fill();
+    </script>
+</body>
+
+</html>

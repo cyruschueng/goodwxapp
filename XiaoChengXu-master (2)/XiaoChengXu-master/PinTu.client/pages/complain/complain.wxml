@@ -1,0 +1,27 @@
+<!--pages/complain/complain.wxml-->
+<view class="bge f14 F bbox">
+  <view class="c7 h40 lh40 p0-10 F_ bbox f16">请选择投诉原因</view>
+  <checkbox-group bindchange="changeCheckBox">
+    <block wx:for="{{arrCheckbox}}">
+      <label class="db h40 lh40 bgf p0-10 mb10 F_ bbox">
+        <checkbox class="dib dn" checked="" value="{{item.value}}" data-value="{{item.value}}" />
+        <view class="dib">{{item.name}}</view>
+        <view class="dib pr f" wx:if="{{item.checked}}">
+          <icon class="pl10" size="16" type="success_no_circle"></icon>
+        </view>
+      </label>
+    </block>
+  </checkbox-group>
+  <view class=""></view>
+  <view class="c7 h40 p0-10 F_ bbox f12">请填写您的手机号，方便我们联系您</view>
+  <view class="F_ bgf h40 lh40 p0-10 bbox">
+    <label class="pr10">手机号</label>
+    <view class="f">
+      <input class="W" placeholder="选填" bindinput='getTel' type='number'></input>
+    </view>
+  </view>
+  <view class="F_ bbox p20-0">
+    <button class="W9 h40 lh40 f14 bgRose" type="primary" bindtap="submitComplain">确认投诉</button>
+  </view>
+
+</view>

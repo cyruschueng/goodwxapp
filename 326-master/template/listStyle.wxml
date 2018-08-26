@@ -1,0 +1,352 @@
+<!--数据 参数-->
+<template name="listOne"> 
+  <view class='flexBetw bgColor0 borderB pd05 h8'  bindtap='listOnetap' data-type="{{listOne.type}}">
+    <view class='flexCenter '>
+      <image class="imgxs"src="/images/{{listOne.pic}}"></image>
+      {{listOne.label}}
+    </view>
+    <image class="imgxxs"src="/images/arrow_unexpanded.png"></image>
+   </view> 
+</template>
+<!--数据 参数-->
+<template name="tabPage"> 
+  <view class='powerLis flexCenter  tab-left1 borderB ' bindtap="tabFunc">
+    <view  class="{{tabBox.tabArr1.curHdIndex=='0'? 'Skin4' : ''}} pAb05" data-id="0">
+      <view data-id="0">
+        <view data-id="0">{{tabBox.label1}}</view>
+      </view>
+    </view>
+    <view  class="{{tabBox.tabArr1.curHdIndex=='1'? 'Skin4' : ''}} pAb05" data-id="1">
+      <view data-id="1">
+        <view data-id="1">{{tabBox.label2}}</view>
+      </view>
+    </view>
+  </view> 
+</template>
+<!--修改别名 删除设备 数据调试-->
+<template name="operaModel"> 
+  <view class="modledrawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{modelDat.mStatus}}"></view> 
+  <view  class="modeldrawer_box bgColor0" wx:if="{{modelDat.mStatus}}">  
+    <view class="modeldrawer_title bgColor0">{{modelDat.label}}</view> 
+      <view class="modeldrawer_content pAb1 bgColor0"> 
+        <view class="modeltop modelgrid bgColor0" wx:if="{{modelDat.modiStatus}}"> 
+          <input class=" modelinput_h30 modelcol-1 bgColor0" placeholder='输入别名' type="text" bindinput='modiAliInput'></input> 
+        </view> 
+        <view class="modeltop modelgrid color3" wx:if="{{modelDat.delStatus}}"> 
+          删除设备之后,同时把数据删除!
+        </view> 
+        <view class="modeldrawer_content pAb1" wx:if="{{modelDat.debStatus}}"> 
+          <textarea placeholder='输入指令' bindinput='inverbugInput'></textarea>
+        </view> 
+      </view> 
+      <view class='flexBetw'>
+        <view class="modelbtn_ok Skin" bindtap="modConfi">确定</view> 
+        <view class="modelbtn_ok" bindtap="modeCancel" data-statu="close">取消</view> 
+      </view>
+  </view>
+</template>
+<!--slider   RequestHead   urlHead -->
+<template name="slider"> 
+  <view class='slider mb05'>
+        <view class='flexCenter pt2'>{{slider.sliderVal}} / {{slider.sliderLength}}</view>  
+      <view class='sliderC flex flexCenter pt0'>
+        <view   bindtap='slider' class='flexCenter width15' data-type = "pre">
+          <image class="imgxs"src="/images/last.png"></image>
+        </view>
+        <slider min='1' max="{{slider.sliderLength}}" step="1" value='{{slider.sliderVal}}'  bindchange="listenerSlider"/>
+        <view  bindtap='slider' class='flexCenter width15' data-type = "after">
+          <image class="imgxs"src="/images/next_day.png"></image>
+        </view>
+      </view>
+    </view>
+</template>
+<!--日历 参数列表 -->
+<template name="kalendar"> 
+  <view class='calender flex bgColorD'>
+      <view class='flexCenter width20 pd04' bindtap="do1Day" data-type = "pre">
+        <image class="imgxs"src="/images/dz.png"  ></image>
+      </view>
+      <view class='color11'>{{kalendar}}</view>
+      <view class='flexCenter width20 pd04' bindtap="do1Day" data-type = "after">
+        <image class="imgxs"src="/images/dy.png" ></image>
+      </view> 
+   </view>
+</template>
+<!--日历+日期  -->
+<template name="calendar"> 
+<view class='dayNavMax flex tab-left pab05 hhh444' bindtap="tabFun">
+        <view class="{{calendar.tabArr.curHdIndex=='0'? 'Skin' : ''}}" data-id="0">{{calendar.label1}}</view>
+        <view class="{{calendar.tabArr.curHdIndex=='1'? 'Skin' : ''}}" data-id="1">{{calendar.label2}}</view>
+        <view class="{{calendar.tabArr.curHdIndex=='2'? 'Skin' : ''}}" data-id="2">{{calendar.label3}}</view>
+        <view class="{{calendar.tabArr.curHdIndex=='3'? 'Skin' : ''}}" data-id="3">{{calendar.label4}}</view>
+  </view>
+   <view class='calender flex pb03'>
+      <view class='flexCenter width20 pd04' bindtap="doDay" data-type = "pre">
+        <image class="imgxs"src="/images/last.png"  ></image>
+      </view>
+      <view class='fontSkin'>{{calendar.date}}</view>
+      <view class='flexCenter width20 pd04' bindtap="doDay" data-type = "after">
+        <image class="imgxs"src="/images/next_day.png" ></image>
+      </view> 
+   </view>
+</template>
+<!--list页面 nav   -->
+<template name="listNav"> 
+  <view class='flex {{listNavData.width}}' wx:for="{{listNavData.listNav}}" wx:key="{{index}}" wx:for-item="listNav">
+    <image class="imgxs15 br50"src="{{listNav.pic}}"></image>
+      <view class='flexColumn flexCenter flexv1'>
+        <view>{{listNav.label}}{{listNav.valUnit}}</view>
+        <view class='powerNum'>{{listNav.val}}</view>
+      </view>
+  </view>
+</template>
+<!--厂家账号的用户页列表  -->
+<template name="showModal"> 
+  <view class="modledrawer_screen"  wx:if="{{modelBox.showModal}}"></view> 
+  <view  class="modeldrawer_box" wx:if="{{modelBox.showModal}}">  
+    <view class="modeldrawer_title">新建分组</view> 
+      <view class="modeldrawer_content pAb15"> 
+        <view class="modeltop modelgrid"> 
+          <input class=" modelinput_h30 modelcol-1" placeholder='输入组名' type="text" bindinput='inputModel'></input> 
+        </view> 
+      </view> 
+      <view class='flexBetw'>
+        <view class="modelbtn_ok Skin" bindtap="comfirmModel">确定</view> 
+        <view class="modelbtn_ok" bindtap="cancelModel" >取消</view> 
+      </view>
+  </view>
+</template>
+<!--厂家账号的用户页列表  -->
+<template name="userList"> 
+<view class="list bg256 borderE"  wx:for="{{userList.accountArr}}" wx:key="{{index}}" wx:for-item="accountArr" bindtap='groupFormInfo' data-id="{{index}}">  
+      <view class='listImg flexColumn flexCenter' style='margin-right:0px' >
+        <image class="imgL br50"src="/images/userW.png"></image>
+      </view>
+      <view class='listPar flex' >
+          <image class='imgxs' src="/images/{{accountArr.enable==true?'hookb.png':'hookp.png'}}"></image>
+        <view class="flexColumn">
+            <view> 
+              <view>{{accountArr.usr}}</view>
+            </view>
+            <view class='flex'>
+              <view class="fontSkin mr1">{{accountArr.role==0?'电站业主':accountArr.role==1?'厂家账户':accountArr.role==2?'管理员':accountArr.role==3?'集团账号':'电站浏览账号'}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+     <view class='flexCenter width100 pd1 bg256 bgColorI' bindtap='More' wx:if="{{userList.more}}">加载更多</view> 
+</template>
+<!--input 输入框  -->
+<template name="Input"> 
+<view class='search flex flexCenter font09' style="background-color:{{inputBox.bgColor}};color:{{inputBox.color}}">
+  <image class="imgxs12"src="{{inputBox.pic}}"></image>
+  <view>
+    <input value='{{inputBox.Val}}' type="text"  placeholder='{{inputBox.placeHoder}}' class="bgColorE"  bindinput='inputTap' placeholder-class='color11 font075' placeholder-style="color:{{inputBox.color}}"/>  
+  </view>
+</view> 
+</template>
+<!--errTip  -->
+<template name="errTip"> 
+  <view class='width100 flexCenter posiErr' wx:if="{{errBox.isErr}}">
+    <view class='bgColorJ pd05 br03 break mwidthB50'>{{errBox.errMsg}}</view>
+  </view>
+</template>
+<!--厂家账号电站列表  -->
+<template name="listAdmStat"> 
+  <view class='flex pt01 flexS' wx:for="{{admStaBox}}" wx:key="{{index}}" wx:for-item="admStaBox">
+    <image class='imgxxs' src='{{admStaBox.pic}}'></image>
+      <view>{{admStaBox.label}}</view>
+      <view class='width3'>{{admStaBox.val}}</view>
+      <view>{{admStaBox.valPercent}}</view>
+  </view>
+</template>
+<!--电站列表  -->
+  <template name="listStyle">    
+<view class="flexv1 modeldrawer_content pb1" > 
+ <view class="items"> 
+  <view wx:for="{{stationBox.list}}" wx:key="{{index}}" wx:for-item="list" class="item"> 
+   <view  class="inner txt">
+      <view class='listOut pAb05' bindtouchstart="mytouchstart" bindtouchend="mytouchend" bindtap="stationTap" data-key="{{index}}" 
+      data-uid="{{list.uid?list.uid:''}}">
+      <view class='listL mr1'>
+        <image class='listLimg' src="{{list.picSmall}}"></image>
+      </view>
+      <view class='listC'>
+         <view class='listCimg'>
+            <image class='listxs' src="../../images/{{list.status==4?'alarm_plant.png':list.status==1?'offline_plant.png':list.status==7?'alr.png':'normal_plant.png'}}"></image>
+         </view> 
+          <view class='listCont'>
+            <view class='listTitle'>{{list.name}}</view>
+            <view>
+              <view>{{list.Label1}}</view>
+              <view class='fontSkin'>{{list.val1}}</view>
+            </view>
+            <view>
+              <view>{{list.Label2}}</view>
+              <view class='fontSkin'>{{list.val2}}</view>
+            </view>
+            <view>
+              <view>{{list.Label3}}</view>
+              <view  class='fontSkin'>{{list.val3}}</view>
+            </view>
+            <view>
+              <view>{{list.Label4}}</view>
+              <view  class='fontSkin'>{{list.val4}}</view>
+            </view>
+          </view>  
+      </view>
+      <view class='listR'>
+        <image class='lists' src='/images/arrow_unexpanded.png'></image>
+      </view>
+    </view> 
+   </view> 
+  </view> 
+ </view> 
+ <!--下拉提醒 str  -->
+     <view class='flexCenter width100 pd1 bg256 bgColorI' bindtap='More' wx:if="{{stationBox.more}}">加载更多</view> 
+    <!--下拉提醒 end  -->
+</view> 
+</template>
+
+<!--下拉菜单0 str  -->
+  <template name="tapMenu"> 
+  <dl class="dropdownMenu   listDropmenu pAb02">
+    <dt data-index="{{tapBox.tapTop.topSerial}}" bindtap="tapMainMenu" class='pab05'>
+      <view class="dropdownMenutitle mr03">
+        <view class='mr03 font09'>{{tapBox.tapTop.topName}}</view>
+        <image style="width:{{tapBox.tapTop.width}};height:{{tapBox.tapTop.height}}" src="{{tapBox.tapTop.topPic}}"></image>
+      </view>
+    </dt>
+    <dd  class="{{tapBox.tapTop.subMenuDisplay[tapBox.tapTop.topSerial]}} bgColor0 color9 modeldrawer_content maxh12">
+      <ul class='pab08'>
+        <li wx:for="{{tapBox.tapList}}" wx:key="{{index}}" wx:for-item="tapList" bindtap="tapSubMenu" class="{{subMenuHighLight[tapBox.tapTop.topSerial][index]}} mAb1" data-index="{{tapBox.tapTop.topSerial}}-{{index}}">
+          <image class="imgxs14 mr03"src="{{tapList.pic}}"></image>
+          <view>{{tapList.name}}</view>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+  </template>
+  <!--下拉菜单0 end  -->
+  <!--下拉菜单1 str  -->
+  <template name="tapMenu1"> 
+    <dd  class="{{tapBox.tapTop.subMenuDisplay[0]}} bgColor0 modeldrawer_content maxh12">
+      <ul class='pab08'>
+        <li wx:for="{{tapBox.tapList}}" wx:key="{{index}}" wx:for-item="tapList" bindtap="tapSubMenu" class="{{subMenuHighLight[tapBox.tapTop.topSerial][index]}}" data-index="{{tapBox.tapTop.topSerial}}-{{index}}">
+          <image class="imgxs14 mr03"src="{{tapList.pic}}"></image>
+          <view>{{tapList.name}}</view>
+        </li>
+      </ul>
+    </dd>
+  <!-- </dl> -->
+  </template>
+  <!--下拉菜单1 end  -->
+
+  <!--device设备页面的列表  hidden='{{tapCate=="0"?false:true}}' Env watt-->
+  <template name="deviceList"> 
+    <view class="list"  id='{{index}}'  wx:for="{{listBox.list}}" wx:for-index="index"   wx:for-item="list" bindtap='deviListTap' data-uid='{{list.uid}}' data-uindex='{{index}}' data-type='{{listBox.type?listBox.type:""}}'> 
+          <view class='listImg flexColumn flexCenter'>
+            <image class="imgL br50"src="/images/nbqZC.png"></image>
+            <view class='flexCenter'>{{listBox.devaddrName}}{{list.devaddrName!=''?list.devaddr:''}}</view>
+          </view>
+          <view class='.listPar'>
+            <image class="imgxxs br50 mr03"src="/images/{{list.status==0?'round3.png':list.status==1?'round.png':list.status==4?'round2.png':'round1.png'}}"></image>
+            <view class="flexColumn">
+            <view>{{(list.alias == undefined?list.sn:list.alias)}}</view>
+            <view>{{list.sn}}</view>
+            <view>{{list.pn}}</view>
+          <view>
+          <view>{{list.Label1?list.Label1:''}}</view>
+          <view class="fontSkin">{{list.Value1?list.Value1:''}}</view>
+        </view>
+        <view>
+          <view class=''>{{list.Label2?list.Label2:''}}</view>
+          <view class="fontSkin">{{list.Value2?list.Value2:''}}</view>
+        </view>
+        <view>
+          <view>{{list.Label3?list.Label3:''}}</view>
+          <view class="fontSkin">{{list.Value3?list.Value3:''}}</view>
+        </view>
+        <view>
+          <view class='overhiden'>{{list.Label4?list.Label4:''}}</view>
+          <view class="fontSkin">{{list.Value4!=''?list.Value4:''}}</view>
+        </view>
+      </view>
+    </view>
+    </view>
+  <view class='flexCenter width100 pd1 bg256 bgColorI' bindtap='More' wx:if="{{listBox.more}}">加载更多</view> 
+</template>
+<!--数采器  -->
+<template name="collList"> 
+   <view class="list" id='{{index}}'  wx:for="{{collListBox}}" wx:for-index="index"   wx:for-item="collListBox" bindtap='collec'>
+   <view class='listImg flexColumn flexCenter'>
+        <image class="imgL br50"src="/images/nbqZC.png"></image>
+      </view>
+      <view class='listPar'>
+        <view class="flexColumn"> 
+        <view class='pl02'>{{collListBox.alias?collListBox.alias:collListBox.pn}}</view>
+        <view class='pl02 mb05'>{{collListBox.pn}}</view>
+        <view class='bt01 listFlex1'>
+          <view class='listFlex1'>
+            <view class='borderR flexColumn flexCenter'>
+              <view class='fontSkin'>在线设备</view>
+              <view>{{collListBox.normal.length}}</view>
+            </view>
+            <view class='borderR flexColumn flexCenter'>
+              <view class='fontSkin'>离线设备</view>
+              <view>{{collListBox.offline.length}}</view>
+            </view>
+            <view class='flexColumn flexCenter'>
+              <view class='fontSkin'>总设备</view>
+              <view>{{collListBox.device.length}}</view>
+            </view>
+          </view> 
+          </view>
+        <view>
+      </view>
+    </view>
+  </view>
+  </view> 
+</template>
+<!--告警页面列表  -->
+<template name="alarList"> 
+  <view class='listPar  bg256 flexColumn pd05 borderB' wx:for="{{alarList.PlantWarning}}" wx:for-index="index" wx:for-item="PlantWarning">
+        <view class='flexBetw'>
+          <view class='flex'>
+            <image class="imgM mr03"src="/images/{{PlantWarning.level==2?'guzhang_imv.png':'gaojing_imv.png'}}"></image>
+            <view class="fontSkin alignCenter">{{PlantWarning.sn}}</view>
+          </view>
+          <view class='color0'>编码：{{PlantWarning.code}}</view>
+        </view>
+        <view class='flexBetw pl03'>
+          <view class="flexColumn">
+            <view class='justi'>
+              <view>发生时间：{{PlantWarning.gts}}</view>
+            </view>
+            <view class='justi' hidden='{{alarList.roleManagH}}'>
+              <view>所属用户：{{PlantWarning.usr?PlantWarning.usr:PlantWarning.uid}}</view>
+            </view>
+            <view class='justi' hidden='{{alarList.roleManagH}}'>
+              <view>所属电站：{{PlantWarning.plant?PlantWarning.plant:PlantWarning.id}}</view>
+            </view>
+            <view class='justi'>
+              <view>设备PN：{{PlantWarning.pn}}</view>
+            </view>
+            <view class='justi'>
+              <view>设备类型：{{PlantWarning.devcode<768?"逆变器":PlantWarning.devcode<1024?"环境监测仪":PlantWarning.devcode<1024?"智能电表":PlantWarning.devcode<1280?"汇流箱":PlantWarning.devcode<1536?"摄像头":PlantWarning.devcode<1792?"电池":PlantWarning.devcode<2048?"电池":PlantWarning.devcode<2304?"充电器":"防孤岛装置"}}</view>
+            </view>
+            <view class='justi'>
+              <view>描述：{{PlantWarning.desc}}</view>
+            </view>
+          </view>
+          <view>
+            <view style="color: {{PlantWarning.handle==true?'#45D55A':'red'}};">{{PlantWarning.handle==true?'已处理':'未处理'}}</view>
+          </view>
+        </view>
+      </view> 
+      <view class='flexCenter width100 pd1 bg256 bgColorI' bindtap='More' wx:if="{{alarList.more}}">加载更多</view> 
+</template>
+<!--更新时间  -->
+<template name="updateTime">
+  <view class='flexCenter padding015 Skin2'>更新时间：{{nowdate}}</view>
+</template>

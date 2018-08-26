@@ -1,0 +1,57 @@
+<!--index.wxml-->
+<view class="index">
+  <!-- banner -->
+  <view class="banner">
+    <view class="title">The Creation</view>
+    <image
+      class="fish fish-{{index}}"
+      wx:for="{{bannerBgList}}"
+      wx:key="{{index}}"
+      src="{{item}}" mode="widthFix" />
+    <view class="banner-btn" bindtap="shareGame">Go!</view>
+    <view class="river">
+      <view class="wave"></view>
+      <view class="wave"></view>
+      <view class="wave"></view>
+      <view class="wave"></view>
+      <view class="wave"></view>
+      <view class="wave"></view>
+      <view class="wave"></view>
+    </view>
+  </view>
+  <!-- userprofile -->
+ <view class="profile">
+   <view class="profile-info">
+      <image src="{{user.avatar_url}}"></image>
+      <text>{{user.name}}</text>
+   </view>
+
+
+   <view class="profile-data">
+      <view class="counts">总生宝宝数：{{totalCounts}}</view>
+   </view>
+ 
+ </view>
+ <view class="world-rank" bindtap="goToRank">
+   <image src="{{rankImg}}"></image>
+   <text>The Creation 今天全球排行榜</text>
+   <text class="arrow">></text>
+ </view>
+
+  <view class="groups-list">
+    <view class="title">参与的群</view>
+    <scroll-view scroll-y lower-threshold="50">
+      <view class="rank-item"
+        wx:for="{{user.groups_info}}"
+        data-gid="{{item.gid}}"
+        wx:key="{{item.gid}}"
+        bindtap="goToGroup"
+      >
+        <image src="{{item.url}}" wx:if="{{item.url}}"></image>
+        <view class="head-name" wx:else>{{item.headName}}</view>
+        <text class="name">{{item.name}}</text>
+        <text class="arrow">></text>
+    </view>
+    </scroll-view>
+  </view>
+</view>

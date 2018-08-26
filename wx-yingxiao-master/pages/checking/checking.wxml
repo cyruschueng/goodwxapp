@@ -1,0 +1,17 @@
+<view class='container'>
+  <view class='white'></view>
+  <view class='banner' wx:for="{{order}}" bindtap='toDetail' wx:key="index" data-order_sn='{{item.order_sn}}'>
+    <view class='bannerTitle'>
+      <view>订单号:{{item.order_sn}}</view>
+      <view>{{states[item.state]}}</view>
+    </view>
+    <view class='bannerInfo'>
+      <image src='{{item.img}}'></image>
+      <view>{{item.title}}</view>
+    </view>
+    <view class='bannerPrice'>
+      <view>开单人:{{item.saler}}</view>
+      <view>¥{{item.price}}</view>
+    </view>
+  </view>
+</view>

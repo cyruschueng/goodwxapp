@@ -1,0 +1,101 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="wrap">
+    <view class="classInfo flex">
+        <view>{{StudentName}}<text>{{StudentPhone}}</text></view>
+        <image src="../images/menu.gif" bindtap="powerDrawer" data-statu="{{isopen}}" wx:if="{{!showModalStatus}}"></image>
+    </view>
+    <view class="choise">
+      <image src="../images/search-arrow.png"></image>{{StudentClass}}
+    </view>
+     <view class='table' bindtouchstart='touchstart' bindtouchmove='touchmove' bindtouchend='touchend' style="height:{{heigh+theadH}}px">
+      <!--表格标题 -->
+      <view class='thead flex'>
+        <view class="thead-left flex" style="width:{{sNameW}}px">
+          <view class="sName">姓名</view>
+          <view class="sKe">多科在读</view>
+        </view>
+        <view class="thead-right" >  
+          <view class="rightWrap flex" style="width:{{contentW}}px;left:{{scrollL}}px;">
+            <view class="sSchool">所在学校</view>
+            <view class="sExperimental">实验班</view>
+            <view class="sKejie" wx:for="{{lessonNumArr}}" wx:for-index="index1" wx:key="id">第{{index1+2}}讲</view>
+          </view>
+        </view>
+      </view>
+      <!--表格内容 -->
+      <view class='thead tbody' style="height:{{contentH}}px;">
+        <view class="twrap flex">
+          <view class="thead-left" style="width:{{sNameW}}px;" >
+            <view style="height:{{contentH}}px;">
+              <view class="leftItem flex" wx:for="{{infos}}" wx:for-item="info"  wx:key="id">
+                <view class="sName">{{info.sName}}</view>
+                <view class="sKe" catchtap="showTip" data-id="{{index}}">{{info.isOthersubject}}
+                  <!-- <view class="bubble" >{{info.sOthersubject}}<image src="../images/arrow-zoom.png"></image></view> -->
+                  <view class="{{index == 0?'bubble1':'bubble'}} {{currentItem == index?'tipShow':'tipHide'}}" wx:if="{{info.sOthersubject!= null}}">
+                      {{info.sOthersubject}}
+                      <image src="../images/{{index == 0?'arrow-zoom1':'arrow-zoom'}}.png"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="thead-right" >  
+            <view class="rightWrap flex" style="width:{{contentW}}px;left:{{scrollL}}px;">
+              <view class="scrollItem flex" wx:for="{{infos}}" wx:for-item="info"  wx:key="id">
+                <view class="sSchool">{{info.sSchool}} </view>
+                <view class="sExperimental">{{info.sExperimentalType}}</view>
+                <view wx:for="{{info.sScore}}" wx:for-item="score" class="sKejie"  wx:key="id">{{score}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+
+  </view>
+
+  <!-- 简介弹窗 -->
+ <!--  <view class="float">
+   <view class="floatWrap">
+     <view class="floatC">
+      北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学北京外国语大学附属实验中学附属实验中学
+     </view>
+   </view>
+ </view> -->
+  <!-- 学校弹窗 -->
+
+
+  <!-- 导航 -->
+  <view animation="{{animationData}}" class="mainMenu drawer_attr_box" wx:if="{{showModalStatus}}">
+    <view class="menu">
+        <view class="userinfo flex">
+            <view class="Avatar">
+                <image src="../images/noface.png" mode='widthFix'></image>
+            </view>
+            <view class="name">{{teacherName}}</view>
+        </view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SchoolCollection/SchoolCollection'>学校信息收集</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClassEntryGrade/SelectClassEntryGrade'>学员资料查询</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClass/SelectClass'>班级成绩录入</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/PicClassList/PicClassList'>定制图片生成</navigator></view>
+        <view class="quit tac"><button class="btn" bindtap="unlogin" hover-class="hoverLogin">退出登录</button></view>
+    </view>
+  </view>
+
+
+  <!-- 导航tab -->
+  <!-- <view class="tabBar flex">
+    <view class="tabItem flex" bindtap="changeColor" wx:for="{{tabBarArr}}" data-id="{{index}}">
+      <view class="icon"><image class="icon1" mode="aspectFit" src="{{item.iconSrc}}"></image></view>
+      <view class="txt" style="color:{{item.changeTextColor}}">{{item.txt}}</view>
+    </view>
+  </view> -->
+
+  <!-- 手指左滑 -->
+  <view class="goLeft" wx:if="{{localShow}}">
+    <view>向左滑动查看更多信息</view>
+    <button bindtap="hideZoom">知道了</button>
+  </view>
+</view>

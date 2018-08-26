@@ -1,0 +1,43 @@
+<!--pages/order/order.wxml-->
+<view class='box flex flex-column-center mb10' bindtap='chooseAddress'>
+  <image class='icon-location' src='http://res.o2o.com.cn:8082/img/352458f56aa1492bae4296adeda3eecb'></image>
+  <view class='flex flex-grow1 ml10'>
+    <view hidden="{{address}}">请选择收货地址</view>
+    <view hidden="{{!address}}" class='flex flex-column'>
+      <text>收货人：{{address.ContactName}} {{address.ContactMobile}}</text>
+      <text class='mt5 text-gray'>收货地址：{{address.ProvinceName}}{{address.CityName}}{{address.CountyName}}{{address.DetailAddress}}</text>
+    </view>
+  </view>
+  <image class='icon-arrow-right' src='http://res.o2o.com.cn:8082/img/f2c42e279cf14019bbae4fa45cc7cf67'></image>
+</view>
+
+<view wx:key="{{product.ProductId}}" wx:for="{{order.Items}}" wx:for-item="product" class='box flex mb1'>
+  <view>
+    <image class='product-image' src='{{product.ProductImage}}/100/100'></image>
+  </view>
+  <view class='flex flex-column flex-grow1 ml10'>
+    <text class='ellipsis2'>{{product.ProductName}}</text>
+    <text class='text-gray small mt7'>规格：{{product.Attr}}</text>
+  </view>
+  <view class='flex flex-column flex-column-end ml10'>
+    <text>￥{{product.Price}}</text>
+    <text class='mt7'>×{{product.Qty}}</text>
+  </view>
+</view>
+
+<view class='box flex'>
+  <text class='flex-grow1'>快递运费</text>
+  <text>￥{{order.FreightPrice}}</text>
+</view>
+
+<view class='order-bottom-holder'></view>
+<view class='order-bottom flex flex-row-between flex-column-center skin-{{skin}}'>
+  <view>
+    <text>总价：</text>
+    <text class='text-primary fs18'>￥{{order.TotalAmt}}</text>
+  </view>
+  <view class='flex flex-column-center'>
+    <text class='small text-gray mr5'>共{{order.TotalQty}}件商品</text>
+    <button class='btn-create-order' bindtap='createOrder'>提交订单</button>
+  </view>
+</view>

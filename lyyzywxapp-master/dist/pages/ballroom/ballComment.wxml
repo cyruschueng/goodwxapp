@@ -1,0 +1,43 @@
+
+<!-- 评论 -->
+<view class='comment-view'>
+
+  <!-- 文字 -->
+  <view class='textarea-view'>
+    <textarea class='textarea' placeholder="请输入您对商户的详细评论，帮助更多的会员做出合适的选择，谢谢！" maxlength="150" auto-focus style='width:{{ windowWidth - 20 }}px' value = "{{ textValue }}" bindinput="bindTextInput"/>
+  </view>
+
+  <!-- 图片 -->
+  <view class='upload-img-view' bindtap='bindUploadImgTap'>
+  
+    <block wx:for="{{ uploadImgUrls }}" wx:key="{{ index }}" >
+    <view class='uploadimg-boder'>
+      <image class='uploadimg' src='{{ item }}' mode='aspectFill' style='width:{{ windowWidth*0.3 }}px;height:{{ windowWidth*0.3 }}px;'></image>
+    </view>
+    </block> 
+
+    <view class='upload-btn' style='width:{{ windowWidth*0.3 }}px;height:{{ windowWidth*0.3 }}px' hidden='{{ uploadImgBtnHidden }}'>
+      <image class='icon' src='../../images/upload-img.png' ></image>  
+      <view>照片</view> 
+    </view> 
+  
+  </view>
+
+</view>
+
+
+<!-- 评分 -->
+<view class='scoring-view'>
+  
+  <block wx:for="{{ scoringItems }}" wx:for-item="scor" wx:key="{{  index }}">
+  <view class='scoring-item' style='{{ index == 4 ? "margin: 0 20% 0 20%;" : "" }}'>
+    {{ scor.title }}
+    <block wx:for="{{ scor.icons }}" wx:key="{{ index }}">
+    <image id='{{ index }}' data-itemId="{{ scor.itemId }}" class='startIcon' src='{{ item == "choosed" ? "../../images/start-red.png" : "../../images/start.png" }}' bindtap='bindStarIconTap' ></image>
+    </block>
+  </view>
+  </block>
+
+</view>
+
+<view class='commit-btn' bindtap='bindCommitBtnTap'>发表</view>

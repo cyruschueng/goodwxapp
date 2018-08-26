@@ -1,0 +1,29 @@
+<template name="discountList">
+  <view class='securityWrap'>
+    <view class='security-use'>
+      <view class='security-top'>
+        <view class='security-top-left'>
+          <text class='security-money {{item.isUsed == 1 ? "isGray" : ""}}'>￥<text class='security-money-se'>{{item.couponAmount}}</text></text>
+        </view>
+        <view class='security-top-right'>
+          <view wx:if="{{item.isDue == 1}}" class='my-immediateUse isGray'>已过期</view>
+          <view wx:if="{{item.isUsed == 1 && item.isDue == 0}}" class='my-immediateUse isGray'>已使用</view>
+          <view wx:else class='my-immediateUse' catchtap='immediateUse' id="{{item.soId}}">立即使用</view>
+        </view>
+      </view>
+      <view class='deadline-time'>
+        <view>
+          <text>有效期至:</text>
+          <text>{{item.expiryDate}}</text>
+        </view>
+        <view>
+          <text wx:if="{{item.isDue == 1}}">已过期</text>
+          <text wx:if="{{item.isUsed == 1 && item.isDue == 0}}">已使用</text>
+          <text wx:else>立即使用</text>
+        </view>
+      </view>
+    </view>
+    <view class='conceal-dot'></view>
+    <view class='conceal-dot-right'></view>
+  </view>
+</template>

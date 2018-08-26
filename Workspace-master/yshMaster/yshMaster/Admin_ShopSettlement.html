@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>店铺结算管理</title>
+		<!--pickers css-->
+		<!--<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />-->
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css" />
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+		<!--pickers plugins-->
+		<!--<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>-->
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+		<!--pickers initialization-->
+		<!--<script src="js/pickers-init.js"></script>-->
+		<!--common scripts for all pages-->
+		<script src="js/layer.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/select2.min.js"></script>
+		<script src="js/adddate.js"></script>
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+
+		<section>
+			<!--body wrapper start-->
+			<section>
+				<!-- page start-->
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								店铺结算管理
+							</header>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form" id="condition">
+									<div class="row clearfix">
+										<div class="row" style="height: 14px;"></div>
+										<div class="row">
+											<div class="col-lg-1 control-label" style="text-align: right;">店铺名称</div>
+											<div class="col-lg-3" style="text-align: right;">
+												<select class="form-control m-bot15 formData" id="storeName">
+													<option value="0">全部</option>
+												</select>
+											</div>
+											<div class="col-lg-1 control-label" style="text-align: right;">结算状态</div>
+											<div class="col-lg-3" style="text-align: right;">
+												<select class="form-control m-bot15 formData" id="StatementStatus">
+													<option value="-1">全部</option>
+													<option value="0">未结算</option>
+													<option value="1">已结算</option>
+													<option value="2">部分结算</option>
+												</select>
+											</div>
+										</div>
+										<div class="row" style="margin-top: 14px;">
+											<div class="col-lg-1 control-label" style="text-align: right;">成交时间</div>
+											<div class="col-lg-3">
+												<input type="text" size="16" class="form-control" id="dealTimeStart" onclick="SelectDate(this,'yyyy-MM-dd')" />
+											</div>
+											<div class="col-lg-1" style="text-align: right;">
+												<label style="padding-top: 7px;">到</label>
+											</div>
+											<div class="col-lg-3">
+												<input type="text" size="16" class="form-control" id="dealTimeEnd" onclick="SelectDate(this,'yyyy-MM-dd')" />
+											</div>
+											<div class="col-lg-2"></div>
+											<div class="col-lg-1" style="text-align: center;"><button class="btn btn-info" onclick="initSearch('#1')" type="button">搜索</button></div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</section>
+						<section class="panel">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-10"></div>
+									<div class="col-lg-1">
+										<button class="btn btn-success" type="button" onclick="javascript:getExcle()">导出Excle</button>
+									</div>
+									<div class="col-lg-1">
+										<button class="btn btn-danger" type="button" onclick="batchStatementStatus()">批量结算</button>
+									</div>
+								</div>
+								<div class="row">
+									<!--结算总金额-->
+									<label class="control-label col-lg-1">结算总金额:</label>
+									<div class="col-lg-1" style="text-align: center;">
+										<label id="totalStateMent" style="color: red;">0</label>
+									</div>
+									<div class="col-lg-1">
+										<label class="control-label">元</label>
+									</div>
+									<!--已结算总金额-->
+									<label class="control-label col-lg-1">已结算总金额:</label>
+									<div class="col-lg-1" style="text-align: center;">
+										<label id="totalStateMent2" style="color: red;">0</label>
+									</div>
+									<div class="col-lg-1">
+										<label class="control-label">元</label>
+									</div>
+									<!--未结算总金额-->
+									<label class="control-label col-lg-1">未结算总金额:</label>
+									<div class="col-lg-1" style="text-align: center;">
+										<label id="totalStateMent1" style="color: red;">0</label>
+									</div>
+									<div class="col-lg-1">
+										<label class="control-label">元</label>
+									</div>
+								</div>
+								<table id='goodstable' class="table table-bordered table-striped table-condensed ysh_table table-hover" style="margin-top: 7px;">
+									<thead>
+										<tr>
+											<th data-field="status" data-align="center"><input type="checkbox" id="allChecked" /></th>
+											<th data-field="Code" data-align="center">订单号</th>
+											<th data-field="Code" data-align="center">店铺名</th>
+											<th data-field="Code" data-align="center">下单时间</th>
+											<th data-field="pic" data-align="center">支付时间</th>
+											<th data-field="Code" data-align="center">可结算金额</th>
+											<th data-field="Code" data-align="center">详情</th>
+											<th data-field="Code" data-align="center">结算状态</th>
+											<th data-field="Code" data-align="center">操作</th>
+										</tr>
+									</thead>
+									<tbody id="view">
+
+									</tbody>
+								</table>
+
+								<div style="display: none;">
+									<table id='goodstable1' class="table table-bordered table-striped table-condensed ysh_table" style="margin-top: 7px;">
+										<thead>
+											<tr>
+												<!--<th data-field="status" data-align="center"><input type="checkbox" id="allChecked"/></th>-->
+												<th data-field="Code" data-align="center">订单号</th>
+												<th data-field="Code" data-align="center">店铺名</th>
+												<th data-field="Code" data-align="center">下单时间</th>
+												<th data-field="pic" data-align="center">支付时间</th>
+												<th data-field="Code" data-align="center">可结算金额</th>
+												<th data-field="Code" data-align="center">详情</th>
+												<th data-field="Code" data-align="center">结算状态</th>
+												<!--<th data-field="Code" data-align="center">操作</th>-->
+											</tr>
+										</thead>
+										<tbody id="view2">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-4">
+										<div style="height: 30px;">总共<span id="pageTotal"></span>页，<span id="itemTotal"></span>条记录，每页显示10条</div>
+									</div>
+									<div class="col-lg-7" style="text-align: right;">
+										<ul class="pagination pagination-lg" id="paginator"></ul>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+		</section>
+		<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content ">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+						<h4 class="modal-title">订单详情</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-horizontal">
+
+							<div class="form-group ">
+							</div>
+							<div class="form-group ">
+								<table id="bs" class="table table-striped table-condensed table-hover talbe-border" data-side-pagination="server">
+									<thead>
+										<tr>
+											<th data-field="OrderId" data-align="center">订单编号</th>
+											<th data-field="Operation" data-align="left" data-formatter="imageFormatter">商品名称</th>
+											<th data-field="Price" data-align="center">单价（￥）</th>
+											<th data-field="Price" data-align="center">单位</th>
+											<th data-field="Price" data-align="center">下单量</th>
+											<th data-field="Price" data-align="center">成交价（￥）</th>
+											<th data-field="Price" data-align="center">结算价（￥）</th>
+											<th data-field="Price" data-align="center">结算状态</th>
+											<th data-field="Price" data-align="center">操作</th>
+										</tr>
+										<tbody id="view_bs">
+
+										</tbody>
+									</thead>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" id="sure" class="btn btn-success" data-dismiss="modal">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="js/layer.js"></script>
+<script src="js/laytpl.js"></script>
+<script src="js/ysh_comm.js"></script>
+<script src="script/Admin_ShopSettlement.js"></script>
+<!--data-->
+<script type="text/html" id="tpl">
+	<tr>
+		{{# if(d.StatementStatus == "已结算"){}}
+			<td> </td>
+		{{# } else {}}
+			<td><input type="checkbox" Id="{{d.Id}}" /></td>
+		{{# }}}
+
+		<td>{{d.OrderNumber||"暂无"}}</td>
+		<td>{{d.StoreName||"暂无"}}</td>
+		<td>{{d.CreatedOnUtc||"暂无"}}</td>
+		<td>{{d.PaidDateUtc||"暂无"}}</td>
+		<td>{{d.StateMent || "0.00"}}</td>
+		<td>
+			<input type="button" onclick="getorderitem({{d.Id}})" class="btn btn-info" data-toggle="modal" data-target="#myModal" value="查看">
+		</td>
+		<td>{{d.StatementStatus}}</td>
+		<td>
+			{{d.btnStatus}}
+		</td>
+	</tr>
+</script>
+<script type="text/html" id="tpl_bs">
+	<tr>
+		<td>{{d.OrderId}}</td>
+		<td>{{d.ProductName}}</td>
+		<td>{{d.Price}}</td>
+		<td>{{d.MeasureName}}</td>
+		<td>{{d.ItemWeight}}</td>
+		<td>{{d.totalprice}}</td>
+		{{# if(d.StatementStatus == "已结算" || d.StatementStatus == "订单冻结无法结算"){}}
+			<td>{{d.StateMent}}</td>
+		{{# } else {}}
+			<td><input id='StateMent' type="text" size="10" value="{{d.StateMent}}" onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"></td>
+		{{# }}}
+		<td>{{d.StatementStatus}}</td>
+		{{# if(d.StatementStatus == "已结算" || d.StatementStatus == "订单冻结无法结算"){}}
+			<td> </td>
+		{{# } else {}}
+			<td><input type="button" onclick="updateStatment({{d.OrderItemId}})" class="btn btn-info" value="保存"></td>
+		{{# }}}
+
+	</tr>
+</script>
+
+<script type="text/html" id="tpl2">
+	<tr style="mso-number-format:'\@';">
+		<td style="mso-number-format:'\@';">{{d.OrderNumber||"暂无"}}</td>
+		<td>{{d.StoreName||"暂无"}}</td>
+		<td style="mso-number-format:'\@';">{{d.CreatedOnUtc||"暂无"}}</td>
+		<td style="mso-number-format:'\@';">{{d.PaidDateUtc||"暂无"}}</td>
+		<td>{{d.StateMent || "0.00"}}</td>
+		<td>
+			<input type="button" onclick="getorderitem({{d.Id}})" class="btn btn-info" data-toggle="modal" data-target="#myModal" value="查看">
+		</td>
+		<td>{{d.StatementStatus}}</td>
+		<!--<td>
+			{{d.btnStatus}}
+		</td>-->
+	</tr>
+</script>
+<!--导出Excel-->
+<script type="text/javascript">
+	initInputData();
+	var idTmr;
+	var count = 0
+	var obj = {
+		pageindex: 0,
+		pagezise: 1000
+	}
+
+	function getExcle() {
+//		if(count == obj.pageindex) {
+			obj.storeid = $("#storeName").val(),
+			obj.begindate = $("#dealTimeStart").val(),
+			obj.enddate = $("#dealTimeEnd").val(),
+			obj.StatementStatus = $("#StatementStatus").val(),
+			
+			getDataList(yshurl + "GETStateMentlist", obj, function(d) {
+				var flag = (d.many[0].length >= obj.PageSize)
+				count += 1;
+				//处理数据
+				for(var num in d.many[0]) {
+					if(d.many[0][num].StatementStatus == 0) {
+						d.many[0][num].StatementStatus = "可结算";
+					} else if(d.many[0][num].StatementStatus == 1) {
+						d.many[0][num].StatementStatus = "已结算";
+					} else {
+						d.many[0][num].StatementStatus = "部分结算";
+					}
+				}
+				
+				$("#view2").empty();
+				showData($("#view2"), $("#tpl2").html(), d.many[0])
+				method1("goodstable1")
+//				if(flag) {
+//					obj.pageindex += 1
+//					getExcle()
+//				} else {
+//					method1("goodstable1")
+//				}
+			})
+//		} else {
+//			method1("goodstable1")
+//		}
+	}
+
+	function getExplorer() {
+		var explorer = window.navigator.userAgent;
+		//ie 
+		if(explorer.indexOf("MSIE") >= 0) {
+			return 'ie';
+		}
+		//firefox 
+		else if(explorer.indexOf("Firefox") >= 0) {
+			return 'Firefox';
+		}
+		//Chrome
+		else if(explorer.indexOf("Chrome") >= 0) {
+			return 'Chrome';
+		}
+		//Opera
+		else if(explorer.indexOf("Opera") >= 0) {
+			return 'Opera';
+		}
+		//Safari
+		else if(explorer.indexOf("Safari") >= 0) {
+			return 'Safari';
+		}
+	}
+
+	function method1(tableid) {
+		if(getExplorer() == 'ie') {
+			var curTbl = document.getElementById(tableid);
+			var oXL = new ActiveXObject("Excel.Application");
+
+			var oWB = oXL.Workbooks.Add();
+
+			var xlsheet = oWB.Worksheets(1);
+
+			var sel = document.body.createTextRange();
+			sel.moveToElementText(curTbl);
+
+			sel.select();
+
+			sel.execCommand("Copy");
+
+			xlsheet.Paste();
+
+			oXL.Visible = true;
+
+			try {
+				var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+			} catch(e) {
+				print("Nested catch caught " + e);
+			} finally {
+				oWB.SaveAs(fname);
+				oWB.Close(savechanges = false);
+				//xls.visible = false;
+				oXL.Quit();
+				oXL = null;
+				//window.setInterval("Cleanup();",1);
+				idTmr = window.setInterval("Cleanup();", 1);
+			}
+		} else {
+			tableToExcel(tableid)
+		}
+	}
+
+	function Cleanup() {
+		window.clearInterval(idTmr);
+		CollectGarbage();
+	}
+	var tableToExcel = (function() {
+		var uri = 'data:application/vnd.ms-excel;base64,',
+			template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+			base64 = function(s) {
+				return window.btoa(unescape(encodeURIComponent(s)))
+			},
+			format = function(s, c) {
+				return s.replace(/{(\w+)}/g,
+					function(m, p) {
+						return c[p];
+					})
+			}
+		return function(table, name) {
+			if(!table.nodeType) table = document.getElementById(table)
+			var ctx = {
+				worksheet: name || 'Worksheet',
+				table: table.innerHTML
+			}
+			window.location.href = uri + base64(format(template, ctx))
+		}
+	})()
+</script>

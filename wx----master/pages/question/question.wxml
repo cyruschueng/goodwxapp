@@ -1,0 +1,34 @@
+<!--倒计时-->
+
+<view class="head-wrap">
+    <view class="circle">
+        <view class="pie_left">
+            <view class="left" style="transform:rotate({{leftDeg}}deg);"></view>
+        </view>
+        <view class="pie_right">
+            <view class="right"style="transform:rotate({{rightDeg}}deg);"></view>
+        </view>
+        <view class="mask">
+            <view>{{countNum}}s</view>
+        </view>
+    </view>
+    <image src="{{userInfo.avatarUrl}}" id="userInfo"></image>
+    <view class="grade">{{userInfo.nickName}}已连续答对<text>{{(index)}}/{{questionLength}}</text></view>
+    <view class="header">{{postList[index].name}}?</view>
+</view>
+<view class="question">
+    <button id='A' class="option" bindtap="btnOpClick" style="background-color:{{bc_a}};">A.{{postList[index].content[0]}}</button>
+    <button id='B' class="option" bindtap="btnOpClick" style="background-color:{{bc_b}};">B.{{postList[index].content[1]}}</button>
+    <button id='C' class="option" bindtap="btnOpClick" style="background-color:{{bc_c}};">C.{{postList[index].content[2]}}</button>
+    <button id='D' class="option" bindtap="btnOpClick" style="background-color:{{bc_d}};">D.{{postList[index].content[3]}}</button>
+</view>
+<view class="alert-wrap" style="display:{{bShowAlert}}">
+    <view class="wrong-alert">
+        <text>转发到不同群,</text>
+        <text>即可马上复活并继续道题</text>
+        <button open-type="share">转发到不同群</button>
+        <image id="fail" mode="aspectFit" src="../../img/answerfail.png"></image>
+        <icon bindtap="closeAlert" color="white" size="25" type="cancel"></icon>
+    </view>
+
+</view>

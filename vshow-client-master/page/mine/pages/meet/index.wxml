@@ -1,0 +1,34 @@
+ <view class="find_box" bindtouchend="bindtouchend">
+  <view class="find_bg"></view>
+  <view class="find">
+    <view class="find_bd"><!-- style="transform: translate({{ cardMoveX }}px, {{ cardMoveY }}px)" -->
+      <view class="card {{ item.aniName }}" wx:for="{{ cardData }}" wx:key="{{ item.id }}" style="z-index: {{ item.zIndex }}; transform: scale({{ item.scale }}) translate({{ item.translateX }}px, {{ item.translateY }}px); display: {{ item.display }};" data-index="{{ index }}" bindtouchstart="bindtouchstart" bindtouchmove="bindtouchmove" >
+        <view class="card_avatar" style="background-image:url({{ meetList[item.index].avatarUrl }})">
+        
+        </view>
+        <view class="card_texts">
+          这张照片做头像，合适吗？
+        </view>
+
+        <view class="card_info">
+          <view class="card_info_text" style="background-image: url({{ meetList[item.index].gender == 2? iconGirlUrl : iconManUrl }}); background-color: {{ meetList[item.index].gender == 2? '#f3c9f5': '#84b9f2' }}">{{meetList[item.index].nickName}}</view>
+          <view class="icon_like islike_tips" style="background-image: url({{ iconMainLike }}); opacity: {{ item.likeOpacity }}"></view>
+          <view class="icon_unlike islike_tips" style="background-image: url({{ iconMainUnlike }}); opacity: {{ item.unlikeOpacity }}"></view>
+        </view>
+
+
+      </view>
+    </view>
+
+    <view class="find_ft">
+      <view class="btns">
+        <view class="btn_unlike btn" bindtap="tapBtns" data-index="0" hover-class="btn_hover" style="background-image:url({{ unlikeIconUrl }})"></view>
+        <view class="btn_like btn" bindtap="tapBtns" data-index="1" hover-class="btn_hover" style="background-image:url({{ likeIconUrl }})"></view>
+      </view>
+    </view>
+
+    <navigator class="btn_home" url="./pages/list/index" style="background-image:url({{ homeIconUrl }})"></navigator>
+  </view>
+
+</view> 
+

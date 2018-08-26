@@ -1,0 +1,94 @@
+<!--mallsure.wxml-->
+<!--orderdetails.wxml-->
+<view class="mallsure">
+    <view class="od-info">
+        <view>订单号：{{oinfo.order_sn}}</view>
+    </view>
+
+    <!--<view class="od-receipt">
+        <view class="fr"> <text class="iconfont icon-mobilefill red"></text> {{oinfo.mobile}}</view>
+        <view class="od-name"> <text class="iconfont icon-peoplefill red"></text> {{oinfo.consignee}}</view>
+        <view class="od-adress grey mt5"> {{oinfo.province}}{{oinfo.city}}{{oinfo.area}}{{oinfo.address}}</view>
+    </view>-->
+
+    <view class="mallsure-content">
+        <block wx:for="{{oinfo.glist}}" wx:for-item="gitem">
+            <view class="sure-item flex">
+                <image src="{{gitem.goods_img}}" mode="aspectFill" class="sure-img"></image>
+                <view class="sure-info sub">
+                    <text class="sure-title lineText2 mb5">{{gitem.goods_name}}</text>
+                    <view class="price f18 red">
+                        <text class="iconfont icon-close fr grey"> {{gitem.goods_number}}</text>
+                        <text>￥{{gitem.goods_price}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!--<view class="sure-item flex">
+        <view class="item-title">
+            <text>买家留言：</text>
+        </view>
+        <view class="sub" style="position:relative;">
+            {{oinfo.post_info||'无'}}
+        </view>
+    </view>-->
+
+    <view class="sure-item">
+        <view class="item-title">
+            <text class="red fr">
+              <block wx:if="{{oinfo.order_status == '0'}}">
+                <text>待确认</text>
+            </block>
+            <block wx:if="{{oinfo.order_status == '1'}}">
+                <text>待评价</text>
+            </block>
+            <block wx:if="{{oinfo.order_status == '2'}}">
+                <text>已完成</text>
+            </block>
+            </text>
+            <text>支付状态</text>
+        </view>
+        <view class="peisong mt10">
+            <view class="flex"><text class="grey">支付方式：</text><text class="sub">积分兑换</text></view>
+            <view class="flex"><text class="grey">下单时间：</text><text class="sub">{{oinfo.add_time}}</text></view>
+            <!--<view class="flex"><text class="grey">发货时间：</text><text class="sub">{{oinfo.shipping_time}}</text></view>-->
+        </view>
+    </view>
+
+    <!--<view class="sure-item">
+        <view class="item-title">
+            <text>配送信息</text>
+        </view>
+        <view class="peisong mt10">
+            <view class="flex"><text class="grey">配送方式：</text><text class="sub">{{oinfo.shipping_name}}</text></view>
+            <view class="flex"><text class="grey">快递单位：</text><text class="sub">{{oinfo.express_name||''}}</text></view>
+            <view class="flex"><text class="grey">快递单号：</text><text class="sub">{{oinfo.express_code||''}}</text></view>
+        </view>
+    </view>-->
+
+    <view class="sure-item flex">
+        <view class="item-title">
+            <text>合计：</text>
+        </view>
+        <view class="sub tr peisong">
+            <view class="red f18">商品总额 {{oinfo.order_amount}} 积分</view>
+            <!--<view>商品总额 <text class="od-price">{{oinfo.goods_amount}}</text></view>-->
+            <!--<view>+运费 <text class="od-price">¥ {{oinfo.shipping_fee}}</text></view>-->
+        </view>
+    </view>
+
+    <view class="no-pay">
+        <!--<block wx:if="{{oinfo.txt_status == '0'}}">
+            <button class="no-pay-button" bindtap="order_go_pay_bind" id="{{oinfo.id}}">立即支付</button>
+        </block>
+        -->
+        <block wx:if="{{oinfo.order_status == '0'}}">
+            <button class="no-pay-button" bindtap="order_go_shouhuo_bind" id="{{oinfo.id}}">确认兑换</button>
+        </block>
+         <block wx:if="{{oinfo.order_status == '1'}}">
+            <button class="no-pay-button" bindtap="order_go_comment_bind" id="{{oinfo.id}}">去评价</button>
+        </block> 
+    </view>
+
+</view>

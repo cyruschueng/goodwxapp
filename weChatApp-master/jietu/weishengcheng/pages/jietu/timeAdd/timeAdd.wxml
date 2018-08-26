@@ -1,0 +1,49 @@
+<import src="/zanui/toast/index.wxml" />
+<!--index.wxml-->
+<view class="container page__bd" >
+
+
+  <view class="weui-cells__title" style=""></view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker  mode="date" value="{{date}}" start="1945-09-01" end="2025-09-01" bindchange="bindDateChange">
+            <view wx:if="{{date}}">
+              <view class="weui-select weui-select_in-select-after">{{date}}</view>
+            </view>
+            <view wx:else>
+              <view class="weui-select weui-select_in-select-after" style="color: #999;">年月日</view>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+            <view wx:if="{{time}}">
+              <view class="weui-select weui-select_in-select-after">{{time}}</view>
+            </view>
+            <view wx:else>
+              <view class="weui-select weui-select_in-select-after" style="color: #999;">时分</view>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+
+    </view>
+    <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

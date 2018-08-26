@@ -1,0 +1,83 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="page bg_listpage">
+   <view class="btn-area">
+      <navigator url="/pages/index/index" hover-class="navigator-hover">返回首页</navigator>
+    </view>
+    <view class='banner'>
+      <image mode="widthFix" src='{{banner_img}}'></image>
+      <text>{{time}}</text>
+    </view>
+    <view class='card_info'>
+      <text class='first_child'>{{title}}</text>
+      <text class='exchange'>已兑换{{exchange}}</text>
+      <text class='copie'>剩余份数{{copie}}</text>
+    </view>
+    <view class='help'>
+      <image mode="widthFix" src='{{help_img}}'></image>
+      <view class='Jackpot'>
+        <block wx:for="{{res_pro}}" wx:key="{{index}}">
+          <view class="Jack_item {{list_num[index] == 0 ? 'selected' : ''}}" data-num='{{list_num[index]}}'>
+            <text class='jack_num'>{{list_num[index]}}</text>
+            <text>{{res_pro[index].words}}  </text>
+          </view>
+        </block>
+      </view>
+      <block wx:if="{{jacknumber > 0}}">
+        <text class='luck' bind:touchstart="luck">我要抽奖（剩余{{jacknumber}}次）</text>
+      </block>
+      <block wx:else>
+        <text class='luck' bindtap="seek">我要抽奖（剩余0次）</text>
+      </block>
+      <text class='seek' bindtap="seek">分享求助好友</text>
+    </view>
+    <view class='rule'>
+      <image mode='widthFix' src='{{rule_img}}'></image>
+    </view>
+    <view class='cooperation' style='display:none'>
+      <image mode='widthFix' src='{{cooperation_img}}'></image>
+      <text class='rule_txt'>{{cooperation_txt}}</text>
+    </view>
+    <view class='order'>
+      <image mode='widthFix' src='{{order_img}}'></image>
+      <view class='order_box'>
+        <view class='scallbox' style='transform:translate(0,{{distance}})'>
+          <block wx:for="{{result}}" wx:key="{{index}}">
+            <view class='order_item'>
+              <image src="{{item.image}}" class="order_img" />
+              <text>{{item.name}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <block wx:if="{{share_item}}">
+      <view class='share'>
+        <view class='share_box'>
+          <image mode='widthFix' class='share_img' src='{{share_img}}'></image>
+          <button class='nowhelp' open-type="share">直接求助</button>
+          <text class='make'  bindtap="make">生成海报</text>
+          <text class='close' bindtap="close">关闭</text>
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{Jack_info}}">
+      <view class='share'>
+        <view class='share_box'>
+          <image mode='widthFix' class='share_img' src='{{jack_img}}'></image>
+          <text class='info_txt'>{{info_txt}}</text>
+          <text class='close' bindtap="close">关闭</text>
+        </view>
+      </view>
+    </block>
+     <image mode="widthFix" src='{{image_tel}}'></image>
+     <view class='file'>
+     <image  mode="widthFix" src='{{image_file}}'></image>
+     <button class='rule_btn' open-type="contact">获得</button>
+     </view>
+  </view>
+  <block wx:if="{{mask}}">
+    <view class="mask"></view>
+  </block>
+</view>

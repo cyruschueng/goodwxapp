@@ -1,0 +1,98 @@
+<!--发布分享  -->
+
+<!--<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:key>
+    <swiper-item>
+      <image src="{{item}}" mode="aspectFit" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper>-->
+
+<form bindsubmit="formSubmit">
+<!-- 分享类型 -->
+   <!-- <view class="share-type flex-row">
+    <view class="title">分享类型:</view>  -->
+
+    <!-- 别动 -->
+    <!--<picker bindchange="bindPickerType" range="{{shareTypes}}">
+      {{shareType}}
+    </picker>-->
+    <!-- 别动 -->
+
+    <!-- <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{shareTypes}}" wx:key="index">
+        <radio color="#f4d000" value="{{item}}" disabled="{{noChoose ==  item}}" checked="{{item == shareType}}"/>{{item}}
+      </label>
+    </radio-group> -->
+  <!-- </view> -->
+ <!-- 分享类型 -->
+  
+  <view class="share-type flex-row" wx:if="{{shareType=='分享设备'}}">
+    <view class="title">分享设备:</view>
+    <picker bindtap="bindTest" bindchange="bindPickerDevice" range="{{deviceArr}}">
+      {{deviceCode}}
+    </picker>
+  </view>
+  <view class="share-type flex-row">
+    <view class="title">选择心情:</view>
+    <picker bindchange="bindChooseMood" range-key="content" range="{{chooseMood}}">
+      {{mood}}
+    </picker>
+  </view>
+  <view class="flex-row" wx:if="{{mood == '自定义心情'}}">
+    <!--<view class="title">上传心情:</view>-->
+    <view class="content">
+      <textarea maxlength="140" bindinput="bindContent" placeholder="请输入自定义心情" placeholder-class="placeholder" />
+      <text>还可以输入{{character}}个字符</text>
+    </view>
+  </view>
+  <view class="flex-row">
+    <view class="title">上传照片:</view>
+    <view class="content">
+      <image bindtap="bindUpLoadImg" wx:if="{{tempFilePaths == ''}}" class="up-img" src="{{upLodingImg}}"></image>
+      <image bindtap="bindUpLoadImg" mode="widthFix" class="share-img" wx:if="{{tempFilePaths != ''}}" bindload="bindLoadImg" src="{{tempFilePaths}}"></image>
+    </view>
+  </view>
+  <view class="share-tip">
+    <view class="title">分享美图赢取积分</view>
+    <view class="content">成功分享美图，赢取点赞，邀请好友可获取嘀嘀币积分，积分可抵用使用费或换取充电宝。</view>
+  </view>
+
+  <view class="share-btn" bindtap="bindShare">分享</view>
+  <view class="sharea" ></view>
+</form>
+
+<view class="nav">
+<view class="" bindtap="homePage">
+    <image src="{{IMG_PATH}}/shouye.jpg"></image>
+    <view>首页</view>
+  </view>
+  <view class="" >
+    <image src="{{IMG_PATH}}/fenxiang2.jpg"></image>
+    <view>发布</view>
+  </view>
+   <view class="scanCode" bindtap="scanCode">
+    <image src="{{IMG_PATH}}/chudian.png"></image>
+     <view>扫一扫</view> 
+  </view>
+  
+  <view class="" bindtap="goToMap">
+    <image src="{{IMG_PATH}}/laidian.png"></image>
+    <view>触电</view>
+  </view>
+
+ 
+
+  <!-- <view class="" bindtap="goToNotice">
+    <image src="{{IMG_PATH}}/tongzhi.png"></image>
+    <view>互动</view>
+  </view> -->
+
+  <view class="" bindtap="goToUser">
+    <image src="{{IMG_PATH}}/wode.png"></image>
+    <view>我的</view>
+  </view>
+
+</view>
+<!--<button open-type="share">分享</button>-->

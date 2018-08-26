@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <title>计算机视觉与三维检测工作室</title>
+    <meta name="Keywords" content="计算机视觉与三维检测工作室,湖南文理学院，物理与电子科学学院，黎小琴，肖瑶" />
+    <meta name="Description" content="计算机视觉与三维检测工作室" />
+    <link rel="stylesheet" href="{$Think.server.script_name}/../pc/css/style.css" />
+    <style>
+        .tuchu{
+            color: #2F83DB;
+        }
+    </style>
+</head>
+<body>
+<!--top_start-->
+<div class="top_box">
+    <div class="top_minbox">
+        <div class="top_left">
+            <a href="{$Think.server.script_name}/focusPc/index/index"><img class="logo" src="{$Think.server.script_name}/../pc/img/logo.png" alt="计算机视觉与三维检测工作室" title="计算机视觉与三维检测工作室" /></a>
+            <div class="top_adBox">
+                <h2>给机器以<span class="tuchu">“视觉”</span></h2>
+                <h2>让TA<span class="tuchu">“理解”</span>我们的世界</h2>
+            </div>
+        </div>
+        <!--<div class="top_right">-->
+        <!--<img src="{$Think.server.script_name}/../pc/img/school.jpg" style="height: 80px;">-->
+        <!--</div>-->
+        <div class="clear"></div>
+    </div>
+</div>
+<!--nav_start-->
+<div class="nav_box">
+    <ul class="nav_minbox" id="nav"><li>
+        <a  href="{$Think.server.script_name}/focusPc/index/index" title="网站首页">网站首页</a></li><li>
+        <a href="{$Think.server.script_name}/focusPc/about/index" title="关于我们" >关于我们</a>
+        <dl class="nav2_box">
+
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/about/index" title="工作室简介" class="bgNone">工作室简介</a>
+            </dd>
+
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/about/culture" title="工作室文化" >工作室文化</a>
+            </dd>
+
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/about/honor" title="荣誉资质" >荣誉资质</a>
+            </dd>
+
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/news/index" title="新闻资讯" >新闻资讯</a>
+        <dl class="nav2_box">
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/teacher/index" title="师资力量" >师资力量</a>
+        <dl class="nav2_box">
+            {volist name="teachersort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/teacher/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/student/index" title="学生团队" >学生团队</a>
+        <dl class="nav2_box">
+            {volist name="studentsort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/student/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/equipment/index" title="设备展示" >设备展示</a>
+        <dl class="nav2_box">
+            {volist name="equipmentsort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/equipment/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+        </dl>
+    </li><li>
+        <a  href="{$Think.server.script_name}/focusPc/cases/index" title="学生作品" >学生作品</a>
+        <dl class="nav2_box">
+
+            {volist name="casesort" id="vo"}
+            <dd>
+                <a  href="{$Think.server.script_name}/focusPc/cases/index/sortid/{$vo.id}" title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/technology/index" title="教学资源" >教学资源</a>
+        <dl class="nav2_box">
+
+            {volist name="technologysort" id="vo"}
+            <dd>
+                <a {if condition="($vo.url)!=1"} href=//{$vo.url} target="_blank"{else/} href="{$Think.server.script_name}/focusPc/technology/index/sortid/{$vo.id}" {/if} title="{$vo.name}" class="bgNone">{$vo.name}</a>
+            </dd>
+            {/volist}
+
+        </dl>
+    </li><li>
+        <a class="navcur" href="{$Think.server.script_name}/focusPc/online/index" title="在线留言" >在线留言</a>
+        <dl class="nav2_box">
+        </dl>
+    </li><li>
+        <a href="{$Think.server.script_name}/focusPc/contact/index" title="联系我们" >联系我们</a>
+        <dl class="nav2_box">
+        </dl>
+    </li><div class="clear"></div></ul>
+    <div class="nav2_bgcolor"></div>
+</div>
+
+
+<div class="location" id="location">
+    <div class="wrap">
+
+        <p>您现在所在位置：<a href="{$Think.server.script_name}/focusPc/index/index" class="home">网站首页</a>
+            <b class="arrow">></b> <a href="{$Think.server.script_name}/focusPc/online/index">在线留言</a>
+        </p>
+    </div>
+</div>
+<div class="wrapper" id="wrapper">
+    <div class="sidebar" id="sidebar">
+        <div class="side-menu">
+
+            <div class="topclass">
+                <h2>在线留言</h2>
+                <p>STUDENT</p>
+            </div>
+            <div class="index_proad_two">技术创新，<br>是我们不断前进的动力</div>
+        </div>
+
+    </div>
+    <div class="container" id="container">
+        <div class="recommend-form2">
+            <form name='formPost' id='formPost' action='{$Think.server.script_name}/focusPc/online/post' method='POST' enctype='multipart/form-data'>
+                <div class="main">
+                    <div class="row-1 ico-name required">
+                        <input type="text" class="txt" name="name"  placeholder="姓名" empty="请输入您的的姓名" maxlength="5" />
+
+                    </div>
+                    <div class="row-1 ico-phone required">
+                        <input type="text" class="txt" name="phone"  placeholder="联系电话" empty="请输入您的联系电话" error="请输入正确的联系电话" maxlength="15" />
+
+                    </div>
+                    <div class="row-1 ico-email">
+                        <input type="text" class="txt" name="email"  placeholder="电子邮箱" error="请输入正确的电子邮箱" maxlength="30" />
+                    </div>
+                    <div class="row-2">
+                        <textarea class="text" placeholder="请填写您的需求信息..." name="des"></textarea>
+                    </div>
+
+                    <div class="row-3">
+                        <input type="submit" class="submit" value="提交" />
+                        <input type="reset" class="reset" value="重置" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <input type="hidden" id="NavigateUrl" name="NavigateUrl" value="" />
+            </form>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!-- footer -->
+<div class="footer">
+    <div class="foot_box w1100">
+        <div class="bt_nav">
+            <a href="{$Think.server.script_name}/focusPc/index/index" title="网站首页">网站首页</a>
+
+            <a href="{$Think.server.script_name}/focusPc/about/index" title="关于我们" class="btNavTitle">关于我们</a>
+
+            <a href="{$Think.server.script_name}/focusPc/teacher/index" title="师资力量" class="btNavTitle">师资力量</a>
+
+            <a href="{$Think.server.script_name}/focusPc/student/index" title="学生团队" class="btNavTitle">学生团队</a>
+
+            <a href="{$Think.server.script_name}/focusPc/equipment/index" title="设备展示" class="btNavTitle">设备展示</a>
+
+            <a href="{$Think.server.script_name}/focusPc/cases/index" title="成功案例" class="btNavTitle">成功案例</a>
+
+            <a href="{$Think.server.script_name}/focusPc/technology/index" title="技术中心" class="btNavTitle">技术中心</a>
+
+            <a href="{$Think.server.script_name}/focusPc/news/index" title="新闻资讯" class="btNavTitle">新闻资讯</a>
+
+            <a href="{$Think.server.script_name}/focusPc/online/index" title="在线留言" class="btNavTitle">在线留言</a>
+
+            <a href="{$Think.server.script_name}/focusPc/contact/index" title="联系我们" class="btNavTitle">联系我们</a>
+        </div>
+    </div>
+    <div style="width: 100%;height: 10px;background:url({$Think.server.script_name}/../static/img/index_youshi.gif);">
+
+    </div>
+    <div class="bottom" style="text-align: center;">
+        <p>版权所有：计算机视觉与三维检测工作室<br/>
+            联系电话：{$us.phone}<br/>
+            联系地址：{$us.address}<br/>
+            技术支持：电信13103班肖瑶</p>
+        <div class="erwei"><img src="{$Think.server.script_name}/../pc/img/code.png" alt="">手机网站二维码</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script src="{$Think.server.script_name}/../pc/js/jquery-3.2.0.min.js"></script>
+<script src="{$Think.server.script_name}/../pc/js/app.js"></script>
+</body>
+</html>

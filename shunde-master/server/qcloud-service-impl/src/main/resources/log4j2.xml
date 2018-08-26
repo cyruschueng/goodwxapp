@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appenders>
+		<Console
+			name="Console"
+			target="SYSTEM_OUT">
+			<PatternLayout pattern="extrainfo:qcloud qcloud qcloud_service %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} --- %msg%n" />
+		</Console>
+
+		<RollingFile
+			name="File"
+			fileName="/usr/local/qcloud-service/logs/qcloud_service.log"
+			filePattern="/usr/local/qcloud-service/logs/$${date:yyyy-MM}/qcloud_service-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="extrainfo:qcloud qcloud qcloud_service %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} --- %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10 M" />
+			</Policies>
+			<DefaultRolloverStrategy max="9" />
+		</RollingFile>
+	</appenders>
+	
+	<loggers>
+		<root level="info">
+			<appender-ref ref="Console" />
+		</root>
+		
+		<logger
+			name="com.visualbusiness"
+			additivity="false"
+			level="info">
+			<appender-ref ref="Console" />
+			<appender-ref ref="File" />
+		</logger>
+	</loggers>
+</configuration>

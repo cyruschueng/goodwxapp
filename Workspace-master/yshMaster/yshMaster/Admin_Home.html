@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>首页</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+		<section>
+			<!--body wrapper start-->
+
+			<section>
+				<!-- page start-->
+
+				<div class="row">
+					<div class="col-lg-12">
+
+						<section class="panel">
+
+							<div class="panel-body">
+								<div class="row">
+									<h2>管理控制台</h2>
+								</div>
+
+								<div class="row">
+
+									<div class="col-lg-3">
+										<a href="Admin_UserGradeManage.html">用户等级配置</a>
+									</div>
+
+									<div class="col-lg-3">
+										<a href="Admin_UserActivityManage.html">用户活跃度配置</a>
+									</div>
+
+									<div class="col-lg-3">
+										<a href="Admin_UserRoleManage.html">用户角色配置</a>
+									</div>
+
+									<div class="col-lg-3">
+										<a href="Admin_UserRegSourceManage.html">用户注册来源配置</a>
+									</div>
+								</div>
+
+								<br/>
+
+								<div class="row">
+
+									<span class="col-sm-3 control-label col-lg-3"><h3 id="tn"></h3></span>
+
+									<script>
+										$(
+											function() {
+												var params = {};
+												getDataList(yshurl + "CountTotalUsers", params, function(d) {
+													$("#tn").text("当前用户总数:" + d.aaData[0].Num);
+												})
+											});
+									</script>
+									<div class="col-lg-3">
+
+									</div>
+									<div class="col-lg-3">
+									</div>
+									<div class="col-lg-3">
+									</div>
+								</div>
+
+								<div class="row">
+
+									<div class="col-lg-4">
+
+									</div>
+
+									<div class="col-lg-4">
+
+									</div>
+									<div class="col-lg-4 text-left">
+
+										<span>用户情况变化按：</span>
+										<select id="mobile_change">
+											<option value="week">周</option>
+											<option value="month">月</option>
+											<option value="year">年</option>
+										</select>
+										<button type="button" class="btn-info" onclick="searchForMobile()">查看</button>
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-lg-12">
+										<div id="mobile" style="width: 1200px;height:400px;" class="text-center">
+
+										</div>
+										<div style="width: 1200px;">
+											<h3 style="text-align: center;">移动端用户变化</h3></div>
+									</div>
+
+								</div>
+
+								<div class="row">
+
+									<div class="col-lg-4">
+
+									</div>
+
+									<div class="col-lg-4">
+
+									</div>
+									<div class="col-lg-4 text-left">
+
+										<span>用户情况变化按：</span>
+										<select id="group_change">
+											<option value="week">周</option>
+											<option value="month">月</option>
+											<option value="year">年</option>
+										</select>
+
+										<button type="button" class="btn-info" onclick="searchForGroup()">查看</button>
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-lg-12">
+										<div id="group" style="width: 1200px;height:400px;" class="text-center">
+
+										</div>
+										<div style="width: 1200px;">
+											<h3 style="text-align: center;">团体采购用户变化</h3></div>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-lg-4">
+										<div id="group2" style="width: 300px;height:300px;">
+
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div id="group3" style="width: 300px;height:300px;">
+
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div id="group4" style="width: 300px;height:300px;">
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-4">
+										<div id="group5" style="width: 300px;height:300px;">
+
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div id="group6" style="width: 300px;height:300px;">
+
+										</div>
+									</div>
+									<div class="col-lg-4">
+
+									</div>
+								</div>
+
+							</div>
+						</section>
+
+						<!--body wrapper end-->
+
+						<!--footer section start-->
+						<!--<footer>
+                            2014 &copy; AdminEx by ThemeBucket
+                        </footer>-->
+						<!--footer section end-->
+
+					</div>
+					<!-- main content end-->
+				</div>
+			</section>
+		</section>
+
+		<script>
+			function initPies(options, tname, XArray, Series) {
+				if(options == undefined) {
+					options = {
+						title: {
+							text: tname,
+							x: 'center'
+						},
+						tooltip: {
+							trigger: 'item',
+							formatter: "{a} <br/>{b} : {c} ({d}%)"
+						},
+						legend: {
+							orient: 'vertical',
+							left: 'left',
+							data: XArray
+						},
+						series: [{
+							name: tname,
+							type: 'pie',
+							radius: '60%',
+							center: ['50%', '60%'],
+							label: {
+								normal: {
+									show: false
+								}
+							},
+							data: Series,
+							itemStyle: {
+								emphasis: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							}
+						}]
+					};
+				} else {
+					options.title.text = tname;
+					options.legend.data = XArray;
+					options.series[0].name = tname;
+					options.series[0].data = Series;
+				}
+				return options;
+			}
+
+			function initBar(options, XArray, Series) {
+				if(options == undefined) {
+					options = {
+
+						tooltip: {
+							trigger: 'axis'
+						},
+						legend: {
+							data: ['新增', '活跃', '流失']
+						},
+						calculable: true,
+						xAxis: [{
+							type: 'category',
+							data: XArray
+						}],
+						yAxis: [{
+							type: 'value'
+						}],
+						series: Series
+					};
+
+				} else {
+					options.legend.data = XArray;
+					options.xAxis[0].data = XArray;
+					options.series = Series;
+				}
+				return options;
+			}
+
+			function getxAix(array) {
+				var obj = {}
+				var tmp = new Array();
+				$.each(array, function(i, v) {
+					tmp.push(v.name);
+				})
+				return tmp;
+			}
+
+			function getDateStr(s, i) {
+				var origin = new Date(s);
+				origin = +origin + i * 86400000;
+				var current = new Date(origin)
+				var y = current.getFullYear();
+				var m = current.getMonth() + 1; //获取当前月份的日期	
+				var d = current.getDate();
+				if(m < 10)
+					m = "0" + m;
+				if(d < 10)
+					d = "0" + d;
+				return y + "-" + m + "-" + d;
+			}
+
+			function initArray(array, start) {
+				for(i = 0; i < 7; i++) {
+					var obj = {};
+					var dt = getDateStr(start, i);
+					obj.time = dt;
+					obj.value = 0;
+					array.push(obj);
+				}
+				return array;
+			}
+
+			function convertToDesc(array1, array2) {
+				var res = new Array();
+				$.each(array1, function(i, v) {
+
+					$.each(array2, function(index, value) {
+						if(v.time == value.dt)
+							v.value = value.TotalNum;
+					});
+
+				})
+
+				$.each(array1, function(i, v) {
+					res.push(v.value);
+				})
+				return res;
+			}
+
+			function createObject(arr, name) {
+
+				var obj = {
+					name: name,
+					type: 'bar',
+					data: arr
+				}
+				return obj;
+			}
+
+			function searchForMobile() {
+				var str = $("#mobile_change").val();
+
+				if(str == "week") {
+					createWeekBarGraph("mobile");
+				} else if(str == "month") {
+					createMonthBarGraph("mobile");
+				} else if(str == "year") {
+					createYearBarGraph("mobile");
+				}
+
+			}
+
+			function searchForGroup() {
+
+				var str = $("#group_change").val();
+
+				if(str == "week") {
+					createWeekBarGraph("group");
+				} else if(str == "month") {
+					createMonthBarGraph("group");
+				} else if(str == "year") {
+					createYearBarGraph("group");
+				}
+
+			}
+
+			function createWeekBarGraph(name) {
+				if(name == "mobile") {
+
+					getDataList(yshurl + "Admin_Home_GetWeek", {}, function(d) {
+						$("#mobile").empty();
+						if(d.state == 0) {
+							var Monday = d.aaData[6][0].Monday;
+							var Sunday = d.aaData[6][0].Sunday;
+							var obj1 = buildSingleArrayForWeek(d.aaData[0], '新增', Monday);
+							var obj2 = buildSingleArrayForWeek(d.aaData[1], '活跃', Monday);
+							var obj3 = buildSingleArrayForWeek(d.aaData[2], '流失', Monday);
+							var arr1 = [obj1, obj2, obj3];
+							var myChart = echarts.init(document.getElementById('mobile'));
+							var option1;
+							var xArray = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+							option1 = initBar(option1, xArray, arr1);
+							myChart.setOption(option1);
+						} else {
+							$("#mobile").append("<p><center>查无数据<center></p>")
+						}
+					});
+				} else if(name == "group") {
+					getDataList(yshurl + "Admin_Home_GetWeek", {}, function(d) {
+						$("#group").empty();
+						if(d.state == 0) {
+							var Monday = d.aaData[6][0].Monday;
+							var Sunday = d.aaData[6][0].Sunday;
+							var obj4 = buildSingleArrayForWeek(d.aaData[3], '新增', Monday);
+							var obj5 = buildSingleArrayForWeek(d.aaData[4], '活跃', Monday);
+							var obj6 = buildSingleArrayForWeek(d.aaData[5], '流失', Monday);
+
+							var arr1 = [obj4, obj5, obj6];
+							var myChart = echarts.init(document.getElementById('group'));
+							var option1;
+							var xArray = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+							option1 = initBar(option1, xArray, arr1);
+							myChart.setOption(option1);
+						} else {
+							$("#group").append("<p><center>查无数据<center></p>")
+						}
+					});
+				}
+			}
+
+			function createMonthBarGraph(name) {
+				if(name == "mobile") {
+
+					getDataList(yshurl + "	Admin_Home_GetMonth", {}, function(d) {
+						$("#mobile").empty();
+						if(d.state == 0) {
+							var startMonth = d.aaData[6][0].StartMonth;
+							var endMonth = d.aaData[6][0].EndMonth;
+							var myChart = echarts.init(document.getElementById('mobile'));
+							var obj1 = buildSingleArrayForMonth(d.aaData[0], "新增", startMonth, endMonth);
+							var obj2 = buildSingleArrayForMonth(d.aaData[1], '活跃', startMonth, endMonth, 1);
+							var xArray = obj2.xArr;
+							delete obj2.xArr;
+							var obj3 = buildSingleArrayForMonth(d.aaData[2], '流失', startMonth, endMonth);
+							var option1;
+							var arr1 = [obj1, obj2, obj3];
+							option1 = initBar(option1, xArray, arr1);
+							myChart.setOption(option1);
+						} else {
+							$("#mobile").append("<p><center>查无数据<center></p>")
+						}
+					});
+
+				} else if(name == "group") {
+
+					getDataList(yshurl + "	Admin_Home_GetMonth", {}, function(d) {
+						$("#group").empty();
+						if(d.state == 0) {
+							var startMonth = d.aaData[6][0].StartMonth;
+							var endMonth = d.aaData[6][0].EndMonth;
+							var myChart = echarts.init(document.getElementById('group'));
+							var obj1 = buildSingleArrayForMonth(d.aaData[3], "新增", startMonth, endMonth);
+							var obj2 = buildSingleArrayForMonth(d.aaData[4], '活跃', startMonth, endMonth, 1);
+							var xArray = obj2.xArr;
+							delete obj2.xArr;
+							var obj3 = buildSingleArrayForMonth(d.aaData[5], '流失', startMonth, endMonth);
+							var option1;
+							var arr1 = [obj1, obj2, obj3];
+							option1 = initBar(option1, xArray, arr1);
+							myChart.setOption(option1);
+						} else {
+							$("#group").append("<p><center>查无数据<center></p>")
+						}
+					});
+
+				}
+			}
+
+			function createYearBarGraph(name) {
+				if(name == "mobile") {
+
+					getDataList(yshurl + "	Admin_Home_GetYear", {}, function(d) {
+						$("#mobile").empty();
+						if(d.state == 0) {
+							var startYear = d.aaData[6][0].StartYear;
+							var endYear = d.aaData[6][0].EndYear;
+							var myChart = echarts.init(document.getElementById('mobile'));
+							var obj1 = buildSingleArrayForYear(d.aaData[0], "新增", startYear, endYear);
+							var obj2 = buildSingleArrayForYear(d.aaData[1], '活跃', startYear, endYear);
+							var obj3 = buildSingleArrayForYear(d.aaData[2], '流失', startYear, endYear);
+
+							var option1;
+
+							var arr1 = [obj1, obj2, obj3];
+							var length = endYear - startYear;
+							var xArray = [startYear];
+							startYear = parseInt(startYear);
+							for(var i = 1; i <= length; i++) {
+								xArray.push(startYear + i);
+							}
+							option1 = initBar(option1, xArray, arr1);
+							myChart.setOption(option1);
+						} else {
+							$("#mobile").append("<p><center>查无数据<center></p>")
+						}
+					});
+
+				} else if(name == "group") {
+					getDataList(yshurl + "	Admin_Home_GetYear", {}, function(d) {
+						$("#group").empty();
+						if(d.state == 0) {
+
+							var startYear = d.aaData[6][0].StartYear;
+							var endYear = d.aaData[6][0].EndYear;
+							var myChart = echarts.init(document.getElementById('group'));
+							var obj1 = buildSingleArrayForYear(d.aaData[3], "新增", startYear, endYear);
+							var obj2 = buildSingleArrayForYear(d.aaData[4], '活跃', startYear, endYear);
+							var obj3 = buildSingleArrayForYear(d.aaData[5], '流失', startYear, endYear);
+							var option1;
+							var arr1 = [obj1, obj2, obj3];
+							var length = endYear - startYear;
+							var xArray = [startYear];
+							startYear = parseInt(startYear);
+							for(i = 1; i <= length; i++) {
+								xArray.push(startYear + i);
+							}
+							option1 = initBar(option1, xArray, arr1);
+							myChart.setOption(option1);
+						} else {
+							$("#group").append("<p><center>查无数据<center></p>")
+						}
+
+					});
+
+				}
+			}
+
+			function monthDiff(startMonth, endMonth) {
+				debugger;
+				var tmp = startMonth.split('-');
+				var tmp1 = endMonth.split('-');
+				var month1 = parseInt(tmp[1]);
+				var month2 = parseInt(tmp1[1]);
+				var diff = 0;
+				if(month2 - month1 <= 0) {
+					diff = month2 + 12 - month1;
+				} else
+					diff = month2 - month1;
+
+				return diff + 1;
+			}
+
+			function initArrayForMonth(arr, startMonth, endMonth) {
+
+				var length = monthDiff(startMonth, endMonth);
+
+				for(i = 0; i < length; i++) {
+					var obj = {};
+					var dt = AddMonth(startMonth, i);
+					obj.time = dt;
+					obj.value = 0;
+					arr.push(obj);
+				}
+				return arr;
+			}
+
+			function initArrayForYear(arr, startYear, endYear) {
+				startYear = parseInt(startYear);
+				endYear = parseInt(endYear);
+				var length = endYear - startYear;
+
+				for(i = 0; i <= length; i++) {
+					var obj = {};
+					var dt = startYear + i;
+					obj.time = dt;
+					obj.value = 0;
+					arr.push(obj);
+				}
+				return arr;
+			}
+
+			function buildSingleArrayForMonth(returnArr, name, startMonth, endMonth, flag) {
+				var arr = new Array();
+				var obj = {};
+				arr = initArrayForMonth(arr, startMonth, endMonth);
+
+				var arr2 = new Array();
+
+				if(flag == 1) {
+					$.each(arr, function(i, v) {
+						arr2.push(v.time);
+					});
+				}
+
+				arr = convertToDesc(arr, returnArr);
+				obj = createObject(arr, name);
+
+				if(flag == 1) {
+					obj.xArr = arr2;
+				}
+
+				return obj;
+			}
+
+			function buildSingleArrayForYear(returnArr, name, startYear, endYear) {
+				var arr = new Array();
+				var obj = {};
+				arr = initArrayForYear(arr, startYear, endYear);
+				arr = convertToDesc(arr, returnArr);
+				obj = createObject(arr, name);
+				return obj;
+			}
+
+			function buildSingleArrayForWeek(returnArr, name, day) {
+				var arr = new Array();
+				arr = initArray(arr, day);
+				arr = convertToDesc(arr, returnArr);
+				var obj = createObject(arr, name);
+				return obj;
+			}
+
+			function AddMonth(month, i) {
+				var tmp = month.split('-');
+				var year = parseInt(tmp[0]);
+				var month = parseInt(tmp[1]);
+				if(month + i > 12) {
+					month = (month + i) % 12;
+					year = year + 1;
+				} else {
+					month = month + i;
+				}
+
+				month = (month >= 10) ? month : "0" + month;
+
+				return year + '-' + month;
+			}
+
+			$(function() {
+
+				var params = {};
+
+				getDataList(yshurl + "	Admin_Home_GetWeek", params, function(d) {
+					if(d.state == 0) {
+						var Monday = d.aaData[6][0].Monday;
+						var Sunday = d.aaData[6][0].Sunday;
+						var obj1 = buildSingleArrayForWeek(d.aaData[0], '新增', Monday);
+						var obj2 = buildSingleArrayForWeek(d.aaData[1], '活跃', Monday);
+						var obj3 = buildSingleArrayForWeek(d.aaData[2], '流失', Monday);
+						var obj4 = buildSingleArrayForWeek(d.aaData[3], '新增', Monday);
+						var obj5 = buildSingleArrayForWeek(d.aaData[4], '活跃', Monday);
+						var obj6 = buildSingleArrayForWeek(d.aaData[5], '流失', Monday);
+
+						var arr1 = [obj1, obj2, obj3];
+						var arr2 = [obj4, obj5, obj6];
+
+						var myChart = echarts.init(document.getElementById('mobile'));
+						var myChart1 = echarts.init(document.getElementById('group'));
+						var option1;
+						var xArray = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+						option1 = initBar(option1, xArray, arr1);
+						myChart.setOption(option1);
+						option1 = initBar(option1, xArray, arr2);
+						myChart1.setOption(option1);
+					} else {
+						$("#mobile").append("<p><center>查无数据</center></p>");
+						$("#group").append("<p><center>查无数据</center></p>");
+					}
+				});
+
+				getDataList(yshurl + "Admin_Home_GetPieChartInfo", params, function(d) {
+					if(d.state == 0) {
+						var Xsource = getxAix(d.many[0]);
+						var Ysource = d.many[0];
+
+						var Xgrade = getxAix(d.many[1]);
+						var Ygrade = d.many[1];
+						var Xactive = getxAix(d.many[2]);
+						var Yactive = d.many[2];
+						var Xchannel = getxAix(d.many[3]);
+						var Ychannel = d.many[3];
+						var Xrole = getxAix(d.many[4]);
+						var Yrole = d.many[4];
+						var myChart2 = echarts.init(document.getElementById('group2'));
+						var myChart3 = echarts.init(document.getElementById('group3'));
+						var myChart4 = echarts.init(document.getElementById('group4'));
+						var myChart5 = echarts.init(document.getElementById('group5'));
+						var myChart6 = echarts.init(document.getElementById('group6'));
+						var options;
+						options = initPies(options, "来源注册", Xsource, Ysource);
+						myChart2.setOption(options);
+						options = initPies(options, "用户等级分布", Xgrade, Ygrade);
+						myChart3.setOption(options);
+						options = initPies(options, "用户活跃度", Xactive, Yactive);
+						myChart4.setOption(options);
+						options = initPies(options, "用户渠道", Xchannel, Ychannel);
+						myChart5.setOption(options);
+						options = initPies(options, "用户角色", Xrole, Yrole);
+						myChart6.setOption(options);
+					} else {
+						$("#group2").append("<p><center>查无数据</center></p>");
+						$("#group3").append("<p><center>查无数据</center></p>");
+						$("#group4").append("<p><center>查无数据</center></p>");
+						$("#group5").append("<p><center>查无数据</center></p>");
+						$("#group6").append("<p><center>查无数据</center></p>");
+					}
+				});
+
+				setIframeHeight();
+
+			});
+		</script>
+		<!--
+	作者：443267568@qq.com
+	时间：2016-05-03
+	描述：修改结束
+-->
+	</body>
+
+</html>

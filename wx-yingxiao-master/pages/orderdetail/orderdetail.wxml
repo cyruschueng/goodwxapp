@@ -1,0 +1,56 @@
+<view class='container'>
+  <view class='white'></view>
+  <view class='banner'>
+    <view class='bannerLeft'>
+      <image src='{{order.img}}'></image>
+      <view>
+        <view>{{order.title}}</view>
+        <view>开单人:{{order.seller}}</view>
+      </view>
+    </view>
+    <view>¥{{order.price}}</view>
+  </view>
+  <view class='state'>
+    <view class='point' wx:for="{{steps}}" wx:kef="index" style='color:{{index<order.step-1?"#ff0100":"#dedede"}}' wx:key="index">
+      <view class='{{index<order.step-1?"done":"donot"}} {{order.step==index+1&&order.state=="1"?"doing":"err"}} {{order.step==index+1&&order.state=="2"?"done":"err"}}'><view></view></view>  
+      <view class='{{index==order.step-1&&order.state=="2"?"red":"err"}} {{index==order.step-1&&order.state=="1"?"yellow":"err"}}'>{{item.step}}</view> 
+    </view>
+  </view>
+  <view class='progress'></view>
+  <view class='address'>
+    <image src='/pages/source/images/address.png'></image>
+    <view>
+      <view>收货人:{{order.consignee}}</view>
+      <view>收货地址:{{order.address}}</view>
+    </view>
+  </view>
+  <view class='orderInfo'>
+    <view>订单号:{{order.order_sn}}</view>
+    <view>创建时间:{{order.createTime}}</view>
+    <view>付款时间:{{order.payTime}}</view>
+  </view>
+  <view class='server'>
+    <view class=''>
+      <image src='/pages/source/images/server.png'></image>
+      <view>联系客服</view>
+      <view class='contact'>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+        <contact-button></contact-button>
+      </view>
+    </view>
+    <view bindtap='call'>
+      <image src='/pages/source/images/call.png'></image>
+      <view>拨打电话</view>
+    </view>
+  </view>
+   <view class='btn' wx:if="{{steps[order.step-1].operation!=''&&order.state=='1'}}">
+    <view style='width:{{len==2?"50%":"100%"}}' wx:for="{{steps[order.step-1].operation}}" wx:key="*this" bindtap='tourl' data-item='{{item}}'>{{item}}</view>
+  </view> 
+</view>

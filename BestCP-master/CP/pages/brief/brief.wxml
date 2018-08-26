@@ -1,0 +1,17 @@
+  <image wx:if="{{isipx}}" src='2-2.png' mode='widthFix' style='width:100%;height:{{screenHeight}}'></image>    
+ <image wx:else src='2-2s.png' mode='widthFix' style='width:100%'></image> 
+<view class="container {{model=='iPhone X'?'xStyle':'sStyle'}} ">
+ 
+  <image src='http://bellazhang.cn/PNG/button.png' class='age-input' mode='widthFix'></image>
+  <input type='number' class='picker' confirm-type="done" maxlength='2' value='20' bindinput='inputAge'></input>
+
+    
+  <image src='http://bellazhang.cn/PNG/button2.png' class='constellation-input' mode='widthFix'></image>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" mode="selector" style='height:70rpx;width:520rpx'>
+    <view class="picker">
+      <text class='picker-content'>{{array[index]}}</text>
+    </view>
+  </picker>
+
+   <image src='{{imgURL}}' class='next' mode='widthFix' bindtap='goNext'></image> 
+</view>

@@ -1,0 +1,29 @@
+<view class="padding-md" wx:for="{{list}}" data-id="{{item.ordernumber}}" 
+bindtap="{{item.orderproduct[0].number == item.realcount ? '':'changes'}}">
+  <view style="border-radius:20rpx;" class="padding-md margin-top-sm bg-white box-shadow " >
+    <view class='panel-around '>
+      <view style='font-size:60px;margin-left:40rpx'>{{item.orderproduct[0].number-item.realcount}}<text class='font-lg'>杯</text>
+      </view>
+      <view style='margin-left:40rpx;'>
+        <view class='font-lg bold'>{{item.orderproduct[0].productname}}</view>
+        <view class='font-md margin-top-xs'>{{item.orderproduct[0].value}}</view>
+        <view class='font-md margin-top-xs'>一共可兑换 {{item.orderproduct[0].number}} 杯</view>
+        <view class='font-md margin-top-xs' wx:if="{{item.vipdiscount > 0}}">会员支付 <text class='font-danger font-lg bold'>￥{{item.totalprice}}</text></view>
+        <view class='font-md margin-top-xs'>{{item.createtime}}</view>
+      </view>
+      <view  class='font-md font-primary'>立即兑换</view>
+    </view>
+    
+  </view>
+  
+</view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

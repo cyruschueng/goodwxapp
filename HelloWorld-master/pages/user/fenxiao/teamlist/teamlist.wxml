@@ -1,0 +1,24 @@
+<!--pages/user/fen/teamlist/teamlist.wxml-->
+<view class="meblist">
+<block wx:if="{{data_list == null}}">
+  <view class="zanwu tc">
+    <text class="iconfont icon-kongbaiyemian"></text>
+    <view class="f18">您暂时还没有分销记录</view>
+  </view>
+</block>
+<block wx:else>
+  <block wx:for="{{data_list}}">
+  <view class="meb-item gridXb flex">
+    <image src="{{item.avatar}}" class="avatar mr10" mode="aspectFill"></image>
+    <view class="sub">
+      <text class="fr">提成金额：{{item.tcmoney}}</text>
+      <view class="mid-font">{{item.nickname}}</view>
+      <view class="f12 grey">
+        <text class="fr">入团时间：{{item.ctime}}</text>
+        <text>{{item.flag}}</text>
+      </view>
+    </view>
+  </view>
+  </block>
+</block>
+</view>

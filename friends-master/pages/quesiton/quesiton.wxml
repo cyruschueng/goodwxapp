@@ -1,0 +1,114 @@
+<view>
+	<view class="popup theme-switch-float">
+		<view class="box">
+			<view class="rank border-line-top border-line-bottom">
+				<button class="rank-title btn-null" form-type="submit">
+					<text class="iconfont icon-close">
+						<text>
+						</text>
+					</text>
+				</button>
+			</view>
+			<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+				<view class="scroll-view">
+					<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+						<view style="height: 100%;">
+							<view class="option-list">
+								<view class="item-null">
+									<view>
+										一题都没猜对也是一种技术
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="popup theme-switch-float">
+		<view class="box">
+			<view class="rank border-line-top border-line-bottom">
+				<button class="rank-title btn-null" form-type="submit">
+					<text class="text">
+						<text>	我已猜过的</text>
+					</text>
+					<text class="iconfont icon-close">
+						<text style="display:none;">
+						</text>
+						<text>
+						</text>
+					</text>
+				</button>
+			</view>
+			<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+				<view class="scroll-view">
+					<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+						<view style="height: 100%;">
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="vote">
+		<view class="header border-line-bottom">
+			<view class="header-card">
+				<view class="card-img">
+					<image class="fadeIn animated" mode='widthFix' src="https://img.pyyx.com/8af1fc9f2b6a81ce02c10e63c77fac6d938bf77459f28e930be68.jpg!p3">
+					</image>
+					<image class="fadeIn animated" mode='widthFix' src="../image/user.png"></image>
+				</view>
+        <view class='right'>
+            <view class="baifenbi">
+                 <text>{{score/100*100}}</text><text>%</text>
+						</view>
+        </view>
+				<view class="card-point">
+					<view class="point-slider" style="width: {{score/100*100}}%;">
+					</view>
+					<view class="point-tips">
+						懂我指数
+					</view>
+				</view>
+			</view>
+		</view>
+    <view wx:if="{{quesition}}">
+        <view class='option-list' wx:for="{{quesition}}" data-index="{{index}}" wx:if="{{index+1==quesitionIndex?true:false}}">
+            <view class="header-title">
+              <view class="htitle ">
+                {{item.title}}
+              </view>
+              <view class="pagenumber">
+                题目{{quesitionIndex}}/{{quesition.length}}
+              </view>
+            </view>
+            <view class='title' wx:for="{{item.choices}}" wx:for-item="choices" bindtap='checked' 
+                data-q_id="{{nowque.q_id}}" data-index="{{index}}"
+                  data-c_id="{{choices.c_id}}"  data-checked="{{choices.checked}}" data-active="{{choices.active}}">
+                <view class='text'> {{choices.choice_title}}</view>
+                  <view wx:if="{{actives}}">    
+                    <view class="ok" wx:if="{{choices.checked}}" style="padding:20rpx 0">正确答案</view>
+                    <view class='no' wx:if="{{choices.active}}">错了</view>
+                 </view>   
+            </view>
+        </view>
+    </view> 
+    <view wx:else>
+          <view style='text-align:center;font-size:26rpx;padding:30rpx 0;'>您的好友未设置此项！</view>
+    </view>
+		
+    <!--回答正确 -->  
+    <view class="bounceIn cover-result cover-green choose"  wx:if="{{right}}">
+        <view class="cover-img">
+          <image mode="widthFix" style='width:50rpx;height:50rpx;' src="../image/user.png"></image>
+        </view>
+        <view class="cover-title">猜对了</view>
+    </view>
+		<view class="footer">
+				<view class="logo">
+            <text class='color'>印</text>朋友印象
+        </view>
+		</view>
+	</view>
+</view>

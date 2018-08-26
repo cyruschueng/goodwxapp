@@ -1,0 +1,26 @@
+<!--pages/me/children/tickets/tickets.wxml-->
+<view>
+  <view class='top-tab'>
+    <view class="tab-item {{currentTab==index ? 'on' : ''}}" bindtap='tabAction' wx:for='{{tabTitles}}' wx:key='{{index}}'      data-index='{{index}}'>
+    {{item}}
+    </view>
+  </view>
+  <swiper class='tab-content' current="{{currentTab}}" bindchange='switchTabContent' style="height:{{screenHeight}}rpx">
+    <swiper-item wx:for='{{centents}}' wx:key='{{index}}'>
+       <view class='item'>
+         <view class='item-top'>
+           <view class='item-left'>
+             <view class='item-centent'>¥</view>
+             <view class='item-centent money'>10</view>
+             <view class='item-detail'>
+              <text class='use'>满99元可使用</text>
+              <text class='item-centent'>元优惠券</text>
+             </view>
+           </view>
+           <view class='btn-use' bindtap='useBtnAction'>立即使用</view>
+         </view>
+         <text class='item-bottom'>使用期限：2017.12.12-2018.11.11</text>
+       </view>
+    </swiper-item>
+  </swiper>
+</view>

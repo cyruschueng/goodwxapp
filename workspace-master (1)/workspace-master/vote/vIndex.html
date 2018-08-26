@@ -1,0 +1,128 @@
+<!doctype HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=320,initial-scale=1.0,maximum-scale=1.3,user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>投票活动</title>
+		<link rel="stylesheet" href="${basePath}/vote/css/weui.min.css">
+		<link rel="stylesheet" href="${basePath}/vote/css/common.css"/>
+		<link rel="stylesheet" href="${basePath}/vote/src/vIndex/index.css"/>
+
+		<input type="hidden" value="${user.hashcode?if_exists}" id="hashcode">
+		<input type="hidden" value="${user.openId?if_exists}" id="openId"> <!--ob4KjxIQpiBa1C2R08tysUk9J4LM-->
+		<input type="hidden" value="${activity.id?c}" id="activityId" /><!--${activity.id?c}-->
+		
+		<input type="hidden" id="isPreview" value=${isPreview?if_exists}>
+		<input type="hidden" id="base" value="${basePath}" />
+		<input type="hidden" id="thumbImgUrl" value=${activity.thumbImgUrl}>
+		<input type="hidden" value="${recordId}" id="recordId">
+		<input type="hidden" id="activityUrl" value=${activity.activityUrl}>
+		<input type="hidden" id="startTime" value="${activity.startTime?string("yyyy-MM-dd HH:mm:ss")}">
+		<input type="hidden" id="endTime" value="${activity.endTime?string("yyyy-MM-dd HH:mm:ss")}">
+		<input type="hidden" id="phoneTpl" value="${phone}">
+		<div id="rule" style="display:none;">
+			${activity.rule}
+		</div>
+		<div id="prizeStep" style="display:none;">
+			${activity.prizeStep}
+		</div>
+		<input type="hidden" value="${activity.mainImgUrl}" id="mainImgUrl">
+		<input type="hidden" value="${activity.qrUrl}" id="qrUrl">
+		<input type="hidden" value="${activity.activityTemplate.templateType}" id="templateType">
+		<input type="hidden" value="${activity.activityTemplate.id}" id="templateId">
+	</head> 
+	<body>
+		<div class="news">
+			<img src="${basePath}/vote/imgs/newIcon.png" alt="" class="newIcon">
+			<div class="swiper-container" id="swiper1">
+		        <div class="swiper-wrapper">
+					<div class='swiper-slide'>
+						<p></p>
+					</div>	
+		        	<div class='swiper-slide'>
+						<p></p>
+					</div>	
+					<div class='swiper-slide'>
+						<p></p>
+					</div>			
+		        </div>
+		        <div class="swiper-pagination"></div>
+			</div>
+		</div>
+		<div class="banner">
+			<img src="${activity.mainImgUrl}" alt="">
+		</div>
+		<div class="main">
+			<div class="realtimeInfor">
+				<div class="weui-row">
+			      <div class="weui-col-33">
+			      	<p class="p1" id="playerNum"></p>
+			      	<p class="p2">参赛选手</p>
+			      </div>
+			      <div class="weui-col-33 borderLeft">
+			      	<p class="p1" id="addVote"></p>
+			      	<p class="p2">累积投票</p>
+			      </div>
+			      <div class="weui-col-33 borderLeft">
+			      	<p class="p1" id="accessNum"></p>
+			      	<p class="p2">访问量</p>
+			      </div>
+			    </div>
+			    <div class="checkSear">
+			    	<div class="search">			    	
+				    	<form action="" class="input-kw-form">
+					    	<img src="${basePath}/vote/imgs/search.png" alt="">
+					    	<input type="text" placeholder="搜索选项编号或名称" />
+				    	</form>
+			    	</div>
+			    	<a class="weui-btn weui-btn_primary" id="weSearch">搜索</a>
+			    </div> 
+			</div>
+			<div class="activity">
+				<div class="countdown">
+					<p class="p1">距离活动结束还有</p>
+					<div id="timer"></div>
+				</div>
+				<a href="${basePath}/vote/vInfo.html?activityId=${activity.id?c}" class="introduced">活动介绍</a>
+			</div>
+			<a href="${basePath}/vote/vApply.html?type=2&activityId=${activity.id?c}&openId=${user.openId?if_exists}" class="weui-btn weui-btn_primary" id="apply">我要报名</a>
+			<div class="inforTab">
+				<div class="weui-tab">
+			      	<div class="weui-navbar">
+				        <a class="weui-navbar__item weui-bar__item--on">默认排序</a>
+				        <a class="weui-navbar__item">最新参与</a>
+				        <a class="weui-navbar__item">人气排行</a>
+			      	</div>
+			      	<div class="weui-tab__bd">
+				        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+						    <ul>
+								
+							</ul>
+							<div class="noInfor">
+								<img src="${basePath}/vote/imgs/noInfor.png" alt="">
+								<p>对不起没找到相关选手...</p>
+							</div>
+				        </div>
+			      	</div>
+    			</div>
+			</div>
+		</div>
+		
+		<div class="footerNav"></div>
+
+		<script type="text/javascript" src="${basePath}/vote/src/common.lib/sea.js"></script>
+		<script type="text/javascript" src="${basePath}/vote/src/common.lib/seajs-text/seajs-text-1.1.1/seajs-text.js"></script>
+		<script type="text/javascript" src="${basePath}/vote/src/config.js"></script>
+		<script>
+		    seajs.use("${basePath}/vote/src/common.lib/sea_css", function(){
+		        seajs.use("${basePath}/vote/src/vIndex/index");
+		    });
+		</script>
+	</body>
+</html>

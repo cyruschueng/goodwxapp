@@ -1,0 +1,96 @@
+<!--pages/productDetails/productDetails.wxml-->
+
+<import src='../homepage/recommendTemplate/recommendTemplate.wxml'/>
+<import src='./sizeQuantityTemplate/sizeQuantityTemplate.wxml'/>
+
+<view class='productDetailsPage'>
+  <view class='productImagesBox'>
+    <swiper indicator-dots="{{swiperParam.indicatorDots}}" indicator-color="{{swiperParam.indicatorColor}}" autoplay='swiperParam.autoplay' interval='{{swiperParam.interval}}' circular='{{swiperParam.circular}}'>
+    <block wx:for="{{imgUrlInfo}}" wx:for-index='index' wx:for-item='item' wx:key="index">
+      <swiper-item>
+        <image src='{{item.imgurl}}'></image>
+      </swiper-item>
+    </block>
+    </swiper>
+    <!-- <view class='handBag'>
+      <image src='../images/beautyCare.png'></image>
+    </view>
+    <view class='productShoppingCart'>
+      <image src='../images/beautyCare.png'></image>
+    </view> -->
+  </view>
+  <view class='productInfo'>
+    <view style='overflow:hidden'>
+      <view class='productName'>
+        <text>{{productDetailsInfoObj.product_name}}</text>
+      </view>
+      <view class='share'>
+         <image src='../images/share.png'></image> 
+         <view>分享有奖</view>
+      </view>
+    </view>
+    
+    <view class='price'>
+      <text>会员价:</text>
+      <text>{{productDetailsInfoObj.member_price}}/条</text>
+      <text>{{productDetailsInfoObj.market_price}}/条</text>
+    </view>
+    <view style='overflow:hidden'>
+      <view class='vipPrice'>
+        <text>股东价</text>
+        <text>¥{{productDetailsInfoObj.vip_price}}</text>
+      </view>
+      <view class='beVIP'>开通会员即可享受</view>
+    </view>
+    <view class='salesAmountAndAddress'>
+      <text>快递:货到付款</text>
+      <text>月销:{{productDetailsInfoObj.sales_volume}}</text>
+      <text>北京</text>
+    </view>
+  </view>
+  <!-- <view class='coupon'>
+    <text>领取优惠券</text>
+    <image src='../images/beautyCare.png'></image>
+    <image src='../images/rightArrow.jpg'></image>
+  </view> -->
+  <view class='sendAndEnsure' style='overflow:hidden'>
+    <view class='send'>
+      <image src='../images/ensure.png'></image>
+      <text>极速发货</text>
+    </view>
+    <view class='ensure'>
+      <image src='../images/ensure.png'></image>
+      <text>正品保证</text>
+    </view>
+  </view>
+  <view class='amount' bindtap='isShow'>
+    <text>规格数量选择</text>
+    <image wx:if='{{!isShowSizeAndAmount}}' src='../images/rightArrow.jpg'></image>
+    <image wx:else src='../images/xiala.png'></image>
+  </view>
+  <view class='sizeQuantityTemplateBox' wx:if='{{isShowSizeAndAmount}}'>
+    <template is='sizeQuantityTemplate' data='{{mallProductModels,currentId,quantity,productDetailsInfoObj,level}}'></template>
+  </view>
+  <view class='productDetailImg'>
+    <text>商品详情</text>
+    <image src='../images/meinv.jpg'></image>
+  </view>
+   <view class='bottomShoppingCart'>
+    <view class='collection' bindtap='collectTab' data-product_id='{{productDetailsInfoObj.product_id}}'>
+    <image src='../images/collect.png' wx:if='{{productDetailsInfoObj.is_collection}}'></image>
+      <image src='../images/nocollect.png' wx:else></image>
+      
+      <view>收藏</view>
+    </view>
+    <view class='inShopppingCart' bindtap='addShopppingCart'>加入购物车</view>
+    <view class='buyNow' bindtap='buyNowTap'>立即购买</view>
+  </view> 
+  <view class='productDetailRecommand'>
+      <image src='../images/recommand.png'></image>
+  </view>
+  <view class='productDetailRecommendGoods'>
+      <block wx:for='{{recommendGoodsInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+      <template is = 'recommendTemplate' data='{{...item}}'/>
+    </block>   
+  </view>
+</view>

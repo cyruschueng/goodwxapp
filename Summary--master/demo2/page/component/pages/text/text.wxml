@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="page-body">
+    <view class="spacing">
+      <scroll-view class="text-box" scroll-y>
+        <text selectable="{{selectable}}" decode="{{decode}}" space="{{space}}">{{text}}</text>
+      </scroll-view>
+    </view>
+
+    <view class="weui-btn-area">
+      <button disabled="{{!canAdd}}" bindtap="add" class="weui-btn" type="primary">添加</button>
+      <button disabled="{{!canRemove}}" bindtap="remove" class="weui-btn" type="primary">删除</button>
+    </view>
+
+    <view class="weui-cells">
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">文本是否可选</view>
+        <view class="weui-cell__ft">
+          <switch data-name="selectable" checked="{{selectable}}" bindchange="onSwitchChange" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">是否解码</view>
+        <view class="weui-cell__ft">
+          <switch data-name="decode" checked="{{decode}}" bindchange="onSwitchChange" />
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section spacing">
+      <view class="page-section-title">
+        <text>连续空格样式</text>
+        <text class="info">{{direction}}</text>
+      </view>
+      <radio-group data-name="space" class="radio-group" bindchange="onRadioChange">
+        <label class="radio" wx:for="{{['ensp','emsp','nbsp']}}" wx:key="*this">
+          <radio value="{{item}}"/>{{item}}
+        </label>
+      </radio-group>
+    </view>
+
+  </view>
+</view>

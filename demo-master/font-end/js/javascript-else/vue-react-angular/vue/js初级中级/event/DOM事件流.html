@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>bubble</title>
+  <style>
+    button{
+      background: red;
+      color:white;
+    }
+    #third{
+      width: 50px;
+      height: 50px;
+      border:thin solid red;
+    }
+    #second{
+      width: 100px;
+      height: 100px;
+      border:thin solid red;
+    }
+    #first{
+      width:200px;
+      height: 200px;
+      border:thin solid red;
+    }
+  </style>
+</head>
+<body>
+  <div id="first">
+    <div id="second" >
+      <div id="third" >
+        <button id="button">事件冒泡</button>
+      </div>
+    </div>
+  </div>
+  <script>
+ 
+    document.getElementById("button").addEventListener("click",function(){
+      alert("button");
+       // event.stopImmediatePropagation();
+    },true);
+ 
+    document.getElementById("third").addEventListener("click",function(){
+      alert("third");
+       event.stopImmediatePropagation();
+    },true);
+ 
+    document.getElementById("second").addEventListener("click",function(){
+      alert("second");
+      // event.stopImmediatePropagation();
+    },true);    
+ 
+    document.getElementById("first").addEventListener("click",function(){
+      alert("first");
+       // event.stopImmediatePropagation();
+    },true);
+ 
+  </script>
+</body>
+</html>
+
+<!-- 第三部分：DOM事件流
+DOM2级事件规定的时间流包括 三个阶段：
+事件捕获阶段
+处于目标阶段
+事件冒泡阶段 -->
+<!-- http://www.jb51.net/article/99326.htm -->

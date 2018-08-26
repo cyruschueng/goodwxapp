@@ -1,0 +1,92 @@
+<!--pages/score/score.wxml-->
+<!-- <text>pages/score/score.wxml</text> -->
+<block wx:if="{{hasUserInfor}}">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+</block>
+<block wx:else>
+
+<view>
+  <!-- 第一屏 -->
+  <view>
+    <text>{{user}}</text>
+    <text>这是网校英语都是发给你的2017成绩单哦，快看看你这一年的优秀表现吧！</text>
+  </view>
+  <!-- 第二屏 -->
+  <view>
+    <text>{{joinTime}}</text>
+    <text>{{user}}同学</text>
+    <!-- <rich-text nodes="{{hr}}"></rich-text> -->
+    <text>在{{joinTime}}你加入了</text>
+    <!-- <rich-text nodes="{{hr}}"></rich-text> -->
+    <text>学而思网校大家庭</text>
+    <!-- <rich-text nodes="{{hr}}"></rich-text> -->
+    <text>自那天起，老师就在想</text>
+    <!-- <rich-text nodes="{{hr}}"></rich-text> -->
+    <text>什么时候才能在英语课堂上</text>
+    <!-- <rich-text nodes="{{hr}}"></rich-text> -->
+    <text>见到可爱的你呢</text>
+    <!-- <rich-text nodes="{{hr}}"></rich-text> -->
+    <text>（这一天好像很快了呢）</text>
+  </view>
+  <!-- 第三屏 -->
+  <view>
+    <text>{{classTime}}</text>
+    <text>你在课堂上第一次见面的</text>
+    <text>主讲老师是</text>
+    <image src='{{mainTeacher.imageUrl}}'></image>
+    <text>{{mainTeacher.name}}</text>
+    <text>你提交的第一份作业是</text>
+    <text>由ta替你批改的</text>
+    <image src='{{nbTeacher.imageUrl}}'></image>
+    <text>{{nbTeacher.name}}</text>
+    <text>她们都很喜欢你</text>
+    <text>也希望你能发个微信告诉她们</text>
+    <text>你这一年进步了</text>
+    <text>考你一个小问题</text>
+    <text>你还记得你的外教老师是谁么？</text>
+  </view>
+  <!-- 第四屏 -->
+  <view>
+    <text>{{fullMarkTime}}</text>
+    <text>你的课后作业拿到<text>第一个</text>满分！</text>
+    <text>太棒了！还记得那节课的内容吗？</text>
+    <text>双优英语<text>{{fullMarkProject}}</text></text>
+    <text>这一年，你总共提交了</text>
+    <text><text>{{workQuantity.submit}}</text>份作业，并认真订正了<text>{{workQuantity.improve}}</text>次。</text>
+    <text>明明可以靠颜值，</text>
+    <text>你却非要靠实力征服老师。</text>
+  </view>
+  <!-- 第五屏 -->
+  <view>
+    <text>2017</text>
+    <text>这一年，你的实力让我们赞叹</text>
+    <text>你共出席了{{workQuantity.present}}节英语课</text>
+    <text>上课时长高达个{{workQuantity.timeAll}}个小时</text>
+    <text>开口英语的时间竟有{{workQuantity.speakTime}}小时</text>
+    <text>那可是{{workQuantity.speakTime*60}}分钟</text>
+    <text>你还读了{{workQuantity.readeQuantity}}本绘本</text>
+    <text>不知道你有没有为自己鼓一下掌</text>
+  </view>
+  <!-- 第六屏 -->
+  <view>
+    <text>2018年</text>
+    <text>老师送你一个英语学习关键词</text>
+    <text>一分耕耘 一分收获</text>
+    <text>2018年你会收获更多知识。</text>
+    <text>认真听课，仔细完成课后作业，</text>
+    <text>勤奋的努力下，</text>
+    <text>相信你会获得更多的知识。</text>
+  </view>
+  <!-- 第七屏 -->
+  <view>
+    <button open-type='share'>分享</button>
+  </view>
+</view>
+
+</block>

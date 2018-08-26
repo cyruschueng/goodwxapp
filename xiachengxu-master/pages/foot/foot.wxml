@@ -1,0 +1,26 @@
+<import src="../tpls/scroll-item/scroll-item.wxml" />
+<import src="./empty/empty.wxml" />
+
+
+<view class='foot-container'>
+  <!-- <view class="navbar">
+    <view class="navbar-item" wx:for="{{navbar}}" wx:key="idx" wx:for-index="idx" data-idx="{{idx}}" bindtap="switchNav">
+      <text class="navbar-text {{currentNavbar==idx ? 'active ' : ' '}}">{{item}}</text>
+    </view>
+  </view> -->
+  <swiper hidden='{{!loadingHidden}}' class='tab-content' current='{{currentNavbar}}' duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{allList.length}}' data='{{hasMore: params[0].hasMore, data: allList, type: "foot"}}'></template>
+      <template is='empty' wx:else></template>
+    </swiper-item>
+    <!-- <swiper-item>
+      <template is='scroll-item' wx:if='{{collectList.length}}' data='{{hasMore: params[1].hasMore, data: collectList, type: "foot"}}'></template>
+      <template is='empty' wx:else></template>
+    </swiper-item>
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{praiseList.length}}' data='{{hasMore: params[2].hasMore, data: praiseList, type: "foot"}}'></template>
+      <template is='empty' wx:else></template>
+    </swiper-item> -->
+  </swiper>
+</view>
+<loading hidden='{{loadingHidden}}'>加载中...</loading>

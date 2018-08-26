@@ -1,0 +1,75 @@
+<!--pages/AppreciatePage/AppreciatePage.wxml-->
+<scroll-view class="container scrollBox" bindscroll="EventHandle" scroll-y="true" scroll-top="{{ScrollTop}}">
+
+<view class="Nav">
+<view class="fl {{NavFlag==1?'NavActive':''}}" id="1" bindtap="NavActive">
+<text style="border-right:1rpx solid #e5e5e5" >首页</text>
+</view>
+<view class="fl {{NavFlag==2?'NavActive':''}}" id="2" bindtap="NavActive">
+<text style="border-right:1rpx solid #e5e5e5">客片欣赏</text>
+</view>
+<view class="fl {{NavFlag==3?'NavActive':''}}" id="3" bindtap="NavActive"><text>好友拼团</text></view>
+</view>
+<!--end Nav-->
+
+
+
+<view class="Appreciate {{NavFlag==2?'':'hidden'}}" >
+
+<view class="AppreciateTop">
+<view class="SolidLeft"></view>
+<view class="fl">
+<view class="Address">{{cname}}客片</view>
+<view class="Time">每月25日早上8:00更新套餐</view>
+</view>
+<view class="SolidRight"></view>
+</view>
+<!--end AppreciateTop-->
+
+<view>
+<image style="width:750rpx;" mode="widthFix" src="/images/121.jpg"></image>
+</view>
+
+<block wx:for="{{articlelist}}">
+<view class="AppreciateList">
+<view class="AppreciateListBox" bindtap="gotoAppreciateText" id="{{index}}" wx:if="{{index%2 == 0}}">
+<view  ><image src="/images/122.jpg"></image>
+<view class="TextLeft" >
+<view class="AddressTextTop">{{item.text}}</view>
+<view class="AddressTextFoot" style="width:300rpx;">{{item.text2}}</view> 
+</view>
+<!--end TextLeft-->
+</view>
+
+
+<view bindtap="gotoAppreciateText"><image src="{{item.image}}"></image></view>
+</view>
+<!--end AppreciateListBox--> 
+<view class="AppreciateListBox" bindtap="gotoAppreciateText" id="{{index}}" wx:if="{{index%2 != 0}}">
+<view  ><image src="{{item.image}}"></image>
+</view>
+<view bindtap="gotoAppreciateText"><image src="/images/122.jpg"></image>
+<view class="TextLeft">
+<view class="AddressTextTop">{{item.text}}</view>
+<view class="AddressTextFoot" style="width:300rpx;">{{item.text2}}</view> 
+</view>
+<!--end TextLeft--></view>
+</view>
+<!--end AppreciateListBox-->
+</view>
+<!--end AppreciateList-->
+</block>
+
+
+</view>
+<!--客片欣赏 end Appreciate-->
+
+
+
+
+<view class="BackTop {{BackFlag?'':'hidden'}}" bindtap="BackTop">
+<view style="padding-top:8rpx">∧</view>
+<view>顶部</view>
+</view>
+<!--end BackTop-->
+</scroll-view>

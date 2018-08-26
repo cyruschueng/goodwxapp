@@ -1,0 +1,107 @@
+##
+spring:
+  profiles:
+    active: dev
+  datasource:
+    enable:
+    url: jdbc:mysql://192.168.0.143:3306/db_shunde?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 
+    redis:
+       database: 0
+       host: 127.0.0.1
+       port: 6379
+       password:
+       timeout: 0
+       pool:
+           max-active: 8
+           max-wait: -1
+           max-idle: 8
+           min-idle: 0
+    session:
+      store-type: none
+  mail:  
+    host: smtp.163.com
+    username: woshiyudanxi@163.com
+    password: yudanxi1990
+    # ksdehzvtnrnqbjie
+    #ubmpzybjxevmbgdc
+    properties:  
+      mail:  
+        smtp:  
+          auth: true  
+          starttls:  
+            enable: true  
+            required: true
+# mybatis
+mybatis:
+  type-aliases-package: com.vizen.sd.repository.mysql
+  mapper-locations: classpath:META-INF/mybatis/*.xml
+
+# pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# 请求的上下文
+server:
+  context-path: /
+
+# 日志路径设置
+logging:
+  config: classpath:META-INF/logback-spring.xml
+  path: /data1/zts-pcard/log
+  level: debug
+
+# 项目配置
+vizen-framework:
+  request:
+    cache:
+      enable:
+    limit:
+      enable:
+  cosConfig:
+    appid: 10002033
+    secretid: AKIDPiqskCCbjlcInFpmlaEqJbieP2XsYqGY
+    secretkey: Me2SmvtgIm5JSUOBsRyLWWUIvSrBLK8l
+    region: sh
+    root: /ztspcard/dev
+    bucket: material
+ztspcard:
+  ctgr:
+    名片:
+      - 传统技艺
+      - 传统美术
+      - 民俗活动
+      - 民间文学
+      - 传统音乐
+      - 传统戏剧
+      - 传统曲艺
+      - 体育杂技
+      - 传统舞蹈
+      - 传统医药
+      - 其他
+    技艺:
+      - 传统技艺
+      - 传统美术
+      - 民俗活动
+      - 民间文学
+      - 传统音乐
+      - 传统戏剧
+      - 传统曲艺
+      - 体育杂技
+      - 传统舞蹈
+      - 传统医药
+      - 其他
+    活动:
+      - 手艺活动
+      - 表演活动
+      - 探访活动
+      - 公益活动
+    文章:
+      - 法规文件
+      - 保护论坛
+      - 记忆非遗
+      - 传承人相关

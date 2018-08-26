@@ -1,0 +1,15 @@
+<scroll-view style='height:{{height}}px;' scroll-y='{{scrollY}}' class='msg-list' wx:if="{{bills.length > 0}}">
+	<view class="bill-block" wx:for="{{bills}}" wx:for-index="index" wx:for-item="item" wx:key="id" animation='{{item.wrapAnimation}}'>
+		<view class='bill-container' bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" id='{{item.id}}' animation='{{item.animation}}' bindtap='changeBill' style='left: 0;' data-location="{{item.location}}" data-time="{{item.time}}">
+			<view class='bill-location'>{{item.location}}</view>
+			<view class='bill-time'>{{item.time}}</view>
+		</view>
+		<view bindtap="delItem" class="bill-buttons">
+			<navigator id='{{item.id}}' open-type='navigate' url='../newAccount/newAccount' class="bill-editor" catchtap="billEditor">编辑</navigator>
+			<view id='{{item.id}}' class="bill-delete" catchtap="billDelete">删除</view>
+		</view>
+	</view>
+</scroll-view>
+<view class='noneBills' wx:if="{{bills.length === 0}}">
+	<text class='noneText'>您目前还没有账本，快去创建吧！</text>
+</view>

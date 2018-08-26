@@ -1,0 +1,54 @@
+<view id='activtyRegister'>
+    <!--表单内容  -->
+    <view class="headPic userBox flex">
+        <view class="personListTile">头像</view>
+        <view class="flex ">
+            <view class="avatar">
+            <image src="/img/icon-chuantouxiang@2x.png"  class="avatars" wx:if="{{!user_info.user_avatar_url}}" bindtap="headPic"></image> 
+            </view>
+            <view class="personListContent" wx:if="{{user_info.user_avatar_url}}">
+                 <image class='avatar' src="{{user_info.user_avatar_url}}" bindtap="headPic"></image> 
+            </view>
+        </view>
+    </view>
+    <view class="telephone userBox flex">
+        <view class="personListTile">手机号</view>
+        <view class="flex">
+            <view class="personListContent" style='color:#ccc'>{{user_info.user_mobile || '请填写手机号码'}}</view>
+        </view>
+    </view>
+    <view class="name userBox flex" bindtap="writeNewThing" data-type="{{4}}">
+        <view class="personListTile">姓名*</view>
+        <view class="flex">
+            <view class="personListContent">{{user_info.user_real_name || '请填写姓名'}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view>
+    </view>
+    <view class="company userBox flex" bindtap="writeNewThing" data-type="{{5}}">
+        <view class="personListTile">公司*</view>
+        <view class="flex">
+            <view class="personListContent">{{user_info.user_company_name || '请填写公司名称'}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view>
+    </view>
+    <view class="brand userBox flex" bindtap="writeNewThing" data-type="{{6}}">
+        <view class="personListTile">品牌</view>
+        <view class="flex">
+            <view class="personListContent">{{user_info.user_brand || '请填写品牌名称'}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view>
+    </view>
+    <view class="career userBox flex" bindtap="writeNewThing" data-type="{{7}}">
+        <view class="personListTile">职位*</view>
+        <view class="flex">
+            <view class="personListContent">{{user_info.user_company_career || '请填写职位名称'}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view>
+    </view>
+    <!--提交  -->
+    <view class="floatBtn flex" bindtap="save">
+        <button class="save">提交</button>
+    </view>
+    <!--错误提示  -->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

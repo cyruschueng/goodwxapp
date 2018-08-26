@@ -1,0 +1,26 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view id='tagFilter'>
+    <block wx:for='{{filterList}}' wx:key='item.name'>
+      <view class='filterBlock'>
+        <view class='mainTitle'>{{item.mainTitle}}</view>
+        <view class='subTitle'>{{item.subTitle}}</view>
+        <view class='content flex'>
+          <block wx:for='{{item.arry}}' wx:for-item='tag' wx:for-index='idx' wx:key='tag[item.tagId]'>
+            <view class='tag {{item.autoLength == true? "autoLength":""}} {{tag.check == true? "check" : ""}}' data-index='{{idx}}' data-id="{{tag[item.tagId]}}" data-sort-id='{{item.sortId}}' data-sort='{{item.name}}' bindtap='tagsCheck'>{{tag[item.tagName]}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <view style='height:160rpx'></view>
+    <!--按钮组  -->
+    <view class='buttonArry flex'>
+      <button class='reset' bindtap='reset'>重置</button>
+      <button class='certain' hoverBlue='hoverBlue' bindtap='certain'>确定</button>
+    </view>
+  </view>
+
+  <!--错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

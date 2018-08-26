@@ -1,0 +1,28 @@
+<import src="../../templates/personalInfo.wxml"/>
+<view hidden="{{detailBox}}">
+<view class="list-box">
+   <!-- 个人信息 -->
+  <template is="personal" data="{{msgList}}"></template>
+   <!-- 票源信息 -->
+  <view class="list fillet">
+    <image class="delete" wx:if="{{msgList.ad_status==0}}" src="../../image/delete2.png"></image>
+    <view class="list-guarantors">
+      <view class="list-guarantors-title"><image src="{{Introduction}}"></image>业务内容</view>
+      <view class="list-guarantors-box">
+        <view class="introduction-box"><text>{{msgList.ad_comment}}</text></view>
+      </view>
+    </view>
+  </view>
+  
+</view>
+<view class="makePhoneCall">
+  <view class='share-box'><button class='share-box-button' open-type="share"><view class='share-box-main'>分享</view></button></view>
+  <view class="makePhoneCall-box">
+    <button class="call" type="{{msgList.creator.user_id.length == 13 ? 'lightgreen' : 'default'}}" bindtap="{{msgList.creator.user_id.length == 13 ? 'makePhoneCall' : ''}}"><image src="{{call}}">
+    </image>拨打电话</button>
+  </view>
+</view>
+</view>
+<loading hidden="{{loadingHidden}}">
+	加载中...
+</loading>

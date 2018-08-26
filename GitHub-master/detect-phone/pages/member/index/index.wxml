@@ -1,0 +1,140 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page navbar" wx:if="{{show}}">
+  <view class="member-head">
+
+    <view class="child">
+      <view class="title">{{member.moneytext}}</view>
+      <view class="number">{{member.credit2}}</view>
+      <navigator class="btn" hover-class="btn-hover" url="/pages/member/recharge/index" wx:if="{{member.open_recharge}}">
+        充值
+      </navigator>
+    </view>
+    <view class="child userinfo">
+      <navigator hover-class="none" url="/pages/member/info/index">
+      <view class="avatar">
+        <image class="icon" src="{{member.avatar || '/static/images/noface.png'}}"></image>
+      </view>
+      <view class="nickname">{{member.nickname || '未更新用户信息'}}</view>
+      <view class="level">{{member.levelname}}</view>
+      </navigator>
+    </view>
+    <view class="child">
+      <view class="title">{{member.credittext}}</view>
+      <view class="number">{{member.credit1}}</view>
+      <navigator hidden="true" class="btn" hover-class="btn-hover">
+        兑换
+      </navigator>
+    </view>
+  </view>
+  <view class="fui-cell-group fui-cell-click" wx:if="{{member.needbind}}">
+    <navigator class="fui-cell" hover-class="none" url="/pages/member/bind/index">
+      <image class="fui-cell-icon" src="{{icons.mobile}}"></image>
+      <view class="fui-cell-text">
+        <p class="text text-danger">绑定手机号</p>
+      </view>
+      <view class="fui-cell-remark"></view>
+    </navigator>
+    <view class="fui-cell-tip">{{member.bindtext}}</view>
+  </view>
+  <view class="fui-cell-group fui-cell-click">
+    <navigator class="fui-cell" hover-class="none" url="/pages/order/index">
+      <image src="{{icons.cart}}" class="fui-cell-icon"></image>
+      <view class="fui-cell-text">我的订单</view>
+      <view class="fui-cell-remark">查看全部订单</view>
+    </navigator>
+    <view class="fui-icon-group nomargin">
+      <navigator hover-class="none" class="fui-icon-col" url="/pages/order/index?status=0">
+        <view class="badge" wx:if="{{member.statics.order_0 > 0}}">{{member.statics.order_0}}</view>
+        <view class="icon">
+          <image src="{{icons.paying48}}"></image>
+        </view>
+        <view class="text">待付款</view>
+      </navigator>
+      <navigator hover-class="none" class="fui-icon-col" url="/pages/order/index?status=1">
+        <view class="badge" wx:if="{{member.statics.order_1 > 0}}">{{member.statics.order_1}}</view>
+        <view class="icon">
+          <image src="{{icons.box48}}"></image>
+        </view>
+        <view class="text">待发货</view>
+      </navigator>
+      <navigator hover-class="none" class="fui-icon-col" url="/pages/order/index?status=2">
+        <view class="badge" wx:if="{{member.statics.order_2 > 0}}">{{member.statics.order_2}}</view>
+        <view class="icon">
+          <image src="{{icons.car48}}"></image>
+        </view>
+        <view class="text">待收货</view>
+      </navigator>
+      <navigator hover-class="none" class="fui-icon-col" url="/pages/order/index?status=4">
+        <view class="badge" wx:if="{{member.statics.order_4 > 0}}">{{member.statics.order_4}}></view>
+        <view class="icon">
+          <image src="{{icons.refund48}}"></image>
+        </view>
+        <view class="text">退换货</view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="fui-cell-group fui-cell-click" wx:if="{{member.commission}}">
+    <navigator class="fui-cell" hover-class="none" url="{{member.commission_url}}">
+      <image class="fui-cell-icon" src="{{icons.group}}"></image>
+      <view class="fui-cell-text">{{member.commission_text}}</view>
+      <view class="fui-cell-remark"></view>
+    </navigator>
+  </view>
+  <view class="fui-cell-group fui-cell-click" wx:if="{{member.hascoupon}}">
+    <navigator class="fui-cell" url="/pages/sale/coupon/index/index" wx:if="{{member.hascouponcenter}}">
+      <image class="fui-cell-icon" src="{{icons.coupon}}"></image>
+      <view class="fui-cell-text">{{member.coupon_text}}</view>
+      <view class="fui-cell-remark"></view>
+    </navigator>
+    <navigator class="fui-cell" hover-class="none" url="/pages/sale/coupon/my/index/index">
+      <image class="fui-cell-icon" src="{{icons.card}}"></image>
+      <view class="fui-cell-text">{{member.couponcenter_text}}</view>
+      <view class="fui-cell-remark">
+        <text class="ff6600" wx:if="{{member.statics.coupon > 0}}">{{member.statics.coupon}}</text>
+      </view>
+    </navigator>
+  </view>
+  <view class="fui-cell-group fui-cell-click">
+    <navigator class="fui-cell" hover-class="none" open-type="switchTab" url="/pages/member/cart/index">
+      <image src="{{icons.cart}}" class="fui-cell-icon"></image>
+      <view class="fui-cell-text">我的购物车</view>
+      <view class="fui-cell-remark">
+        <text class="ff6600" wx:if="{{member.statics.cart > 0}}">{{member.statics.cart}}</text>
+      </view>
+    </navigator>
+    <navigator class="fui-cell" hover-class="none" url="/pages/member/favorite/index">
+      <image class="fui-cell-icon" src="{{icons.like}}"></image>
+      <view class="fui-cell-text">我的关注</view>
+      <view class="fui-cell-remark">
+        <text class="ff6600" wx:if="{{member.statics.favorite > 0}}">{{member.statics.favorite}}</text>
+      </view>
+    </navigator>
+    <navigator class="fui-cell" hover-class="none" url="/pages/member/history/index">
+      <image class="fui-cell-icon" src="{{icons.footprint}}"></image>
+      <view class="fui-cell-text">我的足迹</view>
+      <view class="fui-cell-remark"></view>
+    </navigator>
+  </view>
+  <view class="fui-cell-group fui-cell-click">
+    <navigator class="fui-cell" hover-class="none" url="/pages/member/withdraw/index" wx:if="{{member.open_withdraw}}">
+      <image class="fui-cell-icon" src="{{icons.money}}"></image>
+      <view class="fui-cell-text">{{member.moneytext}}提现</view>
+      <view class="fui-cell-remark"></view>
+    </navigator>
+    <navigator class="fui-cell" hover-class="none" url="/pages/member/log/index">
+      <image class="fui-cell-icon" src="{{icons.list}}"></image>
+      <view class="fui-cell-text" style='color:red'>精彩活动</view>
+      <view class="fui-cell-remark"></view>
+    </navigator>
+  </view>
+  <view class="fui-cell-group fui-cell-click">
+    <navigator class="fui-cell" hover-class="none" url="/pages/member/address/index">
+      <image class="fui-cell-icon" src="{{icons.location}}"></image>
+      <view class="fui-cell-text">收货地址管理</view>
+    </navigator>
+  </view>
+  <view class="i_chat" open-type="contact">
+    <button open-type="contact"><image src="{{icons.ichat}}"/></button>
+  </view>
+</view>

@@ -1,0 +1,173 @@
+<import src="comment-template/comment-template.wxml" />
+<view>
+  <view class='detailsWrap'>
+    <view class="img_shade" bindtap='moreImages'></view>
+    <button class="shareIcon" open-type="share">
+      <image class='shareIcon-IMG' src='/images/icon/share.png'></image>
+    </button>
+    <image class='cateImages' mode="aspectFill" src='{{store_details.logoUrl}}'></image>
+    <text class='wrapImages'>共<text>{{store_images}}</text>张</text>
+  </view>
+  <view>
+    <view class='shop-z-Wrap'>
+      <view class='shop-left-wrap'>
+        <image class='detailsName-img' mode="aspectFill" src='{{store_details.logoUrl}}'></image>
+        <view class='detailsName-genre'>
+          <text class='details-Name'>{{store_details.shopName}}</text>
+          <text class='details-form'>{{store_details.shopInfo}}</text>
+        </view>
+      </view>
+      <view class='popularityCollect'>
+        <text class='popularity'>{{store_details.popNum}}人气</text>
+        <text wx:if="{{isCollected}}" class='collect active' catchtap="cancelCollect">已收藏</text>
+        <text wx:else class='collect enshrinees' catchtap="onCollect">收藏</text>
+      </view>
+    </view>
+  </view>
+  <view class='locationWrap'>
+    <image class='location-left' src='/images/icon/location.png'></image>
+    <text class='location-text' catchtap='TencentMap'>{{store_details.address}}</text>
+    <text class='cut-off0-rule'></text>
+    <image class='location-right' bindtap="calling" src='/images/icon/telephone.png'></image>
+  </view>
+  <!-- 主页跟动态 -->
+  <view class='homepage'>
+    <!--导航条-->
+    <view class="navbar">
+      <text wx:for="{{navbar}}" wx:key="{{index}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">{{item}}</text>
+    </view>
+    <!--主页-->
+    <view hidden="{{currentTab!==0}}">
+      <!-- <swiper class='lunbotu' indicator-dots="true" autoplay="true" interval="5000" indicator-active-color="rgba(252, 94, 45,0.8)">
+        <block wx:for="{{posts_key}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+          <swiper-item>
+            <image class="lbtupian" src='{{store_details.logoUrl}}'></image>
+          </swiper-item>
+        </block>
+      </swiper> -->
+      <view class='doing' wx:for="{{activity}}" wx:key="{{index}}">
+        
+        <view class='doinglist'>
+          
+          <image class='doimg' src='/images/icon/quanhuodong.png'></image>
+          
+          <view class='dotext'>
+            
+            <text class='manj'>{{item.ruleDesc}}\n</text> 
+            <text class='nowtext'>{{item.sellPrice}}元</text> 
+            <text class='original'>{{item.inPrice}}元</text>  </view>
+          
+          <button class='buynow' id="{{item.skuId}}" catchtap='buynow'>立即购买</button>
+           </view>
+         </view>
+      <!-- 活动打折 -->
+      <!-- <view class='currentTabWrap'>
+        <view>
+          <image class='currentTabImg' src='/images/icon/quanhuodong.png'></image>
+          <text class='currentTabLose'>{{posts_key[0].store_discount}}折</text>
+          <text class='currentTabtext'>购买享七劵</text>
+        </view>
+        <image class='currentTabjiantou' src='/images/icon/home_arrow.png'></image>
+      </view>  -->
+      <!-- <view class='currentTabButton'>
+        <image class='voteList' src='/images/icon/votehuodong.png'></image>
+        <image class='currentTabjiantou' src='/images/icon/home_arrow.png'></image>
+      </view>
+      <view class='currentTabButton distance-es'>
+        <view>
+          <text class='serial_number'>{{posts_key[0].time_signature}}号</text>
+          <text class='cuttentTabxiangq'>正在参数不辣不欢活动</text>
+        </view>
+        <text class='vote-entrance'>投票</text>
+      </view> -->
+      <view class='initiate-wrapp' catchtap='recommendedRestaurant'>
+        <view class='initiate-exhibition'>
+          <view>
+            <image class='initiate-left' src='/images/icon/home_sign.png'></image>
+            <text class='initiate-text'>推荐菜</text>
+          </view>
+          <image class='initiate-right' src='/images/icon/home_arrow.png'></image>
+        </view>
+        <view class='scroll_box'>
+          <scroll-view scroll-x="true" class='scroll_anchor'>
+            <block wx:for="{{recommend_list}}" wx:key="{{index}}">
+              <view id="green" class="anchor bc_green">
+                <image class='anchor_img' mode="aspectFill" src='{{item.picUrl}}'></image>
+                <view class='cate_site'>{{item.skuName}}</view>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+
+      <view class='initiate-exhibition the-second' hidden="{{commentNum == 0}}" catchtap='jumpTotalComment'>
+        <view>
+          <image class='initiate-left' src='/images/icon/home_sign.png'></image>
+          <text class='initiate-text'>精选评价</text>
+        </view>
+        <image class='initiate-right' src='/images/icon/home_arrow.png'></image>
+      </view>
+      <block wx:for="{{comment_list}}" wx:key="{{index}}">
+        <template is="commentItem" data="{{item}}"></template>
+      </block>
+      <view class='total-comment' hidden='{{commentNum < 6}}' catchtap='jumpTotalComment'>
+        <view class='total-center'>
+          <text>查看全部<text>{{commentNum}}</text>条评论</text>
+        </view>
+      </view>
+      <view class='botton-comment' bindtap='showAreatext'>
+        <image class='comment-images' src='/images/icon/write.png'></image>
+        <text class='reviewyan'>写评论</text>
+      </view>
+      <form class='commentBox {{isComment ? "show" : "hide"}}'>
+        <textarea class="commentArea" placeholder='请输入评论' focus="{{isComment}}" bindinput="getCommentVal" cursor-spacing="10px" show-confirm-bar="false" fixed="true"></textarea>
+        <button form-type="reset" catchtap="sendComment">发送</button>
+      </form>
+    </view>
+    <!--动态-->
+    <view class="merchant_box" hidden="{{currentTab!==1}}">
+      <view wx:if="{{merchantArt.length > 0}}">
+        <block wx:for="{{merchantArt}}" wx:key="{{index}}" data-idx="{{index}}">
+          <view class="merchant_art" bindtap="toArticleInfo" id="{{item.id}}">
+            <view class="merchant_data">
+              <image src="{{item.iconUrl}}"></image>
+              <view>
+                 <text class="merchant_name">{{item.userName}}</text> 
+                <text class="merchant_time">{{item.timeDiffrence}}</text>
+              </view>
+            </view>
+            <view class="article_cont">
+              <text>{{item.title}}</text>
+              <image class="article_img" mode="aspectFill" src="{{item.homePic}}"></image>
+              <view class="article_img_shade"></view>
+            </view>
+            <view class="merchant_contact">
+              <view class="article_icon">
+                <image src="/images/icon/tuoyuan_w.png"></image>
+                <text>{{item.hitNum}}</text>
+              </view>
+              <view>
+                <view class="article_icon article_icon_r">
+                  <image src="/images/icon/find_share.png"></image>
+                  <text>{{item.transNum}}</text>
+                </view>
+                <view class="article_icon article_icon_r">
+                  <image src="/images/icon/word.png"></image>
+                  <text>{{item.commentNum}}</text>
+                </view>
+                <!-- 备注这个打赏图标以后可能会用到 -->
+                <!-- <view class="article_icon article_icon_r">
+                <image src="/images/icon/find_gold.png"></image>
+                <text>145</text>
+              </view> -->
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view wx:else class='merchant_none'>
+        <image src="/images/icon/zhanweitu.png"></image>
+      </view>
+    </view>
+  </view>
+</view>

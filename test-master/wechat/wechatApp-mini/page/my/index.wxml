@@ -1,0 +1,86 @@
+ <view wx:if="{{!userphone}}" catchtap="toLogin" class="toLogin"></view> 
+
+<view class="container" wx:if="{{1}}" >
+
+  <view class="list_box">
+
+    <navigator url='/page/my/personalData/index'>
+
+      <view class="li wechat">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <view class='text'>
+
+          <view class='t1'>昵称： {{userInfo.nickName}}</view>
+          <view class='t2'>手机号： {{userphone ? userphone : "还未验证手机号！"}}</view>
+
+        </view>
+        <text class="right_icon"></text>
+      </view>
+
+    </navigator>
+
+    <navigator url='/page/coupon/couponList/index?cardType=0' >
+      <view class="li">
+        <image src='https://lingju360.com/miniapp/resources/image/memberCenter/7.png'></image>
+        <text class="title">已领取的优惠券</text>
+         <text class='num'>{{COUPON}}张</text> 
+        <text class="right_icon"></text>
+      </view>
+    </navigator>
+
+    <navigator url='/page/coupon/couponList/index?cardType=DISCOUNT' wx:if="{{0}}">
+      <view class="li">
+        <image src='https://lingju360.com/miniapp/resources/image/memberCenter/11.png'></image>
+        <text class="title">已购买的折扣券</text>
+         <text class='num'>{{DISCOUNT}}张</text> 
+        <text class="right_icon"></text>
+      </view>
+    </navigator>
+
+    <navigator url='/page/coupon/couponList/index?cardType=1'>
+      <view class="li">
+        <image src='https://lingju360.com/miniapp/resources/image/memberCenter/11.png'></image>
+        <text class="title">已购买的代金券</text>
+         <text class='num'>{{CASH}}张</text> 
+        <text class="right_icon"></text>
+      </view>
+    </navigator>
+
+    <view class="li" wx:if="{{0}}">
+      <image src='https://lingju360.com/miniapp/resources/image/memberCenter/8.png'></image>
+      <text class="title">已点外卖订单</text>
+       <text class='num'>{{0}}张</text> 
+      <text class="right_icon"></text>
+    </view>
+
+    <navigator url='/page/myGroupBuy/index'>
+    <view class="li" >
+      <image src='https://lingju360.com/miniapp/resources/image/memberCenter/8.png'></image>
+      <text class="title">我的团购券</text>
+       <text class='num'>{{GROUPON}}张</text> 
+      <text class="right_icon"></text>
+    </view>
+    </navigator>
+
+    
+
+  </view>
+
+
+
+</view>
+
+
+
+
+<!--注册信息  -->
+<view class='register' wx:if="{{0}}" >
+  <view class='login'>
+    <input type='number' class='phone input' value='{{phone}}' placeholder="请输入手机号" bindinput='input_phone' />
+    <input type='number' class='yzm input' value='{{ValidCode}}' placeholder="验证码" bindinput='inputValidCode' />
+    <view wx:if="{{!validCodeShow}}" catchtap='getValidCode' class='get_yzm'>获取验证码</view>
+    <view wx:if="{{validCodeShow}}" class='get_yzm active'>{{validCodeTime}}</view>
+  </view>
+  <view class='login_btn' catchtap='verifyPhone'>会员注册</view>
+  <view class='beizhu'>请进行手机验证，完成注册成为会员后，可以进行自助点餐、排队等本店提供的功能，方便我们提供更方便、快捷、优质的服务给您!</view>
+</view>

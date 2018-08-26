@@ -1,0 +1,15 @@
+<!--page/component/pages/picker-view/picker-view.wxml-->
+<view class="weui-cells__title">当前日期 {{years[value[0]]}}年{{months[value[1]]}}月{{days[value[2]]}}日</view>
+<view class="weui-cells weui-cells_after-title">
+  <picker-view style="width: 100%; height: 200px;background-color:#bfc8bc" indicator-style="color:white" value="{{[1,1,1]}}" data-name="value" bindchange="onPickerChange">
+    <picker-view-column>
+      <view wx:for="{{years}}" wx:key="*this" style="text-align:center;line-height: 34px">{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" wx:key="*this" style="text-align:center;line-height: 34px">{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" wx:key="*this" style="text-align:center;line-height: 34px">{{item}}日</view>
+    </picker-view-column>
+  </picker-view>
+</view>

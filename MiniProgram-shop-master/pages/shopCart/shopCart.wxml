@@ -1,0 +1,48 @@
+<!--pages/shopCart/shopCart.wxml-->
+<view class='container'>
+  <!-- 头部编辑购物车 -->
+  <view class='section-hd'>
+    <view>购物车</view>
+    <view class='edit' wx:if="{{isEdit}}" bindtap='bindEdit'>编辑</view>
+    <view class='edit' wx:else bindtap='bindEdit'>完成</view>
+  </view>
+  <view class='margin-top'></view>
+  <view class='delete-order' wx:if='{{!isEdit}}'>
+    <view class='check-all' bindtap='bindCheckAll'>
+      <icon wx:if="{{checkedAllState}}" type="success" color="#ff6400" size='23'/>
+      <icon wx:else type="success" color="#eaeaea" size='23'/>
+      <text class='label'>全选</text>
+    </view>
+    <view class='delete-item' bindtap='delete_order'>删除所选</view>
+  </view>
+  <!-- 页面底部结算 -->
+  <view class='section-ft' wx:if="{{isEdit}}">
+    <view class='checkAll'>
+      <view class='check-all' bindtap='bindCheckAll'>
+        <icon wx:if="{{checkedAllState}}" type="success" color="#ff6400" size='23'/>
+        <icon wx:else type="success" color="#eaeaea" size='23'/>
+        <text class='label'>全选</text>
+      </view>
+      <view class='total'>合计:<text>￥{{totalPrice}}</text></view>
+    </view>
+    <view class='settlement' bindtap='toPayHtml'>结算({{num}})</view>
+  </view>
+  <!-- 页面底部结算结束 -->
+  <!-- 订单列表 -->
+  <view class='order-list'>
+    <view class='order-item' wx:for='{{items}}' wx:key='unique' data-id='{{index}}' bindtap='bindCheck'>
+      <icon wx:if="{{item.checkedState}}" type="success" color="#ff6400" size='23'/>
+      <icon wx:else type="success" color="#eaeaea" size='23'/>
+      <image class='order-img' src='{{item.goods_thumb}}'></image>
+      <view class='order-text'>
+        <view class='order-title'>{{item.goods_name}}</view>
+        <view class='price'>价格<text>￥{{item.price}}</text></view>
+        <view class='changeNumber' wx:if="{{isEdit}}">
+          <view class='minus' data-id='{{index}}' catchtap='minusCount'>-</view>
+          <input class='input-number' data-id='{{index}}' value='{{item.goods_num}}' bindblur='changeNumFn'></input>
+          <view class='plus' data-id='{{index}}' catchtap='addCount'>+</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

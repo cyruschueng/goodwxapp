@@ -1,0 +1,35 @@
+<view  style="padding-bottom:{{infoData.active_flag ? 46 : 0}}px">
+    <import src="/template/mainInfo.wxml"/>
+   <template is="mainInfo" data="{{infoData}}"/>
+</view>
+
+ <view class="viewerList" wx:if="{{viewers}}">
+    <text class="secName" wx:if="{{infoData.classify == '1'}}">已查看{{viewers.total_person}}人</text>
+    <text class="secName" wx:if="{{infoData.classify == '2'}}">已报名{{viewers.total_person}}人</text>
+    <block wx:for="{{viewers.person_status}}" wx:for-item="viewer" wx:key="time">
+      <view class="viewer">
+        <image src="{{viewer.person_image}}" mode='aspectFit'></image>
+        <text class="ml5" style="flex:1">{{viewer.person_nicename}}</text>
+        <text class="c-gray f12 tr ml5">{{viewer.person_time}}</text>
+      </view>
+    </block>
+  </view>
+
+<button type="primary" class="btnFooter" disabled='{{applyDisabled}}' wx:if="{{infoData.active_flag == 1 && active_flag}}" bindtap="{{infoData.name_need=='1' || infoData.phone_need=='1'?'toggleApplyPupHandle':'applyHandle'}}">报名</button>
+
+<view class="applyPup" hidden="{{applyPupHidden}}">
+  <view class="applyBox">
+    <form bindsubmit='applySubmit' class="applyForm">
+      <view class="applyForm-item" wx:if="{{infoData.name_need==true}}">
+          <text>姓名：</text>
+          <input name="applyName" placeholder='请输入姓名(必填)'  class="tr"  placeholder-class="inputPlaceholder" bindinput="applyNameInput"></input>
+      </view>
+      <view class="applyForm-item" wx:if="{{infoData.phone_need==true}}">
+          <text>手机号码：</text>
+          <input name="applyPhone" type="number" placeholder='请输入手机号码(必填)'  class="tr"  placeholder-class="inputPlaceholder" bindinput="applyPhoneInput"></input>
+      </view>
+       <button formType="submit" type="default" disabled="{{submitDisabled}}" >提交</button>
+    </form>
+  </view>
+  <view class="applyBg" bindtap="toggleApplyPupHandle"></view>
+</view>

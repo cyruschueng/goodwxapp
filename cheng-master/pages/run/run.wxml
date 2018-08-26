@@ -1,0 +1,43 @@
+<!--pages/run/run.wxml-->
+<view class="container">
+    <view class='header'>
+        <view class='left public' data-housemid='{{housemid}}'>
+            <view class='leftBg bg'>
+                  <image src="{{houseImg}}" mode='widthFix'></image>
+            </view>
+            <view class='text'>{{houseName}}</view>
+        </view>
+        <!-- <view class='time'>{{second}}</view> -->
+        <view class='right public' data-othermid='{{othermid}}'>
+            <view class='rightBg bg'>
+                  <image src="{{otherImg}}" mode='widthFix'></image>
+            </view>
+            <view class='text'>{{otherName}}</view>
+        </view>
+    </view>
+ 
+    <view class='line' wx:if="{{line}}">
+        <view class='left' style='width:{{houseWidth}}'></view>
+        <view class='right' style='width:{{otherWidth}}'></view>
+    </view>
+    <view class='num'>第{{title}}题</view>
+    <view class='idiom'>
+        <view>四字成语</view>
+    </view>
+    <view class='caiImg' style='background: url({{question_list.thumb}});'></view>
+    <view class='answer'>
+        <view class='item'  bindtap='backText' wx:for="{{answer}}" wx:key="{{index}}" data-index="{{index}}"
+              data-askindex="{{item.askindex}}" data-text="{{item.text}}">
+            <text class="{{item.text==0?'hide':''}}">{{item.text}}</text>
+        </view>
+    </view>
+    <view class='option'>
+        <view class='item' bindtap='checked' wx:for="{{option}}" wx:key="{{index}}" 
+              data-index='{{index}}' data-text="{{item}}">
+            <text class="{{item==0?'hide':''}}">{{item}}</text>
+            <text wx:if="{{item==''}}" class="{{item==0?'hide':''}}">0</text>
+        </view>
+    </view>
+</view>
+
+

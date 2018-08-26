@@ -1,0 +1,40 @@
+<view class='topBanner'>
+  <image mode='widthFix' lazy-load='true' src='{{subjectinfo.pic}}'></image>
+</view>
+<view class='content'>
+  <view class='introduce'>{{subjectinfo.brief}}</view>
+</view>
+<view class='view' wx:for='{{subjectinfo.list}}' wx:key='item'>
+  <view class='viewBanner' bindtap="enterdetail" id="{{item.shopId}}">
+    <view class='bannerList'>
+      <view class='banner'>
+        <image mode='widthFix' lazy-load='true' wx:if='{{item.surface}}' src='{{item.surface}}'></image>
+        <image mode='widthFix' lazy-load='true' wx:else src='../../images/logo-gray.png'></image>
+        <view wx:if='{{item.minimumCharge}}' class='price'>{{item.minimumCharge}}</view>
+      </view>
+        <view class='message'>
+          <view class='tit'>{{item.shopName}}</view>
+          <view class='count'>
+            <text class='star'>
+              <text wx:for='{{item.stars}}' wx:key='ns' class='iconfont icon-star'>
+              </text>
+              <text wx:if='{{item.half}}' class='iconfont icon-217-star-half'></text>
+              <text>({{item.score}}分)</text>
+            </text> | 
+            <text wx:if="{{item.visitors > 100000}}">100000+人参与体验过</text>
+            <text wx:else>{{item.visitors}}人参与体验过</text>
+          </view>
+          <view class='distance'>
+              <view class='types'>
+                <text wx:for="{{item.serviceTagList}}" wx:key="st" wx:for-item="st" class='type'>{{st.name}}</text>
+              </view>
+            <text class='iconfont icon-location_fill'></text>
+            距离您的位置
+            <text wx:if="{{item.distance >= 1000 && item.distance <= 100000}}" class='meter'>{{item.distance/1000}}km</text>
+            <text wx:elif="{{item.distance > 100000}}" class='meter'>>100km</text>
+            <text wx:else class='meter'>{{item.distance}}m</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>

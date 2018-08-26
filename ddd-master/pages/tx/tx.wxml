@@ -1,0 +1,28 @@
+<!--pages/accountMain/accountMain.wxml-->
+<view class=''>
+    <view class='bgtop'></view>
+
+    <view class='df fxc'>
+        <view class='core por'>
+            <image class='userIcon' src='{{userInfo.avatarUrl}}'></image>
+
+            <view class='mx80'>
+                <view class='df fxc'>
+                  <image
+                    class='mbanner' src='https://wxapp.haizeihuang.com/wannengdequan_php/images/ic_money.png'>
+                  </image>
+                </view>
+                <view class='df mt60 fyc'>
+                    <text class='h6 fc-999'>账户余额</text>
+                    <text class='h1 fc-F34435 mx10'>{{saveM || 0}}</text>
+                    <text class='h6 fc-999'>元</text>
+                </view>
+                    <input class='input' type='number' placeholder='请输入提现金额，大于20元'  bindinput='changeGetM'></input>
+                </view>
+                <view class='mt70'>
+                  <button class='commit' bindtap='getMoneyToMe'></button>
+                </view>
+                <view class='tac h6 fc-999 mt20'>1-5个工作日到账</view>
+        </view>
+    </view>
+</view>

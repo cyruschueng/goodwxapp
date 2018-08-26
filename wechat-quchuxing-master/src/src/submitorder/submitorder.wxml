@@ -1,0 +1,40 @@
+<view class="body">
+	<view class="input_list">
+		<view class="title">票价</view>
+		<view class="price_color">{{ price }}元/位</view>
+	</view>
+	<view class="input_list">
+		<view class="title">座位数量</view>
+		<view class="seat_number">
+			<view wx:for-items="{{ seat }}" wx:key="{{ index }}"  class="{{ item.type ? 'seat_number_active' : ''}}" bindtap="selectSeat"  data-id="{{ index }}">{{ item.number }}</view>
+		</view>
+	</view>
+	<!-- <view class="input_list">
+		<view class="title">优惠券</view>
+		<view class="voucher">
+			<view>无可用</view>
+			<view class="voucher_img">
+				<image src="../../images/icon_return_left@3x.png"></image>
+			</view>
+		</view>
+	</view> -->
+	<!-- <view class="input_list">
+		<view class="title">
+			<view>1万元出行保险</view>
+			<view class="Insurance_rule">确认上车后生效</view>
+		</view>
+		<view class="Insurance_switch">
+			<view class="Insurance_price">
+				<view class="now_price">1元</view>
+				<view class="old_price">10元</view>
+			</view>
+			<view class="switch_btn">
+				<switch color="#4598F7" bindchange="switchChange"/>
+			</view>
+		</view>
+	</view> -->
+</view>
+
+<view class="foot_btn">
+	<button bindtap="submit">合计{{ submit_price }}元 提交订单</button>
+</view>

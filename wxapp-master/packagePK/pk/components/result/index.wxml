@@ -1,0 +1,68 @@
+<view class="result-wrap" wx:if="{{result}}">
+    <!--成功-->
+    <view class="win" wx:if="{{result.status===1}}">
+        <view
+            wx:if="{{result.counterattack && isShowReward}}"
+            class="counterattack"
+        >
+            逆袭
+        </view>
+        <view wx:if="{{isShowBgImg}}" class="bg-img">
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67edd892fdb.png"></image>
+        </view>
+        <view wx:if="{{isShowTipsImg}}" class="tips-img">
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67edd852b69.png"></image>
+        </view>
+        <view wx:if="{{isShowScene}}">
+            <cloud
+                is-show="{{result.status===1}}"
+                top="{{leftCloud.top}}"
+                offset-x="{{leftCloud.offsetX}}"
+                move-offset="{{leftCloud.moveOffset}}"
+            >
+            </cloud>
+            <cloud
+                direction="right"
+                is-show="{{result.status===1}}"
+                top="{{rightCloud.top}}"
+                offset-x="{{rightCloud.offsetX}}"
+                move-offset="{{rightCloud.moveOffset}}"
+            >
+            </cloud>
+        </view>
+    </view>
+    <!--失败-->
+    <view class="fail" wx:if="{{result.status===2}}">
+        <view wx:if="{{isShowBgImg}}" class="bg-img">
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67edd8b8e1b.png"></image>
+        </view>
+        <view wx:if="{{isShowTipsImg}}" class="tips-img">
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67edd832714.png"></image>
+        </view>
+        <view wx:if="{{false}}">
+            <leaves></leaves>
+        </view>
+    </view>
+    <!--打平-->
+    <view class="draw" wx:if="{{result.status===0}}">
+        <view wx:if="{{isShowBgImg}}" class="bg-img">
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67edd872785.png"></image>
+        </view>
+        <view wx:if="{{isShowTipsImg}}" class="tips-img">
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67edd804157.png"></image>
+        </view>
+    </view>
+    <!--奖励-->
+    <view wx:if="{{isShowReward}}" class="reward">
+        <view class="money">
+            <text class="txt-left">银两：</text>
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67ed39afbfc.png"></image>
+            <text class="txt-right">{{result.gold > 0 ? '+' : ''}}{{result.gold}}</text>
+        </view>
+        <view class="express">
+            <text class="txt-left">经验：</text>
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67ed3981bad.png"></image>
+            <text class="txt-right">{{result.exp > 0 ? '+' : ''}}{{result.exp}}</text>
+        </view>
+    </view>
+</view>

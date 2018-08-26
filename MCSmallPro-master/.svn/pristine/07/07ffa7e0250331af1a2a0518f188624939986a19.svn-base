@@ -1,0 +1,25 @@
+<view class='messages'>
+  <scroll-view class='messages-scroll-view' scroll-y="true" scroll-top="{{messagesScrollTop}}">
+    <view class='messages-inner'>
+      <view class='message-item'>
+        <text>宝宝，喜欢主播点赞哟，加购TA推荐的好货！</text>
+      </view>
+      <view class='message-item' wx:key="id" wx:for="{{messages}}" wx:for-item="message">
+        <text class='message-item-name'>{{message.name}}：</text>
+        <text class='message-item-content break'>{{message.content}}</text>
+      </view>
+    </view>
+      <view hidden='{{!messageChatVisible}}' class='message-chat-holder'></view>  
+  </scroll-view>
+
+  <image hidden='{{messageChatVisible}}' class='message-icon-popupInput' src='http://res.o2o.com.cn:8082/img/e563e4d23ea74058a1ef06e685127d03' bindtap='popupInputBox'></image>
+  <view hidden='{{!messageChatVisible}}' class='message-chat'>
+    <image class='message-icon-hideInput' src='http://res.o2o.com.cn:8082/img/9188b93ae3c94efa8b3c5369f4c10e48' bindtap='hideInputBox'></image>
+
+    <view class='message-input-box'>
+      <input class='message-input' focus='{{messageChatVisible}}' value='{{inputMessage}}' placeholder='如果主播比较忙，可以尝试联系商家客服哦~' placeholder-style="color:#{{skinThirdColor}}"
+      bindinput='inputMessage' confirm-type="send" bindconfirm="sendMessage"></input>
+      <button class='message-send' size='mini' bindtap='sendMessage'>发送</button>
+    </view>
+  </view>
+</view>

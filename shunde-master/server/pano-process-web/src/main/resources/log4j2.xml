@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appenders>
+		<Console
+			name="Console"
+			target="SYSTEM_OUT">
+			<PatternLayout pattern="extrainfo:pano pano_process pano_process_web %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} --- %msg%n" />
+		</Console>
+
+		<RollingFile
+			name="File"
+			fileName="/usr/local/pano-process-web/logs/pano_process_web.log"
+			filePattern="/usr/local/pano-process-web/logs/$${date:yyyy-MM}/pano_process_web-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="extrainfo:pano pano_process pano_process_web %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} --- %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10 M" />
+			</Policies>
+			<DefaultRolloverStrategy max="9" />
+		</RollingFile>
+	</appenders>
+	
+	<loggers>
+		<root level="info">
+			<appender-ref ref="Console" />
+		</root>
+		
+		<logger
+			name="com.visualbusiness"
+			additivity="false"
+			level="debug">
+			<appender-ref ref="Console" />
+			<appender-ref ref="File" />
+		</logger>
+	</loggers>
+</configuration>

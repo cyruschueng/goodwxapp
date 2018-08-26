@@ -1,0 +1,95 @@
+/* pages/home/article/article.wxss */
+@import "/pages/bigcms/font_cms.wxss";
+@import "/pages/bigcms/wxParse.wxss";
+
+.icon-appreciatefill::before {color:inherit;}
+
+.article-video{ position: relative; width: 100%; padding-bottom: 50%;}
+.article-video video{width: 100%;height: 100%; position: absolute; left: 0; top: 0;}
+
+.contenter{padding:30rpx;}
+/*头部标题*/
+.top-title{padding-bottom: 20rpx;}
+.top-title .title{padding: 20rpx 0;}
+/*音频*/
+.voice{width:690rpx;padding:30rpx;margin:40rpx auto 0;border:2rpx solid rgba(0, 0, 0, 0.2);position:relative;line-height: 80rpx; border-radius: 4rpx;}
+.voice .voice-img{width:80rpx;height:80rpx;vertical-align:top;display: inline-block;line-height: 80rpx;border-radius: 50%; background:rgba(0, 0, 0, 0.8);}
+/*进度条*/
+.timeline {display: inline-block;height: 14rpx;border-radius: 16rpx;vertical-align: top;margin-top: 33rpx;}
+.timeline.sub{overflow: visible;}
+.progress-bar {display: block; position: relative;height: 100%;border-radius: 16rpx; -wekbit-transition: all 0.4s linear;overflow: visible;}
+.progress-bar:before, .progress-bar:after {content: "";position: absolute;top: 0;left: 0;right: 0;}
+.progress-bar:before {bottom: 0;background-size: 45rpx 45rpx;border-radius: 12rpx;}
+.progress-bar:after {z-index: 2; width: 28rpx;height: 28rpx;left: inherit;top:-7rpx; right: -14rpx;background: #fff;border-radius: 50%; box-shadow: 0 0 0 8rpx rgba(0, 0, 0, 0.2);}
+.timeline {background:rgba(0,0,0,0.2);}
+.progress-bar:before { background: -webkit-repeating-linear-gradient(45deg, rgba(255,255,255,0), rgba(255,255,255,0) 5px, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 10px); background-color: rgba(0, 0, 0, 0.6);}
+/*文章内容*/
+.article{overflow:hidden;padding:30rpx 0;line-height:1.6;position:relative}
+/*.article image{ width: 100%}*/
+/*继续阅读*/
+.read-continue{width:100%;background-image:linear-gradient(rgba(255,255,255,0), #fff 75%, #fff);padding-top:150rpx;margin-top:-190rpx;position:relative;z-index:1}
+.read-continue button{width:400rpx;line-height:92rpx;}
+/*弹出页面背景*/
+.popup,.popup-write{background:rgba(0,0,0,0.5);width:100%;height:100%;position:fixed;top:0;left:0;z-index:10;}
+.popup-write{display:none;}
+/*付费分类*/
+.read-pay{width:600rpx;border-radius:14rpx;padding:40rpx;}
+/*付费分类选项按钮*/
+.read-pay .pay{line-height:84rpx;border:2rpx solid #ccc;border-radius:6rpx;overflow:hidden;position:relative;}
+.read-pay .pay.active:before{content:'✔';font-size:24rpx;line-height:1.2;color:#fff;display:block;position:absolute;right:0;bottom:0;z-index:2}
+.read-pay .pay.active:after{content:'';display:block;border-right:40rpx solid #09BB07;border-top:40rpx solid transparent;position:absolute;right:0;bottom:0}
+/*付费提交按钮*/
+.read-pay button{line-height:92rpx;margin:80rpx auto 0;}
+/*单篇阅读*/
+.read-pay .single{height:310rpx;padding-top:100rpx;}
+.read-pay .single .price{font-size:72rpx;}
+/*成为会员*/
+.read-pay .time-price{padding:0 30rpx;line-height:82rpx;border:1rpx solid #ccc;border-radius:6rpx;}
+/*点赞*/
+.zan{width:590rpx;padding-top:60rpx;margin:100rpx auto 40rpx;}
+.zan .btn-zan{width:160rpx;line-height:76rpx;margin-bottom:60rpx;}
+.zan .peo-img{display:inline-block;width:65rpx;height:65rpx;border-radius: 4rpx;}
+.zan .peo-img:nth-child(8n+8){margin-right:0}
+/*赞赏弹出页*/
+.app-admire{width:600rpx;z-index:2;border-radius: 10rpx;overflow: hidden;}
+.app-admire .topbg{width:100%;height:100rpx;background:#ff473b;}
+.app-admire .topbg:before{content:'';display:block;width:100%;height:200rpx;border-radius:50%;background:#ff473b;}
+.app-admire .user-img{width:140rpx;height:140rpx;margin:0 auto;border-radius:50%;}
+.app-admire .money{padding:10rpx 54rpx;}
+.app-admire .money .list{display:inline-block;width:150rpx;line-height:1.5;font-size:48rpx;border-radius:8rpx;border:2rpx solid #ff5d76;}
+.app-admire .money .list:nth-child(3n+3){margin-right:0}
+/*其他金额*/
+.pop-input{display:none;width:100%;height:100%;background:rgba(0,0,0,0.4);position:fixed;top:0;z-index:6}
+.other-money{background:#fff;padding-bottom:40rpx;width:100%;border-radius:8rpx;}
+.other-money .title{line-height:88rpx;}
+.other-money .title .close{padding:0 30rpx;}
+.other-money .input-box{width:560rpx;padding:0 30rpx;margin:40rpx auto;line-height:80rpx;border:1rpx solid #eee;}
+.other-money input{height: 80rpx;}
+.other-money button{width:560rpx;line-height:80rpx;}
+.app-admire .tips{margin-top: 40rpx;margin-bottom: 16rpx;}
+
+/* 分享按钮 */
+.share-msg button{background: none;display: inline-block;height: 46rpx;line-height: 46rpx;vertical-align: top;padding: 0;font-size:28rpx}
+.share-msg button:after{border: none;}
+
+/*评论列表*/
+.saying{padding:30rpx;}
+.saying .img{width:70rpx;height:70rpx;}
+.saying .userlist .time{padding-bottom:20rpx;}
+
+/*评论输入框*/
+.floatBox{z-index: 10;}
+.floatBoxBg{height: 100%;}
+.pinglun-input {width: 750rpx;height: 140rpx;background: #f2f2f2;padding:30rpx;position: fixed;bottom: 0;}
+.pinglun-input input {display: inline-block; height:80rpx; border-bottom: 1px solid #ccc;}
+.pinglun-input button {display: inline-block;width: 140rpx;color: #fff; height:80rpx; line-height: 80rpx; font-size: 14px;}
+
+/*右侧按钮*/
+.right-btn{position:fixed;bottom:80rpx;right:20rpx;line-height:70rpx;z-index:3;}
+.right-btn .little-btn{width:70rpx;height:70rpx;border-radius:50%;overflow: hidden;}
+.icon-xingjiline{color: #fff;}
+/*左侧按钮*/
+.left-btn{position:fixed;bottom:80rpx;left:20rpx;line-height:70rpx;z-index:2;width: 70rpx;}
+.left-btn .little-btn{background:#09bb07;width:70rpx;height:70rpx;border-radius:50%;overflow: hidden;}
+
+@import "/css/DuoguanBigCms/DuoguanBigCms-template-default.wxss";

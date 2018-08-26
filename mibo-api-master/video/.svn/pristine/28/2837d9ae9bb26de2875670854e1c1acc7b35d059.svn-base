@@ -1,0 +1,27 @@
+<?php
+
+class Model_Version extends PhalApi_Model_NotORM {
+
+    protected function getTableName($id) {
+        return 'version';
+    }
+
+    public function getNewVersion() {
+        $new_version = DI()->redis->get_time('mb_new_version');
+        if(!empty($new_version)) {
+            return json_decode($new_version, true);
+
+        } else {
+            $new_version = $this->getORM()->where('status= 1')
+                ->order('id DESC')->fetchOne();
+            if(!empty($new_version)) {
+                DI()->redis->set_time('mb_new_version', json_encode($new_version), 21600);
+            }
+
+            return $new_version;
+        }
+
+    }
+
+
+}

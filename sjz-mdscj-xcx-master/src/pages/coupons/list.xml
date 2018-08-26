@@ -1,0 +1,45 @@
+<form bindsubmit="formSubmit" report-submit='true'>
+  <button formType="submit" class="formIdBtn">
+    <view>
+      <scroll-view class="switch-tab" scroll-x="{{true}}" scroll-y="true">
+        <view wx:for="{{state.tabs}}"
+              catchtap="handleTab"
+              wx:key="{{index}}"
+              class="item {{index === props.dataTemp.tabIndex ? 'active' : ''}}"
+              style="{{'width: ' +  100 / state.tabs.length + '%'}}"
+              data-index="{{index}}">
+          <text class="content" data-index="{{index}}" catchtap="handleTab">{{item}}</text>
+        </view>
+      </scroll-view>
+
+      <scroll-view scroll-y="{{true}}" scroll-x="{{false}}" style="height: calc(100vh - 90rpx)"
+                   bindscrolltolower="getNextPage" lower-threshold="200">
+        <view class="data-list">
+          <view class="item {{props.dataTemp.tabIndex !== 0 ? 'disabled' : ''}}"
+                wx:for="{{props.dataCoupons.data}}" wx:key="groupOrderId">
+            <view class="item-main">
+              <view class="price">
+                <view class="big-price" wx:if="{{item.type !== 3}}">￥<text>{{item.profitFee_show}}</text></view>
+                <view class="big-price" wx:else=""><text>{{item.profitFee_show}}</text>折</view>
+                <view>{{item.couponRuleVO.fullFee_show}}</view>
+              </view>
+              <view class="info">
+                <view class="big-word">{{item.couponName}}</view>
+                <view>• {{item.startTime_show}} 至</view>
+                <view>{{item.endTime_show}}</view>
+              </view>
+              <view class="icon iconfont icon-unie93d"></view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class="empty" wx:if="{{!props.dataCoupons.data.length}}">
+        <view class="image-wrapper">
+          <image src="../../images/empty@3x.png"></image>
+        </view>
+        <view class="tip">还没有相关数据哟~</view>
+      </view>
+    </view>
+  </button>
+</form>

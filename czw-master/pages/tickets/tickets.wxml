@@ -1,0 +1,61 @@
+<!--index.wxml-->
+<view class="page">
+    <image class="coupon_cover" mode="widthFix" src="../images/poster/oilQuality.jpg"></image>
+    <view class="page__bd page__bd_spacing" style="padding-bottom: 125px;">
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+                <view class="placeholder">
+                    <view class="cart-box">
+                        <view wx:for="{{carts}}" class="{{item.num>0?'green':'gifts-box'}}">
+                            <image class="" mode="widthFix" src="{{item.image}}"></image>
+                            <view class="cart-box-flex">
+                                <view class="gifts-content">
+                                    <text class="gifts-title">{{item.title}}</text>
+                                </view>
+                                <view class="gifts-price-box">
+                                    <text class="gifts-price">{{item.price}}元</text>
+                                </view>
+                                <view class="numCount numCount_active" wx:if="{{item.num>0}}">
+                                    <view class="numMin-box" bindtap="minusCount" data-index="{{index}}">
+                                        <text class="numMin">-</text>
+                                    </view>
+                                    <view class="num-box">
+                                        <text class="num">{{item.num}}</text>
+                                    </view>
+                                    <view class="numAdd-box" bindtap="addCount" data-index="{{index}}">
+                                        <text class="numAdd">+</text>
+                                    </view>
+                                </view>
+                                <view class="numCount" wx:if="{{item.num==0}}">
+                                    <view class="numAdd-box-0" bindtap="addCount" data-index="{{index}}">
+                                        <text class="numAdd-0">+</text>
+                                    </view>
+                                </view>
+                            </view>
+
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!--<view class="bottom_0" wx:if="{{totalNum==0}}">-->
+    <!--<view class="buyAndGive_0">-->
+        <!--<text>购买并赠送</text>-->
+    <!--</view>-->
+<!--</view>-->
+<view class="bottom_1" wx:if="{{totalNum>0}}">
+    <view class="shopping-car">
+        <view class="shopping-car1">
+            <text class="shopping-car-1">共{{totalNum}}份</text>
+        </view>
+        <view class="shopping-car2">
+            <text class="shopping-car-2">{{totalPrice}}</text>
+        </view>
+    </view>
+    <view class="buyAndGive_1" bindtap="openLoading">
+        <text>购买</text>
+        <input type="number" value="12"/>
+    </view>
+</view>

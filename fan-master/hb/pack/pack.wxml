@@ -1,0 +1,29 @@
+<view class="container pack">
+	<view class="topbox">
+	  <view class="phead"><image class="phimg" style=" background: #fff;" src="{{data.headimgurl}}"></image> </view>
+	  <text class="pnkname">{{data.nickname||'暂无昵称'}}</text>
+	  <view class="word"><image src="images/icon_ht.png" mode="aspectFit" class="wico"></image><text class="wtext">{{data.watchword}}</text></view>
+	  <view hidden="{{data.status!=1}}"><text class="pbtn" bind:touchstart="startyy" bind:touchend="endyy">按住说出以上口令领取赏金</text></view>
+	  <view hidden="{{data.status!=2}}"><text class="pgetm">2.00<text class="pbtn_tp">元</text></text></view>
+	  <view hidden="{{data.status!=3}}"><text class="pbtn pbtna">赏金都被领完了ㄟ( ▔, ▔ )ㄏ</text></view>
+	  <view class="tabbox">
+	  	<navigator url="/xxxxxx" hover-class="navigator-hover" class="tab"><image class="tico" mode="aspectFit" src="images/icon01b.png"></image>去提现</navigator>
+	  	<navigator url="/pack/packnew" hover-class="navigator-hover" class="tab"><image class="tico" mode="aspectFit" src="images/icon01a.png"></image>发口令</navigator>
+	  	<view class="tab" bindtap="zhuanfa"><image class="tico" mode="aspectFit" src="images/icon01c.png"></image>去转发</view>
+	  </view>
+	</view>
+	<text class="pnums">共{{data.amount}}元,领取{{data.total-data.remain}}/{{data.total}}个</text>
+	<view class="plist">
+		<view class="item" wx:for="{{winer.list}}">
+			<image class="iimg" mode="aspectFit" style="background: #fff" src="{{item.headimgurl}}"></image> 
+			<text class="ititle">{{item.nickname}}</text>
+			<text class="imoney">{{item.money}}元</text>
+			<view class="ibot">
+				<text class="ista" data-path="{{item.voicepath}}" data-id="{{item.id}}" bindtap="playvoice">{{playid==item.id?'播放中':item.voicetime}}</text>
+				<text class="itime">{{item.timestr}}</text>
+			</view>
+		</view>
+	</view>
+	<view class="gom"><navigator url="/mine/index" class="gomlink">查看我的记录</navigator></view>
+	<text class="tipt">未领取的赏金,将于24小时后退至余额</text>
+</view>

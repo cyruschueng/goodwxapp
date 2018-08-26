@@ -1,0 +1,120 @@
+
+
+<template name="myorder-item">
+<view class=''>
+        
+<view class="page__bd page__bd_spacing">
+  <view class="kind-list">
+    <!-- 外层循环 -->
+    <block wx:for="{{ orderList }}" wx:for-item="outItem" wx:for-index="outIndex" wx:key="{{ outIndex }}">
+      <view class="kind-list__item">
+
+<!-- title -->
+<view id="{{ outItem.orderId }}" class="weui-flex kind-list__item-hd {{ outItem.open ? 'kind-list__item-hd_show' : '' }}" bindtap="bingKindToggleTap">
+  <!-- <image class='kind-list-title__img' src='{{ outItem.titleImg }}'></image> -->
+  <view class="weui-flex__item">
+    <text class='kind-list-title__text' >订单号：{{ outItem.orderId }}</text>
+    <text class='kind-list-title__text float-right'>{{ outItem.time }}</text>
+  </view>
+  <image class="kind-list__img" style='{{ outItem.open ? "transform:rotate(270deg);" : "transform:rotate(90deg);" }}' src="../../images/arrow-right.png"></image> 
+</view>
+<!-- title -->
+
+<!-- body -->
+<view class="kind-list__item-bd {{ outItem.open ? 'kind-list__item-bd_show' : '' }}">
+  <view class="{{ outItem.open ? 'weui-cells_show' : '' }}">
+<!-- 内层循环 -->
+  <block wx:for="{{ outItem.payList }}" wx:for-item="inItem" wx:for-index="inIndex" wx:key="{{ inIndex }}">
+  <view class='inside-cell' data-title='{{ inItem.title }}' bindtap='bindAppointmentTap'>
+    <image class='cellImg' src='{{ inItem.imgUrl }}' mode='aspectFill'></image>
+    <view class='text'>
+      <view>
+        {{ inItem.title }}
+        <text class='{{ inItem.packageStage ? "fz28 second-txt-color" : "" }}'>{{ inItem.packageStage ? inItem.celeName : '' }}</text>
+      </view>
+      <view class='second-txt-color'> 
+        <!-- <text>{{ inItem.name }} {{ inItem.floor }}</text> -->
+        <text>{{ inItem.packageStage ? inItem.packageStage : inItem.name }} {{ inItem.stage == true ? ' ( 有全息 ) ' : '' }} {{ inItem.floor }}</text>
+        <text style='margin-left:30rpx;'>{{ inItem.floorHeight }}</text>
+      </view>
+      <view class='price'>
+        {{ inItem.actualPrice ? inItem.actualPrice : inItem.price }}
+        <text class='second-txt-color' style='float:right;'>x{{ inItem.nums }}</text> 
+      </view>
+    </view>
+  </view>
+  </block>
+<!-- 内层循环 -->
+  <!-- 附加 价钱 等信息 -->
+
+  <!-- 待付款 -->
+  <view wx:if='{{ outItem.addInfo == "待付款" }}'>
+    <view class='price-cell-view'>
+      <!-- 定金 -->
+      <text class='margin-right-20rpx'>共 {{ outItem.payList.length }} 件</text>
+      <text >应付定金: <text class='price-p'>{{ outItem.prePrice }}</text></text>
+    </view>
+    <view class='price-cell-view'>
+      <view class='cancel-cell-btn' id='{{ outIndex }}' data-orderid='{{ outItem.orderId }}' bindtap='bindCancelOrderTap'>取消订单</view>
+      <view id='{{ outIndex }}' bindtap='bindPrePayCellTap'>付定金</view>
+    </view>
+  </view>
+
+
+  <!-- 付尾款 -->
+  <view wx:if='{{ outItem.addInfo == "付尾款" }}'>
+    <view class='weui-flex price-cell-view' >
+      <!-- 定金 -->
+      <text class='txt-algn-left margin-right-20rpx'>共 {{ outItem.payList.length }} 件</text>
+      <text class='weui-flex__item txt-algn-center'>已付定金: ¥ {{ outItem.prePrice }}</text>
+      <text class='weui-flex__item txt-algn-right'>应付尾款:<text class='price-p'> ¥ {{ outItem.finalyPrice }}</text></text>
+    </view>
+    <view class='price-cell-view'>
+      <view id='{{ outIndex }}' data-obligation='{{ outItem.finalyPrice }}' data-orderid='{{ outItem.orderId }}' bindtap='bindFinalyPayCellTap'>付尾款</view>
+    </view>
+  </view>
+
+
+  <!-- 待评价 -->
+  <view wx:if='{{ outItem.addInfo == "待评价" }}'>
+
+    <view class='price-cell-view'>
+      <text class='margin-right-20rpx'>共 {{ outItem.payList.length }} 件</text>
+      <text>合计: <text>¥ {{ outItem.totalPrice }}</text></text>
+    </view>
+    <view class='price-cell-view'>
+      <view id='{{ outIndex }}' bindtap='bindCommentBtnTap'>评价</view>
+    </view>
+  </view>
+
+  <!-- 历史订单 -->
+  <view wx:if='{{ outItem.addInfo == "历史订单" }}'>
+    <view class='weui-flex price-cell-view'>
+      <text class='weui-flex__item txt-algn-left'>共 {{ outItem.payList.length }} 件 </text>
+      <text class='weui-flex__item txt-algn-left'>定金: ¥ {{ outItem.prePrice }}</text>
+      <text class='weui-flex__item txt-algn-right'>合计: ¥ {{ outItem.totalPrice }}</text>
+    </view>
+  </view>
+
+
+
+  <!-- 附加 价钱 等信息 -->
+  </view>
+</view>
+<!-- body -->
+
+      </view>
+    </block>
+    <!-- 外层循环 -->
+
+  </view>
+</view>
+
+
+
+
+
+
+
+</view>
+</template>

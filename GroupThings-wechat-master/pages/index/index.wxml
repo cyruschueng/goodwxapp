@@ -1,0 +1,36 @@
+<!--pages/receipt/receipt.wxml-->
+<view class="container">
+  <!-- <scroll-view scroll-y style="height: {{scrollHeight}}px;" bindscrolltoupper="refresh" bindscrolltolower="loadMore" bindscroll="scroll"  scroll-top="{{scrollTop}}"> -->
+    <block wx:for="{{mainList}}"  wx:for-item="post" wx:key="{{id}}">
+      <view class="indexItem" catchtap='toInfoHandle' data-type="{{post.classify}}" data-id="{{post.send_id}}" data-idx="{{index}}" bindlongpress="delItem">
+        <view class="indexTitle">
+          <span class="iconfont icon-huodong mr5" style="color:#319eff" wx:if="{{post.classify == 2}}"></span>
+          <span class="iconfont icon-tongzhi mr5" style="color:#ff3131" wx:if="{{post.classify == 1}}"></span>
+          <span class="iconfont icon-toupiao mr5" style="color:#ff9800" wx:if="{{post.classify == 3}}"></span>
+          <text>{{post.title}}</text>
+        </view>
+        <view class="indexInfo" wx:if="{{post.content}}">{{post.content}}</view>
+        <view class="indexKeyWords" wx:if="{{post.keyWords}}">
+          <text>关键词：</text>
+          <block wx:for="{{post.keywords}}" wx:for-item="keyWord" wx:key="*this">
+            <text class="mr5">{{keyWord}}</text>
+          </block>
+        </view>
+        <view class="indexFooter">
+          <view wx:if="{{post.classify == 1}}"><span class="iconfont icon-eye mr5"></span>{{post.valid_num}}</view>
+          <view wx:if="{{post.classify == 2}}"><span class="iconfont icon-baoming mr5"></span>{{post.valid_num}}</view>
+          <view wx:if="{{post.classify == 3}}"><span class="iconfont icon-hua mr5"></span>{{post.valid_num}}</view>
+          <view><span class="iconfont icon-shijian mr5"></span>{{post.build_time}}</view>
+        </view>
+      </view>
+    </block>
+
+  <view class="tc" wx:if="{{isEmpty}}">
+    暂无数据...
+  </view>
+  <!-- </scroll-view> -->
+  <view class="tc" hidden="{{loadingHidden}}">
+    <image src="../../assets/imgs/loading.gif" class="loading"></image>
+  </view>
+</view>
+

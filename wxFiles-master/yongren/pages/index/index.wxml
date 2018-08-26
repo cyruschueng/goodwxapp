@@ -1,0 +1,32 @@
+<swiper indicator-dots="{{indicatorDots}}" indicator-active-color="#ffffff" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:200px" indicator-color="rgba(255,255,255,0.3)">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" style="width:100%" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class="bar">
+ <view class="item {{bi == 1? 'active':''}}" bindtap="changeTap" data-id="1">新品推荐</view>
+ <view class="item {{bi == 2? 'active':''}}" bindtap="changeTap" data-id="2">供应产品</view>
+ <view style="clear:both"></view>
+</view>
+<block wx:for="{{list}}">
+<view style="width100%;height:10px;background:#f1f1f1"></view>
+<view class="pro" bindtap="navToDetail" data-id="{{item.id}}">
+  <image src="{{goodsUrl}}{{item.cover}}"></image>
+  <view class="text-bar">
+    <view class="title">{{item.title}}</view>
+    <view class="pull-right">包邮</view>
+    <view class="price">￥{{item.price}}</view>
+    <view class="pull-right" style="font-size:30rpx">混批</view>
+    <view style="clear:both"></view>
+  </view>
+</view>
+</block>
+
+<view style="width100%;height:10px;background:#f1f1f1"></view>
+<view class="service">
+  <contact-button type="default-light" size="20" session-from="weapp">
+    客服
+  </contact-button>
+</view>

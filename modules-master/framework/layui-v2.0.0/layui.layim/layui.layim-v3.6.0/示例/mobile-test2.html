@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>LayIM 移动版</title>
+
+    <link rel="stylesheet" href="../build/css/layui.mobile.css">
+
+</head>
+<body>
+
+<script src="../build/layui.js"></script>
+<script>
+
+    //layui绑定扩展
+    layui.config({
+        base: '../rc/'
+    }).extend({
+        rmlib: 'rmlib',
+        protobuf: 'protobuf',
+        socket: 'socket',
+    });
+
+    layui.config({
+        version: true
+    }).use(['socket', 'mobile', 'layim', 'jquery'], function () {
+        var mobile = layui.mobile
+            , layim = mobile.layim
+            , layer = mobile.layer
+            , $ = layui.jquery
+            , socket = layui.socket;
+
+        layim.config({
+            //上传图片接口
+            uploadImage: {
+                url: '/upload/image' //（返回的数据格式见下文）
+                , type: '' //默认post
+            }
+            //上传文件接口
+            , uploadFile: {
+                url: '/upload/file' //（返回的数据格式见下文）
+                , type: '' //默认post
+            }
+            //,brief: true
+            , init: {
+                //我的信息
+                mine: {
+                    "username": "秋天" //我的昵称
+                    ,
+                    "id": "test2" //我的ID
+                    ,
+                    "avatar": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502990251538&di=2c51dab51fd638a427c6a7c5fb343b12&imgtype=0&src=http%3A%2F%2Fv1.qzone.cc%2Favatar%2F201504%2F04%2F17%2F40%2F551fb1a2b79b6736.jpg%2521200x200.jpg" //我的头像
+                    ,
+                    "sign": "秋天不回来"
+                }
+                //我的好友列表
+                , friend: [{
+                    "groupname": "xiaoyut"
+                    , "id": 1
+                    , "online": 2
+                    , "list": [{
+                        "username": "春天"
+                        ,
+                        "id": "test0"
+                        ,
+                        "avatar": "http://img02.sogoucdn.com/app/a/100520093/ea54b1c5225b5b8f-1f7d693ce5c84217-65bcb52a88b749bfa5bd038796a7f699.jpg"
+                        ,
+                        "sign": "春天花会开"
+                    }, {
+                        "username": "夏天"
+                        ,
+                        "id": "test1"
+                        ,
+                        "avatar": "http://img02.sogoucdn.com/app/a/100520093/ea54b1c5225b5b8f-1f7d693ce5c84217-65bcb52a88b749bfa5bd038796a7f699.jpg"
+                        ,
+                        "sign": "夏天的味道"
+                    }]
+                }]
+                , "group": [{
+                    "groupname": "前端群"
+                    , "id": "101"
+                    , "avatar": "http://tp2.sinaimg.cn/2211874245/180/40050524279/0"
+                }, {
+                    "groupname": "Fly社区官方群"
+                    , "id": "102"
+                    , "avatar": "http://tp2.sinaimg.cn/5488749285/50/5719808192/1"
+                }]
+            }
+
+            //,tabIndex: 1 //用户设定初始打开的Tab项下标
+            //,isNewFriend: false //是否开启“新的朋友”
+            , isgroup: true //是否开启“群聊”
+            //,chatTitleColor: '#c00' //顶部Bar颜色
+            //,title: 'LayIM' //应用名，默认：我的IM
+        });
+
+        //查看聊天信息
+        layim.on('detail', function (data) {
+            //console.log(data); //获取当前会话对象
+            layim.panel({
+                title: data.name + ' 聊天信息' //标题
+                ,
+                tpl: '<div style="padding: 10px;">自定义模版，<a href="http://www.layui.com/doc/modules/layim_mobile.html#ondetail" target="_blank">参考文档</a></div>' //模版
+                ,
+                data: { //数据
+                    test: '么么哒'
+                }
+            });
+        });
+
+        //监听返回
+        layim.on('back', function () {
+            history.back();
+        });
+
+        //监听发送消息
+        layim.on('sendMessage', function (data) {
+
+        });
+
+        //监听查看更多记录
+        layim.on('chatlog', function (data, ul) {
+            console.log(data);
+            layim.panel({
+                title: '与 ' + data.name + ' 的聊天记录' //标题
+                , tpl: '<div style="padding: 10px;">这里是模版，{{d.data.test}}</div>' //模版
+                , data: { //数据
+                    test: 'Hello'
+                }
+            });
+        });
+
+        // 融云socket初始化
+        socket.config({
+            key: 'sfci50a7s1soi',
+            // 在线客服一 token（由唯一ID和共用AppSecret生成）
+            token: "jFseJoezYNNgIkGgDMrF33T8wAjNQi23wzB0PtWUVVm8k63DGUix6W5/wVIBQZJJj/31rPcsEEq2iXGRCvF7Qw==",
+            layim: layim
+        });
+    });
+</script>
+</body>
+</html>

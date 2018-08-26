@@ -1,0 +1,42 @@
+<!--没用了-->
+
+<view class="rectangle">
+
+           <view class="yuan">￥{{payMoney}}</view>
+           <!-- <view class="warming">该设备押金：{{device.shareMoney}} 元，您的押金不足，还差{{money}} 元</view> -->
+
+           <view class="warming">您的可用押金：{{device.shareMoney-money}} 元，仍需支付{{payMoney}}元 </view> 
+           
+           <view class="device">
+              
+              <image src="{{device.imgUrl}}"></image>
+              
+              <view class='desc'>
+                <view class="code"> 设备编号：{{device.deviceNo}}</view>
+                <view class="code1">设备名称：{{device.name}}</view> 
+                <view class="code3">设备押金：{{device.shareMoney}}元</view> 
+                <view class="code4">设备租金：{{rental}}元/{{rentalType}}</view>  
+              </view> 
+
+            </view> 
+
+           <radio-group class="radio-group" bindchange="radioChange">
+         
+              <view  class='radio' wx:for="{{items}}">
+                <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}} +租金{{rental}}元 +押金{{device.shareMoney}}元={{payMoney}}元
+              </view>
+          
+           </radio-group>    
+
+      
+</view>
+
+<button class="wechat-pay" bindtap="wechatPay" disabled="{{canPay}}">微信支付</button>
+
+<view class="des">
+  <view class="content">1.成功付款后即开始起租，租期一{{rentalType}}</view>
+  <view class="content">2.充值余额不可退，当欠款时，押金不可退</view>
+  <view class="content">3.您可在我的钱包画面查看您当前的押金和余额</view>
+  <view class="content">4.所有的充值及消费以嘀嘀币计算</view>
+
+</view> 

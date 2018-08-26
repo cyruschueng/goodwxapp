@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="container">
+<canvas style="width: 300rpx; height: 182rpx;" canvas-id="myCanvas" wx:if="{{circle_status}}"></canvas>
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view> -->
+  <view class="usermotto" wx:if="{{time_status}}">
+    <view><text>距离本场开始</text></view>
+    <view>
+    <text class="user-motto minute">{{minute}}</text>
+    <text class="user-motto">:</text>
+    <text class="user-motto second">{{second}}</text>
+    </view>
+  </view>
+  <view class="usermotto" wx:if="{{start_status}}">
+   <text>答题开始</text>
+  </view>
+</view>

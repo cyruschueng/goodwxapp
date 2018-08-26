@@ -1,0 +1,42 @@
+<block wx:if="{{benid == uid}}" wx:for="{{list}}" >
+<view class="header" >
+  <image class="head" src="{{item.avatar}}"></image>
+  <!--<image class="gender" src="/img/male.png"></image>-->
+  <view class="title">{{item.name}}</view>
+  <!--<view class="value">宁波 51-60岁</view>-->
+  <view class="right" >
+    <image src="/img/star2.png" wx:for="{{item.score}}"></image>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<view class="vela">
+  <view class="title">给你的标签</view>
+</view>
+<view class="its" >
+  <view class="it" wx:for="{{item.content}}" wx:if="{{item != ''}}">{{item}}</view>
+</view>
+<view style="clear:both"></view>
+</block>
+
+<view wx:if="{{list.length == 0}}" class="soli" style="background:#f2f2f2;padding-top:70rpx;padding-bottom:70rpx;">
+  <view class="title">参加人员还未做出评价</view>
+  <view class="notice">评价后会得到相应标签哦~</view>
+  <image src="/img/none.png"></image>
+</view>
+<block wx:if="{{benid != uid}}" wx:for="{{list}}" >
+<view class="star">
+  <view class="title">萍聚评分:</view>
+  <view class="stars">
+    <image src="/img/star2.png" data-index="{{index}}" wx:for="{{item.score}}"></image>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<view class="star">
+  <view class="title">萍聚印象:</view>
+  <view style="clear:both"></view>
+  <view class="item">
+    <view style="{{'background:#06c1ae;color:#fff'}}" wx:for="{{item.content}}" wx:if="{{item != ''}}">{{item}}</view>
+  </view>
+  <view style="clear:both"></view>
+</view>
+</block>

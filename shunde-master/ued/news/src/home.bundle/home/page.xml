@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<Page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../View.xsd">
+    <PanoView id="panoId"/>
+    <View id="panoCtlBox" visible="false">
+        <View id="newsCtrl" height="wrap">
+            <ImageView src="/home/images/icon_shadow.png" height="match"></ImageView>
+            <View height="wrap">
+                <View height="wrap" layout="horizontal" gravity="centerVertical">
+                    <View id="newsLogoBox" width="wrap" height="40dp" marginLeft="20dp">
+                        <ImageView id="newsLogo" width="40dp" height="wrap"  gravity="top" gone="true"/>
+                    </View>
+                    <TextView id="news_title" width="wrap" fontSize="20dp" fontColor="#ffffff" marginLeft="10dp" gravity="centerVertical" height="wrap"></TextView>
+                </View>
+                <View width="wrap" layout="horizontal" height="wrap" gravity="right|center" marginTop="18dp" marginBottom="18dp" marginRight="20dp">
+                    <com.appengine.view.Plugins_gifs id="ctl_music" width="24dp" marginLeft="4dp" marginRight="4dp" height="wrap"
+                        gifPiece="/home/images/music_on.png,/home/images/music_off.png"/>
+                    <ImageView id="video" src="/home/images/video.png"  width="24dp" height="wrap"  marginLeft="4dp" marginRight="4dp" gone="true"></ImageView>
+                    <!-- <com.appengine.view.Plugins_gifs id="ctl_vr"  width="24dp" marginLeft="7dp" marginRight="7dp" height="wrap"
+                        gifPiece="/home/images/vr_on.png,/home/images/vr_off.png"/> -->
+                    <ImageView id="ctl_vr_on" src="/home/images/vr_on.png"  width="24dp" height="wrap"  marginLeft="4dp" marginRight="4dp"></ImageView>
+                    <ImageView id="picIntro" src="/home/images/inf_chart.png"  width="24dp" height="wrap"  marginLeft="4dp" marginRight="4dp" gone="true"></ImageView>
+                    <com.appengine.view.Plugins_gifs id="ctl_gravity"  width="24dp" marginLeft="4dp" marginRight="4dp" height="wrap"
+                        gifPiece="/home/images/gravity_on.png,/home/images/gravity_off.png"/>
+                    <View id="ctl_intro" width="wrap" height="wrap" gravity="center" layout="horizontal" marginLeft="4dp">
+                        <ImageView src="/home/images/inf.png" width="24dp" height="wrap" gravity="center"/>
+                        <TextView id="newsintro_enter" text="新闻简介" gravity="center" width="wrap" height="wrap" fontSize="14dp" fontColor="#ffffff"></TextView>
+                    </View>
+                    <View  id="qrcodeEntrance" height="wrap" width="wrap" gravity="center" marginLeft="14dp">
+                        <TextView text="手机查看" fontColor="#ffffff" fontSize="14dp"  width="wrap" height="wrap"></TextView>
+                        <View id="qrcodeEntranceBg" hover="true" height="match" width="match"></View>
+                    </View>
+                </View>
+            </View>
+        </View>
+        <!-- <ImageView id="newsLogo_pc" width="40dp" height="wrap" marginLeft="25dp" marginTop="50dp" gone="true"/> -->
+
+        <View id="codeBox" background="#ffffff" height="wrap" width="wrap" gravity="right" marginTop="60dp" marginRight="20dp" visible="false">
+            <View layout="vertical" margin="30dp" height="wrap" width="wrap">
+                <View id="code" width="150dp" height="150dp"></View>
+                <TextView text="扫码查看移动端效果" fontSize="14dp" fontColor="#2E2E2E" height="wrap" contentGravity="center" marginTop="10dp" ></TextView>
+            </View>
+        </View>
+        <View id="newsBottom" height="wrap" gravity="bottom">
+            <ImageView src="/home/images/list_shadow.png" height="match"></ImageView>
+            <View id="newsListsBox" height="wrap" layout="vertical">
+                <View id="newsListsIntro" clipToBounds="true" marginTop="16dp" marginBottom="10dp">
+                    <ScrollView height="match">
+                        <TextView id="newsListsIntroTxt" height="wrap" fontColor="#ffffff" fontSize="14dp" lineSpace="6dp"></TextView>
+                    </ScrollView>
+                </View>
+                <ListView id="newsLists" height="wrap" layout="horizontal"></ListView>
+            </View>
+        </View>
+    </View>
+    <View id="picIntroView" visible="false">
+        <ScrollView id="picScrollView">
+            <ImageView id="pic" src="" height="wrap"></ImageView>
+        </ScrollView>
+        <View height="60dp" >
+            <ImageView src="/home/images/icon_shadow.png" height="60dp"></ImageView>
+            <ImageView id="picClose" src="/home/images/close.png" height="28dp" width="wrap" gravity="right|centerVertical" marginRight="15dp"></ImageView>
+        </View>
+    </View>
+    <ImageView id="ctl_vr_off" gravity="right" margin="20dp" src="/home/images/vr_off.png"  width="24dp" height="wrap" visible="false"></ImageView>
+    <View id="newsIntro" background="#90000000" layout="vertical" visible="false">
+        <View height="wrap" marginTop="40dp" marginBottom="30dp" layout="horizontal" marginLeft="20dp">
+            <TextView id="newsIntroTitle" height="28dp" fontSize="20dp" fontColor="#ffffff" text="新闻标题"></TextView>
+            <View id="newsIntroClose" height="match" paddingLeft="10dp" paddingRight="30dp" width="wrap">
+                <ImageView src="/home/images/close.png" height="wrap" width="wrap" gravity="center" />
+            </View>
+        </View>
+        <View clipToBounds="true">
+            <ScrollView >
+                <TextView id="newsIntroCtn" fontColor="#ffffff" fontSize="14dp" marginLeft="20dp" marginRight="20dp" height="wrap"></TextView>
+            </ScrollView>
+        </View>
+    </View>
+    <View id="bootView">
+        <ImageView id="bootImg" src="" gravity="center" anchorX="0.5" anchorY="0.5"></ImageView>
+    </View>
+</Page>

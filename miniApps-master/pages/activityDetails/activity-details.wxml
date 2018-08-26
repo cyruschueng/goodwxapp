@@ -1,0 +1,24 @@
+<view wx:if="{{actdata.length > 0}}">
+  <block wx:for="{{actdata}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+    <view class='activity-particulars' id="{{item.id}}" catchtap='clickVote'>
+      <image wx:if="{{item.mainPic}}" mode="aspectFill" class='activity-particularsImg' src='{{item.mainPic}}'></image> 
+      <image wx:else class='activity-particularsImg' mode="aspectFill" src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1975347470,2770072390&fm=27&gp=0.jpg'></image>
+      <view class='details-hits'>
+        <view>
+          <text>截止时间:</text>
+          <text class='time-condition'>{{item.endTime}}</text>
+          <text class='conditions orange' wx:if="{{item.actStatus == '0'}}">未开始</text>
+          <text class='conditions' wx:if="{{item.actStatus == '1'}}">进行中</text>
+          <text class='conditions gray' wx:if="{{item.actStatus == '2'}}">已结束</text>
+        </view>
+        <view>
+          <image class='hits' src='/images/icon/tuoyuan_w.png'></image>
+           <text class='examine'>{{item.viewNum}}</text> 
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<view wx:else class='placeholder'>
+  <image src="/images/icon/zhanweitu.png"></image>
+</view>

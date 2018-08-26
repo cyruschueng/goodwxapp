@@ -1,0 +1,21 @@
+<view class="special">
+  <scroll-view class="nav" style="display: none" scroll-x>
+    <view class="nav_list" >
+      <view class="nav_item {{ navActive === index && 'nav_item_active' }}" bindtap="tapNavItem" wx:for="{{ navList }}" data-index="{{ index }}" wx:key="@">{{ item }}</view>
+    </view>
+  </scroll-view>
+
+  <scroll-view class="content" style="height: {{ winH }}px" scroll-y>
+    <view class="fn_list">
+      <navigator url="../makespecial/index?pid={{ item.id }}" class="fn_item" wx:for="{{fnList}}" wx:key="{{ item.id }}">
+        <view class="fn_bd" style="background-image: url({{ item.mainImgUrl }})">
+          
+        </view>
+
+        <view class="fn_ft">
+          {{ item.title }}
+        </view>
+      </navigator>
+    </view>
+  </scroll-view>
+</view>

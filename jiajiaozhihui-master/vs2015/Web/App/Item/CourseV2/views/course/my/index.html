@@ -1,0 +1,28 @@
+<div ng-controller="myCourseController">
+    <div style="padding:10px;">
+        <div class="container" style="background-color: #eee;">
+            <div loading="" ng-model="isLoading"></div>
+            <div class="row">
+                <div class="col-xs-12" style="margin-bottom:3px; padding-top:10px; padding-bottom:10px; background-color: #fff;" ng-repeat="info in courses">
+                    <div class="row">
+                        <div class="col-xs-4" >
+                            <a ng-href="{{courseHref(info.mediaType,info.courseId)}}">
+                                <img style="width:100%;" ng-src="{{info.miniImgUrl}}"  /><!--ng-src='{{info.imgUrl}}'-->
+                            </a>
+                        </div>
+                        <div class="col-xs-8" style="padding-left:0;">
+                            <div><strong style='font-size:14px;'>{{info.title}}</strong></div>
+                            <div class='weui_media_desc text-muted' style="font-size:13px;margin-top:5px;">{{info.teacher}}</div>
+                            <div class="row" style="font-size:13px;margin-top:5px;">
+                                <div class="col-xs-12 text-muted text-left">
+                                    <span class="sesuccess">{{info.totalSection}}</span>课时
+                                    <span style="padding-left:15px;" ng-class="{true:'glyphicon-facetime-video',false:'glyphicon-headphones'}[info.mediaType==1]" class="glyphicon "></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

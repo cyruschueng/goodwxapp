@@ -1,0 +1,50 @@
+<!--level.wxml-->
+
+<view class="toolbar">
+  <button class="button float left" hover-class="active" bindtap="onCoins">
+    <span><em>咚豆</em><var>{{coins}}</var></span>
+  </button>
+  <button class="button float right" hover-class="active" bindtap="onRank">
+    <span><image src="{{avatarUrl}}" /><dfn>排行</dfn></span>
+  </button>
+</view>
+
+<view class="cardlist">
+  <button class="arrow left" hover-class="active" bindtap="onGoPrev" wx:if="{{levelIndex>0}}">
+    <span><em></em></span>
+  </button>
+  <button class="arrow right" hover-class="active" bindtap="onGoNext" wx:if="{{levelIndex<levelItems.length-1}}">
+    <span><em></em></span>
+  </button>
+  <view wx:for="{{levelItems}}" wx:key="item" wx:if="{{levelIndex == index}}" class="item">
+    <view class="info">
+      <image wx:if="{{!item.locked && item.subjectAnswerCount>=item.subjectCount}}" class="cover" style="width:{{thumbWidth}}px;height:{{thumbHeight}}px" src="{{thumbEncourage}}" />
+      <image wx:if="{{!item.locked}}" class="thumb" style="width:{{thumbWidth}}px;height:{{thumbHeight}}px" src="{{item.coverUrl}}" />
+      <image wx:if="{{item.locked}}" class="thumb" style="width:{{thumbWidth}}px;height:{{thumbHeight}}px" src="{{thumbLoaded}}" />
+      <view class="title">{{item.title}}</view>
+      <view wx:if="{{!item.locked}}" class="hint">题目 {{item.subjectAnswerCount || 0}} /  {{item.subjectCount || 0}} </view>
+      <view wx:if="{{item.locked}}" class="coins">解锁需要 {{item.coins}} 个咚豆</view>
+    </view>
+    <button class="button" hover-class="active" bindtap="onUnlock" wx:if="{{!item.loading && item.locked}}">
+      <span> 解锁关卡 </span>
+    </button>
+    <button class="button" hover-class="active" bindtap="onCoutinue" wx:if="{{!item.loading && !item.locked}}">
+      <span> {{item.subjectAnswerCount>=item.subjectCount?'重玩一局':'继续'}} </span>
+    </button>
+  </view>
+</view>
+
+<view class="tips" wx-if="{{!goodsHave}}">
+  根据听到的音乐猜出电视节目的名称，答对继续下一题，答错 结束
+</view>
+<button class="store" bindtap="onStore" wx-if="{{goodsHave}}">
+  <image src="{{goodsInfo.pic}}" class="image" />
+  <span class="text">
+    <em>{{goodsInfo.title}}</em>
+    <dfn>原价 <var>{{goodsInfo.originPrice}}</var> 券后 <strong>{{goodsInfo.originPrice-goodsInfo.couponValue}}</strong></dfn>
+    <code>更多></code>
+  </span>
+</button>
+
+<mc-coins id="coins"></mc-coins>
+<mc-toast id="toast"></mc-toast>

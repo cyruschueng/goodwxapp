@@ -1,0 +1,15 @@
+<!--pages/errand/awardRecord/awardRecord.wxml-->
+<view wx:if='{{data.length}}'>
+
+    <view class='recordItem f14' wx:for='{{data}}' wx:key='{{item.id}}'>
+        <view class='ntmBox'>
+            <view class='grey '>{{item.add_time}}</view>
+            <view class='name mt10 f16'>{{item.jp_name}}</view>
+            <view class='duijiangma mt5'>兑奖码：{{item.duihuanma}}</view>
+        </view>
+        <view class='btnBox'>
+            <button class='telBtn' plain catchtap='onCopyTap' data-data='{{item.duihuanma}}'>复制</button>
+        </view>
+    </view>
+
+</view>

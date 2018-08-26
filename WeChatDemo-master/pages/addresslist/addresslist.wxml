@@ -1,0 +1,183 @@
+<!--pages/addresslist/addresslist.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">搜索</view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}" style="position: absolute;width:100%;z-index: 999999;">
+      <block wx:for="{{search}}"  wx:for-item="info">
+        <navigator url="../mycard/mycard?userid={{info.userinfo.id}}&alumniID={{alumniID}}" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+                <view>{{info.userinfo.name}}</view>
+            </view>
+        </navigator>
+      </block>
+    </view>
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+        <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+        </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <block wx:for="{{list1}}" wx:for-index="idx1" wx:for-item="list">
+            <view class='widebound'>
+              <view style='height:49px;padding-left:20px;'>
+                <view class='title'>{{idx1}}</view>
+              </view>
+              <block wx:for="{{list}}" wx:for-item="list11">
+                <navigator url='../mycard/mycard?userid={{list11.userinfo.id}}&alumniID={{alumniID}}' open-type='navigate' hover-class="navigator-hover">
+                  <view style='height:60px;padding:15px 20px;'>
+                    <view style='position:relative;height:60px;'>
+                      <view class='peopleimg' wx:if="{{list11.userinfo.headImg != null}}">
+                        <image src='{{list11.userinfo.headImg}}' class='peopleimg2'>
+                        </image>
+                      </view>
+                      <view wx:else class='peopleimg'>
+                      <image src='../../image/moren.png' class='peopleimg2'>
+                        </image>
+                      </view>
+                      <view class='info'>
+                        <view class='info_name'>
+                          <view style='font-size:15px;'>{{list11.userinfo.name}}</view>
+                          <view style='' class='info_boolean'>
+                            <block wx:if="{{false}}">
+                              <view class='info_group'>群主</view>
+                            </block>
+                            <block wx:elif="{{false}}">
+                              <view class='info_me'>我</view>
+                            </block>
+                          </view>
+                        </view>
+                        <view class='info_work' style='display:block;width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;' wx:if="{{list11.userinfo.zhiwei != null && list11.userinfo.company != null}}">{{list11.userinfo.company}} {{list11.userinfo.zhiwei}}</view>
+                      </view>
+                      <view class='right_img'>
+                        <image src='../../image/right.png' class='right_img2'></image>
+                      </view>
+                    </view>
+                  </view>
+                </navigator>  
+              </block>
+            </view>
+          </block>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+        <!-- <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" bindscrolltoupper="searchScrolltoupper" style="width: 100%;height:500px;"> -->
+          <block wx:for="{{list2}}" wx:for-item="list" wx:for-index="idx2">
+            <view class='widebound'>
+              <view style='height:49px;padding-left:20px;'>
+                <view class='title'>{{idx2}}</view>
+              </view>
+              <block wx:for="{{list}}" wx:for-item="list22">
+                <navigator url='../mycard/mycard?userid={{list22.userinfo.id}}&alumniID={{alumniID}}' open-type='navigate' hover-class="navigator-hover">
+                  <view style='height:60px;padding:15px 20px;'>
+                    <view style='position:relative;height:60px;'>
+                      <view class='peopleimg' wx:if="{{list22.userinfo.headImg != null}}">
+                        <image src='{{list22.userinfo.headImg}}' class='peopleimg2'>
+                        </image>
+                      </view>
+                      <view wx:else class='peopleimg'>
+                      <image src='../../image/moren.png' class='peopleimg2'>
+                        </image>
+                      </view>
+                      <view class='info'>
+                        <view class='info_name'>
+                          <view style='font-size:15px;'>{{list22.userinfo.name}}</view>
+                          <view style='' class='info_boolean'>
+                            <block wx:if="{{false}}">
+                              <view class='info_group'>群主</view>
+                            </block>
+                            <block wx:elif="{{false}}">
+                              <view class='info_me'>我</view>
+                            </block>
+                          </view>
+                        </view>
+                        <view class='info_work' style='display:block;width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>{{list22.userinfo.school_time}} {{list22.userinfo.banji}}</view>
+                      </view>
+                      <view class='right_img'>
+                        <image src='../../image/right.png' class='right_img2'></image>
+                      </view>
+                    </view>
+                  </view>
+                </navigator>  
+              </block>
+            </view>
+          </block>
+          <!-- </scroll-view> -->
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+          <block wx:for="{{list3}}" wx:for-item="list" wx:for-index="idx3">
+            <view class='widebound'>
+              <view style='height:49px;padding-left:20px;'>
+                <view class='title'>{{idx3}}</view>
+              </view>
+              <block wx:for="{{list}}" wx:for-item="list33">
+                <navigator url='../mycard/mycard?userid={{list33.userinfo.id}}&alumniID={{alumniID}}' open-type='navigate' hover-class="navigator-hover">
+                  <view style='height:60px;padding:15px 20px;'>
+                    <view style='position:relative;height:60px;'>
+                      <view class='peopleimg' wx:if="{{list33.userinfo.headImg != null}}">
+                        <image src='{{list33.userinfo.headImg}}' class='peopleimg2'>
+                        </image>
+                      </view>
+                      <view wx:else class='peopleimg'>
+                      <image src='../../image/moren.png' class='peopleimg2'>
+                        </image>
+                      </view>
+                      <view class='info'>
+                        <view class='info_name'>
+                          <view style='font-size:15px;'>{{list33.userinfo.name}}</view>
+                          <view style='' class='info_boolean'>
+                            <block wx:if="{{false}}">
+                              <view class='info_group'>群主</view>
+                            </block>
+                            <block wx:elif="{{false}}">
+                              <view class='info_me'>我</view>
+                            </block>
+                          </view>
+                        </view>
+                        <view class='info_work' style='display:block;width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>{{list33.userinfo.banji}}</view>
+                      </view>
+                      <view class='right_img'>
+                        <image src='../../image/right.png' class='right_img2'></image>
+                      </view>
+                    </view>
+                  </view>
+                </navigator>  
+              </block>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+        <view class="weui-loadmore" hidden="{{!loading}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+    <view class="weui-loadmore weui-loadmore_line"  hidden="{{!loadingcomplete}}">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+    </view>
+    <view style='font-size:13px;display: flex;flex-direction: row;justify-content: center;color:#CCCCCC;'>共{{people}}人</view>
+  </view>
+  <view style='padding-top:10px;' wx:if="{{false}}">
+    <view style='margin:0px 30px;'>
+      <button class="weui-btn" type="primary" style='background-color:#2ebd59;' bindtap="watch">查看通讯录</button>
+    </view>
+  </view>
+</view>    

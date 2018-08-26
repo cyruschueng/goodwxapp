@@ -1,0 +1,226 @@
+<!--pages/home/article/article.wxml-->
+<view wx:if="{{info_data.c_info.typeid == 3}}">
+  <!--视频-->
+  <view class="article-video" wx:if="{{info_data.c_info.is_show_av == 1}}">
+    <video bindplay="toPlay" bindtimeupdate="onTimejindu" src="{{info_data.c_info.upurl}}" controls bindplay="topaly" bindpause="toparse" binderror="videoErrorCallback" autoplay="{{is_avAutoPlay==1?true:''}}"></video>
+  </view>
+  <view wx:if="{{jindu==0 && isToplay==true}}">
+    正在加载中...
+  </view>
+  <view wx:if="{{jindu>0 && jindu<100 && isToplay==false}}">
+    播放进程{{jindu}}%
+  </view>
+</view>
+
+<view class="contenter bgwhite">
+  <!--头部标题-->
+  <view class="top-title gridXb">
+    <!--标题-->
+    <view class="title f18">{{info_data.c_info.title}}</view>
+    <!--时间-->
+    <view class="grey">
+      <text class="time mr10">时间：{{info_data.c_info.add_time}}</text>
+      <text class="author mcolor">{{info_data.c_info.author}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{info_data.c_info.typeid == 2}}">
+    <view class="voice flex" wx:if="{{info_data.c_info.is_show_av == 1}}">
+      <!--音频文件-->
+      <audio id="myAudio" src="{{info_data.c_info.upurl}}" bindtimeupdate="onTimeUpdate" bindplay="onPlay" bindpause="onPause"></audio>
+      <view class="voice-img write mr5 tc f16" catchtap="onTogglePlayTap">
+        <text class="iconfont {{playStatus?'icon-bofang':'icon-bofang1'}} "></text>
+      </view>
+      <text class="timesize grey">{{stepTime}}</text>
+      <view class="timeline sub ml15 mr15">
+        <view class="progress-bar" style="width:{{progress}}%;"></view>
+      </view>
+      <text class="timeshow grey">{{durationTime}}</text>
+    </view>
+    <view wx:if="{{playStatus && downloadPercent<100}}">
+      正在缓冲{{downloadPercent}}%
+    </view>
+  </view>
+  <!--文章内容-->
+  <view class="article f16">
+    <import src="../wxParse.wxml" />
+    <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+  </view>
+  <!--继续阅读文章 -->
+  <view wx:if="{{info_data.pddata.is_openPay == 1}}">
+    <view class="read-continue tc">
+      <!--是否开启支付-->
+      <!--用户未购买需付费-->
+      <view wx:if="{{info_data.c_info.is_userpay == 0}}">
+        <button class="f16" type="primary" hover-class="none" bindtap="continue_read">继续阅读</button>
+      </view>
+    </view>
+  </view>
+
+  <!--付费弹出页面-->
+  <view class="popup" wx:if="{{continue_read}}">
+    <view class="read-pay tc mid bgwhite">
+      <!--弹窗顶部按钮-->
+      <view class="title flex grey f16">
+        <view class="pay sub mr20 {{single_read == 'single'?'active':''}}" bindtap="single_read_change">单篇阅读</view>
+        <view class="pay sub {{single_read == 'to_vip'?'active':''}}" bindtap="to_vip_change">成为会员</view>
+      </view>
+      <view>
+        <!--单篇付费列表-->
+        <view class="pay-item mt20" wx:if="{{single_read == 'single'}}">
+          <view class="single">
+            <view class="price mb15 red">￥{{info_data.c_info.pay_price}}</view>
+            <view class="grey f12">单篇付费仅供本篇文章使用哦~~</view>
+          </view>
+          <button class="f16" type="primary" hover-class="none">提交</button>
+        </view>
+        <!--成为会员列表-->
+        <view class="pay-item tl mt20" wx:if="{{single_read == 'to_vip'}}">
+          <view>
+            <view class="time-price flex mt10 {{to_vip=='month'?'active':''}}" bindtap="to_vip_month">
+              <view class="sub">
+                <text class="f18 grey mr10 iconfont {{to_vip=='month'?'icon-roundcheckfill':'icon-round'}}"></text>按月付费</view>
+              <view class="price">￥3.00</view>
+            </view>
+            <view class="time-price flex mt10 {{to_vip=='quarter'?'active':''}}" bindtap="to_vip_quarter">
+              <view class="sub">
+                <text class="f18 grey mr10 iconfont {{to_vip=='quarter'?'icon-roundcheckfill':'icon-round'}}"></text>按季度付费</view>
+              <view class="price">￥5.50</view>
+            </view>
+            <view class="time-price flex mt10 {{to_vip=='year'?'active':''}}" bindtap="to_vip_year">
+              <view class="sub"><span class="f18 grey mr10 iconfont {{to_vip=='year'?'icon-roundcheckfill':'icon-round'}}"></span>按年付费</view>
+              <view class="price">￥7.00</view>
+            </view>
+          </view>
+          <button class="f16" type="primary" hover-class="none">提交</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--赞-->
+  <view class="zan bt" wx:if="{{info_data.pddata.is_openDs == 1}}">
+    <!--打赏按钮-->
+    <view>
+      <button class="btn-zan f16" type="warn" bindtap="zanshang_show">打赏</button>
+    </view>
+    <!--打赏人数-->
+    <view class="peo-num grey tc mb10"><span class="mcolor">{{info_data.dashang.num}}</span>人打赏</view>
+    <!--打赏用户-->
+    <view class="peo">
+      <image wx:for="{{info_data.dashang}}" wx:key="*this" class="peo-img mr5 mb5" src="{{item.headimg}}" mode="aspectFill"></image>
+    </view>
+  </view>
+  <!--打赏弹出页面-->
+  <view class="popup zanshang" wx:if="{{zanshang_show}}">
+    <view class="app-admire mid tc bgwhite">
+      <view class="top">
+        <!--头部背景-->
+        <view class="topbg"></view>
+        <!--用户头像-->
+        <image class="user-img" src="/images/2.jpg" mode="aspectFill"></image>
+        <!--用户昵称-->
+        <view class="mt10 f18">喜羊羊与灰太狼</view>
+        <view class="grey f12">您的打赏是对我最大的鼓励</view>
+      </view>
+      <!--金额-->
+      <view class="money">
+        <view class="red mb10">
+          <view class="list mt10 mr10">5
+            <text class="f14">元</text>
+          </view>
+          <view class="list mt10 mr10">10
+            <text class="f14">元</text>
+          </view>
+          <view class="list mt10 mr10">20
+            <text class="f14">元</text>
+          </view>
+          <view class="list mt10 mr10">50
+            <text class="f14">元</text>
+          </view>
+          <view class="list mt10 mr10">80
+            <text class="f14">元</text>
+          </view>
+          <view class="list mt10 mr10">100
+            <text class="f14">元</text>
+          </view>
+        </view>
+        <text class="other f14 blue">其他金额</text>
+      </view>
+      <!--其他金额-->
+      <view class="pop-input">
+        <view class="other-money mid">
+          <view class="title bb tc">其他金额
+            <text class="grey fr close iconfont icon-close"></text>
+          </view>
+          <view class="input-box flex">
+            <text>金额(元)</text>
+            <input class="ml10 sub" placeholder="可填写1-256" />
+          </view>
+          <button class="f16" type="primary" hover-class="none">打赏</button>
+        </view>
+      </view>
+      <!--底部提示-->
+      <view class="tips grey f12">打赏是表示鼓励而对文章内容的无偿赠与</view>
+    </view>
+  </view>
+  <!--阅读量-->
+  <view class="read-num grey flex">
+    <view class="sub flex">
+      <view><text>阅读</text><text class="ml5">{{readnum}}</text></view>
+      <view><text class="zan-num" bindtap="toZan" id="{{info_data.c_info.id}}"><text class="{{iszan == 1?'mcolor':'linght'}} ml15 mr5 iconfont icon-appreciatefill"></text>{{article_good_count}}</text>
+      </view>
+      <view class="share-msg ml10"><button class="mcolor iconfont icon-share" open-type="share">分享</button></view>
+      <view class="ml10" bindtap="toCollection" id="{{info_data.c_info.id}}"><text class="iconfont icon-favor{{is_collection?'fill':''}}"></text>收藏</view>
+    </view>
+
+    <!--写留言-->
+    <view class="white-msg mcolor" bindtap="write_msg" wx:if="{{info_data.pddata.is_comment == 1}}"><span class="iconfont icon-bianji"></span>写留言</view>
+  </view>
+
+</view>
+<!--用户留言-->
+<view wx:if="{{info_data.pddata.is_comment == 1}}">
+  <view class="saying">
+    <view class="userlist flex" wx:for="{{comment_list}}" wx:key="*this">
+      <image class="img mr15" src="{{item.app_user_headimg}}" mode="aspectFill"></image>
+      <view class="sub gridXb">
+        <view class="flex">
+          <view class="sub grey">{{item.app_user_name}}</view>
+          <view class="zan-num grey" bindtap="toDianzan" id="{{item.id}}"><span class="{{item.iszanpl == 1?'mcolor':'linght'}} f18 mr5 iconfont icon-appreciatefill"></span>{{item.good_count}}</view>
+        </view>
+        <view class="text">{{item.content}}</view>
+        <view class="time grey f12">{{item.add_time}}</view>
+      </view>
+    </view>
+  </view>
+  <!--没有更多了-->
+  <view class="nothing grey mt10 mb10 tc f14 flex" wx:if="{{is_load_more==false}}">
+    <text class="line sub mr10"></text>
+    <text>没有更多评论了</text>
+    <text class="line sub ml10"></text>
+  </view>
+</view>
+
+<!--评论输入框-->
+<view class="floatBox" wx:if="{{write_msg}}">
+  <form report-submit="true" bindsubmit="formSubmit">
+    <view class="pinglun-input flex">
+      <input class="mr10 sub" name="content" focus="true" placeholder="说点什么吧~~" />
+      <button form-type="submit" type="primary" id="{{info_data.c_info.id}}">发送</button>
+    </view>
+  </form>
+  <view class="floatBoxBg" style="display:block" bindtap="toClose"></view>
+</view>
+
+<!--右侧按钮-->
+<view class="right-btn tc write">
+  <!--返回主页-->
+  <view class="little-btn mb5" catchtap="toIndex" data-url="../index/index"><text class="iconfont icon-home"></text></view>
+</view>
+<!--左侧按钮-->
+<view class="right-btn left-btn tc write">
+  <!--生成二维码-->
+  <view class="little-btn mb5" catchtap="getCode">
+    <text style="font-size:15px" class="iconfont iconfont icon-erweima1 #fff"></text>
+  </view>
+</view>

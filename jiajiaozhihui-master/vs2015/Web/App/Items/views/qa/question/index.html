@@ -1,0 +1,180 @@
+<div style="height:100%;  background-color: #aaa;">
+    <div loading="" ng-model="isLoading"></div>
+    <div class="container" ng-controller="questionController" style="height:auto; background-color: #aaa;" >
+        <div ng-if="userInfo.childAge==0 || userInfo.childAge==null || childAge.sex==''">
+            <div class="weui_msg" >
+                <div class="weui_icon_area"><i class="weui_icon_warn weui_icon_msg se_success"></i></div>
+                <div class="weui_text_area">
+                    <h2 class="weui_msg_title">提示</h2>
+                    <p class="weui_msg_desc">
+                        请先完善你的个人资料,然后再提问！
+                    </p>
+                </div>
+                <div class="weui_opr_area">
+                    <p class="weui_btn_area">
+                        <a ng-href="#editpersonal" class="weui_btn weui_btn_primary se_primary">确定</a>
+                    </p>
+                </div>
+                <div class="weui_extra_area">
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+        <form ng-if="userInfo.childAge!=0 && userInfo.childAge!=null && childAge.sex!='' " name="formIndex" ng-submit="submitForm(formIndex.$invalid)" novalidate="novalidate">
+            <div class="row">
+                <div >
+                    <div ng-show="formIndex.title.$error.required && !formIndex.title.$pristine ">
+                        <div class="alert alert-danger" style="margin-bottom:0;">标题不能空</div>
+                    </div>
+                    <div ng-show="!formIndex.title.$error.required && formIndex.title.$error.minlength && !formIndex.title.$pristine ">
+                        <div class="alert alert-danger" style="margin-bottom:0;">标题不能少于5个字</div>
+                    </div>
+                    <div ng-show="!formIndex.title.$error.required && formIndex.title.$error.maxlength && !formIndex.title.$pristine ">
+                        <div class="alert alert-danger" style="margin-bottom:0;">标题不能多于30个字</div>
+                    </div>
+                    <div ng-show="formIndex.comment.$error.required && !formIndex.comment.$pristine ">
+                        <div class="alert alert-danger" style="margin-bottom:0;">内容不能空</div>
+                    </div>
+                    <div ng-show="!formIndex.comment.$error.required && formIndex.comment.$error.minlength && !formIndex.comment.$pristine ">
+                        <div class="alert alert-danger" style="margin-bottom:0;">内容不能少于5个字</div>
+                    </div>
+                    <div ng-show="!formIndex.comment.$error.required && formIndex.comment.$error.maxlength && !formIndex.comment.$pristine ">
+                        <div class="alert alert-danger" style="margin-bottom:0;">内容不能多于200个字</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div >
+                    <div class="weui_cells weui_cells_form" style="margin-top:0;">
+                        <div class="weui_cell" style="display: none">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input style="font-weight: bold"  class="weui_input" ng-model="data.title"  placeholder="标题" name="title" type="text" >
+                            </div>
+                        </div>
+                        <div class="weui_cell se_line">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <textarea  name="comment" ng-model="text.inputtest.content"  ng-change="text.checkText()" class="weui_textarea" placeholder="内容"  rows="3" required ng-minlength="5" ng-maxlength="200"></textarea>
+                                <div class="weui_textarea_counter"><span >{{text.inputtest.currNumber}}</span>/<span>200</span></div>
+                            </div>
+                        </div>
+                        <div class="weui_cell se_line">
+                            <div class="weui_cell_hd">
+                                <!--
+                                <span se-image-voice="image" style="margin-right:15px;" class="glyphicon glyphicon-picture text-primary"></span>
+                                <a ng-if="selectedExpert.expertType==1" href="#myexpert?hash=question" class="glyphicon glyphicon-user">{{selectedExpert.expertName}}</a>
+                                <a ng-if="selectedExpert.expertType==2" href="#myexpert?hash=question"  class="glyphicon glyphicon-user">{{selectedExpert.expertName}}</a>
+                                <a ng-if="selectedExpert.expertType==0" href="#myexpert?hash=question"  class="glyphicon glyphicon-user"></a>
+                                -->
+                                <span ng-if="isShowImg" ng-click="delImg()" class="glyphicon glyphicon-remove-circle" style="color:#f00;background-color: #eee;font-size:12px;">图片删除</span>
+                                <span ng-if="selectedExpert.expertId!=''"  ng-click="delExpert()" class="glyphicon glyphicon-remove-circle" style="color:#f00;background-color: #eee;font-size:12px;">{{selectedExpert.expertName}}</span>
+                            </div>
+                            <div class="weui_cell_bd weui_cell_primary"></div>
+                            <div class="weui_cell_ft">
+                                <input type="submit" value="提交" ng-class="{true:'weui_btn_info',false:'weui_btn_primary'}[formIndex.$invalid]" ng-disabled="formIndex.$invalid" ng-click="result()" class="weui_btn weui_btn_mini">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="image">
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <div class="weui_uploader">
+                                    <div class="weui_uploader_bd">
+                                        <!--
+                                        <ul class="weui_uploader_files" style="margin-bottom:0;">
+                                            <li ng-click="showImg()" ng-if="isShowImg;" class="weui_uploader_file" style="background-image:url({{imageSrc}}); padding-bottom:15px; position: relative">
+                                                <span ng-click="delImg()" class="glyphicon glyphicon-remove-circle" style="color:#f00;background-color: #eee;"></span>
+                                            </li>
+                                        </ul>
+                                        -->
+                                        <div ng-class="{false:'weui_uploader_input_wrp',true:'weui_uploader_input_wrp se_uploader_input_wrp'}[isShowImg]"
+                                             style="position: relative; margin-bottom:30px; background:url({{imageSrc}}) no-repeat;background-size: cover;" >
+                                            <input class="weui_uploader_input" type="button" ng-click="chooseImage()" />
+                                            <div style="position: absolute; bottom: -20px; left: 0; color:#fff;font-size:13px; width:100%; text-align: center">
+                                                <span>选择图片</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="weui_uploader_input_wrp se_uploader_input_wrp"
+                                             style="position: relative; margin-bottom:30px;background: url({{selectedExpert.headImgUrl||'../../../content/imgs/upload.jpg'}}) no-repeat; background-size: cover;">
+                                            <span class="weui_uploader_input" ng-click="showExpert()"></span>
+                                            <div style="position: absolute; bottom: -20px; left: 0; color:#fff;font-size:13px; width:100%; text-align: center">
+                                                <span>{{selectedExpert.expertName||'选择专家'}}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="voice" style="display: none">
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <div class="weui_uploader">
+                                    <div class="weui_uploader_bd">
+                                        <ul class="weui_uploader_files" style="margin-bottom:0;">
+                                            <li ng-click="voice.testPlayVoice()" ng-if="isShowVoice"  class="weui_uploader_file" style="background-image:url(../../../content/imgs/play.png); padding-bottom:15px; position: relative">
+                                                <span ng-click="voice.clear()" class="glyphicon glyphicon-remove-circle" style="color:#f00;background-color: #eee;"></span>
+                                            </li>
+                                        </ul>
+                                        <div class="weui_uploader_input_wrp">
+                                            <input show-voice-record="new" class="weui_uploader_input" type="button"  />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="expert" style="display: none">
+                        <div class="weui_cell weui_cells_access">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <div class="weui_uploader">
+                                    <div class="weui_uploader_bd" ng-controller="expertController">
+                                        <ul class="weui_uploader_files" style="margin-bottom:0;">
+                                            <div ng-repeat="m in list">
+                                                <li ng-if="m.expertType==1" se-select-expert="{{m.id}}" data-name="{{m.uname}}" class="weui_uploader_file" style="padding-bottom:15px; margin-bottom: 30px; position: relative">
+                                                    <img  class="img-responsive" src="" data-ui-lazyload="{{serverUrl+m.imgUrl}}">
+                                                    <div style="position: absolute; bottom: -18px;left: 0; width: 100%; text-align: center;color:#333; background-color: #eee; font-size:13px;">
+                                                        <span>{{m.uname}}</span>
+                                                    </div>
+                                                    <span  style="position: absolute;bottom: -20px; right: 0;"></span>
+                                                </li>
+                                                <li ng-if="m.expertType==2" se-select-expert="{{m.id}}" data-name="{{m.nickName}}" class="weui_uploader_file" style="padding-bottom:15px; margin-bottom: 30px; position: relative">
+                                                    <img class="img-responsive" src="" data-ui-lazyload="{{m.headImgUrl}}">
+                                                    <div style="position: absolute; bottom: -18px;left: 0; width: 100%; text-align: center;color:#333; background-color: #eee; font-size:13px;">
+                                                        <span>{{m.nickName}}</span>
+                                                    </div>
+                                                    <span  style="position: absolute;bottom: -20px; right: 0;"></span>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!----------开始录音--------------->
+<div id="actionSheet_wrap">
+    <div class="weui_mask_transition" id="mask"></div>
+    <div class="weui_actionsheet" id="weui_actionsheet">
+        <div id="actionsheet_record"  class="text-center" style="padding: 15px 5px; display: none ">
+            <img style="width:50%;" src="../../../content/imgs/0112205543a25f0000019ae98571ec.jpg">
+        </div>
+        <div class="weui_actionsheet_menu">
+            <div id="actionsheet_voice" class="weui_actionsheet_cell">开始录音</div>
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="actionsheet_cancel">取消</div>
+        </div>
+    </div>
+</div>

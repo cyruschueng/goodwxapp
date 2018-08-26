@@ -1,0 +1,102 @@
+<view class="view_box">
+    <view class="course_box">
+        <image src="../../images/course.png" alt="" class="course_img"></image>
+        <view class="course_info">
+            <view class="hot_course_name"><!--&gt;Happy New Year! 新年快乐!-->{{courseInfo.coursename}}</view>
+            <view class="intro"><!--各位小朋友们!双击666666666666666666 -->{{courseInfo.intro}}</view>
+            <view class="course_teachername">主讲:<!--Alex! -->{{courseInfo.coursename}}</view>
+            <view class="duration">课程有效期:<!--3个月--> {{courseInfo.duration}}<span class="schedules">总课时数:<!--1-->{{courseInfo.schedules}}</span>
+            </view>
+        </view>
+    </view>
+    <!--    <view class="course_tab">
+            <view class="swiper-tab">
+                <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">课程详情</view>
+                <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">课程表</view>
+            </view>&lt;!&ndash;height:{{lengthPx}}rpx&ndash;&gt;
+            <swiper style="height: 700rpx;" current="{{currentTab}}" duration="300" bindchange="swiperTab">
+                <swiper-item class="swp_item">
+                    <view class="class_info">
+                        &lt;!&ndash;3-5岁的孩子处于语言学习的黄金期。对于英语，孩子会以"母语"的形式掌握并自然运用。调动孩子的英语兴趣尤为重要。瑞思学科英语采用主题教学的方法，通过故事、歌曲、游戏等方式灵活的表现出来，让孩子在生动有趣的互动过程中，在浸入式的英语环境里，英语自然习得。每个主题都会初步涉及数学逻辑、自然科学，为下一阶段系统学习学科知识做好铺垫。&ndash;&gt;
+                    </view>
+                </swiper-item>
+                <swiper-item class="swp_item">
+                    <ul class="lessons_li">
+                        <li wx:for="{{}}" wx:for-index="index" wx:for-item="item" wx:key="item.productid">
+                            <span>课时{{index+1}}</span>
+                            <span>{{item.title}}</span>
+                        </li>
+                      &lt;!&ndash;  <li>
+                            <span>课时1</span>
+                            <span>第一讲:学音标</span>
+                        </li>
+                        <li>
+                            <span>课时2</span>
+                            <span>第二讲:学音标</span>
+                        </li>
+                        <li>
+                            <span>课时3</span>
+                            <span>第三讲:学音标</span>
+                        </li>
+                        <li>
+                            <span>课时4</span>
+                            <span>第四讲:学音标</span>
+                        </li>
+                        <li>
+                            <span>课时5</span>
+                            <span>第五讲:学音标</span>
+                        </li>
+                        <li>
+                            <span>课时6</span>
+                            <span>第六讲:学音标</span>
+                        </li>
+                        <li>
+                            <span>课时7</span>
+                            <span>第⑦讲:学音标</span>
+                        </li>&ndash;&gt;
+
+                    </ul>
+                </swiper-item>
+            </swiper>
+        </view>-->
+    <!--导航条-->
+  <view class="nav_box">
+      <view class="navbar">
+          <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}"
+                wx:key="unique" bindtap="navbarTap">{{item}}
+          </text>
+      </view>
+      <view hidden="{{currentTab!==0}}" class="tab_box">
+          <view class="class_info" wx:if="{{class_info}}">
+              我是课程概览...........
+              我是课程概览..........
+              我是课程概览..........
+          </view>
+          <view class="course_null" wx:else>
+              <image class="course-empty" src="../../images/course-empty.png"></image>
+              <view style="background:#ececec;min-height:200rpx;"></view>
+          </view>
+      </view>
+      <view hidden="{{currentTab!==1}}" class="tab_box">
+          <view class="lessons_box" wx:if="{{lessons_li}}">
+              <ul class="lessons_li">
+                  <li wx:for="{{lessons}}" wx:for-index="index" wx:for-item="item" wx:key="item.productid">
+                      <span>课时{{index+1}}</span>
+                      <span>{{item.title}}</span>
+                  </li>
+              </ul>
+          </view>
+          <view class="course_null" wx:else>
+              <image class="course-empty" src="../../images/course-empty.png"></image>
+              <view style="background:#ececec;min-height:200rpx;"></view>
+          </view>
+
+      </view>
+  </view>
+    <view class="bay_body">
+        <button class="price">￥ <!--3000-->{{courseInfo.price}}</button>
+        <button class="btn_bay">立即购买</button>
+    </view>
+</view>
+
+

@@ -1,0 +1,111 @@
+<!--pages/album/album.wxml-->
+<!--pages/meeting/meeting.wxml-->
+<view class='superheader'></view>
+<text class='fa fa-chevron-left btnback' bindtap='back'></text>
+
+
+
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar" style='background:white;'>
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}
+              <view class="weui-badge" wx:if="{{index==0&&t1>0}}">{{t1}}</view>
+              <view class="weui-badge" wx:if="{{index==1&&t2>0}}">{{t2}}</view>
+            </view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view style='background:#f2f2f2;color:#999;font-size:22rpx;padding:3vw;position:absolute;width:94vw;'>
+            <text>转发此页面到任意群，可创建群相册</text>
+            <text class='primary' style='font-size:30rpx;line-height:30rpx;position:absolute;right:2vh;' bindtap='startManage' >管理</text>
+          </view>
+
+          <view class='flex-row' style='flex-direction: row;flex-wrap: wrap;margin-top:5vh;'>
+            <view class='flexbox' >
+              <text class='selectoption' wx:if="inmanage==false" style='color:transparent'>a</text>
+              <view bindtap='createAlbum'>
+                <image class='cover' mode='aspectFill' ></image>
+              </view>
+              <view class='cover_text'>创建相册</view>
+            </view>
+            <view class='flexbox' bindtap='selectAllPhotos'>
+              <text class='selectoption' wx:if="inmanage==false" style='color:transparent'>a</text>
+              <view>
+                <image class='cover' mode='aspectFill' src="{{uploadpath}}album/{{group.allphotocover}}"></image>
+              </view>
+              <view class='cover_text'>全部图片</view>
+            </view>
+            <!--
+            <view class='flexbox'>
+              <text class='selectoption' wx:if="inmanage==false" style='color:transparent'>a</text>
+              <view>
+                <image class='cover' mode='center'></image>
+              </view>
+              <view class='cover_text'>全部视频</view>
+            </view>-->
+            <view class='flexbox' wx:for="{{allalbum}}" wx:key="k" bindtap='selectAlbum' id="{{item.id}}">
+              <text class='selectoption fa fa-circle-o primary'  wx:if="{{item.createdmember_id_name==UserInfo.openid&&inmanage==true&&item.selected==false}}"></text>
+              <text class='selectoption fa fa-check-circle-o primary' wx:if="{{item.createdmember_id_name==UserInfo.openid&&inmanage==true&&item.selected==true}}"></text>
+              <text class='selectoption' wx:if="inmanage==false" style='color:transparent'>a</text>
+              <view>
+                <image class='cover' src="{{uploadpath}}album/{{item.cover}}" mode='aspectFill'></image>
+              </view>
+              <view class='cover_text' >{{item.name}} <text bindtap='changeAlbumname' data-name="{{item.name}}" data-openid="{{item.createdmember_id_name}}" data-sid="{{item.id}}" class=' fa fa-pencil' wx:if="{{item.createdmember_id_name==UserInfo.openid}}"></text></view>
+            </view>
+            
+          </view>
+
+
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <view style='background:#f2f2f2;color:#999;font-size:22rpx;padding:3vw;position:absolute;width:94vw;'>
+            <text>转发此页面到任意群，可创建群相册</text>
+            <text class='primary' style='font-size:30rpx;line-height:30rpx;position:absolute;right:2vh;' bindtap='startManage' >管理</text>
+          </view>
+
+          <view class='flex-row' style='flex-direction: row;flex-wrap: wrap;margin-top:5vh;'>
+            <view class='flexbox' wx:for="{{myalbum}}" wx:key="k" bindtap='selectAlbum' id="{{item.id}}">
+              <text class='selectoption fa fa-circle-o primary'  wx:if="{{item.createdmember_id_name==UserInfo.openid&&inmanage==true&&item.selected==false}}"></text>
+              <text class='selectoption fa fa-check-circle-o primary' wx:if="{{item.createdmember_id_name==UserInfo.openid&&inmanage==true&&item.selected==true}}"></text>
+              <text class='selectoption' wx:if="inmanage==false" style='color:transparent'>a</text>
+              <view>
+                <image class='cover' src="{{uploadpath}}album/{{item.cover}}" mode='aspectFill'></image>
+              </view>
+              <view class='cover_text' >{{item.name}} <text bindtap='changeAlbumname' data-name="{{item.name}}" data-openid="{{item.createdmember_id_name}}" data-sid="{{item.id}}" class=' fa fa-pencil' wx:if="{{item.createdmember_id_name==UserInfo.openid}}"></text></view>
+            </view>
+            
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="page__bd page__bd_spacing" wx:if="{{inmanage}}" style='height:unset;'>
+    <view class="weui-footer weui-footer_fixed-bottom" style='background:#fefefe; border-top:2rpx solid #ccc;padding-left:10vw;padding-right:10vw;padding-top:1vw;'>
+      <view class="weui-flex">
+        <view  >
+          <button size="mini" bindtap='cancelManage'>取消</button>
+        </view>
+        <view class="weui-flex__item">
+        <text >请选择删除的相册</text>
+        </view>
+        <view  >
+        <button size="mini" type='warn' bindtap='deleteAlbum'>删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<modal hidden="{{hiddenmodalput}}" title="回忆主题" confirm-text="提交" cancel-text="放弃" bindcancel="cancelCreate" bindconfirm="confirmCreate">  
+    <input type='text' placeholder="请输入主题名称" value="{{albumname}}" bindinput='inputAlbunname' maxlength='20' /> 
+</modal>

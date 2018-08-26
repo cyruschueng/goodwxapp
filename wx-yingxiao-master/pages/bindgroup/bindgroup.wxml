@@ -1,0 +1,49 @@
+<loading wx:if="{{loading!=0}}">请稍后</loading>
+<view class='container' wx:if="{{appleaing==0&&loading==0}}">
+  <view class='binded' wx:if="{{isbind==1}}">
+    <image src='/pages/source/images/binded.png'></image>
+    <view class='bindedTitle'>已有绑定</view>
+    <view class='done'>此群已有群主,您可以申请解绑</view>
+    <view class='done'>申诉成功后重新进入页面即可进入绑定流程</view>
+    <view class='btn-show' bindtap='isModel'>我要申诉</view>
+  </view>
+  <view class='unbind' wx:if="{{isbind==0}}">
+    <view class='bindItem'>
+      <view>姓名</view>
+      <input placeholder='请输入姓名' style='border-bottom:1px solid {{color1}}' bindinput='getName'></input>
+    </view>
+    <view class='bindItem'>
+      <view>手机号</view>
+      <input placeholder='请输入手机号' type='number'  style='border-bottom:1px solid {{color2}}' bindinput='getPhone' maxlength='16'></input>
+    </view>
+    <view class='bindItem'>
+      <view>群备注</view>
+      <input placeholder='请输入群备注'  style='border-bottom:1px solid {{color3}}' bindinput='getInfo'></input>
+    </view>    
+    <view class='btn-bind' bindtap='bindGroup'>绑定为群主</view>
+  </view>
+</view>
+<view class='model' wx:if="{{isModel==1&&loading==0}}">
+  <view class='window'>
+    <view class='appealTitle'>群主申诉</view>
+    <view class='appeal'>
+      <input placeholder='姓名'></input>
+    </view>
+    <view class='appeal'>
+      <input placeholder='手机号'></input>
+    </view>
+    <view class='appeal'>
+      <input placeholder='群备注'></input>
+    </view>    
+    <view class='btn-sub'>申请提交</view>
+    <image class='close' bindtap='close' src='/pages/source/images/close.png'></image>
+  </view>
+</view>
+<view class='appleaing' wx:if="{{appleaing==1&&loading==0}}">
+  <view class='status'>
+    <image src='{{applea[status].img}}'></image>
+    <view style='color:{{applea[status].color}}'>{{applea[status].title}}</view>
+    <view>{{applea[status].info}}</view>
+  </view>
+  <view class='TIP'>注:每人每个群只能申诉一次</view>
+</view>

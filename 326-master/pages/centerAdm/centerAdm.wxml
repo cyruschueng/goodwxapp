@@ -1,0 +1,92 @@
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<view class="list Skin" bindtap='CenterModi'>
+      <view class='listImg mAb'>
+        <image class="imgL br50"src="{{AccountInfo.photo?AccountInfo.photo:'/images/userW.png'}}"></image>
+      </view>
+      <view class='.listPar'>
+        <view class="flexColumn">
+        <view>{{usr}}</view>
+        <view>管理员</view>
+      <view>
+    </view>
+  </view>
+</view>
+ <image class="imgxxs"src="/images/next.png"></image> 
+</view> 
+<view class='powerLisThir flexBetw padding02 borderB'>
+  <template is="listNav" data="{{listNavData: listNavData}}"/>
+</view>
+   <!--发电end  -->
+   <!--左右排列str  -->
+   <!-- <view class='flexBetw bgColor0 borderB pd05'  bindtap='replaceSkinpage'>
+    <view class='flexCenter '>
+      <image class="imgxs"src="/images/user_anquan.png"></image>
+      换肤
+    </view>
+    <image class="imgxxs"src="/images/next.png"></image>
+   </view>   -->
+<template is="listOne" data="{{listOne: listOne[0]}}"/>
+   <!-- <view class='flexBetw bgColor0 borderB pd05' bindtap='about'>
+    <view class='flexCenter '>
+      <image class="imgxs"src="/images/yezhutitle.png"></image>
+      关于
+    </view>
+    <image class="imgxxs"src="/images/next.png"></image>
+   </view>   -->
+    <!-- <view class='flexBetw bgColor0 mb05 pd05'>
+     <view class='flexCenter'>
+      <image class="imgxs"src="/images/saomiao_login.png"></image>
+      扫描登陆
+    </view>
+    <image class="imgxxs"src="/images/next.png"></image>
+   </view>  
+    <view class='flexBetw bgColor0 mb05 pd05' bindtap='rechargePage'>
+      <view class='flexCenter'>
+        <image class="imgxs"src="/images/mainfar_dayshouyi.png"></image>
+        充值
+      </view>
+    <image class="imgxxs"src="/images/next.png"></image>
+   </view>  -->
+
+      <view class='flexBetw bgColor0 borderB pd05 h8' >
+    <view class='flexCenter '>
+      <image class="imgxs"src="/images/bindwx.png"></image>
+      绑定微信（{{isCheck}}）
+    </view> 
+   
+    <view class='overhiden' wx:if="{{wxCheckbind}}" bindtap='offWechart'>
+      <switch checked />
+    </view>
+    
+    <view class='overhiden' wx:if="{{wxCheck}}">
+      <button class='btnNone'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+        <switch/>
+      </button>
+    </view>
+    </view>   
+    <!--群排名 未str  -->
+    <!-- <view class='flexBetw bgColor0 borderB pd05 h8'  bindtap='listOnetap' data-type="rank" wx:if="{{wxNoCheckbind}}" >
+        <view class='flexCenter '>
+          <image class="imgxs"src="/images/rank.png"></image>
+          群排名
+        </view>
+        <image class="imgxxs"src="/images/arrow_unexpanded.png"></image>
+    </view>   -->
+    <!--群排名 未end  -->
+     <view class='bgColor0 borderB pd05 h8'  wx:if="{{wxCheckbind}}">
+      <button class='btnNone width100 h100 flexBetw' open-type="share">
+        <view class='flexCenter'>
+          <image class="imgxs"src="/images/rank.png"></image>
+          <view class='color9 font08'>群排名</view>
+        </view>
+      <image class="imgxxs"src="/images/arrow_unexpanded.png"></image> 
+      </button>
+    </view>  
+
+  <view class='flexCenter bg256 pd1 color0 h8' bindtap='logOut'>退出当前账号</view>
+   <!--左右排列end  -->
+</view>
+

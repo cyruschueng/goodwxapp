@@ -1,0 +1,16 @@
+<view class="search-container">
+    <scroll-view class="search-scroll" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+        <view class="search-wrap">
+            <view class="search-inner">
+                <image mode="aspectFit" src="../../images/ic_home_search.png"></image>
+                <input bindinput="inputChangeActive" value="{{inputValue}}" class="icar-input" placeholder-class="icar-placeholder" placeholder="输入搜索内容" auto-focus />
+                <image catch:tap="emptyInputValueActive" class="search-cancel" mode="aspectFit" src="../../images/ic_home_delete.png"></image>
+            </view>
+            <view class="search-cancel-btn">取消</view>
+        </view>
+        <view class="line"></view>
+        <view class='search-list-wrap'>
+            <testList testList="{{list}}" bind:jumpEvent="listToH5Active"></testList>
+        </view>
+    </scroll-view>
+</view>

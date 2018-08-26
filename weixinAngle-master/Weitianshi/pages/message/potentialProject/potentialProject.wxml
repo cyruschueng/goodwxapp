@@ -1,0 +1,52 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="swiper-tab">
+
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">提交给我的项目</view>
+
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我申请查看的项目</view>
+
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">匹配推荐</view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:570px" bindchange="bindChange">
+    <!--推送给我的项目  -->
+    <swiper-item>
+      <scroll-view scroll-y="true" bindscrolltolower="pushMore" scroll-top="{{scroll}}">
+        <template is="allNumber" data="{{count:count1,text:'提交给我的项目'}}"></template>
+        <template is="personModal" data="{{list:pushToList,type:0}}"></template>
+        <template is="hasNothing" data="{{emptyNumber:pushToList}}"></template>
+      </scroll-view>
+    </swiper-item>
+    <!--我申请查看的项目  -->
+    <swiper-item>
+      <scroll-view bindscrolltolower="loadMore" scroll-top="{{scroll}}" scroll-y="true">
+        <template is="allNumber" data="{{count:count,text:'我申请查看的项目'}}"></template>
+        <template is="personModal" data="{{list:applyList,type:1,push_id:0,project_id:project_id}}"></template>
+        <template is="hasNothing" data="{{emptyNumber:applyList}}"></template>
+      </scroll-view>
+    </swiper-item>
+    <!--匹配推荐  -->
+    <swiper-item>
+      <scroll-view scroll-y="true" scroll-top="{{scroll}}" bindscrolltolower="matchMore">
+        <template is="allNumber" data="{{count:count2,text:'匹配推荐'}}"></template>
+        <template is="selectProject" data="{{list:getMatchList,type:2,push_id:0}}"></template>
+        <template is="hasNothing" data="{{emptyNumber:getMatchList}}"></template>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <!--没有更多-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+  <!--模态框  -->
+  <view class="modalBox" hidden="{{modalBox==0}}">
+    <view class="classname" bindtap="closeModal">
+      <image src="/img/icon-guanbi@2x.png" class="close"></image>
+    </view>
+    <view class="contactModalBox">
+      <view class="modalTitle">联系项目方</view>
+      <textarea class="modalContent" placeholder="请描述您的意向约谈时间，方式" bindinput="contentProject" />
+      <view class="modalTips">微天使将为您联系项目方并安排约谈或添加FA哥微信：weitianshicn</view>
+      <button class="btn" bindtap="yesBtn" hover-class='t-other-button-hover' disabled="{{disabled}}">确定</button>
+    </view>
+  </view>
+</view>

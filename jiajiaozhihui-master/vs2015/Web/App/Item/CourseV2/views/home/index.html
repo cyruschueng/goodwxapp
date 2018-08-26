@@ -1,0 +1,118 @@
+<div style="padding-bottom:30px; background-color: #F4EEEE">
+    <div class=" container"  ng-controller="homeController">
+        <div loading="" ng-model="isLoading"></div>
+        <div class="row ">
+            <img style="width:100%;" src="../coursev2/imgs/logo.jpg">
+        </div>
+        <div class="row">
+            <div class="weui_cells weui_cells_access seline" style="background-color:#F4EEEE;margin-top:0">
+                <a class="weui_cell bg-success" href="http://weixin.jiajiaozhihui.cn/link/wanmama.html">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div><span class="fa fa-th-list"></span> 万妈妈每日一课</div>
+                    </div>
+                    <div class="weui_cell_ft" style="font-size:13px;">更多</div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div ng-if="courses.wangMaMa.length>0" ng-repeat="info in courses.wangMaMa|orderBy:startDate">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <a ng-if="info.isBuy==false" ng-href="#viewcourse?cid={{info.id}}&themid=14">
+                            <div style="position: relative;">
+                                <img style="width:100%;" data-ui-lazyload="{{info.imgUrl}}">
+                                <div style="position:absolute; bottom: 0; left: 0;
+                                    width: 100%; font-size:16px;padding:5px; color:#fff;
+                                    background-color: #000; opacity:0.5; "
+                                     ng-bind="info.title" class="text-muted"></div>
+                            </div>
+                        </a>
+                        <a ng-if="info.isBuy==true" ng-href="#viewcourse?cid={{info.id}}&themid=14">
+                            <div style="position: relative;">
+                                <img style="width:100%;" data-ui-lazyload="{{info.imgUrl}}">
+                                <div style="position:absolute; bottom: 0; left: 0;
+                                    width: 100%; font-size:16px;padding:5px; color:#fff;
+                                    background-color: #000; opacity:0.5; "
+                                     ng-bind="info.title" class="text-muted"></div>
+                            </div>
+                        </a>
+                        <div class="col-xs-1" style="background-color: #fff;height:50px; line-height: 50px;">
+                            <span class="ng-binding"  ng-class="{true:'fa fa-play',false:'fa fa-pause'}[audio.paused]"
+                                  style="color:#ddd; font-size:20px;" ng-click="audio.paused ? audio.play() : audio.pause()">
+                            </span>
+                        </div>
+                        <div class="col-xs-11" style="background-color: #fff;height:50px; line-height: 50px;">
+                            <input class=" ng-pristine ng-valid ng-touched" min="0" max="1" step="0.01"
+                                   style="padding-top:25px;" ng-model="audio.progress" type="range">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="weui_cells weui_cells_access seline" style="background-color:#F4EEEE;margin-top:0">
+                <a class="weui_cell bg-danger">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div><span class="fa fa-th-list"></span>名师课程</div>
+                    </div>
+                    <div class="weui_cell_ft"></div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="padding-bottom:2px; " ng-repeat="info in courses.mingShiKeTing | orderBy:'startDate'">
+                <div class="row" style="background-color:#fff;padding-top:5px;padding-bottom:5px;">
+                    <div class="col-xs-5" >
+                        <a ng-if="info.isBuy==false" ng-href="#viewcourse?cid={{info.id}}&themid=15&mtype={{info.mediaType}}">
+                            <div style="position:relative;">
+                                <img style="width:100%;" data-ui-lazyload="{{info.miniImgUrl}}" /><!--ng-src='{{info.imgUrl}}'-->
+                                <img src="../imgs/618.png" style="position:absolute;left:0px;bottom:5px;" />
+                            </div>
+                        </a>
+                        <a ng-if="info.isBuy==true" ng-href="{{courseHref(info.mediaType,info.id,true)}}">
+                            <img style="width:100%;" data-ui-lazyload="{{info.miniImgUrl}}"  /><!--ng-src='{{info.imgUrl}}'-->
+                        </a>
+                    </div>
+                    <div class="col-xs-7" style="padding-left:0;">
+                        <div>
+                            <a href="javascript:void(0)" ng-click="pay(info.id,1)" ng-if="info.preferentialPrice!=0 && info.isBuy==false" >
+                                <strong style='font-size:14px; color:#666;'>{{info.title}}</strong>
+                            </a>
+                            <a ng-href="{{courseHref(info.mediaType,info.id,true)}}" ng-if="info.isBuy==true" >
+                                <strong style='font-size:14px;'>{{info.title}}</strong>
+                            </a>
+                            <a ng-href="#viewcourse?cid={{info.id}}&themid=15&mtype={{info.mediaType}}" ng-if="info.preferentialPrice==0 && info.isBuy==false" >
+                                <strong style='font-size:14px;'>{{info.title}}</strong>
+                            </a>
+                        </div>
+                        <div class='weui_media_desc text-muted' style="font-size:13px;">{{info.lecturer}}</div>
+                        <div class="row" style="padding-top:10px;padding-bottom:8px;">
+                            <div class="col-xs-9" style="font-size:13px;">
+                                    <span ng-if="info.preferentialPrice==0">
+                                        <strong class="sedanger">免费</strong>
+                                    </span>
+                                    <span ng-if="info.preferentialPrice!=0">
+                                        <strong class="sedanger" ng-bind="info.preferentialPrice|currency:'￥'"></strong>
+                                    </span>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <a href="javascript:void(0)" ng-click="pay(info.id,1)" ng-if="info.preferentialPrice!=0 && info.isBuy==false" class="btn btn-danger btn-xs">购买</a>
+                                <a ng-href="{{courseHref(info.mediaType,info.id,true)}}" ng-if="info.isBuy==true" class="btn btn-success btn-xs">进入</a>
+                                <a ng-href="#viewcourse?cid={{info.id}}&themid=15&mtype={{info.mediaType}}" ng-if="info.preferentialPrice==0 && info.isBuy==false" class="btn btn-success btn-xs">进入</a>
+                            </div>
+                        </div>
+                        <div class="row" style="font-size:13px;">
+                            <div class="col-xs-4 text-muted text-left">
+                                <span style="padding-left:15px;" ng-class="{true:'glyphicon-facetime-video',false:'glyphicon-headphones'}[info.mediaType==1]" class="glyphicon "></span>
+                            </div>
+                            <div class="col-xs-6 text-muted">
+                                <div style='float:right;'><span class="sesuccess">{{info.learnNumber+info.buyNumber}}</span>人在学</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

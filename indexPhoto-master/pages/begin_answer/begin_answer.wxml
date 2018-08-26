@@ -1,0 +1,17 @@
+<!--pages/begin_answer/begin_answer.wxml-->
+
+<view class="container" style="background:url({{background}}) no-repeat;background-size: cover; ">
+  <view class="play {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
+  <view class="tip">开启/关闭</view>
+  <scroll-view>
+    <view class="logo_wrap zoomIn">
+      <image class='niceImg' src="{{userImg}}" mode='widthFix'></image>
+       <image class='little girl' src="{{userIcon}}" mode="widthFix"></image>
+    </view>
+    <form report-submit="true" bindsubmit="naviSubject" class="formSubmit">
+      <button class="nav_subject zoomIn" formType="submit" 
+          style='background:{{backgroundColor}};border:1rpx solid {{border}};box-shadow:2px 2px 5px {{border}};'>
+          开始答题</button>
+    </form>
+  </scroll-view>
+</view>

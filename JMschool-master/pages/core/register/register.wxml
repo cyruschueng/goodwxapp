@@ -1,0 +1,46 @@
+<!--pages/core/student/register.wxml-->
+<view class="container">
+  <form class="login-form">
+    <view class="input-group {{studentid_focus ? 'active' : ''}}">
+      <text class="input-label">学　　号</text>
+      <input maxlength="14" type="number" cursor-spacing="30" id="1" maxlength="14" value="{{studentid}}" placeholder="请输入学号" bindinput="studentidInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{studentidhint}}</text>
+    <view class="input-group {{name_focus ? 'active' : ''}}">
+      <text class="input-label">姓　　名</text>
+      <input type="text" cursor-spacing="30" id="2" maxlength="10" placeholder="请输入你的姓名" bindinput="nameInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{namehint}}</text>
+    <view class="input-group {{pwd_focus ? 'active' : ''}}">
+      <text class="input-label">密　　码</text>
+      <input cursor-spacing="30" id="3" value="{{pwd}}" placeholder="请输入密码" bindinput="pwdInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{pwdhint}}</text>
+
+    <view class="input-group {{repwd_focus ? 'active' : ''}}">
+      <text class="input-label">确认密码</text>
+      <input cursor-spacing="30" id="4" value="{{repwd}}" placeholder="请确认密码" bindinput="repwdInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{repwdhint}}</text>
+
+    <view class="input-group {{birthday_focus ? 'active' : ''}}">
+      <text class="input-label">出生日期</text>
+      <input maxlength="8" type="number" cursor-spacing="30" id="5" value="{{birthday}}" placeholder="请输入8位出生日期" bindinput="birthdayInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{birthdayhint}}</text>
+    <view class="input-group {{idcard_focus ? 'active' : ''}}">
+      <text class="input-label">身份证号</text>
+      <input maxlength="18" type="number" cursor-spacing="30" id="6" value="{{idcard}}" placeholder="请输入18位身份证号" bindinput="idcardInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{idcardhint}}</text>
+  </form>
+  <view class="deposit-tip">
+    <text class="deposit-text scale-1px-bottom" bindtap="forget">忘记学号?</text>
+  </view>
+  <view class="confirm-btn" bindtap="bindRegister">
+    <text>注册</text>
+  </view>
+  <text class="hint">说明：</text>
+  <text class="hint">1.目前该功能仅为界面设计,新生如需注册,请去学校官网进行注册</text>
+  <text class="hint">2.点击忘记学号可查询学号,2017新生也可查询</text>
+</view>

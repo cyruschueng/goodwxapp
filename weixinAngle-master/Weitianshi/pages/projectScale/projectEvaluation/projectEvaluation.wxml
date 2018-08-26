@@ -1,0 +1,56 @@
+<!--pages/projectScale/projectEvaluation.wxml-->
+<import src="/pages/Template/Template.wxml" />
+
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--滑块评分  -->
+  <view class="slider">
+    <view class="sliderTitle">
+      <view class="sliderTitle1">项目的投资价值</view>
+    </view>
+    <view class="sliderScale">{{sliderValue}}分</view>
+    <view class="scaleIntroduce" wx:if="{{sliderValue==1||sliderValue==2||sliderValue==3||sliderValue==4||sliderValue==5}}">暂不跟进</view>
+    <view class="scaleIntroduce" wx:if="{{sliderValue==6||sliderValue==7||sliderValue==8}}">需要进一步了解</view>
+    <view class="scaleIntroduce" wx:if="{{sliderValue==9||sliderValue==10}}">有投资价值</view>
+    <view class="sliderSlider">
+      <view class="sliderMin">1</view>
+      <view class="sliderLeft"></view>
+      <view class="body-view">
+        <slider bindchange="sliderchange" value='{{slivalue}}' max="10" min='1' activeColor="#40587a" backgroundColor="#cccccc" step="1" />
+      </view>
+      <view class="sliderRight"></view>
+      <view class="sliderMax">10</view>
+    </view>
+    <textarea id="textContent" bindinput="leaveMessage" value="{{introduce}}" maxlength="500" placeholder="您对项目的评价描述" />
+  </view>
+  <!--其余评分  -->
+  <view class="scoreItem" wx:if="{{score_list1.length!=0}}">
+    <view class="scoreTitle">评分项———{{competition_name}}</view>
+    <view class="scoreLine"></view>
+    <block wx:for="{{score_list1}}" wx:key="{{index}}">
+      <view class="scoreItem1 flex">
+        <view class="scoreItem1Left">
+          <view class="scoreItem1Left1">
+            <label>{{item.index_name}}</label>
+            <label>：</label>
+            <label>{{item.max_score}}</label>
+            <label>分</label>
+          </view>
+          <view class="scoreItem1Left2">{{item.index_desc}}</view>
+        </view>
+        <view class="scoreItem1Right">
+          <input type="number" bindinput='totalNum' placeholder='0' value='{{score[index]}}' data-id='{{index}}'></input>
+        </view>
+      </view>
+    </block>
+    <view class="scoreLine"></view>
+    <view class="totalTotal flex">
+      <view class="total">总分根据以上评分项目自动加和</view>
+      <view class="totalNum">{{totalNum1}}</view>
+    </view>
+  </view>
+  <view class="scoreWhite"></view>
+  <template is="buttonOne" data="{{text:buttonOneText,btnName:'submit',disabled}}"></template>
+  <!--错语提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

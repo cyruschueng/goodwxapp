@@ -1,0 +1,65 @@
+<view class="container-theme {{opq == 0? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;padding-top:250rpx;">
+  <view class="spinner-cube-grid">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </view>
+</view>
+
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px;">
+
+  <view class="panels {{position == 2 ? 'hidden':''}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;">
+    <view class="search">
+      <view class="do">
+        <image class="se li" src="/img/search.png"></image>
+        <input class="li" placeholder="搜索..." value="{{key}}" bindinput="searchClassify" />
+        <image wx:if="{{sea == 1 ? 'hidden':''}}" class="se2 li" src="/img/del.png" bindtap="delsearch"></image>
+        <view style="clear:both"></view>
+      </view>
+    </view>
+
+    <view class="classify" style="margin-top:-30rpx">
+      <view class="item" wx:for="{{li}}" data-id="{{index}}" bindtap="gotoClassify">
+        <image src="{{item.classicon}}"></image>
+        <view>{{item.classname}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="panels {{position == 1 ? 'hidden':''}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+    <view class="titlebar">
+      <image class="left" src="/img/left.png" bindtap="gotoClassify"></image>
+      <view class="title" bindtap="gotoClassify">当前分类：{{classname}}</view>
+      <!--<image class="sear" src="/img/search2.png"></image>
+      <input placeholder="搜索" placeholder-style="color:#fff" />-->
+      <view style="clear:both"></view>
+    </view>
+
+    
+    <view style="height:230rpx;"></view>
+    <view class="goods" style="clear:both;">
+    
+    <block wx:for="{{gli}}">
+    <view class="good" id="{{item.msgId}}" bindtap="navToGoods">
+      <image class="image" src="{{item.icon}}"></image>
+      <view class="gob">
+        <view class="gtit">{{item.msgcontent}}</view>
+        <view class="col">
+          <text class="fontsize-26">￥</text>{{item.sellprice}}
+        </view>
+        <view class="col">
+          <text class="asf">SHOW NOW ></text>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+  </view>
+  <view class="spinner-cube-grid"></view>
+</view>

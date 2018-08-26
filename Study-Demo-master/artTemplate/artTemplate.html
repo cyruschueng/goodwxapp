@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello artTemlate!</title>
+    <script src="lib/js/arttemplate.js"></script>
+  </head>
+  <body> 
+        <div id="content">
+
+        </div>
+  </body>
+  <script id="test" type="text/html">
+    <h1>{{title}}</h1>
+    <ul>
+        {{each list as value i}}
+            <li>索引 {{i + 1}} ：{{value}}</li>
+        {{/each}}
+    </ul>
+    </script>
+  <script> 
+    var data = {
+        title: '标签',
+        list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+    };
+    var html = template('test', data);
+    document.getElementById('content').innerHTML = html;
+  </script>
+  <!-- <script>
+      ajax例子 html中
+    <div id="classRedDetail"></div>  
+    <script id="baseRedTmp" type="text/html">{{data}}</script>
+      $.ajax({
+          type: "method",
+          url: "url",
+          data: "data",
+          dataType: "dataType",
+          success: function (response) {
+              var template = require('arttemplate');
+	          $('#classRedDetail').html(template('baseRedTmp',json.result));
+          }
+      });
+  </script> -->
+</html>

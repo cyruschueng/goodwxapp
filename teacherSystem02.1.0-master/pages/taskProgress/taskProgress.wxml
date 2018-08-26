@@ -1,0 +1,113 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="wrap">
+    <view   wx:if="{{!show1}}">
+      <view class="classInfo flex">
+        <view><image class="arrow" src="../images/search-arrow.png"></image>打卡剩余时间：{{hours}}小时{{mins}}分{{secs}}秒</view>
+        <image class="menu" src="../images/menu.gif" bindtap="powerDrawer" data-statu="{{isopen}}" wx:if="{{!showModalStatus}}"></image>
+      </view>
+      <view class="choise flex">
+        <view class="choiseItem" bindtap="getClass" data-id="class">{{classInn}}<image src="../images/arrow.gif"></image></view>
+        <view class="choiseItem choiseItem1" bindtap="getKejie" data-id="kejie">{{kejieInn}}<image src="../images/arrow.gif"></image></view>
+      </view>
+      <view class="tasksTable" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+        <!-- 表头 -->
+        <view class="ttHead flex" style="height:{{taskH}}px;">
+          <view class="ttHead-fix">
+            <view class="sName">姓名</view>
+          </view>
+          <view class="ttHead-scroll flex" style="width:{{contentW}}px;left:{{scrollL}}px;" id="widthScroll">
+            <text class="task task1" wx:for="{{taskArr}}" wx:key="id" id="widthScroll{{index}}">{{item}}</text>
+            <view class="time" >用时</view>
+          </view>
+        </view>
+        <!-- 表体 -->
+        <view class="ttHead ttBody flex" style="height:{{heigh}}px;top:{{scrollT}}px;">
+          <view class="ttHead-fix" style="height:{{contentH}}px;">
+            <view wx:for="{{resultArr}}"  wx:key="id" class="sName">{{item.sStudentName}}</view>
+          </view>
+          <view class="ttHead-scroll" style="width:{{contentW}}px;height:{{contentH}}px;left:{{scrollL}}px;">
+            <view class="scroll-item  flex" wx:for="{{resultArr}}" wx:item="item" wx:key="id">
+              <view class="task" wx:for="{{item.newTask}}" wx:for-item="item1" wx:key="id"><image wx:if="{{item1=='是'}}" src="../images/true.png"></image></view>
+              <view class="time">{{item.sUserTime}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+     <image class="showImg" src="{{src}}" wx:if="{{show1}}"></image>
+    <view class="btn">
+      <button  bindtap="forward" wx:if="{{showBtn}}" class="loginBtn" disabled="{{linkBth}}" hover-class="hoverLogin">显示转发链接</button>
+      <button open-type="share" wx:if="{{!showBtn||showBtn1}}" bindtap="forward" class="loginBtn" hover-class="hoverLogin">转发</button>
+    </view>
+  </view>
+ 
+
+  <!-- 弹窗 -->
+  <view class="float" wx:if="{{show}}" data-id="float" bindtap="closeFloat">
+    <view class="floatWrap">
+      <view class="arrows arrowT"><image class="arrowT" src="../images/arrow-t.png"></image></view>
+      <view class="floatC">
+        <view class="floatC-item" wx:for="{{arr}}" data-id="{{item.id}}" bindtap="getIndex" wx:key="id">{{item.value}}</view>
+      </view>
+      <view class="arrows arrowB"><image class="arrowB" src="../images/arrow-b.png"></image></view>
+    </view>
+  </view>
+
+
+ <!-- 导航 -->
+  <view animation="{{animationData}}" class="mainMenu drawer_attr_box" wx:if="{{showModalStatus}}" bindtap="closeNav" data-id="closeNav">
+    <view class="menu" data-id="menu">
+        <view class="userinfo flex">
+            <view class="Avatar">
+                <image src="../images/noface.png" mode='widthFix'></image>
+            </view>
+            <view class="name">{{teacherName}}</view>
+        </view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SchoolCollection/SchoolCollection'>学校信息收集</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClassEntryGrade/SelectClassEntryGrade'>学员资料查询</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/SelectClass/SelectClass'>班级成绩录入</navigator></view>
+        <view class="con"><navigator open-type="redirect" url='/pages/PicClassList/PicClassList'>定制图片生成</navigator></view>
+        <view class="quit tac"><button class="btn" bindtap="unlogin" hover-class="hoverLogin">退出登录</button></view>
+    </view>
+  </view>
+
+ 
+  <!-- <view class="forward" wx:if="{{show1}}" bindtap="parentLogin">
+    <view class="fClass">
+      <image src="../images/logo.png"></image> 
+      <view>{{classInn}}</view>
+      <view>{{kejieInn}}打卡</view>
+    </view>
+    <view class="fDetail">
+      <view class="circle"></view>
+      <view class="topIcon flex">
+        <view class="iconItem flex">
+          <image src="../images/ready.png"></image>
+          <text>已打卡</text>
+        </view>
+        <view class="iconItem flex">
+          <image src="../images/noready.png"></image>
+          <text>未打卡</text>
+        </view>
+        <view class="iconItem flex">
+          <image class="othertime" src="../images/othertime.png"></image>
+          <text>剩余时间</text>
+        </view>
+      </view>
+      <view class="bottomTxt flex">
+        <view class="iconItem">22人</view>
+        <view class="iconItem">22人</view>
+        <view class="iconItem">22人</view>
+      </view>
+    </view>
+  </view> -->
+
+  <!-- 导航tab -->
+  <!-- <view class="tabBar flex">
+    <view class="tabItem flex" bindtap="changeColor" wx:for="{{tabBarArr}}" data-id="{{index}}">
+      <view class="icon"><image class="icon1" mode="aspectFit" src="{{item.iconSrc}}"></image></view>
+      <view class="txt" style="color:{{item.changeTextColor}}">{{item.txt}}</view>
+    </view>
+  </view> -->
+</view>

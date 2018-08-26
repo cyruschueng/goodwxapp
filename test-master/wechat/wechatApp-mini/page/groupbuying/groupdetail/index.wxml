@@ -1,0 +1,110 @@
+<!--page/groupbuying/groupdetail/index.wxml-->
+<view class='head_tag'wx:if="{{catPack}}">
+    <image src='https://flashgoing.oss-cn-shenzhen.aliyuncs.com/{{catPack.coverImg}}'/>
+</view>
+
+
+
+  <view class='list_text'>
+      <view class='title'>{{catPack.name}}</view>
+      <view class="t3">售价：¥{{catPack.price}} <text class="t5">原价：¥{{catPack.oldPrice}}</text> <text class="t4">有效期至：{{catPack.enddate}}</text> </view>
+    </view>
+
+
+
+
+
+<view wx:if='{{selectShopByDistance}}'>
+   <!-- <view class='groupdetail_tags'>
+       商家信息
+   </view> -->
+   <view class='shops_message'>
+     <!-- <view class='shops_message_tag'>{{selectShopByDistance.busname}}</view> -->
+     <view class='shops_message_addre'>{{selectShopByDistance.address}}<text catchtap='phone' class='phone'></text></view>
+    <!-- <view class='shops_message_addre'><text>离我距离 </text>  {{selectShopByDistance.distance/1000}}km</view>  -->
+    
+   </view>
+</view>
+
+<view class='buyNum'>
+
+  购买数量
+
+  <view class='buy_btn'>
+  
+    <text catchtap='add'  class='jia'></text>
+    <text class='num'>{{buyNum}}</text>
+    <text catchtap='minus' class='jian'></text>
+  
+  </view>
+
+</view>
+
+
+<!-- <button catchtap='toSubmitorder'>立即抢购</button> -->
+
+<view class='btn_20'>
+   <view class='groupdetail_tags'>
+       团购菜品详细
+   </view>
+   <view wx:if="{{0}}" class='groupfood'>
+       {{catPack.name}}
+   </view>
+   <view class='groupfood_content'>
+      <view class='groupfood groupfood_meg' wx:for="{{catPackMenuList}}" wx:key="{{index}}">
+        <text>{{item.menuName}}</text>
+        <text>{{item.num}}份</text>
+        <text>￥{{item.price}}</text>
+        <view></view>
+        <view></view>
+      </view>
+   </view>
+   
+   <view class='img_detail_msg {{ showImg ? "active" : "" }}' catchtap='changeShowImg' wx:if="{{0}}">
+     <image src='https://lingju360.com/miniapp/resources/image/groupBuying/jiantou.png'/>查看图文详情
+   </view>
+</view>
+
+<view class='imgtext' hidden='{{!showImg}}' wx:if="{{0}}">
+
+    <image mode="widthFix" wx:for="{{imgText}}" src='https://flashgoing.oss-cn-shenzhen.aliyuncs.com/{{item.picture}}'></image>
+
+
+  
+  <view  catchtap='changeShowImg'>
+     {{ imgText.length ?"收起图文详情":"暂无图文" }}
+   </view>
+
+</view>
+
+<view  wx:if="{{0}}">
+   <view class='groupdetail_tags'>
+       购买须知
+   </view>
+   <view class='pur_notes'>
+      <view class='pur_notes_tag'>开始日期：</view>
+      <view>{{catPack.startdate}}</view>
+      <view class='pur_notes_tag'>结束日期：</view>
+      <view>{{catPack.enddate}}</view>
+      <view class='pur_notes_tag'>使用规则：</view>
+      <view>· 无需预约,消费高峰时可能需要等位</view>
+      <view>· 每张团购卷建议2人使用</view>
+      <view>· 不提供餐巾纸</view>
+      <view>· 不可以使用包间</view>
+      <view>· 仅限堂食不提供餐前外带，餐毕未吃完可打包</view>
+      <view>· 详情咨询商家</view>
+      <view>· 团购用户不可同时享受商家其他优惠</view>
+   </view>
+</view>
+
+
+<view class='foot_sub'>
+
+  <view class='text'>
+    <text class='t1'>合计：</text>
+    <text class='t2'>￥{{allPrice}}</text>
+  </view>
+
+  <view class='foot_pay' catchtap='submit'>支付</view>
+
+</view>

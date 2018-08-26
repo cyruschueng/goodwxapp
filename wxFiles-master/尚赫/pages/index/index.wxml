@@ -1,0 +1,39 @@
+<view class='showtop' >
+  <!-- <view class='linbg'>
+     浙江省宁波市鄞州区学院路999号 
+  </view> -->
+  <swiper class='swiper' indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#fff" autoplay="true" interval="5000" duration="1000" style='width:100%;height:600rpx'>
+    <block wx:for="{{imgUrls}}">
+      <swiper-item style='width:100%;height:600rpx'>
+        <image src="{{item}}" class="slide-image" mode='aspectFill'  style='height:600rpx;width:100%'/>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='icontext'>
+    <image src='/img/location.png'></image>
+    <view bindtap='navToLocation'>导航到店</view>
+  </view>
+  <image src='/img/en_bg.png' class='enBg'></image> 
+</view>
+<view class='panel'>
+  {{systemInfo.shopAddress}}
+</view>
+<view class='iconBar'>
+  <view class='item'>
+    <image src='/img/yu.png'></image>
+    <view>预约</view>
+  </view>
+  <view class='item' bindtap='navToMenu'>
+    <image src='/img/gw.png'></image>
+    <view>产品</view>
+  </view>
+  <view class='item'>
+    <image src='/img/own.png'></image>
+    <view>理疗师</view>
+  </view>
+</view>
+
+<view class='server' bindtap='telPhone'>
+  <image src='/img/ph.png'></image>
+  <view>{{systemInfo.shopPhone}}</view>
+</view>

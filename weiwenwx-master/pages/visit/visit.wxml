@@ -1,0 +1,48 @@
+<!--create.wxml-->
+<view class="page">
+  <view class="header">
+  <image src="../../images/tabbar/bookstore_default@3x.png"></image><text>问卷列表</text>
+  <navigator url="../create/create"  hover-class="none" ><button class="create">创建</button></navigator>
+  <!-- <button class="write" wx:if="{{!go_over}}" bindtap='shift'>编辑</button><button class="write2" wx:else bindtap='shift_two'>完成</button> -->
+  </view>
+  <scroll-view scroll-y="true" style="height:{{winH}}px;" bindscrolltolower="upper" bindscrolltoupper="down">
+    <view class="box" wx:for="{{list}}" wx:for-item="item" wx:key="this">
+        <view class="reduce" wx:if="{{go_del}}" data-id="{{item.id}}" bindtap='del'><image src="../../images/reduce.png"></image></view>
+        <view class="box_left"  bindtap='go' data-id="{{item.id}}">
+            <image  mode="aspectFit"  src="{{item.img}}"></image>
+        </view>
+        <view class="box_center"  bindtap='go' data-id="{{item.id}}">
+            <view class="title">{{item.title}}</view>
+            <view class="describe" wx:if="{{}}">{{item.describe}}</view>
+            <view class="security">
+              <image wx:if="{{item.is_anony==1}}" src="../../images/4.png"></image>
+              <image wx:if="{{item.is_anony==2}}"  src="../../images/1.png"></image>
+              <image wx:if="{{item.has_correct==1}}" src="../../images/3.png"></image>
+              <image wx:if="{{item.is_open==2}}"  src="../../images/5.png"></image>
+              <image wx:if="{{item.is_open==1}}"  src="../../images/2.png"></image>
+              <image wx:if="{{item.is_push==1}}"  src="../../images/6.png"></image>
+            </view>
+        </view>
+        <view class="box_right"  bindtap='go' data-id="{{item.id}}">
+            <view class="persons">
+              <image  mode="aspectFit"  src="../../images/ps.png">
+              </image>
+              <text>{{item.join_total}}</text>
+            </view>
+            <view class="time">
+              <view>{{item.add_time}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="tips" wx:if="{{list.length>0}}">
+       <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+            <text>上拉我会玩命的加载...</text>
+        </view>
+        <view wx:if="{{!hasMore}}"><text>没有更多内容了</text></view>
+    </view>
+    <view wx:if="{{list.length==0}}" class="nones">
+      数据不在地球上了。。。
+    </view>
+ </scroll-view>
+ <view class="fesh" bindtap='am' animation="{{animationData}}"><image mode='aspectFill' src="../../images/fesh.png"></image></view>
+</view>

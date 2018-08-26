@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='nav'>
+    <view class='faxianDisc'>
+      欣赏 发现 创造
+    </view>
+    <button class='shareBtn' id="shareBtn" open-type="share" hover-class="other-button-hover">
+      <image src="{{shareIcon}}"></image>分享
+    </button>
+  </view>
+  <scroll-view class='list-wrap' scroll-y="true" style="height: 100vh;margin-top:{{navH}}px" bindscrolltolower="loadMore" scroll-top="{{realScrollTop}}" bindscroll="scroll" >
+   <loading hidden="{{!hasRefesh}}">
+      加载中...
+    </loading>
+    <view class='item'  wx:for="{{list}}">
+       <view class='item-l'>
+        <image class="item-l-img  {{arr[index] ? 'product_image loaded':'place_image hidden'}}" mode="aspectFit" src="{{arr[index] ? list[index].img : 'https://www.tengyu.site/h5/images/placeholder.jpg'}}"></image>
+      </view> 
+      <view class='item-c'>
+        <text selectable='true' class='item-c-vulue'>{{item.title}}</text>
+        <text selectable='true' class='item-c-name'>{{item.desc}}</text>
+        <view></view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+

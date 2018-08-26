@@ -1,0 +1,71 @@
+<!--index.wxml-->
+<view class="container homepage">
+<!-- 头部 -->
+    <view class="head">
+        <image src="{{phoneInfo.src}}"></image>
+        <view class="machine-model">
+            <view>经鉴定，您的设备为</view>
+            <view>{{phoneInfo.model}}</view>
+        </view>
+    </view>
+
+  <!-- 设备信息 -->
+    <view hidden="{{ scene == 1044 ? true:false }}" class="grids {{phoneInfo ? 'show' : 'hidden'}} padding_left_right--30 font_size--30" wx:for="{{snInfo}}" wx:key="unique" wx:for-item="item">
+        <view class="phoneInfo">
+            <view class="item phone-model height--85 border_bottom-grad">
+                <view>手机型号</view>
+                <view class="color--grad">{{phoneInfo.model}}</view>
+            </view>
+            <view class="item phone-platform height--85 border_bottom-grad">
+                <view>客户端平台</view>
+                <view class="color--grad">{{phoneInfo.platform}}</view>
+            </view>
+            <view class="item phone-system height--85 border_bottom-grad">
+                <view>操作系统版本</view>
+                <view class="color--grad">{{phoneInfo.system}}</view>
+            </view>
+            <view class="item phone-version height--85 border_bottom-grad">
+                <view>微信版本号</view>
+                <view class="color--grad">{{phoneInfo.version}}</view>
+            </view>
+            <view class="item phone-version height--85 border_bottom-grad">
+                <view>微信设置的语言</view>
+                <view class="color--grad">{{phoneInfo.language}}</view>
+            </view>
+        </view>
+    </view>
+
+
+    <!-- 分享群里按钮 -->
+    <view class="padding--30 share-btn bg-grad" >
+    	<button class="weui-btn " type="primary" open-type="share">分享到群里，偷看大家在用什么手机</button>
+    </view>
+
+    <!-- 手机型号列表 -->
+    <view hidden="{{ scene == 1044 ? false : true }}" class="{{phoneList ? 'show' : 'hidden'}} ">
+        <view class="items height--85 font_size--30 border_bottom-grad" wx:for="{{items}}" wx:key="unique">
+            <image src="{{item.avatarurl}}" mode="aspectFill" class="avatar border_radius"></image>
+            <viwe class="username ">{{item.nickname}}</viwe>
+            <viwe class="model color--grad">{{item.phone}}</viwe>
+        </view>
+    </view>
+
+  <!-- 广告位 -->
+    <view class="banner" bindtap="previewImageTap" wx:if="{{banner}}">
+        <image mode="aspectFill" src="{{banner}}"></image>
+    </view>
+
+  <!-- 备注 -->
+    <view class="tips">
+        <view class="title">注：</view>
+        <view>1.此功能用于鉴别手机是否为山寨iPhone(安卓改装成的iPhone)</view>
+        <view>2.此工具可以鉴别安卓手机具体型号</view>
+    </view>
+</view>
+<!-- mask -->
+<view id="mask" wx:if="{{showMask}}" bindtap="closeMask">
+    <view class="modal">
+    <view>获取不到手机的相关信息！</view>
+        <view class="sure" bindtap="close_medal" id="sure">再来一次</view>
+    </view>
+</view>

@@ -1,0 +1,81 @@
+<!--pages/myInfo/myInfo.wxml-->
+<view class='container oh bge f14 W'>
+    <view class="c3 r5 bbox f12 W9 mt10 p10">
+        <view class='tc h50 lh50 f16'>发布海报拼图需完善您的信息</view>
+        <view class="F_ bbc btc h40 lh40 dn">
+          <label class="tr w60 c9">公开信息</label>
+          <view class='f pl5'>
+            <radio-group bindchange="changeRadioInfo">
+              <label class="radio">
+                <radio value="SHOW" checked="checked"/>公开
+              </label>
+              <label class="radio ml15 dn">
+                <radio value="SHOW_AFTER_FINISH"/>完成拼图才公开
+              </label>
+            </radio-group>
+          </view>
+        </view>
+        <view class="F_ bbc btc h40 lh40 dn">
+          <label class="tr w60 c9">性别限制</label>
+          <view class='f pl5'>
+            <radio-group bindchange="changeRadioSex">
+              <label class="radio">
+                <radio value="all" checked="checked"/>不限
+              </label>
+              <label class="radio ml15">
+                <radio value="girl"/>女
+              </label>
+              <label class="radio ml15">
+                <radio value="boy"/>男
+              </label>          
+            </radio-group>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60 c9">微信号</label>
+          <view class='f pl5 ell'>
+            <input class='ell' type='text' bindinput="getWx" value="{{inputWx}}"></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60 c9">联系人</label>
+          <view class='f pl5'>
+            <input class='ell' type='text' bindinput="getName" value="{{inputName}}"></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60 c9">联系电话</label>
+          <view class='f pl5'>
+            <input class='ell' type='tel' bindinput="getTel" value="{{inputTel}}"></input>
+          </view>
+        </view>      
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4 dn">
+          <label class="tr w60 c9">详细地址</label>
+          <view class='f pl5'>
+            <input class='ell' type='text' bindinput="getAddress" value="{{}}"></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4" bindtap="chooseMap">
+          <label class="tr w60 c9">我的位置</label>
+          <view class='f pl5'>
+             <input class='ell' type='button' disabled='true' placeholder='选择公司或店铺位置' value="{{mapInfo?mapInfo.address:''}}"></input> 
+          </view>
+          <view class="pl5"><icon class="iconfont icon-coordinates f20"></icon></view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4 dn">
+          <label class="tr w60 c9">距离限制</label>
+          <view class='f pl5'>
+            <input class='ell' type='digit' bindinput="getDiffDistance" placeholder='只有距您这个范围内的人才可以参与'></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60 c9">Logo：</label>
+          <view class='f pl5 bbox h40' bindtap="uploadLogo">
+            <image class="w35 h35 m2 r" mode="aspectFill" src="{{logo}}"></image>
+          </view>
+        </view>
+        <view class="F_">
+          <button class="bgyellow mt20 r5 W7 cf f14" bindtap="submitInfo">保存</button>
+        </view>
+    </view>  
+  </view>

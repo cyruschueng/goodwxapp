@@ -1,0 +1,140 @@
+<view class="panel bottom-line flex-between {{info.paystatus == '待付款' ? 'bg-card':''}} {{info.paystatus == '完成' ? 'bg-folder':''}} {{info.paystatus == '配送中' ? 'bg-eye':''}} {{info.paystatus == '待接手' ? 'bg-cart':''}}">
+  <view style="width:300rpx;text-align:center">
+    <view style="margin-left:30rpx;color:#fff;font-size:40rpx;">{{info.paystatus}}</view>
+    <view style="color:#fff; font-size:30rpx;margin-top:20rpx;margin-left:20rpx;">{{info.time}}</view>
+  </view>
+  <view style="text-align:center;width:400rpx">
+    <image style="width:170rpx;height:130rpx;" src="{{url}}{{info.shop.imagec.url}}"></image>
+    <view style="color:#fff;font-size:30rpx;">{{info.shop.name}}</view>
+  </view>
+</view>
+<view style="height:84rpx;position:relative" class="panel flex-start">
+  <image style="width:40rpx;height:40rpx;line-height:40rpx;position:absolute;top:50%;margin-top:-20rpx" src="/images/l3.png"></image>
+  <view style="width:600rpx;margin-left:76rpx;height:40rpx;line-height:40rpx;">
+    <view style="font-size:32rpx; font-weight:bold">
+      {{info.addressname}},{{info.addressphone}}
+    </view>
+    <view style="font-size:32rpx; ">
+      {{info.addressdetail}}
+    </view>
+  </view>
+</view>
+
+<view class="panel margin-xs">
+  <view style="padding-bottom:20rpx;font-size:30rpx;">订单号:{{info.ordernumber}}</view>
+  <view style="background:#f4f4f4;padding:15rpx;position:relative;" class="bottom-line" wx:for="{{info.ops}}">
+    <view class="flex-between">
+      <view style="position:relative" class="flex-start">
+        <image style="width:90rpx;height:80rpx;margin-right:20rpx" src="{{url}}{{item.product.imagec.url}}"></image>
+        <view style="position:relative;font-size:28rpx;margin-left:10rpx;font-weight:bold;width:470rpx">{{item.product.name}}</view>
+      </view>
+      <view style="text-align:right;height80rpx:line-height:80rpx">
+        <view style="color:#ee5353;font-size:35rpx;height:44rpx;line-height:44rpx;margin-top:-2rpx">￥{{item.product.price}}</view>
+        <view style="font-size:27rpx;color:#919191;height:34rpx;line-height:34rpx;margin-top:-2rpx">{{item.count}}份</view>
+      </view>
+    </view>
+  </view>
+  <view style="padding-top:20rpx;padding-bottom:20rpx;" class="bottom-line flex-between">
+    <view style="font-size:32rpx">餐盒费</view>
+    <view style="font-size:32rpx">￥{{info.boxprice}}</view>
+  </view>
+  <view style="padding-top:20rpx;padding-bottom:20rpx;" class="bottom-line flex-between">
+    <view style="font-size:32rpx">配送费</view>
+    <view style="font-size:32rpx">￥{{info.sendprice}}</view>
+  </view>
+  <view style="padding-top:20rpx;padding-bottom:20rpx;" class="bottom-line flex-between">
+    <view style="font-size:32rpx" wx:if="{{info.paystatus == '待付款'}}">应付款</view>
+    <view style="font-size:32rpx" wx:if="{{info.paystatus != '待付款'}}">实付款</view>
+    <view style="font-size:34rpx;color:#ee5353">￥{{shifu}}</view>
+  </view>
+  
+</view>
+<view class="panel" style="padding-top:0;font-size:32rpx">
+  备注信息：<text style="color:#888">{{bz}}</text>
+</view>
+
+<view style="height:120rpx;" ></view>
+
+
+
+<view class="flex-between ssssd" wx:if="{{qrsh}}" >
+ <view style="width:50%;text-align:center;line-height:100rpx;font-size:32rpx;background:#f0843c;color:#fff" bindtap="map"  wx:if="{{qrsh}}">骑手位置</view>
+ <view style="width:50%;text-align:center;line-height:100rpx;font-size:32rpx;background:#06c1ae;color:#fff" bindtap="qrsh" wx:if="{{qrsh}}">联系骑手<text style="font-size:22rpx;">({{psy.name}})</text></view>
+</view>
+
+<!--<block wx:if="{{qrsh}}">
+  <button class="payBtn" bindtap="qrsh" wx:if="{{qrsh}}">确认收货 </button>
+  <button class="payBtn" bindtap="map" wx:if="{{qrsh}}">位置 </button>
+</block>-->
+<!--
+  <block wx:if="{{tk}}">
+       <button class="payBtn" bindtap="tk" wx:if="{{tk}}">申请退款</button>
+  </block>-->
+
+
+<!--确认送达按钮-->
+<!--<navigator  url="/pages/order/order">
+  <view class="{{only?'querensongda':'querensongda_1'}}" bindtap="queren">
+    <text class="qrsd_text">确认送达</text>
+  </view>
+</navigator>-->
+
+<view class="flex-between ssssd" wx:if="{{fk}}">
+ <view style="width:50%;text-align:center;line-height:100rpx;font-size:28rpx;background:#fff;color:#000">(22:00自动取消订单)</view>
+ <view style="width:50%;text-align:center;line-height:100rpx;font-size:32rpx;background:#06c1ae;color:#fff" bindtap="tijiaodingdan">确认付款</view>
+</view>
+
+<view class="payment-panel {{openStyle ? '':'pmhidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="pay-style">
+    <view class="tex bottom-line">
+      <view class="t1">请选择支付方式</view>
+      <image style="width:40rpx;height:40rpx;" src="/images/d1.png" bindtap="closeStyle"></image>
+    </view>
+    <view class="item bottom-line" data-id="wo" bindtap="choosePay">
+      <image src="/images/order/woju2.png" ></image>
+      <view class="tit">余额支付</view>
+    </view>
+    <view class="item" data-id="wx" bindtap="choosePay">
+      <image  src="/images/order/wx.png"></image>
+      <view class="tit">微信支付</view>
+    </view>
+  </view>
+</view>
+
+
+<view class="payment-panel {{dopay ? '':'pmhidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+
+  <view class="input-panel">
+    <view class="user-tit">
+      <view class="con">
+        <image src="{{head}}"></image>
+        <view class="tit">请输入支付密码</view>
+      </view>
+      <image style="width:40rpx;height:40rpx;margin-top: 15rpx;" src="/images/d1.png" bindtap="concelPay"></image>
+    </view>
+    <view class="txt-panel">
+      <view class="tit">{{dianming}}</view>
+      <view class="pri">￥{{shifu}}</view>
+    </view>
+    <view class="num-penel">
+      <view class="item" wx:for="{{pwdl}}"><view class="ku" wx:if="{{item}}" ></view></view>
+    </view>
+    <view class="text-panel">
+      蜗居校园余额支付
+    </view>
+  </view>
+  <view class="number-panel">
+    <view data-num="7" bindtap="clickNum">7</view>
+    <view data-num="8" bindtap="clickNum">8</view>
+    <view data-num="9" bindtap="clickNum" style="border-right:none">9</view>
+    <view data-num="4" bindtap="clickNum">4</view>
+    <view data-num="5" bindtap="clickNum">5</view>
+    <view data-num="6" bindtap="clickNum" style="border-right:none">6</view>
+    <view data-num="1" bindtap="clickNum">1</view>
+    <view data-num="2" bindtap="clickNum">2</view>
+    <view data-num="3" bindtap="clickNum" style="border-right:none">3</view>
+    <view data-num="#" bindtap="clickNum" style="background:#f3f3f3"></view>
+    <view data-num="0" bindtap="clickNum">0</view>
+    <view data-num="c" bindtap="clickNum" style="border-right:none;background:#f3f3f3"><image style="width:40rpx;height:40rpx;" src="/images/del.png"></image></view>
+  </view>
+</view>

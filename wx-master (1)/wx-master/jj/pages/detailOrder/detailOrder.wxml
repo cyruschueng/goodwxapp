@@ -1,0 +1,71 @@
+<!--详细还款订单pages/detailOrder/detailOrder.wxml-->
+<view class='container'>
+  <view class='top'>
+  <block wx:for="{{arr}}" wx:key="{{item.id}}">
+   <view class='list row'>
+      <view class='left'>{{item.title}}</view>
+      <view class='right'>{{item.dec}}</view>
+    </view>
+  </block>
+    <!-- <view class='list row'>
+      <view class='left'>银行名称</view>
+      <view class='right'>{{detailOrderList[index].bankName}}</view>
+    </view> -->
+    <!-- <view class='list row'>
+      <view class='left'>银行卡号</view>
+      <view class='right'>{{cardId[index]}}</view>
+    </view>
+    <view class='list row'>
+      <view class='left'>创建时间</view>
+      <view class='right'>{{detailOrderList[index].createTime}}</view>
+    </view>
+    <view class='list row'>
+      <view class='left'>还款天数</view>
+      <view class='right'>{{detailOrderList[index].hk_Date}}天</view>
+    </view>
+    <view class='list row'>
+      <view class='left'>订单状态</view>
+      <view class='right'>{{arr[index]}}</view>
+    </view>
+     <view class='list row'>
+      <view class='left'>借款金额</view>
+      <view class='right'>{{detailOrderList[index].borrowMoney}}</view>
+    </view> 
+    <view class='list row'>
+      <view class='left'>已还金额</view>
+      <view class='right'>{{hasAsoMoney}}</view>
+    </view>
+    <view class='list row'>
+      <view class='left'>待还金额</view>
+      <view class='right'>{{notReturnMoney}}</view>
+    </view> -->
+  </view>
+  <view class='notice'>提示：子订单生成之后，还款时间的具体执行时间随机</view>
+  <view class="row">
+    <view class="title {{show?'':'nav-item-active'}}" catchtap="onTab">还款明细</view>
+    <view class="title {{show?'nav-item-active':''}}" catchtap="onTab">扣款明细</view>
+  </view>
+  <image src="../../images/null.png" class='null' wx:if="{{show2}}"></image>
+  <view class="fill-area" wx:if="{{!show}}">
+    <block wx:for="{{repayDetail}}" wx:key="{{item.index}}" wx:if="{{!show2}}">
+      <view class='row list'>
+        <view class='time'>
+          <view class='date'>{{repayDetail[index].createTime}}</view>
+          <view class='jine'>{{repayDetail[index].for_pay_money}}元</view>
+        </view>
+        <view class='state'>{{repayDetail[index].state}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="fill-area" wx:else>
+    <block wx:for="{{DeductionsDetails}}" wx:key="{{item.index}}">
+      <view class='row list'>
+        <view class='time'>
+          <view class='date'>{{DeductionsDetails[index].createTime}}</view>
+          <view class='jine'>{{DeductionsDetails[index].w_money}}元</view>
+        </view>
+        <view class='state'>{{DeductionsDetails[index].state}}</view>
+      </view>
+    </block>
+  </view>
+</view>

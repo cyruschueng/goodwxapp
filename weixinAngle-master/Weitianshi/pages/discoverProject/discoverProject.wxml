@@ -1,0 +1,109 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<!--错误提示  -->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+<view wx:if="{{nonet}}">
+  <view style='margin-top:100rpx;'>
+    <view class="searchBox" bindtap='searchMore'>
+      <view class="seachSth flex">
+        <icon type="search" size="14" class="search_icon1"></icon>
+        <label> 搜索项目、投资机构、投资人、FA</label>
+      </view>
+    </view>
+    <scroll-view style="height:1108rpx;" scroll-y="true" bindscrolltolower='loadMore'>
+      <!--banner轮播  -->
+      <swiper class='banner' autoplay='true' current='{{bannerIndex}}' interval='4000' duration='500' circular='true' indicator-dots='true' indicator-active-color='#ffffff' indicator-color='rgba(255,255, 255, .3)'>
+        <block wx:for="{{imgUrls}}" wx:key='item'>
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" data-index='{{index}}' bindtap='bannerLink' />
+          </swiper-item>
+        </block>
+      </swiper>
+
+      <view class='jumpBox flex'>
+        <template is="jumpBlock" data="{{text:'投资机构',tapName:'jumpOrg',src:'/img/icon-touzijigou@2x.png'}}"></template>
+        <template is="jumpBlock" data="{{text:'投资人',tapName:'jumpInvestor',src:'/img/icon-touziren@2x.png'}}"></template>
+        <template is="jumpBlock" data="{{text:'融资顾问',tapName:'jumpFinancingAdvisor',src:'/img/icon-FA@2x.png'}}"></template>
+        <template is="jumpBlock" data="{{text:'潜在投资方',tapName:'potentialInvestor',src:'/img/icon-qianzai@2x.png'}}"></template>
+      </view>
+
+      <view class="selectProject flex">
+        <label style="width:26rpx;height:2rpx;background:#333;margin-right:8rpx"></label>
+        微天使FA精选项目
+        <label style="width:26rpx;height:2rpx;background:#333;margin-left:8rpx;"></label>
+      </view>
+
+      <block wx:for="{{slectProject}}" wx:key="{{index}}">
+        <view class="selectProjectBox" data-project="{{item.project_id}}" hover-class='t-hoverColor' catchtap="projectDetail">
+          <view class="describle" wx:if="{{item.pro_intro != ''}}">
+            <image src='/img/img-jingxuan@2x.png' class="selectPic" wx:if="{{item.is_selected == 3}}"></image>
+            <label> {{item.pro_intro}}</label>
+          </view>
+          <image src="/img/img-dujia@2x.png" class="projectDetailType" wx:if="{{item.is_exclusive == 1}}"></image>
+          <view class='flex industryBox' wx:if="{{item.pro_industry.length != 0}}">
+            <block wx:for="{{item.pro_industry}}" wx:key="{{index}}" wx:for-item='industry'>
+              <view class="allIndustry">{{industry.industry_name}}</view>
+            </block>
+          </view>
+          <view class='flex otherInfo' wx:if="{{item.pro_area != ''||item.pro_finance_stock_after!=0||item.pro_stage!=''||item.pro_scale!=''}}">
+            <view class="allProjectDetail flex">
+              <view class="projectDetailLine" wx:if="{{item.pro_scale != ''}}">{{item.pro_scale.scale_money}} </view>
+              <view class="projectDetailLine" wx:if="{{item.pro_finance_stock_after != ''}}">· {{item.pro_finance_stock_after}}% </view>
+              <view class="projectDetailLine" wx:if="{{item.pro_stage != ''}}"> · {{item.pro_stage.stage_name}}</view>
+              <view class="projectDetailLine" wx:if="{{item.pro_area != ''}}">· {{item.pro_area.area_title}}</view>
+            </view>
+          </view>
+          <view class="userInfo flex">
+            <image src="{{item.user.investor_logo_url}}" class="userPic" wx:if="{{item.user.investor_logo_url}}" />
+            <view class="userPicText flex " wx:if="{{item.user.investor_logo_text}}">{{item.user.investor_logo_text}}</view>
+            <view class="userInfoRight">
+              <view class='userName'>{{item.user.user_name}}</view>
+              <view class='userCompany'>
+                <label>{{item.user.user_career}}</label> ·
+                <label>{{item.user.user_company}}</label>
+              </view>
+            </view>
+          </view>
+          <view class='userLine'></view>
+          <view class="applyProjcet flex">
+            <image class="personNumPic" src='/img/icon-chakan@2x.png'></image>
+            <view class="personNum">{{item.view_count}}人</view>
+            <view class="t-interest flex">
+              <view class="appling" wx:if="{{item.relationship_button == 0}}">申请中</view>
+              <view class="t-toAccreditation project-applicationm" wx:if="{{item.relationship_button == 4}}" data-project="{{item.project_id}}" hover-class='t-project-apply' hover-stop-propagation='true' catchtap="matchApply">申请查看</view>
+              <view class="refuseToRead" wx:if="{{item.relationship_button == 1}}">同意查看</view>
+              <view class="refuseToRead t-readed" wx:if="{{item.relationship_button == 3}}">提交给我</view>
+              <view wx:if="{{item.relationship_button == 5}}"></view>
+              <view class="t-toAccreditation" wx:if="{{item.relationship_button == 2}}" data-project="{{item.project_id}}" data-content="{{1}}" catchtap="matchApply">重新申请</view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <template is="theBottom" wx:if="{{atBottom == true}}"></template>
+      <view class='whiteSpace'></view>
+    </scroll-view>
+  </view>
+
+  <view class="floatBtn">
+    <view class="t-accreditation flex">
+      <view>创建项目，加速融资</view>
+      <view class="t-btnToAccreditation" hover-class='t-hoverColor' bindtap="toCreateProject">马上创建</view>
+    </view>
+  </view>
+
+  <template name="jumpBlock">
+    <view class="jumpTo" bindtap='{{tapName}}' hover-class='t-hoverColor'>
+      <image class='jumpImage' src='{{src}}'></image>
+      <view class='jumpToContent'>{{text}}</view>
+    </view>
+  </template>
+</view>
+
+<view class="b1" hidden="{{!showLoading}}">
+  <view class="t_image">
+    <image class="t_image1" src="{{loadingGif}}"></image>
+  </view>
+</view>
+
+

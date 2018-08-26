@@ -1,0 +1,43 @@
+<view wx:if="{{article_list.length > 0}}">
+  <block wx:for="{{article_list}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+    <view class='articleWrap' catchtap='toArticleInfo' id="{{item.id}}" zan="{{item.zan}}">
+      <view class='articleLittle'>
+        <view class='articleTop'>
+          <view>
+            <image class='userImg-portrait' src='{{item.iconUrl}}'></image>
+            <view class='user-text'>
+              <text class='user-name'>{{item.userName}}</text>
+              <text class='user-name-time'>{{item.timeDiffrence}}</text>
+            </view>
+          </view>
+          <view>
+            <text class='somebody-text'>{{item.zan}}</text>
+            <image class='somebody-thumbs' src='/images/icon/home_zaned.png'></image>
+          </view>
+        </view>
+        <view class='article-level-wrap'>
+          <image class='cover-images' mode="aspectFill" src='{{item.homePic}}'></image>
+          <text class='article-describe'>{{item.summary}}</text>
+        </view>
+        <view class='article-bottom-xia'>
+          <view>
+            <image class='click-volume' src='/images/icon/tuoyuan_w.png'></image>
+            <text class='click-text-ar'>0</text>
+          </view>
+          <view>
+            <image class='click-volume' src='/images/icon/find_share.png'></image>
+            <text class='click-text-ar click-text-right'>{{0}}</text>
+            <image class='click-volume ' src='/images/icon/find_comment.png'></image>
+            <text class='click-text-ar click-text-right'>{{item.commentNum}}</text>
+            <!-- 下个版本需要用  不要删除: -->
+            <!-- <image class='click-volume' src='/images/icon/find_gold.png'></image>
+            <text class='click-text-ar'>23</text> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<view wx:else class='placeholder'>
+  <image src="/images/icon/zhanweitu.png"></image>
+</view>

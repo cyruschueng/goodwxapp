@@ -1,0 +1,43 @@
+<!--profile.wxml-->
+
+
+<view class='profile-body'>
+
+  <!-- 头部 -->
+  <view class="userinfo" style='background-image: url({{ profileBgimg }})'>
+    <view class="userinfo-bg_view" catchtap="gotoUserHome">
+      <!-- 我的消息 -->
+      <image class='message-view' src='../../images/message-g.png' bindtap='bindMessageTap'></image>
+      <image mode="aspectFill" class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
+      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class='profile-list-view'>
+    <!-- 我的订单 -->
+    <view class='img-title-arrow-cell profile-list-item' bindtap='goMyorderPage'>
+      <image class='left-icon' src='../../images/order-red.png'></image>
+      <text class='left-text'>我的订单</text>
+      <image class='right-icon' src='../../images/arrow-right.png'></image>
+    </view>
+    <!-- 我的历史订单 -->
+    <view class='img-title-arrow-cell profile-list-item' bindtap='goHistoryOrderPage'>
+      <image class='left-icon' src='../../images/history-order.png'></image>
+      <text class='left-text'>历史订单</text>
+      <image class='right-icon' src='../../images/arrow-right.png'></image>
+    </view>
+    <!-- 意见反馈 -->
+    <view class='img-title-arrow-cell profile-list-item' bindtap='goFeedbackPage'>
+      <image class='left-icon' src='../../images/feedback.png'></image>
+      <text class='left-text'>意见反馈</text>
+      <image class='right-icon' src='../../images/arrow-right.png'></image>
+    </view>
+  </view>
+
+
+
+
+
+
+</view>

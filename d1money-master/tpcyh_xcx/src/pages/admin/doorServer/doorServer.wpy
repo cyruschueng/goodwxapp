@@ -1,0 +1,181 @@
+<style lang="less" rel="stylesheet/less">
+    page{
+        background-color:#f2f2f2;
+        height:100%;
+    }
+    .demon-panel{
+        padding:0;
+        background-color: #ffffff;
+        &:last-child{
+            margin-bottom:0;
+        }
+        .demon-panel__bd{
+            .userCell{
+                .demon-cell__bd{
+                    display: flex;
+                    align-items: center;
+                    font-weight: normal;
+                    .name{
+                        width:130rpx;
+                    }
+                    .signTime{
+                        flex:1;
+                        text-align: center;
+                        color: #666666;
+                    }
+                    .tel{
+                        text-align: center;
+                        width:100rpx;
+                        color: #38A1CF;
+                        transform: rotate(270deg);
+                    }
+                }
+                .demon-cell__ft{
+                    view{
+                        width: 160rpx;
+                        display: inline-block;
+                        padding:10rpx 20rpx;
+                        color: #ffffff;
+                        background-color:#38A1CF;
+                        font-size:12px;
+                        border-radius:60rpx;
+                        text-align: center;
+                        &.error{
+                            background-color: #969696;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon_page doorServer">
+        <!--上门服务-->
+        <block wx:if="{{doorServerCell.list.length==0}}">
+            <view class="dm-nomsg" style="">
+                <image src="/static/img/empty_states-bee.png" lazy-load="true"/>
+                <view class="text">亲~暂时有没数据</view>
+            </view>
+        </block>
+        <dm-panel type="backstage">
+            <dm-panel-bd>
+                <block wx:for="{{doorServerCell.list}}" wx:key="index">
+                    <dm-cell class="userCell" type="user">
+                        <block slot="demon-cell__hd">
+                            <image src="http://wmimage.qn.d1money.com/head/{{item.createHeadTime}}/{{item.userId}}/46.jpg" mode="aspectFill" lazy-load="true"/>
+                        </block>
+                        <block slot="demon-cell__bd">
+                            <view class="name">{{item.userName}}</view>
+                            <view class="signTime">
+                                {{item.appointmentTime}}
+                            </view>
+                            <view class="tel" @tap="tel({{item.userName}},{{item.userPhone}})">
+                                <i class="iconfont icon-dianhua" wx:if="{{item.userPhone}}"></i>
+                            </view>
+                        </block>
+                        <view :class="{'error' : item.statue}" slot="demon-cell__ft" @tap="doorServerCellBtnOnclick({{index}},{{item.id}},{{item.userName}},{{item.statue}})">
+                            {{doorServerCell.status[item.statue]}}
+                        </view>
+                    </dm-cell>
+                </block>
+            </dm-panel-bd>
+        </dm-panel>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import api from './../../../common/api';
+    import G from './../../../common/global';
+    import global from './../../../mixins/global'
+
+    import singleLoad from './../../../mixins/singleLoad';
+    import dmCell from './../../../components/Cell/dm-cell';
+    import dmPanel from './../../../components/Panel/dm-panel';
+    import dmPanelHd from './../../../components/Panel/dm-panel-hd';
+    import dmPanelBd from './../../../components/Panel/dm-panel-bd';
+    import dmPanelFt from './../../../components/Panel/dm-panel-ft';
+    export default class extends wepy.page {
+        config = {
+            navigationBarTitleText: '上门服务'
+        }
+        components = {
+            'dm-cell': dmCell,
+            'dm-panel': dmPanel,
+            'dm-panel-hd': dmPanelHd,
+            'dm-panel-bd': dmPanelBd,
+            'dm-panel-ft': dmPanelFt
+        }
+
+
+        data = {
+            origin: 'doorServerCell',
+            ajaxUrl: G.host + 'cyhManagement/loadmoreReservationList',
+            userCell:{
+                type: 'user'
+            },
+            // 上门服务
+            doorServerCell:{
+                status:['确认上门', '已上门'],
+                list:[]
+            }
+        }
+
+        computed = {
+
+        }
+
+        mixins = [ singleLoad, global];
+
+        methods = {
+            // 上门服务列表按钮事件
+            doorServerCellBtnOnclick(index,id, nickName, status){
+//                console.log(id);
+//                console.log(nickName);
+//                console.log(index);
+                if(!status){
+                    api.showModal('上门服务',`你确定对 ${nickName} 客户已经进行过上门服务?`, true)
+                        .then( res => {
+                            api.request({
+                                url: G.host + 'cyhManagement/doConfirmReservationService',
+                                data: {
+                                    id
+                                }
+                            }).then( res => {
+                                this.doorServerCell.list[index].statue = 1;
+                                this.$apply();
+                            })
+                        })
+                        .catch(res => {
+//                            console.log('用户点击取消');
+                        });
+                }
+
+            }
+        }
+
+        events = {}
+
+        async onLoad() {
+            this.doorServerCell.list = await this.loadmoreSingleLoad();
+            this.$apply();
+        }
+        loadmoreSingleLoad(){
+            return new Promise((resolve, reject) => {
+                api.request({
+                    url: G.host + 'cyhManagement/loadmoreReservationList',
+                    data: {
+                        start: this.pageNo,
+                        limit: this.pageSize
+                    }
+                }).then( (res) => {
+                    resolve(res.data.body.QaList);
+                }).catch(res => {
+                    reject(res);
+                })
+            })
+        }
+    }
+</script>

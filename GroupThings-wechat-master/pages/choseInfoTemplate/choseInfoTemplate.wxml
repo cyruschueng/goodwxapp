@@ -1,0 +1,10 @@
+<!--pages/choseInfoTemplate/choseInfoTemplate.wxml-->
+<form bindsubmit="submitTemplateHandle">
+  <radio-group class="templatesRadio-group" name="template">
+    <label class="templateRadio" wx:for="{{templates}}" wx:key="value">
+      <image src="{{item.address}}" mode="widthFix"></image>
+      <radio value="{{index}}" checked="{{item.checked}}"/>
+    </label>
+  </radio-group>
+  <button formType="submit" class="btnFooter" type="primary" >确认</button>
+</form>

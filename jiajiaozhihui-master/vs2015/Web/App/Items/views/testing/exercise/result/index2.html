@@ -1,0 +1,49 @@
+<div class="page" style="background: #00CCFF" ng-controller="exerciseResultController">
+    <div class="page__bd" style="position: relative">
+        <img style="width:100%;" src="./imgs/gardenia/result.png">
+        <div style="position: absolute;top: 10rem;width: 100%;text-align: center;">
+            <div class="weui-panel weui-panel_access" style="background: none;">
+                <div class="weui-panel__bd">
+                    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img style="border-radius: 30px;" class="weui-media-box__thumb" src="{{userInfo.headImgUrl}}" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h3 style="text-align: left; color: #fff; font-size: 20px;" class="weui-media-box__title">{{userInfo.nickName}}</h3>
+                            <p style="text-align: left; font-size: 18px; color:#fff;" class="weui-media-box__desc">{{memberInfo.className}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="position: absolute; top: 30px;right:30px; color: #f90; font-size: 28px; text-decoration: double; font-family: 方正静蕾简体">本次得分 {{score}}分</div>
+            </div>
+            <div class="weui-panel habit-panel">
+                <div class="weui-panel__bd">
+                    <div class="weui-media-box weui-media-box_small-appmsg ">
+                        <div class="weui-cells">
+                            <div class="weui-cell weui-cell_access habit-cell" ng-repeat="item in ranks.top3">
+                                <div class="weui-cell__hd babit-rank">
+                                    <div class="babit-rank__sn">{{item.row}}</div>
+                                    <img style="width:40px;height:40px;" src="{{item.headImgUrl}}" />
+                                </div>
+                                <div class="weui-cell__bd weui-cell_primary">
+                                    <div class="habit-rank__nickName">{{item.nickName}}</div>
+                                    <div class="habit-rank__desc">{{item.score+'分    '+item.totalTime+'秒'}}</div>
+                                </div>
+                                <div class="weui-cell__ft">
+                                    <img style="width:40px;height:40px;" src="./imgs/gardenia/rank{{$index+1}}.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_btn_area" style="margin-top:60px">
+                <div class="weui-flex">
+                    <div class="weui-flex__item" style="text-align: center"><a href="#task" class="weui-btn  weui-btn_default weui-btn_mini" >返    回</a></div>
+                    <div class="weui-flex__item" style="text-align: center"><a href="#exercisetesting" class="weui-btn weui-btn_primary weui-btn_mini" >再次练习</a></div>
+                    <div class="weui-flex__item" style="text-align: center"><span class="weui-btn weui-btn_primary weui-btn_mini">分    享</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div  ng-controller="initController">
+    <div ng-controller="myAnswersController">
+        <div loading="" ng-model="isLoading"></div>
+        <div class=" container" style="padding-top:10px;" >
+            <div ng-repeat="info in infos">
+                <!--作品-->
+                <div ng-if="info.type==undefined" id="{{'row'+info.fileId}}" class="row" style="padding-bottom:15px; padding-top:5px;">
+
+                    <div class="col-xs-12">
+                        <div style="position: relative;padding-right: 5px; color:#666;">
+                            <img class="img-circle" style="height: 45px; width: 45px; margin-right:5px; margin-top:15px;" ng-src="{{info.wxUserInfo.headImgUrl}}">
+                            <span class="" style="height: 36px; line-height: 36px;">{{info.wxUserInfo.nickName|cut:true:4:'...'}}</span>
+                            <span class="glyphicon glyphicon-map-marker" style="margin-right:10px;"><span style="margin-left: 5px;">{{info.wxUserInfo.city}}</span></span>
+                            <span style="height: 36px; line-height: 36px;margin-right:10px">{{info.player.age+'岁'}}</span>
+                            <span style="height: 36px; line-height: 36px;margin-right:10px">{{info.player.sex}}</span>
+                            <span class="" style="height: 36px; line-height: 36px;margin-right:10px"><span style="margin-left: 5px;">{{info.releaseTime}}</span></span>
+                            <span ng-if="info.isRight==1" se-top
+                                  class="btn btn-xs btn-danger pull-right"
+                                  style="padding:0 6px; font-size:11px; margin-top:20px;"
+                                  data-showTop="{{'top'+info.fileId}}"
+                                  data-fileId="{{info.fileId}}">
+                                精</span>
+                            <span ng-show="info.isTop==1" id="{{'top'+info.fileId}}" class="glyphicon glyphicon-fire" style="color:#f00;position: absolute; right: 0;" ></span>
+                            <span class="btn btn-xs btn-warning" style="position: absolute;top :40px; left: 50px;font-size:12px;">问？</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding: 15px; border-bottom:1px dashed #eee; ">
+                        <div>
+                            <div ng-click="browse(info.fileId)" style="color:#111; font-weight: bold;">{{ info.content}}</div>
+
+                            <div ng-repeat="media in info.medias">
+                                <div ng-show="media.mediaType==1 && media.mediaUrl!=''" class="col-xs-12 text-left" style="padding-top:10px;">
+                                    <img ng-click="showImg(media.mediaUrl)" style="width:20%;" ng-src="{{media.mediaUrl|resourceUrl}}"></img>
+                                </div>
+                                <div ng-show="media.mediaType==2 && media.mediaUrl!=''" class="col-xs-12 text-left" style="padding-top:10px;">
+                                    <span player-link  data-src="{{media.mediaUrl|resourceUrl}}"
+                                          class="btn btn-xs btn-success glyphicon glyphicon-volume-up">播放</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" ng-if="info.comment.details!=''">
+                        <div class="row" style="padding: 5px; border-left:5px solid #f0ad4e;margin-top:15px; margin-bottom:0px;">
+                            <span class="btn btn-warning btn-xs" style="margin-left:50px;">答！</span>
+                        </div>
+                        <div class="row" style="margin-right:0px;margin-left:0px;">
+                            <div style="padding: 15px 0; ">
+                                <div class="col-xs-2" >
+                                    <img ng-if="info.comment.expertType==0" class="img-circle" style="width:30px;" ng-src="{{info.comment.headImgUrl}}">
+                                    <img ng-if="info.comment.expertType!=0" class="img-circle" style="width:30px;" ng-src="{{info.comment.imgUrl}}">
+                                </div>
+                                <div class="col-xs-10" style="padding-left:0px;">
+                                    <div class="row" >
+                                        <div class="col-xs-12">
+                                            <div class="text-info">
+                                                <span ng-if="info.comment.expertType==0">{{info.comment.nickName|cut:true:4:'...'}}</span>
+                                                <span ng-if="info.comment.expertType!=0">{{info.comment.uName|cut:true:4:'...'}}</span>
+                                                <span>{{info.comment.nickName|cut:true:4:'...'}}</span>
+                                                <span style="display: none" ng-class="{'男':'icon-male','女':'icon-female','':''}[info.comment.sex]"></span>
+                                                <img ng-hide="info.comment.expertType==0" src="../../../content/imgs/v.png" style="width:12px;">
+                                                <span style="color:#666; font-size:12px;">{{info.comment.releaseData}}</span>
+                                            </div>
+                                            <div style="margin:15px 0;" id="{{'fold'+info.fileId}}" class="se-fold">
+                                                <div >{{info.comment.details}}</div>
+                                            </div>
+                                            <div se-word-fold data-warp="{{'fold'+info.fileId}}" ng-show="info.comment.details.length>90" class="text-info">全文</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div  style="">
+                            <div class="row">
+                                <div class="col-xs-4 text-center" style="height: 27px; line-height: 27px;">
+                                    <div style=" border-right:1px solid #eee;">
+                                        <span>
+                                        <span se-like
+                                              ng-class="{true:'btn btn-xs btn-danger glyphicon glyphicon-thumbs-up',false:'btn btn-xs btn-default glyphicon glyphicon-thumbs-up'}[info.isLike]"
+                                              style="padding:0 6px; font-size:11px;"
+                                              data-showLike="{{'likeWrap'+info.fileId}}"
+                                              data-fileId="{{info.fileId}}">
+                                        </span>
+                                            {{info.likeNumber}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 text-center" style="height: 27px; line-height: 27px;">
+                                    <div style=" border-right:1px solid #eee;">
+                                        <span>浏览 {{info.browseNumber}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 text-center" style="font-size:14px; height: 27px; line-height: 27px;">
+                                    <span ng-click="browse(info.fileId)" class="btn btn-xs btn-default  ">回复 {{info.commentNumber}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="height:10px;background-color: #ddd;"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center" style="padding:10px 0;">
+                    <input ng-show="moreThen>9"  style="width:90%;" ng-click="more()" type="button" class="btn btn-default" value="加载更多">
+                    <p class="text-center" style="color: #888; font-size:12px;" ng-show="moreThen==0">
+                        暂时还没有数据
+                    </p>
+                </div>
+            </div>
+            <div id="actionSheet_wrap" >
+                <div class="weui_mask_transition" id="mask"></div>
+                <div class="weui_actionsheet" id="weui_actionsheet" style="z-index: 999999">
+                    <div class="weui_actionsheet_menu" >
+                        <div class="text-right" style="padding-right:5px;"><span id="btnClose" class="glyphicon glyphicon-remove"></span></div>
+                        <div class="weui_actionsheet_cell">
+                            <textarea id="commentContext" class="weui_textarea" placeholder="输入你的回答" style="padding:0 10px;" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="weui_actionsheet_action" style="z-index: 999999">
+                        <input type="button" class="btn btn-lg btn-default disabled" style="width:100%;" id="actionsheet_submit" value="提交" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="audio"></audio>
+</div>

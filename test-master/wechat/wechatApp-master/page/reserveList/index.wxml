@@ -1,0 +1,22 @@
+<view class="reserveList">
+
+  <view class="li" data-currentStatus="{{item.currentStatus}}" data-id="{{item.id}}" catchtap="tomore"   wx:for-items="{{ list }}">
+  
+
+    <view class="title">{{item.shopName}} <text class="status">{{item.currentStatusStr}}</text> </view>
+
+    <view class="list">
+      <view class="t"> 桌号 <text>{{item.bookQueueNumberStr}}</text> </view>
+      <view class="t"> 餐桌类型<text>{{item.deskTypeName}}</text> </view>
+      <view class="t"> 就餐时间<text>{{item.bookQueueDate}} {{item.bookQueueTime}}</text> </view>      
+    </view>
+
+    <view class="bottom_d">
+      <text class="t">{{item.currentStatusStr}}</text>下单时间 {{ item.createdDate }}
+    </view>
+
+
+
+  </view>
+
+</view>

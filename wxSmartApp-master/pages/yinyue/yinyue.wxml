@@ -1,0 +1,53 @@
+<view class="section tc">
+ <video id="myVideo" src="{{VIDEO_PATH}}/{{index}}.mp4" controls='{{a}}' binderror="videoErrorCallback" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls
+></video>
+
+
+</view>
+<view class='btn-area zui'>
+  <text>最近浏览</text>
+</view>
+<view class='images'>
+    <view class='methe' wx:for='{{video_data}}'>
+      <image src='{{item.user.profileImage}}' mode='aspectFill' class='imagw' catchtap="goToHistoryShare" data-id='{{item.user.id}}'></image>
+    </view>
+</view>
+
+<view class='block xiu-box'>
+<view class="btn-area let">
+<input bindblur="bindInputBlur" auto-focus class="text" />
+
+<button bindtap="bindSendDanmu" class="footer_btn" plain >发送弹幕</button>
+</view>
+<view class='metohd'>
+<button open-type="share" class='footer-btn1'>分享给朋友</button>
+</view>
+</view>
+
+<view class='banner'>
+   <image src='{{imgUrls.img_url}}'></image>
+</view>
+
+<view class="nav">
+<view class="" bindtap="homePage">
+<image src="{{IMG_PATH}}/shouye.jpg"></image>
+<view>首页</view>
+</view>
+<view class="" bindtap="goToShare">
+<image src="{{IMG_PATH}}/fangdian.png"></image>
+<view>发布</view>
+</view>
+<view class="scanCode" bindtap="scanCode">
+<image src="{{IMG_PATH}}/chudian.png"></image>
+<view>扫一扫</view> 
+</view>
+<view class="" bindtap="goToMap">
+<image src="{{IMG_PATH}}/laidian.png"></image>
+<view>触电</view>
+</view>
+<view class="" >
+<image src="{{IMG_PATH}}/wode.png"></image>
+<view>我的</view>
+</view>
+
+</view>

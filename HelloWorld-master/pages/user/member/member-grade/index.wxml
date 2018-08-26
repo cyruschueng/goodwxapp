@@ -1,0 +1,34 @@
+<!--pages/user/member/member-grade/index.wxml-->
+<view class="member-grade tc {{gradeNum>=50?'grade-gold':''}} {{gradeNum==100?'platinum-gold':''}}">
+    <view class="grade-img-box">
+        <!-- <block wx:if="{{gradeNum<50}}">
+            <image class="grade-img" src="http://ixiaochengxu.cc/resource/images/user/bronze.png" mode="aspectFit"></image>
+        </block>
+        <block wx:if="{{gradeNum>=50&&gradeNum<100}}">
+            <image class="grade-img" src="http://ixiaochengxu.cc/resource/images/user/gold.png" mode="aspectFit"></image>
+        </block>
+        <block wx:if="{{gradeNum==100}}">
+            <image class="grade-img" src="http://ixiaochengxu.cc/resource/images/user/white-gold.png" mode="aspectFit"></image>
+        </block> -->
+        <image class="grade-img" src="{{current_level.img||'http://ixiaochengxu.cc/resource/images/user/gold.png'}}" mode="aspectFit"></image>
+    </view>
+    <view class="mt10">
+        <view class="f24">{{total_score}}</view>
+        <view class="mt5">优惠折扣{{discount}}折</view>
+    </view>
+
+    <view class="grade-gap" wx:if='{{next_level}}'>距离 <text class='fb'>{{next_level.level}}</text> 还差 {{next_level.score-total_score}} 积分</view>
+    <view class="grade-gap" wx:else>你已达到巅峰</view>
+
+    <view class="grade-line" style="background-image: linear-gradient(to right, #ffc814 {{(gradeNum-10)+'%'}},#d3d3d3 {{(gradeNum+10)+'%'}})">
+        <view class="grade-dian"></view>
+        <!-- <view class="grade-dian"></view> -->
+        <view class="grade-dian"></view>
+    </view>
+    <view class="grade-show">
+        <view class="grade-item">{{current_level.level}}</view>
+        <view class="grade-item">{{next_level.level}}</view>
+        <!-- <view class="grade-item">白金会员</view> -->
+    </view>
+
+</view>

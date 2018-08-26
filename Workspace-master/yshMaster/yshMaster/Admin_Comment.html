@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>用户评价</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			  <script src="js/html5shiv.js"></script>
+			  <script src="js/respond.min.js"></script>
+			  <![endif]-->
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/layer.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<!--adddate-->
+		<script src="js/adddate.js"></script>
+		<!--下拉插件-->
+		<script src="js/select2.min.js"></script>
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+
+		<section>
+
+			<!--
+            	作者：443267568@qq.com
+            	时间：2016-05-03
+            	描述：修改开始处
+            -->
+			<!--body wrapper start-->
+			<section>
+				<!-- page start-->
+
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								用户评价
+							</header>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form" id="condition">
+									<div class="row clearfix">
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">用户编码</label>
+												<div class="col-lg-9">
+
+													<input type="text" class="form-control" id="UserId" name="UserId" />
+
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">用户名</label>
+												<div class="col-lg-9">
+
+													<input type="text" class="form-control" id="UserName" name="UserName" />
+
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">审核状态</label>
+												<div class="col-lg-9">
+													<select class="form-control m-bot15" name="Auth" id="Auth">
+						                            	</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row clearfix">
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">评价对象</label>
+												<div class="col-lg-9">
+													<select class="form-control m-bot15" id="cObject" name="cObject">
+						                            	</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">用户角色</label>
+												<div class="col-lg-9">
+
+													<select class="form-control m-bot15" id="Role" name="Role">
+                                                        </select>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">用户等级</label>
+												<div class="col-lg-9">
+													<select class="form-control m-bot15" id="Grade" name="Grade">
+						                            	</select>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row clearfix">
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">所属渠道</label>
+												<div class="col-lg-9">
+													<select class="form-control m-bot15" id="Channel" name="Channel">
+						                            	</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="col-sm-3 control-label col-lg-3">评价等级</label>
+												<div class="col-lg-9">
+													<select class="form-control m-bot15" id="cLevel" name="cLevel">
+						                            	</select>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row clearfix">
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="control-label col-lg-3 col-sm-3 ">评价时间:</label>
+												<div class="col-lg-9">
+													<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="" class="input-append date dpYears" id="dStartTime">
+														<input type="text" readonly="" value="" size="16" class="form-control" id="StartTime" name="StartTime">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+													</div>-->
+													<input type="text" value="" size="16" class="form-control" id="StartTime" name="StartTime" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="control-label col-lg-3 col-sm-3 ">至:</label>
+												<div class="col-lg-9">
+													<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="" class="input-append date dpYears" id="dEndTime">
+														<input type="text" readonly="" value="2016-12-12" size="16" class="form-control" id="EndTime" name="EndTime">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+													</div>-->
+													<input type="text" value="2016-12-12" size="16" class="form-control" id="EndTime" name="EndTime" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-lg-3 text-center">
+											<button class="btn btn-info" type="button" onclick="Query()">搜索</button>
+										</div>
+									</div>
+
+								</form>
+							</div>
+						</section>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+
+						</section>
+
+						<section class="panel">
+							<div class="panel-heading">
+								<!--				<button class="btn btn-warning" type="button">导出</button>-->
+								<button class="btn btn-warning" type="button" onclick="ToAuth()">审核</button>
+							</div>
+							<div class="panel-body">
+								<table id="CommentInfo" class="table table-striped table-condensed table-hover talbe-border">
+									<thead>
+										<tr>
+											<th data-field="status" data-align="center" data-checkbox="true" data-formatter="checkformatter"></th>
+											<th data-field="UserName" data-align="center">用户名</th>
+											<th data-field="UserGrade" data-align="center">等级</th>
+											<th data-field="UserChannel" data-align="center">所属渠道</th>
+											<th data-field="CommentLevel" data-align="center">评价等级</th>
+											<th data-field="CommentTime" data-align="center">评价时间</th>
+											<th data-field="Authorization" data-align="center">审核状态</th>
+											<th data-field="CommentObject" data-align="center">评价对象</th>
+											<th data-field="Operation" data-align="center" data-formatter="operationFormatter">操作</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
+						</section>
+
+					</div>
+
+				</div>
+			</section>
+
+		</section>
+
+		<script>
+			var $table = $("#CommentInfo");
+			var checkList = new Array();
+			var dataTotal = 0;
+			var $condition = $("#condition");
+
+			//构建select
+			function appendSelectList(f1, array) {
+
+				if ((f1.selector != "#Auth") && (f1.selector != "#cLevel") && (f1.selector != '#cObject'))
+					f1.append("<option value=0>全部</option>");
+
+				$.each(array, function(i, v) {
+					f1.append("<option value=" + v.value + ">" + v.text + "</option>");
+				});
+			}
+
+			//查询调数据
+			function Query() {
+				var search = convertToParams($condition.serializeArray());
+				if (search["UserId"] == "")
+					search.UserId = 0;
+
+				getDataList(yshurl + "Admin_Comment_GetUserTotal", search, function(d) {
+					dataTotal = d.aaData[0].TotalNum;
+				});
+
+				search = initPageInfo(search);
+				var options = $table.bootstrapTable('getOptions');
+
+				options.pageNumber = 1;
+				getDataList(yshurl + "Admin_Comment_GetUserInfo", search, function(d) {
+					$table.bootstrapTable('refreshOptions', options);
+					loadData($table, {
+						total: dataTotal,
+						rows: d.aaData
+					});
+
+					checkList.length = 0;
+				});
+			}
+
+			//批量审核用户评价			
+			function ToAuth() {
+
+				debugger;
+				if (checkList.length == 0) {
+					ysh_alert("请选择评论进行操作", "warning");
+					return;
+				}
+
+				var aids = checkList.join(',');
+				var flag = true;
+				getDataList(yshurl + "Admin_Comment_makeSureAuth", {
+					aids: aids
+				}, function(d) {
+
+					if ($.isArray(d.aaData) && d.aaData.length > 0)
+						$.each(d.aaData, function(i, v) {
+							debugger;
+							if (v.IsApproved != 3) {
+								flag = false;
+								return false;
+							}
+						});
+
+				});
+
+				if (flag == true) {
+					ysh_alert("选择评论状态全部为已审核，请重新选择", "warning");
+					return;
+				}
+
+				ysh_confirm("是否审核所选评论？", "确认", "取消", function(res) {
+					if (res) {
+
+						getDataList(yshurl + "Admin_Comment_BatchAuth", {
+							ids: aids
+						}, function(d) {
+
+							if (d.state == 0)
+								ysh_msg("审核评论成功！");
+							else ysh_alert("系统出错啦，请刷新或者联系客服", "error");
+
+						});
+						Query(1);
+						$table.bootstrapTable('uncheckAll');
+					} else
+						return;
+				});
+
+			}
+
+			//翻页时获取数据
+			function getData(params) {
+				getDataList(yshurl + "Admin_Comment_GetUserInfo", params, function(d) {
+					var tableData1 = {
+						total: dataTotal,
+						rows: d.aaData
+					};
+					loadData($table, tableData1);
+					setIframeHeight();
+				});
+			}
+
+			//转换查询条件
+			function convertToParams(array) {
+				var obj = {};
+				$.each(array, function(i, v) {
+
+					obj[v.name] = v.value;
+				})
+				return obj;
+			}
+
+			//初始化分页数据
+			function initPageInfo(res) {
+				res.PageIndex = 0;
+				res.PageSize = 10;
+				return res;
+			}
+
+			//选中行
+			checkformatter = function(value, row, index) {
+				var pIndex = $.inArray(row.Id, checkList);
+				if (pIndex >= 0) {
+					return {
+						checked: true
+					}
+				} else {
+					return {
+						checked: false
+					}
+				}
+			}
+
+			//表格样式
+			function rowStyle(row, index) {
+				var classes = ['active', 'success', 'info', 'warning', 'danger'];
+				if (index % 2 === 0) {
+					return {
+						classes: 'warning'
+					};
+				} else
+					return {
+						classes: 'info'
+					};
+			}
+
+			function JumpToInfo(Id) {
+				window.location.href = "Admin_Comment_Info.html?CommentId=" + Id;
+			}
+
+			function Delete(Id) {
+				ysh_confirm("请确认是否删除所选评论？", "确认", "取消", function(res) {
+
+					if (res) {
+
+						getDataList(yshurl + "Admin_Comment_DeleteData", {
+							CommentId: Id
+						}, function(d) {
+							ysh_msg("删除成功！");
+							Query();
+						});
+						return true;
+					} else
+						return false;
+				});
+			}
+
+			//操作字段格式
+			function operationFormatter(value, row, index) {
+				var result = [
+					'<button class="btn-info" onclick="JumpToInfo(', row.Id, ')">详情</button>    <button class="btn-danger" onclick="Delete(', row.Id, ')">删除</button>'
+				];
+				return result.join('');
+			}
+
+			//表格加载数据
+			function loadData(f1, data) {
+				f1.bootstrapTable('load', data);
+				var hashTemp = window.location.hash || "1"
+
+				hashTemp = hashTemp.replace("#", "")
+				$(".pagination").find('a').each(function() {
+					if($(this).text() == hashTemp)
+						$(this).click()
+				})
+			};
+
+			$(function() {
+
+				var params = {};
+				//初始化用户中心查询数据
+
+				getDataList(yshurl + "Admin_Comment_GetSearchInfo", params, function(d) {
+
+					appendSelectList($("#Role"), d.many[0]);
+					appendSelectList($("#Grade"), d.many[1]);
+					appendSelectList($("#Channel"), d.many[2]);
+					appendSelectList($("#Auth"), d.many[3]);
+					appendSelectList($("#cLevel"), d.many[4]);
+					appendSelectList($("#cObject"), d.many[5]);
+					$("#dStartTime").attr("data-date", d.many[6][0].StartDate);
+					$("#StartTime").val(d.many[6][0].StartDate);
+					$("#dEndTime").attr("data-date", d.many[6][0].EndDate);
+					$("#EndTime").val(d.many[6][0].EndDate);
+
+					var res = convertToParams($condition.serializeArray());
+
+					if (res["UserId"] == "")
+						res.UserId = 0;
+
+					res1 = initPageInfo(res);
+
+					getDataList(yshurl + "Admin_Comment_GetUserInfo", res1, function(d) {
+
+						//获取总条数
+						getDataList(yshurl + "Admin_Comment_GetUserTotal", res, function(d) {
+							dataTotal = d.aaData[0].TotalNum;
+						});
+
+						var tableData = {
+							total: dataTotal,
+							rows: d.aaData
+						};
+
+						$table.bootstrapTable({
+							data: tableData,
+							onCheck: function(row) {
+								checkList.push(row.Id);
+								$.unique(checkList);
+							},
+							onUncheck: function(row) {
+								$.unique(checkList);
+								var pIndex = $.inArray(row.Id, checkList);
+								checkList.splice(pIndex, 1);
+							},
+							onCheckAll: function(rows) {
+								$.each(rows, function(index) {
+									checkList.push(rows[index].Id);
+								});
+								$.unique(checkList);
+							},
+							onUncheckAll: function(rows) {
+								$.unique(checkList);
+								var filterarray = $.grep(checkList, function(value) {
+									var isDel = false;
+									for (var i = 0; i < rows.length; i++) {
+										if (rows[i].Id == value) {
+											isDel = true;
+											break;
+										}
+									}
+									return !isDel;
+								});
+								checkList = filterarray;
+							},
+							escape: true,
+
+							sidePagination: 'server',
+							pagination: true,
+							pageSize: 10,
+							pageNumber: 1,
+							pageList: [10]
+						});
+						loadData($table, tableData);
+
+						// 控制翻页事件
+						$table.on('page-change.bs.table', function(e, number, size) {
+							var search = convertToParams($condition.serializeArray());
+							if (search["UserId"] == "")
+								search.UserId = 0;
+							search.PageIndex = (number - 1) * size;
+							search.PageSize = size;
+							getData(search);
+							window.location.hash = number;
+						});
+						
+						// onhashchange可以监控hash变化
+					    window.onhashchange = function() {
+					        var hash = window.location.hash;
+					        var id;
+					        if(hash != ""){
+					        	id = parseInt(hash.substr(1));
+					        } else{
+					        	id = 1
+					        }
+					        getData(schParam, 10, (id-1)*10);
+					        console.info(window.location.href)
+					       	$("ul.pagination").children().eq(id).addClass("active").siblings().removeClass("active");
+					    };
+
+					});
+
+				});
+
+				setIframeHeight();
+			});
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$('select').select2();
+			})
+		</script>
+		<!--
+	作者：443267568@qq.com
+	时间：2016-05-03
+	描述：修改结束
+-->
+	</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!--pages/openOther/openOther.wxml-->
+<text>
+    1、打开小程序
+    wx.navigateToMiniProgram(OBJECT)
+    打开同一公众号下关联的另一个小程序。
+    （注：必须是同一公众号下，而非同个 open 账号下）
+
+    wx.navigateBackMiniProgram(OBJECT)
+    返回到上一个小程序，只有在当前小程序是被其他小程序打开时可以调用成功
+
+    2、打开APP
+    launchApp(OBJECT)
+    因为需要用户主动触发才能打开 APP，所以该功能不由 API 来调用，需要用 open-type 的值设置为 launchApp 的 button 组件的点击来触发。
+    当小程序从 APP 分享消息卡片的场景打开时（场景值 1036),小程序会获得打开 APP 的能力，此时用户点击按钮可以打开分享该卡片的 APP。即小程序不能打开任意 APP，只能 跳回 分享该小程序卡片的 APP。
+    在一个小程序的生命周期内，只有在特定条件下，才具有打开 APP 的能力。 打开 APP 的能力 可以理解为由小程序框架在内部管理的一个状态，为 true 则可以打开 APP，为 false 则不可以打开 APP。
+
+    <!--代码：-->
+    <!--<button open-type="launchApp" app-parameter="wechat" binderror="launchAppError">打开APP</button>-->
+    <!--Page({-->
+        <!--launchAppError: function(e) {-->
+        <!--console.log(e.detail.errMsg)-->
+        <!--}-->
+    <!--})-->
+</text>

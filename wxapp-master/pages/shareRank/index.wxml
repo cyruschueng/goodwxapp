@@ -1,0 +1,15 @@
+<import src="../templates/rankItem/index.wxml" />
+<import src="../templates/shareBtn/index.wxml" />
+<view class="share-rank">
+    <view class="top-banner">
+        <view class="group-name">
+            <open-data type="groupName"></open-data>
+        </view>
+    </view>
+    <scroll-view class="rank-list" bindscrolltolower="loadingMore" scroll-with-animation scroll-y>
+        <view wx:for="{{items}}" wx:key="{{index}}">
+            <template is="rank-item" data="{{item:item, isMyRank:0, rankImage:rankImages[item.index], gradeText: gradeMap[item.grade]}}" />
+        </view>
+    </scroll-view>
+    <template is="share-btn" data="{{shareText: '分享到微信群 查看我的排名', extraShareInfo: ''}}" />
+</view>

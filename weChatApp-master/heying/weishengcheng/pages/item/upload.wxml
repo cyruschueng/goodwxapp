@@ -1,0 +1,20 @@
+<template name="upload-item">
+  <view class="uploadBG">
+
+    <!-- 图片 -->
+    
+    <image lazyload="true" class="pic" wx:if="{{item.url}}" src="{{item.url}}?imageView2/1/w/150/h/150"></image>
+    <image class="pic" wx:elif="{{item.path}}" src="{{item.path}}"></image>
+
+    <!-- 遮罩 -->
+    <view wx:if="{{item.state == 1 || item.state== 3}}" class="cover"></view>
+
+    <!-- 文字 -->
+    <view wx:if="{{item.state == 1}}" class="state">上传中..</view>
+    <!-- 文字 -->
+    <view wx:if="{{item.state == 3}}" class="state">上传失败</view>
+
+    <!-- 删除按钮 -->
+    <image wx:if="{{item.state == 2 || item.state== 3}}" class="delete" src="http://icons.maiyizhi.cn/delete-image.png" data-index="{{index}}" bindtap="{{deleteFunc}}"></image>
+  </view>
+</template>

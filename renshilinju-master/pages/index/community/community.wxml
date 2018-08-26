@@ -1,0 +1,30 @@
+<!--pages/index/community/community.wxml-->
+    
+<view class="searchLetter touchClass">
+    <view wx:for="{{displayLetter}}" style="height:{{itemH}}px" wx:key="index" data-letter="{{item}}" catchtouchstart="searchStart" catchtouchmove="searchMove" catchtouchend="searchEnd">{{item}}</view>
+</view>
+
+<block wx:if="{{isShowLetter}}">
+<view class="showSlectedLetter">
+    {{showLetter}}
+</view>
+</block>
+  <!-- <view class = "xzxq">选择小区: {{city}}</view>   -->
+
+
+<scroll-view scroll-y="true" style="height:{{winHeight}}px;margin-bottom : 100rpx;" bindscroll="bindScroll" scroll-top="{{scrollTop}}" >
+    <view class="selection" wx:for="{{cityList}}" wx:key="{{item.initial}}">
+         <block wx:if="{{item.cityInfo.length != 0}}">
+            <view class="item_letter">{{item.initial}}</view>
+         </block>
+         <view class="item_city tags-item {{currentItem==item.id?'active-tag':''}}" data-city="{{item.city}}"  wx:for="{{item.cityInfo}}" wx:key="index" bindtap="bindCity" data-id = "{{item.id}}"> 
+              {{item.city}}  
+         </view> 
+    </view>
+</scroll-view>
+
+
+<view class = "button">
+  <text class = "back" bindtap = "back">取消</text>
+  <text class = "go" bindtap = "go">确定</text>
+</view>

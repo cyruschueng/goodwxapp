@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>Form Layouts</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
+		<link href="css/autocomplete.css" rel="stylesheet" type="text/css">
+		
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+
+		<!--body wrapper start-->
+		<section class="">
+			<!-- page start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading">
+							<span id="headerTitle">添加进场</span>
+						</header>
+						<div class="panel-body">
+							<div class=" form">
+								<form class="cmxform form-horizontal adminex-form" id="commentForm" method="get">
+									<div class="form-group ">
+										<label for="batchID" class="control-label col-lg-2">批次号编码</label>
+										<div class="col-lg-7">
+											<input class=" form-control" id="batchID" name="batchID" type="text" readonly="readonly" />
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="suyuancode" class="control-label col-lg-2">溯源码</label>
+										<div class="col-lg-7">
+											<input class=" form-control" id="suyuancode" name="suyuancode" type="text" readonly="readonly" />
+										</div>
+									</div>
+
+									<div class="form-group ">
+										<label for="wholesalerName" class="control-label col-lg-2">批发商名称</label>
+										<div class="col-lg-7">
+											<!--<div id="wholesalerName1"></div>-->
+											<select class="form-control m-bot15" id="wholesalerName1" name="wholesalerName1">
+																																					
+											</select>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="merchantName" class="control-label col-lg-2">经营者名称</label>
+										<div class="col-lg-7">
+											<!--<div id="merchantName1"></div>-->
+											<select class="form-control m-bot15" id="merchantName1" name="merchantName1" onchange="merchantNameChange()">
+																																					
+											</select>
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+
+									<div class="form-group ">
+										<label for="productName" class="control-label col-lg-2">商品信息</label>
+										<div class="col-lg-7">
+											<!--<div id="productName1"></div>-->
+											<select class="form-control m-bot15" id="productName1" name="productName1">
+																																					
+											</select>
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+
+									<div class="form-group ">
+										<label for="price" class="control-label col-lg-2">单价</label>
+										<div class="col-lg-7">
+											<input class="form-control " id="price" name="price" maxlength="15" required />
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="weight" class="control-label col-lg-2">重量</label>
+										<div class="col-lg-7">
+											<input class="form-control " id="weight" name="weight" maxlength="15" required />
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<!--<div class="form-group ">-->
+									<!--<label for="ccomment" class="control-label col-lg-2">地址</label>-->
+									<!--<div class="col-lg-10">-->
+									<!--<textarea  style="resize: none;" class="wysihtml5 form-control" rows="5"></textarea>-->
+									<!--</div>-->
+									<!--</div>-->
+									<div class="form-group ">
+										<label for="remeark" class="control-label col-lg-2">备注</label>
+										<div class="col-lg-7">
+											<textarea style="resize: none;" class="wysihtml5 form-control" rows="6" id="remeark" name="remeark" maxlength="200"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-offset-2 col-lg-7">
+											<button class="btn btn-primary" type="button" Id="btnSave">保存</button>
+											<!--<button class="btn btn-default" type="button" Id="btnCancle">取消</button>-->
+										</div>
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!-- main content end-->
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+		<script src="js/jquery.searchableSelect.js"></script>
+		<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/fill-form.js"></script>
+		<script src="js/autocomplete.js"></script>
+		<script src="js/select2.min.js"></script>
+		
+		<script>
+			var merchantId;
+			
+			//生成option元素字符串
+			function getCompleteHtml(data) {
+				var html = "";
+				for(var i = 0; i < data.length; i++) {
+					html += '<option value=' + data[i].value + '>' + data[i].text + '</option>'
+				}
+				return html;
+			}
+			
+			//获取经营户列表
+			function initSelect(ele,api){
+				getDataList(yshurl + api,{Names:""},function(d){
+					console.log(d)
+					ele.append(getCompleteHtml(d.aaData));
+				})
+			}
+			
+			//获取商品列表
+			function getProductName(){
+				getDataList(yshurl + "Admin_GetInMarketProduct",{
+					Names:"",
+					QueryKeys:$('#merchantName1').val()
+				},function(d){
+					$('#productName1').append(getCompleteHtml(d.aaData));
+				})
+			}
+			
+			//经营者名称选择商品
+			function merchantNameChange (){
+				$('#productName1').empty();
+				getProductName();
+			}
+			
+			//用过Id查询备案数据
+			function getRecordData(ids) {
+				getDataList(yshurl + "Admin_GetInMarketInfoById", {
+					inMarkeId: ids
+				}, function(d) {
+					if (d && d.state == 0) {
+						initData(d.aaData[0]);
+					} else {
+						ysh_msg("获取进场数据失败");
+					}
+				});
+			}
+			//初始化元素数据
+			function initData(obj) {
+
+				$('#select2-productName1-container').text(obj.Goods_Name);
+				if(obj.WS_Supplier_Name == null){
+					$('#select2-wholesalerName1-container').text("暂无");
+				} else {
+					$('#select2-wholesalerName1-container').text(obj.WS_Supplier_Name);
+				}
+				$('#select2-merchantName1-container').text(obj.Seller_Name);
+//				$('#productName').attr('ekey', obj.ProductId);
+//				$('#wholesalerName').attr('ekey', obj.Wholesaler_ID);
+//				$('#merchantName').attr('ekey', obj.Seller_ID);
+				$('#remeark').val(obj.Remark);
+				$('#price').val(obj.Price);
+				$('#weight').val(obj.Weight);
+				$('#batchID').val(obj.Batch_ID);
+				$('#suyuancode').val(obj.SuyuanCode);
+			}
+
+			jQuery(document).ready(function() {
+				$(window.parent.document).find("#main").attr("height", document.body.scrollHeight)
+
+			});
+
+			/*********  新增、、更新  ***********/
+
+			function SaveInMarkInfo(id) {
+				getDataList(yshurl + 'Admin_AddOrUpdInMarketInfo', {
+					productId: $('#productName1').val(),
+					wholesalerId: $('#wholesalerName1').val(),
+					sellerId: $('#merchantName1').val(),
+//					productId: isNaN($('#productName').attr('ekey')) ? 0 : $('#productName').attr('ekey'),
+//					wholesalerId: $('#wholesalerName').attr('ekey') || "",
+//					sellerId: $('#merchantName').attr('ekey'),
+					InMarkId: id,
+					remark: $('#remeark').val(),
+					price: $('#price').val(),
+					weight: $('#weight').val(),
+					createUserId: 2
+				}, function(d) {
+					if (d && d.state == 0) {
+						ysh_msg("添加成功", 200, function() {
+							close();
+						});
+					} else {
+						ysh_msg("添加失败", 200, null);
+					}
+
+				});
+			}
+
+			function close() {
+				window.history.back();
+			}
+
+			$(function() {
+				initSelect($('#wholesalerName1'),"Admin_GetInMarketWholerInfo");
+				initSelect($('#merchantName1'),"Admin_GetInMarketMerchart");
+				getProductName();
+				$("select").select2();
+				//选择批发商
+//				$('#wholesalerName1').autocomplete({
+//					api: 'Admin_GetInMarketWholerInfo',
+//					width: '100%',
+//					height: 34,
+//					showButton: false,
+//					name: 'wholesalerName',
+//					required: false,
+//					onSubmit: function(text) {
+//						//更新表单验证状态
+//						if ($('#wholesalerName').attr('ekey') != "" && $('#wholesalerName').attr('ekey') != undefined) {
+//							$("#commentForm").bootstrapValidator('updateStatus', 'wholesalerName', 'VALID');
+//						}
+//					}
+//				});
+
+				//选择经营户
+//				$('#merchantName1').autocomplete({
+//					api: 'Admin_GetInMarketMerchart',
+//					width: '100%',
+//					height: 34,
+//					showButton: false,
+//					name: 'merchantName',
+//					required: true,
+//					onSubmit: function(text) {
+//						//更新表单验证状态
+//						if ($('#merchantName').attr('ekey') != "" && $('#merchantName').attr('ekey') != undefined) {
+//							$("#commentForm").bootstrapValidator('updateStatus', 'merchantName', 'VALID');
+//						}
+//						$("#productName").removeAttr("readonly");
+//						$('#productName').attr('ekey', '');
+//						$('#productName').val("");
+//					}
+//				});
+
+				//根据经营户选择商品
+//				$('#productName1').autocomplete({
+//					api: 'Admin_GetInMarketProduct',
+//					width: '100%',
+//					height: 34,
+//					showButton: false,
+//					name: 'productName',
+//					required: true,
+//					isAddParams: true,
+//					onSubmit: function(text) {
+//						//更新表单验证状态
+//						if ($('#productName').attr('ekey') != "" && $('#productName').attr('ekey') != undefined) {
+//							$("#commentForm").bootstrapValidator('updateStatus', 'productName', 'VALID');
+//						}
+//					}
+//				});
+
+				var id = ysh_GetQueryString("Id");
+				if (id == undefined || id == "0") {
+					id = 0;
+					$("#headerTitle").text("新增进场");
+					if ($('#merchantName').attr('ekey') === "" || $('#merchantName').attr('ekey') === undefined) {
+						$("#productName").attr("readonly", true);
+					} else {
+						$("#productName").removeAttr("readonly");
+					}
+				} else {
+					$("#headerTitle").text("编辑进场");
+					$("#wholesalerName1").attr("disabled", true);
+					$("#merchantName1").attr("disabled", true);
+					$("#productName1").attr("disabled", true);
+					getRecordData(id);
+				}
+
+				//表单验证
+				$('#commentForm').bootstrapValidator({
+					message: 'This value is not valid',
+					feedbackIcons: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					submitHandler: function(validator, form, submitButton) {
+						// Do nothing
+					},
+					fields: {
+						weight: {
+							validators: {
+								notEmpty: {
+									message: '重量不能为空'
+								},
+								regexp: {
+									regexp: /^[0-9]{1,7}\.{0,1}[0-9]{0,3}$/,
+									message: "重量格式不正确"
+								}
+							}
+
+						},
+						price: {
+							validators: {
+								notEmpty: {
+									message: '价格不能为空'
+								},
+								regexp: {
+									regexp: /^[0-9]{1,7}\.{0,1}[0-9]{0,2}$/,
+									message: "价格格式不正确"
+								}
+							}
+						},
+						productName: {
+							validators: {
+								notEmpty: {
+									message: '商品不能为空'
+								},
+								callback: {
+									message: '商品不存在，请重新选择商品',
+									callback: function(value, validator) {
+										var options = validator.getFieldElements('productName');
+										var istrue = options.attr('ekey') != "" && options.attr('ekey') != undefined;
+										return istrue;
+									}
+								}
+							}
+						},
+						merchantName: {
+							validators: {
+								notEmpty: {
+									message: '经营户不能为空'
+								},
+								callback: {
+									message: '经营户不存在，请重新选择经营户',
+									callback: function(value, validator) {
+										var options = validator.getFieldElements('merchantName');
+										return (options.attr('ekey') != "" && options.attr('ekey') != undefined);
+									}
+								}
+							}
+						}
+					}
+				})
+
+				$("#btnSave").click(function() {
+					//验证表单
+					$('#commentForm').data('bootstrapValidator').validate();
+					if ($('#commentForm').data('bootstrapValidator').isValid()) {
+						SaveInMarkInfo(id);
+					}
+					setIframeHeight();
+				})
+				$("#btnCancle").click(function() {
+					close();
+				})
+				setIframeHeight();
+			})
+		</script>
+
+	</body>
+
+</html>

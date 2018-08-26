@@ -1,0 +1,43 @@
+<!--pages/shopCart/shopCart.wxml-->
+<view class='isEmpty' wx:if='{{isEmpty}}'>
+  <image src='/image/14.png'></image>
+  <view class='empty-content'>购物车空空如也~</view>
+  <button bindtap='toshop'>去逛逛</button>
+</view>
+<view class='container' wx:else>
+  <view class='section-hd'>
+    <view>{{hotelName}}</view>
+    <view class='edit' data-isEdit='{{isEdit}}' bindtap='bindEdit'>{{edit}}</view>
+  </view>
+  <view class='order-list'>
+    <view class='order-item' wx:for='{{items}}' wx:key='code' data-index='{{index}}' bindtap='checkedState'>
+      <icon type='success' size='23' color='#ed403c' wx:if='{{item.checkedState}}'></icon>
+      <icon type='circle' size='23' color='#c1c1c1' wx:else></icon>
+      <image class='goods-img' src='{{item.url}}'></image>
+      <view class='goods-text'>
+        <view class='goods-title'>{{item.goods_title}}</view>
+        <view class='goods-price'>￥{{item.goods_price}}</view>
+        <view class='change-num'>
+          <view>房间数量</view>
+          <view class='change-num-content'>
+            <view class="minus {{item.isOne?'default':''}}" data-index='{{index}}' catchtap='minusCount'>-</view>
+            <input class='input-num' type='text' value='{{item.room_num}}' data-index='{{index}}' bindblur='inputNumber'></input>
+            <view class='plus' data-index='{{index}}' catchtap='addCount'>+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='section-ft'>
+    <view class='section-ft-left' bindtap='checkedAllState'>
+      <icon class='checkAll-icon' type='success' size='23' color='#ed403c' wx:if='{{checkedAllState}}'></icon>
+      <icon class='checkAll-icon' type='circle' size='23' color='#c1c1c1' wx:else></icon>
+      <view class='checkAll'>全选</view>
+    </view>
+    <view class='section-ft-right'>
+      <view class='totalPrice'>合计：￥{{totalPrice}}</view>
+      <view class="toPay {{none?'default':''}}" wx:if='{{isEdit}}' bindtap='toPayHtml'>去结算</view>
+      <view class="toPay {{none?'default':''}}" wx:else bindtap='deleteOrder'>删除</view>
+    </view>
+  </view>
+</view>

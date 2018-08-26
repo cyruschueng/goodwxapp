@@ -1,0 +1,44 @@
+<view class="header">车主认证</view>
+
+<view class="body">
+	<view class="input">
+		<input bindinput="getName" placeholder="输入姓名" />
+	</view>
+	<view class="input">
+		<input bindinput="getCarCode" placeholder="输入车牌号" />
+	</view>
+	<view class="ification">
+		<view class="car_model">
+			<input bindinput="getCarModel" placeholder="输入车型" />
+		</view>
+		<view class="car_color">
+			<input bindinput="getCarColor" placeholder="输入颜色" />
+		</view>
+	</view>
+	<view class="document">
+		<view class="document_title">上传证件</view>
+		<view class="doc_list">
+			<block wx:if="{{ one_img == '' }}">
+				<view class="list_li" bindtap="getDriverLicense">上传驾驶证</view>
+			</block>
+			<block wx:else>
+				<view class="list_li" bindtap="getDriverLicense">
+					<image src="{{ one_img }}"></image>
+				</view>
+			</block>
+			<block wx:if="{{ two_img == '' }}">
+				<view class="list_li" bindtap="getDrivingLicense">上传行驶证</view>
+			</block>
+			<block wx:else>
+				<view class="list_li" bindtap="getDrivingLicense">
+					<image src="{{ two_img }}"></image>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>
+
+
+<view class="foot_btn">
+	<button bindtap="submit">完成</button>
+</view>

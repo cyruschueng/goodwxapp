@@ -1,0 +1,29 @@
+<view class="header">
+	<view class="header_img">
+		<image src="../../images/img_yuer@3x.png"></image>
+	</view>
+	<view class="header_text">
+		<view class="header_text_details">
+			<view class="title">余额(元)</view>
+			<view class="price">{{ money_order.moneyCard || '0' }}</view>
+			<view class="price_info">
+				<view class="price_info_list">总收入(元)<text>{{ money_order.moneyIncome || '0' }}</text></view>
+				<view class="price_info_list">总提现(元)<text>{{ money_order.moneyEnchashment || '0' }}</text></view>
+			</view>
+			<view class="withdraw_btn" bindtap="withdraw">提现</view>
+		</view>
+	</view>
+	<view class="features">
+		<view class="features_list">
+			<view class="features_title">提现账号</view>
+			<view class="features_input" bindtap="setWithdraw">
+				<view class="input">
+					<view class="input_info">{{ money_order.aliPay || '请设置支付宝账号' }}</view>
+				</view>
+				<view class="input_icon">
+					<image src="../../images/icon_return_left@3x.png"></image>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

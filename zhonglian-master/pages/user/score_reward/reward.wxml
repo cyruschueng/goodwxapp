@@ -1,0 +1,90 @@
+<view wx:if='quota>fenzhi' class='tip'>当前剩余信用积分额度：{{quota-fenzhi}}</view>
+<view wx:else class='tip warn'>当前剩余信用积分额度已使用完毕！</view>
+<form bindsubmit="onPushSubmit" report-submit="true">
+
+    <view class="massage">
+        <block wx:if='{{type==0}}'>
+            <view>
+                <text class='blue'>给{{dept.dept_name}}</text>录入积分
+            </view>
+            <view class="grey f12">
+                <text class="tag-name gridFour" wx:for='{{dept.manager}}' wx:key='{{index}}'>{{item}}</text>
+                <input type='text' value='{{dept_id}}' name='dept_id' hidden='true' />
+            </view>
+        </block>
+        <block wx:else>
+            <view>录入积分人员</view>
+            <view class="grey f12">
+                <text class="tag-name gridFour" wx:for='{{user}}' wx:key='{{item.uid}}'>{{item.username}}</text>
+                <input type='text' value='{{uids}}' name='uids' hidden='true' />
+            </view>
+        </block>
+    </view>
+
+    <radio-group class="massage mt10" catchchange='onChange' data-name='score'>
+        <label class="flex radio-item" wx:if='{{!is_manager2}}'>
+            <radio value="10" />
+            <text class="sub">表扬</text>
+            <text class="f18">+10</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="5" />
+            <text class="sub">表扬</text>
+            <text class="f18">+5</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="3" />
+            <text class="sub">表扬</text>
+            <text class="f18">+3</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="2" />
+            <text class="sub">表扬</text>
+            <text class="f18">+2</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="1" checked='true' />
+            <text class="sub">表扬</text>
+            <text class="f18">+1</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="-2" />
+            <text class="sub">批评</text>
+            <text class="f18">-2</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="-3" />
+            <text class="sub">批评</text>
+            <text class="f18">-3</text>
+        </label>
+        <label class="flex radio-item">
+            <radio value="-5" />
+            <text class="sub">批评</text>
+            <text class="f18">-5</text>
+        </label>
+        <label class="flex radio-item" wx:if='{{!is_manager2}}'>
+            <radio value="-10" />
+            <text class="sub">批评</text>
+            <text class="f18">-10</text>
+        </label>
+        <input type='number' value='{{score}}' name='score' hidden='true' />
+    </radio-group>
+
+    <view class="massage mt10">
+        <textarea placeholder="请输入原因,至少8个字" placeholder-class="linght" name="content" maxlength="320" />
+        <!--图片-->
+        <view class="img mt10">
+            <image class="mr5 mb5" src="{{item}}" mode="aspectFill" wx:for="{{pictures}}" wx:key="*this" data-index="{{index}}" catchlongtap="onDeleteImgTap" catchtap="onPreviewTap"></image>
+            <text class="add-img tc grey iconfont icon-add" catchtap="onOpenPictureTap" wx:if="{{pictures.length<6}}"></text>
+        </view>
+    </view>
+    <view class="ml10 mr10 mt5 f12 linght">温馨小提示：长按可以删除图片哦~</view>
+    <view class="m20">
+        <input type='number' value='{{type}}' name='type' hidden='true' />
+        <button type="primary" hover-class="none" form-type='submit' disabled='{{!quota || quota<=fenzhi}}'>
+            <block wx:if="{{quota<=fenzhi}}">积分额度已使用完</block>
+            <block wx:else>提 交</block>
+        </button>
+    </view>
+
+</form>

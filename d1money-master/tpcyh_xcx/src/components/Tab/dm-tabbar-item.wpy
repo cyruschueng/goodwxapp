@@ -1,0 +1,47 @@
+<style lang="less" rel="stylesheet/less">
+
+</style>
+<template>
+    <view
+        class="demon-tabbar__item"
+        :class="{'active' : item.active==1}"
+        @tap="click"
+    >
+        <view class="demon-tabbar__item__img">
+            <i class="iconfont {{item.iconClass}}"></i>
+        </view>
+        <view class="demon-tabbar__item__label">
+            {{item.text}}
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {
+            item: {
+                type: Object
+            }
+        }
+
+        data = {}
+
+        events = {}
+
+        methods = {
+            click(){
+//                console.log("click");
+                this.$emit("selectItem");
+            },
+            changeData(active){
+                this.item.active = active;
+//                console.log(this.item.active);
+            }
+        }
+
+        onLoad() {
+
+        }
+    }
+</script>

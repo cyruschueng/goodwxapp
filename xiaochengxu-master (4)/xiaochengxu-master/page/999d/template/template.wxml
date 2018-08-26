@@ -1,0 +1,45 @@
+
+<template name="itemList">
+   <view class="main-item">
+        <navigator url="../video/video?video_id={{id}}">
+        <image class="item-image" src="{{img}}"></image>
+        </navigator>
+        <navigator url="../video/video?video_id={{id}}">
+            <text class="item-text">{{title}}</text>
+        </navigator>
+        <view class="item-video-msg">
+            <icon class="bofang-icon size25"></icon>
+            {{play_count}}
+        </view>
+    </view>
+</template>
+
+
+<template name="tItemList">
+   <view class="main-item tmain-item">
+        <navigator url="../teacher/teacherlist?tid={{id}}&name={{name}}">
+        <image class="item-image" src="{{img}}"></image>
+        </navigator>
+        <navigator url="../teacher/teacherlist?tid={{id}}&name={{name}}">
+            <text class="item-text">{{name}}</text>
+        </navigator>
+    </view>
+</template>
+
+<template name="dItemList">
+   <view class="main-item tmain-item">
+        <navigator url="../dancing/dancinglist?lid={{lid}}&name={{name}}">
+        <image class="item-image" src="{{img}}"></image>
+        </navigator>
+        <navigator url="../dancing/dancinglist?lid={{lid}}&name={{name}}">
+            <text class="item-text">{{name}}</text>
+        </navigator>
+    </view>
+</template>
+
+<template name="empty">
+    <view hidden="{{isshow}}" class="empty">
+        <image src="http://thumb.media.999d.com/xiaochengxu/empty.png"></image>
+        <text>{{title}}</text>
+    </view>
+</template>

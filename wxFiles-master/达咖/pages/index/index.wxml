@@ -1,0 +1,116 @@
+<import src="/pages/template/template.wxml"/>
+<view class="location panel-start item-center">
+  <image class="icon-md" src="/img/location_fill.png"></image>
+  <view bindtap="chooseLocation" class="font-md font-white margin-left-sm ellipsis" style="max-width:400rpx">{{location}}</view>
+  <image class="icon-xs margin-left-sm" src="/img/down.png"></image>
+</view>
+<swiper indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" autoplay="true" interval="5000" duration="1000" style="height:450rpx" circular="true">
+  <block wx:for="{{imgUrl}}">
+    <swiper-item>
+      <image  mode="aspectFill" src="{{url+item.path}}" class="slide-image" mode="aspectFill" style="width:100%" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class="absolute-panel search-top">
+  <view class="search panel-center item-center" bindtap="navToSearch">
+    <image src="/img/search.png" class="icon-lg"></image>
+    <view class="font-lg margin-left-xs">搜索商品</view>
+  </view>
+</view>
+<view class="bg-white panel-center padding-top-sm padding-bottom-sm">
+  <view class="col-sm text-center" bindtap="navToCardmarket">
+    <image class="icon-xxl" src="/img/ck.png"></image>
+    <view class="font-sm">卡商城</view>
+  </view>
+  <view class="col-sm text-center"  bindtap="navToHoliday">
+    <image class="icon-xxl" src="/img/mkl.png"></image>
+    <view class="font-sm">节日订购</view>
+  </view>
+  <view class="col-sm text-center" data-index='0' bindtap="seeMore">
+    <image class="icon-xxl" src="/img/h3.png"></image>
+    <view class="font-sm">精品推荐</view>
+  </view>
+  <view class="col-sm text-center" bindtap="navToHopy">
+    <image class="icon-xxl" src="/img/qd.png"></image>
+    <view class="font-sm">敬请期待</view>
+  </view>
+</view> 
+
+<image src="/img/bg1.jpg" class="panel-bg"></image>
+<view class="panel-bg-opacity font-lg">
+  <view class="bg-hear radius-xs font-white font-32 line-height-sm text-center" bindtap="navToTakeit">堂食点单</view>
+</view>
+<view style="margin-top:-40px"></view>
+
+<block wx:for="{{blockTools}}">
+  <template is="{{item.style == '1' ? 'blockTool1':''}}" data="{{bt:item,url:url,index:index}}"/>
+  <template is="{{item.style == '3' ? 'blockTool2':''}}" data="{{bt:item,url:url,index:index}}"/>
+  <template is="{{item.style == '2' ? 'blockTool3':''}}" data="{{bt:item,url:url,index:index}}"/>
+</block>
+
+
+
+<view class="panel panel-center item-center margin-top-sm bottom-line">
+  <image class="icon-md" src="/img/j3.png"></image>
+  <view class="font-lg margin-left-sm" >附近的门店</view>
+</view>
+
+<view class="panel" style="padding-bottom:0" wx:if="{{nearShop.length > 0}}">
+  <view class="panel-xs bottom-line shop-list panel-between" wx:for="{{nearShop}}" data-index="{{index}}" bindtap="navToShop">
+    <image mode="aspectFill" class="shop-img" src="{{url+item.shopimage}}"></image>
+    <view class="shop-panel">
+      <view class="blod font-lg ellipsis">{{item.shopname}}</view>
+      <view class="font-md margin-top-xs">距您: {{item.distance}}</view>
+      <view class="margin-top-xs shop-con panel-start">
+        <view class="item bg-user font-xs">会</view>
+        <view class="item bg-filter font-xs">减</view>
+        <view class="item bg-inbox font-xs">折</view>
+      </view>
+      <view class="panel-start margin-top-xs">
+        <image  mode="aspectFill" src="/img/location.png" class="icon-lg"></image>
+        <view class="font-sm font-default ellipsis margin-left-xs" style="width:350rpx">{{item.shopaddresscity}}{{item.shopaddressdistrict}}{{item.shopaddressstreet}}{{item.shopaddressstreetNumber}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+
+
+
+<view class="couponfixed {{showCoupon ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px" bindtap="closeCou">
+  <view class="couponpanel">
+    <view class="text-center">
+      <view class="font-md">获得优惠券<image src="/img/close.png" class="icon-md pull-right" catchtap="closeCou"></image></view>
+    </view>
+    <view class="coupons" wx:for="{{coupon}}">
+      <image src="/img/couponbg.png" class="bg"></image>
+      <view class="con panel-between">
+        <view class="leftcon panel-center">
+          <view class="txt">￥{{item.couponprice}}</view>
+          <view class="txtcon">
+            <view class="font-white font-xl"> {{item.type == 1 ? '折扣券':''}} {{item.type == 2 ? '直减券':''}} {{item.type == 3 ? '满减券':''}} 满减券</view>
+            <view class="font-white font-sm">{{item.type == 1 ? '使用立减'+item.couponprice:''}}{{item.type == 2 ? '使用可享'+(item.couponprice*10)+'折优惠':''}}{{item.type == 3 ? '满￥'+item.tprice+'减￥'+item.bprice:''}}</view>
+            <view class="font-white font-20"><text wx:for="{{item.range}}" wx:for-item="it">限{{' '+it}} 使用</text></view>
+          </view>
+        </view>
+        <view class="rightcon" bindtap="useCoupon">
+          <view class="txt">
+            <text decode="true">立即
+            使用
+            <text class="font-xs">{{item.day}}天后过期</text>
+            </text>
+            
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

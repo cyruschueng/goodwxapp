@@ -1,0 +1,16 @@
+<!--pages/fansList/fansList.wxml-->
+<view class="list-group">
+<view class="list-group-item" wx:if="{{fansList.length == 0}}">当前还没有粉丝</view>
+  <view class="list-group-item" wx:for="{{fansList}}" wx:key>
+    <view class="img-box">
+      <image src="{{item.fansUser.profile_image}}" bindtap="lookUserInfo" data-item="{{item}}"></image>
+    </view>
+    <view class="user-info">
+      <view class="nick-name">{{item.fansUser.nick_name}}</view>
+      <view class="follow-num">爱心：{{item.fansUser.electric}}</view>
+    </view>
+    <view class="btn-box">
+      <text data-item="{{item}}" bindtap="bindDelFans">删除粉丝</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+<view class="list">
+  <radio-group class="radio-group" catchchange="radioChange">
+    <view wx:for="{{data}}" wx:key="*this" class="item">
+      <view class="right arrowR" catchtap="onFireChoiceEventTap" catchlongtap="onActionLongTap" data-index="{{index}}">
+        <text class="h1">{{item.consignee}}({{item.mobile}})</text>
+        <text class="p linght">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</text>
+        <text class="def" wx:if="{{item.is_default>0}}">默认</text>
+      </view>
+    </view>
+  </radio-group>
+</view>
+
+<view class="item addto" bindtap="addrss_bind" data-id="0">
+  <button catchtap="onNavigateTap" data-url="write" class="lable">
+    <text class="iconfont icon-add"></text> 添加新地址</button>
+</view>

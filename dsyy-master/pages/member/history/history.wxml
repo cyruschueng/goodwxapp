@@ -1,0 +1,26 @@
+<scroll-view class="hot-item-container" style="height: {{systemInfo.windowHeight+80}}px;" scroll-y="true" bindscrolltolower="loadMoreDatas">
+  <view class="white-bg">
+    <block wx:for="{{bookInfos}}">
+      <view class="book border-bottom margin-left-40 margin-right-40 padding-top-25 padding-bottom-25" bindtap="jumpBookInfo" data-bookid="{{item.bookInfo.bookInfo.id}}">
+        <view class="book-img">
+          <image src="{{item.bookInfo.bookInfo.images_medium}}" class="book-img-sml" mode="aspectFill"></image>
+        </view>
+        <view class="book-info">
+          <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{item.bookInfo.bookInfo.title}}</view>
+          <view class="text-oneline margin-bottom-10 book-font">{{item.bookInfo.bookInfo.subtitle}}</view>
+          <view class="text-oneline margin-bottom-10 book-font">作者： {{item.bookInfo.bookInfo.author}}</view>
+          <view class="text-oneline margin-bottom-10 book-font">出版社：{{item.bookInfo.bookInfo.publisher}}</view>
+          <view class="text-oneline margin-bottom-10 book-font">借阅日期：{{item.borrowInfo.borrow_time}}</view>
+          <view class="text-oneline margin-bottom-10 book-font">
+            <view wx:if="{{item.borrowInfo.status>0}}" style="color:green">
+                已归还
+            </view>
+            <view wx:else style="color:red">
+                未归还
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>

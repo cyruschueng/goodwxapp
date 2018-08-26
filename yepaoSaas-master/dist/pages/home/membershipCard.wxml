@@ -1,0 +1,22 @@
+<!--pages/home/myMembershipCard.wxml-->
+
+<view class='bg-view'>
+
+  <view class='title-view'>共{{ carList.length }}张</view>
+  <view class='car-cell-view'>
+  
+    <block wx:for='{{ carList }}' wx:key='{{ index }}'>
+    <view class='car-cell' id='{{ item.cardId }}' bindtap='bindCardTap'>
+      <image mode='aspectFill' class='bg-img' src='{{ item.bgimg }}'></image>
+      <view class='info-view'>
+        <view><image class='icon-img' src='../../images/icon/home/car/yepao_logo.png'></image></view>
+        
+        <view class='car-type-view'>{{ item.carType }}</view>
+        <view>{{ item.carName }}</view>
+      </view>
+    </view>
+    </block>
+
+  </view>
+
+</view>

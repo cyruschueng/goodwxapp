@@ -1,0 +1,64 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+<view class="peisong-top write">
+    <view class="userinfo mid">
+        <image class="user-img" src="{{user_info.user_headimg}}"></image>
+        <view class="mt10 tc f16">{{user_info.user_nickname}}</view>
+    </view>
+</view>
+
+<view class="flex indent">
+    <view class="sub">订单号：{{oinfo.order_sn}}</view>
+    <view class="grey"></view>
+</view>
+<!--地址信息-->
+<view class="place-msg mt10">
+    <view class="flex mb10">
+        <view class="sub"><text class="iconfont icon-peoplefill red mr5"></text><text> {{oinfo.consignee}}</text></view>
+        <view><text class="iconfont icon-mobilefill red mr5"></text><text>{{oinfo.mobile}}</text></view>
+    </view>
+        <view>{{oinfo.province}}{{oinfo.city}}{{oinfo.area}}{{oinfo.address}}</view>
+</view>
+<!--商品信息-->
+<block wx:for="{{oinfo.glist}}" wx:for-item="gitem">
+<view class="mall-msg flex mt10">
+    <view class="sub mr10"><image src="{{gitem.goods_img}}" mode="aspectFill"></image></view>
+    <view class="massages">
+        <text class="lineText2">{{gitem.goods_name}}</text>
+        <view class="flex mt15 mb5 f16">
+            <view class="red">￥{{gitem.goods_price}}</view>
+            <view class="sub tr grey"><text class="iconfont icon-close"></text>{{gitem.goods_number}}</view>
+        </view>
+    </view>
+</view>
+</block>
+<!--合计-->
+<view class="total mt10">
+    <view class="flex">
+        <view>合计：</view>
+        <view class="sub tr red f16">￥{{oinfo.order_amount}}</view>
+    </view>
+    <view class="flex">
+        <view class="other tr grey">商品总额</view>
+        <view class="sub tr f12">￥{{oinfo.goods_amount}}</view>
+    </view>
+    <view class="flex">
+        <view class="other tr grey">运费</view>
+        <view class="sub tr f12">￥{{oinfo.shipping_fee}}</view>
+    </view>
+    <view class="flex" wx:if="{{oinfo.is_order_manjian}}">
+        <view class="other tr grey">-满减</view>
+        <view class="sub tr f12">￥{{oinfo.order_manjian_jiner}}</view>
+    </view>
+    <view class="flex" wx:if="{{oinfo.is_order_quan}}">
+        <view class="other tr grey">-优惠券</view>
+        <view class="sub tr f12">￥{{oinfo.order_quan_jiner}}</view>
+    </view>
+</view>
+<!--按钮-->
+<view class="m20"><button type="warn" bindtap="order_peisong_bind" disabled="{{btn_disabled}}" loading="{{submitIsLoading}}">确认配送</button></view>
+</block>

@@ -1,0 +1,16 @@
+<!--pages/userList/userList.wxml-->
+<view class="list-group">
+  <!-- <view class="list-group-item" wx:if="{{userList.length == 0}}">当前还没有关注</view> -->
+  <view class="list-group-item" wx:for="{{userList}}" wx:key="index" bindtap="goToShareList" data-id="{{item.id}}">
+    <view class="img-box">
+      <image src="{{item.profile_image}}"></image>
+    </view>
+    <view class="user-info">
+      <view class="nick-name">{{item.nick_name}}</view>
+      <view class="follow-num">触电值：{{item.electric}}</view>
+    </view>
+    <!-- <view class="btn-box">
+      <text data-item="{{item}}" bindtap="bindDelFollow">取消关注</text>
+    </view> -->
+  </view>
+</view>

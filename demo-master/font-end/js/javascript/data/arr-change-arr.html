@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../..//vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div @click="change">按钮</div>
+        <ul>
+            <li v-for="item in data1">
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        data1: [{
+            name: "zjy1",
+            age: "25"
+        }, {
+            name: "zjy2",
+            age: "26"
+        }],
+        data2: []
+    },
+    created: function() {},
+    mounted: function() {},
+    computed: {},
+    watch: {
+        data2: function() {
+            // console.log(this.data2)
+        }
+    },
+    methods: {
+        change: function() {
+            for (var i = 0; i < this.data1.length; i++) {
+                this.data2.push({key:"",number:""});
+                this.data2[i].key = this.data1[i].name;
+                this.data2[i].number = this.data1[i].age;
+            }
+            console.log(this.data2);
+        }
+    }
+})
+</script>

@@ -1,0 +1,34 @@
+<!--pages/mine/mission/question/add/add.wxml-->
+
+<view class="container">
+  <view class="voice">
+    <view class="record">
+      <button type="{{voiceRecording?'warn':'primary'}}" bindtap="onVoiceRecord"> {{voiceRecording ? '正在录音' : '开始录音'}}  </button>
+    </view>
+    <view class="player">
+      <button type="default" bindtap="onVoicePlay" disabled="{{!voiceFileName}}" > {{voicePlaying ? '暂停':'播放'}} </button>
+    </view>
+  </view>
+  <view class="cells">
+    <form>
+      <view class="group">
+        <span class="item">
+          <picker bindchange="onCategoryChange" value="{{categoryIndex}}" range="{{categoryItems}}">
+            <view class="picker">
+              题目分类：{{categoryItems[categoryIndex]}}
+            </view>
+          </picker>
+        </span>
+        <span class="item">
+          <input bindinput="onTitleInput" placeholder="请输入正确答案" confirm-type="next" bindconfirm="onTitleNext" focus="{{titleFocus}}" />
+        </span>
+        <span class="item">
+          <input bindinput="onTipInput" placeholder="请输入答案提示" confirm-type="done" bindconfirm="onQuestionSaveTap" focus="{{tipFocus}}" />
+        </span>
+      </view>    
+      <view class="controls">
+        <button type="primary" bindtap="onQuestionSaveTap"> 保存题目 </button>
+      </view>
+    </form>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>异步编程</title>
+</head>
+<body>
+<script type="text/javascript">
+	// 回调函数
+	　function f1(callback){
+　　　　setTimeout(function () {
+　　　　　　// f1的任务代码
+　　　　　　callback();
+　　　　}, 1000);
+　　}
+
+　　f1(f2);
+
+
+f1.on('done', f2);
+// 上面这行代码的意思是，当f1发生done事件，就执行f2。然后，对f1进行改写：
+　　function f1(){
+　　　　setTimeout(function () {
+　　　　　　// f1的任务代码
+　　　　　　f1.trigger('done');
+　　　　}, 1000);
+　　}
+
+
+
+
+
+// http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html
+// 回调地狱===异步函数嵌套，promise或generator进行异步流程管理。
+
+</script>
+</body>
+</html>

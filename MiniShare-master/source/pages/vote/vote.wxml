@@ -1,0 +1,67 @@
+<!--pages/vote/vote.wxml-->
+<view class='superheader'>
+  <view class='title'>群投票</view>
+</view>
+<text class='fa fa-chevron-left btnback' bindtap='back'></text>
+
+
+
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="投票标题" value='{{title}}' bindinput='titleChange' maxlength='40' />
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="补充描述（选填）" style="height: 3.3em" value='{{description}}' bindinput='descriptionChange' maxlength='200' />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input " wx:for="{{options}}" wx:key="k">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="选项{{item.seq+1}}" value='{{item.text}}' bindinput='optionsChange' id="{{item.seq}}" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{item.seq>1}}">
+          <text class='fa fa-minus-circle' style='color:#E64340' id="{{item.seq}}" bindtap='cutOption'></text>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input weui-cell_warn" bindtap='addOption'>
+        <view class="weui-cell__hd">
+          <text class='fa fa-plus-circle primary'></text>
+        </view>
+        <view class="weui-cell__bd">
+          <text class='weui-input primary' style='padding-left:20rpx;'>添加选项</text>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">截至时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class='flex-row'>
+
+            <picker mode="date" value="{{date}}" start="{{startdate}}" bindchange="bindDateChange">
+              <view class="weui-input">{{date}}</view>
+            </picker>
+
+            <picker mode="time" value="{{time}}" bindchange="bindTimeChange" style='margin-left:20rpx;'>
+              <view class="weui-input">{{time}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <view>
+    <view class="page__bd page__bd_spacing" >
+      <form name='uploadform' report-submit bindsubmit='sendVote'>
+        <button class="btnNotice" type="primary" form-type="submit">发起投票</button>
+      </form>
+    </view>
+  </view>
+</view>

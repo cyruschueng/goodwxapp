@@ -1,0 +1,25 @@
+<div ng-controller="demoController">
+    <div ng-include="'./views/my/expert/header.html'"></div>
+    <div class="container" >
+        <div class="row">
+            <div class="col-xs-12" style="padding-top:15px;">
+                <div infinite-scroll='paging.nextPage()' infinite-scroll-disabled='paging.busy' infinite-scroll-distance='10'>
+                    <div ng-repeat="item in paging.items">
+                        <div  ng-click="selectExpert(item.id,item.expertType,item.uname,item.imgUrl)" class="media" style="padding-bottom:10px;padding-top:10px; border-bottom: 1px solid #eee;">
+                            <a class="media-left"  href="javascript:void(0)">
+                                <img style="width:40px;" src="{{item.imgUrl|resourceUrl}}"    alt="...">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{item.uname}}</h4>
+                                <div style="font-size: 13px;" class="text-muted" >{{item.intro|cut:true:30:'...'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show='paging.busy && paging.isComplete==false'>Loading data...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

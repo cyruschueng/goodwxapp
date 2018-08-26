@@ -1,0 +1,68 @@
+<!--pages/user/user.wxml-->
+<view class="container">
+   <view class="user-container">
+       <view class="user-pic">
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+       </view>
+       <view class="user-name">
+          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+       </view>
+   </view>
+   <view class="my-coin">
+     <text>我总共比了</text>
+     <text class="count">{{my.total}}</text>
+     <text>种币</text>
+   </view>
+   <view class="coin-container">
+       <view class="eos-item eos-all">
+        <view class="eos-vote-name">
+          盈亏占比
+        </view>
+        <view class="eos-vote-result">
+          <view class="eos-vote-earn-group">
+                <text class="eos-title eos-earn-title">赚了</text>
+                <text class="eos-earn">{{my.gainPercent}}</text>
+          </view>
+          <view class="eos-vote-loss-group">
+                <text class="eos-loss">{{my.lossPercent}}</text>
+                <text class="eos-title eos-loss-title">赔了</text>
+          </view>
+        </view>
+        <view class="eos-vote-progress">
+          <view class="eos-vote-active" style='width:{{my.gainPercent}}'></view>
+        </view>
+      </view>
+
+        <view class="eos-item eos-all">
+        <view class="eos-vote-name">
+         和全网已有{{all.total}}种币比比
+        </view>
+        <view class="eos-vote-result">
+          <view class="eos-vote-earn-group">
+                <text class="eos-title eos-earn-title">赚了的人</text>
+                <text class="eos-earn">{{all.gain}}</text>
+          </view>
+          <view class="eos-vote-loss-group">
+                <text class="eos-loss">{{all.loss}}</text>
+                <text class="eos-title eos-loss-title">赔了的人</text>
+          </view>
+        </view>
+        <view class="eos-vote-progress">
+          <view class="eos-vote-active" style='width:{{all.gainPercent}}'></view>
+        </view>
+      </view>
+   </view>
+    <view class='common-footer'>
+    <navigator class='nav-item-gtoup nav-index' hover-class="navigator-hover" url="/pages/bindex/bindex">
+    <image class="ico-img-coin" src='../images/ico-coin.png'></image>
+    <text class="ico-text-active">首页</text>
+    </navigator>
+    <navigator  class='nav-item-gtoup nav-add' hover-class="navigator-hover"url="/pages/addbb/addbb">
+      <image class="ico-img-plus" src='../images/ico-plus.png'></image>
+   </navigator>
+    <navigator  class='nav-item-gtoup nav-user' hover-class="navigator-hover" url="/pages/user/user">
+      <image class="ico-img-coin" src='../images/ico-user-active.png'></image>
+       <text class="ico-text">我的</text>
+   </navigator>
+</view>
+</view>

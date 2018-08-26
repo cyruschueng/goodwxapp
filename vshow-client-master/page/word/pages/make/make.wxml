@@ -1,0 +1,26 @@
+<view class="make">
+  <view class="make-hd"></view>
+  <view class="make-bd">
+    <view class="make-input">
+      <view class="input-title lh1 f14">请输入文字</view>
+      <view class="input-area f12">
+        <input value="" bindinput="bindinput" class="lh1" value="{{inputText}}" placeholder="输入变换的文字"  />
+      </view>
+    </view>
+
+    <view class="make-output">
+      <view class="output-control lh1 f14 hid">
+        <view class="control-l fl">{{pid == 1? '右侧输入循环倍数': '打乱文字'}}</view>
+        <view class="control-r fr" wx:if="{{pid == 1}}">×<input class="control-input" value="{{times}}" bindinput="changeTimes" /></view>
+      </view>
+      <view class="output-cont hid">
+        <view class="output-title">输出结果：</view>
+        <view class="output f14">{{resultText}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-fixed hid">
+    <view class="btn-copy fr tc" bindtap="onCopy">复制</view>
+  </view>
+</view>

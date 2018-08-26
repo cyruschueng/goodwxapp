@@ -1,0 +1,154 @@
+<!--pages/ranking/ranking/ranking.wxml-->
+<!--用户信息-->
+<view class="top-bg white">
+    <image class="topbg" src="/images/guihua.png" mode="aspectFit"></image>
+    <view class="user-msg flex">
+        <image class="user-img" src="{{avatar}}" mode="aspectFill"></image>
+        <view class="sub mt15 ml15">
+            <view class="f20">{{user}}</view>
+            <view class="f16 yellow">{{dept_name}}</view>
+        </view>
+    </view>
+    <view class="flex tc jifen">
+        <view class="sub gridYr">{{season}}
+            <view>本季度积分</view>
+        </view>
+        <view class="sub gridYr">{{total}}
+            <view>总积分</view>
+        </view>
+        <view class="sub">{{rank}}
+            <view>排名</view>
+        </view>
+    </view>
+</view>
+<!--荣誉室-->
+<view class="honours tc">
+    <!--标题-->
+    <view class="f18 title">
+        <text class="red">{{user}}</text>
+        <text>的荣誉室</text>
+        <text class="fr grey iconfont icon-question" catchtap="onShowHelpTap"></text>
+    </view>
+    <view class="honor-box">
+        <view class="honor {{grade_class}}">
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor1.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==1}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor2.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==2}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor3.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==3}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor4.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==4}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor5.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==5}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor6.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==6}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor7.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==7}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor8.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==8}}">{{total}}</view>
+            </view>
+            <view class="honor-list">
+                <image class="honor-bg" src="/images/honor9.png" mode="aspectFit"></image>
+                <view class="red f24" wx:if="{{grade==9}}">{{total}}</view>
+            </view>
+        </view>
+    </view>
+    <!--进度条-->
+    <view class="progress">
+        <view class="progress-bar"></view>
+    </view>
+    <view class="red tips">成功就是m每天都有新收获！继续努力</view>
+    <view class="mt5">还差{{next_grade}}分，即可升级到下一级别：
+        <text class="red grade">{{next_grade_str}}</text>
+    </view>
+</view>
+<!--荣誉室 弹层-->
+<view class="honours-pop" hidden="{{!isShowHelp}}">
+    <view class="shuoming mid tc">
+        <text class="close grey f24 iconfont icon-close" catchtap="onHideHelpTap"></text>
+        <view class="red f20 mt10">荣誉级别对应积分说明</view>
+        <view class="mt15">
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor1.png" mode="aspectFit"></image>
+                <view>月桂</view>
+                <view class="red f12">(0-99)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor2.png" mode="aspectFit"></image>
+                <view>月桂树</view>
+                <view class="red f12">(100-499)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor3.png" mode="aspectFit"></image>
+                <view>月桂圆</view>
+                <view class="red f12">(500-999)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor4.png" mode="aspectFit"></image>
+                <view>金桂</view>
+                <view class="red f12">(1000-1199)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor5.png" mode="aspectFit"></image>
+                <view>金桂树</view>
+                <view class="red f12">(1200-1999)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor6.png" mode="aspectFit"></image>
+                <view>金桂园</view>
+                <view class="red f12">(2000-2999)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor7.png" mode="aspectFit"></image>
+                <view>丹桂</view>
+                <view class="red f12">(3000-3299)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor8.png" mode="aspectFit"></image>
+                <view>丹桂树</view>
+                <view class="red f12">(3300-4499)</view>
+            </view>
+            <view class="honor-list mt10">
+                <image class="honor-bg" src="/images/honor9.png" mode="aspectFit"></image>
+                <view>丹桂园</view>
+                <view class="red f12">(4500-6000)</view>
+            </view>
+        </view>
+    </view>
+</view>
+<!--表扬-->
+<view class="praise">
+    <view class="praise-total">总共有{{data.length}}次表扬，累计积分{{total}}</view>
+
+    <view class="praise-list grey gridXb" wx:for="{{data}}" wx:key="{{index}}">
+        <view class="flex">
+            <view class="f20">+
+                <text class="f36">{{item.FENZHI}}</text>
+            </view>
+            <view class="sub tr">
+                <text>{{item.SHIJIAN}}</text>
+            </view>
+        </view>
+        <view class="mt10">
+            <text class="f16 red content-genre">{{item.NAME}}</text>
+            <text>{{item.YIJU}}</text>
+        </view>
+    </view>
+
+</view>

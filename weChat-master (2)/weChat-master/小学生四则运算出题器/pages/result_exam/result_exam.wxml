@@ -1,0 +1,21 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class='head'><image src="{{headImage}}"></image></view>
+  <view class='title'>结果报告</view>
+  <view class='description'>在规定时间{{time}}{{timushu}}道题的考试中，{{haoshi}}的时间里，共完成了{{num}}道题目的计算，正确{{correct_num}}道，错误{{num-correct_num}}道，未做{{timushu-num}}道，正确率{{correct_num/timushu*100}}%。{{comment}}</view>
+  
+  <!--结果报表-->
+  <view>
+    <view class='timu'>题目</view>
+    <view class='answer'>解答</view>
+    <view class='correct_result'>答案</view>
+    <view class='judge'>结果</view>
+    <view class='result' wx:for="{{result}}">
+      <view class='timu'>{{item.timu+"="}}</view>
+      <view class='answer'>{{item.answer}}</view>
+      <view class='correct_result'>{{item.correct_result}}</view>
+      <view class='judge' style='color:{{item.answer===item.correct_result?"green":"red"}}'>{{item.answer===item.correct_result?"正确":"错误"}}</view>
+    </view>
+  </view>
+  <button bindtap='copytap'>复制到粘贴板</button>
+  <button bindtap='sharetap' open-type='share'>分享</button>
+</view>

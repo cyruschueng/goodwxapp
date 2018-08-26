@@ -1,0 +1,118 @@
+          <!--pages/index/index.wxml-->
+          <view class='body' style='height: {{windowHeight}}px'>
+          <scroll-view class='body_scroll' scroll-y>
+            <view class='header' catchtap='userInfoTap'>
+              <image class='user_bg' src='/images/index/userBg.png'></image>
+              <view class='level'>
+                <view class='level_container flex_column_start_container flex-stretch'>
+                <view class='flex_item_between'>
+                  <view class='level_content flex_item_between'>
+                    <image src='/images/index/flag.png' class='level_img'></image>
+                    <text class='level_font'>{{darwinUserInfo.grade ? darwinUserInfo.grade : "--"}}</text>
+                  </view>
+                  <view class='level_content  tili_content'>
+                    <view class='tiliBox_bg flex_container'>
+                    <block wx:for="{{tiliEmpty}}" wx:for-item="item" wx:for-index="idx">
+                      <image src='/images/index/moren@3x.png' class='tili_icon_empty'></image>
+                      </block>
+                    </view>
+                    <view class='tiliBox flex_container'>
+                    <block wx:for="{{tiliEmpty}}" wx:for-item="item" wx:for-index="idx">
+                      <image wx:if="{{idx < darwinUserInfo.hpCount}}"  src='/images/index/zhangyu@3x.png' class='tili_icon_empty'></image>
+                      </block>
+                    </view>
+                  </view>
+                  
+                </view>
+                <view class='flex_item_between'>
+                <view class='level_content flex_item_between level_content_top'>
+                    <image src='/images/index/crown.png' class='level_img'></image>
+                    <text class='level_font'>{{darwinUserInfo.rank ? (darwinUserInfo.rank > 99 ? "NO.99+" : "NO." + darwinUserInfo.rank) : "--"}}</text>
+                  </view> 
+                  <view class='level_content flex_item_between level_content_top' catchtap='moreTili'>
+                    <view class='moreTili'>+</view>
+                    <text class='level_font'>章鱼体力值</text>
+                  </view>
+                </view>
+                  
+                  
+                </view>
+              </view>
+              <image class="avatar {{darwinUserInfo.avatar && wxUserInfo? '': 'default_avatar'}}" style="border-radius: 50%;" src="{{darwinUserInfo.avatar && wxUserInfo ? darwinUserInfo.avatar : ''}}"></image>
+              <text class='nick_name'>{{darwinUserInfo.displayName && wxUserInfo ? darwinUserInfo.displayName : "----"}}</text>
+            </view>
+            <view class='flex_container content'>
+              <view class="flex_column_container list_container">
+                <view class = "list" class='prize' catchtap='prizeTap'>
+                  <image class='prize_bg' src='/images/index/prize.png'></image>
+                </view>
+                <view class = "list" class='more' catchtap='moreTap'>
+                  <image src='/images/index/more.png' class='more_bg'></image>
+                </view>
+                <view class = "list" catchtap='settingTap' class='setting'>
+                  <image class='setting_bg' src='/images/index/setting.png'></image>
+                </view>
+              </view>
+              <view class="flex_column_container list_container">
+                <view class = "list question" catchtap='questionTap'>
+                  <image src='/images/index/drinking.png' class='question_bg'></image>
+                </view>
+                <view class = "list" catchtap='rankTap' class='rank'>
+                  <image src='/images/index/rank.png' class='rank_bg'></image>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+            
+          </view>
+          <!-- 设置弹框 -->
+          <view class='setting_popup flex_item_center {{settingOpacityStatus ? "hide" : ""}}' style='width:{{windowWidth}}px; height: {{windowHeight}}px' hidden="{{popupStatus}}" catchtap='popupTap'>
+              <view class='setting_container' catchtap='contentTap'>
+                  <image src='/images/setting_bg.png' class='setting_popup_bg'></image>
+                  <image src='/images/setting_icon.png' class='setting_popup_icon'></image>
+                  <view class='music flex_item_center'>
+                    <text>音效</text>
+                    <view class='switch {{switchCheck ? "checked" : "unchecked"}}' catchtap='switchTap'>
+                      <view class='switch_item'></view>
+                    </view>
+                  </view>
+              </view>
+              <image src='/images/close.png' class='close_button' catchtap='settingCloseTap'></image>
+          </view>
+          <!-- 敬请期待弹框 -->
+          <view class='more_poup flex_item_center {{moreOpacityStatus? "hide":""}}'  animation="{{animationData}}" style='width:{{windowWidth}}px; height: {{windowHeight}}px' catchtap='expectPopupTap' hidden="{{expectPopupStatus}}">
+              <view class='more_container' catchtap='contentTap'>
+                <image src='/images/more_bg.png' class='more_popup_bg'></image>
+                <view class='expect flex_item_center'>
+                <text>敬请期待!</text>
+                </view>
+                <view class='develop flex_item_center'>
+                  <text>此功能正在开发中...</text>
+                </view>
+                <view class='waiting_bottom flex_container'>
+                  <image src='/images/question/octopus.png' class='bottom_icon4'></image>
+                  <image src='/images/question/octopus.png' class='bottom_icon3'></image>
+                  <image src='/images/question/octopus.png' class='bottom_icon2'></image>
+                  <image src='/images/question/octopus.png' class='bottom_icon1'></image>
+                </view>
+              </view>
+              <image src='/images/close.png' class='close_button' catchtap='moreCloseTap'></image>
+          </view>
+
+          <!-- 更多体力值弹框 -->
+          <view class='more_poup flex_item_center' style='width:{{windowWidth}}px; height: {{windowHeight}}px' wx:if="{{showTiliPoup}}">
+              <view class='more_container moreTili_container' catchtap='contentTap'>
+                <image src='/images/more_bg.png' class='more_popup_bg'></image>
+                <view class='expect flex_item_center'>
+                <text>说明</text>
+                </view>
+                <view class='develop'>
+                  <text>1.答题一次消耗一个章鱼体力值；</text>
+                  <text>2.十分钟恢复一个章鱼体力值；</text>
+                  <text>3.分享战绩，成功邀请一个好友加入可以获得一个体力值；</text>
+                  <text>4.体力值最高五个，充满后不再增加。</text>
+                </view>
+              </view>
+              <image src='/images/close.png' class='close_button' catchtap='moreTili'></image>
+          </view>
+

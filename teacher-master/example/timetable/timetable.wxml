@@ -1,0 +1,113 @@
+<view class='help'>
+<button class='kefu-btn' open-type='contact'><view class='xm-kefu'></view></button>
+</view>
+<view class="page" style='height:{{winHeight}}px;background-color:#fff;'>
+
+  <!-- <view class="weui-cells__title" style='padding-left:5px;padding-right:15px;color:#2b2828;font-size:17px;text-align:center;'>{{class_name}}课程表</view> -->
+
+
+  <view class="weui-cells__title" wx:if="{{role=='teacher'}}" style='text-align:center;margin-top:0px;margin-bottom:5px'><label style='font-size:13px;color:#859098'>(点击+直接添加,如需要修改直接点击课程名称)</label></view>
+
+
+  <view class='category-flex' style='background-color:#1e90ff;color:#fff'>
+    <view class='category-cells' style='padding:8px' style='flex: 2;' hover-class="btn_hover" bindtap="navigate" id="classPhoto">
+    </view>
+    <view class='category-cells' style='padding:8px' hover-class="btn_hover" bindtap="navigate" id="classPhoto">
+      星期一
+    </view>
+    <view class='category-cells' style='padding:8px' hover-class="btn_hover" hover-class="btn_hover" bindtap="navigate" id="addNotice">
+      星期二
+    </view>
+    <view class='category-cells' style='padding:8px' hover-class="btn_hover" bindtap="navigate" id="contact">
+      星期三
+    </view>
+    <view class='category-cells' style='padding:8px' hover-class="btn_hover" hover-class="btn_hover" open-type="share">
+      星期四
+    </view>
+
+    <view class='category-cells' style='padding:8px' hover-class="btn_hover" hover-class="btn_hover" open-type="share">
+      星期五
+    </view>
+  </view>
+
+
+
+  <block wx:for="{{[1, 2, 3,4,5,6,7,8,9]}}" wx:for-item="i">
+    <view class='category-flex'>
+      <block wx:for="{{[1, 2, 3,4,5,6]}}" wx:for-item="j">
+        <view wx:if="{{j==1}}" style='padding:8px; vertical-align:middle;' class='category-cells' style='flex: 2;' hover-class="btn_hover" bindtap="navigate" id="classPhoto">
+          <label style='vertical-align:middle; text-align:center;height:100%' >{{i}}</label>
+        </view>
+
+        <view wx:elif="{{j==2}}"  bindtap="edit" data-i="{{i}}"  data-j="{{j}}" style='padding:8px' class='category-cells' hover-class="btn_hover"  id="classPhoto">
+          <view wx:if="{{day1[i-1].subject}}" style='width:100%;text-align:center;'  >
+            {{day1[i-1].subject}}
+          </view>
+          <view wx:else  >
+              <text wx:if="{{role=='teacher'}}" class="category-cell-image-teacher"> </text>
+             <text wx:else >---</text>
+          </view>
+        </view>
+
+
+        <view wx:elif="{{j==3}}" bindtap="edit" data-i="{{i}}"  data-j="{{j}}" style='padding:8px' class='category-cells' hover-class="btn_hover"  id="classPhoto">
+           <view wx:if="{{day2[i-1].subject}}" style='width:100%;text-align:center;' >
+            {{day2[i-1].subject}}
+          </view>
+          <view wx:else >
+              <text wx:if="{{role=='teacher'}}" class="category-cell-image-teacher"> </text>
+             <text wx:else >---</text>
+          </view>
+        </view>
+
+        <view wx:elif="{{j==4}}"   bindtap="edit" data-i="{{i}}"  data-j="{{j}}" style='padding:8px' class='category-cells' hover-class="btn_hover"  id="classPhoto">
+           <view wx:if="{{day3[i-1].subject}}" style='width:100%;text-align:center;' >
+            {{day3[i-1].subject}}
+          </view>
+          <view wx:else >
+            <text wx:if="{{role=='teacher'}}" class="category-cell-image-teacher"> </text>
+             <text wx:else >---</text>
+          </view>
+        </view>
+
+
+        <view wx:elif="{{j==5}}"  bindtap="edit" data-i="{{i}}"  data-j="{{j}}" style='padding:8px' class='category-cells' hover-class="btn_hover"  id="classPhoto">
+           <view wx:if="{{day4[i-1].subject}}" style='width:100%;text-align:center;'>
+            {{day4[i-1].subject}}
+          </view>
+          <view wx:else  >
+              <text wx:if="{{role=='teacher'}}" class="category-cell-image-teacher"> </text>
+             <text wx:else >---</text>
+          </view>
+        </view>
+
+
+        <view wx:elif="{{j==6}}"  bindtap="edit" data-i="{{i}}"  data-j="{{j}}" style='padding:8px' class='category-cells' hover-class="btn_hover"  id="classPhoto">
+           <view wx:if="{{day5[i-1].subject}}" style='width:100%;text-align:center;'>
+            {{day5[i-1].subject}}
+          </view>
+          <view wx:else>
+              <text wx:if="{{role=='teacher'}}" class="category-cell-image-teacher"> </text>
+             <text wx:else >---</text>
+          </view>
+        </view>
+
+
+
+
+      </block>
+    </view>
+  </block>
+
+
+
+
+
+
+
+
+
+  <view class="page__ft">
+    <image src="images/icon_footer.png" style="width: 84px; height: 19px;"></image>
+  </view>
+</view>

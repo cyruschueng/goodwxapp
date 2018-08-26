@@ -1,0 +1,68 @@
+
+<block wx:for="{{avatar}}" wx:key="item">
+  <block wx:if="{{item.user_id == uid}}">
+    <view class="example--date">
+      <view class="example--date-text">
+        {{start_date}}
+      </view>
+    </view>
+    <view class="example--box">
+        <view class="example--demo demo">
+            <view class="demo-inner">
+                <slot></slot>
+                <view class="countdown">
+                  <block wx:if="{{countdown}}">
+                    <wxc-label class="label-countdown" type="fill" type-color="#ff7777">
+                      <wxc-countdown countdown="{{countdown}}"></wxc-countdown>
+                    </wxc-label>
+                  </block>
+                  <wxc-label class="label-coming" type="fill" type-color="#FF7777" text-color="#FFFFFF">{{coming}}人报名</wxc-label>
+                  
+                </view>
+                <block wx:if="{{item.is_coming == 0}}">
+                  <view class="center" bindtap="showDialog" >
+                    <view class="label-coming-btn"><text>点此报名</text></view>
+                  </view>
+                  <wxc-dialog class="wxc-dialog" title="活动报名" content="请确认姓名和联系电话无误" _pid="{{_pid}}">
+                    <form bindsubmit="submitForm" report-submit="true" class="dialog-form">
+                      <view class="dialog-input">
+                        <input name="username" placeholder="请输入您的姓名" value="{{item.user.username}}"></input>
+                      </view>
+                      <view class="dialog-input">
+                        <input type="number" name="phone" placeholder="请输入您的手机" value="{{item.user.phone}}"></input>
+                      </view>
+                      <button formType="submit" class="dialog-submit" data-uid="{{item.user_id}}" data-activity_id="{{item.activity_id}}">立即报名</button>
+                    </form>
+                  </wxc-dialog>
+                </block>
+                <view wx:if="{{image_url == ''}}">
+                  <image class="dome-image" src="/common/assets/images/activity_bg.jpg" mode="aspectFill"></image>
+                </view>
+                <view wx:else>
+                  <navigator url="/pages/activity-detail/index?user_id={{item.user_id}}&activity_id={{item.activity_id}}">
+                    <image class="dome-image" src="{{image_url}}" mode="aspectFill"></image>
+                  </navigator>
+                </view>
+            </view>
+        </view>
+        <view class="example--meta meta">
+            <!-- <view class="meta-title">{{title}}</view> -->
+            <view class="meta-desc">
+              <view class="new-title">{{title}}</view>
+              <navigator class="meta-navigator" url="/pages/navigation/index?latitude={{latitude}}&longitude={{longitude}}" hover-class="navigator-hover">
+                <wxc-icon size="24" type="location"></wxc-icon>
+                {{desc}}
+              </navigator>
+            </view>
+            <view class="meta-avatar">
+              <image class="meta-image" src="{{avatar_url}}" mode="aspectFill"></image>
+            </view>
+        </view>
+        <!-- <view class="example--source">            
+          <navigator url="/pages/activity-detail/index?user_id={{item.user_id}}&activity_id={{item.activity_id}}">
+            <view class="view-btn {{viewSourceClass}}">查看详情</view>
+          </navigator>            
+        </view> -->
+    </view>
+  </block>
+</block>

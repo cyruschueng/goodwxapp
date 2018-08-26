@@ -1,0 +1,15 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<view hidden="{{listBox}}">
+
+
+  <view class="container">
+    <view class="news-title">{{dataList.title}}</view>
+    <view class="news-time">{{dataList.create_datetime}}</view>
+    <view class="news-box"><template is="wxParse" data="{{wxParseData:detail.nodes}}"/></view>
+    <view class="news-footer">图文来源于网络，如有侵权请联系</view>
+    <view class="news-clicks">阅读量 {{dataList.clicks}}</view>
+  </view>
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

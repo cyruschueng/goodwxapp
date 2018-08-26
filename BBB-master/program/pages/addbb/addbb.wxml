@@ -1,0 +1,44 @@
+<!--pages/addbb/addbb.wxml-->
+<view class="container">
+   <view class="form-group">
+     <text class="label">要比的币</text>
+     <input class="input" confirm-type="search" type="text"  bindconfirm="searchHandle"  placeholder="输入搜索" focus="true"/>
+   </view>
+   <view class="result-box" wx:if="{{currentState == true && isNote == false}}">
+     <text class='me'>{{searchValue}}</text>
+      <view class="eos-buttons">
+       <view class="btn btn-left-hand" bindtap='jumpResult' data-type='1'>
+       <image class=" btn-left-hand-image" src='../images/bg-lefthand.png' background-size='contain'></image>
+        <text  class="btn-left-hand-text">没赚</text> 
+       </view>
+       <view class="btn btn-right-hand" bindtap='jumpResult' data-type='2'>
+       <image class="btn-right-hand-image" src='../images/bg-righthand.png' background-size='contain'></image>
+       <text class="btn-right-hand-text">已赚</text></view>
+      </view>
+   </view>
+   <view class="eos-item eos-all"  wx:if="{{currentState == true && isNote == true}}">
+    <view class="eos-vote-name">
+     {{searchValue}}
+    </view>
+    <view class="eos-vote-result">
+      <view class="eos-vote-earn-group">
+            <text class="eos-title eos-earn-title">赚了</text>
+            <text class="eos-earn">{{all.gain}}</text>
+      </view>
+       <view class="eos-vote-loss-group">
+            <text class="eos-earn">{{all.loss}}</text>
+            <text class="eos-title eos-loss-title">赔了</text>
+      </view>
+    </view>
+    <view class="eos-vote-progress">
+       <view class="eos-vote-active" style='width:{{all.gain}}'></view>
+    </view>
+   </view>
+  <view class="form-group">
+     <text class="label">没有你要比的币</text>
+     <navigator  class='btn-create' url="/pages/create/create">
+        点击申请
+     </navigator>
+  </view>
+   <button class="eos-btn eos-btn-share" open-type='share' >分享到群里币比比</button>
+</view>

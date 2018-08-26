@@ -1,0 +1,128 @@
+<form bindsubmit="onPushSubmit" report-submit="true">
+
+    <!-- 基础 -->
+    <view class='form-group'>
+        <view class='form-item'>
+            <textarea class='form-tear' placeholder="请输入要发布的内容" placeholder-class="linght" name="content" maxlength="6144" />
+        </view>
+
+        <view class='form-item'>
+            <view class='image-list'>
+                <view class="image-item" wx:for="{{uploadFiles}}" wx:key="{{index}}" catchtap="onPreviewTap">
+                    <image src="{{item.file}}" mode="aspectFill" data-index="{{index}}"></image>
+                    <text class="image-close" catchtap="onDeleteImgTap" data-index="{{index}}"></text>
+                    <view class="image-info">
+                        <block wx:if='{{item.state==0}}'>等待上传...</block>
+                        <block wx:elif='{{item.state==1}}'>正在上传...</block>
+                        <block wx:elif='{{item.state==2}}'>已上传</block>
+                        <block wx:else>上传失败</block>
+                    </view>
+                </view>
+                <view class="image-item">
+                    <text class="image-plus" catchtap="onChooseUploadImageTap" wx:if="{{uploadFiles.length<6}}"></text> </view>
+            </view>
+        </view>
+
+        <view class='form-item' wx:if="{{category.tags}}">
+            <text wx:for="{{category.tags}}" wx:key="{{index}}" class="tag {{item.active?'active':''}}" catchtap="onChooseTag" data-index='{{index}}'>{{item.value}}</text>
+        </view>
+
+        <view class='form-item form-item-btn flex grey' catchtap='onGetMapLocationTap'>
+            <input type="text" name="address" hidden="true" value="{{address}}" />
+            <input type="text" name="latitude" hidden="true" value="{{latitude}}" />
+            <input type="text" name="longitude" hidden="true" value="{{longitude}}" />
+            <text class="mr5 iconfont icon-locationfill"></text>
+            <text class="sub arrowR">{{address?address:'地址'}}</text>
+        </view>
+
+        <view class='form-item flex grey'>
+            <text class="mr5 iconfont icon-dianhua"></text>
+            <input type="number" class="sub" name="mobile" placeholder="请输入您的电话号码" value="{{mobile}}" />
+        </view>
+
+        <view class='form-item grey' wx:if="{{category.amount>0}}">
+            此分类费用
+            <text class="red">{{category.amount}}元</text>/条
+        </view>
+    </view>
+
+    <!-- 置顶 -->
+    <view class='form-group' wx:if='{{config.show_top}}'>
+        <view class='form-item flex form-center'>
+            <input hidden="true" name="is_top" value="{{is_top}}" />
+            <text class="sub">我要置顶</text>
+            <switch type="switch" bindchange="onSetValueTap" data-name='is_top' data-value='{{is_top?0:1}}' />
+        </view>
+        <view class='fadeInDown' hidden='{{!is_top}}'>
+            <view class='form-item flex form-item-btn'>
+                <input hidden="true" name="top_day" value="{{top_day}}" />
+                <text class="sub">选择置顶时间</text>
+                <picker class="arrowR" bindchange="onTopDayChange" mode="selector" range="{{config.top_rule}}" range-key="day">
+                    {{top_day}} 天
+                </picker>
+            </view>
+
+            <view class='form-item flex'>
+                <text class="sub">价格</text>
+                <text class="red">￥{{top_amount}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 红包 -->
+    <view class='form-group' wx:if='{{config.show_wallet_bonus!==0}}'>
+        <view class='form-item flex form-center'>
+            <input hidden="true" name="is_wallet" value="{{is_wallet}}" />
+            <text class="sub">发福利（提高阅读量和转发量）</text>
+            <switch type="switch" bindchange="onSetValueTap" data-name='is_wallet' data-value='{{is_wallet?0:1}}' />
+        </view>
+
+        <view class="fadeInDown" hidden='{{!is_wallet}}'>
+            <view class='form-item flex form-center'>
+                <text>福利金额</text>
+                <input type='digit' class="sub ml10 red" placeholder="1 - 200元" placeholder-class="grey" name="wallet_amount" />
+            </view>
+
+            <view class='form-item flex form-center'>
+                <text>分成几份</text>
+                <input type='number' class="sub ml10" placeholder="最少一份" placeholder-class="grey" name="wallet_num" />
+            </view>
+
+            <view class='form-item flex form-center'>
+                <input hidden="true" name="is_wallet_avg" value="{{is_wallet_avg}}" />
+                <text class="sub">平均分配福利</text>
+                <switch type="switch" bindchange="onSetValueTap" data-name='is_wallet_avg' data-value='{{is_wallet_avg?0:1}}' />
+            </view>
+
+            <view class='form-item flex form-center'>
+                <input hidden="true" name="is_wallet_pwd" value="{{is_wallet_pwd}}" />
+                <text class="sub">福利口令</text>
+                <switch type="switch" bindchange="onSetValueTap" data-name='is_wallet_pwd' data-value='{{is_wallet_pwd?0:1}}' />
+            </view>
+
+            <view class='form-item flex fadeInDown' hidden='{{!is_wallet_pwd}}'>
+                <input type='text' class="sub" placeholder="请输入福利口令" placeholder-class="grey" maxlength='8' name='wallet_pwd' />
+            </view>
+
+            <view class='form-item flex red' wx:if='{{config.service_charge>0}}'>需要收取{{config.service_charge}}%的手续费</view>
+        </view>
+    </view>
+
+    <!-- 提示信息 -->
+    <view class='container'>
+        <view class="linght mb10" wx:if="{{config.statement}}">
+            <checkbox-group bindchange='onToggleAgreeStatement'>
+                <label>
+                    <checkbox class='tips-checkbox' checked='{{isAgreeStatement}}'></checkbox>
+                    <text>发布信息前请先查看</text>
+                    <text class="blue" catchtap='onNavigateTap' data-url='../statement/statement'>免责声明</text>
+                </label>
+            </checkbox-group>
+        </view>
+    </view>
+
+    <view class='form-button m15'>
+        <button type="primary" form-type="submit" disabled="{{disableBtnPush || isUpload || !isAgreeStatement}}">立即发布</button>
+    </view>
+
+</form>

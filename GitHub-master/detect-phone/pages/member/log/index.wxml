@@ -1,0 +1,41 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page navbar {{isopen == 1 ? 'header' : false}}" wx:if="{{show}}">
+  <view class="fui-tab fixed fui-tab-danger" wx:if="{{isopen == 1}}">
+    <view bindtap="myTab" data-type="0" class="item {{type == 0 ? 'active' : ''}}">充值记录</view>
+    <view bindtap="myTab" data-type="1" class="item {{type == 1 ? 'active' : ''}}">提现记录</view>
+  </view>
+  <view class="fui-list-group" wx:if="{{list.length > 0}}">
+  <block wx:for="{{list}}">
+    <view class="fui-list goods-item">
+      <view class="fui-list-inner">
+        <view class="title">
+          <text wx:if="{{item.type == 0}}">充值金额</text>
+          <text wx:if="{{item.type == 1}}">提现金额</text>
+          <text wx:if="{{item.type == 2}}">佣金打款</text>
+          <text>: {{item.money}}元</text>
+        </view>
+        <view class="text" wx:if="{{item.type == 1}}">
+          (提现方式: {{item.typestr}}), 实际{{item.status == 1 ? '到账' : '金额'}}: {{item.deductionmoney > 0 ? item.realmoney : item.money}}元, 手续费: {{item.deductionmoney}}元)
+        </view>
+        <view class="text">{{item.createtime}}</view>
+      </view>
+      <view class="fui-list-angle">
+        <text class="fui-label fui-label-default" wx:if="{{item.status == 0}}">{{item.status == 0 ? '未充值' : '申请中'}}</text>
+        <text class="fui-label fui-label-success" wx:if="{{item.status == 1}}">成功</text>
+        <text class="fui-label fui-label-danger" wx:if="{{item.status == '-' && item.type == 1}}">成功</text>
+        <text class="fui-label fui-label-warning" wx:if="{{item.status == 3 && item.type == 0}}">退款</text>
+      </view>
+    </view>
+    </block>
+  </view>
+  <view class="fui-loading" wx:if="{{loading}}">
+    <view class="icon"></view>
+    <view class="text">正在加载</view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{loaded && list.length > 0}}">
+    <view class="text">没有更多了</view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{total <= 0 && !loading}}">
+    <view class="text">没有数据</view>
+  </view>
+</view>

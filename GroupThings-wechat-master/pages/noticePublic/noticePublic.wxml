@@ -1,0 +1,41 @@
+<!--pages/addVote/addVote.wxml-->
+<view class="container">
+  <form  bindsubmit="formSubmit" class="addPublic">
+      <view class="publicInput">
+          <input type="value" name="title" placeholder="请输入通知标题(必填)" disabled="{{themeDisabled}}" bindconfirm="themeConfirm" class="themeInput" placeholder-class="inputPlaceholder" maxlength="20" required/>
+          <textarea placeholder="补充通知内容(必填)" name="content" disabled="{{descDisabled}}" class="descInput" placeholder-class="inputPlaceholder" maxlength="1000"  bindinput="descInput"/>
+          <view class="descWords"><text>{{descWordsNum}}</text>/<text>1000</text></view>
+      </view>
+      <view class="publicUpload">
+        <block wx:for="{{imgUrls}}" wx:key="{{item}}" wx:key="*this">
+          <view class="uploadImg">
+            <image src="{{item}}" mode="aspectFit"></image>
+            <view class="delUploadImg" catchtap='delUploadImg' data-url="{{item}}"><icon type="clear" size="20"/></view>
+          </view>
+        </block>
+        <view class="addUpload" catchtap='uploadImg'><text class="prcenter"><text style="font-size:48rpx">+\n</text>添加图片</text></view>
+      </view>
+      <view class="publicSet">
+        <view class="publicSet-item">
+            <text>署名：</text>
+            <input name="author" value="{{userInfo.nickName}}" class="tr"></input>
+        </view>
+        <view class="publicSet-item">
+            <text>文号：</text>
+            <input name="wenhao" placeholder='自定义文号'  class="tr"  placeholder-class="inputPlaceholder"></input>
+        </view>
+        <view class="publicSet-item">
+            <text>添加关键词：</text>
+            <input name="keywords" placeholder='自定义关键词，以逗号分隔'  class="tr"  placeholder-class="inputPlaceholder"></input>
+        </view>
+        <view class="publicSet-item">
+            <text>模板选择：</text>
+            <view bindtap='choseTemplate'>
+              <image src="{{template.address}}" mode="aspectFit" class="templatePic mr5"></image>
+              <span class="iconfont icon-next"></span>
+            </view>
+        </view>
+      </view>
+      <button formType="submit" type="primary" class="submitBtn">提交</button>
+  </form>
+</view>

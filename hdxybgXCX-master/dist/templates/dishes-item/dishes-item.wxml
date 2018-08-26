@@ -1,0 +1,22 @@
+
+<template name="dishes-item">
+
+<!-- 菜品 列表 -->
+<block wx:for="{{ disheList }}" wx:for-item="dishe" wx:key="{{ index }}" >
+<view class='dishe-panel' style='{{ index%2 == 0 ? "float:left;" : "float:right;" }}' >
+  <image class='dishe-img' mode='aspectFill' id='{{ dishe.disId }}' src='{{ dishe.imgUrl }}' bindtap='goDishesDetailsPage'></image>
+  <view class='name' id='{{ dishe.disId }}' bindtap='goDishesDetailsPage'>
+    <text>{{ dishe.name }}</text>
+    <text class='price'>¥ {{ dishe.price }}</text>
+  </view>
+  <view class='next-icon' id='{{ dishe.disId }}' bindtap='goDishesDetailsPage'>
+    <text>菜单</text>
+    <image class='right-icon' src='../../images/arrow-right.png'></image>
+  </view>
+  <view style='text-align: center;'>
+    <view id='{{ index }}' class='{{ dishe.selected ? "selectBtn" : "selectedBtn" }}' data-disheinfo='{{ dishe }}' bindtap='bindDishesSelectTap'>{{ dishe.selected ? "已选用" : "选用" }}</view>
+  </view>
+</view>
+</block>
+
+</template>

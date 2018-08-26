@@ -1,0 +1,28 @@
+<!--pages/index/consume-qibashare/consume-qibashare.wxml-->
+<view>
+  <image class='popularityImages' src='/images/icon/xiangqijuan1.png'></image>
+  <block wx:for="{{information}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+    <view class='consumeWrap consumeone' id="{{item.id}}" catchtap='particulars'>
+      <image class='consumeLogo' src='/images/icon/xiangqiLGBL.gif'></image>
+      <view class='consumeCenter'>
+        <view>
+          <text class='consumeLimit'>{{item.skuName}}</text>
+          <!-- <view class='limitConfine'>当餐消费仅限使用一张</view> -->
+        </view>
+        <view class='sumDiscount'>
+          <view class='figureSum'>￥{{item.sellPrice}}
+            <!-- <text class='discountMomey'>元</text> -->
+          </view>
+           <view class='discount_fels'></view> 
+            <!-- <text class='discount_fels_zq'>{{item.sellPrice/item.inPrice*10}}折</text>   -->
+        </view>
+      </view>
+      <view class='powerScroll'>
+        <view class='buy-immediately' id="{{item.id}}" catchtap='directPurchase'>立即购买</view>
+        <view class='already'>
+          <text class='already_text'>已售{{item.sellNum}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

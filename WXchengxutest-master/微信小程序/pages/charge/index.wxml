@@ -1,0 +1,21 @@
+<!--pages/charge/index.wxml-->
+<view class="container">
+    <!-- <view class="title">请输入充值金额</view>
+    <view class="input-box">
+        <input bindinput="bindInput" />
+    </view> -->
+    <view class="choose">
+        <view class="title">请选择充值金额</view> 
+        <radio-group bindchange="checkboxChange" class="choose-grids">
+            <block wx:for="{{itemsValue}}" wx:key="{{item}}">
+                <view class="grid">
+                    <checkbox value="{{item.value}}" checked="{{item.checked}}" color="{{item.color}}" />{{item.title}}
+                </view>
+            </block>
+        </radio-group>
+    </view>
+    <button bindtap="charge" class="btn-charge">充值</button>
+    <view class="sm">
+    <text class="sm-t">充值余额无法取现或退款</text>
+    </view>
+</view>

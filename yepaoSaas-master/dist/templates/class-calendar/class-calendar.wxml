@@ -1,0 +1,70 @@
+
+<template name='class-calendar'>
+<!-- 课程表 日历 -->
+
+<view class='calendar-view'>
+
+<view class="flex box box-tb box-align-center">
+  <view class="calendar box box-tb">
+
+    <!-- 头部 -->
+    <view class="top-handle fs30 box box-lr box-align-center box-pack-center">
+      
+      <!-- 月份 -->
+      <view class='txt-center flex' data-taptype='pre' bindtap='bindCalendarMonthTap'>
+        <image class='cal-icon' src='../../images/icon/home/cal_turn_left.png'></image>
+      </view>
+      <view class='txt-center flex' data-taptype='month' bindtap='bindCalendarMonthTap'>
+        {{ calendarData.cur_month || "--" }} 月
+      </view>
+      <view class='txt-center flex' data-taptype='next' bindtap='bindCalendarMonthTap'>
+        <image class='cal-icon' src='../../images/icon/home/cal_turn_right.png'></image>
+      </view>
+      <!-- 年份 -->
+      <view class='txt-center flex' data-taptype='pre' bindtap='bindCalendarYearTap'>
+        <image class='cal-icon' src='../../images/icon/home/cal_turn_left.png'></image>
+      </view>
+      <view class='txt-center flex' data-taptype='year' bindtap='bindCalendarYearTap'>
+        {{ calendarData.cur_year || "--" }}
+      </view>
+      <view class='txt-center flex' data-taptype='next' bindtap='bindCalendarYearTap'>
+        <image class='cal-icon' src='../../images/icon/home/cal_turn_right.png'></image>
+      </view>
+
+    </view>
+
+    <!-- 星期 -->
+    <view class="weeks box box-lr box-pack-center box-align-center">
+      <view class="flex week" wx:for="{{ calendarData.weeks_ch }}" wx:key="{{ index }}" data-idx="{{ index }}">{{ item }}</view>
+    </view>
+
+    <!-- 日期 -->
+    <view class="days box box-lr box-wrap">
+      <!-- 上个月 -->
+      <view wx:if="{{ calendarData.hasLastMonthGrid }}" class="grid box box-align-center box-pack-center" wx:for="{{ calendarData.lastMonthDaysGrids }}" wx:key="{{ index }}" data-idx="{{ index }}">
+        <view class="otherday box box-align-center box-pack-center">
+          {{ item }}
+        </view>
+      </view>
+      <!-- 这个月 -->
+      <view class="grid box box-align-center box-pack-center" wx:for="{{ calendarData.calculatedays }}" wx:key="{{ index }}" data-idx="{{ index }}" bindtap="tapDayItem">
+        <view class="day {{ item.choosed ? 'yel-bg' : ''}} box box-align-center box-pack-center">
+          <text class='{{ item.unChecked ? "otherday" : "" }}' >{{ item.day }}</text>
+        </view>
+      </view>
+      <!-- 下个月 -->
+      <view wx:if="{{ calendarData.hasNextMonthGrid }}" class="grid box box-align-center box-pack-center" wx:for="{{ calendarData.nextMonthDaysGrids }}" wx:key="{{ index }}" data-idx="{{ index }}">
+        <view class="otherday box box-align-center box-pack-center">
+          {{ item }}
+        </view>
+      </view>
+    </view>
+
+    </view>
+</view>
+  
+
+</view>
+<!-- 课程表 日历 -->
+
+</template>

@@ -1,0 +1,159 @@
+<!--latest.wxml-->
+
+<view class="page"  >
+
+    <!--1 目录-->
+    <view class=" category">
+        <!--<view class="all"> 
+            <label catchtap="selectCategory" data-select_category_id="" class=" {{selectCategory.category_id == null ? 'select' : 'unselect'}} font">全选</label>
+        </view>    -->
+            <scroll-view  scroll-x="true" style="width:{{categoryScrollWidth}}px;"  >
+                 <label catchtap="selectCategory" data-select_category_id="" class=" {{selectCategory.category_id == null ? 'select' : 'unselect'}} font">全选</label>
+                <block wx:for="{{category}}"  wx:for-item="c_name">
+                    <label catchtap="selectCategory"  data-select_category_id="{{c_name.category_id}}" class="{{selectCategory.category_id == c_name.category_id ? 'select' : 'unselect'}} font">{{c_name.name}}</label>
+                </block>
+            </scroll-view>
+        <!--<view class="relogin"> 
+                <contact-button 
+                    type="default-light" 
+                    size="24"
+                    session-from="weapp"
+                    class="contact"
+                >
+                </contact-button>
+        </view> -->
+    </view>
+
+     <!--2 join拼接bar -->
+    <view class="join-new "  hidden="{{!joinShow}}">
+        <view class="weui-flex">            
+            <view class="weui-flex__item">
+                表情一
+            </view>
+            <view class="weui-flex__item"> 
+                表情二
+            </view>
+            <view class="weui-flex__item">
+                <icon type="cancel" catchtap="joinCancel" class="back"  ></icon>
+            </view>
+        </view>
+        <view class="weui-flex ">
+            <view class="weui-flex__item">  
+                <image  class= "image" src="{{joinImg.first}}" catchtap="joinPreview" data-img_url="{{joinImg.first}}" mode="aspectFit" ></image> 
+            </view>
+            <view class="weui-flex__item"> 
+                <image  class= "image" src="{{joinImg.seconde}}" catchtap="joinPreview" data-img_url="{{joinImg.seconde}}" mode="aspectFit" ></image>
+            </view>
+            <view class="weui-flex__item"> 
+                <image  class= "image" src="{{joinImg.resualt}}" catchtap="joinPreview" data-img_url="{{joinImg.resualt}}"></image></view>
+        </view>
+         <view class="weui-flex ">
+            <view class="weui-flex__item"></view>
+            <view class="weui-flex__item"></view>
+            <view class="weui-flex__item">
+                <button size="mini" loading="{{isUpload}}" catchtap="joinConfirm" data-action="" type="primary" >拼接</button>
+            </view>
+        </view>
+    </view>
+
+    <!-- 3 emoticon-wall表情显示列表-->
+    <scroll-view class="emoticon-wall" scroll-y="true" style="height:{{windowHeight - joinHeight}}px;" bindscrolltolower="emoticonScrollTolower" >
+        <block wx:for-items="{{emoticon}}"  wx:for-item="emoticon">
+            <view class="emoticon-grid">
+                <view  class="follow__btn"  catchtap="followEvent" data-img_id="{{emoticon.img_id}}">
+                    <navigator class="set" hover-class="btn_active_gray font-color">⋮</navigator>
+                </view>
+                <navigator hover-class="btn_active_gray" class="emoticon-preview" catchtap="menuShare" data-yun_url="{{emoticon.yun_url}}">
+                    <image class="icon" src="{{emoticon.static_url}}" background-size="cover" mode="aspectFit"  />
+                    <view class="emoticon-grid__mark ">
+                        <image class="mark" wx:if="{{ emoticon.menu_type == 4 ? true :false}}"  src="../../images/mp4.png"></image>
+                        <image class="mark" wx:if="{{ emoticon.menu_type == 1 ? true :false}}"  src="../../images/gif.png"></image>
+                    </view>
+                </navigator>
+            </view>
+        </block>
+        <view class="space-64"></view>
+    </scroll-view>
+
+    <!-- 4 初始loading-->
+    <view class="page__bd" hidden="{{!loadShow}}">
+        <view class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+        <view class="weui-loadmore weui-loadmore_line">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+        </view>
+        <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+        </view>
+    </view>
+
+    <!--客服按钮-->
+    <!--<view class="contact"> 
+        <view class="title">
+            <label>求图 (↓_↓) 客服</label>
+        </view>
+        <view class="button">
+            <contact-button 
+                size="24"
+                session-from="weapp"
+            >
+            </contact-button>
+        </view>
+        
+    </view> -->
+
+    <!--5 右下角 + 号。图片、视频上传-->
+    <view class="upload">
+        <view wx:if="{{isUpload}}">
+            <image  src="../../images/upload.gif" background-size="cover" catchtap="btnIsUpload"></image>
+        </view>
+        <view wx:else>
+            <image  src="../../images/ic_action_add.png" background-size="cover" catchtap="btnUpload"></image>
+        </view>
+        <!--<button catchtap="previewUpload">预览</button>-->
+    </view>
+
+  
+
+    <!--6 显示临时表情-->
+    <scroll-view class="temp__wall" hidden="{{!temp.show}}"  scroll-y="true" style="height:{{windowHeight+42}}px;" >   
+        <view class="page__hd">
+            <view class="page__title">临时表情</view>
+            <view class="page__desc">临时存放制作的表情，退出表情袋，请及时保存</view>
+            <view class="page__desc">保存方法：点击表情->右上角按钮->保存图片</view>
+        </view>
+        <view class="weui-grids">
+            <block wx:for="{{temp.emoticon}}" wx:for-index="index" wx:for-item="item">
+                <view class="temp-grid-3" >
+                    <image catchtap="tempPreview"  data-src="{{item}}" class="temp-grid__icon-3" src="{{item}}" background-size="cover" mode="aspectFit" />
+                    <view class="temp_join">
+                        <button class="weui-grid__label" size="mini" catchtap="tempJoinEvent" data-yun_url="{{item}}" >继续拼</button>
+                    </view>                        
+                </view>
+            </block>
+        </view>
+        <view class="temp__button_area">
+            <button class="weui-btn temp__button" catchtap="tempClear">清除</button>
+        </view>
+        <view class="space-64"></view>
+    </scroll-view>
+    <!--6.1 左下角色数字 打开临时列表 -->
+    <view class="temp" catchtap="tempSwitch" wx:if="{{temp.emoticon.length>0}}">
+        <label class="title" wx:if="{{temp.show}}">关闭</label>
+        <label class="title" wx:else>{{temp.emoticon.length}}</label>
+    </view>
+
+
+    <!--7 目录 > 6，目录选择列表-->
+    <scroll-view class="select-category" wx:if="{{selectCategoryShow}}"
+    scroll-y="true" style="height:{{windowHeight}}px;"
+    catchtap="closeMove"  >   
+        <view class="space-72"></view>
+         <block wx:for="{{category}}" wx:for-index="index" wx:for-item="item">
+            <button  catchtap="buttonMove"  data-index="{{index}}">{{item.name}}</button>
+        </block>
+    </scroll-view>
+
+</view>

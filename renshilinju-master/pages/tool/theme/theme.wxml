@@ -1,0 +1,20 @@
+<!--pages/mine/theme/theme.wxml-->
+<view class="content">
+  <view class="theme-cont">
+    <view class="section">
+      <textarea placeholder="请输入文字内容..." placeholder-class="psection" value="{{title}}" auto-height bindinput="textBlurTitle" focus="{{focus}}" />
+    </view>
+    <view class='flex'>
+      <block wx:if="{{tempFilePaths}}">
+        <block wx:for="{{tempFilePaths}}" wx:key="index">
+          <view class='asset'>
+            <image src="{{item}}" mode="aspecFill" style="padding:0;height: 100%;" />
+          </view>
+        </block>
+      </block>
+      <image src="../../images/add@2x.png" bindtap="chooseimage"></image>
+    </view>
+  </view>
+  <button loading="{{loading}}" class='fabu' bindtap='themePosts' data-list="{{}}" tempFilePathsloading="{{loading}}">发布</button>
+  <view class='wtitle'>只有{{xqname}}的邻居才能看到您的信息！</view>
+</view>

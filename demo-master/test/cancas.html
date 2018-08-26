@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>canvas</title>
+</head>
+
+<body>
+    <canvas width="500px" height="500px" class="canvas" id="canvasBox"></canvas>
+    <script type="text/javascript">
+    var c = document.getElementById("canvasBox");
+    var cxt = c.getContext("2d");
+    cxt.beginPath();
+    for (var i = 0; i < 4; i++) {
+    	var anger = i * Math.PI / 10 ;
+        cxt.arc(70, 18, 15, anger,  2 * anger, false);
+    }
+    cxt.closePath();
+
+    // cxt.fillStyle = "#FF0000";
+    // cxt.fill();
+    cxt.stroke();
+    </script>
+</body>
+
+</html>

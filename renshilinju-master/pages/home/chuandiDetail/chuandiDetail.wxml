@@ -1,0 +1,85 @@
+<!--pages/home/chuandiDetail/chuandiDetail.wxml-->
+<view class="card" id="{{passelist.id}}">
+  <view class="things">
+    <view class='user'>
+      <image class='userasset' src="{{user.userasset}}" alt="" />
+      <view class='ubox'>
+        <view class='name t2'>{{user.username}}</view>
+        <text class="things-name t2">{{passelist.title}}</text>
+        <view class='picbox'>
+          <image class='asset' mode="widthFix" src="{{passelist.asset}}" alt="" />
+        </view>
+        <view class='time t3'>{{passelist.time}}</view>
+      </view>
+
+    </view>
+  </view>
+</view>
+<view class='addbox'>
+  <block wx:if="{{status=='我要交换'}}">
+    <view class='add' bindtap='want'>我想要</view>
+  </block>
+  <block wx:if="{{status=='您已交换'}}">
+    <view class='add' bindtap='yiwant'>您已参加交换</view>
+  </block>
+  <view class='allpeo'>
+    <block wx:for="{{applies}}" wx:key="index">
+      <image class='userasset' data-applies='{{applies}}' bindtap='showDialogBtn' src="{{item.useravatar}}" alt="" />
+    </block>
+  </view>
+</view>
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">用户信息</view>
+  <view class="modal-content"></view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>
+<view class='allmessage'>
+  <view class='mbox'>
+    <view class='mtitle t2'>全部留言（{{commentlenght}}）</view>
+    <view class='post t2' bindtap="powerDrawer" data-statu="open">发留言</view>
+  </view>
+  <!--mask-->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+  <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+    <!--drawer content-->
+    <view class="drawer_title">发布留言</view>
+    <view class="drawer_content">
+      <view class="section">
+        <textarea bindinput="getComment" value="{{title}}" auto-height placeholder="请输入您的内容" focus="{{focus}}" />
+      </view>
+    </view>
+    <view class='btnbox'>
+      <view class="btn_no" bindtap="powerDrawer" data-statu="close">取消</view>
+      <view class="btn_ok" bindtap="postComment" data-title="{{title}}" data-statu="close">确定</view>
+    </view>
+  </view>
+  <block wx:for="{{comments}}" wx:key="index">
+    <view class='user'>
+      <image class='userasset' src="{{item.userasset}}" alt="" />
+      <view class='ubox'>
+        <view class='name t2'>{{item.username}}</view>
+        <text class="things-name t2">{{item.title}}</text>
+        <view class='time t3'>{{item.time}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+<block wx:if="{{path=='fabu'}}">
+<view class="btn">
+  <button class='gogroup' bindtap="back">回到首页</button>
+  <button class='back' open-type='share'>转发到微信</button>
+</view>
+</block>
+<block wx:if="{{path!='fabu'}}">
+<view class="btn">
+  <button class='gogroup' bindtap='fanhui'>返回</button>
+  <button class='back' open-type='share'>转发到微信</button>
+</view>
+</block>

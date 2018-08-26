@@ -1,0 +1,27 @@
+<!--bind.wxml-->
+<view class="container">
+  <form class="login-form">
+    <view class="input-group {{userid_focus ? 'active' : ''}}">
+      <text class="input-label">姓　名</text>
+      <input maxlength="10" cursor-spacing="30" id="name" maxlength="14" value = "{{name}}" placeholder="请输入姓名" bindinput="nameInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{namehint}}</text>
+    <view class="input-group {{passwd_focus ? 'active' : ''}}">
+      <text class="input-label">准考证</text>
+      <input maxlength="15" type="number" cursor-spacing="30" id="number" value = "{{number}}" placeholder="请输入15位准考证号" bindinput="numberInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{numberhint}}</text>
+
+  </form>
+  <view class="deposit-tip">
+    <text class="deposit-text scale-1px-bottom" bindtap="forget">忘记准考证?</text>
+  </view>
+  <view class="confirm-btn" bindtap="bind">
+    <text>查询</text>
+  </view>
+
+  <text class="hint">说明：</text>
+  <text class="hint">1.目前学信网封ip,查询次数较多后可能出现查询失败现象</text>
+  <text class="hint">2.若出现查询失败现象,可以复制准考证号自行去学信网查询</text>
+  <text class="hint">3.谢谢大家理解</text>
+</view>

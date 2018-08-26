@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view class="mine-info">
+  <view class='infobox'>
+    <view class="information">
+      <image src="{{avatar}}" class="icon"></image>
+      <view class="cbox t2">
+        {{name}}
+        <block wx:if="{{gender==2}}">
+          <image src="../images/WechatIMG37.png" class="sex"></image>
+        </block>
+        <block wx:if="{{gender==1}}">
+          <image src="../images/WechatIMG36.png" class="sex"></image>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='first'>
+  <view class="choose">第一步,请选择你小区所属的区域</view>
+  <view class="container">
+    <view class="input">
+      <input placeholder="选择" value="{{province}}-{{city}}-{{county}}" disabled="disabled" focus="{{focus}}" bindtap="open" />
+    </view>
+  </view>
+  <!-- <view wx:if="{{!Community}}"> -->
+    <view wx:if="{{condition}}" class="citypicker">
+      <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+        <view class="cityheader">
+          <view bindtap="open" class="city-cancel">取消</view>
+          <view bindtap="confirm" class="city-true">确定</view>
+        </view>
+        <picker-view-column>
+          <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10rpx;" data-city="{{item}}">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;" data-qu="{{item}}">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{countys}}" wx:key="item.code" style="line-height: 50px;padding-left:10px;" data-quyu="{{item.code}}">{{item.name}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  <!-- </view> -->
+</view>
+<view wx:if="{{Community}}">
+  <view class='second'>
+    <view class="choose">第二步,请确认您选择的小区</view>
+    <view class='input'>{{Community}}</view>
+  </view>
+  <button class='queren' bindtap='querenxq'>确认</button>
+</view>

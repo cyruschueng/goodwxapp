@@ -1,0 +1,163 @@
+<view class='top-bg'>
+  <view class='user-info flex-row '>
+    <view>
+      <image class='userphoto' src='{{UserInfo.avatarUrl}}'></image>
+    </view>
+    <view class='username '>{{UserInfo.nickName}}</view>
+    <view class='go-right'>
+      <text class='fa fa-angle-right'></text>
+    </view>
+  </view>
+</view>
+<view class='user-center'>
+  <view class='flex-row'>
+    <view class='title-shot'></view>
+    <view class='title'>个人中心</view>
+  </view>
+  <view class='icons'>
+    <view class='flex-row'>
+      <navigator url="/pages/votelist/votelist" class='icon'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-1.png'></image>
+        </view>
+        <view class='txt'>群投票</view>
+      </navigator>
+      <navigator url="/pages/mypost/mypost?operation=P"  class='icon next'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-2.png'></image>
+        </view>
+        <view class='txt'>群相册</view>
+      </navigator>
+      <view class='icon next'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-3.png'></image>
+        </view>
+        <view class='txt'>群位置</view>
+      </view>
+      <navigator url="/pages/notifylist/notifylist"  class='icon next'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-4.png'></image>
+        </view>
+        <view class='txt'>群公告</view>
+      </navigator>
+    </view>
+
+
+    <view class='flex-row' style='margin-top:40rpx;'>
+      <view class='icon'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-5.png'></image>
+        </view>
+        <view class='txt'>群名片</view>
+      </view>
+      <view class='icon next'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-6.png'></image>
+        </view>
+        <view class='txt'>群相恋</view>
+      </view>
+      <view class='icon next'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-7.png'></image>
+        </view>
+        <view class='txt'>群游戏</view>
+      </view>
+      <view class='icon next'>
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-8.png'></image>
+        </view>
+        <view class='txt'>群红包</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='user-share'>
+  <view class='flex-row'>
+    <view class='title-shot'></view>
+    <view class='title'>我的群空间</view>
+  </view>
+  <view class='group-items'>
+    <block  wx:for="{{list}}" wx:key="k">
+      <navigator url="/pages/group/group?id={{item.id}}" class="item " hover-class="active">
+        <view class='flex-row'>
+        <view class='pics'>
+            <block wx:if="{{item.members.length==1}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:50%;height:50%;margin:25%;'></image>
+            </block>
+            <block wx:if="{{item.members.length==2}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:38%;height:38%;padding:1%;margin-top:30%;'></image><image src="{{item.members[1].avatarUrl}}" style='width:38%;height:38%;padding:1%;margin-top:30%;'></image>
+            </block>
+            <block wx:if="{{item.members.length==3}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:38%;height:38%;padding:1%;margin-left:30%;margin-right:30%;margin-top:10%;'></image><image src="{{item.members[1].avatarUrl}}" style='margin-left:10%;width:38%;height:38%;padding:1%;'></image><image src="{{item.members[2].avatarUrl}}" style='width:38%;height:38%;padding:1%;'></image>
+            </block>
+            <block wx:if="{{item.members.length==4}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:38%;height:38%;padding:1%;margin-top:10%;'></image>
+              <image src="{{item.members[1].avatarUrl}}" style='width:38%;height:38%;padding:1%;'></image>
+              <image src="{{item.members[2].avatarUrl}}" style='width:38%;height:38%;padding:1%;'></image>
+              <image src="{{item.members[3].avatarUrl}}" style='width:38%;height:38%;padding:1%;'></image>
+            </block>
+            <block wx:if="{{item.members.length==5}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:31%;height:31%;padding:1%;margin-top:17%;margin-left:17%'></image>
+              <image src="{{item.members[1].avatarUrl}}" style='width:31%;height:31%;padding:1%;margin-right:17%'></image>
+              <image src="{{item.members[2].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[3].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[4].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+            </block>
+            <block wx:if="{{item.members.length==6}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:31%;height:31%;padding:1%;margin-top:17%;'></image>
+              <image src="{{item.members[1].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[2].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[3].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[4].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[5].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+            </block>
+            <block wx:if="{{item.members.length==7}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:31%;height:31%;padding:1%;margin-right:33%;margin-left:33%'></image>
+              <image src="{{item.members[1].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[2].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[3].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[4].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[5].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[6].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+            </block>
+            <block wx:if="{{item.members.length==8}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:31%;height:31%;padding:1%;margin-left:17%;'></image>
+              <image src="{{item.members[1].avatarUrl}}" style='width:31%;height:31%;padding:1%;margin-right:17%'></image>
+              <image src="{{item.members[2].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[3].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[4].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[5].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[6].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[7].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+            </block>
+            <block wx:if="{{item.members.length>=9}}">
+              <image src="{{item.members[0].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[1].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[2].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[3].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[4].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[5].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[6].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[7].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+              <image src="{{item.members[8].avatarUrl}}" style='width:31%;height:31%;padding:1%;'></image>
+            </block>
+          </view>
+
+          <view class='content'>
+            <view class="gtitle">
+            <open-data type="groupName"  open-gid="{{item.opengid}}"></open-data>
+            </view>
+            <view class='gdesc'>{{item.latestoperation}}</view>
+          </view>
+      
+          <view class='flex-1 timespan'>{{item.operationtime_span}}</view>
+
+        </view>
+      </navigator>
+    </block>
+  </view>
+  <view class='open-share'>
+  <button class="weui-btn" type="primary" open-type="share">创建群空间</button>
+  </view>
+</view>
+

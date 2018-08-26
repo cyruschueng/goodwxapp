@@ -1,0 +1,19 @@
+<form class="box" bindsubmit="submit">
+  <view class="sample_box">
+    <image class="sample_img" mode="widthFix" src="{{ item.subImgUrl }}"/>
+  </view>
+
+  <view class="example_box">
+    <view class="example_list">
+      <view class="example_item" wx:for="{{ item.formList }}" wx:key="{{ item.id }}">
+        <label class="example_tips">{{ item.tips }}:</label>
+        <input name="name{{index}}" placeholder="{{item.placeholder}}" class="example_input" maxlength="50" />
+      </view>
+    </view>
+  </view>
+
+  <view class="btn_box">
+    <button class="cre_btn" disabled="{{ disabled }}" form-type="submit" type="primary">{{ btnText }}</button>
+  </view>
+</form>
+

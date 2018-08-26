@@ -1,0 +1,10 @@
+<!--pages/test/dragsort.wxml-->
+<view style="height: {{windowHeight}}px;" class="{{isMoving ? 'frozen' : ''}}">
+  <view style="height: 60rpx"></view>
+  <view class="movable-container"> 
+   <scroll-view class="scroll-view" scroll-y="{{!isMoving}}" bindscroll="scroll" scroll-top="{{scrollTop}}"> 
+    <view wx:for="{{movableCellsData}}" class="movableCell" bindtouchmove="move" bindtouchend="moveEnd" bindlongtap="longtap" data-index="{{index}}" style="height: {{cellHeight}}px; width: 100%; background-color: {{item.color}};">{{item.title}}</view>
+    <view wx:if="{{isMoving}}" class="movableCell moving" style="height: {{cellHeight}}px; width: 100%; background-color: {{movingItem.color}}; left:{{position.x}}px; top:{{position.y}}px; z-index=100">{{movingItem.title}} I'm floating</view>
+   </scroll-view> 
+  </view> 
+</view>

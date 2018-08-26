@@ -1,0 +1,50 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="outBox">
+    <view class="choiceBox flex">
+      <view class="content">公开项目后可参与融资对接</view>
+      <switch checked="{{open_status}}" bindchange="switchChange1" class="switchTab" />
+    </view>
+    <view class="choiceBox flex">
+      <view class="content">仅自己分享后好友直接查看项目信息、BP资料</view>
+      <switch checked="{{power_share_status}}" bindchange="switchChange2" class="switchTab" />
+    </view>
+    <view class="choiceBox flex">
+      <view class="content">平台认证投资人无需申请，直接查看项目信息</view>
+      <switch checked="{{power_investor_status}}" bindchange="switchChange3" class="switchTab" />
+    </view>
+    <view class="choiceBox flex">
+      <view class="content">隐藏公司信息</view>
+      <switch bindchange="switchChange4" class="switchTab" checked="{{company_open_status}}" />
+    </view>
+  </view>
+  <view class="tips flex">
+    <image src="/img/icon-zhuyi@2x.png" class="tipsPic"></image>
+    <view class="tipsContent">以下功能即将上线，功能上线后自动应用于该项目</view>
+  </view>
+  <view class="whiteNameList">
+    <view class="whiteName">白名单设置</view>
+    <view class="choiceBox flex">
+      <view class="box">
+        <view class="whiteContent">一线投资机构（清科2016年度中国股权投资排行榜前30）投资人，无需申请，直接查看项目信息、BP</view>
+      </view>
+      <switch bindchange="whiteCompany" class="switchTab" checked="{{white_company}}" />
+    </view>
+    <view class="choiceBox flex">
+      <view class="box">
+        <view class="whiteContent">平台认证投资机构总监级别以上用户，无需申请，直接查看项目信息、BP</view>
+      </view>
+      <switch bindchange="whiteUser" class="switchTab" checked="{{white_user}}" />
+    </view>
+  </view>
+  <view class="blackNameList">
+    <view class="blackName">黑名单设置</view>
+    <view class="blackTips blackTips1">针对以下投资机构,屏蔽项目展示</view>
+    <input class="inputBox" bindinput="blackCompany" maxlength="500" value="{{black_company}}" placeholder="请输入" />
+    <view class="blackTips">针对以下用户,屏蔽项目显示</view>
+    <input class="inputBox" bindinput="blackUser" maxlength="500" value="{{black_user}}" placeholder="请输入" />
+  </view>
+  <view class="highBox"></view>
+  <template is="buttonOne" data="{{text:'保存',btnName:'saveInitPrivacy',disabled}}"></template>
+</view>

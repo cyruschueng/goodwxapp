@@ -1,0 +1,417 @@
+<template name="message_item">
+    <view catchtap="operateMessage" data-index="{{index}}" wx:if="{{item.time}}" style="margin-top: 28.2rpx;" class="c_flex">
+        <view style="border-radius: 9rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color: #fff;height:48rpx;background-color:#cecece;font-size:12px;padding:0 23.99rpx;" class="flex_col_center">
+            <text>{{item.time}}</text>
+        </view>
+    </view>
+    <view catchtap="operateMessage" data-index="{{index}}" wx:if="{{item.message}}" style="margin-top: 28.2rpx;" class="c_flex">
+        <view style="border-radius: 9rpx;color: #fff;background-color:#cecece;font-size:14px;line-height:17px;padding:6rpx 23.99rpx;max-width: 80%;" class="flex_col_center">
+            <view>{{item.message}}<text style="color: #2d75e6;" wx:if="{{item.typeIndex==5}}">发送朋友验证</text></view>
+        </view>
+    </view>
+    <block wx:if="{{name!=item.name&&item.name}}">
+        <view catchtap="operateMessage" data-index="{{index}}" wx:if="{{item.content}}" style="margin-top: 28.2rpx;" class="b_flex">
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+            <view  class="flex_all">
+                <view class="dialog_name" wx:if="{{show_name}}">{{item.name}}</view>
+                <view style="position: relative;">
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent #fff transparent transparent;"></view>
+                    <view class="a_flex" style="background-color: #fff;float:left;border-radius: 9rpx;">
+                        <view style="margin: 17rpx 19.82rpx 17rpx 23.99rpx;font-size: 16px;max-width: 495.48rpx;word-wrap:break-word ;line-height: 20px;">{{item.content}}</view>
+                    </view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.pic}}" style="margin-top: 28.2rpx;" class="b_flex">
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+            <view class="flex_all">
+                <view class="dialog_name" wx:if="{{show_name}}">{{item.name}}</view>
+                <view class="{{app}}_dialog" style="float:left;height: {{system.windowWidth*max_width*item.pic.height/item.pic.width}}px;width:{{system.windowWidth*max_width}}px;background-image: url({{item.pic.url}});background-size: {{system.windowWidth*max_width}}px {{system.windowWidth*max_width*item.pic.height/item.pic.width}}px;" wx:if="{{item.pic.width>=item.pic.height && item.pic.width>=system.windowWidth*max_width}}">
+                    <image lazyload="true" src="{{item.pic.url}}" style="height: {{system.windowWidth*max_width*item.pic.height/item.pic.width}}px;width:{{system.windowWidth*max_width}}px"></image>
+                </view>
+                <view class="{{app}}_dialog" style="float:left;width: {{system.windowWidth*max_height*item.pic.width/item.pic.height}}px;height:{{system.windowWidth*max_height}}px;background-image: url({{item.pic.url}});background-size: {{system.windowWidth*max_height*item.pic.width/item.pic.height}}px {{system.windowWidth*max_height}}px;" wx:elif="{{item.pic.height>item.pic.width && item.pic.height>=system.windowWidth*max_height}}">
+                    <image lazyload="true" src="{{item.pic.url}}" style="width: {{system.windowWidth*max_height*item.pic.width/item.pic.height}}px;height:{{system.windowWidth*max_height}}px"></image>
+                </view>
+                <view class="{{app}}_dialog" style="float:left;height: {{item.pic.height}}px;width:{{item.pic.width}}px;background-image: url({{item.pic.url}});background-size: {{item.pic.width}}px {{item.pic.height}}px;" wx:elif="{{item.pic.height>item.pic.width}}">
+                    <image lazyload="true" src="{{item.pic.url}}" style="height: {{item.pic.height}}px;width:{{item.pic.width}}px"></image>
+                </view>
+                <view class="{{app}}_dialog" style="float:left;height: {{item.pic.height}}px;width:{{item.pic.width}}px;background-image: url({{item.pic.url}});background-size: {{item.pic.width}}px {{item.pic.height}}px;" wx:else>
+                    <image lazyload="true" src="{{item.pic.url}}" style="height: {{item.pic.height}}px;width:{{item.pic.width}}px"></image>
+                </view>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.voice_length}}" style="margin-top: 28.2rpx;" class="b_flex">
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+            <view  class="flex_all">
+                <view class="dialog_name" wx:if="{{show_name}}">{{item.name}}</view>
+                <view style="position: relative;">
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color:transparent #fff transparent transparent;"></view>
+                    <view wx:if="{{item.voice_length<3}}" style="width:117.87rpx;height: 78.23rpx;background-color: #fff;border-radius: 9rpx;float:left;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 0 0 15.65rpx;"></image>
+                    </view>
+                    <view wx:elif="{{item.voice_length<4}}" style="width:{{117.87+(item.voice_length-2)*10.43}}rpx;height: 78.23rpx;border-radius: 9rpx;background-color: #fff;float:left;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 0 0 15.65rpx;"></image>
+                    </view>
+                    <view wx:elif="{{item.voice_length<7}}" style="width:{{128.3+(item.voice_length-3)*19.82}}rpx;height: 78.23rpx;border-radius: 9rpx;background-color: #fff;float:left;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 0 0 15.65rpx;"></image>
+                    </view>
+                    <view wx:elif="{{item.voice_length<11}}" style="width:{{187.76+(item.voice_length-6)*15.65}}rpx;height: 78.23rpx;border-radius: 9rpx;background-color: #fff;float:left;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 0 0 15.65rpx;"></image>
+                    </view>
+                    <view wx:else style="width:{{261.82+(item.voice_length-10)*2.09}}rpx;height: 78.23rpx;background-color: #fff;border-radius: 9rpx;float:left;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 0 0 15.65rpx;"></image>
+                    </view>
+                    <view style="font-size:10pt;color:#969696;float: left;margin-top: 26.12rpx;margin-left: 14.6rpx;">{{item.voice_length}}''</view>
+                    <view style="clear: both;"></view>
+                </view>
+
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.zhuanzhang_price||item.shouqian_price}}" style="margin-top: 28.2rpx;" class="b_flex">
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+            <view  class="flex_all">
+                <view class="dialog_name" wx:if="{{show_name}}">{{item.name}}</view>
+                <view style="position: relative;">
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent {{(item.shouqian_price||item.yishou)?'#ffd09c':'#fa9e3b'}} transparent transparent;"></view>
+                    <view style="width:460rpx;float:left;">
+                        <view style="font-size: 16px;height:129.35rpx;word-wrap:break-word ;color: #fff;background-color:{{(item.shouqian_price||item.yishou)?'#ffd09c':'#fa9e3b'}} ;border-radius: 9rpx 9rpx 0 0;">
+                            <view style="float:left;padding: 24rpx 19.82rpx 24rpx 19.82rpx;width:81.36rpx;height: 81.36rpx;">
+                                <image wx:if="{{(item.shouqian_price||item.yishou)}}" style="width:81.36rpx;height: 81.36rpx;" src="http://icons.maiyizhi.cn/yilingqu.png" />
+                                <image wx:else style="width:81.36rpx;height: 81.36rpx;" src="http://icons.maiyizhi.cn/zhuanzhang.png" />
+                            </view>
+                            <view wx:if="{{isAndroid}}" style="float:left;padding-top: 8px;width:335rpx;">
+                                <view style="font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    <text wx:if="{{item.shouqian_price}}">已收钱</text>
+                                    <text wx:elif="{{item.zhuanzhang_price&&!item.yishou}}">{{item.zhuanzhang_shuoming}}</text>
+                                    <text wx:else>已被领取-{{item.zhuanzhang_shuoming}}</text>
+                                </view>
+                                <view style="font-size:12px;">
+                                    <text>¥</text><text style="margin-left: 6rpx;">{{item.zhuanzhang_price?item.zhuanzhang_price:item.shouqian_price}}</text>
+                                </view>
+                            </view>
+                            <view wx:else style="float:left;padding-top: 5px;width:335rpx;">
+                                <view style="font-size:19px;">
+                                    <text>¥</text><text style="margin-left: 6rpx;">{{item.zhuanzhang_price?item.zhuanzhang_price:item.shouqian_price}}</text>
+                                </view>
+                                <view style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    <text wx:if="{{item.shouqian_price}}">已收钱</text>
+                                    <text wx:elif="{{item.zhuanzhang_price&&!item.yishou}}">{{item.zhuanzhang_shuoming}}</text>
+                                    <text wx:else>已被领取-{{item.zhuanzhang_shuoming}}</text>
+                                </view>
+                            </view>
+                            <view style="clear: both;"></view>
+                        </view>
+                        <view style="font-size:10px;height: 16px;line-height:16px;color: #9c9c9c;padding-left: 10px;background-color: #fff;border-radius:0 0 4.5px 4.5px;" class="flex_col_center">
+                            <view>微信转账</view>
+                        </view>
+                    </view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.hongbao_price && item.typeIndex==0}}" style="margin-top: 28.2rpx;" class="b_flex">
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+            <view  class="flex_all">
+                <view class="dialog_name" wx:if="{{show_name}}">{{item.name}}</view>
+                <view style="position: relative;">
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent {{(item.typeIndex==0&&!item.yilingwan)?'#fa9e3b':'#ffd09c'}} transparent transparent;"></view>
+                    <view style="width:460rpx;float:left;">
+                        <view style="font-size: 16px;height:129.35rpx;word-wrap:break-word ;color: #fff;background-color:{{(item.typeIndex==0&&!item.yilingwan)?'#fa9e3b':'#ffd09c'}} ;border-radius: 9rpx 9rpx 0 0;">
+                            <view style="float:left;padding: 24rpx 19.82rpx 24rpx 19.82rpx;width:81.36rpx;height: 81.36rpx;">
+                                <image wx:if="{{(item.typeIndex==0&&!item.yilingwan)}}" style="width:67.8rpx;height: 81.32rpx;" src="http://icons.maiyizhi.cn/fahongbao.png" />
+                                <image wx:else style="width:67.8rpx;height: 81.32rpx;" src="http://icons.maiyizhi.cn/chaihongbao.png" />
+                            </view>
+                            <view style="float:left;padding-top: 12rpx;width:335rpx;">
+                                <view style="font-size:16px;margin-top:7rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    <text wx:if="{{item.typeIndex==1}}">{{item.hongbao_shuoming}}</text>
+                                    <text wx:elif="{{item.typeIndex==0 && item.yilingwan}}">{{item.hongbao_shuoming}}</text>
+                                    <text wx:else>{{item.hongbao_shuoming}}</text>
+                                </view>
+                                <view style="font-size:12px;">
+                                    <view wx:if="{{item.typeIndex==1}}">红包已领取</view>
+                                    <view wx:elif="{{item.typeIndex==0 && item.yilingwan}}">红包已领取</view>
+                                    <view wx:else>领取红包</view>
+                                </view>
+                            </view>
+                            <view style="clear: both;"></view>
+                        </view>
+                        <view style="font-size:12px;height: 39.64rpx;color: #9c9c9c;padding-left: 20.86rpx;background-color: #fff;border-radius:0 0 9rpx 9rpx;" class="flex_col_center">
+                            <view>微信红包</view>
+                        </view>
+                    </view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.hongbao_price && item.typeIndex==1}}" style="margin-top: 28.2rpx;" class="c_flex">
+            <view wx:if="{{item.fromIndex==0}}" style="border-radius: 9rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color: #fff;height:48rpx;background-color:#cecece;font-size:12px;padding:0 23.99rpx;" class="flex_col_center">
+                <image style="width:29.2rpx;height: 35.46rpx;padding-right:19.82rpx;" src="http://icons.maiyizhi.cn/fahongbao.png"></image>
+                <text>你</text>领取了<text>{{item.name}}</text>的<text style="color: #fd9931;">红包</text>
+            </view>
+            <view wx:else style="border-radius: 9rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color: #fff;height:48rpx;background-color:#cecece;font-size:12px;padding:0 23.99rpx;" class="flex_col_center">
+                <image style="width:29.2rpx;height: 35.46rpx;padding-right:19.82rpx;" src="http://icons.maiyizhi.cn/fahongbao.png"></image>
+                <text>{{item.name}}</text>领取了<text>你</text>的<text style="color: #fd9931;">红包</text>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.is_video}}" style="margin-top: 28.2rpx;" class="b_flex">
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+            <view  class="flex_all">
+                <view class="dialog_name" wx:if="{{show_name}}">{{item.name}}</view>
+                <view style="position: relative;">
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent #fff transparent transparent;"></view>
+                    <view style="background-color: #fff;float:left;border-radius: 9rpx;padding: 0 20.86rpx;height: 78.23rpx;" class="a_flex">
+                        <image wx:if="{{item.typeIndex==0}}" src="http://icons.maiyizhi.cn/shipinliao.png" style="width:43.81rpx;height: 20.86rpx;"></image>
+                        <image wx:else src="http://icons.maiyizhi.cn/yuyinliao.png" style="width:43.81rpx;height: 18.78rpx;"></image>
+                        <view wx:if="{{item.statusIndex==0}}" style="padding-left:25.03rpx;font-size: 16px;">通话时长</view>
+                        <view wx:if="{{item.statusIndex==1}}" style="padding-left:25.03rpx;font-size: 16px;">已取消</view>
+                        <view wx:if="{{item.statusIndex==2}}" style="padding-left:25.03rpx;font-size: 16px;">已拒绝</view>
+                        <view wx:if="{{item.statusIndex==3}}" style="padding-left:25.03rpx;font-size: 16px;">对方已取消</view>
+                        <view wx:if="{{item.statusIndex==4}}" style="padding-left:25.03rpx;font-size: 16px;">对方已拒绝</view>
+                        <view wx:if="{{item.statusIndex==0}}" style="padding-left:12.52rpx;font-size: 16px;">{{item.videoLength}}</view>
+                    </view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.linkTitle}}" style="margin-top: 28.2rpx;" class="b_flex">
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+            <view  class="flex_all">
+                <view class="dialog_name" wx:if="{{show_name}}">{{item.name}}</view>
+                <view style="position: relative;">
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent #fff transparent transparent;"></view>
+                    <view style="width:460rpx;float:left;">
+                        <view style="font-size: 16px;background-color:#fff ;border-radius: 9rpx;padding:25.03rpx 18.78rpx 22.95rpx 21.9rpx">
+                            <view style="color:#000;line-height:20px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;">{{item.linkTitle}}</view>
+                            <view style="margin-top: 13.56rpx;" class="flex_row">
+                                <view class="flex_all" style="overflow:hidden;font-size:12px;line-height:16px;color:#8f8f8f;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;">{{item.linkContent}}</view>
+                                <view style="width: 89.71rpx;">
+                                    <image style="width: 89.71rpx;height: 89.71rpx;display: block;float: right;" src="{{item.linkAvatar?item.linkAvatar:'http://avatars.maiyizhi.cn/link.png'}}" mode="aspectFill"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <block wx:elif="{{item.name}}">
+        <view catchtap="operateMessage" data-index="{{index}}" wx:if="{{item.content}}" style="margin-top: 28.2rpx;" class="b_flex end_flex">
+            <view  style="">
+                <view style="position: relative;" class="b_flex">
+                    <view class="a_flex">
+                        <view wx:if="{{item.isFail}}" style="margin-right:12rpx;"><image src="http://icons.maiyizhi.cn/fasongshibai.png" style="width:44rpx;height: 44rpx;"></image></view>
+                        <view style="background-color: #a2e65b;border-radius: 9rpx;" class="a_flex">
+                            <view style="margin: 17rpx 19.82rpx 17rpx 23.99rpx;font-size: 16px;max-width: 495.48rpx;word-wrap:break-word ;line-height: 20px;">{{item.content}}</view>
+                        </view>
+                    </view>
+                    <view class="weixin_triangle" style="margin-top: 28.685rpx;border-color: transparent transparent transparent #a2e65b;margin-right:-10.43rpx;margin-left: 0;"></view>
+                </view>
+            </view>
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.pic}}" style="margin-top: 28.2rpx;" class="b_flex end_flex">
+            <view style="">
+                <view style="position: relative;" class="b_flex">
+                    <view class="a_flex">
+                        <view wx:if="{{item.isFail}}" style="margin-right:12rpx;"><image src="http://icons.maiyizhi.cn/fasongshibai.png" style="width:44rpx;height: 44rpx;"></image></view>
+                        <view class="my_{{app}}_dialog" style="float:left;height: {{system.windowWidth*max_width*item.pic.height/item.pic.width}}px;width:{{system.windowWidth*max_width}}px;background-image: url({{item.pic.url}});background-size: {{system.windowWidth*max_width}}px {{system.windowWidth*max_width*item.pic.height/item.pic.width}}px;" wx:if="{{item.pic.width>=item.pic.height && item.pic.width>=system.windowWidth*max_width}}">
+                            <image lazyload="true" src="{{item.pic.url}}" style="height: {{system.windowWidth*max_width*item.pic.height/item.pic.width}}px;width:{{system.windowWidth*max_width}}px"></image>
+                        </view>
+                        <view class="my_{{app}}_dialog" style="float:left;width: {{system.windowWidth*max_height*item.pic.width/item.pic.height}}px;height:{{system.windowWidth*max_height}}px;background-image: url({{item.pic.url}});background-size: {{system.windowWidth*max_height*item.pic.width/item.pic.height}}px {{system.windowWidth*max_height}}px;" wx:elif="{{item.pic.height>item.pic.width && item.pic.height>=system.windowWidth*max_height}}">
+                            <image lazyload="true" src="{{item.pic.url}}" style="width: {{system.windowWidth*max_height*item.pic.width/item.pic.height}}px;height:{{system.windowWidth*max_height}}px"></image>
+                        </view>
+                        <view class="my_{{app}}_dialog" style="float:left;height: {{item.pic.height}}px;width:{{item.pic.width}}px;background-image: url({{item.pic.url}});background-size: {{item.pic.width}}px {{item.pic.height}}px;" wx:elif="{{item.pic.height>item.pic.width}}">
+                            <image lazyload="true" src="{{item.pic.url}}" style="height: {{item.pic.height}}px;width:{{item.pic.width}}px"></image>
+                        </view>
+                        <view class="my_{{app}}_dialog" style="float:left;height: {{item.pic.height}}px;width:{{item.pic.width}}px;background-image: url({{item.pic.url}});background-size: {{item.pic.width}}px {{item.pic.height}}px;" wx:else>
+                            <image lazyload="true" src="{{item.pic.url}}" style="height: {{item.pic.height}}px;width:{{item.pic.width}}px"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.voice_length}}" style="margin-top: 28.2rpx;" class="b_flex end_flex">
+            <view  style="">
+                <view style="position: relative;">
+                    <view wx:if="{{item.isFail}}" style="float: left;margin:17.1rpx 12rpx 0 0;"><image src="http://icons.maiyizhi.cn/fasongshibai.png" style="width:44rpx;height: 44rpx;"></image></view>
+                    <view wx:else style="font-size:10pt;color:#969696;float: left;margin-top: 26.12rpx;margin-right: 14.6rpx;">{{item.voice_length}}''</view>
+                    <view wx:if="{{item.voice_length<3}}" style="width:117.87rpx;height: 78.23rpx;background-color: #a2e65b;border-radius: 9rpx;float:left;text-align:right;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png?imageMogr2/rotate/180" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 15.65rpx 0 0;"></image>
+                    </view>
+                    <view wx:elif="{{item.voice_length<4}}" style="width:{{117.87+(item.voice_length-2)*10.43}}rpx;height: 78.23rpx;border-radius: 9rpx;background-color: #a2e65b;float:left;text-align:right;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png?imageMogr2/rotate/180" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 15.65rpx 0 0;"></image>
+                    </view>
+                    <view wx:elif="{{item.voice_length<7}}" style="width:{{128.3+(item.voice_length-3)*19.82}}rpx;height: 78.23rpx;border-radius: 9rpx;background-color: #a2e65b;float:left;text-align:right;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png?imageMogr2/rotate/180" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 15.65rpx 0 0;"></image>
+                    </view>
+                    <view wx:elif="{{item.voice_length<11}}" style="width:{{187.76+(item.voice_length-6)*15.65}}rpx;height: 78.23rpx;border-radius: 9rpx;background-color: #a2e65b;float:left;text-align:right;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png?imageMogr2/rotate/180" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 15.65rpx 0 0;"></image>
+                    </view>
+                    <view wx:else style="width:{{261.82+(item.voice_length-10)*2.09}}rpx;height: 78.23rpx;background-color: #a2e65b;border-radius: 9rpx;float:left;text-align:right;">
+                        <image src="http://icons.maiyizhi.cn/yuyin1.png?imageMogr2/rotate/180" style="width:34.42rpx;height:34.42rpx;margin:21.9rpx 15.65rpx 0 0;"></image>
+                    </view>
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;margin-right:-10.43rpx;margin-left: 0;border-color:transparent transparent transparent #a2e65b;"></view>
+                    <view style="clear: both;"></view>
+                </view>
+
+            </view>
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.zhuanzhang_price||item.shouqian_price}}" style="margin-top: 28.2rpx;" class="b_flex end_flex">
+            <view  style="">
+                <view style="position: relative;">
+                    <view style="width:460rpx;float:left;">
+                        <view style="font-size: 16px;height:129.35rpx;word-wrap:break-word ;color: #fff;background-color:{{(item.shouqian_price||item.yishou)?'#ffd09c':'#fa9e3b'}} ;border-radius: 9rpx 9rpx 0 0;">
+                            <view style="float:left;padding: 24rpx 19.82rpx 24rpx 19.82rpx;width:81.36rpx;height: 81.36rpx;">
+                                <image wx:if="{{(item.shouqian_price||item.yishou)}}" style="width:81.36rpx;height: 81.36rpx;" src="http://icons.maiyizhi.cn/yilingqu.png" />
+                                <image wx:else style="width:81.36rpx;height: 81.36rpx;" src="http://icons.maiyizhi.cn/zhuanzhang.png" />
+                            </view>
+                            <view wx:if="{{isAndroid}}" style="float:left;padding-top: 8px;width:335rpx;">
+                                <view style="margin-top:7rpx;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                    <text wx:if="{{item.shouqian_price}}">已收钱</text>
+                                    <text wx:elif="{{item.zhuanzhang_price&&!item.yishou}}">{{item.zhuanzhang_shuoming}}</text>
+                                    <text wx:else>已被领取-{{item.zhuanzhang_shuoming}}</text>
+                                </view>
+                                <view style="font-size:12px;">
+                                    <text>¥</text><text style="margin-left: 6rpx;">{{item.zhuanzhang_price?item.zhuanzhang_price:item.shouqian_price}}</text>
+                                </view>
+                            </view>
+                            <view wx:else style="float:left;padding-top: 5px;width:335rpx;">
+                                <view style="font-size:19px;">
+                                    <text>¥</text><text style="margin-left: 6rpx;">{{item.zhuanzhang_price?item.zhuanzhang_price:item.shouqian_price}}</text>
+                                </view>
+                                <view style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    <text wx:if="{{item.shouqian_price}}">已收钱</text>
+                                    <text wx:elif="{{item.zhuanzhang_price&&!item.yishou}}">{{item.zhuanzhang_shuoming}}</text>
+                                    <text wx:else>已被领取-{{item.zhuanzhang_shuoming}}</text>
+                                </view>
+                            </view>
+                            <view style="clear: both;"></view>
+                        </view>
+                        <view style="font-size:10px;height: 16px;line-height:16px;color: #9c9c9c;padding-left: 10px;background-color: #fff;border-radius:0 0 4.5px 4.5px;" class="flex_col_center">
+                            <view>微信转账</view>
+                        </view>
+                    </view>
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent transparent transparent {{(item.shouqian_price||item.yishou)?'#ffd09c':'#fa9e3b'}};margin-right:-10.43rpx;margin-left: 0;"></view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.hongbao_price && item.typeIndex==0}}" style="margin-top: 28.2rpx;" class="b_flex end_flex">
+            <view  style="">
+                <view style="position: relative;">
+                    <view style="width:460rpx;float:left;">
+                        <view style="font-size: 16px;height:129.35rpx;word-wrap:break-word ;color: #fff;background-color:{{(item.typeIndex==0&&!item.yilingwan)?'#fa9e3b':'#ffd09c'}} ;border-radius: 9rpx 9rpx 0 0;">
+                            <view style="float:left;padding: 24rpx 19.82rpx 24rpx 19.82rpx;width:81.36rpx;height: 81.36rpx;">
+                                <image wx:if="{{(item.typeIndex==0&&!item.yilingwan)}}" style="width:67.8rpx;height: 81.32rpx;" src="http://icons.maiyizhi.cn/fahongbao.png" />
+                                <image wx:else style="width:67.8rpx;height: 81.32rpx;" src="http://icons.maiyizhi.cn/chaihongbao.png" />
+                            </view>
+                            <view style="float:left;padding-top: 12rpx;width:335rpx;">
+                                <view style="font-size:16px;margin-top:7rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    <text wx:if="{{item.typeIndex==1}}">{{item.hongbao_shuoming}}</text>
+                                    <text wx:elif="{{item.typeIndex==0 && item.yilingwan}}">{{item.hongbao_shuoming}}</text>
+                                    <text wx:else>{{item.hongbao_shuoming}}</text>
+                                </view>
+                                <view style="font-size:12px;">
+                                    <view wx:if="{{item.typeIndex==1}}">红包已领取</view>
+                                    <view wx:elif="{{item.typeIndex==0 && item.yilingwan}}">红包已被领完</view>
+                                    <view wx:else>领取红包</view>
+                                </view>
+                            </view>
+                            <view style="clear: both;"></view>
+                        </view>
+                        <view style="font-size:12px;height: 39.64rpx;color: #9c9c9c;padding-left: 20.86rpx;background-color: #fff;border-radius:0 0 9rpx 9rpx;" class="flex_col_center">
+                            <view>微信红包</view>
+                        </view>
+                    </view>
+                    <view class="weixin_triangle" style="margin-right:-10.43rpx;margin-left: 0;float:left;margin-top: 28.685rpx;border-color: transparent transparent transparent {{(item.typeIndex==0&&!item.yilingwan)?'#fa9e3b':'#ffd09c'}};"></view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.hongbao_price && item.typeIndex==1}}" style="margin-top: 28.2rpx;" class="c_flex">
+            <view style="border-radius: 9rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color: #fff;height:48rpx;background-color:#cecece;font-size:12px;padding:0 23.99rpx;" class="flex_col_center">
+                <image style="width:29.2rpx;height: 35.46rpx;padding-right:19.82rpx;" src="http://icons.maiyizhi.cn/fahongbao.png"></image>
+                <text>你</text>领取了<text>自己</text>发的<text style="color: #fd9931;">红包</text>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.is_video}}" style="margin-top: 28.2rpx;" class="b_flex end_flex">
+            <view  style="">
+                <view style="position: relative;">
+                    <view style="background-color: #a2e65b;float:left;border-radius: 9rpx;padding: 0 20.86rpx;height: 78.23rpx;" class="a_flex">
+                        <view wx:if="{{item.statusIndex==0}}" style="padding-right:12.52rpx;font-size: 16px;">通话时长</view>
+                        <view wx:if="{{item.statusIndex==1}}" style="padding-right:12.52rpx;font-size: 16px;">已取消</view>
+                        <view wx:if="{{item.statusIndex==2}}" style="padding-right:12.52rpx;font-size: 16px;">已拒绝</view>
+                        <view wx:if="{{item.statusIndex==3}}" style="padding-right:12.52rpx;font-size: 16px;">对方已取消</view>
+                        <view wx:if="{{item.statusIndex==4}}" style="padding-right:12.52rpx;font-size: 16px;">对方已拒绝</view>
+                        <view wx:if="{{item.statusIndex==0}}" style="padding-right:25.03rpx;font-size: 16px;">{{item.videoLength}}</view>
+                        <image wx:if="{{item.typeIndex==0}}" src="http://icons.maiyizhi.cn/shipinliao2.png" style="width:43.81rpx;height: 20.86rpx;"></image>
+                        <image wx:else src="http://icons.maiyizhi.cn/yuyinliao2.png" style="width:43.81rpx;height: 18.78rpx;"></image>
+                    </view>
+                    <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent transparent transparent #a2e65b;margin-right:-10.43rpx;margin-left: 0;"></view>
+                    <view style="clear: both;"></view>
+                </view>
+            </view>
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+        </view>
+        <view catchtap="operateMessage" data-index="{{index}}" wx:elif="{{item.linkTitle}}" style="margin-top: 28.2rpx;" class="b_flex end_flex">
+            <view  style="">
+                <view style="position: relative;">
+                    <view style="position: relative;" class="b_flex">
+                        <view class="a_flex">
+                            <view wx:if="{{item.isFail}}" style="margin-right:12rpx;"><image src="http://icons.maiyizhi.cn/fasongshibai.png" style="width:44rpx;height: 44rpx;"></image></view>
+                            <view style="width:460rpx;">
+                                <view style="font-size: 16px;background-color:#fff ;border-radius: 9rpx;padding:25.03rpx 18.78rpx 22.95rpx 21.9rpx">
+                                    <view style="color:#000;line-height:20px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;">{{item.linkTitle}}</view>
+                                    <view style="margin-top: 13.56rpx;" class="flex_row">
+                                        <view style="overflow:hidden;font-size:12px;line-height:16px;color:#8f8f8f;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;" class="flex_all">{{item.linkContent}}</view>
+                                        <view style="width: 89.71rpx;">
+                                            <image style="width: 89.71rpx;height: 89.71rpx;display: block;float: right;" src="{{item.linkAvatar?item.linkAvatar:'http://avatars.maiyizhi.cn/link.png'}}" mode="aspectFill"></image>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weixin_triangle" style="float:left;margin-top: 28.685rpx;border-color: transparent  transparent transparent #fff;margin-right:-10.43rpx;margin-left: 0;"></view>
+                    </view>
+                </view>
+            </view>
+            <view class="dialog_avatar" style="width:80.3rpx;height:80.3rpx;margin: 0 19.8rpx 0 19.8rpx;">
+                <image lazyload="true" src="{{item.avatar}}" mode="aspectFill" style="width:80.3rpx;height:80.3rpx;"></image>
+            </view>
+        </view>
+    </block>
+
+</template>

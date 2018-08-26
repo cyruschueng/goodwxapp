@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html >
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>没有水了</title>
+    <link href="../css/paint.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <style>
+        #operation{ position:fixed; width:100%; height:100%; left:0px; top:0px; display:none; background:#fff;}
+        #operation img{ position:absolute; width:100%; height:50%; top:25%;}
+        #footer{ position:fixed; bottom:0px;  width:100%;}
+        #footer img{ position:absolute; width:32px; height:32px; left:50%; margin-left:-16px;}
+    </style>
+    <script>
+        $(function () {
+            setInterval(function () {
+                var display = $("#footer").data("display");
+                if (display == "true") {
+                    $("#footer").data("display", "false");
+                    $("#footer img").animate({ top: "0px" });
+                    $("#footer").fadeOut(500);
+                } else {
+                    $("#footer").data("display", "true");
+                    $("#footer img").animate({ top: "-30px" });
+                    $("#footer").fadeIn(500); 
+                }
+            }, 1000);
+        })
+    </script>
+</head>
+<body>
+    <div class="swipe-wrap" id="slip">
+	<article class="swipe">
+
+		<div class="swipe-box" style="background-color:#ea5513;">
+            <img src="../img/paint/meishuile/没水了-01.jpg" />
+		</div>
+        
+		<div class="swipe-box" style="background-color:#f9ffdd;">
+            <img src="../img/paint/meishuile/没水了-02.jpg" />
+		</div>
+
+		<div class="swipe-box" style="background-color:#f3f9d3;">
+            <img src="../img/paint/meishuile/没水了-03.jpg" />
+		</div>
+
+		<div class="swipe-box" style="background-color:#191313;">
+            <img src="../img/paint/meishuile/没水了-04.jpg" />
+		</div>
+
+        <div class="swipe-box" style="background-color:#d5fffd;">
+            <img src="../img/paint/meishuile/没水了-05.jpg" />
+		</div>
+	</article>
+</div>
+<div id="footer" data-display="false">
+    <img src="../img/gg.jpg" />
+</div>
+<script src="../js/slip.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var container = document.getElementById('slip');
+    var pages = document.querySelectorAll('.swipe-box');
+    var slip = Slip(container, 'y').webapp(pages);
+</script>
+</body>
+</html>

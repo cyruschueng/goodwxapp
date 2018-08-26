@@ -1,0 +1,104 @@
+<?php
+header("Content-type:text/html;charset=utf-8");
+//连接数据库
+$con = mysql_connect("localhost","root","root");
+if (!$con)
+  {
+  die('连接数据库失败，失败原因：' . mysql_error());
+  }
+
+//设置数据库字符集  
+mysql_query("SET NAMES UTF8");
+//查询数据库
+mysql_select_db("test", $con);
+//更新
+mysql_query("UPDATE zan SET zan = zan+1");
+$result = mysql_query("SELECT * FROM zan");
+if(isset($_GET['name'])){
+while($row = mysql_fetch_array($result))
+  {
+  echo $row['zan'];
+  }
+}else{
+    echo "赞失败！";
+}
+//关闭连接
+mysql_close($con);
+?>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>异步提交</title>
+    <script src="jquery-2.1.1.min.js"></script>
+    <script src="ajaxindex.js"></script>
+</head>
+<body>
+    <button id="btn">赞</button>
+    <span id="result">
+        <?php
+        $con = mysql_connect("localhost","root","root");
+        if (!$con)
+        {
+        die('连接数据库失败，失败原因：' . mysql_error());
+        }
+        //设置数据库字符集  
+        mysql_query("SET NAMES UTF8");
+        //查询数据库
+        mysql_select_db("test", $con);
+        $result = mysql_query("SELECT * FROM zan");
+        while($row = mysql_fetch_array($result))
+        {
+        echo $row['zan'];
+        }
+        //关闭连接
+        mysql_close($con);
+        ?>
+    </span>
+</body>
+</html>
+
+
+
+
+$(document).ready(function(){
+    $("#btn").on("click",function(){
+        $.get("sever.php",{name:$("#btn").val()},function(data){
+            $("#result").text(data);
+        });
+    });
+});
+
+
+
+
+<?php
+header("Content-type:text/html;charset=utf-8");
+//连接数据库
+$con = mysql_connect("localhost","root","root");
+if (!$con)
+  {
+  die('连接数据库失败，失败原因：' . mysql_error());
+  }
+
+//设置数据库字符集  
+mysql_query("SET NAMES UTF8");
+//查询数据库
+mysql_select_db("test", $con);
+//更新
+mysql_query("UPDATE zan SET zan = zan+1");
+$result = mysql_query("SELECT * FROM zan");
+if(isset($_GET['name'])){
+while($row = mysql_fetch_array($result))
+  {
+  echo $row['zan'];
+  }
+}else{
+    echo "赞失败！";
+}
+//关闭连接
+mysql_close($con);
+?>

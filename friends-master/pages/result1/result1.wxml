@@ -1,0 +1,194 @@
+<view>
+	<view class="popup theme-switch-float" wx:if="{{guess}}">
+		<view class="box">
+			<view class="rank border-line-top border-line-bottom" bindtap="closeguess">
+				<button class="rank-title btn-null" form-type="submit">
+          <text class="text"><text>我猜中的答案</text></text>
+					<text class="iconfont icon-close">
+						<text>
+						</text>
+					</text>
+				</button>
+			</view>
+			<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+				<view class="scroll-view">
+					<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+						<view style="height: 100%;">
+              <!--答对  -->
+                <view class="option-list" wx:if="{{wingque}}">
+                    <view class='queList' wx:for="{{wingque}}">
+                        <view class='spaces'>{{item.chosen.choice_title}}</view>
+                        <view class='nowraps'>{{item.quesiton.title}}</view>
+                        <view class='groups'>
+                            <image wx:if="{{item.chosen.item.image}}" src="{{item.chosen.item.image}}" mode="widthFix"></image> 
+                            <image wx:else src="https://qncdn.playonwechat.com/nice/users.png" mode="widthFix"></image> 
+                            <image src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
+                        </view>
+                    </view>
+                </view>
+                <!--没有答对  -->
+              <view class="option-list" wx:else>
+								<view class="item-null">
+									<view>
+										一题都没猜对也是一种技术
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="popup theme-switch-float" wx:if="{{finish}}">
+		<view class="box">
+			<view class="rank border-line-top border-line-bottom" bindtap="closefinish">
+				<button class="rank-title btn-null" form-type="submit">
+					<text class="text"><text>我已猜过的</text></text>
+					<text class="iconfont icon-close">
+						<text>
+						</text>
+					</text>
+				</button>
+			</view>
+			<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+				<view class="scroll-view">
+					<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+						<view style="height: 100%;">
+							<view class="rank-list" wx:for="{{oldask}}" bindtap='result1' 
+                    data-g_id="{{item.g_id}}" data-r_id="{{item.r_id}}" data-friend_mid="{{friend_mid}}">
+								<view class="item border-line-bottom" data-friend_content="{{item.title}}"
+								data-id="15">
+									<view class="item-title">
+										{{item.title}}
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="vote">
+		<view class="header border-line-bottom">
+			<view class="header-card">
+				<view class="card-img">
+        <!--被猜人  -->
+					<image class="fadeIn animated" mode="widthFix" wx:if="{{firstList.friend_avatarurl}}" 
+                 src="{{firstList.friend_avatarurl}}"></image>
+          <image class="fadeIn animated" mode="widthFix" wx:else src="https://qncdn.playonwechat.com/nice/users.png"></image>
+        <!--用户  -->
+					<image class="fadeIn animated" mode="widthFix"  src="{{userInfo.avatarUrl}}">	</image>
+				</view>
+        <view class='right'>
+            <view class="baifenbi">
+                 <text>{{wing.count}}0</text><text>%</text>
+						</view>
+        </view>
+				<view class="card-point">
+					<view class="point-slider" style="width: {{wing.count}}0%;">
+					</view>
+					<view class="point-tips">
+						懂我指数
+					</view>
+				</view>
+			</view>
+			<view class="header-tips">
+				你共猜中了<text class='baifenbi'>{{wing.count}}</text>	个答案，打败了{{wing.rate}}%的人
+			</view>
+			<view class="header-btn col-2">
+				<button form-type="submit" class="btn btn-null btn-green" bindtap='seeque'>
+					看我猜中了哪些
+				</button>
+				<button form-type="submit" class="btn btn-null btn-green" bindtap='result'>
+					炫耀一下
+				</button>
+			</view>
+		</view>
+    <!--可以去猜的  -->
+    <view class='caiList'>
+        <view wx:for="{{askok}}" class='listitem' bindtap='nextque' 
+              data-g_id="{{item.g_id}}" data-friend_mid="{{item.friend_mid}}">
+            <view wx:if="{{firstList.friend_avatarurl}}">
+                <image src="{{firstList.friend_avatarurl}}" mode="widthFix"></image>{{item.title}}
+            </view>
+            <view wx:else>
+                <image src="https://qncdn.playonwechat.com/nice/users.png" mode="widthFix"></image>{{item.title}}
+            </view>
+        </view>
+    </view>
+		<view class="rank theme-list border-line-bottom margin-top-20" bindtap='more'>
+			<button form-type="submit" class="btn btn-null" >更多我已猜过的</button>
+		</view>
+		<view class="rank border-line-top margin-top-20">
+			<view class="rank-title">
+				<view>
+					最懂	<text class="name">{{firstList.friend_wx_name}}</text>
+					的排行榜
+				</view>
+			</view>
+      <!--第一  -->
+			<view class="rank-list rank-myinfo" wx:if="{{firstList}}" data-r_id="{{firstList.r_id}}">
+				<view class="item pading-left-0 border-line-top">
+					<view class="item-index">
+					</view>
+					<image class="fadeIn animated item-img" mode="widthFix"  src="{{firstList.guess_avatarurl}}">
+					</image>
+					<view class="item-info" >
+						<view class="item-title">
+							{{firstList.guess_wx_name}}
+						</view>
+						<view class="item-desc">
+							我的排名：1
+						</view>
+					</view>
+					<view class="baifenbi">
+                 <text>{{firstList.point}}</text><text>%</text>
+					</view>
+				</view>
+			</view>
+      <!--列表  -->
+			<view class="rank-friend rank-list" style="min-height:">
+				<view class="item pading-left-0 border-line-bottom" wx:for="{{listAll}}" data-r_id="{{item.point}}">
+          <!--排行  -->
+					<view class="item-index" wx:if="{{index==0}}">
+						<image src="../image/one.png" mode="widthFix" >
+						</image>
+					</view>
+          <view class="item-index" wx:if="{{index==1}}">
+						<image src="../image/two.png" mode="widthFix" >
+						</image>
+					</view>
+					<image data-id="1901963375" class="item-img fadeIn animated" data-status="false" mode="widthFix" 
+					src="{{item.avatarurl}}">
+					</image>
+					<view class="item-info">
+						<view class="item-title">
+							<text data-id="1901963375" data-status="false">
+								<text>{{item.wx_name}}</text>
+							</text>
+						</view>
+					</view>
+					<view class="baifenbi">
+                 <text>{{item.point}}</text><text>%</text>
+					</view>
+					<view class="item-msg">{{item.desc}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="back-home-cover">
+		</view>
+		<button form-type="submit" class="btn-nul back-home" bindtap="back-home">
+			<view class="avatar">
+				<image mode="widthFix"  style="width:66rpx!important;"
+           class="fadeIn animated" src="{{userInfo.avatarUrl}}">
+				</image>
+			</view>
+			<view class="name" bindtap='backhome'>
+						前往我的主页
+				<text class="iconfont icon-arrowright"></text>
+			</view>
+		</button>
+	</view>
+</view>

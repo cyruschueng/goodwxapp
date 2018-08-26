@@ -1,0 +1,62 @@
+@import './common/const.scss';
+@import '../common/rpx.scss';
+@import 'share';
+@import '../../common/mixin.scss';
+.scroll-item{
+    width: 100%;
+    position: relative;
+    padding: rpx(30) 0;
+    height: rpx(186);
+    display: flex;
+    @include borderBottomOnePx;
+    &:nth-last-child(1):after{
+        height: 0;
+    }
+ }
+ .list-img{
+     width: rpx(188);
+     image{
+         height: 100%;
+         width: 100%;
+     }
+ }
+ .list-des{
+     flex: 1;
+     padding: 0 rpx(28);
+     line-height: rpx(160);
+     .des-wrap{
+         display:inline-block;
+     }
+     .des-title{
+        line-height: rpx(40);
+        font-size: rpx($size-four);
+        color: $color-word-one;
+     }
+     .des-num{
+         line-height: rpx(34);
+         font-size: rpx($size-one);
+         color: $color-word-two;
+         text{
+            color: $color-word-important;
+         }
+     }
+ }
+ .list-btn{
+     width: rpx(120);
+     position: relative;
+     .text-btn{
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        height: rpx(60);
+        line-height: rpx(60);
+        text-align: center;
+        font-size: rpx($size-two);
+        color: $color-word-import-inner;
+        background: $color-word-important;
+        box-shadow: 0 6px 10px 0 rgba(51,133,238,0.40);
+        border-radius: rpx(8);
+     }
+ }

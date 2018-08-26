@@ -1,0 +1,14 @@
+<!--pages/user/user.wxml-->
+<view class="container">
+   <view class="header">
+        <view class="img"><image mode='aspectFill' src="{{avatar}}"></image></view>
+        <view class="txt" wx:if="{{nickname}}"><text>{{nickname}}</text></view>
+        <view class="txt" wx:else><text>匿名</text></view>
+   </view>
+   <view class="content">
+      <textarea bindinput='textInput' placeholder='请输入你的建议(250字之内)' cursor-spacing="180" maxlength='250'></textarea>
+   </view>
+   <view class="do_over">
+        <button bindtap="check">提交</button>
+    </view>
+</view>

@@ -1,0 +1,108 @@
+<view class="functpanel {{user.bell == 1 ? 'fhidden':''}}">
+  <view class="tit">你有你的Free.Style，我有我的Card.Holder</view>
+  <view class="fpbtn" bindtap="openit">开启卡包</view>
+</view>
+
+<view class="card {{user.bell == 1 ? '':'fhidden'}}">
+  <view class="item">
+    <view class="first flex-between item-center">
+      <image src="/images/order/woju.png" style="width:70rpx;height:70rpx"></image>
+      <view style="font-size:30rpx;color:#fff;font-weight:bold">蜗居会员</view>
+    </view>
+    <view class="second flex-center" style="margin-top:40rpx">
+      <image src="/images/payment.png" style="width:66rpx; height:66rpx"></image>
+      <view style="font-size:50rpx;color:#fff;margin-left:15rpx;height:66rpx;line-height:66rpx">{{user.money}}</view>
+    </view>
+    <view class="flex-between">
+      <view class="flex-start">
+        <image src="/images/jifen.png" style="width:40rpx;height:40rpx;margin-top:78rpx;margin-left:30rpx;"></image>
+        <view style="font-size:27rpx;margin-left:20rpx;margin-top:80rpx;color:#fff;white-space:nowrap;width:100rpx;">{{user.source}}</view>
+      </view>
+      <image src="/images/bg.png" style="height:130rpx; width:410rpx; "></image>
+    </view>
+  </view>
+</view>
+
+
+<view class="card">
+  <view style="border-radius:10px;box-shadow:2px 2px 2px #c1c1c1">
+    <view class="citem bottom-line" bindtap="navToRecharge">
+      <view class="flex-between item-center">
+        <view class="flex-start item-center">
+          <image src="/images/ol.png" class="icon-sm"></image>
+          <view style="margin-left:30rpx;font-size:30rpx">充值</view>
+        </view>
+        <image class="icon-sm" src="/images/mine/fl.png"></image>
+      </view>
+    </view>
+    <view class="citem bottom-line" bindtap="navToMingxi" style="border-radius:0 0 0 0">
+      <view class="flex-between item-center" >
+        <view class="flex-start item-center" >
+          <image src="/images/qwe.png" class="icon-sm"></image>
+          <view style="margin-left:30rpx;font-size:30rpx">交易明细</view>
+        </view>
+        <image class="icon-sm" src="/images/mine/fl.png"></image>
+      </view>
+    </view>
+    <view class="citem" bindtap="navToJifen">
+      <view class="flex-between item-center">
+        <view class="flex-start item-center">
+          <image src="/images/shancheng.png" class="icon-sm"></image>
+          <view style="margin-left:30rpx;font-size:30rpx">积分商城</view>
+        </view>
+        <image class="icon-sm" src="/images/mine/fl.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="zhuiyi" >
+  <view style="font-size:25rpx;line-height:50rpx;padding:30rpx;color:#919191;margin-left:4rpx">
+    会员积分制度请前往积分商城了解；红包的获取可从交易记录中查询。
+  </view>
+  </view>
+</view>
+
+
+
+
+<view class="setpwd {{open ? '':'fhidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="input-panel {{dotrue ? 'fhidden':''}}">
+    <view class="tit">请设置支付密码
+      <image style="width:40rpx;height:40rpx;float:right" src="/images/d1.png" bindtap="dosu"></image>
+    </view>
+    <view class="con">
+      <view class="item" wx:for="{{pwdl}}">
+        <view class="dot" wx:if="{{item == 1}}"></view>
+      </view>
+    </view>
+  </view>
+  <view class="input-panel {{dotrue ? '':'fhidden'}}">
+    <view class="tit">确认密码
+      <image style="width:40rpx;height:40rpx;float:right" src="/images/d1.png" bindtap="dosu"></image>
+    </view>
+    <view class="con">
+      <view class="item" wx:for="{{repwdl}}">
+        <view class="dot" wx:if="{{item == 1}}"></view>
+      </view>
+    </view>
+  </view>
+  <view class="number-panel">
+    <view data-num="7" bindtap="clickNum">7</view>
+    <view data-num="8" bindtap="clickNum">8</view>
+    <view data-num="9" bindtap="clickNum" style="border-right:none">9</view>
+    <view data-num="4" bindtap="clickNum">4</view>
+    <view data-num="5" bindtap="clickNum">5</view>
+    <view data-num="6" bindtap="clickNum" style="border-right:none">6</view>
+    <view data-num="1" bindtap="clickNum">1</view>
+    <view data-num="2" bindtap="clickNum">2</view>
+    <view data-num="3" bindtap="clickNum" style="border-right:none">3</view>
+    <view data-num="#" bindtap="clickNum" style="background:#f3f3f3"></view>
+    <view data-num="0" bindtap="clickNum">0</view>
+    <view data-num="c" bindtap="clickNum" style="border-right:none;background:#f3f3f3">
+      <image style="width:40rpx;height:40rpx;" src="/images/del.png"></image>
+    </view>
+  </view>
+</view>
+<!--
+<view class="payment-panel" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="classname"></view>
+</view>-->

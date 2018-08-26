@@ -1,0 +1,27 @@
+<!--pages/me/children/evaluateList/evaluateList.wxml-->
+<view class='main-view skin-{{skin}}'>
+  <!--有数据时展示的界面-->
+     <block wx:if="{{list.length}}">
+     <view class='list-view' wx:for-items="{{list}}" wx:key="{{index}}" wx:for-item='product' >
+        <view class='order-detail' bindtap='productDetailAction' data-productid='{{product.ProductId}}' data-zhuboid='product.ZhuboId'>
+         <image class='pro-image' src='{{product.Image}}'></image>
+         <view class='pro-detail'>
+           <text class='pro-name ellipsis2'>{{product.Name}}</text>
+           <text class='pro-content ellipsis2'>规格：{{product.Attr}}</text>
+         </view>
+         <view class='pro-num-price'>
+           <text class='pro-price'>¥{{product.Price}}</text>
+           <text class='pro-num'>x{{product.Qty}}</text>
+         </view>
+        </view>
+         <view class='order-bottom'>
+          <view class='order-btn-right order-btn' bindtap='evaluateAction' data-productid='{{product.OrderProductId}}' data-image='{{product.Image}}'>评价</view>
+        </view>
+     </view>
+    </block>
+     <!--没有数据时候的界面-->
+     <view class='tab-empty-view' wx:else>
+       <image class='empty-image' src='http://res.o2o.com.cn:8082/img/9b2f8290fbe943d49470ce0d6628b6dc'></image>
+       <text class='empty-text'>还没有相关订单哦</text>
+     </view>
+</view>

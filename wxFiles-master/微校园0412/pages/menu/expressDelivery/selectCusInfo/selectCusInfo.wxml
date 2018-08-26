@@ -1,0 +1,29 @@
+<!--pages/wode/dizhi/dizhi.wxml-->
+<!--<view class="dizhi">
+  <view wx:for="{{cardTeams}}" wx:key="unique" >
+  <view class="part" >
+    <text class="part_text" bindtouchstart="touchS" bindtapmove="touChM" bindtapend="touchE" style="{{item.txtStyle}}" data-index="{{index}}">{{item.name}}</text>
+    <view data-index="{{index}}" bindtap = "delItem" class="del">删除</view>
+    </view>
+  </view>
+  
+  </view>-->
+
+
+
+  
+
+  <view class="items">
+    <!--<view wx:for="{{list}}"  wx:key="{{index}}"  class="item">-->
+    
+    <view wx:for="{{cusList}}"    class="item">
+      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="{{shanchu?'inner txt':'inner txt_1'}}"  catchtap="selectOne" data-index="{{index}}" key="selectOneInfo">{{item.name}}{{item.tel}}{{item.address}}</view>
+      <view data-index="{{index}}" bindtap = "delItem" class="inner del">删除</view>
+    </view>
+<!--
+    <view class="part" bindtap="xinzengdizhi">
+      <image class="part_add" src="/icon/wode/add.png" mode="aspectFit"></image>
+      <text class="text">新增收货地址</text>
+    </view>-->
+  </view>
+

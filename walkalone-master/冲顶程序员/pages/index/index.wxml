@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="container-header">
+    <view class="userinfo">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname px-30">{{userInfo.nickName}}</text>
+    </view>
+    <view class="instruction text-align-center px-36">
+      <view class="px-30 title">做最好的你</view>
+      <view class="px-30 info">实现心中所有的美好</view>
+    </view>
+    
+  </view>
+  <view class="container-content text-align-center">
+    <view class="start" bindtap="start">开始答题</view>
+    <view class="remains">剩余挑战次数:{{userInfo.ticket}}次</view>
+    <button open-type="share" class="invite px-32">转发到不同的群,挑战机会+1</button>
+  </view>
+</view>
+
+<!-- 职业选择框 -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" bindtap="cancelSubmit" wx:if="{{showJobChoosePanel}}"></view>
+<view class="modal-dialog" wx:if="{{showJobChoosePanel}}">
+  <view class="modal-title">你是哪一类程序猿(媛),可多选</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <button class="input {{jobChoose.php > 0 ? 'on':''}}" bindtap="chooseJob" id="php">PHP</button>
+      <button class="input {{jobChoose.java > 0 ? 'on':''}}" bindtap="chooseJob" id="java">Java</button>
+    </view>
+    <view class="modal-input">
+      <button class="input {{jobChoose.python > 0 ? 'on':''}}" bindtap="chooseJob" id="python">Python</button>
+      <button class="input {{jobChoose.front > 0 ? 'on':''}}" bindtap="chooseJob" id="front">前端</button>
+    </view>
+    <view class="modal-input">
+      <button class="input {{jobChoose.maintenance > 0 ? 'on':''}}" bindtap="chooseJob" id="maintenance">运维</button>
+      <button class="input {{jobChoose.go > 0 ? 'on':''}}" bindtap="chooseJob" id="go">Go</button>
+    </view>
+    <view class='submit' bindtap='submitJob'>完成</view>
+  </view>
+</view>
+
+<!-- 提示分享框 -->
+

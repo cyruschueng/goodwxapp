@@ -1,0 +1,53 @@
+<import src="/zanui/toast/index.wxml" />
+<view class="container page__bd" >
+    <form bindsubmit="formSubmit">
+    <view style="margin-top:10px;position:relative">
+        <!-- <image lazyload="true" src="http://pics.maiyizhi.cn/woshishei_demo_{{select}}.jpg" wx:if="{{select}}" style="width:610rpx;height:663rpx;margin:0 70rpx 10rpx 70rpx;" /> -->
+
+        <view class="moban" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+          <view class="{{lb[0]}}">
+            <image src="http://pics.maiyizhi.cn/woshishei_demo_{{clubs[0].target.url}}.jpg" />
+          </view>
+          <view class="{{lb[1]}}">
+            <image src="http://pics.maiyizhi.cn/woshishei_demo_{{clubs[1].target.url}}.jpg" />
+          </view>
+          <view class="{{lb[2]}}">
+            <image src="http://pics.maiyizhi.cn/woshishei_demo_{{clubs[2].target.url}}.jpg" />
+          </view>
+          <view class="{{lb[3]}}">
+            <image src="http://pics.maiyizhi.cn/woshishei_demo_{{clubs[3].target.url}}.jpg" />
+          </view>
+          <view class="{{lb[4]}}">
+            <image src="http://pics.maiyizhi.cn/woshishei_demo_{{clubs[4].target.url}}.jpg" />
+          </view>
+        </view>
+
+        <view class='left' bindtap='scrollLeft'></view>
+        <view class='right' bindtap='scrollRight'></view>
+
+        <view class="zan-font-14 zan-c-blue flex_col_center space_between"  style="background-color: #f2f2f2;margin: 0 60rpx;">
+            <view class="item item-title" style="padding-left: 0;background-color: transparent;">右侧'+'号新建一行</view>
+            <navigator url="/pages/about/about?type=video_help_woshishui" >
+                    <view>视频说明</view>
+            </navigator>
+        </view>
+
+
+            <view wx:for="{{data}}" wx:key="{{index}}" style="border-bottom:1px solid #e5e5e5;margin:0 60rpx 0 60rpx;" class="space_between flex_col_center">
+                <view  style="width: 70%;">
+                    <input type="text" style="border-bottom: 1px dashed #e5e5e5;" class="zan-form__input zan-cell__bd" id="{{index}}" data-idx="zuo" name="data{{index}}zuo" placeholder="第{{index+1}}行左边文字，必填"  value="{{item.zuo}}" bindinput="bindInput" />
+                    <input type="text" class="zan-form__input zan-cell__bd" id="{{index}}" data-idx="you" name="data{{index}}you" placeholder="第{{index+1}}行右边文字，必填"  value="{{item.you}}" bindinput="bindInput" />
+                </view>
+                <view style="width: 30%;">
+                    <image wx:if="{{index == data.length-1}}" style="width: 40px;height: 40px;" class="icon" src="http://icons.maiyizhi.cn/plus_green.png" bindtap="addLine" />
+                    <image wx:else class="icon" style="width: 40px;height: 40px;" src="http://icons.maiyizhi.cn/delete.png" data-lineindex="{{index}}" bindtap="deleteLine" />
+                </view>
+            </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" style="width: 100%;" formType="submit">生成图片</button>
+        </view>
+    </view>
+    </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>用户中心</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+		<!--common scripts for all pages-->
+		<script src="js/layer.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/select2.min.js"></script>
+		
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+
+		<section>
+			<!--body wrapper start-->
+			<section>
+				<!-- page start-->
+
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								生产基地管理
+							</header>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form" id="condition">
+									<div class="row clearfix">
+										<div class="col-lg-1" style="text-align: center;margin-top: 7px;">
+											<span>经营者</span>
+										</div>
+										
+										<div class="col-lg-3">
+											<select id="shop" class="form-control m-bot15 formData">
+												<option id="defaultShop" value="0">全部</option>
+											</select>
+										</div>
+										<div class="col-lg-7"></div>
+										<div class="col-lg-1" style="text-align: center;">
+											<button class="btn btn-info" type="button" onclick="initSearch('#1')">搜索</button>
+										</div>
+									</div>
+									<div class="row clearfix" style="margin-top: 14px;">
+										<div class="col-lg-11"></div>
+										<div class="col-lg-1" style="text-align: center;">
+											<button class="btn btn-success" type="button" onclick="window.location.href='Production_baseDetial.html?key=insert'">添加</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</section>
+
+						<section class="panel">
+							<div class="panel-body">
+								<table id='goodstable' class="table table-bordered table-striped table-condensed ysh_table">
+									<thead>
+										<tr>
+											<th data-width="8%" data-field="Code" data-align="center">基地名称</th>
+											<th data-width="8%" data-field="Code" data-align="center">经营者</th>
+											<th data-width='121px' data-field="pic" data-align="center" data-formatter="pictureFormatter">基地图</th>
+											<th data-width="5%" data-field="pricecount" data-align="center">基地类型</th>
+											<th data-width="10%" data-field="ProductName" data-align="center">操作</th>
+										</tr>
+									</thead>
+									<tbody id="view">
+
+									</tbody>
+								</table>
+								<div class="row">
+									<div class="col-lg-4">
+										<div style="height: 30px;">总共<span id="pageTotal"></span>页，<span id="itemTotal"></span>条记录，每页显示10条</div>
+									</div>
+									<div class="col-lg-7" style="text-align: right;">
+										<ul class="pagination pagination-lg" id="paginator">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+		</section>
+	</body>
+
+</html>
+<script src="js/layer.js"></script>
+<script src="js/laytpl.js"></script>
+<script src="js/ysh_comm.js"></script>
+<script src="script/Production_base.js"></script>
+<script type="text/html" id="tpl">
+	<tr>
+		<td>{{d.BaseName||"匿名基地"}}</td>
+		<td>{{d.MerchantName||"未知供应商"}}</td>
+		<td><img style="width: 100px;height: 100px;" src="{{seturl+d.picurl}}"></td>
+		<td>{{d.basetype||"0"}}</td>
+		<td>
+			<button class="btn btn-info" onclick="window.location.href='Production_baseDetial.html?Pid={{d.Id}}&key=search'" type="button">查看</button>
+			<button class="btn btn-warning" onclick="window.location.href='Production_baseDetial.html?Pid={{d.Id}}&key=update'" type="button">修改</button>
+			<button class="btn btn-danger" onclick="deletePB({{d.Id}})" type="button">删除</button></td>
+	</tr>
+</script>

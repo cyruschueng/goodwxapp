@@ -1,0 +1,90 @@
+<!--pages/severs/my_com.wxml-->
+<view class="flex tc top_title bgwhite grey">
+    <view class="sub top-title-tab {{tabIndex==0?'green':''}} gridYr" catchtap="onTabTap" data-index="0">我的评论</view>
+    <view class="sub top-title-tab {{tabIndex==1?'green':''}}" catchtap="onTabTap" data-index="1">回复我的</view>
+</view>
+<!--评论内容-->
+<view class="bgwhite mt10">
+    <view class="comment f14" catchtap="onShowCommentTap" wx:for="{{data}}" wx:key="{{item.id}}">
+        <view class="co-item flex gridXb">
+            <view class="co-userimg">
+                <image src="{{item.headimgurl}}"></image>
+            </view>
+            <view class="sub ml15">
+                <view class="flex name" style="align-items:center;">
+                    <view class="sub">
+                        <view class="lineText">{{item.nickname}}</view>
+                        <view class="grey f12">{{item.create_time}}</view>
+                    </view>
+                    <!-- <view class="co-caozuo iconfont icon-jubao"></view>
+                    <view class="co-caozuo iconfont icon-huifu blue"></view> -->
+                </view>
+                <view class="f16 mt5">{{item.content}}</view>
+                <!-- 回复原文 -->
+                <view class="co-answerb mt10 lineText" catchtap="onNavigateTap" data-url="../detail/detail?id={{item.doc_id}}">{{item.doc_content}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<!--评论输入框-->
+<view class="floatBox" wx:if="{{show_comment}}">
+    <view class="pinglun-input">
+        <view class="flex f16">
+            <text class="sub">评论</text>
+            <text class="close tc grey" catchtap="onHideCommentTap">×</text>
+        </view>
+        <form report-submit="true" bindsubmit="onCommentSubmit">
+            <textarea class="mt10" name="content" focus="true" placeholder="{{comment_placeholder}}" />
+            <!-- <input class="mr10" name="content" focus="true" placeholder="{{comment_placeholder}}" /> -->
+            <view class="flex mt10">
+                <view class="sub linght f12">
+                    <text class="mr5 iconfont icon-wran"></text>请遵循用户协议</view>
+                <button class="send-btn f16" type="primary" form-type="submit">发送</button>
+            </view>
+        </form>
+    </view>
+    <view class="floatBox floatBoxBg" style="display:block;" catchtap="onHideCommentTap"></view>
+</view>
+<!-- 弹出框 -->
+<view class="floatBox" style="display:none;">
+    <view class="bgwhite pup-content mid tc">
+        <view class="pop-item gridXb">回复</view>
+        <view class="pop-item gridXb">举报</view>
+    </view>
+    <view class="floatBox floatBoxBg" style="display:block;"></view>
+</view>
+<!-- 举报弹出框 -->
+<view class="floatBox" style="display:none;">
+    <view class="bgwhite pup-content mid">
+        <view class="red" style="padding:0 30rpx;">请选择举报类型</view>
+        <radio-group style="padding:0 30rpx;">
+            <label class="pop-item gridXb flex">
+                <view class="sub">广告或垃圾营销</view>
+                <radio />
+            </label>
+            <label class="pop-item gridXb flex">
+                <view class="sub">有害信息</view>
+                <radio />
+            </label>
+            <label class="pop-item gridXb flex">
+                <view class="sub">违法信息</view>
+                <radio />
+            </label>
+            <label class="pop-item gridXb flex">
+                <view class="sub">淫秽色情信息</view>
+                <radio />
+            </label>
+            <label class="pop-item gridXb flex">
+                <view class="sub">人身攻击</view>
+                <radio />
+            </label>
+        </radio-group>
+        <view class="flex tc gridXt pup-btn">
+            <view class="sub gridYr">取消</view>
+            <view class="sub">确定</view>
+        </view>
+    </view>
+    <view class="floatBox floatBoxBg" style="display:block;"></view>
+</view>

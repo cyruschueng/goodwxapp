@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="page-body">
+
+    <view class="page-section page-section-spacing swiper">
+      <swiper bindchange="traceEvent" circular="{{circular}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item {{item}}"></view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="page-section" style="margin-top: 40rpx;margin-bottom: 0;">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">指示点</view>
+          <view class="weui-cell__ft">
+            <switch data-name="indicatorDots" checked="{{indicatorDots}}" bindchange="onSwitchChange" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">自动播放</view>
+          <view class="weui-cell__ft">
+            <switch data-name="autoplay" checked="{{autoplay}}" bindchange="onSwitchChange" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">采用衔接滑动</view>
+          <view class="weui-cell__ft">
+            <switch data-name="circular" checked="{{circular}}" bindchange="onSwitchChange" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="page-section page-section-spacing">
+      <view class="page-section-title">
+        <text>幻灯片切换时长(ms)</text>
+        <text class="info">{{duration}}</text>
+      </view>
+      <slider data-name="duration" bindchange="onSliderChange" value="{{duration}}" show-value min="500" max="2000" />
+      <view class="page-section-title">
+        <text>自动播放间隔时长(ms)</text>
+        <text class="info">{{interval}}</text>
+      </view>
+      <slider data-name="interval" bindchange="onSliderChange" value="{{interval}}" show-value min="2000" max="10000" />
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<view class="share-container">
+	<view class="share-top">
+		<view class="share-top__item">
+			<image class="user-info__avatar" src="{{ userInfo.avatarUrl }}"></image>
+			<view class="user-info__message">
+				<text class="user-info__nickname">{{ userInfo.nickName }}</text>
+				<text>正在赚个车</text>
+			</view>
+		</view>
+		<view class="share-top__item">
+			<image class="user-info__avatar" src="{{ userInfo.avatarUrl }}"></image>
+			<view class="user-info__message">
+				<text class="user-info__nickname">沈阳信达4S店</text>
+				<text>旗下20款车型</text>
+			</view>
+		</view>
+		<view class="share-top__item share-top__btn">
+			<image class="share-top__btn_img" src="{{ userInfo.avatarUrl }}"></image>
+			<text class="share-top__btn_txt">进店看车</text>
+			<image class="share-top__btn_icon" src="../../../assets/images/icon_22.png"></image>
+		</view>
+	</view>
+	<view class="swiper-container">
+		<view class="swiper-info">已赚：{{eranInfo}}</view>
+		<swiper class="swiper_box" indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" current="{{ current }}" interval="{{ interval }}" duration="{{ duration }}" circular="{{ circular }}" bindchange="swiperchange" catchtap="onSwiperTap">
+		    <block wx:for="{{ items.images }}" wx:key="*this">
+		        <swiper-item>
+		            <image src="{{ item.path }}" class="slide-image" data-url="{{item.url}}"/>
+		        </swiper-item>
+		    </block>
+		</swiper>
+		<view class="dots">  
+		    <block wx:for="{{items.images}}" wx:key="unique">  
+		      <view class="dot{{index == current ? ' active' : ''}}" data-index="{{ index }}" bindtap="dotstip">
+		      		<image src="{{ item.path }}" class="dot-image"/>
+		      </view>  
+		    </block>  
+		</view>
+		<button class="dots-l" type="primary" bindtap="dotsL">1</button>
+		<button class="dots-r" type="primary" bindtap="dotsR">2</button>
+	</view>
+	<view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_access">
+            <view class="weui-cell__bd">沈阳鑫达4s店，旗下有20款车</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
+                <view style="display: inline-block;vertical-align:middle; font-size: 17px;">详细信息</view>
+            </view>
+        </view>
+    </view>
+	<view class="make-form">
+		<button class="weui-btn" type="primary" bindtap="helpMake">
+			<text class="title">马上帮他赚车</text>
+			<text>点击按钮，您最多可赚10车币</text>
+		</button>
+	</view>
+	<view class="make-list">
+		<view class="make-list-title">有50人正在帮他赚车，累计赚取2000车币</view>
+		<view class="make-list-item weui-flex">
+			<view class="weui-flex__item">
+				<image src="../../../assets/images/make.png" style="width: 14px;height: 14px;margin-right: 5px" />
+				<text>帮他赚了2车币,自己获得8车币</text>
+			</view>
+			<view>2017.10.18  20:10:14</view>
+		</view>
+	</view>
+	
+</view>

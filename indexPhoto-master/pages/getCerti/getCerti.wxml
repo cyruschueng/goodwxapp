@@ -1,0 +1,52 @@
+<!--pages/share/share.wxml-->
+<view class="container" style="background:url({{background}}) no-repeat;background-size: cover; ">
+<view class='certi_img'  style=' border:20rpx solid {{border}};'>
+      <image src="{{imgUrl}}" class="" bindtap="prewImg" mode='widthFix'></image>
+  </view>
+  
+  <view class="certi_wrap" style='background:{{backgroundColor}}'>
+    <view class="certi_title">质检列表</view>
+    <scroll-view scroll-y="true">
+    <block wx:for="{{array}}" wx:key="{{index}}">
+      <view class="parent_item" >
+        <image src="{{item.headimgurl}}"></image>
+        <view class="parent_center">
+          <view class="parent_name">{{item.nickname}}</view>
+          <view class="parent_desc">{{item.comments}}</view>
+        </view>
+        <view class="parent_right">{{item.correct_percent}}%</view>
+      </view>
+    </block>
+    </scroll-view>
+  </view>
+
+  <view class="tab_wrap">
+    <view class="share_btn" bindtap="wantSet">
+      <image src="../../resource/tabbar/icon1a.png"></image>
+      <view class="">我也要玩</view>
+    </view>
+    <button class="share_btn" bindtap="getCerti">
+      <image src="http://ovhvevt35.bkt.clouddn.com/moqi/answer.png"></image>
+      <view>偷看答案</view>
+    </button>
+  </view>
+
+  <button class="home_icon"  bindtap="backHome">
+    <image src="../../resource/images/home_icon.png"></image>
+  </button>
+</view>
+<!--弹窗  -->
+<view class='bg' wx:if="{{zindex}}">
+    <view class='zindex'>
+        <view class='notice'>
+            <view class='title' style='background:{{backgroundColor}}'>温馨提示</view>
+            <view class='text'>
+                游戏增加你我之间的默契，支付1元，立即偷看答案！心若相知无言也默契！
+            </view>
+            <view class='flex'>
+                <view class='one' bindtap='catale' style='border:1px solid {{border}}'>取消</view>
+                <view class='two' bindtap='ok' style='background:{{backgroundColor}};border:1px solid {{border}}'>确定</view>
+            </view>
+        </view>
+    </view>
+</view> 

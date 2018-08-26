@@ -1,0 +1,32 @@
+<import src="../tpls/scroll-item/scroll-item.wxml" />
+<import src="../foot/empty/empty.wxml" />
+
+<view hidden='{{!loadingHidden}}'>
+  <view class='particulars-message'>
+    <view class='particulars-amount1'>客户总数</view>
+    <view class='particulars-amount2'>{{totalCount}}</view>
+  </view>
+  <view class="navbar">
+    <view class="navbar-item" wx:for="{{navbar}}" wx:key="idx" wx:for-index="idx" data-idx="{{idx}}" bindtap="switchNav">
+      <text class="navbar-text {{currentNavbar==idx ? 'active ' : ' '}}">{{item}}</text>
+    </view>
+  </view>
+  <swiper class='tab-content' current='{{currentNavbar}}' duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{allList.length}}' data='{{hasMore: params[0].hasMore, data: allList, type: "customer"}}'></template>
+      <template is='empty' data='{{from: "back"}}' wx:elif='{{!params[0].hasMore && !allList.length}}'></template>
+    </swiper-item>
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{viewList.length}}' data='{{hasMore: params[1].hasMore, data: viewList, type: "customer"}}'></template>
+      <template is='empty' data='{{from: "back"}}' wx:elif='{{!params[1].hasMore && !viewList.length}}'></template>
+    </swiper-item>
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{collectList.length}}' data='{{hasMore: params[2].hasMore, data: collectList, type: "customer"}}'></template>
+      <template is='empty' data='{{from: "back"}}' wx:elif='{{!params[2].hasMore && !collectList.length}}'></template>
+    </swiper-item>
+    <swiper-item>
+      <template is='scroll-item' wx:if='{{praiseList.length}}' data='{{hasMore: params[3].hasMore, data: praiseList, type: "customer"}}'></template>
+      <template is='empty' data='{{from: "back"}}' wx:elif='{{!params[3].hasMore && !praiseList.length}}'></template>
+    </swiper-item>
+  </swiper>
+</view>

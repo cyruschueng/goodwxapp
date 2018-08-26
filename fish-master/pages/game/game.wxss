@@ -1,0 +1,92 @@
+@import '../../static/css/animate.wxss';
+
+.river {
+  height: 300px;
+
+}
+
+.game {
+  width: 100%;
+  height: 100%;
+  background: #595;
+  position: relative;
+}
+
+.wave:nth-child(1) {
+  top: 170px;
+}
+
+.wave:nth-child(2) {
+  top: 200px;
+}
+
+.wave:nth-child(3) {
+  top: 230px;
+}
+
+.wave:nth-child(4) {
+  top: 260px;
+}
+
+.sea-hourse {
+  position: absolute;
+  width: 250rpx;
+  height: 250rpx;
+  bottom: 200rpx;
+}
+
+.arrow-tip {
+  position: absolute;
+  font-weight:500;
+  bottom:460rpx;
+  left:180rpx;
+  transform:rotate(45deg);
+  font-size:40rpx;
+  color: #FFF;
+  animation: move 1s cubic-bezier(0.645, 0.045, 0.355, 1) infinite alternate;
+}
+
+.dot {
+  width: 40rpx;
+  height: 40rpx;
+  background: orange;
+  border-radius: 50%;
+  position: absolute;
+  visibility: hidden;
+  bottom: 200rpx;
+  left: 200rpx;
+  transition: all .1s;
+}
+
+.dot.dot-move {
+  visibility: visible;
+  transform: translateX(500px);
+}
+
+.counts {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 100rpx;
+  color: #FFF;
+  width: 200rpx;
+  height: 200rpx;
+  text-align: center;
+  line-height: 200rpx;
+  border-radius: 50%;
+  background: orange;
+}
+
+@keyframes move {
+  from {
+    bottom:460rpx;
+    left:180rpx;
+  }
+
+  to {
+    bottom:430rpx;
+    left:150rpx;
+    opacity: 0;
+  }
+}

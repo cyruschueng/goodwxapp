@@ -1,0 +1,180 @@
+<picker bindchange="bindFlagChange" value="{{vflag}}" range="{{vchoose}}" wx:if="{{isTangs == 1}}">
+  <view class="panel panel-between bottom-line">
+    <view class="font-md">是否打包</view>
+    <view class="panel-end">
+      <view class="font-md margin-right-sm">{{vchoose[vflag]}}</view>
+      <image src="/img/right.png" class="icon-md"></image>
+    </view>
+  </view>
+</picker>
+
+<view class="address panel-between item-center" bindtap="chooseAddress" wx:if="{{isTangs == 0}}">
+  <image src="/img/location1.png" class="icon-lg"></image>
+  <view class="addressd">
+    <view class="font-md ">
+      <text style="font-weight:400">联系人: </text><text>{{address.userName}} , {{address.telNumber}}</text>
+    </view>
+    <view class="font-sm margin-top-xs">
+      <text style="font-weight:400">详细地址: </text><text wx:if="{{!address.address}}">{{address.provinceName}} {{address.cityName}} {{address.countyName}} {{address.detailInfo}}</text><text wx:if="{{address.address}}">{{address.address}}</text>
+    </view>
+  </view>
+  <image src="/img/right.png" class="icon-md"></image>
+</view>
+<view><image src="/img/linesds.png" class="linesds"></image></view>
+
+<view class="margin-top-sm padding-sm bg-white bottom-line">
+  <view class="panel-start item-center">
+    <image src="{{url+shopimage}}" mode="aspectFill" style="width:60rpx; height:50rpx;border-radius:5rpx"></image>
+    <view class="font-md margin-left-sm">{{shopname}}</view>
+  </view>
+</view>
+
+<view class="panel bottom-line">
+  <view class="gitem" wx:for="{{shopCart}}">
+    <view class="panel-start">
+      <image src="{{url+item.image}}" class="gimg" mode="aspectFill"></image>
+      <view class="gtxt margin-left-sm">
+        <view class="font-md bold">{{item.name}}</view>
+        <view class="font-sm font-default margin-top-xs">{{item.gui}}</view>
+      </view>
+    </view>
+    <view class="font-md" style="text-align:right">
+      <view class="font-md">x{{item.count}}</view>
+      <view class="font-danger font-lg">￥{{item.realprice}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="panel">
+  <view class=" panel-between">
+    <view class="font-md txtiem">商品数量</view>
+    <view class="font-md txtiem">x{{shopNum}}</view>
+  </view>
+  <view class=" panel-between">
+    <view class="font-md txtiem">商品合计</view>
+    <view class="font-md txtiem">￥{{totalPrice}}</view>
+  </view>
+  <view class="txtiem panel-between" wx:if="{{totalPrice > shopcouponstart}}">
+    <view class="font-md txtiem">店铺满减优惠</view>
+    <view class="font-md txtiem">-￥{{totalPrice > shopcouponstart ? shopcouponend:'0'}}</view>
+  </view>
+  <view class="txtiem panel-between" wx:if="{{shopsendprice > 0 && isTangs == 0}}">
+    <view class="font-md txtiem">配送费</view>
+    <view class="font-md txtiem">￥{{shopsendprice}}</view>
+  </view>
+  <view class="txtiem panel-between" wx:if="{{shopboxprice > 0  && vflag == 1}}">
+    <view class="font-md txtiem">餐盒费</view>
+    <view class="font-md txtiem">￥{{shopboxprice}}</view>
+  </view>
+  <view class="txtiem panel-between">
+    <view class="font-md bold txtiem">总计</view>
+    <view class="font-lg font-danger bold txtiem" wx:if="{{vflag == 0}}">￥{{isBj ? showSum:sum}}</view>
+    <view class="font-lg font-danger bold txtiem" wx:if="{{vflag == 1}}">￥{{isBj ? showSum:sum}}</view>
+  </view>
+</view>
+
+<picker class='{{shopCart[0].makeday ? "":"hidden"}}' mode="date" value="{{date}}" start="{{sdate}}" end="{{edate}}" bindchange="bindDateChange">
+  <view class="panel panel-between bottom-line margin-top-sm">
+    <view class="font-md">选择送达日期</view>
+    <view class="panel-end">
+      <view class="font-md margin-right-sm">{{date}}</view>
+      <image src="/img/right.png" class="icon-md"></image>
+    </view>
+  </view>
+</picker>
+
+<picker class='{{shopCart[0].makeday ? "":"hidden"}}' mode="time" value="{{time}}" start="9:00" end="20:00" bindchange="bindTimeChange">
+  <view class="panel panel-between ">
+    <view class="font-md">选择送达时间</view>
+    <view class="panel-end">
+      <view class="font-md margin-right-sm">{{time}}</view>
+      <image src="/img/right.png" class="icon-md"></image>
+    </view>
+  </view>
+</picker>
+
+<picker bindchange="bindCouponChange" value="{{flag1}}" range="{{coupon}}">
+  <view class="panel panel-between bottom-line margin-top-sm">
+    <view class="font-md">优惠券</view>
+    <view class="panel-end">
+      <view class="font-md margin-right-sm">{{title1}}</view>
+      <image src="/img/right.png" class="icon-md"></image>
+    </view>
+  </view>
+</picker>
+
+<picker bindchange="bindPayChange" value="{{flag3}}" range="{{pay}}">
+  <view class="panel panel-between bottom-line">
+    <view class="font-md">支付方式</view>
+    <view class="panel-end">
+      <view class="font-md margin-right-sm">{{title3}}</view>
+      <image src="/img/right.png" class="icon-md"></image>
+    </view>
+  </view>
+</picker>
+
+<view class="panel margin-top-sm">
+  <view class="font-md">备注信息</view>
+</view> 
+
+<view class="panel" style="padding-top:0" wx:if="{{!dopay}}">
+  <textarea class="texta" bindinput='remark' placeholder="备注信息填写" />
+</view>
+
+<view class="cantact">
+  <button style="border:none" bindtap='cantacts'>
+    <view class="item">
+      <image src="/img/sj.png" class="icon-md"></image>
+      <view class="font-md margin-left-xs">联系商家</view>
+    </view>
+  </button>
+  <button open-type="contact" style="border:none">
+    <view class="item">
+      <image src="/img/kf.png" class="icon-md"></image>
+      <view class="font-md margin-left-xs">联系客服</view>
+    </view>
+  </button>
+</view>
+
+<view style="height:100rpx;"></view>
+
+<view class="payforfix panel-between">
+  <view class="font-lg margin-left-md" style="line-height:100rpx;">需付款: <text class="font-lg font-danger bold">￥{{isBj ? showSum:sum}}</text></view>
+  <view class="paybtn bg-inbox" bindtap="payfor">立即付款</view>
+</view>
+
+<view class="payment-panel {{dopay ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="input-panel">
+    <view class="user-tit">
+      <view class="con">
+        <image src="{{head}}"></image>
+        <view class="tit">请输入支付密码</view>
+      </view>
+      <image style="width:40rpx;height:40rpx;margin-top: 15rpx;" src="/img/close.png" bindtap="concelPay"></image>
+    </view>
+    <view class="txt-panel">
+      <view class="tit">{{shopname}}</view>
+      <view class="pri">￥{{isBj ? showSum:sum}}</view>
+    </view>
+    <view class="num-penel">
+      <view class="item" wx:for="{{pwdl}}"><view class="ku" wx:if="{{item}}" ></view></view>
+    </view>
+    <view class="text-panel">
+      BigJA 会员余额支付
+    </view>
+  </view>
+  <view class="number-panel">
+    <view data-num="1" bindtap="clickNum">1</view>
+    <view data-num="2" bindtap="clickNum">2</view>
+    <view data-num="3" bindtap="clickNum" style="border-right:none">3</view>
+    <view data-num="4" bindtap="clickNum">4</view>
+    <view data-num="5" bindtap="clickNum">5</view>
+    <view data-num="6" bindtap="clickNum" style="border-right:none">6</view>
+    <view data-num="7" bindtap="clickNum">7</view>
+    <view data-num="8" bindtap="clickNum">8</view>
+    <view data-num="9" bindtap="clickNum" style="border-right:none">9</view>
+    <view data-num="#" bindtap="clickNum" style="background:#f3f3f3"></view>
+    <view data-num="0" bindtap="clickNum">0</view>
+    <view data-num="c" bindtap="clickNum" style="border-right:none;background:#f3f3f3"><image style="margin-top:40rpx;width:60rpx;height:60rpx;" src="/img/shanchu.png"></image></view>
+  </view>
+</view>

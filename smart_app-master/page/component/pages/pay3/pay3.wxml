@@ -1,0 +1,81 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '总资产'}}" />
+  <view class="page-body">
+
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+             <view class="weui-label">流动现金：</view> 
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{value0}} 元">{{value}} 元</input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+             <view class="weui-label">货币基金：</view> 
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{value1}} 元">{{value}} 元</input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">风险理财：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{value2}} 元">{{value}} 元</input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">信用卡：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{value3}} 元">{{value}} 元</input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type="number" bindinput="input_value0" placeholder="流动现金" />
+          <input class="weui-input" type="number" bindinput="input_value1" placeholder="货币基金" />
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type="number" bindinput="input_value2" placeholder="理财" />
+          <input class="weui-input" type="number" bindinput="input_value3" placeholder="信用卡" />
+        </view>
+      </view>
+    </view>
+
+    <view class="btn-area" id="buttonContainer">
+      <view class="button-sp-area">
+        <button type="primary" plain="true" bindtap="output">计算</button>
+      </view>
+    </view>
+
+    <!-- <view class="page-body">
+      <view class="page-section">
+        <view>支付金额</view>
+        <view class="price">{{price}}</view>
+        <view class="desc"> </view>
+        <view class="btn-area">
+          <button type="primary" bindtap="requestPayment" loading="{{loading}}">支付</button>
+        </view>
+      </view>
+    </view> -->
+
+    <view class="page-section page-section-gap">
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/app_k.jpg" />
+        <!-- <image class="image" src="../../resources/pic/mmqrcode.png"/>  -->
+      </view>
+    </view>
+
+  </view>
+  <template is="foot" />
+</view>

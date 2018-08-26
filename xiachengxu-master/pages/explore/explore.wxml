@@ -1,0 +1,37 @@
+<template name="explore">
+  <view class='{{type?"explore-block explore-warp":"explore-block explore-right"}}'><!--explore-warp start-->
+            <view class="explore-center" wx:if="{{type}}">
+              <view class="cir cir1 pt-page-moveIconUp "></view>
+              <view class="cir cir2 pt-page-moveIconUp "></view>
+              <view class="cir cir3 pt-page-moveIconUp "></view>
+              <view class="cir cir4 pt-page-moveIconUp "></view>
+
+              <view class="headImg">
+                <view class="head1"  bindtap="exploreFn">
+                  <image src="../../images/explore/exploreBtn@2x.png" title="返回主页" alt="返回主页"></image>
+                </view>
+                <view class="header head2" catchtap='showEventList'  data-index='1'>
+                  <text>折扣商品</text>
+                  <view class="image">
+                    <image src="../../images/explore/discoundGoods@2x.png" title="折扣商品" alt="折扣商品"></image>
+                  </view>
+                </view>
+                <view class="header head3" bindtap="newGoods">
+                  <text>新款上架</text>
+                  <view class="image">
+                    <image src="../../images/explore/newGoods@2x.png" title="新款上架" alt="新款上架"></image>
+                  </view>
+                </view>
+                <view class="header head4" bindtap="allClassify">
+                  <text>全部分类</text>
+                  <view class="image">
+                    <image src="../../images/explore/allClassify@2x.png" title="全部分类" alt="全部分类"></image>
+                  </view>
+                </view>
+              </view>
+
+            </view>
+
+            <view class="shade" bindtap="exploreFn"></view>
+      </view><!--explore-warp end-->
+</template>

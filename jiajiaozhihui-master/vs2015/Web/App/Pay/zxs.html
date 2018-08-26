@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="./Content/Css/weui.min.css" rel="stylesheet" />
+    <link href="./Content/Css/bootstrap.min.css" rel="stylesheet" />
+    <title></title>
+    <style>
+        body, html {
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: #fbf9fe;
+        }
+
+        .container {
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tabbar {
+            height: 100%;
+        }
+        .weui_tabbar_item {
+            padding-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="container" style="padding-left:0;padding-right:0;">
+        <div class="tabbar">
+            <div class="weui_tab">
+                <div class="weui_tab_bd">
+                    <h3 class="text-info" style="padding:0 5px;">
+                        本次活动产品
+                    </h3>
+                    <img style="width:100%;" src="./Content/Imgs/sr-6.jpg" />
+                    <div style="display:none;" id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active text-info"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1" class="text-info"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2" class="text-info"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active text-center">
+                                <img style=" margin:0 auto" src="./Content/Imgs/sr-6.jpg" alt="...">
+                                <div class="carousel-caption">
+
+                                </div>
+                            </div>
+                            <div class="item text-center">
+                                <img style=" margin:0 auto" src="./content/imgs/book.jpg" alt="...">
+                                <div class="carousel-caption">
+
+                                </div>
+                            </div>
+                            <div class="item text-center">
+                                <img style=" margin:0 auto" src="./content/imgs/book2.jpg" alt="...">
+                                <div class="carousel-caption">
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <div class="weui_cells">
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>我的收货地址</p>
+                            </div>
+                            <div class="weui_cell_ft">
+                                <a id="btnEditAddress" class="btn btn-default" href="javascript:void(0)">
+                                    编辑收货地址<span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>收货人</p>
+                            </div>
+                            <div class="weui_cell_ft" id="receivename"></div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>区域</p>
+                            </div>
+                            <div class="weui_cell_ft" id="area">省市</div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>具体地址</p>
+                            </div>
+                            <div class="weui_cell_ft" id="address">具体地址</div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>联系电话</p>
+                            </div>
+                            <div class="weui_cell_ft" id="telephone">联系电话</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_tabbar">
+                    <a href="javascript:;" class="weui_tabbar_item weui_bar_item_on text-center" style="height:45px;line-height:45px;">
+                        <span class="text-info">包邮</span>
+                    </a>
+                    <a href="javascript:;" class="weui_tabbar_item text-center" style="height:45px;line-height:45px;">
+                        <span class="text-info">保证金：1500元</span>
+                    </a>
+                    <a href="javascript:;" class="weui_tabbar_item">
+                        <span id="btnPay" class="btn btn-danger btn-lg" style="width:100%;">微信支付</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./Content/ThirdJs/jquery-1.10.2.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="./Content/ThirdJs/jquery-weui.js"></script>
+    <script src="./Content/Js/address.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="./Content/Js/wx.js"></script>
+</body>
+</html>
+

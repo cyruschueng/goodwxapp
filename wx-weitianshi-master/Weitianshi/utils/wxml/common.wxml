@@ -1,0 +1,34 @@
+<!--网络不给力  -->
+<view wx:if="{{!nonet}}">
+  <scroll-view scroll-y style="height:1108rpx;">
+    <view style="position:relative">
+      <image class="N-netWorkImg" src="/img/img-duanwang.png"></image>
+      <view class="N-text">网络不给力</view>
+      <view class="N-refresh" bindtap='refresh'>刷新试试</view>
+    </view>
+  </scroll-view>
+</view>
+
+<!--错误提示  -->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+
+<!--注册方式选择弹框  -->
+<view id='registerModal' wx:if='{{registerModalShow}}'>
+  <view class='modalBox'></view>
+  <view class='registerFrame'>
+    <view class='title tc'>
+      登录/注册微天使
+      <button hover-class="closeIconClass" class="closeClass" bindtap='closeRegisterModal'>
+        <image class='closeIcon' src='/img/register-guanbi@2x.png'></image>
+      </button>
+    </view>
+    <button class='wxSign tc' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" hover-class='wxSignClass'>
+      <view>
+        <image class='wxSignIcon' src='/img/register-weixin@2x.png'></image>微信账号快速登录</view>
+    </button>
+    <button class='telephoneSign' bindtap='telephoneRegister' hover-class='telephoneClass'>
+      <view>
+        <image class='wxSignIcon' src='/img/register-dadianhua@2x.png'></image>手机号注册/登录</view>
+    </button>
+  </view>
+</view>

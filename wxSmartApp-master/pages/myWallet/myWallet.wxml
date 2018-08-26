@@ -1,0 +1,90 @@
+<view class="user ">
+
+  <view class="state wallet">
+    <view class="title">账户状态</view>
+    <view class="state-name">{{walletInfo.stateName}} </view>
+
+
+    <block wx:if="{{isshow}}">
+    
+    <view class="btn">
+       <view bindtap="performance" class='performance' >业绩排行</view> 
+    </view>
+    
+    </block>
+
+  
+  </view>
+
+  <view class="wallet">
+    <view class="content title">
+      <view> 嘀嘀币<image class="coin" src="{{IMG_PATH}}/coin.png"></image></view>
+      <text>{{walletInfo.amount}}</text>
+    </view>
+    <view class="btn">
+      <view bindtap="goToWalletLog">交易明细</view>
+    </view>
+  </view>
+
+  <view class="wallet">
+    <view class="content title">
+    
+    <view>共享金(元)</view>
+      <text>{{walletInfo.shareAmount}} 元</text>
+    </view>
+    
+    <view class="btn" bindtap="bindRefundMoney">
+      <view>退共享金</view>
+    </view> 
+  </view>
+
+
+</view>
+
+
+<view class="recharge">
+
+  <view class="title">选择充值金额</view>
+
+  <block wx:if="{{inputMoney=='off'?'on':''}}">
+
+    <radio-group class="radio-group content {{inputMoney=='off'?'on':''}}" bindchange="radioChange">
+
+      <label class='item' wx:for="{{items}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}￥
+      </label>
+
+      <label class='item'>
+        <text>赠20</text>
+      </label>
+
+      <label class='item'>
+        <text>赠30</text>
+      </label>
+
+      <label class='item'>
+        <text>赠50</text>
+      </label>
+
+    </radio-group>
+
+  </block>
+
+  <block wx:if="{{inputMoney=='on'?'on':''}}">
+
+    <view class="input-box {{inputMoney=='on'?'on':''}}">
+
+      <text>￥</text>
+      <input bindblur="bindInputBlur" type="number" focus="{{inputFocus}}" value='{{initMoney}}' />
+    </view>
+  </block>
+
+</view>
+
+<view class="input-money" bindtap="bindInputMoney">{{inputMoneyTip}}</view>
+<view class="submit" bindtap="bindPayMoney">
+
+  <image src='{{IMG_PATH}}/charging.png'></image>
+
+</view>
+

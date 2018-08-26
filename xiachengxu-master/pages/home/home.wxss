@@ -1,0 +1,432 @@
+/*------引入探索样式---*/
+@import '../explore/explore.wxss';
+
+.storyContainer {
+  min-height:100%;
+  font-family:PingFang-SC-Medium;
+  background-color:#f5f5f5;
+  display: flex;
+  flex-direction:column;
+}
+.storyContainer text,.storyContainer view{
+  font-family:PingFang-SC-Medium;
+}
+.storyContainer.addExplore{
+  overflow:hidden;
+  height:100%;
+  position:absolute;
+}
+/*----------动画效果--------*/
+.animation{
+  transform: scale(0.9);
+  -ms-transform:scale(0.9); 	/* IE 9 */
+-moz-transform:scale(0.9); 	/* Firefox */
+-webkit-transform:scale(0.9); /* Safari 和 Chrome */
+-o-transform:scale(0.5); 
+transition:all 1s;
+-moz-transition:all 1s; /* Firefox 4 */
+-webkit-transition:all 1s; /* Safari and Chrome */
+-o-transition:all 1s; /* Opera */
+}
+/*----------进度条---------*/
+.content{
+  width:675rpx;
+  margin-top:37rpx;
+  margin:17rpx auto 0;
+}
+.content>view{
+  background:#ffffff;
+  height:4rpx;
+  width:100%;
+}
+.content .percent{
+  background:#cacaca;
+  height:100%;
+  width:67rpx;
+}
+/*--------------head---------------*/
+.head{
+  width: 100%;
+  margin:0px;
+  padding:0;
+  position: relative;
+  height:584rpx;
+}
+.head .slide-image{
+  width:100%;
+  height: 582rpx;
+}
+.head .swiper-item{
+  position: relative;
+}
+.head .head-text{
+  position: absolute;
+  color:#fff;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+.head .head-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:transparent;
+  border-radius: 0;
+  font-weight: 500;
+  border: 3rpx solid #fff;
+   width:282rpx;
+   height:65rpx;
+}
+.head .head-btn button{
+  padding:0;
+  margin:0;
+  border:0;
+  padding-left:0;
+  padding-right:0;
+  border-radius:0;
+  display: inline;
+  background-color:transparent;
+}
+button::after{
+  border: none;
+}
+.head .head-btn text{
+   color: #fff;
+   font-size: 36rpx;
+   font-weight:500;
+}
+.head .progress>view{
+  position: absolute;
+  bottom:40rpx;
+  width: 675rpx;
+  left: 37.5rpx;
+  height:4rpx;
+  background:#a8a8a8;
+}
+.head .progress .percent{
+  background:#1d1d1d;
+  width:225rpx;
+  height:100%;
+}
+
+.head .explore{
+  position:absolute;
+  bottom:80rpx;
+  right:0;
+  width:54rpx;
+  height:100rpx;
+  background-size:100% auto;
+  -moz-background-size:100% auto;
+  -webkit-background-size:100% auto;
+  overflow: hidden;
+}
+.head .explore text{
+  margin-top:22rpx;
+  color:#ffcc00;
+  font-size:26rpx;
+  line-height:44rpx;
+  Writing-mode:tb-rl;
+}
+
+/*---------------------title----------------------*/
+.title{
+  height:200rpx;
+  display: flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items: center;
+  text-align: center;
+  background: transparent;
+  position: relative;
+}
+.title .title1{
+  color:#333;
+  font-size:30rpx;
+}
+.title .title2{
+  color:#999999;
+  font-size:26rpx;
+}
+.title .line{
+  display: flex;
+  flex-direction:row;
+  justify-content:space-between;
+  align-items: center;
+}
+.title .line .block{
+  width:163rpx;
+  height:2rpx;
+  transform:scale(0.7);
+  background: #ebebeb;
+
+  margin:12rpx 0;
+}
+.title .line .block:nth-child(1){
+  margin-right:150rpx;
+}
+/*----------------- limited-time ----------------*/
+.limited-time .h1{
+  display: flex;
+  align-items: baseline;
+}
+.limited-time .more{
+  position: absolute;
+  right:30rpx;
+}
+.limited-time .more text{
+  color:#999999;
+  font-size:26rpx;
+}
+.limited-time .more image{
+  width:19rpx;
+  height:20rpx;
+  margin-left:6rpx;
+}
+.limited-time .main{
+  width:693rpx;
+  height:276rpx;
+  margin:0 auto;
+}
+.limited-time .main swiper {
+  height:100%;
+}
+.limited-time .main .item{
+  width:100%;
+  height:256rpx;
+  border-radius: 10rpx;
+  background: #fff;
+  position:relative;
+  -webkit-box-shadow:0 1px 15px rgba(0,0,0,.15);
+  -moz-box-shadow:0 1px 15px rgba(0,0,0,.15);
+  box-shadow:0 1px 15px rgba(0,0,0,.15);
+}
+.limited-time .item-left{
+  position: absolute;
+  width:193rpx;
+  height:194rpx;
+  overflow: hidden;
+  margin:30rpx;
+  border-radius: 4px;
+  left:-10rpx;
+}
+.limited-time .item-left image{
+  width:194rpx;
+  height:194rpx;
+}
+
+/*---item-right---*/
+.limited-time .item-right{
+  display: inline-block;
+  margin-left:234rpx;
+  display: flew;
+  flex-direction:column;
+  padding-top:45rpx;
+  padding-bottom:30rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:360rpx;
+}
+.item-right>text{
+  font-size: 32rpx;
+  color:#333；
+}
+.item-right .price{
+  margin-top:40rpx;
+}
+.item-right .price>text{
+  font-size: 30rpx;
+  color:#000;
+}
+.item-right .oldPrice{
+  margin-top:10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items:baseline;
+}
+.item-right .oldPrice text{
+  color:#999;
+  font-size:26rpx;
+}
+.item-right .oldPrice text:nth-child(1){
+  font-size:20rpx;
+  text-decoration:line-through;
+}
+.item-right .oldPrice text:nth-child(2){
+  margin-right:10rpx;
+}
+/*-----discount-----*/
+.discount{
+  background-size: 100% auto;
+  width: 112rpx;
+  height:110rpx;
+  position:absolute;
+  right:-1rpx;
+  top:-2rpx;
+  z-index:1;
+}
+.discount text{
+  display: block;
+  color:#ffcc00;
+  font-size:26rpx;
+  line-height:49rpx;
+  text-align:right;
+  transform:rotate(45deg);
+  font-family:MicrosoftYAHei;
+}
+/*--------- new-arrival -----------*/
+.new-arrival .main{
+  height: 789rpx;
+}
+.new-arrival .main swiper{
+  height: 100%;
+}
+.new-arrival .main .body{
+  width:692rpx;
+  margin:0 auto;
+  height:769rpx;
+  border-radius: 32px;
+  background: #fff;
+  position:relative;
+  -webkit-box-shadow:0 1px 15px rgba(0,0,0,.15);
+  -moz-box-shadow:0 1px 15px rgba(0,0,0,.15);
+  box-shadow:0 1px 15px rgba(0,0,0,.15);
+}
+.new-arrival .top{
+  height:360rpx;
+  overflow: hidden;
+}
+.new-arrival .top image{
+  width:100%;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+}
+.new-arrival .bottom{
+  display: flex;
+  justify-content:space-between;
+  flex-direction: row;
+  align-items:stretch;
+  margin-top:50rpx;
+  padding:0 52rpx;
+}
+.new-arrival .bottom .item{
+  overflow: hidden;
+   width:164rpx;
+}
+.new-arrival .bottom .item image{
+  width:100%;
+  height:250rpx;
+  border-radius: 20rpx;
+  background: #9a9a9a;
+}
+.new-arrival .bottom .desc{
+  display: flex;
+  justify-content:flex-start;
+  flex-flow:column;
+  margin-top:10rpx;
+}
+.new-arrival .bottom .desc text:nth-child(1){
+  font-size:28rpx;
+  color:#333333;
+}
+.new-arrival .bottom .desc text:nth-child(2){
+  font-size:26rpx;
+  color:#999999;
+  display: inline-block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:160rpx;
+}
+/*------popular------*/
+.popular .main{
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.popular .item{
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+.popular .item .shade{
+  position: absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  border-radius: 20rpx;
+  background: rgba(0,0,0,0.4);
+}
+.popular .item image{
+  width:100%;
+  height:100%;
+  border-radius: 20rpx;
+}
+.popular .item_text{
+  position: absolute;
+  top:50%;
+  left:50%;
+   transform:translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  color: #fff;
+  z-index:1;
+}
+.popular .item_text text{
+  font-size:30rpx;
+  color:#ffffff;
+  white-space:nowrap;
+}
+.popular .item_text .line{
+  height:2rpx;
+  transform: scale(0.7);
+  width:50rpx;
+  background: #fff;
+  margin:0 auto;
+  margin-top:20rpx;
+}
+/*多余4个的热门分类*/
+.popular .item.many{
+  width:201rpx;
+  height:255rpx;
+}
+.popular .item.many:nth-child(3n+2){
+  margin-left:39rpx;
+  margin-right:39rpx;
+}
+.popular .item.many:nth-child(n+4){
+   margin-top:39rpx;
+}
+/*少于余4个的热门分类*/
+.popular .item.less{
+  width:309rpx;
+  height:310rpx;
+}
+.popular .item.less:nth-child(2n+1){
+  margin-right:61rpx;
+}
+.popular .item.less:nth-child(n+3){
+   margin-top:62rpx;
+}
+/*------------active------------*/
+.active .main{
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+}
+.active .item{
+  width:693rpx;
+  height:601rpx;
+  overflow: hidden;
+  margin-bottom:54rpx;
+}
+.active .item image{
+  width:100%;
+  height:100%;
+  border-radius:32rpx;
+}

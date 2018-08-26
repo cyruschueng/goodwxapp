@@ -1,0 +1,78 @@
+<import src="../template/template.wxml" />
+<template wx:if="{{!is_showHideBtn}}" is='hideBtn' data='{{hideBtnData}}'></template>
+<!--0baoyangjilu.wxml-->
+<text>报告综述：</text>
+<view class="table">
+  <block wx:for="{{listData}}" wx:key="{{code}}">
+    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+      <view class="td-1" selectable="true">{{item.code}}</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.text}}
+      </view>
+      <!--view class="td">{{item.type}}</view-->
+    </view>
+    <view class="tr bg-g2" wx:else>
+      <view class="td-1" selectable="true">{{item.code}}</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.text}}
+      </view>
+    </view>
+  </block>
+</view>
+<text>详细结果：</text>
+<view class="table">
+  <block wx:for="{{result_content}}" wx:key="{{index}}">
+    <view class="tr">
+      <view class="td-1" selectable="true">维修项目</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.content}}
+      </view>
+    </view>
+    <view class="tr ">
+      <view class="td-1" selectable="true">入店时间</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.date}}
+      </view>
+    </view>
+    <view class="tr " >
+      <view class="td-1" selectable="true">维修材料</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.materal}}
+      </view>
+    </view>
+    <view class="tr " >
+      <view class="td-1" selectable="true">入店公里数</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.mileage}}
+      </view>
+    </view>
+    <view class="tr " style="border-bottom:2px solid #ddd;">
+      <view class="td-1" selectable="true">备注</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.remark}}
+      </view>
+    </view>
+  </block>
+</view>
+<text>异常描述：</text>
+<view class="table">
+  <block wx:for="{{result_description}}" wx:key="{{index}}">
+    <view class="tr">
+      <view class="td-1" selectable="true">描述</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.content}}
+      </view>
+    </view>
+    <view class="tr "  style="border-bottom:2px solid #ddd;">
+      <view class="td-1" selectable="true">日期</view>
+      <view class="td-2" selectable="true" scroll-y="true">
+        {{item.date}}
+      </view>
+    </view>
+  </block>
+</view>
+<view class="c-minheight wx-view_eEOWJz" data-c_e_id="wx_view_a358dca2">
+    <text class="c-block wx-text_QLV28Q" data-c_e_id="wx_text_e73553f5">- 568数据报告诠释&说明 -</text>
+    <text class="c-block wx-text_PVNqZv" data-c_e_id="wx_text_a4dcab57">此报告所包含内容及判断，仅基于截止到生成报告曰期之前收集到的相关数据。关于此车其他车辆信息（包括但不限于在非4s店或非制造商授杈店的 维修保养信息）有可能未被采集或收录，本报告仅作参考，请结合实车勘验和试乘试驾体验，做出更精准的交易决策。本报告内车型部分使用第三方接口，与维保记录无关，如有疑问请致电人工客服咨询。
+  568数据为您査询车辆仅限于中国大陆地区合法登记车辆，您同意并承诺所购买568数据报告仅供个人使用。568数据提供报告为源数据文字呈现，不会人为添加或删减任何条目内容，但并不提供任何形式明示或暗示的担保。在任何情况下，568数据都没有责任和义务承担用户购买报告后续签 订的销售合同造成的各类损失，以及利用报告所造成的任何侵权（包括自身疏忽）伤害。这些损失及伤害，包括但不仅限于直接的，间接的，附带的，特殊的，惩罚性的，或类似的损害赔偿。568数据报告对用户承担的责任不超过用户为购买每份568数据报告所支付的款项，您同意不会因为在使用报告以外的行为中造成损失后，追究568数据及上述单位的股东、董事、管理人员、员工和代理商的责任。也不会提出任何索赔、诉讼、损害赔偿及其他 各类费甩要求等。</text>
+</view>

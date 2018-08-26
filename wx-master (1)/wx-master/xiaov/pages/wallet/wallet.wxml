@@ -1,0 +1,106 @@
+<!--pages/wallet/wallet.wxml-->
+<view class='container pos-r'>
+  <view class='head'>
+    <view class='withdrawal'>
+      <view class='jine'>￥{{yue?yue:"0.00"}}</view>
+      <view class='txt'>可提现金额</view>
+    </view>
+    <view class='status row'>
+      <view class='left'>
+        <view class='money'>￥{{use?use:"0.00"}}</view>
+        <view class='txt'>已提现金</view>
+      </view>
+      <view class='right'>
+        <view class='money'>￥{{sum?sum:'0.00'}}</view>
+        <view class='txt'>总资产</view>
+      </view>
+    </view>
+  </view>
+  <view class='body'>
+    <navigator url='../profits/profits'>
+      <view class='transaction col row'>
+        <image class='profits transact' src="../../images/wallet/profits.png"></image>
+        <view>分润明细</view>
+        <image class='arrow' src="../../images/account/5.png"></image>
+      </view>
+    </navigator>
+    <navigator url='../WithdrawalList/WithdrawalList'>
+      <view class='transaction col row'>
+        <image class='withdrawal transact' src="../../images/wallet/withdrawal.png"></image>
+        <view>提现明细</view>
+        <image class='arrow' src="../../images/account/5.png"></image>
+      </view>
+    </navigator>
+    <view class='withdrawalDetial'>
+      <text class='title' style='font-size:30rpx;'>提现金额</text>
+      <view class='inputWrapper row'>
+        <text style='font-size:30rpx; line-height:60rpx;'>￥</text>
+        <input type="number" class='input' bindinput='input' placeholder='最小提现金额5元' value='{{inputJine}}'></input>
+      </view>
+      <view class='useable'>可用余额{{yue?yue:"0.00"}}元</view>
+    </view>
+  </view>
+  <view class='Tips'>不论提现金额大小，每笔手续费
+    <text style='font-size:28rpx;font-weight:bold; color:#4eb8ff'>2</text>元。最高提现
+    <text style='font-size:28rpx;font-weight:bold; color:#4eb8ff'>10000</text> 元</view>
+  <view class='bot' bindtap='withdrawal' data-statu="open">确认提现</view>
+</view>
+
+<!--密码弹窗-->
+<view class="mask_wrapper" wx:if="{{showModalStatus}}">
+  <!--content-->
+  <view class='mask'>
+    <view wx:if="{{wallets_password_flag}}" class="wallets-password"></view>
+
+    <view class="row">
+      <view class='title'>请输入支付密码</view>
+    </view>
+    <view class="drawer_content row">
+      <view catchtap="set_Focus" class="input-password-wrap row">
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=1}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=2}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=3}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=4}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=5}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=6}}"></i>
+        </view>
+      </view>
+
+      <input bindinput="set_wallets_password" class="input-content" password type="number" focus="{{isFocus}}" maxlength="6" />
+    </view>
+    <view class='row bottom'>
+      <button type="default" class="btn_cancel btn_ok" bindtap="withdrawalCancel" data-statu="open">取消</button>
+      <button type="default" class="btn_ok" bindtap="withdrawalSure" data-statu="close" disabled="{{dis}}">确定</button>
+    </view>
+  </view>
+
+</view>
+
+
+<!-- //弹窗 -->
+<view class="box-wrapper" wx:if="{{showModalState}}">
+  <view class='box-content pos-r'>
+    <view class='tips'>提示</view>
+    <view class='tips1 tipsb'>亲爱的用户:</view>
+    <view class='tips1'>如果您第一次使用该产品，请进行
+      <text class='remind'>注册</text>!</view>
+    <view class='tips1'>如果您已经有账号，请
+      <text class='remind'>登录</text>！</view>
+    <view class='bottom row'>
+      <button type="default" class="regist" catchtap="regist">注册</button>
+      <button type="default" class="login" catchtap="login">登录</button>
+    </view>
+    <!-- <image class='close' catchtap='close' src='../../images/index/close.png'></image> -->
+  </view>
+</view>

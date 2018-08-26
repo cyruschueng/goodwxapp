@@ -1,0 +1,102 @@
+<view class="container-theme {{opq == 0? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;padding-top:250rpx;">
+  <view class="spinner-cube-grid">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </view>
+</view>
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <swiper indicator-dots="true" autoplay="true" interval="5000" duration="2000" style="height:{{innerWidth}}px" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" bindchange="imgChange" bindtap="preview" circular="true">
+    <block wx:for="{{imgUrl}}">
+      <swiper-item>
+        <image src="{{item}}" style="width:{{innerWidth}}px;height:{{innerWidth}}px" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="pan">
+    <view class="title pull-left">{{GoodsList.msgcontent}}</view>
+    <view class="collect pull-right" bindtap="oncollection">
+      <image class="pull-left" style="width:35rpx;height:35rpx" src="/img/star1.png" ></image>
+      <view class="delc pull-left" style="font-size:28rpx; margin-left:10rpx;">收藏</view>
+    </view>
+    <view class="theme men pull-left" style="color:#e2906a;clear:both">￥{{GoodsList.sellprice}}</view>
+    <view class="pull-left kls line-through">原价:￥{{GoodsList.price}}</view>
+    <view class="pull-right kls">包邮</view>
+    <view class="clear-both"></view>
+    <view class="pull-left kl">积分可抵扣{{GoodsList.integralprice}}元</view>
+    <view class="pull-right kl">库存:{{GoodsList.storecount}} 销量:{{GoodsList.shellcount}}</view>
+    <view class="clear-both"></view>
+  </view>
+  <view style="height:30rpx"></view>
+
+  <!--<block wx:for="{{sgli}}" wx:for-index="iy">
+    <picker bindchange="bindGuiChange" data-index="{{iy}}" value="{{flag}}" range="{{item.list}}" class="pan" style="margin-top:-4px">
+      <view class="title pull-left" style="color:#000">{{item.value}}</view>
+      <image class="pull-right icon-30" src="/img/right.png"></image>
+      <view class="clear-both"></view>
+    </picker>
+  </block>-->
+  <view class="pan" style="margin-top:-4px">
+    <view class="title pull-left">数量</view>
+    <image class="pull-right icon-50" src="/img/add.png" bindtap="bindNumAdd"></image>
+    <input class="pull-right " style="width:100rpx;text-align:center" bindinput="numinput" value="{{num}}" />
+    <image class="pull-right icon-50" src="/img/ref.png" bindtap="bindNumRef"></image>
+    <view class="clear-both"></view>
+  </view>
+  <view class="panel">
+    <view class="title pull-left" style="color:#000">商品规格</view>
+    <view class="clear-both" style="height:30rpx;"></view>
+    <view style="text-align:left">{{GoodsList.prostandard}}</view>
+    <view class="clear-both"></view>
+  </view>
+   <view class="panel" wx:if="{{uli.length == 0}}">
+    <view class="title pull-left" style="color:#000">用户评价</view>
+    <view class="clear-both" style="height:30rpx;"></view>
+    <view style="text-align:center">暂无评价</view>
+    <view class="clear-both"></view>
+  </view>
+  
+  <view class="panel" wx:if="{{uli.length > 0}}">
+    <view class="title pull-left" style="color:#000">用户评价</view>
+    <view class="clear-both" style="height:30rpx;"></view>
+    <image class="pull-left img-xs" src="{{item.avatarUrl}}"></image>
+    <view class="pull-left" style="margin-left:30rpx">
+      <view>{{uli[0].nickname}}</view>
+      <view class="tex">{{uli[0].lmsgcontent}} </view>
+    </view>
+    <view class="clear-both bottom-line" style="padding-top:30rpx;"></view>
+    <view class="text-align theme" style="padding-top:30rpx;" bindtap="navToEvaluateshow">查看更多</view>
+    <view class="clear-both"></view>
+  </view>
+  <view class="panel" id="{{uli[0].lmsgId}}" bindtap="navToEvaluateshow">
+    图文信息
+  </view>
+
+  <view class="pan " style="margin-top:1px">
+    <import src="../../wxParse/wxParse.wxml"/> 
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  </view>
+  
+  <view style="height:100rpx"></view>
+
+  <view class="fix-bottom bars {{opq == 1? '':'hidden'}}">
+    <view class="butn pull-left" style="border-right: 1px solid #cfcfcf">
+      <contact-button  type="default-dark"  size="20" session-from="weapp" class="icon-25" src="/img/kef.png"></contact-button>
+      <view style="font-size:20rpx">客服</view>
+    </view>
+    <view class="butn pull-left" bindtap="makecall">
+      <image class="icon-30" src="/img/call.png"></image>
+      <view style="font-size:20rpx">电话</view>
+    </view>
+    <view class="btjia pull-right" bindtap="navToPayfor">立即购买</view>
+    <view class="btru pull-right" bindtap="addToCart">加入购物车</view>
+    <view class="clear-both"></view>
+  </view>
+</view>

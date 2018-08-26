@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+	<title>训练计划</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+	<link rel="stylesheet" type="text/css" href="css/trainPlan.css">
+	<style type="text/css">
+	
+	
+	</style>
+	</head>
+	<body>
+	<div class="container">
+		<ul class="row classTag">
+			<li class="tagItem  active col-xs-6 col-sm-6"><span>运动方案</span></li>
+			<li class="tagItem col-xs-6 col-sm-6"><span>饮食方案</span></li>
+		</ul>
+		<div class="row planContent">
+			<div class="row part1">
+			</div>
+			<div class="row part2">
+				<a class="eatPlan-item" href="javascript:void(0);" onclick="trainPlan('http://detection.picooc.com/details255'+window.location.search,1)">饮食结构 （吃什么）</a>
+				<a class="eatPlan-item" href="javascript:void(0);" onclick="trainPlan('http://detection.picooc.com/details256'+window.location.search,1)">饮食方法 （怎么吃）</a>
+			</div>
+		</div>
+	</div>
+
+		<div class="row errorAlert">
+			<div class="col-xs-12 col-sm-12 error-main">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 error-main-t"></div>
+					<div class="col-xs-12 col-sm-12 error-main-btn">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 error-main-btn1">我知道了</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript" id="script1"></script>
+	<script>
+		if(getParamByUrl("webver")>2){
+			if(getParamByUrl("os")=="android"){
+				$("#script1").attr("src","jsv1/trainPlan.js?v=8");
+			}
+			else{
+				var mobileApp=window.webkit.messageHandlers;
+				$("#script1").attr("src","jsv1/trainPlan.js?v=8");
+			}
+		}
+		else{
+			$("#script1").attr("src","js/trainPlan.js?v=8");
+		}
+	</script>
+	<!--<script type="text/javascript" src="js/trainPlan.js?v=7"></script>-->
+	<script type="text/javascript">
+	/*$(function(){
+		$(".part1").html('<iframe class="eat-plan" frameborder="0" src="https://detection.picooc.com/details193'+window.location.search+'"></iframe>');
+	})*/
+	</script>
+<script>
+
+//百度统计上传代码
+	var _hmt = _hmt || [];
+	_hmt.push(['_setAutoPageview', false]);
+	_hmt.push(['_trackPageview', location.pathname]);
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+	  var s = document.getElementsByTagName("script")[0];
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</html>

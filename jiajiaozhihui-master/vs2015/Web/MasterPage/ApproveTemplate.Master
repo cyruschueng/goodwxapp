@@ -1,0 +1,147 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ApproveTemplate.master.cs"
+    Inherits="SfSoft.web.MasterPage.ApproveTemplate" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>EMC</title>
+    <script type="text/javascript" src="/js/popup.js"></script>
+    <script type="text/javascript" src="/js/popupclass.js"></script>    
+    <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.easyui.min.1.2.2.js"></script>
+    <script type="text/javascript" src="/js/checkform.js"></script>
+      <script type="text/javascript" src="/js/comm.js"></script>
+       <script language="JavaScript" src="/js/selectDate.js"></script>
+
+    <script language="JavaScript" src="/js/fixDate.js"></script>
+    <link rel="stylesheet" type="text/css" href="/emc/css/emccss.css" />
+    <link rel="stylesheet" type="text/css" href="/js/themes/default/easyui.css" />
+
+    <script language="javascript">
+
+
+        function ShowAppDiv() {
+            var div_id = "divApp";
+            var div_obj = $("#" + div_id);
+            var windowWidth = document.body.clientWidth;
+            var windowHeight = document.body.clientHeight;
+            var popupHeight = div_obj.height();
+            var popupWidth = div_obj.width();
+            //添加并显示遮罩层   
+            $("<div id='mask'></div>").addClass("mask")
+                                  .width(windowWidth + document.body.scrollWidth)
+                                  .height(windowHeight + document.body.scrollHeight)
+                                  .click(function() { hideDiv(div_id); })
+                                  .appendTo("tempdiv")
+                                  .fadeIn(200);
+            div_obj.css({ "position": "absolute" })
+               .animate({ left: 2, top: 28, opacity: "show" }, "slow");
+
+        }
+        function hideDiv() {
+            var div_id = "divApp";
+            $("#mask").remove();
+            $("#" + div_id).animate({ left: 0, top: 0, opacity: "hide" }, "slow");
+        }
+
+
+        function ShowFormDiv(divID) {
+            var div_id = divID;
+            var div_obj = $("#" + div_id);
+            var windowWidth = 100;
+            var windowHeight = document.body.clientHeight;
+            var popupHeight = div_obj.height();
+            var popupWidth = 200;
+
+            var winwidth = document.body.offsetWidth; //可以给弹出层定位
+            var winheight = document.body.offsetHeight;
+
+
+          //  var centop = (windowHeight - popupHeight) / 2 + ($(document).scrollTop() / 2);
+            var centop = $(document).scrollTop() + popupHeight / 2;
+            var cenleft = 40;
+
+            //添加并显示遮罩层   
+            $("<div id='mask'></div>").addClass("mask")
+                                  .width(400)
+                                  .height(windowHeight + document.body.scrollHeight)
+                                  .click(function() { hideDiv(div_id); })
+                                  .appendTo("tempdiv")
+                                  .fadeIn(200);
+            div_obj.css({ "position": "absolute" })
+               .animate({ left: cenleft, top: centop, opacity: "show" }, "slow");
+
+        }
+        function hideFormDiv(DivID) {
+
+            var div_id = DivID;
+            $("#mask").remove();
+            $("#" + div_id).animate({ left: 0, top: 0, opacity: "hide" }, "slow");
+        }
+
+        function AppReturn_List() {
+            var objPageFrom = document.getElementById("hfPageFrom");
+            var pagefrom = objPageFrom.value;
+            if (pagefrom == "" || pagefrom == "M") {
+                document.location = "browse.aspx";
+            }
+            else if (pagefrom == "todo") {
+                document.location = "/emc/rcm/todo/browse.aspx";
+            }
+            else if (pagefrom == "todomgt") {
+                document.location = "/emc/rcm/todo/list.aspx";
+            }
+        }
+ 
+    </script>
+
+</head>
+<body>
+    <form id="form1" runat="server" style="padding: 2px 2px 2px 2px">
+    <div id="tempdiv" >
+    </div>
+    <div id="ToolBarsDiv" class="toolbars">
+        <asp:PlaceHolder ID="phToolBars" runat="server"></asp:PlaceHolder>
+    </div>
+    <div id="divApp" class="divApp" style="width: 600px;display:none; ">
+    
+        <div id="divAppToolbars" class="toolbars">
+            <asp:PlaceHolder ID="phAppToolBars" runat="server"></asp:PlaceHolder>
+        </div>
+        <table border="0" width="100%" class="divApp" >
+            <tr>
+                <td width="50%">
+                    审批意见：
+                    <asp:TextBox ID="txtContral" runat="server" MaxLength="450" Width="200px"></asp:TextBox>
+                </td>
+                <td width="50%">
+                    审批备注： &nbsp;<asp:TextBox ID="txtAuditorCmnt" runat="server" MaxLength="450" Width="200px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%">
+                    审批人签名：<asp:TextBox ID="txtAuditName" runat="server" ReadOnly="True" Width="200px"
+                        SkinID="txtBoxRedonly"  ></asp:TextBox>
+                </td>
+                <td width="50%">
+                    审批时间： &nbsp;<asp:TextBox ID="txtAuditdate" runat="server" ReadOnly="True" Width="200px"
+                        SkinID="txtBoxRedonly"  ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 46%">
+                    <asp:Label ID="lblUnDoFlag" runat="server" Width="180px"></asp:Label>
+                </td>
+                <td width="54%">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <asp:Panel ID="panelMain" runat="server">
+        <asp:ContentPlaceHolder ID="PageBody" runat="server">
+        </asp:ContentPlaceHolder>
+    </asp:Panel>
+    <asp:HiddenField ID ="hfPageFrom" runat ="server" />
+    </form>
+</body>
+</html>

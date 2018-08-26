@@ -1,0 +1,23 @@
+<!--pages/core/mail/mail.wxml-->
+<view class="container">
+  <view class="content">
+    <view class="remind-box" wx:if="{{loading}}">
+      <image class="remind-img" src="/images/index/loading.gif"></image>
+    </view>
+    <view wx:else class="body-view">
+      <block wx:for="{{data}}" wx:key="item">
+        <navigator url="./detail?question={{item[0]}}&&question_time={{item[1]}}&&response={{item[2]}}&&response_time={{item[3]}}">
+          <view class="list-item jw">
+            <view class="list-item-left">
+              <text class="list-item-title">{{item[0]}}</text>
+              <text class="list-item-time">{{item[1]}}</text>
+            </view>
+            <image class="list-item-icon" src="/images/news/news.png"></image>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+  <!--提醒消息-->
+  <text class="content-ending">{{remind}}</text>
+</view>

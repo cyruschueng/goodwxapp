@@ -1,0 +1,46 @@
+<!--add.wxml-->
+<view class="page">
+  <scroll-view scroll-y="true" style="height:{{winH}}px;" bindscrolltolower="upper" bindscrolltoupper="down">
+      <!-- <view wx:if="{{hasRefesh}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+      <icon type="waiting" size="20"/><text style="font-size:26rpx;color:#333;">刷新中...</text>
+      </view>
+      <view wx:else  style="display:none" ><text>没有更多内容了</text></view> -->
+    <view class="box" wx:for="{{list}}" wx:for-item="item" bindtap='go' data-id="{{item.id}}" wx:key="this">
+        <view class="box_left">
+            <image  mode="aspectFit"  src="{{item.img}}"></image>
+        </view>
+        <view class="box_center">
+            <view class="title">{{item.title}}</view>
+            <view class="describe" wx:if="{{item.describe}}">{{item.describe}}</view>
+            <view class="security">
+              <image wx:if="{{item.is_anony==1}}" src="../../images/4.png"></image>
+              <image wx:if="{{item.is_open==1}}"  src="../../images/2.png"></image>
+              <image wx:if="{{item.has_correct==1}}" src="../../images/3.png"></image>
+              <image wx:if="{{item.is_anony==2}}"  src="../../images/1.png"></image>
+              <image wx:if="{{item.is_open==2}}"  src="../../images/5.png"></image>
+              <image wx:if="{{item.is_push==1}}"  src="../../images/6.png"></image>
+            </view>
+        </view>
+        <view class="box_right">
+            <view class="persons">
+              <image  mode="aspectFit"  src="../../images/ps.png">
+              </image>
+              <text>{{item.join_total}}</text>
+            </view>
+            <view class="time">
+              <view>{{item.add_time}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="tips" wx:if="{{list.length>0}}">
+        <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+            <text>上拉可以玩命加载数据...</text>
+        </view>
+        <view wx:if="{{!hasMore}}"><text>没有更多内容了</text></view>
+    </view>
+    <view wx:if="{{list.length==0}}" class="nones">
+      玩命加载数据。。。
+    </view>
+ </scroll-view>
+ <view class="fesh" bindtap='am' animation="{{animationData}}"><image mode='aspectFill' src="../../images/fesh.png"></image></view>
+</view>

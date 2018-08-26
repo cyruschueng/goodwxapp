@@ -1,0 +1,26 @@
+<!--lookTestDriveInfo.wxml-->
+<include src="../header/header.wxml" />
+<view class="container">
+  <view class="infoRegister_wrap">
+    <view class="infoRegister" style=" background: #fff url({{imagesUrl}}bg.png) no-repeat left top;  background-size: 100% 100%;">
+      <image src="{{imagesUrl}}testinfo.png" class="testinfo"></image>
+      <view class="testDriveInfo" style="background: url({{imagesUrl}}bg2.png) no-repeat ;  background-size: 100% 100%;">
+        <scroll-view class="scroll" style="height:280rpx" scroll-y>
+          <view style="overflow:hidden"><text class="ti">试驾人电话: </text> <text class="ti2">{{test.user_phone}}</text></view>
+          <view style="overflow:hidden"><text class="ti">试驾车型: </text> <text class="ti2">{{test.model_name}}</text></view>
+          <view style="overflow:hidden"><text class="ti">试驾店面: </text> <text class="ti2">{{test.dealername}}</text></view>
+          <view style="overflow:hidden"><text class="ti">4S人员姓名: </text> <text class="ti2">{{test.staff_name}}</text></view>
+          <view style="overflow:hidden"><text class="ti">4S人员电话: </text> <text class="ti2">{{test.staff_phone}}</text></view>
+        </scroll-view>
+        <image src="{{imgStr}}" class="imgStr"></image>
+        <image src="{{imagesUrl}}result.png" class="result"></image>
+        <view class="resultInfo">
+          {{activityresult.message}}
+        </view>
+      </view>
+      <view class="goIndex">
+        <image src="{{imagesUrl}}goIndex.png" bindtap="goIndex"></image>
+      </view>
+    </view>
+  </view>
+</view>

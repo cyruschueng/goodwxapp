@@ -1,0 +1,194 @@
+<!-- form 2.0-->
+
+<template name="form">
+    <view class='form'>
+        <block wx:for='{{data}}' wx:key='{{index}}'>
+            <view class='form-item'>
+                <label class='form-tit' for='{{item.name}}'>{{item.title}}</label>
+
+                <template is="form-input" wx:if='{{item.type=="string"}}' data='{{control:item}}' />
+                <template is="form-input" wx:if='{{item.type=="number"}}' data='{{control:item}}' />
+                <template is="form-input" wx:if='{{item.type=="idcard"}}' data='{{control:item}}' />
+                <template is="form-input" wx:if='{{item.type=="digit"}}' data='{{control:item}}' />
+
+                <template is="form-checkbox" wx:if='{{item.type=="checkbox"}}' data='{{control:item}}' />
+                <template is="form-switch" wx:if='{{item.type=="switch"}}' data='{{control:item}}' />
+                <template is="form-radio" wx:if='{{item.type=="radio"}}' data='{{control:item}}' />
+                <template is="form-text" wx:if='{{item.type=="text"}}' data='{{control:item}}' />
+                <template is="form-slider" wx:if='{{item.type=="slider"}}' data='{{control:item}}' />
+                <template is="form-datetime" wx:if='{{item.type=="datetime"}}' data='{{control:item}}' />
+                <template is="form-date" wx:if='{{item.type=="date"}}' data='{{control:item}}' />
+                <template is="form-time" wx:if='{{item.type=="time"}}' data='{{control:item}}' />
+                <template is="form-region" wx:if='{{item.type=="region"}}' data='{{control:item}}' />
+                <template is="form-images" wx:if='{{item.type=="images"}}' data='{{control:item}}' />
+
+            </view>
+
+        </block>
+    </view>
+</template>
+
+
+<template name="form-input">
+    <view class='form-cot'>
+        <input type='{{control.type}}' id='{{control.name}}' name='{{control.name}}' value='{{control.value}}' catchblur='onFormBlur' placeholder='{{control.options.tip}}' />
+    </view>
+</template>
+ <!-- wx:if='{{control.options.col_show == 2 }}' -->
+<template name="form-checkbox">
+    <view class="form-cot form-tex-choose form-choose-col{{control.options.col_show}}">
+        <checkbox-group catchchange='onFormCheckboxChange' id='{{control.name}}'>
+            <label class='form-choose' wx:for='{{control.options.items}}' wx:key='{{index}}'>
+                <checkbox checked='{{item.checked}}' value='{{item.value}}'></checkbox>
+                <view class='choose-img' wx:if='{{control.options.imgs[index]}}'>
+                    <image src='{{control.options.imgs[index]}}' mode='aspectFill' catchtap='onFormPrevImage' data-src='{{control.options.imgs[index]}}'></image>
+                </view>
+                <view class='choose-text'>{{item.value}}</view>
+            </label>
+        </checkbox-group>
+    </view>
+</template>
+
+<template name="form-radio">
+    <view class="form-cot form-tex-choose form-choose-col{{control.options.col_show}} ">
+        <radio-group catchchange='onFormRadioChange' id='{{control.name}}'>
+            <label class='form-choose' wx:for='{{control.options.items}}' wx:key='{{index}}'>
+                <radio checked='{{control.value==item}}' value='{{item}}'></radio>
+                <view class='choose-img' wx:if='{{control.options.imgs[index]}}'>
+                    <image src='{{control.options.imgs[index]}}' mode='aspectFill' catchtap='onFormPrevImage' data-src='{{control.options.imgs[index]}}'></image>
+                </view>
+                <view class='choose-text'>{{item}}</view>
+            </label>
+        </radio-group>
+    </view>
+</template>
+
+<template name="form-switch">
+    <view class='form-cot form-switch'>
+        <view>{{control.options.tip}}</view>
+        <switch id='{{control.name}}' catchchange="onFormSwitchChange" checked='{{control.value}}' value='1' />
+    </view>
+</template>
+
+<template name="form-text">
+    <view class='form-cot'>
+        <textarea id='{{control.name}}' name='{{control.name}}' value='{{control.value}}' catchblur='onFormBlur' class='form-tear'></textarea>
+    </view>
+</template>
+
+<template name="form-slider">
+    <view class='form-cot'>
+        <slider id='{{control.name}}' value='{{control.value}}' catchchange="onFormSliderChange" min='{{control.options.min||0}}' max='{{control.options.max||100}}' step='{{control.options.step||1}}' show-value='{{control.options.showValue}}' activeColor='{{control.options.activeColor}}'
+            backgroundColor='{{control.options.backgroundColor}}' />
+    </view>
+</template>
+
+<template name="form-datetime">
+    <view class='form-cot'>
+        <view class="flex">
+            <view class="time-item">
+                <picker id='{{control.name}}' mode="date" value='{{control.value[0]}}' catchchange="onFormDateChange" data-refresh='1' data-type='date'>
+                    {{control.value[0]}}
+                </picker>
+            </view>
+            <view class="time-item">
+                <picker id='{{control.name}}' mode="time" value='{{control.value[1]}}' catchchange="onFormDateChange" data-refresh='1' data-type='time'>
+                    {{control.value[1]}}
+                </picker>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template name="form-date">
+    <view class='form-cot'>
+        <picker id='{{control.name}}' mode="date" value='{{control.value}}' catchchange="onFormDateChange" data-refresh='1'>
+            {{control.value}}
+        </picker>
+    </view>
+</template>
+
+<template name="form-time">
+    <view class='form-cot'>
+        <picker id='{{control.name}}' mode="time" value='{{control.value}}' catchchange="onFormDateChange" data-refresh='1'>
+            {{control.value}}
+        </picker>
+    </view>
+</template>
+
+<template name="form-region">
+    <view class='form-cot'>
+        <picker id='{{control.name}}' mode="region" value='{{control.value||[]}}' catchchange="onFormRegionChange" data-refresh='1'>
+            {{control.value||"请选择"}}
+        </picker>
+    </view>
+</template>
+
+<template name="form-images">
+    <view class='form-cot'>
+        <view class='form-add-img' wx:for='{{control.value}}' wx:key='{{index}}'>
+            <image src='{{item}}' mode='aspectFill' catchtap='onFormPreviewImageTap' data-name='{{control.name}}' data-index='{{index}}'></image>
+            <text class='close-img' catchtap='onFormRemoveImageTap' data-name='{{control.name}}' data-index='{{index}}'></text>
+            <text class=' add-img-fail' wx:if="{{!control.state[index]}}">上传失败</text>
+        </view>
+        <view class='form-add-img' id='{{control.name}}' catchtap='onFormChooseImageTap' wx:if='{{control.value.length<control.options.count}}'>
+            <text class='add-btn'></text>
+        </view>
+    </view>
+</template>
+
+<view class='form-item'>
+    <view class="form-tit">地址选择</view>
+    <view class='form-cot'>
+        <view class="flex">
+            <picker class="sub">
+                <view class="select-item active">
+                    <text class='lineText'>河南省</text>
+                </view>
+            </picker>
+            <picker class="sub">
+                <view class="select-item">
+                    <text class='lineText'>郑州市</text>
+                </view>
+            </picker>
+            <picker class="sub">
+                <view class="select-item">
+                    <text class='lineText'>金水区</text>
+                </view>
+            </picker>
+        </view>
+        <view class='gridXt mt5 form-tear-box'>
+            <textarea class="form-tear" placeholder="详细地址如门牌号"></textarea>
+        </view>
+    </view>
+</view>
+<view class='form-item'>
+    <view class="form-tit">地址选择</view>
+    <view class='form-cot'>
+        <view class='flex'>
+            <input class='sub' placeholder='选择地址' value='{{address_name}}'></input>
+            <view class="choose-adds green iconfont icon-locationfill" bindtap='chooseLocation'></view>
+        </view>
+    </view>
+</view>
+<view class='form-item'>
+    <view class="form-tit">上传图片</view>
+    <view class='form-cot'>
+        <view class='form-add-img'>
+            <image src='/images/default.png'></image>
+            <text class='close-img'></text>
+        </view>
+        <view class='form-add-img'>
+            <image src='/images/default.png'></image>
+            <text class='close-img'></text>
+        </view>
+        <view class='form-add-img'>
+            <image src='/images/default.png'></image>
+            <text class='close-img'></text>
+            <text class=' add-img-fail'>长传失败</text>
+        </view>
+        <view class='form-add-img'>
+            <text class='add-btn'></text>
+        </view>
+    </view>
+</view>

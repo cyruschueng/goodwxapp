@@ -1,0 +1,131 @@
+<!--pages/index/index.wxml-->
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <!-- 搜索icon + input + 叉叉icon -->
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+      <!-- 清空输入框 -->
+      <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+        <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+    <!-- focus时 搜索icon -->
+    <!-- hidden	Boolean	组件是否显示	所有组件默认显示 -->
+    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+      <icon class="weui-icon-search" type="search" size="14"></icon>
+      <view class="weui-search-bar__text">搜索</view>
+    </label>
+  </view>
+  <!-- 取消按钮 -->
+  <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+</view>
+<!--搜索后显示的列表-->
+<!--lower-threshold	Number	50	距底部/右边多远时（单位px），触发 scrolltolower 事件-->
+
+<scroll-view scroll-y class="weui-cells weui-cells_after-title searchReault-list" style="height:{{winHeight-48}}px" lower-threshold="20" bindscrolltolower="searchReaultLower" wx:if="{{inputVal.length > 0}}">
+
+  <block wx:for="{{searchReault}}" wx:key="item">
+    <navigator url="../now/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-id="{{item.id}}" data-name="{{item.name}}" data-picUrl="{{item.picUrl}}" data-author="{{item.singer}}" open-type="switchTab" bindtap="tonow">
+      <!--open-type="switchTab" 先让他不能跳转  后续要改成跳转歌曲播放也准备-->
+      <view class="weui-cell__bd">
+        <view class="song-name">
+          {{item.name}}
+          <text class="song-singer">
+            {{item.singer}}</text>
+        </view>
+      </view>
+    </navigator>
+  </block>
+</scroll-view>
+
+<view class="swiper-tab">
+  <!--如果currentTab对应current就选中状态on css class类名-->
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">首页</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">排行榜</view>
+</view>
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 140}}px" bindchange="bindChange">
+  <!--首页-->
+  <swiper-item class="container">
+    <!--        swiper
+        indicator-dots	Boolean	false	是否显示面板指示点	
+        indicator-active-color	Color	#000000	当前选中的指示点颜色
+        autoplay	Boolean	false	是否自动切换	
+        interval	Number	5000	自动切换时间间隔	
+        circular	Boolean	false	是否采用衔接滑动-->
+    <swiper class="banner" indicator-dots="true" autoplay="true" circular="true">
+      <block wx:for="{{banners}}" wx:key="item">
+        <swiper-item>
+          <image src="{{item.pic}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <view class="tuijian-lists">
+      <view class="header">
+        <text>推荐新音乐</text>
+      </view>
+      <view class="lists-content">
+        <block wx:for="{{newsong}}" wx:key="item">
+          <navigator url="./index" hover-class="weui-grid_active" data-id="{{item.id}}" data-name="{{item.name}}" data-picUrl="{{item.picUrl}}" data-author="{{item.author}}" open-type="switchTab" bindtap="tonow">
+            <image class="image" src="{{item.picUrl}}"></image>
+            <view class="">{{item.name}}</view>
+          </navigator>
+        </block>
+      </view>
+      <view class="header">
+        <text>推荐电台</text>
+      </view>
+      <view class="lists-content">
+        <block wx:for="{{djprogram}}" wx:key="item">
+          <navigator url="./index" hover-class="weui-grid_active" data-musicType="radioStation" data-id="{{item.id}}" data-name="{{item.name}}" data-picUrl="{{item.picUrl}}" data-author="{{item.author}}" open-type="switchTab" bindtap="tonow">
+            <image class="image" src="{{item.picUrl}}"></image>
+            <view class="">{{item.name}}</view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+  <!--排行榜-->
+  <swiper-item class="container">
+    <view>
+      <block wx:for="{{tracks}}" wx:key="item">
+        <navigator url="../now/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-id="{{item.id}}" data-name="{{item.name}}" data-picUrl="{{item.picUrl}}" data-author="{{item.author}}" open-type="switchTab" bindtap="tonow">
+          <!--判断前3变红  index默认0开始-->
+          <view class="weui-cell__hd">
+            <image src="{{item.picUrl}}" style="width:40px;height:40px;margin-right:10px;"></image>
+          </view>
+          <view class="weui-cell__bd red" wx:if="{{index<3}}">
+            {{index+1 +"、"+ item.name}}
+            <text class="song-singer">
+              {{item.author}}
+            </text>
+          </view>
+          <view wx:else>
+            {{index+1 +"、"+ item.name}}
+            <text class="song-singer">
+              {{item.author}}
+            </text>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </swiper-item>
+</swiper>
+<view class="audio">
+
+  <!--播放器-->
+  <image class="audio-cover" src="{{audio.picUrl}}" bindtap="skip"></image>
+  <view class="progress">
+    <view class="song-information" bindtap="skip">
+      <view data-id="{{audio.id}}">{{audio.name}}</view>
+      <view class="author">{{audio.author}}</view>
+    </view>
+    <view class="operations">
+      <image class="audio-btn" bindtap="audioPlay" hidden="{{isplaying}}" src="../../images/play.png"></image>
+      <image class="audio-btn" bindtap="audioPause" hidden="{{!isplaying}}" src="../../images/pause.png"></image>
+      <image class="audio-btn" bindtap="audioNext" src="../../images/next.png"></image>
+    </view>
+  </view>
+</view>

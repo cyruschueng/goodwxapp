@@ -1,0 +1,28 @@
+<div class="page" ng-controller="habitsMyController">
+    <div class="page__bd">
+        <div class="weui-cells " style="margin-top:0;">
+            <a href="#habits" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd"></div>
+                <div class="weui-cell__ft" style="color:#f60">
+                    <div class="fa fa-plus">新增</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <a href="#habitrecord?habitid={{item.habitId}}"
+                   class="weui-media-box weui-media-box_appmsg"
+                   ng-repeat="item in habits">
+                    <div class="weui-media-box__hd" style="width:105px;">
+                        <img class="weui-media-box__thumb"  ng-src="{{item.imgurl}}" style="width:100px;" />
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <div class="weui-media-box__title habit-media__title" >第{{item.finish}}天</div>
+                        <div class="weui-media-box__desc habit-media__desc" >{{item.title}}</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

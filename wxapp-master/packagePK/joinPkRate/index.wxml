@@ -1,0 +1,58 @@
+<wxs src="../../utils/common.wxs" module="commonModule" />
+<import src="./template/star.wxml" />
+<view class="join-pkrate">
+    <view class="top-banner">
+        <view class="season-title">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b361f375f.png"></image>
+        </view>
+        <view class="season-time">
+            {{season.beginTime}} -
+            {{season.endTime}}
+        </view>
+        <view class="user-info">
+            <view class="exp-info">
+                <text class="player-level">Lv.{{profile.level.now}}</text>
+                <view class="exp-progress">
+                    <view class="mask"></view>
+                    <view class="inner-bar {{isAndroid ? 'android' : ''}}" style="width:{{profile.level.percent}}%"></view>
+                </view>
+            </view>
+            <view class="content">
+                <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67ed39afbfc.png"></image>
+                <text>{{commonModule.formatMoney(profile.money)}}兩</text>
+            </view>
+        </view>
+    </view>
+    <scroll-view scroll-y scroll-into-view="{{currentGradeId}}" class="level-list" animation="{{gradeAnimationData}}">
+        <view wx:for="{{profile.grade}}" wx:key="{{item.type}}" id="{{item.type === profile.myGrade ? 'current-grade' : ''}}">
+            <navigator wx:if="{{item.unlock && profile.money >= item.appearanceFee}}"
+                class="level-item unlock {{index === currentIndex ? 'active' : ''}}"
+                url="{{'/packagePK/pk/index?rateType=pk&appearanceFee=' + item.appearanceFee + '&gradeType=' + item.type}}"
+                bindtap="setAnimation" data-index="{{index}}">
+                <view class="text-grade icon-{{item.name}}"></view>
+                <view class="stars {{index < 8 ? 'single-line' : ''}}">
+                    <template is="star" data="{{have: item.star.have, need: item.star.need, unlock: item.unlock}}" />
+                </view>
+            </navigator>
+            <view wx:elif="{{item.unlock && profile.money < item.appearanceFee}}"
+                  class="level-item unlock {{index === currentIndex ? 'active' : ''}}" bindtap="showRemindDialog"
+                  data-index="{{index}}">
+                <view class="text-grade icon-{{item.name}}"></view>
+                <view class="stars {{index < 8 ? 'single-line' : ''}}">
+                    <template is="star" data="{{have: item.star.have, need: item.star.need, unlock: item.unlock}}" />
+                </view>
+            </view>
+            <view wx:else class="level-item">
+                <view class="text-grade icon-{{item.name}}"></view>
+                <view class="stars {{index < 8 ? 'single-line' : ''}}">
+                    <template is="star" data="{{have: item.star.have, need: item.star.need, unlock: item.unlock}}" />
+                </view>
+                <image class="locked-image" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b33da1e9b.png"></image>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="for-more"></view>
+    <view class="remind-text">
+        请选择要挑战的段位，满星即可升级
+    </view>
+</view>

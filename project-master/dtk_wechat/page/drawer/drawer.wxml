@@ -1,0 +1,69 @@
+<!--drawer.wxml-->
+<view class="container"  >
+  <view class="containerBox">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="section-box" bindtap="bindfundsTypehide">
+        <image class="section-box-image" src="../../image/title.png"></image>
+        <view class="add-title">基础信息</view>
+        <view class="section" style="border:0;">
+          <view class="section__title">业务类型：</view>
+            <picker mode="selector" range="{{array}}" value="{{index}}" bindchange="listenerPickerSelected" name="funds_type">
+                <text>{{array[index]}}</text>
+            </picker>
+        </view>
+        <view class="section money" wx:if="{{array[index] == '其他'}}">
+            <view class="section__title" style="color:#fff;">其他类型：</view>
+            <input class="weui-input section-mian" name="funds_other_type" placeholder="请输入业务类型" />
+        </view>
+        <view class="section money">
+          <view class="section__title">业务金额：</view>
+            <input type="number" class="weui-input section-mian " name="funds_value" placeholder="不限" />
+            <text class="moneytext">万元</text>
+        </view>
+        <view class="section">
+          <view class="section__title">开始时间：</view>
+          <picker class="section-mian" mode="date" value="{{stardate}}"  bindchange="bindStartDateChange" name="funds_start_date">
+              <view class="weui-input">{{stardate}}</view>
+          </picker>
+        </view>
+        <view class="section money">
+          <view class="section__title">业务期限：</view>
+            <input type="number" class="weui-input section-mian" name="funds_duration" placeholder="不限"  />
+            <text class="moneytext">天</text>
+        </view>
+        <view class="section money">
+          <view class="section__title">日收益率：</view>
+            <input type="digit" class="weui-input section-mian" name="yield_rate" placeholder="面议"  />
+            <text class="moneytext">‰</text>
+        </view>
+      </view>
+      <view class="section-box" bindtap="bindfundsTypehide">
+        <image class="section-box-image" src="../../image/title.png"></image>
+        <view class="add-title">客户信息</view>
+        <view class="section" style="border:0;">
+          <view class="section__title">客户名称：</view>
+            <input class="weui-input section-mian" name="customer_name" placeholder="请输入客户名称" />
+        </view>
+        <view class="section">
+          <view class="section__title">所属银行：</view>
+            <input class="weui-input section-mian" name="funds_bank" placeholder="请输入所属银行" />
+        </view>
+        <view class="section">
+          <view class="section__title">交易地点：</view>
+            <input class="weui-input section-mian" name="address" placeholder="请输入交易地点" />
+        </view>
+      </view>
+      <!-- 业务备注 -->
+      <view class="section-box">
+        <image class="section-box-image" src="../../image/title.png"></image>
+        <view class="add-title">业务备注</view>
+        <view class="section clearfix" style="border:0;height:auto;">
+            <textarea name="funds_comment" placeholder="请输入业务备注" />
+        </view>
+      </view>
+      <view class="btn-area">
+        <button type="red" formType="submit" disabled="{{disabled}}">提交</button>
+      </view>
+    </form>
+  </view>
+</view>

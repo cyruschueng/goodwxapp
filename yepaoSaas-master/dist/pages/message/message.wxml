@@ -1,0 +1,20 @@
+<!--pages/fitnessCircle/fitnessCircle.wxml-->
+
+<import src="../../templates/empty-view/empty-view.wxml"/>
+<import src="../../templates/article-item/article-item.wxml"/>
+
+<view class='bg-view' >
+
+  <view wx:if='{{ articleItems.length > 0 }}'>
+  <block wx:for='{{ articleItems }}' wx:for-item='arts' wx:key='{{ index }}'>
+    <template is='article-item' data='{{ ...arts, index }}'/>
+  </block>
+  </view>
+
+  <!-- 无 更多 -->
+  <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+
+</view>
+
+<!-- 认证弹窗 -->
+<certificationModal modal-hidden="{{ is_modal_Hidden }}" modal-isCertificationMem="{{ isCertificationMem }}" />  

@@ -1,0 +1,29 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+
+  <view class="upBox flex">
+    <view class="statusPic">
+      <image src="/img/icon-shenhezhong@2x.png" class="statusPic" wx:if="{{status == 1}}"></image>
+      <image src="/img/icon-chenggong@2x.png" class="statusPic" wx:if="{{status == 2}}"></image>
+      <image src="/img/icon-shibai@2x.png" class="statusPic" wx:if="{{status == 3}}"></image>
+    </view>
+    <view>
+      <view class="statusTitle" wx:if="{{status == 1}}">{{group_title}}认证审核中</view>
+      <view class="statusTitle" wx:if="{{status == 2}}">{{group_title}}认证审核通过</view>
+      <view class="statusTitle" wx:if="{{status == 3}}">{{group_title}}认证审核未通过</view>
+      <view class="severThing">认证会员将由微天使直接服务 </view>
+      <view>请加微信weitianshiFA</view>
+    </view>
+  </view>
+  <textarea id="textContent" bindinput="leaveMessage" maxlength="500" placeholder="如需认证其他身份，可在此留言" />
+  <image src="{{imgUrls}}" class="picAfter"></image>
+  <view class="floatBtn">
+    <view class="btnYes" bindtap="btnYes" wx:if="{{status != 3}}" hover-class='t-other-button-hover'>确定</view>
+    <view class="flex backColor" wx:if="{{status == 3}}">
+      <view class="reaccreditation" bindtap="reaccreditation" hover-class='t-other-button-hover'>重新认证</view>
+      <view class="reaccreditation no-border" bindtap="reaccreditationYes" hover-class='t-other-button-hover'>确定</view>
+    </view>
+  </view>
+</view>

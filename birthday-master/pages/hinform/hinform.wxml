@@ -1,0 +1,180 @@
+
+<view class="container">
+  <view class='header' bindtap='setting'>
+      <image class="photo" src="{{inform.avatar}}" mode='widthFix'></image>
+      <view class="name ellipsis">{{inform.name}}</view>
+      <view class="main-tatile">
+        <text>♀	</text>
+        <text style="margin: 0 4px;">{{inform.birthday}}</text>
+        <text class="constellation">{{inform.star}}</text>
+      </view>
+  </view>
+  <view class="wishes">
+		<view class="left">
+        <view class="top">
+          <text style="font-size: 32px;">{{inform.surplus_day}}</text>天
+        </view>
+        <view class="center">后是她的<text>{{inform.age}}岁</text>生日</view>
+        <view class="bottom">
+            <text>{{inform.birthday}}</text>
+            <text style="margin-left: 4px;">{{inform.week}}</text>
+        </view>
+		</view>
+    <!--已认证  -->
+		<view class="right" wx:if="{{renzheng}}" bindtap='zan'>
+        <view class="top" >
+            <text class="ico"></text>{{inform.wish_count}}
+        </view>
+        <view class="zan">点赞</view>
+	  </view>
+    <!--未认证  -->
+    <view class="right" wx:else bindtap='gorenzheng'>
+        <view class="noIco" ></view>
+        <view class="zan">点赞</view>
+	  </view>
+  </view>
+  <!--性格档案  -->
+	<!-- <view class="personPro">
+		<view class="title">性格档案</view>
+		<view class="person_all">
+			<view class="people_one">
+				<view class="people_dec" style="background:#63CEE5">典雅型
+					<view class="contact" style="border-color: #63CEE5 transparent transparent #63CEE5;">
+					</view>
+				</view>
+				<image src="../images/personality_image@7.png"></image>
+				<view class="people_trait">
+					看中外表
+					<view class="trait_point" style="border-color:#63CEE5"></view>
+				</view>
+				<view class="people_trait">
+					擅长调解
+					<view class="trait_point" style="border-color:#63CEE5">
+					</view>
+				</view>
+				<view class="people_trait">
+					得体
+					<view class="trait_point" style="border-color:#63CEE5">
+					</view>
+				</view>
+			</view>
+			<view class="people_one">
+				<view class="people_dec" style="background:#86BEFF">
+					灵动型
+					<view class="contact" style="border-color: #86BEFF transparent transparent #86BEFF;"></view>
+				</view>
+				<image src="../images/personality_image@8.png">	</image>
+				<view class="people_trait">
+					敏感<view class="trait_point" style="border-color:#86BEFF"></view>
+				</view>
+				<view class="people_trait">
+           热烈<view class="trait_point" style="border-color:#86BEFF"></view>
+				</view>
+				<view class="people_trait">
+					敢爱敢恨<view class="trait_point" style="border-color:#86BEFF"></view>
+				</view>
+			</view>
+			<view class="people_one">
+				<view class="people_dec" style="background:#FFA585">
+					隐忍型<view class="contact" style="border-color: #FFA585 transparent transparent #FFA585;">	</view>
+				</view>
+				<image src="../images/personality_image@10.png"></image>
+				<view class="people_trait">
+					意志力<view class="trait_point" style="border-color:#FFA585"></view>
+				</view>
+				<view class="people_trait">
+					企图心<view class="trait_point" style="border-color:#FFA585"></view>
+				</view>
+				<view class="people_trait">
+					专业<view class="trait_point" style="border-color:#FFA585"></view>
+				</view>
+			</view>
+		</view>
+		<view class="more_charactor">	详解她的12型性格</view>
+	</view> -->
+  <!--互动与测算  -->
+	<!-- <view class="game">
+		<view>互动与测算</view>
+		<view class="item" data-index="1">
+			<image src="https://static.shengri.cn/uploads/xydd/web/srgjmingli@2x.png"></image>
+			<view class="desc">
+				<view class="one">命理关系</view>
+				<view class="two">算一算我和TA的命理关系</view>
+			</view>
+		</view>
+		<view class="item" data-index="2">
+			<image src="https://static.shengri.cn/uploads/xydd/web/sigjdafen@2x.png">	</image>
+			<view class="desc">
+				<view class="one">	姓名打分大PK</view>
+				<view class="two">看看谁的名字起的好	</view>
+			</view>
+		</view>
+	</view> -->
+	<view class="message">
+		<view>个人信息</view>
+		<view class="birthMsg">
+			<image src="../images/srgjshengri@2x.png"></image>
+			<view class="desc">
+				<view class="one">{{inform.birthday_detail}}</view>
+				<view class="three">
+					<!-- <text style="display: inline-block;width: 17px; height: 17px; border: 1px solid rgba(153,153,153,0.7); text-align: center; line-height: 17px;">猴</text> -->
+					<text style="margin-left: 7px; display: inline-block;width: 44px; height: 17px; border: 1px solid rgba(153,153,153,0.7); text-align: center; line-height: 17px;">{{inform.star}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="relation">
+			<image src="../images/srgjguanxi@2x.png" style="float: left;"></image>
+			<view class="desc">
+				<view class="one over">
+				  关系<text class='' data-index="3" style="margin-left: 9px; color: #3CACDF; text-decoration: underline;">{{inform.relation}}</text>
+				</view>
+				<view class="two">
+					<text>微信</text>
+					<image src="{{url}}" style="margin-left: 9px; width: 23px; height: 23px; border-radius: 50%; display: inline-block; vertical-align: middle;"></image>
+					<text style="width: 144px; display: inline-block;vertical-align: middle; margin-left: 7px; font-size: 13px; color: #999999; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;">{{inform.name}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+  <!--优缺点  -->
+	<!-- <view class="meritDefect" data-index="4">
+		<view class="title">
+			优缺点
+		</view>
+		<view class="bottom clearfix">
+			<image src="../images/srgjbaike@2x.png">	</image>
+			<view class="desc">
+				<view class="one">
+					<text>生日百科</text>好学的研究者
+				</view>
+				<view class="two">
+					具有很好的领导和沟通能力、擅长外交、人际关系良好。
+				</view>
+			</view>
+		</view>
+	</view> -->
+  <!--送她礼物  -->
+	<!-- <view class="giftGiving" data-index="5">
+		<view class="title">送她礼物</view>
+		<view class="bottom clearfix">
+			<image src="../images/srgjxinyidiandian@2x.png"></image>
+			<view class="desc">
+				<view class="one">
+					心意点点
+				</view>
+				<view class="two">
+					微信送礼、心意又新意
+				</view>
+			</view>
+		</view>
+	</view> -->
+	<view style="width: 100%; height: 62px;"></view>
+</view>
+
+<!--foot  -->
+<view class='foot' wx:if="{{setting}}">
+    <view class='item' bindtap='bianji'>编辑</view>
+    <view class='item' bindtap='dels'>删除好友</view>
+    <view class='item quxaio' bindtap='quxaio'>取消</view>
+</view>
+<view class='bg' wx:if="{{setting}}"></view>

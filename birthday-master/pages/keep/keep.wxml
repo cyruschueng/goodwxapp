@@ -1,0 +1,18 @@
+<!--pages/keep/keep.wxml-->
+<view class="container">
+    <block wx:if="{{tableCell}}">
+        <view class="tableCell" wx:for="{{tableCell}}">
+            <view class="cellLeft">
+              <view class="cellname">红包</view>
+              <view class="cellFrom">	{{item.title}}</view>
+              <view class="cellTime">	{{item.add_time}}</view>
+            </view>
+            <view class="cellMoney" style="color:#CC9E3D">	+{{item.money}}</view>
+        </view>
+    </block> 
+    <view wx:else>
+        <view class="noOrder2" style="font-size:26rpx;text-align:center;padding:20rpx;margin-top:0;box-sizing:border-box;">
+            还没有账单呢！
+        </view>
+    </view>
+</view>

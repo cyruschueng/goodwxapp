@@ -1,0 +1,38 @@
+<!--index.wxml-->
+<view class="container">
+	<view class="section section-logo">
+		<view class="section__img">
+			<image class='img img-logo' mode="{{mode}}" src="{{src}}"></image>
+		</view>
+		<view class="section__title">
+			<text>啪啪运动资源商城</text>
+		</view>
+	</view>
+    <form class="page-form">
+        <view class="section section-form">
+			<image class='img form-input__bg' src="../../assets/images/icon-phone.png"></image>
+            <input id="user_phone" class="form-input" type="number" name="user_phone" placeholder="手机号" maxlength="11" bindinput="inputPhone"/>
+			<view class='form-code' bindtap='getSmsCode'>
+				<text>{{codeInfo}}</text>
+			</view>
+        </view>
+		<view class="section section-form">
+			<image class='img form-input__bg' src="../../assets/images/icon-code.png"></image>
+            <input id="sms_code" class="form-input" type="number" name="sms_code" placeholder="验证码" bindinput="inputCode"/>
+        </view>
+		<view class="section section-form">
+			<image class='img form-input__bg' src="../../assets/images/icon-user.png"></image>
+            <input id="user_name" class="form-input" type="text" name="user_name" placeholder="姓名" bindinput="inputName"/>
+        </view>
+		<view class="section section-form">
+			<image class='img form-input__bg' src="../../assets/images/icon-user.png"></image>
+            <input id="user_password" class="form-input" type="text" name="user_password" placeholder="密码" bindinput="inputPassword" password/>
+        </view>
+        <view class="section section-form">
+            <button hover-class="none" class='form-btn' bindtap="userSignup">立即注册</button>
+        </view>
+    </form>
+	<!-- <view class='section section-bottom' bindtap='goLogin'>
+		<text>已有账号？去登录</text>
+	</view> -->
+</view>

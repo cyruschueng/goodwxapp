@@ -1,0 +1,24 @@
+<import src="../../style/footer.wxml" />
+<view class="container">
+  <view class="page-body">
+    <view class="page-section-title" style='margin-top:30rpx;'>点击可预约的车位，进行预定。目前测试中，可在后台完成订单处理即模拟车位已使用完毕。</view>
+    <view class="page-section-title"></view>
+    <view class="btn-area">
+      <form bindsubmit="sendSms" bindreset="formReset">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="descriotion" value='{{description}}' placeholder="车位描述" />
+              <input class="weui-input" name="equipId" value='{{equipId}}' placeholder="车位编号" />
+              <input class="weui-input" name="userId" value='{{userId}}' placeholder="车位归属" />
+              </view>
+          </view>
+        </view>
+        <button type="primary" formType="submit">确认预约</button>
+        <button formType="reset">重置</button>
+      </form>
+    </view>
+    
+  </view>
+  <template is="foot" />
+</view>

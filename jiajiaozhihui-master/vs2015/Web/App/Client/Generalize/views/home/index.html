@@ -1,0 +1,72 @@
+﻿<div class="page" ng-controller="homeController">
+    <div ng-include="'./views/home/header.html'"></div>
+    <div class="page__bd">
+
+        <div class="weui-tab">
+            <div class="weui-navbar">
+                <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+                    初级群
+                </a>
+                <a class="weui-navbar__item" href="#tab2">
+                    高级群
+                </a>
+            </div>
+            <div class="weui-tab__bd">
+                <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    <div class="weui-cells__title" ng-bind="groupName"></div>
+                    <div class="weui-cells">
+                        <div ng-repeat="m in list  | filter:{'catalogue':1} | orderBy:['-is_act','pass']" class="weui-cell">
+                            <div class="weui-cell__hd">
+                                <img ng-click="detail(m.id)" style="width:60px;height:60px;" ng-src="{{m.img_url}}">
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>{{m.title + ' '+ m.classname+'班' }}</p>
+                                <p style="font-size:13px;color:#666;" ng-if="m.classname!=''" >班级：{{m.classname+'班' }}</p>
+                                <p style="font-size:13px;color:#666;">有效期：{{m.valid_date|date:"yyyy-MM-dd" }}</p>
+                                <p style="font-size:13px;color:#666;">群成员：{{m.quantity }} 人</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <p ng-show="m.is_act==1"><span  class="weui-btn weui-btn_mini weui-btn_primary">正在使用</span></p>
+                                <p ng-show="m.is_act==0 && isValidDate(m.valid_date)"><span ng-click="using(m.id,1)"  class="weui-btn weui-btn_mini weui-btn_default"><span ng-class="{true:' fa  fa-spinner fa-pulse',false:''}[busy]"></span>启用</span></p>
+                                <p ng-show="!isValidDate(m.valid_date)" ><span class="weui-btn weui-btn_mini weui-btn_disabled weui-btn_default">过期</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab2" class="weui-tab__bd-item">
+                    <div class="weui-cells__title" ng-bind="groupName"></div>
+                    <div class="weui-cells">
+                        <div ng-repeat="m in list | filter:{'catalogue':2} | orderBy:['-is_act','pass']" class="weui-cell">
+                            <div class="weui-cell__hd">
+                                <img ng-click="detail(m.id)" style="width:60px;height:60px;" ng-src="{{m.img_url}}">
+                            </div>
+                            <div class="weui-cell__bd">
+                                    <p>{{m.title + ' '+ m.classname+'班' }}</p>
+                                    <p style="font-size:13px;color:#666;" ng-if="m.classname!=''" >班级：{{m.classname+'班' }}</p>
+                                    <p style="font-size:13px;color:#666;">有效期：{{m.valid_date|date:"yyyy-MM-dd" }}</p>
+                                    <p style="font-size:13px;color:#666;">群成员：{{m.quantity }} 人</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <p ng-show="m.is_act==1"><span  class="weui-btn weui-btn_mini weui-btn_plain-primary">正在使用</span></p>
+                                <p ng-show="m.is_act==0 && isValidDate(m.valid_date)"><span ng-click="using(m.id,2)"  class="weui-btn weui-btn_mini weui-btn_default "><span ng-class="{true:' fa  fa-spinner fa-pulse',false:''}[busy]"></span>启用</span></p>
+                                <p ng-show="!isValidDate(m.valid_date)" ><span  class="weui-btn weui-btn_mini weui-btn_disabled weui-btn_plain-default">过期</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="showLoadding" style="position:fixed; top:0; left:0; height: 100%; width: 100%;">
+        <div style="height: 100%; width: 100%; display: flex;align-items: center">
+            <div class="weui-loadmore" >
+                <i class="weui-loading"></i>
+                <span class="weui-loadmore__tips">正在处理中，请稍等</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>今日头条APP顶部点击可居中导航</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <script src="js/swiper.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #topNav {
+            width: 100%;
+            overflow: hidden;
+            font: 16px/32px hiragino sans gb, microsoft yahei, simsun;
+            border-bottom: 1px solid #f8f8f8;
+        }
+
+        #topNav .swiper-slide {
+            padding: 0 5px;
+            letter-spacing: 2px;
+            width: 3rem;
+            text-align: center;
+        }
+
+        #topNav .swiper-slide span {
+
+            transition: all .3s ease;
+            display: block;
+        }
+
+        #topNav .active span {
+            transform: scale(1.1);
+            color: #FF2D2D;
+        }
+
+        img {
+            width: 100%;
+            line-height: 0;
+        }
+    </style>
+</head>
+<body>
+<img src="images/img01.png">
+<div id="topNav" class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide active"><span>推荐</span></div>
+        <div class="swiper-slide"><span>热点</span></div>
+        <div class="swiper-slide"><span>深圳</span></div>
+        <div class="swiper-slide"><span>视频</span></div>
+        <div class="swiper-slide"><span>社会</span></div>
+        <div class="swiper-slide"><span>娱乐</span></div>
+        <div class="swiper-slide"><span>科技</span></div>
+        <div class="swiper-slide"><span>问答</span></div>
+        <div class="swiper-slide"><span>汽车</span></div>
+        <div class="swiper-slide"><span>财经</span></div>
+        <div class="swiper-slide"><span>军事</span></div>
+        <div class="swiper-slide"><span>体育</span></div>
+        <div class="swiper-slide"><span>段子</span></div>
+        <div class="swiper-slide"><span>美女</span></div>
+        <div class="swiper-slide"><span>国际</span></div>
+        <div class="swiper-slide"><span>趣图</span></div>
+        <div class="swiper-slide"><span>健康</span></div>
+        <div class="swiper-slide"><span>特产</span></div>
+        <div class="swiper-slide"><span>房产</span></div>
+    </div>
+</div>
+<img src="images/img02.png">
+<script type="text/javascript">
+    var mySwiper = new Swiper('#topNav', {
+        freeMode: true,
+        freeModeMomentumRatio: 0.5,
+        slidesPerView: 'auto',
+        onTap: function (swiper, event) {
+            var index = swiper.clickedIndex,
+                slide = swiper.slides[index],
+                slideLeft = slide.offsetLeft,
+                slideWidth = slide.clientWidth,
+                slideCenter = slideLeft + slideWidth / 2,
+                doc = window.document,
+                topNav = doc.getElementById('topNav'),
+                act = topNav.getElementsByClassName('swiper-slide')[index];
+
+            // 被点击slide的中心点
+            mySwiper.setWrapperTransition(300);
+            if (slideCenter < swiperWidth / 2) {
+                mySwiper.setWrapperTranslate(0)
+            } else if (slideCenter > maxWidth) {
+                mySwiper.setWrapperTranslate(maxTranslate)
+            } else {
+                nowTlanslate = slideCenter - swiperWidth / 2;
+                mySwiper.setWrapperTranslate(-nowTlanslate)
+            }
+
+            addClass(act, 'active');
+            removeClass(siblings(act), 'active');
+
+            // 获取包含类名的DOM兼容写法
+            function getElementsByClassName(className) {
+                var all = document.all ? document.all : document.getElementsByTagName('*'); // document.all 是代表文档的所有元素的集合数组
+                var elements = new Array();
+                for (var e = 0; e < all.length; e++) {
+                    if (all[e].className == className) {
+                        elements[elements.length] = all[e];
+                        break;
+                    }
+                }
+                return elements;
+            }
+            // 判断对象是否包含某个类名
+            function hasClass(obj, cls) {
+                return !!obj.className.match(new RegExp("(\\s|^)" + cls + "(\\s|$)")); // ( \\s|^ ) 判断前面是否有空格 （\\s | $ ）判断后面是否有空格 两个感叹号为转换为布尔值 以方便做判断
+            };
+            // 给对象添加某个类名
+            function addClass(obj, cls) {
+                if (!hasClass(obj, cls)) obj.className += " " + cls;
+            }
+            // 获取所有兄弟节点
+            function siblings(elm) {
+                var a = [];
+                var p = elm.parentNode.children;
+                for (var i = 0, pl = p.length; i < pl; i++) {
+                    if (p[i] !== elm) a.push(p[i]);
+                }
+                return a;
+            }
+            // 移除类名
+            function removeClass(obj, cls) {
+                obj.forEach(function (value, index, array) {
+                    array[index].className = array[index].className.replace(new RegExp("(\\s|^)" + cls + "(\\s|$)"), " "); // replace方法是替换
+                })
+
+            };
+        }
+
+    });
+    /*  可以通过mySwiper.container[0]得到container的HTML元素 */
+    swiperWidth = mySwiper.container[0].clientWidth ;  // container的屏幕宽度
+    maxTranslate = mySwiper.maxTranslate();
+    maxWidth = -maxTranslate + swiperWidth / 2;
+</script>
+</body>
+</html>

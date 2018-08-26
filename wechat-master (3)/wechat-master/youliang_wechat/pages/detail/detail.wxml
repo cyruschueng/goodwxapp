@@ -1,0 +1,28 @@
+<import src="../../wxParse/wxParse.wxml" />
+
+<view class='title'>{{title}}</view>
+<view class='summary'>{{summary}}</view>
+<view class='date'>
+  <view class='time'>{{time}}</view>
+  <view class='date_t' wx:if="{{src.length>0}}" style="display:block;">
+    <view class='audio'>
+      <audio poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop bindplay="funplay" bindpause="funpause" bindtimeupdate="funtimeupdate" bindended="funended" binderror="funerror"></audio>
+    </view>
+  </view>
+  <view class='date_t' wx:else="{{src.length==0}}" style="display:none;">
+    <view class='audio'>
+      <audio poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop bindplay="funplay" bindpause="funpause" bindtimeupdate="funtimeupdate" bindended="funended" binderror="funerror"></audio>
+    </view>
+  </view>
+</view>
+<view class="contents">
+
+  <template is="wxParse" data="{{wxParseData:article_content.nodes}}" />
+
+</view>
+<loading hidden='{{hidden}}'>加载中……</loading>
+
+
+<import src="../../wxParse/wxParse.wxml" />
+
+

@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2016/8/16
+ * Time: 18:35
+ */
+class Domain_HalfHourCrond {
+
+    private $req;
+
+    public function __construct() {
+        $this->req = DI()->request->getAll();
+    }
+
+    public function closeExpiredLive() {
+        $half_hour_ago = date('Y-m-d H:i', strtotime('30 minutes ago'));
+        DI()->logger->debug('关闭预告时间', $half_hour_ago);
+        $rs = DI()->notorm->live_list->where('status = 1 and preview_time < ?', $half_hour_ago)->update(['status' => 5]);
+
+
+        DI()->logger->info('关闭过期预告', $rs);
+
+        if($rs) {
+            DI()->redis->del('get_live_list');
+        }
+        //var_dump($rs);exit;
+        //$status = 3;
+
+    }
+
+}

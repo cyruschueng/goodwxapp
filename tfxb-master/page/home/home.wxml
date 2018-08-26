@@ -1,0 +1,43 @@
+<view class='slbd home speedup {{startGameAnim}} anim-home {{loadclass}}'>
+    <view class="user-box">
+        <view class="face-box" bindtap="linkPageMe">
+            <image class="user-face" src="{{userface}}" mode="aspectFit"></image>
+        </view>
+        <!-- <view class="user-nick">{{usernick}}</view> -->
+    </view>
+    <view class='home-info'>
+        <view class='info-item clearfix info-star'>
+            <view class='info-title'>Lv {{userLevel}}</view>
+            <view class="info-con iconstar-bg {{starBgHide}}"><text class="iconstar {{'star'+userStar}}"></text></view>
+        </view>
+        <view class='info-item clearfix info-gold'>
+            <view class='info-title'>
+                <image class='icon-gold' src="../../asset/image/icon-gold.png"></image>
+            </view>
+            <view class="info-con">{{userScore}}</view>
+        </view>
+    </view>
+    <view class='home-level'>
+        <view class='level-box'>
+            <view class='level-con'>
+                <view class='level-bar'>
+                    <view class='bar-hl' style='width:{{levelBarWidth}}'></view>
+                </view>
+                <view class='level-min'>Lv1</view>
+                <view class='level-max'>Lv13</view>
+            </view>
+            <view class='level-tip'>
+                <view class='tip-val' style='left:{{levelBarWidth}}'>Lv{{userLevel}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='home-map'>
+        <image class='img-map' src="{{mapImgSrc}}" mode="widthFix"></image>
+    </view>
+    <button class='home-bag hidebtn btnclick-anim anim-bag' bindtap="linkPagePrize">
+        <image class='img-bag' src="../../asset/image/img-bag.png" mode="widthFix" ></image>
+    </button>
+</view>
+<view class='game-start speedup {{startGameAnim}} anim-rocket {{loadclass}}'>
+    <image class="img-rocket" src="../../asset/image/img-rocket.png" mode="widthFix" bindtap="linkPageGame"></image>
+</view>

@@ -1,0 +1,60 @@
+<view class="container">
+  <view class='flexColumn bg256 wh100'>
+  <!--上  -->
+    <view class='flexCe h25 flexColumn'>
+      <image class="img4"src="/images/logo.png"></image>
+    </view>
+    <!--中  -->
+    <view class='flexCe h15 justi mAb05 pd11 borderB mb05'>
+      <view class='width10 h100  cir'>
+        <image class="imgl circ top0 zindex" src="/images/no1.png"></image>
+      </view>
+      <view class='width27 h100 flexCe'  wx:for="{{rankNo3}}" wx:key="{{index}}" wx:for-item="rankNo3">
+         <image class='wh100' src="{{rankNo3.wxInfo.avatar}}"></image> 
+      </view>
+    </view>
+    <view class='flexCe h8 justi mAb05 pd11 borderB mb05 font10'>
+      倒计时：{{index}}
+    </view>
+    <!--下  -->
+    <!--排序列表  -->
+    <view class='flexv1  pdlr14 flexColumn mAb1 bgColorGH'>
+    <view class='width100  h12 flexCe fontw'>
+      <view class='width20'></view>
+      <view class='width40 flexS'>今日排行</view>
+      <view class='width40 flexS'>当月排行</view>
+    </view>
+    <view class=' flex flexv1 '>
+    <!--左 "-->
+      <view class=' modeldrawer_content width10 pd07'>
+      </view>
+      <!--中  -->
+      <view class=' modeldrawer_content width45'>
+        <view class=' h30 flex flexCenter borderBL'  wx:for="{{dayRankBox.dayList}}" wx:key="{{index}}" wx:for-item="dayList">
+           <view class='fontw1'>{{index+1}}</view>
+          <image src="{{dayList.wxInfo.avatar}}" class='width60 h80'></image>
+          <view class='flexColumn flexCenter'>
+            <view class='font075 color10 mb01'>{{dayList.wxInfo.nickName}}</view>
+            <view class='font07'>{{dayList.energy}}kW</view>
+          </view>
+        </view>
+      </view>
+      <!--右  -->
+      <view class=' modeldrawer_content width45'>
+        <view class=' h30 flex flexCenter borderBL'  wx:for="{{dayRankBox.monthList}}" wx:key="{{index}}" wx:for-item="monthList">
+           <view class='fontw1 mr03'>{{index+1}}</view>
+          <image src="{{monthList.wxInfo.avatar}}" class='width60 h80 mr03'></image>
+          <view class='flexColumn flexCenter'>
+            <view class='font075 color10 mb01'>{{monthList.wxInfo.nickName}}</view>
+            <view class='font07'>{{monthList.energy}}kW</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    </view>
+    <view class='flexCe h8 justi overhiden pd13'>
+    <button class='font08 Skin' bindtap='toIndex'>进入恒通源光伏监控</button>
+  </view>
+  </view>
+</view>
+

@@ -1,0 +1,55 @@
+ <image bindtap='toPause' class="music {{showView3?'show':''}}" src='/pages/imgs/start_button.png'></image>
+ <image bindtap='toStart' class="music {{showView4?'show':''}}" src='/pages/imgs/pause_button.png'></image>
+ <image src='{{p1}}' class='bg_color' style='background-color:{{bgcolor}}'>
+  <image class="top-start" animation="{{animationDataA1}}" src='{{p2}}'></image>
+  <image class="top-start" animation="{{animationDataA2}}" src='{{p3}}'></image>
+
+  <image class="top-start" animation="{{animationDataB1}}" src='{{p2}}'></image>
+  <image class="top-start" animation="{{animationDataB2}}" src='{{p3}}'></image>
+  <view class='clearfix'></view>
+</image>
+
+<image class="photo1" src="{{headimgurl}}" background-size="cover"> </image>
+<view class='footer'  style='background-color:{{color}}'>
+  <view class='info_box'>
+    <view class='name' style='color:white'>{{nickname}}</view>
+    <view class="wishes_world {{showView5?'show':''}}">{{wishes_world}}</view> 
+    <view class="playVoice1 {{showView6?'show':''}}" bindtap='playVoice'> 收听 </view>
+    <view class="turnCoin ">
+    <view class="{{showView?'show':''}}">
+    <image bindtap='turnCoin' src='/pages/imgs/OK.png' animation="{{animationData}}"></image> 
+    </view>  
+    <view class="show_Money {{showView1?'show':''}}">￥{{money}}</view>
+    <view class="over_tip {{showView2?'show':''}}">已领完</view>
+    <view class="over_tip1 {{showView7?'show':''}}"><text>红包已过期\n余额已退还</text></view>
+    </view> 
+    <button bindtap='selectTheme' class='imgBox' style='color:none;background-color:{{color}};'>
+      <image  src='../imgs/alsoSent1.png'></image>
+      <view class='imgBox_text'>我要发</view>
+    </button>
+    <button class='imgBox' open-type="share" style='color:none;background-color:{{color}};'>
+      <image src='../imgs/share1.png'></image>
+      <view class='imgBox_text'>去分享</view>
+    </button>
+    <button class='imgBox' open-type="contact" session-from="weapp"  style='color:none;background-color:{{color}};'>
+      <image src='../imgs/talk1.png'></image>
+      <view class='imgBox_text'>去吐槽</view>
+    </button>
+  </view>
+  <!-- 领取列表 -->
+      <view class='detial'>
+    <view class='detailHeader'>共{{much}}元，领取{{no}}/{{totle}}个</view>
+    <view class='detialContent' wx:for="{{items}}">
+      <image class="detialPhoto" src="{{item.headimgurl}}" background-size="cover"> </image>
+      <view class='detialInfo'>
+        <view class='detialName'>{{item.nickname}}</view>
+      </view>
+      <view class='detailRight'>
+        <view class='detailMoney'>{{item.money}}元</view>
+        <view class='detailTimet'>{{item.update_time}}</view>
+      </view>
+      <view class='clearfix'></view>
+    </view>
+  </view>
+</view>
+

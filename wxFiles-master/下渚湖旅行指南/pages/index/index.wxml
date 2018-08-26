@@ -1,0 +1,45 @@
+<view style='height:350rpx;overflow:hidden;padding:30rpx 30rpx 0 30rpx;'>
+  <swiper indicator-dots="true" autoplay="true" interval="5000" duration="500" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" style='width:100%;height:350rpx;overflow:hidden;border-radius:10rpx 10rpx 0 0'>
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" style='width:100%;height:350rpx;' mode='aspectFill' />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='btn-cri panel-center item-center'>
+    <image src='/img/search.png' style='width:40rpx;height:40rpx'></image>
+  </view>
+  
+</view>
+<!--图标栏 start  -->
+<view style='padding:0 30rpx 30rpx 30rpx'>
+  <view class='bg-white panel-center' style='border-radius:0 0 10rpx 10rpx;padding:0  0  30rpx 0'>
+    <view class='icon-item' wx:for="{{iconList}}" bindtap='navToList' data-id='{{index}}'>
+      <image src='{{item.image}}' style='width:70rpx;height:70rpx'></image>
+      <view>{{item.text}}</view>
+    </view>
+  </view>
+</view>
+<!--图标栏 end  -->
+
+<!--标题栏start  -->
+<view class='panel-start' style='padding: 0 30rpx 0 30rpx'>
+  <view style='background:#ff9900;height:40rpx;width:10rpx'></view>
+  <view style='margin-left:30rpx;font-size:32rpx' class='color-gray'>下渚湖精选</view>
+</view>
+<!--标题栏end  -->
+
+
+<!--列表  -->
+<view style='padding:30rpx;'>
+  <view class='bg-str jxlist' wx:for="{{dataList}}" style='background-image:url({{item.image}})' bindtap='navTodetail' data-page='notice'>
+    <view style='background-color:rgba(0,0,0,0.3);height:300rpx;' class='panel-center item-center'>
+      <view style='text-align:center'>
+        <text>
+          <text class='color-white' style='font-size:40rpx;'>{{item.title}}\n</text>
+          <text class='color-white'>{{item.subTitle}}</text>
+        </text>
+      </view>
+    </view>
+  </view>
+</view>

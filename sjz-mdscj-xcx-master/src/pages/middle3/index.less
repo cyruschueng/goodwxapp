@@ -1,0 +1,118 @@
+@import "productCard";
+page {
+  background: #efefef;
+}
+.product-wrap {
+  background: #efefef;
+  text-align: center;
+  box-sizing: border-box;
+  .loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    padding-top: 100rpx;
+    color: #999;
+    font-size: 24rpx;
+    background: #fff;
+  }
+  .old-products {
+    background: transparent;
+    opacity: 0;
+    &.show {
+      opacity: 1;
+    }
+  }
+  .down-products {
+    padding-top: 28rpx;
+    background: transparent;
+  }
+  .product-item {
+    background: transparent;
+  }
+  .up-info {
+    text-align: center;
+    padding: 19rpx 0 25rpx;
+    background: inherit;
+    font-size: 24rpx;
+    line-height: 33rpx;
+    color: #a0a0a0;
+    image {
+      display: block;
+      width: 26rpx;
+      height: 23rpx;
+      margin: 0 auto 12rpx;
+    }
+    & + .product-card {
+      margin-top: 0;
+    }
+  }
+  .down-info {
+    position: relative;
+    display: inline-block;
+    font-size: 24rpx;
+    line-height: 24rpx;
+    color: #a0a0a0;
+    background: inherit;
+    image {
+      width: 24rpx;
+      height: 24rpx;
+      margin-right: 5rpx;
+      vertical-align: top;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -60rpx;
+      width: 40rpx;
+      height: 1rpx;
+      background: #a0a0a0;
+      vertical-align: middle;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -60rpx;
+      width: 40rpx;
+      height: 1rpx;
+      background: #a0a0a0;
+      vertical-align: middle;
+    }
+  }
+  .contact {
+    position: fixed;
+    bottom: 78rpx;
+    right: 11rpx;
+    width: 140rpx;
+    height: 120rpx;
+    background: url("http://img-prod.kkkd.com/Fq9TaTbVWi_9uzEVbybZq_cZoD1J") no-repeat;
+    background-size: 140rpx;
+    &:after {
+      border: none;
+    }
+    transform: translateZ(0);
+    animation: shake linear 2s infinite;
+  }
+}
+
+@keyframes shake {
+  80% {
+    transform: scale(1);
+  }
+  85% {
+    transform: scale(1.2);
+  }
+  90% {
+    transform: scale(1);
+  }
+  95% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

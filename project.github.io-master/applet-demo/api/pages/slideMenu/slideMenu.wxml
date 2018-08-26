@@ -1,0 +1,14 @@
+<!--pages/slideMenu/slideMenu.wxml-->
+<view class="mpage {{!ui.tStart ? 'widthAnimate' : ''}}" style="left:{{ui.offsetLeft}}px;width:{{ui.windowWidth}}px">
+    <view class="title" bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" bindtap="handlerPageTap">右滑出现菜单</view>
+</view>
+<view bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" class="user" style="width: {{ui.menuWidth}}px">
+    <view style="width: {{ui.menuWidth}}px;left:{{-ui.menuWidth/3 + ui.offsetLeft/3}}px" class="user-box {{!ui.tStart? 'withAnimate': ''}}">
+        <view class="user-face-wrapper">
+            <image class="user-face" src="../../images/3.png"></image>
+        </view>
+        <view wx:for="1234" wx:key="unique" class="one-menu">
+            <text>菜单{{item}}</text>
+        </view>
+    </view>
+</view>

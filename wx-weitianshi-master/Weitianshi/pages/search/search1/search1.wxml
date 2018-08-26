@@ -1,0 +1,24 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="searchBox">
+    <input class="searchCompany" placeholder="请输入公司名称" bindinput="inputValue" value="{{company_name}}" maxlength="40" />
+    <view class="searchSth" bindtap="searchCompany">搜索</view>
+  </view>
+
+  <view class=" prompt">
+    <image src="/img/icon-zhuyi@2x.png" class="exclamation"></image>
+    <view class="noLetOut">公司名称仅自己可见,不对外泄露</view>
+  </view>
+  <scroll-view scroll-y="true" bindscrolltolower="loadMore" scroll-top="{{scroll}}">
+    <block wx:for="{{company}}" wx:key="{{index}}">
+      <view class="result">
+        <view class="content {{item.com_id ==  com_id ? 'on':''}}" data-id="{{item.com_id}}" data-name="{{item.company_name}}" bindtap="checkOne">{{item.company_name}}</view>
+      </view>
+    </block>
+    <view class="hasNo" wx:if="{{company.length  == 0}}">暂无结果，可点击保存</view>
+  </scroll-view>
+  <view class="emptyBox"></view>
+  <view class="saveCompanyName" hover-class='t-other-button-hover' bindtap="save">保存</view>
+  <!--没有更多-->
+  <view class="error" wx:if="{{error==1}}">{{error_text}}</view>
+</view>

@@ -1,0 +1,68 @@
+<!--pages/alterAddress/alterAddress.wxml-->
+<view class='gift'>
+  <scroll-view scroll-y class='giftshow' >
+     <view class='goodsList' wx:for="{{giftList}}" data-gid="{{item.id}}" bindtap='openPopup'>
+        <image src='{{item.url}}' class='goodsImg'></image>
+        <view class='shuoming'>{{item.introduction}}</view>
+      </view>
+  </scroll-view>
+</view>
+
+<!-- 遮罩 -->
+<view wx:if="{{isTanchuang}}" class='mask'></view>
+<!-- 弹框 -->
+<view wx:if="{{isTanchuang}}" class='popup'>
+  <image src='../../img/close.png' class='close' bindtap='closePopup'></image>
+   <view class='info' wx:if="{{!isTijiao}}">
+    <view class='infolist'>
+        <text>　　姓名</text>
+        <input type="text" value="{{adrName}}" name="adrName" placeholder="姓名" bindinput="addname"/>
+      </view>
+      <view class='infolist'>
+        <text>　　电话</text>
+        <input type="number" value="{{adrPhone}}" name="adrPhone" placeholder="手机号码" bindinput="addphone"/>
+      </view>
+      <view class='infolist'>
+        <text>　　地址</text>
+        <input type="text" disabled="disabled" name="pct" value="{{areaInfo}}" placeholder="省份、城市、区县" bindtap="selectDistrict"/>
+      </view>
+      <view class='infolist'>
+        <text>详细地址</text>
+        <input type="text" name="adrDetail" value="{{adrDetail}}" placeholder="详细地址，如街道、楼牌号等" bindinput="addDetail"/>
+      </view>
+      <button bindtap='submitInfo' hover-class="none" class="answerBtn-right tt3">确 定</button>  
+  </view> 
+  <view class='info' wx:else>
+    <view class='tips'>联系客服领取奖品</view>
+    <button open-type="contact" hover-class="none" class="answerBtn-right tt3">确 定</button>  
+  </view>
+</view>
+
+
+
+
+<!-- 城市地址选择 -->
+<view class="dialog-mask " style="z-index:30;visibility:{{addressMenuIsShow ? 'visible': 'hidden'}}" bindtap="hideCitySelected" />
+<!--城市三级联动-->
+<!--使用动画时不能wx:if="{{city.length>0&&isVisible}}" ，不能hidden=''属性否则无动画效果-->
+<view class="picker-view" animation="{{animationAddressMenu}}" style="visibility:{{addressMenuIsShow ? 'visible':'hidden'}}">
+  <view style="height:10% ;width:95%;margin-top:10rpx">
+    <text catchtap="cityCancel">取消</text>
+    <text style="float: right" catchtap="citySure">确定</text>
+  </view>
+  <!--"可以显示默认的城市，使用后级联选择城市反应很慢就不使用了-->
+  <picker-view style="width: 100%; height: 300px;" bindchange="cityChange" value="{{value}}" wx:key="">
+    <picker-view-column>
+      <view wx:for="{{provinces}}" class="picker-item">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" class="picker-item" wx:key="">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{areas}}" class="picker-item" wx:key="">
+        {{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>

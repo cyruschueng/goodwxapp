@@ -1,0 +1,26 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<!--index.wxml-->
+<view class="container">
+<view class='flex flexv1 p0'>
+  <map id="map4select"
+ longitude="{{longitude}}" latitude="{{latitude}}" 
+ markers="{{markers}}"
+ scale="14" 
+ bindregionchange="regionchange"
+ controls="{{controls}}" class='h100 width100'>
+ 
+</map> 
+</view>
+<view class='flexColumn mt05 pb1'>
+    <view>要在当前位置创建电站吗？</view>
+     <view>经度：{{longitude}}  纬度：{{latitude}}</view> 
+    <view class='flexCenter flex1 mt05'>
+      <view bindtap='buildConfi' class='Skin mr1 flexCenter pAb02 br02' >确定</view>
+      <view bindtap='midiPosi' class='bgColorE flexCenter pAb02 br02'>自定义</view>
+    </view>
+    <view class='flexD  mt05'>
+      <view bindtap='buildConfiCancel' class='bgColorE flexCenter mr1 padding015 br02'>取消</view>
+    </view>
+</view>
+</view>

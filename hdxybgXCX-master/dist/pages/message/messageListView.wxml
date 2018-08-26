@@ -1,0 +1,19 @@
+<!--logs.wxml-->
+
+<view class='message-body'>
+
+  <view class='message-panel' wx:for="{{ messages }}" wx:for-item="meg" wx:key="{{ index }}" id='{{ meg.id }}' bindtap='goMessageDetailsPage'>
+    <view class='title'>
+      {{ meg.title }}
+    </view>
+    <view class='text second-txt-color'>
+      {{ meg.text }}
+    </view>
+    <view class='time second-txt-color'>
+      <text>{{ meg.time }}</text>
+    </view>
+  </view>
+
+</view>
+
+<view class='remind-empty-view' wx:if='{{ messages.length <= 0 }}'>暂无消息...</view>

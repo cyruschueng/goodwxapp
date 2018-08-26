@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>Form Layouts</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
+		<link href="css/autocomplete.css" rel="stylesheet" type="text/css">
+		<style>
+			td {
+				word-break: break-all
+			}
+		</style>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<!--adddate-->
+		<script src="js/adddate.js"></script>
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+	</head>
+
+	<body class="children-body">
+
+		<!--body wrapper start-->
+		<section>
+			<!-- page start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading">
+							平台消息
+						</header>
+						<div class="panel-body">
+							<form class="form-horizontal" role="form">
+								<div class="row clearfix">
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">标题:</label>
+											<div class="col-lg-9">
+
+												<input type="text" class="form-control" id="sr_title">
+
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label class="control-label col-lg-3 col-sm-3 ">开始时间:</label>
+											<div class="col-lg-9">
+												<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+													<input type="text" readonly="" value="" size="16" class="form-control" id="begintime">
+													<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary date-set" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+												</div>-->
+													<input type="text" value="" size="16" class="form-control" id="begintime" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+												
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label class="control-label col-lg-3 col-sm-3 ">结束时间:</label>
+											<div class="col-lg-9">
+												<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-12-12" class="input-append date dpYears">
+													<input type="text" readonly="" value="" size="16" class="form-control" id="endtime">
+													<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+												</div>-->
+													<input type="text" value="" size="16" class="form-control" id="endtime" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+												
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="text-right">
+											<button class="btn btn-info" type="button" id="btn_Search">搜索</button>
+											<button class="btn btn-danger" type="button" id="btn_Reset">重置</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
+
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+
+					<section class="panel">
+						<div class="panel-heading">
+							<div class="text-right">
+								<button class="btn btn-success" type="button" id="btn_Add">添加</button>
+								<button class="btn btn-danger" type="button" id="btn_batchDel">批量删除</button>
+							</div>
+						</div>
+						<div class="panel-body">
+							<table id="bs" class="table table-striped table-condensed table-hover talbe-border" data-side-pagination="server">
+								<thead>
+									<tr>
+										<th data-field="status" data-align="center" data-checkbox="true"></th>
+										<th data-field="Username" data-align="center">创建人</th>
+										<th data-field="Title" data-align="center">标题</th>
+										<th data-field="Message" data-align="center" data-width="30%">内容</th>
+										<th data-field="BeginDateTimeSTR" data-align="center">开始时间</th>
+										<th data-field="EndDateTimeSTR" data-align="center">结束时间</th>
+										<th data-field="Id" data-align="center" data-formatter="operationFormatter">操作</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+						<!-- Modal -->
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" data-backdrop="static">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<label id="lbl_IdValue" hidden="hidden"></label>
+										<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+										<h4 class="modal-title" id="tip_title">添加平台消息</h4>
+									</div>
+									<div class="modal-body">
+										<form class="form-horizontal" id="sub_form">
+											<div class="form-group ">
+												<label for="cemail" class="control-label col-lg-3">标题</label>
+												<div class="col-lg-8">
+													<input class="form-control " id="md_title" name="md_title" type="text" maxlength="50" />
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">内容</label>
+												<div class="col-lg-8">
+													<textarea style="resize: none;" class="form-control" name="md_content" rows="5" id="md_content" maxlength="200"></textarea>
+													<!--<input class="form-control " id="md_content" name="md_content" type="text" />-->
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">用户名</label>
+												<div class="col-lg-8">
+													<!--<select class="form-control input-lg m-bot15" id="UserIDlist">
+
+										                            </select>-->
+													<div id="UserIDlist"></div>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">开始时间</label>
+												<div class="col-lg-8">
+													<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+														<input type="text" readonly="" value="" size="16" class="form-control" id="in_begintime" name="in_begintime">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+													</div>-->
+														<input type="text" value="" size="16" class="form-control" id="in_begintime" name="in_begintime" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+													
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">结束时间</label>
+												<div class="col-lg-8">
+													<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+														<input type="text" readonly="" value="" size="16" class="form-control" id="in_endtime" name="in_endtime">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+													</div>-->
+														<input type="text" value="" size="16" class="form-control" id="in_endtime" name="in_endtime" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+													
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+
+										</form>
+									</div>
+									<div class="modal-footer">
+
+										<button type="button" class="btn btn-success" onclick="Save();">保存</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- modal -->
+
+					</section>
+
+					<!--body wrapper end-->
+
+				</div>
+				<!-- main content end-->
+			</div>
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/bootstrapValidator.js"></script>
+		<script src="js/autocomplete.js"></script>
+
+		<script>
+			var tiaojian = {};
+			var checkList = new Array();
+			var $table = $("#bs");
+			var userinfo = getuserInfo();
+			//			console.log(userinfo);
+
+			function selectListFormatter(value, row, index) {
+				if(value != null && value != undefined) {
+					var sl = ["<select id='Id", row.Id, "' class='selectForMobile' >"];
+					$.each(value, function(i, v) {
+						sl.push("<option value='" + v.value + "' >" + v.text + "</option>");
+					});
+					sl.push("</select>")
+					return sl.join('');
+				} else return "";
+			}
+
+			function operationFormatter(value, row, index) {
+				var result = [
+					'<button onclick="Edit(' + value + ')" class="btn btn-info">编辑</button>', '<button type="reset" onclick="DelOne(' + value + ')" class="btn btn-danger">删除</button>'
+				];
+				return result.join(' ');
+			}
+			$(document).ready(function() {
+				leftCancelShade('myModal');
+				checkList = new Array();
+				$table.bootstrapTable({
+					pagination: true, //分页
+					onCheck: function(row) {
+						checkList.push(row.Id);
+						$.unique(checkList);
+					},
+					onUncheck: function(row) {
+						$.unique(checkList);
+						var pIndex = $.inArray(row.Id, checkList);
+						checkList.splice(pIndex, 1);
+					},
+					onCheckAll: function(rows) {
+						$.each(rows, function(index) {
+							checkList.push(rows[index].Id);
+						});
+						$.unique(checkList);
+					},
+					onUncheckAll: function(rows) {
+						checkList = new Array();
+					},
+					escape: true,
+					pageList: [10]
+				});
+				getdata(0);
+				bindUserlist();
+				btValidator();
+			});
+
+			function bindUserlist() {
+				$('#UserIDlist').autocomplete({
+					api: 'DRD_UserList',
+					width: '100%',
+					height: 34,
+					showButton: false,
+					name: 'selectedUser',
+					required: true,
+					onSubmit: function(text) {
+						//更新表单验证状态
+						if($('#selectedUser').attr('ekey') != "" && $('#selectedUser').attr('ekey') != undefined) {
+							$("#sub_form").bootstrapValidator('updateStatus', 'selectedUser', 'VALID');
+						}
+					}
+				});
+			}
+
+			//表格加载数据
+			function loadData(f1, data) {
+				f1.bootstrapTable('load', data);
+				var hashTemp = window.location.hash || "1"
+
+				hashTemp = hashTemp.replace("#", "")
+				$(".pagination").find('a').each(function() {
+					if($(this).text() == hashTemp)
+						$(this).click()
+				})
+			};
+			var getdata = function(offset) {
+					var data = new Array();
+					var totalcount = 0;
+					condition = {
+						Title: $("#sr_title").val(),
+						BeginDateTime: $("#begintime").val(),
+						EndDateTime: $("#endtime").val()
+					}
+					condition.p_limit = $table.bootstrapTable('getOptions').pageSize;
+					//console.log($table.bootstrapTable('getOptions'));
+					condition.p_offset = offset;
+					var options = $table.bootstrapTable('getOptions');
+					if(offset == 0) {
+						options.pageNumber = 1;
+						$table.bootstrapTable('refreshOptions', options);
+					}
+					getDataList(yshurl + "AM_GetMessageList", condition, function(d) {
+						data = d.many[0];
+						totalcount = d.many[1][0].totalcount;
+						//						console.log(d.many);
+					});
+					var pdata = {
+						total: totalcount,
+						rows: data
+					};
+					loadData($table, pdata)
+					setIframeHeight();
+				}
+			//分页点击
+			$table.on('page-change.bs.table', function(e, number, size) {
+				var os = (number - 1) * size;
+				window.location.hash = number;
+				getdata(os);
+			});
+
+			// onhashchange可以监控hash变化
+			window.onhashchange = function() {
+				var hash = window.location.hash;
+				var id;
+				if(hash != "") {
+					id = parseInt(hash.substr(1));
+				} else {
+					id = 1
+				}
+				var os = (id - 1) * 10;
+				getdata(os);
+				console.info(hash)
+				$("ul.pagination").children().eq(id).addClass("active").siblings().removeClass("active");
+			};
+
+			//搜索
+			$("#btn_Search").click(function() {
+				getdata(0);
+			});
+			//批量删除
+			$("#btn_batchDel").click(function() {
+				if(checkList.length <= 0) {
+					ysh_alert("请选中删除项", "warning");
+					return;
+				}
+				$.unique(checkList);
+				ysh_confirm("确定要删除选中项吗？", "确定", "取消", function(ret) {
+					if(ret) {
+						DelMessage(checkList.join(","));
+					}
+				});
+			});
+			//单个删除
+			function DelOne(id) {
+				ysh_confirm("确定要删除该项吗？", "确定", "取消", function(ret) {
+					if(ret) {
+						DelMessage(id);
+					}
+				});
+			}
+
+			function DelMessage(IdList) {
+				getDataList(yshurl + "AM_DelSysMessage", {
+					Idlist: IdList
+				}, function(d) {
+					getdata(0);
+					ysh_msg("删除成功");
+				});
+			}
+			//编辑
+			function Edit(id) {
+				getDataList(yshurl + "AM_GetSysMessageById", {
+					msgId: id
+				}, function(d) {
+					$("#md_title").val(d.aaData[0].Title);
+					$("#md_content").val(d.aaData[0].Message);
+					$("#in_begintime").val(d.aaData[0].BeginDateTimeSTR);
+					$("#in_endtime").val(d.aaData[0].EndDateTimeSTR);
+					if(d.aaData[0].IsSendAll == '1') {
+						$("#selectedUser").val('全部');
+						$("#selectedUser").attr('ekey', '0');
+					} else {
+						$("#selectedUser").val(d.aaData[0].Username);
+						$("#selectedUser").attr('ekey', d.aaData[0].UserId);
+					}
+					$("#lbl_IdValue").val(id);
+					$("#tip_title").text('编辑平台消息');
+				});
+				$('#myModal').modal('show');
+			}
+			$('#myModal').on('hidden.bs.modal', function() {
+				clear();
+			});
+			$('#myModal').on('hide.bs.modal', function() {
+				$('#sub_form').data('bootstrapValidator').resetForm();
+			});
+			//清空
+			function clear() {
+				$("#lbl_IdValue").val('');
+				$("#md_title").val('');
+				$("#md_content").val('');
+				$("#in_begintime").val('');
+				$("#in_endtime").val('');
+				$("#selectedUser").val('');
+				$("#selectedUser").attr('ekey', '');
+			}
+			//添加
+			$("#btn_Add").click(function() {
+				$("#tip_title").text('添加平台消息');
+				$('#myModal').modal('show');
+			});
+			//绑定用户编号
+			function bindUserId() {
+				getDataList(yshurl + "DRD_UserList", null, function(d) {
+					if(d.state == 0 && d.aaData.length > 0) {
+						var htmlstr = '<option value="0">全部</option>';
+						for(var i = 0; i < d.aaData.length; i++) {
+							htmlstr += '<option value="' + d.aaData[i].Id + '">' + d.aaData[i].Username + '</option>';
+						}
+						$("#UserIDlist").html(htmlstr);
+					} else {
+						console.log("获取分类列表接口出错");
+					}
+				});
+			}
+			//保存
+			function Save() {
+				$('#sub_form').data('bootstrapValidator').validate();
+				if($("#sub_form").data('bootstrapValidator').isValid()) {
+					var id = $("#lbl_IdValue").val();
+					var da = {
+						Title: $("#md_title").val(),
+						Message: $("#md_content").val(),
+						CreateId: userinfo[0].Id,
+						EndDateTime: $("#in_endtime").val(),
+						BeginDateTime: $("#in_begintime").val(),
+						UserId: $("#selectedUser").attr('ekey')
+					}
+					
+					//时间验证
+					if(da.EndDateTime == "" || da.BeginDateTime == ""){
+						ysh_alert("请输入开始时间或结束时间");
+					} else if(Number(da.EndDateTime.replace(/-/g, "")) < Number(da.BeginDateTime.replace(/-/g, ""))){
+						ysh_alert("结束时间不应早于开始时间");
+					} else {
+						if(id == '') { //新增
+							if(CheckIsExsit(da.Title)) {
+								ysh_alert("标题重复", "warning");
+								return;
+							}
+							getDataList(yshurl + "AM_InsertSysMessage", da, function(d) {
+								$('#myModal').modal('hide');
+								getdata(0);
+							});
+						} else { //修改
+							da.mesgId = id;
+							if(da.UserId == 0) {
+								da.IsSendAll = 1
+							}
+							getDataList(yshurl + "AM_UpdateSysMessageById", da, function(d) {
+								$('#myModal').modal('hide');
+								var options = $table.bootstrapTable('getOptions');
+								var offset = (options.pageNumber - 1) * options.pageSize;
+								getdata(offset);
+							});
+						}
+						ysh_msg("保存成功");
+					}
+				}
+			}
+			//表单验证
+			var btValidator = function() {
+					$('#sub_form').bootstrapValidator({
+						message: '错误',
+						feedbackIcons: {
+							valid: 'glyphicon glyphicon-ok',
+							invalid: 'glyphicon glyphicon-remove',
+							validating: 'glyphicon glyphicon-refresh'
+						},
+						fields: {
+							md_title: {
+								validators: {
+									notEmpty: {
+										message: '标题不能为空'
+									},
+									stringLength: {
+										max: 50,
+										message: '长度不能大于50'
+									}
+								}
+							},
+							md_content: {
+								validators: {
+									notEmpty: {
+										message: '内容不能为空'
+									},
+									stringLength: {
+										max: 200,
+										message: '长度不能大于200'
+									}
+								}
+							},
+//							in_begintime: {
+//								validators: {
+//									notEmpty: {
+//										message: '开始时间不能为空'
+//									}
+//								}
+//							},
+//							in_endtime: {
+//								validators: {
+//									notEmpty: {
+//										message: '结束时间不能为空'
+//									}
+//									callback: {
+//										message: '结束时间小于开始时间',
+//										callback: function(value, validator) {
+//											return Date.parse(value) > Date.parse($("#in_begintime").val());
+//										}
+//									}
+//								}
+//							},
+							selectedUser: {
+								validators: {
+									notEmpty: {
+										message: '用户名不能为空'
+									},
+									callback: {
+										message: '用户名不存在',
+										callback: function(value, validator) {
+											var options = validator.getFieldElements('selectedUser');
+											var istrue = options.attr('ekey') != "" && options.attr('ekey') != undefined;
+											return istrue;
+										}
+									}
+								}
+							}
+						}
+					});
+				}
+				//重置
+			$("#btn_Reset").click(function() {
+				$("#sr_title").val('');
+				$("#begintime").val('');
+				$("#endtime").val('');
+			});
+			//标题重复判断
+			function CheckIsExsit(title) {
+				var ret = false;
+				getDataList(yshurl + "AM_GetmessageByTitle", {
+					title: $.trim(title)
+				}, function(d) {
+					if(d.aaData.length > 0)
+						ret = true;
+				});
+				return ret;
+			}
+		</script>
+		<!--
+	作者：443267568@qq.com
+	时间：2016-05-03
+	描述：修改结束
+-->
+	</body>
+
+</html>

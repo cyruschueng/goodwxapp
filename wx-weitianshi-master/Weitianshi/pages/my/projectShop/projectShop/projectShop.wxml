@@ -1,0 +1,148 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+ 
+<scroll-view style='heigt:1000rpx;' scroll-y='true' bindscrolltolower='loadMore'>
+  <view wx:if="{{nonet}}">
+    <!--筛选和搜索  -->
+    <template is="newSearch" data="{{text:searchText,searchTap:'searchSth',filter:'tagFilter'}}"></template>
+    <!--图片  -->
+    <view class="shopBanner" bindtap="toPersonDetail">
+      <image src="{{banner_personShop}}" class="bgPic" wx:if="{{!userInfo.shop_banner}}"></image>
+      <image src="{{userInfo.shop_banner}}" class="bgPic" wx:if="{{userInfo.shop_banner}}"></image>
+      <view class='modal picModal'></view>
+      <view class="userInfo zIndex99">
+        <view class="flex online">
+          <!--第一行显示  -->
+          <view class="userNameTitle flex">
+            <view class="userName">{{userInfo.user_real_name}}</view>
+            <!-- userInfo.authentication[0].group_title -->
+            <view class="flex line" wx:if="{{userInfo.authentication[0].group_title}}">
+              <image src="/img/img-touzifang1.png" class="renzheng1" wx:if="{{userInfo.authentication[0].group_title=='其他'}}"></image>
+              <image src="/img/img-maifangFA.png" class="renzheng" wx:if="{{userInfo.authentication[0].group_title=='买方FA'}}"></image>
+              <image src="/img/img-maifangFA1@2x.png" class="renzheng" wx:if="{{userInfo.authentication[0].group_title=='卖方FA'}}"></image>
+              <image src="/img/img-touzifang.png" class="renzheng" wx:if="{{userInfo.authentication[0].group_title=='投资方'}}"></image>
+              <image src="/img/img-chuangye1.png" class="renzheng" wx:if="{{userInfo.authentication[0].group_title=='创业者'}}"></image>
+              <!-- <view class="userPart1">{{userInfo.authentication[0].group_title}}</view> -->
+            </view>
+          </view>
+          <!--第二行显示  -->
+          <view class="lineTwo flex">
+            <view class="userPosition">{{userInfo.user_company_career}}</view>
+            <view class="userCompany" wx:if="{{userInfo.user_brand}}">· {{userInfo.user_brand}}</view>
+            <view class="userCompany" wx:if="{{!userInfo.user_brand}}">· {{userInfo.user_company_name}}</view>
+          </view>
+          <view>
+            <image wx:if="{{userInfo.user_avatar_url}}" class="user_pic" src="{{userInfo.user_avatar_url}}" bindtap='toPersonDetail'></image>
+            <view wx:if="{{userInfo.user_avatar_text}}" class="user_text noPic" bindtap='toPersonDetail'>{{userInfo.user_avatar_text}}</view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <!--店铺描述  -->
+    <view class="shopDesBox" wx:if="{{userInfo.user_intro}}">
+      <view class="shopContent" class="{{isChecked?'shopContent':'shopContentAfer'}} {{isChecked1?'shopPad':'shopPad1'}}">{{userInfo.user_intro}}</view>
+      <view class="more" hover-class="t-more" bindtap="allPoint" wx:if="{{isChecked == true && contentMore== true}}">点击查看全部</view>
+      <view class="more" hover-class="t-more" bindtap="noPoint" wx:if="{{isChecked == false && contentMore == true}}">点击收起</view>
+    </view>
+    <!-- <view style="height:30rpx;"></view> -->
+    <view class='scrollFrame flex' wx:if="{{hasCompetitor == true}}">
+      <scroll-view class='scroll flex' scroll-x='true'>
+        <view class='flex'>
+          <block wx:for='{{node_list}}' wx:key='{{item.schedule_id}}'>
+            <view class='item {{node_list[index].is_select == 1 ? "itemhover" : ""}}' data-id='{{item.schedule_id}}' data-index='{{index}}' bindtap='scheduleCheck'>
+              <view class='itemName'>{{item.schedule_name}}({{item.node_count}})</view>
+              <!-- <view class='itemNum'>个项目</view> -->
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </view>
+    <!--符合条件的我的项目  -->
+    <view class='outBox'>
+      <block wx:for="{{myProject}}" wx:key="{{index}}">
+        <view class='insideBox' data-id="{{item.project_id}}" hover-class='t-hoverColor' bindtap="detail">
+          <view class="describle" wx:if="{{item.pro_intro != ''}}">{{item.pro_intro}}</view>
+          <image src="/img/img-dujia@2x.png" class="projectDetailType" wx:if="{{item.is_exclusive == 1}}"></image>
+          <view class='flex industryBox'>
+            <block wx:for="{{item.pro_industry}}" wx:key="{{index}}" wx:for-item='industry'>
+              <view class="allIndustry">{{industry.industry_name}}</view>
+            </block>
+          </view>
+          <view class='flex otherInfo'>
+            <view class="allProjectDetail flex " wx:if="{{item.pro_area != ''||item.pro_finance_stock_after!=0||item.pro_stage!=''||item.pro_scale!=''}}">
+              <view class="projectDetailLine" wx:if="{{item.pro_scale != ''}}">{{item.pro_scale.scale_money}} </view>
+              <view class="projectDetailLine" wx:if="{{item.pro_finance_stock_after != ''}}">· {{item.pro_finance_stock_after}}% </view>
+              <view class="projectDetailLine" wx:if="{{item.pro_stage != ''}}"> · {{item.pro_stage.stage_name}}</view>
+              <view class="projectDetailLine" wx:if="{{item.pro_area != ''}}">· {{item.pro_area.area_title}}</view>
+            </view>
+          </view>
+          <view class="star" catchtap="clickProject" data-id="{{item.project_id}}" wx:if="{{otherPerson == false}}" data-top="{{item.is_top}}" hover-class="t-hoverColor" hover-stop-propagation="true">
+            <image src="/img/btn-zhiding@2x.png" class="starPic" wx:if='{{item.is_top == 0}}'></image>
+            <image src="/img/btn-quxiao@2x.png" class="starPic" wx:if='{{item.is_top == 1}}'></image>
+          </view>
+          <view class="top" data-id="{{item.project_id}}" wx:if="{{otherPerson == true}}">
+            <image src="/img/img-tuijian@2x.png" class="topPic" wx:if="{{item.is_top == 1 }}"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="emptyStyle" wx:if="{{myProject.length==0 && notHave != 0}}">
+      <view>您的店铺是空的</view>
+      <view>点击“新增项目”打造店铺</view>
+    </view>
+
+    <view class="highBox"></view>
+    <!--我的项目店铺的底部按钮  -->
+    <view class="flex aboutNetwork" wx:if="{{otherPerson == false}}">
+      <view class="flexBox" hover-class="t-hoverColor" catchtap="toShareShop">
+        <image src='/img/icon-erweima12.png' class='shopPic'></image>
+        <view class='shopBlock'>店铺二维码</view>
+      </view>
+      <view class="t-line"></view>
+      <view class="flexBox">
+        <button class='shopBlock' open-type="share" id="shareFriend" hover-class="t-hoverColor">
+          <image src='/img/icon-fenxiang@2x.png' class='shopPic'></image>
+          分享</button>
+      </view>
+      <view class="t-line"></view>
+      <view class="flexBox" bindtap="decorate" hover-class="t-hoverColor">
+        <image src='/img/icon-dianpu@2x.png' class='shopPic'></image>
+        <view class='shopBlock'>店铺装修</view>
+      </view>
+      <view class="t-line"></view>
+      <view bindtap="editDetail" class='creatProject' hover-class="t-redColor">创建项目</view>
+    </view>
+
+    <!--他人项目店铺的底部按钮  -->
+    <view class="aboutNetwork flex" wx:if="{{otherPerson == true}}">
+      <view class="flexBox" bindtap="moreProject" hover-class="t-hoverColor">
+        <image src='/img/icon-shouye@2x.png' class='shopPic'></image>
+        <view class='shopBlock'>首页</view>
+      </view>
+      <view class='t-line'></view>
+      <view class="flexBox" hover-class="t-hoverColor ">
+        <image src='/img/icon-fenxiang@2x.png' class='shopPic'></image>
+        <button class='shopBlock' open-type="share" id="shareFriend">分享</button>
+      </view>
+      <view class='t-line'></view>
+      <view class="flexBox" bindtap="toMyShop" hover-class="t-hoverColor">
+        <image src='/img/icon-dianpu@2x.png' class='shopPic'></image>
+        <label class='shopBlock'>我的店铺</label>
+      </view>
+      <view class='t-line'></view>
+      <view bindtap="pushProject" class='creatProject' hover-class="t-redColor">提交项目</view>
+    </view>
+
+      <template is="theBottom" wx:if="{{atBottom == true}}"></template>
+        <view class='whiteSpace'></view>
+    <!--错误提示-->
+    <!-- <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view> -->
+
+    <!--模态层  -->
+    <view class='t-modal' wx:if='{{currentIndex!=5}}' bindtap='modal'></view>
+
+    <!--筛选无结果  -->
+    <view class="hasNoThing" wx:if="{{notHave == 0 && myProject.length==0}}">暂时没有符合该条件的项目</view>
+  </view>
+</scroll-view>

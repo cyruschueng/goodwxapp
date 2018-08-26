@@ -1,0 +1,56 @@
+<!--index.wxml-->
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+<!--帖子列表 start-->
+<view class="postList">
+    <block wx:for="{{postlist}}">
+    <view class="post-item">
+        <view class="info">
+            <block wx:if="{{item.digest == 1}}">
+                <view class="fr state marrow">精华</view>
+            </block>
+            <view class="fr green forum-name">{{item.weiba_name}}</view>
+            <view class="user-info">
+                <view class="fl avatar"><image src="{{item.user_headimgurl}}"></image></view>
+                <view class="fl grey">{{item.user_nickname}}</view>
+            </view>
+        </view>
+        <view bindtap="detail" id="{{item.id}}" class="desc">
+            <!--<text class="tit lineText">{{item.title}}</text>-->
+            <text class="lineText3">{{item.content}}</text>
+            <view class="flex albums {{item.imgnum_style}}" wx:if="{{item.imgarr}}">
+                <block wx:for="{{item.imgarr}}" wx:for-item="itemName">
+                    <view class="sub pic-item"><image src="{{itemName.imgurl}}" mode="aspectFill"></image></view>
+                </block>
+            </view>
+        </view>
+        <view class="grey f12 item-footer">
+            <view class="fr">
+                <text class="iconfont icon-comment mr20">{{item.reply_count}}</text>
+                <text class="iconfont icon-appreciatefill">{{item.praise}}</text>
+            </view>
+            <view>
+                <text class="mr10">{{item.post_mytime}}</text>
+                <text>{{item.read_count}} 阅</text>
+            </view>
+        </view>
+    </view>
+    </block> 
+</view>
+<!--帖子列表 end-->
+<!--loading start-->
+<view class="m20 tc grey loading" wx:if="{{showLoading}}">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在加载...</text>
+</view>
+<!--loading end-->
+<!--发帖按钮 start-->
+<view class="post-btn" bindtap="post">
+    <text class="iconfont icon-write aside-icon"></text>
+</view>
+<!--发帖按钮 end-->
+</block>
+

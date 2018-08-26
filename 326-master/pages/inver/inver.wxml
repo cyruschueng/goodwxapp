@@ -1,0 +1,106 @@
+<import src="/template/listStyle.wxml" /> 
+<view class="container">
+  <view class='clearfix'>
+  <!--返回 -->
+  <view class='h5 flexS Skin pdr1 pdl1' hidden='{{deviAdmIn}}'> 
+    <image class='imgxs15' src='/images/back.png' bindtap='deviback'></image>
+  </view>
+  <!--top  -->
+    <view class='panel flexCenter Skin'>
+     <view class='flexCenter width27'>
+      <image class="imgL"src="/images/nbqZC.png"></image>
+    </view> 
+     <view class='width50'>
+      <view>{{inverDevPage.sn}}</view>
+      <view class='flex justi pdlr0'>
+        <view>额定功率：</view>
+        <view class='flexv1 justi'>
+         <view  hidden='{{imgRateS}}' class='mr03'>{{inverDevPage.ratePower?inverDevPage.ratePower:'0.0kW'}}</view> 
+         <image class="imgxs"src="/images/editw.png" hidden='{{imgRateS}}' bindtap='modirateP'></image>
+         <view class='mr03'>
+          <input type='text'  class='borderA width5 br02' wx:if='{{imgRateS}}' bindinput='ratepnput'></input>
+         </view>
+         <view wx:if='{{imgRateS}}' bindtap='modiRatepower' class='width5 flexCenter bgColor0 br02'>确定</view>
+        </view> 
+       </view> 
+     </view> 
+    <view class='flexV1 deviceDetMode mr03'> 
+      <template is="tapMenu" data="{{tapBox: tapBox}}"/>  
+     </view> 
+  </view>
+ <view class='flexCenter padding015 Skin2'>更新时间：{{nowdate}}</view> 
+<!--图表、数据 -->
+   <template is="tabPage" data="{{tabBox: tabBox}}"/>
+
+  </view> 
+<view class='width100'  hidden='{{chartNavHid}}'>
+  <view class='bg256 mt10'>
+      <!--圆环str panel  -->
+  <view class='panel flex bgColorCD' >
+    <view class='panelL flexCenter'>
+      <view>当前功率</view>
+      <view>{{inverDevPage.output_power?inverDevPage.output_power:'0.0kW'}}</view>
+    </view>
+        <view class='panelC flexCenter cir' style='min-height:54px;'>
+          <canvas hidden='{{chartHide}}' disable-scroll="false" bindtouchmove="cvsMove" class="" style="width:52px; height:52px;" canvas-id="canvasArc"></canvas> 
+          <view class="circ">{{circ?circ:'0.0'}}%</view> 
+    </view>
+    <view class='panelL flexCenter'>
+      <view>额定功率</view>
+      <view>{{inverDevPage.ratePower?inverDevPage.ratePower:'0.0kW'}}</view>
+    </view>
+  </view>
+  <template is="calendar" data="{{calendar: calendar}}"/>
+    <!--图表str  -->
+  <view class='mainCharData flexColumn cir h12r'>
+    <view class='ecBar'>
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ec}}"></ec-canvas>
+    </view>
+  </view>
+  <!--左右靠边  -->
+  <view class='flexBetw bgColor0 padding04 borderB'>
+    <view>当日发电</view>
+    <view class="fontSkin">{{inverDevPage.energyToday?inverDevPage.energyToday:'0.0kWh'}}</view>
+  </view>
+   <!--发电  -->
+  <view class='powerLisThir flexBetw padding04 borderB'>
+    <view>
+      <view>
+        <view>当月发电量</view>
+        <view class='powerNum fontSkin pd03'>{{inverDevPage.energyMonth?inverDevPage.energyMonth:'0.0kWh'}}</view>
+      </view>
+    </view>
+    <view>
+      <view>
+        <view>当年发电量</view> 
+        <view class='powerNum fontSkin pd03'>{{inverDevPage.energyYear?inverDevPage.energyYear:'0.0kWh'}}</view>
+      </view>
+    </view>
+    <view>
+      <view>
+        <view>总发电量</view>
+        <view class='powerNum fontSkin pd03'>{{inverDevPage.energyTotal?inverDevPage.energyTotal:'0.0kWh'}}</view>
+      </view>
+    </view>
+  </view>
+   <template is="collList" data="{{collListBox: colledatArr}}"/> 
+</view>
+</view>
+<!--数据 -->
+<view hidden='{{datNav}}' class='width100 mt10'>
+  <template is="kalendar" data="{{kalendar: cdate}}"/>
+  <template is="slider" data="{{slider: slider}}"/>
+</view>
+  <!--参数表 -->
+  <view class='paraList flexv1 modeldrawer_content' wx:if='{{invParaDetail}}'>
+    <view id='{{index}}'  wx:for="{{invParaDetail}}" wx:for-index="index"   wx:for-item="invParaDetail">
+      <view>{{invParaDetail.title}}</view>
+      <view>{{invParaDetail.unit}}</view>
+    </view>
+  </view>
+<view>
+<!--mask-->
+<template is="operaModel" data="{{modelDat: modelDat}}"/>
+</view>
+  <template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

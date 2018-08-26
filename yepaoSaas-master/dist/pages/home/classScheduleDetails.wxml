@@ -1,0 +1,50 @@
+<!--pages/home/classScheduleDetails.wxml-->
+
+<import src="../../templates/star-item/star-item.wxml"/>
+
+<view class='bg-view' wx:if='{{ classDetails != "" }}'>
+
+  <view>
+    <image mode='aspectFill' class='title-img' src='{{ classDetails.titleImg }}'></image>
+  </view>
+
+  <view class='classinfo-view'>
+    <view class='whiteColor fs36'>{{ classDetails.className }}·{{ classDetails.classTime }}</view>
+    <view class='info-text weui-flex'>
+      <view class='weui-flex__item'>
+        <image class='league_class' src='../../images/icon/home/league_class.png'></image>
+        <text>团课</text>
+      </view>
+      <view class='weui-flex__item'>
+        <image class='enrolment' src='../../images/icon/home/enrolment.png'></image>
+        <text wx:if='{{ classDetails.classPepoNum != -1 }}' class='text'>还可报名 <text>{{ classDetails.classPepoNum }}</text>人</text>
+        <text wx:else class='text'>不限报名人数</text>
+      </view>
+    </view>
+    <view>
+      <image class='locale' src='../../images/icon/home/locale.png'></image>
+      <text>{{ classDetails.address }}</text>
+    </view>
+
+  </view>
+
+
+  <view class='coachinfo-view'>
+    <view >
+      <image mode='aspectFill' class='coach-headimg' src='{{ classDetails.coachHeadImg }}'></image>
+      <text class='fs36'>{{ classDetails.coachName }}</text>
+
+      <template is='star-item' data='{{ score, starUrl, emptUrl }}'/>
+    </view>
+
+    <view class='title-view'>教练介绍</view>
+    <view class='content-view'>{{ classDetails.coachIntroduction }}</view>
+
+    <view class='fs36 title-view'>课程介绍</view>
+    <view class='content-view'>{{ classDetails.classDetail }}</view>
+  
+  </view>
+
+  <view class='{{ classDetails.reserveFlag ? "foot-gray-view" : "foot-view" }}' bindtap='{{ classDetails.reserveFlag ? "" : "bindClassScheduleApptTap" }}'>{{ classDetails.reserveFlag ? '已预约' : '预约' }}</view>
+
+</view>

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<Page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../View.xsd"
+      layout="frame"
+      background="#F9F9F9">
+
+    <View width="fill" height="fill">
+
+        <View width="fill" height="fill" layout="vertical" background="#F9F9F9">
+            <View width="fill" height="wrap" layout="frame" padding="12 0 12 16" background="#FFFFFF">
+                <ImageView id="btnBack" width="24dp" height="24dp" src="../images/ic_return.svg"/>
+                <TextView id="taskName" text="瑞吉酒店" width="wrap" height="wrap" fontSize="17dp" fontColor="#333333" gravity="center"/>
+            </View>
+
+            <View width="fill" height="1dp" background="#E5E5E5"/>
+            <TextView text="基本信息"  width="fill" height="wrap" fontSize="14dp" fontColor="#888888" margin="10 0 10 16"/>
+            <View width="fill" height="1dp" background="#E5E5E5"/>
+
+
+
+            <View width="fill" height="wrap" background="#FFFFFF" padding="15" layout="vertical">
+                <View width="fill" height="wrap" layout="frame" marginBottom="10dp">
+                    <TextView width="wrap" height="wrap" text="需求名称" fontSize="14dp" fontColor="#888888" />
+                    <TextView id="customerTaskName" width="wrap" height="wrap" text="天津瑞吉酒店" gravity="right" fontSize="14px" fontColor="#888888" />
+                </View>
+                <View width="fill" height="wrap" layout="frame" marginBottom="10dp">
+                    <TextView width="wrap" height="wrap" text="拍摄位置" fontSize="14dp" fontColor="#888888" />
+                    <TextView id="customerTaskAddress" width="wrap" height="wrap" text="天津市河东区" gravity="right" fontSize="14px" fontColor="#888888" />
+                </View>
+                <View width="fill" height="wrap" layout="frame" marginBottom="10dp">
+                    <TextView width="wrap" height="wrap" text="联系人" fontSize="14dp" fontColor="#888888" />
+                    <TextView id="customerPhotographerName" width="wrap" height="wrap" text="谢秀春" gravity="right" fontSize="14px" fontColor="#888888" />
+                </View>
+                <View width="fill" height="wrap" layout="frame">
+                    <TextView width="wrap" height="wrap" text="联系电话" fontSize="14dp" fontColor="#888888" />
+                    <TextView id="customerPhotographerPhone" width="wrap" height="wrap" text="12343534534" gravity="right" fontSize="14px" fontColor="#888888" />
+                </View>
+            </View>
+
+            <View width="fill" height="1dp" background="#E5E5E5"/>
+            <TextView text="拍摄清单"  width="fill" height="wrap" fontSize="14dp" fontColor="#888888" margin="10 0 10 16"/>
+            <View width="fill" height="1dp" background="#E5E5E5"/>
+
+            <View width="fill" height="250dp" background="#FFFFFF">
+
+            </View>
+
+            <View width="fill" height="1dp" background="#E5E5E5"/>
+            <View width="fill" height="wrap" marginTop="12dp">
+                <TextView id="facilityCount" width="wrap" height="wrap" text="共有7个设施点" fontSize="13dp" fontColor="#999999" gravity="right" marginRight="10dp"/>
+            </View>
+
+        </View>
+
+        <View id="completePhotographBtn" width="fill" height="55dp" background="#F15A3F" contentGravity="center" gravity="bottom">
+            <View width="wrap" height="wrap" layout="horizontal" contentGravity="centerVertical">
+                <TextView id="photographStatus" text="确认完成拍摄" fontSize="18dp" fontColor="#FFFFFF" width="wrap" height="wrap"/>
+            </View>
+            <View id="photographBtnCover" width="fill" height="55dp" background="#FFFFFF" alpha="0.4"/>
+        </View>
+
+    </View>
+
+    <View id="qrcodeDialog" layout="frame" width="fill" height="fill"  contentGravity="center" visible="false">
+
+        <View id="qrcodeDialogCover" width="fill" height="fill" background="#000000" alpha="0.5"/>
+
+        <View width="wrap" height="wrap" layout="vertical" >
+            <View width="335dp" height="430dp" layout="vertical" padding="40 40 25 40" background="#FFFFFF">
+                <TextView id="qrTaskName" width="wrap" height="wrap" text="瑞吉酒店" fontSize="24dp" fontColor="#333333" marginBottom="10dp"/>
+
+                <TextView id="qrTaskAddress" width="wrap" height="wrap" text="我是一个省市区信息" fontSize="14dp" fontColor="#888888" marginBottom="28dp"/>
+
+                <ImageView id="qrImg" width="255dp" height="255dp" src="" background="#456767" marginBottom="20dp"/>
+
+                <TextView width="wrap" height="wrap" text="需求方扫码确认拍摄完成即可开始制作" fontSize="14dp" fontColor="#888888" gravity="centerHorizontal"/>
+
+            </View>
+
+            <ImageView id="qrClose" width="40dp" height="40dp" src="../images/close@2x.png" gravity="centerHorizontal"
+                       marginTop="20dp"/>
+        </View>
+
+    </View>
+
+
+    <View id="confirmDialog" visible="false" width="fill" height="fill" contentGravity="centerHorizontal">
+        <View id="confirmDialogCover" width="fill" height="fill" background="#000000" alpha="0.5"/>
+        <View width="fill" height="wrap" gravity="bottom" layout="vertical" background="#F9F9F9">
+            <View width="fill" height="wrap" background="#FFFFFF" layout="vertical">
+                <TextView width="wrap" height="wrap" fontSize="14dp" fontColor="#888888"  gravity="center" margin="24 0 24 0" text="确认完成之后，你将不能修改酒店设施信息"/>
+                <View width="fill" height="1dp" background="#E5E5E5"/>
+                <TextView id="confirmCompletedBtn" width="wrap" height="wrap" fontSize="18dp" fontColor="#E64340" text="确认完成拍摄" margin="24 0 24 0" gravity="center"/>
+            </View>
+
+            <View width="fill" height="wrap" background="#FFFFFF" marginTop="6dp" padding="24 0 24 0">
+                <TextView id="cancelBtn" width="wrap" height="wrap" fontSize="18dp" fontColor="#333333" text="取消" gravity="center"/>
+            </View>
+
+        </View>
+    </View>
+
+
+
+</Page>

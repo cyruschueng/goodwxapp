@@ -1,0 +1,24 @@
+<view class="section">
+<scroll-view scroll-y="true" bindscrolltolower="setLoading" bindscrolltoupper="refresh" style="height:100vh" > 
+  <view class="section_top">
+    <view bindtap="bindform">
+      <image src="../../resoursce/online.png" class="topleft"></image>
+    </view>
+    <view bindtap="bindphone"> 
+      <image src="../../resoursce/tel.png" class="topright"></image>
+    </view>
+    
+  </view>
+    <view class="weui-panel__bd">
+        <navigator url="../article/article?id={{item.id}}" open-type="navigate" class="weui-cell" hover-class="weui-cell_active" style="padding:1rem 0 1rem 1rem" wx:for="{{array}}" wx:key="*this" wx:for-index="postid">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg list" style="width:70%;margin:0">
+              {{item.title}}
+            </view>
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg listTime" style="width:27%">
+                {{item.publishDate}}
+            </view>
+        </navigator> 
+                
+    </view>
+</scroll-view> 
+</view>

@@ -1,0 +1,400 @@
+<!doctype html>
+<html>
+	<head>
+	<title>个人主页</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+	<link rel="stylesheet" type="text/css" href="css/comment.css">
+	<link rel="stylesheet" type="text/css" href="css/comment2.css?v=3">
+	<link rel="stylesheet" type="text/css" href="css/studentOtherInfo.css?v=5">
+	<link rel="stylesheet" type="text/css" href="css/studentType1.css">
+	<style type="text/css">
+		.container{
+    		min-height: 100vh;
+    	}
+	</style>
+	</head>
+	<body>
+	<div class="container">
+		<div class="top-info">
+			<div class="row top-info1">
+				<div class="col-xs-3 col-sm-3 top-img">
+					<img  class="head" />
+					<img class="sex" />
+				</div>
+				<div class="col-xs-9 col-sm-9 row right-part">
+					<div class="row account">
+						<span id="accountVal"></span>
+					</div>
+					<div style="display:none;">
+						<span id="friendUserId"></span>
+					</div>
+					<div class="row addFriend">
+						<span>+加为PICOOC好友</span>
+						<span class="roleName" style="display:none;"></span>
+						<span class="isReply" style="display:none;"></span>
+					</div>
+					<div class="row hasAddFriend">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/hasAddFriend.png" />
+						<span>已加为PICOOC好友</span>
+					</div>
+				</div>
+			</div>
+			<div class="row info-tag">
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 info-tag-item">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/bodyChange3.png" />
+						<span>身体变化</span>
+					</div>
+					<div class="col-xs-4 col-sm-4 info-tag-item">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/cardInfo4.png" />
+						<span>打卡记录</span>
+					</div>
+					<div class="col-xs-4 col-sm-4 info-tag-item">
+						<img src="http://cdn2.picooc.com/web/res/fatburn/image/studentInfo/baseInfo4.png" />
+						<span>基本信息</span>
+					</div>
+				</div>
+				<div class="row navBar">
+					<!-- <img src="image/studentInfo/tagIcon.png"> -->
+				</div>
+			</div>
+			<!-- <div class="row status">
+				<div class="col-xs-4 col-sm-4 status-item">
+					<div>初始体重</div>
+					<div id="first-weight"></div>
+				</div>
+				<div class="col-xs-4 col-sm-4 status-item">
+					<div>初始体脂</div>
+					<div id="first-fat"></div>
+				</div>
+				<div class="col-xs-4 col-sm-4 status-item">
+					<div>初始内脂</div>
+					<div id="first-in-fat"></div>
+				</div>
+			</div> -->
+		</div>
+
+		<div class="row" id="tag-content">
+			<div class="page1">
+				<div class="chart">
+					<!-- <div class="row info-change1">
+						<div class="col-xs-6 col-sm-6 info-change1-info1">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 info-change1-p1">体重</div>
+								<div class="col-xs-12 col-sm-12 info-change1-p2"><span></span></div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 info-change1-info1 info-change1-info2">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 info-change1-p1">脂肪</div>
+								<div class="col-xs-12 col-sm-12 info-change1-p2"><span></span></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 info-tab">
+						<div class="row">
+							<span class="col-xs-6 col-sm-6 info-tab-btn tag-weight active">体重</span>
+							<span class="col-xs-6 col-sm-6 info-tab-btn tag-fat">脂肪</span>
+						</div>
+					</div> -->
+					<!-- <div class="row chartTop">
+						<div class="chartTag">
+							<span class="tag-weight active">体重</span>
+							<span class="tag-fat">脂肪</span>
+						</div>
+						<div class="chartTag-item">
+							<div>体重</div>
+							<div>
+								<img class="wFlag" src="" />
+								<span class="wChange"></span>
+							</div>
+						</div>
+						<div class="chartTag-item">
+							<div>脂肪</div>
+							<div>
+								<img class="fFlag" src="" />
+								<span class="fChange"></span>
+							</div>
+						</div>
+					</div> -->
+					<div class="row chartTop">
+						<div class="row top">
+							<div class="col-xs-6 col-sm-6 chartTag-item">
+								<div>体重变化</div>
+								<div>
+									<img class="wFlag" />
+									<span class="wChangePar"></span>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-6 chartTag-item">
+								<div>脂肪变化</div>
+								<div>
+									<img class="fFlag" />
+									<span class="fChangePar"></span>
+								</div>
+							</div>
+						</div>
+						<!-- <a class="userBody" href="javascript:void(0);" onclick="javascript:this.href='bodyChange.html'+location.search">
+							<span>更多指标变化</span>
+							<img src="image/studentInfo/right.png">
+						</a> -->
+						<div class="userBody">
+							<span>更多指标变化</span>
+							<img src="image/studentInfo/right.png">
+						</div>
+					</div>
+
+					<div class="row chartContent">
+						<div class="row chartTag">
+							<span class="col-xs-4 col-sm-4 tag-weight active">体重</span>
+							<span class="col-xs-4 col-sm-4 tag-fat">脂肪</span>
+							<span class="col-xs-4 col-sm-4 tag-waist">腰围</span>
+						</div>
+						<div class="row chartBottom weightContent">
+							<canvas class="line" id="weight" width="100px" height="100px"></canvas>
+							<div id="weightNum" class="lineNum"></div>
+						</div>
+						<div class="row chartBottom fatContent">
+							<canvas class="line" id="fat" width="100px" height="100px"></canvas>
+							<div id="fatNum" class="lineNum"></div>
+						</div>
+						<div class="row chartBottom waistContent">
+							<canvas class="line" id="waist" width="100px" height="100px"></canvas>
+							<div id="waistNum" class="lineNum"></div>
+						</div>
+					</div>
+ 					<article class="row change">
+						<div class="col-xs-6 col-sm-6 changeList changeList1">
+							<a class="row changeList-main1" href="javascript:void(0);" onclick="javascript:this.href='trainPlan.html'+location.search">
+								<div class="col-xs-12 col-sm-12 changeList-icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/student/plan.png"></div>
+								<div class="col-xs-12 col-sm-12 changeList-p myPlan">我的方案</div>
+							</a>
+						</div>
+						<div class="col-xs-6 col-sm-6 changeList changeList2">
+							<a class="row changeList-main2" href="">
+								<div class="col-xs-12 col-sm-12 changeList-icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/student/body.png"></div>
+								<div class="col-xs-12 col-sm-12 changeList-p myBody">我的身材</div>
+							</a>
+						</div>
+					</article>
+					<div class="bodyMessage">
+						暂时没有身体数据哦～
+					</div>
+				</div>
+			</div>
+			<aside class="row page2 msgType1">
+				<div class=" row shaixuan1">
+					<div class="col-xs-12 col-sm-12 campstatusContainer1">
+						<div class="ttab1"><span class="tabtype1">全部</span></div>
+						<div class="col-xs-12 col-sm-12 campstatus1">
+						<div class="campstatusContent"></div>
+						</div>
+					</div>
+					<div class="type-container1">
+						<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-2.png" /></div>
+						<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/studentList/all.png" /></div>
+						<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-3.png" /></div>
+						<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/studentList/diet.png" /></div>
+						<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-4.png" /></div>
+						<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-7.png" /></div>
+						<div class="icon1"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-5.png" /></div>
+					</div>
+				</div>
+				<article class="row list">
+				</article>
+				<div class="saveImg-ceng">
+					<aside class="row saveImg">
+						<div class="col-xs-12 col-sm-12 saveImg-btn saveImg-item">保存图片</div>
+						<div class="col-xs-12 col-sm-12 cancelImg-btn saveImg-item">取消</div>
+					</aside>
+				</div>
+			</aside>
+			<div class="row page3">
+				<div class="col-xs-12 col-sm-12 info-item height">
+					<span>身高</span>
+					<span ></span>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item age">
+					<span>生日</span>
+					<span></span>
+				</div>
+				<!-- <div class="col-xs-12 col-sm-12 info-item goalFat">
+					<span>目标脂肪</span>
+					<span></span>
+				</div> -->
+				<!-- <div class="col-xs-12 col-sm-12 info-item goalWeight">
+					<span>目标体重</span>
+					<span></span>
+				</div> -->
+				<div class="col-xs-12 col-sm-12 info-item career">
+					<span>职业</span>
+					<span></span>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item area">
+					<span>所在地</span>
+					<span></span>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item physicalPeriod">
+					<span>上次生理期</span>
+					<span></span>
+				</div>
+				<!-- <div class="col-xs-12 col-sm-12 info-item periodDesc">
+					<span>习惯测量时段</span>
+					<span></span>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item wechat">
+					<span>微信账号</span>
+					<span></span>
+				</div>
+				<div class="col-xs-12 col-sm-12 info-item phoneNo">
+					<span>手机号码</span>
+					<span></span>
+				</div> -->
+		</div>
+		<div class="row footer comment">
+			<div class="col-xs-12 col-sm-12 footer-top"><span class="footer-top-1" id="comment-back">取消</span><span class="footer-top-3"></span><span class="footer-top-2" id="comment-btn">发送</span></div>
+			<div class="col-xs-12 col-sm-12 footer-main">
+				<textarea id="comment-msg" class="col-xs-12 col-sm-12 " placeholder="回复："></textarea>
+			</div>
+		</div>
+		<aside class="row swiper-container bigImg">
+			<div class="row swiper-wrapper bigImg-main">
+			</div>
+			<div class="swiper-pagination"></div>
+		</aside>
+		<div class="row footer  comment2">
+			   <div class="col-xs-2 col-sm-2" style="position:relative;height:auto">
+					<div class="imgContainer" style="width:100%;">
+						<img class="img1" src="image/student/student-19.png">
+						<div class="shuxian"></div>
+					</div>
+			   </div>
+				<div class="footer-main1 col-xs-8 col-sm-8">
+					<textarea id="comment2-msg1" class="" placeholder="回复:"></textarea>
+			   </div>
+			   <div class="col-xs-2 col-sm-2" style="position:relative;height:auto">
+					<div class="btn" style="width:100%">
+						<img class="comment2-send" src="image/student/send1.png">
+					</div>
+			   </div>
+		</div>
+		<div class="row footer comment3">
+				<div class="footer-main1 col-xs-8 col-sm-8">
+					<textarea id="comment2-msg2" class=""></textarea>
+			   </div>
+		</div>
+
+		<aside class="row fixbg">
+			<div class="col-xs-12 col-sm-12 fixbg-main">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 fixbg-main-t">您确定删除这条评论吗？</div>
+					<div class="col-xs-12 col-sm-12 fixbg-main-btn">
+						<div class="row">
+							<div class="col-xs-6 col-sm-6 fixbg-main-btn1">取消</div>
+							<div class="col-xs-6 col-sm-6 fixbg-main-btn2">确定</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+		
+	<div class="typeContainer"></div>
+
+	</div>
+
+	<div class="row errorAlert">
+		<div class="col-xs-12 col-sm-12 error-main">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 error-main-t"></div>
+				<div class="col-xs-12 col-sm-12 error-main-btn">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 error-main-btn1">我知道了</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<aside class="row fixbg2">
+		<div class="col-xs-12 col-sm-12 fixbg-main">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 fixbg-main-t">您已发送请求，等待对方处理</div>
+				<div class="col-xs-12 col-sm-12 fixbg-main-btn">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 fixbg-main-btn1">我知道了</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+</div>
+</body>
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript">
+		var functionType1='studentInfo';
+	</script>
+	<script type="text/javascript" id="script1"></script>
+	<script type="text/javascript" id="script2"></script>
+	<script type="text/javascript">
+		if(getParamByUrl("webver")>2){
+			if(getParamByUrl("os")=="android"){
+				$("#script1").attr("src","jsv1/cardFunction.js?v=13");
+				$("#script2").attr("src","jsv1/card1.js?v=30");
+			}
+			else{
+				var mobileApp=window.webkit.messageHandlers;
+				$("#script1").attr("src","jsv1/cardFunction.js?v=13");
+				$("#script2").attr("src","jsv1/card1.js?v=30");
+			}
+		}
+		else{
+			$("#script1").attr("src","js/cardFunction.js?v=13");
+			$("#script2").attr("src","js/card1.js?v=30");
+		}
+	</script>
+	<!--<script type="text/javascript" src="js/cardFunction.js?v=12"></script>-->
+	<!--<script type="text/javascript" src="js/card1.js?v=29"></script>-->
+	<script type="text/javascript" id="script3"></script>
+	<script type="text/javascript">
+		$(function(){
+			if(getParamByUrl("webver")>2){
+				if(getParamByUrl("os")=="android"){
+					$("#script3").attr("src","jsv1/studentOtherInfo.js?v=25");
+				}
+				else{
+					var mobileApp=window.webkit.messageHandlers;
+					$("#script3").attr("src","jsv1/studentOtherInfo.js?v=25");
+				}
+			}
+			else{
+				$("#script3").attr("src","js/studentOtherInfo.js?v=25");
+			}
+		});
+	</script>
+	<!--<script type="text/javascript" src="js/studentOtherInfo.js?v=24"></script>-->
+	<!--  
+	<script type="text/javascript" src="js/studentStudentCard.js?v=6"></script>
+	-->
+<script>
+
+//百度统计上传代码
+	var _hmt = _hmt || [];
+	_hmt.push(['_setAutoPageview', false]);
+	_hmt.push(['_trackPageview', location.pathname]);
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+	  var s = document.getElementsByTagName("script")[0];
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</html>

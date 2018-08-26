@@ -1,0 +1,25 @@
+<!--pages/groupmgr/groupmgr.wxml-->
+<view class='superheader'></view>
+<text class='fa fa-chevron-left btnback' bindtap='back'></text>
+
+
+
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells__title">群成员（{{info.members.length}}）人</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:for="{{info.members}}" wx:key="k">
+        <view class="weui-cell__hd">
+          <image src="{{item.avatarUrl}}" style="margin-right: 5vw;vertical-align: middle;width:10vw; height: 10vw;border-radius:5vw;"></image>
+        </view>
+        <view class="weui-cell__bd">{{item.nickName}}</view>
+        <view class="weui-cell__ft">
+        <block wx:if="{{info.adminmember_id_name==item.openid}}">管理员</block>
+        <block wx:else>
+        <button  wx:if="{{info.adminmember_id_name==UserInfo.openid}}" size="mini" type='default' data-member_id="{{item.id}}"  data-openid="{{item.openid}}" bindtap='transManage'>转让</button>
+        </block>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

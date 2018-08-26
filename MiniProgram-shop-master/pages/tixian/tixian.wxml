@@ -1,0 +1,25 @@
+<!--pages/tixian/tixian.wxml-->
+<view class='container'>
+  <view class='section-hd'>
+    <view class='balance'>{{balance}}</view>
+    <view>可提现金额（元）</view>
+  </view>
+  <view class='process'>
+    <view class='process-item' wx:for='{{process_items}}' wx:key='code'>
+      <image src='{{item.url}}'></image>
+      <view class='process-title'>{{item.title}}</view>
+    </view>
+  </view>
+  <form bindsubmit='formSubmit'>
+    <view class='form-list'>
+      <input type='text' name='money' placeholder='最低额度为1元' bindblur='bindMoney'></input>
+      <input type='text' name='phone' placeholder='电话号码' bindblur='bindPhone' maxlength="11"></input>
+      <input type='text' name='weChat' placeholder='微信号' bindblur='bindWeChat'></input>
+      <button form-type='submit'>申请提现</button>
+    </view>
+  </form>
+  <view class='tipInfo'>
+    <icon class='info-icon' type='warn' color='#ed3743' size='16'></icon>
+    <view>提现金额需要3-5个工作日到帐</view>
+  </view>
+</view>

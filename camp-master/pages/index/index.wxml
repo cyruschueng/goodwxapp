@@ -1,0 +1,17 @@
+<import src="../../views/activelist/activelist.wxml"/>
+
+
+
+<view class="content">
+	<template wx:if="{{currentView}}" is="{{currentView}}" data="{{ ...viewData }}"></template>
+</view>
+
+
+
+
+<view class="base toolbar">
+	<view wx:for="{{tab.list}}" data-view="{{item.view}}" wx:key="index" data-index="{{index}}" bindtap="changeTab" class="tab">
+		<image src="../../asset/{{item.className}}.png" mode="widthFix" class="icon bar {{ item.view == currentView ? 'current' : ''}}"></image>
+	</view>
+	<view class="line" style="left : {{ 87 + tab.currentTab * 250 }}rpx"></view>
+</view>

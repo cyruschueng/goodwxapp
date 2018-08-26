@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<import src='../../wxParse/wxParse.wxml' />
+
+ <view class="jokeContainer">
+    <view class="jokeItem" wx:for="{{jokes}}" wx:for-index="index" wx:key="">
+      <view class="jokeAuthor">
+        <image class="jokeAuthorImg" src="{{item.author[0].avatar}}" background-size="cover"></image>
+        <view class="jokeAuthorRight">
+          <text class="jokeAuthorName">{{item.author[0].nickname||item.author[0].username}}</text>
+          <text class="jokeTime">{{item.createdate}}</text>
+        </view>
+      </view>
+
+      <view class="jokeCont" >
+        <template is="wxParse" data="{{wxParseData:replyTemArray[index]}}"/>
+        <block wx:if="{{item.videourl}}">
+                       <video src="{{item.videourl}}" poster="{{jokes[index].videourl}}.jpg"> </video>
+        </block>
+      </view>
+
+      <view class="operateBlock" wx:if="{{item.comments}}">
+        <view class="operateItem" data-id="{{item._id}}" data-index = "{{index}}" bindtap="bindcomment" >
+          <image class="replayIcon" src="/images/icon_reply.png"  mode="widthFix"></image>
+          <text class="num">{{comments.length}}</text>
+        </view>
+        <view class="operateItem" data-id="{{item._id}}" data-index = "{{index}}" bindtap="bindjoke">
+          <image class="followIcon" src="/images/icon_follow_normal.png"  mode="widthFix" ></image>
+          <text class="num" >{{item.joke}}</text>
+        </view>
+      
+      </view> <!--operateBlock-->
+
+      <view class="reply" wx:if="{{comments.length}}">
+        <view class="replyItem" wx:for="{{comments}}" wx:for-index="cinx" wx:for-item="c" wx:key="" >
+          <text class="replyName">{{c.author.nickname||c.author.username}} : </text>
+          <text class="replyCont">{{c.content}}</text>
+        </view>
+        
+      </view> 
+
+      <view class="line"></view>
+    </view>
+</view>
+  
+ <view class="page">
+    <view class="weui-footer"> 
+       
+       <view class="weui-footer__text">扫描下面二维码看更多笑话</view>
+       <image src="/images/jsjokeqrcode.jpg" style="width:60%;" mode="widthFix"> </image>
+       <view class="weui-footer__text">2018 @集思笑话</view> 
+       <view class="weui-footer__text">代码开放asmcos@github</view> 
+       <view style="height:100px;"> </view>
+     </view>
+  <form bindsubmit="bindFormSubmit">
+    <view class="page-section" style="position:fixed;bottom:0px;width:100%;">
+      
+      <view class="weui-cells weui-cells_comment">
+        <view class="weui-cell weui-cell_input" style="width:70%;"> 
+          <input class="weui-input" placeholder="评论..." name="content" value="{{inputval}}" style="border-bottom:1rpx solid #1AAD19;width:100%;"/>
+        </view>
+        <button class="weui-btn" type="primary" form-type="submit">确定</button>
+      </view>
+    </view>
+  </form>
+ </view> <!--page-->
+
+

@@ -1,0 +1,348 @@
+<!--  -->
+<view class='topBox'>
+  <!--顶部背景  -->
+  <image class='topbg' src='http://www.ixiaochengxu.cc/resource/images/plug-in/set-like/topbg.jpg'></image>
+
+  <!--规则说明按钮  -->
+  <view class='ruleBtn' catchtap='rule_show'>规则说明</view>
+
+
+  <!--活动时间 流程  立即参与  -->
+  <view class="tpBox tc {{like.end ? 'overBox' : ''}}">
+    <!--穿空线  -->
+    <view>
+      <view class='cklBox '>
+        <view class='ckline'></view>
+        <view class='ckline'></view>
+      </view>
+      <view class='cklBox hasBg'>
+        <view class='lfLIne'></view>
+        <view class='lfLIne'></view>
+      </view>
+    </view>
+
+    <!--活动时间 -->
+    <view class='durationBox'>活动时间：{{like.starttime}} - {{like.endtime}}</view>
+
+    <!--开奖倒计时   -->
+    <view class='hdsjBox lineText'>
+      <view hidden='{{!like.start}}'>距离活动开始还有 {{cutdown}}</view>
+      <view class='f14' wx:if="{{like.ljstart}}">距离开奖：{{cutdown}}</view>
+      <view wx:if="{{like.getit}}">领奖中</view>
+      <view wx:if="{{like.ljend}}">领奖结束</view>
+    </view>
+
+
+    <!--流程  -->
+    <view hidden='{{inlike}}'>
+      <view class='lcBox flex'>
+        <view class='icitem'>
+          <view class='outcircle'>
+            <view class='incircle'>1</view>
+          </view>
+          <view class='lcfont'>邀请好友</view>
+        </view>
+
+        <view class='icitem'>
+          <view class='outcircle'>
+            <view class='incircle'>2</view>
+          </view>
+          <view class='lcfont'>好友帮抢</view>
+        </view>
+
+        <view class='icitem'>
+          <view class='outcircle'>
+            <view class='incircle'>3</view>
+          </view>
+          <view class='lcfont'>坐等惊喜</view>
+        </view>
+        <view class='connentline'></view>
+      </view>
+      <!-- 立即参与  -->
+      <block wx:if='{{!like.start}}'>
+        <form bindsubmit='Instrant' report-submit='true'>
+          <input type='text' hidden='true' name='likeid' value='{{like.id}}'></input>
+          <button class='zrbqBox ' hover-class='none' form-type='submit' disabled='{{isin}}'>
+            <view class='ljcyBtn'>立即参与</view>
+          </button>
+        </form>
+      </block>
+      <!--活动结束提示语  -->
+      <view class='overTip' hidden="{{!like.end}}">
+        <text class='iconfont icon-info mr5'></text>
+        <text>活动已结束</text>
+      </view>
+    </view>
+
+
+
+
+
+    <!--点击立即参与后的状态  -->
+    <view class='partiBox' wx:if="{{mylike}}">
+      <!--头像  -->
+      <view class='parterPicBox'>
+        <image class='parterPic' src='{{mylike.headimgurl}}' mode='aspectFill'></image>
+        <view class='rotBorder'></view>
+      </view>
+
+      <!--昵称  -->
+      <view class='nickName mt5'>
+        <text class='mr10 lineText'>{{mylike.nickname}}</text>
+        <text>当前排名</text>
+      </view>
+
+      <!--名次  -->
+      <view class='mcBox flex'>
+        <view class='mcDeco flex'>
+          <view class='line line1 '></view>
+          <view class='line line2'></view>
+          <view class='carLine'>
+            <view class='caret'></view>
+            <view class='line3'></view>
+          </view>
+        </view>
+        <view class='mingci'>
+          <text>第</text>
+          <text class='mcVal'>{{mylike.rank}}</text>
+          <text>名</text>
+        </view>
+        <view class='mcDeco flex rotaDeco '>
+          <view class='line line1 '></view>
+          <view class='line line2'></view>
+          <view class='carLine'>
+            <view class='caret'></view>
+            <view class='line3'></view>
+          </view>
+        </view>
+      </view>
+
+      <!--查看榜单  -->
+      <view class='ckbd arrowR' catchtap='lookrank'>查看榜单</view>
+
+      <!--是否获奖  -->
+      <view hidden='{{!like.cangetprize}}'>
+        <!--没有获奖  -->
+        <view class='noawa' wx:if='{{!like.myprize}}'>活动已结束，很抱歉您的人气偏低无法兑奖哦</view>
+
+        <!--获奖  -->
+        <view class='getBox' wx:if='{{like.myprize}}'>
+          <image class='awaPic' src='{{like.myprize.goods_img_url}}' mode='aspectFill'></image>
+          <!--未领  -->
+          <view>
+            <view class='hdjdj'>活动结束，恭喜您获得{{like.myprize.prize_name}}</view>
+            <view class='getAwa' catchtap='getshow' wx:if="{{like.getit && mylike.get_style==1}}">领取奖品</view>
+          </view>
+
+          <!--已领  -->
+          <view wx:if="{{mylike.get_style==2}}">
+            <view class='getsucTip'>兑换码获取成功</view>
+            <view class='dhCode'>兑换码：{{mylike.mycode}}</view>
+          </view>
+
+          <!--奖品已兑换  -->
+          <view class='dhended' wx:if="{{mylike.get_style==3}}">奖品已兑换</view>
+        </view>
+
+      </view>
+
+      <!--人气值  -->
+      <view class='rqzBox'>
+        <view class='renqizhi flex'>
+          <view class='rqzline sub'></view>
+          <view class='rqzVal'>人气值：
+            <text class='f16'>{{mylike.get_num}}</text>
+          </view>
+          <view class='rqzline sub'></view>
+        </view>
+        <view class='friBox flex '>
+          <view class='arr arrLf'></view>
+          <scroll-view class='scrollView sub' scroll-x>
+            <block wx:if="{{headlist}}" wx:for="{{headlist}}" wx:key="{{index1}}">
+              <image class='friPic' src='{{item.headimgurl}}' mode='aspectFill'></image>
+            </block>
+          </scroll-view>
+          <view class='arr arrRg'></view>
+        </view>
+      </view>
+
+
+
+      <!--找人帮抢  -->
+      <form bindsubmit='onShareAppMessage' report-submit='true'>
+        <button class='zrbqBox ' hover-class='none' form-type='submit' open-type='share'>
+          <view class='ljcyBtn'>找人帮抢</view>
+        </button>
+      </form>
+    </view>
+
+
+  </view>
+
+
+  <!--奖品栏  -->
+  <view class='awardBox'>
+    <view class='title flex'>
+      <view class='sub flex'>
+        <view class='headerline sub'></view>
+        <view class='bk '></view>
+        <view class='bk darkbk molf'></view>
+      </view>
+      <view class='header'>奖品栏</view>
+      <view class='sub flex rota'>
+        <view class='headerline sub'></view>
+        <view class='bk '></view>
+        <view class='bk darkbk molf'></view>
+      </view>
+    </view>
+    <view class='luckerList'>
+      <block wx:for="{{like.prize}}" wx:key="{{index}}">
+        <view class='luckerItem flex'>
+          <image class='hjzPic mr10' src='{{item.goods_img_url}}'></image>
+          <view class='mr10 awardnam lineText'>{{item.goods_name}}</view>
+          <view class='tc'>
+            <view class='djming' wx:if="{{item.prize_type==1}}">{{item.prize_num}}名</view>
+            <view class='djming' wx:else>{{item.prize_start_num}}-{{item.prize_num}}名</view>
+            <view class='jdjiang'>{{item.prize_name}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <!--领奖时间  -->
+    <view class='getwardBox flex'>
+      <view class='sub flex mr10'>
+        <view class='qq kxqq'></view>
+        <view class='qq sxqq molf'></view>
+      </view>
+      <view class='f14 mr10'>领奖时间：{{like.ljstart_time}}-{{like.ljend_time}}</view>
+      <view class='sub flex rota'>
+        <view class='qq kxqq'></view>
+        <view class='qq sxqq molf'></view>
+      </view>
+    </view>
+  </view>
+
+
+  <!--参与用户列表  -->
+  <view class='userBox'>
+    <view class='title flex'>
+      <view class='sub flex'>
+        <view class='headerline sub'></view>
+        <view class='bk '></view>
+        <view class='bk darkbk molf'></view>
+      </view>
+      <view class='header'>已有 {{listinfo.count?listinfo.count:0}} 名用户参与</view>
+      <view class='sub flex rota'>
+        <view class='headerline sub'></view>
+        <view class='bk '></view>
+        <view class='bk darkbk molf'></view>
+      </view>
+
+    </view>
+
+
+    <!--用户列表  -->
+    <view class='usleList'>
+      <block wx:if="{{listinfo.list}}" wx:for="{{listinfo.list}}" wx:key="{{index}}">
+        <view class='userItem flex'>
+          <image class='userPic' src='{{item.headimgurl}}' mode='aspectFill'></image>
+          <view class='useerName lineText'>{{item.nickname}}</view>
+          <view class='pariTime'>{{item.difftime}}</view>
+          <view>抢先参与</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+
+
+</view>
+
+
+
+<!--弹窗   规则说明 -->
+<view class='shade_bg' hidden='{{rule}}' catchtap='rule_hide'>
+  <view class='modal'>
+    <!--上边  -->
+    <view class='modTop'>
+      <view class='modBgLf'>
+        <view class='modBgLfInner'></view>
+      </view>
+      <view class='modBgMid'>
+        <view class='modBgMidInner'></view>
+      </view>
+      <view class='modBgRg'>
+        <view class='modBgRgInner'></view>
+      </view>
+      <view class='modTopWhite'>
+        <view class='modBgLf'>
+          <view class='modBgLfInner'></view>
+        </view>
+        <view class='modBgMid'>
+          <view class='modBgMidInner'></view>
+        </view>
+        <view class='modBgRg'>
+          <view class='modBgRgInner'></view>
+        </view>
+      </view>
+    </view>
+
+    <!--中间内容  -->
+    <view class='modMid'>
+      <view class='modCon'>
+        <view class='ruleTit tc'>规则说明</view>
+        <scroll-view class='ruleCon' scroll-y>
+          <import src="../../../../wxParse/wxParse.wxml" />
+          <template is="wxParse" data="{{wxParseData:description.nodes}}" />
+        </scroll-view>
+      </view>
+    </view>
+
+    <!--底边  -->
+    <view class='modBot '>
+      <view class='modBgLf'>
+        <view class='modBgLfInner'></view>
+      </view>
+      <view class='modBgMid'>
+        <view class='modBgMidInner'></view>
+      </view>
+      <view class='modBgRg'>
+        <view class='modBgRgInner'></view>
+      </view>
+      <view class='modTopWhite'>
+        <view class='modBgLf'>
+          <view class='modBgLfInner'></view>
+        </view>
+        <view class='modBgMid'>
+          <view class='modBgMidInner'></view>
+        </view>
+        <view class='modBgRg'>
+          <view class='modBgRgInner'></view>
+        </view>
+      </view>
+    </view>
+
+
+
+  </view>
+</view>
+
+
+<!--弹窗 领取奖品  -->
+<view class='popupBox tc' hidden='{{getshow}}'>
+  <form bindsubmit='getprize' report-submit='true'>
+    <view class='shade_bg' catchtap='gethide'></view>
+    <view class='getAwaModal'>
+      <view class='gwTit'>领取奖品</view>
+      <view class='writright'>请正确填写个人联系方式，客服会与您联系确认领奖信息</view>
+      <view class='inpBox gridXb'>
+        <input name='realname' placeholder='姓名'></input>
+      </view>
+      <view class='inpBox gridXb'>
+        <input name='mobile' placeholder='手机号'></input>
+      </view>
+      <button form-type='submit' disabled='{{getit}}' class='comfirmBtn'>确定</button>
+    </view>
+  </form>
+</view>

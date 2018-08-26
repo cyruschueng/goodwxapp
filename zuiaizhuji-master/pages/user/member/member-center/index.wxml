@@ -1,0 +1,95 @@
+<!--pages/user/member/member-center/index.wxml-->
+<view class="member-card-box">
+    <view class="member-card">
+        <view class="user-info flex">
+            <image class="user-img mr10" src="{{card.headimgurl}}" mode="aspectFill"></image>
+            <view class="sub">
+                <view class="lineText">{{card.name||card.nickname}}</view>
+                <view class="member-grade">
+                    <text class="iconfont icon-huiyuan"></text> {{card.level.level}}</view>
+            </view>
+            <view class="write-code">
+                <!-- <text class="iconfont icon-erweima1"></text> -->
+            </view>
+        </view>
+        <view class="card-money flex">
+            <view class="sub">
+                <view class="balance-tit">账户余额</view>
+                <view class="card-balance">￥
+                    <text class="card-balance-money">{{card.recharge}}</text>
+                </view>
+            </view>
+            <view>
+                <button class="card-recharge" catchtap='onSetValueTap' data-name='recharge' data-value='{"show":true}' data-is-multi='true'>充值</button>
+            </view>
+        </view>
+        <view class='vip-number'>No.{{card.number}}</view>
+    </view>
+</view>
+
+<!-- 充值弹框 -->
+<view class="recharge-pop" hidden='{{!recharge.show}}'>
+    <form class="recharge-cont" report-submit='true' bindsubmit='onRechargeSubmit'>
+        <view class="recharge-colse" catchtap='onSetValueTap' data-name='recharge' data-value='{"show":false}' data-is-multi='true'></view>
+        <view class='fb'>选择充值金额</view>
+        <form class='recharge-item' report-submit='true' bindsubmit='onRechargeSelect'>
+            <button class="recharge-btn" wx:for='{{recharge_list}}' wx:key='{{item.id}}' data-index='{{index}}' form-type='submit'>{{item.title}}</button>
+        </form>
+        <view class="recharge-inp">
+            <text>其他</text>
+            <input type='digit' class="recharge-inp-txt" placeholder="请输入充值金额" placeholder-style='color:#c9b084;' bindinput="onMoneyInput" name='money' maxlength='5' />
+            <text>元</text>
+        </view>
+        <button class="recharge-sure" form-type='submit'>确认充值</button>
+    </form>
+    <view class="recharge-popbg"></view>
+</view>
+
+<view class="card-integral">
+    <view>
+        <text class="mr5 iconfont icon-xiaofeijifen"></text> 积分：{{card.score}}
+    </view>
+    <view catchtap='onNavigateTap' data-url='../pay-records/index'>
+        <text class="mr5 iconfont icon-jiaoyijilu"></text> 交易记录
+    </view>
+</view>
+
+<view class="card-desc-tit gridXb">会员权益</view>
+<view class="card-desc">
+    <view class="card-desc-item">
+        <view>
+            <text class="iconfont icon-zhuanxiangzhekou"></text>
+        </view>
+        <view class="card-desc-cont">
+            <view class="desc-item-tit">专享折扣</view>
+            <view class="f12 grey">当前等级折扣{{(100 - card.level.discount) * 0.1}}折</view>
+        </view>
+    </view>
+    <view class="card-desc-item">
+        <view>
+            <text class="iconfont icon-xiaofeijifen"></text>
+        </view>
+        <view class="card-desc-cont">
+            <view class="desc-item-tit">消费积分</view>
+            <view class="f12 grey">会员消费返积分</view>
+        </view>
+    </view>
+    <view class="card-desc-item">
+        <view>
+            <text class="iconfont icon-jifenduihuan"></text>
+        </view>
+        <view class="card-desc-cont">
+            <view class="desc-item-tit">积分兑换</view>
+            <view class="f12 grey">积分商城兑换商品</view>
+        </view>
+    </view>
+    <view class="card-desc-item">
+        <view>
+            <text class="iconfont icon-huiyuandengji"></text>
+        </view>
+        <view class="card-desc-cont">
+            <view class="desc-item-tit">会员等级</view>
+            <view class="f12 grey">消费越多等级越高</view>
+        </view>
+    </view>
+</view>

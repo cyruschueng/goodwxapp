@@ -1,0 +1,62 @@
+<!--index.wxml-->
+<!--index.wxml-->
+<view class="container page__bd" >
+  <view class="weui-cells__title"></view>
+  <form bindsubmit="formSubmit" id="formSubmit" style="width: 100%;">
+
+    <block wx:if="{{type=='source'}}">
+      <view class="weui-cells weui-cells_after-title" >
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="填写来源" focus="true" name="source" value="{{detail.source}}"/>
+          </view>
+        </view>
+      </view>
+      <text style="color:#666;font-size: 13px;margin: 0 10px;">来自其它APP的分享会显示来源，如：美图秀秀</text>
+    </block>
+    <block wx:elif="{{type=='loc'}}">
+      <text style="color:#666;font-size: 13px;margin: 0 10px;" wx:if="{{detail.city}}">所在省市，如：上海</text>
+      <view class="weui-cells weui-cells_after-title" >
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="所在省市，如：上海" name="city" value="{{detail.city}}"/>
+          </view>
+        </view>
+      </view>
+      <text style="color:#666;font-size: 13px;margin: 0 10px;margin-top: 15px;" wx:if="{{detail.loc}}">详细地址，如：东方明珠</text>
+      <view style="margin-top: 15px;" wx:else></view>
+      <view class="weui-cells weui-cells_after-title" >
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="详细地址，如：东方明珠" name="loc" value="{{detail.loc}}"/>
+          </view>
+        </view>
+      </view>
+      <view style="margin: 10px;text-align: center;display: none;">
+        <image src="http://icons.maiyizhi.cn/suozaiweizhi.png" style="width:600rpx;height:305.6rpx;"></image>
+      </view>
+    </block>
+    <block wx:if="{{type=='time'}}">
+      <view class="weui-cells weui-cells_after-title" >
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请填写时间" value="{{detail.time}}" name="time" focus="true"/>
+          </view>
+        </view>
+      </view>
+      <view style="margin: 10px;text-align: center;display: none;">
+        <image src="http://icons.maiyizhi.cn/fabushijian.png" style="width:600rpx;height:270.4rpx;"></image>
+      </view>
+      <view style="color:#666;font-size: 13px;margin: 10px 10px 0 10px;">请按以下格式手动修改：</view>
+      <view style="color:#666;font-size: 13px;margin: 0 10px;">格式1：1分钟前</view>
+      <view style="color:#666;font-size: 13px;margin: 0 10px;">格式2：1小时前</view>
+      <view style="color:#666;font-size: 13px;margin: 0 10px;">格式3：昨天</view>
+      <view style="color:#666;font-size: 13px;margin: 0 10px;">格式4：5天前</view>
+      <view style="color:#666;font-size: 13px;margin: 0 10px;">格式5：2016年5月1日 10:00</view>
+      <button class="weui-btn" style="width: 80%;" type="default" bindtap="changeTime">切换格式</button>
+    </block>
+
+    <button formType="submit"  class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+

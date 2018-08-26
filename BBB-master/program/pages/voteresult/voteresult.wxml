@@ -1,0 +1,43 @@
+<view class="container">
+  <text class='eos-h1'>{{coinName}}</text>
+  <view class="eos-item eos-all">
+    <view class="eos-vote-name">
+      全网
+    </view>
+    <view class="eos-vote-result">
+      <view class="eos-vote-earn-group">
+            <text class="eos-title eos-earn-title">赚了</text>
+            <text class="eos-earn">{{all.gain}}</text>
+      </view>
+       <view class="eos-vote-loss-group">
+            <text class="eos-earn">{{all.loss}}</text>
+            <text class="eos-title eos-loss-title">赔了</text>
+      </view>
+    </view>
+    <view class="eos-vote-progress">
+       <view class="eos-vote-active" style='width:{{all.gain}}'></view>
+    </view>
+  </view>
+   <view class="eos-item eos-group">
+     <view class="eos-vote-name">
+      本群的群友们
+    </view> 
+      <view class="eos-vote-result">
+      <view class="eos-vote-earn-group">
+            <text class="eos-title eos-earn-title">赚了</text>
+            <text class="eos-earn">{{group.gain}}人</text>
+      </view>
+       <view class="eos-vote-loss-group">
+            <text class="eos-earn">{{group.loss}}人</text>
+            <text class="eos-title eos-loss-title">赔了</text>
+      </view>
+    </view>
+    <view class="eos-vote-progress">
+       <view class="eos-vote-active" style='width:{{group.gain}}'></view>
+    </view>
+  </view>
+  <!-- 分享 -->
+   <button class="eos-btn eos-btn-share" open-type='share' >分享看更多的群友赚没赚</button>
+  <!-- 返回首页 -->
+  <button class="eos-btn eos-btn-back" bindtap='jumpurl'>返回首页</button>
+</view>

@@ -1,0 +1,84 @@
+<!--index.wxml-->
+<!-- 弹幕 -->
+<view class="page-section">
+    <view class="doommview">
+      <block wx:for="{{doommData}}" wx:key="id">
+          <text wx:if="{{item.display}}" class="aon" style="animation: first {{item.time}}s linear infinite;top:{{item.top}}%;color:{{item.color}};">
+              {{item.text}}
+          </text>
+      </block>
+    </view>
+  </view>
+<view class="index">
+  <view class="index_content">
+    <image class="photo" src="{{imgUrl}}" background-size="cover"> </image>
+    <view class='name'>{{name}}</view>
+    <form bindsubmit="formSubmit">  
+      <view class="index_content_info">
+        <text class="index_content_title">设置口令</text>
+          <view class="index_content_input form-group">
+            <input bindinput="check" name="input_key"  placeholder="请输入中文口令"></input>
+          </view>
+      </view>
+      <view class="index_content_info1">
+        <text style="float:left;margin-top:10px;">小伙伴们说对口令即可获得随机红包</text>
+        <image bindtap='NormalProblem' class="tubiao_why1" src="/pages/img/tubiao_why1.png"></image>
+        <view class="clearfix"></view>
+      </view>
+      <view class="index_content_info index_content_info_mt">
+        <text class="index_content_title">总赏金</text>
+          <view class="index_content_input form-group">
+            <input type='digit' value="{{tel}}" bindinput='word_length'  name="input_money" placeholder="填写金额"></input>
+            <text>元</text>
+          </view>
+          <view class="clearfix"></view>
+      </view>
+      <view class="index_content_info index_content_info_mt">
+        <text class="index_content_title">数量</text>
+          <view class="index_content_input form-group">
+            <input type='number' value="{{value}}" bindinput='count_length' name="input_count" placeholder="填写数量"></input>
+            <text>个</text>
+          </view>
+          <view class="clearfix"></view>
+      </view>
+      <view class="index_content_info1">
+        <text style="color:black">可进入排行榜查看自己的排名</text>
+      </view>
+ 
+ <view class="record-style">   
+ <!-- bindtouchstart="touchdown" bindtouchend="touchup"  -->
+      <button bindtap='payMoney'  formType="submit"  class="index_content_botton" style="background-color:#d24d46;" >生成语音口令</button>
+  </view> 
+</form>
+<view class="errod">{{tip}}</view>
+      <view class="index_content_info3">
+        <text>需支付￥0.00服务费，优先使用余额</text>
+      </view>
+      <view class="clearfix"></view>
+  </view> 
+      <view class="index_content_info4">
+        <text bindtap='qrCode' style='color:#999'>更多玩法 • 敬请期待</text>
+        <text></text>
+      </view>
+</view>
+
+<view class="footer">
+  <view bindtap="MyRecord">
+    <image class="foot_img" src="/pages/img/tubiao1.png"></image>
+    <text>我的记录</text>
+  </view>
+  <view bindtap="ReturnMoney">
+    <image class="foot_img" src="/pages/img/tubiao2.png"></image>
+    <text>余额提现</text>
+  </view>
+  <view bindtap="list">
+    <image class="foot_img" src="/pages/img/tubiao3.png"></image>
+    <text>收支账单</text>
+  </view>
+  <view bindtap="NormalProblem">
+    <image class="foot_img" src="/pages/img/tubiao4.png"></image>
+    <text>常见问题</text>
+  </view>
+  <view class="clearfix"></view>
+</view>
+

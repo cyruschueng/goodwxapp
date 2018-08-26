@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script>
+		$(function(){
+			/*
+				思路：
+				1）window绑定滚动事件
+				2）当滚动到一定距离时，显示楼层导航
+				3）当滚动到相应的楼层时，导航"相应位置"显示高亮
+					scrollTop,offset().top对比，得出索引值
+			 */
+			 var isClick = false;//是否是点击滚动
+			 $(window).scroll(function(){
+			 	// 如果为点击滚动，退出当前事件
+				if(isClick){
+					return;
+				}
+
+			 	var height=$(this).scrollTop();
+
+			 	if(height>200){
+			 		$('.nav').fadeIn();
+			 	}else{
+			 		$('.nav').fadeOut();
+			 	}
+
+			 	// 遍历所有楼层，和scrollTop进行比较，得出当前楼层索引
+				$('#main .Louti').each(function(index,louti){
+					console.log('---',$(this).offset().top)
+					// 判断临界点
+					if((height>=$(this).offset().top-$(this).outerHeight()/2)){
+						$('.nav li').not('.last').removeClass().eq(index).addClass('hover');
+					}
+				})
+
+			 })
+
+			$('.nav li').click(function(){
+
+				isClick = true;
+				
+				$(this).addClass('hover').siblings().not('.last').removeClass();
+
+				if($(this).hasClass('last')){
+					$('html,body').animate({scrollTop:0},function(){
+						isClick = false;
+					});
+					return;
+				}
+
+				var index = $(this).index();
+
+				var currentLouti = $('#main .Louti').eq(index);
+
+				var currentScrollTop = currentLouti.offset().top - ($(window).height() - currentLouti.outerHeight())/2;
+				if(currentScrollTop < 0){
+						currentScrollTop = 0;
+				}
+
+				$('html,body').animate({scrollTop:currentScrollTop},function(){
+					//动画执行完后，重置点击滚动变量
+					isClick = false;
+				});
+
+			})
+
+		})
+	</script>
+</head>
+<body>
+
+	<div class="nav">
+		<ul>
+			<li class="hover">1F <span>服饰</span> </li>
+			<li>2F <span>美妆</span> </li>
+			<li>3F <span>手机</span> </li>
+			<li>4F <span>家电</span> </li>
+			<li>5F <span>数码</span> </li>
+			<li>6F <span>运动</span> </li>
+			<li>7F <span>居家</span> </li>
+			<li>8F <span>母婴</span> </li>
+			<li>9F <span>食品</span> </li>
+			<li>10F <span>图书</span> </li>
+			<li>11F <span>服务</span> </li>
+			<li class="last">Top</li>
+		</ul>
+	</div>
+	<div id="main">
+		<div class="Louti" style="background: #cc0033;">服饰</div>
+		<div class="Louti" style="background: #999933;">美妆</div>
+		<div class="Louti" style="background: #ccff33;">手机</div>
+		<div class="Louti" style="background: #006633;">家电</div>
+		<div class="Louti" style="background: #6666cc;">数码</div>
+		<div class="Louti" style="background: #ff6600;">运动</div>
+		<div class="Louti" style="background: #ffff00;">居家</div>
+		<div class="Louti" style="background: #3333ff;">母婴</div>
+		<div class="Louti" style="background: #ff00cc;">食品</div>
+		<div class="Louti" style="background: #669900;">图书</div>
+		<div class="Louti" style="background: #ff66cc;">服务</div>
+	</div>
+</body>
+</html>

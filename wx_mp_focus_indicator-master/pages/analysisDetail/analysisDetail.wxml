@@ -1,0 +1,283 @@
+<!--pages/analysisDetail/analysisDetail.wxml-->
+<view class="container">
+	<!-- canvas图表区域 -->
+	<view class="pz_canvas" style="width:{{windowWidth}}px;transform: rotate({{chartsDeg}}deg);" wx:if="{{analysisData.group_list.length > 0 && canvasShowed ? true : false}}">
+		<canvas canvas-id="analysisDetailCanvas" disable-scroll="true" class="canvas" style="width:{{windowWidth}}px" bindtouchstart=""></canvas>
+	</view>
+	<view class="pz_analysis_listr_loading" hidden="{{analysisData.group_list.length > 0}}">
+		<view class="sk-circle">
+		  <view class="sk-circle1 sk-child"></view>
+		  <view class="sk-circle2 sk-child"></view>
+		  <view class="sk-circle3 sk-child"></view>
+		  <view class="sk-circle4 sk-child"></view>
+		  <view class="sk-circle5 sk-child"></view>
+		  <view class="sk-circle6 sk-child"></view>
+		  <view class="sk-circle7 sk-child"></view>
+		  <view class="sk-circle8 sk-child"></view>
+		  <view class="sk-circle9 sk-child"></view>
+		  <view class="sk-circle10 sk-child"></view>
+		  <view class="sk-circle11 sk-child"></view>
+		  <view class="sk-circle12 sk-child"></view>
+		</view>
+		<view class="pz_analysis_listr_loading_text">
+			<text>媒体观点分析中...</text>
+		</view>
+	</view>
+	<!-- 详情列表区域 -->
+	<view class="pz_analysis_listr_area" wx:if="{{analysisData.group_list.length > 0}}">
+		<scroll-view scroll-y style="height:{{scrollHeight}}px;" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="{{inToView}}" scroll-top="">
+			<view class="pz_analysis_listr_head" >
+				<view class="pz_analysis_listr_head_top">
+
+					<!-- <swiper style="width:{{(analysisData.display_title.length*18+36+25)>windowWidth?analysisData.display_title.length*18+36:windowWidth-25}}px;height:24px;" autoplay="true" interval="4200" duration="5000" circular="true" wx:if="{{(analysisData.display_title.length*18+36+25)>windowWidth?true:false}}">
+					  <swiper-item class="pz_analysis_listr_head_title" style="">{{analysisData.display_title}}</swiper-item>
+					  <swiper-item class="pz_analysis_listr_head_title" style=""></swiper-item>
+					  <swiper-item class="pz_analysis_listr_head_title" style="">{{analysisData.display_title}}</swiper-item>
+					  <swiper-item class="pz_analysis_listr_head_title" style=""></swiper-item>
+					</swiper> -->
+					<view class="pz_analysis_listr_head_title_r" wx:if="{{(analysisData.display_title.length*18+25)>windowWidth?true:false}}">
+						<view class="pz_analysis_listr_head_title" id="headTitleId" style="width:{{analysisData.display_title.length*18+36}}px;position:absolute;" animation="{{titleAnimationData}}">{{analysisData.display_title}}</view>
+					</view>
+					<view class="pz_analysis_listr_head_title" id="headTitleId" wx:if="{{(analysisData.display_title.length*18+25)>windowWidth?false:true}}">{{analysisData.display_title}}</view>
+
+					<!-- <view class="pz_analysis_listr_head_title_r">
+						<view class="pz_analysis_listr_head_title" style="width:{{(analysisData.display_title.length*18+25)}}px">{{analysisData.display_title}}</view>
+						<view class="pz_analysis_listr_head_title" style="width:{{windowWidth}}px;height:26px"></view>
+					</view> -->
+
+					<!-- <view class="pz_analysis_listr_head_title" style="width:{{(analysisData.display_title.length*18+36+25)>windowWidth?analysisData.display_title.length/2*18+36:windowWidth-25}}px;">《{{analysisData.display_title}}》</view> -->
+					<!-- <view class="pz_analysis_listr_head_title" style="width:{{(le*18+36+25)>windowWidth?le/2*18+36:windowWidth-25}}px;">《微信小程序》</view> -->
+				</view>
+				<view class="pz_analysis_listr_head_bottom">
+					<view class="pz_analysis_listr_head_left">
+						<view class="pz_analysis_listr_head_left_i"></view>
+					</view>
+					<view class="pz_analysis_listr_head_right">
+						<view class="pz_analysis_listr_head_right_r">
+							<view class="pz_analysis_listr_head_right_i">
+								<view class="pz_analysis_listr_head_name">
+									<view class="pz_analysis_listr_head_name_text">简述</view>
+								</view>
+								<view class="pz_analysis_listr_des">{{analysisData.description}}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="pz_analysis_list_wrap">
+			  <view class="pz_analysis_list_item" wx:for="{{analysisData.group_list}}" wx:key="analysisDataId" wx:for-item="analysisData" wx:for-index="idx">
+		      <view class="pz_analysis_list_head_wrap" id="{{'inToView'+analysisData.date}}" data-id="{{analysisData.date}}" bindtap="loadMoreTap">
+		      	<view class="pz_analysis_list_head" hover-class="pz_analysis_list_head_hover">
+		      		<view class="pz_analysis_list_head_left">
+		      			<view class="pz_analysis_list_head_left_i"></view>
+		      		</view>
+			      	<view class="pz_analysis_list_head_right">
+			      		<view class="pz_analysis_list_publish_date">
+				      		<image class="pz_analysis_list_publish_date_bg" mode="scaleToFill" src="../../image/icon_date_bg.png">
+				      		</image>
+				      		<view class="pz_analysis_list_publish_date_month">{{analysisData.month}}月</view>
+				      		<view class="pz_analysis_list_publish_date_day">{{analysisData.day}}</view>
+				      		<view class="pz_analysis_list_mark" wx:if="{{analysisData.key.length > 0}}" style="background-color:{{rankColorDefault[analysisData.key]}};">{{analysisData.key}}</view>
+			      		</view>
+			      		<view class="pz_analysis_list_head_right_i">
+						      <view class="pz_analysis_list_item_title">
+						      	<view class="pz_analysis_list_item_title_text">{{analysisData.title}}</view>
+						      	<view class="pz_analysis_list_item_count" wx:if="{{analysisData.list.length > 1}}">{{analysisData.list.length}}条相似</view>
+						      	<view class="pz_analysis_list_head_bottom" wx:if="{{analysisData.list.length < 2}}">
+						      		<view class="pz_analysis_list_head_bottom_left">
+							      		<view class="pz_analysis_list_media_name">{{analysisData.list[0].media_name_sign}}</view>
+							      		<view class="pz_analysis_list_point" wx:if="{{analysisData.list[0].is_sensitive}}">敏感</view>
+							      		<!-- <view class="pz_analysis_list_point">敏感</view> -->
+							      		<view class="pz_analysis_list_wind_level" wx:if="{{analysisData.list[0].media_wind > 0}}">风力{{analysisData.list[0].media_wind}}级</view>
+						      		</view>
+						      		<!-- <view class="pz_analysis_list_wind_grading_i" wx:if="{{analysisData.list[0].media_wind > 0}}">
+						      			<view class="pz_analysis_list_wind_level_i">风力{{analysisData.list[0].media_wind}}级</view>
+						      		</view> -->
+						      	</view>
+						      	<view class="pz_analysis_list_item_line_wrap" wx:if="{{idx!==titleSignCount-1?true:false}}">
+						      		<view class="pz_analysis_list_item_line" wx:if="{{unfold[analysisData.date]==analysisData.date?false:true}}"></view>
+						      	</view>
+						      </view>
+						      <view class="pz_analysis_list_ico">
+						      	<view class="pz_analysis_list_unfold" style="border-{{unfold[analysisData.date]==analysisData.date?'top':'bottom'}}: 1px solid #777777;border-{{unfold[analysisData.date]==analysisData.date?'left':'right'}}: 1px solid #777777;" wx:if="{{analysisData.list.length > 1}}"></view>
+						      	<!-- <view class="pz_analysis_list_fold"></view> -->
+						      </view>
+			      		</view>
+			      	</view>
+		      	</view>
+		      </view>
+		      <view class="pz_analysis_list_content_wrap" id="item{{analysisData.date}}" animation="{{currentItem==analysisData.date?unfoldAnimationData:''}}">
+		      	<view class="pz_analysis_list_content" id="cnt{{analysisData.date}}">
+		      		<view class="pz_analysis_list_cnt_left"></view>
+		      		<view class="pz_analysis_list_cnt_right" wx:if="{{analysisData.list.length > 1}}">
+					      <view wx:for="{{analysisData.list}}" wx:key="analysisId" wx:for-item="analysisItem">
+					      	<view class="pz_analysis_list_card_wrap">
+					      		<view class="pz_analysis_list_card_tr">
+					      			<view class="pz_analysis_list_card_cir"></view>
+					      		</view>
+						        <view class="pz_analysis_list_card" data-article="{{analysisItem}}" bindtap="">
+						        	<view class="pz_analysis_list_card_top">
+						        		<view class="pz_analysis_list_title">
+						        		  {{analysisItem.title}}
+						        		</view>
+						        	</view>
+						        	<view class="pz_analysis_list_card_bottom">
+						        		<view class="pz_analysis_list_media_name">{{analysisItem.media_name_sign}}</view>
+						        		<view class="pz_analysis_list_point" wx:if="{{analysisItem.is_sensitive}}">敏感</view>
+						        		<!-- <view class="pz_analysis_list_point">敏感</view> -->
+						        		<view class="pz_analysis_list_wind_level" wx:if="{{analysisItem.media_wind > 0}}">风力{{analysisItem.media_wind}}级</view>
+<!-- 						        		<view class="pz_analysis_list_wind_grading" wx:if="{{analysisItem.media_wind > 0}}">
+						        			<view class="pz_analysis_list_wind_level">风力{{analysisItem.media_wind}}级</view>
+						        		</view> -->
+						        	</view>
+<!-- 						          <view class="pz_analysis_list_top">
+						            <view class="pz_analysis_list_left">
+						              <view class="pz_analysis_list_content">
+						                <view class="pz_analysis_list_text">
+						                  {{analysisItem.title}}
+						                </view>
+						              </view>
+						              <view class="pz_analysis_list_media">
+						                <view class="pz_analysis_list_point" wx:if="{{analysisItem.is_sensitive}}">敏感</view>
+						              </view>
+						            </view>
+						            <view class="pz_analysis_list_right">
+						            </view>
+						          </view>
+						          <view class="pz_analysis_list_bottom">
+						            <view class="pz_analysis_list_left">
+						              <view class="pz_analysis_list_media">
+						                <view class="pz_analysis_list_media_name">{{analysisItem.media_name_sign}}</view>
+						                <view class="pz_analysis_list_date">{{analysisItem.publish_at}}</view>
+						              </view>
+						            </view>
+						            <view class="pz_analysis_list_right" wx:if="{{analysisItem.media_wind > 0}}">
+						              <view class="pz_analysis_list_wind_grading">
+						                <view class="pz_analysis_list_wind_top">
+						                  <view class="pz_analysis_list_wind_text">最大风力</view>
+						                </view>
+						                <view class="pz_analysis_list_wind_bottom">
+						                  <view class="pz_analysis_list_wind_level_num">{{analysisItem.media_wind}}</view>
+						                  <view class="pz_analysis_list_wind_level">级</view>
+						                </view>
+						              </view>
+						            </view>
+						          </view> -->
+						        </view>
+					      	</view>
+				      	</view>
+		      		</view>
+			      </view>
+		      </view>
+			  </view>
+			</view>
+			<view class="pz_analysis_listr_footer" >
+				<view class="pz_analysis_listr_footer_left">
+					<view class="pz_analysis_listr_footer_left_i"></view>
+				</view>
+				<view class="pz_analysis_listr_footer_right">
+					<view class="pz_analysis_listr_footer_right_r">
+						<view class="pz_analysis_listr_footer_right_i">
+							<view class="pz_analysis_listr_footer_name">
+								<view class="pz_analysis_listr_footer_name_text">
+									<image class="pz_analysis_list_footer_bg" mode="scaleToFill" src="../../image/icon_copyright.png">
+									</image>
+								</view>
+							</view>
+							<view class="pz_analysis_listr_footer_des">深圳比量传媒公司<text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>版权所有<text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>未经许可<text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>禁止商业用途</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+<!-- 			<view class="pz_analysis_list_wrap">
+				<view class="pz_analysis_listr">
+				  <view wx:for="{{analysisData}}" wx:key="analysisDataId" wx:for-item="analysisData">
+				    <view class="pz_analysis_list_item">
+				      <view class="pz_analysis_list_publish_date" id="{{'inToView'+analysisData.publish_at}}" bindtap="">
+				        <text class="pz_analysis_list_publish_date_text">{{analysisData.publish_at}}</text>
+				        <text class="pz_analysis_list_publish_date_text" wx:if="{{analysisData.data.length > 1}}">（{{analysisData.data.length}}条）</text>
+				      </view>
+				      <view wx:for="{{analysisData.data}}" wx:key="analysisId" wx:for-item="analysisItem">
+				        <view class="pz_analysis_list" hover-class="pz_analysis_list_hover" style="background-color:{{resultArticleListBgcStyle}};" data-article="{{analysisItem}}" bindtap="articleListTap">
+				          <view class="pz_analysis_list_top">
+				            <view class="pz_analysis_list_left">
+				              <view class="pz_analysis_list_content">
+				                <view class="pz_analysis_list_text">
+				                  {{analysisItem.title}}
+				                </view>
+				              </view>
+				              <view class="pz_analysis_list_media">
+				                <view class="pz_analysis_list_point" wx:if="{{analysisItem.is_sensitive}}">敏感</view>
+				              </view>
+				            </view>
+				            <view class="pz_analysis_list_right">
+				            	<view class="pz_analysis_list_mark" wx:if="{{analysisItem.key.length > 0}}" style="background-color:{{rankColorDefault[analysisItem.key]}};">{{analysisItem.key}}</view>
+				            </view>
+				          </view>
+				          <view class="pz_analysis_list_bottom">
+				            <view class="pz_analysis_list_left">
+				              <view class="pz_analysis_list_media">
+				                <view class="pz_analysis_list_media_name">{{analysisItem.media_name_sign}}</view>
+				                <view class="pz_analysis_list_date">{{analysisItem.publish_at}}</view>
+				              </view>
+				            </view>
+				            <view class="pz_analysis_list_right" wx:if="{{analysisItem.media_wind > 0}}">
+				              <view class="pz_analysis_list_wind_grading">
+				                <view class="pz_analysis_list_wind_top">
+				                  <view class="pz_analysis_list_wind_text">最大风力</view>
+				                </view>
+				                <view class="pz_analysis_list_wind_bottom">
+				                  <view class="pz_analysis_list_wind_level_num">{{analysisItem.media_wind}}</view>
+				                  <view class="pz_analysis_list_wind_level">级</view>
+				                </view>
+				              </view>
+				            </view>
+				          </view>
+				        </view>
+				      </view>
+				    </view>
+				  </view>
+				</view>
+			</view> -->
+
+<!-- 			<view class="pz_analysis_list_wrap">
+				<view wx:for="{{analysisData}}" wx:key="analysisDataId" wx:for-item="analysisData">
+				  <view class="pz_analysis_data_item">
+				    <view class="pz_analysis_publish_date" id="{{'inToView'+analysisData.publish_at}}" bindtap="">
+				      <text class="pz_analysis_publish_date_text">{{analysisData.publish_at}}</text>
+				      <text class="pz_analysis_publish_date_text" wx:if="{{analysisData.data.length > 1}}">（{{analysisData.data.length}}条）</text>
+				    </view>
+					  <view wx:for="{{analysisData.data}}" wx:key="analysisId" wx:for-index="idx" wx:for-item="analysisItem">
+					  	<view class="pz_analysis_list" hover-class="pz_analysis_list_hover" data-id="{{analysisItem.id}}" bindtap="loadMoreTap">
+					  		<view class="pz_analysis_list_mark" wx:if="{{analysisItem.key.length > 0}}" style="background-color:{{rankColorDefault[analysisItem.key]}};">{{analysisItem.key}}</view>
+					  		<view class="pz_analysis_list_item">
+					  		  <view class="pz_analysis_list_title">{{analysisItem.title}}</view>
+					  		  <view class="pz_analysis_list_abstract" hidden="{{currentItem[analysisItem.id]== analysisItem.id?false:true}}">{{analysisItem.abstract}}</view>
+					  		</view>
+					  		<view class="pz_analysis_list_bottom" catchtap="">
+					  			<view class="pz_analysis_list_left">
+						  			<view class="pz_analysis_list_media">{{analysisItem.media_name}}</view>
+						  			<view class="pz_analysis_list_publish_at">{{analysisItem.publish_at}}</view>
+						  			<view class="pz_analysis_list_sensitive" wx:if="{{analysisItem.is_sensitive}}">敏感</view>
+					  			</view>
+					  			<view class="pz_analysis_list_right" wx:if="{{analysisItem.media_wind > 0}}">
+					  			  <view class="pz_analysis_list_wind_grading">
+					  			    <view class="pz_analysis_list_wind_top">
+					  			      <view class="pz_analysis_list_wind_text">最大风力</view>
+					  			    </view>
+					  			    <view class="pz_analysis_list_wind_bottom">
+					  			      <view class="pz_analysis_list_wind_level_num">{{analysisItem.media_wind}}</view>
+					  			      <view class="pz_analysis_list_wind_level">级</view>
+					  			    </view>
+					  			  </view>
+					  			</view>
+					  		</view>
+					  	</view>
+					  </view>
+				  </view>
+				</view>
+			</view> -->
+		</scroll-view>
+	</view>
+</view>

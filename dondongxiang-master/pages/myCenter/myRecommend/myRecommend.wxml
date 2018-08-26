@@ -1,0 +1,77 @@
+<!--pages/dynamic/myRecommend/myRecommend.wxml-->
+<view class='hdtagbar alter'>
+    <view data-current="0" class="col-tab {{meartTab==0 ? 'active' : ''}}" bindtap='meartType'>个人代言</view>
+    <view data-current="1" class="col-tab {{meartTab==1 ? 'active' : ''}}" bindtap='meartType'>门店代言</view>
+</view>
+<view class="meart-info {{meartindex==0 ? 'active' : ''}}">
+    <view class='hdtagbar'>
+        <view data-current="0" class="col-tab {{currentTab==0 ? 'active' : ''}}" bindtap='changeType'>直接推荐({{ShowDirectSum}})</view>
+        <view data-current="1" class="col-tab {{currentTab==1 ? 'active' : ''}}" bindtap='changeType'>间接推荐({{ShowIndirectSum}})</view>
+    </view>
+    <view class='view-row'>
+        <view class="view-col {{currentindex==0 ? 'active' : ''}}">
+            <view class='col-list' wx:for="{{ShowDirectList}}" wx:key="">
+                <view class='label-img'><image src='{{item.headimgurl}}'></image></view>
+                <view class='col-right'>
+                    <view class='name'>{{item.nickname}}</view>
+                    <view class='rectext'>咚咚享</view>
+                </view>
+                <text class='dataprice'>+{{item.money}}</text>
+            </view>
+            <view class='datastatr' hidden='{{ShowDirectState}}'>
+                <image class='icon' src='/images/myCenter/shopset/icon_self_setting.png'></image>
+                <view class='text'>还没有没有直接推荐人</view>
+            </view>
+        </view>
+        <view class="view-col {{currentindex==1 ? 'active' : ''}}">
+            <view class='col-list' wx:for="{{ShowIndirectList}}" wx:key="">
+                <view class='label-img'><image src='{{item.headimgurl}}'></image></view>
+                <view class='col-right'>
+                    <view class='name'>{{item.nickname}}</view>
+                    <view class='rectext'>咚咚享</view>
+                </view>
+                <text class='dataprice'>+{{item.money}}</text>
+            </view>
+            <view class='datastatr' hidden='{{ShowIndirectState}}'>
+                <image class='icon' src='/images/myCenter/shopset/icon_self_setting.png'></image>
+                <view class='text'>还没有没有间接推荐人</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="meart-info {{meartindex==1 ? 'active' : ''}}" style='display:none'>
+    <view class='hdtagbar'>
+        <view data-current="0" class="col-tab {{currentTab==0 ? 'active' : ''}}" bindtap='changeType'>直接推荐({{ShowDirectSum}})</view>
+        <view data-current="1" class="col-tab {{currentTab==1 ? 'active' : ''}}" bindtap='changeType'>间接推荐({{ShowIndirectSum}})</view>
+    </view>
+    <view class='view-row'>
+        <view class="view-col {{currentindex==0 ? 'active' : ''}}">
+            <view class='col-list' wx:for="{{ShowDirectList}}" wx:key="">
+                <view class='label-img'><image src='{{item.headimgurl}}'></image></view>
+                <view class='col-right'>
+                    <view class='name'>{{item.nickname}}</view>
+                    <view class='rectext'>咚咚享</view>
+                </view>
+                <text class='dataprice'>+{{item.money}}</text>
+            </view>
+            <view class='datastatr' hidden='{{ShowDirectState}}'>
+                <image class='icon' src='/images/myCenter/shopset/icon_self_setting.png'></image>
+                <view class='text'>还没有没有间接推荐人</view>
+            </view>
+        </view>
+        <view class="view-col {{currentindex==1 ? 'active' : ''}}">
+            <view class='col-list' wx:for="{{ShowIndirectList}}" wx:key="">
+                <view class='label-img'><image src='{{item.headimgurl}}'></image></view>
+                <view class='col-right'>
+                    <view class='name'>{{item.nickname}}</view>
+                    <view class='rectext'>咚咚享</view>
+                </view>
+                <text class='dataprice'>+{{item.money}}</text>
+            </view>
+            <view class='datastatr' hidden='{{ShowDirectState}}'>
+                <image class='icon' src='/images/myCenter/shopset/icon_self_setting.png'></image>
+                <view class='text'>还没有没有直接推荐人</view>
+            </view>
+        </view>
+    </view>
+</view>

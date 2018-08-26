@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>继承</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    /*// 构造函数
+            function Person(){
+                this.species = '人类'
+            }
+
+            function Boy(name,age){
+                Person.call(this,arguments);
+                this.name = name;
+                this.age = age;
+            }
+
+            var boy1 = new Boy("liming","18");
+            alert(boy1.species)*/
+
+    /*// prototype
+    function Person(){
+        this.species = '人类'
+    }
+
+    function Boy(name,age){
+        this.name = 'liming';
+        this.age = '18';
+    }
+
+    Boy.prototype = new Person();
+    alert(Boy.prototype.constructor==Person)//true,不能这样
+    Boy.prototype.constructor = Boy;
+    var boy1 = new Boy("liming","18");
+    alert(boy1.species)*/
+
+    /*// 直接继承prototype
+    function Person(){
+    }
+    Person.prototype.species = '人类';
+
+    function Boy(name,age){
+        this.name = 'liming';
+        this.age = '18';
+    }
+
+    Boy.prototype = Person.prototype;//缺点是 Boy.prototype和Person.prototype现在指向了同一个对象
+    Boy.prototype.constructor = Boy;
+    var boy1 = new Boy("liming","18");
+    alert(boy1.species);
+    　alert(Person.prototype.constructor==Boy);//true,不能这样*/
+
+
+    /* // 直接继承prototype
+     function Person() {}
+     Person.prototype.species = '人类';
+
+     function Boy(name, age) {
+         this.name = 'liming';
+         this.age = '18';
+     }
+
+     var F = function() {}; //空对象
+     　　
+     F.prototype = Person.prototype;
+     Boy.prototype = new F();　　
+     Boy.prototype.constructor = Boy;
+
+     var boy1 = new Boy("liming", "18");
+     alert(boy1.species);　　
+     alert(Person.prototype.constructor); // Person*/
+
+
+    /* //封装一个函数
+    function extend(Child, Parent) {
+        var F = function() {};
+        F.prototype = Parent.prototype;　　　　
+        Child.prototype = new F();　　　　
+        Child.prototype.constructor = Child;　　　　
+        Child.uber = Parent.prototype;　　
+        //子对象uber属性指向父对象的prototype属性。这等于在子对象上打开一条通道，可以直接调用父对象的方法。放在这里，只是为了实现继承的完备性，纯属备用性质。
+    }
+    function Cat(name,color){
+　　　　Animal.apply(this, arguments);
+　　　　this.name = name;
+　　　　this.color = color;
+　　}
+    
+    function Animal(){}
+　　Animal.prototype.species = "动物";
+
+    // 使用如下
+    extend(Cat, Animal);　　
+    var cat1 = new Cat("大毛", "黄色");　　
+    alert(cat1.species); // 动物*/
+
+
+
+    // 拷贝继承
+    function extend2(Child, Parent) {
+        console.log(Parent.prototype);
+        alert(Parent.prototype);
+        console.log(Child.prototype);　　　　
+        var p = Parent.prototype;　　　　
+        var c = Child.prototype;　　　　
+        for (var i in p) {　　　　　　 c[i] = p[i];　　　　　　 }　　　　 c.uber = p;
+        console.log(c.uber);　　
+    }
+
+    function Cat(name, color) {　　　　 Animal.apply(this, arguments);　　　　
+        this.name = name;　　　　
+        this.color = color;　　 }
+
+    function Animal() {}　　 Animal.prototype.species = "动物";
+
+
+    extend2(Cat, Animal);　　
+    var cat1 = new Cat("大毛", "黄色");　　
+    alert(cat1.species); // 动物
+    </script>
+</body>
+
+</html>

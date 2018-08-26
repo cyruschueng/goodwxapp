@@ -1,0 +1,582 @@
+<?php 
+namespace app\index\controller;
+use app\index\model\User as UserModel;
+use app\index\model\Order ;
+use app\index\model\Province ;
+use app\index\model\City ;
+use app\index\model\OrderH5 ;
+use app\index\model\SubmitInfo ;
+use think\Session;
+use think\Request;
+use think\Cookie;
+use think\Config;
+class User extends Base{
+	/**
+	 * [reservation 预约]
+	 * @return [type] [description]
+	 */
+	public function reservation()
+	{
+		$this->redis->databaseSelect('Sign');
+		$orderid = input('param.orderid');
+		$name = input('param.name');
+		$gender = input('param.gender');//1男 2女
+		$telephone = input('param.telephone');
+		$verificationcode = input('param.verificationcode');
+		$model_code = input('param.model_code');
+		$model_name = input('param.model_name');
+		$city = input('param.city');
+		$openid = input('param.openid');
+		$dealer_id = input('param.dealer_id');
+		$config_id = input('param.config_id');
+		$car_model_id = input('param.car_model_id');
+		$flag = input('param.flag');
+		$response = array();
+		$response['name'] = $name;
+		$response['gender'] = $gender;
+		$response['verificationcode'] = $verificationcode;
+		$response['deverificationcode'] = $this->redis->get('verificationcode');
+		$response['model_code'] = $model_code;
+		$response['model_name'] = $model_name;
+		$response['city'] = $city;
+		$response['dealer_id'] = $dealer_id;
+		$response['config_id'] = $config_id;
+		$response['car_model_id'] = $car_model_id;
+		
+		// dump(Session::get('verificationcode'));
+		if($verificationcode != $this->redis->get('verificationcode')){
+			$response['error'] = 1;
+			$response['message'] = '验证码不对';
+			exit(json_encode($response));
+			// dump('验证码不对');
+		}
+		$user = new UserModel;
+		// Cookie::delete('equipment');
+		//设备唯一性判断
+		if(empty($this->userid)){
+			
+			$userinfo = $user->where('openid',$openid)->find();
+			$this->userid = $userinfo['id'];
+		}
+		if($flag == 'add'){
+			if(Cookie::has('equipment')){
+				do_log('add',$telephone,'该设备已预订'.Cookie::get('is_order'),$this->userid);
+				$response['error'] = 1;
+				$response['message'] = '对不起，您无法参加此活动。可能的原因：</br>1.您已经报名参加过本活动</br> 2.您报名的4S店试驾名额已满';
+				exit(json_encode($response));
+			}
+		}
+		//半年内不能重复试驾(手机号和时间来判断)openid
+		//单个车型只能试驾一次(手机号和车型判断)openid
+		$order = new Order();
+		$order_where = "( u.telephone = '" .$telephone. "' or u.openid  = '".$openid."' )and (o.createtime > '" .date("Y-m-d H:i:s", strtotime("-6 month")). "' or o.model_code = '" .$model_code. "') and o.status > 0";
+		$orderinfo = $order->alias('o')
+						   ->join('user u', 'u.id = o.user_id')
+		                   ->where($order_where)->find();
+		$orderh5 = new OrderH5();
+		$orderh5_where = "( model_code = '" . $model_code . "' or create_time > '".date("Y-m-d H:i:s", strtotime("-6 month"))."') and (mobile = '".$telephone."')";
+		$orderh5info = $orderh5->where($orderh5_where)->find();
+		// echo $orderh5->getLastSql();die;
+		if( $orderinfo['id'] > 0 || $orderh5info['id'] > 0){
+			do_log('add',$telephone,'该设备已预订'.Cookie::get('is_order'),$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '对不起，您无法参加此活动。可能的原因：</br>1.您已经报名参加过本活动</br> 2.您报名的4S店试驾名额已满';
+			exit(json_encode($response));
+		}
+
+		
+		$reuserid = $user->where('openid',$openid)->update([
+		    'telephone'  => $telephone,
+		    'nickename' => $name,
+		    'city' => $city,
+		    'last_login_time'=>date('Y-m-d H:i:s')
+		]);
+
+		if($reuserid < 1 || empty($reuserid)){
+			$response['error'] = 1;
+			if($flag == 'add'){
+				do_log('adduser',$telephone,'录入用户预约信息出错',$this->userid);
+			}else{
+				do_log('adduser',$telephone,'更新用户预约信息出错',$this->userid);
+			}
+			
+			$response['message'] = '出错了,请稍后再试';
+			exit(json_encode($response));
+		}
+		
+		if(empty($orderid)){
+			$order->user_id = $reuserid;
+			$order->car_model_id = $car_model_id;
+			$order->model_name = $model_name;
+			$order->model_code = $model_code ;
+			$order->dealer_id = $dealer_id;//4s门店id
+			$order->config_id = $config_id;//配置id
+			$order->createtime = date('Y-m-d H:i:s');
+			$order->status = 1;
+			$order->updatetime = date('Y-m-d H:i:s');
+			$order->order_name = $name;
+			$order->order_sex = $gender;
+			$reorderid = $order->save();
+		}else{
+			$reorderid = $order->where('id',$orderid)->update([
+			    'car_model_id'  => $car_model_id,
+			    'model_name' => $model_name,
+			    'model_code' => $model_code,
+			    'dealer_id' => $dealer_id,
+			    'config_id' => $config_id,
+			    'status' => 1,
+			    'order_name' => $$name,
+			    'order_sex' => $gender,
+			    'updatetime'=>date('Y-m-d H:i:s')
+			]);
+
+		}
+		if($reorderid < 1 || empty($reorderid)){
+			$userdelete = $user->get($reuserid);
+			$userdelete->delete();
+			do_log('addorder',$telephone,'录入用户预约订单信息出错',$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '出错了,请稍后再试';
+			exit(json_encode($response));
+		}
+		if($flag == 'add'){
+			Cookie::set('equipment','1',3600*24*30*6);
+			Cookie::set('is_order',$order->id, 3600*24*30*6);
+		}
+		do_log('add',$telephone,'用户预约成功',$this->userid);
+		$response['error'] = 0;
+		$response['message'] = '预约成功';
+		exit(json_encode($response));
+		
+	}
+
+	/**
+	 * [isPhoneExist  手机是否存在]
+	 * @param  [type]  $telephone [description]
+	 * @return boolean            [description]
+	 */
+	public function isPhoneExist($telephone)
+	{
+		$user = new UserModel;
+		$userinfo = $user->get(['telephone'=>$telephone]);
+		if(empty($userinfo)){
+			return false;
+		}
+		return true;
+	}
+	public function userLogin()
+	{
+		$this->redis->databaseSelect('Sign');
+		$telephone = input('param.telephone');
+		$openid = input('param.openid');
+		$city = input('param.city');
+		$verificationcode = input('param.verificationcode');
+		if(empty($this->userid)){
+			$user = new UserModel;
+			$userinfo = $user->where('openid',$openid)->find();
+			$this->userid = $userinfo['id'];
+		}
+		// $response['telephone'] = $telephone;
+		// $response['openid'] = $openid;
+		// $response['city'] = $city;
+		// $response['verificationcode'] = $verificationcode;
+		// $response['deverificationcode'] = $this->redis->get('verificationcode');
+		if($verificationcode != $this->redis->get('verificationcode')){
+			do_log('userLogin',$telephone,'验证码不对',$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '验证码不对';
+			exit(json_encode($response));
+			// dump('验证码不对');
+		}
+		$user = new UserModel();
+		if(empty($openid)){
+			do_log('userLogin',$telephone,'openid为空',$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '出错了';
+			exit(json_encode($response));
+		}
+
+		$uid = $user->where('openid',$openid)->update([
+		    'telephone'  => $telephone,
+		    'city' => $city,
+		    'last_login_time'=>date('Y-m-d H:i:s')
+		]);
+		
+		if($uid < 1 || empty($uid)){
+			do_log('userLogin',$telephone,'登录失败',$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '登录失败';
+			exit(json_encode($response));
+		}else{
+			do_log('userLogin',$telephone,'登陆成功',$this->userid);
+			$response['error'] = 0;
+			$response['message'] = '登陆成功';
+			exit(json_encode($response));
+		}
+
+	}
+	/**
+	 * [rereservation 重新预约]
+	 * @return [type] [description]
+	 */
+	public function rereservation(){
+		$orderid = input('param.orderid');//预约订单id
+		$order = new Order();
+		$response = array();
+		$id = $order->save([
+			'status'=>0
+			],['id'=>$orderid]);
+		if($id > 0){
+			$response['error'] = 0;
+			$response['message'] = "重新预约成功";
+		}else{
+			$response['error'] = 1;
+			$response['message'] = "重新预约失败";
+		}
+		exit(json_encode($response));
+	}
+	/**
+	 * [editreservation 预约信息修改]
+	 * @return [type] [description]
+	 */
+	public function editreservation(){
+		$openid = input('param.openid');
+		$user = new UserModel;
+		$userinfo = $user->where('openid',$openid)->find();
+		if(empty($userinfo)){
+			$response['error'] = 1;
+			$response['message'] = '出错了,请稍后再试';
+		}else{
+			$response['error'] = 0;
+			$response['userinfo'] = $userinfo;
+		}
+		exit(json_encode($response));
+	}
+	/**
+	 * [CreateVerificationCode 创建验证码]
+	 */
+	public function CreateVerificationCode()
+	{
+		$telephone = input('param.telephone');
+		$verificationcode = rand(100000,999999);
+		$this->redis->databaseSelect('Sign');
+		$this->redis->set('verificationcode',$verificationcode, 60*5);
+		// Session::set('verificationcode',$verificationcode);
+		// Cookie::set('verificationcode',$verificationcode,60*5);
+		
+		//短信发送验证码
+		// $res = send_msg_aliyun($telephone,$verificationcode);
+		// if(strpos('ok', $res) !== false){
+		// 	//成功
+		// 	$response['verifycode'] = $verificationcode;
+		// 	exit(json_encode($response));
+		// }else{
+		// 	//失败
+		// 	$response['verifycode'] = 0;
+		// 	exit(json_encode($response));
+		// }
+		
+		
+		// dump($verificationcode);
+		// dump(Session::get('verificationcode'));
+		// // dump(Session::get('verificationcode'));
+		$response['verifycode'] = $verificationcode;
+		exit(json_encode($response));
+	}
+
+	/**
+	 * [authcode 生成accesstoken]
+	 * @param  [type]  $string    [description]
+	 * @param  string  $operation [description]
+	 * @param  string  $key       [description]
+	 * @param  integer $expiry    [description]
+	 * @return [type]             [description]
+	 */
+	public function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {   
+	    // 动态密匙长度，相同的明文会生成不同密文就是依靠动态密匙   
+	    $ckey_length = 4;   
+	       
+	    // 密匙   
+	    $key = md5($key ? $key : $GLOBALS['discuz_auth_key']);   
+	       
+	    // 密匙a会参与加解密   
+	    $keya = md5(substr($key, 0, 16));   
+	    // 密匙b会用来做数据完整性验证   
+	    $keyb = md5(substr($key, 16, 16));   
+	    // 密匙c用于变化生成的密文   
+	    $keyc = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length): 
+	substr(md5(microtime()), -$ckey_length)) : '';   
+	    // 参与运算的密匙   
+	    $cryptkey = $keya.md5($keya.$keyc);   
+	    $key_length = strlen($cryptkey);   
+	    // 明文，前10位用来保存时间戳，解密时验证数据有效性，10到26位用来保存$keyb(密匙b)， 
+	//解密时会通过这个密匙验证数据完整性   
+	    // 如果是解码的话，会从第$ckey_length位开始，因为密文前$ckey_length位保存 动态密匙，以保证解密正确   
+	    $string = $operation == 'DECODE' ? base64_decode(substr($string, $ckey_length)) :  
+	sprintf('%010d', $expiry ? $expiry + time() : 0).substr(md5($string.$keyb), 0, 16).$string;   
+	    $string_length = strlen($string);   
+	    $result = '';   
+	    $box = range(0, 255);   
+	    $rndkey = array();   
+	    // 产生密匙簿   
+	    for($i = 0; $i <= 255; $i++) {   
+	        $rndkey[$i] = ord($cryptkey[$i % $key_length]);   
+	    }   
+	    // 用固定的算法，打乱密匙簿，增加随机性，好像很复杂，实际上对并不会增加密文的强度   
+	    for($j = $i = 0; $i < 256; $i++) {   
+	        $j = ($j + $box[$i] + $rndkey[$i]) % 256;   
+	        $tmp = $box[$i];   
+	        $box[$i] = $box[$j];   
+	        $box[$j] = $tmp;   
+	    }   
+	    // 核心加解密部分   
+	    for($a = $j = $i = 0; $i < $string_length; $i++) {   
+	        $a = ($a + 1) % 256;   
+	        $j = ($j + $box[$a]) % 256;   
+	        $tmp = $box[$a];   
+	        $box[$a] = $box[$j];   
+	        $box[$j] = $tmp;   
+	        // 从密匙簿得出密匙进行异或，再转成字符   
+	        $result .= chr(ord($string[$i]) ^ ($box[($box[$a] + $box[$j]) % 256]));   
+	    }   
+	    if($operation == 'DECODE') {  
+	        // 验证数据有效性，请看未加密明文的格式   
+	        if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) &&  
+	substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {   
+	            return substr($result, 26);   
+	        } else {   
+	            return '';   
+	        }   
+	    } else {   
+	        // 把动态密匙保存在密文里，这也是为什么同样的明文，生产不同密文后能解密的原因   
+	        // 因为加密后的密文可能是一些特殊字符，复制过程可能会丢失，所以用base64编码   
+	        return $keyc.str_replace('=', '', base64_encode($result));   
+	    }   
+	}
+
+	/**
+	 * [testDrive 试驾完成]
+	 * @return [type] [description]
+	 */
+	public function testDrive()
+	{
+		$orderid = input('param.orderid');
+		$response = array();
+		$staff_name = input('param.staff_name');
+		$staff_phone = input('param.staff_phone');
+		$user_phone = input('param.user_phone');
+		$openid = input('param.openid');
+		$img = input('param.img');
+		if(empty($this->userid)){
+			$user = new UserModel;
+			$userinfo = $user->where('openid',$openid)->find();
+			$this->userid = $userinfo['id'];
+		}
+		// $response['error'] = $orderid;
+		// exit(json_encode($response));
+		if($orderid < 1 || empty($orderid )){
+			do_log('testDrive',$user_phone,'获取orderid出错',$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '出错了,请稍后再试';
+			exit(json_encode($response));
+		}
+		$submitinfo = new SubmitInfo();
+		$submitinfo->staff_name = $staff_name;
+		$submitinfo->openid = $openid;
+		$submitinfo->staff_phone = $staff_phone;
+		$submitinfo->user_phone = $user_phone;
+		$submitinfo->img = $img;
+		$submitinfo->createtime = date('Y-m-d H:i:s');
+		$submitinfo->save();
+		if($submitinfo->id < 1 || empty($submitinfo->id) ){
+			do_log('testDrive',$user_phone,'试驾完成信息提交出错',$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '出错了,请稍后再试';
+			exit(json_encode($response));
+		}
+
+		$order = new Order();
+		$id = $order->save([
+			'status'=>2
+			],['id'=>$orderid]);
+		if($id < 1 || empty($id)){
+			$submitinfo->delete();
+			do_log('testDrive',$user_phone,'试驾完成信息更新订单出错',$this->userid);
+			$response['error'] = 1;
+			$response['message'] = '出错了,请稍后再试';
+			exit(json_encode($response));
+		}
+		do_log('testDrive',$user_phone,'试驾完成信息提交成功',$this->userid);
+		$response['error'] = 0;
+		$response['message'] = '信息提交成功';
+		exit(json_encode($response));
+	}
+
+	/**
+	 * [getUserOpenid 获取openid]
+	 * @return [type] [description]
+	 */
+	public function getUserOpenid()
+	{
+		$code = input('param.code');
+		$appid = config('applet.appid');
+		$secret = config('applet.secret');
+		// $appid = input('param.appid');
+		// $secret = input('param.secret');
+		$api_url = "https://api.weixin.qq.com/sns/jscode2session?appid=" .$appid. "&secret=" .$secret. "&js_code=" .$code. "&grant_type=authorization_code";
+		$this->curlGet($api_url);
+		exit;
+	}
+	/**
+	 * [firstLogin 第一次登录]
+	 * @return [type] [description]
+	 */
+	public function firstLogin()
+	{
+		$openid = input('param.openid');
+		$user = new UserModel();
+		$userinfo = $user->where('openid',$openid)->find();
+		if(!empty($userinfo)){
+			$response['error'] = 0;
+			$response['message'] = '登陆成功';
+			exit(json_encode($response));
+		}
+		$user->openid = $openid;
+		$user->createtime = date('Y-m-d H:i:s');
+		$user->last_login_time = date('Y-m-d H:i:s');
+		$user->save();
+		if($user->id < 1 || empty($user->id)){
+			$response['error'] = 1;
+			$response['message'] = '出错了';
+		}else{
+			$response['error'] = 0;
+			$response['message'] = '登陆成功';
+		}
+		exit(json_encode($response));
+	}
+
+	public function curlGet($url)
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);    // 要求结果为字符串且输出到屏幕上
+   	 	curl_setopt($ch, CURLOPT_HEADER, 0); // 不要http header 加快效率
+		$output = curl_exec($ch);
+		curl_close($ch);
+		return $output; 
+	}
+
+	public function uploadFile(){
+		$username = input('param.username');//试驾人员姓名
+		$absolute_uploads_dir = UPLOAD_DEFAULT_DIR;
+		$file = $_FILES['file']['name'];
+		$filetype = pathinfo($file, PATHINFO_EXTENSION);
+    	$mimetype = exif_imagetype($_FILES['file']['tmp_name']);
+
+		if (!($mimetype == IMAGETYPE_GIF || $mimetype == IMAGETYPE_JPEG || $mimetype == IMAGETYPE_PNG || $mimetype == IMAGETYPE_BMP))
+		{
+			$response['error'] = 11;
+			$response['message'] = "请上传图片文件格式";
+            exit(json_encode($response));
+		}
+    	if(empty($username)){
+    		$response['error'] = 1;
+    		$response['message'] = "试驾人员名称为空";
+    		exit(json_encode($response));
+    		
+    	}
+    	//判断图片尺寸
+    	// list($width, $height, $type, $attr) = getimagesize($_FILES["file"]["tmp_name"]);
+    	// if( $height != 200 || $width != 200){
+    	// 	$response['error'] = 9;
+    	// 	echo json_encode($response);
+    	// 	exit;
+    	// }
+		$rand = rand(1000,9999);
+		$filename = get_pinyin($username) . "APPLET".date('Ymd',time()).$rand. "." .$filetype;
+		$absolute_store_upload_filename 	= $absolute_uploads_dir . $filename;
+		$res = move_uploaded_file($_FILES["file"]["tmp_name"],$absolute_store_upload_filename);
+		if($res){
+			$response['error'] 		= 0;
+			$response['filename'] 	= $filename;
+			
+		}else{
+			$response['error'] = 1;
+			$response['message'] = "上传失败";
+		}
+				
+    	exit(json_encode($response));
+	}
+	/**
+	 * [getlocation 根据经纬度获取地址]
+	 * @return [type] [description]
+	 */
+	public function getlocation(){
+		$longitude = input('param.longitude');
+		$latitude = input('param.latitude');
+		$txmapapi = "http://apis.map.qq.com/ws/geocoder/v1/?location=" .$longitude. "," .$latitude. "&key=DL3BZ-YH3WS-25XO2-6LIMA-FBNYJ-TSBD5";
+		$this->curlGet($txmapapi);
+		exit;
+	}
+	/**
+	 * [getProvince 获取所有的省份]
+	 * @return [type] [description]
+	 */
+	public function getProvince(){
+		$province = new Province();
+		$provinceinfo = $province->all(['status'=>1]);
+		exit(json_encode($provinceinfo));
+	}
+	/**
+	 * [getCity 根据省代码获取市]
+	 * @return [type] [description]
+	 */
+	public function getCity(){
+		$provincecode = input('param.provincecode');
+		$city = new City();
+		$cityinfo = $city->where('city_code', 'like', $provincecode.'%')->where('status', 1)->select();
+		exit(json_encode($cityinfo));
+	}
+
+	/**
+	 * [getLocationInfo 获取客户端位置]
+	 * @return [type] [description]
+	 */
+	public function getLocationInfo(){
+		$request = Request::instance();
+	   	$ip = $request->ip();  //get_client_ip()为tp自带函数，如没有，自己百度搜索。此处就不重复复制了
+	    $result = $this->get_user_district($ip);
+	    exit(json_encode($result));
+	}
+	public function get_user_district($user_ip)
+    {        
+        $this->redis->databaseSelect('Ip');
+         if ($this->redis->existsRedis("Ip:" . $user_ip)) {
+             $res = $this->redis->hget("Ip:" . $user_ip);
+             $special_map_arr = ['闽' => '福建'];
+             foreach ($special_map_arr as $k => $v) {
+                 //特殊替换
+                 if ($k == $res['province']) $res['province'] = $v;
+             }
+         } else {
+            //设置file_get_contents 超时时间
+            $opts = array(
+                'http' => array(
+                    'method' => "GET",
+                    'timeout' => 3,
+                )
+            );
+            //从百度ip获取
+            $res_baidu = json_decode(file_get_contents("https://api.map.baidu.com/location/ip?ip=" . $user_ip . "&ak=E9FAeIguIYQe6M0NcYxEUpMb", false, stream_context_create($opts)), true);
+            var_dump($res_baidu);
+            if (!($res_baidu['content']['address_detail']['province'] && $res_baidu['content']['address_detail']['city'])) {
+                $res = array('province' => '', 'city' => '');
+            } else {
+                $res['province'] = $res_baidu['content']['address_detail']['province'];
+                $res['city'] = $res_baidu['content']['address_detail']['city'];
+            }
+        }
+        return $res;
+    }
+}
+

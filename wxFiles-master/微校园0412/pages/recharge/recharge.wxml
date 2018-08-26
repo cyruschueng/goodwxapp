@@ -1,0 +1,16 @@
+
+<view class="plo">
+  <view class="tit">￥</view>
+  <view style="font-size:70rpx;color:#06c1ae;height:92rpx;line-height:92rpx">{{values}}</view>
+</view>
+<view class="oop">
+  充值金额
+</view>
+<view style="display:flex;" class="panel bottom-line flex-start" wx:for="{{numbers}}" data-index="{{index}}" bindtap="getPay">
+  <view class="jkl" wx:if="{{!item.act}}"></view>
+  <icon wx:if="{{item.act}}" type="success" size="22" color="rgb(6,193,174)"/>
+  <view style="margin-left:20rpx;height:44rpx;line-height:44rpx">￥{{item.txt}}</view>
+</view>
+<view class="paybtn" bindtap="submit" >
+  <view >确认充值</view>
+</view>

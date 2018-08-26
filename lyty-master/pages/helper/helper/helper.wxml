@@ -1,0 +1,23 @@
+<view id="chat">
+	<scroll-view scroll-y="true" style="height: {{windowHeight-50}}px;" bindscroll="scrollSet" scroll-top="{{domHeight}}"  class="Main">
+	<view class="m-message">
+		<view >
+			<block wx:for="{{Arr}}" wx:for-item="itemques" >
+				<view class="main" wx:if="{{itemques.code == 100000}}" >
+					<image class="avatar" src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/icon/h6vr.jpg"></image>
+					<text class="text">{{itemques.text}}</text>
+				</view>
+				<view wx:if="{{itemques.code == -1}}" class="main"> 
+						<image class="avatar avatar_ans" src="{{userInfo.avatarUrl}}"></image>
+						<text class="text_ans">{{itemques.text}}</text>
+				</view>
+			</block>
+		</view>
+
+	</view>
+	</scroll-view >
+	<view class="m-text">
+	<input  bindfocus="bindfocus" bindblur="bindblur" bindinput="askquestion" bindconfirm="submitques"  value="{{question}}"  focus="{{focus}}" placeholder="想聊点什么～" />
+	<button id="submitBtn" disabled="{{disabled}}" type="primary" size="default"   bindtap="submitques" > 发送 </button>
+	</view>
+</view>

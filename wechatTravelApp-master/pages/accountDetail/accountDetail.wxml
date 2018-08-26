@@ -1,0 +1,163 @@
+<!-- 账本对应时间地点和人员，菜单栏 -->
+<view class='account-summary-container {{onlyBillsDisplay}}'>
+	<view class='account-summary'>
+		<view class='summary-title'>
+			<text class='summary-title-content' data-id="{{accountId}}">{{title.location}}　({{title.time}})</text>
+			<image class='summary-title-menu' background-size="cover" src='../../images/detail_title_menu.png' bindtap='showMenu'></image>
+		</view>
+		<view class='summary-users'>
+			<scroll-view scroll-x="{{title.users.length <= 5 ? false : true}}" style="width:{{title.users.length <= 5 ? title.users.length * 100 -10 : 490}}rpx;" class='user-image-scroll'>
+				<image class='summary-users-image' wx:for="{{title.users}}" wx:for-index="index" wx:for-item="item" src='{{item.avatarUrl}}' data-name='{{item.nickName}}' data-id='{{item.id}}'></image>
+			</scroll-view>
+			<button class='users-icon-button' open-type='share'>
+				<image class='summary-users-icon' src='../../images/detail_add_user.png' background-size="cover" bindtap='addUser'></image>
+			</button>
+			<text class='summary-users-text {{textNone}}'>邀请小伙伴加入该账本</text>
+		</view>
+	</view>
+</view>
+<!-- 账本花销 -->
+<view class='account-summoney {{onlyBillsDisplay}}'>
+	<view class='summoney-title'>
+		<text class='summoney-title-content'>我的总花费</text>
+		<image class='summoney-title-info' src='../../images/more_info.png' background-size="cover" bindtap='showModal'></image>
+	</view>
+	<view class='summoney-price'>
+		<text class='summoney-price-number'>{{summoney}}</text>
+		<text class='summoney-price-text'>元</text>
+	</view>
+	<button class='summoney-add' bindtap='addAccount'>记一笔</button>
+</view>
+<view class="only-bills-container {{onlyBillsHeader}}">
+	<text class="only-bills-header-location">{{title.location}}共花费：</text>
+	<text class="only-bills-header-cost">{{summoney}}人民币</text>
+</view>
+<!-- 公账、私账详情 -->
+<view class='account-sort'>
+	<view class='sort-block'>
+		<!-- 公账 -->
+		<view data-current="{{0}}" class="sort-public-block" bindtap='clickTab'>
+			<text class="sort-public {{currentTab === 0 ? 'on' : ''}}">公账</text>
+		</view>
+		<!-- 私账 -->
+		<view data-current="{{1}}" class="sort-private-block" bindtap='clickTab'>
+			<text class="sort-private {{currentTab === 1 ? 'on' : ''}}">私账</text>
+		</view>
+	</view>
+	
+	<swiper style="height:{{swiperHeight}}rpx;" current="{{currentTab}}" duration="300" bindchange="swiperTab">
+		<!-- 公账明细 -->
+		<swiper-item>
+				<!-- <scroll-view scroll-y="{{true}}"> -->
+					<view class='bill-detail}}' wx:for="{{detailShow1}}" wx:for-index="index" wx:for-item="item" data-id='{{item.id}}' data-checked="1" bindtap='changeBill'>
+						<view class='detail-image-container'>
+							<image class='detail-image' src='{{item.imageUrl}}' background-size="cover"></image>
+						</view>
+						<view class='detail-info-container'>
+							<view class='detail-info'>
+								<text class='info-sort'>{{item.sort}}</text>
+								<text class='info-time'>{{item.time}}</text>
+							</view>
+							<view class='detail-price'>
+								<text class='price-money'>{{item.pricePer}}</text>
+								<text class='price-detail'>共{{item.participantsNum}}人消费{{item.price}}元</text>
+							</view>
+						</view>
+						<!-- 公账四种形式 -->
+						<view class='detail-four-condition'>
+							<button class='detail-button undone' data-id='{{item.id}}' data-listid='{{index}}' wx:if="{{item.visible == 0}}" catchtap='chooseHurry'>催账</button>
+							<button class='detail-button done' wx:elif="{{item.visible == 1}}" data-id='{{item.id}}' data-listid='{{index}}' catchtap='noHurry'>已结清</button>
+							<view class='detail-favicon' wx:elif="{{item.visible == 2}}">
+								<image class='favicon-image' src='{{item.userImage}}' background-size="cover"></image>
+								<view class='favicon-paid {{item.beforeRound}}'>已支付</view>
+							</view>
+							<view class='detail-favicon' wx:elif="{{item.visible == 3}}" >
+									<image class='favicon-image' src='{{item.userImage}}' data-id='{{item.id}}' data-listid='{{index}}' background-size="cover" catchtap="showCard"></image>
+									<!-- <view class='favicon-paid-before {{item.beforeRound}}'></view> -->
+							</view>
+						</view>
+					</view>
+					<!-- 账单无数据 -->
+					<view class='bill-none {{billNone}}'>
+						<view class="none-content">{{noneContent}}</view>
+					</view>
+				<!-- </scroll-view> -->
+		</swiper-item>
+		<!-- 私账明细 -->
+		<swiper-item>
+			<view class='bill-detail}}' wx:for="{{detailShow2}}"  wx:for-index="index" wx:for-item="item" data-checked="0" data-id='{{item.id}}' bindtap='changeBill'>
+				<view class='detail-image-container'>
+					<image class='detail-image' src='{{item.imageUrl}}' background-size="cover"></image>
+				</view>
+				<view class='detail-info-container'>
+					<view class='detail-info'>
+						<text class='info-sort'>{{item.sort}}</text>
+						<text class='info-time'>{{item.time}}</text>
+					</view>
+					<view class='detail-price-private'>
+						<text class='private-price-money'>{{item.price}}</text>
+					</view>
+				</view>
+			</view>
+			<!-- 账单无数据 -->
+			<view class='bill-none {{billNone}}'>
+				<view class="none-content">{{noneContent}}</view>
+			</view>
+		</swiper-item>
+	</swiper>	
+	<!-- 账单无数据 -->
+	<!-- <view class='bill-none {{billNone}}'>
+		<view class="none-content">{{noneContent}}</view>
+	</view> -->
+</view>
+<!-- Info提示框 -->
+<view class='alert-background {{show0}}'>
+  <view class='alert-container'>
+    <text class='alert-content'>总花费由公账(AA制计算)和私账共同构成</text>
+    <button class='alert-confirm' bindtap='hideModal'>我知道了</button>
+  </view>
+</view>
+<!-- 提醒他人上传二维码 -->
+<view class='remind-background {{show2}}'>
+  <view class='remind-container'>
+		<text class='remind-content'>TA还未上传二维码，快前往提醒他</text>
+		<button class='remind-confirm' open-type='share'  bindtap='remindQrCode'>好的</button>
+    <button class='remind-cancel'  bindtap='hideRemind'>下次吧</button>
+  </view>
+</view>
+<!-- 菜单详细分类 -->
+<view class='menu-background {{show1}}' bindtap='hideMenu' catchtouchmove='preventDefult'></view>
+	<view class='menu-container {{show1}}' catchtouchmove='preventDefult'>
+		<!-- 切换账本 -->
+		<navigator class='menu-switch' open-type="navigate" bindtap='closeMenu' url='../billsPage/billsPage?title=navigate'>
+			<image class='menu-image' src='../../images/menu_select/menu_switch.png' background-size="cover"></image>
+			<text class='menu-text'>切换账本</text>
+		</navigator>
+		<!-- 新建账本 -->
+		<navigator class='menu-new' open-type="navigate" bindtap='closeMenu' url="../newAccount/newAccount?title=navigate">
+			<image class='menu-image' src='../../images/menu_select/menu_add.png' background-size="cover"></image>
+			<text class='menu-text'>新建账本</text>
+		</navigator>
+		<!-- 晒账单 -->
+		<navigator class='menu-show' open-type="navigate" bindtap='closeMenu' url='../accountSummary/accountSummary?title=navigate'>
+			<image class='menu-image' src='../../images/menu_select/menu_show.png' background-size="cover"></image>
+			<text class='menu-text'>账单统计</text>
+		</navigator>
+		<!-- 历史操作 -->
+		<navigator class='menu-history' open-type="navigate" bindtap='closeMenu' url='../historySearch/historySearch?title=navigate'>
+			<image class='menu-image' src='../../images/menu_select/menu_history.png' background-size="cover"></image>
+			<text class='menu-text'>历史操作</text>
+		</navigator>
+		<!-- 上传收款码 -->
+		<navigator class='menu-upload' open-type="navigate" bindtap='closeMenu' url='../codeUpload/codeUpload?title=navigate'>
+			<image class='menu-image' src='../../images/menu_select/menu_upload.png' background-size="cover"></image>
+			<text class='menu-text'>上传收款码</text>
+		</navigator>
+	</view>
+<!-- 分享出去的卡片 -->
+<view class='share-background {{share.backNone}}' bindtap='closeShare' catchtouchmove="preventDefult"></view>
+<view class='share-area {{share.areaNone}}'>
+	<canvas class='hurry-card' style="background: rgb(227, 227, 227)" data-id="hurryCanvas" canvas-id="hurryCanvas" class='hurry-card {{share.hurryNone}}' catchtouchmove='preventDefult' catchtap='previewImage'></canvas>
+	<canvas class='pay-card' style="background: rgb(227, 227, 227)" data-id="payCanvas" canvas-id="payCanvas" class='pay-card {{share.payNone}}' catchtouchmove='preventDefult' catchtap='previewImage'></canvas>
+	<button class='save-button {{share.payNone}}' catchtap='savePayImage'>保存图片</button>
+</view>

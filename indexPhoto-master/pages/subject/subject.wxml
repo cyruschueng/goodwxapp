@@ -1,0 +1,118 @@
+<!--pages/subject/subject.wxml-->
+<view class="container" style="background:url({{background}}) no-repeat;background-size: cover; ">
+<scroll-view>
+  <view class="subject" wx:if="{{setOver == 'true'}}">
+    <view class="subject_wrap bounceInDown">
+    <!-- bounceInDown -->
+      <view class='bgImg' style='background:{{backgroundColor}}'>
+          <image style='background:{{backgroundColor}}' wx:if="{{sex==2}}" 
+                src="http://p1jrmxejh.bkt.clouddn.com/moqi/hepulannv.png" mode='widthFix'></image>
+          <image style='background:{{backgroundColor}}' wx:if="{{sex==1}}" 
+                src="http://ovhvevt35.bkt.clouddn.com/moqi/hepulanb.png" mode='widthFix'></image>
+      </view>
+      <view class="subject_title" style='background:{{backgroundColor}}'>
+         第{{title}}题
+         <image class='bianji' bindtap='bianji' wx:if="{{flag}}"
+                src="settingTitle" src="./bianji.png" mode='widthFix'></image>
+      </view>
+
+      <view class="question_title" style='color:{{color}}'>
+          <input type="text" value='{{question.title}}' wx:if="{{inputSet && flag}}" 
+                 bindinput="titleInput" maxlength='16' auto-focus></input>
+          <view wx:else>{{question.title}}</view>
+      </view>
+      <block wx:for="{{answer_arr}}" wx:key="{{index}}">
+        <view class="choose 111 {{item.check == true?'choosed':''}} {{sex == 1?'choosea':'chooseb'}}" wx:if="{{inputSet && flag}}" data-idx="{{index}}" 
+              data-option="{{item.option}}">
+              <input type="text" value='{{item.text}}' bindinput="textInput{{index}}"  maxlength='26'></input>      
+        </view>
+        <view class="choose 222 {{item.check == true?'choosed':''}} {{sex == 1?'choosea':'chooseb'}}" wx:else
+               bindtap="choose"  data-idx="{{index}}" 
+              data-option="{{item.option}}"> {{item.text}}    
+        </view>
+      </block>
+    
+    </view>
+    <!--编辑  inputSet-->
+    <view class="btn_wrap bounceInDown" wx:if="{{inputSet}}" style='justify-content:space-around;'>
+        <button class="next_subject" bindtap='baocun' style='background:{{backgroundColor}};border:1px solid {{border}}'>
+          保存</button>
+    </view>
+    <view class="btn_wrap bounceInDown" wx:else>
+      <button class="change_subject {{sex == 1?'checkSexa':checkSexb}}" bindtap="changeSubject" style='border:1px solid {{border}};'>换一换</button>
+      <form report-submit="true" bindsubmit="nextSubject" class="formSubmit">
+        <button class="next_subject" formType="submit" style='background:{{backgroundColor}};border:1px solid {{border}}'>下一题</button>
+      </form>
+    </view>
+  </view>  
+
+  <view class="share" wx:else>
+    <view class="share_wrap">
+    <view class="share_top" style='background:{{backgroundColor}}'>
+      <view class="user_img">
+         <image src="{{avatar}}"></image> 
+      </view>
+      <view class="user_name">
+        <view>{{nickname}}</view>
+        <view class="user_name_state">我的默契大考题</view>
+      </view>
+    </view>
+    <view class="share_con" wx:if="{{sex==1}}"  
+          style="background:url(http://p1jrmxejh.bkt.clouddn.com/moqi/friendsb.png) no-repeat;background-size: cover; ">
+    </view>
+    <view class="share_con" wx:if="{{sex==2}}"  
+          style="background:url(http://ovhvevt35.bkt.clouddn.com/moqi/friends.png) no-repeat;background-size: cover; ">
+    </view>
+    <view class="share_bottom" style='color:{{backgroundColor}}'>    
+      <view>赶紧去邀请你的朋友</view>
+      <view>来检测下你们的默契度吧</view>
+    </view>
+     <view class="tab_wrap">
+      <view class="share_btn" bindtap="newObject" style='border:1px solid {{border}};color:{{backgroundColor}}'>重新出题</view>
+      <view>
+          <button class="home_icon"  bindtap="backHome" wx:if="{{setOver == 'true'}}"> 
+            <image src="../../resource/images/home_icon.png"></image>
+          </button>
+          <!-- <button class="erwei_icon"  bindtap="shareImg" wx:else>
+            <image wx:if="{{sex==1}}" src="../../resource/images/erweia.png"></image>
+            <image wx:if="{{sex==2}}" src="../../resource/images/erwei.png"></image>
+          </button> -->
+      </view>
+      <button class="share_btn" open-type="share" bindtap="share" style='border:{{border}};background:{{backgroundColor}}'>
+          发起挑战
+      </button>
+    </view>
+  </view>
+
+   
+  </view>
+ <!-- <view class="arrow_action" bindtap="hidden_arrow" hidden="{{show_arrow}}">
+  <view class="arrow_wrap">
+  <image src="../../resource/images/arrow.png"></image>
+  <view class="">检验默契度？保存分享</view>
+  </view>
+</view>  -->
+
+  
+  <!-- https://qncdn.playonwechat.com/image/adver.png -->
+  <!-- <view class="toYlf" wx:if="{{setOver == 'false'}}" bindtap='previewHpl'> -->
+    <!-- <view class='surprise bounce'>点我有惊喜</view> -->
+    <!-- <image src="https://qncdn.playonwechat.com/moqi/hpl_five.png" mode="aspectFit"></image>
+  </view> -->
+  </scroll-view>
+</view>
+<!--弹窗  -->
+<view class='bg' wx:if="{{zindex}}">
+    <view class='zindex'>
+        <view class='notice'>
+            <view class='title' style='background:{{backgroundColor}}'>温馨提示</view>
+            <view class='text'>
+                必须要选择答案才能进行下一题哦!
+            </view>
+            <view class='flex'>
+                <view class='two' bindtap='catale' 
+                  style='background:{{backgroundColor}};border:1px solid {{backgroundColor}};'>确定</view>
+            </view>
+        </view>
+    </view>
+</view> 

@@ -1,0 +1,36 @@
+为什么用fastclick?
+
+在移动浏览器中，当你点击按钮的单击事件时，将会等待大约300ms的时间。这是因为，浏览器是等着看，如果你是真正执行双击。
+
+消除在移动浏览器上触发click事件与一个物理Tap(敲击)之间的300延迟。
+
+使用好处：click响应速度直接提升。
+
+下载 fastClick.js 链接：https://github.com/ftlabs/fastclick
+
+对于非移动浏览器不启作用，禁用缩放标签。
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+引入：
+
+
+
+<script src="js/fastclick.js"></script>
+
+
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
+或者你使用了jquery插件，你可以这样编写：
+
+$(function() {
+    FastClick.attach(document.body);
+});
+如果你使用的browserify CommonJS的模块系统或另一种风格，其fastclick.attach函数将返回 require(‘fastclick’)。作为一个结果，使用fastclick这些装载机的最简单的方法如下：
+
+var attachFastClick = require('fastclick');
+attachFastClick(document.body);

@@ -1,0 +1,20 @@
+<scroll-view>
+  <!-- 我的信息 -->
+  <image class="userinfo-avatar me" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  <text class='userinfo-nickname my-nickname'>{{userInfo.nickName}}</text>
+  <!-- CP信息 -->
+  <image class="userinfo-avatar other" src="{{cpInfo.avatarUrl}}" background-size="cover"></image>
+  <text class='userinfo-nickname other-nickname'>{{cpInfo.nickname}}</text>
+  <!-- 描述 --> 
+  <view class="title {{status=='success'?'success':'fail'}}">
+    <text>{{bestCP}}</text>
+    <view class='box'></view>
+      <text class='des' style='color:#0D0D0D'>{{description}}</text>
+        <view class='about' bindtap='goAbout'></view> 
+  </view>
+  <!-- 背景 -->
+   <image src='result-bg.png' mode='widthFix' style='width:100%'></image> 
+   <view class='lotto'>
+    <button class='lotto-btn' open-type='contact'>马上去抽奖</button>
+   </view>
+</scroll-view>

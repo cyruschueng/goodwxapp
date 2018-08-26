@@ -1,0 +1,25 @@
+<!--pages/address/address.wxml-->
+<text>pages/address/address.wxml</text>
+
+
+<view class='df'>
+    <view class="info df fyc f1">
+        <view class="mr20">省份</view>
+        <picker  bindchange="bindPickerChange" value="{{provinceId}}" range="{{province}}">
+          <view class="picker">
+            {{province[provinceId]}}
+          </view>
+        </picker>
+    </view>
+
+
+    <view class="info df fyc f1">
+        <view class="mr20">城市</view>
+        <picker  bindchange="bindPickerCity" value="{{cityId}}" range="{{city[provinceId].cities}}">
+          <view class="picker">
+            {{city[provinceId].cities[cityId]}}
+          </view>
+        </picker>
+    </view>
+</view>
+

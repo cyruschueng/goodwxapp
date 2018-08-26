@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+            // Deep Clone
+  obj1 = { a: 0 , b: { c: 0}};
+  let obj3 = JSON.parse(JSON.stringify(obj1));
+  obj1.a = 4;
+  obj1.b.c = 4;
+  console.log(JSON.stringify(obj3)); // { a: 0, b: { c: 0}}
+    </script>
+
+    <script>
+    // js对象的深度克隆
+
+
+    function clone(Obj) {
+
+        var buf;
+
+        if (Obj instanceof Array) {
+
+            buf = []; //创建一个空的数组
+
+            var i = Obj.length;
+
+            while (i--) {
+
+                buf[i] = clone(Obj[i]);
+
+            }
+
+            return buf;
+
+        } else if (Obj instanceof Object) {
+
+            buf = {}; //创建一个空对象
+
+            for (var k in Obj) { //为这个对象添加新的属性
+
+                buf[k] = clone(Obj[k]);
+
+            }
+
+            return buf;
+
+        } else {
+
+            return Obj;
+
+        }
+    }
+    </script>
+    <script type="text/javascript">
+    var o;
+
+    function clone(obj) {
+        switch (typeOf obj) {
+            case 'undefined':
+                break;
+            case 'string':
+                o = obj + '';
+                break;
+            case 'number':
+                o = obj - 0;
+                break;
+            case 'boolean':
+                o = obj;
+                break;
+            case 'object':
+                if (obj === null) {
+                    o = null
+                } else { //数组						
+                    if (Object.prototype.toString.call(obj).slice(8, -1) === 'Array') {
+                        for (var i = obj.length - 1; i >= 0; i--) {
+                            o.push(clone(obj[i]))
+                        }
+                    } else { //对象
+                        for (var key in obj) {
+                            o[key] = clone(obj[key]);
+                        }
+                    }
+                }
+                break;
+            default:
+                o = obj;
+                break;
+
+        }
+    }
+    return o;
+    </script>
+    <script type="text/javascript">
+    var cloneObj = function(obj) {
+        var str, newobj = obj.constructor === Array ? [] : {};
+        if (typeof obj !== 'object') {
+            return;
+        } else if (window.JSON) {
+            str = JSON.stringify(obj), //系列化对象
+                newobj = JSON.parse(str); //还原
+        } else {
+            for (var i in obj) {
+                newobj[i] = typeof obj[i] === 'object' ?
+                    cloneObj(obj[i]) : obj[i];
+            }
+        }
+        return newobj;
+    };
+
+    // <!-- 作者：知乎用户
+    // 链接： https: //www.zhihu.com/question/23031215/answer/31944721
+    //     来源： 知乎
+    // 著作权归作者所有。 商业转载请联系作者获得授权， 非商业转载请注明出处。 -->
+    </script>
+</body>
+
+</html>

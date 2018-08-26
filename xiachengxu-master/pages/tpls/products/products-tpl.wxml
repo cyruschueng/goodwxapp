@@ -1,0 +1,46 @@
+<template name="products">
+  <view class='{{type=="index"?"products-box-index":"products-box"}}'>
+    <block wx:for="{{data}}" wx:key="{{index}}">
+      <view class='product-wrapper'>
+        <view class='{{type=="index"?"product-index":"product"}}'>
+          <form report-submit data-id='{{item.goodsId}}' data-index='{{listIndex}}' data-storeno='{{item.storeNo}}' bindsubmit='onProductTap'>
+            <button form-type='submit' class='form_button'>
+              <view class='img-wrap back_img'>
+                <image class="products-image" src="{{item.goodsPic}}" mode="aspectFill"></image>
+              </view>
+              <view wx:if='{{type=="index"}}'>
+                <view class='product-name'>{{item.goodsName}}</view>
+                <view class='product-price'>{{item.goodsPrice}}</view>
+              </view>
+              <view wx:else class="title">{{item.goodsName}}</view>
+            </button>
+          </form>
+          <view wx:if='{{type!="index"}}'>
+            <view class='product-rate' wx:if='{{item.discountPrice}}'>
+              <image src='/images/icon/discount_border.png' mode='aspectFit'></image>
+              <text>{{item.discountRate}} 折</text>
+            </view>
+            <view class="products-item-bottom">
+              <view class="price" wx:if='{{item.discountPrice}}'>
+                <view>
+                  <text>￥</text>{{item.discountPrice}}
+                </view>
+                <view class='original'>￥{{item.goodsPrice}}</view>
+              </view>
+              <view class='price' wx:else>
+                <view>
+                  <text>￥</text>{{item.goodsPrice}}
+                </view>
+              </view>
+              <form data-id='{{item.goodsId}}' data-index='{{listIndex}}' catchsubmit='collectProduct' report-submit>
+                <button form-type='submit' class='form_button'>
+                  <image src='{{item.isFavorite?"/images/tab/cart@active.png": "/images/tab/cart@default.png"}}' mode='aspectFill'></image>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

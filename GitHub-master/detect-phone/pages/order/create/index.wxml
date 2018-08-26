@@ -1,0 +1,255 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page footer" wx:if="{{show}}">
+  <view class="nav" wx:if="{{list.showTab}}">
+    <view data-type="0" bindtap="dispatchtype" class="{{data.dispatchtype == 0 ? 'red' : 'default'}}">快递配送</view>
+    <view data-type="1" bindtap="dispatchtype" class="{{data.dispatchtype == 1 ? 'red' : 'default'}}">上门自提</view>
+  </view>
+  <view>
+    <block wx:if="{{list.showAddress}}">
+      <view class="fui-cell-group" wx:if="{{data.dispatchtype == 0}}">
+        <navigator class="fui-cell" hover-class="none" url="/pages/member/address/select">
+          <image class="fui-cell-icon" src="{{icons.location}}"></image>
+          <view class="fui-cell-text textl info">
+            <view wx:if="{{list.address}}">
+              <text class="name">{{list.address.realname}} </text>
+              <text>{{list.address.mobile}}</text>
+            </view>
+            <view class="adress" wx:if="{{list.address}}">{{list.address.province + list.address.city + list.address.area + ' ' + list.address.address}}</view>
+            <view class="text no-address" wx:if="{{!list.address}}">添加收货地址</view>
+          </view>
+          <view class="fui-cell-remark"></view>
+        </navigator>
+      </view>
+      <view class="fui-cell-group" wx:if="{{data.dispatchtype == 1}}">
+        <navigator class="fui-cell" hover-class="none" url="/pages/order/store/index">
+          <image class="fui-cell-icon" src="{{icons.shop}}"></image>
+          <view class="fui-cell-text textl info">
+            <view class="shop_name">{{list.carrierInfo.storename}}</view>
+            <view>
+              <text class="name">{{list.carrierInfo.realname}}</text>
+              <text>{{list.carrierInfo.mobile}}</text>
+            </view>
+            <view class="adress">{{list.carrierInfo.address}}</view>
+          </view>
+          <view class="fui-cell-remark"></view>
+        </navigator>
+      </view>
+    </block>
+    <view class="fui-cell-group" wx:if="{{!list.showAddress || data.dispatchtype == 1}}">
+      <view class="fui-cell">
+        <view class="fui-cell-label">姓名</view>
+        <view class="fui-cell-info">
+          <input id="realname" placeholder="请输入姓名" type="text" bindinput="listChange" class="fui-input textl" value="{{list.member.realname}}" />
+        </view>
+      </view>
+      <view class="fui-cell">
+        <view class="fui-cell-label">电话</view>
+        <view class="fui-cell-info">
+          <input type="text" id="mobile" bindinput="listChange" class="fui-input textl" placeholder="请输入电话" value="{{list.member.mobile}}" />
+        </view>
+      </view>
+    </view>
+    <block wx:for="{{list.goods}}">
+      <view class="fui-list-group">
+        <navigator hover-class="none" class="fui-list-group-title" open-type="switchTab" url="/pages/index/index">
+          <image src="/static/images/icon/shop.png" class="round "></image>
+          <text class="shop">{{item.shopname}}</text>
+        </navigator>
+        <block wx:for="{{item.goods}}" wx:for-index="key" wx:for-item="val">
+          <view class="fui-list goods-item noclick">
+            <view class="fui-list-media" bindtap="url" data-url="/pages/goods/detail/index?id={{val.goodsid}}">
+              <image src="{{val.thumb}}" class="round goods_img"></image>
+            </view>
+            <view class="fui-list-inner" bindtap="url" data-url="/pages/goods/detail/index?id={{val.goodsid}}">
+              <view class="sure_subtitle">
+                <text class="fui-label fui-label-danger" wx:if="{{val.hasdiscount}}">折扣</text>{{val.title}}
+              </view>
+              <view class="text cart-option" wx:if="{{val.optionid != 0}}">
+                <view class="choose-option">{{val.optiontitle}}</view>
+              </view>
+            </view>
+            <view class="fui-list-angle">
+              <text class="price">￥{{val.price}}</text>
+              <view bindtap="number" data-id="{{val.id}}" class="fui-number small" data-max="{{val.totalmaxbuy}}" data-min="{{val.minbuy}}" data-value="{{val.total}}" wx:if="{{list.changenum}}">
+                <view data-action="minus" class="minus {{val.total <= 1 ? 'disabled' : ''}}">-</view>
+                <input name="" type="tel" value="{{val.total}}" class="num shownum" />
+                <view data-action="plus" class="plus {{val.total >= val.totalmaxbuy ? 'disabled' : ''}}">+</view>
+              </view>
+              <view class="text-right" wx:elif="!list.changenum">x{{val.total}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+    <view class="fui-list-group" wx:if="{{hasinvoice}}">
+      <view class="fui-cell-group">
+        <view class="fui-cell">
+          <view class="fui-cell-label">发票抬头</view>
+          <view class="fui-cell-info">
+            <input class="fui-input" type="text" name="" bindinput="listChange" id="invoicename" value="{{list.invoicename}}" />
+          </view>
+        </view>
+        <view class="fui-cell">
+          <view class="fui-cell-info" style="text-align: right;">共
+            <text class="text-danger">{{list.total}}</text> 件商品 合计：
+            <text class="text-danger">¥ {{list.goodsprice}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="fui-cell-group">
+      <view class="fui-cell">
+        <view class="fui-cell-info">
+          <input id="remark" bindinput="dataChange" placeholder="选填：买家留言（50字以内）" />
+        </view>
+      </view>
+    </view>
+    <include src="/pages/common/diyform.wxml" />
+    <include src="/pages/common/city-picker.wxml" />
+    <view class="fui-mask {{showPicker ? 'show' : ''}}"></view>
+    <view class="fui-cell-group">
+      <navigator class="fui-cell" hover-class="none" url="/pages/public/coupon/index?type=0" wx:if="{{list.couponcount > 0}}">
+        <view class="fui-cell-text">
+          <p> {{!data.couponname ? '选择优惠券' : '已选择优惠券：' + data.couponname}}</p>
+        </view>
+        <view class="fui-cell-remark">
+          <view class="badge badge-danger">{{list.couponcount}}</view>
+        </view>
+        <text class="text" wx:if="{{list.couponcount <= 0}}"></text>
+      </navigator>
+      <view class="fui-cell" wx:if="{{list.deductcredit > 0}}">
+        <text class="text-danger">{{list.deductcredit}}</text>
+        <view class="fui-cell-text" style="text-align:left;width:auto">积分可抵扣
+          <text class="text-danger">{{list.deductmoney}}</text>
+          元
+        </view>
+        <view class="fui-cell-info">
+          <switch bindchange="dataChange" class="switch-80 pull-right" id="deduct" />
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{list.deductcredit2 > 0}}">
+        <view class="fui-cell-text" style="text-align:left;width:auto">余额可抵扣
+          <text class="text-danger">{{list.deductcredit2}}</text>
+          元
+        </view>
+        <view class="fui-cell-info">
+          <switch bindchange="dataChange" class="switch-80 pull-right" id="deduct2" />
+        </view>
+      </view>
+    </view>
+    <view class="fui-cell-group {{toggleStore ? 'toggleSend-group' : ''}}" wx:if="{{list.stores.length > 0}}">
+      <view class="fui-cell" bindtap="toggle" data-id="{{toggleStore}}" data-type="toggleStore">
+        <image class="image-32" src="/static/images/icon/shop.png"></image>
+        <view class="fui-cell-text differ">
+          <text class="store">适用门店</text>
+        </view>
+        <view class="num">{{stores.length}}</view>
+        <view class="fui-cell-remark"></view>
+      </view>
+      <view class="send-code">
+        <block wx:for="{{list.stores}}">
+          <view class="fui-list noclick">
+            <view class="fui-list-media">
+              <image src="/static/images/icon/shop.png" class="fui-list-icon"></image>
+            </view>
+            <view class="fui-list-inner store-inner">
+              <view class="title">
+                <text class="storename">{{item.storename}}</text>
+              </view>
+              <view class="text">
+                <text class="realname">{{item.realname}}</text>
+                <text class="mobile">{{item.mobile}}</text>
+              </view>
+              <view class="text">
+                <text class="address">{{item.address}}</text>
+              </view>
+            </view>
+            <view class="fui-list-angle ">
+              <image class="image-48" bindtap="phone" data-phone="{{item.mobile}}" src="/static/images/icon/tel.png"></image>
+              <navigator hover-class="none" url="/pages/order/store/map?id={{item.id}}">
+                <image class="image-48" src="/static/images/icon/location.png"></image>
+              </navigator>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="fui-cell-group">
+      <view class="fui-cell">
+        <view class="fui-cell-text">商品小计</view>
+        <view class="fui-cell-remark noremark">¥
+          <text>{{list.goodsprice}}</text>
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{list.buyagain > 0}}">
+        <view class="fui-cell-text">重复购买优惠</view>
+        <view class="fui-cell-remark noremark">-¥
+          <text>{{list.buyagain}}</text>
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{list.taskdiscountprice > 0}}">
+        <view class="fui-cell-text">任务活动优惠</view>
+        <view class="fui-cell-remark noremark">-¥
+          <text>{{list.taskdiscountprice}}</text>
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{list.discountprice > 0}}">
+        <view class="fui-cell-text">会员优惠</view>
+        <view class="fui-cell-remark noremark">-¥
+          <text>{{list.discountprice}}</text>
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{list.isdiscountprice > 0}}">
+        <view class="fui-cell-text">促销优惠</view>
+        <view class="fui-cell-remark noremark">-¥
+          <text>{{list.isdiscountprice}}</text>
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{list.showenough}}">
+        <view class="fui-cell-text" style="text-align:left;width:auto">商城单笔满
+          <text class="text-danger">{{list.enoughmoney}}</text>元立减
+        </view>
+        <view class="fui-cell-info"></view>
+        <view class="fui-cell-remark noremark">-¥
+          <text>{{list.enoughdeduct}}</text>
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{list.merch_showenough}}">
+        <view class="fui-cell-text" style="text-align:left;width:auto">商户单笔满
+          <text class="text-danger">{{list.merch_enoughmoney}}</text>元立减
+        </view>
+        <view class="fui-cell-info"></view>
+        <view class="fui-cell-remark noremark">-¥
+          <text>{{list.merch_enoughdeduct}}</text>
+        </view>
+      </view>
+      <view class="fui-cell">
+        <view class="fui-cell-text">运费</view>
+        <view class="fui-cell-remark noremark">¥
+          <text>{{list.dispatch_price}}</text>
+        </view>
+      </view>
+      <view class="fui-cell" wx:if="{{data.couponname && coupon.deductprice}}">
+        <view class="fui-cell-text">{{coupon.coupondeduct_text}}</view>
+        <view class="fui-cell-remark noremark">-¥
+          <text>{{coupon.deductprice}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="fui-footer">
+    <view class="tool nopadding">
+      <view class="text">
+        <view class="title text-right">需付：
+          <text class="text-danger">{{list.realprice}}元</text>
+        </view>
+      </view>
+      <view class="btns">
+        <text bindtap="submit" class="btn btn-danger {{submit && disabled}}">立即支付</text>
+      </view>
+    </view>
+  </view>
+  <view class="fui-toast {{FoxUIToast.show ? 'in' : 'out'}}">
+    <view class="text">{{FoxUIToast.text}}</view>
+  </view>
+</view>

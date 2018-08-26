@@ -1,0 +1,30 @@
+<view class='userInfo' hidden='{{!loadingHidden}}'>
+  <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">手机号格式错误</view>
+  <view class='avatar' catchtap='upload'>
+    <view class="weui-uploader__input-box" wx:if='{{!userInfo.faceImage}}'>
+      <view class="weui-uploader__input"></view>
+    </view>
+    <view class='user-avatar' wx:else>
+      <image src='{{userInfo.faceImage}}' mode='aspectFill'></image>
+    </view>
+    <view class='tip'>
+      <text>上传图片后，您就可以体验我们的线上线下刷脸买买买服务了，惊喜多多，需要正脸哦！</text>
+      <text>(点击上传)</text>
+    </view>
+  </view>
+  <view class="weui-cells__title">绑定手机号</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__bd">
+        <button class='get-phone' open-type='{{initial?"getPhoneNumber":""}}' bindgetphonenumber='{{initial?"getPhoneNumber": ""}}'>
+          <input type='number' disabled='{{initial}}' bindblur='getInputPhone' class="weui-input" confirm-type='done' value='{{userInfo.mobile}}' maxlength='11' placeholder="请输入手机号" />
+        </button>
+      </view>
+    </view>
+  </view>
+  <button class="weui-btn save-btn" catchtap='updateUserInfo' type="primary">保存</button>
+</view>
+
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

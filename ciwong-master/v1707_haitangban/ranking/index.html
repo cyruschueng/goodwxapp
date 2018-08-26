@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <title>排行榜</title>
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="../common/js/zepto.min.js"></script>
+    <script src="../common/js/common.js"></script>
+</head>
+
+<body>
+    <div class="loading">
+        <div class="load-inner">
+            <img style="display:none" src="../common/images/loading.gif" alt="">
+            <span>加载中...</span>
+        </div>
+    </div>
+    <!--loading end-->
+    <div class="dialog" style="display:none;">
+        <div class="dialog-inner"> <span>暂无信息~</span>
+        </div>
+    </div>
+    <!--dialog end-->
+    <div class="m-error" style="display:none;">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.reload()">重 试</div>
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div>
+    <!--error end-->
+    <div class="wrap word-wrap clear" id="app" style="position: relative; display: none; width: 100%; overflow: hidden;">
+        <div class="content">
+            <div class="backgroundImg">
+                <img src="" alt="" class="firstRankImg maxAvatar">
+                <p style="position: absolute;top: 65%;left: 0;font-size: 0.24rem;color: #fff;display: block;width: 100%;text-align: center;"><span class="maxName"></span>占据了榜首 <span></span>
+                </p>
+            </div>
+            <div class="firstStudent">
+                <img src="" alt="" class="headImg" id="selfAvatar" style="position: absolute; left: 0.8rem; top: 0.15rem;">
+                <div class="firstDetail">
+                    <p class="fs-30" id="Name"></p>
+                    <p class="fs-24 col-999896" id="Rank"></p>
+                </div>
+                <p class="green firstGrade" id="Score"></p>
+            </div>
+            <div class="bdb20-f1f0ec mb30"></div>
+            <div class="">
+                <ul class="rankList">
+                   
+                </ul>
+            </div>
+        </div>
+        <div class="no_rank clear">
+            <img src="images/noRank.png" alt="">
+        </div>
+    </div>
+    <script>
+        var pageType = $common.getUrlParaBase64('pageType');
+        var app_interaction; // 是否与APP交互
+        if (pageType == 1) {
+            app_interaction = true; // 与APP交互
+        } else if (pageType == 2) {
+            app_interaction = false; // 不与APP交互
+        }
+    </script>
+    <script src="../common/js/cordova.min.js"></script>
+</body>
+<script type="text/javascript">
+    $(function() {
+
+        var log = '异常log';
+        // APP数据集合
+        var apiData = {
+                records: '',
+                userInfo: '',
+                members: ''
+            }
+            // 设置超时报错
+        var firstTimer = setTimeout(function() {
+            if (apiData.records === '') {
+                $.error('Api请求超时')
+                return;
+            }
+        }, 10000)
+
+        var brandId = $common.getUrlParaBase64('brandId') || ''; //524726977
+        var clientId = $common.getUrlParaBase64('clientId') || ''; // 100131
+        var userId = $common.getUrlParaBase64('userId') || ''; // 543758688
+        var contentId = $common.getUrlParaBase64('contentId') || ''; // 301819 //// #clientId=100131&userId=543758688&contentId=301819
+
+        var authorization = '?clientId=' + clientId + '&userId=' + userId;
+
+        // 请求数据 http://prevm.teacher.jiaofuyun.com/v1706_moliban/ranking/index.html#clientId=100131&userId=543758688&contentId=301819
+
+        function getRanking() {
+            var url = HOST + 'h5/epaperwork/getEworkContentScoreStatistics' + '?clientId=' + clientId +
+                '&contentId=' + contentId + '&pageType' + pageType;
+            $common.ajax(url, function(response) {
+                var json = typeof response == 'string' ? JSON.parse(response) : response;
+                if ((json.errcode == undefined || json.errcode != 0) || !json.data) { // 返回错误
+                    $.error(json.msg || log)
+                } else {
+                    apiData.members = json.data.classInfo.members;
+                    apiData.records = json.data.records;
+                    dataReady();
+
+                }
+            }, userId)
+        }
+        function getBrand() {
+            var url = API.getBrand + authorization + '&brandId=' + brandId;
+            $common.ajax(url, function(response) {
+                log = '根据id查询品牌信息'
+                var json = typeof response == 'string' ? JSON.parse(response) : response;
+                if ((json.errcode == undefined || json.errcode != 0) || !json.data) {
+                    // 品牌信息获取失败不做异常处理
+                    // $.error(json.msg || log)
+                } else {
+                    apiData.userInfo = json.data.icon || '品牌logo获取失败';
+                    dataReady();
+                    !json.data.icon && console.marn(apiData.userInfo+'：'+url)
+                }
+            }, userId)
+        }
+        // 处理数据
+        function dataReady() {
+
+            $('.loading').hide();
+            $('.wrap').show();
+            // alert(JSON.stringify(apiData.records))
+
+            if (!apiData.records) {
+                $('.content').hide();
+                $('.no_rank').show();
+                return false;
+            } else {
+                $('.content').show();
+                $('.no_rank').hide();
+                pageType == 1 && $common.shareUrl()
+            }
+
+            // 追加头像
+            var havAvatar = true;
+            for (var i = 0; i < apiData.members.length; i++) {
+                var userIdA = apiData.members[i].userId;
+                for (var j = 0; j < apiData.records.length; j++) {
+                    var userIdB = apiData.records[j].userId;
+                    if (userIdA == userIdB) {
+                        apiData.records[j].avatar = apiData.members[i].avatar;
+                        if (!apiData.records[j].avatar && !apiData.userInfo) {
+                            havAvatar = false;
+                            getBrand(); //请求品牌头像
+                            break;
+                        }else if(!apiData.records[j].avatar && apiData.userInfo){
+                            apiData.records[j].avatar = apiData.userInfo;
+                        }
+                    }
+                }
+                if(!havAvatar){
+                    break;
+                }
+            }
+            avatarData();
+
+        }
+
+        function avatarData() {
+            var flag,html='';
+            //排名
+            for (var i = 0; i < apiData.records.length; i++) {
+                var liContent = "";
+                if (apiData.records[i].moduleId == 15 && apiData.records[i].workStatus == 16) {
+                    apiData.records[i].actualScore = '评分中';
+                }
+
+                $('.maxName').text(apiData.records[0].userName);
+                $('.maxAvatar').attr('src', apiData.records[0].avatar);
+
+                liContent = '<li><span>' + apiData.records[i].index + '</span><img class="headImg mlr30" src=' +
+                    apiData.records[i].avatar + '><span class="fs-30 user_name">' + apiData.records[i].userName +
+                    '</span><span class="col-green gradeR" id=status_' + apiData.records[i].index + '>' +
+                    apiData.records[i].actualScore + '</span>';
+
+                if (i == 0) {
+                    liContent += '<span class="gradeR"><span class="fs-24 col-999896 workScore">/' + apiData.records[
+                        0].workScore + '</span><span class="fs-24 col-999896">分</span></span>'
+                }
+                liContent += '</li>'
+                html+=liContent;
+            }
+            $('.rankList').html(html)
+            for (var i = 0; i < apiData.records.length; i++) {
+
+                $('#status_' + apiData.records[0].index).css('right', '1.36rem');
+
+                
+                if (apiData.records[i].moduleId == 124 && apiData.records[i].workStatus == 17) {
+                    $('#status_' + apiData.records[i].index).addClass('no_correct')
+                }else if (apiData.records[i].moduleId == 15 && apiData.records[i].workStatus == 16) {
+
+                    $('#status_' + apiData.records[i].index).addClass('no_correct')
+
+                } else {
+                    $('#status_' + apiData.records[i].index).removeClass('no_correct')
+
+                }
+             
+                if (apiData.records[i].userId == userId) {
+                    $('#Name').text(apiData.records[i].userName);
+                    $('#selfAvatar').attr('src', apiData.records[i].avatar);
+                    $('#Score').text(apiData.records[i].actualScore);
+                    $('#Rank').text('第' + apiData.records[i].index + '名');
+                   
+                    // 16为主观题还未批改
+
+                    if (apiData.records[i].moduleId == 124 && apiData.records[i].workStatus == 17) {
+                        $('#Score').addClass('no_correct')
+                    } else if (apiData.records[i].moduleId == 15 && apiData.records[i].workStatus == 16) {
+
+                        $('#Rank').text('——');
+                        $('#Score').text('评分中');
+                    } else {
+                        $('#Score').removeClass('no_correct')
+                    }
+                    flag = true;
+                }
+                if (!flag) getSelf();
+            }
+
+            function getSelf() {
+                for (var j = 0; j < apiData.members.length; j++) {
+                    if (apiData.members[j].userId == userId) {
+
+                        $('#Name').text(apiData.members[j].userName);
+
+                        if (!apiData.members[j].avatar) {
+                            apiData.members[j].avatar = apiData.userInfo;
+                        }
+                        $('#selfAvatar').attr('src', apiData.members[j].avatar);
+
+                        $('#Rank').text('你还未完成作业');
+                        $('#Score').text('——');
+                        return;
+                    }
+                }
+            }
+        }
+
+        getRanking();
+    })
+</script>
+
+
+
+</html>

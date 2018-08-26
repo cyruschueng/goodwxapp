@@ -1,0 +1,45 @@
+<view class="outer">
+  <audio src="{{reviveSrc}}" id="reviveAudio" style="display: none;"></audio>
+  <audio src="{{rightSrc}}" id="rightAudio" style="display: none;"></audio>
+  <audio src="{{wrongSrc}}" id="wrongAudio" style="display: none;"></audio>
+  <view class="quiz_box">
+    <scroll-view class="content">
+    <!--<view class="content">-->
+      <view wx:for="{{quiz}}" wx:key="{{quiz}}" data-item="{{item}}" wx:for-index="ind" class="list" wx:if="{{ind == page}}">
+        <view class="head-box">
+          <view class="left-box">
+            <image src="../../images/right.png"></image>
+            <text>{{ind}}</text>
+          </view>
+          <view class="pro-box">
+            <image class="bg" src="../../images/bar_bg.png"></image>
+            <image class="bar_yellow" style="width:{{(500-second)*0.2*350/100}}rpx;" src="{{second<=300?'../../images/bar_yellow.png':'../../images/bar_blue.png'}}"></image>
+            <text>{{count}}</text>
+          </view>
+          <view class="right-box">
+            <image src="../../images/heart_left.png"></image>
+            <text>{{heartNum}}</text>
+          </view>
+        </view>
+        <view class="img-box">
+          <image class="wrap_img" src="../../images/TV.png"></image>
+          <image class="quiz_img" src="{{item.title}}" lazy-load="{{ind<page+10?true:false}}"></image>
+          <!--<image class="quiz_img" src="{{item.title}}" lazy-load="true"></image>-->
+        </view>
+        <view class="btns" wx:for="{{item.quiz}}" wx:for-item="a" wx:key="{{item.quiz}}" wx:for-index="i">
+          <view class="button" data-flag="{{a.flag}}" data-index="{{i}}" data-word="{{item.word}}" data-title="{{item.title}}" data-flagStatus="{{flagStatus}}" bindtap="check_ans">
+            <image class="button_bg" src="{{markArr[i]?'../../images/button_selected.png':'../../images/button.png'}}"></image>
+            <text>{{a.title}}</text>
+            <image wx:if="{{markArr[i]}}" class="mark_img" src="{{a.flag?'../../images/mark_right.png':'../../images/mark_wrong.png'}}"></image>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="heart_confirm_wrap" wx:if="{{heartConStatus}}">
+      <view class="heart_confirm">
+        <image class="bg" src="../../images/popup_survive.png"></image>
+        <view class="text">使用复活<image src="../../images/heart_sm.png"></image></view>
+      </view>
+    </view>
+  </view>
+</view>

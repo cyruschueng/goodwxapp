@@ -1,0 +1,111 @@
+<form bindsubmit="formSubmit" bindreset="formReset">
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__bd">
+        <view class="weui-cells__title"></view>
+        <view class="logo_header">
+            <image class="logo"  bindtap="uplogo" mode="aspecFill"   src="{{logo}}" />
+            <input name="logo" style="display:none;" value="{{logo}}"  />
+            <view><text style="font-size:12px;color:#808080">更换公司图像</text></view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">公司</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" maxlength="20" name="title" placeholder="企业名称" value="{{info.title}}"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">规模</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="guimo"  bindchange="bindguimoChange" value="{{guimoIndex}}" range="{{guimotype}}">
+                        <view class="weui-select weui-select_in-select-after">{{guimotype[guimoIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">区域</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="sheng" bindchange="bindshengChange" value="{{shengIndex}}" range="{{shengtype}}">
+                        <view class="weui-select weui-select_in-select-after">{{shengtype[shengIndex]}}</view>
+                    </picker>
+                </view>
+                 <view class="weui-cell__bd">
+                    <picker name="shi"  bindchange="bindshiChange" value="{{shiIndex}}" range="{{shitype}}">
+                        <view class="weui-select weui-select_in-select-after">{{shitype[shiIndex]}}</view>
+                    </picker>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="qu" bindchange="bindquChange" value="{{quIndex}}" range="{{qutype}}">
+                        <view class="weui-select weui-select_in-select-after">{{qutype[quIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">详细地址</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="jiedao"  class="weui-input" maxlength="20" placeholder="街道地址" value="{{info.jiedao}}"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">联系人</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="lianxiren"  class="weui-input" value="{{info.lianxiren}}" placeholder="不少于两个字"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="phone"  value="{{info.phone}}"  class="weui-input" placeholder="请输入手机号" />
+                </view>
+                <!--<view class="weui-cell__ft">
+                    <view class="weui-vcode-btn">获取验证码</view>
+                </view>-->
+            </view>
+            <!--<view class="weui-cells__title">文本域</view>-->
+             <view class=" weui-cells_after-title" style="background-color:#F8F8F8;border-top:1px solid #D9D9D9;">
+               
+                    <view style="margin-left:16px;padding-top:4px;">
+                    <view>公司介绍</view>
+                    </view>
+                    
+                
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                    
+                    <view class="weui-cell__bd">
+                        <textarea name="jieshao" maxlength='500'  value="{{info.jieshao}}" class="weui-textarea" placeholder="（选填）" style="height: 6em" />
+                        <view class="weui-textarea-counter">0/500</view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+
+        <checkbox-group bindchange="bindAgreeChange">
+            <label class="weui-agree" for="weuiAgree">
+                <view class="weui-agree__text">
+                    <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                    <view class="weui-agree__checkbox-icon">
+                        <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                    </view>
+                    阅读并同意<navigator url="../fabuxuzhi/fabuxuzhi?token=1" class="weui-agree__link" style="color:#999999">《发布须知》</navigator>
+                </view>
+            </label>
+        </checkbox-group>
+            <button class="weui-btn" style="width:90%;background-color:#FF5902;color:#ffffff" formType="submit" hover-class="none" type="default">保存简介</button>
+    </view>
+</view>
+</form>

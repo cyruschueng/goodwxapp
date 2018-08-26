@@ -1,0 +1,53 @@
+<!--导航条,切换滑块-->
+
+
+<!--首页精选-->
+<scroll-view scroll-y="true" style="height: 100%;" bindscrolltolower="loadMore" bindscrolltoupper="refesh">
+
+
+  <view >
+    <view class="swiper-container">
+      <swiper autoplay="auto" interval="5000" duration="1000" current="{{swiperCurrent}}"
+       bindchange="swiperChange" class="swiper">
+        <block wx:for="{{slider}}" wx:key="">
+          <swiper-item data-id="{{item.id}}">
+            <image src="{{item.picUrl}}" class="img"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dots">
+      <block wx:for="{{slider}}">
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+  </view>
+
+<view class="recommend_tr_desc">
+ <text>最新红包</text>
+</view>
+<view class="recommend_sp">
+  <block wx:for = "{{indexData}}" wx:key="{{title}}">
+    <view style= "width:100%;" class="recommend_index_data">
+     <view class='brand_desc'>
+         <image src='../image/mtwm.png' hidden="{{item.type!=='美团外卖'}}" class='brand_logo'></image>
+         <image src='../image/eleme.png' hidden="{{item.type!=='饿了么'}}" class='brand_logo'></image>
+     <text>{{item.type}}红包    {{item.dateStr}}\n</text>
+     <text class='brand_detail'>第{{item.num}}个最大，已有{{item.currentNum}}人领取\n</text>
+  <button class='myself_btn' type="default"  size="mini"   data-info="{{item}}" open-type="share" hidden="{{item.state==0}}" hover-class="other-button-hover"> 求助攻 </button>
+
+  <button class='myself_btn myself_get' type="primary" size="mini" bindtap="default"  hidden="{{item.state==0}}" hover-class="other-button-hover"> 我要抢</button>   
+
+    <button class='myself_btn' type="warn" size="mini"  hidden="{{item.state==1}}" hover-class="other-button-hover"> 来晚了，已经抢光了</button>
+
+     </view>
+    </view>
+  </block>
+  <view class='theEnd' >~就以上这些了哦~</view>
+</view>
+<view class='fixedBtn'>
+<view class="fixedL" bindtap='toAddRedpack'>➕</view>
+</view>
+
+ </scroll-view>
+

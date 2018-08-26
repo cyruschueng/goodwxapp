@@ -1,0 +1,44 @@
+<!--pages/count/countDown.wxml-->
+<view class="container">
+  <view class="page-body">
+    <view class="weui-cells__title">滑动以下滚轮来选择倒计时的时间</view>
+    <view class="page-section">
+      <view>
+        <picker-view indicator-class="indicator-class" mask-class="mask-class" class='picker-view' value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view class='picker-view-column' wx:key="hour" wx:for="{{hours}}">{{item}}时</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view class='picker-view-column' wx:key="minute" wx:for="{{minutes}}">{{item}}分</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view class='picker-view-column' wx:key="second" wx:for="{{seconds}}">{{item}}秒</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+      <form bindsubmit='formSubmit' report-submit='true'>
+        <!-- <view class="weui-cells__title">提醒内容</view> -->
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="title" placeholder="来写点提醒的内容吖~(*´∀`)~♥" />
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title text-margin">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="detail" placeholder="备注" />
+            </view>
+          </view>
+        </view>
+
+        <view class="btn-area">
+          <button style='background-color: #5fa9f0;' id='remind_other' name="remind_other" type="primary" formType="submit">提醒好友</button>
+          <button id='remind_me' name="remind_me" formType="submit">提醒自己</button>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

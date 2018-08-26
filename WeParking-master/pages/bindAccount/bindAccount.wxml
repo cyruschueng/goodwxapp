@@ -1,0 +1,27 @@
+<!--bindAccount.wxml-->
+<view class="hint_area">
+  <text class="hint_text">在进行提现前,您需要提供您的账户信息</text>
+</view>
+<view class="content_area">
+  <view class="line_area">
+    <text class="main_text">开户机构</text>
+    <picker class="picker" bindchange="selectSource" range="{{accountSource}}" value="{{selectedItem}}">
+      <view class="{{selectedTextClass}}">
+        {{selectedText}}
+      </view>
+    </picker>
+  </view>
+  <view class="line"></view>
+  <view class="line_area">
+    <text class="main_text">开户账号</text>
+    <input class="picker main_text" bindinput="getAccount" maxlength="25" placeholder-class="hint_text" placeholder="输入您的机构账号" />
+  </view>
+  <view class="line"></view>
+  <view class="line_area">
+    <text class="main_text">真实姓名</text>
+    <input class="picker main_text" bindinput="getTrueName" maxlength="20" placeholder-class="hint_text" placeholder="输入您的真实姓名" />
+  </view>
+</view>
+<view class="submit_area">
+  <button type="primary" bindtap="bindAccount" style="background-color:#f4c600">提交</button>
+</view>

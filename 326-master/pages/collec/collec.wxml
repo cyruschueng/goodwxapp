@@ -1,0 +1,128 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+<!--top -->
+    <view class='panel flexCenter Skin bbottom'>
+    <view class='panelL'>
+      <image class="imgL"src="/images/nbqZC.png"></image>
+    </view>
+    <view class='panelL'>
+      <view>{{CollectorInfo.pn}}</view>
+      <view>隶属电站:{{webQueryPlants.name}}</view>
+    </view>
+
+    <view class='flexV1 deviceDetMode mr03'>
+      <template is="tapMenu" data="{{tapBox: tapBox}}"/> 
+      </view>
+  </view>
+<!--图表、数据-->
+  <template is="tabPage" data="{{tabBox: tabBox}}"/>
+  <!--参数表 str  -->
+  <view class='paraList' hidden='{{coH}}'>
+    <view class='bgColorC'>参数</view>
+    <view>
+      <view>数采器PN号</view>
+      <view> {{CollectorInfo.pn}}</view>
+    </view>
+    <view>
+      <view>数采器别名</view>
+      <view> {{collDevPage.alias?collDevPage.alias:collDevPage.pn}}</view>
+    </view>
+    <view>
+      <view>数采器状态</view>
+      <view>{{CollectorInfo.status==0?"在线":CollectorInfo.status==1?"离线":CollectorInfo.status==2?"故障":CollectorInfo.status==3?"待机":CollectorInfo.status==4?"告警":CollectorInfo.status==5?"错误":"协议错误"}} </view>
+    </view>
+    <view>
+      <view>固件版本</view>
+      <view> {{CollectorInfo.fireware}}</view>
+    </view>
+    <view>
+      <view>数采器带载数</view>
+      <view> {{CollectorInfo.load?CollectorInfo.load:0}}</view>
+    </view>
+    <view>
+      <view>在线设备数量</view>
+      <view> {{collDevPage.normal.length?collDevPage.normal.length:0}}</view>
+    </view>
+    <view class='bgColorC'>GPRS流量参数</view>
+    <view>
+      <view>激活时间</view>
+      <view>{{gprsAdate}} </view>
+    </view>
+  </view>
+  <!--参数表 end  -->
+  <view class='flexv1 modeldrawer_content'>
+      <!--电站列表str  -->
+  <view class="flex1_vie bg256 flexCe pd04 borderC" id='{{index}}'  wx:for="{{collDevPage.device}}" wx:for-index="index"   wx:for-item="device" hidden='{{colH}}' bindtap='collToinver'>
+      <view class='listImg flexColumn  flexCenter'>
+        <image class="imgL br50"src="/images/nbqZC.png"></image>
+        <view class='flexCenter'>地址：{{device.devaddr}}</view>
+      </view>
+      <view class='flexv1'>
+        <image class="imgxxs br50 mr03"src="/images/{{device.status==0?'round3.png':device.status==1?'round.png':device.status==4?'round2.png':'round1.png'}}"></image>
+        <!--逆变器  -->
+        <view class="{{((device.devcode<='200') || (device.devcode>'768'))?'hidden':'flexColumn'}}">
+        <view>{{device.sn}}</view>
+        <view>{{device.pn}}</view>
+      <view class='flexS'>
+        <view>当前功率：</view>
+          <view class="lisNum">{{device.output_power?device.output_power:'0.0kW'}}</view>
+        </view>
+      <view class='flexS'>
+        <view>日发电量：</view>
+        <view class="lisNum">{{device.energy_today?device.energy_today:'0.0kWh'}}</view>
+      </view>
+      <view class='flexS'>
+        <view>总发电量：</view>
+        <view class="lisNum">{{device.energy_total?device.energy_total:'0.0kWh'}}</view>
+      </view>
+    </view>
+    <!--环测仪   -->
+    <view class="{{((device.devcode<='768') || (device.devcode>'1024'))?'hidden':'flexColumn'}}">
+        <view>{{device.alias?device.alias:device.pn}}</view>
+        <view>{{device.sn}}</view>
+        <view>{{device.pn}}</view>
+      <view class='flexS'>
+        <view>风速{{device.devcode}}：</view>
+          <view class="lisNum">{{device.wind_speed?device.wind_speed:'0.0'}}m/s</view>
+        </view>
+      <view class='flexS'>
+        <view>日照：</view>
+        <view class="lisNum">{{device.radiation?device.radiation:'0.0'}}W/m2</view>
+      </view>
+      <view class='flexS'>
+        <view>环境温度：</view>
+        <view class="lisNum">{{device.temp?device.temp:'0.0'}}°C</view>
+      </view>
+      <view class='flexS'>
+        <view>背板温度：</view>
+        <view class="lisNum">{{device.btemp?device.btemp:'0.0'}}°C</view>
+      </view>
+    </view>
+    <!--电表  -->
+    <view class="{{((device.devcode<='1024') || (device.devcode>'1280'))?'hidden':'flexColumn'}}">
+        <view>{{device.alias?device.alias:device.pn}}</view>
+        <view>{{device.sn}}</view>
+        <view>{{device.pn}}</view>
+      <view class='flexS'>
+        <view>总有功功率：</view>
+          <view class="lisNum">{{device.active_power?device.active_power:'0.0'}}kW</view>
+        </view>
+    </view>
+    <!--汇流箱 -->
+    <view class="{{((device.devcode<='1280') || (device.devcode>'1536'))?'hidden':'flexColumn'}}" >
+        <view>{{device.alias?device.alias:device.pn}}</view>
+        <view>{{device.sn}}</view>
+        <view>{{device.pn}}</view>
+      <view class='flexS'>
+        <view>SN：</view>
+        <view class="lisNum">{{device.sn}}</view>
+      </view>
+    </view>
+
+  </view>
+  <image class="imgxs"src="/images/arrow_unexpanded.png"></image>
+  </view> 
+  </view>
+<template is="errTip" data="{{errBox: errBox}}"/> 
+<template is="operaModel" data="{{modelDat: modelDat}}"/>
+</view>

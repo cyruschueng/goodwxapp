@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testLayerUi</title>
+    <link rel="stylesheet" href="css/layui.css">
+</head>
+<body>
+<input onclick="layui.laydate()">
+<script src="layui.js"></script>
+<script>
+    layui.config({
+        base: 'myModules/' //假设这是test.js所在的目录
+    }).extend({ //设定模块别名
+        test: 'index' //如果test.js是在根目录，也可以不用设定别名
+    });
+    //使用test
+    layui.use('test', function(){
+        var test = layui.test;
+        test.hello('zxf!'); //弹出Hello World!
+    });
+
+</script>
+</body>
+</html>

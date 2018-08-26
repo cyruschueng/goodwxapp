@@ -1,0 +1,44 @@
+<!--pages/me/children/order/order.wxml-->
+<view class='main'>
+  <view class='swiper-tab'>
+   <block wx:for-items="{{titles}}" wx:key="{{item.id}}">
+     <view class="swiper-tab-text {{currentTab==index ? 'swiper-on' : ''}}" bindtap='switchTab' data-id="{{index}}">
+     {{item.title}}
+     </view>
+   </block>
+  </view>
+  <swiper class='tab-content' current="{{currentTab}}" bindchange='switchTabContent' style="height:{{screenHeight}}rpx">
+   <block wx:for-items="{{tabList}}" wx:key="{{item.id}}">
+    <swiper-item>
+    <!--有数据时展示的界面-->
+     <view class='tab-view' wx:if="{{item.isHaveData}}">
+      <view class='order-list-view'>
+       <view class='order-top ml10'>名字</view>
+       <view class='order-detail' bindtap='orderDetailAction'>
+         <image class='pro-image' src='http://res.o2o.com.cn:8082/img/67124fd5824c42249386b0d57d8b20ea'></image>
+         <view class='pro-detail'>
+           <text class='pro-name ellipsis2'>口红颜色：品红 规格：100g颜色：品红 规格：100g颜色：品红 规格：100g颜色：品红 规格：100g颜色：品红 规格：100g</text>
+           <text class='pro-content ellipsis2'>颜色：品红 规格：100g</text>
+         </view>
+         <view class='pro-num-price'>
+           <text class='pro-price'>¥100.00</text>
+           <text class='pro-num'>x1</text>
+         </view>
+       </view>
+       <view class='order-bottom'>
+         <view class='order-btn-left order-btn'>查看物流</view>
+         <view class='order-btn-right order-btn'>评价</view>
+       </view>
+      </view>
+     </view>
+     <!--没有数据时候的界面-->
+     <view class='tab-empty-view' wx:else>
+       <image class='empty-image' src='http://res.o2o.com.cn:8082/img/9b2f8290fbe943d49470ce0d6628b6dc'></image>
+       <text class='empty-text'>还没有相关订单哦</text>
+     </view>
+    </swiper-item>
+   </block>
+  </swiper>
+</view>
+
+

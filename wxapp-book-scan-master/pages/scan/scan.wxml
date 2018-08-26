@@ -1,0 +1,34 @@
+<image class="toWrite" bindtap="onScanButton" src="/image/9.png"></image>
+<image class="toSearch" bindtap="onSearchButton" src="/image/16.png"></image>
+<view class="page">
+  <image src="{{imageSource}}" mode="aspectFit" />
+  <view class="page__hd">
+    <view class="page__title">{{articleTitle}}</view>
+    <view class="page__desc">{{subtitle}}</view>
+    <view class="page__desc">作者：{{articleAuthor}}</view>
+    <view class="page__desc">译者：{{translator}}</view>
+    <view class="page__desc">评分：{{rating[0]}}/{{rating[1]}}</view>
+    <view class="page__desc">装订：{{binding}}</view>
+    <view class="page__desc">系列：{{series}}</view>
+    <view class="page__desc">ISBN：{{isbn}}</view>
+    <view class="page__desc">页数：{{pages}}</view>
+    <view class="page__desc">出版社：{{publisher}}</view>
+    <view class="page__desc">标签：</view>
+    <block wx:for="{{tags}}" wx:key="{{index}}">
+      <a class="page__tags">·{{item.count}}{{item.name}}</a>
+    </block>
+    <view class="page__desc">作者简介：{{author_intro}}</view>
+    <view class="page__desc specialcolor">概要</view>
+    <view class="page__desc">{{summary}}</view>
+  </view>
+</view>
+<modal hidden="{{modalHidden}}" title="手动找书" confirm-text="查询" cancel-text="取消" bindcancel="onSearchCancel" bindconfirm='onSearchConfirm'>
+  <view class="page__desc">书名</view>
+  <input class="weui-input" id="titleSearch" placeholder="请输入书名" bindinput='getTitle' value='{{titleSearch}}' />
+  <view class="page__desc">作者</view>
+  <input class="weui-input" id="authorSearch" placeholder="请输入作者" bindinput='getAuthor' value='{{authorSearch}}' />
+  <view class="page__desc">出版社</view>
+  <input class="weui-input" id="publisherSearch" placeholder="请输入出版社" bindinput='getPublisher' value='{{publisherSearch}}' />
+  <view class="page__desc">ISBN号</view>
+  <input class="weui-input" type='digit' id="isbnSearch" placeholder="请输isbn号" bindinput='getISBN' value='{{isbnSearch}}' />
+</modal>

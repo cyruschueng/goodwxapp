@@ -1,0 +1,311 @@
+<!--pages/MyOrder/MyOrder.wxml-->
+<scroll-view class="container" scroll-x="false">
+
+<view class="nav">
+
+<block wx:for="{{navList}}">
+<view class="{{NavFlag == index?'NavActive':''}} fl" id="{{index}}" bindtap="NavClick">{{item}}</view>
+</block>
+
+<!--<view class="{{NavFlag == 1?'NavActive':''}} fl" id="1" bindtap="NavClick">全部</view>
+<view class="{{NavFlag == 2?'NavActive':''}} fl" id="2" bindtap="NavClick">待付款</view>
+<view class="{{NavFlag == 3?'NavActive':''}} fl" id="3" bindtap="NavClick">待发货</view>
+<view class="{{NavFlag == 4?'NavActive':''}} fl" id="4" bindtap="NavClick">待收货</view>
+<view class="{{NavFlag == 5?'NavActive':''}} fl" id="5" bindtap="NavClick">待评价</view>-->
+</view>
+<!--end nav-->
+
+
+<view class="AllOrder" hidden="{{NavFlag == 0?'':'ListHidden'}}" wx:if="{{HaveOrder}}">
+
+<block wx:for="{{OrderList}}">
+
+<view class="OrderList" >
+
+<view class="OrderListTop">
+<view class="fl">订单编号：{{item.ordernumber}}</view>
+<text wx:if="{{item.PaymentStatus==1}}">待付款</text>
+<text wx:if="{{item.PaymentStatus==2}}">待发货</text>
+<text wx:if="{{item.PaymentStatus==3}}">待收货</text>
+<text wx:if="{{item.PaymentStatus==4}}">待评价</text>
+</view>
+<!--end OrderListTop-->
+
+<view class="OrderListMid" id="{{index}}" bindtap="OrderDetails">
+<view class="fl" style="width:185rpx"><image style="width:152rpx; height:152rpx" src="{{item.image}}"></image></view>
+<view class="fl" style="width:520rpx">
+<text wx:for="{{item.ops}}">
+{{item.product.name}}X{{item.count}}
+</text>
+</view>
+</view>
+<!--end OrderListMid-->
+
+<view class="OrderListFoot">
+<text>总价: ¥ {{item.actualpay}}</text>
+</view>
+<!--end OrderListFoot-->
+
+<view class="payment" wx:if="{{item.PaymentStatus==1}}">
+<text class="payText" bindtap="pay" id="{{item.id}}">去付款</text>
+<text class="cancel" bindtap="cancel" id="{{item.id}}">取消订单</text>
+</view>
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==2}}">
+<text class="payText" bindtap="TiXingFaHuo">提醒发货</text>
+</view>
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==3}}">
+<text class="payText" bindtap="sure" id="{{item.id}}">确认收货</text>
+<text class="cancel" bindtap="wl" id="{{item.id}}">查看物流</text>
+</view>
+<!--end payment-->
+</view>
+<!--end OrderList-->
+
+</block>
+<view class="NoOrder" wx:if="{{flag0}}">
+<image src="/images/NoOrder.jpg"></image>
+<view style="font-size:34rpx;margin-bottom:35rpx">您还没有相关的订单</view>
+<view style="font-size:24rpx;color:#969696;">去看看大家都在买什么吧</view>
+</view>
+<!--没有订单 end NoOrder-->
+</view>
+<!--全部订单 end AllOrder-->
+
+
+<view class="AllOrder" hidden="{{NavFlag == 1?'':'ListHidden'}}" wx:if="{{HaveOrder}}">
+
+<block wx:for="{{OrderList}}">
+
+<view class="OrderList" wx:if="{{item.PaymentStatus==1}}">
+
+<view class="OrderListTop">
+<view class="fl">订单编号：{{item.ordernumber}}</view>
+<text wx:if="{{item.PaymentStatus==1}}">待付款</text>
+<text wx:if="{{item.PaymentStatus==2}}">待发货</text>
+<text wx:if="{{item.PaymentStatus==3}}">待收货</text>
+<text wx:if="{{item.PaymentStatus==4}}">待评价</text>
+</view>
+<!--end OrderListTop-->
+
+<view class="OrderListMid" id="{{index}}" bindtap="OrderDetails">
+<view class="fl" style="width:185rpx"><image style="width:152rpx; height:152rpx" src="{{item.image}}"></image></view>
+<view class="fl" style="width:520rpx"><text wx:for="{{item.ops}}">
+{{item.product.name}}X{{item.count}}
+</text></view>
+</view>
+<!--end OrderListMid-->
+
+<view class="OrderListFoot">
+<text>总价: ¥ {{item.actualpay}}</text>
+</view>
+<!--end OrderListFoot-->
+
+<view class="payment">
+<text class="payText" bindtap="pay" id="{{item.id}}">去付款</text>
+<text class="cancel" bindtap="cancel" id="{{item.id}}">取消订单</text>
+</view>
+<!--end payment-->
+
+
+</view>
+<!--end OrderList-->
+
+</block>
+<view class="NoOrder" wx:if="{{flag1}}">
+<image src="/images/NoOrder.jpg"></image>
+<view style="font-size:34rpx;margin-bottom:35rpx">您还没有相关的订单</view>
+<view style="font-size:24rpx;color:#969696;">去看看大家都在买什么吧</view>
+</view>
+<!--没有订单 end NoOrder-->
+</view>
+<!--待付款 end AllOrder-->
+
+
+
+<view class="AllOrder" hidden="{{NavFlag == 2?'':'ListHidden'}}" wx:if="{{HaveOrder}}">
+
+<block wx:for="{{OrderList}}">
+
+<view class="OrderList" wx:if="{{item.PaymentStatus==2}}">
+
+<view class="OrderListTop">
+<view class="fl">订单编号：{{item.ordernumber}}</view>
+<text wx:if="{{item.PaymentStatus==1}}">待付款</text>
+<text wx:if="{{item.PaymentStatus==2}}">待发货</text>
+<text wx:if="{{item.PaymentStatus==3}}">待收货</text>
+<text wx:if="{{item.PaymentStatus==4}}">交易完成</text>
+</view>
+<!--end OrderListTop-->
+
+<view class="OrderListMid" id="{{index}}" bindtap="OrderDetails">
+<view class="fl" style="width:185rpx"><image style="width:152rpx; height:152rpx" src="{{item.image}}"></image></view>
+<view class="fl" style="width:520rpx"><text wx:for="{{item.ops}}">
+{{item.product.name}}X{{item.count}}
+</text></view>
+</view>
+<!--end OrderListMid-->
+
+<view class="OrderListFoot">
+<text>总价: ¥ {{item.actualpay}}</text>
+</view>
+<!--end OrderListFoot-->
+<!--
+<view class="payment" wx:if="{{0==1}}">
+<text class="payText">去付款</text>
+<text class="cancel" bindtap="cancel">取消订单</text>
+</view>-->
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==2}}">
+<text class="payText" bindtap="TiXingFaHuo">提醒发货</text>
+</view>
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==3}}">
+
+</view>
+<!--end payment-->
+</view>
+<!--end OrderList-->
+
+</block>
+<view class="NoOrder" wx:if="{{flag2}}">
+<image src="/images/NoOrder.jpg"></image>
+<view style="font-size:34rpx;margin-bottom:35rpx">您还没有相关的订单</view>
+<view style="font-size:24rpx;color:#969696;">去看看大家都在买什么吧</view>
+</view>
+<!--没有订单 end NoOrder-->
+</view>
+<!--待发货 end AllOrder-->
+
+
+
+
+
+<view class="AllOrder" hidden="{{NavFlag == 3?'':'ListHidden'}}" wx:if="{{HaveOrder}}">
+
+<block wx:for="{{OrderList}}">
+
+<view class="OrderList" wx:if="{{item.PaymentStatus==3}}">
+
+<view class="OrderListTop">
+<view class="fl">物流单号：{{item.wlnumber}}</view>
+<text wx:if="{{item.PaymentStatus==1}}">待付款</text>
+<text wx:if="{{item.PaymentStatus==2}}">待发货</text>
+<text wx:if="{{item.PaymentStatus==3}}">待收货</text>
+<text wx:if="{{item.PaymentStatus==4}}">待评价</text>
+</view>
+<!--end OrderListTop-->
+
+<view class="OrderListMid" id="{{index}}" bindtap="OrderDetails">
+<view class="fl" style="width:185rpx"><image style="width:152rpx; height:152rpx" src="{{item.image}}"></image></view>
+<view class="fl" style="width:520rpx"><text wx:for="{{item.ops}}">
+{{item.product.name}}X{{item.count}}
+</text></view>
+</view>
+<!--end OrderListMid-->
+
+<view class="OrderListFoot">
+<text>总价: ¥ {{item.actualpay}}</text>
+</view>
+<!--end OrderListFoot-->
+<!--
+<view class="payment" wx:if="{{0==1}}">
+
+<text class="cancel" bindtap="cancel">取消订单</text>
+</view>-->
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==2}}">
+</view>
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==3}}">
+<text class="payText" bindtap="sure" id="{{item.id}}">确认收货</text>
+<text class="cancel" bindtap="wl" id="{{item.id}}">查看物流</text>
+</view>
+<!--end payment-->
+</view>
+<!--end OrderList-->
+
+</block>
+
+
+
+
+<view class="NoOrder" wx:if="{{flag3}}">
+<image src="/images/NoOrder.jpg"></image>
+<view style="font-size:34rpx;margin-bottom:35rpx">您还没有相关的订单</view>
+<view style="font-size:24rpx;color:#969696;">去看看大家都在买什么吧</view>
+</view>
+<!--没有订单 end NoOrder-->
+</view>
+<!--待收货 end AllOrder-->
+
+
+
+<view class="AllOrder" hidden="{{NavFlag == 4?'':'ListHidden'}}" wx:if="{{HaveOrder}}">
+
+<block wx:for="{{OrderList}}">
+
+<view class="OrderList" wx:if="{{item.PaymentStatus==4}}">
+
+<view class="OrderListTop">
+<view class="fl">订单编号：{{item.ordernumber}}</view>
+<!--<image style="width:42rpx;" src="/images/20_1.jpg"></image>-->
+<text wx:if="{{item.PaymentStatus==1}}">待付款</text>
+<text wx:if="{{item.PaymentStatus==2}}">待发货</text>
+<text wx:if="{{item.PaymentStatus==3}}">待收货</text>
+<text wx:if="{{item.PaymentStatus==4}}">待评价</text>
+</view>
+<!--end OrderListTop-->
+
+<view class="OrderListMid" id="{{index}}" bindtap="OrderDetails">
+<view class="fl" style="width:185rpx"><image style="width:152rpx; height:152rpx" src="{{item.image}}"></image></view>
+<view class="fl" style="width:520rpx"><text wx:for="{{item.ops}}">
+{{item.product.name}}X{{item.count}}
+</text></view>
+</view>
+<!--end OrderListMid-->
+
+<view class="OrderListFoot">
+<text>总价: ¥ {{item.actualpay}}</text>
+</view>
+<!--end OrderListFoot-->
+<!--
+<view class="payment" wx:if="{{0==1}}">
+<text class="payText">去付款</text>
+<text class="cancel" bindtap="cancel">取消订单</text>
+</view>-->
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==2}}">
+
+</view>
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==3}}">
+<!--
+<text class="payText" bindtap="confirm">确认收货</text>-->
+</view>
+<!--end payment-->
+<view class="payment" wx:if="{{item.PaymentStatus==4}}">
+<!--
+<text class="payText" bindtap="OrderEvaluate">立即评价</text>
+<text class="cancel">再次购买</text>-->
+</view>
+<!--end payment-->
+</view>
+<!--end OrderList-->
+
+</block>
+
+
+
+
+<view class="NoOrder" wx:if="{{flag4}}">
+<image src="/images/NoOrder.jpg"></image>
+<view style="font-size:34rpx;margin-bottom:35rpx">您还没有相关的订单</view>
+<view style="font-size:24rpx;color:#969696;">去看看大家都在买什么吧</view>
+</view>
+<!--没有订单 end NoOrder-->
+</view>
+<!--待评价 end AllOrder-->
+
+</scroll-view>

@@ -1,0 +1,41 @@
+<import src="/pages/Template/Template.wxml" />
+<!--pages/my/investCaseEdit/investCaseEdit.wxml-->
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view id="cardEdit">
+    <view class="card">
+      <view class="text">项目名称*</view>
+      <input class="card_case" id="case_name" placeholder="请输入" value="{{case_name}}" bindblur="case_name" maxlength="15" />
+    </view>
+
+    <!--项目领域-->
+    <template is="input_jump" data="{{...industryCard}}"></template>
+    <view class="card">
+      <view class="text">项目轮次*</view>
+      <picker class="card_case" bindchange="case_stage" value="{{case_stage_index}}" range="{{stage_arr}}">
+        {{stage_arr[case_stage_index]}}
+      </picker>
+    </view>
+    <view class="card">
+      <view class="text">投资金额(万元)*</view>
+      <input class="" id="case_money" placeholder="请输入" value="{{case_money}}" bindblur="case_money" maxlength="8" type="number" />
+    </view>
+    <view class="card">
+      <view class="text">交易时间*</view>
+      <picker class="card_case" mode="date" value="{{case_time}}" start="{{timeBefore}}" end="{{timeNow}}" bindchange="case_time">
+        {{case_time}}
+      </picker>
+    </view>
+    <view class="card">
+      <view class="text">投资地区*</view>
+      <view class="card_case" id="case_local" bindtap="case_local">{{belongArea.area_title||"请选择地区"}}</view>
+    </view>
+  </view>
+  <view style="height:118rpx;"></view>
+
+  <!--保存  -->
+  <template is="buttonOne" data="{{text:buttonOneText,btnName:'buttonOne',disabled}}"></template>
+
+  <!--错语提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>yuanzi的个人网站 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            margin: 0;
+        }
+        body {
+            font-family: 'Open Sans', 'Helvetica Neue', 'Hiragino Sans GB', 'LiHei Pro', Arial, sans-serif;
+            color: #333;
+        }
+        #wrapper {
+            position: absolute;
+            left: 0;
+            width: 320px;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            margin-left: -160px;
+            margin-top: -160px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        h1,
+        h2 {
+            position: relative;
+        }
+        h1 {
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+            letter-spacing: 9px;
+            text-transform: uppercase;
+            margin: 12px 0;
+            left: 4px;
+        }
+        h2 {
+            color: #999;
+            font-weight: normal;
+            font-size: 15px;
+            letter-spacing: .12em;
+            margin-bottom: 30px;
+            left: 3px;
+        }
+        p {
+            font-size: 14px;
+            line-height: 2em;
+            margin: 0;
+            letter-spacing: 2px;
+            color: #999;
+        }
+        a {
+            color: #999;
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+        a:hover {
+            color: #f33;
+        }
+        .headimg {
+            width: 20%;
+        }
+        .zhihu-login-effect-block {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: -1;
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?2545536fdfa5d3b680d0aafdb07bfef1";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="zhihu-login-effect-block">
+        <canvas id="zhihu_login_effect" width="1366" height="638"></canvas>
+    </div>
+    <div id="wrapper">
+        <h1>yuanzi</h1>
+        <img src="./battery-half.png" class="headimg">
+        <h2>专前端 &amp; 做全栈&nbsp;</h2>
+        <!-- <h2>Front-End Developer</h2> -->
+        <p><a href="https://github.com/yuanzihtml">Github</a></p>
+        <p>
+            <!-- <a>itemA</a> &amp; -->
+            <a href="javascript:void(0)">简历</a> &amp;               
+            <a href="https://yuanzihtml.github.io/demo/gains/interview.md">h5</a>
+        </p> 
+        <p>
+            <!-- <a>itemA</a> &amp; -->
+            <a href="javascript:void(0)">技能树</a> &amp;               
+            <a href="https://yuanzihtml.github.io/demo/README.md">h5</a>
+        </p> 
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            var canvas = document.getElementById("zhihu_login_effect");
+            var ctx = canvas.getContext("2d");
+            canvas.width = w;
+            canvas.height = h;
+            function generateRandom(min, max) {
+                return parseInt((max - min) * Math.random() + min + 1)
+            }
+         
+            function Circle() {
+                this.radius = generateRandom(4, 12);
+                this.diam = this.radius * 2;
+                // position
+                var x = generateRandom(0, canvas.width - this.radius);
+                this.xPos = x < this.radius ? this.radius : x;
+                var y = generateRandom(0, canvas.height - this.radius);
+                this.yPos = y < this.radius ? this.radius : y
+                var speed = generateRandom(2, 4) / 10
+                this.speedX = generateRandom(0, 4) > 2 ? speed : -speed;
+                this.speedY = generateRandom(0, 4) > 2 ? speed : -speed;
+                this.color = "rgba(0,0,0," + 0.05 + ")";
+            }
+         
+            Circle.prototype.draw = function () {
+                //绘制函数
+                ctx.fillStyle = this.color;
+                ctx.beginPath()
+                ctx.arc(this.xPos, this.yPos, this.radius, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fill();
+            }
+            Circle.prototype.move = function () {
+                this.xPos += this.speedX;
+                if (this.xPos > canvas.width - this.radius) {
+                    this.xPos = this.radius
+                } else if (this.xPos < this.radius) {
+                    this.xPos = canvas.width - this.radius
+                }
+                this.yPos += this.speedY;
+                if (this.yPos > canvas.height - this.radius) {
+                    this.yPos = this.radius
+                } else if (this.yPos < this.radius) {
+                    this.yPos = canvas.height - this.radius
+                }
+            }
+            // 圆圈
+            var circleArr = [];
+            function initCircle() {
+                for (var i = 0; i < 15; i++) {
+                    var obj = new Circle();
+                    obj.draw();
+                    obj.move();
+                    circleArr.push(obj);
+                }
+            }
+            initCircle();
+            var dxdy = []
+            function circleMove() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // 重绘
+                for (var i = 0; i < circleArr.length; i++) {
+                    var circle = circleArr[i];
+                    circle.draw();
+                    circle.move();
+                    dxdy[i] = {
+                        dx: circle.xPos,
+                        dy: circle.yPos
+                    };
+                    var dx = dxdy[i].dx;
+                    var dy = dxdy[i].dy;
+                    for (var j = 0; j < i; j++) {
+                        var sx = dxdy[j].dx;
+                        var sy = dxdy[j].dy;
+                        var l = Math.sqrt((dx - sx) * (dx - sx) + (dy - sy) * (dy - sy));
+                        var C = 1 / l * 7 - 0.009;
+                        var alpha = C > 0.03 ? 0.03 : C;
+                        ctx.strokeStyle = 'rgba(0,0,0,' + alpha + ')';
+                        ctx.beginPath();
+                        ctx.lineWidth = 2;
+                        ctx.moveTo(dxdy[i].dx, dxdy[i].dy);
+                        ctx.lineTo(dxdy[j].dx, dxdy[j].dy);
+                        ctx.closePath();
+                        ctx.stroke();
+                    }
+                }
+                window.requestAnimationFrame(circleMove);
+            }
+            circleMove();
+        })();
+    </script>
+</body>
+</html>

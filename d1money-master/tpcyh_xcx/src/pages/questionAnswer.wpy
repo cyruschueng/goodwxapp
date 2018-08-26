@@ -1,0 +1,146 @@
+<style lang="less" rel="stylesheet/less">
+
+    page{
+        background-color: #f2f2f2;
+    }
+    .questionAnswer{
+        background-color: #ffffff;
+        .question{
+            padding:0;
+        }
+        .icon-question{
+            color: #38a1cf;
+        }
+        /*回答样式*/
+        .dm-cell__answer{
+            display: flex;
+            align-items: flex-start;
+            margin-top:20rpx;
+            /*回答者头像*/
+            .img{
+                height:70rpx;
+                width:70rpx;
+                border-radius:100%;
+                overflow: hidden;
+                margin-right: 20rpx;
+            }
+            /*回答者内容／名称*/
+            .content{
+                flex:1;
+                .name{
+                    margin-bottom: 20rpx;
+                    font-size:14px;
+                    color: #666666;
+                }
+                .desc{
+                    font-size:14px;
+                    color: #333333;
+                    line-height:21px;
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon_page questionAnswer">
+        <!--问答-->
+        <block wx:if="{{questionCell.list.length==0}}">
+            <view class="dm-nomsg" style="">
+                <image src="/static/img/empty_states-bee.png" lazy-load="true"/>
+                <view class="text">亲~暂时有没数据</view>
+            </view>
+        </block>
+        <dm-panel class="question">
+            <dm-panel-bd>
+                <repeat for="{{questionCell.list}}" key="index" item="item">
+                    <dm-cell
+                        :type="textCell.type"
+                        :title_icon="textCell.title_icon"
+                    >
+                        <view slot="title">
+                            {{item.userQuestion}}
+                        </view>
+                        <view class="dm-cell__answer" slot="desc">
+                            <view class="img">
+                                <image src="http://wmimage.qn.d1money.com/head/{{item.createTime}}/{{item.agentUserId}}/46.jpg"
+                                       mode="aspectFill" lazy-load="true"/>
+                            </view>
+                            <view class="content">
+                                <view class="name">{{item.agentName}}</view>
+                                <view class="desc">{{item.agentAnswer}}</view>
+                            </view>
+                        </view>
+                    </dm-cell>
+                </repeat>
+            </dm-panel-bd>
+        </dm-panel>
+        <view wx:if="{{pageNo!=0 && pageNo+1 >=pageCount}}" style="width: 100%;background-color:#f2f2f2; text-align: center;padding:30rpx 0;font-size: 12px;color:#969696">- 没有更多数据 -</view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import api from './../common/api';
+    import G from './../common/global';
+
+    import singleLoad from './../mixins/singleLoad';
+    import dmPanel from './../components/Panel/dm-panel';
+    import dmPanelHd from './../components/Panel/dm-panel-hd';
+    import dmPanelBd from './../components/Panel/dm-panel-bd';
+    import dmPanelFt from './../components/Panel/dm-panel-ft';
+    import dmCell from './../components/Cell/dm-cell';
+
+    export default class extends wepy.page {
+        config = {
+            navigationBarTitleText: '问答'
+        }
+
+        components = {
+            'dm-panel': dmPanel,
+            'dm-panel-hd': dmPanelHd,
+            'dm-panel-bd': dmPanelBd,
+            'dm-panel-ft': dmPanelFt,
+            'dm-cell': dmCell
+        }
+
+        data = {
+            origin: 'questionCell',
+            textCell:{
+                type: 'text',
+                title_icon: 'icon-question'
+            },
+            questionCell: {
+                list: []
+            }
+        }
+
+        computed = {}
+
+        mixins = [ singleLoad ];
+
+        methods = {}
+
+        events = {}
+
+        async onLoad() {
+            this.questionCell.list = await this.loadmoreSingleLoad();
+            this.$apply();
+        }
+        loadmoreSingleLoad(){
+            return new Promise((resolve, reject) => {
+                api.request({
+                    url: G.host + 'tpcyh/loadQuestionAndAnswerList',
+                    data: {
+                        start: this.pageNo,
+                        limit: this.pageSize
+                    }
+                }).then( (res) => {
+                    resolve(res.data.body.QaList);
+                }).catch(res => {
+                    reject(res);
+                })
+            })
+        }
+
+    }
+</script>

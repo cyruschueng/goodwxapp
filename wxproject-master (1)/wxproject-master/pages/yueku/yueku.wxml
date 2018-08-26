@@ -1,0 +1,18 @@
+<!--pages/yueku/yueku.wxml-->
+<view>
+  <view class='title'>
+    <image src='../../images/yueku.png'></image>
+    <text>全部分类</text>
+  </view>
+  <navigator url='../list/list?id={{item.id}}' wx:for='{{list}}' wx:key='index'>
+    <view class='list'>
+      <image src='{{item.img}}'></image>
+      <view class='right'>
+        <text class='content'>{{item.title}}</text>
+        <text class='name'>{{item.name}}</text>
+        <image src='../../images/collectChanged.png' class='collect'></image>
+        <text class='collectContent'>{{item.collect}}</text>
+      </view>
+    </view>
+  </navigator>
+</view>

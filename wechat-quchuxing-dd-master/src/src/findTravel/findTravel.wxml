@@ -1,0 +1,41 @@
+<view class="body">
+  <view class="search">
+    <image src="../../images/btn_home_seach@3x.png"></image>
+    <input type="text" placeholder="搜索" disabled="true" bindtap="gotoSearch" />
+  </view>
+  <view class="line" wx:if="{{ !isRecommend || myGroup.length !== 0 }}">
+    <view class="line_title">我的线路</view>
+    <view class="myLine">
+      <view class="myLine_li" bindtap="gotoLineInfo" data-id="{{ item.groupId }}" wx:for-items="{{ myGroup }}" wx:key="{{ index }}">
+        <image src="{{ item.groupBanner }}"></image>
+        <view class="line_name">{{ item.groupTitle }}</view>
+      </view>
+      <view class="myLine_li">
+        <image src="../../images/btn_new_line@3x.png"></image>
+        <view class="line_name">更多</view>
+      </view>
+    </view>
+  </view>
+  <view class="line">
+    <view class="line_title">热门线路</view>
+    <view class="hotLine">
+      <view class="hotLine_li" wx:for-items="{{ hotGroups }}" wx:key="{{ index }}">
+        <view class="hotLine_li_left" bindtap="gotoLineInfo" data-id="{{ item.groupId }}">
+          <image class="hotLine_imgOne" src="{{ item.groupBanner }}"></image>
+          <view class="hotLine_detail">
+            <view class="hot_info_tit">{{ item.groupTitle }}</view>
+            <view class="hot_info_peopleNum">人数{{item.groupMemberNum}}</view>
+            <view class="hot_ingo_synopsis">{{item.groupNotice}}</view>
+          </view>
+        </view>
+        <block wx:if="{{ !item.isJoined }}">
+          <image data-id="{{ item.groupId }}" bindtap="joinGroup" class="hotLine_imgTwo" src="../../images/btn_join_mini@3x.png"></image>
+        </block>
+        <block wx:else>
+          <image class="isJoined" src="../../images/btn_followed_nomal@3x.png"></image>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="release_btn" bindtap="gotoRelease">发布</view>
+</view>

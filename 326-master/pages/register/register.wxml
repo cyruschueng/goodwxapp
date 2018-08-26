@@ -1,0 +1,41 @@
+<import src="/template/listStyle.wxml" />  
+<view class="container">
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class='register mt05'>
+    <view class='flex pd05 borderB'>
+      <image class="imgxs"src="/images/rsign_user.png"></image>
+      <input class='flexv1' placeholder='请输入用户名称' id='regName'  type="text"  name="regName" value="{{regName}}"/>
+  </view>
+  <view class='flex pd05 borderB'>
+      <image class="imgxs"src="/images/rsign_emil.png"></image>
+      <input class='flexv1' placeholder='请输入固定邮箱地址'   id='regEmail'   type="email" name="regEmail" value="{{regEmail}}"/>
+  </view>
+
+  <view class='flex pd05 borderB'>
+      <image class="imgxs"src="/images/rsign_phone.png"></image>
+      <input class='flexv1' placeholder='请输入你的手机号'   id='regPhone' type="phone"  name="regPhone" value="{{regPhone}}"/>
+  </view>
+    <!-- <view class='flex pd05 borderB'>
+      <image class="imgxs"src="/images/rsign_phone.png"></image>
+      <input placeholder='请输入你的微信号'  id='regWec' type="text"  name="regWec" value="{{regWec}}"/>
+  </view> -->
+  <view class='flex pd05 borderB'>
+      <image class="imgxs"src="/images/rsign_pn.png"></image>
+      <input class='flexv1' placeholder='数采器PN号' id='regPN' type="text"   name="regPN" value="{{regPN}}"/>
+  </view>
+    <view class='flex pd05 borderB bt05'>
+      <image class="imgxs"src="/images/rsign_ps.png"></image>
+      <input class='flexv1' placeholder='请输入密码'  id='regPwd' type="password"  name="regPwd" value="{{regPwd}}"/>
+  </view>
+  <view class='flex pd05 borderB'>
+      <image class="imgxs"src="/images/rsign_sure.png"></image>
+      <input class='flexv1' placeholder='确认密码'  id='regConpwd' type="password"  name="regConpwd" value="{{regConpwd}}"/>
+  </view>
+  </view>
+  <view class='flexCenter flex1'>
+    <button class='m5 Skin mr3 font09' formType="submit">注册</button>
+    <button class='m5 bgColorD font09' bindtap='canceReg'>取消</button>
+  </view>
+  </form>
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

@@ -1,0 +1,60 @@
+<!--pages/submitOrder/submitOrder.wxml-->
+<!-- <text>pages/submitOrder/submitOrder.wxml</text> -->
+<import src='./orderInfoTemplate/orderInfoTemplate.wxml'/>
+
+<view class='submitOrderHomePage'>
+  <view class='addressBox' bindtap='goAddress'>
+    <view wx:if='{{defaultAddress==0}}' class='addIconView'>
+      <image class='addIcon' src='../images/add.png'></image>
+      填写收货地址
+    </view>
+    <view wx:else>
+      <image class='positionIcon' src='../images/location.jpg'></image>
+      <view>收货地址:{{addressDetailInfo.city_area}}{{addressDetailInfo.detailed_address}}</view>
+      <image src='../images/rightArrow.jpg'></image>
+    </view>
+  </view>
+  <view class='order'>订单</view>
+  <view class='orderInfoBox'>
+    <block wx:for='{{SureProductInfo}}' wx:for-index='index' wx:for-item='item' wx:key='index'>
+      <template is = 'orderInfoTemplate' data='{{...item,level}}'/>
+    </block>
+  </view>
+  <view class='deliverMode'>
+    <view>发货方式</view>
+    <view>快递(到付):{{freight}}元</view>
+  </view>
+  <view class='totalPrice'>
+    <view>订单总计</view>
+    <view>¥{{totalAmount}}</view>
+  </view>
+  <view class='discount'>优惠减免</view>
+  <view class='couponBox' bindtap='goCouponPage'>
+    <view>优惠券</view>
+      <view style='color:red;margin-left: 73%;' wx:if='{{couponNum!=0&deduction==0}}'>{{couponNum}}</view> 
+       <view style='color:red;margin-left: 65%;' wx:elif='{{deduction!=0}}'>-￥{{deduction}}</view> 
+      <view style='margin-left: 45%;' wx:else>暂无可用优惠券</view>  
+    <image src='../images/rightArrow.jpg'></image>   
+  </view>
+  <view class='beansBox' wx:if="{{level==3}}">
+    <view>爱心蜜豆币抵现</view>
+    <view wx:if='{{fortHostess==null}}'>暂无可用爱心蜜豆币</view>
+    <switch name='switch'></switch>
+  </view>
+  <view class='payType'>选择支付方式</view>
+  <radio-group bindchange='paymentType'>
+    <view class='wxPay'>
+      <text>微信支付</text>
+      <radio value='微信支付' checked='{{payment_type==1}}'></radio>
+    </view>
+    <view class='beansPay'>
+      <text>蜜豆币支付</text>
+      <radio value='蜜豆币支付' checked='{{payment_type==7}}'></radio>
+    </view>
+  </radio-group>
+  <view class='payBox'>
+    <view class='choosePayType'>{{payment_type_name}}</view>
+    <view class='payTotalPrice'>总计：¥{{totalPayNum!=0?totalPayNum:totalAmount}}</view>
+    <view class='pay' bindtap='payClick'>付款</view>
+  </view>
+</view>

@@ -1,0 +1,59 @@
+<view class="wx-view_TjAoku" >
+    <view class="wx-view_GIj3gf" >
+        答对10道题,赏金任你拿
+    </view>
+    <view class="wx-view_ayclwn" >
+        总计赏金 9999.00 元
+    </view>
+    <image  class="wx-image_qcfd0J"  mode="scaleToFill" src="{{ userAvatar }}" style="background-size:  100% 100%; background-position:  0% 0%; background-repeat:  no-repeat; background-image: url({{ userAvatar }}); "/>
+</view>
+<view class="c-minheight wx-view_xZJdvR" wx:if="{{!challengeChance}}">
+    <view class="c-minheight wx-view_Mt6fZq" >
+        !
+    </view>
+    <view class="c-minheight wx-view_3utMEj" >
+        剩余挑战次数不足
+    </view>
+</view>
+<view class="c-minheight wx-view_TZMFSf" >
+    <view class="c-minheight wx-view_E9grNv"  bindtap="startExam" wx:if="{{challengeChance}}">
+        开始答题
+    </view>
+    <button plain="true" open-type="share" class="c-minheight wx-view_NKlwjJ">
+        分享群，挑战次+1
+    </button>
+    <view class="c-minheight wx-view_vHsrP5" bindtap="toDaTing">
+        竞赛大厅
+    </view>
+</view>
+<view class="c-minheight wx-view_i93mrA" >
+    每道答题时间10秒，剩余挑战次数:{{ challengeChance }}
+</view>
+<view class="c-minheight wx-view_PuJa4g" >
+    <view class="c-minheight wx-view_kh9f6G" />
+    <view class="user-list" wx:for="{{userList}}">
+        <view class="user-list c-minheight wx-view_VGc0zg">
+                <image class="crown" src="../../images/皇冠.png" wx:if="{{ index== 0 }}" style="width:25px; height: 25px"/>
+                <image class="crown" src="../../images/皇冠 (1).png" wx:if="{{ index== 1 }}" style="width:25px; height: 25px"/>
+                <image class="crown" src="../../images/皇冠 (2).png" wx:if="{{ index== 2 }}" style="width:25px; height: 25px"/>            
+                <image class="wx-image_87HMe0"  mode="scaleToFill" src="{{ item.photourl }}" style="background-size:  100% 100%; background-position:  0% 0%; background-repeat:  no-repeat; background-image: url({{ item.photourl }}); "/>
+                <view class="c-minheight wx-view_NyO7Nh" >
+            
+                <view class="c-minheight wx-view_RqWtlp" >
+                    {{item.username}}
+                </view>
+                <view class="c-minheight wx-view_VjFJPl" >
+                    <view class="c-minheight wx-view_xz3qsC" >
+                        挑战<view style="display: inline-block; color: rgb(255, 43, 69)">{{item.chargenumber}}</view>次,用<view style="display: inline-block; color: rgb(255, 43, 69)">{{item.chargesecond}}</view>秒,答对<view style="display: inline-block; color: rgb(255, 43, 69)">{{item.correctnumber}}</view>题
+                    </view>
+                    <view class="c-minheight wx-view_et0PwY" >
+                        抢到{{item.totalreward}}元
+                    </view>
+                </view>
+            </view>
+            <view class="line" wx:if ="{{ index <  userList.length - 1 }}"/>
+        </view>
+    </view>
+    <view class="c-minheight wx-view_XCl0he" />
+</view>
+<view class="c-minheight wx-view_9zzj1k" />

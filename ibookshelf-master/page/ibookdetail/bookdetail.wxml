@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="book-info">
+    <image class="book-img box-shadow" src='{{bookinfo.images.large}}'></image>
+    <view class="book-brief">
+      <view class="book-title">{{bookinfo.title}}</view>
+      <view class="book-rating">豆瓣评分：{{bookinfo.rating.average}}</view>
+      <view class="book-author">作者：{{bookinfo.author}}</view>
+      <view class="book-publisher">出版社：{{bookinfo.publisher}}</view>
+      <view class="book-pubdate">出版日期：{{bookinfo.pubdate}}</view>
+      <view class="book-isbn">ISBN：{{bookinfo.isbn13}}</view>
+    </view>
+  </view>
+  <view class="book-btn">
+    <button type="primary" loading="{{btn_loading}}"  bindtap="addToBookshelf" class="{{btn_addFlag ? '' : 'book-btn-hiden'}}">放入书架</button>
+    <button type="primary" disabled="true" class="{{btn_autoAddFlag ? '' : 'book-btn-hiden'}}">已放入书架</button>
+  </view>
+  <view class="book-summary">
+    <view class="summary-title">简介</view>
+    <view class="classname">{{bookinfo.summary}}</view>
+  </view>
+  <view class="book-author-intro">
+    <view class="summary-title">作者简介</view>
+    <view class="classname">{{bookinfo.author_intro}}</view>
+  </view>
+  <view class="book-btn">
+    <button type="warn" loading="{{btn_loading}}"  bindtap="removeFromBookshelf" class="{{btn_delFlag ? '' : 'book-btn-hiden'}}">移出书架</button>
+  </view>
+</view>

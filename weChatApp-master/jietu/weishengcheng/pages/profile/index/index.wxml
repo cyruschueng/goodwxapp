@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<import src="/zanui/toast/index.wxml" />
+<view class="container page__bd" >
+    <view class="weui-cells__title"></view>
+    <form bindsubmit="formSubmit" id="formSubmit" style="width: 100%;">
+        <text style="color:#666;font-size: 13px;margin: 0 10px;" >ID</text>
+        <view class="weui-cells weui-cells_after-title" style="background: inherit;" catchtap="copy_user_id">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <text class="weui-input" >{{user_id}}</text>
+                </view>
+            </view>
+        </view>
+
+        <text style="color:#666;font-size: 13px;margin: 0 10px;" >昵称</text>
+        <view class="weui-cells weui-cells_after-title" >
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="您的昵称" name="user_name" value="{{user_name}}"/>
+                </view>
+            </view>
+        </view>
+
+        <text style="color:#666;font-size: 13px;margin: 0 10px;margin-top: 15px;" >头像</text>
+        <view class="weui-cells weui-cells_after-title" bindtap="select">
+            <view style="padding: 0 15px;">
+                <view class="weui-uploader">
+                    <view class="weui-uploader__bd">
+                        <view class="weui-uploader__files" wx:if="{{avatar}}">
+                            <view class="weui-uploader__file" style="margin: 6px 6px 6px 0;width: 165rpx;height: 165rpx;">
+                                <image bindload="loaded" class="weui-uploader__img" src="{{avatar}}" mode="aspectFill" style="width: 165rpx;height: 165rpx;" />
+                                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+    </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

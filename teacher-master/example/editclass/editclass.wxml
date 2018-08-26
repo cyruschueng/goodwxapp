@@ -1,0 +1,52 @@
+<view class='help'>
+<button class='kefu-btn' open-type='contact'><view class='xm-kefu'></view></button>
+</view>
+
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+     <form bindsubmit="submit">
+    <view class="page__bd">
+  
+        <view class="weui-cells__title" style='font-size:18px;color:#4c4c4c;'>编辑班级群"<open-data type="groupName" open-gid="{{gid}}"></open-data>"的基本信息</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='padding-right:25px'>班级名称</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput="bindKeyInput" id="class_name"  name="class_name" value='{{cls.class_name}}' placeholder="请输入班级名称"/>
+                </view>
+            </view>
+             <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='padding-right:25px'>班级人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" type='number' value='{{cls.number}}'  bindinput="bindKeyInput" id="student_number"  name="student_number" placeholder="学生人数"/>
+                </view>
+            </view> 
+            <view class="weui-cell weui-cell_select"  >
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label" style='padding-right:25px'>当前管理员</view>
+                </view>
+                <view class="weui-cell__bd" >
+                    <picker bindchange="teacherChange" disabled="{{!is_admin}}" value="{{teachersIndex}}" range="{{teacherNames}}">
+                        <view  class="weui-select weui-select_in-select-after {{!is_admin?'show_disable':''}}">{{teacherNames[teachersIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+          
+        </view>
+   
+
+    
+        <view class="weui-btn-area">
+            <button class="weui-btn btn_config_class" loading="{{button_loadding}}" type="primary" disabled='{{button_disable}}' style='background-color:#1e90ff;' formType="submit">保存设置</button>
+        </view>
+
+         <view class="weui-btn-area" wx:if="{{is_admin}}">
+    <button class="weui-btn" type="default" bindtap='delClass'>删除此班级</button>
+  </view>
+
+    </view>
+    </form>
+</view>

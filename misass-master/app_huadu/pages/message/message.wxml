@@ -1,0 +1,32 @@
+<!--pages/message/message.wxml-->
+<view class="container">
+
+  <view wx:for="{{users}}" bindtap='toTalk' class="talk-item" data-item-index="{{item.id}}">
+    <view>
+      <image class="head-img" src="{{item.user.img}}"></image>
+      <block wx:if="{{item.message.wecha_id != wecha_id}}">
+          <block wx:if="{{item.awecha_id == wecha_id}}" >
+            <view wx:if="{{item.atime <= item.message.time}}" class="new-style"></view>
+          </block>
+          <block wx:else if="{{item.bwecha_id == wecha_id}}" >
+            <view wx:if="{{item.btime <= item.message.time}}" class="new-style"></view>          
+          </block>          
+      </block>
+    </view>
+    <view class="t-i-m">
+      <text class="t-i-name">{{item.user.wecha_name}}</text>
+      <text class="t-i-content">{{item.message.value}}</text>
+    </view>
+    <view>
+      <text class="time">{{item.date}}</text>
+    </view>
+  </view>
+
+  <block wx:if='{{status == 0}}'>
+    <worker-footer textColorMessage="text-color"  workPath="../../../img/work.png" messagePath="../../../img/message1.png" myPath="../../../img/my.png"></worker-footer>
+  </block>
+
+  <block wx:if='{{status == 1}}'>
+    <boss-footer textColorMessage="text-color"  workPath="../../../img/work.png" messagePath="../../../img/message1.png" myPath="../../../img/my.png"></boss-footer>
+  </block>
+</view>

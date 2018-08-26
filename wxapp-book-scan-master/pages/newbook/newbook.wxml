@@ -1,0 +1,209 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__bd">
+    <form bindsubmit="addBook" report-submit="true">
+        <view class="weui-cells__title">书名</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="title" placeholder="请输入书名" />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">作者</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="author" placeholder="请输入作者" />
+                </view>
+            </view>
+        </view>
+        
+
+        <!-- <view class="weui-cells__title">单选列表项</view>
+        <view class="weui-cells weui-cells_after-title">
+            <radio-group bindchange="radioChange">
+                <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                    <view class="weui-cell__bd">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                    </view>
+                </label>
+            </radio-group>
+            <view class="weui-cell weui-cell_link">
+                <view class="weui-cell__bd">添加更多</view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">复选列表项</view>
+        <view class="weui-cells weui-cells_after-title">
+            <checkbox-group bindchange="checkboxChange">
+                <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+                    <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                    <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                        <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                        <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                    </view>
+                    <view class="weui-cell__bd">{{item.name}}</view>
+                </label>
+            </checkbox-group>
+            <view class="weui-cell weui-cell_link">
+                <view class="weui-cell__bd">添加更多</view>
+            </view>
+        </view> -->
+
+        <view class="weui-cells__title">详细信息</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" >ISBN</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="isbn" placeholder=""/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" >页数</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="pages" placeholder=""/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">子标题</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="subtitle" placeholder="" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">译者</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="translator" placeholder=""/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">出版社</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="publisher" placeholder="" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">豆瓣评分</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="ratingscore" placeholder=""/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">打分人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="ratingnumber" placeholder="" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">装版</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="binding" placeholder=""/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">系列名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="series" placeholder="" />
+                </view>
+            </view>
+            <!-- <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">日期</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                        <view class="weui-input">{{date}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                        <view class="weui-input">{{time}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">验证码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入验证码" />
+                </view>
+                <view class="weui-cell__ft">
+                    <image class="weui-vcode-img" src="../images/vcode.jpg" style="width: 108px"></image>
+                </view>
+            </view> -->
+        </view>
+
+        <!-- <view class="weui-cells__title">开关</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">标题文字</view>
+                <view class="weui-cell__ft">
+                    <switch checked />
+                </view>
+            </view>
+        </view> -->
+
+        <!-- <view class="weui-cells__title">文本框</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入文本" />
+                </view>
+            </view>
+        </view> -->
+
+        <view class="weui-cells__title">书籍简介</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" name="summary" placeholder="请输入书籍简介" style="height: 3.3em" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">作者简介</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" name="author_intro" placeholder="请输入作者简介" style="height: 3.3em" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" formType="submit" bindtap="showTopTips">确定</button>
+        </view>
+    </form>
+    </view>
+</view>

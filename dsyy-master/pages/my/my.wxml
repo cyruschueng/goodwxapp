@@ -1,0 +1,47 @@
+<!--center.wxml-->
+<view class="page" wx:if="{{myNav}}">
+  <view style="height:20rpx;"></view>
+  <view class="my-background margin-bottom-20" style="background:url('{{myBg}}');background-size:contain;">
+    <view class="my-text" bindtap="editInfo">
+      <image src="{{myPhoto}}" class="my-photo"></image>
+      <view class="my-name">{{myName}}</view>
+    </view>
+  </view>
+  <view wx:if="{{myType==1}}">
+    <view class="white-bg margin-bottom-20 my-bar">{{bar.barname}}</view>
+    <view class="white-bg my-nav margin-bottom-20">
+      <view wx:if="{{bar}}" wx:for="{{myNav}}">
+        <view class="my-nav-block margin-top-30 margin-left-30" data-url="{{item.url}}" bindtap="jumpUrl">
+          <button class="my-nav-button">
+          <image src="{{item.img}}" class="my-nav-button-img float-left"></image>
+          <view class="float-left">
+            {{item.title}}
+          </view>
+        </button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="white-bg my-nav-member margin-bottom-20">
+    <view wx:for="{{myNav}}">
+      <view class="padding-top-30 pading-bottom-30 padding-left-30 padding-right-30" data-url="{{item.url}}" bindtap="jumpUrl">
+        <button class="my-nav-member-button">
+          <image src="{{item.img}}" class="my-nav-member-button-img float-left"></image>
+          <view class="float-left">
+            {{item.title}}
+          </view>
+        </button>
+      </view>
+    </view>
+  </view>
+  <view class="white-bg my-notice">
+    <view wx:for="{{myNotice}}">
+      <view class="border-bottom margin-left-30 margin-right-30 my-notice-list" data-url="{{item.url}}" bindtap="jumpUrl">
+        <image src="{{item.img}}" class="my-notice-img margin-right-20"></image>
+        <view class="float-left">
+          {{item.title}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

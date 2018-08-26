@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    // function callee (num){
+    //     if (num < 1) {
+    //         return 1
+    //     }else{
+    //        return num * callee(num -1)
+    //     }
+    // }
+
+    // var anoterCallee = callee;
+    // callee =null;
+
+    // console.log(anoterCallee(10))
+
+
+    function callee (num){
+        if (num < 1) {
+            return 1
+        }else{
+           return num * arguments.callee(num -1)
+        }
+    }
+
+    var anoterCallee = callee;
+    callee =null;
+    
+    console.log(anoterCallee(10))
+    </script>

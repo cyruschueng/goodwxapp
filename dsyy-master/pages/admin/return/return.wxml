@@ -1,0 +1,166 @@
+<!--还书中_Start-->
+<view hidden="{{returningHidden}}" class="white-bg">
+  <view class="page" style="height:20rpx;"></view>
+  <view class="margin-left-30 margin-right-30">
+    <view class=" margin-top-30 margin-bottom-30">
+      <view class="return-word">归还图书</view>
+      <view class="return-bar">（{{bar_name}}）</view>
+    </view>
+    <view class="clear"></view>
+    <!-- 无信息 -->
+    <view hidden="{{searchHidden}}">
+      <view class="weui-flex padding-top-30">
+        <view>
+          <view class="placeholder">
+            <image src="../../../images/ewm_icon.png" class="opt-icon-28 margin-left-10" bindtap="scanBook"></image>
+          </view>
+        </view>
+        <view class="weui-flex__item border-bottom">
+          <view class="placeholder">
+            <input class="weui-input" type="text" value="{{isbn}}" placeholder="如无法扫描ISBN号，请手动输入" class="margin-left-15 font-size-14" bindinput="inputISBN" />
+          </view>
+        </view>
+        <view class="border-bottom">
+          <view class="placeholder">
+            <image src="../../../images/search_icon.png" class="opt-icon-nor margin-right-15" bindtap="searchISBN"></image>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{noBook}}" class="text-center">此书吧中没有找到这本书</view>
+    </view>
+    <!-- 有信息 -->
+    <view hidden="{{!searchHidden}}">
+      <view class="book padding-top-25 padding-bottom-25 border-bottom">
+        <view class="book-img">
+          <image src="{{bookDetail.images_large}}" class="book-img-sml" mode="aspectFill"></image>
+        </view>
+        <view class="book-info">
+          <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{bookDetail.title}}</view>
+          <view class="text-oneline margin-bottom-10 book-font">作者： {{bookDetail.author}}</view>
+          <view class="text-oneline margin-bottom-10 book-font">页数：{{bookDetail.pages}}页</view>
+          <view class="text-oneline margin-bottom-10 book-font">出版社：{{bookDetail.publisher}}</view>
+        </view>
+      </view>
+      <view class=" margin-top-30 margin-bottom-30">
+        <view class="return-msg">当前借阅信息</view>
+      </view>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <scroll-view scroll-y style="height:300px;">
+          <view wx:for="{{bookObj}}">
+            <view wx:if="{{item.status==0}}" class=" weui-flex">
+              <view class="book-sale margin-right-10 lend-width-180">图书编码：</view>
+              <view class="book-sale margin-right-10 lend-width-330">{{item.book_code}}</view>
+              <view class="book-sale lend-width-160">
+                <button class="weui-btn mini-btn text-right return-unused-button" type="default" size="mini">在架</button>
+              </view>
+            </view>
+            <view wx:else>
+              <view class="weui-flex">
+                <view class="book-sale margin-right-10 lend-width-180">图书编码：</view>
+                <view class="book-sale margin-right-10 lend-width-330">{{item.book_code}}</view>
+                <view class="book-sale lend-width-160"></view>
+              </view>
+              <view wx:for="{{lendBookObj}}" wx:for-item="lendItem" class="weui-flex">
+                <view wx:if="{{lendItem.borrowInfo.book_obj_id==item.id}}">
+                  <view class="text-oneline book-lend margin-right-10 lend-width-70">
+                    <image src="{{lendItem.userInfo.avatar}}" class="userInfo_img"></image>
+                  </view>
+                  <view class="text-oneline book-lend margin-right-10 lend-width-110">
+                    {{lendItem.userInfo.nick_name}}
+                  </view>
+                  <view class="text-oneline book-lend-time margin-right-10 lend-width-330">借书时间：{{lendItem.borrowInfo.borrow_time}}</view>
+                  <view class="book-sale lend-width-160">
+                    <button class="weui-btn mini-btn text-right return-unused-button" type="primary" size="mini" bindtap="returnBook" data-borrow_id="{{lendItem.borrowInfo.id}}" data-nick_name="{{lendItem.userInfo.nick_name}}">归还</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="clear"></view>
+          </view>
+        </scroll-view>
+      </radio-group>
+    </view>
+  </view>
+</view>
+<!--还书中_End-->
+<!-- 还书成功_Start -->
+<view hidden="{{!returningHidden}}" class="page">
+  <view class="page" style="height:20rpx;"></view>
+  <view class="white-bg return-success-flex padding-top-30 padding-bottom-30">
+    <view class="margin-left-30 margin-right-30 margin-top-30 text-center">
+      <icon type="success" size="60" />
+    </view>
+    <view class="return-success weui-flex">
+      <view class="weui-flex__item ">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">会员：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="nick_name" class="weui-input" value="{{user_s_name}}" placeholder="{{user_s_name}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="return-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">归还图书：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="book_name" class="weui-input" value="{{book_s_name}}" placeholder="《{{book_s_name}}》" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="return-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">书吧：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="bar_name" class="weui-input" value="{{bar_name}}" placeholder="{{bar_name}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="return-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">归还时间：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="time" class="weui-input" value="{{time}}" placeholder="{{time}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="return-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">管理员：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="oper_name" class="weui-input" value="{{oper_name}}" placeholder="{{oper_name}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="return-button" bindtap="back">返回</view>
+</view>
+<!-- 还书成功_End -->

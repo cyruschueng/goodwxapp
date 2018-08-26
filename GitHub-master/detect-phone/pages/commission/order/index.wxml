@@ -1,0 +1,70 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page navbar com-order" wx:if="{{show}}">
+  <view class="fui-cell-group">
+    <view class="fui-cell">
+      <view class="fui-cell-label">{{textctotal}}</view>
+      <view class="fui-cell-info"></view>
+      <view class="fui-cell-remark noremark">
+        <text>{{comtotal}}</text>{{textyuan}}
+      </view>
+    </view>
+  </view>
+  <view class="fui-tab fui-tab-danger">
+    <view bindtap="myTab" class="item {{status == '' ? 'active' : ''}}" data-status="">所有</view>
+    <view bindtap="myTab" data-status="0" class="item {{status == '0' ? 'active' : ''}}">待付款</view>
+    <view bindtap="myTab" data-status="1" class="item {{status == '1' ? 'active' : ''}}">已付款</view>
+    <view bindtap="myTab" data-status="3" class="item {{status == '3' ? 'active' : ''}}">已完成</view>
+  </view>
+  <block wx:for="{{list}}">
+    <view class="fui-cell-group {{item.code == 1 ? 'toggleSend-group' : ''}}">
+      <view class="fui-cell" bindtap="toggleSend" data-index="{{index}}">
+        <view class="fui-cell-label">
+          <view>{{item.ordersn}}({{item.level}})</view>
+          <view class="text-default">{{item.createtime}}</view>
+        </view>
+        <view class="fui-cell-info">
+          <view>+{{item.commission}}</view>
+          <view>{{item.status}}</view>
+        </view>
+        <view class="fui-cell-remark" wx:if="{{openorderdetail == 1 || openorderbuyer == 1}}"></view>
+      </view>
+      <view class="fui-list details" wx:if="{{openorderbuyer == 1}}">
+        <view class="fui-list-media">
+          <image src="{{item.buyer.avatar}}"></image>
+        </view>
+        <view class="fui-list-inner">
+          <view class="row">
+            <view class="row-text">{{item.buyer.nickname}}</view>
+          </view>
+          <view class="subtitle">微信号: {{item.buyer.weixin || '未填写'}}</view>
+        </view>
+      </view>
+      <block wx:for="{{item.order_goods}}" wx:for-item="g">
+      <view class="fui-list details" wx:if="{{openorderdetail == 1}}">
+        <view class="fui-list-media">
+          <image src="{{g.thumb}}"></image>
+        </view>
+        <view class="fui-list-inner">
+          <view class="row">
+            <view class="row-text">{{g.title}}</view>
+          </view>
+          <view class="subtitle">{{g.optionname}}x{{g.total}}</view>
+        </view>
+        <view class="row-remark">
+          <view>预计</view>
+          <view>+{{g.commission}}</view>
+        </view>
+      </view>
+      </block>
+    </view>
+  </block>
+  <view class="center" wx:if="{{list.length < 1}}">
+    <view class="empty-tip">
+      <image class="light" src="/static/images/icon/lights-128.png"></image>
+      <view class="text-cancel">暂时没有任何数据</view>
+    </view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{loaded && list.length > 0}}">
+    <view class="text">没有更多了</view>
+  </view>
+</view>

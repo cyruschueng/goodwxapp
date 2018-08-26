@@ -1,0 +1,15 @@
+<!--pages/history/index.wxml-->
+<scroll-view class="history-container" scroll-y="true">
+    <!--<view class="title-part">
+        历史上的今天（{{day}}）{{today.length}}条
+    </view>-->
+
+    <block wx:for="{{today}}" wx:key="item">
+        <view class="single">
+            <view>{{item.date}}</view>
+            <text>{{item.title}}</text>
+        </view>
+    </block>
+    <button type="primary" size="mini" bindtap="goTo" style="margin-left:12px;">返回首页</button>
+    <view class="footer-part"></view>
+</scroll-view>

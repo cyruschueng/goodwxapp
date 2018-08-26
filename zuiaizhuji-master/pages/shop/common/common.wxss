@@ -1,0 +1,61 @@
+/* 引入字体图标 */
+@import "./shopFont.wxss";
+.iconfont{font-size: inherit;display: inline-block;vertical-align: bottom;}
+
+/* 引入多色版文件 */
+@import "/css/DuoguanShop/DuoguanShop-template-default.wxss";
+
+page{font-size: 32rpx;}
+
+/* 加入购物车 立即购买 弹出框 */
+.add-cart-box{z-index: 999;}
+.layout{ position: absolute; left: 0; bottom: 0; width: 100%; background: #fff; z-index: 1;animation: fadeInUp .4s ease forwards; transform: translateY(100%);}
+.layout-info{padding: 10px; line-height: 30px;padding-right: 38px;}
+.layout-info image{ width:200rpx; height: 200rpx;margin-top: -60rpx;border-radius:3px;background: #fff; box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);}
+.layout-info .sub{ line-height: 23px; overflow: hidden;}
+/* 数量 */
+.options{padding:0 30rpx;display: block;width:100%;clear:both;}
+.options-tiem{ padding:15px 0; overflow: hidden;}
+.count-set{ width:auto; border: 1px solid #eee;}
+.count-set text{ display: block; line-height: 30px; padding:0 10px;}
+.count-set text:active{ background: rgba(0, 0, 0, 0.05);}
+.buy-couts{ border-left: 1px solid #eee; border-right: 1px solid #eee; width: 60px; height: 30px;}
+.buy-couts input{ height: 30px;}
+.count-set .flase{ background: rgba(0, 0, 0, 0.05); color: #999;}
+.add-cart-btn,.buy-now-btn{padding: 0; color: #fff; border-radius: 0;font-size: 30rpx;line-height: 46px;height: 46px;}
+button:not([plain])::after{border:none;}
+.add-cart-btn{background:#f0aa30;}
+.buy-now-btn{background: #f14344;}
+
+/* 购物车商品属性 */
+.goods-attrs-box{max-height: 500rpx;overflow-y: auto;-webkit-overflow-scrolling: touch;}
+.attr_list{padding: 20rpx 30rpx;}
+/* .attr_list_t{padding: 20rpx 0;} */
+.attr-list-li{display: inline-block;padding:0 20rpx;margin-right:12rpx;margin-top:12rpx;line-height: 24px;font-size: 12px;background: #f0f0f0;border-radius: 6rpx;transition: all .2s linear;}
+.attr-list-li.on{background: #f14344;color: #fff;}
+.attr-list-li.disabled{background: #f7f7f7;color: #ccc;}
+
+/* 购物车商品属性 */
+/* .attr_list{padding:10px 10px 5px 10px;width:100%;clear:both;display:block;max-height: 300rpx;overflow-y: auto;-webkit-overflow-scrolling: touch;}
+.attr_list_t{float: left;}
+.attr_list_li{float:left;padding:0px 10px;border:1px solid #ddd;margin-right:5px;margin-top:5px}
+.on{border:1px solid #f00; color:#fff;background: #f00;} */
+.icon-close{ width: 25px; height: 25px; border-radius: 50%; color: #999; line-height: 25px; font-size: 18px; text-align: center;margin:10px 10px 0 0;position: absolute;right: 0;z-index: 1;}
+.icon-close:active{ background: rgba(0, 0, 0, 0.05);}
+
+.floatBoxBg{animation-direction: 0.2s;}
+/* css 动画 */
+@keyframes fadeIn{
+  0%{opacity:0}
+  100%{opacity:1}
+}
+
+@keyframes fadeInUp{
+  0%{transform:translateY(100%)}
+  100%{transform:translateY(0)}
+}
+
+.ui-cells{background: #fff;}
+.ui-cell{padding: 20rpx 30rpx; line-height: 1.4;}
+.ui-cell.gridXb::before{left: 30rpx;}
+.ui-cell.gridXb:last-child:before{display: none;}

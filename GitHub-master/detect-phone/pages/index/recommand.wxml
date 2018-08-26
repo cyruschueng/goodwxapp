@@ -1,0 +1,28 @@
+<block wx:if="{{item.data.length > 0}}">
+  <view class="fui-line" style="background: #f4f4f4;">
+    <view class="text text-danger">
+      <text class="icon icon-likefill"></text> 为您推荐
+    </view>
+  </view>
+  <view class="fui-goods-group {{shop.goodsstyle > 0 ? '' : 'block border'}}">
+    <block wx:for="{{item.data}}" wx:for-index="idx">
+      <view class="fui-goods-item" data-goodsid="{{item.id}}" data-type="{{item.type}}">
+        <navigator url="/pages/goods/detail/index?id={{item.id}}&frommyshop=1">
+          <view class="image" style="background-image:url('{{item.thumb}}');">
+            <view class="salez" style="background-image: url('{{shop.saleout}}'); " wx:if="{{item.total <= 0}}"></view>
+          </view>
+        </navigator>
+        <view class="detail">
+          <navigator url="/pages/goods/detail/index?id={{item.id}}&frommyshop=1">
+            <view class="name">
+              <text class="fui-tag fui-tag-danger" wx:if="{{item.ispresell==1}}">预售</text> {{item.title}}
+            </view>
+          </navigator>
+          <view class="price">
+            <text class="text">￥{{item.minprice}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</block>

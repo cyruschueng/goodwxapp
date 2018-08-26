@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<view class="compose-container">
+	<view class="compose-front" wx:if="{{ isCreate }}">
+		<view class="compose-box" style='background:url({{ bgWishes }}) no-repeat center;'>
+			<view class="compose-box__txt">
+				<text>{{wishesContent}}</text>
+				<view class="compose-box__txt_btn" bindtap="navigateTo" data-id="{{wishesContent}}">(点击文字可自定义)</view>
+			</view>
+			<view class="compose-box__info">
+				<image class="compose-info__image" src="{{ userInfo.avatarUrl }}"></image>
+				<text class="compose-info__nickname">{{ userInfo.nickName }}</text>
+				<view>已有{{count}}人分享</view>
+			</view>
+		</view>
+	  	<view class="compose-select">
+	      	<view class="compose-select__title">选则卡片</view>
+	      	<view class='compose-select__list'>
+	        	<scroll-view class="scroll-view__box" scroll-x>
+	          		<view class="scroll-view__item" wx:for="{{ order }}" wx:key="" style='background:url({{ item }}) no-repeat center' data-id="{{ index }}" bindtap='bgChange'></view>
+	        	</scroll-view>
+	      	</view> 
+	  	</view>
+		<button class="compose-btn" type="primary" bindtap='syntheisis'>确定</button>
+		<button class="weui-btn" type="primary" bindtap="navigateTo" data-id="{{id}}">马上吆喝</button>
+		<canvas wx:if="{{ hasCanvas }}" class="compose-canvas" canvas-id="myCanvas"></canvas>
+	</view>
+	<view wx:else class="compose-after">
+		<image class="compose-after__image" src="{{ tempFilePath }}"></image>
+		<view class="compose-after__btn">
+			<button class="compose-after__btn_keep" type="default" bindtap='keepImage'>保存</button>
+			<button class="compose-after__btn_share" type="primary" open-type="share">发送</button>
+		</view>
+	</view>
+</view>

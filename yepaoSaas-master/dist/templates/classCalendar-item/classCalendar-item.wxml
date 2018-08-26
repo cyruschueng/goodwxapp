@@ -1,0 +1,54 @@
+
+<template name='classCalendar-item'>
+
+<block wx:for='{{ courseList }}' wx:key='{{ index }}'>
+<view class='weui-flex classCalendar-cell'>
+  <view class='weui-flex__item'>
+    <!-- 上 -->
+    <view class='up-text-view' data-planid='{{ item.planId }}' data-plandetailid='{{ item.planDetailId }}' id='{{ index }}' bindtap='bindClassDetails'>
+      <text class='time-text'>{{ item.classTime }}</text>
+      <text>{{ item.className }}</text>
+      <text class='right-text'>查看详情</text>
+    </view>
+    <!-- 下 -->
+    <view class='weui-flex down-view'>
+      <!-- 左 -->
+      <view class='name-view weui-flex__item'>
+        <view class='name-headview weui-flex'>
+          <!-- 头像 -->
+          <view >
+            <image mode='aspectFill' class='head-img' src='{{ item.headimg }}'></image>
+          </view>
+          <view class='weui-flex__item'>
+            <view>{{ item.teacherName }}</view>
+            <!-- 评分 -->
+            <view class='star-view'>
+            <block wx:for='{{ item.teacherScore }}' wx:key='{{ index }}'>
+              <image class='star-icon' src='../../images/icon/star_{{ item == "star" ? "red" : "g" }}.png'></image>
+            </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 团课 还可报名 -->
+        <view class='otherinfo-view'>
+          <image class='cell-icon-class' src='../../images/icon/home/league_class.png'></image>
+          <text class='text'>团课</text>
+          <image class='cell-icon-enro' src='../../images/icon/home/enrolment.png'></image>
+          <text wx:if='{{ item.allowSignUp != -1 }}' class='text'>还可报名 <text class='mainColor'>{{ item.allowSignUp }}</text>人</text>
+          <text wx:else class='text'>不限报名人数</text>
+        </view>
+      </view>
+
+      <!-- 右 -->
+      <view>
+        <view id='{{ index }}' data-plandetailid='{{ item.planDetailId }}' data-planid='{{ item.planId }}' class='{{ item.reserveFlag ? "appted-btn" : "appt-btn" }}' bindtap='{{ item.reserveFlag ? "" : "bindClassCalendarCellTap" }}'>{{ item.reserveFlag ? '已预约' : '预约' }}</view>
+      </view>
+
+    </view>
+  </view>
+
+</view>
+</block>
+
+</template>

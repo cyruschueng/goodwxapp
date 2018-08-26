@@ -1,0 +1,322 @@
+/* pages/productDetails/productDetails.wxss */
+
+@import '../homepage/recommendTemplate/recommendTemplate.wxss';
+@import './sizeQuantityTemplate/sizeQuantityTemplate.wxss';
+
+page{
+  background-color: rgb(245, 246, 247);
+}
+.productDetailsPage{
+   /* background-color: red;  */
+    padding-bottom: 20rpx; 
+}
+/*
+ 轮播图
+ */
+.productImagesBox{
+  width: 100%;
+  height: 400rpx;
+  position: relative;
+}
+.productImagesBox swiper{
+  width: 100%;
+  height: 100%;
+}
+.productImagesBox swiper swiper-item image{
+  width: 100%;
+  height: 100%;
+}
+/*
+ 手提袋跟购物车小按钮
+ */
+ .handBag{
+  position: absolute; 
+  top: 10%;
+  right: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background-color: rgb(145, 148, 148); 
+  text-align: center;
+ }
+ .productShoppingCart{
+  position: absolute; 
+  top: 25%;
+  right: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background-color: rgb(145, 148, 148); 
+  text-align: center;
+ }
+ .handBag image,.productShoppingCart image{
+   width: 70%;
+   height: 70%;
+   margin-top: 15%;
+ }
+/*
+商品信息（价格，名称，销量啥的）
+*/
+.productInfo{
+  width: 100%;
+  background-color: white;
+  height: 290rpx;
+  padding: 20rpx 0rpx 20rpx 20rpx;
+  overflow: hidden;
+  /*宽给了，然后写了padding，会把盒子撑大，写上这个就行  */
+  box-sizing: border-box;
+  border-bottom: 5rpx solid rgb(245, 246, 247);
+}
+.productName{
+  width: 70%;
+  height: 25%;
+  font-size: 30rpx;
+  color: rgb(39, 40, 42);
+  float: left;
+  margin-top: 20rpx;
+}
+.share{
+  float: right;
+  width: 150rpx;
+  height: 80rpx;
+  margin-right: 1rpx; 
+  font-size: 22rpx;
+  color: #ff1f25;
+  text-align: center
+}
+.share image{
+  width: 30rpx;
+  height: 30rpx;
+}
+.price{
+  width: 100%;
+  height: 25%;
+}
+.price text:nth-child(1){
+  font-size: 30rpx;
+  color: rgb(194, 195, 196)
+}
+.price text:nth-child(2){
+  font-size: 32rpx;
+  color: #ff1f25
+}
+.price text:nth-child(3){
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  color: rgb(194, 195, 196)
+}
+.vipPrice{
+  float: left;
+}
+.vipPrice text:nth-child(1){
+  padding: 3rpx 5rpx;
+  font-size: 24rpx;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#CF03FA), to(#fe5708));
+  color: white;
+}
+.vipPrice text:nth-child(2){
+  margin-left: 15rpx;
+  font-size: 34rpx;
+  color: #fe5708;
+  letter-spacing: 5rpx;
+}
+.beVIP{
+  float: right;
+  font-size: 28rpx;
+  color:#ff1f25;
+  text-decoration: underline;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+}
+.salesAmountAndAddress{
+  width: 100%;
+  height: 25%;
+  overflow: hidden;
+  /* vertical-align: middle; */
+  margin-top: 20rpx;
+}
+.salesAmountAndAddress text:nth-child(1){
+  font-size: 24rpx;
+  color: rgb(181, 182, 183);
+  float: left;
+}
+.salesAmountAndAddress text:nth-child(2){
+  font-size: 24rpx;
+  color: rgb(181, 182, 183);
+  float: left;
+  margin-left: 160rpx;
+}
+.salesAmountAndAddress text:nth-child(3){
+  font-size: 24rpx;
+  color: rgb(181, 182, 183);
+  float: right;
+  margin-right: 20rpx;
+}
+/*
+领取优惠券
+*/
+.coupon{
+  width: 100%;
+  /*让所有子元素垂直居中：行高=高  */
+  height: 90rpx;
+  line-height: 90rpx;
+  background-color: white;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-bottom: 3rpx solid rgb(245, 246, 247);
+}
+.coupon text{
+  color: rgb(135, 135, 136);
+  font-size: 28rpx;
+  float: left;
+  margin-left: 20rpx;
+}
+.coupon image:nth-child(2){
+  float: left;
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 30rpx; 
+  margin-left: 20rpx;
+}
+.coupon image:nth-child(3){
+  float: right;
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 30rpx; 
+  margin-right: 20rpx;
+}
+/*
+极速发货 正品保证
+*/
+.sendAndEnsure{
+  padding: 30rpx 0rpx 20rpx;
+  background-color: white;
+  box-sizing: border-box;
+  border-bottom: 5rpx solid rgb(245, 246, 247);
+}
+.send,.ensure{
+  float: left;
+  font-size: 26rpx;
+  color: rgb(181, 182, 183)
+}
+.send image,.ensure image{
+  width: 25rpx;
+  height: 25rpx;
+}
+.send{
+  margin-left: 10%;
+}
+.ensure{
+  margin-left: 40%;
+}
+.send text,.ensure text{
+  margin-left: 20rpx;
+}
+/*
+规格数量选择
+*/
+.amount{
+  padding: 30rpx 0rpx 30rpx;
+  background-color: white;
+  box-sizing: border-box;
+  border-bottom: 5rpx solid rgb(245, 246, 247);
+  overflow: hidden;
+}
+.amount text{
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  float: left;
+  color: rgb(132, 132, 133)
+}
+.amount image{
+  width: 30rpx;
+  height: 30rpx;
+  float: right;
+  margin-right: 20rpx;
+}
+/*
+商品详情图片
+*/
+.productDetailImg{
+  padding: 20rpx 0rpx 0rpx;
+  text-align: center;
+}
+.productDetailImg text{
+  width: 100%;
+  display: inline-block;
+  padding: 20rpx 0;
+  background-color: white;
+  color: rgb(132, 132, 133);
+  font-size: 30rpx;
+}
+.productDetailImg image{
+  width: 100%;
+  height: 700rpx;
+}
+/*
+底部收藏购物车购买
+*/
+.bottomShoppingCart{
+  width: 100%;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 110rpx;
+  line-height: 110rpx;
+  /*如果不写这句话，购买数量那个数字就会在上面  */
+  z-index: 666
+}
+.collection{
+  flex: 1;
+  text-align: center;
+  color: rgb(189, 190, 192);
+  font-size: 30rpx;
+  background-color: white;
+  position: relative;
+}
+.collection image{
+  width:30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 20rpx;
+  left: 43%;
+}
+.collection view{
+  margin-top: 20rpx;
+}
+.inShopppingCart{
+  height: 100%;
+  flex: 1;
+  background-color: rgb(247, 181, 72);
+  font-size: 32rpx;
+  color: white;
+  text-align: center;
+
+  /* padding-top: 5%; */
+}
+.buyNow{
+  flex: 1;
+  background-color: rgb(236, 81, 74);
+  font-size: 32rpx;
+  color: white;
+  text-align: center;
+
+}
+/*
+猜你喜欢
+*/
+.productDetailRecommand{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  text-align: center;
+}
+.productDetailRecommand image{
+  height: 50rpx;
+  width: 30%; 
+}
+.productDetailRecommendGoods{
+  padding-bottom: 110rpx; 
+  overflow: hidden;
+} 

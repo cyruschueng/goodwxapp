@@ -1,0 +1,31 @@
+
+<block wx:if="{{ type == 'home' || type == 'other' }}">
+	<view class="header">先设置家的地址哦</view>
+
+	<view class="set_home">
+		<view class="home">
+			<view class="home_img">
+				<image src="../../images/icon_home@3x.png"></image>
+			</view>
+			<view class="home_tile">家庭地址</view>
+		</view>
+		<view class="home_address" data-id="home" bindtap="setAddress">{{ keywords || '输入您的家庭地址' }}</view>
+	</view>
+</block>
+<block wx:if="{{ type == 'company' || type == 'other' }}">
+	<view class="header">先设置公司的地址哦</view>
+
+	<view class="set_home">
+		<view class="home">
+			<view class="home_img">
+				<image src="../../images/icon_company@3x.png"></image>
+			</view>
+			<view class="home_tile">公司地址</view>
+		</view>
+		<view class="home_address" data-id="company" bindtap="setAddress">{{ keywords || '输入您的公司地址' }}</view>
+	</view>
+</block>
+
+<view class="submit_btn">
+	<button bindtap="submit_btn">确定</button>
+</view>

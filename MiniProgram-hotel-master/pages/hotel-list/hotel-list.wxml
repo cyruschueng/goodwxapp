@@ -1,0 +1,21 @@
+<!--pages/hotel-list/hotel-list.wxml-->
+<view class='container'>
+  <form>
+    <view class='search'>
+      <icon type='search' size='16' class='search-icon'></icon>
+      <input class='search-input' type='text' placeholder='输入搜索'></input>
+      <button class='search-button'>搜索</button>
+    </view>
+  </form>
+  <view class='hotel-list'>
+    <view class='hotel-item' wx:for='{{lists}}' wx:key='code' bindtap='toReserve'>
+      <image src='{{item.url}}'></image>
+      <view class='hotel-title'>{{item.title}}</view>
+      <view class='number'>
+        <view class='price'>￥{{item.price}}</view>
+        <view class='sale-num'>销量：{{item.num}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='section-ft'>没有更多啦</view>
+</view>

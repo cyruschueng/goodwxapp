@@ -1,0 +1,14 @@
+<!--pages/QRCode/QRCode.wxml-->
+<text>
+    获取二维码
+    通过后台接口可以获取小程序任意页面的二维码，扫描该二维码可以直接进入小程序对应的页面。目前微信支持两种二维码，小程序码，小程序二维码。
+</text>
+<button bindtap="interfaceA" style="margin-top: 30rpx;line-height: 50rpx;padding: 30rpx 0;">
+    <text>获取小程序码-接口A:
+        适用于需要的码数量较少的业务场景</text>
+</button>
+<image wx:if="{{src}}" src="data:image/png;base64,{{src}}"></image>
+<button bindtap="interfaceB" style="margin-top: 30rpx;line-height: 50rpx;padding: 30rpx 0;">
+    <text>获取小程序码-接口B：
+        适用于需要的码数量极多的业务场景</text>
+</button>

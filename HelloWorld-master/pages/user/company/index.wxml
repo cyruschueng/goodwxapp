@@ -1,0 +1,25 @@
+<!--pages/user/company/index.wxml-->
+<block wx:if='{{isLoaded}}'>
+    <view class="mb10 company">
+        <import src="../../../wxParse/wxParse.wxml" />
+        <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+    </view>
+    <view class="ui-cells f16">
+        <view class="ui-cell gridXb" catchtap='onCallPhoneTap'>
+            <view>咨询热线</view>
+            <view class="grey f14">{{tel}}</view>
+        </view>
+        <view class="ui-cell gridXb" catchtap='onCopyTap' data-value='{{wx_service}}'>
+            <view>微信客服</view>
+            <view class="grey f14">{{wx_service}}</view>
+        </view>
+        <view class="ui-cell gridXb" catchtap='onCopyTap' data-value='{{url}}'>
+            <view>官方网站</view>
+            <view class="grey f14">{{url}}</view>
+        </view>
+        <view class="ui-cell gridXb" catchtap='onCopyTap' data-value='{{wx_account}}'>
+            <view>公众号</view>
+            <view class="grey f14">{{wx_account}}</view>
+        </view>
+    </view>
+</block>

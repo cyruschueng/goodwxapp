@@ -1,0 +1,64 @@
+<!--pages/user/red-packet/index.wxml-->
+<view class="packet-money">
+    <view class="packet-balance">
+        <view class="flex">
+            <view class="sub mr10 packet-balance-tit">福包余额</view>
+            <view>
+                <button class="cash-rule-btn" catchtap='navigateTo' data-path="../cash-rule/index" data-params="?min_cash_withdrawal_money={{min_cash_withdrawal_money}}&customer_service_phone={{customer_service_phone}}">提现规则</button>
+            </view>
+        </view>
+        <view class="f28 mt20 mb20">￥
+            <text class="balance-money">{{balance_money}}</text>
+        </view>
+    </view>
+    <view class="money-cash f14">
+        <view wx:if="{{min_cash_withdrawal_money != '0'}}">满{{min_cash_withdrawal_money}}元可提现</view>
+        <view catchtap='navigateTo' data-path="../cash-record/index" data-params="?type=cash_withdrawal_record">已提现{{cash_withdrawal_money}}元</view>
+    </view>
+</view>
+<view class="mt10 ml15" wx:if="{{showHasRecord == '' ? false : true}}">
+    <view class="flex gridXb">
+        <view class="sub">
+            <text class="red">温馨提示：{{showHasRecord}}</text>
+        </view>
+        <view class="arrowR right-more f14 mr15" style='color: #576b95;' catchtap='updateBankCardInfo' wx:if="{{bankCardInfo.id}}">点我修改</view>
+    </view>
+</view>
+<view class="mt10">
+    <view class="money-source-tit gridXb">历史奖励来源</view>
+    <view class="money-source-item flex gridXb" catchtap='navigateTo' data-path="../redwallet-record/index" data-params="?type=redwallet_record&title=红包福利">
+        <view class="sub">红包福利</view>
+        <view class="arrowR right-more f14">共计：{{redwallet_money}}元</view>
+    </view>
+    <view class="{{is_show_fenxiao_record ? '' : 'hidden'}}">
+        <view class="money-source-item flex gridXb" catchtap='navigateTo' data-path="../fenxiao-record/index" data-params="?type=fenxiao_record&title=分销奖励">
+            <view class="sub">分销奖励</view>
+            <view class="arrowR right-more f14">共计：{{feixiao_money}}元</view>
+        </view>
+    </view>
+    <view class="{{is_show_activity_promot_record ? '' : 'hidden'}}">
+        <view class="money-source-item flex gridXb" catchtap='navigateTo' data-path="../records/index" data-params="?type=activity_promot_record&title=活动推广">
+            <view class="sub">活动推广</view>
+            <view class="arrowR right-more f14">共计：{{activity_promot_money}}元</view>
+        </view>
+    </view>
+    <view class="{{is_show_tuan_record ? '' : 'hidden'}}">
+        <view class="money-source-item flex gridXb" catchtap='navigateTo' data-path="../records/index" data-params="?type=tuan_record&title=拼团佣金">
+            <view class="sub">拼团佣金</view>
+            <view class="arrowR right-more f14">共计：{{tuan_money}}元</view>
+        </view>
+    </view>
+</view>
+<!-- 底部固定 -->
+<view class="bottom-fixed-box">
+    <form bindsubmit='fromSubmit' report-submit="{{true}}">
+        <view class="flex bottom-fixed-btn">
+            <view class="sub" wx:if="{{is_card_member}}">
+                <button form-type='submit' disabled='{{!canIUseTransferMembershipCard || canIUseCash == false}}' data-type="{{'card'}}">转入会员卡</button>
+            </view>
+            <view class="sub">
+                <button form-type='submit' disabled='{{!canIUseCash}}' data-type="{{'cash'}}" class="cash-btn">我要提现</button>
+            </view>
+        </view>
+    </form>
+</view>

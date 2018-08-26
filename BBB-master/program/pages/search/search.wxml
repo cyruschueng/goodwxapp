@@ -1,0 +1,25 @@
+<view class='search_wrap'>
+  <view class='search_content'>
+    <text class='contrast'>要比的币</text><input confirm-type="search" type="text"  bindconfirm="searchHandle" placeholder="输入搜索" focus/>
+  </view>
+  <view wx:if="{{currentState == true}}">
+  <view class='search_me'>
+    <text>{{code}}</text>
+  </view>
+  <view wx:if="{{currentState}}" class='situation_wrap'>
+    <view bindtap='isMakeSelected' style="background:{{backgroundMake}};" class='situation'>
+      <text>赚了</text>
+    </view>
+    <view bindtap='isNotMakeSelected' style="background:{{backgroundNotMake}};" class='situation'>
+      <text>没赚</text>
+    </view>
+  </view>
+  </view>
+  <view class='create_sth'>
+    <text>没有你要的币?</text>
+    <button bindtap="applySth" size="mini" class='apply_button'>点击进行申请</button>
+  </view>
+  <button open-type='share' plain class='search_share'>
+    <text>分享到群里比比币</text>
+  </button>
+</view>

@@ -1,0 +1,82 @@
+<import src="/zanui/toast/index.wxml" />
+<import src="../selectUser/selectUser" />
+<!--index.wxml-->
+<view class="container page__bd" wx:if="{{!showEditUser}}">
+  <view class="weui-cells__title"></view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+
+    <view class="weui-cells__title"> </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <!-- <navigator class="weui-cell weui-cell_access" style="height:60px;line-height:60px;" hover-class="weui-cell_active" url="/pages/jietu/selectUser/selectUser?from={{app_name}}_{{type}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">发送人</view>
+        </view>
+        <view class="weui-cell__bd special_flex" style="margin-right:25rpx;">
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{app[type].list[index].name}}</view>
+          <view class="weui-cell__hd" style="width: 50px;height: 50px;">
+            <image style="width: 50px;height: 50px;" src="{{app[type].list[index].avatar?app[type].list[index].avatar:'http://icons.maiyizhi.cn/default_avatar.png'}}" mode="aspectFill"></image>
+          </view>
+        </view>
+      </navigator> -->
+
+      <view class="weui-cell weui-cell_access" catchtap="showEditUser" style="height:60px;line-height:60px;">
+        <view class="weui-cell__hd">
+          <view class="weui-label">发送人</view>
+        </view>
+        <view class="weui-cell__bd special_flex" style="margin-right:25rpx;">
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{app[type].list[index].name}}</view>
+          <view class="weui-cell__hd" style="width: 50px;height: 50px;">
+            <image style="width: 50px;height: 50px;" src="{{app[type].list[index].avatar?app[type].list[index].avatar:'http://icons.maiyizhi.cn/default_avatar.png'}}" mode="aspectFill"></image>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">类型</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker range="{{types}}" range-key="name"  bindchange="typeChange">
+            <view wx:if="{{app[type].list[index].typeIndex}}">
+              <view class="weui-select weui-select_in-select-after" style="text-align:right;">{{types[app[type].list[index].typeIndex].name}}</view>
+            </view>
+            <view wx:else>
+              <view class="weui-select weui-select_in-select-after" style="color: #999;text-align:right;">请选择</view>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">状态</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker range="{{status}}" range-key="name"  bindchange="statusChange">
+            <view wx:if="{{app[type].list[index].statusIndex}}">
+              <view class="weui-select weui-select_in-select-after" style="text-align:right;">{{status[app[type].list[index].statusIndex].name}}</view>
+            </view>
+            <view wx:else>
+              <view class="weui-select weui-select_in-select-after" style="color: #999;text-align:right;">请选择</view>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" wx:if="{{app[type].list[index].statusIndex==0}}">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label" style="width: 400rpx;">通话时长(分:秒)</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input style="" class="weui-input" placeholder="如  00:23" name="videoLength" id="videoLength" value="{{app[type].list[index].videoLength}}" bindinput="bindContent" ></input>
+        </view>
+      </view>
+
+    </view>
+
+    <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<template is="selectUser" data="{{showEditUser:showEditUser,list:list}}"></template>

@@ -1,0 +1,34 @@
+<view class="container">
+	<image class="top-img" src="http://ovhvevt35.bkt.clouddn.com/day/invite_top.png"></image>
+	<view class="top-layout">
+		<view class="first-layout">
+			<view class="tip">亲,快把你的生日告诉我吧~等你生日的时候会收到我的祝福哦!</view>
+		</view>
+		<view class="second-layout">
+			<view class="from-label">--From</view>
+			<image class="from-avatar" src="{{birth_info.avatar}}"></image>
+		</view>
+	</view>
+	<view class="bg-layout">
+		<image class="my-avatar" src="{{birth_info.avatar}}"></image>
+		<view class="name">{{birth_info.name}}</view>
+		<view class="birth-layout">
+			<view class="label">生日</view>
+			<view class="chooseDate">
+         <picker mode="date" value="{{birth_year}}{{birth_month}}{{birth_day}}" start="" end="" bindchange="bindDateChange">
+              <view class="weui-input">{{birth_year}}-{{birth_month}}-{{birth_day}}</view>
+          </picker>
+      </view>
+		  </view>
+		<view class="phone-layout">
+			<view class="label">手机</view>
+			<input bindinput="bindPhoneInput" class="input-phone" placeholder="开启你的祝福墙 (选填)"
+			placeholder-style="input-class" value="{{phone}}" />
+		</view>
+		<view class="share" bindtap='sendShare'>确定告诉他	</view>
+	</view>
+	<view class="tip-layout">
+		<view class="text1">	•填写完后,你也将获得的生日。</view>
+		<view class="text1">•你的生日信息只有他可见。</view>
+	</view>
+</view>

@@ -1,0 +1,58 @@
+  <view class="page" style="backgroud-color:#ffffff;overflow-x: hidden;padding-bottom:100rpx;">
+    <view style="height:16px;backgroud-color:#efefef;">
+    </view>
+    <view class='hotlistItemView' bindtap='avatarclick'>
+      <view class='avatarView'>
+        <image class='hotlistAvatar' mode='aspectFill' src='{{vote.creater.wxInfo.avatarUrl}}'></image>
+      </view>
+      <view class='unameAndTagsView'>
+        <text class="uname">{{vote.creater.wxInfo.nickName}}</text>
+        <text class="tags">{{vote.createTime}}</text>
+      </view>
+      <view class="aready_end">
+        <text class="{{vote.isEnd?'aread_end_test':'ing_test'}}">{{vote.voteTag}}</text>
+      </view>
+    </view>
+    <view class="vote_theme">
+      {{vote.theme}}
+    </view>
+    <view wx:if="{{vote.imgurl.length > 0}}">
+      <image mode="scaleToFill" class="theme_img" bindtap="lookBig" src="{{vote.imgurl}}"></image>
+    </view>
+    <view class="weui-cells__title select_title">
+      <text class="max_select">{{vote.selectType}}</text>
+      <text class="count_select" wx:if="{{vote.hasVote || vote.isEnd}}">共 {{vote.selectCount}} 票</text>
+    </view>
+    <view class="weui-cells weui-cells_after-title" style="border-bottom:0px solid red;">
+      <checkbox-group>
+        <block wx:for="{{vote.options}}">
+          <view>
+            <label bindtap="checkboxChange" data-option-id="{{item.id}}" data-index="{{index}}" class="{{item.checked && vote.hasVote?'weui-cell weui-check__label check_bg':'weui-cell weui-check__label'}}" wx:key="value" style="border-top:1px solid #d9d9d9;;">
+              <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                <image class="weui-icon-checkbox_circle check_img" mode='scaleToFill' src="{{item.checked?'../../imgs/selected.png':'../../imgs/unselected.png'}}"></image>
+              </view>
+              <view class="weui-cell__bd option_name">{{item.comment}} </view>
+              <view class="ticket_count" wx:if="{{vote.hasVote || vote.isEnd}}">{{item.voteUsers.length}} 票</view>
+            </label>
+            <view class="signup_container signup_container_item" wx:if="{{item.showVoteUser && item.voteUsers.length > 0}}">
+              <block wx:for="{{item.voteUsers}}" wx:for-item="user">
+                <image class="signup_item" src="{{user.wxInfo.avatarUrl}}" />
+              </block>
+              <text class="signup_text">已投票</text>
+            </view>
+          </view>
+        </block>
+      </checkbox-group>
+    </view>
+    <view class="weui-cells__tips end_time">截止时间:{{vote.endTime}}</view>
+    <view class="signup_container" wx:if="{{vote.users.length > 0 && vote.shouldVoteShow }}">
+      <block wx:for="{{vote.users}}" wx:for-item="item">
+        <image class="signup_item" src="{{item.wxInfo.avatarUrl}}" />
+      </block>
+      <text class="signup_text">已投票</text>
+    </view>
+    <button bindtap="submit" class="weui-btn" disabled="{{!vote.checkingCount > 0}}" wx:if="{{!vote.hasVote && !vote.isEnd}}" type="primary">确定</button>
+     <view class="bottom_publish_view" bindtap="lookList">
+      <text class="bottom_publish">查看列表</text>
+    </view> 
+  </view>

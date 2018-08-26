@@ -1,0 +1,135 @@
+<view class="header">
+  <view class="block" bindtap="goToHistoryShare">
+    <view class="img-box"><image src="{{userInfo.headImgUrl}}"></image></view>
+    <text>{{userInfo.nickName}}</text>
+    <image class="backicon" src="{{IMG_PATH}}/backicon.png"></image>
+  </view>
+  <view class="items">
+    <view class="item" data-page="myWallet" bindtap="goToNewPage">
+      <image class="coin" src="{{IMG_PATH}}/coin.png"></image>
+      <text>嘀嘀币：{{userInfo.amount}}</text>
+    </view>
+    <view class="item" data-page="myDevice" bindtap="goToNewPage">
+      <!-- <text>分享：{{userInfo.sharePictureNum + userInfo.shareDeviceNum}}</text> -->
+      <text>设备：{{userInfo.deviceCount }}</text>
+    </view>
+    <view class="item">
+      <text>爱心：{{userInfo.electric}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="list-group">
+  <view class="list-item" data-page="myWallet" bindtap="goToNewPage">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/mywallet.png"></image>
+    </view>
+    <view class="list-text">我的钱包</view>
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view>
+
+  <view class="list-item" data-page="myDevice" bindtap="goToNewPage">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/mydev.png"></image>
+    </view>
+    <view class="list-text">我的设备</view>
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view>
+
+  <view class="list-item" data-page="userInfo" bindtap="goToNewPage">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/myinfo.png"></image>
+    </view>
+    <view class="list-text">我的信息</view>
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view>
+
+  <view class="list-item" data-page="followList" bindtap="goToNewPage">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/myfollow.png"></image>
+    </view>
+    <view class="list-text">我的关注</view>
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view>
+
+  <view class="list-item" data-page="fansList" bindtap="goToNewPage">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/myfans.png"></image>
+    </view>
+    <view class="list-text">我的粉丝</view>
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view>
+
+   <view class="list-item notice" bindtap="goToNotice">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/mynews.png"></image>
+    </view>
+    <view class="list-text">我的通知</view>
+     <view class="tip" wx:if="{{userInfo.hasUnReadAct!=0 || userInfo.hasUnReadChat!=0}}"></view> 
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view> 
+
+  <!-- <view class="list-item" data-page="myCode" bindtap="goToNewPage">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/myCode.png"></image>
+    </view>
+    <view class="list-text">我的二维码</view>
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view> -->
+
+   <view class="list-item" data-page="myCode" bindtap="goToNewPage">
+    <view class="list-icon">
+      <image src="{{IMG_PATH}}/myCode.png"></image>
+    </view>
+    <view class="list-text">邀请好友</view>
+    <view class="list-back">
+      <image src="{{IMG_PATH}}/backicon.png"></image>
+    </view>
+  </view> 
+  
+  <view class="list-item1" data-page="myCode" >
+    <view class="list-text1">版本号：v2.3.67</view>
+  </view>
+</view>
+
+
+ <view class="nav">
+<view class="" bindtap="homePage">
+    <image src="{{IMG_PATH}}/shouye.jpg"></image>
+    <view>首页</view>
+  </view>
+  <view class="" bindtap="goToShare">
+    <image src="{{IMG_PATH}}/fangdian.png"></image>
+    <view>发布</view>
+  </view>
+   <view class="scanCode" bindtap="scanCode">
+    <image src="{{IMG_PATH}}/chudian.png"></image>
+     <view>扫一扫</view> 
+  </view>
+  <view class="" bindtap="goToMap">
+    <image src="{{IMG_PATH}}/laidian.png"></image>
+    <view>触电</view>
+  </view>
+
+
+
+  <view class="" >
+    <image src="{{IMG_PATH}}/wode2.png"></image>
+    <view>我的</view>
+  </view>
+
+</view>

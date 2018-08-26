@@ -1,0 +1,121 @@
+<!--index.wxml-->
+<block wx:if="{{showHome}}">
+<view class="container H bge oh">
+  <view class="F_ jcc">
+    <!-- <button class='m30' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+    <button class='m30' wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 暂未授权 </button>
+    <block wx:else>
+      <image class="r w64 h64 m30" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    </block>
+  </view>
+  <view class="tc cyellow f16 b">
+    <view>选一张海报图上传</view>
+    <view>来宣传你的活动</view>
+  </view>
+  <view class="f">
+    <image class="w120 mt50" bindtap="addImg" src="../../image/camera_big2.png" mode="widthFix"></image>
+  </view>
+  <view class="tc mt10 f14 c7 pb50 dn">请勿上传色情以及其他违禁图片</view>
+  <view class="contact pb50">
+    <text class="iconfont icon-message f18 dib vtt c7"></text>
+    <button class="f14 c7 dib h20 lh20 p0" open-type="contact" session-from='puzzles' style="border-color:#fff;">联系客服</button>
+  </view>
+  
+</view>
+</block>
+
+<block wx:if="{{showCanvas}}">
+<view class="container H bg3 oh">
+  <view class="f F W bbox">
+     <canvas class="W bbox" canvas-id="mycanvas" bindtouchend="touchEnd" bindtouchmove="touchMove" disable-scroll="true" style="height:{{canvasHeight}}px">
+     </canvas> 
+  </view>
+  <view class="F_ cf f16 bbox h50 lh50">
+    <view class="f pl20" bindtap="cancel">取消</view>
+    <view class="f tr pr20 cyellow bt3" bindtap="next">下一步</view>
+  </view>
+</view>
+</block>
+
+<block wx:if="{{showMemberInfo}}">
+  <view class='container oh bge f14'>
+    <view class="c3 r5 bbox f12 W9 mt10 p10">
+        <view class='tc h50 lh50 f16'>发布海报拼图需完善您的信息</view>
+        <view class="F_ bbc btc h40 lh40 dn">
+          <label class="tr w60">公开信息</label>
+          <view class='f pl5'>
+            <radio-group bindchange="changeRadioInfo">
+              <label class="radio">
+                <radio value="SHOW" checked="checked"/>公开
+              </label>
+              <label class="radio ml15 dn">
+                <radio value="SHOW_AFTER_FINISH"/>完成拼图才公开
+              </label>
+            </radio-group>
+          </view>
+        </view>
+        <view class="F_ bbc btc h40 lh40 dn">
+          <label class="tr w60">性别限制</label>
+          <view class='f pl5'>
+            <radio-group bindchange="changeRadioSex">
+              <label class="radio">
+                <radio value="all" checked="checked"/>不限
+              </label>
+              <label class="radio ml15">
+                <radio value="girl"/>女
+              </label>
+              <label class="radio ml15">
+                <radio value="boy"/>男
+              </label>          
+            </radio-group>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60">微信号</label>
+          <view class='f pl5 ell'>
+            <input class='ell' type='text' bindinput="getWx"></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60">联系人</label>
+          <view class='f pl5'>
+            <input class='ell' type='text' bindinput="getName"></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60">联系电话</label>
+          <view class='f pl5'>
+            <input class='ell' type='tel' bindinput="getTel"></input>
+          </view>
+        </view>      
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4 dn">
+          <label class="tr w60">详细地址</label>
+          <view class='f pl5'>
+            <input class='ell' type='text' bindinput="getAddress"></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4" bindtap="chooseMap">
+          <label class="tr w60">我的位置</label>
+          <view class='f pl5'>
+             <input class='ell' type='button' disabled='true' placeholder='选择公司或店铺位置' value="{{mapInfo?mapInfo.address:''}}"></input> 
+          </view>
+          <view class="pl5"><icon class="iconfont icon-coordinates f20"></icon></view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4 dn">
+          <label class="tr w60">距离限制</label>
+          <view class='f pl5'>
+            <input class='ell' type='digit' bindinput="getDiffDistance" placeholder='只有距您这个范围内的人才可以参与'></input>
+          </view>
+        </view>
+        <view class="F_ bgf r2 mt10 h40 lh40 bbox p0-10 ell r4">
+          <label class="tr w60">Logo：</label>
+          <view class='f pl5 bbox h40' bindtap="uploadLogo">
+            <image class="w35 h35 m2 r" mode="aspectFill" src="{{logo}}"></image>
+          </view>
+        </view>
+        <view class="F_">
+          <button class="bgyellow mt20 r5 W7 cf f14" bindtap="submitInfo">保存</button>
+        </view>
+    </view>  
+  </view>
+</block>

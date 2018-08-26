@@ -1,0 +1,42 @@
+<!--pages/profile/profile.wxml-->
+<scroll-view scroll-y="false" class="content">
+    <image style="width:100%;height:1114rpx" src="https://wangjue666.github.io/img/profile.png"></image>
+    <image class="custom" src="../../img/customServer.png"></image>
+    <button style="opacity:0" open-type="contact" class="custom"></button>
+    <image id="userImg" style="width:120rpx;height:120rpx;" src="{{userInfo.avatarUrl}}"></image>
+    <view class="user-grade">
+        <text>{{userInfo.nickName}}共获得</text>
+        <text class="user-num">{{nToy}}</text>个娃娃
+    </view>
+    <view class="common left-info">
+        <view>
+            <text>{{changeNum}}<text class="smallSize">次</text></text>
+        </view>
+        挑战机会
+
+    </view>
+    <view class="common center-info">
+        <view>
+           <text>{{hasChanged}}<text class="smallSize">次</text></text>
+        </view>
+        已挑战
+    </view>
+    <view class="common right-info">
+        <view>
+          <text>1<text class="smallSize">个</text></text>
+        </view>
+        邀请码
+    </view>
+    <button open-type="share" class="showGrade">炫耀战绩</button>
+    <button class="getChance"  bindtap="bShow">获得挑战机会</button>
+    <view class="share-mask" style="display:{{showMask}}">
+        <view class="mask-content">
+            <icon bindtap="bShow" color="white" size="25" type="cancel"></icon>
+            <view class="mask-header">获得更多挑战机会</view>
+            <view class="share-wrap">
+                <button open-type="share" >分享到不同的群挑战机会+1</button>
+            </view>
+            <image id="shareBtn" src="../../img/shareBtn.jpg"></image>
+        </view>
+    </view>
+</scroll-view>

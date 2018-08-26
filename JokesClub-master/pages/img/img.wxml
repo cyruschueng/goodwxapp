@@ -1,0 +1,55 @@
+<scroll-view scroll-y="true" bindscrolltolower="bindscrolltolower" style="height: 100%">
+  <block wx:for-items="{{list}}">
+    <!-- 分割线 -->
+    <view class="divLine"></view>
+    <!-- 整体样式 -->
+    <view class="bigList">
+      <!-- 头部个人头像 -->
+      <view class='containerTop'>
+        <view>
+          <image src='{{item.profile_image}}' class='profileImage'></image>
+        </view>
+        <view class='topRightView'>
+          <text class='topRightName'>{{item.name}}</text>
+          <text class='topRightTime'>{{item.create_time}}</text>
+        </view>
+      </view>
+      <text style="font-size: 30rpx">{{item.text}}</text>
+      <!-- 这里应该去判断是什么图 is_gif就是判断是否为gif -->
+      <view wx:if="{{item.is_gif != 0}}" style="position: relative;">
+        <image class="centerContent" src="{{item.cdn_img}}" mode="aspectFill" />
+      </view>
+      <!-- 普通大图 可点击查看全部图片 -->
+      <view data-url="{{item.cdn_img}}" data-height="{{item.height}}" data-width="{{item.width}}"
+            bindtap="lookBigPicture" wx:elif="{{item.is_gif == 0}}" style="position: relative;">
+        <!-- 图片资源 -->
+        <image class="centerContent" src="{{item.cdn_img}}" mode="aspectFill" />
+        <!-- 图片上浮动的点击查看详情图片view -->
+        <view class="flexView">
+          <text class="flexText">点击查看全图</text>
+        </view>
+      </view>
+      <!-- 底部view样式 -->
+      <view class='contentBottom'>
+      <view class='bottomItemView' bindtap="loveDz">
+        <image src='../images/ding.png' class='contentIcon'></image>   <!-- 点赞icon-->
+        <text class='doNum'>{{item.ding}}</text>    <!-- 点赞人数-->
+      </view>
+      <view class='bottomItemView' bindtap="hateDz">
+        <image src='../images/cai.png' class='contentIcon'></image>   <!-- 不喜欢icon-->
+        <text class='doNum'>{{item.hate}}</text>    <!-- 不喜欢人数-->
+      </view>
+      <view class='bottomItemView' bindtap="shareDz">    <!-- 这个接口没有转发和评论的人数 -->
+        <button open-type="share" class='btn'>
+          <image src='../images/share.png' class='contentIcon'></image>   <!-- 转发icon-->
+          <text class='doNum'>{{item.repost}}</text>    <!-- 转发人数-->
+        </button>
+      </view>
+      <view class='bottomItemView' id='{{item.id}}' bindtap="commentDz">
+        <image src='../images/comment.png' class='contentIcon'></image>   <!-- 评论icon-->
+        <text class='doNum'>{{item.comment}}</text>    <!-- 评论人数-->
+      </view>
+    </view>
+    </view>
+  </block>
+</scroll-view>

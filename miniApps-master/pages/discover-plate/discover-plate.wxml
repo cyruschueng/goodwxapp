@@ -1,0 +1,97 @@
+<view class='discover' catchtap='close'>
+  <!-- 此代码别要删除,以后有用 -->
+  <!-- <view class='initiate-exhibition the-second'>
+
+  <view class='initiate-exhibition the-second'>
+
+    <view>
+      <image class='initiate-left' src='/images/icon/home_sign.png'></image>
+      <text class='initiate-text'>享七吃货</text>
+    </view>
+
+  </view>
+
+  <view class='scroll_box'>
+    <scroll-view scroll-x="true" class='scroll_anchor'>
+      <block wx:for="{{hotlive}}" wx:key="{{index}}">
+         <view id="green" class="anchor bc_green">
+           <image class='anchor_img' mode="aspectFill" src='{{item.vedioUrl}}'></image> 
+           <image class='live-Images' src='/images/icon/dot_mos.png'></image> 
+          <text class='on-line'>{{item.clickNum}}</text>
+          <view class='cate_site'>
+            <text class='live-streaming'>{{item.title}}</text>
+            <text class='live-name'>{{item.summary}}</text>
+          </view>
+        </view> 
+      </block>
+    </scroll-view>
+  </view> -->
+
+   <!-- <view class='initiate-exhibition the-second'>
+    <view>
+      <image class='initiate-left' src='/images/icon/home_sign.png'></image>
+      <text class='initiate-text'>美食栏</text>
+    </view>
+  </view>  -->
+
+    <view class='distop'>
+    <button class="topall {{isscelect==1?'xuanzhong':''}}" catchtap='topall'>全部</button>
+    <button class="topbus {{isscelect==2?'xuanzhong':''}}" catchtap='topbus'>店家美文</button>
+    <button class="topper {{isscelect==3?'xuanzhong':''}}" catchtap='topper'>美食写手</button>
+    <view class='sect' catchtap='sect'>{{tect}}
+      <image class="sectimg {{ishotnew?'sectxz':''}}" src='/images/icon/xialatupian.png'></image>
+    </view>
+    <view class='newhot' wx:if="{{ishotnew}}">
+      <button class='mostnew' catchtap='mostnew'>最新</button>
+      <button class='mosthot' catchtap='mosthot'>最热</button>
+    </view>
+  </view>  
+
+  <view class='distop2'></view>
+  <view wx:if="{{food.length > 0}}" wx:for="{{food}}" wx:key="{{index}}" class='datafor'>
+    <view id="{{item.id}}" catchtap="clickarticle" class="scroll_user find">
+      <view class='merchant_data'>
+        <image src='{{item.iconUrl}}'></image>
+        <view>
+          <text class="merchant_name">{{item.nickName}}</text>
+          <text class="merchant_time">{{item.timeDiffrence}}</text>
+        </view>
+      </view>
+      <view class='finddes'>
+        <image class='cateWallImg findimg' mode="aspectFill" src='{{item.homePic}}'></image>
+        <view class='DescriptionText findtext'>{{item.summary}}</view>
+        <view class='gastronomeName'></view>
+      </view>
+      <view class='otherdata'>
+        <view class='browsing'>
+          <image src='/images/icon/tuoyuan_w.png' class='tuoyuan'></image>
+         
+          <text class='text_wz'>{{item.hitNum}}</text>
+           <!-- {{item.scan}}  -->
+        </view>
+        
+        
+        <!-- <view class='reward'>
+          <image src='/images/icon/find_gold.png' class='find_flold'></image>{{item.reward}} 打赏
+        </view> -->
+
+        <view class='evaluate'>
+          <image src='/images/icon/word.png' class='word'></image>
+           <text class='text_wz'>{{item.commentNum}}</text>
+        </view>
+
+        <view class='forwarding'>
+          <image src='/images/icon/find_share.png' class='findshare'></image>
+          <text class='text_wz'>{{item.transNum}}</text>
+          
+           <!-- {{item.convey}}  -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{food.length < 1}}" class='placeholder'>
+    <image src="/images/icon/zhanweitu.png"></image>
+  </view>
+  <image catchtap='announceState' class='publish-dynamic-condition' src='/images/icon/send_dongtai.png'></image>
+
+</view>

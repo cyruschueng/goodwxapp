@@ -1,0 +1,19 @@
+<!--pages/myTeam/myTeam.wxml-->
+<view class='container'>
+  <view class='myTeam'>
+    <view class='myTeam-item' wx:for='{{myTeam}}' wx:key='code'>
+      <view class='memberInfo'>
+        <image class='memberPic' src='{{item.avatars}}'></image>
+        <view>
+          <view class='memberName'>{{item.nickname}}</view>
+          <view class='memberLevel'>{{item.grade}}</view>
+        </view>
+      </view>
+      <view class='teamInfo'>
+        <view class='money'>提成金额：￥{{item.comm}}</view>
+        <view class='joinTime'>入团时间：{{item.inputtime}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='section-ft'>没有更多啦</view>
+</view>

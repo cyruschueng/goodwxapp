@@ -1,0 +1,53 @@
+<view class="page header">
+  <view class="fui-tab fixed fui-tab-danger">
+    <view bindtap="myTab" data-cate="" class="item {{cate == '' ? 'active' : ''}}">未使用</view>
+    <view bindtap="myTab" class="item {{cate == 'used' ? 'active' : ''}}" data-cate="used">已使用</view>
+    <view bindtap="myTab" class="item {{cate == 'past' ? 'active' : ''}}" data-cate="past">已过期</view>
+  </view>
+  <navigator hover-class="none" open-type="redirect" url="/pages/sale/coupon/index/index" class="btn btn-default-o block" wx:if="{{closecenter != 1}}">
+    <image src="/static/images/icon/gifts.png"></image>
+    <text>赶紧去领券中心看看更多优惠券~</text>
+  </navigator>
+  <view class="coupon-container coupon-index-list" wx:if="{{total > 0}}">
+    <block wx:for="{{list}}">
+      <view bindtap="jump" class="coupon-index-list-a {{item.color}}" data-id="{{item.check == 0 ? item.id : ''}}">
+        <view class="fui-list coupon-list">
+          <i class="coupon-top-i"></i>
+          <i class="coupon-bot-i"></i>
+          <view class="coupon-ling">
+            <image src="{{approot}}template/mobile/default/static/images/coupon/{{item.imgname}}.png"></image>
+          </view>
+          <view class="fui-list-inner coupon-index-list-left">
+            <b class="tagtitle">{{item.tagtitle}}</b>
+            <div class="coupon-index-list-info fui-list noclick">
+              <div class="fui-list-media">
+                <image src="{{item.thumb || approot + 'template/mobile/default/static/images/coupon/coupon-list-img.png'}}"></image>
+              </div>
+              <div class="fui-list-inner">
+                <view class="h3">{{item.couponname}}</view>
+                <view class="coupon-full">
+                  {{item.title2}}
+                </view>
+                <view class="coupon-time" wx:if="{{item.timestr == 0}}">永久有效</view>
+                <view class="coupon-time" wx:elif="{{item.timestr == 1}}">即 {{item.gettypestr}} 日内 {{item.timedays}} 天有效</view>
+                <view class="coupon-time" wx:else>有效期 {{item.timestr}}</view>
+              </div>
+            </div>
+          </view>
+          <view class="fui-list-media coupon-index-list-right">
+            <view class="forth0 circle coupon-list-canvas"></view>
+            <view class="coupon-list-ling" wx:if="{{item.check == 2}}">已过期</view>
+            <view class="coupon-list-ling" wx:elif="{{item.check == 1}}">已使用</view>
+            <view class="coupon-list-ling" wx:else>立即使用</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="fui-loading empty" wx:if="{{loaded && list.length > 0}}">
+    <view class="text">没有更多了</view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{total <= 0 && !loading}}">
+    <view class="text">没有数据</view>
+  </view>
+</view>

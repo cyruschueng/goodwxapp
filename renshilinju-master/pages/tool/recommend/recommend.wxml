@@ -1,0 +1,43 @@
+<!--pages/mine/recommend/recommend.wxml-->
+<view class="content">
+  <view class="recommend">
+    <view class='box'>
+      <label class='name'>姓名:</label>
+      <input type='text' placeholder='请输入真实姓名(必填)' bindinput='name'></input>
+    </view>
+    <view class='box'>
+      <label class='name'>电话:</label>
+      <input type='text' placeholder='请输入11位手机号(必填)' bindinput='tel'></input>
+    </view>
+    <view class='box'>
+      <label class='name'>备注:</label>
+      <input type='text' placeholder='请输入备注信息(选填)' bindinput='beizhu'></input>
+    </view>
+    <view class='box box1'>
+      <label class='name cheked'>选择标签(可选1-3个)</label>
+    </view>
+    <checkbox-group class='free-radios' bindchange="checkChange">
+      <label bindtap="click" wx:for="{{items}}" wx:key="{{items}}" class="free-radio {{item.checked?'is_checked':''}}">
+        <checkbox value="{{item.name}}" name="{{item.value}}" checked="{{item.checked}}" hidden='true'></checkbox>
+        <label class="free-text">{{item.value}}</label>
+      </label>
+    </checkbox-group>
+  </view>
+  <button loading="{{loading}}" class='fabu' bindtap='recommendPosts'>发布</button>
+  <view class='wtitle'>只有{{xqname}}的邻居才能看到您的信息！</view>
+</view>
+<!--mask-->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <!--drawer content-->
+  <view class="drawer_title">添加新标签</view>
+  <view class="drawer_content">
+    <view class="top grid">
+      <input class="input_base input_h30 col-1" name="rName" bindinput='getnew' placeholder="添加新标签"></input>
+    </view>
+  </view>
+  <view class="btn_ok" bindtap="addNew" data-statu="close">确定</view>
+</view>

@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<!--index.wxml-->
+<import src="/zanui/toast/index.wxml" />
+<view class="container page__bd" >
+  <view class="weui-cells__title"></view>
+  <form bindsubmit="formSubmit" id="formSubmit" style="width: 100%;">
+
+      <text style="color:#666;font-size: 13px;margin: 0 10px;" >群聊名称</text>
+      <view class="weui-cells weui-cells_after-title" >
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="群聊" name="name" value="{{weixin.qunliao.name}}"/>
+          </view>
+        </view>
+      </view>
+      <text style="color:#666;font-size: 13px;margin: 0 10px;margin-top: 15px;" >群聊人数</text>
+      <view class="weui-cells weui-cells_after-title" >
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="10" type="number" name="counts" value="{{weixin.qunliao.counts}}"/>
+          </view>
+        </view>
+      </view>
+
+      <text style="color:#666;font-size: 13px;margin: 0 10px;margin-top: 15px;" >发言成员(默认第一个为自己)</text>
+      <view class="weui-cells weui-cells_after-title">
+          <view style="padding: 0 15px;">
+              <view class="weui-uploader">
+                  <view class="weui-uploader__bd">
+                      <view class="weui-uploader__files" id="uploaderFiles">
+                          <block wx:for="{{weixin.qunliao.users}}" wx:key="{{item}}">
+                              <view class="weui-uploader__file" style="margin: 6px 6px 6px 0;width: 165rpx;height: 213rpx;">
+                                  <image  bindtap="deleteImage" id="{{item.avatar}}" class="weui-uploader__img" src="{{item.avatar}}" mode="aspectFill" style="width: 165rpx;height: 165rpx;" />
+                                  <input bindinput="bindName" data-index="{{index}}" style="text-align: center;" maxlength="10" value="{{item.name}}" placeholder="请输入昵称" />
+                              </view>
+                          </block>
+                      </view>
+                      <view class="weui-uploader__input-box" style="width: 165rpx;height: 165rpx;margin: 6px 6px 6px 0;">
+                          <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                      </view>
+                  </view>
+              </view>
+          </view>
+      </view>
+
+      <text style="color:#666;font-size: 13px;margin: 0 10px;margin-top: 15px;" >聊天背景(可以不选，默认无背景)</text>
+      <view class="weui-cells weui-cells_after-title">
+          <view style="padding: 0 15px;">
+              <view class="weui-uploader">
+                  <view class="weui-uploader__bd">
+                      <view class="weui-uploader__files" wx:if="{{weixin.qunliao.bg.url}}">
+                          <view class="weui-uploader__file" style="margin: 6px 6px 6px 0;width: 165rpx;height: 165rpx;">
+                              <image  bindtap="deleteBg" class="weui-uploader__img" src="{{weixin.qunliao.bg.url}}" mode="aspectFill" style="width: 165rpx;height: 165rpx;" />
+                          </view>
+                      </view>
+                      <view wx:else class="weui-uploader__input-box" style="width: 165rpx;height: 165rpx;margin: 6px 6px 6px 0;">
+                          <view class="weui-uploader__input" bindtap="chooseBg"></view>
+                      </view>
+                  </view>
+              </view>
+          </view>
+      </view>
+
+    <button formType="submit"  class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

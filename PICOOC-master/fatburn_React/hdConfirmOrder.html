@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+    <title>确认订单</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="format-detection"content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ppublic.css">
+    <link rel="stylesheet" type="text/css" href="css/hdConfirmOrder.css?v=2017102001">
+</head>
+<body style="display: none;">
+<section class="container">
+    <aside class="row common info">
+        <div class="col-xs-12 col-sm-12 buy">
+            <div class="col-xs-12 col-sm-12">
+                <!--<img class="circle" src="image/confirmOrder/circle1.png"> <span>参营人：</span>
+                <span>为</span>  <img class="avatar" src="image/confirmOrder/avatar.png"> <span>Emma</span>-->
+                <span>购买人：</span><!--<img class="avatar" src="">--><span class="userName"></span>
+            </div>
+            <!--             <div class="col-xs-6 col-sm-6 right"><img class="circle" src="image/_confirmOrder/circle2.png"> <span>为其他人购买</span></div> -->
+        </div>
+    </aside>
+    <aside class="row common infoInput phone">
+        <div class="row col-xs-12 col-sm-12">
+            <div class="col-xs-2 col-sm-2 logo"><img src="https://cdn2.picooc.com/web/res/fatburn/image/sell/hdConfirmOrder/phone.png"></div>
+            <div class="col-xs-10 col-sm-10 tiaoZheng">
+                <!--<form action="#">-->
+                <input id="phoneNum" type="text" placeholder="您的手机号">
+                <!--</form>-->
+            </div>
+        </div>
+    </aside>
+    <aside class="row common infoInput wechat">
+        <div class="row col-xs-12 col-sm-12">
+            <div class="col-xs-2 col-sm-2 logo"><img src="https://cdn2.picooc.com/web/res/fatburn/image/sell/hdConfirmOrder/wechat.png"></div>
+            <div class="row col-xs-10 col-sm-10 sameHeight">
+                <div class="col-xs-8 col-sm-8 tiaoZheng">
+                    <!--<form action="#">-->
+                    <input id="wechatNum" type="text" placeholder="您的微信号">
+                    <!--</form>-->
+                </div>
+                <!--<div class="col-xs-6 col-sm-6">
+                    <form action="#" class="right check">
+                        <input type="checkbox">&emsp;<span>同手机号</span>
+                    </form>
+                </div>-->
+                <div class="row col-xs-4 col-sm-4 right check">
+                    <img id="samePhone" src="https://cdn2.picooc.com/web/res/fatburn/image/sell/hdConfirmOrder/order-3.png">&emsp;同手机号
+                </div>
+            </div>
+        </div>
+    </aside>
+    <aside class="row common good">
+        <div class="row col-xs-12 col-sm-12 aboutInfo">
+            <div class="col-xs-3 col-sm-3 infoImg"><!--<img src="image/hdConfirmOrder/good.jpg">--><img src=""></div>
+            <div class="col-xs-9 col-sm-9 infoDesc">
+                <div class="goodsName">
+                    <p></p>
+                </div>
+                <!--<p class="open">开营时间：2016年9月18日</p>-->
+                <p class="open beginTime">购买时间：<span class="year"></span>年<span class="month"></span>月<span class="day"></span>日</p>
+                <p class="price">¥<span class="new-price"></span></p>
+            </div>
+        </div>
+    </aside>
+    <!--<aside class="row common sameHeight youhui">
+        <div class="col-xs-12 col-sm-12">
+            <div class="col-xs-6 col-sm-6 status"><img src="image/confirmOrder/youhui.png">&emsp;<span class="aboutYouhui">优惠券</span></div>
+            <div class="col-xs-6 col-sm-6 right money"><span></span>&emsp;<img src="image/confirmOrder/more.png"></div>
+        </div>
+    </aside>-->
+    <aside class="row common jine">
+        <div class="col-xs-12 col-sm-12 first">
+            <div class="col-xs-6 col-sm-6 status">商品金额</div>
+            <div class="col-xs-6 col-sm-6 right money">¥<span class="new-price"></span></div>
+        </div>
+        <div class="col-xs-12 col-sm-12">
+            <div class="col-xs-6 col-sm-6 status">优惠金额</div>
+            <div class="col-xs-6 col-sm-6 right money youHuiMoney"></div>
+        </div>
+    </aside>
+    <aside class="empty">
+
+    </aside>
+    <aside class="row sameHeight pay" style="display: none;">
+        <div class="col-xs-6 col-sm-6 realyPay">实付款: &nbsp;<span>799</span></div>
+        <div class="col-xs-6 col-sm-6 submit right"><span clicked="0">提交订单</span></div>
+    </aside>
+    <aside class="alertBox">
+        <div class="alerts" style="display: none;">
+            已拍完，但还有人未付款，待会儿再来看看吧～
+        </div>
+        <div class="alerts" style="display: none;">
+            手慢了，名额被抢光啦～
+        </div>
+        <div class="alerts" style="display: none;">
+            同一账号只能购买一次哦!请核对参营人员信息～
+        </div>
+        <div class="alerts" style="display: none;">
+            请填写参营人员手机号码～
+        </div>
+        <div class="alerts" style="display: none;">
+            手机号填写有误，请重新核对哦～
+        </div>
+    </aside>
+
+    <aside class="row errorAlert">
+        <div class="col-xs-12 col-sm-12 error-main">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 error-main-t"></div>
+                <div class="col-xs-12 col-sm-12 error-main-btn">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 error-main-btn1">我知道了</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+</body>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.ellipsis.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" id="script1"></script>
+<script>
+    if(getParamByUrl("webver")>2){
+        if(getParamByUrl("os")=="android"){
+            $("#script1").attr("src","jsv1/hdConfirmOrder.js?v=3");
+        }
+        else{
+            var mobileApp=window.webkit.messageHandlers;
+            $("#script1").attr("src","jsv1/hdConfirmOrder.js?v=3");
+        }
+    }
+    else{
+        $("#script1").attr("src","js/hdConfirmOrder.js?v=3");
+    }
+</script>
+<!--<script type="text/javascript" src="js/hdConfirmOrder.js?v=2"></script>-->
+<script>
+    //百度统计上传代码
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAutoPageview', false]);
+    _hmt.push(['_trackPageview', location.pathname]);
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</html>

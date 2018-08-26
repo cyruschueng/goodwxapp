@@ -1,0 +1,47 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view id="companyInfo" wx:if="{{nonet}}">
+  <view class='title'>请尽可能的填写真实信息，有助于高效对接</view>
+  <!--姓名  -->
+  <view class="boxStyle bottomStyle" style="margin-top:106rpx">
+    <view class="projectBoxContent flex noBorder">
+      <view class="projectTitle">姓名*</view>
+      <input placeholder="请输入真实的姓名" placeholder-style='color:#ccc' class="newBox" bindblur="name" maxlength="40" value="{{name}}" />
+    </view>
+  </view>
+  <!--品牌  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex">
+      <view class="projectTitle">品牌</view>
+      <input placeholder="请输入品牌名称，如：微天使" placeholder-style='color:#ccc' class="newBox" bindblur="checkBrand" value="{{brand}}" maxlength="40" />
+    </view>
+  </view>
+  <!--公司  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex">
+      <view class="projectTitle">公司*</view>
+      <input placeholder="请输入公司全称" placeholder-style='color:#ccc' class="newBox" maxlength="40" value="{{company}}" bindblur="company" />
+    </view>
+  </view>
+  <!--职位  -->
+  <view class="boxStyle bottomStyle">
+    <view class="projectBoxContent flex noBorder">
+      <view class="projectTitle">职位*</view>
+      <input placeholder="请输入职位，如：CEO" placeholder-style='color:#ccc' class="newBox" maxlength="40" value="{{position}}" bindblur="position" />
+    </view>
+  </view>
+  <!--邮箱  -->
+  <view class="boxStyle">
+    <view class="projectBoxContent flex noBorder">
+      <view class="projectTitle">邮箱</view>
+      <input placeholder="请输入您常用的工作邮箱" placeholder-style='color:#ccc' class="newBox" bindblur="checkEmail" value="{{email}}" />
+    </view>
+  </view>
+  <!-- <button form-type="submit" hover-class='t-other-button-hover' class="nextBtn complete-infom" bindtap="backHome" loading="{{loading=='1'}}">
+    完成
+  </button> -->
+
+  <template is="buttonTwo" data="{{text:'提交',btnName:'backHome',disabled}}"></template>
+
+</view>
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>

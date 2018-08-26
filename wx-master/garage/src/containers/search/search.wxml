@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class="container fullPage">
+  <view class="sort">
+	     <view class="sortInput"><view class="input"><image class="searchIcon" src="../../../images/icon_search.png"></image><input confirm-type="search" type="text" placeholder="输入车牌/车型/手机号" value="{{searchText}}" data-key="searchText" bindinput="inputChange" bindconfirm="searchConfirm" focus="{{true}}" auto-focus="{{true}}"/><view class="clear" wx:if="{{searchText}}" bindtap="_clearSearch"><image src="../../../images/close.png" mode="scaleToFill" binderror="" bindload=""></image></view></view><view class="cancel_btn" bindtap="_cancel">取消</view></view>
+
+	</view>
+	<view class="tipPlanet fullPage" wx:if="{{!list.length}}">
+		<view class="firstIn">
+			<view class="import vc" wx:if="{{!noAnswer}}">
+          <view class="t1">输入部分信息即可搜索</view>
+          <view class="t2">如车牌为 <text class="strong">粤BN8008</text>，只需搜索 <text class="strong">粤BN88</text> 或 <text class="strong">008</text> 即可</view>
+          <view></view>
+			</view>
+      <view class="noAnswer" wx:else>
+          <image src="../../../images/noAnswer.png"></image>
+          <view>没有搜索到相关内容</view>
+      </view>
+		</view>
+	</view>
+	<view class="fullPage scroller_container" wx:else>
+     <view class='middleLine'><view class="middle_text">共{{fullListSize}}个订单</view></view>
+		<view wx:for="{{list}}" wx:key="{{list}}" data-status="{{item.status}}" data-id="{{item.id}}" bindtap="_toDetail">
+        <view class="item">
+              <view class="left">
+                <view class="carName">{{item.autoModelChnName}}</view>
+                <view class="userInfo space-between">
+                    <view class="info"><text>{{item.userName?item.userName:''}}</text><text>{{item.vehicleLicenceCode?item.vehicleLicenceCode:''}}</text></view>
+                    <view class="date"><text>{{item.dateStr}}</text></view>
+                </view>
+              </view>
+              <view class="right">
+                <view class="status status1" wx:if="{{item.status==1}}"><image src="../../../images/ic_state1.png"></image></view>
+                <view class="status status2" wx:if="{{item.status==2}}"><image src="../../../images/ic_state2.png"></image></view>
+                <view class="status status3" wx:if="{{item.status==3}}"><image src="../../../images/ic_state3.png"></image></view>
+                <view class="status status4" wx:if="{{item.status==4}}"><image src="../../../images/ic_state4.png"></image></view>
+                <view class="status status5" wx:if="{{item.status==5}}"><image src="../../../images/ic_state5.png"></image></view>
+                <view class="status status6" wx:if="{{item.status==6}}"><image src="../../../images/ic_state6.png"></image></view>
+              </view>
+        </view>
+		</view>
+		<view class="weui-loadmore" wx:if="{{isLoadMore}}">
+			<view class="weui-loading"></view>
+			<view class="weui-loadmore__tips">正在加载</view>
+		</view>
+	</view>
+</view>

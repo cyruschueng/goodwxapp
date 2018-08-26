@@ -1,0 +1,34 @@
+<swiper class="leave-word">
+  <object wx:for="{{leaveWords}}" wx:key="{{item._id}}">
+    <swiper-item class="leave-word-item">
+      <view class="card">
+        <view class="banner">
+          <image
+            class="banner-img"
+            mode="widthFix"
+            src="{{item.author.avatarUrl}}"
+          />
+        </view>
+
+        <view class="body">
+          <view class="body-times">
+            <view class="body-times-day">{{item.date}}</view>
+            <view class="body-times-right">
+              <view class="body-times-month">{{item.month}}月</view>
+              <view class="body-times-week">星期{{item.day}}</view>
+            </view>
+            
+          </view>
+          <view class="body-words">
+            {{item.cont}}
+          </view>
+          <view class="body-author">
+            --  {{item.author.nickName}}
+          </view>
+        </view>
+      </view>
+      
+    </swiper-item>
+  </object>
+</swiper>
+<button class="send-btn" size='mini' type='primary' bindtap='onSend'>发送留言</button>

@@ -1,0 +1,90 @@
+git pull error 
+http://blog.csdn.net/byoooy/article/details/52263404
+
+
+github本身不可以提交空文件夹。那么就需要使空文件夹不为空。
+命令行进入工程目录下，输入下面这句话：
+find . -type d -empty -exec touch {}/.gitignore \;
+
+---------------------------------git------------------------------------
+$ git clone <°æ±¾¿âµÄÍøÖ·> <±¾µØÄ¿Â¼Ãû>
+
+$ git remote -v
+
+$ git pull <Ô¶³ÌÖ÷»úÃû> <Ô¶³Ì·ÖÖ§Ãû>:<±¾µØ·ÖÖ§Ãû>
+git pull=git fetch+git merge¡£
+
+$ git push <Ô¶³ÌÖ÷»úÃû> <±¾µØ·ÖÖ§Ãû>:<Ô¶³Ì·ÖÖ§Ãû>
+
+ÐÂ½¨·ÖÖ§git branch test
+ÇÐ»»·ÖÖ§git checkout test	
+É¾³ý·ÖÖ§git branch -d test
+
+
+
+"git reset HEAD" ÃüÁîÊ±£¬ÔÝ´æÇø±» master ·ÖÖ§Ö¸ÏòµÄÄ¿Â¼Ê÷ËùÌæ»»£¬¹¤×÷Çø²»ÊÜÓ°Ïì¡£
+
+"git rm --cached <file>" ÃüÁîÊ±£¬»áÖ±½Ó´ÓÔÝ´æÇøÉ¾³ýÎÄ¼þ£¬¹¤×÷ÇøÔò²»×ö³ö¸Ä±ä¡£
+
+"git checkout ." ("git checkout -- <file>" )£¬ÔÝ´æÇøÌæ»»¹¤×÷ÇøµÄÎÄ¼þ¡£Î£ÏÕ£¬Çå³ý¹¤×÷ÇøÎ´Ìí¼Óµ½ÔÝ´æÇøµÄ¸Ä¶¯¡£
+
+"git checkout HEAD ." ("git checkout HEAD <file>" )»áÓÃ HEAD Ö¸ÏòµÄ master ·ÖÖ§Ìæ»»ÔÝ´æÇø+¹¤×÷ÇøÖÐµÄÎÄ¼þ¡£Î£ÏÕ£¬Çå³ý¹¤×÷Çø+Çå³ýÔÝ´æÇø¸Ä¶¯¡£
+
+ÄÉÈë×´Ì¬¹ÜÀíÖ®ºó£¬²»ÊÜ×´Ì¬¹ÜÀí¿ØÖÆ
+git push -f git update - index--assume - unchanged logs /*.log"
+
+-----------------------------------------------------------------------
+
+
+GitÔÚÎ´½øÐÐcommit²Ù×÷Ö®Ç°£¬´æÔÚÈýÖÖ×´Ì¬£º
+Untracked files
+Changes not staged for commit
+Changes to be committed
+
+-----------------------------------------------------------------------
+ssh-keygen -t rsa -C "2500119617@qq.com"      ´´Ôì¹¦ÄÜ
+
+git config --global user.name "2500119617"
+git config --global user.email "2500119617@qq.com"
+
+git clone git@github.com:yuanzihtml/course-webapp.git
+
+cd course-webapp
+----------------------------master
+git status
+
+git add .
+
+git status
+
+git commit -a -m "innit project"
+
+git status
+
+git push
+
+
+
+git branch
+git checkout -b (branch name)
+
+
+
+  
+
+git remote add origin git@github.com:yuanzihtml/yuanzihtml..github.io.git
+
+»»³Éssh·½Ê½
+http-----
+git remote re origin
+git remote add origin git@github.com:........
+git push origin
+
+======================================
+[remote "origin"]
+	url = git@github.com:
+	fetch=+refs/heads/*:refs/remotes/origin/*
+[branch "master"]  
+
+	remote="origin"
+	merge=refs/heads/master

@@ -1,0 +1,65 @@
+<view id='joinWarband'>
+    <scroll-view scroll-y="true" style="height: 1334rpx;" bindscrolltolower="loadMore" scroll-top="{{scrollTop}}">
+        <!--搜索框  -->
+        <view class="search_frame">
+            <label class="searchBox flex">
+            <icon type="search" size="12" class="search_icon"></icon>
+            <input class="searchInput" placeholder="搜索战队名、创始人" value='{{str}}'  bindinput="searchSth"  /> 
+        </label>
+        </view>
+        <!--已加入战队  -->
+        <view class="joinedWarband paddingTop" wx:if="{{joinedWarband.length!=0}}">
+            <view class="text"><span class='blueLine'></span>已加入战队</view>
+            <block wx:for='{{joinedWarband}}' wx:key='{{item.team_id}}'>
+                <view class="warband flex">
+                    <view class="logo">
+                        <image wx:if="{{item.team_logo_text}}" src="/img/warband-logo.png"></image>
+                        <image wx:if="{{item.team_logo_url}}" src="{{item.team_logo_url}}"></image>
+                    </view>
+                    <view class="info">
+                        <view class="companyName">{{item.team_name}}</view>
+                        <view class="representative">代表人:{{item.team_founder}}</view>
+                    </view>
+                    <view class="checkbox fr">
+                        <image src="/img/checked.png" data-team='{{item}}' bindtap="checkbox2"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <!--所有战队  -->
+        <view class="allWarband {{joinedWarband.length!=0 ? '' : 'paddingTop'}}">
+            <view class="text"><span class='blueLine'></span>所有战队</view>
+            <block wx:for='{{warband}}' wx:key='{{index}}'>
+                <view class="warband flex"  data-team='{{item}}' data-index='{{index}}' bindtap="checkbox1">
+                    <view class="logo">
+                          <image wx:if="{{item.team_logo_text}}" src="/img/warband-logo.png"></image>
+                        <image wx:if="{{item.team_logo_url}}" src="{{item.team_logo_url}}"></image>
+                    </view>
+                    <view class="info">
+                        <view class="companyName">{{item.team_name}}</view>
+                        <view class="representative">代表人:{{item.team_founder}}</view>
+                    </view>
+                     <view class="checkbox fr" wx:if='{{item.check==true}}'>
+                        <image src="/img/checked.png"></image>
+                    </view> 
+                    <view class="checkbox fr" wx:if='{{item.check==false}}'>
+                        <image src="/img/noChecked.png"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <!--下部空档  -->
+        <view style='height:88rpx;'></view>
+    </scroll-view>
+
+    <!--错误提示-->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+    <!--按钮  -->
+    <view class="flex btnGroup" wx:if="{{btnType==1}}">
+        <view class="certain btn" bindtap='certain'>确定</view>
+        <view class="createWarband btn" bindtap='createWarband'>创建战队</view>
+    </view>
+    <view class="btnGroup" wx:if="{{btnType==2}}">
+        <view class="createWarband" bindtap='save'>保存</view>
+    </view>
+</view>

@@ -1,0 +1,21 @@
+<view class="container">
+	<view class="list-layout" wx:if="{{idolList}}">
+		<view class="item-layout" data-idol_id="{{item.idol_id}}" bindtap='goodInform' wx:for="{{idolList}}">
+			<image class="avatar" src="{{item.avatar}}"></image>
+			<view class="right-layout">
+				<view class="right-top-layout">
+					<view class="name">	{{item.name}}</view>
+					<view class="num">{{item.wish_count}}</view>
+					<image class="star" src="../images/star.png"></image>
+				</view>
+				<view class="birth">{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日</view>
+			</view>
+		</view>
+		<view class="follow" bindtap='goAtt'>	关注更多爱豆</view>
+	</view>
+	<view class="empty-layout" wx:else>
+		<image class="tip-follow" src="http://ovhvevt35.bkt.clouddn.com/day/empty_idol.png"></image>
+		<view class="tip-label">你还没有关注任何爱豆哦！ 快去寻找你的爱豆吧~</view>
+		<view class="go-follow" bindtap='goAtt'>去关注</view>
+	</view>
+</view>

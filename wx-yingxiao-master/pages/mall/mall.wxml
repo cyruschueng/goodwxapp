@@ -1,0 +1,58 @@
+<view class='container'>
+  <swiper autoplay indicator-dots indicator-active-color='#00a1ea' interval='3000'>
+    <swiper-item  wx:for="{{swiperItem}}" wx:key="{{*this}}" >
+      <image src='{{item.img}}' class='swiper'></image>    
+    </swiper-item>
+  </swiper>
+  <view class='mallMenu'>
+    <view wx:for="{{mallMenu}}" wx:key="{{*this}}" bindtap='tocatlist' data-index='{{index}}'>
+      <image src="{{item.cat_img}}"></image>
+      <text class="menuTitle">{{item.catname}}</text>     
+    </view>
+    <view bindtap='tocatlist' data-index='0'>
+      <image src="/pages/source/images/more.png"></image>
+      <text class="menuTitle">更多分类</text>        
+    </view>
+  </view>
+  <view class='bindtips' wx:if="{{tobindphone!='0'}}">
+    <view class='break'></view>
+    <view class='bindtip'>
+      <view class='bindleft'>
+        <image src='/pages/source/images/phone.png'></image>
+        <text>请绑定手机号使用更多功能.</text>    
+      </view>
+      <view class='bindright' bindtap='bindphone'>立即绑定</view>  
+    </view>
+
+  </view>
+  <view class='break'></view>
+  <view class='forVip'>
+    <view class="info-title" wx:if="{{push!='null'}}">
+      <text>推荐活动</text>
+    </view>
+    <view class='info-list'>
+      <view class='info-item' wx:for="{{vipContent}}" wx:key="{{*this}}" bindtap='toSell' data-cat='{{item.is_distribution}}' data-id='{{item.id}}'>
+        <image class='activeVIP' src='{{item.goods_img}}'></image>
+        <view class='cat'>
+          <image src='{{item.tip}}'></image>
+        </view>
+      </view>
+    </view>  
+  </view>
+  <view class='break'></view>
+  <view class="item">
+    <view class="info-title">
+      <text>推荐商品</text>
+    </view>
+    <view class='item-list'>
+      <view class="item-card" wx:for="{{childItem}}" wx:key="index" bindtap='toDetail' data-id='{{item.id}}'>
+        <image src="{{item.goods_img}}"></image>
+        <view class='itemTitle'>{{item.goods_name}}</view>
+        <view class='itemPrice'>
+          <text>¥{{item.goods_price}}</text>
+          <text>销量:{{item.salesvolume}}</text>
+        </view>
+      </view>    
+    </view>
+  </view> 
+</view>

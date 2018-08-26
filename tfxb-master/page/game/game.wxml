@@ -1,0 +1,87 @@
+<view class='slbd game {{gameLoad}}'>
+    <view class='question-num'>
+        <view class='animated anim-questionnumer {{questionLoad}}'>
+            <text class='num-line'></text>
+            <text class='num-val'>第 {{questionNumber}} 题</text>
+            <text class='num-line'></text>
+        </view>
+    </view>
+    <view class='question-title'>
+        <view class='animated anim-questiontitle {{questionLoad}}'>
+            <text class='title-text'>{{questionTitle}}</text>
+        </view>
+    </view>
+    <view class="question-main {{contentLoad}}">
+        <view class='count-box'>
+            <view class='progress-box'>
+                <view class='progress-hd'>
+                    <image class='icon-clock' src="../../asset/image/icon-clock.png" mode="aspectFit"></image>
+                </view>
+                <view class='progress left count-down'>
+                    <view class='progress-con'>
+                        <view class='progress-bar'>
+                            <view class='bar-hl barhl-time anim-time' style='height:{{countDownH}};transition-duration:{{countDownAnimTime}};'></view>
+                        </view>
+                        <view class='progress-max'>10s</view>
+                        <view class='progress-min'>0s</view>
+                    </view>
+                    <view class='progress-tip anim-time slhide' style='bottom:{{countDownH}};transition-duration:{{countDownAnimTime}};'>
+                        <text class='tip-val'>{{countDownVal}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='option-box'>
+            <view class='option-list {{choiceResClass}} {{questionLoad}}'>
+            <view class='option-item animated anim-option' wx:for="{{questionOptions}}" wx:key="{{index}}">
+                <view class="option-btn {{'option'+item.tag}} {{item.isanswer ? 'option-ok' : 'option-err'}}" bindtap="chooseOptFun" data-value="{{item.value}}" data-tag="{{item.tag}}" data-isanswer="{{item.isanswer ? true : false}}">
+                    <text class='option-text'>{{item.value}}</text>
+                    <!-- <text class='flex-box option-btn'>
+                        <text class='option-symbol symbol-right'>√</text>
+                        <text class='flex-item option-text'>{{item.value}}</text>
+                        <text class='option-symbol symbol-error'>×</text>
+                    </text>  -->
+                </view>
+            </view>
+            </view>
+        </view>
+        <view class='score-box'>
+            <view class='progress-box'>
+                <view class='progress-hd'>
+                    <image class='icon-score' src="../../asset/image/icon-score.png" mode="aspectFit"></image>
+                </view>
+                <view class='progress right score-total'>
+                    <view class='progress-con'>
+                        <view class='progress-bar'>
+                            <view class='bar-hl anim-score barhl-score' style='height:{{scoreTotalH}}' bindtransitionend="scoreTotalAnimEnd"></view>
+                        </view>
+                        <view class='progress-max'>1000</view>
+                        <view class='progress-min'></view>
+                    </view>
+                    <view class='progress-tip anim-score' style='bottom:{{scoreTotalH}}'>
+                        <text class='tip-val'>{{scoreTotalVal}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!--得分页  -->
+<view class='grade {{gradeLoad}}'>
+    <view class='grade-main animated anim-gradescore'>
+        <image class='grade-bg' src="{{gradeBgImgSrc}}" mode="widthFix"></image>
+        <view class='grade-info flex-box'>
+            <view class='flex-item'>
+                <view class="grade-star">
+                    <text class='iconstar-bg {{starBgHide}}'><text class="anim-resstar iconstar {{'star'+userStar}}"></text></text>
+                </view>
+                <view class="grade-score">
+                    <text class="grade-val">{{gradeScoreTotal}}分</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='grade-bag animated anim-gradebag'>
+        <image class='img-bag' src="../../asset/image/grade-bag.png" mode="widthFix"></image>
+    </view>
+</view>

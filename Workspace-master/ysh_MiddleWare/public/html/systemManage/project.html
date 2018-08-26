@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>控制台</title>
+    <link rel="stylesheet" type="text/css" href="../../Css/identify.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/account.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/style.css" />
+    <link rel="stylesheet" type="text/css" href="" />
+    <link rel="stylesheet" type="text/css" href="../../Css/control_index.css" />
+</head>
+
+<body>
+    <div class="view-body">
+        <div class="view-product" style="left: 0px;right: 0;top: 0px;">
+            <div class="authority">
+                <div class="authority-head">
+                    <div class="manage-head">
+                        <h6 class="layout padding-left manage-head-con">项目管理
+                                <span class="fr margin-large-right padding-top text-small text-normal"><em style="cursor: pointer" class="text-main" onclick="window.location.href='addOrEdit_Project.html?action=add'">添加</em></span>
+                            </h6>
+                    </div>
+                </div>
+                <div class="authority-content">
+                    <div class="list-content show">
+                        <div class="offcial-table tr-border margin-big-top clearfix">
+                            <div class="tr-th clearfix">
+                                <div class="th w25">
+                                    id
+                                </div>
+                                <div class="th w25">
+                                  	项目名称
+                                </div>
+                                <div class="th w25">
+                                    项目状态
+                                </div>  
+                                <div class="th w25">
+                                    操作
+                                </div>
+                            </div>
+                            <div id="view">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="show-page padding-big-right">
+                        <div class="page">
+                            <div class="page">
+                                <div id="pageView"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../Js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../../Js/haidao.offcial.general.js"></script>
+    <script type="text/javascript" src="../../Js/select.js"></script>
+    <script type="text/javascript" src="../../Js/laytpl.js"></script>
+    <script type="text/javascript" src="../../Js/layer.js"></script>
+    <script type="text/javascript" src="../../Js/haidao.validate.js"></script>
+    <script type="text/javascript" src="../../Js/public_fuc.js"></script>
+    <script>	
+	    $(function(){
+	    	var num = 0;
+            thisPageInitSearch(num,"select_project");
+	    })
+        
+        //初始化查询
+        function thisPageInitSearch(num,api){
+            var param = new Object;
+            param.num = num;
+            $.ajax({
+                url: "http://localhost:3000/MiddleWare/" + api,
+                dataType: "json",
+                async: true,
+                data: param,
+                type: "POST",
+                success: function(msn) {
+                    //列表数据
+                    for(var i=0;i<msn.aaData.length;++i){
+                        if(msn.aaData[i].projectStatus == 0){
+                            msn.aaData[i].projectStatus = "开启"
+                        } else{
+                            msn.aaData[i].projectStatus = "关闭"
+                        }
+                    }
+                    var data = msn.aaData;
+                    var view = $("#view");
+                    var tpl = $("#tpl").html();
+                    view.empty();
+                    showData(view,tpl,data);
+
+                    // 分页数据
+                    var data2 = msn.page;
+                    var allPages = parseInt(data2[0].count/10) + 1;// 总页数
+                    data2[0].pages = allPages;
+                    var pageView = $("#pageView");
+                    var pageTpl = $("#pageTpl").html();
+                    pageView.empty();
+                    showData(pageView,pageTpl,data2);
+                }
+            })
+        }
+        //下一页
+        var num = 0;
+        function nextPage (){
+            var allPages = $("#all").html();
+            num += 1;
+            if (num >= allPages) {
+                num = allPages -1;
+            }
+            thisPageInitSearch(num,"select_project")
+        }
+
+        //上一页
+        function prevPage (){
+            num -= 1;
+            if(num <= 0){
+                num = 0
+            };
+            thisPageInitSearch(num,"select_project");
+        }
+
+        //删除
+        function deleteDeveloper (id){
+            var param = new Object;
+            param.Id = id;
+
+            $.ajax({
+                url: "http://localhost:3000/MiddleWare/delete_project",
+                dataType: "json",
+                async: true,
+                data: param,
+                type: "POST",
+                success: function(msn) {
+                    if (msn.err && msn.err.status == 0) {
+                        location.reload();
+                    } else {
+                        alert(JSON.stringify(msn))
+                    }
+                }
+            })
+        }
+    </script>
+
+    <script id="tpl" type="text/html">  
+        <div class="tr clearfix border-bottom-none">
+            <div class="td w25">
+                {{d.Id}}
+            </div>
+            <div class="td w25">
+                {{d.projectName}}
+            </div>
+            <div class="td w25">
+                {{d.projectStatus}}
+            </div>
+            <div class="td w25">
+                <a href="addOrEdit_Project.html?id={{d.Id}}&action=search" class="button-word2 btn_ajax_confirm">查看</a>
+                <a href="addOrEdit_Project.html?id={{d.Id}}&action=editor" class="button-word2 btn_ajax_confirm">编辑</a>
+                <a href="#" msg="您是否确定删除" callback="deleteDeveloper({{d.Id}})" data-id="" class="button-word2 btn_ajax_confirm">删除</a>
+            </div>
+        </div>
+    </script>
+
+    <script id="pageTpl" type="text/html">
+        <ul class="offcial-page margin-top margin-big-right">
+            <li>共<em class="margin-small-left margin-small-right">{{d.count}}</em>条数据</li>
+            <li>每页显示<em class="margin-small-left margin-small-right">10</em>条</li>
+            <li>
+                <a class="next disable" onclick="prevPage()">上一页</a>
+            </li>
+            <li></li>
+            <li>
+                <a class="next disable" onclick="nextPage()">下一页</a>
+            </li>
+            <li><span class="fl">共<em class="margin-small-left margin-small-right" id="all">{{d.pages}}</em>页</span></li>
+        </ul>
+    </script>
+</body>
+
+</html>

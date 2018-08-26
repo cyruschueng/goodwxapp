@@ -1,0 +1,63 @@
+<view class="user_content">
+    <view class="Member_head">
+        <view class="Member_img domain">
+            <image class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
+            <view class="userinfo_name">{{userInfo.nickname}}</view>
+        </view>
+    </view>
+
+    <form bindsubmit="onPushSubmit" report-submit="true">
+        <view class="user_edit_con">
+
+            <!--<view class="user_account_info">您的余额还有<text>{{userInfo.user_balance}}</text>元</view>-->
+            <view class="user_edit_li">
+                <view class="user_edit_li_input">
+                    <text class="label">用户名</text>
+                    <input maxlength="8" placeholder="用户名" value="{{userInfo.user_id}}" disabled="true" />
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_input">
+                    <text class="label">姓名</text>
+                    <input maxlength="8" placeholder="8个汉字，16个英文字符" value="{{userInfo.user_name}}" disabled="true" />
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_input">
+                    <text class="label">部门</text>
+                    <input maxlength="11" value="{{userInfo.dept_name}}" disabled="true" />
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_input">
+                    <radio-group class="radio-group" bindchange="onBindDataChange" data-name="sex" disabled="true">
+                        <text class="sub radio-label">性别</text>
+                        <input type="number" hidden="true" name="SEX" value="{{sex||userInfo.sex}}" />
+                        <radio value="1" checked="{{userInfo.sex == 1}}" />男
+                        <radio value="0" checked="{{userInfo.sex == 0}}" />女
+                    </radio-group>
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_input">
+                    <text class="label">手机号</text>
+                    <input name="MOBIL_NO" maxlength="11" value="{{userInfo.mobil_no}}" />
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_input">
+                    <text class="label">地址</text>
+                    <input name="ADD_HOME" maxlength="128" value="{{userInfo.add_home}}" />
+                </view>
+            </view>
+            <!-- <view class="user_edit_li">
+        <view class="user_edit_li_input">
+          <textarea name="profile" maxlength="255" placeholder="详细介绍" value="{{userInfo.profile}}" />
+        </view>
+      </view> -->
+        </view>
+        <view class="m15">
+            <button form-type="submit" type="warn">提交保存</button>
+        </view>
+    </form>
+</view>

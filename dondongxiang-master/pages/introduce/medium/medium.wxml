@@ -1,0 +1,98 @@
+
+<view style="width:100%; height: 100%;">
+    <view class='data-view'>
+        <view style='height:100%;' class="data-page {{currentindex==0 ? 'active' : ''}}">
+            <view class='view-wrap'>
+                <view class="section">
+                    <textarea style='width:100%;font-size:{{fontSize}}pt;text-align: center'maxlength="200"  bindblur="bindTextAreaBlur" auto-height bindinput='Image_txtInput' placeholder="自动变高" >{{getimage_txt}}</textarea>
+                </view>
+                <view class='section-upl' bindtap='choosesimg'>
+                  <view class="classname" wx:if="{{tempFilePaths==null}}">
+                    <view class='upload_title'>上传宣传图，建议长宽尺寸 （宽750px，高250px）</view>
+                    <view class='upload_img rel' bindtap="choosesimg">
+                      <view class='ab udlr'></view>
+                      <view class='ab udlr'></view>
+                    </view>
+                  </view>
+                  <image mode="aspectFill" wx:if="{{tempFilePaths!=null}}" src='{{tempFilePaths}}'></image>
+                  <view class="replace" wx:if="{{tempFilePaths!=null}}">
+                    <view class="classname"></view>
+                    <view class="classname" bindtap="choosesimg">更换分享图</view>
+                  </view>
+                </view>
+            </view>
+        </view>
+        <view style='background:gray;height:100%;text-align:center;line-height:200px;' class="data-page {{currentindex==1 ? 'active' : ''}}">
+        <!-- 这个是控制分享后的页面图层 -->
+        <view class='sharepicview' hidden="{{showsharepicviewstate}}"><image src='{{showsharepicviewsrc}}'></image></view>     
+      <!--画布区域-->
+      <view class="canvas_area">
+        <!--注意：同一页面中的 canvas-id 不可重复，如果使用一个已经出现过的 canvas-id，该 canvas 标签对应的画布将被隐藏并不再正常工作-->
+          <canvas canvas-id="myCanvas" class="myCanvas"
+            disable-scroll="false"
+            bindtouchstart="touchStart"
+            bindtouchmove="touchMove"
+            bindtouchend="touchEnd">
+          </canvas>
+      </view>     
+        </view>
+        <view style='background:#999;height:100%;text-align:center;line-height:200px;' class="data-page {{currentindex==2 ? 'active' : ''}}">视频开发中...</view>
+        <view style='background:#999;height:100%;text-align:center;line-height:200px;' class="data-page {{currentindex==3 ? 'active' : ''}}">链接开发中...</view>
+    </view>
+    <view class='col-tab-bar'>
+        <view bindtap='changeType' data-current="0" class="xs-tab {{currentTab==0 ? 'active' : ''}}">
+            <image bindtap='changeType' data-current="0" class='icon' src="{{currentTab==0 ? tabiconimg[0]:'/images/introduce/medium/tw_h.png'}}"></image>
+            <view bindtap='changeType' data-current="0" class='text'>图文</view>
+        </view>
+        <view bindtap='changeType' data-current="1" class="xs-tab {{currentTab==1 ? 'active' : ''}}">
+            <image bindtap='changeType' data-current="1" class='icon' src="{{currentTab==1 ? tabiconimg[1]:'/images/introduce/medium/hb_h.png'}}"></image>
+            <view bindtap='changeType' data-current="1" class='text'>画板</view>
+        </view>
+        <view bindtap='changeType' data-current="2" class="xs-tab {{currentTab==2 ? 'active' : ''}}">
+            <image bindtap='changeType' data-current="2" class='icon' src="{{currentTab==2 ? tabiconimg[2]:'/images/introduce/medium/vedio_h.png'}}"></image>
+            <view bindtap='changeType' data-current="2" class='text'>视频</view>
+        </view>
+        <view bindtap='changeType' data-current="3" class="xs-tab {{currentTab==3 ? 'active' : ''}}">
+            <image bindtap='changeType' data-current="3" class='icon' src="{{currentTab==3 ? tabiconimg[3]:'/images/introduce/medium/link_h.png'}}"></image>
+            <view bindtap='changeType' data-current="3" class='text'>链接</view>
+        </view>
+    </view>
+    
+  <view class='brush-block' style='padding-top: 10px;'>
+    <view class="data-page {{currentindex==1 ? 'active' : ''}}">  
+        <view class="showtwo" style="width: 100%; height:100rpx;background-color: #eeeeee;" >
+          <view class="canvas_tools">
+              <view class="box box1" bindtap="penSelect" data-param="5"></view>
+              <view class="box box2" bindtap="penSelect" data-param="15"></view>
+              <view class="box box3" bindtap="colorSelect" data-param="#cc0033"></view>
+              <view class="box box4" bindtap="colorSelect" data-param="#ff9900"></view>
+              <view class="box box5" bindtap="clearCanvas"></view>
+          </view>  
+      </view>
+    </view>
+    
+  <view class="data-page {{currentindex==0 ? 'active' : ''}}">  
+     <view class="transform" style="width: 100%; height:100rpx;background-color: #eeeeee;" >
+        <view class="section section_gap">
+            <view class="body-view">
+              <slider bindchange="slider3change" show-value/>
+            </view>
+        </view>
+     </view>
+  </view>
+  
+  </view>
+  <!-- 工具区域底 -->
+<view class='linkbtnpos pul-left' style='bottom: 70px'>分享
+    <button open-type="share" style='width:100%;height:100%;z-index:2;opacity:0;position:absolute;top:0;left:0'></button>
+</view>
+<view class='linkbtnpos pul-left' style='bottom:20px' bindtap='shareinfodata'>我要编辑分享</view>
+<view class='linkbtnpos pul-right' bindtap='loinkindex'><image class='userpic' src='{{shareusericon}}'></image><text class='username'>查看分享人主页</text></view>
+ <view class='footer-bar'>
+    <image class='linkbtn' src='/images/introduce/medium/zmu.png'></image>
+</view> 
+
+<!-- <import src="/utils/template/backhome.wxml" />
+<template is="backhome"/> -->
+
+</view>

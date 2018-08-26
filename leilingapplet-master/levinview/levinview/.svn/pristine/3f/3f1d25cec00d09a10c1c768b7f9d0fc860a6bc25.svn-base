@@ -1,0 +1,38 @@
+<!--regInfo.wxml-->
+<include src="../header/header.wxml"/>
+<view class="container">
+   <view class="infoRegister_wrap">
+      <view class="infoRegister" style="background: #fff url({{imagesUrl}}levin/img/title2.png) no-repeat left top;  background-size: 100% auto;">
+         <label class="name">
+            <text>姓名:</text>
+            <input placeholder="您的姓名"   bindblur="testName"/>
+         </label>
+          <label class="sex">
+            <text>性别:</text>
+            <picker bindchange="bindSexChange" value="{{iSex}}" range="{{arraySex}}">
+                <view class="picker" style="background: url({{imagesUrl}}levin/img/down2.png) no-repeat 80rpx;background-size: 30rpx auto;">
+                    {{arraySex[iSex]}}
+                </view>
+            </picker>
+         </label>
+         <label class="mobile2">
+            <text>电话:</text>
+            <input placeholder="您的电话号码" bindblur='testMobile' type="number" maxlength="11"/>
+            <image src="{{imagesUrl}}levin/img/code.png" bindtap="getCode"></image>
+         </label>
+         <!--验证码  -->
+         <view class="code">
+                <input  type="number"  maxlength="6" bindblur="testVerifycode"/>
+                <view>接收短信大约<text>{{number}}</text>秒</view>
+         </view>
+         <!--预约  -->
+         <view class="yuyue imgCom" bindtap="yuyue">
+           <image src="{{imagesUrl}}levin/img/yuyue.png"></image>
+         </view>
+         <!--上一步  -->
+         <view class="pre imgCom" bindtap="pre">
+            <image src="{{imagesUrl}}levin/img/pre.png"></image>
+         </view>
+      </view>
+   </view>
+</view>

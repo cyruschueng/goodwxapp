@@ -1,0 +1,20 @@
+<view class="spacing">
+  <audio style="width:100%" poster="{{audio.poster}}" 
+  name="{{audio.name}}" author="{{audio.author}}" src="{{audio.src}}" 
+  id="myAudio" controls loop bindtimeupdate="onTimeUpdate" 
+  bindplay="onPlay" bindpause="onStop" bindended="onStop"></audio>
+</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd vcenter">
+      <image bindtap="play" src="{{!playing ? 'play' : 'pause'}}.png" 
+      style="width:28px;height:28px;padding-right:5px;"></image>
+    </view>
+    <view class="weui-cell__bd">
+      <slider min="0" max="{{audio.duration}}" value="{{audio.current}}" bindchange="seek" />
+    </view>
+    <view class="weui-cell__ft vcenter">
+      <image bindtap="restart" src="replay.png" style="width:28px;height:28px;"></image>
+    </view>
+  </view>
+</view>

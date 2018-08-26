@@ -1,0 +1,24 @@
+<!--pages/clockList/clockList.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view wx:if="{{showNoData}}" class="no-data">
+      <view>暂无数据</view>
+      <view bindtap='createClock' class='create-clock'>去创建闹钟</view>
+    </view>
+    <view wx:key="index{{index}}" data-num='{{item.a_id ? item.a_id : item.id }}' data-item="{{item}}" wx:for="{{showData}}" bindtap="enter" class="cell-content">
+      <view class="cell-text-content">
+        <view class="">
+          <text class="cell-text-title">{{item.title}}</text>
+        </view>
+        <text class="cell-text-detail">提醒备注: {{item.detail}}</text>
+        <text class="cell-text-detail">提醒时间: {{item.time}}</text>
+        <text class="cell-text-detail">创建时间: {{item.create_time}}</text>
+      </view>
+      <!--wx:if="{{item.feature == 0}}"   -->
+      <view class="status-content">
+        <text class="status-text">{{item.status}}</text>
+         <image class="status-img" src="../../images/arrow_right.png"></image> 
+      </view>
+    </view>
+  </view>
+</view>

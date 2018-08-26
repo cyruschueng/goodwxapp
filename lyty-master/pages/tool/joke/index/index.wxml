@@ -1,0 +1,9 @@
+<view class="container">
+<view class="topBack">
+  <button bindtap="goTo" type="primary" size="mini" style="margin-left:12px;">返回首页</button>
+</view>
+  <import src="../templates/joke-tpl"/>
+  <block wx:for="{{jokes}}" wx:key="item">
+    <template is="joke-tpl" data="{{item, index}}"/>
+  </block>
+</view>

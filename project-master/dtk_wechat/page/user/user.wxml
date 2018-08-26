@@ -1,0 +1,38 @@
+<view class="head-box">  
+  <view class="head">
+    <view class="avatar" catchtap="changeAvatar"><image  src="{{srcavatar}}"></image></view>
+  </view>
+</view>  
+  <view class="editavatar"><image class="edit-image" src="../../image/edit_img.png" ontap="goToUserInfo"></image><text ontap="goToUserInfo">修改信息</text></view>
+  <view class="container">
+    <view class="containerBox">
+        <view class="section-box">
+          <view class="section" style="border:0;">
+            <view class="section__title">姓名</view>
+            <view class="section__box">{{dataList.name == null ? '' : dataList.name}}</view>
+          </view>
+          <view class="section">
+            <view class="section__title">性别</view>
+            <view class="section__box">{{dataList.gender == null || dataList.gender == '' ? '未知' : dataList.gender}}</view>
+          </view>
+          <view class="section">
+            <view class="section__title">手机号</view>
+            <view class="section__box"><view class="section__box_text">{{dataList.user_id == null || dataList.user_id == ''  ? '未绑定手机号' : dataList.user_id}}</view></view>
+          </view>
+          <view class="section">
+            <view class="section__title">公司名称</view>
+            <view class="section__box"><view class="section__box_text">{{dataList.company == null || dataList.company == '' ? '保密' : dataList.company}}</view></view>
+          </view>
+          <view class="section">
+            <view class="section__title">工作地点</view>
+            <view class="section__box"><view class="section__box_text">{{dataList.address == null || dataList.address == '' ? '未知' : dataList.address}}</view></view>
+          </view>
+        </view>
+    </view>
+    <view class="btn-area">
+        <button type="warn" catchtap="goToQuit">退出</button>
+      </view>
+  </view>
+<loading hidden="{{loadingHidden}}">
+	加载中...
+</loading>

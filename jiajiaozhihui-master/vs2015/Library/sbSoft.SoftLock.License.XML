@@ -1,0 +1,1103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>sbSoft.SoftLock.License</name>
+    </assembly>
+    <members>
+        <member name="T:sbSoft.SoftLock.Database.ProductLicence">
+            <summary>
+            产品可使用的帐套类
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.Database.ProductLicence.m_license">
+            <summary>
+            当前使用的许可文件
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.Database.ProductLicence.m_licencesHistroy">
+            <summary>
+            已被禁用的历史许可
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.Database.ProductLicence.m_configuration">
+            <summary>
+            产品许可虚拟数据库
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.#ctor">
+            <summary>
+            构造函数，此构造函数仅提供给供序列化时使用
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.#ctor(System.String)">
+            <summary>
+            构造函数，并指明此产品许可管理的产品编号
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.SetConfiguration(sbSoft.SoftLock.Database.ProductConfiguration)">
+            <summary>
+            设置虚拟数据库
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.GetProduct">
+            <summary>
+            产品信息
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.GetAccounts">
+            <summary>
+            获取帐套信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.ExistsAccount(sbSoft.SoftLock.Database.Account)">
+            <summary>
+            检查是否存在指定的帐套编号
+            </summary>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.AddAccount(sbSoft.SoftLock.Database.Account)">
+            <summary>
+            为产品增加一个可用帐套
+            </summary>
+            <param name="account"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.CheckLicense(sbSoft.SoftLock.License)">
+            <summary>
+            检查指定的许可文件是否有效
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.CheckLicense">
+            <summary>
+            检查当前的许可文件是否有效
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.AddConnection">
+            <summary>
+            增加一个连接用户连接数。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.Disconnect(System.String)">
+            <summary>
+            减少一个用户连接数。
+            </summary>
+            <param name="connectId"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.ImportLicense(sbSoft.SoftLock.License)">
+            <summary>
+            导入许可
+            </summary>
+            <param name="license"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.RemoveLicencesToHistroy">
+            <summary>
+            将当前使用的许可转移到历史列表
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.EqualsLicence(sbSoft.SoftLock.License)">
+            <summary>
+            检查指定的许可文件是否与当前使用的许可一致（精确到许可文件）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductLicence.ExistsLicenceHistroy(sbSoft.SoftLock.License)">
+            <summary>
+            检查许可在历史许可列表中是否已经存在
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.Configuration">
+            <summary>
+            获取虚拟数据库
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.LicencesHistroy">
+            <summary>
+            产品许可列表历史
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.ProductNo">
+            <summary>
+            产品编号
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.License">
+            <summary>
+            获取产品帐套许可
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.Accounts">
+            <summary>
+            可使用帐套列表
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.HasLicense">
+            <summary>
+            是否已经绑定了一个许可
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.IsValidUserCount">
+            <summary>
+            检查用户数是否超出许可
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductLicence.IsValidAccountCount">
+            <summary>
+            检查帐套数是否超出许可
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.Database.DBLogin">
+            <summary>
+            登录账户
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.DBLogin.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.DBLogin.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="login"></param>
+            <param name="logPass"></param>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.DBLogin.LogId">
+            <summary>
+            账户Id
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.DBLogin.LogPass">
+            <summary>
+            账户口令
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.SerialNoOption">
+            <summary>
+            系列号类型
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.SerialNoOption.Default">
+            <summary>
+            默认系列号
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.SerialNoOption.Local">
+            <summary>
+            本地系列号
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.SerialNoOption.User">
+            <summary>
+            用户系列号
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.LicenseManager">
+            <summary>
+            许可服务
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.LicenseManager.syncLock">
+            <summary>
+            重启服务时，用于锁定相关的资源
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.LicenseManager.s_cpuId">
+            <summary>
+            服务器的CPU Id
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.LicenseManager.m_instance">
+            <summary>
+            服务的一个实例
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.LicenseManager.m_restart">
+            <summary>
+            重启标志
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.Restart(System.Int32)">
+            <summary>
+            即将在指定时间后重启服务
+            </summary>
+            <param name="seconds"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.Reset">
+            <summary>
+            重置缓存数据
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.GetLocalSerialNo">
+            <summary>
+            获取服务器的系列号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.Login(System.String)">
+            <summary>
+            连接服务，返回以后访问的连接Id,并占用产品的连接数
+            </summary>
+            <param name="productNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.LogOff(System.String)">
+            <summary>
+            注销，释放产品的连接数
+            </summary>
+            <param name="connectId"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.IsLimitLicense(System.String)">
+            <summary>
+            检查当前连接的产品是否使用了期限许可
+            </summary>
+            <param name="connectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.GetLicenseInfo(System.String)">
+            <summary>
+            获取许可的描述信息
+            </summary>
+            <param name="connectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.AllowToDo(System.String,System.Int32)">
+            <summary>
+            供客户端操作重要功能时测试许可情况
+            </summary>
+            <param name="connectId"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.NotifyOnline(System.String)">
+            <summary>
+            通知连接目前在线活动中
+            </summary>
+            <param name="connectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.GetAccountsString(System.String,System.Boolean)">
+            <summary>
+            获取指定产品关联的帐套，并以xml格式返回。
+            </summary>
+            <param name="connectId"></param>
+            <param name="xmlFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.GetConnections(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.ImportLicenseString(System.String)">
+            <summary>
+            导入许可内容
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.ImportLicenseString(System.String,System.String)">
+            <summary>
+            导入许可内容
+            </summary>
+            <param name="productNo"></param>
+            <param name="source"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.ImportLicenseFile(System.String,System.String)">
+            <summary>
+            导入一个许可文件
+            </summary>
+            <param name="productNo"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.IsRegister(System.String)">
+            <summary>
+            检查产品是否已经注册许可
+            </summary>
+            <param name="productNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.GetProductLicence(System.String)">
+            <summary>
+            获取指定产品当前使用的许可
+            </summary>
+            <param name="productNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.LicenseManager.RemoveProductLicence(System.String)">
+            <summary>
+            移除指定产品的许可
+            </summary>
+            <param name="productNo"></param>
+        </member>
+        <member name="P:sbSoft.SoftLock.LicenseManager.Instance">
+            <summary>
+            获取服务的一个实例
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.LicenseManager.IsRestarting">
+            <summary>
+            是否即将重启
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.LicenseManager.IsStart">
+            <summary>
+            检查服务是否已经启动
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.SerialKey">
+            <summary>
+            与许可相关的系列号管理类
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.SerialKey.m_localSerialNo">
+            <summary>
+            本地机器系列号（如果非期限，则作为私锁）
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.SerialKey.#ctor">
+            <summary>
+            构造函数，创建一个使用默认系列号的SerialKey对象
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.SerialKey.#ctor(System.String)">
+            <summary>
+            构造函数，创建一个使用注册系列号的SerialKey对象
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.SerialKey.DecryptLicenseWith(System.String,sbSoft.SoftLock.SerialNoOption)">
+            <summary>
+            使用指定的系列号对内容进行解码，并返回一个许可对象。若无法解码则返回null。
+            </summary>
+            <param name="source"></param>
+            <param name="keyOption"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.SerialKey.DecryptLicense(System.String)">
+            <summary>
+            使用默认期限系列号或者本本机系列号解码许可内容，生成并返回一个许可对象
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.SerialKey.GetSerialNoHash(sbSoft.SoftLock.SerialNoOption)">
+            <summary>
+            获取指定类型的系列号的哈希值（此值用于编码和解码许可内容）
+            </summary>
+            <param name="keyOption"></param>
+            <returns></returns>
+        </member>
+        <member name="P:sbSoft.SoftLock.SerialKey.LocalSerialNo">
+            <summary>
+            获取本地机器系列号
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.SerialKey.DefaultSerialNo">
+            <summary>
+            获取默认的机器系列号
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.SerialKey.SerialNo">
+            <summary>
+            获取/设置注册系列号
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.SerialKey.IsMatch">
+            <summary>
+            检查注册系列号是否与本地系列号匹配
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.SerialKey.HasSerialNo">
+            <summary>
+            检查是否设置了注册系列号
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.License">
+            <summary>
+            许可授权文件信息
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.LoadFromFile(System.String)">
+            <summary>
+            从文件加载许可内容，并生成一个许可。
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.LoadFromString(System.String)">
+            <summary>
+            根据许可内容，生成一个许可。
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.#ctor(sbSoft.SoftLock.Database.Product)">
+            <summary>
+            创建一个期限许可实例。此实例默认1个帐套数，10个用户，30天期限，且要求在30天内激活才有效。
+            </summary>
+            <param name="product"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.#ctor(sbSoft.SoftLock.Database.Product,System.Int32,System.Int32)">
+            <summary>
+            创建一个期限许可实例。此实例可以指定帐套数，用户数，30天期限，且要求在30天内激活才有效。
+            </summary>
+            <param name="product"></param>
+            <param name="accounts"></param>
+            <param name="users"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.#ctor(sbSoft.SoftLock.Database.Product,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            创建一个期限许可实例。此实例可以指定帐套数，用户数，N天期限，且要求在30天内激活才有效。
+            </summary>
+            <param name="product"></param>
+            <param name="accounts"></param>
+            <param name="users"></param>
+            <param name="limitDays"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.#ctor(sbSoft.SoftLock.Database.Product,System.Int32,System.Int32,System.String)">
+            <summary>
+            创建一个永久许可实例。此实例可以指定帐套数，用户数，且要求在30天内激活才有效。
+            </summary>
+            <param name="product"></param>
+            <param name="accounts"></param>
+            <param name="users"></param>
+            <param name="serialNo"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.GetLicencesInfo">
+            <summary>
+            获取许可的描述信息，用户客户端显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.GetLicencesInfo2">
+            <summary>
+            获取许可的扼要信息，用于注册程序显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.License.Active">
+            <summary>
+            激活许可
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.LicencesId">
+            <summary>
+            获取许可文件的唯一标识码
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.Product">
+            <summary>
+            产品信息
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.AllowAccounts">
+            <summary>
+            许可的帐套数
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.AllowUsers">
+            <summary>
+            许可的用户数
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.IsValid">
+            <summary>
+            检查许可是否有效
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.IsLimit">
+            <summary>
+            是否期限许可
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.SerialKey">
+            <summary>
+            获取/设置系列号对象
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.CreateDate">
+            <summary>
+            生成日期
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.IsActive">
+            <summary>
+            是否已经激活
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.ActiveDate">
+            <summary>
+            激活日期
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.LastActiveDate">
+            <summary>
+            最迟激活日期
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.LimitDays">
+            <summary>
+            期限许可时的有效天数
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.LimitDate">
+            <summary>
+            期限许可时的有效日期
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.License.IsOverDate">
+            <summary>
+            检查是否已经过期
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.Database.Product">
+            <summary>
+            产品类
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Product.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Product.#ctor(System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="productNo"></param>
+            <param name="productName"></param>
+            <param name="displayName"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Product.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="productNo"></param>
+            <param name="productName"></param>
+            <param name="displayName"></param>
+            <param name="version"></param>
+            <param name="company"></param>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Product.ProductNo">
+            <summary>
+            产品编号
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Product.PruoductName">
+            <summary>
+            产品内部名称
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Product.DisplayName">
+            <summary>
+            产品名称
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Product.Version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Product.Company">
+            <summary>
+            公司名称
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.Database.ProductConfigurationManager">
+            <summary>
+            许可虚拟数据库加载、存储配置管理器
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.Database.ProductConfigurationManager.m_configurationFileName">
+            <summary>
+            缓存使用的配置文件
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.Database.ProductConfigurationManager.m_configurationPath">
+            <summary>
+            缓存所在的目录
+            </summary>
+        </member>
+        <member name="F:sbSoft.SoftLock.Database.ProductConfigurationManager.m_currentFileName">
+            <summary>
+            当前的配置文件
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.#ctor">
+            <summary>
+            构造函数，此实例将在默认的文件对配置进行存储、加载操作。
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.#ctor(System.String)">
+            <summary>
+            构造函数，此实例将在指定的文件对配置进行存储、加载操作。
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.#ctor(sbSoft.SoftLock.Database.ProductConfiguration)">
+            <summary>
+            构造函数，此实例以现有的配置为基础，在默认的文件对配置进行存储、加载操作。
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.#ctor(sbSoft.SoftLock.Database.ProductConfiguration,System.String)">
+            <summary>
+            构造函数，此实例以现有的配置为基础，在指定的文件对配置进行存储、加载操作。
+            </summary>
+            <param name="configuration"></param>
+            <param name="filename"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.SaveConfiguration">
+            <summary>
+            保存配置到文件（如果对象实例化时没有指定文件，则保存到默认的配置文件）
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.LoadConfiguration">
+            <summary>
+            从文件加载配置（如果对象实例化时没有指定文件，则从默认的配置文件加载）
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.SaveToFile(sbSoft.SoftLock.Database.ProductConfiguration)">
+            <summary>
+            保存配置到默认文件
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.SaveToFile(sbSoft.SoftLock.Database.ProductConfiguration,System.String)">
+            <summary>
+            保存配置到指定文件
+            </summary>
+            <param name="configuration"></param>
+            <param name="path"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.LoadFromFile">
+            <summary>
+            从默认的文件加载配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfigurationManager.LoadFromFile(System.String)">
+            <summary>
+            从指定的文件加载配置
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfigurationManager.Configuration">
+            <summary>
+            获取当前的配置
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfigurationManager.CurrentFileName">
+            <summary>
+            获取当前的配置文件（如果对象实例化时没有指定文件，则返回默认的文件）
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfigurationManager.ConfigurationFileName">
+            <summary>
+            获取默认配置的文件名称
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfigurationManager.ConfigurationPath">
+            <summary>
+            获取默认配置的文件目录
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfigurationManager.ConfigurationFullName">
+            <summary>
+            获取默认配置的完整文件名称（包含路径）
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.ConnectionManager">
+            <summary>
+            产品连接数管理器
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.ConnectionManager.Reset">
+            <summary>
+            重置缓存
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.ConnectionManager.ConnectTo(sbSoft.SoftLock.Database.ProductLicence)">
+            <summary>
+            新增一个连接数
+            </summary>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.ConnectionManager.Disconnect(System.String)">
+            <summary>
+            断开并减少一个连接
+            </summary>
+            <param name="connectId"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.ConnectionManager.Exists(System.String)">
+            <summary>
+            检查连接是否存在
+            </summary>
+            <param name="connectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.ConnectionManager.Find(System.String)">
+            <summary>
+            根据连接Id获取连接对象Connection。
+            </summary>
+            <param name="connectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.ConnectionManager.GetConnectCount(sbSoft.SoftLock.Database.ProductLicence)">
+            <summary>
+            统计指定产品在线用户数，如果连接已经处于离线状态，不参与统计
+            </summary>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.ConnectionManager.GetConnections(System.Boolean)">
+            <summary>
+            获取当前的连接情况，可指定是否包含非活动的连接信息。
+            </summary>
+            <param name="onlyActive"></param>
+            <returns></returns>
+        </member>
+        <member name="P:sbSoft.SoftLock.ConnectionManager.Connections">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.Database.ProductConfiguration">
+            <summary>
+            产品许可虚拟数据库
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.Init">
+            <summary>
+            初始化列表对象
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.Reset">
+            <summary>
+            清除缓存
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.IsCache">
+            <summary>
+            检查是否已经载入缓存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.SaveConfiguration">
+            <summary>
+            将当前配置保存到默认的虚拟数据库文件
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AutoSaveConfiguration">
+            <summary>
+            自动保存修改后的设置
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.GetAccount(System.String)">
+            <summary>
+            根据帐套编号获取帐套信息
+            </summary>
+            <param name="accountNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.GetLogin(System.String)">
+            <summary>
+            根据登录用户Id获取用户信息
+            </summary>
+            <param name="logId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.GetProductLicence(System.String)">
+            <summary>
+            根据产品编号获取产品的许可信息
+            </summary>
+            <param name="productNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.FindProductLicence(System.String)">
+            <summary>
+            根据产品编号获取产品的许可信息
+            </summary>
+            <param name="productNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AddAccount(sbSoft.SoftLock.Database.Account)">
+            <summary>
+            添加一个可选的帐套
+            </summary>
+            <param name="account"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AddLogin(System.String,System.String)">
+            <summary>
+            添加一个可选的登录账户
+            </summary>
+            <param name="logId"></param>
+            <param name="logPass"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AddLogin(sbSoft.SoftLock.Database.DBLogin)">
+            <summary>
+            添加一个可选的登录账户
+            </summary>
+            <param name="login"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AddLicenceFromFile(System.String,System.String)">
+            <summary>
+            添加一个绑定许可的产品，并检查许可产品号与指定的产品编码是否一致
+            </summary>
+            <param name="productNo"></param>
+            <param name="licenseFile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AddLicenceFromString(System.String,System.String)">
+            <summary>
+            根据许可内容导入一份许可，并检查许可产品号与指定的产品编码是否一致
+            </summary>
+            <param name="productNo"></param>
+            <param name="licenseSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AddLicenceFromString(System.String)">
+            <summary>
+            根据许可内容导入一份许可，并且直接使用许可的产品编号
+            </summary>
+            <param name="licenseSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.AddLicence(System.String,sbSoft.SoftLock.License)">
+            <summary>
+            根据许可文件导入一份许可
+            </summary>
+            <param name="productNo"></param>
+            <param name="license"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.IsRegister(System.String)">
+            <summary>
+            检查产品是否已经注册许可
+            </summary>
+            <param name="productNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.RemoveAccount(sbSoft.SoftLock.Database.Account)">
+            <summary>
+            删除一个帐套
+            </summary>
+            <param name="account"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.RemoveLogin(sbSoft.SoftLock.Database.DBLogin)">
+            <summary>
+            删除一个登录账户
+            </summary>
+            <param name="login"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.ExistsLogin(System.String)">
+            <summary>
+            检查是否存在登录用户
+            </summary>
+            <param name="logId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.ExistsLogin(sbSoft.SoftLock.Database.DBLogin)">
+            <summary>
+            检查是否存在登录用户
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.ExistsAccount(System.String)">
+            <summary>
+            检查帐套是否存在（以帐套的编号查找，用于获取帐套信息）
+            </summary>
+            <param name="accountNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.ExistsAccount(sbSoft.SoftLock.Database.Account)">
+            <summary>
+            检查帐套是否存在（以帐套名称查找，用于不重复添加帐套）
+            </summary>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.ProductConfiguration.ExistsProduct(System.String)">
+            <summary>
+            根据产品编号检查当前许可产品列表中是否已经存在
+            </summary>
+            <param name="productNo"></param>
+            <returns></returns>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfiguration.Settings">
+            <summary>
+            获取一个默认的虚拟数据库
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfiguration.IsAutoSaveConfiguration">
+            <summary>
+            是否在修改配置后自动保存到文件，默认为true=是
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfiguration.ProductLicences">
+            <summary>
+            产品许可列表
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfiguration.Accounts">
+            <summary>
+            帐套列表
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.ProductConfiguration.Logins">
+            <summary>
+            登录账户列表
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.Database.Account">
+            <summary>
+            帐套类
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Account.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Account.#ctor(System.String)">
+            <summary>
+            构造函数，创建一个只含名称的帐套
+            </summary>
+            <param name="displayName"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Account.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="displayName"></param>
+            <param name="serverName"></param>
+            <param name="dbName"></param>
+            <param name="logId"></param>
+            <param name="logPass"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Account.#ctor(System.String,System.String,System.String,sbSoft.SoftLock.Database.DBLogin)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="displayName"></param>
+            <param name="serverName"></param>
+            <param name="dbName"></param>
+            <param name="login"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Database.Account.CreateIndex(System.Collections.Generic.List{sbSoft.SoftLock.Database.Account})">
+            <summary>
+            生成帐套序号
+            </summary>
+            <param name="accounts"></param>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Account.AccountId">
+            <summary>
+            帐套Id
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Account.AccountNo">
+            <summary>
+            帐套编号
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Account.DisplayName">
+            <summary>
+            帐套名称
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Account.ServerName">
+            <summary>
+            服务器
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Account.DBMS">
+            <summary>
+            数据库引擎
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Account.DBName">
+            <summary>
+            数据库名称
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Database.Account.Login">
+            <summary>
+            登录账户
+            </summary>
+        </member>
+        <member name="T:sbSoft.SoftLock.Connection">
+            <summary>
+            产品连接类
+            </summary>
+        </member>
+        <member name="M:sbSoft.SoftLock.Connection.#ctor(sbSoft.SoftLock.Database.ProductLicence)">
+            <summary>
+            构造函数,创建一个连接
+            </summary>
+            <param name="product"></param>
+        </member>
+        <member name="M:sbSoft.SoftLock.Connection.Active">
+            <summary>
+            刷新连接的活动时间
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Connection.ConnectId">
+            <summary>
+            获取连接Id
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Connection.Product">
+            <summary>
+            获取/设置连接的产品使用的许可
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Connection.LoginTime">
+            <summary>
+            获取连接的时间
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Connection.ActiveTime">
+            <summary>
+            获取连接最近的活动时间
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Connection.ActiveCount">
+            <summary>
+            获取已经刷新的次数
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Connection.IsActive">
+            <summary>
+            检查连接是否处于活动状态（如果超过10分钟不活动，则表示false）
+            </summary>
+        </member>
+        <member name="P:sbSoft.SoftLock.Connection.IsOffLine">
+            <summary>
+            检查连接是否处于离线状态（如果超过10分钟不活动，则表示true）
+            </summary>
+        </member>
+    </members>
+</doc>

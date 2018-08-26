@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="wrap">
+    <form bindsubmit="login">
+      <view class="item">
+        <label class="userIcon"><image mode="" src="{{userSrc}}"></image></label>
+        <input type="number" name="username" bindinput="moblieChange" value="{{moblie}}" placeholder="教师系统账号\手机号" />
+      </view>
+      <view class="item item1">
+        <label class="userIcon"><image mode="" src="{{passSrc}}"></image></label>
+        <input type="text" password name="password" bindinput="passwordChange" value="{{password}}" placeholder="教师系统密码" />
+      </view>
+      <view class="item-btns">
+        <radio-group bindchange="getKind">
+          <label class="radio">
+            教师<radio value="2" checked="true"/>
+          </label>
+          <label class="radio">
+            助教<radio value="1" />
+          </label>
+        </radio-group>
+      </view>
+      <view class="btn">
+        <button formType="submit" class="loginBtn" hover-class="hoverLogin">登录</button>
+      </view>
+    </form>
+    <view class="forget"> 
+      <navigator url="/pages/resetPassword/resetPassword" hover-class="navigator-hover">忘记密码</navigator>
+    </view> 
+  </view>
+</view>

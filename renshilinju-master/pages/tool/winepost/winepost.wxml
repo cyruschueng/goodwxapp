@@ -1,0 +1,22 @@
+<!--pages/tool/winepost/winepost.wxml-->
+<view class = "content">
+  <view class = "success">{{name}}推荐的微信群：</view>
+  <view class = "show-theme">
+    <view class = "message">群名称：{{winename}}</view>
+    <view class = "message">群主微信号：{{winenumber}}</view>
+    <view class = "message">群介绍：{{desc}}</view>
+    <view class='assetbox'>
+      <block wx:for="{{assets}}" wx:key="index">
+        <view class='picbox'>
+          <image class='asset' src="{{item}}" alt="" /> 
+        </view>
+      </block>
+    </view>
+    <view class = "name">{{name}}</view>
+    <view class = "time">{{time}}</view>
+  </view>
+  <view class='btn'>
+    <button class='back' type="primary" bindtap = "go">返回首页</button>
+    <button class='group' type="primary" open-type="share">发到群里去</button>
+  </view>
+</view>

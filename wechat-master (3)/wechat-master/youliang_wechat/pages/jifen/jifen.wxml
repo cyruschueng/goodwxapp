@@ -1,0 +1,94 @@
+<view class="box">
+<navigator class='ad' url='{{url}}'>
+    <image src='../../images/6.png'></image>
+    {{news_title}}
+  </navigator>
+
+
+
+  <view class="top_row">
+    <view class="userinfo desc">
+      <view class='user'>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+      <view style='height:30rpx'></view>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">本班排名
+      <image class='triangle' src='../../images/9.png'></image>
+    </view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">学校排名
+      <image class='triangle' src='../../images/9.png'></image>
+    </view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+    <!-- 本班排名 -->
+    <swiper-item>
+      <view class="tr" id='class_id'>
+        <view class='th'>
+          <view class='tr_header userinfo'>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+          </view>
+          <view class='fra_has' wx:if="{{integral==0}}">
+            <text class='null'> 暂无积分，请联系管理员进行添加</text>
+          </view>
+          <view class='fra_has' wx:else="{{integral>0}}">
+            <view class='has_text'>
+              <text class="userinfo-nickname" style='overflow:hidden;'>{{userInfo.nickName}}</text>
+              <view class='has_number'>第{{num}}名</view>
+            </view>
+            <view class='fra'>{{integral}}积分</view>
+          </view>
+        </view>
+        <view class='td' wx:for="{{ranking}}">
+          <text>{{index+1}}</text>
+
+          <view class='tr_img'>
+            <view class='tr_header'>
+              <image src="{{item.avatarUrl}}"></image>
+            </view>
+            <view class='name'>{{item.nickName}}</view>
+          </view>
+          <view class='fra'>{{item.integral}}积分</view>
+        </view>
+
+      </view>
+    </swiper-item>
+    <!-- 学校排名 -->
+    <swiper-item>
+      <view class="tr" id='school_id'>
+        <view class='th'>
+          <view class='tr_header userinfo'>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+          </view>
+          <view class='fra_has' wx:if="{{integral==0}}">
+            <text class='null'> 暂无积分，请联系管理员进行添加</text>
+          </view>
+          <view class='fra_has' wx:else="{{integral>0}}">
+            <view class='has_text'>
+              <text class="userinfo-nickname" style='overflow:hidden;te'>{{userInfo.nickName}}</text>
+              <view class='has_number'>第{{num}}名</view>
+            </view>
+            <view class='fra'>{{ranking.integral}}积分</view>
+          </view>
+        </view>
+        <view class='td' wx:for="{{ranking_scr}}">
+          <text>{{index+1}}</text>
+
+          <view class='tr_img'>
+            <view class='tr_header'>
+              <image src="{{item.avatarUrl}}"></image>
+            </view>
+            <view class='name'>{{item.nickName}}</view>
+          </view>
+          <view class='fra'>{{item.integral}}积分</view>
+        </view>
+
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <loading hidden='{{hidden}}'>加载中……</loading>
+</view>

@@ -1,0 +1,152 @@
+<style lang="less" rel="stylesheet/less">
+    /*dialog样式*/
+    .demon-dialogBox{
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        .demon-dialog{
+            width:560rpx;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            background-color: #ffffff;
+            border-radius:6px;
+            overflow: hidden;
+            z-index:1001;
+            /*dialog 页头*/
+            .demon-dialog__hd{
+                text-align: center;
+                font-size:18px;
+            }
+            /*dialog 内容*/
+            .demon-dialog__bd{
+                box-sizing: border-box;
+                padding: 30rpx;
+                border-bottom: 1px solid #dddddd;
+                textarea{
+                    height:300rpx;
+                    width:100%;
+                }
+
+                .demon-input{
+                    margin-bottom:20rpx;
+                    padding:10rpx 0;
+                    font-size:16px;
+                    align-items: center;
+                    .demon-input__label{
+                        text-align:center ;
+                        width:4em;
+                        float: left;
+                    }
+                    .demon-input__input{
+                        flex:1;
+                        margin-left:4em;
+                    }
+                }
+            }
+            /*dialog 页脚*/
+            .demon-dialog__ft{
+                display: flex;
+                align-items: center;
+                background-color: #ffffff;
+                font-size:16px;
+                text-align: center;
+                view,button{
+                    padding: 20rpx 0;
+                    flex:1;
+                    border-left: 1px solid #dddddd;
+                    &:first-child{
+                        border-left: none;
+                    }
+                }
+                button{
+                    background-color: #ffffff;
+                    border-radius: 0;
+                    font-size:16px;
+                    line-height: normal;
+                    color: #38A1CF;
+                    &:after{
+                        border:none;
+                    }
+                }
+            }
+        }
+        /*关闭按钮*/
+        .demon-mask-close{
+            position: absolute;
+            color: rgba(255,255,255,.6);
+            z-index:1001;
+            i{
+                font-size:50px;
+            }
+
+            &.topRight{
+                top:230rpx;
+                right:95rpx;
+            }
+
+            &.bottomCenter{
+                left:50%;
+                bottom:80rpx;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+</style>
+<template lang="wxml">
+    <view class="demon-dialogBox">
+        <view class="demon-mask" @tap.stop="maskTap"></view>
+
+        <view wx:if="{{closeBtn}}" class="demon-mask-close {{closeBtn}}" @tap.stop="maskClosBtn">
+            <i class="iconfont icon-guanbi"></i>
+        </view>
+
+        <view class="demon-dialog">
+            <view class="demon-dialog__hd">
+                <slot name="dm-dialog__hd"></slot>
+            </view>
+
+            <view class="demon-dialog__bd">
+                <slot name="dm-dialog__bd"></slot>
+            </view>
+
+            <view class="demon-dialog__ft">
+                <slot name="dm-dialog__ft"></slot>
+            </view>
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {
+            closeBtn:String
+        }
+
+        data = {}
+
+        events = {}
+
+        methods = {
+            // 点击遮盖层
+            maskTap(){
+//                console.log('maskTap');
+            },
+            // 点击关闭按钮
+            maskClosBtn(){
+//                console.log('maskClosBtn');
+                this.$emit("dialogCloseBtn");
+            }
+        }
+
+        onLoad() {
+
+        }
+    }
+</script>

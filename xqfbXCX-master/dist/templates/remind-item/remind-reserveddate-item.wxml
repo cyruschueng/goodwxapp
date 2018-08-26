@@ -1,0 +1,43 @@
+
+<!-- 时间 弹窗 -->
+<template name="remindReserveddate">
+
+
+<view class='selectDate-bgview' hidden='{{ reserveddateData.dateViewHidden }}'>
+  <view class='datepicker-view'>
+    <view class='title'>
+      联系人：<input bindinput="bindContactInput" placeholder='请填写联系人'></input>
+    </view>
+    <view class='title'>
+      联系电话：<input bindinput="bindContactInfoInput" type='number' placeholder='请填写联系电话'></input>
+    </view>
+    <view class='title'>
+      预订日期：{{ reserveddateData.choose_year }}-{{ reserveddateData.choose_month }}-{{ reserveddateData.choose_day }}
+    </view>
+
+    <view class='picker'>
+      <picker-view class="flex" indicator-style="height: 50px;" value="{{ reserveddateData.picker_value }}" bindchange="pickerChange">
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_year }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_month }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_day }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+      </picker-view> 
+    </view>
+
+    <view class='weui-flex picker-btns'>
+      <view class='weui-flex__item' style='border-right:1px #f1f1f1 solid;' bindtap='bindCancelBtnTap'>取消</view>
+      <view class='weui-flex__item' style='color:#62b900;' bindtap='bindConfirmBtnTap'>确定</view>
+    </view>
+
+  </view> 
+
+</view>
+
+
+
+</template>

@@ -1,0 +1,54 @@
+<!--pages/music/music.wxml-->
+<view class='container'>
+      <view class='header'>
+          <view class='title'>第<text class='yellow'>{{inform.num}}</text>首</view>
+          <view class='music'>
+              <image class='musicStar {{play?"play":"stop"}}' src="{{inform.thumb}}" style='background:url({{inform.thumb}}) no-repeat;background-size: 100%;'></image>
+              <view class='status'>
+                  <image class='play' bindtap='stop' wx:if='{{play}}'  mode="widthFix" src="../image/play.png"></image>
+                  <image class='stop' bindtap='play' wx:else  mode="widthFix" src="../image/stop.png"></image>
+              </view>
+              
+          </view>
+      </view>
+      <view class='friends'>请选择答案，助好友通关吧~~</view>
+      <view class='answer'>
+          <view class='answerList'>
+              <view class='answerTitle' wx:for="{{answer}}" wx:key="{{index}}" bindtap='backText' 
+                    data-notice="{{item.notice}}"
+                    data-index="{{index}}" data-askindex="{{item.index}}" data-text='{{item.text}}'>
+                      <text class="{{item.text==0?'hide':''}}">{{item.text}}</text>
+              </view>
+              <view class='reset' bindtap='refresh'>
+                  <image class='' src="../image/reset.png" mode='widthFix'></image>
+              </view>
+          </view>
+      </view>
+      <view class='problem'>
+          <view class='problemTitle' wx:for="{{problem}}" wx:key="{{index}}" bindtap='checked'
+                data-index="{{index}}" data-text="{{item}}"><text class="{{item==0?'hide':''}}">{{item}}</text>
+          </view>
+      </view>
+      <view class='mine' bindtap='mine'>进入我的猜歌</view>
+</view>
+<view class='bg' wx:if="{{bg}}">
+    <!--答对了！  -->
+    <view class='zindex zindex1' wx:if="{{right}}">
+        <view class='queTitle'>答对了！</view>
+        <view class='title'>第<text class='yellow'>{{inform.num}}</text>首</view>
+        <view class='daan'>很多事</view>
+        <view class='thanks'>Thanks朋友!</view>
+        <view class='jifenNow'>
+            <image src="../image/jifen.png" mode='widthFix'></image>+{{answer_add_point}}
+        </view>
+        <view class='mine1 mine' bindtap='mine'>进入我的猜歌</view>
+    </view>
+    <!-- 通过完成 -->
+    <view class='zindex zindex1' wx:if="{{finish}}">
+        <view class='queTitle' style='font-size:28rpx;padding-top:26rpx;'>
+        此好友已完成目前所以关卡,新的关卡正在更新,敬请期待！</view>
+        <view class='check'>
+            <view class='two' bindtap='morePlay'>更多好玩</view>
+        </view>
+    </view>
+</view>

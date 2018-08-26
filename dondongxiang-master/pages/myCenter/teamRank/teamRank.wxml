@@ -1,0 +1,79 @@
+<!--pages/dynamic/teamRank/teamRank.wxml-->
+<view class='swiper-box'>
+    <swiper indicator-dots="true" autoplay="true" interval="2000" duration="500">
+        <block wx:for="{{imgUrls}}">
+            <swiper-item><image src="{{item.photo}}" class="slide-image"/></swiper-item>
+        </block>
+    </swiper>
+    <view class='addcol'>
+        <text bindtap="addteam">创建家族战队</text>
+        <text bindtap="addstate">创建说明</text>
+        <text bindtap="agencyteam">代理</text>
+    </view>
+</view>
+<view class='main-tab hd-tab'>
+    <view data-current="0" bindtap="swichNav" class="col-ls {{currentTab==0 ? 'active' : ''}}">家族动态</view>
+    <view data-current="1" bindtap="swichNav" class="col-ls {{currentTab==1 ? 'active' : ''}}">我的家族</view>
+    <view data-current="2" bindtap="swichNav" class="col-ls {{currentTab==2 ? 'active' : ''}}">我加入的家族</view>
+</view>
+
+<view class="min-inner {{currentindex==0 ? 'active' : ''}}">
+    <view class='main-tab msg-tab'>
+        <view class='col-25'>排序</view>
+        <view class='col-50'>名称</view>
+        <view class='col-25'>状态</view>
+    </view>
+    <view class='m-row' wx:for="{{familyArt}}" wx:for-index="key">
+        <view class='col-list'>
+            <view data-id="{{item.id}}" bindtap='lookfamilydist'>
+                <view class='col-left'>{{key+1}}</view>
+                <view class='col-center'>
+                    <view class='dl-img'><image src="{{item.head_img}}"></image></view>
+                    <view class='culd-bd'>
+                        <view class='name'>{{item.name}}</view>
+                        <view class='cen-taxt'>{{item.introduce}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class='col-right' data-id="{{item.id}}" bindtap='{{item.status == "0"?"addfamilyArt":"outmyfamily"}}'><button class='btn'>{{item.status == "0"?"加入":"退出"}}</button></view>
+        </view>
+    </view>
+</view>
+<view class="min-inner {{currentindex==1 ? 'active' : ''}}">
+    <view class='msginner' wx:if="{{MsgView}}">
+        <image class='msgicon' src='/images/icon_self_setting.png'></image>
+        <text class='msgtext'>你还没创建家族，点击创建</text>
+    </view>
+    <block wx:else>
+        <view class='m-row' style='margin-top:10px;margin-bottom:30px;'>
+            <view wx:for="{{myfamily}}" class='col-list active'>
+                <view data-id="{{item.id}}" class='col-center addwid'>
+                    <view class='dl-img'><image src="{{item.head_img}}"></image></view>
+                    <view class='culd-bd'>
+                        <view class='name'>{{item.name}}</view>
+                        <view class='cen-taxt'>{{item.introduce}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class='addmybtn'><button bindtap="addteam" class='btn'>创建我的家族</button></view>
+</view>
+<view class="min-inner {{currentindex==2 ? 'active' : ''}}">
+    <view class='main-tab msg-tab'>
+        <view class='col-50 addcen'>名称</view>
+        <view class='col-50 addcen'>状态</view>
+    </view>
+    <view class='m-row' wx:for="{{myaddfamily}}">
+        <view class='col-list active'>
+            <view class='col-center addwid'>
+                <view class='dl-img'><image src="{{item.head_img}}"></image></view>
+                <view class='culd-bd'>
+                    <view class='name'>{{item.name}}</view>
+                    <view class='cen-taxt'>{{item.introduce}}</view>
+                </view>
+            </view>
+            <view class='col-right' data-id="{{item.id}}" bindtap='outmyfamily'><button class='btn'>退出</button></view>
+        </view>
+    </view>
+</view>

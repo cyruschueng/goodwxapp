@@ -1,0 +1,59 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+      body,html,#container{
+        height: 100%;
+        margin: 0px;
+      }
+    </style>
+    <title>全景地图</title>
+  </head>
+  <body>
+    <div id="container" tabindex="0"></div>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=a9cb25d44dba7d95d54701188b994562"></script>
+    <script type="text/javascript">
+        var map = new AMap.Map('container',{
+            resizeEnable: true,
+            zoom: 10,
+            center: [116.480983, 40.0958]
+        });
+        function addMarkers(markers) {
+          for (var i = 0, len = markers.length; i < len; i++ ) {
+            var marker = new AMap.Marker({
+              position: markers[i].position,//marker所在的位置
+              map:map,//创建时直接赋予map属性
+              title: markers[i].title
+            });
+            marker.url = markers[i].url
+            //也可以在创建完成后通过setMap方法执行地图对象
+            marker.setMap(map);
+            var _onClick = function(e){
+                   window.open(e.target.url, '_blank')
+            }
+            AMap.event.addListener(marker, 'click', _onClick);
+          }
+        }
+        var markers = [
+          {
+            position: [117.480983, 39.989628],
+            title: '外链',
+            url: 'http://pano.visualbusiness.cn/single/index.html?panoId=F0A99996B43B48B4B1F04DBFB6DDF1CD'
+          },
+          {
+            position: [116.480983, 39.989628],
+            title: '外链',
+            url: 'http://pano.visualbusiness.cn/single/index.html?panoId=F0A99996B43B48B4B1F04DBFB6DDF1CD'
+          },
+          {
+            position: [116.380983, 39.989628],
+            title: '外链',
+            url: 'http://pano.visualbusiness.cn/single/index.html?panoId=F0A99996B43B48B4B1F04DBFB6DDF1CD'
+          }
+        ]
+        addMarkers(markers);
+    </script>
+  </body>
+</html>

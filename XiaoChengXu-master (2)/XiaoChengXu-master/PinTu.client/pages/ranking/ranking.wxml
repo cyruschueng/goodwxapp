@@ -1,0 +1,140 @@
+<!--pages/ranking/ranking.wxml-->
+<view class='container oh'>
+  <view class="bgmain W bbox">
+    <view class="F_ jcc">
+      <image class="r w64 h64 m10" src="{{avatar}}" background-size="cover"></image>
+    </view>
+    <view class="tc b f16 cyellow">要拼就拼第一名赢大赏金</view>
+    <view class="m20-0 F_ jcc bbox">
+      <view class="w100 h100 pr" bindtap="openPuzzle">
+        <view class="pa z1 L0 T0 w100 h100 bgopacity"></view>
+        <image class="w100 h100" mode="aspectFill" src="{{posterSrc}}"></image>
+         <view class="bg0 pt10 pb10 pl4 pr4 r5 f12 ls2 cyellow0 byellow0 pa bbox w80 tc L10 T20">
+          <view class="">点击拼图</view>
+          <view class="">赢取赏金</view>
+          <view class="dn">
+            <icon class="iconfont icon-time f16 vb ell"></icon>
+        {{useTime}}秒
+          </view>
+        </view>           
+      </view>      
+    </view>
+
+    <view class="bgred2 cf tc f16 F_ h45 lh45">
+      <view class="f">
+        <icon class="iconfont icon-redpacket f20 mr5 vb"></icon> 
+        <text class='f dib lh30'>去提现</text> 
+      </view>
+      <view class="f" bindtap='urlTarget' data-url="index">
+        <icon class="iconfont icon-tools f20 mr5 vb"></icon>
+        <view class='dib'>再发一个</view>       
+      </view>
+      <button class="f bbox" open-type="share" plain="true" style="border:none;color:#fff;font-size:32rpx;line-height:45px">
+        <icon class="iconfont icon-share f20 mr5 vb"></icon>去转发
+      </button>
+    </view>
+  </view>
+  <view class="W">
+    <view class="F_ f14 lh40 bbe">
+      <view class="f pl10">目前排名</view>
+      <view class="pr10">还有机会赢得第一名{{ainfo.award_first}}元赏金</view>
+    </view>    
+  </view>
+  <view class='f H oh F W bbox'>
+      <scroll-view class='scroll'>
+        <block wx:for="{{arrRank.list}}" wx:for-item="item">
+          <view class="F_ bbe p10-0 bbox">
+            <view class="p0-10 pr">
+              <image class="w40 h40 r2" src="{{item.user_info.avatarUrl}}"></image>
+              <view class="pa L5 T-5 bbox be2 z1 r cf tc w20 h20 f12 {{index==0?'bgyellow':'dn'}}">1</view>
+              <view class="pa L5 T-5 bbox be2 z1 r cf tc w20 h20 f12 {{index==1?'bgc':'dn'}}">2</view>
+              <view class="pa L5 T-5 bbox be2 z1 r cf tc w20 h20 f12 {{index==2?'bgorange':'dn'}}">3</view>
+            </view>
+            <view class="f pr10 f14 c7">
+              <view class="F_ h20 lh20 b">
+                <view class="f">{{item.user_info.nick_name}}</view>
+                <view class="">0.0元（活动未结束）</view>
+              </view>
+              <view class="F_ h20 f12">
+                <view class="f">用时{{item.use_time}}秒</view>
+                <view class="">{{item.create_time}}</view>
+              </view>
+            </view>
+            
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+
+  <view class='W F bgopacity8 pa L0 T0 z2 cf f14 bbox' wx:if="{{showPuzzle}}">
+    <view class="F_ jcc f12 p20-0">
+      <view class="r bf dib p0-70 h30 lh15">
+        <icon class="iconfont icon-time f16 vb ell"></icon>
+        用时{{useTime}}秒
+      </view>
+    </view>
+
+    <image class="C4 w90 h90 dib m0 bbox {{preIndex === index ? 'bgolden' : 'bc'}}" src="../../image/2018.png" data-src="{{arrPic[0]}}"></image>
+
+    <view class="f F_ jcc">
+      <view class="w270 h270 bbox pr">      
+        <block wx:for="{{arrPic}}">
+          <image class="C4 h90 dib m0 bbox {{preIndex === index ? 'bgolden' : 'bc'}}" src="{{arrPic[index]}}" data-index="{{index}}" data-src="{{arrPic[index]}}" mode="scaleToFill" bindtap="exchangePic"></image>
+        </block>
+      </view>  
+    </view>
+
+    <!-- 原始交换 -->
+    <view class="f F_ jcc dn">
+      <view class="w270 h270 bb bbox">
+        <view class='f F_ h90 bbb bbox'>
+          <view class='f H bbox'>
+            <image class='W H' src="{{posterSrc}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>
+          <view class='f H blb brb bbox'>
+            <image class='W H' src="{{posterSrc}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>   
+          <view class='f H bbox'>
+            <image class='W H' src="{{posterSrc}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>        
+        </view>
+
+        <view class='f F_ h90 bbb bbox'>
+          <view class='f H bbox'>
+            <image class='W H' src="{{test1}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>
+          <view class='f H blb brb bbox'>
+            <image class='W H' src="{{test1}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>   
+          <view class='f H bbox'>
+            <image class='W H' src="{{test1}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>        
+        </view>
+
+        <view class='f F_ h90 bbb bbox'>
+          <view class='f H bbox'>
+            <image class='W H' src="{{test2}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>
+          <view class='f H blb brb bbox'>
+            <image class='W H' src="{{test2}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>   
+          <view class='f H bbox'>
+            <image class='W H' src="{{test2}}" mode="scaleToFill" bindtap="exchangePic"></image>
+          </view>        
+        </view>
+      </view>
+    </view>
+
+    <view class="F_ jcc f16 p20-0">
+      <view class="r dib pl30 pr30 h40 lh40 bg2" bindtap="cancelGame">
+        <icon class="iconfont icon-prompt f20 vb"></icon>
+        放弃挑战
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<view class="">
+  <canvas class="w270 h270 bggreen z1" canvas-id="myCanvas" style="display: block!important;"></canvas>
+</view>  

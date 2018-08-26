@@ -1,0 +1,51 @@
+<view wx:if="{{headsculpture}}" class="anni {{show_menu_Name == 0 ?'':'show'}}"> <image src="{{headsculpture}}"></image> <view>{{menu_Name}} {{mark}}1</view></view>
+
+<view class="footer">
+  <view class="num" wx:if="{{num}}">{{num}}</view>
+  <image wx:if="{{!num}}" src="https://lingju360.com/shop/resources/image/manage/index/food/shop.png"></image>
+  <view wx:if="{{num}}" class="rmb">¥{{price}}</view>
+  <view class='sub_box' catchtap="settle" wx:if="{{num}}">
+  <view class="sub"  >确认下单</view>
+  </view>
+  <view class="sub no" wx:if="{{!num}}">未选菜品</view>
+</view>
+
+
+
+<!-- 购物车 -->
+
+<view class="yes-select-menu-box {{ show ? 'ani' :''}}">
+  <view class="yes-select-menu">
+    <text class="f_l">我的菜单</text>
+
+<view catchtap="goBack" class="f_r cl add">
+      <image src="https://lingju360.com/shop/resources/image/manage/index/food/jia3.png"></image>添加</view>
+
+    <view catchtap="clear" class="f_r cl">
+      <image src="https://lingju360.com/shop/resources/image/manage/index/food/de.png"></image> 清空</view>
+
+    
+  </view>
+
+  <view class="ul_menu" scroll-y="true">
+    <view class="li_menu" wx:for-items="{{buymenu}}" wx:key="{{index}}" wx:if="{{item.num}}">
+      <view class="imgbox">
+        <image src="https://flashgoing.oss-cn-shenzhen.aliyuncs.com/{{item.menuPicture}}{{item.menupicture}}" ></image>
+      </view>
+      <view class="t">
+        <view class="tit">{{item.menuName}}{{item.name}}{{item.flavour ? "/"+ item.flavour : "" }}{{item.menuspecjson.name ? "/"+item.menuspecjson.name : "" }}</view>
+        <view class="num2">¥{{item.price}}</view>
+      </view>
+
+
+      <view class="jia"  data-isNeedWeigh="{{item.isNeedWeigh }}" data-id="{{item.id}}" data-name="{{item.menuName}}{{item.name}}" data-price="{{item.price}}" catchtap="add" src="https://lingju360.com/shop/resources/image/manage/index/food/jian.png"></view>
+      <view class="jia jian" data-id="{{item.id}}" data-name="{{item.menuName}}{{item.name}}" data-price="{{item.price}}" catchtap="minus" src="https://lingju360.com/shop/resources/image/manage/index/food/jia.png"></view>
+      <text class="jia num">{{ item.num }}</text>
+    </view>
+  </view>
+
+  <view class="input_box">
+    <!-- <input placeholder="备注" /> -->
+  </view>
+
+</view>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>销量统计图表</title>
+		<!--Morris Chart CSS -->
+		<link rel="stylesheet" href="js/morris-chart/morris.css">
+		<!--common-->
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+	</head>
+
+	<body class="sticky-header" style="background: white;">
+		<!-- main content start-->
+		<div class="main-content">
+			<!--body wrapper start-->
+			<div class="wrapper">
+				<div class="row">
+					<div class="col-md-6">
+						<!--statistics start-->
+						<div class="row state-overview">
+							<div class="col-md-6 col-xs-12 col-sm-6">
+								<div class="panel blue">
+									<div class="symbol">
+										<i class="fa fa-money"></i>
+									</div>
+									<div class="state-value">
+										<div class="value"><span id="totalMoney"></span>元</div>
+										<div class="title">金额</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-xs-12 col-sm-6">
+								<div class="panel green">
+									<div class="symbol">
+										<i class="fa fa-eye"></i>
+									</div>
+									<div class="state-value">
+										<div class="value"><span id="totalOrder"></span>笔</div>
+										<div class="title">订单</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--statistics end-->
+					</div>
+					<div class="col-md-6">
+						<!--more statistics box start-->
+
+						<!--more statistics box end-->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="panel">
+							<div class="panel-body">
+								<div class="row revenue-states">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<h4>Monthly revenue report</h4>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<ul class="revenue-nav">
+											<li id="day" onclick="initSearch('day')" class="active" timeWay='day'><a href="#">7天</a></li>
+											<li id="mounth" onclick="initSearch('mounth')" timeWay='mounth'><a href="#">30天</a></li>
+											<li id="year" onclick="initSearch('year')" timeWay='year'><a href="#">365天</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="clearfix">
+											<div id="main-chart-legend" class="pull-right"></div>
+										</div>
+
+										<div id="main-chart">
+											<div id="main-chart-container" class="main-chart"></div>
+										</div>
+										<ul class="revenue-short-info">
+											<li>
+												<h1 class="red">20%</h1>
+												<p>Server Load</p>
+											</li>
+											<li>
+												<h1 class="purple">30%</h1>
+												<p>Disk Space</p>
+											</li>
+											<li>
+												<h1 class="green">20%</h1>
+												<p>Transferred</p>
+											</li>
+											<li>
+												<h1 class="blue">30%</h1>
+												<p>Temperature</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--body wrapper end-->
+		</div>
+		<!-- main content end-->
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--easy pie chart-->
+		<script src="js/easypiechart/jquery.easypiechart.js"></script>
+		<script src="js/easypiechart/easypiechart-init.js"></script>
+
+		<!--Sparkline Chart-->
+		<script src="js/sparkline/jquery.sparkline.js"></script>
+		<script src="js/sparkline/sparkline-init.js"></script>
+
+		<!--icheck -->
+		<script src="js/iCheck/jquery.icheck.js"></script>
+		<script src="js/icheck-init.js"></script>
+
+		<!-- jQuery Flot Chart-->
+		<script src="js/flot-chart/jquery.flot.js"></script>
+		<script src="js/flot-chart/jquery.flot.tooltip.js"></script>
+		<script src="js/flot-chart/jquery.flot.resize.js"></script>
+		<script src="js/flot-chart/jquery.flot.time.js"></script>
+
+		<!--Morris Chart-->
+		<script src="js/morris-chart/morris.js"></script>
+		<script src="js/morris-chart/raphael-min.js"></script>
+
+		<!--Calendar-->
+		<script src="js/calendar/clndr.js"></script>
+		<script src="js/calendar/evnt.calendar.init.js"></script>
+		<script src="js/calendar/moment-2.2.1.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/laytpl.js"></script>
+		<script src="js/ysh_comm.js"></script>
+
+		<!--Dashboard Charts-->
+		<script src="script/Sales_Overview_Statistics.js"></script>
+	</body>
+
+</html>

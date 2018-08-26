@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<!-- 弹幕 -->
+<view class="page-section">
+    <view class="doommview">
+      <block wx:for="{{doommData}}" wx:key="id">
+          <text wx:if="{{item.display}}" class="aon" style="animation: first {{item.time}}s linear infinite;top:{{item.top}}%;color:{{item.color}};">
+              {{item.text}}
+          </text>
+      </block>
+    </view>
+  </view>
+  
+<view class='header'>
+  <image class="index_img" src="https://www.mqtp8.cn/imgs/index_img.png">
+  </image>
+  <view class='openTip'>一键开启 ☻ 送出祝福</view>
+  <image bindtap='selectTheme' class='open_button'  bindtouchstart="touchStart" bindtouchend="touchEnd" src="/pages/imgs/index_button.png"></image>
+</view>

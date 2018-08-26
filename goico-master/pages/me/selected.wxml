@@ -1,0 +1,32 @@
+<!--pages/me/selected.wxml-->
+<view class="container">
+  <view class="filter" bindtap="goSearch">
+    <view class="filter-set">
+      <icon type="search" class="search-img" size="15" color="#999"></icon>
+      <label class="search-lbl">输入币名添加自选</label>
+    </view>
+  </view>
+
+  <view class="currencies">
+    <view wx:for="{{favlist}}" wx:for-item="item" class="currencies-item">
+      <view class="item-info">
+        <view class="item-left">
+          <view class="item-name">{{item.showName}}</view>
+          <view class="item-symbol">{{item.symbol}}</view>
+        </view>
+        
+        <view class="item-right">
+          <image wx:if="{{item.isFavorite && index>0}}" class='stick' data-seq="{{index}}" src="/images/buttons/move_up.png" bindtap="upSymbol"></image>
+          <image wx:if="{{item.isFavorite && index==0}}" class='stick' data-seq="{{index}}" src="/images/buttons/move_up_disable.png"></image>
+          <image wx:if="{{item.isFavorite && index<favlist.length-1}}" class='stick' data-seq="{{index}}" src="/images/buttons/move_down.png" bindtap="downSymbol"></image>
+          <image wx:if="{{item.isFavorite && index==favlist.length-1}}" class='stick' data-seq="{{index}}" src="/images/buttons/move_down_disable.png"></image>
+          <view class="item-star" data-seq="{{index}}" data-marketid="{{item.marketId}}" data-currencyid="{{item.currencyId}}" bindtap="favorite">
+            <image class="star" wx:if="{{item.isFavorite}}" src="/images/buttons/star.png"></image>
+            <image class="star" wx:else src="/images/buttons/unstar.png"></image>
+          </view>
+        </view>
+      </view>
+      <view class="item-line"></view>
+    </view>
+  </view>
+</view>

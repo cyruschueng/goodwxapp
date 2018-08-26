@@ -1,0 +1,24 @@
+    <scroll-view scroll-y="true" class="dev-list" style="height:{{scrollHeight}}">
+
+      <view class="devTip" wx:if="{{devList.length == 0}}">没有设备</view>  
+
+      <view class="dev-item" wx:for="{{devList}}" wx:key="" data-phone="{{item.phone}}" bindtap="goToDevInfo">
+        
+        <view class="img-box">
+          <image src="/images/station.png"></image>
+        </view>
+
+        <view class="dev-info">
+          <view >充电侠：{{item.user}}</view>
+          <view >距离：{{item.distance}}米</view>
+          <view> 地址：{{item.address}}</view>
+        </view> 
+
+        <view class='dev-remainder'>
+           <image src='https://didicharging-v2.oss-cn-beijing.aliyuncs.com/code/phoneicon.png'></image>
+        </view>
+
+      </view>
+
+    </scroll-view>
+

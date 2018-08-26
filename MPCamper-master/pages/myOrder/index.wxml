@@ -1,0 +1,59 @@
+<!--pages/myOrder/index.wxml-->
+<import src="../../components/prompt/prompt.wxml"/>
+
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for-items="{{ tabs}}" wx:key="{{ index }}">
+                    <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : '' }}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{ item }}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{ activeIndex != 0 ||order.length>0 }}">
+                	<template is="prompt" data="{{ ...$wux.prompt.msg1 }}"/>
+                </view>
+                <view class="weui-tab__content" hidden="{{ activeIndex != 1 ||order.length>0}}">
+                	<template is="prompt" data="{{ ...$wux.prompt.msg2 }}"/>
+                </view>
+                <view class="weui-tab__content" hidden="{{ activeIndex != 2 ||order.length>0}}">
+                	<template is="prompt" data="{{ ...$wux.prompt.msg3 }}"/>
+                </view>
+                <!-- <view class="weui-tab__content" hidden="{{ activeIndex != 3 ||order.length>0}}">
+                	<template is="prompt" data="{{ ...$wux.prompt.msg4 }}"/>
+                </view> -->
+            </view>
+
+            <view class="items">
+                 <view class="items" wx:for="{{ order }}" wx:key="" wx:for-item="item"> 
+                 <navigator url="/pages/liveCamperOrderDetail/index?orderNo={{item.OrderNo}}">
+                    <view class='item'>
+                        <view class="item-image">
+                            <image class="item-image" src="{{item.Img}}" mode='center'/>
+                        </view>
+                        <view class='item-right'>
+                            <view class='item-right-top'>
+                                <text class='item-right-top-title'>{{item.CamperTypeName}}</text>
+                                <text class='item-right-top-status'>{{statuStr[index]}}</text>
+                            </view>
+                            <view class='item-right-bottom'>
+                                <text class='item-right-bottom-text'>营地：{{item.CampShortName}}</text>
+                                <text class='item-right-bottom-text'>入住时间：{{item.BTimeDate}}（{{item.Days}}晚）</text>
+                                <text class='item-right-bottom-text'>实付款：¥{{item.TotalMoney}}</text>
+                            </view>
+                            <view class='item-bottom'> 
+                                <button class="item-bottom-btn" id='{{index}}' type="primary" catchtap='btnClick'>{{btnStr[index]}}</button>
+                            </view>    
+                        </view>
+                    </view>
+                    </navigator>
+                    <view style='width:100%;height:1px;background:#ccc;margin-top:10rpx;'></view>
+                 </view> 
+                 
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,22 @@
+<view class="container">
+        <view class="camps" wx:for-items="{{camp}}" wx:key="id" wx:for-item="item">
+                <view class="travel-notes">
+                        <navigator url="/pages/campDetail/index?CampOwerGuid={{item.GUID}}">
+                                <image class="travel-img" src="{{item.Img}}" mode='widthFix'></image>
+                                <view class="travel-title">
+                                        <view class='camp-text-left'>
+                                                <text class="title">{{item.CampOwerName}}</text>
+                                                <text class="info">{{item.CampOwerAddress}}</text>
+                                        </view>
+
+                                        <view class='camp-text-right'>
+                                                <image style="width:30px; height:30px;border-radius: 50%;" src='{{item.Logo}}' mode='aspectFill'></image>
+                                        </view>
+                                </view>
+                        </navigator>
+                </view>
+
+        </view>
+
+       <view class='refesh' data-time="33" bindtap="goTel" wx:if="{{telstatus}}"> <image class="tel-img" src="../../images/index_tel.png" mode='widthFix'></image></view>
+</view>

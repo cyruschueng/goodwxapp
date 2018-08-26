@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container" >
+  <view class="home-content">
+    <image class="num-image" src='http://l.test.81youxi.com/public/image/cdx/num-BJ@2x4.png'></image>
+    <view class='game-introduce'>限定时间内找出较大的数字</view>
+
+    <view class='btn-box btn-top'>
+      <button class='start-game' hover-class="change-bgc" bindtap='startGame'></button>
+    </view>
+    <view class='btn-box btn-bottom'>
+      <button class='start-game-friends' open-type='share' hover-class="change-bgx-text">邀请好友一起挑战</button>
+    </view>
+  </view>
+
+
+     <dialog id='dialog' 
+      title='获得更多挑战机会' 
+      content='分享成功后，即可再玩一次' 
+      showTitle="{{ false }}"
+      cancelText='取消' 
+      confirm='去分享'
+      confirmText="去分享"
+      bind:cancelEvent="_cancelEvent"  
+      bind:confirmEvent="_confirmEvent">
+    </dialog>
+</view>

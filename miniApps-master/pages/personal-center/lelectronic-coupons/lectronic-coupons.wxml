@@ -1,0 +1,75 @@
+<view>
+  <view class='lectronic-wrap'>
+    <view class='lectronic-top'>
+      <view class='lectronic-left'>
+        <view class='lectronic-wrap-im'>
+          <image class='lectronic-images' src='/images/icon/xiangqiLGBL.gif'></image>
+        </view>
+        <view class='lectronic-text'>
+          <text class='lectronic-reel'>{{ticketInfo.skuName}}</text>
+          <text class='lectronic-limit'>{{ticketInfo.coupons[0].promotionRules[0].ruleDesc}}</text>
+        </view>
+      </view>
+      <view class='lectronic-right'>
+        <text wx:if="{{ticketInfo.soStatus == 2}}">待使用</text>
+        <text wx:if="{{ticketInfo.soStatus == 3}}">已使用</text>
+      </view>
+    </view>
+    <view catchtap='sublevelSum'>
+      <view class='restrict-time'>
+        <view class='restrict-caution'>
+          <text>有限期至:</text>
+          <text>{{ticketInfo.coupons[0].expiryDate}}</text>
+        </view>
+        <view class='restric-page-down'>
+          <text class='restric-page-text' id="{{ticketInfo.id}}">使用详情</text>
+          <image class='restrict-Images' src='/images/icon/home_arrow.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='qr-code'>
+    <view class='rollMessage'>享7劵</view>
+    <block wx:for="{{couponsArr}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+      <view class='coding-code {{idx > 2 && qrCodeFlag ? "hide" : ""}}'>
+        <text class='codingText'>{{idx + 1}}</text>
+        <text>劵码:</text>
+        <text class='numberFeald'>{{item.couponCode}}</text>
+        <image src='{{item.qrcodeUrl}}' class='codingImages' data-index='{{idx}}' bindtap='previewImg'></image>
+      </view>
+    </block>
+    <view class='codingeven-more' wx:if="{{qrCodeArr.length > 3}}" bindtap="onclickMore">
+      <text>{{qrCodeFlag ? '更多' : '收起'}}</text>
+      <image class="veent-more-img" wx:if="{{qrCodeFlag}}" src='/images/icon/xialatupian.png'></image>
+      <image class="veent-more-img-top" wx:else src='/images/icon/xialatupian.png'></image>
+    </view>
+  </view>
+
+  <view class='order-for-goods'>
+    <view class='order-for-nei'>
+      <view class='order-for-text'>
+        <text>订单详情</text>
+      </view>
+      <view class='order-for-colour'>
+        <text>订单号</text>
+        <text>{{ticketInfo.soId}}</text>
+      </view>
+      <view class='order-for-colour'>
+        <text>付款时间</text>
+        <text>{{ticketInfo.paidTime}}</text>
+      </view>
+      <view class='order-for-colour'>
+        <text>数量</text>
+        <text>{{ticketInfo.skuNum}}</text>
+      </view>
+      <view class='order-for-colour'>
+        <text>总价</text>
+        <text>￥<text>{{ticketInfo.soAmount}}</text></text>
+      </view>
+    </view>
+  </view>
+  <view class='warm-prompt'>
+    <text>^_^温馨提示:到店向商家出示劵码</text>
+  </view>
+</view>

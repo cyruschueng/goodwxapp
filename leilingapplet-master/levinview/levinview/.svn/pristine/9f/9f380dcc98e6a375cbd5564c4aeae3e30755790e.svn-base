@@ -1,0 +1,68 @@
+<!--detail.wxml-->
+<view class="wrap">
+    <include src="../header/header.wxml"/>
+    <view class="container">
+      <swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" 
+        indicator-active-color ="#fff" indicator-color="#ddd">
+          <block wx:for="{{banner}}">
+            <swiper-item>
+              <image src="{{item}}" class="slide-image"/>
+            </swiper-item>
+          </block>
+      </swiper>
+      <view class="blink_wrap">
+        <view class="blink"   style="background: #fff url({{imagesUrl}}levin/img/title.png) no-repeat left top;  background-size: 700rpx 700rpx;">
+          <view class="listText">
+              <block wx:for="{{content}}">
+                  <text style=" background: url({{imagesUrl}}levin/img/circle.png) no-repeat 20rpx 10rpx;background-size: 10rpx 10rpx;">{{item}}</text>
+              </block>
+          </view>
+          <view class="picker_wrap">
+                <picker bindchange="bindModelChange" value="{{iModel}}" range="{{arrayModel}}" >
+                    <view class="picker" style="  background: url({{imagesUrl}}levin/img/down2.png) no-repeat 270rpx;background-size: 30rpx auto;">
+                        {{arrayModel[iModel]}}
+                    </view>
+                </picker>
+                <picker bindchange="bindSChange" value="{{iS}}" range="{{arrayS}}">
+                    <view class="picker picker2" style="  background: url({{imagesUrl}}levin/img/down2.png) no-repeat 270rpx;background-size: 30rpx auto;">
+                        {{arrayS[iS]}}
+                    </view>
+                </picker>
+          </view>
+          <view class="info">
+              <text class="tel text" style="background: url({{imagesUrl}}levin/img/tel.png) no-repeat left;background-size: 50rpx auto;">{{tel}}</text>
+              <text class="address text" style="background: url({{imagesUrl}}levin/img/home.png) no-repeat left;background-size: 50rpx auto;">{{address}}</text>
+              <view class="map" bindtap="showMap">
+                  <image src="{{imagesUrl}}levin/img/address2.png"></image><text>附近的店</text>>
+              </view>
+          </view>
+          <view class="next" bindtap="next">
+              <image src="{{imagesUrl}}levin/img/next.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--地图  -->
+    <view class="M_map_wrap" style="transform:{{showMap ? 'translateY(-100%)' : 'translateY(0)'}}">
+        <view class="M_map2" >
+           <map id="map" longitude="113.324520" latitude="23.099994" scale="14" bindtap="ddd"> </map>
+           <image src="{{imagesUrl}}levin/img/close.png" class="close" bindtap="close"></image>
+           <image src="{{imagesUrl}}levin/img/choose4S.png" class="choose4s"></image>
+           <scroll-view scroll-y  id="scroll">
+              <radio-group class="radio-group" bindchange="radioChange">
+                <label class="radio" wx:for="{{dealerinfo}}">
+                    <view  class="scroll-view-item ">
+                      <text class="title" style=" background: url({{imagesUrl}}levin/img/circle.png) no-repeat left; background-size: 10rpx auto;">{{item.address}}</text>
+                      <text class="con">{{item.tel}}</text>
+                      <radio value="{{index}}" checked="{{item.checked}}"/>
+                      {{item.checked}}{{index}}
+                    </view>
+                </label>
+              </radio-group>
+            </scroll-view>
+          <image src="{{imagesUrl}}levin/img/sure.png" class="sure"></image>
+        </view>
+    </view>
+</view>
+

@@ -1,0 +1,39 @@
+
+
+<template name="intention-leftbox">
+
+  <view class='leftboxbg-view weui-flex'>
+    
+    <view class='leftbox-view'>
+      
+      <!-- 单选几种 -->
+      <block wx:for='{{ leftboxList }}' wx:for-item='lbl' wx:for-index='x' wx:key='{{ x }}'>
+      <view class='box-item'>
+        <view class='title'>{{ lbl.title }}</view>
+        <view class='weui-flex'>
+          <block wx:for='{{ lbl.cots }}' wx:for-index='y' wx:key='{{ y }}'>
+          <view class='weui-flex__item'>
+            <view data-x='{{ x }}' data-y='{{ y }}'  class='cots-btn {{ item.checked ? "checked-cots-btn" : "" }} ' bindtap='bindLeftBoxBtnTap'>{{ item.name }}</view>
+          </view>
+          </block>
+        </view>
+      </view>
+      </block>
+
+      <!-- 关键时间 -->
+      <view class='leftbox-input-view'>
+        <text>关键词</text>
+        <input class='leftbox-input' placeholder-style='color:#BAB9C7;' placeholder='可以搜索手机号、名字' bindinput='bindLeftBoxKeyWordInput'></input>
+      </view>
+
+      <!-- 底部按钮 -->
+      <view class='let-foot-view weui-flex'>
+        <view class='weui-flex__item reset-btn' bindtap='bindResetSearchTap'>重置</view>
+        <view class='weui-flex__item conf-btn' bindtap='bindConfirmSearchTap'>确定</view>
+      </view>
+
+    </view>
+
+  </view>
+
+</template>

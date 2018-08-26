@@ -1,0 +1,34 @@
+<import src="../../../wxParse/wxParse.wxml"/> 
+<view class="Page">
+  <view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  <scroll-view scroll-y="true" class="list" style="height:{{scrollHeight}}px;" wx:else>
+    <view class="header">
+      <image src="{{img}}" class='img' mode="aspectFill" binderror="errImg" wx:if="{{img.length > 0}}"></image>
+      <image src="../../../image/default.png" class='img' mode="aspectFill" wx:else></image>
+      <view class="title">{{title}}</view>
+      <view class="subTitle_groups">
+        <view class="subTitle">{{author}}</view>
+      </view>
+    </view>
+    <view class="body">
+      <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+    </view>
+    <block wx:for="{{place_ids}}" wx:key="*this">
+      <navigator url="{{'../../live/food/merchants/merchants?id='+item.id}}" class="place_ids" style="{{'background-image:url('+item.img+');'}}">
+        <view class="mask"></view>
+        <view class="title_groups">
+          <view class="icon">— </view>
+          <view class="title">  {{item.title}}  </view>
+          <view class="icon"> —</view> 
+        </view>
+      </navigator>
+      <view class="white" wx:if="{{index == (place_ids.length -1)}}"></view>
+    </block>
+  </scroll-view>
+</view>
+
+
+

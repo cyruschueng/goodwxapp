@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../build/jquery-1.10.1.js"></script>
+    <script type="text/javascript" src="../build/react.js"></script>
+    <script type="text/javascript" src="../build/react-dom.js"></script>
+    <!--<script type="text/javascript" src="../build/browser.min.js"></script>-->
+    <script type="text/javascript" src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/jsx">
+    //创建组建
+    var Component = React.createClass({
+        ajaxButton:function(event){
+            $.ajax({
+                type:'get',
+//                dataType:"json",
+                url:this.props.url,
+                success:function(data){
+                    alert('请求成功！');
+                    console.log(data);
+                },
+                error:function(error){
+                    alert(error);
+                }
+            });
+        },
+        componentDidMount:function(){//已插入真实DOM
+            $.ajax({
+                type:'get',
+//                dataType:"json",
+                url:this.props.url,
+                success:function(data){
+                    alert('请求成功！');
+                    console.log(data);
+                },
+                error:function(error){
+                    alert(error);
+                }
+            });
+        },
+        render:function(){
+            return (<div>
+                <button onClick={this.ajaxButton}>发送ajax请求</button>
+            </div>);
+        }
+    });
+    ReactDOM.render(
+            <Component url="https://api.github.com/users/octocat/gists" />,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<import src="/zanui/toast/index.wxml" />
+<!--index.wxml-->
+<view class="container page__bd" >
+  <view class="weui-cells__title"></view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+
+    <view class="weui-cells__title"> </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input" bindtap="avatarMenu" style="height:60px;line-height:60px;">
+        <view class="weui-cell__hd">
+          <view class="weui-label">评论人头像</view>
+        </view>
+        <view class="weui-cell__bd" >
+          <image style="width: 50px;height: 50px;display: block;float: right;" src="{{detail.comments[index].avatar?detail.comments[index].avatar:'http://icons.maiyizhi.cn/default_avatar.png'}}" mode="aspectFill"></image>
+          <view style="clear: both;"></view>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">评论人昵称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input name="name" value="{{detail.comments[index].name}}" bindinput="bindName" style="text-align: right;" class="weui-input" placeholder="请输入昵称"/>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" bindtap="nav" id="/pages/commentTime/commentTime" style="">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">评论时间</view>
+        </view>
+        <view class="weui-cell__bd">
+            <text style="display: block;color: #888;text-align:right;margin-right:25px;" class="weui-input">{{detail.comments[index].time?detail.comments[index].time:'1分钟前'}}</text>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view>
+    </view>
+
+      <view class="weui-cells__title"> </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <textarea placeholder="请输入评论内容" name="content" value="{{detail.comments[index].content}}" bindinput="bindContent"  style="height: 80px;margin: 8px 0;" maxlength="800"></textarea>
+        </view>
+      </view>
+
+    <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

@@ -1,0 +1,67 @@
+<!--pages/weddingTalent/weddingTalent.wxml-->
+
+<import src="../../templates/dishes-item/dishes-item.wxml"/>
+<import src="../../templates/talent-item/talent-item.wxml"/>
+<import src="../../templates/celebration-item/celebration-item.wxml"/>
+
+ <view class="weui-tab">
+  <view class="weui-navbar">
+      <block wx:for-items="{{ navbarTabs }}" wx:key="{{ index }}">
+          <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="bindNavbarTabTap">
+              <view class="weui-navbar__title {{ activeIndex == index ? 'weui-bar__item_on' : ''}}">{{ item }}</view>
+          </view>
+      </block>
+      <!-- <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view> -->
+  </view>
+
+  <view class="weui-tab__panel">
+
+<!-- 选项一 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}" style='border-top-style:none;padding-top:20rpx;'>
+      <!-- 选项一 内容 -->
+      <template is="dishes-item" data="{{ disheList }}"/>
+      <!--无 更多 -->
+      <view class='foot-more-view' wx:if='{{ disheList.length <= 0 }}'>
+        <view class="second-txt-color">暂无更多套餐</view>
+      </view>
+    </view>
+<!-- 选项一 结束 -->
+
+<!-- 选项二 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
+      <!-- 选项二 内容 -->
+      <template is="talent-item" data="{{ leftTabs,talentList,windowHeight,itemSelectIndex }}"/>
+      <!-- 无 更多 -->
+      <view class='foot-more-view' wx:if='{{ talentList.length <= 0 }}'>
+        <view class="second-txt-color">暂无更多人才</view>
+      </view>
+    </view>
+<!-- 选项二结束 -->
+
+<!-- 选项三 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}" style='border-top-style:none;padding-top:20rpx;'>
+      <!-- 选项三 内容 -->
+      <template is="celebration-item" data="{{ celebrationList }}"/>
+      <!-- 无 更多 -->
+      <view class='foot-more-view' wx:if='{{ celebrationList.length <= 0 }}'>
+        <view class="second-txt-color">暂无更多庆典</view>
+      </view>
+    </view>
+<!-- 选项三 结束 -->
+
+  </view>
+
+<!-- 结算 -->
+  <view class='weui-footer weui-footer_fixed-bottom settlement-view'>
+    <text>共计：{{ shoppingcars.shoppinglist.length }}件</text>
+    <view class='shopping-car-view' bindtap='goShoppingCarPage'>
+      <image class='shopping-car' src='../../images/shopping-car-red.png'></image>
+      <view class='number-icon' hidden='{{ shoppingcars.shoppinglist.length > 0 ? false : true }}'>{{ shoppingcars.shoppinglist.length }}</view>
+    </view>
+  </view> 
+
+</view>
+
+
+
+

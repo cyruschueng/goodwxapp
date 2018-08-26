@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>名片</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="名片">
+    <meta name="keyword" content="名片">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css" rel="stylesheet">
+    <style type="text/css">
+    @font-face {
+        font-family: 'iconfont';
+        /* project id 634463 */
+        src: url('//at.alicdn.com/t/font_634463_drcifisewbzz1tt9.eot');
+        src: url('//at.alicdn.com/t/font_634463_drcifisewbzz1tt9.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_634463_drcifisewbzz1tt9.woff') format('woff'),
+        url('//at.alicdn.com/t/font_634463_drcifisewbzz1tt9.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_634463_drcifisewbzz1tt9.svg#iconfont') format('svg');
+    }
+
+    .interview {
+        display: flex;
+        justify-content: center;
+    }
+    </style>
+</head>
+<div id="app" class="interview">
+    <div id="content"></div>
+</div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script type="text/javascript">
+/*function Editor(input, preview) {
+    this.update = function() {
+        preview.innerHTML = markdown.toHTML(input.value);
+    };
+    input.editor = this;
+    this.update();
+}
+var $ = function(id) { return document.getElementById(id); };
+new Editor($("text-input"), $("preview"));*/
+</script>
+<script type="text/javascript">
+new Vue({
+    el: '#app',
+    mixins: [],
+    data: function() {
+        return {
+            markdownData: '',
+        }
+    },
+    created: function() {
+        // document.getElementById('content').innerHTML = marked(``);
+
+        this.getMarkdown();
+    },
+    mounted: function() {},
+    computed: {},
+    methods: {
+        getMarkdown: function() {
+            axios({
+                url: "./interview.md",
+                method: "get",
+                data: {},
+                params: {},
+                headers: {}
+            }).then(res => {
+                console.log(res);
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
+    },
+    watch: {}
+})
+</script>
+</body>
+
+</html>

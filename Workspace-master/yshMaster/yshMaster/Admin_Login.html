@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>Login</title>
+
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+	</head>
+
+	<body class="login-body">
+
+		<div class="container">
+
+			<form class="form-signin" action="index.html">
+				<div class="form-signin-heading text-center">
+					<h1 class="sign-title">管理员登录</h1>
+					<img src="images/logo.png" alt="" />
+				</div>
+				<div class="login-wrap">
+					<input id="username" type="text" maxlength="20" class="form-control" placeholder="用户名" autofocus>
+					<input id="password" type="password" maxlength="20" class="form-control" placeholder="密码">
+
+					<button class="btn btn-lg btn-login btn-block" type="button" id="btn_login">
+                <i class="fa fa-check"></i>
+            </button>
+
+					<!--<div class="registration">
+                Not a member yet?
+                <a class="" href="registration.html">
+                    Signup
+                </a>
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+
+                </span>
+            </label>-->
+
+				</div>
+
+				<!-- Modal -->
+				<!--<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Forgot Password ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Enter your e-mail address below to reset your password.</p>
+                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="button">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+				<!-- modal -->
+
+			</form>
+
+		</div>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+
+		<!--pickers plugins-->
+
+		<script src="js/MD5.js"></script>
+
+		<script src="js/scripts.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/ysh_comm.js"></script>
+
+		<script type="text/javascript">
+			$(function() {
+				$("#btn_login").click(function() {
+					var user = new Object();
+					var timestamp = Date.parse(new Date());
+					var password = $("#password").val() || null;
+					var url = yshurl + "Admin_UserLogin";
+					user.m = $.trim($("#username").val()) || null;
+					user.t = timestamp;
+					//对用户名和密码进行非空验证
+					if(!user.m) {
+						ysh_msg('用户名不能为空');
+						return;
+					}
+					if(password.trim().length < 6 || password.trim().length > 20) {
+						ysh_msg('密码必须大于6，小于20个字符！');
+						return;
+					} else {
+						user.ptm = md5(md5(password) + timestamp)
+						user.act = null;
+						user.id = '1' || null;
+						user.back_act = null;
+						user.cookie = document.cookie;
+						getDataList(url, user, function(d) {
+							if(d && d.state == 0) {
+								ysh_msg('登录成功');
+								userInfo(function(user) {
+									setTimeout(function() {
+										window.location.href = 'index.html'
+									}, 2000)
+								})
+							} else {
+								ysh_msg('登录失败:用户名或密码错误，或没有权限登录，请联系系统管理员处理');
+							}
+						});
+					}
+				});
+			})
+		</script>
+
+	</body>
+
+</html>

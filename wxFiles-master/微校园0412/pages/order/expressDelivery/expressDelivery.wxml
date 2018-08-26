@@ -1,0 +1,76 @@
+<view>
+<!--pages/daiqukuaidi/daiqukuaidi.wxml-->
+<view class="{{click?'':'opacity'}}">
+<view class="cus_inf">
+    <view bindtap="selectCusInfo" >
+        <view class="name">{{name}} {{tel}}</view>
+        <view class="address">{{address}}</view>
+    </view>
+    <view class="jiantou"><image class="more" src="/images/jiantou.png" mode="aspectFit"></image></view>
+</view>
+
+
+<view class="kuaidi">快递选择</view>
+
+
+</view>
+
+  <view class="kuaidixuanze"  bindtap="xuanzekuadi">
+    <!--<view  class="{{click?'kuaidi_txt':'kuaidi_txt1'}}">{{kuaidi}}</view>
+    <view class="{{click?'kuaidi_jiantou':'kuaidi_jiantou1'}}"><image class="{{click?'more':'more_1'}}" src="{{click?'/images/jiantou.png':'/images/jiantou_1.png'}}" mode="aspectFit"></image></view>-->
+    <picker style="width:100%"  bindchange="bindPickerChange" value="{{index}}"  range="{{array}}">
+    <view class="picker" style="{{style}}">
+      当前选择：{{array[index]}}
+       <view style="float:right;margin-right:50rpx"><image class="more" src="/images/jiantou.png" mode="aspectFit"></image></view>
+    </view>
+  </picker>
+</view>
+
+
+
+<view class="person_box">
+   <view class="phone_select" hidden="{{selectPerson}}">
+    <view class="select_one" bindtap="mySelect" data-me="中通快递">中通快递</view>
+    <view class="select_one" bindtap="mySelect" data-me="韵达快递">韵达快递</view>
+    <view class="select_one" bindtap="mySelect" data-me="圆通快递">圆通快递</view>
+    <view class="select_one" bindtap="mySelect" data-me="百世汇通">百世汇通</view>
+    <view class="select_one" bindtap="mySelect" data-me="顺丰速运">顺丰速运</view>
+    <view class="select_one" bindtap="mySelect" data-me="申通快递">申通快递</view>
+    <view class="select_one" bindtap="mySelect" data-me="天天快递">天天快递</view>
+    <view class="select_one" bindtap="mySelect" data-me="EMS">EMS</view>
+    <view class="select_one" bindtap="mySelect" data-me="平邮">平邮</view>
+  </view>
+ </view>
+  
+
+
+
+
+
+<!--下拉菜单-->
+    <view class="fengexian"></view>
+
+<view class="{{click?'':'opacity'}}">
+
+<!--<view class="kuaidi_kg">快递大小</view>
+<view class="kuaidi_size" bindtap="kuaidixuanze">
+    <input class="size" bindinput="guige" placeholder="适当描述一下快递大小" />
+</view>-->
+
+<view class="kuaidi">备注信息</view>
+<view class="xinxi">
+    <textarea class="fuzhixinxi" bindinput="bz" placeholder="将收到的快递信息复制于此"/>
+</view>
+
+<view class="kuaidi">服务费用</view>
+<view class="fuwufeiyong">
+    <input class="price" type="number" bindinput="total"   placeholder="一元起，仅支持小体积小体重物件"/>
+    </view>
+ <view class="yuan">元</view>
+
+</view>
+
+
+<view class="{{btncss}}">
+    <view class="fabudingdan" bindtap="fb">确认付款</view>
+</view></view>

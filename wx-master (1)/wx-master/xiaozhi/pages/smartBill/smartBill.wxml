@@ -1,0 +1,76 @@
+<!--智能账单pages/smartBill/smartBill.wxml-->
+
+<view class='container'>
+<view wx:if="{{!showModalStatus}}">
+<view class='option row'>
+    <view class='card blod' catchtap='bindCard' wx:if="{{!show}}">选择信用卡</view>
+  </view>
+
+  <view wx:if="{{show}}" class='content row pos-r' data-index="{{index}}" catchtap='catchCard' style="background:rgba({{listData.r}},{{listData.g}},{{listData.b}},{{listData.a}})">
+      <view class='left' >
+        <!-- <view class='bank'>{{listData.bankName}}</view> -->
+         <view class='bank_logo row'>
+            <image src="http://ppp.zhybpay.com:1177{{listData.logo}}" class='logo'></image>
+            <view class='bank'>{{listData.bankName}}</view>
+          </view>
+        <view class='cardType'>{{listData.acctType?"信用卡":"储蓄卡"}}</view>
+        <view class='cardNo'>{{cardId}}</view>
+      </view>
+      <view class='right'>
+        <view class='sta'>{{listData.state?"":"还款中"}}</view>
+      </view>
+  </view> 
+
+  <view class='detail'>
+    <view class='jine row' style='order-bottom:2rpx solid #ccc;'>
+      <view style='width:30%; margin:-2rpx 0 0 20rpx;'>{{repayment}}</view>
+      <input type='number' placeholder='不小于1000' placeholder-class='placer' style='height:80rpx; width:70%;' confirm-type="next" maxlength="6" bindinput='bindMoney' bindblur='blurMoney' > </input>
+    </view>
+    <view class='jine row' style='border-top:2rpx solid #ccc;'>
+      <view style='width:30%; margin:-2rpx 0 0 20rpx;'>期望还款天数</view>
+      <picker bindchange="bindPickerChange" mode="selector" value="{{index}}" range="{{arr1}}" style='width:70%;'>
+      <view class="picker">{{arr1[index]}}天</view>
+      </picker>
+    </view>
+    <view wx:if="{{show}}">
+    <!--发送验证码-->
+       <view class="ui-cell input-box" wx:if="{{show1}}">
+        <view class="input-title">验证码</view>
+        <view class="ui-primary">
+          <input type="number"  bindinput="getCode" bindconfirm='confirm' value="{{code}}" confirm-type="done" placeholder="请输入验证码"/>
+        </view>
+        <button class="send-btn ui-cell" catchtap="sendCode" disabled='{{disa}}'>{{getBtnText}}</button>
+      </view> 
+      <!--cvn及有效日期-->
+      <view class='valid column' wx:else>
+        <view class='row'>
+          <view class='input-title' >CVN</view>
+          <input class='cvn' type='number' maxlength='3' value='{{cvn}}' placeholder='信用卡背面三位数' bindinput='CVN' placeholder-class="placer" ></input>
+        </view>
+        <view class='row' style='border-top:2rpx solid #ccc'>
+          <view class='input-title' >有效日期</view>
+          <input type='number' class="mm" placeholder='输入mm格式' bindinput="mm" cursor="0" maxlength='2' value='{{MM}}' placeholder-class="placer placerh"></input><view class='part'>/</view> <input type='number' bindinput="yy" class='yy' cursor="0" value="{{yy}}" maxlength='2' focus = "{{focus}}"  placeholder='输入yy格式' confirm-type="done" placeholder-class="placer placerh"></input>
+        </view> 
+      </view>
+    </view> 
+  </view>
+  <button id="submit" form-type='sumbit' name="submit" bindtap="bindSubmit" disabled='{{dis}}' data-statu="open">提交</button>
+  <view class='prompting' wx:if="{{show1}}">温馨提示：请确保卡内有申请还款的金额10%以上的余额，生成智能账单后，每笔子订单需您手动执行，可随时终止订单，还款更省心</view>
+  <view class='prompting' wx:else>温馨提示：提交订单后系统自动执行，还款更放心</view>
+</view>
+  
+    <!--删除信用卡-->
+  <view animation="{{animationData}}" class="drawer_box1" wx:if="{{showModalStatus}}">
+    <!--content-->
+    <view class='mask pos-r' >
+    <view class='hint'>
+      <view class='title'>提示</view>
+      <view class='msg'>亲爱的用户，请确认该卡办理分期，代扣等业务，并开通快捷支付功能，否则将无法正常还款</view>
+      <view class='row bottom'>
+        <button type="default" class="btn_cancel btn_ok" bindtap="cancelDele" data-statu="open" >取消</button> 
+        <button type="default" class="btn_ok" bindtap="sureDele" data-statu="closeSure">确定</button> 
+      </view>
+    </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view id="cardEdit">
+    <view class="userPic">
+      <image class="noPic" src="{{user_info.user_avatar_url}}" wx:if="{{user_info.user_avatar_url}}" bindtap="headPic"></image>
+      <view class="user_text noPic" wx:if="{{user_info.user_avatar_text}}" bindtap='headPic'>{{user_info.user_avatar_text}}</view>
+    </view>
+    <view class="card">
+      <view class="text">姓名*</view>
+      <input class="" id="name" maxlength="40" value="{{user_info.user_real_name}}" bindblur="nameEdit" />
+    </view>
+    <view class="card">
+      <view class="text">手机*</view>
+      <view disabled="true" class="noChange" id="mobile" bindblur="mobileEdit" style="color:#ccc;">{{user_info.user_mobile}}</view>
+    </view>
+    <view class="card">
+      <view class="text">公司*</view>
+      <input class="" id="company" value="{{user_info.user_company_name}}" bindblur="companyEdit" />
+    </view>
+    <view class="card">
+      <view class="text">品牌</view>
+      <input class="" id="companybrand" value="{{user_info.user_brand}}" bindblur="brandEdit" placeholder="品牌(选填)" maxlength="40" />
+    </view>
+    <view class="card">
+      <view class="text">职位*</view>
+      <input class="" id="career" value="{{user_info.user_company_career}}" bindblur="careerEdit" />
+    </view>
+    <view class="card">
+      <view class="text">邮箱</view>
+      <input class="" id="eMail" value="{{user_info.user_email}}" bindblur="eMailEdit" placeholder="邮箱(选填)" />
+    </view>
+    <view class="card">
+      <view class="text">个人描述</view>
+      <textarea class="" id="describe" value="{{user_info.user_intro}}" bindinput="describeEdit" maxlength="1000" />
+    </view>
+  </view>
+  <!--错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+
+  <!--保存  -->
+  <template is="buttonOne" data="{{text:buttonOneText,btnName:'public',disabled}}"></template>
+</view>

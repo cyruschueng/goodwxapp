@@ -1,0 +1,87 @@
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <!-- <view class="weui-form-preview">
+     <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">订单总价</view>
+            <view class="weui-form-preview__value_in-hd">¥ {{oinfo.order_amount}}<text class="weui-media-box__desc">(包含运费¥{{oinfo.shipping_fee}})</text></view>
+        </view>
+    </view> 
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item" wx:for="{{order.item.items }}" wx:key="">
+            <view class="weui-form-preview__label">{{item.goods.name}}</view>
+            <view class="weui-form-preview__value">x{{item.meta.total}} ¥ {{item.meta.totalAmount}}</view>
+        </view> 
+    </view> 
+</view> -->
+  <view class="ui-cells tc" style='padding:30rpx 0'>
+    <view class='red f36' style='line-height:1;'>¥ {{oinfo.order_amount}}</view>
+    <text class="f14 mt10">订单总价<text class="grey">(包含运费¥{{oinfo.shipping_fee}})</text></text>
+  </view>
+
+  <view class='pTit grey'>订单信息</view>
+  <view class="ui-cells f14">
+    <view class="ui-cell gridXb">订单号：{{oinfo.order_sn}}</view>
+    <view class="ui-cell gridXb">收货地址：{{oinfo.province+' '+oinfo.city+' '+oinfo.area+' '+oinfo.address}}</view>
+    <view class="ui-cell gridXb">联系电话：{{oinfo.mobile}}</view>
+    <view class="ui-cell gridXb">下单时间：{{oinfo.ctime}}</view>
+  </view>
+
+  <!-- <view class="weui_cells_title">订单信息</view>
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc">订单号：{{oinfo.order_sn}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc">收货地址：{{oinfo.province+' '+oinfo.city+' '+oinfo.area+' '+oinfo.address}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc">联系电话：{{oinfo.mobile}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc">下单时间：{{oinfo.ctime}}</view>
+        </view>
+    </view> -->
+  <!-- </view> -->
+  <form bindsubmit="pay_confirmOrder" report-submit="true">
+    <!--支付方式  -->
+    <view class='ptBox'>
+      <view class="pTit grey">支付方式</view>
+      <view class="can-use-list">
+        <radio-group name="pay_name">
+          <label class='gridXb'>
+            <view>
+              <text class="iconfont icon-Paywechat"></text>
+              <text class='mr10'>微信支付</text>
+            </view>
+            <radio value="0" checked/>
+          </label>
+          <label class='gridXb' wx:if="{{cardinfo.status}}">
+            <view>
+              <text class="iconfont icon-yuezhifu"></text>
+              <text class='mr10'>余额支付</text>
+            </view>
+            <radio value="1" />
+          </label>
+          <label wx:if="{{oinfo.public_info.is_huodaofukuan == 1}}">
+            <view>
+              <text class="iconfont icon-huodaofukuan"></text>
+              <text class='mr10'>货到付款</text>
+            </view>
+            <radio value="2" />
+          </label>
+        </radio-group>
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access m20">
+      <button class="weui-btn" type="primary" formType="submit" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">确认下单</button>
+    </view>
+  </form>
+</block>

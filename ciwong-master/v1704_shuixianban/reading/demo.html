@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <title>同步跟读</title>
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="../common/js/adaptive.js"></script>
+    <script src="../common/js/jquery.min.js"></script>
+    <script src="../common/js/vue.js"></script>
+
+    <!-- <script src="../common/js/common.js"></script>
+    <script src="js/index.js"></script> -->
+    <script>
+        $(function(){
+            // 初始化音频组件2
+            setTimeout(function(){
+                $('.audioBox .taskBoxLinks').each(function(){
+                    new AudioClass(this)
+                });
+            },1000)
+        })
+    </script>
+    <!-- 音频插件 -->
+    <script src="js/audiojs/hoasou.audio.js?v=031320"></script>
+</head>
+<body>
+     <div class="loading" style="display: none;">
+        <div class="load-inner">
+            <span>加载中...</span>
+        </div>
+    </div> 
+    <!--loading end-->
+    <div class="dialog">
+        <div class="dialog-inner">
+            <span>题目获取失败~</span>
+        </div>
+    </div><!--dialog end-->
+    <div class="m-error">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.href=location.href">重 试</div>
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div><!--error end-->
+
+    <div id="app" class="wrap word-break">
+        <div class="bg-f1f0ec p-30">
+
+            <div class="audioBox clearfix">
+                <div class="audioBtn"></div>
+                <div class="taskBoxLinks"><h3><i></i></h3></div>
+                    <div class="timeBox"><em class="currentTime"></em><strong class="duration"></strong></div>
+                <div class="loadError fl ml20"></div>
+                <audio src="../../../ListenSpeek/1.mp3" preload="auto"></audio>
+                <audio src="http://rimg3.ciwong.net/audio/20140427/2014042715143292321639431.mp3" preload="auto"></audio>
+                <audio src="http://rimg2.ciwong.net/cwf/6v68/tools/audios/15815/010/80010/50746de0e10476a09f37278d3da6e67c.mp3" preload="auto"></audio>
+            </div>
+            
+        </div>
+        <div class="p-30 bdb-f1f0ec">Many student suffer from stress in their daily lives. <span class="ml20 green">80分</span></div>
+        <div class="p-30 bdb-f1f0ec">Many student suffer from stress in their daily lives. <span class="ml20 orange">60分</span></div>
+        <div class="p-30 bdb-f1f0ec">Many student suffer from stress in their daily lives. <span class="ml20 red">59分</span></div>
+        <div class="p-30 bdb-f1f0ec">Many student suffer from stress in their daily lives. <span class="ml20 red">18分</span></div>
+        <div class="list-item2 bdb-f1f0ec clearfix">
+            <div class="list-item-l">Many student suffer from stress in their daily lives. </div>
+            <div class="list-item-r">
+                <div class="audio-btn2 playing"><audio src="http://rimg2.ciwong.net/cwf/6v68/tools/audios/15815/010/80010/50746de0e10476a09f37278d3da6e67c.mp3"></audio></div>
+                <span class="red">18分</span>
+            </div>
+        </div>
+
+
+        <div class="list-item2 bdb-f1f0ec clearfix">
+            <div class="list-item-l">
+                <div>Language</div>
+                <div class="fs-24 lh-36 c-999896">n.语言</div>
+            </div>
+            <div class="list-item-r">
+                <div class="audio-btn2"><audio src="http://rimg2.ciwong.net/cwf/6v68/tools/audios/15815/010/80010/50746de0e10476a09f37278d3da6e67c.mp3"></audio></div>
+                <span class="red">18分</span>
+            </div>
+        </div>
+        <div class="list-item2 bdb-f1f0ec clearfix">
+            <div class="list-item-l">
+                <div>Language</div>
+                <div class="fs-24 lh-36 c-999896">n.语言</div>
+            </div>
+            <div class="list-item-r">
+                <div class="audio-btn2 playing audio-loading "><audio src="http://rimg2.ciwong.net/cwf/6v68/tools/audios/15815/010/80010/50746de0e10476a09f37278d3da6e67c.mp3"></audio></div>
+                <span class="red">18分</span>
+            </div>
+        </div>
+        <div class="list-item2 bdb-f1f0ec clearfix">
+            <div class="list-item-l">
+                <div>Language</div>
+                <div class="fs-24 lh-36 c-999896">n.语言</div>
+            </div>
+            <div class="list-item-r">
+                <div class="audio-btn2 playing audio-error"><audio src="http://rimg2.ciwong.net/cwf/6v68/tools/audios/15815/010/80010/50746de0e10476a09f37278d3da6e67c.mp3"></audio></div>
+                <span class="red">18分</span>
+            </div>
+        </div>
+
+        <div class="p-30 bdb-f1f0ec clearfix">
+            <div class="fl maxw-560">
+                <div>Language</div>
+                <div class="fs-24 lh-36 c-999896">n.语言</div>
+            </div>
+            <div class="fr ml20 mt20 red">18分</div>
+        </div>
+        <div class="p-30 bdb-f1f0ec clearfix">
+            <div class="fl maxw-560">
+                <div>Language</div>
+                <div class="fs-24 lh-36 c-999896">n.语言</div>
+            </div>
+            <div class="fr ml20 mt20 red">18分</div>
+        </div>
+    </div>
+</body>
+</html>

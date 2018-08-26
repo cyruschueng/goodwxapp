@@ -1,0 +1,207 @@
+<view class='wrapper' style=''>
+  <view wx:if='{{!useSimple}}' class='product-detail' hidden="{{!loadingHidden}}" catchtap='hideTip'>
+    <swiper class='product-carousel' indicator-dots='{{product.goodsPics.length > 1}}' interval="3000">
+      <block wx:for='{{product.goodsPics}}' wx:key='{{index}}' wx:for-item='img'>
+        <swiper-item class='back_img'>
+          <image catchtap='previewImage' src='{{img.imageUrl}}' data-img-src='{{img.imageUrl}}' mode='widthFix'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='product-info'>
+      <view class='product-price' wx:if='{{product.discountPrice}}'>
+        <text>￥{{product.discountPrice}}</text>
+        <text>￥{{product.goodsPrice}}</text>
+      </view>
+      <view wx:else class='product-price'>
+        <text>￥{{product.goodsPrice}}</text>
+      </view>
+      <text class='product-name'>{{product.goodsName}}</text>
+      <view class='info-bar'>
+        <text class='info-bar-left'>预定</text>
+        <text class='info-bar-right'>预约一小时内备货</text>
+      </view>
+      <view class='other-info'>
+        温馨提示：预约后请在预约时间之前到达门店
+      </view>
+    </view>
+    <view class='product-introduce'>
+      <view class='info'>
+        <text>正品</text>
+        <text>预约保留</text>
+        <text>7天无理由退换</text>
+      </view>
+      <view class='store-info'>
+        <image src='{{storeInfo.storeLogo}}' mode='aspectFill'></image>
+        <text class='store-name'>{{storeInfo.brandName}}</text>
+        <form class='attention' bindsubmit='goHome' report-submit>
+          <button class='form_button' form-type='submit'>
+            <text>门店首页</text>
+          </button>
+        </form>
+      </view>
+      <view class='store-introduce'>
+        {{storeInfo.storeIntro}}
+      </view>
+      <view class='products-introduce' wx:if='{{recommendList.length}}'>
+        <view class='introduce-item' wx:for='{{recommendList}}' wx:key='index' catchtap='selectProduct' data-id='{{item.goodsId}}'>
+          <image src='{{item.goodsPic}}' mode='aspectFill'></image>
+          <view class='introduce-item-name'>{{item.goodsName}}</view>
+          <text class='introduce-item-price'>￥{{item.goodsPrice}}</text>
+        </view>
+      </view>
+      <!-- <view>
+      <text>宝贝介绍</text>
+      <text>PRODUCT PRESENTATION</text>
+    </view> -->
+    </view>
+    <view class='product-img'>
+      <block wx:for='{{product.goodsPics}}' wx:key='{{index}}' wx:for-item='img'>
+        <view class='img-wrap back_img'>
+          <image catchtap='previewImage' src='{{img.imageUrl}}' data-img-src='{{img.imageUrl}}' mode='aspectFill'></image>
+        </view>
+      </block>
+    </view>
+    <!--预约引导提示  -->
+    <view class='appoint-guide' wx:if='{{!first_access && showTip}}'>
+      <view class='appoint-guide-content'>预约喜欢的商品,店员会为你提前准备，到店即可试穿，享受女王般的购物体验!</view>
+      <view class='guide-line'></view>
+    </view>
+  </view>
+
+  <!--简约模板  -->
+  <view wx:else class='product-simple-detail' hidden='{{!loadingHidden}}' catchtap='hideTip'>
+    <view class='product-simple-img' style='width: 100%; height: {{winHeight}}rpx'>
+      <swiper bindchange='slideChange'>
+        <swiper-item wx:for='{{product.postPics}}' wx:for-item='img' wx:key='index'>
+          <image bindtap='hideProductInfo' data-id='{{img.goodsId}}' src='{{img.postPic}}' data-img-src='{{img.postPic}}' mode='widthFix'></image>
+          <view class='product-simple-rate' wx:if='{{img.discountPrice}}'>
+            <image src='/images/icon/discount_border.png' mode='aspectFit'></image>
+            <text>{{img.discountRate}} 折</text>
+          </view>
+          <view class='product-simple-attr' wx:if='{{img.goodsPrice}}'>
+            <view class='product-simple-price-discount' wx:if='{{img.discountPrice}}'>
+              <view>
+                <text>RMB</text> {{img.discountPrice}}
+              </view>
+              <view>原价{{img.goodsPrice}}</view>
+            </view>
+            <view class='product-simple-price' wx:else>
+              <text>RMB</text> {{img.goodsPrice}}
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class='product-simple-cover' wx:if='{{!first_access && showTip}}'></view>
+    <!--商品信息  -->
+    <view class='product-simple-info {{showProductInfo?"":"hide-animation"}}'>
+      <!-- <view class='product-simple-cover' style='background: url({{slideImg || product.goodsPics[0].imageUrl}}) 0 / cover fixed;'></view> -->
+      <text wx:if='{{product.goodsPrice}}' class='product-simple-name'>{{product.postContent}}</text>
+      <text class='product-simple-name-easy' wx:else>{{product.postContent}}</text>
+      <view class='product-simple-options {{showProductInfo?"":"hide-animation"}}'>
+        <form class='product-simple-options-item' report-submit bindsubmit='collectTap' data-id='{{product.postId}}'>
+          <button form-type='submit' class='form_button'>
+            <image class='{{click_favorite?"animate_style":""}}' src='/images/icon/cart_simple@default.png' mode='aspectFill'></image>
+          </button>
+        </form>
+        <form class='product-simple-options-item' report-submit bindsubmit='appointProducts'>
+          <button form-type='submit' class='form_button'>
+            <image src='/images/icon/appoint_simple.png' mode='aspectFill'></image>
+          </button>
+        </form>
+        <form class='product-simple-options-item' report-submit>
+          <button form-type='submit' open-type='share' class='form_button'>
+            <image src='/images/icon/share_simple.png' mode='aspectFill'></image>
+          </button>
+        </form>
+        <view class='product-simple-options-item' catchtap='clickProductDesc'>
+          <image wx:if='{{!click_desc}}' src='/images/icon/product_simple_detail.png' mode='aspectFill'></image>
+          <view wx:else>详情</view>
+        </view>
+      </view>
+
+    </view>
+    <view class='product-simple-desc {{expandProductInfo?"show-desc":""}}'>
+      <view>{{product.postContent}}</view>
+    </view>
+    <view class='appoint-guide' wx:if='{{!first_access && showTip}}'>
+      <view class='appoint-guide-content'>预约喜欢的商品,店员会为你提前准备，到店即可试穿，享受女王般的购物体验!</view>
+      <view class='guide-line'></view>
+    </view>
+
+  </view>
+  <!-- 导购欢迎界面  -->
+  <view wx:if='{{showGuide}}' class='guide-modal' hidden='{{!loadingHidden}}'>
+    <view class='guide-modal-mask'></view>
+    <view class='guide-modal-content'>
+      <form report-submit bindsubmit='closeGuide'>
+        <button form-type='submit' class='form_button'>
+          <image src='/images/icon/close.png' mode='aspectFit'></image>
+        </button>
+      </form>
+      <view class='guide-content'>
+        <image src='{{employee.remark}}' mode='aspectFill'></image>
+        <view class='guide-center'>
+          <view class='guide-user'>
+            <image src='{{userInfo.avatarUrl}}' mode='aspectFill'></image>
+            <view class='guide-user-info'>
+              <text>{{userInfo.nickName}} 您好!</text>
+              <text>欢迎来到本店</text>
+            </view>
+          </view>
+          <view class='guide-employee'>
+            <text>我是您的专属导购{{employee.nickName}}，有什么问题可以随时找我!</text>
+            <image src='{{employee.headImage}}' mode='aspectFill'></image>
+          </view>
+        </view>
+      </view>
+      <form class='guide-bottom' report-submit bindsubmit='closeGuide'>
+        <button form-type='submit' class='form_button'>
+          <text>立刻逛逛</text>
+        </button>
+      </form>
+    </view>
+  </view>
+  <!-- 客服按钮  -->
+  <view class='contact-wrapper {{hideContactButton?"":"hide-contact"}}' hidden='{{!loadingHidden}}'>
+    <button class='contact' open-type='contact' show-message-card session-from='{{product.storeNo}}' send-message-img='{{product.goodsPic}}' send-message-title='{{product.goodsName}}' send-message-path='/pages/product/product?id={{product.goodsId}}'>
+      <image src='/images/icon/wechat.png' mode='aspectFill'></image>
+      <text>客服</text>
+    </button>
+    <view class='contact-cover' catchtap='talkToCustomer' wx:if='{{hideContactButton}}'></view>
+  </view>
+
+  <view class='btn-area' wx:if='{{!from && !useSimple}}' hidden='{{!loadingHidden}}'>
+    <view class='btn-area-left'>
+      <form class='option' report-submit bindsubmit='backHome'>
+        <button form-type='submit' class='form_button'>
+          <image src='/images/tab/home.png' mode='aspectFill'></image>
+          <text>首页</text>
+        </button>
+      </form>
+      <form class='option' report-submit bindsubmit='collectTap' data-id='{{product.goodsId}}'>
+        <button form-type='submit' class='form_button'>
+          <image class='{{click_favorite?"animate_style":""}}' src='{{product.isFavorite?"/images/tab/cart@active.png" : "/images/tab/cart@default.png" }}' mode='aspectFill'></image>
+          <text>预购</text>
+        </button>
+      </form>
+      <form class='option' report-submit bindsubmit='shareTap' data-id='{{product.goodsId}}'>
+        <button form-type='submit' open-type='share' class='form_button'>
+          <image src='/images/icon/share.png' mode='aspectFill'></image>
+          <text>分享</text>
+        </button>
+      </form>
+    </view>
+    <view class='btn-area-cover' wx:if='{{!first_access&&showTip}}'></view>
+    <form class='order' report-submit bindsubmit='makeAppoint' data-id='{{product.goodsId}}'>
+      <button form-type='submit' class='form_button'>
+        <text>预约到店</text>
+      </button>
+    </form>
+  </view>
+  <view class='popup' wx:if='{{isShowPopup}}'>{{tip}}</view>
+
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

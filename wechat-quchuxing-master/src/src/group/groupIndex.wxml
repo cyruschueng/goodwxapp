@@ -1,0 +1,72 @@
+<view style="width: {{ video_width }}px; height:{{ video_height - 294 }}px;" >	
+	<map id="map" 
+		longitude="{{ longitude }}" 
+		latitude="{{ latitude }}" 
+		markers="{{ markers }}" 
+		scale="16" 
+		bindcontroltap="controltap" 
+		bindmarkertap="markertap" 
+		polyline="{{ polyline }}" 
+		controls="{{ controls_samll }}"
+		style="width: 100%; height: 100%;"
+		></map>
+</view>
+<block wx:if="{{ group.type != 2 }}">
+	<view class="detail" style="297px">
+		<block wx:if="{{ group.type == 0 }}">
+			<view class="title">从 {{ group.groupName }} 到 {{ detail_people.driverAddr_company }}</view>
+		</block>
+		<block wx:if="{{ group.type == 1 }}">
+			<view class="title">从 {{ group.groupName }} 到 {{ detail_people.driverAddr_home }}</view>
+		</block>
+		<view class="scroll">
+			<scroll-view scroll-x="true" style=" white-space: nowrap; display: flex; height: 120px; overflow:scroll;" >
+			  <view wx:for-items="{{ findData }}" wx:key="{{ index }}" bindtap="findPeopleDetails" data-id="{{ item.id }}" class="group_li {{ item.id == details_id ? 'group_li_active' : '' }}">
+			  	<image src="{{ item.img }}"></image>
+			  </view>
+			</scroll-view>
+		</view>
+		<view class="group_info">
+			<view class="people_info">
+				<view class="name">{{ detail_people.driverNickname }}</view>
+				<view class="age">{{ detail_people.age || '0' }}岁</view>
+				<view class="time">{{ detail_people.templeTime }}</view>
+			</view>
+			<block wx:if="{{ detail_people.carNum != null || detail_people.car != null }}">
+				<view class="car_code"><text>{{ detail_people.carNum }}</text> {{ detail_people.car }}</view>
+			</block>
+		</view>
+		<view class="foot_btn">
+			<button bindtap="gotoUserPage">添加好友</button>
+		</view>
+	</view>
+</block>
+<block wx:else>
+	<view class="detail" style="297px">
+		<view class="switch_title">
+			<view class="{{ active_switch == 'work' ? 'switch_active' : '' }}" bindtap="getMeetingGroupDetails" data-type="1">去公司</view>
+			<view class="{{ active_switch == 'home' ? 'switch_active' : '' }}" bindtap="getMeetingGroupDetails" data-type="0">回家</view>
+		</view>
+		<view class="scroll">
+			<scroll-view scroll-x="true" style=" white-space: nowrap; display: flex; height: 120px; overflow:scroll;">
+			<!--  display: inline-block-->
+			  <view wx:for-items="{{ findData }}" wx:key="{{ index }}" bindtap="findMeetingDetails" data-id="{{ item.id }}" class="group_li {{ item.id == details_id ? 'group_li_active' : '' }}">
+			  	<image src="{{ item.img }}"></image>
+			  </view>
+			</scroll-view>
+		</view>
+		<view class="group_info">
+			<view class="people_info">
+				<view class="name">{{ detail_meeting.driverNickname }}</view>
+				<view class="age">{{ detail_meeting.age || '0' }}岁</view>
+				<view class="time">{{ detail_meeting.templeTime }}</view>
+			</view>
+			<block wx:if="{{ detail_meeting.carNum != null || detail_meeting.car != null }}">
+				<view class="car_code"><text>{{ detail_meeting.carNum }}</text> {{ detail_meeting.car }}</view>
+			</block>
+		</view>
+		<view class="foot_btn">
+			<button bindtap="gotoUserPage">添加好友</button>
+		</view>
+	</view>
+</block>

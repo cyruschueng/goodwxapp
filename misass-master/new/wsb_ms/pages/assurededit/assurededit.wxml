@@ -1,0 +1,122 @@
+<!--编辑被保险人-->
+<view class='policyedit'>
+      <view class='policyedit_content'>
+          <view class='policyedit_list'>
+              <text>投保人名称</text>
+              <input value='江纯'/>
+              <icon></icon>
+          </view>
+          <view class='policyedit_list'>
+              <text>投保人类型</text>
+              <text>{{policytype}}</text>
+              <icon class='iconfont icon-right' bindtap='clickType'></icon>
+          </view>
+          <view class='policyedit_list'>
+              <text>角色</text>
+              <text>{{role}}</text>
+              <icon class='iconfont icon-right' bindtap='clickRole'></icon>
+          </view>
+          <view class='policyedit_list'>
+              <text>手机号码</text>
+              <text>15647898566</text>
+              <icon class='iconfont icon-right' bindtap='clickPhone'></icon>
+          </view>
+          <view class='policyedit_list'>
+              <text>身份证号码</text>
+              <input type='idcard' value='{{idcard}}' data-value='{{idcard}}'  bindblur='blurIDcard'/>
+              <icon></icon>
+          </view>
+           <view class='policyedit_list'>
+              <text>邮箱</text>
+              <input value='{{email}}' bindblur='bluremail' data-value='{{email}}' />
+              <icon></icon>
+          </view>
+           <view class='policyedit_list'>
+              <text>地址</text>
+              <text>{{areaInfo}}</text>
+              <icon class='iconfont icon-right' bindtap='selectDistrict'></icon>
+          </view>
+      </view>
+      <view class='policyedit_btn' bindtap='saveEditpolicy'>
+           <button>保存</button>
+      </view> 
+</view>
+
+
+<!--滑动选择投保人  -->
+<view class='{{_type == 1?"cover":""}}' style="display:{{_type == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeType'>取消</text>
+                   <text>投保人类型</text>
+                   <text bindtap='rightType'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="bindType">
+                  <picker-view-column>
+                    <view wx:for="{{typeArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view> 
+
+<!--滑动选择角色  -->
+<view class='{{_role == 1?"cover":""}}' style="display:{{_role == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeRole'>取消</text>
+                   <text>角色</text>
+                   <text bindtap='rightRole'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="bindRole">
+                  <picker-view-column>
+                    <view wx:for="{{roleArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+<!--滑动选择地区  -->
+  <!-- 地址 -->
+<view class="dialog-mask {{addressMenuIsShow?'cover':''}}" style="z-index:3;visibility:{{addressMenuIsShow ? 'visible': 'hidden'}}" bindtap="hideCitySelected" />
+<!--城市三级联动-->
+<!--使用动画时不能wx:if="{{city.length>0&&isVisible}}" ，不能hidden=''属性否则无动画效果-->
+<view class="picker-view" animation="{{animationAddressMenu}}" style="visibility:{{addressMenuIsShow ? 'visible':'hidden'}}">
+  <view style="height:6%;width:100%;position:fixed;bottom:125px;z-index:10;background:#c6c6c6;display:flex;align-items:center;justify-content:space-between;">
+    <text catchtap="cityCancel" style='margin-left:32rpx;'>取消</text>
+    <text>编辑地址</text>
+    <text style="float: right" catchtap="citySure" style='margin-right:32rpx;color:#00aff5'>确定</text>
+  </view>
+  <!--"可以显示默认的城市，使用后级联选择城市反应很慢就不使用了-->
+  <picker-view style="width: 100%; height: 300rpx;z-index:9;background-color:#fff;position:fixed;bottom:0" bindchange="cityChange" value="{{value}}" wx:key="*this">
+    <picker-view-column>
+      <view wx:for="{{provinces}}" class="picker-item" wx:key="*this">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" class="picker-item" wx:key="*this">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{areas}}" class="picker-item" wx:key="*this">
+        {{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+
+
+<view id='mask' wx:if='{{_phoneshow}}'>
+
+</view>
+
+<view class='phonemodel' wx:if='{{_phoneshow}}'>
+      <view>
+       <text>编辑手机号码</text>
+      </view>
+      <view class='phonemodel_ov'>
+         <input placeholder='请输入新的手机号码' type='number' value='{{phonenum}}'  bindblur='getphonenum'/> 
+         <button bindtap='getCode'>获取验证码</button>
+      </view>
+      <view class='phonemodel_ov'>
+        <input placeholder='请输入验证码' type='number' />
+      </view>
+      <view class='phonemodel_btn'>
+          <button bindtap='closehide'>取消</button>
+          <button bindtap='phonesure'>确定</button>
+      </view> 
+</view>
+

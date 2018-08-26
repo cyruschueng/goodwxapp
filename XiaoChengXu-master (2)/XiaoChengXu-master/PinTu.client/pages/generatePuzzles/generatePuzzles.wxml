@@ -1,0 +1,136 @@
+<!--pages/generatePuzzles/generatePuzzles.wxml-->
+<view class='container oh bge c3 f14'>
+  <scroll-view class="scroll bbox" scroll-y="">
+    <!-- <image class='W' src='{{poster}}' mode="widthFix"></image>   -->
+    <view class='h10'></view>
+    <view class="c0 r2 m0-10 p0-10 bbox f12">
+      <view class="F_ bby h35 lh35 dn">
+        <label class="tr w80">玩法：</label>
+        <view class='f pl5'>海报拼图</view>
+      </view>      
+      <view class="F_ fie c3 cf" style="background:url(../../image/bg_red.png) center left;background-size:cover ">
+        <view class='f'></view>
+        <view class="w35 h60 F">
+          <view class='W tc mb5 c7 h18 h18'>{{moneyNo4}}</view>
+          <view class="f tc pt5 bg3"><view class='W lh20 r tc mb5'>4</view></view>
+        </view>
+        <view class="w35 h100 F">
+          <view class='W tc mb5 c7 h18'>{{moneyNo2}}</view>
+          <view class="f bgc tc pt5"><view class='W lh20 r tc mb5'>2</view></view>        
+        </view>
+        <view class="w35 h120 F">          
+          <view class='W tc mb5 c7 h18'>{{moneyNo1}}</view>
+          <view class="f bgorange tc pt5"><view class='W lh20 r tc mb5'>1</view></view>
+        </view>
+        <view class="w35 h80 F">
+          <view class='W tc mb5 c7 h18'>{{moneyNo3}}</view>
+          <view class="f tc pt5" style='background-color:#D2691E'><view class='W lh20 r tc mb5'>3</view></view>
+        </view>
+        <view class="w35 h60 F">
+          <view class='W tc mb5 c7 h18'>{{moneyNo4}}</view>
+          <view class="f tc pt5 bg3"><view class='W lh20 r tc mb5'>5</view></view>
+        </view>
+        <view class='f'></view>
+      </view>
+      <view class="F_ bgf r2 mt5 p0-10 bbox h40 lh40">
+        <label class="tr w90">单个红包金额：</label>
+        <view class='f pl5'>
+          <input class='dib W' type="digit" bindblur="getSingleMoney" bindconfirm="getSingleMoney" placeholder='将此金额分成五个红包' placeholder-style='color:#ccc' value="{{singleMoney}}"></input>          
+        </view>
+        <view class='pl10'>元</view>
+      </view>
+      <view class="F_ bgf r2 mt5 p0-10 bbox h40 lh40">
+        <label class="tr w80">红包个数：</label>
+        <view class='f pl5'>
+          <input class="dib W" type='number' value="{{group}}" bindblur="getGroup" bindconfirm="getGroup" placeholder='比赛组数' placeholder-style='color:#ccc'></input>
+        </view>
+        <view class='pl10'>个</view>
+      </view>
+      <!-- <view class="F_ r2 mt5 p0-10 bbox h40 lh40 bgf">
+        <label class="tr w80">第二名赏金：</label>
+        <view class='f pl5'>
+          <text class="dib W">{{moneyNo2}}</text>
+        </view>
+        <view class='pl10'>元×1人，冠军赏金的50%</view>
+      </view>
+      <view class="F_ r2 mt5 p0-10 bbox h40 lh40 bgf">
+        <label class="tr w80">第三名赏金：</label>
+        <view class='f pl5'>
+          <text class="dib W">{{moneyNo3}}</text>
+        </view>
+        <view class='pl10'>元×1人，亚军赏金的20%</view>
+      </view>
+      <view class="F_ r2 mt5 p0-10 bbox h40 lh40 bgf">
+        <label class="tr w80">第四名赏金：</label>
+        <view class='f pl5'>
+          <text class="dib W">{{moneyNo4}}</text>
+        </view>
+        <view class='pl10'>元×1人，季军赏金的10%</view>
+      </view>
+      <view class="F_ r2 mt5 p0-10 bbox h40 lh40 bgf">
+        <label class="tr w80">第五名赏金：</label>
+        <view class='f pl5'>
+          <text class="dib W">{{moneyNo4}}</text>
+        </view>
+        <view class='pl10'>元×1人，季军赏金的10%</view>
+      </view> -->
+      <view class="F_ bgf r2 mt5 p0-10 bbox h40 lh40">
+        <label class="tr w80">性别限制：</label>
+        <view class='f pl5'>
+          <radio-group bindchange="changeRadioSex">
+            <label class="radio">
+              <radio value="0" checked="checked" />不限
+            </label>
+            <label class="radio ml15">
+              <radio value="2" />女
+            </label>
+            <label class="radio ml15">
+              <radio value="1" />男
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="F_ bgf r2 mt5 p0-10 bbox h40 lh40">
+        <label class="tr w80">距离限制：</label>
+        <view class='f pl5 ell'>
+          <input class="dib W" type='number' value="{{diffDistance}}" bindinput="getDiffDistance"  placeholder='只有距您这个范围内的人才可以参与' placeholder-style='color:#ccc'></input></view>
+          <view class='pl10'>公里</view>
+      </view>
+      <view class="F_ bgf r2 mt5 p0-10 h35 lh35 bbox">
+        <label class="tr w80">活动描述：</label>
+        <view class='f pl5 bbox h35 F_ jcs' wx:if="{{arrActive}}">
+          <block wx:for="{{arrActive}}">
+            <image class="w30 h30 m2 r bge" mode="" bindtap="chooseImg" data-index='{{index}}' src="{{arrActive[index]}}"></image>
+          </block>          
+        </view>
+      </view>
+
+      <view class="F_ bgf r2 mt5 p0-10 bbox lh20">
+        <label class="tr w80 h35 lh35">活动声明：</label>
+        <view class='f pl5'>
+          <!-- <textarea class="W" maxlength="140" auto-height='true' show-confirm-bar='true'  bindinput="getDescription" placeholder-style='color:#ccc' placeholder='活动说明不能多于140字' value="{{inputDescription}}"></textarea> -->
+          <input class="W" placeholder-style='color:#ccc' placeholder='活动说明不能多于140字' bindinput="getDescription" maxlength="140"></input>
+        </view>
+      </view>
+
+    </view>
+    <view class="W h30 tc mt30 db c7">每组拼图比赛需由10人参与，若不足则游戏无效</view>
+    <view class="h30 tc c7">需支付手续费￥{{moneyService}}，优先使用余额￥0.00</view>
+    <view class="W h40">
+      <form report-submit bindsubmit='clickGenerate'>
+        <button class='cf bgyellow tc W8 ml010 h40 lh40 r5 f14' form-type='submit'>{{moneyTotal? "还需要支付"+moneyTotal+"元":"生成拼图"}}</button>      
+      </form>
+      
+    </view>
+    
+    <view class="F_ pt20 pb10 jcc dn">
+      <view class="bf h150 r2" style="border-width:5px">
+        <image class="w150 h150 m0" src="{{poster}}" mode=""></image>
+      </view>
+    </view>
+
+    <view class="tc mt10 dn">请勿上传色情以及其他违禁图片，本小程序</view>
+    <view class="h20 tc dn">有权在收到投诉后删除相应内容</view>
+    <view class="tc mt10 f14 c7">请勿上传色情以及其他违禁图片</view>
+  </scroll-view>
+</view>

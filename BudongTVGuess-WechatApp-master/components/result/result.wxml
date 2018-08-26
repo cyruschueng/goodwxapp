@@ -1,0 +1,23 @@
+<view class="overlay" wx:if="{{visible}}" animation="{{animate}}">
+  <view id="resultModalbox" class="modalbox" style="margin-top: {{marginTop}}px">
+    <view class="title">
+      <em wx:if="{{success}}" class="success">恭喜你！答对了</em>
+      <em wx:if="{{!success}}" class="fail">很遗憾！答错了</em>
+    </view>
+    <view class="cover">
+      <mc-television id="television">
+        <image wx:if="{{success}}" class="image" src="{{subjectThumbUrl}}" />
+        <image wx:if="{{!success}}" class="image" src="http://upload.cbg.cn/2016/0803/1470231298401.jpg" />
+      </mc-television>
+      <view class="text">{{success ? subjectTitle : '没猜出来'}}</view>
+    </view>
+    <view class="controls">
+      <button wx:if="{{success}}" class="button" hover-class="active" bindtap="_continue">
+        <span> 下一题 </span>
+      </button>
+      <button wx:if="{{!success}}" class="button" hover-class="active" bindtap="reload">
+        <span> 再试一次 </span>
+      </button>
+    </view>
+  </view>
+</view>

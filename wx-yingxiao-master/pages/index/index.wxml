@@ -1,0 +1,18 @@
+<loading wx:if='{{loading=="1"}}'>loading...</loading>
+<view class="container" wx:if="{{loading=='0'}}">
+  <swiper autoplay indicator-dots="0,0,0,.3" indicator-dots indicator-active-color='#38adff' class='swiper'>
+    <swiper-item wx:for='{{swiperItem}}' wx:key="{{index}}" >
+      <image src='{{item.img}}' width='335' height="150"></image>
+    </swiper-item>
+  </swiper>
+  <view class='banner'>
+   <view class="special">样片展示</view>
+   <view class='kind' wx:for="{{kind}}" wx:key="index" wx:for-item="this">
+    <view class='kindTitle'>{{this.catname}}</view>
+    <view class='info'>
+       <image class='infoPic' wx:for="{{this.cat_list}}" wx:key="index" src="{{item.sample_img}}" bindtap='toUrl' data-id='{{item.id}}' data-cover='{{item.sample_img}}'></image> 
+    </view>
+   </view>  
+  </view>
+
+</view>

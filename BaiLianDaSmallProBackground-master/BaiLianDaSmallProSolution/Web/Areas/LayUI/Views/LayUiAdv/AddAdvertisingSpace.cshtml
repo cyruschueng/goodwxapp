@@ -1,0 +1,112 @@
+﻿@model BaseDatabase.Entities.Admins.AdvertisingSpaces.AdvertisingSpaceInfoModel
+@{
+    ViewBag.Title = "新增广告位";
+}
+
+@section headerCss{
+
+}
+<blockquote class="layui-elem-quote">说明：对广告位进行管理</blockquote>
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>新增广告位</legend>
+</fieldset>
+<div class="layui-container">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">广告位标题</label>
+                <div class="layui-input-block">
+                    <input name="Title" required lay-verify="required" placeholder="请输入广告位标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">广告位类型</label>
+                <div class="layui-input-block">
+                    @Html.DropDownListFor(q => q.TypeId, ViewBag.TypeList as List<SelectListItem>)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">宽度</label>
+                <div class="layui-input-block">
+                    <input name="Width" required lay-verify="required|number" placeholder="请输入宽度" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">高度</label>
+                <div class="layui-input-block">
+                    <input name="Height" required lay-verify="required|number" placeholder="请输入高度" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">说明</label>
+            <div class="layui-input-block">
+                <textarea id="intro" placeholder="请输入内容" lay-verify="content" name="Intro" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit lay-filter="save">保存</button>
+            <a class="layui-btn" href="/layui/LayUiAdv/AdvertisingSpaceIndex">返回列表</a>
+        </div>
+
+    </form>
+</div>
+@section footerJs{
+    <script>
+        layui.config({
+            base: '/Areas/LayUI/Content/commonJs/'
+            , version: '1515376178709'
+        }).extend({
+            myAjax: 'myAjax'
+        });
+    </script>
+    <script>
+        //Demo
+        layui.use(['form', 'layedit', 'jquery', 'myAjax'], function () {
+            var form = layui.form;
+            var $ = layui.jquery;
+            var aj = layui.myAjax;
+            var layedit = layui.layedit
+            layedit.set({
+                tool: [
+                    'strong', 'italic', 'underline', 'del'
+                    , '|'
+                    , 'left', 'center', 'right'
+                    , '|'
+                    , 'link', 'unlink'
+                    , '|'
+                    , 'code'
+                ]
+            });
+
+            //创建一个编辑器
+            var editIndex = layedit.build('intro');
+            form.verify({
+                content: function (value) {
+                    layedit.sync(editIndex);
+                }
+            });
+
+            //监听提交
+            form.on('submit(save)', function (data) {
+                aj.postNoSyncReq('/layui/LayUiAdv/AddAdvertisingSpace', data.field, function (data) {
+                    aj.dealResult(data, function () {
+                        layer.confirm(data.ReturnMsg + "，是否继续？", function (index) {
+                            layer.close(index);
+                            window.location = window.location;
+                        }, function () {
+                            window.location = '/layui/LayUiAdv/AdvertisingSpaceIndex';
+                        });
+                    });
+                });
+
+                return false;
+            });
+        });
+    </script>
+}

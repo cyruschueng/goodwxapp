@@ -1,0 +1,203 @@
+<view>
+  <loading hidden="{{initload}}">正在加载</loading>
+</view>
+<!-- <view class='banner t1' hidden="{{!initload}}">{{userInfo.sqname}} {{userInfo.xqname}}</view> -->
+<view class='box' hidden="{{!initload}}">
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">话题</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">社群</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">传递</view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{scrollH}}px;overflow-y: auto; " bindchange="bindChange">
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height:{{scrollH}}px;" bindscrolltolower="loadmore">
+        <view class='bg'>
+          <view class='introduce-tilte' bindtap='left'>
+            <image src="/pages/images/logo.png" class="log"></image>
+            <view class='lnttitle'>
+              <text class='rslj'>认识邻居</text>
+              <text class='content'>【生活推荐】说明及用户指引</text>
+            </view>
+          </view>
+        </view>
+        <view class='bg'>
+          <view class='introduce-tilte' bindtap='help'>
+            <image src="/pages/images/logo.png" class="log"></image>
+            <view class='lnttitle'>
+              <text class='rslj'>认识邻居</text>
+              <text class='content'>【邻里互助】说明及用户指引</text>
+            </view>
+          </view>
+        </view>
+        <view class='bg'>
+          <view class='introduce-tilte' bindtap='event'>
+            <image src="/pages/images/logo.png" class="log"></image>
+            <view class='lnttitle'>
+              <text class='rslj'>认识邻居</text>
+              <text class='content'>【活动报名】说明及用户指引</text>
+            </view>
+          </view>
+        </view>
+        <view class='bg'>
+          <block wx:for="{{posts}}" wx:key="index">
+            <block wx:if="{{item.pleixing=='post'}}">
+              <view class='card' id='{{item.id}}' bindtap='clickHuati'>
+                <view class='userbox'>
+                  <image class='userasset' src="{{item.userasset}}" alt=""></image>
+                  <view class='cbox'>
+                    <text class='name t2'>{{item.username}}</text>
+                    <view class='title t2'>
+                      <text>【邻里互助】</text>{{item.title}}</view>
+                    <view class='helpimg'>
+                      <block wx:for="{{item.assets}}" wx:key="item">
+                        <view class='picbox'>
+                          <image src="https://api.changching.cn/{{item.asset}}" alt=""></image>
+                        </view>
+                      </block>
+                    </view>
+                    <view class='tbox'>
+                      <view class='time t3'>{{item.updatetime}}</view>
+                      <view class='time t3'>留言{{item.sumcomment}}条</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+            <block wx:if="{{item.pleixing=='event'}}">
+              <view class='card' id='{{item.id}}' bindtap='clickHuati'>
+                <view class='userbox'>
+                  <image class='userasset' src="{{item.userasset}}" alt=""></image>
+                  <view class='cbox'>
+                    <text class='name t2'>{{item.username}}</text>
+                    <view class='etitle t2'>
+                      <text>【活动报名】</text>{{item.title}}</view>
+                    <view class='tbox'>
+                      <view class='time t3'>{{item.updatetime}}</view>
+                      <view class='time t3'>留言{{item.sumcomment}}条</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+            <block wx:if="{{item.pleixing=='serman'}}">
+              <view class='card' id='{{item.id}}' bindtap='clickHuati'>
+                <view class='userbox'>
+                  <image class='userasset' src="{{item.userasset}}" alt=""></image>
+                  <view class='cbox'>
+                    <text class='name t2'>{{item.username}}</text>
+                    <view class='etitle t2'>
+                      <text>【生活推荐】</text>{{item.title}}</view>
+                    <view class='tbox'>
+                      <view class='time t3'>{{item.updatetime}}</view>
+                      <view class='time t3'>留言{{item.sumcomment}}条</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </block>
+        </view>
+        <view class="loading" hidden="{{!searchLoading}}">
+          <view class='sk'>
+            <view class='sk-ch sk1'></view>
+            <view class='sk-ch sk2'></view>
+            <view class='sk-ch sk3'></view>
+          </view>
+          <view>正在载入更多...</view>
+        </view>
+        <view class="loading" hidden="{{!hidden}}">没有更多了</view>
+      </scroll-view>
+
+    </swiper-item>
+
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" bindscroll="scroll" bindscrolltolower="loadmore" style="height:{{scrollH}}px">
+        <view class='bg'>
+          <view class='introduce-tilte wintroduce-tilte' bindtap='group'>
+            <image src="/pages/images/logo.png" class="wlogo"></image>
+            <view class='lnttitle'>
+              <text class='rslj'>认识邻居</text>
+              <text class='content'>【社群】说明及用户指引</text>
+            </view>
+          </view>
+        </view>
+        <view class='bg'>
+          <block wx:for="{{weixins}}" wx:key="index">
+            <view class='wcard card' id='{{item.id}}' bindtap='clickWeixin'>
+              <view class='remarks'>
+                <view class='icon'>
+                  <image src="{{item.userasset}}" alt=""></image>
+                </view>
+              </view>
+              <view class='qun'>
+                <view class='qunbox'>
+                  <view class='title t2'>{{item.wname}}</view>
+                  <block wx:if="{{item.desc==''}}">
+                    <view class='jieshao'>这个社群还没有填写介绍</view>
+                  </block>
+                  <block wx:if="{{item.desc!=null}}">
+                    <view class='jieshao'>{{item.desc}}</view>
+                  </block>
+                </view>
+              </view>
+              <view class='wtimebox'>
+                <view class='wtime'>{{item.time}}</view>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="loading" hidden="{{!searchLoading}}">
+          <view class='sk'>
+            <view class='sk-ch sk1'></view>
+            <view class='sk-ch sk2'></view>
+            <view class='sk-ch sk3'></view>
+          </view>
+          <view>正在载入更多...</view>
+        </view>
+        <view class="loading" hidden="{{!hidden}}">没有更多了</view>
+      </scroll-view>
+    </swiper-item>
+
+    <swiper-item>
+      <view style="display:none">
+        <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
+      </view>
+      <scroll-view scroll-y="true" bindscroll="scroll" bindscrolltolower="loadmore" style="height:{{scrollH}}px">
+        <view class='bg'>
+          <view class="free-WaterfallFlow">
+            <view class="flex-wrap" bindtap='book'>
+              <view class='bgcolor'>
+                <text>【图书传递】\n说明及用户指引</text>
+              </view>
+              <view class='chuandiname'>请首先阅读</view>
+              <view>{{item.data}}</view>
+            </view>
+            <block wx:for="{{images}}" wx:key='{{item.asset}}' wx:if="{{item.id%2!=''}}">
+              <view class="flex-wrap" id="{{item.id}}" bindtap='clickChuandi'>
+                <image mode="widthFix" src="{{item.asset}}"></image>
+                <view class='chuandiname'>{{item.name}}</view>
+                <view>{{item.data}}</view>
+              </view>
+            </block>
+             <block wx:for="{{images}}" wx:key='{{item.asset}}'>
+              <view class="flex-wrap" id="{{item.id}}" bindtap='clickChuandi' wx:if="{{item.id%2==''}}">
+                <image mode="widthFix" src="{{item.asset}}"></image>
+                <view class='chuandiname'>{{item.name}}</view>
+                <view>{{item.data}}</view>
+              </view>
+            </block> 
+          </view>
+        </view>
+        <view class="loading" hidden="{{!searchLoading}}">
+          <view class='sk'>
+            <view class='sk-ch sk1'></view>
+            <view class='sk-ch sk2'></view>
+            <view class='sk-ch sk3'></view>
+          </view>
+          <view>正在载入更多...</view>
+        </view>
+        <view class="loading" hidden="{{!hidden}}">没有更多了</view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

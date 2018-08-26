@@ -1,0 +1,41 @@
+<view class='personalCenter'>
+  <view class='personalCenterTop'>
+    <view class='personalCenterTopLine'>
+      <text >头像</text>
+      <view class='headerBox'>
+        <image src='{{picture}}'></image>
+      </view>
+    </view>
+    <view class='personalCenterTopLine'>
+      <text>昵称</text>
+      <text>
+      {{nickname}}
+      </text>
+    </view>
+    <!-- <view class='personalCenterTopLine'>
+      <text>个性签名</text>
+      <image src='../../images/leftArrow.png'></image>
+    </view> -->
+    <view class='personalCenterTopLine' bindtap='alterTelephone'>
+      <text>绑定手机号</text>
+      <image src='../../images/leftArrow.png'></image>
+      <text wx:if='{{telephone!=null}}'>{{telephone}}</text>
+    </view>
+    <view class='personalCenterTopLine' bindtap='goShippingAddress'>
+      <text>收货地址</text>
+      <image src='../../images/leftArrow.png'></image>
+    </view>
+  </view>
+  <view class='personalCenterBottom'>
+    <view class='personalCenterBottomLine'>
+      <text>ID</text>
+       <text>{{customer_id}}</text>
+    </view>
+    <view class='personalCenterBottomLine'>
+      <text>等级</text>
+        <text wx:if='{{level==1}}'>普通用户</text>
+        <text wx:if='{{level==2}}'>黑钻会员</text>
+        <text wx:if='{{level==3}}'>天使堡主</text>
+    </view>
+  </view>
+</view>

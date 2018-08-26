@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AppEngineDemo</title>
+    <style type="text/css">html {height: 100%;margin: 0;} body {height: 100%;margin: 0;}.main-wrap{width: 80%;height:600px;position: relative;background: red}</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+</head>
+<body>
+    <div class="main-wrap">
+        <div id="appContainer" style="position: absolute;width: 100%; height: 500px;"></div>
+    </div>
+
+</body>
+</html>
+
+<script type="application/javascript" src="http://mob.visualbusiness.cn/appengine_web/v1.0.139/appengine_web.js"></script>
+<script>
+    var page;
+    var panoView;
+    var panoWrap = document.getElementById("appContainer");
+        var url = "http://test.visualbusiness.cn/cemp/images/alive.png";//"http://127.0.0.1:8080/vbpanomediapro/ued/images/logo.png";
+    new com.appengine.App(panoWrap,function(){
+        page = new com.appengine.view.Page();
+        panoView = new com.appengine.view.PanoView();
+        panoView.setPanoId("[TT]F3F16B7B419443A1960300F6B93FBC77");//'4507AB24F3BE4571B2C9D596263EAAB5'
+
+        page.addView(panoView);
+        return page;
+    });
+    setTimeout(function(){
+        panoView.addPatch(url, 0, 90, 61, 61)
+    }, 5000)
+</script>

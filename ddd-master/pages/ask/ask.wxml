@@ -1,0 +1,107 @@
+<wxs src="./tools.wxs" module="tools" />
+<!--pages/ask/ask.wxml-->
+<view class='fullwh fxyc' style='{{isShowHelpUI?"display:none":"display:none"}}'>
+  <view class='helpView df fxyc'>
+      <text class='fc-red h1'>等待求助剩余时间 : {{helpCD+'秒'}} </text>
+  </view>
+</view>
+
+<!-- 强制续命 -->
+<view class='fullwh fxyc' style='{{isTryUIA?"display:flex":"display:none"}}'>
+  <view class='helpView df fxyc por'>
+      <view class="tryCore">
+            <view class='fc-red tryInfo'>{{TryUIInfo}}</view>
+            <button type="button" name="ftryIt" class="tryIt" bindtap='tryItA'>
+              {{answer.resurrection_fee[answer.l_config_level||1]/100}}元 续命
+            </button>
+      </view>
+      <view class='close' bindtap='toIndex'></view>
+  </view>
+</view>
+
+<!-- 正常续命 -->
+<view class='fullwh fxyc' style='{{isTryUIB?"display:flex":"display:none"}}'>
+  <view class='helpView df fxyc por'>
+      <view class="tryCore">
+            <view class='fc-red tryInfo'>{{TryUIInfo}}</view>
+            <button type="button" name="ftryIt" class="tryIt" bindtap='tryItB'>{{answer.resurrection_fee[answer.l_config_level||1]/100}}元 续命</button>
+            <button type="button" name="ftryIt" class="tryIt" open-type="share" id='tryItByShare'>分享即可复活</button>
+      </view>
+      <view class='close' bindtap='toIndex'></view>
+  </view>
+</view>
+
+<view class='askRoot ovh'>
+  <view class='df fyc baseInfo mt60'>
+      <image bindtap="" class="userIcon" src="{{userInfo.avatarUrl}}"></image>
+      <!-- <text class="userName h4 ml20 fc-fff">{{userInfo.nickName}}</text> -->
+      <text class='h1 fc-fffe49 ml40'>剩余 {{cd}} 秒</text>
+  </view>
+
+  <!--  答题内容页面 开始 -->
+  <view class='questionArea mx24 mt60 por'>
+      <image class='logo' src='https://wxapp.haizeihuang.com/wannengdequan_php/images/logo.png'></image>
+      <view class='mx36 ovh'>
+          <view class='mt40 tac h4 mt70'>{{answer.a_progress}}/{{answer.a_max}} {{answer.q_title}}</view>
+          <view
+            class='mt40 por'
+            wx:for="{{[1,2,3,4]}}"
+            wx:for-index="idx"
+            wx:key="qid"
+            wx:for-item="qid"
+          >
+            <!-- <view
+              wx:if='{{isCheck&&answer.q_an == qid}}'
+              data-qid='{{qid}}' class='qitem qitem-fail'>
+              <text class='pl30'>{{answer['q_an'+qid]}}</text>
+            </view> -->
+
+            <view
+              wx:if='{{isCheck&&answer.q_an_yes == qid}}'
+              data-qid='{{qid}}'class='qitem qitem-ok'>
+                <text class='pl30'>{{answer['q_an'+qid]}}</text>
+            </view>
+
+            <view
+              wx:elif='{{isCheck&&(selectQid==qid&&answer.q_an_yes != qid)}}'
+              data-qid='{{qid}}' class='qitem qitem-fail'>
+              <text class='pl30'>{{answer['q_an'+qid]}}</text>
+            </view> 
+
+            <view  wx:else data-qid='{{qid}}'
+                bindtap='onCheck'
+                class='qitem qitem-normal df dyc'
+            >
+              <text class='pl30'>{{answer['q_an'+qid]}}</text>
+              <view wx:if='{{isShowHelpUI}}'
+                class='f1 tar mr30 fc-000 fb'
+              >
+                {{tipInfo['fabulous'+qid]||0}}人
+              </view>
+            </view>
+          </view>
+      </view>
+  </view>
+  <!--  答题内容页面 结束 -->
+
+  <!--  分享开始   wx:if='{{isOver == false}}'-->
+  <view class="mt30"></view>
+
+  <view style='{{isShowHelpUI?"":"display:none"}}' class="mt20 h6 fc-fff tac">求助倒计时{{helpCD+'秒'}}</view>
+  <button wx:if="{{tools.isActiveShare(answer,isOver)}}" id='fua' class='shareIconBig mt20' open-type="share"></button>
+  <view wx:if="{{!isOver}}" class="h6 fc-fff tac mt20">#可求助多人或群#</view>
+  <!-- 显示帮助倒计时框 -->
+  <view style='{{isShowHelpUI?"":"display:none"}}' class='fullwh '>
+      <view class='df f1 fxyc full'>
+          <view class='ah-pop-bg ovh por'>
+                <view class='ah-pop-close' bindtap='cloas'></view>
+                <view class='ah-pop-cd mt40'>{{helpCD+'秒暂停'}}</view>
+                <view class='ah-pop-info'>等待朋友帮你做答，朋友选对也算对，组群组团答题哦。</view>
+                <button wx:if="{{tools.isActiveShare(answer,isOver)}}" id='fub' class='ah-pop-share' open-type="share"></button>
+          </view>
+      </view>
+
+  </view>
+  <!-- 分享结束 -->
+
+</view>

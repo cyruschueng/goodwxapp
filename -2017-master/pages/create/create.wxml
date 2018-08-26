@@ -1,0 +1,70 @@
+<!--create.wxml-->
+<view class="page">
+    <view class="top">
+      <view class="log" catchtap='uploadlog'>
+           <image wx:if="{{uploadlog}}" mode="aspectFit" src="{{uploadlog}}"></image>
+           <image wx:if="{{!uploadlog}}"  src="../../images/addpt.png"></image> 
+      </view>
+      <view class="titles">
+        <input value="{{title}}" class="fuck" bindinput='bindTitle' maxlength='200' placeholder='问卷主题，标题'/>
+        <textarea value="{{describe}}" bindinput='bindDescribe'   maxlength='200' placeholder='问卷描述(选项)' class="describe"></textarea>
+      </view>
+    </view>
+    <view class="middle">
+        <view class="box">
+          <text>是否记名:</text>
+          <radio-group class="radio-group" bindchange="radioChange">
+            <label class="radio" wx:for="{{sign}}" wx:key="this*">
+              <radio value="{{item.value}}" color="#1f5cd8" checked="{{item.checked}}"/>{{item.name}}<image src="{{item.image}}"></image>
+            </label>
+          </radio-group>
+        </view>
+        <view class="box">
+          <text>统计结果:</text>
+          <radio-group class="radio-group" bindchange="radioChange2">
+            <label class="radio" wx:for="{{statistics}}" wx:key="this*">
+              <radio value="{{item.value}}" color="#1f5cd8" checked="{{item.checked}}"/>{{item.name}}<image src="{{item.image}}"></image>
+            </label>
+          </radio-group>
+        </view>
+        <view class="box">
+          <text>截止时间:</text>
+          <radio-group class="radio-group" bindchange="radioChange3">
+            <label class="radio">
+              <radio value="1" color="#1f5cd8" checked="{{limit==2}}"/>不限
+            </label>
+            <label class="radio">
+              <radio value="2" checked='{{limit==1}}' color="#1f5cd8"/>
+              <picker mode="date"  value="{{date}}" start="{{datestart}}" end="" bindchange="bindDateChange">
+                <view class="picker here">
+                  {{date}}
+                </view>
+              </picker>
+            </label>
+              <picker mode="time" value="{{time}}" start="{{timestart}}" end="24:60" bindchange="bindTimeChange">
+                <view class="picker">
+                  {{time}}
+                </view>
+              </picker>
+          </radio-group>
+        </view>
+        <view class="box transpond">
+            <view class="left">
+                <view class="big">是否禁止转发</view>
+                <view class="small">仅自己可以发给别人，别人不可再转发</view>
+            </view>
+            <view class="right"><switch color="#1f5cd8" checked="{{transpond}}" bindchange="switch1Change"/></view>
+        </view>
+        <view class="box correctAnswer">
+            <view class="left">
+                <view class="big">题目是否有正确答案</view>
+                <view class="small">适用于：答题，竞猜</view>
+            </view>
+            <view class="right"><switch color="#1f5cd8" checked="{{correctAnswer||endAnswer>0}}"  bindchange="switch2Change"/></view>
+        </view>
+    </view>
+    <view class="bottom">
+          <button bindtap='check'>下一步</button>
+          <text>不添问卷图片，将默认使用您的头像代替</text>
+    </view>
+</view>

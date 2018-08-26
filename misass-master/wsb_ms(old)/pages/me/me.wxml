@@ -1,0 +1,55 @@
+<!--pages/me/me.wxml-->
+<view class='me'>
+  <view class='me_top' bindtap='listTitle' data-title='title'>
+    <image class='me_img' src='../../images/my_img1.jpg'/>
+    <view class='me_msg'>
+      <text>江纯</text>
+      <view>
+         <text>微速保ID:</text>
+         <text>10001</text>
+      </view>
+      <view>
+         <text>积分:</text>
+         <text>10</text>
+      </view>
+    </view>
+    <icon class='iconfont icon-right me_icon'></icon>
+  </view>
+  <view class='me_content'>
+    <!-- <view class='me_list' bindtap='listClick'>
+      <view>
+        <icon class='iconfont icon-organize me_icon_lit'></icon>
+        <text>组织结构</text>
+      </view>
+      <icon class='iconfont icon-right me_icon_lib'></icon>
+    </view>
+    <view class='me_list'>
+      <view>
+        <icon class='iconfont icon-list me_icon_lit'></icon>
+        <text>投保人信息</text>
+      </view>
+      <icon class='iconfont icon-right me_icon_lib'></icon>
+    </view>
+    <view class='me_list'>
+      <view>
+        <icon class='iconfont icon-me me_icon_lit'></icon>
+        <text>被保险人信息</text>
+      </view>
+      <icon class='iconfont icon-right me_icon_lib'></icon>
+    </view>
+    <view class='me_list'>
+      <view>
+        <icon class='iconfont icon-tel me_icon_lit'></icon>
+        <text>客服电话</text>
+      </view>
+      <icon class='iconfont me_icon_tel me_icon_lib'>4008-361-254</icon>
+    </view> -->
+    <view class='me_list' wx:for="{{listArr}}" wx:key="*this" bindtap='listClick' data-index='{{index}}'>
+      <view>
+        <icon class='iconfont {{item.class}} me_icon_lit'></icon>
+        <text>{{item.name}}</text>
+      </view>
+      <icon class='iconfont {{item.me_right_class}} me_icon_lib'>{{item.me_tel}}</icon>
+    </view>
+  </view>
+</view>

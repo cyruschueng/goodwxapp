@@ -1,0 +1,72 @@
+<!--index.wxml-->
+<view class="container">
+  <view>这是体验版</view>
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <!-- map -->
+  <view>
+    <map bindmarkertap="markertap" longitude="121.438834" latitude="31.243567"></map>
+  </view>
+  <view>
+    <navigator class='navitem' url='../calc/calc'>go to calc</navigator>
+    <navigator class='navitem' url='../eight/eight'>go to eight</navigator>
+    <navigator class='navitem' url='../five/five'>go to five</navigator>
+    <navigator class='navitem' url='../four/four'>go to four</navigator>
+    <navigator class='navitem' url='../logs/logs'>go to logs</navigator>
+    <navigator class='navitem' url='../nine/nine'>go to nine</navigator>
+    <navigator class='navitem' url='../page0/page0'>go to page0</navigator>
+    <navigator class='navitem' url='../page1/page1'>go to page1</navigator>
+    <navigator class='navitem' url='../page2/page2'>go to page2</navigator>
+    <navigator class='navitem' url='../score/score'>go to score</navigator>
+    <navigator class='navitem' url='../secondScore/secondScore'>go to secondScore</navigator>
+    <navigator class='navitem' url='../seven/seven'>go to seven</navigator>
+    <navigator class='navitem' url='../share/share'>go to share</navigator>
+    <navigator class='navitem' url='../six/six'>go to six</navigator>
+    <navigator class='navitem' url='../ten/ten'>go to ten</navigator>
+    <navigator class='navitem' url='../three/three'>go to three</navigator>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  <view>
+    <text class="user-motto">{{testms}}</text>
+  </view>
+  <button bindtap='clickme'>click me</button>
+  <button bindtap='showToast'>showToast</button>
+  <view>
+    <!-- 视图容器 -->
+    <view class='section_title'>flex-direction: row</view>
+    <view class='flex-wrp'>
+      <view class="flex-item bc_green">1</view>
+      <view class="flex-item bc_red">2</view>
+      <view class="flex-item bc_blue">3</view>
+    </view>
+  </view>
+  <!-- navigator -->
+  <view>
+    <text>navigator</text>
+    <navigator class='navitem' url='../logs/logs'>new page</navigator>
+    <navigator class='navitem' url='../three/three'>go to three</navigator>
+    <navigator class='navitem' url='../calc/calc'>calculator</navigator>
+  </view>
+  <button bindtap='scan'>scan</button>
+  <text style="width: 750rpx; height: 50rpx; background: #333333"></text>
+  <template name="msgItem">
+    <view>
+      <text>{{index}}: {{msg}}</text>
+      <text>Time: {{time}}</text>
+    </view>
+  </template>
+  <template is="msgItem" data="{{...item}}"></template>
+  <template is="msgItem" data="{{...item1}}"></template>
+  <template is="msgItem" data="{{...item2}}"></template>
+  <button open-type='share'>share this</button>
+</view>
+<button bindtap='navAFive'>go to package/five</button>
+<button bindtap="chooseImage">chooseImage</button>
+<text>{{imagesPath}}</text>

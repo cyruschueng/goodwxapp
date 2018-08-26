@@ -1,0 +1,67 @@
+<!--pages/me/children/order/order.wxml-->
+<view class='main'>
+  <view class='swiper-tab'>
+   <block wx:for-items="{{titles}}" wx:key="{{index}}">
+     <view class="swiper-tab-text {{currentTab==index ? 'swiper-on' : ''}}" bindtap='switchTab' data-id="{{index}}">
+     {{item}}
+     </view>
+   </block>
+  </view>
+  <swiper class='tab-content' current="{{currentTab}}" bindchange='switchTabContent' style="height:{{screenHeight}}rpx">
+   <block wx:for-items="{{tabList}}" wx:key="{{index}}">
+    <swiper-item>
+    <!--有数据时展示的界面-->
+     <scroll-view class='tab-view' wx:if="{{item.length}}" scroll-y>
+      <view class='order-list-view' wx:for-items="{{item}}" wx:key="{{index}}" wx:if='{{item.Status <= 3}}'>
+       <!-- 状态展示 -->
+       <view class='order-top ml10'>
+          <view wx:if="{{item.Status == -2}}">系统关闭</view>
+           <view wx:if="{{item.Status == -1}}">用户取消</view>
+          <view wx:elif="{{item.Status == 0}}">待付款</view>
+          <view wx:elif="{{item.Status == 1}}">已付款</view>
+          <view wx:elif="{{item.Status == 2}}">已发货</view>
+          <view wx:elif="{{item.Status == 3}}">交易成功</view>
+       </view>
+
+       <view class='order-detail' bindtap='orderDetailAction' wx:for-items="{{item.Products}}" wx:key="{{index}}" wx:for-item="product" data-orderid='{{item.OrderId}}'>
+         <image class='pro-image' src='{{product.Image}}'></image>
+         <view class='pro-detail'>
+           <text class='pro-name ellipsis2'>{{product.Name}}</text>
+           <text class='pro-content ellipsis2'>规格：{{product.Attr}}</text>
+         </view>
+         <view class='pro-num-price'>
+           <text class='pro-price'>¥{{product.Price}}</text>
+           <text class='pro-num'>x{{product.Qty}}</text>
+         </view>
+       </view>
+       <!-- 判断显示 -->       
+        <view class='order-bottom' wx:if="{{item.Status == -2}}">
+          <view>全国包邮，合计</view>
+          <view class='order-cancel'>¥{{item.TotalAmt}}</view>
+        </view>
+        <view class='order-bottom' wx:elif="{{item.Status == 0}}">
+          <view class='order-btn-left order-btn' bindtap='cancelOrderAction' data-orderid='{{item.OrderId}}'>取消订单</view>
+          <view class='order-btn-right order-btn' bindtap='payAction' data-orderid='{{item.OrderId}}'>付款</view>
+        </view>
+        <view class='order-bottom' wx:elif='{{item.Status == 1}}' hidden='true'>
+          <view class='order-btn-left order-btn' bindtap='flowAction' data-orderid='{{item.OrderId}}'>查看物流</view>
+        </view>
+        <view class='order-bottom' wx:elif='{{item.Status == 2}}'>
+          <!-- <view class='order-btn-left order-btn' bindtap='flowAction' data-orderid='{{item.OrderId}}'>查看物流</view> -->
+          <view class='order-btn-right order-btn' bindtap='confirmAction' data-orderid='{{item.OrderId}}'>确认收货</view>
+        </view>
+        
+      </view>
+     </scroll-view>
+     <!--没有数据时候的界面-->
+     <view class='tab-empty-view' wx:else>
+       <view class='loading-view' hidden='{{loadingHidden}}'>正在加载中...</view>
+       <image class='empty-image' src='http://res.o2o.com.cn:8082/img/9b2f8290fbe943d49470ce0d6628b6dc'></image>
+       <text class='empty-text'>还没有相关订单哦</text>
+     </view>
+    </swiper-item>
+   </block>
+  </swiper>
+</view>
+
+

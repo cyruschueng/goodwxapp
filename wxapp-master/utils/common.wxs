@@ -1,0 +1,84 @@
+//将秒转成 4‘20''的格式
+function convertTimeFromSecond(seconds) {
+    if (seconds > 60) {
+        var minute = Math.floor(seconds / 60);
+        var second = seconds % 60;
+        return minute + "'" + second + "''";
+    }
+    else {
+        return seconds + "''";
+    }
+}
+
+
+//格式化日期参数 返回字符串
+function getFormatedTimeStr(array, character, addZero) {
+    if (addZero) {
+        for (var  i = 0; i < array.length; i++) {
+            var value = array[i];
+            if (value < 10) {
+                array[i] = '0' + value;
+            }
+        }
+    }
+    return array.join(character);
+}
+
+//是否支持阿里云裁剪
+function isSupportALiYunParams(imgSrc) {
+    return imgSrc.indexOf('gsxservice') !== -1
+           || imgSrc.indexOf('genshuixue') !== -1
+           || imgSrc.indexOf('baijiayun') !== -1;
+}
+
+//裁剪图片
+function cropImage(imgSrc, width, height) {
+    var imgSrc = imgSrc;
+    var width = width || 60;
+    var height = height || 60;
+    if (isSupportALiYunParams(imgSrc)) {
+        var arr = imgSrc.split('.');
+        var extendName = arr[arr.length - 1];
+        if (extendName === 'gif') {
+            extendName = 'jpg';
+        }
+        imgSrc += '@1e_' + width + 'w_' + height + 'h_1c_0i_0o_90Q_1x' + extendName;
+    }
+    return imgSrc;
+}
+//从后面截取指定长度的字符串
+function cutStringFromEnd(str, length) {
+    var result = str;
+    var strLength = str.length;
+    if (strLength > length) {
+        var index = strLength - length;
+        result = '...' + str.substring(index);
+    }
+    return result;
+}
+//截取指定长度的字符串
+function cutString(str, length) {
+    var result = str;
+    var strLength = str.length;
+    if (strLength > length) {
+        result = str.substring(0, length) + '...';
+    }
+    return result;
+}
+//格式化money展示
+function formatMoney(money) {
+    if (money >= 1000000) {
+        money = Math.round(money / 10000) + '万';
+    }
+    return money;
+}
+
+
+module.exports = {
+    convertTimeFromSecond: convertTimeFromSecond,
+    getFormatedTimeStr: getFormatedTimeStr,
+    cropImage: cropImage,
+    cutStringFromEnd: cutStringFromEnd,
+    cutString: cutString,
+    formatMoney: formatMoney
+};

@@ -1,0 +1,99 @@
+@import "../../utils/animate.wxss";
+@import "../../utils/base_bg.wxss";
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60rpx;
+  font-size: 32rpx;
+}
+.header image{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 6rpx solid #fff;
+}
+.animated {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+.lightSpeedIn-left {
+  animation-name: lightSpeedIn-left;
+  animation-timing-function: ease-out;
+}
+@keyframes lightSpeedIn-left {
+  from {
+    transform: translate3d(-600%, 0, 0) skewX(-15deg);
+    opacity: 0;
+  }
+  60% {
+    transform: skewX(15deg);
+    opacity: 1;
+  }
+  80% {
+    transform: skewX(-5deg);
+    opacity: 1;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.lightSpeedIn-right {
+  animation-name: lightSpeedIn-right;
+  animation-timing-function: ease-out;
+}
+@keyframes lightSpeedIn-right {
+  from {
+    transform: translate3d(600%, 0, 0) skewX(15deg);
+    opacity: 0;
+  }
+  60% {
+    transform: skewX(-15deg);
+    opacity: 1;
+  }
+  80% {
+    transform: skewX(5deg);
+    opacity: 1;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  color: #1396DB;
+  margin-top: 300rpx;
+}
+
+.body .containCircle{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content:center;
+  align-items: center;
+  margin: 30rpx;
+  font-size: 28rpx;
+  color: #1295DA;
+  line-height: 30rpx;
+  opacity: 0;
+}
+.body image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.animated-slow {
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-delay: 1.2s;
+}

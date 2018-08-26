@@ -1,0 +1,98 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-form-preview">
+      <view class="weui-form-preview__hd">
+        <view class="new-preview__label">订单总额</view>
+        <view class="new-preview__label__value">¥2400.00</view>
+      </view>
+      <!-- 金额明细 -->
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">重量</view>
+          <view class="new-preview__value__item">{{orderInfo.commodityWeight}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">首重</view>
+          <view class="new-preview__value__item">100元</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">续重</view>
+          <view class="new-preview__value__item">200元</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">支付方式</view>
+          <view class="new-preview__value__item" wx:if="{{paymentType == 0}}">在线支付</view>
+          <view class="new-preview__value__item" wx:elif="{{paymentType == 1}}">线下现结</view>
+          <view class="new-preview__value__item" wx:elif="{{paymentType == 2}}">线下月结</view>
+        </view>
+      </view>
+
+      <!-- 物流明细 -->
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">物流</view>
+          <view class="new-preview__value">{{orderInfo.expressCompany.name}}</view>
+        </view>
+      </view>
+
+      <!-- 寄件人、收件人明细 -->
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">寄件人</view>
+          <view class="new-preview__value">{{orderInfo.sender.name}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">手机号</view>
+          <view class="new-preview__value">{{orderInfo.sender.mobile}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">公司名称</view>
+          <view class="new-preview__value">{{orderInfo.sender.company}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">发货地址</view>
+          <view class="new-preview__value">{{orderInfo.sender.province}} {{orderInfo.sender.city}} {{orderInfo.sender.region}} {{orderInfo.sender.address}}</view>
+        </view>
+      </view>
+
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">收件人</view>
+          <view class="new-preview__value">{{orderInfo.receiver.name}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">手机号</view>
+          <view class="new-preview__value">{{orderInfo.receiver.mobile}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">公司名称</view>
+          <view class="new-preview__value">{{orderInfo.receiver.company}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">收货地址</view>
+          <view class="new-preview__value">{{orderInfo.receiver.province}} {{orderInfo.receiver.city}} {{orderInfo.receiver.region}} {{orderInfo.receiver.address}}</view>
+        </view>
+      </view>
+
+      <!-- 商品明细 -->
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">商品</view>
+          <view class="new-preview__value">{{orderInfo.commodity.name}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="new-preview__label__item">备注</view>
+          <view class="new-preview__value">{{orderInfo.remark}}</view>
+        </view>
+      </view>
+
+      <view class="weui-form-preview__ft">
+        <navigator bindtap='payment' class="new-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+          <text wx:if="{{paymentType == 0}}">支付</text>
+          <text wx:elif="{{paymentType == 1 || paymentType == 2}}">提交</text>
+          <text wx:else>未支持的支付方式</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

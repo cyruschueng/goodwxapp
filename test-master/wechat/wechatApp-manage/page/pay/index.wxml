@@ -1,0 +1,64 @@
+<view>
+  <view class=' t_t account_msg'>
+   账单信息
+  </view>
+
+  <view class='account_money account_money_1 clearfix'>
+    <view catchtap='changeMoneyType' data-index='0' class='{{ moneyType === "0" ?"active":"" }} account_money_msg'><text>原价：¥{{totalMoney}}</text></view> 
+    <view catchtap='changeMoneyType' data-index='1' class='{{ moneyType === "1" ?"active":"" }} account_money_msg'><text>优惠价：¥{{billMoney}}</text></view>
+  </view>
+</view>
+
+<view>
+  <view class=' t_t account_msg'>
+   选择支付方式
+  </view>
+  <view class='account_money clearfix'>
+    <view catchtap='changePayMethod' data-index='7' class='{{ payMethod === "7" ?"active":"" }}'><image src='https://lingju360.com/miniapp/resources/image/pay/icon1.png'></image><text>微信支付</text></view> 
+    <view catchtap='changePayMethod' data-index='8' class='{{ payMethod === "8" ?"active":"" }}'><image src='https://lingju360.com/miniapp/resources/image/pay/icon4.png'></image><text>支付宝支付</text></view>
+    <view catchtap='changePayMethod' data-index='2' class='{{ payMethod === "2" ?"active":"" }}'><image src='https://lingju360.com/miniapp/resources/image/pay/icon2.png'></image><text>现金支付</text></view> 
+    <!-- <view catchtap='changePayMethod' data-index='2' class='{{ payMethod === "2" ?"active":"" }}'><text>银联支付</text></view> -->
+  </view>
+</view>
+
+<view>
+  <view class=' t_t account_msg'>
+   优惠项目
+  </view>
+  <view class='tax_items'>
+     <view>折扣<input bindinput='input_discoun' value='{{discount}}' placeholder='*折扣优惠输入规格为1-10的数'/></view>
+     <view>减免<input bindinput='input_specialMoney' value='{{specialMoney }}' placeholder='*减免金额应该小于账单金额'/></view>
+  </view>
+</view>
+
+<view class='bott'>
+  <view class=' t_t account_msg'>
+   支付信息
+  </view>
+  <view class='pay_msg'>
+    账单选择 :<text>{{moneyType==="0"?"原价":"优惠价"}}</text>
+  </view>
+  <view class='pay_msg'>
+    支付方式：<text>{{payMethod=="7"?"微信支付":""}}{{payMethod=="8"?"支付宝支付":""}}{{payMethod=="2"?"现金支付":""}}</text>
+  </view>
+  <view class='pay_msg'>
+    账单金额：<text class='money'>¥{{moneyType==="0"?totalMoney:billMoney}}</text>
+  </view>
+  <view class='pay_msg' wx:if="{{discount == '' ? false : true }}">
+    折扣：<text  class='money'>{{discount ? (discount)+'折':'未打折'}}</text>
+  </view>
+  <!-- <view class='pay_msg' wx:if="{{discount == '' ? false : true }}">
+    折扣金额：<text  class='money'>{{discountMoney}}</text>
+  </view> -->
+  <view class='pay_msg' wx:if="{{specialMoney == '' ? false : true }}">
+    减免：<text  class='money'>¥{{specialMoney}}</text>
+  </view>
+  <view class='pay_msg'>
+    实收金额：<text  class='money'>¥{{actualMoney}}</text>
+  </view>
+</view>
+
+<view catchtap='get_money' class='get_money'>收款</view>
+
+
+

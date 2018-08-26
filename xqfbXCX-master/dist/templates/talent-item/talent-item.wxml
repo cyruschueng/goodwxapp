@@ -1,0 +1,41 @@
+
+<template name="talent-item">
+  
+  <!-- 左边 -->
+  <view class='leftTabs'>
+    <block wx:for="{{ leftTabs }}" wx:for-item="tab" wx:key="{{ index }}">
+      <view id='{{ index }}' class="left-item {{ itemSelectIndex == index ? 'left-item-select' : '' }}" bindtap='bindLeftTabsTap'>
+        <view class="left-item-btn-select {{ itemSelectIndex == index ? '' : 'none' }}">
+          <text class='select-txt'>{{ tab }}</text>
+          <image class='select-icon' src='{{ itemSelectIndex == index ? "../../images/select-icon.png" : "" }}'></image>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 右边 -->
+  <view class='rightScroll'>
+    <scroll-view scroll-y style="height: {{ windowHeight }}px;" scroll-with-animation="true" >
+      <block wx:for="{{ talentList }}" wx:for-item="talent" wx:key="{{ talent.talentid }}">
+        <view class="right-item" data-talentid='{{ talent.talentid }}' bindtap='goTalentDetailsPage'>
+          <view style='display:inline-block;'>
+            <view class='avatar' >
+              <image mode='aspectFill' src='{{ talent.imgUrl }}'></image>
+            </view>
+            <view class='info'>
+              <view>{{ talent.name }}</view>
+              <view class='praise lit-text'>{{ talent.praise }}</view>
+              <view class='transaction lit-text'>{{ talent.transaction }}</view>
+            </view>
+          </view>
+          <view class='price'>
+            <text>¥ {{ talent.price }}</text>
+            <!-- <view wx:if='{{ talent.freeStatus == true }}' data-talenttypeid='{{ itemSelectIndex }}' data-talentid='{{ talent.talentid }}' id='{{ index }}' data-talentinfo='{{ talent }}' class='{{ talent.selected ? "selectBtn" : "selectedBtn" }}' bindtap='bindTalentSelectTap'>{{ talent.selected ? "已选用" : "选用" }}</view>
+            <view wx:if='{{ talent.freeStatus == false }}' class='notOptional-btn' >选用</view> -->
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+</template>

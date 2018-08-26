@@ -1,0 +1,58 @@
+<view class='slbd me {{loadclass}}'>
+    <view class="user-box">
+        <view class="face-box">
+            <image class="user-face" src="{{userface}}" mode="aspectFit"></image>
+        </view>
+         <!-- <view class="user-nick">{{usernick}}</view>  -->
+    </view>
+    <view class='result-level'>
+        <view class='level-box'>
+            <view class='level-con'>
+                <view class='level-bar'>
+                    <view class='bar-hl' style='width:{{levelBarWidth}}'></view>
+                </view>
+                <view class='level-min'>{{levelMin}}</view>
+                <view class='level-max'>{{levelMax}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='info-wrap me-info'>
+        <view class='info-list'>
+            <view class='info-li'>
+                <image class='info-title img-level' src="../../asset/image/info-level.png" mode="aspectFit"></image>
+                <text class='info-con'>{{userLevel}} <text class="iconstar {{'star'+userStar}}"></text></text>
+            </view>
+            <view class='info-li'>
+                <image class='info-title img-all' src="../../asset/image/info-all.png" mode="aspectFit"></image>
+                <text class='info-con'>{{userScore}}</text>
+            </view>
+            <view class='info-li'>
+                <image class='info-title img-sort' src="../../asset/image/info-sort.png" mode="aspectFit"></image>
+                <text class='info-con'>第{{friendRank}}名</text>
+            </view>
+        </view>
+    </view>
+    <view class='me-handle'>
+        <view class='handle-list'>
+            <view class='handle-row'>
+                <button class='handle-btn' bindtap="linkPageRank">
+                    <image src="../../asset/image/btn-list.png" mode="widthFix"></image>
+                </button>
+            </view>
+            <view class='handle-row'>
+                <button class='handle-btn' bindtap="createShareImg">
+                    <image src="../../asset/image/btn-pyq.png" mode="widthFix"></image>
+                </button>
+            </view>
+            <view class='handle-row'>
+                <button class='handle-btn' open-type="share">
+                    <image src="../../asset/image/btn-send.png" mode="widthFix"></image>
+                    <view class='handle-more'>（可获得2次挑战机会）</view>
+                </button>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='share'>
+    <canvas class='sharecanvas' canvas-id="myCanvas" style="width:420px;height:630px;"></canvas>
+</view>

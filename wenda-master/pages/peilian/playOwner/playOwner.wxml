@@ -1,0 +1,40 @@
+<view class="wrap" wx:if="{{show}}">
+	<view class="header">
+		<view class="header-img">
+			<image src="{{headerImg ? headerImg : '../../../images/head.png'}}"></image>
+		</view>
+		<view class="header-name">{{headerName}}</view>
+		<view class="header-num">{{headerNum}}</view>
+		<view class="header-title1">总局数</view>
+		<view class="header-rate">{{headerRate}}%</view>
+		<view class="header-title2">胜率</view>
+	</view>
+  <view class='my-wallet' bindtap="toWalletEv">
+    我的钱包
+    <text>{{walletMoney}}元</text>
+  </view>
+  <view class="my-list" bindtap="toListEv">我的订单</view>
+  <view class="my-card" bindtap="toCardEv">
+		我的优惠券
+		<text>{{cardNum}}张可用</text>
+  </view>
+  <view class="question" bindtap="toQuestionEv">常见问题</view>
+	<!-- <view class="list">
+		<view class="list-empty" wx:if="{{!total}}">
+			<view>暂无订单</view>
+		</view> 
+    <block wx:else>
+      <view class="item" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.orderId}}" bindtap="toDetail">
+        <image class="item-img" src="{{item.trainer.avatarUrl}}"></image>
+        <view class="item-name">{{item.trainer.nickName}}</view>
+        <view class="item-region">{{item.gameRegion}}</view>
+        <view class="item-pai">排位赛</view>
+        <view class="item-level">{{item.levelName}}</view>
+        <view class="item-time">{{item.createTime}}</view>
+        <view class="item-price {{item.status == '已取消' ? 'item-color' : ''}}"><text>{{item.amount / 100}}</text>元</view>
+        <view class="item-num {{item.status == '已取消' ? 'item-color' : ''}}">{{item.gameNumber}}局</view>
+        <view class="item-status {{item.status == '待认同' ? 'item-status-color' : ''}}">{{item.status}}</view>
+		  </view> 
+    </block>
+	</view> -->
+</view>

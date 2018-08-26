@@ -1,0 +1,35 @@
+<view class="weui-cells__title">复选列表项</view>
+<view class="weui-cells weui-cells_after-title">
+  <checkbox-group>
+    <label class="weui-cell weui-check__label" wx:for="{{['选项1','选项2','选项3']}}" wx:key="*this">
+        <checkbox value="{{item}}"></checkbox>
+        <view class="weui-cell__bd">{{item}}</view>
+    </label>
+  </checkbox-group>
+</view>
+
+<view class="weui-cells__title">单选列表项</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group bindchange="radioChange">
+    <view class="weui-cell" wx:for="{{['选项1','选项2','选项3']}}" wx:key="*this">
+      <radio id="radio{{index}}" value="{{item}}" />
+      <label for="radio{{index}}" class="weui-check__label">
+          <view class="weui-cell__bd">{{item}}</view>
+      </label>
+    </view>
+  </radio-group>
+</view>
+
+<view class="weui-cells__title">扩展switch</view>
+<view class="weui-cells weui-cells_after-title">
+  <label class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">开关</view>
+      <view class="weui-cell__ft">
+          <switch id="switch1" checked />
+      </view>
+  </label>
+</view>
+
+<label for="switch1">
+  <canvas style="width: 400px; height: 500px;" canvas-id="firstCanvas"></canvas>
+</label>

@@ -1,0 +1,31 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="swiper-tab">
+
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">申请查看我的项目</view>
+
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我申请查看的项目</view>
+
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:570px" bindchange="bindChange">
+    <!--申请查看我的项目  -->
+    <swiper-item>
+      <scroll-view scroll-y="true" scroll-top="{{scroll}}" bindscrolltolower="moreForApply">
+        <template is="allNumber" data="{{count:count1,text:'申请查看我的项目'}}"></template>
+        <template is="pushProject" data="{{contentList:contentList,type:0,record_id:record_id}}"></template>
+        <template is="hasNothing" data="{{emptyNumber:contentList}}"></template>
+      </scroll-view>
+    </swiper-item>
+    <!--我申请查看的项目  -->
+    <swiper-item>
+      <scroll-view bindscrolltolower="loadMore" scroll-top="{{scroll}}" scroll-y="true">
+        <template is="allNumber" data="{{count:count,text:'我申请查看的项目'}}"></template>
+        <template is="personModal" data="{{list:applyList,type:1,push_id:0}}"></template>
+        <template is="hasNothing" data="{{emptyNumber:applyList}}"></template>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <!--没有更多-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

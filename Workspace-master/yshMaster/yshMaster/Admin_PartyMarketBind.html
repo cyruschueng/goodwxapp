@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>用户备案绑定</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">	
+		<style type="text/css">
+			.margin-p{
+				margin-top: 7px;
+			}
+		</style>
+		<script src="js/jquery-1.10.2.min.js"></script>
+  		<script src="js/ysh_comm.js"></script>
+  		<!--adddate-->
+		<script src="js/adddate.js"></script>
+  		<script type="text/javascript">
+  			checkPermission();
+  		</script>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+	</head>
+
+	<body class="children-body">
+
+		<!--body wrapper start-->
+		<section class="">
+			<div id='bindedpart' style="display: none;">
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								该团体已认证，认证信息如下：
+							</header>
+							<div class="panel-body">
+								
+								<div class="form-horizontal">
+								<div class="form-group">
+									<label for="MarketId" class="control-label col-lg-2">市场编码:</label>
+									<div class="col-lg-8">
+										<p class="margin-p" id="MarketId" type="text" name="MarketId"></p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="MarketName" class="control-label col-lg-2">市场名称:</label>
+									<div class="col-lg-8">
+										<p class="margin-p" id="MarketName" type="text" name="MarketName"></p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="RegId" class="control-label col-lg-2">工商注册号:</label>
+									<div class="col-lg-8">
+										<p class="margin-p" id="RegId" type="text" name="RegId"></p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="Legal_Represent" class="control-label col-lg-2">法人代表:</label>
+									<div class="col-lg-8">
+										<p class="margin-p" id="Legal_Represent" type="text" name="Legal_Represent"></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="Tel" class="control-label col-lg-2">联系电话:</label>
+									<div class="col-lg-8">
+										<p class="margin-p" id="Tel" type="text" name="Tel"></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="Addr" class="control-label col-lg-2">地址:</label>
+									<div class="col-lg-8">
+										<p class="margin-p" id="Addr" type="text" name="Addr"></p>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div>			
+										<button id="unbindBtn" class="btn btn-warning" type="button">解除绑定</button>
+										<button id="back" class="btn btn-primary" type="button" onclick="window.history.back();">返回</button>
+									</div>
+								</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+			<div id="unbindPart" style="display: none;">
+			<!-- page start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading">
+							用户备案绑定
+						</header>
+						<div class="panel-body">
+							<form id="searchForm" class="form-horizontal" role="form">
+								<div class="row clearfix">
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">市场名称</label>
+											<div class="col-lg-9">
+												
+													<input id="MarketName" name="MarketName" type="text" class="form-control">
+												
+
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">法人代表</label>
+											<div class="col-lg-9">
+												
+													<input id="Legal_Represent" name="Legal_Represent"  type="text" class="form-control">
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">工商注册号/身份证号</label>
+											<div class="col-lg-9">
+												
+													<input id="Reg_Id" name="Reg_Id" type="number" class="form-control">
+											
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-lg-4">
+                                       <div class="form-group">
+											<label class="control-label col-lg-3 col-sm-3 ">备案开始时间:</label>
+											<div class="col-lg-9">
+												<!--<div data-date-viewmode="months" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+													<input  id="Record_Date_bg" name="Record_Date_bg" type="text" readonly=""  size="16" class="form-control">
+													<span class="input-group-btn add-on">
+                                                    <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                  </span>
+												</div>-->
+												<input  id="Record_Date_bg" name="Record_Date_bg" type="text" size="16" class="form-control" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="control-label col-lg-3 col-sm-3 ">备案结束时间:</label>
+											<div class="col-lg-9">
+												<!--<div data-date-viewmode="months" data-date-format="yyyy-mm-dd" data-date="2016-12-12" class="input-append date dpYears">
+													<input id="Record_Date_ed" name="Record_Date_ed" type="text" readonly=""  size="16" class="form-control">
+													<span class="input-group-btn add-on">
+                                                    <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                  </span>
+												</div>-->
+												<input id="Record_Date_ed" name="Record_Date_ed" type="text" size="16" class="form-control" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="text-right">			
+											<button id="searchBtn" class="btn btn-info" type="button">搜索</button>		
+											<button id="resetBtn" class="btn btn-danger" type="reset">重置</button>	
+										</div>
+									</div>
+								</div>
+								
+							</form>
+							
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">		
+					<section class="panel">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-lg-6">
+									<p>当前团体:   <span style="color: red;" id="curuser"></span></p>
+								</div>
+								<div class="col-lg-6">
+									<div class="text-right">
+										<button id="back" class="btn btn-primary" type="button" onclick="window.history.back();">返回</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<table id="bs" class="table table-striped table-condensed table-hover talbe-border" data-side-pagination="server">
+								<thead>
+									<tr>
+										<!--<th data-field="status" data-align="center" data-checkbox="true" data-formatter="checkformatter"></th>-->
+										<th data-field="Id" data-align="center" >Id</th>
+										<th data-field="MarketId" data-align="center" >市场编号</th>
+										<th data-field="MarketName" data-align="center" >市场名称</th>
+                                        <th data-field="RegId" data-align="center">工商注册号</th>
+										<th data-field="Legal_Represent" data-align="center">法人代表</th>
+										<th data-field="RecordDate" data-align="center">备案时间</th>		
+										<th data-field="Operation" data-align="center" data-formatter="operationFormatter">操作</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+					</section>
+
+					<!--body wrapper end-->
+
+				</div>
+				<!-- main content end-->
+			</div>
+			</div>
+		</section>
+		
+			
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+	
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+	
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+	
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+	
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/ysh_comm.js"></script>
+
+
+		<script>
+			var checkList = [];
+			var $table = $("#bs");
+			var data = [];
+			var schParam = {};
+			var total = 0; 	//总数据条数
+			var userData = {};
+			var id = ysh_GetQueryString('Id');
+			if(!id){
+				ysh_msg("数据传递错误");
+				setTimeout(function(){window.history.back();},1500);
+			}else{
+				getDataList(yshurl+'Admin_GetMarketInfoByPId',{pId:id},function(d){
+					if(d && d.state == 0 && d.aaData){
+						userData = d.aaData[0];
+						if(userData.MarketInfoId){
+							$("#bindedpart").show();
+							initElement(userData);
+							console.log(userData);
+						}else{
+							$("#curuser").text(userData.PartyName);
+							$("#unbindPart").show();
+						}
+					}else{
+						ysh_msg("获取数据失败");
+						setTimeout(function(){window.history.back();},1500);
+					}
+				});
+			}
+			
+			function initElement(obj){
+				$("#bindedpart #MarketId").text(obj.MarketId);
+				$("#bindedpart #MarketName").text(obj.MarketName);
+				$("#bindedpart #RegId").text(obj.RegId);
+				$("#bindedpart #Legal_Represent").text(obj.Legal_Represent);
+				$("#bindedpart #Tel").text(obj.Tel);
+				$("#bindedpart #Addr").text(obj.ADDR);
+			}
+			
+			//表格样式
+			function rowStyle(row, index) {
+				var classes = ['active', 'success', 'info', 'warning', 'danger'];
+				if (index % 2 === 0) {
+					return {
+						classes: 'warning'
+					};
+				} else
+					return {
+						classes: 'info'
+					};
+			}
+
+			function selectListFormatter(value, row, index) {
+				if (value != null && value != undefined) {
+					var sl = ["<select id='Id", row.Id, "' class='selectForMobile' >"];
+					$.each(value, function(i, v) {
+						sl.push("<option value='" + v.value + "' >" + v.text + "</option>");
+					});
+					sl.push("</select>")
+					return sl.join('');
+				} else return "";
+			}
+
+			function operationFormatter(value, row, index) {
+				var result = [];
+				if(row.PartyId)
+				 	result.push('<span>已绑定</span>');
+				else
+					result.push('<button class="btn btn-success" onclick="bindMaket('+row.Id+');">绑定</button>');
+					
+				return result.join(' ');
+			}
+			
+			function checkformatter(value, row, index) {
+		        var pIndex = $.inArray(row.Id, checkList);
+		        if (pIndex >= 0) {
+		            return {
+		                checked: true
+		            }
+		        }
+		        else {
+		            return {
+		                checked: false
+		            }
+		        }
+		    }
+			
+			function bindMaket(mid){
+				ysh_confirm("确定要绑定该经营户？","确定","取消",function(ret){
+					if(ret){
+						getDataList(yshurl+"Admin_BindPartyMarket",{pId:userData.Id,MarketInfoId:mid},function(d){
+							if(d && d.state==0){
+								ysh_msg("绑定成功");
+								setTimeout(function(){window.history.back();},1500);
+							}else{
+								ysh_msg("绑定失败");
+							}
+						});
+					}
+				});
+			}
+			
+			
+			$(function() {
+				var bt = GetDateStr(-60);
+				var et = GetDateStr(0);
+				$("#searchForm #Record_Date_bg").val(bt);
+				$("#searchForm #Record_Date_ed").val(et);
+				
+				$("#unbindBtn").click(function(){
+					ysh_confirm("确定要解除绑定信息？","确定","取消",function(ret){
+						if(ret){
+							getDataList(yshurl+"Admin_UnbindPartyMarket",{pId:userData.Id,MarketInfoId:userData.MarketInfoId},function(d){
+								if(d && d.state==0){
+									ysh_msg("解绑成功");
+									setTimeout(function(){window.history.back();},1500);
+								}else{
+									ysh_msg("解绑失败");
+								}
+							});
+						}
+					});
+				})
+				
+				
+				//初始化表格
+				$table.bootstrapTable({
+					pagination: true, //分页
+					onCheck: function(row) {
+						checkList.push(row.Id);
+						$.unique(checkList);
+					},
+					onUncheck: function(row) {
+						$.unique(checkList);
+						var pIndex = $.inArray(row.Id, checkList);
+						checkList.splice(pIndex, 1);
+					},
+					onCheckAll: function(rows) {
+						$.each(rows, function(index) {
+							checkList.push(rows[index].Id);
+						});
+						$.unique(checkList);
+					},
+					onUncheckAll: function(rows) {
+						$.unique(checkList);
+						var filterarray = $.grep(checkList, function(value) {
+							var isDel = false;
+							for (var i = 0; i < rows.length; i++) {
+								if (rows[i] == value) {
+									isDel = true;
+									break;
+								}
+							}
+							return !isDel;
+						});
+						checkList = filterarray;
+					},
+					escape: true,
+					clickToSelect: true,
+					pageList: [10]
+				});
+				
+				/*********  查询  ***********/
+				
+				//获取数据
+				function getData(param, limit, offset){
+					param.limit = limit;
+					param.offset = offset;
+					getDataList(yshurl+'Admin_GetMarketInfoBindData',param,function(d){
+						if(d && d.state == 0){
+							data = d.many[1].rows;
+							for(var i =0;i< data.length;i++){
+								data[i].RecordDate = new Date(data[i].RecordDate).Format('yyyy-MM-dd hh:mm:ss');
+							}
+							var pdata = {total:d.many[0].total[0].total,rows:data};
+							$table.bootstrapTable('load',pdata);
+						}else{
+							var pdata = {total:0,rows:[]};
+							$table.bootstrapTable('load',pdata);
+						}
+						setIframeHeight();
+					});
+				}
+				
+				//点击分页查询
+				$table.on('page-change.bs.table', function(e, number, size) {
+					var os = (number - 1)*size;
+					var lm = size;
+					getData(schParam,lm,os);
+				});
+				
+				$("#searchBtn").click(function(){
+					schParam = convertParams("searchForm");
+					if(new Date(schParam.Record_Date_bg) > new Date(schParam.Record_Date_ed)){
+						ysh_msg("备案开始时间不能大于结束时间");
+						return;
+					}
+					
+					schParam.Record_Date_bg = schParam.Record_Date_bg + " 00:00:00";
+					schParam.Record_Date_ed = schParam.Record_Date_ed + " 23:59:59"; 
+					
+					total = 0;
+					data = [];
+					var options = $table.bootstrapTable('getOptions');
+					checkList = [];
+					getData(schParam,options.pageSize, 0);
+				});
+				
+				$("#searchBtn").click();
+				setIframeHeight();
+			});
+			
+		</script>
+
+	</body>
+
+</html>

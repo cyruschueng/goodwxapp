@@ -1,0 +1,105 @@
+<view style="padding:10px;background-color:#f2f2f2">
+<view class="viewTitle" style="text-align:center">
+  <view class="lineView"></view>
+</view>
+
+<form class="page__bd" bindsubmit="formSubmit" bindreset="formReset" report-submit>
+<view class="weui-cells__title">称呼(必填)</view>
+<view class="weui-cells weui-cells_after-title weui-cell_input">
+            <view class="weui-cell weui-cell_select">
+                
+                <view class="weui-cell__hd">
+                    <view  class="weui-label" style="margin:0 -1rem 0 1rem;width:3rem">称呼</view>
+                </view>
+
+                <view class="weui-cell__bd weui-cell__bd_in-select-before">
+                    <input  name="name" bindinput="bindInputName" value="{{inputName}}" class="weui-input"  placeholder="请输入称呼" />
+                </view>
+
+                <view class="weui-cell__hd" style="width: 105px">
+                    <picker name="sex" bindchange="bindmaleCodeChange" value="{{maleCodeIndex}}" range="{{maleCodes}}">
+                        <view class="weui-select">{{maleCodes[maleCodeIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+
+<view class="weui-cells__title">电话(必填)</view>
+
+<view class="weui-cells weui-cells_after-title weui-cell_input">
+            <view class="weui-cell weui-cell_select">
+                
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style="margin:0 -1rem 0 1rem;width:3rem">电话</view>
+                </view>
+
+                 <view class="weui-cell__bd weui-cell__bd_in-select-before">
+                    <input bindinput="bindInputNum" value="{{inputNum}}" name="phone" class="weui-input" placeholder="请输入号码" />
+                </view>
+            </view>
+</view>
+
+        
+
+<view class="weui-cells__title">事件描述（必填 ）</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea bindinput="bindInputCon" value="{{inputCon}}" name="content"class="weui-textarea" placeholder="请输入文本" style="height: 5em" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+
+<view class=" weui-cells__title">地区(必选)</view>
+
+<view class="weui-cells weui-cells_after-title weui-cell_input">
+            <view class="weui-cell weui-cell_select">
+                
+                <view class="weui-cell__hd">
+                    <view name="pic" class="weui-label" style="margin:0 -1rem 0 1rem;width:3.5rem">选择：</view>
+                </view>
+
+                <view class="weui-cell__hd" style="width:85%">
+                    <picker name="city" bindchange="bindCityChange" value="{{indexCity}}" range="{{city}}">
+                        <view class="weui-select" >{{city[indexCity]}}</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+  
+<view class="page__bd">
+        <view class="weui-cells">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title">图片上传</view>
+                            <view class="weui-uploader__info">{{files.length}}/5</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for-items="{{files}}" wx:key="{{index}}">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image name="pics" class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box" hidden="{{hidden}}">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+
+  <view class="btn-area" style="margin:1rem 0 2rem 0">
+   <button form-type="submit" type="primary" >提交报料</button>
+  </view>
+ </form>
+
+ </view>

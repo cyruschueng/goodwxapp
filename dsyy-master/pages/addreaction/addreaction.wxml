@@ -1,0 +1,66 @@
+<view class="page">
+  <form bindsubmit="formSubmit">
+    <view class="book-seize"></view>
+    <view class="white-bg weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入标题" value="{{tit}}" name="title" bindinput="catchTitle" />
+        </view>
+      </view>
+    </view>
+    <view class="white-bg margin-top-20 weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入内容" value="{{intro}}" bindinput="catchIntro" name="intro" style="height: 300rpx;" maxlength="-1" />
+        </view>
+      </view>
+    </view>
+    <view hidden="{{searchHidden}}" class="white-bg my-nav-member margin-bottom-20 margin-top-20">
+      <view class="padding-top-30 pading-bottom-30 padding-left-30 padding-right-30">
+        <button class="my-nav-member-button"  bindtap="scanBook">
+          <image src="/images/member_scan.png" class="my-nav-member-button-img float-left"></image>
+          <view class="float-left">
+            扫描图书
+          </view>
+        </button>
+      </view>
+    </view>
+    <view hidden="{{!searchHidden}}" class="white-bg margin-top-20 add-book-detail padding-left-30 padding-right-30 padding-top-20 padding-bottom-20">
+      <view class="book-img" >
+        <image src="{{bookDetail.images_medium}}" class="book-img-detial" mode="aspectFill"></image>
+      </view>
+      <view class="book-info">
+        <view class="text-oneline margin-bottom-10" style="font-size:26rpx;">{{bookDetail.title}}</view>
+        <view class="text-oneline margin-bottom-10" style="font-size:22rpx;">作者：{{bookDetail.author}}</view>
+      <view class="text-oneline margin-bottom-10 " style="font-size:22rpx;">出版社：{{bookDetail.publisher}}</view>
+      </view>
+    </view>
+    <view class="page__bd white-bg margin-top-20">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title"></view>
+              <view class="weui-uploader__info">{{files.length}}/4</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}">
+                  <view class="weui-uploader__file" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="updateImage" data-id="{{index}}" />
+                  </view>
+                </block>
+              </view>
+              <view wx:if="{{files.length<4}}" class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="book-seat"></view>
+    <view wx:if="{{tit==''||intro==''}}" class="add-unused-button">发布</view>
+    <button wx:else class="add-button" form-type="submit">发布</button>
+  </form>
+</view>

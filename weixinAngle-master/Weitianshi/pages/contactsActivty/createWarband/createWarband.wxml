@@ -1,0 +1,47 @@
+<view class="classname">
+    <view class="userBox">
+        <view class="warLogo flex" bindtap="warLogo">
+            <view class="personListTile">战队logo</view>
+            <view class="flex">
+                <image src="/img/icon-chuantouxiang@2x.png" class="uploadBefore" wx:if="{{filePath == ''}}"></image>
+                <view class="uploadAfter" wx:if="{{filePath != ''}}">
+                    <image src="{{filePath}}" class="uploadAfter"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="userBox">
+        <view class="warName flex" bindtap="writeNewThing" data-type="{{2}}">
+            <view class="personListTile">战队名*</view>
+            <view class="flex">
+                <view class="personListContent" wx:if="{{!team_name}}">建议填写品牌名</view>
+                <view class="personListContentAfter" wx:if="{{team_name}}">{{team_name}}</view>
+                <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+            </view>
+        </view>
+    </view>
+    <view class="userBox">
+        <view class="createName flex" bindtap="writeNewThing" data-type="{{3}}">
+            <view class="personListTile">机构创始人*</view>
+            <view class="flex">
+                <view class="personListContent" wx:if="{{!team_founder}}">建议填写核心创始人</view>
+                <view class="personListContentAfter" wx:if="{{team_founder}}">{{team_founder}}</view>
+                <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="illustration">
+    <view>1、政府双创部门、承担双创工作任务的事业单位或下级机构/品牌</view>
+    <view>2、众创空间/创业服务机构</view>
+    <view>3、投资机构</view>
+    <view>4、FA机构及创业社区组织</view>
+    <view class="attention">
+        创业公司不可参与团队赛，所有参与团队赛的组织需实际运营超过3个月（或2017年4月1 日前成立或有运营记录）
+    </view>
+</view>
+<view class="floatBtn flex pushPro" bindtap="createWar">
+    <view class="pushProjectAfter">创建</view>
+</view>
+<!-- 错误提示-->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>

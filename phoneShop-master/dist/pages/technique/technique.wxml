@@ -1,0 +1,37 @@
+<import src="../template/navbar.wxml"  />
+<import src="../template/hint.wxml"  />
+<import src="../template/list.wxml"  />
+
+<view class="container">
+	<template is="navbar" data="{{navbar:navbar,currentTab:currentTab}}"></template>
+	<view style="height:90rpx;"></view>
+	<!-- currentTab==0 热门资讯 -->
+	<view class="lists-section" hidden="{{currentTab !==0 }}">
+		<template is="list" ></template>	
+	</view>
+	<!-- currentTab==1 手机技巧 -->
+	<view class="lists-section" hidden="{{currentTab !==1 }}">
+		<template is="list" ></template>	
+		
+	</view>
+	<!-- currentTab==2 故障自查 -->
+	<view class="lists-section__group" hidden="{{currentTab !==2 }}">
+		<view class="lists-group__cell" wx:for="1234" wx:key="item">
+			<view class="lists-group" hover-class="lists-group_active" data-cid="{{item.id}}" bindtap="showPullDown">
+				<view class="lists-group__bd  {{pullDown && pullDownId== item.id?'col_b2':'col_35'}}">无端关机</view>
+				<view class="lists-group__ft triangle_under {{pullDown && pullDownId== item.id?'triangle_under_choose' :''}}"></view>
+			</view>
+			<view class="lists-group__item {{pullDown && pullDownId== item.id?'show':'hidden'}}">
+				<view class="list_bd " wx:for="1234" wx:for-item="details" data-aid="{{details.id}}" bindtap="navigateToActical">
+					<view class="lists-group__bd ">没电了</view>
+					<view class="lists-group__ft icon icon-arrow_right"></view>
+				</view>
+				<!--<view class="weui-cell" wx:if="{{!item.kb.length}}">
+				<view class="lists-group__bd  dividing-line info-fonts">该分类暂无文章</view>
+			</view>
+			-->
+		</view>
+	</view>
+</view>
+</view>
+<template is="hint" data="{{text:'没有更多'}}"></template>

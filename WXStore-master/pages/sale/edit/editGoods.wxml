@@ -1,0 +1,31 @@
+<!--pages/sale/edit/editGoods.wxml-->
+<!-- <text>{{goodsInfo}}</text> -->
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <image name='bigPic' mode='aspectFit' src='{{goodsInfo.imgUrl}}'></image>
+    <view class='goodsPic'>
+      <image wx:for='{{goodsPicUrls}}' wx:key='key' mode='aspectFit' src='{{item}}'></image>
+    </view>
+    <button type='primary' bindtap='selectPic'>添加图片</button>
+    <view class='goodsItem'>详情：
+      <textarea name='goodsInfo' value='{{goodsInfo.info}}'></textarea>
+    </view>
+    <view class='goodsItem'>标题：
+      <input name='goodsName' confirm-type='done' value='{{goodsInfo.name}}'></input>
+    </view>
+    <view class='goodsItem'>价格：
+      <input name='goodsPrice' type='digit' confirm-type='done' value='{{goodsInfo.price}}'></input>
+    </view>
+    <view class='goodsItem'>是否上架：
+      <radio-group name='goodsStatus'>
+        <radio value='上架' checked='true'>上架</radio>
+        <radio value='下架'>下架</radio>
+      </radio-group>
+      <!-- <input name='goodsStatus' confirm-type='done' value='{{goodsInfo.status}}'></input> -->
+    </view>
+    <view class="btn-area">
+      <button formType="submit">保存</button>
+      <button formType="reset">重置</button>
+    </view>
+  </form>
+</view>

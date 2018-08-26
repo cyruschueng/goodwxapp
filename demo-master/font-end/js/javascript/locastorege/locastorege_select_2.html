@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选择localStorage</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div><a href="http://blog.csdn.net/smartsmile2012/article/details/45534253">localStorage链接</a></div>
+    <div id="app">
+        <div id="btn" @click="btn">选择localStorage</div>
+    </div>
+</body>
+
+</html>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {},
+    created: function() {},
+    mounted: function() {},
+    computed: {},
+    watch: {},
+    methods: {
+        btn: function() {
+            var arr = localStorage.getItem("approverArr"); //取localstorage,localStorage注意要驼峰命名
+            var arr1 = JSON.parse(arr) //字符串解析js
+            arr1.push({ //选择的数组，这里写成静态的
+                "name": "zjy",
+                "age": "25",
+            });
+            localStorage.setItem("approverArr", JSON.stringify(arr1)); //js解析字符串  &&  localstorage
+            window.location.href = "./locastorege_save_1.html"
+        }
+    }
+})
+</script>
+<script>
+window.onload = function() {
+
+    /*   var zjy = { "name": "zjy", "age": "25" };
+       zjy = JSON.stringify(zjy);//{"name":"zjy","age":"25"}
+       var zjy = localStorage.getItem("zjy");
+       zjy = JSON.parse(zjy);
+        sessionStorage.setItem('zjy',this.zjy);*/
+
+       /* sessionStorage.setItem('zjy',this.zjy);临时存储，关闭网页消失*/
+
+
+    /*   localStorage.setItem("key1", "123");
+          localStorage.key3 = "789";
+          document.write(localStorage.getItem("key1");
+          document.write(localStorage.key2 + "</br>"); */
+
+}
+</script>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>听说模考</title>
+    <link rel="stylesheet" type="text/css" href="listen/css/style.css">
+    <script src="listen/js/adaptive.js"></script>
+
+    <script src="listen/js/jquery.min.js"></script>
+    <script src="listen/js/vue.js"></script>
+</head>
+<body>
+    <div class="loading">
+        <div class="load-inner">
+            <span>加载中...</span>
+        </div>
+    </div><!--loading end-->
+    <div class="dialog">
+        <div class="dialog-inner">
+            <span>题目获取失败~</span>
+        </div>
+    </div><!--dialog end-->
+
+    <div class="wrap word-break" id="app" style="display:none;">
+        <!-- parts -->
+        <div v-for="part in exampaper.parts">
+            <div class="tit1 bg-f1f0ec">{{part.module_type_name}}</div>
+            <div v-for="question in part.children">
+                <question :question="question" :questionnum="getQuestionNo" :index="$index+1"></question>
+            </div>
+        </div>
+        <!-- parts end -->
+    </div>
+
+    <!-- 题目模板 -->
+    <script type="text/template" id="question-template">
+        <question-choice v-if="question.qtype==1" :question="question" :questionnum="questionnum" :parentqtype="parentqtype"></question-choice>
+        <question-shortanswer v-if="question.qtype==6" :question="question" :questionnum="questionnum" :parentqtype="parentqtype"></question-shortanswer>
+        <question-imitation v-if="question.qtype==7" :question="question" :questionnum="questionnum" :parentqtype="parentqtype"></question-imitation>
+        <question-filling v-if="question.qtype==3" :question="question" :questionnum="questionnum" :index="index"></question-filling>
+        <question-reading v-if="question.qtype==5" :question="question" :questionnum="questionnum" :index="index"></question-reading>
+    </script>
+    <!-- 附件 模板 -->
+    <script type="text/template" id="attachments-template">
+        <!-- <h2>attachments</h2> -->
+        <div v-for="data in attachments">
+            <div v-if="data.file_url">
+                <div class="img-box mt30" v-if="data.file_type == 1">
+                    <img onclick="hammerClass(this)" :src="data.file_url" alt="" />
+                </div>
+                <div class="audio mt30" v-if="data.file_type == 2">
+                    <audio :src="data.file_url" preload="auto"></audio>
+                </div>
+                <div class="video pr mt30" v-if="data.file_type == 3">
+                    <!-- <div class="video-icon pa"></div> -->
+                    <video :src="data.file_url" controls="controls"></video>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- 选择题 模板 -->
+    <script type="text/template" id="question-choice-template">
+        <!-- <h2>choice</h2> -->
+        <!-- little question -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span :class="parentqtype?'option':''">{{questionnum()}}. </span>
+                    <div class="mlr20 display-ib col-red" v-html="question.userAnswer | setAssessIcon"></div>
+                    <span class="fs-24 col-808080">(<span class="col-red">{{question.userAnswer && question.userAnswer.score || 0}}分</span>/{{question.question_ref_sorce}}分)</span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+
+                <!-- option -->
+                <div v-for="option in question.options">
+                    <div class="mt40">
+                        <span class="option {{option | setOptionsIcon question.userAnswer }}">{{$index | fromCharCode}}</span><div class="display-ib ml20" v-html="option.stem"></div>
+                        <attachments :attachments="option.attachments"></attachments>
+                    </div>
+                </div>
+                <!-- option end -->
+                <div class="fs30 col-999896  mt30 pt30 bdt1-f1f0ec">参考答案</div>
+                <div class="green mt20" v-if="question.ref_info">
+                    <div v-for="val in question.ref_info.answers">{{val.index | fromCharCode}}</div>
+                </div>
+                
+                <div v-if="question.textModule &&question.textModule[0] && question.textModule[0].textType==2 && question.textModule[0].questionStem!=''">
+                    <div class="fs30 col-999896 mt40">听力原文</div>
+                    <div class="tit2 mt20">{{question.textModule[0].questionStem}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- little question end -->
+    </script>
+    <!-- 填空题 模板 -->
+    <script type="text/template" id="question-filling-template">
+        <!-- <h2>filling</h2> -->
+        <!-- little question -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span>{{index}}. </span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem | formatHtml question.qtype"></div>
+                <attachments :attachments="question.attachments"></attachments>
+            </div>
+            <!-- option -->
+            <div class="bdt4-f1f0ec" v-for="option in question.options">
+                <div class="m20">
+                    <div class="tit2 pt30 mt30">
+                        <span class="option">{{questionnum()}}. </span>
+                        <div class="mlr20 display-ib col-red" v-html="question.userAnswer && question.userAnswer.answers[$index] | setAssessIcon"></div>
+                        <span class="fs-24 col-808080">(<strong class="col-red">{{question.userAnswer.answers[$index].assess!=1 ? question.userAnswer.answers[$index].item_score||0 : (question.question_ref_sorce/question.options.length).toFixed(0)}}分</strong>/{{(question.question_ref_sorce/question.options.length).toFixed(0)}}分)</span>
+                    </div>
+                    <div class="mt40">
+                        <div class="display-ib" v-html="$index | fillingSetStem question.userAnswer"></div>
+                        <attachments :attachments="option.attachments"></attachments>
+                    </div>
+                    <div class="fs30 col-999896  mt30 pt30 bdt1-f1f0ec">参考答案</div>
+                    <div class="green mt20" v-html="option.stem"></div>
+                </div>
+            </div>
+            <!-- option end -->
+        </div>
+        <!-- little question end -->
+    </script>
+    <!-- 简答题 模板 -->
+    <script type="text/template" id="question-shortanswer-template">
+        <!-- <h2>shortanswer qtype={{question.qtype}}</h2> -->
+        <!-- little question -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span :class="parentqtype?'option':''">{{questionnum()}}. </span>
+                    <div class="mlr20 display-ib col-red" v-html="question.userAnswer | setAssessIcon"></div>
+                    <span class="fs-24 col-808080">(<span class="col-red">{{question.userAnswer&&question.userAnswer.score || 0}}分</span>/{{question.question_ref_sorce}}分)</span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+                <div v-if="question.userAnswer.answers[0].answerType==1 && question.userAnswer.answers[0].content">
+                    <div class="fs30 col-999896 mt40">我的录音</div>
+                    <div class="audio mt30">
+                        <audio :src="question.userAnswer.answers[0].content | formatAudioUrl" preload="auto"></audio>
+                    </div>
+                </div>
+
+
+                <div class="fs30 col-999896 mt30 pt30 bdt1-f1f0ec">参考答案</div>
+
+                <div class="green mt20" v-if="question.ref_info">
+                    <div v-html="question.ref_info.solving_idea"></div>
+                </div>
+            </div>
+        </div>
+        <!-- little question end -->
+    </script>
+    <!-- 仿声朗读 模板 -->
+    <script type="text/template" id="question-imitation-template">
+        <!-- <h2>imitation qtype={{question.qtype}}</h2> -->
+        <!-- little question -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span :class="parentqtype?'option':''">{{questionnum()}}. </span>
+                    <div class="mlr20 display-ib col-red" v-html="question.userAnswer | setAssessIcon"></div>
+                    <span class="fs-24 col-808080">(<span class="col-red">{{question.userAnswer&&question.userAnswer.score || 0}}分</span>/{{question.question_ref_sorce}}分)</span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+                <div v-if="question.userAnswer.answers[0].answerType==1 && question.userAnswer.answers[0].content">
+                    <div class="fs30 col-999896 mt40">我的录音</div>
+                    <div class="audio mt30">
+                        <audio :src="question.userAnswer.answers[0].content | formatAudioUrl" preload="auto"></audio>
+                    </div>
+                </div>
+
+
+                <div class="fs30 col-999896 mt30 pt30 bdt1-f1f0ec">参考答案</div>
+
+                <div class="green mt20" v-if="question.ref_info">
+                    <div v-for="val in question.ref_info.answers"><div v-html="val | formatAnswers"></div></div>
+                </div>
+            </div>
+        </div>
+        <!-- little question end -->
+    </script>
+    <!-- 阅读理解 模板 -->
+    <script type="text/template" id="question-reading-template">
+        <!-- <h2>reading</h2> -->
+        <!-- little question -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span>{{index}}. </span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+            </div>
+            <div v-for="question in question.children">
+                <question :question="question" :questionnum="questionnum" :parentqtype="question.qtype"></question>
+            </div>
+        </div>
+        <!-- little question end -->
+    </script>
+
+    <script src="listen/js/question.js"></script>
+    <!-- 音频插件 -->
+    <script src="listen/js/audiojs/audio.min.js"></script>
+    <!-- 图片放大插件 -->
+    <script src="listen/js/hammer.min.js"></script>
+
+    <script>
+        var debug;
+        debug = true;    // 开启调试
+    
+        if(debug) $(function(){
+            var question_json={"title":"云听说-全题型","ref_score":10.0,"curriculum_id":3,"parts":[{"sid":0,"module_type_name":"听对话，从下面各题所给的A、B、C三幅图片中选择与对话内容相符的图片。每段对话你将听两遍。","module_type_url":null,"children":[{"sid":0,"stem":"","qtype":1,"is_objective":0,"parent_version":"0","question_ref_sorce":1.0,"ref_info":{"answers":["950460955559013241"],"solving_idea":null,"attachments":[]},"options":[{"id":"950460955559013239","stem":"","attachments":[{"file_type":3,"position":2,"file_url":"../1.mp4"}]},{"id":"950460955559013240","stem":"","attachments":[{"file_type":1,"position":2,"file_url":"images/pic2.jpg"}]},{"id":"950460955559013241","stem":"","attachments":[{"file_type":1,"position":2,"file_url":"../pic1.jpg"}]}],"attachments":[{"file_type":2,"position":3,"file_url":"../1.mp3"}],"children":[],"id":"855789107375283267","version_id":"950460940485634790"},{"sid":0,"stem":"<div>&nbsp;</div><div align=\"center\"><table align=\"center\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\" white - space: nowrap;text - align: center;\" valign=\" top\"><div>&nbsp;&nbsp; A. cause&nbsp;&nbsp;&nbsp;&nbsp; B. cut out&nbsp; C. why not&nbsp;&nbsp; D. good&nbsp;</div></td></tr>\</tbody></table></div><div>① The students all want the teacher to <u>give them less</u> homework so that they can have a relaxing holiday. {#blank#}1{#/blank#}</div><div>② But <u>why don&rsquo;t you</u> talk to your teacher to get some information? {#blank#}2{#/blank#}</div><div>③ The increasing number of cars will <u>make</u> serious air pollution. {#blank#}3{#/blank#}</div><div>④ I need to tell them the truth at a <u>proper</u> time, so that they can accept it more easily. {#blank#}4{#/blank#}</div>","qtype":3,"is_objective":true,"parent_version":"0","question_ref_sorce":4.0,"ref_info":{"answers":["B","C","A","D"],"solving_idea":"","attachments":[]},"options":[{"id":"950460955556825216","stem":"B","attachments":[]},{"id":"950460955556825217","stem":"C","attachments":[]},{"id":"950460955556825218","stem":"A","attachments":[]},{"id":"950460955556825219","stem":"D","attachments":[]}],"attachments":[],"children":[],"id":"855789107374499852","version_id":"950460940484856211"},{"sid":0,"stem":"","qtype":1,"is_objective":0,"parent_version":"0","question_ref_sorce":1.0,"ref_info":{"answers":["950460955559013281"],"solving_idea":null,"attachments":[]},"options":[{"id":"950460955559013280","stem":"","attachments":[{"file_type":1,"position":2,"file_url":"../packages/catalogue_5232_1056402/media/6d4c33c63d39c2d5a9d810b918e771a6.png"}]},{"id":"950460955559013281","stem":"","attachments":[{"file_type":1,"position":2,"file_url":"../packages/catalogue_5232_1056402/media/a65c1c3fb8b9e3dc426b4d5c2976b500.png"}]},{"id":"950460955559013282","stem":"","attachments":[{"file_type":1,"position":2,"file_url":"../packages/catalogue_5232_1056402/media/7ce21aac098acad23497d1d567e6ea16.png"}]}],"attachments":[{"file_type":2,"position":3,"file_url":"../1.mp3"}],"children":[],"id":"855789107375283281","version_id":"950460940485634804"}]},{"sid":0,"module_type_name":"听对话或独白，根据对话或独白的内容，从下面各题所给的A、B、C三个选项中选择最佳选项。每段对话或独白你将听两遍。","module_type_url":null,"children":[{"sid":0,"stem":"请听一段对话，完成第6至第7小题。<br/>6.Who is Lanlan?<br/><br/>7.What is bad for Lanlan’s health?<br/>","qtype":5,"is_objective":0,"parent_version":"0","question_ref_sorce":0.0,"ref_info":{"answers":[],"solving_idea":null,"attachments":[]},"options":[],"attachments":[{"file_type":2,"position":3,"file_url":"../1.mp3"}],"children":[{"sid":0,"stem":"6.Who is Lanlan?","qtype":1,"is_objective":0,"parent_version":"950460940485634831","question_ref_sorce":1.0,"ref_info":{"answers":["950460955559013352"],"solving_idea":null,"attachments":[]},"options":[{"id":"950460955559013351","stem":"She is the girl’s sister.","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559013352","stem":"She is girl’s friend.","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559013353","stem":"She is girl’s classmate.","attachments":[{"file_type":1,"position":0,"file_url":""}]}],"attachments":[],"children":[],"id":"855789107375283308","version_id":"950460940485634832"},{"sid":0,"stem":"7.What is bad for Lanlan’s health?","qtype":1,"is_objective":0,"parent_version":"950460940485634831","question_ref_sorce":1.0,"ref_info":{"answers":["950460955559013356"],"solving_idea":null,"attachments":[]},"options":[{"id":"950460955559013354","stem":"Her hair is too long.","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559013355","stem":"Her hands are dirty.","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559013356","stem":"Her fingernails are too long.","attachments":[{"file_type":1,"position":0,"file_url":""}]}],"attachments":[],"children":[],"id":"855789107375283308","version_id":"950460940485634833"}],"id":"855789107375283308","version_id":"950460940485634831"}]},{"sid":0,"module_type_name":"信息转换：你将听到一篇短文，请根据短文内容。写出下面表格中所缺的单词，每空仅填一词。短文读两遍。","module_type_url":null,"children":[{"sid":0,"stem":"填空题题干11111111111111111111","qtype":3,"is_objective":0,"parent_version":"0","question_ref_sorce":5.0,"ref_info":{"answers":["tomatoes","lunch","meat","nine","India"],"solving_idea":"12","attachments":[]},"options":[{"id":"950460955559012720","stem":"tomatoes","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559012721","stem":"lunch","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559012722","stem":"meat","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559012723","stem":"nine","attachments":[{"file_type":1,"position":0,"file_url":""}]},{"id":"950460955559012724","stem":"India","attachments":[{"file_type":1,"position":0,"file_url":""}]}],"attachments":[{"file_type":1,"position":2,"file_url":"images/pic2.jpg"},{"file_type":2,"position":3,"file_url":"../packages/catalogue_5232_1056402/media/635a33ac22e2927746826fe9e05d9f92.mp3"}],"children":[],"id":"855789107375283085","version_id":"950460940485634609"}]}],"id":"5506294225635470636","version_id":null}
+            var answers_json=[{"score":1,"__className":"LEWorkAnswersJso","versionId":"950460940485634609","answers":[{"assess":1,"content":"烦烦烦","__className":"CWSMAnswersModel","item_score":1,"answerType":3},{"assess":2,"content":"xxx","__className":"CWSMAnswersModel","item_score":0,"answerType":3},{"assess":2,"content":"zxsfsd","__className":"CWSMAnswersModel","item_score":0,"answerType":3},{"assess":2,"content":"十大歌手公司的","__className":"CWSMAnswersModel","item_score":0,"answerType":3},{"assess":2,"content":"错误宠物刺猬","__className":"CWSMAnswersModel","item_score":0,"answerType":3}],"assess":2}]
+            callback(question_json,answers_json)
+        })
+    </script>
+</body>
+</html>

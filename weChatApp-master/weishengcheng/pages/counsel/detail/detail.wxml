@@ -1,0 +1,122 @@
+<import src="../../../wux/rater/rater.wxml"/>
+<!-- <template name="more">
+  <view class="more">
+    <view class="more-title">
+      <view>↓ 更多好玩的测试 ↓</view>
+      <view bindtap="inGroup">[换一组]</view>
+    </view>
+    <view class="more-content">
+      <view wx:key="{{index}}" wx:for="{{list}}" bindtap="showDetail" data-id="{{item.id}}">{{item.name}}</view>
+    </view>
+  </view>
+</template> -->
+
+<template name="Lists">
+  <view style="margin: 40rpx 0 60rpx 0;background-color: #fff;">
+    <view style="padding-left: 30rpx;height: 90rpx;line-height: 90rpx;">更多好玩的测试</view>
+    <view class="weui-cell weui-cell_access" wx:key="{{index}}" wx:for="{{list}}" bindtap="showDetail" data-id="{{item.id}}">
+      <view class="weui-cell__hd">
+        <image src="{{item.avatar.url}}?imageView2/2/w/150" mode="aspectFill" style="margin-right: 20rpx;vertical-align: middle;width:100rpx; height: 100rpx;border-radius: 6rpx;"></image>
+      </view>
+      <view class="weui-cell__bd">
+        <view style="margin-bottom: 10rpx;font-size: 30rpx;">{{item.name}}</view>
+        <view class="text">{{item.text}}</view>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+
+    <view class="footerView">
+      <view wx:if="{{hasMore}}" class="weui-loadmore">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+      </view>
+      <view wx:elif="{{list.length>5}}" class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">更多测试正在路上...</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<view class="container" wx:if="{{!result}}">
+  <block wx:if="{{condition}}">
+    <view class="box">
+      <view class="title">{{item.name}}</view>
+      <view class="star">{{item.times}}人在测</view>
+      <image class="banner" src="{{item.avatar.url}}" mode="widthFix" alt="banner"/>
+      <view class="descript">{{item.text}}</view>
+      <view class="flex_col_center space_between" style="height: 160rpx;">
+        <button class="flex_center" style="width: 45%;height: 90rpx;font-size: 32rpx;border:1px solid rgba(0, 0, 0, 0.2);" open-type="share">
+          分享给好友
+        </button>
+        <button class="flex_center" disabled="{{disable}}" type="primary" style="width: 45%;height: 90rpx;font-size: 32rpx;" catchtap="start">开始测试</button>
+      </view>
+    </view>
+
+    <template is="Lists" data="{{list:anoList}}"></template>
+    <!-- <template is="more" data="{{list:list}}"></template> -->
+  </block>
+
+  <view class="questions" wx:else bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+    <view class="question {{lb[questionInd]}}" data-questionind="{{questionInd}}" wx:for-item="question" wx:for-index="questionInd" wx:for="{{question}}" wx:key="{{questionInd}}">
+      <scroll-view scroll-y style="height:{{showSubmit?90:100}}%;" data-questionind="{{questionInd}}">
+        <view style="font-size: 36rpx;">{{question.titleNumber}}、{{question.asktitle}}</view>
+        <image wx:if="{{question.askimg}}" style="width: 100%;margin-top: 20rpx;border-radius: 6rpx;" mode="widthFix" src="{{question.askimg}}"></image>
+
+        <block wx:for-item="answer" wx:for-index="answerInd" wx:for="{{question.answer}}" wx:key="{{answerInd}}">
+          <view class="flex_col_center space_between answer" data-questionind="{{questionInd}}" data-answerind="{{answerInd}}" catchtap="selectAnswer">
+            <view style="width: 90%;">{{answerInd+1}}、{{answer.content}}</view><view class="circle {{answer.select?'select':''}}"></view>
+          </view>
+        </block>
+      </scroll-view>
+
+      <view wx:if="{{showSubmit}}" class="submit" catchtap="submit">提交</view>
+      <view style="position: absolute;bottom: -6%;left: 50%;transform: translateX(-50%);"><text style="font-size: 40rpx;">{{question.titleNumber}}</text><text style="font-size: 40rpx;color: #999;">/{{showSubmit?question.titleNumber:item.content.questions.question.length}}</text></view>
+    </view>
+  </view>
+</view>
+
+<view class="container" wx:else style="margin-bottom: 40rpx;">
+  <view style="margin: 30rpx; border-radius: 8rpx;background-color: #fff;box-shadow: 1px 1px 5px 5px #e5e5e5;">
+    <view style="position: relative;">
+      <image src="{{item.avatar.url}}" style="width: 100%;border-radius: 8rpx 8rpx 0 0;" mode="widthFix" alt="banner"/>
+      <view style="position: absolute;top: 0;left: 0;width: 100%;height: 98%;background-color: #000;border-radius: 8rpx 8rpx 0 0;opacity: 0.3;"></view>
+      <view style="position: absolute;top: 50%;left: 50%;width: 100%;transform: translate(-50%, -50%);color: #fff;font-size: 44rpx;font-weight: bold;text-align: center;">{{item.name}}</view>
+    </view>
+    <view style="padding: 0 30rpx;">
+      <view class="flex_col_center">
+        <image src="{{user.avatar}}" style="width: 50rpx;height: 50rpx;border-radius: 25rpx;margin-right: 20rpx;"/>
+        <view style="color: #999999;font-size: 28rpx;">{{user.user_name}}</view>
+      </view>
+      <view style="line-height: 70rpx;font-size: 36rpx;font-weight: bold;">测试结果：{{result.result1}}</view>
+      <view style="padding-bottom: 30rpx;color: #999999;font-size: 30rpx;">{{result.result2}}</view>
+      <view class="flex_col_center space_between" style="height: 100rpx;border-top: 1px solid #f2f2f2;">
+        <button class="flex_center shareButton" style="width: 100%;height: 70rpx; text-align: center" catchtap="_showSharebutton" type="primary">
+          <view>分享给好友</view>
+        </button>
+        <!-- <button class="flex_center shareButton" style="width: 100%;height: 70rpx; text-align: center" open-type="share">
+          <image src="/styles/mine.png" style="width: 30rpx;height: 30rpx;margin-right: 10rpx;"/>
+          <view>分享给好友</view>
+        </button> -->
+        <!-- <view class="flex_center" style="width: 50%;height: 70rpx;border-left: 1px solid #f2f2f2;" catchtap="saveResult">
+          <image src="/styles/mine.png" style="width: 30rpx;height: 30rpx;margin-right: 10rpx;"/>
+          <view>保存结果</view>
+        </view> -->
+      </view>
+      
+    </view>
+  </view>
+  <view class="share-wrapper" wx:if="{{showSharebutton}}" >
+        <view class="container">
+          <dialog id='dialog'  
+            content='' 
+              
+            bind:shareToChats="shareToChats"
+            bind:shareToMoments ="shareToMoments" 
+            bind:showSharebutton="_showSharebutton"
+            bind:toggleSharePopup="toggleSharePopup">
+          </dialog>
+        </view>
+      </view>
+  <template is="Lists" data="{{list:list}}"></template>
+  <!-- <template is="more" data="{{list:list}}"></template> -->
+</view>

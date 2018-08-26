@@ -1,0 +1,54 @@
+<!--pages/mine/myMember/customerTrackingIntention.wxml-->
+
+<view class='bg-view'>
+
+  <!-- 基本 信息 -->
+  <view class='baseinfo-view'>
+    <view class='name-view'>
+      <image class='headimg' src='{{ task.custHeadimg }}'></image>
+      <text>{{ task.custName }}</text>
+      <image class='gender-icon' src='../../../images/icon/mine/{{ task.custGender }}.png'></image>
+    </view>
+    <view class='phone-view'>
+      <view class='padbotm10'>
+        电<text class='bgblueColor'>占位</text>话：<text class='mainColor'>{{ task.custPhone }}</text>
+        <image class='phone-icon' src='../../../images/icon/mine/telephone.png' bindtap='bindCustPhonecallTap'></image>
+      </view>
+      <view>出生日期：<text class='whiteColor'>{{ task.custBirth }}</text></view>
+    </view>
+  </view>
+
+  <!-- 意向 信息 -->
+  <view class='maininfo-view'>
+    <view class='padbotm10 weui-flex'>
+      <view class='weui-flex__item'>健身目的：<text>{{ task.fitnessPurpose }}</text></view>
+      <view class='weui-flex__item'>意向卡：<text>{{ task.intentionCard }}</text></view>
+    </view>
+    <view class='padbotm10'>健身时间：<text>{{ task.fitnessTime }}</text></view>
+    <view class='padbotm10'>登记地址：<text>{{ task.address }}</text></view>
+    <view >备注信息：<text>{{ task.remarks }}</text></view>
+  </view>
+
+  <!-- 跟单 列表 -->
+  <view class='follow-view' hidden='{{ task.followList.length <= 0 }}'>
+    <view class='zw-line'></view>
+    <block wx:for='{{ task.followList }}' wx:key='{{ index }}'>
+    <view class='follow-item'>
+      <view class='weui-flex'>
+        <view class='leftRoun-icon'></view>
+        <view class='weui-flex__item'>{{ item.time }}</view>
+        <view class='weui-flex__item right-text'>{{ item.followMan }}</view>
+      </view>
+      <view class='whiteColor fs32 martop10'>{{ item.title }}</view>
+      <view>{{ item.content }}</view>
+    </view>
+    </block>
+  </view>
+
+</view>
+
+<!-- foot -->
+<view class='foot-view weui-flex'>
+  <view class='weui-flex__item left-btn' hidden='{{ memIdentity == "pt" }}' bindtap='bindPrepayTap'>预付定金</view>
+  <view class='weui-flex__item right-btn' bindtap='bindFollowTap'>跟单</view>
+</view>

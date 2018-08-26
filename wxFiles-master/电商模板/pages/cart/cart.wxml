@@ -1,0 +1,38 @@
+<view class=" margin-top-xs panel" wx:for="{{list}}" data-id="{{item.itemId}}" bindlongtap="deletes">
+  <view class='panel-between'>
+    <view class='panel-start item-center'>
+      <view class='cri' wx:if="{{!item.active}}"  data-index='{{index}}' bindtap='chooseIt'></view>
+      <icon type='success'  wx:if="{{item.active}}" color='#FF4040' size='20' data-index='{{index}}' bindtap='chooseIt'></icon>
+      <view class='panel-start'>
+        <image class='img' src='{{ip+item.imagePath}}' mode='aspectFill'></image>
+        <view class='margin-left-md con'>
+          <view class='bold'>{{item.commodityName}}</view>
+          <view class='font-md font-default margin-top-sm'>{{item.specificationName}}</view>
+        </view>
+      </view>
+    </view>
+    <view style='text-align:right'>
+      <view class='font-lg bold font-danger'>￥{{item.itemPrice/item.itemCount}}</view>
+      <view class='font-md margin-top-xs'>x{{item.itemCount}}</view>
+    </view>
+  </view>
+</view>
+
+<view class='padding-md tim' wx:if="{{list.length == 0 && !loading}}">
+  <image class='kong' src='/img/shopc.png' mode='aspectFill'></image>
+  <view class='font-default margin-top-sm'>购物车空空如也~!</view>
+</view>
+
+<view style='height:100rpx;'></view>
+
+<view class='fixbottom panel-between item-center'>
+  <view class='panel-start item-center'>
+    <view class='cri margin-left-md' wx:if="{{!checkedAll}}" bindtap='chooseAll'></view>
+    <icon type='success' class='margin-left-md'  wx:if="{{checkedAll}}" color='#FF4040' size='20' bindtap='chooseAll'></icon>
+    <view class='margin-left-sm font-default' bindtap='chooseAll'>全选</view>
+  </view>
+  <view class='panel-end item-center'>
+    <view class='margin-right-md'>合计<text class='font-danger bold'>￥{{countPrice}}</text> <text class='font-xs font-default'> 不含运费</text></view>
+    <view class='jsbtn' bindtap='{{countPrice > 0 ? "navToPayfor":""}}'>结算</view>
+  </view>
+</view>

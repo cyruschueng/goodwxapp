@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+
+<body>
+<script src="./Content/ThirdJs/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    (function () {
+        function run() {
+            if (IsCode()) {
+                
+            } else {
+                AuthorizeUrl();
+            }
+        }
+        function AuthorizeUrl() {
+            var cid = helper.getQueryString("cid");
+            var ctype = helper.getQueryString("ctype");
+
+            var url = "http://weixin.jiajiaozhihui.cn/app/tool/Wx.ashx?method=callback";
+            $.get('../tool/Wx.ashx', { redirect_uri: url, method: 'authorizeurl', scope: helper.scope.snsapi_base, state: "{'cid':'"+cid+"','ctype':'"+ctype+"'}" }, function (res) {
+                window.location.href = res;
+            })
+        };
+        function IsCode() {
+            if (helper.getQueryString("code") == null) return false;
+            return true;
+        };
+        var helper = {
+            /*获取参数*/
+            getQueryString: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            },
+            /*参数储存*/
+            setStorage: function (name, value) {
+                window.localStorage.setItem(name, value);
+            },
+            /*参数读起*/
+            getStorage: function (name) {
+                return window.localStorage.getItem(name);
+            },
+            scope: {
+                snsapi_base: "snsapi_base",
+                snsapi_userinfo: "snsapi_userinfo"
+            }
+        };
+        run()
+    })()
+    
+</script>
+</body>
+</html>

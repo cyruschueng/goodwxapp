@@ -1,0 +1,45 @@
+<!--pages/goods-list/goods-list.wxml-->
+<view class='container'>
+   <form bindsubmit='formSubmit'>
+    <view class='search'>
+    <icon type='search' size='16' class='search-icon'></icon>
+      <input class='search-input' name='keyword' type='text' placeholder='输入搜索'></input>
+      <button class='search-button' form-type='submit'>搜索</button>
+    </view>
+  </form>
+  <view class='title'><text>{{list_title}}</text></view> 
+  <view class='goods-list'>
+    <view class='goods-item' wx:for='{{lists}}' wx:key='unique' bindtap='goods_details' data-id='{{item.id}}'>
+      <image class='goods-img' src='{{item.thumb}}'></image>
+      <view class='goods-title'>{{item.name}}</view>
+      <view class='price'>￥{{item.price}}<text>销量：{{item.sales_volume}}</text></view>
+      <image class='shopCart' src='/image/shopCart.png' catchtap='toShopcart' data-id='{{item.id}}'></image>
+    </view>
+  </view>
+
+   <!-- 底部动画块 -->
+  <view class='shade' animation="{{animationData_2}}"></view>
+  <view class='animation' animation="{{animationData_1}}">
+    <view class='animation-info'>
+      <image class='animation-goods-img' src='{{goods_img}}'></image>
+      <view class='animation-text'>
+        <view class='animation-title'>{{title}}</view>
+        <view class='animation-price'>￥{{price}}</view>
+      </view>
+      <view class='animation-close' bindtap='animation_close'>X</view>
+    </view>
+    <view class='animation-num'>
+      <view>数量</view>
+      <view class='animation-num-content'>
+        <view class='animation-stock'>库存：{{stock}}</view>
+        <view class='change-num'>
+          <view class='minus' bindtap='minusCount'>-</view>
+          <input class='input-number' value='{{goods_num}}' bindblur='changeNumFn'></input>
+          <view class='plus' bindtap='addCount'>+</view>
+        </view>
+      </view>
+    </view>
+    <view class='toShopCart animation-ft' bindtap='submitOrder'>加入购物车</view>
+  </view>
+  <!-- 底部动画块结束 -->
+</view>

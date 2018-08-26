@@ -1,0 +1,18 @@
+<view style="padding:15px;">
+  <view style="border-radius:5px;border:#f2f2f2 1px solid">
+    <input type="text" style="text-align:center" bindinput="bindInput" placeholder="搜索" />
+  </view>
+</view>
+<view style="padding:15px;border-bottom:1px #f2f2f2 solid" wx:if="{{list.length != 0}}" wx:for="{{list}}" data-id="{{item.id}}" data-uid="{{item.uid}}" data-mobile="{{item.mobile}}" bindtap="phonecall" bindlongtap="delphone">
+  <image style="width:70rpx;height:70rpx;float:left" src="{{item.avatar}}"></image>
+  <view style="float:left;margin-left:30rpx;">
+    <view>{{item.name}}</view>
+    <view style="color:#888888">{{item.mobile}}</view>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<view  class="soli" wx:if="{{list.length == 0}}">
+  <view class="title">暂无添加记录</view>
+</view>
+
+

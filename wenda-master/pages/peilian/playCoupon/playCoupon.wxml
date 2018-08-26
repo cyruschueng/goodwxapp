@@ -1,0 +1,34 @@
+<view class="coupon-instructions" bindtap="instructionsEv">优惠券使用说明</view>
+<view data-node='container' class="{{blankFlag ? 'coupon-blank' : ''}}">
+ <view wx:for="{{list}}" wx:key="{{index}}" bindtap="couponListEv" data-invalid="{{item.invalid}}" data-id="{{item.id}}" data-value="{{item.value}}" data-name="{{item.name}}" data-chosed="{{item.chosed}}" class="coupon-list {{item.isExpire ? 'overTime' : (item.isUsed ? 'used' : '')}} {{(from && item.chosed) ? 'chosed': ''}}">
+    <view>
+      <view class="list-left-price {{item.invalid ? 'invalid' : ''}}">{{item.value / 100}}</view>
+    </view>
+    <view>
+      <view class="list-right-title {{item.invalid ? 'invalid' : ''}}">{{item.name}}</view>
+      <view class="list-right-content">{{item.remark}}</view>
+      <view class="list-right-date">{{item.expireTime}}</view>
+    </view>
+    <view class="coupon-list-split"></view>
+  </view> 
+</view>
+
+<view class="coupon-btn" hidden="{{confirmFlag}}" bindtap="confirmEv">确定</view>
+
+<view class="share-modal" hidden="{{instructionsModalFlag}}">
+  <view class="share-modal-container">
+    <view class="share-modal-header">优惠券使用说明</view>
+    <view class="share-modal-title">1.什么是优惠券?</view>
+    <view class="share-modal-content">优惠券(首局免费券 & 现金抵扣券)是问技陪练发行和认可的, 可以在问技陪练消费付款时抵扣相应面值的金额;</view>
+    <view class="share-modal-title">2.如何获得优惠券?</view>
+    <view class="share-modal-content">问技陪练用户可以通过完成订单认同订单结果分享和领取优惠券,也可以通过邀请新用户完成订单获得优惠券. 大神游戏失利造成用户降分损失的,问技陪练将弥补用户相同段位优惠券多张, 用户可以选择重新下单与更靠谱的大神上分;</view>
+    <view class="share-modal-title">3.如何使用优惠券?</view>
+    <view class="share-modal-content">在问技陪练公众号,小程序和 APP进行下单付款时,都可以选择使用优惠券,抵扣相应的金额;</view>
+    <view class="share-modal-title">4.优惠券找零兑现吗?</view>
+    <view class="share-modal-content">优惠券不找零,不兑现.付款时,优惠券会被优先使用,不足支付时才会需要用户使用其他支付方式;</view>
+    <view class="share-modal-title">5.优惠券有时效吗?</view>
+    <view class="share-modal-content">通过分享或者邀请获得优惠券有时效,问技陪练补偿给游戏失败用户的优惠券永久有效;</view>
+    <view class="share-modal-button" data-node="instructionsClose" bindtap="instructionsModalCloseEv">我知道了</view>
+    <view class="share-modal-close" data-node="instructionsClose" bindtap="instructionsModalCloseEv"></view>
+  </view>
+</view>

@@ -1,0 +1,40 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page footer" wx:if="{{show}}">
+  <block wx:if="{{list.length > 0}}">
+    <block wx:for="{{list}}">
+      <view class="fui-list-group">
+        <view class="fui-list address-item noclick">
+          <view class="fui-list-inner">
+            <view class="title">{{item.realname}} {{item.mobile}}</view>
+            <view class="text">{{item.province}} {{item.city}} {{item.area}} {{item.address}}</view>
+            <view class="bar">
+              <view bindtap="deleteItem" class="pull-right btn-del" data-id="{{item.id}}">
+                <image class="image-32" src="/static/images/icon/delete.png"></image>
+                <text>删除</text>
+              </view>
+              <navigator hover-class="none" class="pull-right btn-edit" url="/pages/member/address/post?id={{item.id}}&type=member">
+                <image class="image-32" src="/static/images/icon/edit.png"></image>
+                <text>编辑</text>
+              </navigator>
+              <label bindtap="setDefault" data-id="{{item.id}}">
+                <radio color="#fd5454" checked="{{item.isdefault > 0 ? true : false}}" class="zoom-70" name="default" />设为默认地址
+              </label>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+  <view class="fui-loading empty" wx:if="{{list.length < 1 && loaded}}">
+    <view class="text">没有数据</view>
+  </view>
+  <view class="fui-toast {{FoxUIToast.show ? 'in' : 'out'}}">
+    <view class="text">{{FoxUIToast.text}}</view>
+  </view>
+  <view class="fui-navbar">
+    <navigator hover-class="none" class="nav-item i_btn btn-danger" url="/pages/member/address/post?type=member">
+        <image class="image-48" src="/static/images/icon-white/add.png"></image>
+        <text>添加收货地址</text>
+    </navigator>
+  </view>
+</view>

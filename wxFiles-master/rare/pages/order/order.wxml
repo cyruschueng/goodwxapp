@@ -1,0 +1,163 @@
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="fix-top">
+    <view class="li">
+      <view class="{{change == 1? 'act':''}}" data-id="1" bindtap="changeTap">待付款</view>
+    </view>
+    <view class="li">
+      <view class="{{change == 2? 'act':''}}" data-id="2" bindtap="changeTap">待发货</view>
+    </view>
+    <view class="li">
+      <view class="{{change == 3? 'act':''}}" data-id="3" bindtap="changeTap">待收货</view>
+    </view>
+    <view class="li">
+      <view class="{{change == 4? 'act':''}}" data-id="4" bindtap="changeTap">已完成</view>
+    </view>
+  </view>
+  <view style="height:100rpx"></view>
+  <swiper bindchange="changePage" style="height:{{innerHeight-50}}px;overflow-y:scroll" current="{{change-1}}">
+    <swiper-item style="overflow-y:scroll">
+      <view style="padding-top:200rpx; text-align:center" wx:if="{{list.length == 0}}">
+        <image style="height:200rpx;width:200rpx;" src="/img/cartnone.png"></image>
+        <view style="margin-top:30rpx;">没有该订单哦！</view>
+      </view>
+      <view>
+        <view class="pa" wx:for="{{list}}" wx:for-item="it">
+          <view class="align-right color-b font-xs ssssd" wx:if="{{it.orderflag == 0}}" style="color:#e6bfae">等待买家付款</view>
+          <view class="align-right color-b font-xs ssssd" wx:if="{{it.orderflag == 1}}">已付款</view>
+
+          <view style="background:#fafafa;padding-bottom:10rpx;padding-right:30rpx;" data-num="{{it.orderNum}}" data-flag="{{it.orderflag}}" bindtap="navToOrderdetail" wx:for="{{it.tOrOrderdetaillist}}" wx:for-item="li">
+            <image class="imgds pull-left" src="{{li.icon}}"></image>
+            <view class="pull-left" style="margin-left:30rpx;margin-top:10rpx;width:500rpx;">
+              <view class="font-xs">{{li.msgcontent}}</view>
+              <view class="font-xs" style="color:#aaa; margin-top:20rpx;">{{li.prostandard}}</view>
+              <view class="font-xs" style=" margin-top:20rpx;">
+                <view class="pull-left" style="color:#ff3e3e;">￥{{li.sellprice}}</view>
+                <view class="pull-right" style="color:#aaa">X{{li.sumbuy}}</view>
+              </view>
+            </view>
+            <view class="clear-both"></view>
+          </view>
+
+          <view class="kld">共计{{it.sumbuy}}件商品 合计:￥
+            <text style="font-size:34rpx">{{it.countprice}} (含运费￥{{it.sendprice}})</text>
+          </view>
+          <view class="shkl" wx:if="{{it.orderflag == 0}}">
+            <view class="btn-bu pull-right" data-no="{{it.orderNum}}" bindtap="payit">付款</view>
+            <view class="btn-de pull-right" data-no="{{it.orderId}}" bindtap="cancelorder">取消订单</view>
+            <view class="clear-both"></view>
+          </view>
+          <view class="shkl" wx:if="{{it.orderflag == 1}}">
+            <view class="btn-bu pull-right" style="background:#e6bfae">退货</view>
+            <view class="clear-both"></view>
+          </view>
+        </view>
+      </view>
+
+    </swiper-item>
+
+    <swiper-item style="overflow-y:scroll">
+    <view style="padding-top:200rpx; text-align:center" wx:if="{{list1.length == 0}}">
+        <image style="height:200rpx;width:200rpx;" src="/img/cartnone.png"></image>
+        <view style="margin-top:30rpx;">没有该订单哦！</view>
+      </view>
+      <view>
+        <view class="pa" wx:for="{{list1}}" wx:for-item="it">
+          <view class="align-right color-b font-xs ssssd">等待卖家发货</view>
+
+          <view style="background:#fafafa;padding-bottom:10rpx;padding-right:30rpx;" data-num="{{it.orderNum}}" data-flag="{{it.orderflag}}" bindtap="navToOrderdetail" wx:for="{{it.tOrOrderdetaillist}}" wx:for-item="li">
+            <image class="imgds pull-left" src="{{li.topimg}}"></image>
+            <view class="pull-left" style="margin-left:30rpx;margin-top:10rpx;width:500rpx;">
+              <view class="font-xs">{{li.msgcontent}}</view>
+              <view class="font-xs" style="color:#aaa; margin-top:20rpx;">尺寸：{{li.prostandard}}</view>
+              <view class="font-xs" style=" margin-top:20rpx;">
+                <view class="pull-left" style="color:#ff3e3e;">￥{{li.sellprice}}</view>
+                <view class="pull-right" style="color:#aaa">X{{li.sumbuy}}</view>
+              </view>
+            </view>
+            <view class="clear-both"></view>
+          </view>
+
+          <view class="kld">共计{{it.sumbuy}}件商品 合计:￥
+            <text style="font-size:34rpx">{{it.countpricepro}} (含运费￥{{it.sendprice}})</text>
+          </view>
+          <view class="shkl">
+            <view class="btn-bu pull-right" bindtap="toNotice">提醒发货</view>
+            <view class="clear-both"></view>
+          </view>
+        </view>
+      </view>
+
+    </swiper-item>
+
+    <swiper-item style="overflow-y:scroll">、
+      <view style="padding-top:200rpx; text-align:center" wx:if="{{list2.length == 0}}">
+        <image style="height:200rpx;width:200rpx;" src="/img/cartnone.png"></image>
+        <view style="margin-top:30rpx;">没有该订单哦！</view>
+      </view>
+      <view>
+        <view class="pa" wx:for="{{list2}}" wx:for-item="it">
+          <view class="align-right color-b font-xs ssssd">等待买家收货</view>
+
+          <view style="background:#fafafa;padding-bottom:10rpx;padding-right:30rpx;" data-num="{{it.orderNum}}" data-flag="{{it.orderflag}}" bindtap="navToOrderdetail" wx:for="{{it.tOrOrderdetaillist}}" wx:for-item="li">
+            <image class="imgds pull-left" src="{{li.topimg}}"></image>
+            <view class="pull-left" style="margin-left:30rpx;margin-top:10rpx;width:500rpx;">
+              <view class="font-xs">{{li.msgcontent}}</view>
+              <view class="font-xs" style="color:#aaa; margin-top:20rpx;">尺寸：{{li.prostandard}}</view>
+              <view class="font-xs" style=" margin-top:20rpx;">
+                <view class="pull-left" style="color:#ff3e3e;">￥{{li.sellprice}}</view>
+                <view class="pull-right" style="color:#aaa">X{{li.sumbuy}}</view>
+              </view>
+            </view>
+            <view class="clear-both"></view>
+          </view>
+
+          <view class="kld">共计{{it.sumbuy}}件商品 合计:￥
+            <text style="font-size:34rpx">{{it.countpricepro}} (含运费￥{{it.sendprice}})</text>
+          </view>
+          <view class="shkl">
+            <view class="btn-bu pull-right" data-no="{{it.orderNum}}" bindtap="shouhuo">确认收货</view>
+            <view class="clear-both"></view>
+          </view>
+        </view>
+      </view>
+
+    </swiper-item>
+
+    <swiper-item style="overflow-y:scroll">
+      <view style="padding-top:200rpx; text-align:center" wx:if="{{list3.length == 0}}">
+        <image style="height:200rpx;width:200rpx;" src="/img/cartnone.png"></image>
+        <view style="margin-top:30rpx;">没有该订单哦！</view>
+      </view>
+      <view>
+        <view class="pa" wx:for="{{list3}}" wx:for-item="it">
+          <view class="align-right color-b font-xs ssssd">等待买家评价</view>
+
+          <view style="background:#fafafa;padding-bottom:10rpx;padding-right:30rpx;" data-num="{{it.orderNum}}" data-flag="{{it.orderflag}}" bindtap="navToOrderdetail" wx:for="{{it.tOrOrderdetaillist}}" wx:for-item="li">
+            <image class="imgds pull-left" src="{{li.topimg}}"></image>
+            <view class="pull-left" style="margin-left:30rpx;margin-top:10rpx;width:500rpx;">
+              <view class="font-xs">{{li.msgcontent}}</view>
+              <view class="font-xs" style="color:#aaa; margin-top:20rpx;">尺寸：{{li.prostandard}}</view>
+              <view class="font-xs" style=" margin-top:20rpx;">
+                <view class="pull-left" style="color:#ff3e3e;">￥{{li.sellprice}}</view>
+                <view class="pull-right" style="color:#aaa">X{{li.sumbuy}}</view>
+              </view>
+            </view>
+            <view class="clear-both"></view>
+          </view>
+
+          <view class="kld">共计{{it.sumbuy}}件商品 合计:￥
+            <text style="font-size:34rpx">{{it.countpricepro}} (含运费￥{{it.sendprice}})</text>
+          </view>
+          <view class="shkl">
+            <view class="btn-bu pull-right" data-no="{{it.orderId}}" bindtap="navToEvaluate">去评价</view>
+            <view class="btn-de pull-right">取消订单</view>
+            <view class="clear-both"></view>
+          </view>
+        </view>
+      </view>
+
+    </swiper-item>
+
+  </swiper>
+
+</view>

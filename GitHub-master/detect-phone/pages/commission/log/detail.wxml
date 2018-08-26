@@ -1,0 +1,32 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page log-detail" wx:if="{{show}}">
+  <block wx:for="{{list}}">
+    <view class="fui-list-group">
+      <view class="fui-list">
+        <view class="fui-list-inner">
+          <view class="subtitle">订单编号: {{item.ordersn}}</view>
+          <view class="subtitle">订单金额: +{{item.goodsprice}}{{textyuan}}</view>
+          <view class="subtitle">申请{{textcomm}}: +{{item.ordercommission}}{{textyuan}} </view>
+          <view class="subtitle">审核{{textcomm}}: +{{item.orderpay}}{{textyuan}} </view>
+        </view>
+      </view>
+      <block wx:for="{{item.goods}}" wx:for-item="g">
+        <view class="fui-list">
+          <view class="fui-list-media">
+            <image src="{{g.thumb}}"></image>
+          </view>
+          <view class="fui-list-inner">
+            <view class="row">
+              <view class="row-text">{{g.title}}</view>
+            </view>
+            <view class="subtitle">{{textcomm}}: +{{g.commission}}{{textyuan}}</view>
+          </view>
+          <view class="row-remark">
+            <view>{{g.level}}级</view>
+            <view class="text-danger">{{g.statusstr}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>

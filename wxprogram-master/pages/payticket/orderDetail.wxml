@@ -1,0 +1,102 @@
+<view class='box'>
+  <view class='title' bindtap='backDetail'>
+    <view class='titles'>
+      <view>{{cname}}</view>
+      <view>{{ename}}</view>
+    </view>
+    <view class='arrowright iconfont icon-you'></view>
+  </view>
+
+  <!-- 交通订单 -->
+  <view wx:if='{{biztype == 2}}'>
+    <view class='orderText'><view class="text"><view class="adult">
+      <view class='type'>出行人数</view>
+      <view class='price'>{{count}}位</view>
+      <view class='count'>
+        <text class='button' bindtap='reducecount'>-</text>
+        <text class='num'>{{count}}</text>
+        <text class='button' bindtap='addcount'>+</text>
+      </view>
+    </view></view></view>
+
+    <view wx:if='{{goods}}' class='dayCount'>
+      <view class='title'>可订通票</view>
+      <view class='content'>
+        <view wx:for='{{goods}}' wx:key='{{item}}' wx:for-index="idx" id='{{idx}}' bindtap='choosecp' data-index='{{idx}}' class="dayType {{currentItem==idx?'active':''}}">
+          <!--  no discount yet <view class='progress'>29% off</view>-->
+          <view>{{item.name}}</view><view>€{{item.price}}/人</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 门票类 -->
+  <view wx:else>
+    <view wx:if='{{goods.days}}'  class='orderText'>
+      <view class='text' bindtap='checkDay'>
+        <text class='useDate'>使用日期</text> <text class='nowDay'>{{cday}}</text>
+        <text class='iconfont icon-rili'></text>
+      </view>
+    </view>
+    <view wx:if="{{cday && timeslots}}" class='orderText'>
+      <view class='text'>
+        <text class='useDate'>使用时间</text> <text class='nowDay'>{{ctime}}</text>
+      </view>
+      <view class="timeLot">
+        <view wx:for='{{timeslots}}' wx:key='time' wx:for-item="time" wx:if='{{time.is_available}}' id='{{time.timeslot}}' bindtap='choosetime' class="dayType {{ctime==time.timeslot?'active':''}}">
+          <view>{{time.timeslot}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if='{{goods.goodsList}}' class='orderText'>
+      <view class='title-small'>购买份数</view>
+      <view class='text'>
+        <view wx:for="{{goods.goodsList}}" wx:key="item" wx:for-index="idx" class='adult'>
+          <view class='typePrice'>
+            <view class='type'>{{item.name}}</view>
+            <view class='description'>{{item.description}}</view>
+            <view class='price'>€{{item.price}}</view>
+          </view>
+          <view class='count'>
+            <text class='button' id="{{idx}}" bindtap='reducecounts'>-</text>
+            <text class='num'>{{counts[idx]}}</text>
+            <text class='button' id="{{idx}}" bindtap='addcounts'>+</text>
+          </view>
+        </view>
+        <view class='altText'>
+          *儿童票不单独出售，请与成人票一起购买
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='orderText take-ticket'>
+    <view class='title-small'>取票信息<text bindtap='checkUser'>选择取票人</text></view>
+      <view wx:if="{{geter.firstName && geter.lastName}}">
+        <view class='text'>姓名：{{geter.firstName}}  {{geter.lastName}}</view>
+        <view class='text'>手机号：{{geter.mobile}}</view>
+        <view class='text'>邮箱：{{geter.mail}}</view>
+      </view>
+    </view>
+    <view class='altText1'>*点击支付代表你已阅读同意 <text bindtap='showterm'>《服务协议》</text>
+  </view>
+
+  <view class="{{showCostExplain?'costExplain':'hideCostExplain'}}" bindtap='hideDialog'>
+    <view class='dialog' catchtap='showDialog'>
+      <view class='title'>金额明细</view>
+      <view class='content'>
+        <view wx:for="{{ticketsdetail}}" wx:key="item" wx:if="{{item.nums>0}}" class='timeCondition'>
+          <text>{{item.name}}</text>    <text>€{{item.price}}X {{item.nums}}张</text>   
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部价格，立即体验 -->
+<view class="footer">
+    <view class='price'> 
+      €<text>{{total}}</text>
+    </view>
+    <view class='explain' bindtap='moneyMessage'>金额明细</view>
+    <view class='button' bindtap='goPay'>去支付</view>
+</view>

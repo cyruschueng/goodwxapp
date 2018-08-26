@@ -1,0 +1,248 @@
+/* pages/insure/insure.wxss */
+
+@import "../../font/iconfont.wxss";
+.insure .insure_content{
+  margin-top: 20rpx;
+}
+.insure .insure_content>view>text,.insure .insure_content>text,.insure .insure_content>view>input{
+  border: 3rpx solid #bbbbbb;
+  width: 80%;
+  height: 65rpx;
+  line-height: 65rpx;
+  margin: 0 auto 10rpx auto;
+  padding-left: 32rpx;
+  border-radius: 10rpx; 
+}
+.insure .insure_content>view>text,.insure .insure_content>view>input{
+   width: 100%;
+   z-index: 1;
+}
+.insure .insure_content>view{
+  width: 85%;
+  display: flex;
+  margin: 0 auto 20rpx auto;
+  position: relative;
+}
+.insure .insure_content>view.active{
+  border: 3rpx solid #bbbbbb;
+   border-radius: 10rpx; 
+}
+.insure .insure_content>view.active>input{
+  border: none;
+}
+.insure .insure_content>view>icon{
+  position: absolute;
+  right: 20rpx;
+  color: #bbbbbb;
+}
+
+.insure .insure_content>view>view{
+  width: 105%;
+  display: flex;
+  position: relative;
+  margin-left: 20rpx;
+}
+.insure .insure_content>view>view.active{
+  right: 20rpx;
+  color: #bbbbbb;
+  width:40rpx;
+  align-items:center;
+}
+.insure .insure_content>view>view>text{
+  border: 3rpx solid #bbbbbb;
+  flex: 1;
+  height: 65rpx;
+  line-height: 65rpx;
+  padding-left: 32rpx;
+  border-radius: 10rpx; 
+}
+.insure .insure_content>view>view>icon{
+  position: absolute;
+  right: 20rpx;
+  color: #bbbbbb;
+}
+.insure .insure_protocol{
+  display: flex;
+  margin: 0 auto;
+  width: 80%;
+  height: 55rpx;
+  line-height: 55rpx;
+  font-size:28rpx;
+}
+.insure .insure_protocol .insure_protocol_col>text{
+  color: #00aff5;
+}
+.insure .insure_btn>button{
+    color: #ffffff;
+    background-color: #bbbbbb;
+    font-size: 30rpx;
+}
+.insure .insure_btn>button.active{
+    background-color: #7abfe6;
+}
+.cover {
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  background:rgba(66,66,66,0.6);
+  z-index:2;
+}
+/*弹窗*/
+ .list_data_btn{
+  position:fixed;
+  bottom:280rpx;
+  display:flex;
+  left:0;
+  width:100%;
+  z-index:6;
+  justify-content: space-between;
+  background-color: #F7F7F7;
+  height: 70rpx;
+  line-height:70rpx;
+}
+.list_data_btn>text{
+  font-size: 32rpx;
+}
+ .list_data_btn>text:nth-of-type(1){
+  color: #a8a8a8;
+  margin-left: 30rpx;
+}
+.list_data_btn>text:nth-of-type(2){
+  color: #030303;
+}
+.list_data_btn>text:nth-of-type(3){
+  color: #00aff5;
+   margin-right: 30rpx;
+}
+picker-view{
+  position: fixed;
+  text-align: center;
+  bottom: 0
+}
+
+
+/**地图的样式*/
+
+/* directory.wxss */
+
+.container {
+  display: block;
+  background-color: #fafafa;
+  padding: 0;
+}
+
+.top-menu {
+  display: flex;
+  position: fixed;
+  height: 80rpx;
+  z-index: 10;
+  background-color: #fff;
+  width: 100%;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 2rpx solid #ddd;
+  border-bottom: 2rpx solid #ddd;
+  font-size: 11pt;
+  color: #bdbdbd;
+}
+
+.line {
+  width: 2rpx;
+  height: 100%;
+  background-color: #ddd;
+}
+
+.state-menu {
+  display: flex;
+  position: fixed;
+  left: 0;
+  height: 200rpx;
+  top: 80rpx;
+  width: 100%;
+  z-index: 9;
+  background-color: #fff;
+  flex-direction: row;
+  border-bottom: 2rpx solid #ddd;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hidden.state-menu {
+  transform: translateY(-200rpx);
+  transition: all 0.4s ease;
+  visibility: hidden;
+}
+
+.show.state-menu {
+  transform: translateY(0);
+  transition: all 0.4s ease;
+  visibility: visible;
+}
+
+.dialog-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 8;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.state-item {
+  width: 20%;
+  height: 70rpx;
+  font-size: 11pt;
+  line-height: 70rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  border: 2rpx solid #ddd;
+}
+
+.border.state-item {
+  border: 2rpx solid #c4245c;
+}
+
+.date {
+  min-width: 40%;
+  display: flex;
+  font-size: 11pt;
+  color: #bdbdbd;
+  align-items: center;
+}
+
+.date-btn {
+  min-width: 80%;
+  font-size: 12pt;
+  background-color: #c4245c;
+  color: #fff;
+  position: fixed
+}
+
+
+.picker-view {
+  width: 100%;
+  display: flex;
+  z-index:12;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  height: 30vh;
+}
+
+.picker-item {
+  line-height: 70rpx;
+  margin-left: 5rpx;
+  margin-right: 5rpx;
+  text-align: center;
+}

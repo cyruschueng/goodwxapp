@@ -1,0 +1,27 @@
+<!--pages/prize/mei/mei.wxml-->
+<view class='body'>
+  <view class='topic'>
+    <view class='topic-box'>{{question.title}}</view>
+    <view class="{{down_time>0?'topic-timer':'font'}}">{{down_time>0?down_time:'时间到'}}</view>
+    <view class='topic-num'>第{{index+1}}题</view>
+    <view class='topic-count'>{{index+1}}/{{listData.length}}</view>
+  </view>
+
+  <view wx:for="{{question.options}}" class="{{item.option_index==selIndex ? selColor : (!down_time&&item.option_index==question.answers ? 'option-itemRight' : 'option-item') }}" bindtap='selOption' data-index='{{item.option_index}}'>
+
+     <text>{{letterItems[index]}}、{{item.option_value}}</text>
+    <image class="{{item.option_index==selIndex ? 'option-item-checked':'none'}}" src='http://i1.dd-img.com/assets/image/1520828094-4892fd56ff9a3450-88w-68h.png'></image>
+
+  </view>
+
+</view>
+
+
+<view class='error' wx:if="{{error}}">
+  <view class='error-box'>
+    <image src='http://i1.dd-img.com/assets/image/1520061117-ccfabeb2131a81ca-280w-280h.png'></image>
+    <view>差一点就能分钱了</view>
+    <view>别灰心，再接再厉</view>
+    <button bindtap='defeated'>我知道了</button>
+  </view>
+</view>

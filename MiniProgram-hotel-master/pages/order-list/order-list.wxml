@@ -1,0 +1,30 @@
+<!--pages/order-list/order-list.wxml-->
+<view class='container'>
+  <view class='navbar'>
+    <view class="navbar-item {{currentTab==index?'active':''}}" wx:for='{{navbar}}' wx:key='code' data-id='{{index}}' bindtap='navbarTap'>{{item}}</view>
+  </view>
+  <view class='order-list'>
+    <view class='order-item' wx:for='{{items}}' wx:key='code'>
+      <view class='order-hd'>
+        <view class='time'>
+          <view class='order-time'>下单时间：{{item.order_time}}</view>
+          <view>入住时间：{{item.hotel_time}}</view>
+          <view>离店时间：{{item.leave_time}}</view>
+        </view>
+        <view class='order-state'>{{item.order_state}}</view>
+      </view>
+      <view class='order-num' bindtap='order_details'>订单号：{{item.order_num}}</view>
+      <view class='goods-list'>
+        <block wx:for='{{item.goods_img}}' wx:for-item='goods_img_url' wx:key='code'><image src='{{goods_img_url}}'></image></block>
+      </view>
+      <view class='order-ft'>
+        <view class='totalPrice'>金额：￥{{item.totalPrice}}</view>
+        <view class='order-manage'>
+          <view class='cancel'>取消订单</view>
+          <view class='toPay'>马上付款</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='section-ft'>没有更多啦</view>
+</view>

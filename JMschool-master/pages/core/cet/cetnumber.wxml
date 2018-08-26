@@ -1,0 +1,53 @@
+<!--pages/cet/cetnumber.wxml-->
+<view class="container">
+  <form class="login-form">
+    <view class="input-group {{userid_focus ? 'active' : ''}}">
+      <text class="input-label">姓　名</text>
+      <input maxlength="10" cursor-spacing="30" id="name" maxlength="14" placeholder="请输入姓名" bindinput="nameInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{namehint}}</text>
+    <view class="input-group {{passwd_focus ? 'active' : ''}}">
+      <text class="input-label">身份证</text>
+      <input maxlength="18" type="idcard" cursor-spacing="30" id="number" placeholder="请输入18位身份证号" bindinput="numberInput" bindfocus="inputFocus" bindblur="inputBlur" />
+    </view>
+    <text class="hint">{{numberhint}}</text>
+    <!-- 四六级选择 -->
+    <view class="switch">
+      <text class="switch-text switch-text-{{kd==1 ? 'select' : ''}}">四级</text>
+      <switch checked bindchange="switchChange" />
+      <text class="switch-text switch-text-{{kd==2 ? 'select' : ''}}">六级</text>
+    </view>
+
+    <view class="login-help" bindtap="showHelp">
+      <text>帮助</text>
+      <image class="login-help-img" src="/images/more/help.png"></image>
+    </view>
+
+  </form>
+
+  <view class="confirm-btn" bindtap="bind">
+    <text>查询</text>
+  </view>
+  <text class="result">{{result}}</text>
+
+  <view class="help" id="help" wx:if="{{help_status}}" bindtap="tapHelp">
+    <view class="box">
+      <view class="box-hd">
+        <text class="box-title">说明</text>
+        <image class="box-close" src="/res/img/close.png" bindtap="hideHelp"></image>
+      </view>
+      <view class="box-bd">
+        <view class="help-q">1、用户人群？</view>
+        <view class="help-a">
+          <text>目前只针对本校同学(交大理工)开放</text>
+          <text>外校同学如有需要点击主页联系客服按钮</text>
+        </view>
+        <view class="help-q">2、说明？</view>
+        <view class="help-a">
+          <text>目前小程序还处于开发阶段,有许多不完善的地方需要各位同学指出</text>
+          <text>该准考证数据和成绩查询均来自于学信网,具体数据以学信网为准</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

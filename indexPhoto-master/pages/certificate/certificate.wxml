@@ -1,0 +1,27 @@
+<!--pages/certificate/certificate.wxml-->
+<view class="container" style="background:url({{background}}) no-repeat;background-size: cover; ">
+<scroll-view>
+  <view class="certificate">
+    <view class="img_wrap" style='border:20rpx solid {{backgroundColor}};'>
+      <image src="{{imgUrl}}" bindtap="prewImg" mode='widthFix'></image>
+    </view>
+
+    <!-- <button class="download_carti" bindtap="downLoad" 
+            style="background:{{backgroundColor}};box-shadow:2px 2px 5px {{border}};border:1rpx solid {{border}};">
+            下载证书
+    </button> -->
+     <button class="download_carti" bindtap="backHome" wx:if="{{myself}}"
+            style="background:{{backgroundColor}};box-shadow:2px 2px 5px {{border}};">
+            我也要玩
+    </button>
+    <button class="share_btn download_carti" wx:else open-type="share" bindtap="share" style='box-shadow:2px 2px 5px {{backgroundColor}};background:{{backgroundColor}}'>
+        炫耀成绩
+    </button>
+    
+  </view>
+
+  <button class="home_icon"  bindtap="backHome">
+      <image src="../../resource/images/home_icon.png"></image>
+  </button>
+  </scroll-view>
+</view>

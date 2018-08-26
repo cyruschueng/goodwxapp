@@ -1,0 +1,58 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{show}}">
+  <view class="fui-list-group">
+    <view class="fui-list-group-title">
+      <image src="/static/images/icon/shop.png"></image>
+      <text class="shop">{{shopname}}</text>
+    </view>
+    <block wx:for="{{goods}}">
+      <view class="fui-list">
+        <view class="fui-list-media">
+          <image src="{{item.thumb}}"></image>
+        </view>
+        <view class="fui-list-inner">
+          <view class="text">{{item.title}}</view>
+          <view class="text grade" wx:if="{{item.optiontitle}}">{{item.optiontitle}}</view>
+        </view>
+        <view class="fui-list-angle">
+          <view class="text-right">{{ite.price}}</view>
+          <view class="text-right">x{{item.total}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="fui-title">
+    整单评价
+  </view>
+  <view class="fui-cell-group evaluate">
+    <view class="fui-cell must">
+      <view class="fui-cell-label">评分</view>
+      <block wx:for="{{stars_class}}">
+        <image data-key="{{index}}" bindtap="select" class="star-image image-32" src="{{key >= index ? selectedSrc : normalSrc}}"></image>
+      </block>
+      <text class="fui-label {{stars_class[key]}}">{{key['-'] != 1 ? stars_text[key] : '未评价'}}</text>
+    </view>
+    <view class="fui-cell" wx:if="{{order.iscomment == 0}}">
+      <view class="fui-cell-label">晒图</view>
+      <view class="fui-images fui-images-sm">
+        <block wx:for="{{imgs}}">
+          <image data-index="{{index}}" src="{{item}}" class="image image-sm" data-type="image-preview" catchtap="upload">
+            <content>
+              <text data-index="{{index}}" class="image-remove" data-type="image-remove" catchtap="upload">×</text>
+            </content>
+          </image>
+        </block>
+      </view>
+      <view class="fui-uploader fui-uploader-sm" data-type="image" catchtap="upload"></view>
+    </view>
+    <view class="fui-cell must">
+      <view class="fui-cell-label">评论</view>
+    </view>
+    <view class="textarea">
+      <textarea bindinput="change" data-name="content" placeholder="商品满意吗？来分享你的感受吧"></textarea>
+    </view>
+  </view>
+  <view class="fui-footer">
+    <view bindtap="submit" class="btn btn-danger block">提交评价</view>
+  </view>
+</view>

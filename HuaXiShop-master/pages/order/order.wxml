@@ -1,0 +1,35 @@
+<!--pages/order/order.wxml订单-->
+<view class="container">
+
+<!--tab切换-->
+<view class="nav_tab">
+     <block wx:for="{{navItems}}">
+        <view class="default {{tag == item.id ? 'red' : ''}}" data-index="{{index}}" data-id="{{item.id}}" bindtap="switchTab">{{item.item}}</view>
+     </block> 
+</view>
+<!--tab切换-->
+
+<!--订单列表-->
+<view class="order_list">
+<block wx:for="{{OrderList}}" wx:for-item="order">
+  <view class="sp_info">
+      <view class="sp_img">
+         <image src="{{GuestUserData.ImgageDomainUrl}}{{order.ProductPic}}" mode="widthFix"></image>
+      </view>
+      <view class="sp_miaoshu">
+         <view class="sp_name">{{order.ProductName}}</view>
+         <view class="sp_kucun">{{order.ProductBuyCount}}件</view>
+         <view class="sp_f">
+            <view wx:if="{{order.OrderStatus==1}}" class="sp_status">状态：待付款</view>
+            <view wx:elif="{{order.OrderStatus==2}}" class="sp_status">状态：待发货</view>
+            <view wx:elif="{{order.OrderStatus==3}}" class="sp_status">状态：已发货</view>
+            <view class="sp_price">￥{{order.PayAmount}}</view>
+         </view>
+      </view>
+  </view>
+</block>
+</view>
+<!--订单列表-->
+
+
+</view>

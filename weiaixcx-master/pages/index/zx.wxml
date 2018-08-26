@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class="page">
+
+  <!--图片banner-->
+  <view class="img">
+    <image src="http://www.weilaihexun.com/wxxcx/images/qyy_9.jpg" style="width:750rpx;height:300rpx;"></image>
+  </view>
+
+  <!--最新资讯-->
+  <block wx:for="{{getNew}}" wx:key="index">
+    <view class="hourtop">
+      <navigator url="/pages/information/information?id={{item.id}}">
+        <view class="hour_img">
+          <image src="{{imgurl+item.img}}" style="width:152rpx;height:106rpx;"></image>
+        </view>
+        <view class="hourtct">
+          <view class="hourtcts">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="hourtctx">
+            <text>{{item.charm}}</text>
+            <text class="xq">详情>></text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+    <view class="aaaa"></view>
+  </block>
+</view>

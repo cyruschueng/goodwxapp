@@ -1,0 +1,17 @@
+<!--pages/mine/myOrderListView.wxml-->
+
+<import src="../../templates/order-item/order-item.wxml"/>
+<import src="../../templates/empty-view/empty-view.wxml"/>
+
+<view class='bg-view'>
+
+  <block wx:if='{{ orderList.length > 0 }}'>
+  <block wx:for='{{ orderList }}' wx:for-item='order' id='{{ index }}' wx:key='{{ index }}'>
+  <template is='order-item' data='{{ ...order, index }}' />
+  </block>
+  </block>
+
+    <!-- 无 更多 -->
+  <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+
+</view>

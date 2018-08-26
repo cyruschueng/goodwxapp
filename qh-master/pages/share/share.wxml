@@ -1,0 +1,56 @@
+<view style='background: #4e0308'>
+<view class='header'> </view>
+<view class="btn2">
+<view class='btn_4' bindtap='zhuli' id='77'></view>
+<view class='btn_5' bindtap='xiazai' id='xz'></view>
+</view>
+<view class="active_4 active">
+</view>
+<!-- 轮播 -->
+<view class='lunbo'>
+<view class="title"></view>
+<view class='swiper-container'>
+   <swiper    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for-items="{{imgUrls}}" wx:key="item">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="{{wiper_mode}}" bindtap="currentImg" style="width:100%; height:100%;"/>
+      </swiper-item>
+    </block>
+  </swiper> 
+</view>
+</view>
+<!-- 二维码 -->
+<view class="erweima">
+
+</view>
+<!-- 下载弹窗 -->
+<view  class="{{download}}">
+    <view class="close1" bindtap='close1'></view>
+    <view class="copy"  bindtap='copy' id='cp'></view>
+</view>
+<!-- 遮罩层 -->
+<view class="{{modal}}"></view>
+
+<!-- 活动规则弹窗 -->
+<view class="{{modalHelp}}">
+    <view class="close1" bindtap='close1' id='cl'></view>
+    <view>恭喜您获得价值88元新春新手礼包，请复制下方
+        礼包码，前往《拳皇世界》中领取！</view>
+    <view class="copy2" bindtap="copyCard" id='cpcard'>
+        <view class="copy_txt"><text>{{card}}</text></view><view  class="copy_btn"></view>
+    </view>
+    <view style="color: #fad480;margin-bottom: 0.5rem">
+        成功在游戏中激活礼包，Ta还将有机会获得价值288元大礼
+    </view>
+    
+
+     <view style="margin-top: 20rpx">
+        <text>如何使用礼包码？ 
+        1、进入游戏，点击主界面右上“齿轮”打开系统设置； 
+        2、点击【礼包兑换】，输入礼包码即可领取奖励；
+        </text>
+    </view>
+</view>
+
+</view>

@@ -1,0 +1,23 @@
+<view wx:if="{{setmoney}}" class='get_money'>
+    <view class='get_money_num'>
+        <view class='get_money_num_left'>提现金额</view>
+        <view class='get_money_num_right' wx:if="{{amount}}">{{amount}}元</view>
+    </view>
+    <view class='get_money_num'>
+        <view class='get_money_num_left'>微信号</view>
+        <view class='get_money_number_right'>
+            <input bindinput="bindKeyInput" placeholder="请输入您的微信号" />
+        </view>
+    </view>
+    <view class='get_money_text'>请确保微信号输入正确</view>
+    <view bindtap="setsubmit">
+        <button class="{{btnColor ? 'btn-color' : 'btn-colorold'}} ">确认提现</button>
+    </view>
+</view>
+<view wx:else class='get_money_two'>
+    <view class='old_get_money_one'>
+        <text>{{amount}}元</text> 提现申请已提交成功！</view>
+    <view class='old_get_money_two'>等待工作人员与您联系</view>
+    <view class='old_get_money_text'>工作人员将于2个工作日内通过微信与您联系，请留意您的微信</view>
+    <button bindtap='getknow' class='btn-colorold'>我知道了</button>
+</view>

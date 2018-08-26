@@ -1,0 +1,17 @@
+<!--pages/personal/myChuandi/myChuandi.wxml-->
+<view class='httitle'>我的传递(共{{length}}条)</view>
+<block wx:if="{{message}}">
+  <view class='nohuati t2'>{{message}}</view>
+</block>
+<block wx:if="{{!message}}">
+<view class='card'>
+  <block wx:for="{{passes}}" wx:key="index">
+    <view class='pbox' id='{{item.id}}' bindtap='clickChuandi'>
+      <view class='title'>{{item.title}}</view>
+      <view class='remarks'>
+        <view class='time'>{{item.time}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+</block>

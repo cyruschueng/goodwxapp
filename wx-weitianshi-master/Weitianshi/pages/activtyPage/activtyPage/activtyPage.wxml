@@ -1,0 +1,17 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view id='activtyPage' wx:if="{{nonet}}">
+  <!-- <view wx:if="{{downShow == true}}" style='height:96rpx;width:100%'></view> -->
+  <image mode='widthFix' src='{{activtyPagePic}}'></image>
+  <!-- <view class="downLoad flex">
+    <image src="/img/img-weitianshi@2x.png" class="downImg"></image>
+    <view class="downContent">FA的智能助理，投资人的项目猎手</view>
+    <view class="downApp">下载App</view>
+  </view> -->
+  <form report-submit='true' bindsubmit='formSubmit' wx:if="{{packetStatus == 'SUCCESS' && buttonStyle == true}}">
+    <button form-type='submit' bindtap='createHB'>
+      <image src="{{imgUrls2}}" class="btn1 floatBtn" wx:if="{{bindContact == false}}"></image>
+      <image src="{{openHover2}}" class="btn1 floatBtn" wx:if="{{bindContact == true}}"></image>
+    </button>
+  </form> 
+</view>

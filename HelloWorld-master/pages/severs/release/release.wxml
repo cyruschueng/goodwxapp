@@ -1,0 +1,20 @@
+<!--pages/severs/release/release.wxml-->
+<form report-submit='true' bindsubmit='onChooseCateTap'>
+    <view class="fenlei tc">
+        <view class="flex" wx:for="{{data}}" wx:for-index="gIndex" wx:key="gIndex">
+            <button class="classify-list sub" wx:for="{{item}}" wx:key="{{item.id}}" data-g-index='{{gIndex}}' data-index='{{index}}' form-type='submit'>
+                <image class="list-img mb5" src="{{item.cover}}" mode="aspectFill"></image>
+                <view class="lineText">{{item.title}}</view>
+            </button>
+        </view>
+    </view>
+</form>
+<view class="floatBox" style='display:{{childCates?"block":"none"}}'>
+    <view class="bgwhite pup-content tc">
+        <view class="pop-item-box">
+            <view class="pop-item gridXb" wx:for='{{childCates}}' wx:key='{{item.id}}' catchtap='onChooseChildCateTap' data-index='{{index}}'>{{item.title}}</view>
+        </view>
+        <view class="pop-item gridXt" catchtap='onChooseCancel'>取消</view>
+    </view>
+    <view class="floatBox floatBoxBg" style='display:{{childCates?"block":"none"}}'></view>
+</view>

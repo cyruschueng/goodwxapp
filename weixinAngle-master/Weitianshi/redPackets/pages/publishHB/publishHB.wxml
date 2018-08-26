@@ -1,0 +1,37 @@
+<include src='/utils/wxml/common' />
+<image src="{{imgUrls}}" class="imgBg"></image>
+<view class="redInfo">
+  <view class="bagTitle">红包标题</view>
+  <input class="bagName" value='{{title}}' bindinput="redBagName" maxlength='100'></input>
+  <view class="flex">
+    <view class="bagLeft">
+      <view class="bagTitle">红包金额</view>
+      <input type='digit' class="redBagMoney" placeholder='建议不低于1元' bindblur="redBagMoney"></input>
+    </view>
+    <view class="bagRight">
+      <view class="bagTitle">红包个数</view>
+      <input type='number' class="redBagNum" placeholder='请输入' bindblur="redBagNum"></input>
+    </view>
+  </view>
+  <view class="point">由于微信限制，红包金额须大于红包个数，否则影响领取者取现</view>
+  <view class="point">24小时后未领取，金额将自动返还到您的微信零钱包</view>
+</view>
+
+<view class='rgInfo'>
+  <view>已有
+    <label class="rgInfoNum">{{recordHB.user_count}}</label>人通过名片红包</view>
+  <view>拓展了
+    <label class="rgInfoNum">{{recordHB.card_count}}</label>个创投圈好友 </view>
+  <view>累计领取
+    <label class="rgInfoNum">{{recordHB.drawed_count}}</label>次红包 </view>
+</view>
+
+
+<form report-submit='true' bindsubmit='createRedBag'>
+  <button form-type='submit'>
+    <image src="{{imgUrls2}}" class="btn1 floatBtn" wx:if="{{bindContact == false}}"></image>
+    <image src="{{openHover}}" class="btn1 floatBtn" wx:if="{{bindContact == true}}"></image>
+  </button>
+</form>
+<!--错误提示  -->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>

@@ -1,0 +1,78 @@
+<view class="wrap">
+    <button open-type="contact" class="contact_btn">
+        <image src="../../images/index/help_right.png"></image>
+        <!--<image src="../../images/index/join.png"></image>-->
+    </button>
+    <view wx:if="{{razStatus}}" class="content">
+        <image class="bg" src="../../images/index/logo_bg.png"></image>
+        <view class="cids">
+            <image class="cid" src="../../images/index/button_aa.png" bindtap="getBooks" data-cid="3"></image>
+            <image class="cid" src="../../images/index/button_A.png" bindtap="getBooks" data-cid="4"></image>
+            <image class="cid" src="../../images/index/button_B.png" bindtap="getBooks" data-cid="5"></image>
+            <image class="cid" src="../../images/index/button_C.png" bindtap="getBooks" data-cid="6"></image>
+            <image class="cid" src="../../images/index/button_D.png" bindtap="getBooks" data-cid="7"></image>
+            <image class="cid" src="../../images/index/button_E.png" bindtap="getBooks" data-cid="8"></image>
+            <image class="cid" src="../../images/index/button_F.png" bindtap="getBooks" data-cid="9"></image>
+        </view>
+    </view>
+    <view wx:if="{{!razStatus}}" class="article_content">
+        <view class="use-box">
+            <view class="head_wrap">
+                <image class="head_bg" src="../../images/index/portrait_bg.png"></image>
+                <image class="head_img" src="{{head_img}}"></image>
+            </view>
+            <view class="nickname">{{nickname}}</view>
+        </view>
+        <view class="read-box">
+            <image class="sum" src="../../images/index/sum.png"></image>
+            <view class="text-box">
+                <view class="books">{{artInfo.book_num||0}}</view>
+                <view class="times">{{artInfo.speak_num||0}}</view>
+                <view class="words">{{artInfo.words_num||0}}</view>
+            </view>
+        </view>
+        <view class="tag-box">
+            <image class="duration_bg" src="../../images/index/time_bg.png"></image>
+            <view  class="today_min">{{today_min}}</view>
+            <view class="min">min</view>
+            <canvas bindtap="clickRaz" class="duration_canvas" canvas-id="timeCanvas" id="timeCanvas"/>
+            <image class="button_unlock" bindtap="getLesson" src="{{canUnlock?'../../images/index/button_daily_1.png':'../../images/index/button_daily_2.png'}}"></image>
+            <image class="role" src="../../images/index/help.png" bindtap="showInfo"></image>
+        </view>
+        <view class="lis">
+            <view class="li" wx:for="{{articleData}}" wx:for-item="at" wx:key="{{at}}" wx:for-index="ind">
+                <image class="li_bg" src="../../images/index/video_bg_1.png"></image>
+                <view class="article_ind">D{{ind+1}}</view>
+                <image class="article_cover_bg" src="../../images/index/video_bg_2.png"></image>
+                <image class="article_cover" data-id="{{at.id}}" src="{{at.pic}}" bindtap="goArticle" data-can-use="{{!lockArr[ind]}}"></image>
+                <image wx:if="{{lockArr[ind]}}" class="lock" src="../../images/index/lock.png"></image>
+                <view class="article_name">{{at.title}}</view>
+                <view class="article_level">{{at.cat_name}}</view>
+                <view class="article_times"><image src="../../images/index/watchtimes.png"></image>{{at.visited_nums}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="bar-box">
+        <image bindtap="clickRaz" class="tab1" src="{{razStatus?'../../images/index/tab_1_select.png':'../../images/index/tab_1_unselect.png'}}"></image>
+        <image bindtap="clickLesson" class="tab2" src="{{razStatus?'../../images/index/tab_2_unselect.png':'../../images/index/tab_2_select.png'}}"></image>
+    </view>
+    <view wx:if="{{getFirst}}" class="first_lesson">
+        <image class="bg" src="../../images/index/firstLesson.png"></image>
+        <image class="button_get" src="../../images/index/button_get.png" bindtap="clickLesson"></image>
+        <view class="line"></view>
+        <view class="text">完美解锁外教领读纠音课！</view>
+        <image class="book_pic" src="{{articleData[0].pic}}"></image>
+        <view class="book_name">《Baby Animals》</view>
+    </view>
+    <view class="info_wrap" wx:if="{{infoStatus}}">
+        <view class="info">
+            <image class="info_bg" src="../../images/article/popup_bg.png"></image>
+            <image class="button_off" src="../../images/article/button_close.png" bindtap="hideInfo"></image>
+            <view class="total" style="width: 400rpx;margin-top: 80rpx;margin-left: 20rpx;">
+                <view style="text-align: left;line-height: 2;">1、阅读时长多于3min时，才可签到打卡；</view>
+                <view style="text-align: left;line-height: 2;">2、阅读打卡，自动解锁外教领读课；</view>
+                <view style="text-align: left;line-height: 2;">3、外教领读课只有解锁后才可查看哦。</view>
+            </view>
+        </view>
+    </view>
+</view>

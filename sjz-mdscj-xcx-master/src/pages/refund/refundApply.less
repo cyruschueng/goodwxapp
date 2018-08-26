@@ -1,0 +1,69 @@
+@import '../../value';
+
+page{
+  background: #F4F4F4;
+}
+
+picker{
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20rpx;
+    display: block;
+    width: 10rpx;
+    height: 10rpx;
+    margin-top: -5rpx;
+    border: 1rpx solid #ccc;
+    border-width: 0 1rpx 1rpx 0;
+    transform:rotate(45deg);
+  }
+  &[disabled=""] {
+    color: #ccc;
+  }
+}
+
+.list-form{
+  padding: 0 20rpx;
+  .form-item{
+    display: flex;
+    padding: 40rpx 0;
+    border-bottom: 1rpx solid #E6E6E6;
+    font-size: 30rpx;
+    &:last-child{
+      border-bottom: 0;
+    }
+    .form-lbl{
+      display: block;
+      width: 145rpx;
+    }
+    .form-main{
+      flex:1;
+      color: #666;
+      textarea{
+        width: 100%;
+        margin-top: -14rpx;
+      }
+    }
+  }
+}
+
+.textarea-pr{
+  color: #ccc;
+}
+
+.btn-refund{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  line-height:96rpx;
+  text-align:center;
+  opacity:.9;
+  letter-spacing:0.6rpx;
+  height:96rpx;
+  background-color:#FF2551;
+  color:white;
+  font-size:32rpx;
+}

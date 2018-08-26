@@ -1,0 +1,247 @@
+<!--index.wxml-->
+
+
+
+<scroll-view bindscroll="scroll" scroll-y="{{true}}" style="height:{{wHeight}}px;background:#DFD0C2">
+    <view class="top_animation">
+        <view class="snowflakes">
+            <view class="snowflake snowflake{{item % 10}}" wx:for="{{ snowflakeCount }}" ></view>
+        </view>
+
+        <view class="run_glup">
+            <view class="rnd"  animation="{{animationLion}}">  <image src="http://oss.xqzs.cn/resources/runmini/index_lion.png" class="lion"  animation="{{animationLion2}}">   ></image></view>
+            <view class="cirle">
+                <view class="run_info">
+                    <view class="run_title">今日步数</view>
+                    <view class="run_bushu">{{todayNum}}</view>
+                    <view class="run_goal">目标：{{goal}}</view>
+                </view>
+            </view>
+
+
+
+            <view class="pie_left"  >
+                <view class="left"  animation="{{animationLeftCrile}}"></view>
+            </view>
+            <view class="pie_right">
+                <view class="right"  animation="{{animationRightCrile}}"></view>
+            </view>
+
+
+            <!--<image src="{{canvasImg}}" class="rnd" wx:if="{{!canvasShow}}"></image>-->
+            <!--<canvas canvas-id="myCanvas" class="yyyy" wx:if="{{canvasShow}}" >-->
+                <!--&lt;!&ndash;<cover-view  >&ndash;&gt;-->
+                    <!--&lt;!&ndash;<cover-image  class="lion" style="top:{{lionY}}px;left:{{lionX}}px"  src="http://oss.xqzs.cn/resources/runmini/index_lion.png" />&ndash;&gt;-->
+                <!--&lt;!&ndash;</cover-view>&ndash;&gt;-->
+            <!--</canvas>-->
+
+
+        </view>
+        <view class="img cloud1">
+        </view>
+        <view class="img dl">
+         </view>
+        <view class="img dl1">
+         </view>
+        <view class="img cloud2">
+        </view>
+        <view class="img branch1">
+         </view>
+        <view class="img branch2">
+         </view>
+        <view class="img branch3">
+         </view>
+
+        <view class="nav">
+            <view class="nav_cat">
+                <image src='http://oss.xqzs.cn/resources/runmini/index_cat.png' mode='widthFix'></image>
+            </view>
+            <view class="nav_snow">
+                <image src='http://oss.xqzs.cn/resources/runmini/index_house_snow.png' mode='widthFix'></image>
+            </view>
+            <view class="nav_items">
+                <form bindsubmit="goTj" class="nav_item tj" report-submit="{{true}}">
+                    <button formType="submit">统计</button>
+                </form>
+                <form bindsubmit="goTarget" class="nav_item goal" report-submit="{{true}}">
+                    <button formType="submit">目标</button>
+                </form>
+                <form bindsubmit="showBind" class="nav_item bind" report-submit="{{true}}">
+                    <button formType="submit">关联</button>
+                </form>
+                <form bindsubmit="goPK" class="nav_item pk" report-submit="{{true}}">
+                    <button formType="submit">好友PK</button>
+                </form>
+
+            </view>
+        </view>
+    </view>
+    <!-- <view class="top">
+          <view class="coin" wx:if="{{isSubscribe}}">{{user.coinAmount}}</view>
+          <view class="contact_btn_h"  wx:if="{{!isSubscribe}}">
+              <view class="coin">{{user.coinAmount}}</view>
+              <view class="line"></view>
+              <button wx:if="{{canIUse}}" open-type="contact" class="contactttt"> 免费兑好礼 </button>
+              <contact-button  class="contactttt" wx:else>免费兑好礼</contact-button>
+              <view class="right"></view>
+          </view>
+
+          <view class="today_run_num">
+              <view class="bg {{round?'round':''}}" ></view>
+              <view class="text">第{{myTodayRank.rank}}名</view>
+              <view class="num">
+                  <text>{{todayNum}}</text>
+                  <text class="unit"></text>
+              </view>
+              <view class="text">今日步数</view>
+          </view>
+          <block wx-if="{{!todayChanged}}">
+
+              <button class="change" bindtap="change">领取{{yesterdayChangeCoin.coinNum}}个积分</button>
+          </block>
+          <block wx-if="{{todayChanged}}">
+              <button class="change changed" bindtap="change">明日再来</button>
+          </block>
+      </view> -->
+
+
+    <!-- <navigator url="{{noticeLink}}" open-type="navigate" class="notice_link" wx:if="{{notice.count>0}}">
+      <view class="notice_box notice_box_p">
+        <view class="notice">
+          <image class="notice_friend" src="{{notice.user[0].faceUrl}}"></image>
+          <view>{{notice.count}} 条新消息</view>
+          <image class="goNotice" src="http://oss.xqzs.cn/xqzs/mini/program/iconjt.png" alt="" />
+        </view>
+      </view>
+    </navigator> -->
+
+    <view class="rank">
+        <view class="img snow1">
+            <image src='http://oss.xqzs.cn/resources/runmini/index_snow1.png' mode='widthFix'></image>
+        </view>
+        <view class="img dog">
+            <image src='http://oss.xqzs.cn/resources/runmini/index_dog.png' mode='widthFix'></image>
+        </view>
+        <view class="img hulu">
+            <image src='http://oss.xqzs.cn/resources/runmini/index_hulu.png' mode='widthFix'></image>
+        </view>
+        <view class="z1">z</view>
+        <view class="z2">z</view>
+        <view class="z3">z</view>
+        <view class="artshadow"></view>
+
+        <view class="artsnow"></view>
+        <view class="tabs">
+            <view class="btn {{tab==0?'selected':''}}" bindtap='tab' data-index="0">
+                <view class="rank_wz">好友排行</view>
+            </view>
+            <view class="btn {{tab==1?'selected':''}}" bindtap='tab' data-index="1">
+                <view class="rank_wz">TOP100</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="  tj" style="margin-bottom: 10px;">
+        <view class="img listsnow">
+            <image src='http://oss.xqzs.cn/resources/runmini/index_list_snwo.png' mode='widthFix'></image>
+        </view>
+        <view class="img rightsnow">
+            <image src='http://oss.xqzs.cn/resources/runmini/index_list_snwo.png' mode='widthFix'></image>
+        </view>
+        <view class="item">
+            <text class="order">{{myRank.rank}}</text>
+            <image src="{{user.faceUrl}}"></image>
+            <view class="run_infos">
+                <view class="run_name">{{user.nickName}}</view>
+                <view class="shuju">
+                    <text>步行距离</text>
+                    <text class="moredata">{{myRank.km}}</text>
+                    <text>KM 消耗热量</text>
+                    <text class="moredata">{{myRank.kll}}</text>
+                    <text>KCL</text>
+                </view>
+            </view>
+            <view class="hearts" bindtap="goCareList" data-id="{{myRank.id}}" data-count="{{myRank.careCount}}">
+                <view class="num2">{{myRank.careCount}}</view>
+                <view class="heart{{myRank.careCount>0?'_on':''}}"></view>
+            </view>
+            <view class="num">
+                <text>{{myRank.step}}</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="tj">
+        <block wx-if="{{tab ==i}}" wx:for="{{[today,allToday]}}" wx:for-item="item"
+               wx:for-index="i">
+            <view class="item {{userId==name.userId&&false?'myself':''}}" wx:for="{{item}}" wx:for-item="name"
+                  wx:for-index="index" wx:key="key">
+                <text class="order">{{index+1}}</text>
+                <view class="line"></view>
+                <image src="{{name.faceUrl}}"></image>
+                <view class="run_infos">
+                    <view class="run_name">{{name.nickName}}</view>
+                    <view class="shuju">步行距离{{name.km}}KM</view>
+                </view>
+                <view class="hearts" bindtap="care" data-index="{{index}}" data-typeindex="{{i}}"
+                      bindtouchstart='flyStart' bindtouchend='flyOver'>
+                    <view class="num2">{{name.careCount}}</view>
+                    <image wx:for="{{name.flyHeart}}" src="http://oss.xqzs.cn/resources/runmini/index_good_on.png"
+                           class="fly_heart start{{itemf.rnd}}" wx:for-item="itemf"></image>
+                    <view class="heart{{name.careMe||(userId==name.userId&&name.careCount>0)?'_on':''}} {{name.hit?'hit':''}}"></view>
+                </view>
+                <view class="num">
+                    <text class="{{i<2&&name.step>9999?'step_w':''}}">{{name.step}}</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </block>
+
+    </view>
+    <view class="view_btn_share">
+        <button class="share_btn" open-type="share"  wx:if="{{false}}">邀请好友</button>
+    </view>
+</scroll-view>
+
+
+
+
+
+
+<view class="bind_mini_program_tip" wx:if="{{bindMiniProgramTip}}">
+    <view class="bg  {{bindMiniProgramTipOut===null?'':(!bindMiniProgramTipOut?'cover_bg_out':'cover_bg_in')}}"></view>
+    <view class="main  {{bindMiniProgramTipOut===null?'':(!bindMiniProgramTipOut?'cover_main_down_out':'cover_main_up_in')}}" >
+        <div class="close" bindtap="closeBindMiniProgramTip"></div>
+        <view class="top"></view>
+        <view class="title">我们关联在一起吧</view>
+        <view class="content">
+            <text>我有早起打卡小程序，你有微信公众号吗？</text>
+            <text>如果有；我们关联在一起吧！</text>
+            <text>请您按照以下步骤关联：</text>
+            <text>1、登录微信公众号</text>
+            <text>2、小程序管理-添加</text>
+            <text>3、关联小程序</text>
+            <text>4、输入早起打卡排行小程序</text>
+            <text bindtap="copyAppId" style="font-size:26rpx; padding-left: 24rpx; ">APPID：{{APP_ID}} <text class="copy" >复制</text></text>
+            <text bindtap="copyPage" style="padding-left: 24rpx;font-size:28rpx;"> 页面：pages/index/index <text class="copy" >复制</text></text>
+            <text>5、提交审核后，早起打卡排行会在一天时间内通过，通过后即关联成功</text>
+            <text>备注：</text>
+            <text>本次关联是自愿原则，无金钱来往。</text>
+        </view>
+        <view class="foot">好一点</view>
+    </view>
+
+</view>
+
+
+ <view class="coin_add" wx-if="{{showAddCoinAninate}}">
+    <view class="coin_add_round"></view>
+    <view class="coin_add_coin"></view>
+    <view class="add_num">+{{yesterdayChangeCoin.coinNum}}</view>
+</view>
+
+<view wx-if="{{false}}">
+    <!--[<open-data type="groupName" open-gid="{{ggggggid}}"></open-data>]-->
+
+    <!--dsfdsfd-->
+</view>

@@ -1,0 +1,95 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="pocket__form">
+    <view class="pocket__form_header">
+      <view class="pocket__form_header_user">
+        <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+        <text class="nickname">{{userInfo.nickName}}</text>
+      </view>
+      <!-- 点击该图标跳转客服 -->
+      <contact-button size="12" class='pos' style='top:10px;right:10px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:10px;right:30px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:10px;right:50px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:30px;right:10px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:30px;right:30px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:30px;right:50px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:50px;right:10px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:50px;right:30px;' type="default-light" session-from="weapp"></contact-button>
+      <contact-button size="12" class='pos' style='top:50px;right:50px;' type="default-light" session-from="weapp"></contact-button>
+      <image class="pocket__form_header_pop" background-size="cover" src="/assets/pop_pocket.png"></image>
+    </view>
+    <!-- 红包表单 -->
+    <view class="pocket__form_body">
+      <view class="item">
+        <view class="label">发祝福语</view>
+        <input type='text' placeholder='恭喜发财新年快乐' maxlength="10" placeholder-class="placeholder" class='short' value='{{packet.redpacket_title}}' confirm-type="next" data-key="packet.redpacket_title" bindinput="handleInput"></input>
+      </view>
+      <view class="item">
+        <view class="label">赏金（元）</view>
+        <input type='digit' placeholder='请输入金额' placeholder-class="placeholder" class='long' value='{{packet.redpacket_amount}}' disabled='{{packet.redpacket_type == 2 ? true : false}}' confirm-type="next" data-key="packet.redpacket_amount" bindinput="handleInput"></input>
+      </view>
+      <view class="item">
+        <view class="label">数量（个）</view>
+        <input type='number' placeholder='请输入红包数量' placeholder-class="placeholder" class='long' value='{{packet.redpacket_number}}' disabled='{{packet.redpacket_type == 2 ? true : false}}' confirm-type="next" data-key="packet.redpacket_number" bindinput="handleInput"></input>
+      </view>
+      <view class="item" wx:if="{{packet.img_url==null||packet.img_url==''}}" bindtap="linkToVideo">
+        <image class="add_video" src="/assets/add_video.png"></image>
+      </view>
+      <view class="item" wx:else bindtap="playVideo">
+        <view class="video_cover">
+          <image mode="widthFix" src="{{packet.img_url}}"></image>
+        </view>
+      </view>
+      <view class="item" style="justify-content: center;" bindtap="linkToVideo">
+        <image class="ref" src="/assets/ref.png"></image>
+        <text class="change_video">换个视频</text>
+      </view>
+      <!-- 提交红包按钮 -->
+      <view class="item">
+        <button bindtap="createVideoPacket" disabled='{{createBtnDisabled}}'>生成红包</button>
+      </view>
+    </view>
+    <!-- 用户余额显示处 -->
+    <view class="pocket__form_footer">
+      优先使用账户余额，当前余额为￥{{ balance }}
+    </view>
+  </view>
+  <!-- 链接至发赞美红包页面 -->
+  <view class="pocket__new_link" bindtap="linkToPraise">
+    <image class="like" src="/assets/pocket_like.png"></image>
+    <text class="like_text">开口赞我，红包拿去</text>
+  </view>
+  <!-- 底部tab -->
+  <view class="tab__bar">
+    <view class="tab__bar_item" bindtap="linkToRecord">
+      <image class="record" src="/assets/record.png"></image>
+      <text class="">记录</text>
+    </view>
+    <view class="tab__bar_item" bindtap="linkToMoney">
+      <image class="money" src="/assets/money.png"></image>
+      <text class="">提现</text>
+    </view>
+    <view class="tab__bar_item" bindtap="linkToMine">
+      <image class="mine" src="/assets/mine.png"></image>
+      <text class="">我的</text>
+    </view>
+  </view>
+  <!-- 提示弹窗 去掉hide -->
+  <view class="pop {{isShowPop ? '' : 'hide'}}">
+    <view class="pop_shade"></view>
+    <image class="pop_close" src="/assets/pop_close.png" bindtap="onPopclose"></image>
+    <view class="pop_tips_bg">
+      <image src="/assets/home_pop_pocket.png"></image>
+    </view>
+    <view class="pop_tips_text">
+      <text class="tips1">获得一次</text>
+      <text class="tips2">
+                <text>免费发红包</text>机会
+      </text>
+      <text class="tips3">快来和小伙伴们一起拆开吧</text>
+    </view>
+    <view class="pop_pocket_btn" bindtap="openRedPacket">
+      <button>拆红包</button>
+    </view>
+  </view>
+</view>

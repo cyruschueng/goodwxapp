@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+    //字符串转换为时间戳
+    function getDateTimeStamp(dateStr) {
+        return Date.parse(dateStr.replace(/-/gi, "/"));
+    }
+
+    function getDateDiff(dateStr) {
+        var publishTime = getDateTimeStamp(dateStr) / 1000,
+            d_seconds,
+            d_minutes,
+            d_hours,
+            d_days,
+            timeNow = parseInt(new Date().getTime() / 1000),
+            d,
+
+            date = new Date(publishTime * 1000),
+            Y = date.getFullYear(),
+            M = date.getMonth() + 1,
+            D = date.getDate(),
+            H = date.getHours(),
+            m = date.getMinutes(),
+            s = date.getSeconds();
+        console.log(new Date());
+        //小于10的在前面补0
+        if (M < 10) {
+            M = '0' + M;
+        }
+        if (D < 10) {
+            D = '0' + D;
+        }
+        if (H < 10) {
+            H = '0' + H;
+        }
+        if (m < 10) {
+            m = '0' + m;
+        }
+        if (s < 10) {
+            s = '0' + s;
+        }
+
+        d = timeNow - publishTime;
+
+        d_days = parseInt(d / (60 * 60 * 24));
+        d_hours = parseInt(d / (60 * 60));
+        d_minutes = parseInt(d / 60);
+        d_seconds = parseInt(d);
+
+        if (d_days > 2 && d_days < 3) {
+            return '前天';
+        } else if (d_days > 1 && d_days < 2) {
+            return '昨天' + '&nbsp;' + H + ':' + m;
+        } else if (d_days <= 0 && d_hours > 0) {
+            return d_hours + '小时前';
+        } else if (30 >= d_minutes >= 0) {
+            return d_minutes + '分钟前';
+        } else if (d_minutes < 5) {
+            return '刚刚';
+        } else if (d_days >= 3 && d_days < 30) {
+            return D + '&nbsp;' + H + ':' + m;
+        } else if (d_days >= 30 && d_days < 365) {
+            return M + '-' + D + '&nbsp;' + H + ':' + m;
+        } else {
+            return Y + '-' + M + '-' + D + '&nbsp;' + H + ':' + m + ':' + s;
+        }
+    }
+    // dateStr： 返回的时间字符串， 格式如： 2015 - 07 - 30 09: 36: 10
+
+    // 转换后的结果 
+    var str = getDateDiff("2017 -07-18 18:00:00");
+    // 在控制台输出结果 
+    console.log(str);
+    </script>
+</body>
+
+</html>

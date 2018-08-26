@@ -1,0 +1,30 @@
+<!--pages/login/login.wxml-->
+<import src="../../template/toast/toastText.wxml" />
+<template is="toastText" data='{{..._toast_}}' />
+<view class='baseView'>
+    <image class='login_logo' src='{{login_logo}}'></image>
+    <view class='accountContainer'>
+        <view class='accountContainer-account'>
+            <image class='icon' src='{{icon_login_account}}'></image>
+            <input class='account-input' bindinput='accountInput' placeholder='请输入账号'></input>
+        </view>
+        <view class='accountContainer-password'>
+            <image class='icon' src='{{icon_login_password}}'></image>
+            <input class='account-input' bindinput='passwordInput' placeholder='请输入密码'></input>
+        </view>
+        <view class='accountContainer-verifycode'>
+            <image class='icon' src='{{icon_login_verifycode}}'></image>
+            <input class='account-input-verifycode' bindinput='verifycode' placeholder='请输入右侧验证码'></input>
+            <image class='account-verifycode' src='{{verifyCodeImg}}'></image>
+        </view>
+    </view>
+
+    <button class='loginBtn' bindtap='loginBtnAction'>登录</button>
+
+    <view class='extra'>
+        <button class='extraBtn'>注册</button>
+        <view class='extra-seporator'></view>
+        <button class='extraBtn'>忘记密码?</button>
+    </view>
+
+</view>

@@ -1,0 +1,26 @@
+<view class="body_b" wx:if="{{showPage}}">
+    <view class="discount_pic">
+        <view class="headImg_wrapper">
+            <image class="headImg" src="{{headImg}}"></image>
+            <view class="nickName">{{nickName}}</view>
+        </view>
+        <view class="desc">邀请您一起上分，轻松上王者</view>
+        
+        <view class="discount_btn" bindtap="discountBtnEv"></view>
+    </view>
+    <view class="active_rule" bindtap="showRulesEv">活动规则</view>
+    <view class="rule-wrapper {{showRules ? '' : 'hide'}}"></view>
+    <view class="rule-detail-wrapper textFontR {{showRules ? '' : 'hide'}}">
+        <view class="rule-title">活动规则</view>
+        <view class="rule-detail textFontR">
+            <view class="rule-item">1.优惠券发放到已授权登录的微信号账户上。</view>
+            <view class="rule-item">2.下载问技陪练APP用微信授权登录，可在“我的” - “优惠券”中查看已获得的优惠券。</view>
+            <view class="rule-item">3.下单支付时可以选择使用已获得的优惠券。</view>
+            <view class="rule-item">4.每次支付时限制使用一张优惠券，优惠券不找零。</view>
+            <view class="rule-item">5.问技陪练保留法律范围内允许的对优惠券的解释权。</view>
+        </view>
+        <view class="rule-btn textFontR" bindtap="hideRulesEv">我知道了</view>
+        <view class="rule-close"></view>
+        <view class="rule-close-cover" bindtap="hideRulesEv"></view>
+    </view>
+</view>

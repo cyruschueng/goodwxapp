@@ -1,0 +1,41 @@
+<view class="loding linght tc mt10" wx:if="{{!isLoaded}}">
+    <text class="iconfont icon-jiazai mr10 f18"></text>
+    <text>正在加载中...</text>
+</view>
+<block wx:else>
+    <view class="no-content tc" wx:if="{{!data.length}}">
+        <text style="font-size:232rpx;" class="no-content-icon iconfont icon-kongbaiyemian"></text>
+        <view class="no-content-font">暂无优惠券</view>
+    </view>
+    <view class="contenter" wx:else>
+        <view class="dollar-list {{item.status==1?'used':''}}" wx:for="{{data}}" wx:key="{{item.id}}">
+            <view class="top write">
+                <view class="money-msg f16">
+                    <text wx:if="{{item.type==0}}">¥ </text>
+                    <text wx:else>折 </text>
+                    <text class="money">{{item.discount}}</text>
+
+                    <text wx:if="{{item.full_available>0}}"> 满减券</text>
+                    <block wx:else>
+                        <text wx:if="{{item.type==0}}"> 代金券</text>
+                        <text wx:else> 折扣券</text>
+                    </block>
+
+                </view>
+                <view class="tc fr" wx:if="{{item.status==1}}">
+                    <text class="iconfont icon-yishiyong"></text>
+                </view>
+                <!-- <view class="status tc fr" catchtap="onNavigateTap" data-type="coupon" data-url="{{item.url}}" wx:else>使用</view> -->
+            </view>
+            <view class="bottom grey">
+                <view>
+                    <text class="iconfont icon-time mr10 linght"></text>
+                    <text wx:if="{{item.full_available>0}}">满{{item.full_available}}元可用 </text>
+                    <text wx:if="{{item.first_available>0}}">首单可用</text>
+                </view>
+                <view>
+                    <text class="iconfont icon-info mr10 linght"></text>{{item.use_start_date}} 至 {{item.use_end_date}}</view>
+            </view>
+        </view>
+    </view>
+</block>

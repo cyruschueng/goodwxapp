@@ -1,0 +1,37 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view class="s_frame" wx:if="{{warMemberList.length!=0}}">
+  <scroll-view bindscrolltolower="loadMore" scroll-top="{{scroll}}" scroll-y="{{true}}">
+    <block wx:for="{{warMemberList}}" wx:key="{{index}}">
+      <view class="flex infoBox" data-id="{{item.user_id}}" bindtap="goTo">
+        <view class="infoLeft">
+          <image src="{{item.user_avatar_url}}" class="others_pic" wx:if="{{item.user_avatar_url}}" />
+          <view class="flex user_image" wx:if="{{item.user_avatar_text}}">{{item.user_avatar_text}}</view>
+        </view>
+        <view class="infoCenter">
+          <view class="userName">{{item.user_real_name}}</view>
+          <view class="userCompany">{{item.user_company_name}}</view>
+          <view class="userPosition">{{item.user_company_career}}</view>
+        </view>
+        <view class="infoRight">
+          <view class="flex addNetwork">
+            <view class="refuse" wx:if="{{item.follow_status == 1}}">已为人脉</view>
+            <view class="refuse" wx:if="{{item.follow_status == 2}}">待验证</view>
+            <view class="addPersonBtn" wx:if="{{item.follow_status == 0 || item.follow_status == 3}}" catchtap="addPerson" data-applyid="{{item.user_id}}" data-status="{{item.follow_status}}">加人脉</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+<!--没有更多-->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+<view class="empty flex" wx:if="{{warMemberList.length == 0}}">
+  <image src="/img/img-kong1@2x.png" class="noData"></image>
+  <view class="hasNothing">暂无成员</view>
+</view>
+<view class="flex btn">
+  <view class="addWar" bindtap="addWar" wx:if="{{follow_status == 0}}">加战队</view>
+  <view class="addWar" wx:if="{{follow_status == 1}}">已加入</view>
+  <button open-type="share" id="share" class="invitePersons">为他拉票</button>
+</view>

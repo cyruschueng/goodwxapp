@@ -1,0 +1,34 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+<!--top str -->
+<view class='h100'>
+  <view class='h7 flexBetw Skin pdr1 pdl1 borderD'>
+    <image class='imgxs15' src='/images/back.png' bindtap='Infoback'></image>
+    <view></view>
+    <view></view>
+  </view>
+<!--top end -->
+<!--输入框 str -->
+  <view>
+    <view class='pdr1 pdl1 pd11 borderB bg256' wx:if="{{inputH}}">
+      <input type='text' value='{{buildData}}' placeholder='{{infoPlaceH}}' class='h100 wh100' bindinput='buildInput'></input>
+    </view>
+    <!--日历 str  -->
+    <view  wx:if="{{calenH}}" class='pd1 bg256 flex flexCenter'>
+      <picker class='pick flexCenter' mode="date" value="{{date}}" start="2000-01-01" end="{{todaye}}" bindchange="bindDateChange0">  
+      <view class="picker color0 "> {{dates0}}   </view>  
+    </picker>
+    <picker class='pick flexCenter' mode="time" value="{{time}}" start="00:00:00" end="23:59:59" bindchange="bindDateChange1">
+      <view class="picker color0 "> {{time0}}</view>  
+    </picker>
+    </view> 
+  <!--日历 end  -->
+</view>
+
+<view class='flexCenter'>
+  <button class='btns Skin mt05' bindtap='editbuild'>确定</button>
+</view>
+</view>
+<!--输入框 end -->
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

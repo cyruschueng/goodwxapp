@@ -1,0 +1,136 @@
+<!--page/verification/menuverification/index.wxml-->
+<view class='table-verification'>
+  <!--切线-->
+  <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+    <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">全部
+      <text>{{verifyList.length}}</text>
+    </view>
+    <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">未验单
+      <text>{{noVerificationCertificate}}</text>
+    </view>
+    <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">已验单
+      <text>{{verificationCertificate}}</text>
+    </view>
+  </scroll-view>
+  <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+    <!--全部-->
+    <swiper-item>
+      <scroll-view scroll-y="true" class="scoll-h">
+        <block wx:for="{{verifyList}}"  wx:key="{{index}}">
+
+          <view class='item-ans' catchtap="swichMain"  data-deskNo='{{item.deskNo}}' data-memberFlag='{{item.memberFlag}}'data-orderShopId='{{item.orderShopId}}'>
+
+            <view class='_border'>
+              <view class='table-message'>
+                <view class='table-message-left'>
+                  <view class='table-type'>桌号：
+                    <text>{{item.deskNo}}</text>
+                  </view>
+                  <view class='table-type'>就餐人数：
+                    <text>{{item.useNum}}人</text>
+                  </view>
+                  <view class='table-type'>状态：
+                    <text>{{item.memberFlag==0?'未验单':''}}{{item.memberFlag==1?'已验单':''}}</text>
+                  </view>
+                </view>
+                <view class='table-message-right'>
+                  <view class='number'>
+                    <text class='num'>{{item.catNum}}份</text>
+                    <text class='jian'></text>
+                  </view>
+                </view>
+              </view>
+
+              <view class='expense-money'>
+                <text>消费金额：</text>
+                <text class='money'>￥<text>{{item.price}}</text></text>
+              </view>
+            </view>
+
+          </view>
+          <view class='tangent2'></view>
+        </block>
+        <!--切线2-->
+      </scroll-view>
+    </swiper-item>
+    <!--未验单-->
+    <swiper-item>
+      <scroll-view scroll-y="true" class="scoll-h">
+
+
+        <block wx:for="{{verifyList}}"  wx:key="{{index}}" wx:if="{{item.memberFlag == 0 ? true : false }}">
+          <!--切线2-->
+
+          <view class='item-ans' catchtap="swichMain" data-deskNo='{{item.deskNo}}' data-memberFlag='{{item.memberFlag}}' data-orderShopId='{{item.orderShopId}}'>
+            <view class='_border'>
+              <view class='table-message'>
+                <view class='table-message-left'>
+                  <view class='table-type'>桌号：
+                    <text>{{item.deskNo}}</text>
+                  </view>
+                  <view class='table-type'>就餐人数：
+                    <text>{{item.useNum}}人</text>
+                  </view>
+                  <view class='table-type'>状态：
+                    <text>{{item.memberFlag==0 ? '未验单':''}}</text>
+                  </view>
+                </view>
+                <view class='table-message-right'>
+                  <view class='number'>
+                    <text class='num'>{{item.catNum}}份</text>
+                    <text class='jian'></text>
+                  </view>
+                </view>
+              </view>
+
+              <view class='expense-money'>
+                消费金额：
+                <text class='money'>￥<text>{{item.price}}</text></text>
+              </view>
+            </view>
+          </view>
+          <view class='tangent2'></view>
+        </block>
+        <!--切线2-->
+      </scroll-view>
+    </swiper-item>
+    <!--已验单-->
+    <swiper-item>
+      <scroll-view scroll-y="true" class="scoll-h">
+        <block wx:for="{{verifyList}}"  wx:key="{{index}}" wx:if="{{ item.memberFlag == 1 ? true : false }}">
+
+          <view class='item-ans' catchtap="swichMain" data-deskNo='{{item.deskNo}}' data-memberFlag='{{item.memberFlag}}' data-orderShopId='{{item.orderShopId}}'>
+            <view class='_border'>
+              <view class='table-message'>
+                <view class='table-message-left'>
+                  <view class='table-type'>桌号：
+                    <text>{{item.deskNo}}</text>
+                  </view>
+                  <view class='table-type'>就餐人数：
+                    <text>{{item.useNum}}人</text>
+                  </view>
+                  <view class='table-type'>状态：
+                    <text>{{item.memberFlag==1 ? '已验单':''}}</text>
+                  </view>
+                </view>
+                <view class='table-message-right'>
+                  <view class='number'>
+                    <text class='num'>{{item.catNum}}份</text>
+                    <text class='jian'></text>
+                  </view>
+                </view>
+              </view>
+
+              <view class='expense-money'>
+                消费金额：
+                <text class='money'>￥<text>{{item.price}}</text></text>
+              </view>
+            </view>
+          </view>
+          <view class='tangent2'></view>
+        </block>
+        <!--切线2-->
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

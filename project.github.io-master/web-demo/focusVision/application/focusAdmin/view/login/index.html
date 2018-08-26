@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>计算机视觉与三维检测工作室后台管理系统--登录</title>
+    <link type="text/css" href="{$Think.server.script_name}/../admin/login/css/css.css" rel="stylesheet">
+</head>
+<body>
+<form method="post" action="{$Think.server.script_name}/focusAdmin/login/post_login">
+    <div id="main">
+        <div id="top" style="text-align: center;">
+            <img src="{$Think.server.script_name}/../admin/login/img/toplogo.jpg" style="margin: 80px auto;">
+        </div>
+        <div id="mid">
+            <div id="mid_left">
+                <div id="mid_left_con"></div>
+            </div>
+            <div id="mid_right">
+                <div id="mid_right_con">
+                    <div style="text-align:center;"><span id="lblMSG" style="color:#ff3300;"></span></div>
+                    <table cellpadding="0" cellspacing="0" border="0" width="300" class="login">
+                        <tr>
+                            <td width="60">用 &nbsp;户：</td>
+                            <td width="160">
+                                <div class="l1">
+                                    <input name="number" type="text" title="请输入工号" placeholder="请输入工号" style="width:108px;">
+                                </div>
+                            </td>
+                            <td rowspan="3" width="80">
+                                <input name="btnLogin" src="{$Think.server.script_name}/../admin/login/img/an.jpg" onclick="javascript:return checkLogin();" style="height:67px;width:76px;" type="image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>密 &nbsp;码：</td>
+                            <td>
+                                <div class="l2">
+                                    <input name="password" type="password" title="请输入密码！" placeholder="请输入密码" style="width:108px;" />
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="bot"></div>
+    </div>
+</form>
+</body>
+<script type="text/javascript">
+    function checkLogin(){
+        var checkNumber=/^[0-9]*$/;
+        var checkSpell=/^[a-zA-Z]*$/;
+        var NameValue=document.getElementById("txtUserName").value;
+        var PassWordValue=document.getElementById("txtPassword").value;
+        var ImgValue=document.getElementById("txtImage").value;
+        if(NameValue == ""){
+            alert("用户名不能为空！");
+            document.getElementById("txtUserName").focus();
+            document.getElementById("txtUserName").select();
+            return false;
+        }else if(ImgValue==""){
+            alert("验证码不能为空！");
+            document.getElementById("txtImage").focus();
+            document.getElementById("txtImage").select();
+            return false;
+        }else if(PassWordValue == ""){
+            alert("密码不能为空！");
+            document.getElementById("txtPassword").focus();
+            document.getElementById("txtPassword").select();
+        }
+    }
+    function ChangeImageVerificationImageUrl(imgObject){
+        var url=imgObject.getAttribute("src")
+        if(url != ""){
+            url=url.substring(0,url.indexOf("?"));
+        }
+        imgObject.setAttribute("src",(url+"?t="+Math.random()))
+    }
+</script>
+</html>

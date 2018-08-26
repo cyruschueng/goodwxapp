@@ -1,0 +1,27 @@
+<!--pages/me/me.wxml-->
+<view class='me'>
+  <view class='me_top' bindtap='listTitle' data-title='title'>
+    <image class='me_img' src='../../images/my_img1.jpg'/>
+    <view class='me_msg'>
+      <text>{{name}}</text>
+      <view>
+         <text>微速保ID:</text>
+         <text>10001</text>
+      </view>
+      <view>
+         <text>积分:</text>
+         <text>10</text>
+      </view>
+    </view>
+    <icon class='iconfont icon-right me_icon'></icon>
+  </view>
+  <view class='me_content'>
+    <view class='me_list' wx:for="{{listArr}}" wx:key="*this" bindtap='listClick' data-index='{{index}}'  data-tel='{{item.me_tel}}'>
+      <view>
+        <icon class='iconfont {{item.class}} me_icon_lit'></icon>
+        <text>{{item.name}}</text>
+      </view>
+      <icon class='iconfont {{item.me_right_class}} me_icon_lib'>{{item.me_tel}}</icon>
+    </view>
+  </view>
+</view>

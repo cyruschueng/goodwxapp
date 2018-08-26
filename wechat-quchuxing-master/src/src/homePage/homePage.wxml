@@ -1,0 +1,369 @@
+<!-- <view style="height: 50px; width: 100%; background: red;" >滑动我</view> -->
+
+<view style="padding: 15px; border-bottom: 5px solid #F7F6F6;background: #ffffff;">
+	<view class="header">
+		<view class="header_left">
+			<image src="{{ userInfo.picture }}"></image>
+		</view>
+		<view class="header_right">
+			<block wx:if="{{ isSelf == 0 }}">
+				<view class="operating">
+					<view class="operating_right">
+						<view class="share"><button open-type="share">分享</button></view>
+					</view>
+					<view class="operating_left">
+						<view class="operating_left_img">
+							<image src="../../images/icon_likemini@3x.png"></image>
+						</view>
+						<view>关注</view>
+					</view>
+				</view>
+			</block>
+			<block wx:if="{{ isSelf == 1 }}">
+				<view class="operating">
+					<view class="operating_right" bindtap="openPopUpLayer">更多</view>
+					<view class="operating_left">
+						<view class="share"><button open-type="share">分享主页</button></view>
+					</view>
+				</view>
+			</block>
+			<view class="history">
+				<view class="history_list">{{ userInfo.orderNum }}<text>乘车</text></view>
+				<view class="history_list">{{ userInfo.departureNum }}<text>发车</text></view>
+				<view class="history_list">{{ userInfo.beCare }}<text>粉丝</text></view>
+			</view>
+		</view>
+	</view>
+	<view class="user_name">{{ userInfo.nickName }} <text>{{ userInfo.lastTimeOnline }}</text></view>
+	<view class="user_type">
+		<view class="age">{{ userInfo.age || '0' }}岁</view>
+		<view class="certification">
+			<view class="certification_list">
+				<view class="certification_img">
+					<block wx:if="{{ userInfo.zmxy_status == 0 }}">
+						<image src="../../images/icon_zhmsign_no@3x.png"></image>
+					</block>
+					<block wx:else>
+						<image src="../../images/icon_zhmsign@3x.png"></image>
+					</block>
+				</view>
+			</view>
+			<view class="certification_list">
+				<view class="certification_img">
+					<block wx:if="{{ userInfo.status != 1 }}">
+						<image src="../../images/icon_carsign@3x.png"></image>
+					</block>
+					<block wx:else>
+						<image src="../../images/icon_carsign_no@3x.png"></image>
+					</block>
+				</view>
+			</view>
+		</view>
+	</view>
+	<block wx:if="{{ userInfo.carNumber != null || userInfo.car != null }}">
+		<view class="car_code">{{ userInfo.carNumber }} <text>{{ userInfo.car }}</text></view>
+	</block>
+</view>
+
+<view class="switch">
+	<view bindtap="switch_code" data-type="stroke" class="switch_list {{ code_type == 'stroke' ? 'switch_list_active' : '' }}">行程</view>
+	<view bindtap="switch_code" data-type="attention" class="switch_list {{ code_type == 'attention' ? 'switch_list_active' : '' }}">关注</view>
+	<!-- <view bindtap="switch_code" data-type="personal" class="switch_list {{ code_type == 'personal' ? 'switch_list_active' : '' }}">资料</view> -->
+</view>
+
+<block wx:if="{{ code_type == 'stroke' }}">
+	<view class="content">
+		<!-- 行程 -->
+		<view wx:for-items="{{ order_travel }}" wx:key="{{ index }}">
+			<block wx:if="{{ item.status == 'MACH' }}">
+				<view class="stroke_list">
+					<view class="list_header">
+						<view class="stroke_title">({{ item.startTimeTxt }}) 查看匹配详情</view>
+						<view class="stroke_type" data-id="{{ item.PassengerTravelId }}" bindtap="deleteTraval">
+							<image src="../../images/btn_cancel@3x.png"></image>
+						</view>
+					</view>
+					<view class="list_content" data-id="{{ item.PassengerTravelId }}" bindtap="gotoMatchPay">
+						<view class="list_location">
+							<view class="loc_style_up"></view>
+							<view class="loc_address">{{ item.startAddress }} <text>上车</text></view>
+						</view>
+						<view class="list_location">
+							<view class="loc_style_down"></view>
+							<view class="loc_address">{{ item.endAddress }} <text>下车</text></view>
+						</view>
+						<view class="list_foot">
+							<view class="ride_number">
+								<view class="ride">乘车人数</view>
+								<view class="number">{{ item.seats }}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<view wx:for-items="{{ order_travel }}" wx:key="{{ index }}">
+			<block wx:if="{{ item.status == 'PASSENGER_TRAVEL' }}">
+				<view class="stroke_list">
+					<view class="list_header">
+						<view class="stroke_title">{{ item.startTime }}</view>
+					</view>
+					<view class="list_content">
+						<view class="list_location">
+							<view class="loc_style_up"></view>
+							<view class="loc_address">{{ item.startAddress }}</view>
+						</view>
+						<view class="list_location">
+							<view class="loc_style_down"></view>
+							<view class="loc_address">{{ item.endAddress }}</view>
+						</view>
+						<view class="list_foot">
+							<view class="ride_number">
+								<view class="ride">乘车人数</view>
+								<view class="number">{{ item.seats }}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<view wx:for-items="{{ order_travel }}" wx:key="{{ index }}">
+			<block wx:if="{{ item.status == 'PASSENGER_TRAVELING' }}">
+				<view class="stroke_list">
+					<view class="list_header">
+						<view class="stroke_title">{{ item.startTimeTxt }}准时上车哦</view>
+						<view class="stroke_type paid" data-travelId="{{ item.travelId }}" bindtap="toPayDetails">已支付</view>
+					</view>
+					<view class="list_content" data-travelId="{{ item.travelId }}" bindtap="toPayDetails">
+						<view class="list_location">
+							<view class="loc_style_up"></view>
+							<view class="loc_address">{{ item.startAddress }} <text>上车</text></view>
+						</view>
+						<view class="list_location">
+							<view class="loc_style_down"></view>
+							<view class="loc_address">{{ item.endAddress }} <text>下车</text></view>
+						</view>
+						<view class="list_foot">
+							<view class="ride_number">
+								<view class="ride">乘车人数</view>
+								<view class="number">{{ item.bookSeat }}</view>
+							</view>
+							<view class="payment">
+								<view>实付款:</view>
+								<view>{{ item.price }}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			<block wx:if="{{ item.status == 'PASSENGER_NOPAY_TRAVEL' }}">
+				<view class="stroke_list">
+					<view class="list_header">
+						<view class="stroke_title">{{ item.startTimeTxt }}准时上车哦</view>
+						<view class="stroke_type unpaid" data-id="{{ item.travelId }}" bindtap="gotoPay">未支付</view>
+					</view>
+					<view class="list_content" data-id="{{ item.travelId }}" bindtap="gotoPay">
+						<view class="list_location">
+							<view class="loc_style_up"></view>
+							<view class="loc_address">{{ item.startAddress }} <text>上车</text></view>
+						</view>
+						<view class="list_location">
+							<view class="loc_style_down"></view>
+							<view class="loc_address">{{ item.endAddress }} <text>下车</text></view>
+						</view>
+						<view class="list_foot">
+							<view class="ride_number">
+								<view class="ride">乘车人数</view>
+								<view class="number">{{ item.bookSeat }}</view>
+							</view>
+							<view class="payment">
+								<view>实付款:</view>
+								<view>{{ item.price }}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			<!-- 车主匹配到乘客或者没有匹配到 -->
+			<block wx:if="{{ item.status == 'DRIVER_WILL_TRAVEL' }}">
+				<view class="stroke_list">
+					<view class="list_header">
+						<view class="stroke_title">{{ item.startTimeTxt }}出发</view>
+						<view class="stroke_type look_at_the_way" data-travelId="{{ item.travelId }}" bindtap="gotoDetails">查看</view>
+					</view>
+					<view class="list_content" data-travelId="{{ item.travelId }}" bindtap="gotoDetails">
+						<view class="list_location">
+							<view class="loc_style_up"></view>
+							<view class="loc_address">{{ item.startAddress }} <text>上车</text></view>
+						</view>
+						<view class="list_location">
+							<view class="loc_style_down"></view>
+							<view class="loc_address">{{ item.endAddress }} <text>下车</text></view>
+						</view>
+						<view class="list_foot">
+							<view class="ride_number clear_flex">
+								<view class="ride">座位数</view>
+								<view class="number_img">
+									<image wx:for="{{ item.seat_true }}" wx:for-item="seat_img" wx:key="{{ index }}" src="{{ seat_img.img }}"></image>
+									<image wx:for="{{ item.seat_false }}" wx:for-item="seat_img" wx:key="{{ index }}" src="{{ seat_img.img }}"></image>
+								</view>
+							</view>
+							<view class="payment">
+								<view>单价:</view>
+								<view>{{ item.travelPrice }}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			<!-- 车主结束行程 -->
+			<block wx:if="{{ item.status == 'DRIVER_HISTORY_TRAVEL' }}">
+				<view class="over_list">
+					<view class="stroke_list" data-type="owners" data-id="{{ item.travelId }}" bindtap="deleteOfpage">
+						<view class="list_header">
+							<view class="stroke_title">{{ item.startTimeTxt }}</view>
+							<view class="stroke_type over">已结束</view>
+						</view>
+						<view class="list_content">
+							<view class="list_location">
+								<view class="loc_style_up"></view>
+								<view class="loc_address">{{ item.startAddress }} <text>上车</text></view>
+							</view>
+							<view class="list_location">
+								<view class="loc_style_down"></view>
+								<view class="loc_address">{{ item.endAddress }} <text>下车</text></view>
+							</view>
+							<view class="list_foot">
+								<view class="ride_number clear_flex">
+									<view class="ride">座位数</view>
+									<view class="number_img">
+										<image wx:for="{{ item.seat_true }}" wx:for-item="seat_img" wx:key="{{ index }}" src="{{ seat_img.img }}"></image>
+										<image wx:for="{{ item.seat_false }}" wx:for-item="seat_img" wx:key="{{ index }}" src="{{ seat_img.img }}"></image>
+									</view>
+								</view>
+								<view class="payment">
+									<view>收入:</view>
+									<view>{{ item.totalPrice }}</view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view animation="{{ deleteAnimation_btn }}" data-id="{{ item.travelId }}" class="delete_list {{ !delete_active && item.travelId == delete_id ? 'delete_index' : '' }}" bindtap="deleteOverTraveId">
+						<view class="delete_list_text">删除</view>
+					</view>
+				</view>
+			</block>
+			<!-- 乘客结束行程 -->
+			<block wx:if="{{ item.status == 'PASSENGER_HISTORY_ORDER' }}">
+				<view class="over_list">
+					<view class="stroke_list" data-type="passenger" data-orders_id="{{ item.ordersTravelId }}" data-id="{{ item.travelId }}"  bindtap="deleteOfpage">
+						<view class="list_header">
+							<view class="stroke_title">{{ item.startTimeTxt }}</view>
+							<view class="stroke_type over">已结束</view>
+						</view>
+						<view class="list_content">
+							<view class="list_location">
+								<view class="loc_style_up"></view>
+								<view class="loc_address">{{ item.startAddress }} <text>上车</text></view>
+							</view>
+							<view class="list_location">
+								<view class="loc_style_down"></view>
+								<view class="loc_address">{{ item.endAddress }} <text>下车</text></view>
+							</view>
+							<view class="list_foot">
+								<view class="ride_number">
+									<view class="ride">乘车人数</view>
+									<view class="number">{{ item.bookSeat }}</view>
+								</view>
+								<view class="payment">
+									<view>实付款:</view>
+									<view>{{ item.price }}</view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view animation="{{ deleteAnimation_btn }}" data-id="{{ item.travelId }}" class="delete_list {{ !delete_active && item.travelId == delete_id ? 'delete_index' : '' }}" bindtap="deleteOverTraveId">
+						<view class="delete_list_text">删除</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<block wx:if="{{ order_travel.length == 0 }}">
+			<view class="loading">
+				<view class="loading_img">
+					<image src="../../images/img_wuxingcheng.png"></image>
+				</view>
+			</view>
+		</block>
+		<block wx:if="{{ pull_up_loading }}">
+			<view class="pull_up_loading">加载中....</view>
+		</block>	
+	</view>
+</block>
+<block wx:elif="{{ code_type == 'attention' }}">
+	<view class="attention">
+		<view class="attention_list" wx:for-items="{{ attention }}" wx:key="{{ index }}" bindtap="gotoUserPage" data-id="{{ item.phone }}">
+			<block wx:if="{{ item.carNum != null }}">
+				<view class="people_info" >
+					<view class="people_img">
+						<image src="{{ item.picture }}"></image>
+					</view>
+					<view class="people_details">
+						<view class="people_name">{{ item.nickName }} <text>{{ item.lastTimeOnline }}</text></view>
+						<view class="people_code">{{ item.carNum }}</view>
+					</view>
+				</view>
+				<view class="people_lastTime">一天前有发车</view>
+			</block>
+			<block wx:if="{{ item.carNum == null }}">
+				<view class="people_info" bindtap="gotoUserPage" data-id="{{ item.phone }}">
+					<view class="people_img">
+						<image src="{{ item.picture }}"></image>
+					</view>
+					<view class="people_details">
+						<view class="people_name">{{ item.nickName }} </view>
+						<view class="people_pass_name">{{ item.lastTimeOnline }}</view>
+					</view>
+				</view>
+				<view class="people_lastTime">一天前有乘车</view>
+			</block>
+		</view>
+	</view>
+	<block wx:if="{{ attention.length == null }}">
+		<view class="loading">
+			<view class="loading_img">
+				<image src="../../images/img_wuxianxi.png"></image>
+			</view>
+		</view>
+	</block>
+</block>
+<!-- <block wx:elif="{{ code_type == 'personal' }}">
+	<view class="personal">
+		<view class="personal_info">
+			<view class="personal_title">个人信息</view>
+			<view class="home">家乡: 北京市</view>
+			<view class="work">职业: 工程师</view>
+		</view>
+		<view class="personal_car">
+			<view class="car_details">
+				<view>{{ userInfo.car }}</view>
+				<view>{{ userInfo.carNumber }}</view>
+			</view>
+			<view class="car_img">
+				<image></image>
+			</view>
+		</view>
+	</view>
+</block> -->
+
+
+<view class="pop_up_layer" style="width: {{ width }}px; height: {{ height }}px" hidden="{{ pop_up_layer }}">
+	<view class="close" style="height: {{ height - 229 }}px"></view>
+	<view class="operating_list">
+		<view bindtap="gotoEditFormation">编辑资料</view>
+		<view bindtap="setLocation">设置地址</view>
+		<view bindtap="gotoMoneyDetails">钱包</view>
+		<view bindtap="callCustomerService">客服</view>
+		<view bindtap="closePopUpLayer">取消</view>
+	</view>
+</view>

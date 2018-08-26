@@ -1,0 +1,78 @@
+<template name="use_coupon">
+    <view class="floatBox" hidden="{{!isShow}}" catchtap="on{{name}}ComfirnTap">
+        <view class="use-juan">
+            <radio-group catchchange="on{{name}}Change">
+
+                <label class="not-use flex gridXb mt10">
+                    <view class="sub">不使用代金券</view>
+                    <radio value="-1" checked='true' />
+                </label>
+
+                <view class="juan-items-box mt10">
+                    <label class="juan-item flex mb10" wx:for="{{data}}" wx:key="{{item.id}}">
+                        <view class="price">
+                            <text wx:if="{{item.type==0}}">￥ </text>
+                            <text wx:else>折 </text>
+
+                            <text class="price-num">{{item.discount}}</text>
+                        </view>
+                        <view class="sub ml15">
+                            <view class="shop-name f18">{{item.title}}</view>
+                            <view class="mt5 tips-msg">
+                                <view class="grey f12" wx:if="{{item.full_available>0}}">满{{item.full_available}}元可用</view>
+                                <view class="grey f12" wx:if="{{item.first_available>0}}">首单可用</view>
+                                <view class="grey f12">{{item.use_start_date}} 至 {{item.use_end_date}}</view>
+                            </view>
+                        </view>
+                        <radio value="{{index}}" checked="{{item.is_active}}" />
+
+                    </label>
+                </view>
+
+            </radio-group>
+        </view>
+        <view class="floatBox floatBoxBg" style="display:block;"></view>
+    </view>
+</template>
+
+
+<template name="go_coupon">
+    <view class="floatBox" hidden="{{!isShow}}">
+        <view class="use-juan">
+            <!--优惠劵-->
+            <view class="juan mb10">
+
+                <view class="juan-list flex {{item.style}}" wx:for="{{data}}" wx:key="{{item.id}}">
+                    <view class="juan-msg flex">
+                        <view class="flexC mr20">
+                            <view class="sub price">{{item.discount}}
+                                <text class='f14' wx:if="{{item.type==0}}">元</text>
+                                <text class='f14' wx:else>折</text>
+                            </view>
+                            <view class="linght f12">
+                                <view wx:if="{{item.full_available>0}}">满{{item.full_available}}元可用 </view>
+                                <view wx:if="{{item.first_available>0}}">首单可用</view>
+                            </view>
+                        </view>
+                        <view class="sub juan-title">
+                            {{item.title}}
+                        </view>
+                    </view>
+                    <view class="recive tc fb">
+                        <view>
+                            <text wx:if="{{item.full_available>0}}">满减券</text>
+                            <block wx:else>
+                                <text wx:if="{{item.type==0}}">代金券</text>
+                                <text wx:else>折扣券</text>
+                            </block>
+                        </view>
+                        <view class="btn f12 mt10" catchtap="on{{name}}Go" data-index="{{index}}">点击领取</view>
+                    </view>
+                </view>
+
+            </view>
+
+        </view>
+        <view class="floatBox floatBoxBg" style="display:block;" catchtap="on{{name}}ComfirnTap"></view>
+    </view>
+</template>

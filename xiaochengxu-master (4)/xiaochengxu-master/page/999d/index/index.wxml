@@ -1,0 +1,67 @@
+
+<import src="../template/template.wxml" />
+
+<scroll-view scroll-y="true" style="height:100%" upper-threshold="50" lower-threshold="100" bindscrolltolower="scrolltolower">
+    <!--搜索-->
+    <view class="index-search">
+        <navigator url="../search/search" class="search-view" >
+            <icon class="search-icon size30"/>
+            舞蹈·舞曲·老师
+        </navigator>  
+        <navigator url="../collect/collect" class="shoucang-index-icon">
+        </navigator> 
+        <navigator url="../history/history" class="history-icon size40">
+        </navigator>
+    </view>
+
+    <!--导航-->
+    <view class="nav-list">
+        <navigator url="../hot/hot" class="nav-icon">
+            <icon class="hot-icon"/>
+            <text>热门</text>
+        </navigator>
+        <navigator url="../music/music" class="nav-icon">
+            <icon class="wuqu-icon"/>
+            <text>舞曲</text>
+        </navigator>
+        <navigator url="../teacher/teacher" class="nav-icon">
+            <icon class="mingshi-icon"/>
+            <text>名师</text>
+        </navigator>
+        <navigator url="../dancing/dancing" class="nav-icon">
+            <icon class="jiaoyi-icon"/>
+            <text>交谊舞</text>
+        </navigator> 
+    </view>
+
+    <!--今日推荐-->
+
+    <view class="shouye-content">
+            
+        <view class="main-title">
+            <text>今日推荐</text>
+        </view> 
+        <view class="content-main">
+            <block wx:for="{{ indexData }}" wx:key="id">
+                <template is="itemList" data="{{ ...item }}" />
+            </block>
+        </view>
+
+        <view hidden="{{hotshidden}}" class="box-more">
+            <view wx:if="{{hothidden}}">
+                <image src="../../images/loading.gif"/>
+                加载中...
+            </view>
+            <view wx:else>
+                <text> 没有更多了 </text>
+            </view>
+        </view>      
+    </view> 
+<loading hidden="{{hidden}}">加载中...</loading>
+
+</scroll-view>
+
+
+
+
+

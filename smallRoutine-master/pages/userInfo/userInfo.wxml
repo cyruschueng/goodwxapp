@@ -1,0 +1,39 @@
+<!-- 过滤器 -->
+<wxs src="../../filter/filter.wxs" module="filter" />
+<view class="body" style='height:{{windowHeight}}px'>
+  <view class='header_container'>
+      <image class='header_bg' src='/images/userInfo/user_header_bg.png'></image>
+      <canvas class='my_canvas' canvas-id='my_canvas' style="width: {{windowWidth}}px; height: {{canvasHeight}}px">
+      </canvas>
+  </view>
+  <view class='text_content'>
+    <image wx:if="{{false}}" src='/images/userInfo/hang.png' class='left_img text_img'></image>
+    <image wx:if="{{false}}" src='/images/userInfo/hang.png' class='right_img text_img'></image>
+    <view class='font_content flex_column_center_container'>
+      <view class='flag_container' wx:if="{{userInfo.result}}">
+        <view class='flex_item_center flag_img_line'>
+          <image src='/images/userInfo/flag.png' class='flag_img'></image>
+          <text class='flag_nickname'>{{userInfo.grade ? userInfo.grade : "--"}}</text>
+      </view>
+        <text class='flag_message'>{{userInfo.gradeText? userInfo.gradeText: "--"}}</text>
+      </view>
+      <view wx:if="{{!userInfo.result}}" class="flex_item_center" style='height: 100%;'>
+          <view style=' color: #808080;padding: 10rpx 0;font-size: 24rpx;display: block;'>您还未参与挑战</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='flex_item_between button_content'>
+    <button open-type="share" class="friends button" catchtap='Page.onShareAppMessage()' plain="true">分享好友</button>
+    <button class="photo button" catchtap='saveTap' plain="true">保存相册</button>
+  </view>
+  <view class='continue' catchtap='continueTap'>
+    <text class='continue_button'>继续挑战</text>
+  </view>
+</view>
+<canvas class='save_canvas' canvas-id='save_canvas' style="width: {{windowWidth}}px; height: {{windowHeight}}px"></canvas>
+
+<import src="../../img-loader/img-loader.wxml"/>
+<template is="img-loader" data="{{ imgLoadList }}"></template>
+
+

@@ -1,0 +1,22 @@
+<view class="head">
+    <view class="title">选择一些你的约会喜好</view>
+    <view class="text">选择一些你的约会喜好</view>
+</view>
+
+<block wx:for="{{msg}}" wx:for-item="it">
+    <view style="padding:15px; border-bottom:1px #f2f2f2 solid"  id="{{it.id}}" bindtap="dropDownBind">
+        <view style="float:left">{{it.name}}</view>
+        <image style="float:right;width:20rpx;height:15rpx;" src="{{it.open == true? drop[1]:drop[0]}}"></image>
+        <view style="clear:both"></view>
+    </view>
+    <view class="{{it.open == true ? '':'hidden'}} lit">
+        <view class="con" wx:for="{{it.list}}" wx:for-item="li">
+            <view style="{{li.sel == 1 ?'color:#fff;background:#06c1ae;border:#06c1ae 1px solid':''}}" data-id="{{it.id}}" data-index="{{index}}" bindtap="selectLi">{{li.name}}</view>
+        </view>
+        <view style="clear:both"></view>
+    </view>
+    <view style="clear:both"></view>
+</block>
+<view class="btn btn-theme" style="background:#fff">
+    <view bindtap="save">保存</view>
+</view>

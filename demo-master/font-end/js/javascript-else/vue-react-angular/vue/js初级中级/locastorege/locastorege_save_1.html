@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>保存显示localStorage</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{approverArr}}</p>
+        <div @click="save">跳转，存localStorage</div>
+    </div>
+</body>
+
+</html>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        approverArr: [], //定义初始数组
+    },
+    created: function() {
+        this.loadData(); //加载渲染
+    },
+    mounted: function() {
+       
+    },
+    computed: {},
+    watch: {},
+    methods: {
+        save: function() {
+            
+
+            localStorage.setItem("approverArr", JSON.stringify(this.approverArr)); //保存当前
+            window.location.href = "./locastorege_select_2.html";
+        },
+
+        loadData: function() {
+            if (localStorage.getItem("approverArr")) { //判断是否有approverArr的localStorage
+                this.approverArr = JSON.parse(localStorage.getItem("approverArr"));
+            } else {
+                this.approverArr = [{
+                    "name": "zjy123",
+                    "age": "25123",
+                }]
+            }
+        }
+    }
+})
+</script>

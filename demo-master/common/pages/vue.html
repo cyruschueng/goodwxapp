@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ajax</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        123
+    </div>
+    <script type="text/javascript">
+    new Vue({
+        el: '#app',
+        mixins: [],
+        data: function() {
+            return {}
+        },
+        created: function() {
+            this.support();
+        },
+        mounted: function() {},
+        computed: {},
+        methods: {
+            support: function() {
+                var _this = this;
+                var reqUrl = 'http://192.168.40.119:9999/bservice/insertdata';
+                var reqData = {
+                    insertType: 'INSERT_TYPE_COOP_FRIEND',
+                    title: '12',
+                    attach: '',
+                    publish_at: '1992-02-01 10:30:00',
+                    sort: 1,
+                    fid: 1,
+                };
+
+                console.log(21);
+                $.ajax({
+                    url: reqUrl,
+                    type: 'post',
+                    data: reqData,
+                    dataType: 'json',
+                    scriptCharset: 'utf-8',
+                    success: function(res) {
+                        console.log('support123123', res)
+                    },
+                    error: function(res) {
+                        console.log('error');
+                    }
+                });
+            },
+        },
+        watch: {}
+    })
+    </script>
+</body>
+
+</html>

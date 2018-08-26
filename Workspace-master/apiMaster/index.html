@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>API接口管理</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="js/layui/css/layui.css">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+		<!--[if lt IE 9]>
+		  	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	  	<![endif]-->
+	  	<style type="text/css">
+	  		thead tr th{
+	  			text-align: center;
+	  		}
+	  		.ColorActive{
+	  			color: #fff;
+	  		}
+	  	</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini fixed">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>A</b>PI</span>
+					<span class="logo-lg"><b>API管理</b></span>
+				</a>
+				<!-- Header Navbar -->
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">Toggle navigation</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li style="line-height: 50px;color: #fff;">
+								<strong id="userWelcome"></strong>
+							</li>
+							<li class="dropdown messages-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-envelope-o"></i>
+									<span class="label label-success">4</span>
+								</a>
+							</li>
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-bell-o"></i>
+									<span class="label label-warning">10</span>
+								</a>
+							</li>
+							<li class="dropdown tasks-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-flag-o"></i>
+									<span class="label label-danger">9</span>
+								</a>
+							</li>
+							<li onclick="logout()">
+								<a href="#" data-toggle="control-sidebar"><i class="fa fa-sign-out"></i></a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<form action="#" method="get" class="sidebar-form">
+						<div class="input-group">
+							<input type="text" name="q" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+				                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+				                </button>
+				            </span>
+						</div>
+					</form>
+					<ul class="sidebar-menu" id="muenListView">
+						
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<!-- Main content -->
+				<section class="content">
+		            <div class="form-horizontal">
+              			<div class="box-body">
+							<div class="form-group">
+			                  	<label for="api_name" class="col-sm-1 control-label">接口名：</label>
+			                  	<div class="col-sm-11">
+			                  		<input type="text" class="form-control" id="api_name">
+			                  	</div>
+			                </div>
+			                <div class="form-group">
+			                  	<label for="sql" class="col-sm-1 control-label">SQL：</label>
+			                  	<div class="col-sm-11">
+			                  		<textarea name="sql" class="form-control" id="sql" cols="30" rows="10" style="height:100px"></textarea>
+			                  	</div>
+			                </div>
+			                <div class="form-group">
+			                  	<label for="sql" class="col-sm-1 control-label">说明：</label>
+			                  	<div class="col-sm-11">
+			                  		<input type="text" class="form-control" id="explan">
+			                  	</div>
+			                </div>
+			                <div class="form-group">
+			                  	<label for="sql" class="col-sm-10 control-label"></label>
+			                	<div class="col-sm-2">
+			                		<button id="search" class="btn btn-primary" onclick="Query()">搜索</button>
+				                	<button id="add" class="btn btn-success" onclick="addPop()">新增</button>
+			                	</div>
+		                	</div>
+				        </div>
+				    </div>
+			           
+		            <div class="box" style="margin-top: 30px;">
+			            <div class="box-body">
+			              	<table class="table table-bordered table-hover">
+			                	<thead>
+					                <tr>
+					                  <th width="15%">接口名</th>
+					                  <th width="45%">SQL</th>
+					                  <th width="20%">说明</th>
+					                  <th width="20%">操作</th>
+					                </tr>
+				                </thead>
+				                <tbody align="center" id="mainTableView">
+
+				                </tbody>
+			             	</table>
+			            </div>
+			          </div>
+				</section>
+			</div>
+			<div class="control-sidebar-bg"></div>
+		</div>
+		<!--新增编辑api弹出窗HTML-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        	<h4 class="modal-title" id="gridSystemModalLabel">新增API信息</h4>
+			      	</div>
+				    <div class="modal-body">
+				       	<div class="form-horizontal">
+			  				<div class="box-body">
+					  			<div class="form-group">
+					  				<label for="popApiName" class="col-sm-2 control-label">接口名：</label>
+					  				<div class="col-sm-9">
+					  					<input type="text" class="form-control" id="popApiName">
+					  				</div>
+					  			</div>
+					  			<div class="form-group">
+				                  	<label for="sql" class="col-sm-2 control-label">SQL：</label>
+				                  	<div class="col-sm-9">
+				                  		<textarea name="sql" class="form-control" id="popSql" cols="30" rows="10" style="height:120px"></textarea>
+				                  	</div>
+				                </div>
+				                <div class="form-group">
+				                  	<label for="sql" class="col-sm-2 control-label">说明：</label>
+				                  	<div class="col-sm-9">
+				                  		<textarea name="sql" class="form-control" id="popExplan" cols="30" rows="10" style="height:120px"></textarea>
+				                  	</div>
+				                </div>
+				  			</div>
+			  			</div>
+				    </div>
+		      		<div class="modal-footer">
+		        		<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+		        		<button type="button" class="btn btn-primary" id="addSubmint">确认</button>
+		      		</div>
+		    	</div>
+		  	</div>
+		</div>
+		<!--测试api弹出窗口-->
+		<div class="modal fade" id="myTestModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        	<h4 class="modal-title" id="gridSystemModalLabel">测试API信息</h4>
+			      	</div>
+				    <div class="modal-body">
+				       	<div class="form-horizontal">
+			  				<div class="box-body">
+					  			<div class="form-group">
+					  				<label for="popApiName" class="col-sm-2 control-label">接口名：</label>
+					  				<div class="col-sm-10">
+					  					<input type="text" disabled="disabled" class="form-control" id="testPopAPIname">
+					  				</div>
+					  			</div>
+					  			<div class="form-group">
+				                  	<label for="sql" class="col-sm-2 control-label">SQL：</label>
+				                  	<div class="col-sm-10">
+				                  		<textarea name="sql" disabled="disabled" class="form-control" id="testpopSql" cols="30" rows="10" style="height:100px"></textarea>
+				                  	</div>
+				                </div>
+				                <table class="table table-bordered table-hover">
+				                	<thead>
+					                	<tr>
+					                		<th width="50%">参数</th>
+					                		<th width="50%">参数值</th>
+					                		<!--<th width="60%">执行结果</th>-->
+					                	</tr>
+				                	</thead>
+				                	<tbody align="center" id="testPopView">
+				                	
+				                	</tbody>
+				                	<tfoot>
+				                		<tr align="center">
+							    			<td colspan="2"><button class="btn btn-primary" onclick="implementSql()">执行</button></td>
+							    		</tr>
+							    		<tr>
+							    			<td colspan="2"><strong>执行结果：</strong><span id="result"></span></td>
+							    		</tr>
+				                	</tfoot>
+				                </table>
+				  			</div>
+			  			</div>
+				    </div>
+		      		<div class="modal-footer">
+		        		<button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+		      		</div>
+		    	</div>
+		  	</div>
+		</div>
+		<!--测试模板-->
+		<script type="text/html" id="testPopTpl">
+    		<tr>
+    			<td>{{d}}</td>
+    			<td>
+					<input class="form-control" type="text" name="" id="{{d}}" value="" style="width: 100%;"/>
+    			</td>
+    		</tr>
+		</script>
+		<!--接口列表模板-->
+		<script type="text/html" id="mainTableTpl">
+    		<tr>
+              	<td>{{d.JKM}}</td>
+              	<td>{{d.JKSQL}}</td>
+              	<td>{{d.JKBZ}}</td>
+              	<td>
+    				<button id="edit" class="btn btn-primary" onclick="editPop({{ d.ID }})">修改</button>
+            		<button id="test1" class="btn btn-primary" onclick="testPop({{ d.ID }})">测试</button>
+            		<button class="btn btn-danger" onclick="deleteApi({{ d.ID }})">删除</button>
+              	</td>
+            </tr>
+		</script>
+		<!--左侧菜单栏加载模板-->
+		<script type="text/html" id="muenListTpl">
+			{{# for(var i = 0;i < d.length; i++){ }}
+				{{# if(d[i].DJ == 1){ }}
+					{{# if(d[i].CD == '接口管理'){ }}
+						<li class="treeview active">
+							<a href="#"><i class="fa fa-th"></i> <span>{{d[i].CD}}</span>
+								<span class="pull-right-container">
+					              	<i class="fa fa-angle-left pull-right"></i>
+					            </span>
+							</a>
+							<ul class="treeview-menu">
+								{{# for(var j = 0; j < d[i].erMuen.length;++j){ }}
+									<li>
+										<a style="cursor: pointer;" class="getApiType" onclick="getApiType('{{ d[i].erMuen[j].ML }}',this)">{{d[i].erMuen[j].CD}}</a>
+									</li>
+								{{# } }}
+							</ul>
+						</li>
+					{{# } else { }}
+						<li class="treeview">
+							<a href="#"><i class="fa fa-th"></i> <span>{{d[i].CD}}</span>
+								<span class="pull-right-container">
+					              	<i class="fa fa-angle-left pull-right"></i>
+					            </span>
+							</a>
+							<ul class="treeview-menu">
+								{{# for(var j = 0; j < d[i].erMuen.length;++j){ }}
+									<li>
+										<a style="cursor: pointer;" onclick="getApiType('{{ d[i].erMuen[j].ML }}')">{{d[i].erMuen[j].CD}}</a>
+									</li>
+								{{# } }}
+							</ul>
+						</li>
+					{{# } }}
+				{{# } }}
+			{{# } }}
+		</script>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+		<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		<script src="js/layui/layui.js"></script>
+		<script src="js/layer/layer.js"></script>
+		<script src="js/laytpl.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+
+</html>

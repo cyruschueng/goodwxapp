@@ -1,0 +1,100 @@
+<!--index.wxml-->
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view> -->
+
+<view style='background: #4e0308'>
+<view class='header'> </view>
+<view class="btn">
+ <!-- <view class='btn_1'  bindtap='share' id='fx'></view>  -->
+ <button class='btn_1' plain='false' open-type='share'></button>
+ <view class='btn_2' bindtap='xiazai' id='xz'></view> 
+ <view class='btn_3' bindtap='guize' id='gz'></view> 
+</view>
+<view class="active_1 active">
+    <view class="btn_gift" id="75" bindtap='getlibao'></view>
+</view>
+<view class="active_2 active">
+    <view class="btn_gift" id="76" bindtap='getlibao'></view>
+</view>
+<view class="active_3 active">
+    <view class="btn_gift" id="74" bindtap='getlibao'></view>
+</view>
+<view class="{{invited}}">
+        <text class='invited_p'>已邀请 :</text> <text class='invited_p_span'>{{imgsNum}}位</text>
+        <view class="invitedHead" >
+        <block wx:if="{{imgsNum>0}}">
+        <block wx:for="{{imgs}}" wx:for-index="idx" wx:for-item="item">
+        	 
+         <block wx:if="{{idx<=5}}" >
+        	<image class='invitedHeadimg' id="{{idx}}" src="{{item}}"></image>
+        	 
+         </block >
+         <block wx:if="{{idx>5}}" >
+        	<image class='invitedHeadimg' class='{{imageShow}}' src="{{item}}"></image>    	 
+         </block > 
+         </block >
+         </block >
+        </view>
+        <view class="{{btn_moreHead}}" bindtap='show' id='show'></view>
+    </view>
+
+<!-- 轮播 -->
+<view class='lunbo'>
+<view class="title"></view>
+<view class='swiper-container'>
+   <swiper    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for-items="{{imgUrls}}" wx:key="item">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="{{wiper_mode}}" bindtap="currentImg" style="width:100%; height:100%;"/>
+      </swiper-item>
+    </block>
+  </swiper> 
+</view>
+</view>
+<!-- 二维码 -->
+<view class="erweima">
+ 
+ </view>
+<!-- 下载弹窗 -->
+<view  class="{{download}}">
+    <view class="close1" bindtap='close1'></view>
+    <view class="copy"  bindtap='copy' id='cp'></view>
+</view>
+<!-- 遮罩层 -->
+<view class="{{modal}}"></view>
+<!-- 领取礼包弹窗 -->
+<view class="{{Getgift}}">
+    <view class="close" bindtap='close'></view>
+    <view class="Getgift_yzm" bindtap="copyCard" id='cpcard'><text class="Getgift_p">{{card}}</text><text class="Getgift_copy" ></text></view>
+</view>
+<!-- 活动规则弹窗 -->
+<view  class="{{hdclass}}">
+    <view class="close1" bindtap='close1' id='cl'></view>
+    <view>将小程序分享至微信群中，邀请小伙伴们前来助力，来助力的小伙伴越多，可获得的礼包越丰富！</view>
+
+    <view><text>1、邀请<text class='details_span'>10名</text>，领取价值<text class='details_span'>88元</text>新春豪华礼包； 
+        2、邀请<text class='details_span'>30名</text>，领取价值<text class='details_span'>188元</text>新春至尊礼包； 
+        3、前来助力的每位小伙伴均会获得新春礼包码一份，若至少<text class='details_span'>3名</text>小伙伴下载《拳皇世界》并在游戏中成功领取新春礼包，您还可额外获得价值<text class='details_span'>288元</text>的新春团圆礼包一份！ 
+        4、观看新春主题影片后，还可额外领取暖心大礼包一份呦！
+        </text>
+    </view>
+
+    <view style="margin-top: 20rpx">
+    <text>如何使用礼包码？ 
+        1、进入游戏，点击主界面右上“齿轮”打开系统设置； 
+        2、点击【礼包兑换】，输入礼包码即可领取奖励；
+        </text>
+    </view>
+</view>
+</view>

@@ -1,0 +1,51 @@
+<style lang="less" rel="stylesheet/less">
+
+    .demon-panel__ft{
+        i{
+            display: none;
+        }
+        /*加载更多*/
+        .loadmore{
+            display: flex;
+            padding: 30rpx;
+            justify-content: space-between;
+            i.iconfont{
+                display: block;
+                font-weight: bold;
+                color: #969696;
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon-panel__ft">
+        <slot></slot>
+
+        <view wx:if="{{isload}}" class="loadding">
+            正在加载中
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {}
+
+        data = {
+            isload:false
+        }
+
+        events = {}
+
+        methods = {
+            changeData(data){
+                this.isload = data;
+            }
+        }
+
+        onLoad() {
+
+        }
+    }
+</script>

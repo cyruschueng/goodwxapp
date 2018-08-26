@@ -1,0 +1,18 @@
+<!--center.wxml-->
+<view class="page">
+  <view style="height:20rpx;"></view>
+  <view class="admin-about-background margin-bottom-20 white-bg">
+    <view class="admin-about-text">
+      <image src="{{aboutIcon}}" class="admin-about-icon"></image>
+      <view class="admin-about-title">{{aboutTitle}}</view>
+      <view class="admin-about-subtitle margin-top-10">{{aboutSubtitle}}</view>
+    </view>
+  </view>
+  <view class="white-bg admin-about-article">
+    <view wx:for="{{aboutArticle}}">
+      <view class="border-bottom margin-left-30 margin-right-30 admin-about-article-list" data-url="{{item.url}}" bindtap="jumpUrl">
+        {{item.title}}
+      </view>
+    </view>
+  </view>
+</view>

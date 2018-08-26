@@ -1,0 +1,46 @@
+<style lang="less" rel="stylesheet/less">
+    .demon-panel{
+        width:100%;
+        padding:30rpx 0;
+        &.backstage{
+            .demon-panel__hd{
+                padding:30rpx;
+                .demon-panel__hd__text{
+                    flex:1;
+                    padding-left:30rpx;
+                    border-left: 2px solid #38a1cf;
+                }
+                i{
+                    color: #969696;
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon-panel {{type}}">
+        <slot></slot>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {
+            type: {
+                type: String,
+                default: 'default'
+            }
+        }
+
+        data = {}
+
+        events = {}
+
+        methods = {}
+
+        onLoad() {
+
+        }
+    }
+</script>

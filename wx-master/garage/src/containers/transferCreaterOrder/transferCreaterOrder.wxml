@@ -1,0 +1,48 @@
+<view class="wrapper">
+    <view class="item" bindtap="createHistory">
+        <image class="leftImg" src="../../../images/ic_historyOrder.png"></image>
+        <view>
+           <view class="title" >历史单</view>
+           <view class="desc">不需要客户在场，直接录入单据</view>
+        </view>
+
+    </view>
+    <view class="item" bindtap="createNew">
+        <image class="leftImg" src="../../../images/ic_historyOrder.png"></image>
+        <view>
+            <view class="title" >现场单</view>
+            <view class="desc">需要客户在现场扫码确认</view>
+        </view>
+    </view>
+    <view class="modalBtn" bindtap="switchModal">什么是历史单和现场单？</view>
+    <view class='modal' wx:if="{{showModal}}">
+         <view class="content">
+             <view class="choice">
+                  <view><image src="https://test-pamap-gr-stg2.pingan.com.cn/mobile/images/wx/photo_lishi.png"></image></view>
+
+                  <view>
+                       <view class="title">历史单</view>
+                       <view class="desc">无需客户确认，快速开单</view>
+                       <view class="add">
+                            <view>适合场景：</view>
+                            <view>纸质单据存档</view>
+                            <view>客户不在现场</view>
+                       </view>
+                  </view>
+             </view>
+             <view class="choice">
+                  <view><image src="https://test-pamap-gr-stg2.pingan.com.cn/mobile/images/wx/photo_xianchang.png"></image></view>
+                  <view>
+                      <view class="title">现场单</view>
+                      <view class="desc">客户扫码，快速绑定客户</view>
+                      <view class="add">
+                          <view>适合场景：</view>
+                          <view>门店接车开单</view>
+                          <view>道路救援开单</view>
+                      </view>
+                  </view>
+             </view>
+             <view class="btn" bindtap="switchModal">知道了</view>
+         </view>
+    </view>
+</view>

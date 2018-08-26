@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    // 图片路径，字符串变成数组
+    self.curGetlogData.content.forEach(function(key) {
+        if (key.textType == 1) {
+            if (key.value == '' || key.value == null || typeof(key.value) == 'undefined') {} else {
+                key.value = key.value.split(",");
+                key.value = self.removeArrSpace(key.value); //数组去空
+                key.value.forEach(function(item, index) {
+                    key.value[index] = JC.Const.site_url + key.value[index]
+                })
+            }
+        };
+    })
+    //去除数组中的空值  
+    removeArrSpace: function(array) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] == "" || typeof(array[i]) == "undefined" || array[i] == null) {
+                array.splice(i, 1);
+                i = i - 1;
+            }
+        }
+        return array;
+    }
+    </script>
+</body>
+
+</html>

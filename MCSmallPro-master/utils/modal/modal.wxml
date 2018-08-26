@@ -1,0 +1,13 @@
+<!--utils/modal/modal.wxml-->
+<view class='modal' wx:if="{{showModalStatus}}" catchtouchmove='preventTouchMove'>
+  <view class='modal-shadow' bindtap='hide'></view>
+  <view class='modal-content' animation="{{animationData}}">
+    <view class='modal-header' wx:if="{{title!=''}}">
+      <text>{{title}}</text>
+      <image bindtap='hide' class='modal-close' src='http://res.o2o.com.cn:8082/img/821fe84c3cb6475b9d011266917dfde6'></image>
+    </view>
+    <view class='modal-body'>
+      <slot></slot>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,144 @@
+<view class='pageBody'>
+
+  <view>
+    <swiper indicator-dots="true" autoplay="true" interval="3000" duration="500" indicator-color="white" indicator-active-color="red" class='swiper'>
+      <block wx:for="{{imgUrls}}" wx:key="unique">
+        <swiper-item>
+          <image src="{{item.srcUrl}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class='myIntroInfo mySection'>
+    <view class='shopName'>
+      <view class='shopNameTxt'>
+        百莲达美容美发会所
+      </view>
+      <view class='tel' catchtap='callPhoneEvent'>
+        <image src='/images/phone.png' class='telIco'></image>
+      </view>
+    </view>
+    <view class='myLocation' catchtap='locationEvent'>
+      <view class='myLocationImg'>
+        <image src='/images/map.png' class='locationIco'></image>
+      </view>
+      <view class='myLocationTxt'>
+        晋江市内坑镇吉安中路168-170号(
+        <text style="color:blue">查看地图</text>)
+      </view>
+    </view>
+  </view>
+
+
+  <view class='.line-css'>
+  </view>
+
+
+  <view class='mySection myMenu' catchtap='subscribeEvent'>
+    <view class='menu firstMenu'>
+      <image src='/images/subscribe.png'></image>
+      <view class='menuTitle'>
+        <text>我要预约</text>
+      </view>
+    </view>
+    <view class='menu secondMenu' catchtap='buyEvent'>
+      <image src='/images/buy.png'></image>
+      <view class='menuTitle'>
+        <text>我要买单</text>
+      </view>
+    </view>
+    <view class='menu thirdMenu' catchtap='shopServiceEvent'>
+      <image src='/images/shop.png'></image>
+      <view class='menuTitle'>
+        <text>店铺服务</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='.line-css'>
+  </view>
+
+  <view class='sectionTitle'>
+    <text>-推荐优惠券-</text>
+  </view>
+  <view class='shopCouponItem'>
+    <view class='shopCouponItemLeft'>
+      <view class='shopCouponItemLeftTop'>
+        <text>30.00元</text>
+        <text style='display:inline-block;margin-left:10rpx;'>代金券</text>
+      </view>
+      <view class='shopCouponItemLeftBottom'>
+        烫染券
+      </view>
+    </view>
+    <view class='shopCouponItemRight'>
+      <button type='default' class='fetchCouponBtn' catchtap="fetchEvent">领取</button>
+    </view>
+    <view class='shopCouponFooter'>
+      <text class='expireDate'>
+    有效期：2018-01-01 至 2018-12-31
+    </text>
+      <text class='quantity'>
+    共有10000份
+    </text>
+    </view>
+  </view>
+  <view class='sectionTitle'>
+    <text>-推荐发型师-</text>
+  </view>
+  <view class='barberItem'>
+    <view class='header'>
+      <view class='avtarContainer'>
+        <view class='avtar'>
+          <image src='/images/avtar1.jpg'></image>
+        </view>
+      </view>
+      <view class='baseInfo'>
+        <view class='nickName'>
+          铃铃
+        </view>
+        <view class='job'>
+          店长
+        </view>
+      </view>
+    </view>
+    <view class='content'>
+      <view class='skillContainer'>
+        <view class='skill' style='width:70rpx;'>
+          染发
+        </view>
+        <view class='skill' style='width:140rpx;'>
+          女生造型
+        </view>
+      </view>
+      <view class='buttonContainer'>
+        <button type='default' plain="true" class='subscribe' data-tel="0595-88360567" catchtap='subscribeSomebodyEvent'>
+          预约TA
+        </button>
+      </view>
+      <view class='other'>
+        <view class='praiseRate'>
+          好评率：99%
+        </view>
+        <view class='successService'>
+          已被约：562
+        </view>
+        <view class='productions'>
+          作品数：8
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='.line-css'>
+  </view>
+
+  <view class='footer'>
+    <view class='author'>
+      技术支持：春雷网络科技有限公司
+    </view>
+    <view class='contactMethod'>
+      QQ:596673681
+    </view>
+  </view>
+</view>

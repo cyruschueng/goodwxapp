@@ -1,0 +1,15 @@
+<template name="favoriteItems">
+  <view class="favorite-item">
+    <view class="fav-info">
+      <view class="fav-left"  data-currencyid="{{currencyId}}" data-marketid="{{marketId}}" data-symbol="{{symbol}}" data-market="{{marketShowName}}" bindtap="redirectToDetail">
+        <view class="fav-name">{{showName}}</view>
+        <view class="fav-symbol">{{symbol}}</view>
+      </view>
+      <view class="fav-star" data-seq="{{index}}" bindtap="favorite">
+        <image class="star" wx:if="{{isFavorite}}" src="/images/buttons/star.png"></image>
+        <image class="star" wx:else src="/images/buttons/unstar.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="item-line"></view>
+</template>

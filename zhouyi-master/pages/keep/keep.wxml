@@ -1,0 +1,34 @@
+<view class="service-list"  wx:if="{{alllist}}">
+    <navigator class=""  wx:for="{{alllist}}" data-nums="{{item.nums}}"
+               url="../inform/inform?nums={{item.nums}}">
+          <view class="diangdanNum">
+              <view class="left">
+                  <view class="bianhao">编号：<text>{{item.nums}}</text></view>
+              </view>
+              <view class="right"> 查看</view>
+          </view>
+          <view class="service-item">
+              <view class="jiage">
+                  <view class="price"> 
+                      姓名：{{item.xingshi}}{{item.mingzi}} 性别：
+                      <text wx:if="{{item.gender==0}}">男</text>
+                      <text wx:else>女</text>
+                  </view>
+                  <view class="price"> 出生于：
+                      <text wx:if="{{item.date_type==0}}">阳历</text>
+                      <text wx:else>阴历</text>{{item.birthday}} 
+                  </view>
+                  <view class="price">出生地：{{item.number}}山西忻州市</view>
+              </view>
+          </view>
+      </navigator>
+</view>
+<view wx:else>
+    <view class="modeList"  style="font-size:26rpx;text-align:center;padding:40rpx;margin-top:0;box-sizing:border-box;">您暂时没有预测记录！</view>
+    <view bindtap='go'
+    style='color:#FFFFFF;background-color:#1AAD19;width:260rpx;margin:0 auto;text-align:center;font-size:26rpx;border-radius:8rpx;padding:10rpx 0'>
+  去测试</view>
+</view>
+
+
+      

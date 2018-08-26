@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="full">
+<head>
+    <meta charset="utf-8">
+    <title>智慧能源网关数据监测平台</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <style>
+        .full {
+            width: 98.5%;
+            height: 98.5%;
+        }
+        .dataTable {
+            width: 100%;
+            line-height: 30px;
+            text-align: center;
+            font-size: 14px;
+            border-collapse: collapse;
+        }
+
+        .dataTable th {
+            background-color: #7f988f;
+            color: #fff;
+            font-size: 16px;
+            font-weight: normal;
+            border: 1px solid #ccc;
+        }
+
+        .dataTable td {
+            border: 1px solid #ccc;
+        }
+
+    </style>
+</head>
+<body class="full">
+<div id="chartEle" class="full"></div>
+<script src="assets/js/common/zepto.min.js"></script>
+<!--lib-->
+<script src="assets/layer/layer.js"></script>
+<script src="assets/js/lib/echarts/echarts.min.js"></script>
+<script src="assets/js/lib/echarts/shine.js"></script>
+<script>
+    for(var i=0;i<3;i++){
+        for(var j=0;j<3;j++){
+            console.log(j)
+        }
+    }
+    /*console.log(j)*/
+
+    $(function () {
+        //定义全局变量，用于存储ajax获取到的data
+        var dataGlo;
+        //定义绘制柱状图函数
+        function chartLine(id, legendArr, xData, yUnit, sData) {
+            var obj = document.getElementById(id)
+            var myChart = echarts.init(obj, 'shine');
+            var option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: legendArr,
+                    selectedMode: false,  //取消默认的点击图例事件
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            readOnly: true,
+                            optionToContent: function (opt) {
+                                var axisData = opt.xAxis[0].data;
+                                var series = opt.series;
+                                var table = "";
+                                var thList = ""; //需要叠加，所以放在这里
+                                for (var j = 0, k = series.length; j < k; j++) {
+                                    thList += '<th>' + series[j].name + '</th>';
+                                };
+                                table += '<table class="dataTable"><tbody><tr>'
+                                    + '<th>时间</th>'
+                                    + thList
+                                    + '</tr>';
+                                for (var i = 0, l = axisData.length; i < l; i++) {
+                                    var tdList = "";// 每次循环，清空tdList
+                                    for (var j = 0, k = series.length; j < k; j++) {
+                                        tdList += '<td>' + series[j].data[i] + '</td>';  // 在这重新对tdList赋值
+                                    }
+                                    table += '<tr>'
+                                        + '<td>' + axisData[i] + '</td>'
+                                        + tdList
+                                        + '</tr>';
+                                }
+                                table += '</tbody></table>';
+                                return table;
+                            }
+                        },
+                        magicType: {type: ['line', 'bar']}
+                    },
+                    top: 25,
+                    right: 20,
+                },
+                /*grid: {
+                 left: '0',
+                 right: '10%',
+                 top: '12%',
+                 containLabel: true
+                 },*/
+                xAxis: {
+                    name: '点',
+                    type: 'category',
+                    boundaryGap: false,
+                    data: xData
+                },
+                yAxis: [{
+                    name: yUnit,
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value}'
+                    },
+                }],
+                dataZoom: [{
+                    show: true,
+                    type: 'inside',
+                    y: '80%',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 50
+                }, {
+                    start: 0,
+                    end: 10,
+                    handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                    handleSize: '80%',
+                    handleStyle: {
+                        color: '#fff',
+                        shadowBlur: 3,
+                        shadowColor: 'rgba(0, 0, 0, 0.6)',
+                        shadowOffsetX: 2,
+                        shadowOffsetY: 2
+                    }
+                }],
+                series: sData
+            }
+            myChart.setOption(option);
+        };
+        $.ajax({
+            type: 'post',
+            url: "assets/jsons/realMonitor.json",
+            dataType: 'json',
+            beforeSend: function (xhr, options) {
+                layer.open({type: 2, shadeClose: false});
+            },
+            complete: function (XHR, TS) {
+                $('.layui-m-layer2').hide()
+            },
+            success: function (data) {
+                dataGlo = data;
+                mlegend = data[0].sData.map(function (item) {
+                    return {
+                        name: item.name,
+                    }
+                });
+                //加载成功先初始化渲染图表
+                mData = dataGlo[0].sData.map(function (item) {
+                    return {
+                        name: item.name,
+                        type: 'line',
+                        smooth: true,
+                        lineStyle: {
+                            normal: {
+                                width: 2,
+                            }
+                        },
+                        data: item.value
+                    }
+                })
+                chartLine(dataGlo[0].id, mlegend, dataGlo[0].xData, dataGlo[0].yUnit, mData)
+            },
+            error: function () {
+            }
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!--pages/home/myClass.wxml-->
+
+<import src="../../templates/empty-view/empty-view.wxml"/>
+
+<view class='bg-view'>
+
+  <view wx:if='{{ myclassList.length > 0 }}'>
+
+  <view class='title-view'>请尽快到店里参加您所需要的课程</view>
+
+  <view class='myclass-cell-view'>
+    <block wx:for='{{ myclassList }}' wx:key='{{ index }}'>
+    <view class='myclass-cell'>
+      <!-- 上 -->
+      <view class='up-view weui-flex'>
+        <view>
+          <image class='headimg' mode='aspectFill' src='{{ item.headimg }}'></image>
+        </view>
+        <view class='info-view weui-flex__item'>
+          <view class='name-text'>{{ item.className + "（" + item.classType + "）" }}</view>
+          <view>教练：{{ item.teacherName }}</view>
+        </view>
+        <view>
+          <view class='btn {{ item.classStatus == "取消团课" ? "" : "cancel" }}' id='{{ index }}' data-orderid='{{ item.orderId }}' bindtap='{{ item.classStatus == "取消团课" ? "bindClassStatusTap" : "" }}'>{{ item.classStatus }}</view>
+        </view>
+      </view>
+      <!-- 下 -->
+      <view class='bottom-view'>预约时间：{{ item.classTime }}</view>
+    </view>
+    </block>
+  </view>
+
+  </view>
+
+  <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
+
+</view>

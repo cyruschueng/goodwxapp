@@ -1,0 +1,92 @@
+<!--pages/schedule/schedule.wxml-->
+
+<view class="flex box box-tb box-align-center bgview" wx:if='{{ days.length > 0 }}'>
+  <view class="calendar box box-tb">
+
+        <!-- 头部 -->
+        <view class="top-handle fs36 box box-lr box-align-center box-pack-center">
+            <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
+                <view class="prev-handle box box-lr box-align-center box-pack-center">
+                <!-- {{ preStr }} -->
+                <image hidden='{{ preStrHidden }}' style='transform: rotate(180deg);' class='next-handle-icon' src='../../images/arrow-right.png'></image>
+                </view>
+            </view>
+            <picker class='date-area box box-lr box-align-center box-pack-center' mode="date" fields="month" value="{{ picker_value }}" start="{{ start_date }}" bindchange="pickerChange" bindtap="chooseYearAndMonth">
+              {{ cur_year || "--" }} 年 {{ cur_month || "--" }} 月
+            </picker>
+            <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
+                <view class="next-handle box box-lr box-align-center box-pack-center">
+                  <!-- {{ nextStr }} -->
+                  <image hidden='{{ nextStrHidden }}' class='next-handle-icon' src='../../images/arrow-right.png'></image>
+                </view>
+            </view>
+        </view>
+
+        <!-- 星期 -->
+        <view class="weeks box box-lr box-pack-center box-align-center">
+            <view class="flex week fs28 {{ index == 0 ? 'weekend' : '' }} {{ index == 6 ? 'weekend' : '' }}" wx:for="{{ weeks_ch }}" wx:key="{{ index }}" data-idx="{{ index }}">{{ item }}</view>
+        </view>
+
+        <!-- 日期 -->
+        <view class="days box box-lr box-wrap">
+            <view wx:if="{{ hasEmptyGrid }}" class="grid white-color box box-align-center box-pack-center" wx:for="{{ empytGrids }}" wx:key="{{ index }}" data-idx="{{ index }}">
+            </view>
+            <view class="grid white-color box box-align-center box-pack-center" wx:for="{{ days }}" wx:key="{{ index }}" data-idx="{{ index }}" bindtap="tapDayItem">
+                <view class="day {{ item.choosed ? 'border-radius red-bg' : ''}} box box-align-center box-pack-center">
+                <view class='day-view'>
+                  <text style='{{ item.reserved ? "color:#C9C9C9" : "" }}'>{{ item.day }}</text>
+                  <view class='{{ item.choosed ? "white-color" : "red-color" }}' hidden='{{  }}'>{{ item.lunar }}</view>
+                </view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 下一步 -->
+        <!-- <view class='next-step' bindtap='bindNextBtnTap'>下一步</view> -->
+        
+
+    </view>
+
+    <view class='remarks-view'>
+      <text>备注：灰色为不可预订</text>
+    </view>
+
+    <!-- 联系人 信息 -->
+    <view class='contactInfo-view'>
+      
+      <!-- 联系人 -->
+      <view class='contact-title'>
+        <text>联系人：</text>
+        <input bindinput="bindContactInput" placeholder='请填写联系人'></input>
+      </view>
+      <!-- 联系电话 -->
+      <view class='contact-title'>
+        <text>联系电话：</text>
+        <input bindinput="bindContactInfoInput" type='number' placeholder='请填写联系电话'></input>
+      </view>
+      <!-- 性别 -->
+      <view class='title'>
+        性别：
+        <radio-group bindchange="bindGenderCheckboxChange">
+          <label class="checkbox" wx:for="{{ genderItems }}" wx:key='{{ item.name }}'>
+            <radio value="{{ item.name }}" checked="{{ item.checked }}"/>{{ item.value }}
+          </label>
+        </radio-group>
+      </view>
+      <!-- 桌数 -->
+      <view class='title'>
+        <text class='slider-text'>桌数：</text>
+        <view class="slider-view">
+          <slider activeColor='#F15A4A' bindchange="bindTableSliderChange" min="{{ ballInfo.minTable }}" max="{{ ballInfo.maxTable }}" show-value/>
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 立即预定 -->
+    <view class='foot-btn-view'>
+      <view class='foot-btn' bindtap='bindConfirmBtnTap'>立即预定</view>
+    </view>
+
+</view>
+

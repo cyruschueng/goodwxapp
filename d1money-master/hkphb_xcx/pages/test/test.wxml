@@ -1,0 +1,89 @@
+<view class="container">
+  <image src="{{jumbotronSrc}}" class="demon_jumbotron"></image>
+  <view class="demon_tabBox" style="height:{{tabBox.height}}">
+    <view class="demon_tab">
+      <view bindtap="bindViewTap" class="demon_tab_item {{tabSetting.selectIndex==index ? 'active' :''}}" wx:for="{{tabSetting.item}}" wx:key="item" data-index="{{index}}">
+        {{item}}
+      </view>
+    </view>
+    <!--群排行-->
+    <view class="demon_tab_content" wx:if="{{tabSetting.selectIndex==0}}">
+      <scroll-view scroll-y="true" style="height: {{tabSetting.rankHeight}};" lower-threshold="50" bindscrolltolower="lower" scroll-with-animation="true">
+        <view class="demon_tab_content_item" wx:for="{{tabSetting.data}}" wx:key="item">
+          <text class="rank">{{index + 1}}</text>
+          <image src="http://wx.qlogo.cn/mmopen/vi_32/rz4xqX0A7oyAPVbbqylbDcDQhZmibHHouwcxHPycLVfyicN3xEEXBOibdjw3LPN12UvedakfMO4y0ufAsKQIrfSfg/0" class="userImg"></image>
+          <view class="others">
+            <view class="nickname">
+              <text class="nick">{{item.nickName}}</text>
+              <text wx:if="{{item.type}}" class="demon_label demon_default }}">未签到</text>
+              <text wx:else="{{item.type}}" class="demon_label demon_danger }}">已签到</text>
+            </view>
+            <view class="number">
+              <text style="flex:1">{{item.friendNum}}</text>
+              <text>{{item.newclientNum}}</text>
+              <text>{{item.allclientNum}}</text>
+            </view>
+            <view class="number" style="margin-bottom:0">
+              <text style="flex:1">好友数</text>
+              <text>本周新客户</text>
+              <text>积累客户</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <!--群动态-->
+    <view class="demon_tab_content dynamicgroup" wx:if="{{tabSetting.selectIndex==1}}">
+      <scroll-view scroll-y="true" style="height: {{tabSetting.rankHeight}};" bindscrolltolower="lower" scroll-with-animation="true">
+        <view class="nomsgBox" wx:if="{{tabSetting.data1.length==0}}">
+          <image class="nomsgimg" src="./../../static/img/nomsg.png"></image>
+          <view class="nomsgtext">这里有点冷清 ～</view>
+        </view>
+        <view class="demon_tab_content_item" wx:for="{{tabSetting.data1}}" wx:key="item">
+          <image src="http://wx.qlogo.cn/mmopen/vi_32/rz4xqX0A7oyAPVbbqylbDcDQhZmibHHouwcxHPycLVfyicN3xEEXBOibdjw3LPN12UvedakfMO4y0ufAsKQIrfSfg/0" class="userImg"></image>
+          <view class="others">
+            <view class="nickname">
+              <text class="nick">{{item.nickName}}</text>
+              <text class="nick">{{item.type}}</text>
+              <text class="time">{{item.time}}</text>
+            </view>
+            <view class="share">
+              <image class="img" src="{{item.share.img}}"></image>
+              <text class="word">{{item.share.content}}</text>
+              <!--<text class="word">{{item.share.content}}</text>-->
+            </view>
+          </view>
+        </view>
+        <view class="weui-loadmore" wx:if="{{dynamicgroup_load}}">
+          <view class="weui-loading"></view>
+          <text class="weui-loadmore__tips">正在加载</text>
+        </view>
+      </scroll-view>
+    </view>
+    <button class="demon_btn" type="primary" size="{{tabSetting.btn.primarySize}}" loading="{{tabSetting.btn.loading}}" plain="{{tabSetting.btn.plain}}" disabled="{{tabSetting.btn.disabled}}" bindtap="powerDrawer" data-statu="open">
+      签到
+    </button>
+  </view>
+  <!--mask-->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+  <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+    <!--drawer content-->
+    <view class="drawer_title">今日好友数</view>
+    <view class="drawer_content">
+      <view class="grid">
+        <image class="logo" src="./../../static/img/people.png"></image>
+        <view class="from-input">
+          <input type="number" class="input" bindinput="bindKeyInput" value="{{friendNum}}" placeholder="请输入好友数" confirm-type="done" maxlength="4"></input>
+        </view>
+      </view>
+    </view>
+    <view class="demon_flex drawer_footer">
+      <view class="flexitem btn" bindtap="powerDrawer" data-statu="close">取消</view>
+      <view class="flexitem btn btn_ok" bindtap="powerDrawer" data-statu="ok">确定</view>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,50 @@
+<!--pages/map/map.wxml-->
+
+<block wx:if="{{!maskState}}">
+  <map id="myMap" scale="11" controls="{{controls}}" markers="{{mapMarks}}" show-location longitude="{{longitude}}" latitude="{{latitude}}" style="width: 100%;height: {{windowHeight}}px" bindmarkertap="markertap" bindcontroltap="controltap">
+
+  
+  <cover-view>
+    <cover-view>嘀嘀币：{{wallet.amount}}</cover-view>
+    <cover-view>共享金：{{wallet.shareAmount}}</cover-view>
+  </cover-view>
+
+  </map>
+</block>
+
+              
+<block wx:if="{{maskState}}">
+
+ <image src='{{IMG_PATH}}/mapback.png' style="width: 100%;height: {{windowHeight}}px"></image>
+
+  <view class="mask mask-on">
+
+    <view class="container">
+
+      <view class="close-mask">
+        <image bindtap="bindCloseMask" src="{{IMG_PATH}}/close-icon.png"></image>      
+        
+      </view>
+
+      <view class='desc'>
+
+        <view class='station-desc'>站点名称 :{{station.name}} </view>
+
+        <view class='chargeMan-desc'>充电大侠：{{station.user}} </view>
+
+
+        <view class='address-desc'>站点地址：{{station.address}}</view>
+      </view>
+
+      <view class='find'>
+
+        <button bindtap="findStation" type="primary">找到他</button>
+        <button bindtap="callChargeMan" type="primary">联系他</button>
+
+      </view>
+
+
+    </view>
+
+  </view>
+</block>

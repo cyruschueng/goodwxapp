@@ -1,0 +1,83 @@
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <block wx:if="{{cart_list == null || cart_list == ''}}">
+    <!--暂无内容提示 start-->
+    <view class="no-content tc">
+      <text class="no-content-icon iconfont icon-yemianwuneirong"></text>
+      <view class="no-content-font">购物车暂无商品</view>
+    </view>
+    <!--暂无内容提示 end-->
+  </block>
+  <block wx:else>
+    <view class="mallcart">
+      <view class="mallcart-title flex">
+        <label class="radio">
+          <checkbox-group bindchange="all_checkboxChange">
+            <checkbox value="1" checked="{{all_is_checked}}" />
+          </checkbox-group>
+        </label>
+        <view class="sub">
+          <text class="iconfont icon-shop sub"> 购物车</text>
+        </view>
+        <view class="mallcart-del grey f18" bindtap="bind_delete_cart">
+          <text class="iconfont icon-delete"></text>
+        </view>
+      </view>
+      <view class="cart-content">
+        <checkbox-group bindchange="single_checkboxChange">
+          <block wx:for="{{cart_list}}" wx:key="*this">
+            <view class="cart-item flex">
+              <label class="radio">
+                <checkbox value="{{item.id}}" data-aaaaa="{{item.id}}" checked="{{item.is_checked}}" />
+              </label>
+              <image src="{{item.goods_img}}" mode="aspectFill" class="cart-img"></image>
+              <view class="cart-info sub">
+                <text class="cart-title lineText2 mb5">{{item.goods_title}}</text>
+                <view class="price f18 red mb5">{{item.goods_price}} 积分</view>
+                <view class="count-set fr tc flex">
+                  <view class="sub" bindtap="bind_cart_number_jian" id="{{item.id}}">
+                    <text class="iconfont icon-move"></text>
+                  </view>
+                  <view class="sub">
+                    <input type="number" value="{{item.goods_number}}" class="buy-couts" disabled="true" />
+                  </view>
+                  <view class="sub" bindtap="bind_cart_number_jia" id="{{item.id}}">
+                    <text class="iconfont icon-add"></text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </checkbox-group>
+      </view>
+    </view>
+
+
+    <!--底部浮动 start-->
+    <view class="mallcart-float mt15">
+      <view class="mallcart-foot flex gridXt">
+        <label class="radio" style="padding:0 10px;"></label>
+        <view class="mall-cart-sum sub tr">
+          <view>合计：
+            <text class="red f16">{{totalPrice}} 积分</text>
+          </view>
+          <text class="f12 grey">(共{{totalNum}}件商品)</text>
+        </view>
+        <button class="mall-cart-btn ml10" bindtap="mallsure" disabled="{{btn_mall_sure_disabled && gassiteData}}">兑换</button>
+      </view>
+    </view>
+    <!--底部浮动 end-->
+  </block>
+</block>
+
+<view class="mask" catchtap="onHideGasSiteTap" hidden="{{!isShowGassite}}">
+  <view class="mask-content list">
+    <view class="mask-content-title">选择站点</view>
+    <view class="list-item" wx:for="{{gassiteData}}" wx:key="*this" data-dept-id="{{item.DEPT_ID}}" data-name="{{item.DEPARTMENT}}" catchtap="onCashing">{{item.DEPARTMENT}}</view>
+  </view>
+</view>

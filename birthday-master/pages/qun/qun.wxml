@@ -1,0 +1,51 @@
+<view class="group">
+	<view class="groups" wx:if="{{groupList.length>0}}">
+     <view class="group-item" wx:for="{{groupList}}" data-g_id="{{item.g_id}}" 
+            bindtap='inform'>
+        <view class="group-detail">
+          <view class="group-name">{{item.group_name}}</view>
+        </view>
+        <view class="group-member-box">
+          <view class="group-mate">
+            <image wx:for="{{item.members}}" wx:for-item="url" src="{{url.avatar}}"></image>
+          </view>
+          <view class="group-num">{{item.members.length}}位成员</view>
+        </view>
+        <!-- <view class="birth-info">
+          <view class="yihang">
+            <view class="icon-1"><image src="../images/time.png"></image></view>
+            <veiw class="birth-day cg">	{{item.time}}</veiw>
+            <view class="birth-desc">{{item.day}}过生日</view>
+          </view>
+        </view> -->
+    </view>
+    <view class="add-group">
+        <view class="line">
+          收集和管理微信群成员的生日
+        </view>
+        <view class="add-group-btn" bindtap='addQun'>
+          添加生日群
+        </view>
+    </view>
+	</view>
+  
+  <!--没有数据  -->
+  <view class='addFriends' wx:else>
+      <view class="empty-box" hidden="">
+        <image src="http://ovhvevt35.bkt.clouddn.com/day/empty-group.png"></image>
+        <view class="line1">
+          收集和管理微信群成员的生日
+        </view>
+        <view class="line1">
+          现在就创建你的第一个生日群吧
+        </view>
+        <view class="creat-btn" bindtap='addQun'>添加</view>
+        <!-- <view class="line2">
+          什么是生日群
+          <view class="question-group">
+            ?
+          </view>
+        </view> -->
+      </view>
+  </view>
+</view>

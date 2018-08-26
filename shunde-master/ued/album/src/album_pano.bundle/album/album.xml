@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<Page xmlns:xsi="//www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../View.xsd"
+      background="#ffffff">
+    <include src="/widgets/albumMenu.js"/>
+    <PanoView id="panoView"/>
+    <View id="infoArea" alpha="0">
+        <!-- 头部:功能菜单 -->
+        <View id="funMenu" width="match" height="wrap">
+            <ImageView width="match" height="60dp" src="images/shangMengCeng.png"/>
+            <View id="back" gone="true" width="40dp" height="60dp" marginLeft="5dp" paddingLeft="20dp"
+                  paddingBottom="20dp" paddingTop="20dp">
+                <ImageView width="20dp" height="20dp" src="images/icon/symbols-ic-back.png"/>
+            </View>
+            <View id="logo" width="wrap" height="wrap" gravity="centerVertical" paddingLeft="20dp">
+                <ImageView width="wrap" height="25dp" src="images/logo.png"/>
+            </View>
+            <View gravity="right" width="wrap" height="wrap" layout="horizontal" marginRight="10dp">
+                <View id="audio" gone="true" width="30dp" height="60dp" paddingLeft="12dp" paddingBottom="20dp"
+                      paddingTop="20dp" marginLeft="5dp">
+                    <ImageView id="musicOff" width="20dp" height="20dp" src="images/icon/music.png"/>
+                    <ImageView id="musicOn" visible="false" width="20dp" height="20dp"
+                               src="images/icon/music_close.png"/>
+                </View>
+                <View id="time" gone="true" width="30dp" height="60dp" paddingLeft="12dp" paddingBottom="20dp"
+                      paddingTop="20dp">
+                    <ImageView id="timeIc" visible="false" width="20dp" height="20dp"
+                               src="images/icon/symbols-ic-change.png"/>
+                    <ImageView id="dayIc" visible="false" width="17dp" height="17dp" gravity="center"
+                               src="images/icon/day.png"/>
+                    <ImageView id="nightIc" visible="false" width="17dp" height="17dp" gravity="center"
+                               src="images/icon/night.png"/>
+                </View>
+                <View id="vrOn" gone="true" width="30dp" height="60dp" paddingLeft="12dp" paddingBottom="20dp"
+                      paddingTop="20dp">
+                    <ImageView id="vrIc" width="20dp" height="20dp" src="images/icon/symbols-ic-vr-on.png"/>
+                </View>
+                <View id="gravity" width="30dp" height="60dp" paddingLeft="12dp" paddingBottom="20dp" paddingTop="20dp">
+                    <ImageView id="gravityOff" visible="false" width="20dp" height="20dp"
+                               src="images/icon/symbols-ic-gyroscope-off.png"/>
+                    <ImageView id="gravityOn" width="20dp" height="20dp" src="images/icon/symbols-ic-gyroscope-on.png"/>
+                </View>
+                <View id="intro" width="wrap" height="60dp" paddingLeft="12dp" layout="horizontal"
+                      paddingBottom="20dp" paddingTop="20dp">
+                    <View id="introIc" width="20dp" height="20dp">
+                        <ImageView id="introIc" width="20dp" height="20dp"
+                                   src="images/icon/symbols-ic-introduction.png"/>
+                    </View>
+                    <TextView id="introTxt" width="wrap" height="wrap" maxLine="1" fontSize="14dp"
+                              fontColor="#ffffff" contentGravity="left|center" marginLeft="5dp"/>
+                </View>
+            </View>
+        </View>
+        <!-- 底部:相册菜单&重力 -->
+        <View id="bottom" height="wrap" gravity="bottom" layout="vertical">
+            <View height="wrap">
+                <ImageView width="match" src="images/xiaMengCeng.png" gravity="bottom"/>
+                <com.album.widgets.AlbumMenu id="albumMenu" height="wrap" margin="0dp 2dp 0dp 10dp" paddingBottom="10dp"
+                                             gravity="bottom" layout="vertical">
+                    <ScrollView id="albumList" layout="horizontal" height="25dp"/>
+                </com.album.widgets.AlbumMenu>
+            </View>
+        </View>
+        <View id="panScrollHistoryBottom" height="wrap"  gravity="bottom">
+            <ImageView src="images/bottom_shadow.png" height="match"/>
+            <View layout="vertical" height="wrap">
+                <ScrollView layout="horizontal" marginLeft="10dp" id="pano_text_scroll" height="wrap"
+                            width="fill">
+                </ScrollView>
+
+                <ScrollView layout="horizontal" paddingBottom="15dp" marginLeft="10dp" marginTop="6dp" id="pano_image_scroll" height="wrap"
+                            width="fill">
+                </ScrollView>
+            </View>
+        </View>
+    </View>
+    <View id="vrOff" width="60dp" height="60dp" gravity="right|top" visible="false">
+        <ImageView width="60dp" height="60dp" padding="30dp 10dp 10dp 30dp" src="images/icon/symbols-ic-vr-off.png"/>
+    </View>
+    <View width="wrap" id="contentOperate" height="wrap" gravity="right|bottom" marginRight="150dp" layout="vertical" marginBottom="150dp">
+        <ImageView id="viewInfo" width="wrap" height="40dp" gravity="centerHorizontal" src="images/intro.png"/>
+        <View marginTop="20dp" id="intoAlbum" width="wrap" height="wrap" layout="vertical" gone="true">
+            <ImageView id="inImg" width="wrap" height="40dp" src="images/browse_fill.png" gravity="centerHorizontal"/>
+            <TextView id="intoTxt" text="进入专题" fontSize="12dp" fontColor="#ffffff" width="wrap" maxLine="1" marginTop="5dp" contentGravity="center"/>
+        </View>
+    </View>
+    <View id="titleInfo" width="wrap" height="wrap" gravity="left|bottom" layout="vertical" marginLeft="150dp"
+          marginBottom="150dp">
+        <TextView id="albumTitle" fontSize="40dp" fontColor="#FFFFFF" width="wrap" height="wrap" text=""/>
+        <TextView id="albumDate" marginTop="10dp" fontSize="18dp" fontColor="#FFFFFF" width="wrap" height="wrap" text=""/>
+        <View/>
+    </View>
+    <View id="goPano" clipToBounds="true" height="40dp" borderCorner="40dp" width="40dp" gravity="right|bottom" marginRight="150dp" marginBottom="150dp" gone="true" contentGravity="center">
+        <View  background="#000000" alpha="0.12"></View>
+        <ImageView id="swithIcon" src="images/history_off.png" height="24dp" width="wrap"></ImageView>
+    </View>
+    <TextView id="bottomLabel" fontSize="16dp" fontColor="#ffffff" alpha="0.6" gravity="bottom|center" height="wrap"
+              width="wrap" marginBottom="50dp"/>
+    <View id="coverContainer" gone="true" background="#000000">
+        <ImageView id="coverBg" height="match" width="match"/>
+        <ImageView id="panoLogo" width="100dp" height="100dp" gravity="centerHorizontal|bottom" marginBottom="200dp"/>
+        <TextView id="tv1" fontSize="16dp" fontColor="#ffffff" alpha="0.6" gravity="bottom|center" height="wrap"
+                  width="wrap" marginBottom="50dp"/>
+        <View id="skipCover" gravity="right" height="30dp" margin="10dp" width="50dp" borderCorner="2dp"
+              borderColor="#ffffff">
+            <View background="#ffffff" alpha="0.3"/>
+            <TextView fontSize="14dp" contentGravity="center" text="跳过" fontColor="#ffffff" margin="10dp"/>
+        </View>
+    </View>
+</Page>

@@ -1,0 +1,83 @@
+<!--pages/guanlijianli/guanlijianli.wxml-->
+<view class="page">
+
+<form bindsubmit="formSubmit" bindreset="formReset">
+<view class="page__bd" style="padding-bottom:0px;">
+    <view class="linputer">
+        <view class="lbutton" bindtap="selectcitys">
+            <text class="city">{{city}}</text>
+            <input name="city" style="display: none;"  value="{{city}}" />
+        </view>
+        <view class="rinput">
+            <input name="zhiwei" id="zhiwei" value="{{zhiwei}}" class="inputer" bindfocus="xuanzhong"  placeholder="搜索职位"  />
+            <!--<button formType="submit" plain="true" class="search" style="border:0px solid #fff;">搜索</button>-->
+        </view>
+    </view>
+</view>
+
+<view class="page__bd" style="display:{{diquxianshi}};">
+    <view class="weui-cells__title">选择地区</view>
+    <view class="weui-grids">
+            <block wx:for-items="{{grids}}"wx:key="{{index}}">
+                <!--<navigator url="" class="weui-grid" hover-class="weui-grid_active">-->
+                    <!--<image class="weui-grid__icon" src="../images/icon_tabbar.png" />-->
+                    <view class="weui-grid" data-hi="{{item.city}}" bindtap="xuanzhongcitys"  hover-class="weui-grid_active">
+                        <view class="weui-grid__label">{{item.city}}</view>
+                    </view>
+                <!--</navigator>-->
+            </block>
+        </view>
+</view>
+</form>
+ <form bindsubmit="formsubmit2" report-submit='true'>
+<view class="page__bd" style="padding:10px 10px;display:{{remenyincang}};margin:auto 0px;">
+
+	<block wx:for-items="{{remen}}" wx:key="{{index}}"  wx:for-index="idx">
+        <view class="weui-flex">
+        <block wx:for-items="{{item}}" wx:key="{{index}}"  wx:for-index="idx">
+        
+            <view class="weui-flex__item"  >
+            
+                <!-- <view>{{item.position_name}}</view> -->
+                <button class="yuanjiao" data-hi="{{item.position_name}}" bindtap = "remen" form-type="submit">{{item.position_name}}</button>
+            </view>
+        </block>
+		</view>
+	</block>
+	
+</view>
+</form>
+<view class="page__bd" style="display:{{zhiweixianshi}};padding:10px 0px">
+    <!--<view class="weui-cells__title">职位搜索结果：</view>-->
+    <view style="padding-left:10px;padding-right:10px;" class="weui-cells weui-cells_after-title">
+    
+ <block wx:for-items="{{info}}"wx:key="{{index}}">
+        <navigator url="../jobs/jobs?token={{item.id}}" hover-class="weui-grid_active" open-type="navigate">
+        
+        <view class="list-zhiwei">
+      <image src="{{item.logo}}" />
+      <view class="zhiwei-rigth">
+        <view class="zhiwei-rigth-name" style="padding-bottom:2px;">
+          <text class="name">{{item.title}}</text>
+          <text class="gongzi">{{item.gongzi}}</text>
+        </view>
+        <view class="zhiwei-rigth-company"  >
+          <text class="name" style="padding-top:3px;">{{item.company}}</text>
+          
+        </view>
+        <view class="zhiwei-rigth-dizhi">
+          <text class="name" style="padding-top:3px;">{{item.city}} {{item.quyu}} <text style="color:#E2E2E2;font-size: 0.70rem;">|</text> {{item.renyuan}} <text style="color:#E2E2E2;font-size: 0.70rem;">|</text> {{item.jingyan}}<text  style="float:right">{{item.creattime}}</text></text>
+        </view>
+        </view>
+    </view>
+    </navigator>
+</block>
+    
+
+    </view>
+   
+</view>
+
+
+
+</view>

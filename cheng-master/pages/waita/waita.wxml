@@ -1,0 +1,53 @@
+<!--pages/wait/wait.wxml-->
+<view class="container">
+    <view class='header'>
+        <view class='left public'>
+            <view class='leftBg bg'>
+                  <image src="{{otherImg}}" mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='leftInform inform'>
+            <view class='text name'>{{otherName}}<text style='color:red;font-size:26rpx' wx:if="{{comeIn}}">（房主）</text></view>
+            <!-- <view class='text little' style='color:red;' wx:if="{{comeIn}}">房主</view> -->
+        </view> 
+        <view class='wait'>
+           <view>等待中...</view> 
+        </view>
+        <view class='right public'>
+            <view class='rightBg bg'>
+                  <image src="{{userInfo.avatarUrl}}" mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='rightInform inform'>
+            <view class='text name'>{{userInfo.nickName}}</view>
+            <!-- <view class='text little'>来自：{{userInfo.province}}</view> -->
+        </view> 
+    </view>
+     <view class='foot'>
+        <view class='button'>
+            <!-- <view class='star'>
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button formType="submit" class="submit" style='border-radius:0'>
+                      开始
+                  </button>
+              </form>
+            </view> -->
+            <view class='out' bindtap='outTap'>
+              <form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+                  <button formType="submit" class="submit" style='border-radius:0'>
+                      退出
+                  </button>
+              </form>
+            </view>
+        </view>
+         <view class='color'>成语挑战,共5题,每题20秒时间</view>
+    </view>
+</view>
+<!-- 离开 -->
+<view class='bg' wx:if="{{bg}}">
+    <view class='zindex'>
+        <view class='title'>好友正在对战或者离开房间</view>
+        <view class='item one' bindtap='waitTap'>继续等待</view>
+        <view class='item' bindtap='outTap'>退出</view>
+    </view>
+</view>

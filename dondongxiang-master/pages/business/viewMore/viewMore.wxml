@@ -1,0 +1,55 @@
+<view class="search-box">
+    <view class="search-input">
+        <image class="search-icon" src="/images/business/shop/icon_normal_search.png"></image>
+        <view class="input-block">
+          <input type='text' placeholder='输入用户名、地名'></input>
+        </view>
+    </view>
+</view>
+<view class="filter-box">
+    <view class="filter-item">
+        <view class="filter-item-text">
+          <text>附近</text>
+          <image src="/images/business/shop/icon_filter_arrow.png"></image>
+        </view>
+    </view>
+    <view class="filter-item" style='left:33.33%;'>
+        <view class="filter-item-text">
+          <text>全部分类</text>
+          <image src="/images/business/shop/icon_filter_arrow.png"></image>
+        </view>
+    </view>
+    <view class="filter-item" style='right:0;'>
+        <view class="filter-item-text">
+          <text>排序</text>
+          <image src="/images/business/shop/icon_filter_arrow.png"></image>
+        </view>
+    </view>
+</view>
+<view class="fix-box" style='top:96px;'>
+  <view class="relative-box">
+    <scroll-view scroll-y style='width:100%;height:100%;'>
+        <view class="ration-list">
+          <block wx:for="{{userlist}}" wx:key="">
+            <view class="ration-item" data-index='{{item.user_id}}' bindtap='detailsTap'>
+                <view class='ration-img'>
+                    <image class="ration-photo" src="{{item.headimgurl}}"></image>
+                    <image class="ration-vip" src="/images/business/shop/icon_cooperation_vip.png"></image>
+                </view>
+              <view class="ration-title">{{item.nickname}}</view>
+              <view class="ration-desc">{{item.introduce}}</view>
+              <view class="ration-type">{{item.position}}</view>
+            </view>
+          </block>
+            <!-- <view class="load-more">查看更多</view> -->
+        </view>
+    </scroll-view>
+  </view>
+</view>
+<view class="time-select">
+  <view data-id='1' bindtap='pay'  class="time-select-item">24小时</view>
+  <view data-id='30' bindtap='pay' class="time-select-item">1个月</view>
+  <view data-id='90' bindtap='pay' class="time-select-item">3个月</view>
+  <view data-id='360' bindtap='pay' class="time-select-item">12个月</view>
+  <view class="time-select-item">说明</view>
+</view>

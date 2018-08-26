@@ -1,0 +1,55 @@
+<!-- <view class="border2"></view>-->
+<view wx:if="{{load}}" style="text-align:center;margin-top:20rpx">
+  <image class="load" src="/images/index/load.gif"></image>
+  <text class="loadtext">一脸懵逼的加载中...</text>
+</view>
+
+<view wx:if="{{tl}}" style="text-align:center;margin-top:20rpx">
+  <image class="load" src="/images/index/hl.gif"></image>
+  <text class="loadtext">惊不惊喜，意不意外，这里啥也没</text>
+</view>
+
+<!--美食外卖店家信息-->
+<view>
+  <view class="storeInfo">
+    <block wx:for="{{list}}" wx:key="unique">
+      <view class="border"></view>
+      <view class="store" bindtap="storeMenu" data-in="{{index}}" id="{{item.id}}">
+        <view class="store_avatar">
+          <image class="avatar" src="{{item.img}}"></image>
+        </view>
+        <view class="store_text">
+          <view class="store_name bold" style="color:#232323;font-size:32rpx;"><text>{{item.store_name}}\n</text></view>
+          <view class="store_score" >
+            <image src="../../../images/item/star.png"></image>
+          </view>
+          <view class="monthlySale" ><text>月售{{item.monthlySale}}单\n</text></view>
+
+          <view class="startingAndDistrubute" >
+            <view class="startingFee"><text>起送¥{{item.startingFee}}</text></view>
+            <text>配送¥{{item.distributionFee}}</text>
+            <view wx:if="{{item.zk!=10.0}}" class="zk">
+              {{item.zk}}折优惠
+            </view>
+          </view>
+        </view>
+        <view>
+          <image wx:if="{{item.status == '打烊中'}}" src="/images/item/dayangzhon.png" style="margin-left:15rpx;width:100rpx;height:60rpx"></image>
+          <image wx:if="{{item.status != '打烊中'}}" src="/images/item/yingyezhon.png" style="margin-left:15rpx;width:100rpx;height:60rpx"></image>
+          <view style="margin-top:-5rpx;margin-left:15rpx;text-align:center" wx:if="{{item.minDiscount < 10 && item.minDiscount !=1}}">
+            <view style="margin:auto;font-size:20rpx; width:30rpx;height:30rpx; line-height:30rpx;text-align:center;background:#FF4040;color:#fff;border-radius:10rpx;">折</view>
+            <view style="margin:auto;font-size:24rpx;margin-top:5rpx ;color:#aaa;">{{item.minDiscount}}折起</view>
+          </view>
+        </view>
+      </view>
+
+
+      <!-- <view class="border"></view>-->
+    </block>
+  </view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" style="margin-top:60rpx">
+  <image class="line margin-top-sm" src="/images/line.png"></image>
+  <view class=" margin-left-sm" style="font-size:30rpx; color:#888">一言不合就扯我(⊙o⊙)</view>
+  <image class="line margin-left-sm margin-top-sm" src="/images/line.png"></image>
+</view>

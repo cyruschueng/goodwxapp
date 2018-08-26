@@ -1,0 +1,23 @@
+<div class="page" ng-controller="historyEveryWeekController">
+    <div class="page__bd">
+        <div class="weui-panel">
+            <div class="weui-panel__hd">每周一课历史</div>
+            <div class="weui-panel__bd">
+                <div   class="weui-media-box weui-media-box_text" ng-repeat="m in list.data|orderBy:m.week" >
+                    <a href="#/courses?courseId={{m.id}}">
+                        <h4 class="weui-media-box__title" style="color:#000">{{m.title}}</h4>
+                        <p class="weui-media-box__desc">{{m.intro}}</p>
+                    </a>
+                    <ul class="weui-media-box__info">
+                        <li class="weui-media-box__info__meta">{{memberInfo.className}}</li>
+                        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{m.year}}年</li>
+                        <li class="weui-media-box__info__meta">第{{m.week}}周</li>
+                        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra" >
+                            <a ng-click="startExercise(m.exercisesId)" style="color:#f60">练习</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

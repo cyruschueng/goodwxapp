@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<View xmlns:xsi="//www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../View.xsd"
+      >
+  <include src="map.js"/>
+  <View id="mapContainer"/>
+  <ImageView id="back" src="/images/ic_return.svg" height="24dp" width="24dp" margin="10dp 0 0 15"/>
+  <View id="markerCard" visible="false" gravity="bottom" anchorY="0" anchorX="0.5" background="#ffffff" height="match 0.7">
+    <View layout="vertical" padding="0 15dp 10dp 15dp">
+      <View layout="vertical" height="fill" clipToBounds="true">
+      <ScrollView id="markerDetail" height="wrap" layout="vertical">
+        <TextView id="spotName" fontColor="#333333" height="wrap" fontSize="18dp" margin="20dp 15dp 0dp 15dp"/>
+        <View id="photographerAddressBox" margin="15dp 15dp 20dp 15dp" width="fill" height="wrap" background="#FFFFFF">
+          <View width="fill" height="wrap" layout="horizontal" gravity="centerVertical">
+            <ImageView width="24dp" height="24dp" src="../images/ic_place_24px.svg"/>
+            <TextView id="photographerAddress" width="fill" height="wrap" text="天津市河东区团结路57号" fontSize="14dp" fontColor="#4A90E2" gravity="centerVertical"/>
+          </View>
+        </View>
+        <TextView id="spotsCount" text="拍摄清单"  width="fill" height="wrap" fontSize="14dp" fontColor="#888888" margin="0 15 10 15"/>
+        <View width="fill" height="1dp" background="#dcdcdc"/>
+        <View id="facilityListView" height="wrap" gone="true" width="fill" layout="vertical"/>
+        <View id="spotsName_album" height="wrap" layout="flow" marginTop="20dp" marginLeft="10dp"/>
+      </ScrollView>
+      </View>
+      <View id="markerUp" height="50dp">
+        <ImageView  gravity="center|bottom" src="../images/down.svg" marginTop="20dp" width="18dp" height="18dp" rotateZ="180"/>
+      </View>
+    </View>
+  </View>
+</View>

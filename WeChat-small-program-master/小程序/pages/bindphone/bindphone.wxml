@@ -1,0 +1,28 @@
+<view class="telephone_box">
+    <view class="telephone_title">绑定手机号</view>
+    <view class="telephone_text">
+        <picker mode = multiSelector class="country" bindchange="bindPickerChange"  value="{{index}}" range="{{options}}">
+            {{telephone}}
+        </picker>
+        <input class="phone" placeholder="请输入您的手机号" type="number" focus="{{focus}}" bindinput="listenerPhoneInput" maxlength="11"/>
+    </view>
+    <view class="telephone_text telephone_code">
+        <input class="phone" placeholder="请输入收到的验证码" type="number" focus="{{focus}}" bindinput="listenerPasswordInput" maxlength="4"/>
+        <view wx:if="{{code}}" class="code_disable">
+            获取验证码
+        </view>
+        <view wx:else >
+           <view class="code" bindtap="click_code" wx:if="{{sms_code}}">
+               获取验证码
+           </view>
+            <view wx:else class="code">
+                {{getmsg}}
+            </view>
+        </view>
+    </view>
+</view>
+<view>
+    <view class="info">如果您是第一次绑定手机号,我们将为您创建账号</view>
+    <view class="bind_btn_disable" wx:if="{{submit}}">绑定</view>
+    <view class="bind_btn" bindtap="bind_submit" wx:else>绑定</view>
+</view>

@@ -1,0 +1,147 @@
+<!--index.wxml-->
+<scroll-view class="container scrollBox" bindscroll="EventHandle" scroll-y="true" scroll-top="{{ScrollTop}}">
+
+<view class="Nav">
+<view class="fl {{NavFlag==1?'NavActive':''}}" id="1" bindtap="NavActive">
+<text style="border-right:1rpx solid #e5e5e5" >首页</text>
+</view>
+<view class="fl {{NavFlag==2?'NavActive':''}}" id="2" bindtap="NavActive">
+<text style="border-right:1rpx solid #e5e5e5">客片欣赏</text>
+</view>
+<view class="fl {{NavFlag==3?'NavActive':''}}" id="3" bindtap="NavActive"><text>好友拼团</text></view>
+</view>
+<!--end Nav-->
+
+
+
+<view class="{{NavFlag==1?'':'hidden'}}" >
+<view class="swiper-container">
+ <swiper autoplay="true" interval="3000" duration="500" bindchange="swiperChange">
+  <block wx:for="{{slider}}">
+   <swiper-item>
+    <image src="{{item}}" mode="widthFix" class="focusImg"></image>
+   </swiper-item>
+  </block>
+ </swiper>
+  
+
+ <view class="dots">
+  <block wx:for="{{slider}}">
+   <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+  </block>
+ </view>
+</view>
+<!--end swiper-container-->
+
+
+<view class="IconBox1">
+<block wx:for="{{classeslist}}">
+<view class="Icon a fl">
+<image src="{{item.image}}" bindtap="classclick" id="{{index}}" ></image>
+<view>{{item.name}}</view>
+</view>
+
+</block>
+<!--Icon-->
+</view>
+
+<!--IconBox-->
+
+
+<block wx:for="{{productlist}}">
+<view class="CommodityBox a" bindtap="CommodityDetails" id="{{index}}">
+<image src="{{item.image}}" mode="widthFix" style="width:750rpx"></image>
+<view class="CommodityTitle">{{item.name}}</view>
+<view class="FootBox">
+<text class="CommodityPrice">¥ {{item.price}}</text>
+<text class="CommodityNum">已售{{item.sales}}套</text>
+<view class="Package" >购买套餐</view>
+</view>
+</view>
+</block>
+
+<!--end CommodityBox-->
+</view>
+<!--首页-->
+
+<view class="Appreciate {{NavFlag==2?'':'hidden'}}">
+
+<view class="swiper-container">
+ <swiper autoplay="true"interval="3000"duration="500"bindchange="swiperChange">
+  <block wx:for="{{kplb}}">
+   <swiper-item>
+    <image src="{{item}}" mode="widthFix" class="focusImg"></image>
+   </swiper-item>
+  </block>
+ </swiper>
+  
+
+ <view class="dots">
+  <block wx:for="{{slider2}}">
+   <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+  </block>
+ </view>
+</view>
+<!--end swiper-container-->
+
+<view class="AppreciateBox" style="background: url('/images/bj.jpg') repeat-y;background-size: 750rpx 266rpx;">
+
+<block wx:for="{{topiclist}}">
+
+<view bindtap="gotoAppreciatePage" id="{{index}}" class="ImagesList">
+
+<view class="ColorBox" style="background-color:#{{ImagesColor[index]}}"></view>
+
+<view class="AppreciateImg"><image mode="aspectFill" src="{{item.url}}"></image></view>
+
+<view class="AddressText">
+<view class="AddressTextTop">{{item.name}}</view>
+<view class="AddressTextFoot">{{AddressText[index].foot}}</view>
+</view>
+
+</view>
+</block>
+
+</view>
+<!--end AppreciateBox-->
+
+<view class="FootImg">
+<image mode="widthFix" src="/images/120.jpg"></image>
+</view>
+<!--end FootImg-->
+
+</view>
+<!--客片欣赏 end Appreciate-->
+
+
+<view class="PinTuan {{NavFlag==3?'':'hidden'}}">
+<view class="PinTuanTop"><image src="/images/14.jpg"></image></view>
+<!--end PinTuanTop-->
+<block wx:for="{{productlist}}">
+<view class="PinTuanList">
+<view class="PinTuanTitle">
+<view class="numberIcon fl"><text style="position:relative;left:3rpx">T</text><text style="font-size:18rpx;position:relative;left:-4rpx">wo</text></view>
+<view class="fr" style="font-size:36rpx;color:#ff7a92">新人拼团专区</view>
+</view>
+<!--end PinTuanTitle-->
+<view class="PinTuanImg"><image src="{{item.image}}" mode="widthFix" style="width:750rpx"></image></view>
+<view class="PinTuanText">{{item.name}}</view>
+<view class="PinTuanFoot">
+<view class="PinTuanPrice fr" bindtap="pintuan" id="{{index}}">拼团</view>
+<view class="PinTuanNum fr">已售{{item.sales}}套</view>
+</view>
+<!--end PinTuanFoot-->
+</view>
+</block>
+<!--end PinTuanList-->
+</view>
+<!--好友拼团--end PinTuan-->
+
+
+<view class="BackTop {{BackFlag?'':'hidden'}}" bindtap="BackTop">
+<view style="padding-top:8rpx">∧</view>
+<view>顶部</view>
+</view>
+<!--end BackTop-->
+
+</scroll-view>

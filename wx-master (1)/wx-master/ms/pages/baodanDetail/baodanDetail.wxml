@@ -1,0 +1,18 @@
+<!--pages/baodanDetail/baodanDetail.wxml-->
+<view class='container'>
+<!-- <view class='img row'>
+  <image class="left"src='../../images/baodan/1.png'></image>
+   <image  class="right"src='../../images/baodan/2.png'></image>
+</view> -->
+  <block wx:for="{{list}}" wx:key="{{item.id}}">
+    <view class='list row {{"list"+index}}' data-index='{{index}}' catchtap="nnn">
+      <view >{{item.title}}</view>
+      <view >{{item.dec}}</view>
+    </view>
+  </block>
+<view class='list row' catchtap="ontip">
+      <view >查看</view>
+      <view class='item17'>保险条款</view>
+    </view>
+  <view style='margin-top:60rpx;background:#fff; text-align:center; line-height:50rpx; font-size:30rpx; color:#5271ff;'>查看更多资金保障</view>
+</view>

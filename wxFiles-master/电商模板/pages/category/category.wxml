@@ -1,0 +1,32 @@
+<view class="titlebar">
+  <scroll-view class="scroll-x" scroll-x="true">
+    <view class='item scroll-x-control' wx:for="{{cate}}" data-id='{{item.categoryTwoId}}' bindtap='changeBar'>
+      <view class='{{item.active? "act":""}}'>{{item.categoryTwoName}}</view>
+    </view>
+  </scroll-view>
+</view>
+
+<view style='height:100rpx'></view>
+<view class='padding-md font-md' style='text-align:center' wx:if="{{!loading && list.length == 0}}">
+  暂无该分类商品
+</view>
+<view class='panelShop'>
+  <view class='item' style='width:{{innerWidth/2-2}}px' wx:for="{{list}}" data-id='{{item.commodityId}}' bindtap='navToGoods'>
+    <image src='{{ip+item.imagePath}}' style='width:{{innerWidth/2-2}}px;height:{{innerWidth/2-2}}px;display:block' mode='aspectFill'></image>
+    <view class='con' style='width:{{innerWidth/2-2}}px;' >
+      <view class='ell bold'>{{item.commodityName}}</view>
+      <view class='margin-top-xs'>
+        <text class='font-lg font-danger bold' wx:if="{{item.isDiscount == 1}}">￥{{item.commodityPrice * item.commodityDiscount}}</text>
+          <text class='font-lg font-danger bold' wx:if="{{item.isDiscount == 0}}">￥{{item.commodityPrice}}</text>
+          <text class='font-sm font-default through' wx:if="{{item.isDiscount == 1}}">￥{{item.commodityPrice}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+
+<view style='padding:40rpx;text-align:center' class='font-default' wx:if="{{!loading}}">到底啦</view>

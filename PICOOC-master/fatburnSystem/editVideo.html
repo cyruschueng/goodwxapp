@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+    <title>编辑视频</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="format-detection"content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+    <!--<link rel="stylesheet" href="css/bootstrap.css">-->
+    <link href="image/login/icon.png" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/ppublic.css">-->
+    <link rel="stylesheet" type="text/css" href="css/system.css">
+    <link rel="stylesheet" href="css/zyUpload.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <link type="text/css" href="css/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+     <link type="text/css" href="css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-zh-CN.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
+</head>
+<body>
+    <section class="container-fluid">
+        <aside class="row info">
+            <!-- 新增视频 -->
+            <div class="addVideo newAdd col-xs-12 col-sm-12">
+                <div>上传视频
+                    <a href="javascript:;" class="file">+上传视频
+                        <input type="file" name="file" id="videoFile"/>
+                    </a>
+                    <div class="videolist" id="addvideoList"></div>
+                    <button class="dlVideo">删除</button>
+                </div>
+                <div>
+                    <label for="">视频名称：</label>
+                    <input type="text" value="" placeholder="不多于10个汉字" id="videoname" />
+                </div>
+
+                <div>缩略图
+                    <a href="javascript:;" class="file">+加图
+                        <input type="file" name="file" id="imgFile"/>
+                    </a>
+                    <div class="imglist" id="addimgList"></div>
+                    <button class="dlimg">删除</button>
+                </div>
+                <div class="sexban">
+                    <label>试用版本：</label>
+                    <label><input type="radio" value="0" data-index="0" name="sexban" checked="checked"/>女生版</label>
+                    <label><input type="radio" value="1" data-index="1" name="sexban"/>男生版</label>
+                </div>
+                <div class="actionType">
+                    <label>动作类型：</label>
+                </div>
+                <div class="VbodyMain">
+                    <label>主要结构：</label>
+                </div>
+                <div class="Vbody">
+                    <label>锻炼结构：</label>
+                </div>
+                <div class="VpartMain">
+                    <label>主要部位：</label>
+                </div>
+                <div class="Vpart">
+                    <label>锻炼部位：</label>
+                </div>
+                <div class="direction">
+                    <label>方向：</label>
+                    <label><input type="radio" value="0" name="direction" checked="checked">无</label>&emsp;
+                    <label><input type="radio" value="1" name="direction">左</label>&emsp;
+                    <label><input type="radio" value="2" name="direction">右</label>                    
+                </div>
+                <div class="actionCount">
+                    <label>动作个数：</label>
+                    <label><input type="radio" value="1" name="actionCount" checked="checked">1</label>&emsp;
+                    <label><input type="radio" value="2" name="actionCount">2</label>
+                </div>
+                <div  class="actionUnit">
+                    <label>动作单位：</label>
+                    <label><input type="radio" value="0" name="actionUnit"/>次</label>
+                    <label><input type="radio" value="1" name="actionUnit"/>秒</label>
+                </div>
+                <div>
+                    <button class="Vcancel">取消</button>&emsp;&emsp;&emsp;
+                    <button class="Vsave">保存</button>
+                </div>
+            </div>
+        </aside>
+    </section>
+</body>
+
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
+<script type="text/javascript" src="js/system.js?v=1"></script>
+<script type="text/javascript" src="js/class.js?v=7"></script>
+<script type="text/javascript" src="js/campvideo.js?v=1"></script>
+<script>
+    //编辑视频
+    var vID = JSON.parse(localStorage.getItem('videoId'));
+    // alert(vID);
+    var timer= null;
+     clearTimeout(timer);
+     timer = setTimeout(function(){
+       editVideo(vID);
+     },0)
+    function editVideo(id){
+        $.ajax({
+            url:baseUrl+"v1/api/campVideo/getVideoById"+"?token="+token+"&id="+id+"&roleId="+roleId,
+            type:'GET',
+            dataType: "json",
+            jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+            jsonpCallback:"flightHandler",
+            success:function(result){
+                if(result.code == 200){
+                    var data = result.resp;
+                    console.log(data);
+                    $('.Vsave').attr('data-id',data.id);
+                    $('#videoname').val(data.name);
+                    var actionType = $('.actionType input');
+                    for(var i = 0;i < actionType.length;i++){
+                        if($(actionType[i]).val()== data.actionType){
+                            $(actionType[i]).attr('checked','checked');
+                        }
+                    }
+                    var VbodyMain = $('.VbodyMain input');
+                    for(var i = 0;i < VbodyMain.length;i++){
+                        if($(VbodyMain[i]).attr('data-id') == data.bodyMain){
+                            $(VbodyMain[i]).attr('checked','checked');
+                        }
+                    }
+                    var bodyArr = data.body.split(',');
+                    var body = $('.Vbody input')
+                    for(var i=0;i < body.length;i++){
+                        for(var j = 0;j<bodyArr.length;j++){
+                            if($(body[i]).attr('data-id')== bodyArr[j]){
+                                $(body[i]).attr('checked','checked');
+                            }
+                        }
+                    }
+                    var VpartMain = $('.VpartMain input');
+                    for(var i = 0;i < VpartMain.length;i++){
+                        if($(VpartMain[i]).attr('data-id') == data.partMain){
+                            $(VpartMain[i]).attr('checked','checked');
+                        }
+                    }
+                    var partArr = data.part.split(',');
+                    var part = $('.Vpart input');
+                    for(var j =0;j < part.length;j++){
+                        for(var n = 0;n < partArr.length;n++){
+                            if($(part[j]).attr('data-id')== partArr[n]){
+                                 $(part[j]).attr('checked','checked');
+                            }
+                        }
+                    }
+                }
+                var imgbox = $('<div></div>').html(data.videoUrl);
+                $('#addvideoList').append(imgbox);
+                var str = '<div class="upload_append_list" index7='+imgIndex7+'>'+
+				                          '<a style="height:100px;width:120px;" href="#" class="imgBox" id="imgcon">'+
+										  '<div id="del_img" style="text-align:center;background:#000;color:#fff;width:80%;position:absolute;top:0;left:0"></div>'+										  
+				                       	  '<div class="uploadImg" style="width:105px;">'+
+				                          '<img class="upload_image" src='+data.videoImg+' style="width:expression(this.width > 105 ? 105px :this.width)">'+
+				                          '</div>'+
+				                    	  '</a>'+
+				                		  '</div>';
+                $('#addimgList').append(str);//头图路劲
+                var sex = $('.sexban input')//男版、女版
+                for(var k = 0;k< sex.length;k++){
+                    if($(sex[k]).attr('data-index')== data.sex){
+                        $(sex[k]).attr('checked','checked');
+                    }
+                }
+                var actionCount = $('.actionCount input');
+                for(var i = 0;i < actionCount.length;i++){
+                    if($(actionCount[i]).val() == data.actionCount){
+                        $(actionCount[i]).attr('checked','checked');
+                    }
+                }
+                var direction = $('.direction input');
+                // console.log(data.direction);
+                for(var m = 0; m < direction.length;m++){
+                    if($(direction[m]).val() == data.direction){
+                        $(direction[m]).attr('checked','checked');
+                    }
+                }
+                // $('.actionCount input').val(data.actionCount);
+                var actionCount =$('.actionCount input');//动作次数
+                for(var j =0;j < actionCount.length;j++){
+                    if($(actionCount[j]).val()== data.actionCount){
+                        $(actionCount[j]).attr('checked','checked');
+                    }
+                }
+
+                var unit =$('.actionUnit input');//单位
+                for(var m =0;m < unit.length;m++){
+                    if($(unit[m]).val()== data.unit){
+                        $(unit[m]).attr('checked','checked');
+                    }
+                }
+            }
+        })
+    } ;
+    //百度统计上传代码
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAutoPageview', false]);
+    _hmt.push(['_trackPageview', location.pathname]);
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</html>

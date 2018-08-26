@@ -1,0 +1,74 @@
+<!--pages/company/company.wxml-->
+<view class="page">
+<!--start-->
+<view class="page__hd" style="padding:10px;">
+ 
+    <view class="companylogo">
+        <image src="{{info.logo}}" />
+    </view>
+    <view class="companyname">{{info.title}}</view>
+    <!--标签-->
+    <view>
+        <view class="hitem" style="padding-top:15px;" >
+		<view class="weui-flex">
+			<view class="weui-flex__item">
+				<view class="vitem disabled"><image src="http://7pun6r.com2.z0.glb.qiniucdn.com/%E5%9C%B0%E7%82%B9.png" /><text style="padding-top:2px;">  {{info.city}}</text></view>
+			</view>
+			<view class="weui-flex__item">
+				<view class="vitem disabled"><image src="http://7pun6r.com2.z0.glb.qiniucdn.com/%E4%BA%BA%E7%BE%A4.png" /><text style="padding-top:2px;">  {{info.renyuan}}</text></view>
+			</view>
+			<view class="weui-flex__item">
+	            <view class="vitem disabled"><image src="http://7pun6r.com2.z0.glb.qiniucdn.com/联系人.png" style="width:14px;height:14px;" />  <text style="padding-top:20px;padding-left:5px;">  {{info.lianxiren}}</text></view>			
+			</view>
+        </view>
+            
+        </view>
+    </view>
+</view>
+
+<!--公司介绍-->
+<view class="companyinfo" style="margin-top: 20px;">
+    <view class="title">公司介绍</view>
+    <view class="des">{{info.gongsijieshao}}</view>
+</view>
+
+<!--公司介绍-->
+<view class="companyinfo">
+    <view class="title">公司地址</view>
+    <view class="des"><image src="http://7pun6r.com2.z0.glb.qiniucdn.com/%E5%9C%B0%E7%82%B9.png" /> {{info.dizhi}}</view>
+    <map id="map" longitude="{{map.lng}}" latitude="{{map.lat}}" scale="17" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 150px;"></map>
+</view>
+
+<!--其他职位-->
+<view class="companyinfo">
+    <view class="title">其他职位</view>
+      <!--列表-->
+    <view class="list-full">
+    <block wx:for-items="{{zhiwei}}" wx:key="{{index}}">
+    <navigator url="../jobs/jobs?token={{item.id}}" hover-class="weui-grid_active" open-type="navigate">
+        <view class="list-zhiwei">
+      <image src="{{item.logo}}" />
+      <view class="zhiwei-rigth">
+        <view class="zhiwei-rigth-name">
+          <text class="name">{{item.title}}</text>
+          <text class="gongzi">{{item.gongzi}}</text>
+        </view>
+        <view class="zhiwei-rigth-company">
+          <text class="name">{{item.company}}</text>
+         
+        </view>
+        <view class="zhiwei-rigth-dizhi">
+          <text class="name">{{item.city}} {{item.quyu}} <text style="color:#E2E2E2;font-size: 0.70rem;">|</text> {{item.renyuan}} <text style="color:#E2E2E2;font-size: 0.70rem;">|</text> {{item.jingyan}} <text class="time" style="float:right">{{item.creattime}}</text></text>
+        </view>
+        </view>
+    </view>
+    </navigator>
+    </block>
+    </view>
+    
+</view>
+
+
+<!--end-->
+    
+</view>

@@ -1,0 +1,63 @@
+alert( $('div').width() );  //width
+	
+	alert( $('div').innerWidth() );  //width + padding
+	
+	alert( $('div').outerWidth() );  //width + padding + border
+	
+	alert( $('div').outerWidth(true) );  //width + padding + border + margin
+
+
+
+
+
+
+
+
+
+
+
+标准   不透明度  opacity:0~1;
+IE私有  filter:alpha(opacity=0~100);
+
+.clear{zoom:1}
+.clear:after{content: "";display: block;clear: both;}
+
+
+
+
+
+定位的兼容问题、清浮动方法:
+position:relative;	
+在 IE6 下父级的 overflow:hidden; 包不住子级的relative；
+
+position:absolute;	
+在 IE6 下定位元素的父级宽高都为奇数那么在 IE6 下定位元素的 right 和 bottom 都有1像素的偏差；
+
+position:absolute; 
+绝对定位元素子级的浮动可以不用写清浮动方法；
+
+position:fixed;  
+固定定位元素子级的浮动可以不用写清浮动方法；（IE6不兼容） 
+
+
+table{border-collapse:collapse;} 单元格间隙合并
+th,td{padding:0;}重置单元格默认填充
+
+
+
+
+
+
+
+
+
+最基本的区别
+1.执行时间
+window.onload必须等到页面内包括图片的所有元素加载完毕后才能执行。 
+$(document).ready()是DOM结构绘制完毕后就执行，不必等到加载完毕。
+2.编写个数不同
+window.onload不能同时编写多个，如果有多个window.onload方法，只会执行一个 
+$(document).ready()可以同时编写多个，并且都可以得到执行
+3.简化写法
+window.onload没有简化写法 
+$(document).ready(function(){})可以简写成$(function(){});

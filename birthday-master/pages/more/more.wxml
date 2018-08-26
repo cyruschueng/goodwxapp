@@ -1,0 +1,18 @@
+<!--pages/more/more.wxml-->
+<view class="recentBirthday">
+    <view data-path="detail" data-mf_id="{{item.mf_id}}" data-url='{{item.avatar}}'
+    class="birthdayInfo clearfix" bindtap='birthdayInfo' wx:for="{{known}}">
+      <view class="left clearfix">
+        <image wx:if="{{item.avatar!='undefined'}}" src="{{item.avatar}}"></image>
+        <image wx:else src="../images/user.png"></image>
+        <view class="msg">
+          <view class="name">{{item.name}}</view>
+          <view class="date">{{item.birthday}}{{item.star}}</view>
+          <view class="date">推荐理由：你们在同一微信群</view>
+        </view>
+      </view>
+      <view class="right">
+        <view class="nextBirthday" bindtap='sendShare'>记下生日</view>
+      </view>
+    </view>
+  </view>

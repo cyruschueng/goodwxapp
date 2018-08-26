@@ -1,0 +1,40 @@
+
+
+<view>
+  <view>{{year}}年{{month}}月{{day}}日</view>
+  <picker-view indicator-style="height: 58px;" style='width: 100%; height: 300px;' value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{years}}" style='line-height: 50px'>{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" style='line-height: 50px'>{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" style='line-height: 50px'>{{item}}日</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+
+<view>
+  <radio-group bindchange="radioChange">
+    <block wx:for="{{items}}">
+      <label for="{{item.name}}">{{item.value}}</label>
+      <radio id="{{item.name}}" value='{{item.value}}'></radio>
+    </block>
+  </radio-group>
+</view>
+
+<view>
+  <slider min='2' max='250' step="3" value="210" block-size='35' show-value='true' bindchange='sliderChange' bindchanging='sliderChanging'></slider>
+</view>
+
+<text>switch</text>
+<view>
+  <switch checked='true' id='switch' type='switch' bindchange='switch' color='red'></switch>
+  <text for="switch" >for switch</text>
+</view>
+
+<text>textarea</text>
+<view>
+  <textarea value='test value' ></textarea>
+</view>

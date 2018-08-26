@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Progress演示，志玲姐姐 - swiper中文网</title>
+<meta name="viewport" content="initial-scale=1">
+
+<!--<link rel="stylesheet" href="../../dist/css/swiper.min.css">
+<script src="../../templets/default/js/jquery-1.10.1.min.js"></script>
+<script src="../../dist/js/swiper.min.js"></script>-->
+<link rel="stylesheet" href="css/swiper.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/swiper.min.js"></script>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+  .swiper-container {
+  
+  }
+  .swiper-wrapper {
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    -ms-perspective: 1200px;
+    perspective: 1200px;
+  }
+  .swiper-slide {
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+   background-size:100% auto;
+   overflow:hidden;
+   text-align:center;
+   line-height:300px;
+  }
+.swiper-slide img{
+	max-width:100%;
+}
+
+</style>
+</head>
+<body>
+<div style="max-width:640px; margin:0 auto;">
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+  <div class="swiper-slide"><img src="img/zhiling1.jpg" ></div>
+    <div class="swiper-slide"><img src="img/zhiling2.jpg" ></div>
+    <div class="swiper-slide"><img src="img/zhiling3.jpg" ></div>
+  </div>
+</div>
+</div>
+<script type = "text/javascript">
+function fixPagesHeight() {
+	$('.swiper-slide,.swiper-container').css({
+		height: $(window).height(),
+	})
+}
+$(window).on('resize', function() {
+	fixPagesHeight();
+})
+fixPagesHeight();
+
+
+var mySwiper = new Swiper('.swiper-container', {
+
+    direction: 'vertical',
+	lazyLoading : true,
+	mousewheelControl: true,
+	watchSlidesProgress: true,
+	onInit: function(swiper) {
+		swiper.myactive = 0;
+		
+	},
+	onProgress: function(swiper) {
+		for (var i = 0; i < swiper.slides.length; i++) {
+			var slide = swiper.slides[i];
+			var progress = slide.progress;
+			var translate, boxShadow;
+
+			translate = progress * swiper.height * 0.8;
+			scale = 1 - Math.min(Math.abs(progress * 0.2), 1);
+			boxShadowOpacity = 0;
+
+			slide.style.boxShadow = '0px 0px 10px rgba(0,0,0,' + boxShadowOpacity + ')';
+
+			if (i == swiper.myactive) {
+				es = slide.style;
+				es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0,' + (translate) + 'px,0) scale(' + scale + ')';
+				es.zIndex=0;
+
+
+			}else{
+				es = slide.style;
+				es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform ='';
+				es.zIndex=1;
+				
+			}
+
+		}
+
+	},
+
+
+	onTransitionEnd: function(swiper, speed) {
+		for (var i = 0; i < swiper.slides.length; i++) {
+		//	es = swiper.slides[i].style;
+		//	es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = '';
+
+		//	swiper.slides[i].style.zIndex = Math.abs(swiper.slides[i].progress);
+
+			
+		}
+
+		swiper.myactive = swiper.activeIndex;
+
+	},
+	onSetTransition: function(swiper, speed) {
+
+		for (var i = 0; i < swiper.slides.length; i++) {
+			//if (i == swiper.myactive) {
+
+				es = swiper.slides[i].style;
+				es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
+			//}
+		}
+
+	}
+
+});
+</script>
+
+</body>
+</html>

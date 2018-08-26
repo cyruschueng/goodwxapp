@@ -1,0 +1,48 @@
+<!--pages/answer_list/answer_list.wxml-->
+<view class='container' style="background:url({{background}}) no-repeat;background-size: cover; ">
+  <view class='search_wrap'>
+      <!-- <image class='sousuo' src='http://ovhvevt35.bkt.clouddn.com/moqi/searcha.png' mode='widthFix'></image> -->
+      <input type='text' class='search_input' bindinput='getNumber' placeholder='输入证书编号'></input>
+      <view class='search_btn' bindtap='search'>搜索</view>
+  </view>
+  <view class='content'>
+    <scroll-view scroll-y="true"> 
+      <view class='title'>参考答案</view>
+
+      <view class='tips tips1'>Tips：标红为回答错误</view>
+        <view class='tips tips2'>Tips：标黄为回答正确</view>  
+
+      <view class='item {{item.correct=="n"?"red":"blue"}}' wx:for="{{list}}" wx:key="{{idnex}}">
+        <!--{{item.correct=="n"?"red1":"blue"}}  -->
+        <view class='item_title'>{{index+1}}、{{item.title}}</view>
+        <view class='choose {{item.option=="a"?"color":""}}' wx:if="{{item.option_a}}">A、{{item.option_a}}</view>
+        <view class='choose {{item.option=="b"?"color":""}}' wx:if="{{item.option_b}}">B、{{item.option_b}}</view>
+        <view class='choose {{item.option=="c"?"color":""}}' wx:if="{{item.option_c}}">C、{{item.option_c}}</view>
+      </view>
+
+      <view class='bottom' wx:if="{{}}">微信小程序.默契大考验</view>
+    </scroll-view>
+  </view>
+  <view class='no_content' wx:if="{{}}">暂无结果</view>
+  
+</view>
+<!--弹窗  -->
+<view class='bg' wx:if="{{zindex}}">
+    <view class='zindex'>
+        <view class='notice'>
+            <view class='titlea' style='background:{{backgroundColor}}'>温馨提示</view>
+            <view class='text'>
+                游戏增加你我之间的默契，支付1元，立即偷看答案！心若相知无言也默契！
+            </view>
+            <view class='flex'>
+                <view class='one' bindtap='catale' style='border:1px solid {{border}}'>取消</view>
+                <view class='two' bindtap='ok' style='background:{{backgroundColor}};border:1px solid {{border}}'>确定</view>
+            </view>
+        </view>
+    </view>
+</view> 
+
+
+
+
+

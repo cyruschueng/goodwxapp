@@ -1,0 +1,13 @@
+<!--pages/message/messageDetails.wxml-->
+
+
+<import src="../../templates/mesgCar-item/mesgCar-item.wxml"/>
+
+
+<view class='bg-view'>
+
+   <block wx:for='{{ mesgCarItems }}' wx:for-item='mesg' wx:key='{{ index }}'> 
+    <template is='mesgCar-item' data='{{ ...mesg, index }}'/>
+   </block> 
+
+</view>

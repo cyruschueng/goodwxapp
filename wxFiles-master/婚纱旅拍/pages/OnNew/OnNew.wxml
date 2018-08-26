@@ -1,0 +1,54 @@
+<!--pages/OnNew/OnNew.wxml-->
+<view class="container">
+
+<view class="Head">
+
+<view class="HeadLeft">
+<view class="HeadLeftTop"><image src="/images/16.jpg"></image><text>热销排行</text></view>
+<view class="HeadLeftMid">要结婚的他们都在选</view>
+<view class="HeadLeftFoot">
+<!--
+<view style="left:20rpx;z-index:3"></view> 
+<view style="left:10rpx;z-index:2"></view> -->
+<view wx:for="{{heads}}"><image src="{{item}}"></image></view> 
+</view>
+<!--end HeadLeftFoot-->
+</view>
+
+<view class="HeadRight">
+<view class="HeadRightTop"><image src="/images/17.jpg"></image><text>精选专题</text></view>
+<view class="HeadLeftMid">要结婚的他们都在选</view>
+<view class="HeadRightFoot">
+
+<view wx:for="{{heads}}"><image src="{{item}}"></image></view> 
+</view>
+<!--end HeadLeftFoot-->
+</view>
+</view>
+<!--endHead-->
+
+<view class="Title">
+<image src="/images/18.jpg"></image>
+<view>每月25日早上8:00更新套餐</view>
+</view>
+<!--end Titles-->
+
+<view class="NewListBox">
+<block wx:for="{{productlist}}">
+<view class="NewList" id="{{index}}" bindtap="detail">
+<image src="{{item.image}}" mode="aspectFill"></image>
+<view class="NewListText">{{item.name}}</view>
+<view class="NewListFoot">
+<text style="font-size:30rpx;color:#ff7a92;">¥ {{item.price}}</text>
+<text style="font-size:22rpx;color:#919191">已售{{item.sales}}套</text>
+</view>
+<!--end NewListFoot-->
+</view>
+</block>
+<!--end NewList-->
+</view>
+<!--end NewListBox-->
+
+
+</view>
+<!--end container-->

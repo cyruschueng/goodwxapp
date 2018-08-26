@@ -1,0 +1,22 @@
+<!--pages/organization/subPage/list_orgMember/list_orgMember.wxml-->
+<!--pages/organization/subPage/list_media/list_media.wxml-->
+<import src="/pages/Template/Template.wxml" />
+
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <scroll-view style='heigt:3000rpx;' scroll-y='true' bindscrolltolower='loadMore'>
+
+    <view class="media12" wx:if="{{memberList.length!=0}}">
+
+      <block wx:for="{{memberList}}" wx:key="{{memberList}}">
+        <template is='memberList1' data='{{item}}'></template>
+      </block>
+    </view>
+    <view class="hasNothing" wx:if="{{memberList.length ==0 }}">暂无数据</view>
+
+
+    <!--错误提示-->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+
+  </scroll-view>
+</view>

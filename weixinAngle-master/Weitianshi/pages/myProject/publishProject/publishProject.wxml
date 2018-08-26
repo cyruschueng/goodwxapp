@@ -1,0 +1,117 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <template is="pointPC">用电脑创建项目，体验更好更流畅</template>
+  <view class='whiteSpace'></view>
+  <view class="modalBox" hidden="{{modalBox==0}}">
+    <view class="classname" bindtap="closeModal">
+      <image src="/img/icon-guanbi@2x.png" class="close"></image>
+    </view>
+    <view class="contactModalBox">
+      <image src="/img/img-saoyisao@2x.png" class="aPic"></image>
+      <view class="modalTitle">电脑打开,点击扫一扫</view>
+      <view class="modalTips">www.weitianshi.cn/qr</view>
+      <view class="btn" hover-class='t-other-button-hover' bindtap="upLoadPc">扫一扫</view>
+    </view>
+  </view>
+
+  <view style='background:white;'>
+    <view class="projectBoxContent flex noBorder">
+      <view class="projectTitle">项目名称*</view>
+      <input placeholder="项目代号，快速识别，仅自己可见" placeholder-style='color:#ccc' class="newBox" bindinput="projectName" maxlength="40" value="{{projectName}}" />
+    </view>
+  </view>
+
+
+  <view class='otherInfo'>
+    <view class="userBox" hover-class='t-hoverColor'>
+      <view class="projectBoxContent flex noBorder" bindtap="industryChoice">
+        <view class="projectTitle">项目领域</view>
+        <view class="flex">
+          <view class="projectContent {{industryCard.value == '最多选择5个' ? 'noCheck' : 'checkOn'}}">{{industryCard.value}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="aLine"></view>
+
+    <view class="projectBoxContent flex">
+      <view class="projectTitle">是否独家</view>
+      <picker id="exclusive" bindchange="tipsOn" range="{{exclusive_arry}}" value='{{tips_index}}'>
+        <view class="{{tips_index == 0 ? 'noCheck' : 'checkOn'}} projectContent">{{exclusive_arry[tips_index] || "请选择"}} </view>
+      </picker>
+    </view>
+    <view class="aLine"></view>
+
+    <view class='flex  littleBox'>
+      <view class='contentBox'>
+        <view class="littleTitle">阶段</view>
+        <view class="littleContent">
+          <picker id="stage" bindchange="stage" value="{{stage_index}}" range="{{stage_arry}}">
+            <view class="{{stage_index == 0 ? 'noCheck' : 'checkOn'}}">{{stage[stage_index].stage_name || "请选择"}} </view>
+          </picker>
+        </view>
+      </view>
+      <view class='contentBox'>
+        <view class="littleTitle">期望融资</view>
+        <view class="littleContent">
+          <picker id="expect" bindchange="scale" value="{{scale_index}}" range="{{scale_arry}}">
+            <view class="{{scale_index ==0 ? 'noCheck' : 'checkOn'}}">{{scale[scale_index].scale_money || "选择金额"}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class='contentBox'>
+        <view class="littleTitle">地区</view>
+        <view class="littleContent" bindtap='areaJump'>
+          <view id="belongArea">
+            <view class="{{cityNum == '' ? 'noCheck' : 'checkOn'}}">{{area_title}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='background:white;'>
+    <view class="userBox" hover-class='t-hoverColor'>
+      <view class="projectBoxContent flex noBorder" bindtap="initPrivacy">
+        <view class="projectTitle">私密性设置</view>
+        <view class="flex">
+          <view class="projectContent newContent">请选择</view>
+          <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+        </view>
+      </view>
+    </view>
+    <view class="aLine"></view>
+    <view class="projectBoxContent flex" wx:if="{{!yesData}}">
+      <view class="projectTitle">需要Bp美化</view>
+      <switch bindchange="switchChange1" class="switchTab" checked="{{service_ps_bp}}" />
+    </view>
+    <view class="aLine"></view>
+    <view class="choiceBox flex" wx:if="{{!yesData}}">
+      <view class="content">需要融资顾问（FA）服务</view>
+      <switch bindchange="switchChange2" class="switchTab" checked="{{service_fa}}" />
+    </view>
+    <view wx:if="{{yesData}}">
+      <view class="choiceBox flex">
+        <view class="content">是否需要云投行（FA）合作</view>
+        <switch bindchange="switchChange3" class="switchTab" checked="{{service_yun}}" />
+      </view>
+    </view>
+  </view>
+
+  <view class="question" wx:if="{{group_id != 21&& group_id != 18 && group_id != 6}}">
+    <view class="questionWhy">Q：什么是融资顾问服务</view>
+    <view class="answer">A：微天使平台会结合您的融资需求推荐最适合的FA，帮助您打磨 商业计划，梳理BP，引荐投资机构。（业务同学会通过您在平台 留下的联系方式与您沟通具体融资需求）
+    </view>
+  </view>
+
+  <view class="question" wx:if="{{group_id == 21|| group_id == 18 || group_id == 6}}">
+    <view class="questionWhy">Q：什么是云投行合作</view>
+    <view class="answer">A：微天使平台将协助您寻找最合适的投资机构，并与合作伙伴共同协助推进您的项目融资。（业务同学会通过您在平台留下的联系方式与您沟通具体合作方式）
+    </view>
+  </view>
+
+  <template is="buttonTwo" data="{{text:'保存',btnName:'public',disabled}}"></template>
+  <view class="highBox"></view>
+
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

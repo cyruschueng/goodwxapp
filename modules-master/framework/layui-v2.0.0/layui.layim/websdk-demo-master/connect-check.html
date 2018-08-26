@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>connect，receive message</title>
+</head>
+<body>
+
+<link rel="stylesheet" href="./res/rongcloud.css">
+<a href="https://github.com/rongcloud/websdk-demo/blob/master/connect-check.html" class="get-source">获取源码</a>
+
+
+<style>
+body{
+	font-size:80%;
+}
+.panel span{
+	display:inline-block;	
+	width:60px;
+}
+.show{
+	width:98%;
+	display:inline-block;
+	overflow:hidden;
+	border:1px solid #ccc;
+}
+.show h3{
+	text-indent:10px;
+}
+.show pre{
+	border-top:1px dotted #ccc;
+	padding:5px 0 0 10px;
+	line-height:1.5;
+	color:#333;
+	background:#f5f5f5;
+}
+</style>
+
+<script>
+function showResult(id,message){
+	var dom = document.getElementById(id);
+	console.log(message.content.content)
+	// dom.innerHTML += '<pre>' + message.senderUserId + ":   " +  RongIMLib.RongIMEmoji.emojiToHTML(message.content.content + "") + '</pre>';
+	dom.innerHTML += '<pre>' + JSON.stringify(message,null,"\t") + '</pre>';
+	//JSON.stringify(message,null,"\t")
+}	
+</script>
+
+<script src="js/message-output.js"></script>
+
+<script src="//cdn.ronghub.com/RongIMLib-2.2.6.min.js"></script>
+<script src="//cdn.ronghub.com/RongEmoji-2.2.5.min.js"></script>
+<script src="./init.js"></script>
+<script>
+function startInit(user,targetId){
+	var params = {
+		appKey : getValue("appKey"),
+		token : getValue("token"),
+		navi : getValue("navi")
+	};
+
+	var callbacks = {
+		getInstance : function(instance){
+			RongIMLib.RongIMEmoji.init();
+			//instance.sendMessage
+		},
+		getCurrentUser : function(userInfo){
+			console.log(userInfo.userId);
+			alert("链接成功；userid=" + userInfo.userId);
+		},
+		receiveNewMessage : function(message){
+			showResult("show1",message);
+			messageOutput(message);
+		}
+	};
+
+	init(params,callbacks);
+}
+
+function getValue(id){
+	return document.getElementById(id).value;
+}
+</script>
+
+
+<h1>token check</h1>
+<div class="panel" id="panel">
+	<p>
+		<span>appkey</span>
+		<input type="text" id="appKey" size="20" value="8w7jv4qb78a9y">
+	</p>
+	<p>
+		<span>token</span>
+		<input type="text" id="token" size="110" value="ZThhLI1Xa1BX5EMREAdArWSH6ouuI8NT/fNmMkzF+4IOKIoFvbsi6JnH8QmnSltLkCcsK8vOgKl3IZgfbxFiWg==">
+	</p>
+	<p>
+		<span>navi</span>
+		<input type="text" id="navi" size="50" value=""> <b>此配置项仅针对私有部署，公有云请置空，格式为10.10.10.10:8080，不带http(s)://前缀，</b>
+	</p>
+	<p>
+		<span>&#160;</span>
+		<input type="button" onclick="startInit()" value="start check">
+	</p>
+</div>
+
+<p></p>
+
+<div class="show" id="show1">
+	<h3>消息接收结果(新消息在最下)</h3>
+</div>
+
+</body>
+</html>

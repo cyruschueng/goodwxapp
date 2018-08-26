@@ -1,0 +1,48 @@
+<!--pages/introduce/edit/edit.wxml-->
+<form bindsubmit="formSubmit" >
+<view class='item-cricle'>
+    <view class="cricle-col">
+        <image mode="aspectFit" src="{{uploaduserimg}}"></image>
+        <view class="xs-block" style="flex-direction:column;">
+            <view class='phone'><input class="input" value="{{nicknameval}}" placeholder="请输入昵称" bindinput="nicknameval"/></view>
+             <view class='phone'><input class="input" value="{{phoneInput}}" placeholder="请输入手机号" 
+    bindinput="phoneInput"/></view> 
+        </view>
+         <button class='rigbtn editbtn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">一键获取</button> 
+    </view>
+</view>
+<view class="contact">
+    <view class="itemView">
+        <text class='label'>公司</text>
+        <input class="input" placeholder="请输入公司名名" value="{{companyName}}" bindinput="companyName"/>
+    </view>
+    <view class="itemView">
+        <text class='label'>职务</text>
+        <input class="input" value="{{postInput}}" placeholder="输入职务" bindinput="postInput" />
+    </view>
+    <view class="itemView">
+        <text class='label'>微信</text>
+        <input class="input" value="{{wechatvalue}}" placeholder="请输入微信号" bindinput="wechatvalue"/>
+    </view>
+    <view class="itemView">
+        <text class='label'>地址</text>
+        <input class="input" value="{{addressinfo}}" placeholder="请输入地址" bindinput="addressinfo"/>
+    </view>
+</view>
+<!-- 图文 -->
+<view class="content" >
+    <view class="contentText">
+        <text class='label'>介绍</text>
+        <textarea  maxlength="80" bindinput="TextAreaBlur" value="{{TextAreaBlur}}" placeholder="个人介绍"/>
+    </view>
+    <view class="img-v">
+         <view class="img" wx:for="{{loadimglist}}">
+            <image src="{{item.photo_url}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImg"></image>
+            <text bindtap='deletePic' data-id="{{item.id}}" class='colse'>-</text>
+        </view> 
+        <image class="upload-img-btn" src="../../../images/introduce/medium/add.png" bindtap="chooseImg"></image>
+    </view>
+    <button type="primary" class='submit' bindtap="submit">保存</button> 
+</view>
+</form>
+

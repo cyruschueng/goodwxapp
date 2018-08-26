@@ -1,0 +1,132 @@
+<!-- pages/question_index.wxml-->
+<!-- <text>pages/question_index.wxml</text>  -->
+<!-- <view class='get_money'>
+    <view class='get_money_num'>
+        <view class='get_money_num_left'>提现金额</view>
+        <view class='get_money_num_right'>15元</view>
+    </view>
+    <view class='get_money_num'>
+        <view class='get_money_num_left'>微信号</view>
+        <view class='get_money_number_right'>
+            <input bindinput="bindKeyInput" placeholder="请输入您的微信号" />
+        </view>
+    </view>
+    <view class='get_money_text'>请确保微信号输入正确</view>
+    <button class='get_money_submit' bindtap="setsubmit">确认提现</button>
+</view>
+<view class='get_money_two'>
+    <view class='old_get_money_one'>
+        <text>15.0元</text> 提现申请已提交成功！</view>
+    <view class='old_get_money_two'>等待工作人员与您联系</view>
+    <view class='old_get_money_text'>工作人员将于2个工作日内通过微信与您联系，请留意您的微信</view>
+    <button class='get_money_submit'>我知道了</button>
+</view> -->
+<view class="container">
+    <view class='head-bgimg'></view>
+    <view class='question-head'>
+        <!-- <view class='head-rule' bindtap='onRule'>答题规则</view> -->
+        <view class='head-picimg'>
+            <image class='head-picimg-picture' src='{{prizelast.ico}}'></image>
+        </view>
+        <view class='head-text'>{{prizelast.ico_alt}}</view>
+        <!-- 有无奖金S -->
+        <!-- <view wx:if="{{prizemoneyend}}" class='head-data'>{{prizelast.start_time_date}}</view> -->
+         <view wx:if="{{Istimestatus==-1}}" class='head-data'>{{prizelast.start_time_date}}</view>
+        <!-- 有无奖金E -->
+        <view class='head-title'>{{prizelast.title}}</view>
+        <view class='head-foreword'>
+            <text>{{prizelast.desc}}</text>
+            <!-- 本期共12道题，每道10秒作答时间 -->
+            <!-- <text>时间到未作答或答错即出局</text> -->
+        </view>
+        <!-- <view wx:if="{{!prizemoneyend}}" class='head-price'> -->
+        <view wx:if="{{Istimestatus==1||Istimestatus==2||Istimestatus==3}}" class='head-price'>
+            <text>本期奖金</text>
+            <text class='head-price-old'>{{prizelast.money}}元</text>
+        </view>
+        <!-- 有无奖金S -->
+        <!-- <block wx:if="{{prizemoneyend}}"> -->
+         <block wx:if="{{Istimestatus==-1}}">
+            <view wx:if="{{prizelast.user.obtain_money == '0.00'}}" class='head-bonus'>
+                <text>您本期与{{prizelast.money}}块大洋</text>
+                <text class='head-bonus-block'>擦肩而过，下次努力</text>
+            </view>
+            <view wx:else class='head-bonus'>
+                <text>您本期获得</text>
+                <text class='head-bonus-old'>{{prizelast.user.obtain_money}}元</text>
+            </view>
+            <view class='head-bonus-have'>
+                <view>共计
+                    <text>{{prizelast.access_num}}</text> 人通关
+                </view>
+                <view>平分{{prizelast.money}}元奖金</view>
+            </view>
+        </block>
+        <!-- 有无奖金E -->
+        <view wx:if="{{Istimestatus==1}}" class='head-time-blue'>
+            <view class='head-time-title'>距离开始答题</view>
+            <view class='head-time-number'>
+           <block wx:if="{{downTime.day>0}}">{{downTime.day}}天</block>
+           <!-- <block wx:else></block> -->
+           {{downTime.hour}}:{{downTime.minute}}:{{downTime.second}}</view>
+        </view>
+        <view wx:if="{{Istimestatus==2}}" class='head-time-pink'>
+            <view class='head-time-number-old'>{{downTime.second}}</view>
+        </view>
+        <view wx:if="{{Istimestatus==3}}" class='head-time-gray'>
+            <text class='head-time-gray-ing'>答题活动正在进行中…</text>
+            <text>结果稍后公布</text>
+        </view>
+
+    </view>
+</view>
+  
+  <!-- <view class="container">
+    <view class='head-bgimg'></view>
+    <view class='question-head'>
+        <view class='head-picimg'>
+            <image class='head-picimg-picture' src='{{prizelast.ico}}'></image>
+        </view>
+        <view class='head-text'>{{prizelast.ico_alt}}</view>
+          有无奖金S  
+         <view class='head-data'>2018.3.10 20:00</view>   
+          有无奖金E  
+        <view class='head-title'>{{prizelast.title}}</view>
+        <view class='head-foreword'>
+            <text>{{prizelast.desc}}</text>
+             本期共12道题，每道10秒作答时间 
+             <text>时间到未作答或答错即出局</text> 
+        </view>
+        <view class='head-price'>
+            <text>本期奖金</text>
+            <text class='head-price-old'>{{prizelast.money}}元</text>
+        </view>
+          有无奖金S  
+         <view class='head-bonus'>
+            <text>您本期获得</text>
+            <text class='head-bonus-old'>216.4元</text>
+        </view>  
+         <view class='head-bonus'>
+            <text>您本期与{{prizelast.obtain_total_money}}块大洋</text>
+            <text class='head-bonus-block'>擦肩而过，下次努力</text>
+        </view>  
+
+         <view class='head-bonus-have'>
+            <view>共计<text>{{prizelast.access_num}}</text>人通关</view>
+            <view>平分{{prizelast.obtain_total_money}}元奖金</view>
+        </view>  
+          有无奖金E  
+        <view wx:if="{{isstartime&&!istentime}}" class='head-time-blue'>
+            <view class='head-time-title'>距离开始答题</view>
+            <view class='head-time-number'>{{timer.hour}}:{{timer.minute}}:{{timer.second}}</view>
+        </view>
+        <view wx:if="{{istentime}}" class='head-time-pink'>
+            <view class='head-time-number-old'>{{timer.second}}</view>
+        </view>
+        <view wx:if="{{isendtime}}" class='head-time-gray'>
+            <text class='head-time-gray-ing'>答题活动正在进行中…</text>
+            <text>结果稍后公布</text>
+        </view>   
+    </view>
+
+</view>     -->

@@ -1,0 +1,68 @@
+<view class="act_box">
+  <view class="act_content">
+    <image class='particulars-images' mode="aspectFill" src='{{actdetail.mainPic}}'></image>
+    <view class='particulars-ed'>
+      <view class='particulars-option'>
+        <view class='particulars-warp'>
+          <text class='particulars-text'>参与选手</text>
+          <text class='particulars-digit'>{{actdetail.shopNum}}</text>
+        </view>
+        <view class='particulars-warp'>
+          <text class='particulars-text'>累计投票</text>
+          <text class='particulars-digit'>{{actdetail.voteNum}}</text>
+        </view>
+        <view class='particulars-warp'>
+          <text class='particulars-text'>访问人数</text>
+          <text class='particulars-digit'>{{actdetail.viewNum}}</text>
+        </view>
+      </view>
+      <view class='end-time'>
+        <image class='end-images' src='/images/icon/xingzhuang_w.png'></image>
+        <text wx:if="{{actdetail.actStatus == 0}}">
+          <text >距离此活动开始还有<text class='timeFate'>{{starttime}}</text>天</text>
+        </text>
+        <text wx:else>
+          <text>距离此活动结束还有<text class='timeFate'>{{endtime}}</text>天</text>
+        </text>
+      </view>
+      <view class='end-button'>
+        <text class='end-activity' bindtap='lookActImg'>活动简介</text>
+        <text wx:if="{{actdetail.isSign == 1}}" class='end-activity active'>已报名</text>
+        <text wx:else class="end-activity {{endtime==0 || actdetail.actStatus == 0?'active':''}}" bindtap='takePartIn'>我要报名</text>
+      </view>
+    </view>
+    <view class='vote'>
+      <view>
+        <view class="search">
+          <view class="search_arr">
+            <icon class="searchcion" size='20' type='search' bindtap='selectnum'></icon>
+            <input type='text' class='inputs' placeholder="请输入编号、名称" bindinput="bindInput" bindconfirm="selectnum" />
+          </view>
+        </view>
+      </view>
+
+      <block wx:for="{{actlist}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+        <view class='merchant-sub' id="{{item.shopId}}" bindtap='clickshop'>
+          <view class='merchant-img-left'>
+            <image class='merchant-images' mode="aspectFill" src='{{item.logoUrl}}'></image>
+            <view class='serial-number'>{{item.shopCode}}</view>
+          </view>
+          <view class='merchant-img-right'>
+            <view class='merchant-right-wrap'>
+              <text class='merchant-right-text'>{{item.shopName}}</text>
+              <view class='merchant-total'>
+                <text class='merchant-right-number'>{{item.voteNum}}</text>
+                <text class='merchant-right-piao'>票</text>
+                <image class='merchant-right-button' wx:if="{{item.isVote == 0}}" id="{{item.id}}" catchtap='clickVote' src='/images/icon/vote_time2.png'></image>
+                <image class='merchant-right-button' wx:else id="{{item.id}}" catchtap='clickVote' src='/images/icon/vote_time.png'></image>
+              </view>
+            </view>
+            <view class='brief-introduction'>
+              <text>{{item.sort_center}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

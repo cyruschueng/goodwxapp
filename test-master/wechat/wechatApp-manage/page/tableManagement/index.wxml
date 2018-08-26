@@ -1,0 +1,160 @@
+<view class="tableManagement">
+
+  <view class='table-management-list'>
+
+    <view wx:key="index" data-index="{{item.num}}" catchtap='change_active_tab' class='li {{ item.num === active_tab ? "active" : ""  }}' wx:for="{{tab}}">{{item.text}}</view>
+
+  </view>
+
+  <view class='table-management-box table-management-ul {{ btn === 0 ? "show" : ""  }}'>
+
+    <view class='li ' wx:key="{{index}}" wx:for="{{daskList}}">
+      <view catchtap='active_dask_change' data-daskIndex="{{index}}" data-flag="{{item.flag}}" data-deskNo="{{item.deskNo}}" data-index="{{item.id}}" class='box free {{active_dask === item.id ? "active":""}} {{"back"+item.flag}}'>
+        <view class='num'>桌号：{{item.deskNo}}</view>
+        <view class='t'>{{item.flag==0?"空闲":"" }}{{item.flag==1?"预订":"" }}{{item.flag==2?"就餐":"" }}{{item.flag==4?"锁定":"" }}</view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class='table-management-bottom table-management-ul {{ btn === 0 ? "" : "show"  }}'>
+
+    
+    <view class='li ' catchtap='show_box1'>
+      <view class='box'>{{active_flag == 2 || active_flag == 4 ? "修改人数":"开台"}}</view>
+    </view>
+
+    <view class='li' catchtap='{{active_flag === 0 || active_flag === 4 || active_flag === 1 ? "":"show_box2"}}'>
+      <view class='box {{active_flag === 0 || active_flag === 4 || active_flag === 1 ? "disabled":""}}'>结账</view>
+    </view>
+
+    <view class='li ' catchtap='{{active_flag === 0  ? "":"show_box3"}}'>
+      <view class='box {{active_flag === 0  ? "disabled":""}}'>验单</view>
+    </view>
+
+    <view class='li ' catchtap='{{active_flag === 0 || active_flag === 1 || active_flag === 4 ? "":"show_box4"}}'>
+      <view class='box {{active_flag === 0 || active_flag === 1 || active_flag === 4 ? "disabled":""}}'>换桌</view>
+    </view>
+
+    <view class='li ' catchtap='{{active_flag === 0 || active_flag === 1 ? "":"show_box5"}}'>
+
+      <view class='box {{active_flag === 0 || active_flag === 1  ? "disabled":""}}'>点菜</view>
+
+    </view>
+
+    <view class='li ' catchtap='show_box6'>
+      <view class='box '>管理</view>
+    </view>
+
+  </view>
+
+  <view catchtouchmove="catchtouchmove" class=' box1 {{ box1_show === 0 ? "" : "show"  }}'>
+
+    <view class='title'>选择就餐人数</view>
+
+    <view class='content'>
+
+      <view class='li'>
+        <view class='text'>人数:</view>
+        <view class='right_btn'>
+          <view class='imgbox'>
+            <image src='https://lingju360.com/shop/resources/image/manage/index/minus.png' catchtouchmove="catchtouchmove" catchtouchstart='del_person'></image>
+          </view>
+          <view class='num'>{{numbers}}</view>
+          <view class='imgbox'>
+            <image src='https://lingju360.com/shop/resources/image/manage/index/add.png' catchtouchmove="catchtouchmove" catchtouchstart='add_person'></image>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+
+    <view class='table-management-ul '>
+
+      <view class='li ' catchtap='useDesk_takeoutpay'>
+          <view class='box'>确认并点菜</view>
+        
+      </view>
+
+      <view class='li '>
+        <view class='box' catchtap='placeorder'>确认并且扫单</view>
+      </view>
+
+      <view class='li '>
+        <view class='box active' catchtap='useDesk'>确定</view>
+      </view>
+
+    </view>
+
+
+  </view>
+
+  <view class=' box1 center box3 {{ box3_show === 0 ? "" : "show"  }}'>
+
+    <view class='title'>验证单号</view>
+
+    <view class='content'>
+
+      <view class='li'>
+        <view class='text'>订单号:</view>
+        <view class='left_btn'>
+          <input type='text' value="{{billsLogId}}" bindinput='change_billsLogId' placeholder='填写订单号信息'></input>
+        </view>
+        <image src='https://lingju360.com/shop/resources/image/manage/index/chongqingjzb.png' catchtap='scan'></image>
+      </view>
+
+    </view>
+
+    <view class='table-management-ul '>
+
+      <view class='li '>
+        <view catchtap='verifyAndOrder' class='box active'>验证并下单</view>
+      </view>
+
+      <view class='li '>
+        <view catchtap='verify' class='box '>仅仅验证查看</view>
+      </view>
+
+    </view>
+
+
+  </view>
+
+
+  <view class=' box1 center box6 {{ box6_show === 0 ? "" : "show"  }}'>
+
+    <view class='title'>切换餐桌状态</view>
+
+    <view class='content'>
+
+      <view class='li'>
+        <view class='text'>状态:</view>
+        <view class='right_btn'>
+          <view class='{{ flag_num == item.num ? "active" : ""  }}' catchtap='change_tableManage' wx:key="index" data-num="{{item.num}}" wx:for="{{flag_tab}}">{{item.text}}</view>
+        </view>
+
+      </view>
+
+    </view>
+
+    <view class='table-management-ul '>
+
+      <view class='li '>
+        <view catchtap='close_box' class='box'>取消</view>
+      </view>
+
+      <view class='li '>
+        <view catchtap='tableManage' class='box active'>确定</view>
+      </view>
+
+    </view>
+
+
+  </view>
+
+
+</view>
+
+
+<view catchtouchmove="catchtouchmove" catchtap='close_box' class='zz {{box_show === 0? "hide":""}}'></view>

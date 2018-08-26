@@ -1,0 +1,14 @@
+<!--pages/shop/shop.wxml-->
+<view class='container'>
+    <view class='header'>
+        成语商店
+    </view>
+    <view class='list'>
+        <view class='item' wx:for="{{list}}" wx:key="{{index}}" bindtap='rechargeTap' data-id='{{index}}'>
+            <view class='red' wx:if="{{index==1}}">首充2倍</view>
+            <view class='one'><image src="http://ovhvevt35.bkt.clouddn.com/chengyu/gold{{index}}.png" mode='widthFix'></image></view>
+            <view class='two'>x{{item.point}}</view>
+            <view class='three'>￥{{item.price}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,62 @@
+.cmsg{
+   position: fixed;
+    top:40%;
+    left:50%;
+    transform: translate3d(-50%,-50%,0);
+    z-index: 11;
+}
+.cmsg-box{
+    background-color:rgba(0,0,0,0.8);
+    border-radius: 10rpx;
+    font-size: 28rpx;
+    color:#fff;
+    text-align: center;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:0 24rpx;
+}
+
+@keyframes jackInTheBox {
+  from {
+    opacity: 0;
+    transform: scale(0.1) rotate(30deg);
+    transform-origin: center bottom;
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  70% {
+    transform: rotate(3deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.jackInTheBox {
+  animation-name: jackInTheBox;
+}
+
+.animated {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+  animation-duration: .75s;
+}

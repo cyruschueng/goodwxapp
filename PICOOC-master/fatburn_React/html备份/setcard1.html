@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+	<head>
+	<title>学员首页</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+	<link rel="stylesheet" type="text/css" href="css/setcard1.css?v=4">
+	</head>
+	<body>
+		<section class="container main">
+			<div class="row msg">
+				<textarea class="col-xs-12 col-sm-12" id="msgInfo" placeholder="今天的表现怎么样～"></textarea>
+			</div>
+			<div class="row getImg">
+				<div class="col-xs-4 col-sm-4 getImg-add"><img class="getImg-bg1" src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-11.png" /></div>
+			</div>
+			<aside class="row swiper-container bigImg">
+				<div class="row swiper-wrapper bigImg-main">
+				</div>
+				<div class="swiper-pagination"></div>
+			</aside>
+			<div class="row selectCard">
+				<span>选择打卡标签</span>
+				<!-- <div class="col-xs-12 col-sm-12 selectCard">
+					<span>选择打卡标签</span>
+				</div> -->
+			</div>
+			<div class="row icon-list">
+				<div class="icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-2.png" /></div>
+				<div class="icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-3.png" /></div>
+				<div class="icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-4.png" /></div>
+				<div class="icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-5.png" /></div>
+				<!-- <div class="icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-6.png" /></div> -->
+				<div class="icon"><img src="http://cdn2.picooc.com/web/res/fatburn/image/setcard/setcard-7.png" /></div>
+			</div>
+		</section>
+
+		<section class="container">
+			<div class="row footbtn">
+				<div class="col-xs-12 col-sm-12 footbtn-btn">打卡</div>
+			</div>
+		</section>
+
+		<div class="row errorAlert">
+			<div class="col-xs-12 col-sm-12 error-main">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 error-main-t"></div>
+					<div class="col-xs-12 col-sm-12 error-main-btn">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 error-main-btn1">我知道了</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="saveImg-ceng">
+			<aside class="row saveImg">
+				<div class="col-xs-12 col-sm-12 saveImg-btn saveImg-item">保存图片</div>
+				<div class="col-xs-12 col-sm-12 cancelImg-btn saveImg-item">取消</div>
+			</aside>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript" id="script1"></script>
+	<script>
+		if(getParamByUrl("webver")>2){
+			if(getParamByUrl("os")=="android"){
+				$("#script1").attr("src","jsv1/setcard1.js?v=59");
+			}
+			else{
+				var mobileApp=window.webkit.messageHandlers;
+				$("#script1").attr("src","jsv1/setcard1.js?v=96");
+			}
+		}
+		else{
+			$("#script1").attr("src","js/setcard1.js?v=59");
+		}
+	</script>
+	<!--<script type="text/javascript" src="js/setcard1.js?v=58"></script>-->
+<script>
+
+//百度统计上传代码
+	var _hmt = _hmt || [];
+	_hmt.push(['_setAutoPageview', false]);
+	_hmt.push(['_trackPageview', location.pathname]);
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+	  var s = document.getElementsByTagName("script")[0];
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</html>

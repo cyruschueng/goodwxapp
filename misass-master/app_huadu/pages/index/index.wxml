@@ -1,0 +1,255 @@
+<!--index.wxml-->
+<view class="container {{workList==1?'noScroll':''}}">
+
+  <view wx:if='{{status == 0 && phone == null}}' class="content">
+    <input wx:if="{{wi == 0}}" bindtap='showSelect' type="text" placeholder='请选择工种类型' value="请选择工种类型" disabled="true" />
+    <input wx:if="{{wi == 1}}" bindtap='showSelect' type="text" placeholder='请选择工种类型' value="{{workAll1}}>{{workAll2}}" disabled="true" />
+    <view bindtap='openLocation' class="location-box">
+      <image src="../../img/lo.png" class="lo"></image>
+      <text wx:if="{{address == ''}}">请选择位置</text>
+      <text wx:else="{{address != ''}}">{{address}}</text>
+    </view>
+    <text class="search-tip">附近热搜岗位</text>
+    <view class="search-label">
+      <block wx:for="{{search}}">
+        <label data-index="{{item.id}}" class="{{hotstate==index?'hotsel':''}}" data-item-index="{{index}}" bindtap='selHotWork'>{{item.name}}</label>
+      </block>
+    </view>
+    <button wx:if="{{workAll2 == '' || address == ''}}" class="choose">选好了，去找工作</button>
+    <button bindtap='chooseWork' wx:if="{{workAll2 != '' && address != ''}}" class="choose blue">选好了，去找工作</button>
+  </view>
+
+  <view wx:if='{{status == 1}}' class="content2">
+    <view class="f-top">
+      <view>
+        <image class="lo" src="../../img/lo.png"></image>
+        <text class="addr">{{workAddr}}</text>
+      </view>
+      <view>
+        <input wx:if="{{wi == 0}}" bindtap='showSelect' class="input-work" disabled='true' placeholder="选择工作类型 ∨"></input>
+        <input wx:if="{{wi == 1}}" bindtap='showSelect' class="input-work" disabled='true' value="{{workAll1}}>{{workAll2}}"></input>
+      </view>
+      <view>
+        <input bindinput='getWorkName' class="input-work" placeholder="输入工作名称" value="{{workName}}"></input>
+      </view>
+      <view>
+        <input bindinput='getPersonNum' type="number" class="input-work" placeholder="输入招聘人数" value="{{personNum}}"></input>
+      </view>
+      <view>
+        <picker bindchange='getDateBegin' mode="date">
+          <input class="input-work" disabled='true' placeholder="输入工作开始日期" value="{{beginDate}}"></input>
+        </picker>
+      </view>
+      <view>
+        <picker bindchange='getDateOver' mode="date">
+          <input class="input-work" disabled='true' placeholder="输入工作结束日期" value="{{overDate}}"></input>
+        </picker>
+      </view>
+      <view>
+        <input bindinput='getWorkDesc' class="input-work" placeholder="输入工作描述" value="{{workDesc}}"></input>
+      </view>
+
+      <view class="add-img">
+        <text>添加图片</text>
+        <view class="img-box">
+          <image wx:if="{{imgFilePath[0]}}" bindtap='chooseImg' data-item-index='0' class="imgs" src="{{imgFilePath[0]}}"></image>
+          <image wx:if="{{!imgFilePath[0]}}" bindtap='chooseImg' data-item-index='0' class="imgs" src="../../img/addImg.png"></image>
+          <image wx:if="{{imgFilePath[1]}}" bindtap='chooseImg' data-item-index='1' class="imgs" src="{{imgFilePath[1]}}"></image>
+          <image wx:if="{{!imgFilePath[1]}}" bindtap='chooseImg' data-item-index='1' class="imgs" src="../../img/addImg.png"></image>
+          <image wx:if="{{imgFilePath[2]}}" bindtap='chooseImg' data-item-index='2' class="imgs" src="{{imgFilePath[2]}}"></image>
+          <image wx:if="{{!imgFilePath[2]}}" bindtap='chooseImg' data-item-index='2' class="imgs" src="../../img/addImg.png"></image>
+        </view>
+      </view>
+      <view class="add-video">
+        <text>添加小视频</text>
+        <view class="video-wrap">
+          <image wx:if="{{videoFilePath == ''}}" bindtap='chooseVideo' class="videos" src="../../img/addVideo.png"></image>
+          <video wx:if="{{videoFilePath != ''}}" bindtap='chooseVideo' src="{{videoFilePath}}"></video>
+        </view>
+      </view>
+
+      <view>
+        <button wx:if="{{(workAll2 == '' || workName == '' || personNum == '' || beginDate == '' || overDate == '') || (workDesc == '' && imgFilePath == '' && videoFilePath == '')}}" class="sub-work">招人</button>
+        <button bindtap='subJob' wx:if="{{workAll2 != '' && workName != '' && personNum != '' && beginDate != '' && overDate != '' && (workDesc != '' || imgFilePath != '' || videoFilePath != '')}}" class="sub-work blue">招人</button>
+      </view>
+    </view>
+
+    <!-- 我已发布   -->
+    <view class="sub-aleready">
+      <view class="sa-top">
+        <view class="line"></view>
+        <text class="sa-t">我已发布</text>
+        <view class="line"></view>
+      </view>
+      <view wx:if="{{ isPublishingWork == 100000 }}" class="revise">
+        <button size='mini' bindtap="reviseTap">{{reviseTxt}}</button>
+      </view>
+      <view wx:if="{{subJobList == ''}}">
+        <text class="noneWork">您还未发布工作</text>
+      </view>
+      <view data-item-index="{{item.cid}}" wx:if="{{subJobList != ''}}" bindtap='toJobPage' wx:for="{{subJobList}}" class="interest-item">
+        <view class="i-l">
+          <view class="i-l-t">
+            <text>{{item.classification[2].name}}</text>
+            <image class="right" src="../../img/right2.png"></image>
+            <text>{{item.classification[1].name}}</text>
+          </view>
+          <view class="i-l-m">
+            <text>招聘{{item.num}}人｜</text>
+            <text>{{item.start_time}}~{{item.end_time}}</text>
+          </view>
+          <view class="i-l-b">
+            <image class="lo" src="../../img/lo2.png"></image>
+            <text class="">{{item.address}}</text>
+          </view>
+        </view>
+        <view class="i-r">
+          <image wx:if="{{isRevise === false}}" class="into" src="../../img/into.png"></image>
+          <image wx:if="{{isRevise}}" class="into" src="../../img/delete.png" catch:tap='deleteJob' data-item-index="{{item.id}}"></image>  
+        </view>
+      </view>
+    </view>
+
+    <!--  可能合适的人  -->
+    <!-- <view class="sub-aleready">
+      <view class="sa-top">
+        <view class="line"></view>
+        <text class="sa-t">可能合适的人</text>
+        <view class="line"></view>
+      </view>
+      <view wx:if="{{interestJobList == ''}}">
+        <text class="noneWork">暂时没有合适的人选</text>
+      </view>
+      <view wx:if="{{interestJobList != ''}}" bindtap='toPersonInfo' data-item-index="{{item.id}}" wx:for="{{interestJobList}}" class="sub-item">
+        <view class="s-l">
+          <image class="head" src="../../img/head.jpg"></image>
+        </view>
+        <view class="s-r">
+          <view class="s-r-t">
+            <text>{{item.classification[2].name}}</text>
+            <image class="right" src="../../img/right.png"></image>
+            <text>{{item.classification[1].name}}</text>
+          </view>
+          <view class="s-r-b">
+            <image class="lo" src="../../img/lo.png"></image>
+            <text class="addr2">{{item.address}}</text>
+          </view>
+        </view>
+        <view class="i-r">
+          <image class="into" src="../../img/into.png"></image>
+        </view>
+      </view>
+    </view>  -->
+  </view>
+
+  <view wx:if="{{status == 0 && phone != null}}" class="content2">
+    <view class="f-top">
+      <view bindtap='openLocation'>
+        <image class="lo" src="../../img/lo.png"></image>
+        <text class="addr" wx:if="{{address == ''}}">请选择位置</text>
+        <text class="addr" wx:else="{{address != ''}}">{{address}}</text>
+      </view>
+      <view>
+        <input wx:if="{{wi == 0}}" bindtap='showSelect' class="input-work" disabled='true' value="选择工作类型 ∨"></input>
+        <input wx:if="{{wi == 1}}" bindtap='showSelect' class="input-work" disabled='true' value="{{workAll1}}>{{workAll2}}"></input>
+      </view>
+      <view>
+        <button wx:if="{{workAll2 == ''}}" class="sub-work">我选好了，去找工作</button>
+        <button bindtap='subWork' wx:if="{{workAll2 != ''}}" class="sub-work blue">选好了，去找工作</button>
+      </view>
+    </view>
+
+    <!--  已发布工作  -->
+    <view class="sub-aleready">
+      <view class="sa-top">
+        <view class="line"></view>
+        <text class="sa-t">我已发布</text>
+        <view class="line"></view>
+      </view>
+      <view wx:if="{{ isPublishingWork == 100000 }}" class="revise">
+        <button size='mini' bindtap="reviseTap">{{reviseTxt}}</button>
+      </view>
+      <view wx:if="{{subWorkList == ''}}">
+        <text class="noneWork">您还未发布工作</text>
+      </view>
+      <view data-item-index="{{item.cid}}" bindtap='toJobPage' wx:if="{{subWorkList != ''}}" wx:for="{{subWorkList}}" class="sub-item">
+        <view class="s-l">
+          <image class="head" src="../../img/head.jpg"></image>
+        </view>
+        <view class="s-r">
+          <view class="s-r-t">
+            <text>{{item.classification[2].name}}</text>
+            <image class="right" src="../../img/right.png"></image>
+            <text>{{item.classification[1].name}}</text>
+          </view>
+          <view class="s-r-b">
+            <image class="lo" src="../../img/lo.png"></image>
+            <text class="addr2">{{item.address}}</text>
+          </view>
+        </view>
+        <view class="i-r">
+          <image wx:if="{{isRevise === false}}" class="into" src="../../img/into.png"></image>
+          <image wx:if="{{isRevise}}" catch:tap='deleteWork' data-item-index="{{item.id}}" class="into" src="../../img/delete.png"></image>
+        </view>
+      </view>
+
+    </view>
+
+    <!--  在招岗位  -->
+    <!-- <view class="sub-aleready">
+      <view class="sa-top">
+        <view class="line"></view>
+        <text class="sa-t">您可能感兴趣的岗位</text>
+        <view class="line"></view>
+      </view>
+      <view wx:if="{{interestWorkList == ''}}">
+        <text class="noneWork">暂时没有您感兴趣的职位</text>
+      </view>
+      <view wx:if="{{interestWorkList != ''}}" bindtap='toWorkInfo' data-item-index="{{item.id}}" wx:for="{{interestWorkList}}" class="interest-item">
+        <view class="i-l">
+          <view class="i-l-t">
+            <text>{{item.classification[2].name}}</text>
+            <image class="right" src="../../img/right2.png"></image>
+            <text>{{item.classification[1].name}}</text>
+          </view>
+          <view class="i-l-m">
+            <text>招聘{{item.num}}人｜</text>
+            <text>{{item.start_time}}~{{item.end_time}}</text>
+          </view>
+          <view class="i-l-b">
+            <image class="lo" src="../../img/lo2.png"></image>
+            <text class="">{{item.address}}</text>
+          </view>
+        </view>
+        <view class="i-r">
+          <image class="into" src="../../img/into.png"></image>
+        </view>
+      </view>
+    </view> -->
+  </view>
+
+  <view class="cover" wx:if="{{workList == 1}}">
+    <view class="select-work">
+      <view class="select-top">
+        <text bindtap='hideSelect' class="cancel">取消</text>
+        <text bindtap='sureSelect' class="success">确定</text>
+      </view>
+      <view class="select-bottom">
+        <view>
+          <text bindtap='selectWork' class="{{state==index?'select':''}}" wx:for="{{workType}}" data-index="{{item.id}}" data-item-index="{{index}}" data-value="{{item.name}}">{{item.name}}</text>
+        </view>
+        <view>
+          <text bindtap='selectWork2' class="{{state2==index?'select':''}}" wx:for="{{workType2}}" data-index="{{item.id}}" data-item-index="{{index}}" data-value="{{item.name}}">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <block wx:if='{{status == 0}}'>
+    <worker-footer textColor="text-color" workPath="../../../img/work1.png" messagePath="../../../img/message.png" myPath="../../../img/my.png"></worker-footer>
+  </block>
+
+  <block wx:if='{{status == 1}}'>
+    <boss-footer textColor="text-color" workPath="../../../img/work1.png" messagePath="../../../img/message.png" myPath="../../../img/my.png"></boss-footer>
+  </block>
+</view>

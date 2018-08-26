@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class="container">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(245, 104, 57, 0.8)" indicator-active-color="rgba(255, 255, 255, 0.6)">
+        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+            <swiper-item>
+                <image src="{{item}}" class="slide-image" />
+            </swiper-item>
+        </block>
+    </swiper>
+    <scroll-view class="scroll-view_H items-cate" scroll-x>
+		<view class='item' wx:for="{{cateList}}" wx:key="{{index}}" bindtap='goCateList' data-id='{{item.id}}'>
+            <view>
+                <image class='img item-img' src="../../assets/images/icon-cate-{{item.id}}.png"></image>
+            </view>
+            <view>
+                <text class='item-title'>{{item.type_name}}</text>
+            </view>
+        </view>
+    </scroll-view>
+    <!--资源推荐  -->
+    <view class='source-wrap'>
+        <view class='section-title'>
+            <text>- 资源推荐 -</text>
+        </view>
+        <view class='items-source'>
+            <view class='item-source' wx:for="{{supplyList}}" wx:key="{{index}}" bindtap='goSourceDetail' data-id='{{item.id}}'>
+                <view>
+                    <image class='img source-img' src="{{item.supply_img_url}}"></image>
+                </view>
+                <view class='source-price'>
+                    <text class='font-20 font-orange'>￥{{item.supply_price}} </text>
+                    <text class='font-10 font-grey'>起</text>
+                </view>
+                <view>
+                    <text class='source-banner'>{{item.supply_banner}}</text>
+                </view>
+                <view class='source-name'>
+                    <text>{{item.supply_name}}</text>
+                </view>
+            </view>
+        </view>
+		<view class='section-title'>
+            <text>{{reachBottomText}}</text>
+        </view>
+    </view>
+</view>

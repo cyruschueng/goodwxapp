@@ -1,0 +1,58 @@
+<view class="wrap" bindtap="hideCid">
+    <text wx:if="{{timeStatus == 1}}" class="count_down {{isIpx?'ipx':''}}">距初赛开始还有<text class="count_time">{{c_day}}</text>天<text class="count_time">{{c_hour}}</text>时<text class="count_time">{{c_min}}</text>分<text class="count_time">{{c_sis}}</text>秒</text>
+    <text wx:elif="{{timeStatus == 2}}" class="count_down {{isIpx?'ipx':''}}">距初赛结束还有<text class="count_time">{{c_day}}</text>天<text class="count_time">{{c_hour}}</text>时<text class="count_time">{{c_min}}</text>分<text class="count_time">{{c_sis}}</text>秒</text>
+    <text wx:else="{{timeStatus == 3}}" class="count_down {{isIpx?'ipx':''}}">初赛已结束，点击"21世纪大赛"查询结果</text>
+    <view class="main">
+        <view class="content-box">
+            <view class="shelf_head">
+                <!--<view class="scene_title">-->
+                    <!--<image src="../../images/shelf/animals_icon.png"></image>-->
+                    <!--<text></text>-->
+                <!--</view>-->
+                <view class="cid_one" catchtap="clickCid">
+                    <view class="cid">{{firstCid}}</view>
+                    <image src="../../images/shelf/select_icon.png" class="cid_image {{selectArea ? 'rotateLeft' :''}}"></image>
+                </view>
+            </view>
+            <!--cid选项-->
+            <view class="cid_box" hidden="{{selectCid}}">
+                <view class="cid_select" hidden="{{selectCid}}" wx:for="{{cids}}" wx:key="{{item}}" data-item="{{item}}">
+                    <view class="select_one" bindtap="mySelect" data-cid="{{item.value}}">
+                        {{item.name}}
+                        <view style="width: 190rpx;height: 3rpx;background: #404040;margin: auto"></view>
+                    </view>
+                </view>
+            </view>
+            <!--书架区域-->
+            <view class="books-box">
+                    <view wx:for="{{books}}" wx:key="{{item}}" class="lis" data-item="{{item}}">
+                        <view class="li {{item.max_score>0?'book_yellow':'book_blue'}}">
+                            <image src="{{item.pic}}" data-book-id="{{item.id}}" data-book-pic="{{item.pic}}" data-book-cid="{{item.cid}}" bindtap="toReading"></image>
+                            <view class="book_name">
+                                <text>{{item.book_name}}</text>
+                            </view>
+                            <!--<view>Hooray  for the Farmer's Market!</view>-->
+                            <image class="score_bg {{item.max_score>0?' ':'hidden'}}" src="../../images/icon/score_bg.png"></image>
+                            <view class="score {{item.max_score>0?' ':'hidden'}}">
+                                {{item.max_score}}
+                            </view>
+                        </view>
+                    </view>
+            </view>
+        </view>
+        <!--<image class="scroll-img" src="../../images/shelf/scroll_g.png" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></image>-->
+    </view>
+    <view class="btn21" bindtap="toMatch">
+        <image src="../../images/shelf/button21.png"></image>
+        <text>21世纪大赛</text>
+    </view>
+    <view wx:if="{{moStatus}}" class="modal-box">
+        <image class="modal_bg" src="../../images/icon/modal_bg.png"></image>
+        <view class="text">
+            <text class="title">温馨提示</text>
+            <text>先练习再答题效果更好呦！</text>
+            <text>建议您阅读<text class="four">4</text>本书后参与比赛</text>
+        </view>
+        <image class="modal_btn" src="../../images/icon/modal_btn.png" bindtap="modalHide"></image>
+    </view>
+</view>

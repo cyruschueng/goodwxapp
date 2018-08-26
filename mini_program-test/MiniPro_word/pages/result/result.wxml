@@ -1,0 +1,68 @@
+<view class="outer">
+  <view class="pages">
+    <audio src="{{audioSrc}}" id="startAudio" style="display: none;"></audio>
+    <view class="board" style="padding-top:{{ipX?200:0}}rpx;">
+      <image class="board_img" src="../../images/board.png"></image>
+      <view class="{{ipX?'flag_p':'flag'}}" wx:if="{{wordNum<=50}}">“美国小学一年级”</view>
+      <view class="{{ipX?'flag_p':'flag'}}" wx:elif="{{wordNum>50&&wordNum<=120}}">“美国小学二年级”</view>
+      <view class="{{ipX?'flag_p':'flag'}}" wx:elif="{{wordNum>120&&wordNum<=220}}">“美国小学三年级”</view>
+      <view class="{{ipX?'flag_p':'flag'}}" wx:elif="{{wordNum>220&&wordNum<=340}}">“美国小学四年级”</view>
+      <view class="{{ipX?'flag_p':'flag'}}" wx:else="{{wordNum>340}}">“美国小学五年级”</view>
+      <view class="{{ipX?'sen_p':'sen'}}" wx:if="{{wordNum<=50}}">真正努力过的人，就会明白天赋的重要</view>
+      <view class="{{ipX?'sen_p':'sen'}}" wx:elif="{{wordNum>50&&wordNum<=120}}">失败并不可怕，可怕的是你还相信这句话</view>
+      <view class="{{ipX?'sen_p':'sen'}}" wx:elif="{{wordNum>120&&wordNum<=220}}">生活不止眼前的苟且，还有读不完的词汇</view>
+      <view class="{{ipX?'sen_p':'sen'}}" wx:elif="{{wordNum>220&&wordNum<=340}}">如果你还在坚持，说明你还不够绝望</view>
+      <view class="{{ipX?'sen_p':'sen'}}" wx:else="{{wordNum>340}}">恭喜你，达到了美国小学水平</view>
+      <view class="{{ipX?'score_p':'score'}}">{{wordNum}}</view>
+      <image wx:if="{{wordNum>=maxScore}}" class="{{ipX?'high_score_p':'high_score'}}" src="../../images/highscore.png"></image>
+    </view>
+    <view class="user-box">
+      <view class="head-box">
+        <image class="head_img_wrap" src="../../images/portrait_bg.png"></image>
+        <image class="head_img" src="{{head_img}}"></image>
+      </view>
+      <text>{{nickname}}</text>
+    </view>
+    <view class="button-box" style="top:{{ipX?1032:832}}rpx;">
+        <image class="rank_img" src="../../images/button_rank.png" bindtap="toRank"></image>
+        <image class="save_img" src="../../images/button_save.png" bindtap="saveImg"></image>
+        <image class="replay_img" src="../../images/button_replay.png" bindtap="toTest"></image>
+    </view>
+    <view class="share_btn" style="top:{{ipX?1166:966}}rpx;">
+      <button bindtap="onShareAppMessage" open-type="share"><text>转发到微信群，查看群排行</text></button>
+    </view>
+    <view class="app-box">
+      <image class="logo" src="../../images/abc_logo.png"></image>
+      <text>美国小学图书馆一键“搬”回家</text>
+      <image class="load" src="../../images/load.png" bindtap="showInfo"></image>
+    </view>
+    <view wx:if="{{addHeart}}" class="addModal">
+      <image class="bg" src="../../images/popup_life.png"></image>
+      <view>分享奖励复活<image class="heart_sm" src="../../images/heart_sm.png"></image>+1</view>
+      <image class="button_ok" src="../../images/button_ok.png" bindtap="hideAdd"></image>
+    </view>
+    <button open-type="contact" class="contact_btn">
+      <image src="../../images/help.png"></image>
+    </button>
+    <view class="info_wrap" wx:if="{{infoStatus}}">
+      <view class="info">
+        <image class="info_bg" src="../../images/popup_bg.png"></image>
+        <image class="button_off" src="../../images/button_off.png" bindtap="hideInfo"></image>
+        <view class="total">
+          <view>一款专门为中国孩子量身打造的学习英语的在线阅读产品</view>
+          <view>【自主学习能力】</view><view>引进原版RAZ系列，科学的分级阅读体系；</view>
+          <view>【练就地道美式英语】</view><view>采用国际先进的语音识别技术，让孩子开口说英语；</view>
+          <view>【提高学习兴趣】</view><view>亲子PK互动游戏，让孩子在玩耍之余快乐地学习英语；</view>
+          <view>亿万孩子学习英文的阅读神器，您还在等什么？扫码解锁吧！ </view>
+          <image class="qr_code" src="../../images/qr_code.png"></image>
+        </view>
+      </view>
+    </view>
+    <!--<view>-->
+      <!--<button bindtap="onShareAppMessage" open-type="share">转发到微信群</button>-->
+    <!--</view>-->
+  </view>
+  <view id="canvas-box">
+    <canvas canvas-id="shareCanvas" id="shareCanvas"/>
+  </view>
+</view>

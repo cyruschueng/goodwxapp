@@ -1,0 +1,90 @@
+<!--pages/workInfo/workInfo.wxml-->
+<view class="container">
+  <!--  临时工详情  -->
+  <view wx:if="{{status == 1}}" class="info-box">
+    <view class="h-t">
+      <view class="head">
+        <view class="h-l">
+          <image src="../../img/head.jpg" class="head-img"></image>
+          <text class="h-l-name">{{username}}</text>
+        </view>
+        <view class="h-r">
+          <image bindtap='calling' class="call" src="../../img/call.png"></image>
+          <image bindtap='talking' class="talk" src="../../img/talk.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="content">
+      <view class="c-item">
+        <text class="c-i-l">工作类型：</text>
+        <text class="c-i-r">{{item1}}>{{item2}}</text>
+      </view>
+      <view class="c-item">
+        <text class="c-i-l">性别：</text>
+        <text wx:if="{{sex == 0}}" class="c-i-r">男</text>
+        <text wx:if="{{sex == 1}}" class="c-i-r">女</text>
+      </view>
+      <view class="c-item">
+        <text class="c-i-l">年龄：</text>
+        <text class="c-i-r">{{age}}</text>
+      </view>
+      <view class="lo">
+        <image class="lo2" src="../../img/lo2.png"></image>
+        <text>{{address}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!--  招聘详情  -->
+  <view wx:if="{{status == 0}}" class="info-box">
+    <view class="h-t">
+      <view class="head">
+        <view class="h-l f-c">
+          <view class="h-l-t">
+            <text>{{item1}}</text>
+            <image class="right" src="../../img/right.png"></image>
+            <text>{{item2}}</text>
+          </view>
+          <view class="lo">
+            <image class="lo2" src="../../img/lo2.png"></image>
+            <text class="lo-scroll">{{address}}</text>
+          </view>
+        </view>
+        <view class="h-r">
+          <image bindtap='calling' class="call" src="../../img/call.png"></image>
+          <image bindtap='talking' class="talk" src="../../img/talk.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="content">
+      <view class="c-item">
+        <text class="c-i-l">招聘职位：</text>
+        <text class="c-i-r">{{name}}</text>
+      </view>
+      <view class="c-item">
+        <text class="c-i-l">招聘人数：</text>
+        <text class="c-i-r">{{num}}</text>
+      </view>
+      <view class="c-item">
+        <text class="c-i-l">工作时间：</text>
+        <text class="c-i-r">{{start_time}}至{{end_time}}</text>
+      </view>
+      <view class="c-item">
+        <text class="c-i-l">招聘企业：</text>
+        <text class="c-i-r">{{companyName}}</text>
+      </view>
+      <view class="c-item">
+        <text class="c-i-l">工作描述：</text>
+        <text class="c-i-r">{{text}}</text>
+      </view>
+         <text class="c-i-f">视频:</text>
+      <view wx:if="{{videoUrl != ''}}" class="video">
+      <video src="https://xcx.misass.com/huadu/Uploads{{videoUrl}}"  controls="true"></video>
+      </view>
+       <text class="c-i-f">图片:</text>    
+      <view wx:if="{{img != ''  || img != null}}" class="img-info">  
+        <image wx:for="{{img}}" bindtap="lookPic" src="https://xcx.misass.com/huadu/Uploads{{item}}" data-item-index="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+</view>

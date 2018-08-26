@@ -1,0 +1,27 @@
+<import src="../templates/userInfo/index.wxml" />
+<view class="page-index">
+    <template is="user-info" data="{{profile: profile, doJump: true, isAndroid: isAndroid}}" />
+    <view class="pk-rate" bindtap="toJoinRate" animation="{{pkAnimationData}}">
+        <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b315a4651.png"></image>
+    </view>
+    <view class="image-box">
+        <view wx:if="{{shareShow}}">
+            <button class="friends-rate" bindtap="inviteFriend" open-type="share" animation="{{inviteAnimationData}}">
+                <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b31482e7e.png"></image>
+            </button>
+        </view>
+        <view animation="{{rankAnimationData}}" bindtap="jumpToRank">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b315c4eb5.png"></image>
+        </view>
+    </view>
+    <view class="back-home" bindtap="jumpToHome">
+        <view>诗词</view>
+        <view>阅读</view>
+    </view>
+    <view class="btns">
+        <button class="btn-contact follow-btn" session-from="getGift" bindtap="sendKefuMsg" open-type="contact">领取知识包，早日上王者</button>
+        <button class="btn-help" data-type="help" session-from="feedback" bindtap="sendKefuMsg" open-type="contact">问题反馈</button>
+    </view>
+</view>
+<invite-dialog></invite-dialog>
+<award-dialog trigger-show-dialog="{{triggerShowDialog}}" bindupdatemoney="updateMoney"></award-dialog>

@@ -1,0 +1,59 @@
+<!--userDetail.wxml-->
+<!--personal.wxml-->
+<view class="page">
+  <view class="page__hd i-header">
+    <view class="g-bd">
+      <view> </view>
+      <view class="g-bda">
+        <view bindtap="" class="g-bda-userinfo">
+          <image class="userinfo-avatar" src="{{userInfo.userPic}}"></image>
+          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="page__bd">
+  </view>
+  <view class="weui-panel">
+    <view class="weui-panel__hd">用户资料</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_small-appmsg">
+        <view class="weui-cells weui-cells_in-small-appmsg">
+          <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__hd">
+              <image src="/images/github.png" style="width: 20px;height: 20px;margin-right: 5px" />
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+              <view data-content="github">Github:{{result.github}}</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+          <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__hd">
+              <image src="/images/edit.png" style="width: 20px;height: 20px;margin-right: 5px" />
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+              <view data-content="content">个人简介:{{result.content}}</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-btn-area">
+        <block wx:if="{{pro_own.status=='开发中'}}">
+          <button class="weui-btn" type="primary" disabled="true">已选择该开发者/团队</button>
+          <button bindtap="chatroom" class="weui-btn" type="primary">进入沟通频道</button>
+          <button bindtap="complete" class="weui-btn" type="warn">完成该项目</button>
+        </block>
+        <block wx:elif="{{pro_own.status=='完成'}}">
+          <button class="weui-btn" type="primary" disabled="true">项目已完成</button>
+        </block>
+        <block wx:else>
+          <form bindsubmit="select" report-submit='true'>
+            <button form-type="submit" bindtap="" class="weui-btn" type="primary">选择该开发者/团队</button>
+          </form>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

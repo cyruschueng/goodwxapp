@@ -1,0 +1,46 @@
+<template name="tpeMerchant">
+  <view class='shopWrap' id="{{item.id}}" catchtap="onTouchItem">
+    <view class='navigationPractical'>
+      <view class='practical_left'>
+        <image class='practicalImg' mode="aspectFill" src="{{item.logoUrl}}"></image>
+      </view>
+      <view class='practical_right'>
+        <view class='elsk'>
+          <text class='trade_name'>{{item.shopName}}</text>
+          <view class='dq_popularitywrap'>
+            <image class='dq_popularity' src='/images/icon/restaurant_hot.png'></image>
+            <text class='trade_rq'>人气<text class='trade_figure'>{{item.popNum}}</text></text>
+          </view>
+        </view>
+        <view class='trade_site_distance'>
+           <text class='trade_caim'>{{item.skuName}}</text> 
+          <!-- <text class='trade_guangu'>{{item.merchant_location}}</text>| -->
+           <!-- <text class='trade_site_lxg'>{{item.remark}}</text>  -->
+          <text class='trade_site_address'>{{item.address}}</text>
+          <text class='trade_site_lxg'>{{item.distance}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='navigationButtom'>
+      <view class='navigationKb_left'></view>
+      <view class='navigationKb_right'>
+        <view class='navigationKb_Wrapp'>
+          <image class='navigationKb_img' src='/images/icon/restaurant_newuser.png'></image>
+          <text class='navigationKb_text'>新用户首次免费领劵</text>
+        </view>
+        <!-- <view class='navigationKb_Wrapp'>
+          <image class='navigationKb_img' src='/images/icon/restaurant_huo.png'></image>
+          <text class='navigationKb_text'>购买享7代金卷</text>
+        </view> -->
+        <view class='navigationKb_Wrapp'>
+          <image class='navigationKb_img' src='/images/icon/restaurant_ticket.png'></image>
+          <text class='navigationKb_text navigationQdis'>{{item.activity}}</text>
+        </view>
+        <!-- <view class='navigationKb_Wrapp'>
+          <image class='navigationKb_img' src='/images/icon/restaurant_detrusion.png'></image>
+          <text class='navigationKb_text'>预定"团年宴",现场抽IPhone X</text>
+        </view> -->
+      </view>
+    </view>
+  </view>
+</template>

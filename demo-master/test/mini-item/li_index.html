@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Closures</title>
+    <meta charset="UTF-8" />
+    <script>
+    // window.addEventListener("load", function() {
+    //   for (var i = 1; i < 4; i++) {
+    //     var button = document.getElementById("button" + i);
+
+    //     button.addEventListener("click", function() {
+    //       alert("Clicked button " + i);
+    //     });
+    //   }
+    // });
+
+    // 第一种方式，使用es6
+    /*    window.addEventListener("load", function() {
+          for (let i = 1; i < 4; i++) {
+            var button = document.getElementById("button" + i);
+
+            button.addEventListener("click", function() {
+              alert("Clicked button " + i);
+            });
+          }
+        });*/
+
+    // 第二种方式,闭包
+    /*    window.addEventListener("load", function() {
+          for (var i = 1; i < 4; i++) {
+            var button = document.getElementById("button" + i);
+            (function(j) {
+              button.addEventListener("click", function() {
+                alert("Clicked button " + j);
+              });
+            })(i);
+          }         
+
+        });*/
+
+    // 第三种方式，函数调用
+    window.addEventListener("load", function() {
+
+        for (var i = 1; i < 4; i++) {
+            but(i);
+        }
+
+        function but(i) {
+            var button = document.getElementById("button" + i);
+            button.addEventListener("click", function() {
+                alert("Clicked button " + i);
+            });
+        }
+    });
+    </script>
+</head>
+
+<body>
+    <input type="button" id="button1" value="One" />
+    <input type="button" id="button2" value="Two" />
+    <input type="button" id="button3" value="Three" />
+</body>
+
+</html>

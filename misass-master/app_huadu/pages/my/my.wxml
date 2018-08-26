@@ -1,0 +1,107 @@
+<!--pages/my/my.wxml-->
+<view class="container">
+  <view class="h-t">
+    <view class="head">
+      <image src="{{headImg}}" class="head-img"></image>
+      <view class="h-r">
+        <view class="h-r-top">
+          <text class="gray">微信昵称</text>
+          <text class="blue">{{wechaName}}</text>
+        </view>
+        <view class="h-r-bottom">
+          <text class="gray">ID</text>
+          <text class="blue">{{id}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="info-form" wx:if="{{status == 0}}">
+    <text class="red-tip gray-tip">*您的信息如下!</text>
+    <view class="info-input">
+      <image class="info-ico" src="../../img/name.png"></image>
+      <input class="input-content" disabled='{{inputEdit}}' value="{{name}}" bindinput='checkName' placeholder='真实姓名'></input>
+    </view>
+    <view class="info-input"  bindtap="toPhoneJump" wx:if="{{inputEdit == false}}">
+      <image class="info-ico shouji" src="../../img/shouji.png"></image>
+      <input class="input-content" disabled='true' value="{{phone}}" bindinput='checkPhone' placeholder='手机号码'></input>
+      <image  class="confim down" src="../../img/up.png"></image>
+    </view>
+      <view class="info-input"   wx:if="{{inputEdit == true}}">
+      <image class="info-ico shouji" src="../../img/shouji.png"></image>
+      <input class="input-content" disabled='true' value="{{phone}}" bindinput='checkPhone' placeholder='手机号码'></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico" src="../../img/IDCard.png"></image>
+      <input class="input-content" disabled='{{inputEdit}}' value="{{IDNum}}" bindinput='checkID' placeholder='身份证号码'></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico" src="../../img/age.png"></image>
+      <input type='number' class="input-content" disabled='{{inputEdit}}' value="{{age}}" bindinput='checkAge' placeholder='年龄'></input>
+    </view>
+    <view class="info-input" wx:if="{{inputEdit == true}}">
+      <image class="info-ico" src="../../img/sex.png"></image>
+      <input class="input-content" disabled='true' wx:if="{{sex == 0}}" value="未知"></input>
+      <input class="input-content" disabled='true' wx:if="{{sex == 1}}" value="男"></input>
+      <input class="input-content" disabled='true' wx:if="{{sex == 2}}" value="女"></input>
+    </view>
+    <view class="info-input" wx:if="{{inputEdit == false}}">
+      <image class="info-ico" src="../../img/sex.png"></image>
+      <input wx:if="{{sex == 1}}" bindtap='selectSex' class="input-content" value="男" disabled='true' placeholder='性别'></input>
+      <input wx:if="{{sex != 1}}" bindtap='selectSex' class="input-content" value="女" disabled='true' placeholder='性别'></input>
+      <image wx:if="{{show == 0}}" class="down" src="../../img/down.png"></image>
+      <image wx:if="{{show == 1}}" class="down" src="../../img/up.png"></image>
+      <view class="sexSelect" wx:if="{{show == 1}}">
+        <view bindtap='selectMan' data-index="1" class="blue">男</view>
+        <view bindtap='selectFemale' data-index="2" class="blue">女</view>
+      </view>
+    </view>
+    <block wx:if="{{inputEdit == false}}">
+      <button wx:if="{{ name == '' || IDNum == '' || age == '' || sex == ''}}" class="sub-info">确认</button>
+      <button wx:if="{{name != '' && IDNum != '' && age != '' && sex != ''}}" bindtap='subInfo' class="sub-info sub-info-success">确认</button>
+    </block>
+    <block wx:if="{{inputEdit == true}}">
+      <button wx:if="{{inputEdit == true}}" bindtap='changeInfo' class="sub-info sub-info-success">修改信息</button>
+    </block>
+    <text class="want" bindtap='toRecruit'>我要招人</text>
+    <!-- </block> -->
+
+  </view>
+
+  <view class="info-form" wx:if="{{status == 1}}">
+    <text class="red-tip gray-tip">*您的信息如下!</text>
+    <view class="info-input">
+      <image class="info-ico-c" src="../../img/qym.png"></image>
+      <input disabled='true' class="input-content" placeholder='企业名称' value="{{companyName}}"></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico-c" src="../../img/gong.png"></image>
+      <input disabled='true' type='number' class="input-content" placeholder='企业工商号' value="{{companyNum}}"></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico-c" src="../../img/addr.png"></image>
+      <input disabled='true' class="input-content" placeholder='公司地址' value="{{companyAddr}}"></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico-c" src="../../img/workAddr.png"></image>
+      <input disabled='true' class="input-content" placeholder='招聘地址' value="{{companyWorkAddr}}"></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico-c" src="../../img/fa.png"></image>
+      <input disabled='true' class="input-content" placeholder='法人代表' value="{{companyFa}}"></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico-c shouji" src="../../img/shouji.png"></image>
+      <input disabled='true' type='number' class="input-content" placeholder='联系方式' value="{{phone}}"></input>
+    </view>
+    <button bindtap='toCompanyInfo' class="sub-info sub-info-success">修改信息</button>
+    <text class="want" bindtap='toChangeStatus'>切换到个人版</text>
+  </view>
+
+  <block wx:if='{{status == 0}}'>
+    <worker-footer textColorMy="text-color" workPath="../../../img/work.png" messagePath="../../../img/message.png" myPath="../../../img/my1.png"></worker-footer>
+  </block>
+
+  <block wx:if='{{status == 1}}'>
+    <boss-footer textColorMy="text-color" workPath="../../../img/work.png" messagePath="../../../img/message.png" myPath="../../../img/my1.png"></boss-footer>
+  </block>
+</view>

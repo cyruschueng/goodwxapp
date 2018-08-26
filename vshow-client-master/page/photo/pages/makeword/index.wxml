@@ -1,0 +1,41 @@
+<view class="make">
+  <!-- canvas -->
+  <canvas class="canvas" canvas-id="canvas" style="width: {{ winW }}px; height: {{ winW }}px"></canvas>
+  <view class="controls">
+    <!-- 编辑文字 -->
+    <view class="edit_word">
+      <input class="word" cursor-spacing="4" bindinput="bindinput" name="word" placeholder="点击输入你想表达的文字吧" />
+    </view>
+    <!-- 编辑文字颜色 -->
+    <view class="edit_color">
+      <view class="section_title">文字颜色</view>
+      <view class="edit_color_list">
+        <view class="color_lump" style="width: {{ 38 * colorLumpNum }}px">
+          <view wx:for="{{ colors }}" data-name="color" data-index="{{ index }}" bindtap="selColor" style="background-color: {{ item }}" class="color_lump_item"></view>
+        </view>
+        
+      </view>
+    </view>
+    <!-- 编辑背景颜色 -->
+    <view class="edit_color">
+      <view class="section_title">背景颜色</view>
+      <view class="edit_color_list">
+        <view class="color_lump" style="width: {{ 38 * colorLumpNum }}px">
+          <view wx:for="{{ bgColors }}" data-name="bgColor" data-index="{{ index }}" bindtap="selColor" style="background-color: {{ item }}" class="color_lump_item"></view>
+        </view>
+        
+      </view>
+    </view>
+    <!-- 编辑字体 -->
+    <view class="edit_fontSize">
+      <text class="section_title">设置文字大小</text>
+      <view class="body-view">
+        <slider bindchange="sliderChange" min="10" max='100' value="20" show-value/>
+      </view>
+    </view>
+    <!-- 生成图片按钮 -->
+    <view class="cre_btn">
+      <button type="primary" disabled="{{ disabled }}" bindtap="creImg">{{ btnText }}</button>
+    </view>
+  </view>
+</view>

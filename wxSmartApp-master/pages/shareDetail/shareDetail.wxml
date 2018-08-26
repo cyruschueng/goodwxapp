@@ -1,0 +1,139 @@
+<!--分享详情页  -->
+
+
+<!-- <view class="btn-group" wx:if="{{source != 'list'}}">
+  <view class="btn-item">
+     <view wx:if="{{!isNotice}}" bindtap="bindFollow" data-id="{{share.userId}}">
+      <image src="{{IMG_PATH}}/followUser.png"></image>
+      <text>关注</text>
+    </view> 
+    <view wx:if="{{isNotice}}" bindtap="bindDelFollow" data-id="{{share.id}}">
+      <image src="{{IMG_PATH}}/followUser-2.png"></image>
+      <text>已关注</text>
+    </view>
+  </view>
+  <view class="btn-item">
+    <view bindtap="goToMapNav" data-lng="{{share.longitude}}" data-lat="{{share.latitude}}">
+      <image src="{{IMG_PATH}}/localUser.png"></image>
+      <text>位置</text>
+    </view>
+  </view>
+  <view class="btn-item">
+    <view data-phone="{{share.user.phone}}" bindtap="bindCallPhone">
+      <image src="{{IMG_PATH}}/phoneUser.png"></image>
+      <text>电话</text>
+    </view>
+  </view>
+</view> -->
+<view class="banner">
+    <swiper indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
+      <!--<block wx:for="{{imgUrls}}" wx:key >-->
+        <!--<swiper-item>-->
+          <image bindtap="bindGoActive" src="{{imgUrls.img_url}}" class="slide-image" data-item="{{item}}" data-index="{{index}}" wx:key="{{index}}"/>
+        <!--</swiper-item>-->
+      <!--</block>-->
+    </swiper>
+  </view>
+<view class="content">
+    <view class="share-img">
+      <image bindtap="bindLookImage" mode="widthFix" src="{{share.imgUrl}}"></image>
+      <!-- <view class='go-home {{hide?"hide":""}}' bindtap='bindHome'>首页</view> -->
+    </view>
+    <view class="text">
+    {{share.content}}
+    </view>
+<view>
+    <view class="header" wx:if="{{source != 'list'}}">
+      <view class="block">
+          <image  catchtap="goToHistoryShare" src="{{share.user.profile_image}}"></image>
+      </view>
+      <view class="block user-info">
+          <view class="nick">{{share.user.nick_name}}</view>
+          <!--性别没用-->
+          <!--<view class="local">   
+              <text>{{share.user.sex==1?'男':'女'}}</text>
+              <image src="{{share.user.sex==1?'{{IMG_PATH}}/sexman.png':'{{IMG_PATH}}/sexwoman.png'}}"></image>
+          </view>-->
+          <view class='location'>
+            <image src="{{IMG_PATH}}/local.png"></image>
+            <text>{{share.address}}</text>
+          </view>
+      </view>
+      <view class='block xiu-box'>
+              
+              <view class='xiu'>
+                  <button  open-type="share">分享给朋友</button>
+              </view>
+      </view>
+      
+    </view>
+    
+</view>
+
+ 
+
+     <view class="act-list">
+      <view class="img-list">
+        <image bindtap="goToShareHistory" style="width:40rpx; height:40rpx" data-id="{{item.userId}}" wx:for="{{actList}}" wx:if="{{index < 4}}" wx:key="index" src="{{item.actUser.profile_image}}"></image>
+        <image bindtap="goToUserList" wx:if="{{actList.length!=0}}" style="margin-left: 20rpx;" src="{{IMG_PATH}}/ellipsis.png"></image>
+      </view>
+      <view class="up">
+        <image bindtap="bindLike" wx:if="{{!isAct}}" src="{{IMG_PATH}}/upUser.png"></image>
+        <!-- <image  bindtap="bindUnLike" wx:if="{{isAct}}" src="{{IMG_PATH}}/upUser-ok.png"></image> -->
+        <image wx:if="{{isAct}}" src="{{IMG_PATH}}/upUser-ok.png"></image>
+        <text>{{actList.length}}</text>
+        <!-- <button open-type="share"><image class="up-list" src="{{IMG_PATH}}/userList.png"></image><text style='top: 18rpx;margin-left: 4rpx;'>邀请</text></button> -->
+        
+      </view>
+    </view>
+    <view class="comment-list">
+        <view wx:for="{{commentList}}" wx:key="index">
+          <text class="name" bindtap="goToShareHistory" data-id="{{item.userId}}">{{item.actUser.nick_name}}：</text>
+          <text class="desc">{{item.actContent}}</text>
+        </view>
+    </view> 
+    <view class="comment">
+      <view class="input-box">
+        <input maxlength="140" placeholder="添加评论" placeholder-class="placeholder" bindinput="bindContent" value="{{content}}" />
+      </view>
+      <!--<view wx:if="{{!content}}" class="push-content">发表</view>-->
+      <view wx:if="{{content}}" class="push-content push-on" bindtap="bindPushContent">发表</view>
+    </view> 
+</view>
+
+
+
+<!-- <view class='share-btn' > -->
+<!--<view class='share-btn' wx:if="{{showGoHomeBtn}}">-->
+    <!-- <button  bindtap='bindHome'> -->
+        <!-- 进入首页 -->
+    <!-- </button> -->
+    <!--</view>>-->
+<!-- </view> -->
+
+<view class="nav">
+<view class="" bindtap="homePage">
+    <image src="{{IMG_PATH}}/shoye2.jpg"></image>
+    <view>首页</view>
+  </view>
+  <view class="" bindtap="goToShare">
+    <image src="{{IMG_PATH}}/fangdian.png"></image>
+    <view>发布</view>
+  </view>
+   <view class="scanCode" bindtap="scanCode">
+    <image src="{{IMG_PATH}}/chudian.png"></image>
+     <view>扫一扫</view> 
+  </view>
+  <view class="" bindtap="goToMap">
+    <image src="{{IMG_PATH}}/laidian.png"></image>
+    <view>触电</view>
+  </view>
+
+ 
+  <view class="" bindtap="goToUser">
+    <image src="{{IMG_PATH}}/wode.png"></image>
+    <view>我的</view>
+  </view>
+
+</view>

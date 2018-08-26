@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="share">
+  <view class="share-main">
+    <image src="{{shellImg}}" mode="widthFix"></image>
+    <view class="river">
+        <view class="wave"></view>
+        <view class="wave"></view>
+        <view class="wave"></view>
+        <view class="wave"></view>
+        <view class="wave"></view>
+        <view class="wave"></view>
+        <view class="wave"></view>
+      </view>
+  </view>
+  <view class="share-rank">
+    <view class="title">今天全球排行榜</view>
+    <view class="detail">
+      <view class="top-group">
+          <image src="" mode="" wx:if="{{topGroup.url}}"></image>
+          <view class="top-group-head" wx:else>{{topGroup.headName}}</view>
+          <view class="top-group-name">
+            冠军群: {{topGroup.name}}
+          </view>
+        </view>
+        <view class="top-user">
+          <image src="" mode="" wx:if="{{topUser.avatar_url}}"></image>
+          <view class="top-user-head" wx:else>{{topUser.headName}}</view>
+          <view class="top-user-name">
+            最佳群成员: {{topUser.user.name}}
+          </view>
+        </view>
+    </view>
+  </view>
+  <button
+    class="share-btn"
+    open-type="share"
+    >
+    召唤群友，组队参赛
+  </button>
+</view>

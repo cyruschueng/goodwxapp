@@ -1,0 +1,41 @@
+<!--pages/companyInfo/companyInfo.wxml-->
+<view class="container">
+  <view class="info-form">
+    <text class="red-tip">*企业信息如下!</text>
+    <view class="info-input">
+      <image class="info-ico" src="../../img/qym.png"></image>
+      <input class="input-content" bindinput='checkInputName' placeholder='企业名称' value="{{companyName}}"></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico" src="../../img/gong.png"></image>
+      <input type='text' bindinput='checkInputNum' class="input-content" placeholder='企业工商号' value="{{companyNum}}"></input>
+    </view>
+
+    <view class="info-input">
+      <image class="info-ico" src="../../img/addr.png"></image>
+      <input class="input-content" bindinput='checkInputAddr' placeholder='公司地址' value="{{companyAddr}}"></input>
+    </view>
+    <view class="info-input" bindtap='openLocation'>
+      <image class="info-ico" src="../../img/workAddr.png"></image>
+      <input class="input-content" disabled='true' placeholder='发布招聘地址' value="{{companyWorkAddr}}"></input>
+    </view>
+    <view class="info-input">
+      <image class="info-ico" src="../../img/fa.png"></image>
+      <input class="input-content" bindinput='checkInputFa' placeholder='法人代表' value="{{companyPerson}}"></input>
+    </view>
+    <view class="info-input"  bindtap='phoneJump'>
+      <image class="info-ico shouji" src="../../img/shouji.png"></image>
+      <input type='number' bindinput='checkInputPhone' class="input-content" placeholder='联系方式' value="{{phone}}" disabled='true'></input>
+       <image  class="confim down" src="../../img/up.png"></image>
+    </view>
+
+    <!--获取验证码  -->
+    <!-- <view class="info-input" > 
+      <input class="input-content input-identifying-code" value="{{ipnCode}}" placeholder='' bindinput='checkCode'></input>
+      <button class="button-identifying-code" size='mini' bindtap='gainTap'>{{countdown}}</button>
+    </view> -->
+
+    <button wx:if="{{companyName == '' || companyNum == '' || companyAddr == '' || companyPerson == '' || phone == ''}}" class="sub-info sub-info-default">确认</button>
+    <button wx:if="{{companyName != '' && companyNum != '' && companyAddr != '' && companyPerson != '' && phone != ''}}" class="sub-info" bindtap='subCompanyInfo'>确认</button>
+  </view>
+</view>

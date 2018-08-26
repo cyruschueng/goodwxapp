@@ -1,0 +1,462 @@
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <block wx:for="{{index_set}}">
+    <!--mall.wxml-->
+    <block wx:if="{{item.name == 'search'}}">
+      <!-- search start  -->
+      <view class="search flex f14">
+        <block wx:if="{{index_data.public['is_position'] == 1}}">
+          <!-- 定位 -->
+          <view class="address lineText mr10" bindtap="location">
+            <text class="green iconfont icon-locationfill"></text> {{address}}</view>
+          <view class="search-box sub">
+            <form bindsubmit="goods_search_bind">
+              <view class="flex">
+                <input name="k-word" class="sub search-input" type="text" placeholder="请搜索商品" confirm-type="search" bindconfirm="goods_search_bind" />
+                <button form-type='submit' size="mini" class="search-btn">
+                  <icon type="search" size="18" />
+                </button>
+              </view>
+            </form>
+          </view>
+        </block>
+        <block wx:else>
+          <!-- 扫一扫 -->
+          <view class="saoyisao tc" bindtap="shop_saoma_bind">
+            <text class="iconfont icon-saoyisao"></text>
+          </view>
+          <view class="search-box sub">
+            <form bindsubmit="goods_search_bind">
+              <view class="flex">
+                <input name="k-word" class="sub search-input" type="text" placeholder="请搜索商品" confirm-type="search" bindconfirm="goods_search_bind" />
+                <button form-type='submit' size="mini" class="search-btn">
+                  <icon type="search" size="18" />
+                </button>
+              </view>
+            </form>
+          </view>
+          <button class="contact-button" open-type="contact">
+            <text class="iconfont icon-mark"></text>
+          </button>
+        </block>
+      </view>
+      <!-- search end  -->
+    </block>
+    <block wx:if="{{item.name == 'swiper'}}">
+      <!--home swiper start-->
+      <view class="swiper">
+        <swiper indicator-dots="true" autoplay="true" indicator-color="rgba(0,0,0,0.5)" indicator-active-color="#ffffff" current="0" interval="3000" duration="600" class="swiper-box">
+          <block wx:for="{{index_data.index_swiper_list}}">
+            <swiper-item>
+              <image src="{{item.img_url}}" bindtap="swiper_top_bind" data-url="{{item.url}}" class="swiper-img" mode="aspectFill" />
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <!--home swiper end-->
+    </block>
+    <block wx:if="{{item.name == 'cap'}}">
+      <!--home cap start-->
+      <swiper class="bgwhite tc clearfix" style="height:{{index_data.index_cate_list.length <= 4 ? 176:332}}rpx;" wx:if="{{index_data.index_cate_list}}" indicator-dots="{{index_data.index_cate_list.length > 8?true:false}}">
+        <swiper-item>
+          <view class="menu clearfix">
+            <block wx:for="{{index_data.index_cate_list}}">
+              <block wx:if="{{index < 8}}">
+                <view class="menu-item" bindtap="mall_list_bind" id="{{item.id}}">
+                  <image src="{{item.icon}}" class="menu-item-img" mode="aspectFill"></image>
+                  <view class="menu-txt lineText">{{item.name}}</view>
+                </view>
+              </block>
+            </block>
+          </view>
+        </swiper-item>
+        <block wx:if="{{index_data.index_cate_list.length > 8}}">
+          <swiper-item>
+            <view class="menu">
+              <block wx:for="{{index_data.index_cate_list}}">
+                <block wx:if="{{index >= 8}}">
+                  <view class="menu-item" bindtap="mall_list_bind" id="{{item.id}}">
+                    <image src="{{item.icon}}" class="menu-item-img" mode="aspectFill"></image>
+                    <view class="menu-txt lineText">{{item.name}}</view>
+                  </view>
+                </block>
+              </block>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!--home cap end-->
+    </block>
+    <block wx:if="{{item.name == 'notice'}}">
+      <!-- 公告 -->
+      <block wx:if="{{index_data.public.shop_notice}}">
+        <view class="notice flex arrowR mt10">
+          <view class="mr10 red">
+            <text class="iconfont icon-tongzhi"></text>
+          </view>
+          <swiper class="notice-list" vertical autoplay circular interval="2000" bindtap="is_show_notice">
+            <block wx:for="{{index_data.public.shop_notice_arr}}">
+              <swiper-item>
+                <view class="news lineText">{{item}}</view>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+      </block>
+      <!-- 公告 -->
+      <!-- 公告弹出框 -->
+      <block wx:if="{{is_show_notice}}">
+        <view class="add-cart-box floatBox" bindtap="is_show_notice">
+          <view class="mid tips-detail">
+
+            <view class="tips-top tc">公告</view>
+            <text class="close tc"></text>
+            <view class="tips-detail-content mt10">
+              <block wx:for="{{index_data.public.shop_notice_arr}}">
+                <view class="tips-detail-item">{{index + 1}}. {{item}}</view>
+              </block>
+            </view>
+          </view>
+          <view class="floatBox floatBoxBg" style="display:block;"></view>
+        </view>
+      </block>
+      <!-- 公告弹出框 -->
+    </block>
+    <block wx:if="{{item.name == 'brand'}}">
+      <!--home brand start-->
+      <view wx:if="{{index_data.index_pinpai_list.length > 0}}">
+        <view class="home-tit gridXb tc f18">
+          <text class="iconfont icon-crownfill"></text> 品牌专区
+        </view>
+        <view class="brand-box f14">
+          <scroll-view class="brand-home" scroll-x="true" scroll-with-animation="true">
+            <block wx:for="{{index_data.index_pinpai_list}}">
+              <view class="brand-list" bindtap="mall_list_bind2" id="{{item.id}}">
+                <image src="{{item.icon}}" class="brand-img" mode="aspectFill"></image>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+      <!--home brand end-->
+    </block>
+
+    <block wx:if="{{item.name == 'quan'}}">
+      <!--领取优惠券 start-->
+      <block wx:if="{{index_data.index_quan_list!=null}}">
+        <view class="juan-box">
+          <view class="coupon-list flex" wx:for="{{index_data.index_quan_list}}" bindtap="go_quan_info_bind" id="{{item.id}}">
+            <view class="coupon-price sub">
+              <view class='price lineText'>
+                <text class='f14'>￥</text>
+                <text class="f24 mr5 ">{{item.q_dai_jiner}}</text>{{index_data.index_quan_list.length==1?'优惠券':''}}
+              </view>
+              <view class="f14 lineText coupon-name mt5">{{item.q_name}}</view>
+            </view>
+            <view class="receive-btn flex">领取</view>
+          </view>
+        </view>
+      </block>
+      <!--领取优惠券 end-->
+    </block>
+
+    <block wx:if="{{item.name == 'ad'}}">
+      <!-- 二张广告图 start-->
+      <view wx:if="{{index_data.index_ad_list.length> 0}}">
+        <view class="ads clearfix ads-{{index_data.index_ad_list.length}}th">
+          <block wx:for="{{index_data.index_ad_list}}">
+            <view class="ads-item">
+              <image src="{{item.img_url}}" bindtap="shop_ad_bind" data-url="{{item.url}}" mode="aspectFill" class="ads-img"></image>
+            </view>
+          </block>
+        </view>
+      </view>
+      <!-- 二张广告图 end-->
+    </block>
+    <block wx:if="{{item.name == 'tuijian'}}">
+      <!--home top start-->
+      <view wx:if="{{index_data.index_tuijian_list.length > 0}}">
+        <view class="home-tit gridXb tc f18">
+          <text class="iconfont icon-appreciatefill"></text> 店家推荐
+        </view>
+        <scroll-view class="recommend goods goods-recombox name-lineTwo" scroll-x="true" scroll-with-animation="true">
+          <view>
+            <block wx:for="{{index_data.index_tuijian_list}}">
+              <view class="goods-item" bindtap="detail" id="{{item.id}}">
+                <view class="goods-imgbox">
+                  <image src="{{item.g_img}}" class="goods-img" mode="aspectFill"></image>
+                </view>
+                <view class="goods-info">
+                  <view class="goods-name">
+                    <text>{{item.g_name}}</text>
+                  </view>
+                  <view class="goods-pricebox">
+                    <view class="goods-price">
+                      <block wx:if="{{item.promote_status == 1}}">
+                        <view>
+                          <text class="iconfont icon-cu"></text>
+                          <text>￥{{item.promote_price}}</text>
+                        </view>
+                        <view class="delLine grey ml5 f12">￥{{item.shop_price}}</view>
+                      </block>
+                      <block wx:else>
+                        <view>
+                          <text>￥{{item.shop_price}}</text>
+                        </view>
+                        <view class="delLine grey ml5 f12">￥{{item.market_price}}</view>
+                      </block>
+                    </view>
+                    <!-- 加入购物车 -->
+                    <view class="shopCart-btn" catchtap="is_show_card" data-id="{{item.id}}">
+                      <text class="iconfont icon-cart"></text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+      <!--home top start-->
+    </block>
+    <block wx:if="{{item.name == 'hot'}}">
+      <!--home hot start-->
+      <view wx:if="{{index_data.index_hot_list.length > 0}}">
+        <view class="home-tit home-tit2 gridXb tc f18">
+          <text class="iconfont icon-hotfill"></text> 热品推荐
+        </view>
+        <scroll-view class="recommend goods goods-recombox name-lineTwo" scroll-x="true" scroll-with-animation="true">
+          <view>
+            <block wx:for="{{index_data.index_hot_list}}">
+              <view class="goods-item" bindtap="detail" id="{{item.id}}">
+                <view class="goods-imgbox">
+                  <image src="{{item.g_img}}" class="goods-img" mode="aspectFill"></image>
+                </view>
+                <view class="goods-info">
+                  <view class="goods-name">
+                    <text>{{item.g_name}}</text>
+                  </view>
+                  <view class="goods-pricebox">
+                    <view class="goods-price">
+                      <block wx:if="{{item.promote_status == 1}}">
+                        <view>
+                          <text class="iconfont icon-cu"></text>
+                          <text>￥{{item.promote_price}}</text>
+                        </view>
+                        <view class="delLine grey f12">￥{{item.shop_price}}</view>
+                      </block>
+                      <block wx:else>
+                        <view>
+                          <text>￥{{item.shop_price}}</text>
+                        </view>
+                        <view class="delLine grey f12">￥{{item.market_price}}</view>
+                      </block>
+                    </view>
+                    <!-- 加入购物车 -->
+                    <view class="shopCart-btn" catchtap="is_show_card" data-id="{{item.id}}">
+                      <text class="iconfont icon-cart"></text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+      <!--home hot start-->
+    </block>
+
+    <block wx:if="{{item.name == 'extra'}}">
+      <view class="adver-box">
+        <block wx:if="{{item.config.imginfo['img-url'].length == 1}}">
+          <view class="adver space-tb ad1th" bindtap="shop_ad_bind" data-url="{{item.config.imginfo['path'][0]}}">
+            <image src="{{item.config.imginfo['img-url'][0]}}" mode="widthFix"></image>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="clearfix adver space-tb {{item.config.type}} {{item.config.gap == 1 ? 'space-mini' : ''}}">
+            <view class="ad-item" wx:for="{{item.config.imginfo['img-url']}}" wx:for-item="extraitem" wx:for-index="idx" bindtap="shop_ad_bind" data-url="{{item.config.imginfo['path'][idx]}}">
+              <image src="{{extraitem}}" mode="aspectFill"></image>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+  </block>
+  <!--home list start-->
+  <view wx:if="{{index_data.index_new_list.length > 0}}">
+    <view class="goods-tit tc f18">新品上架</view>
+    <view class="goods goods-colbox name-lineTwo">
+      <block wx:for="{{index_data.index_new_list}}">
+        <view class="goods-item" bindtap="detail" id="{{item.id}}">
+          <view class="goods-imgbox">
+            <image src="{{item.g_img}}" class="goods-img" mode="aspectFill"></image>
+          </view>
+          <view class="goods-info">
+            <view class="goods-name">
+              <text>{{item.g_name}}</text>
+            </view>
+            <view class="goods-pricebox">
+              <!-- 商品价格 -->
+              <view class="goods-price">
+
+                <block wx:if="{{item.promote_status == 1}}">
+                  <view>
+                    <text class="iconfont icon-cu"></text>
+                    <text>￥{{item.promote_price}}</text>
+                  </view>
+                  <view class="delLine grey f12">￥{{item.shop_price}}</view>
+                </block>
+                <block wx:else>
+                  <view>
+                    <text>￥{{item.shop_price}}</text>
+                  </view>
+                  <view class="delLine grey f12">￥{{item.market_price}}</view>
+                </block>
+              </view>
+              <!-- 加入购物车 -->
+              <view class="shopCart-btn" catchtap="is_show_card" data-id="{{item.id}}">
+                <text class="iconfont icon-cart"></text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!--home list end-->
+  <!--加入购物车 start-->
+  <block wx:if="{{is_show_card}}">
+    <view class="add-cart-box floatBox">
+      <view class="layout">
+        <text class="iconfont icon-close fr" bindtap="is_show_card"></text>
+        <view class="layout-info gridXb flex">
+          <image src="{{goods_property.g_img_url ==''?goods_info.g_img_url:goods_property.g_img_url}}" width="40" height="40" mode="aspectFill"></image>
+          <view class="sub ml10">
+            <view class="lineText">{{goods_info.g_name}}</view>
+            <view class="red f18 mt5">
+              ￥{{goods_property.shop_price>0?goods_property.shop_price:goods_info.price_info.price}}
+            </view>
+            <view class="f12 grey">
+              <text>库存：<text>{{goods_property.last_num == undefined ? goods_info.g_number:goods_property.last_num}}</text></text>
+              <text class="ml10">销量：<text>{{goods_property.sell_num == undefined ? goods_info.sale_number:goods_property.sell_num}}</text></text>
+            </view>
+          </view>
+        </view>
+        <!-- 商品属性和数量 -->
+        <view class="goods-attrs-box">
+          <block wx:for="{{goods_info.property}}" wx:for-item="itemType" wx:for-index="index">
+            <view class="attr_list">
+              <view class="attr_list_t">{{itemType.name}}</view>
+              <view>
+                <block wx:for="{{itemType.item}}" wx:for-item="itemVal" wx:for-index="key">
+                  <text class="attr-list-li {{property_select[index].item == key? 'on': ''}}" data-index="{{index}}" data-key="{{key}}" bindtap="select_attr_bind">{{itemVal}}</text>
+                </block>
+              </view>
+            </view>
+          </block>
+          <view class="options">
+            <view class="options-tiem">
+              <view class="count-set tc fr flex">
+                <view class="sub" bindtap="bind_cart_number_jian">
+                  <text class="iconfont icon-move"></text>
+                </view>
+                <view class="sub buy-couts">
+                  <input type="number" value="{{cart_default_number}}" bindinput="check_cart_number" bindblur="change_cart_number" />
+                </view>
+                <view class="sub" bindtap="bind_cart_number_jia">
+                  <text class="iconfont icon-add"></text>
+                </view>
+              </view>
+              <view class="name" style="line-height:30px;">
+                <text>购买数量：</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view class="add-cart-box floatBox">
+      <view class="layout">
+        <text class="iconfont icon-close fr" bindtap="is_show_card"></text>
+        <view class="layout-info gridXb flex">
+          <image src="{{goods_info.g_img}}" width="40" height="40" mode="aspectFill"></image>
+          <view class="sub ml10">
+            <view class="lineText">{{goods_info.g_name}}</view>
+            <view class="red f18">
+              <block wx:if="{{goods_info.promote_status == 1}}">￥{{goods_info.promote_price}}</block>
+              <block wx:elif="{{goods_info.vip_price > 0}}">
+                <view class="f14">
+                  <text class="cuxiao" style="padding:0 5px">V</text>￥{{goods_info.vip_price}}</view>
+                <view class="f14">
+                  <text class="cuxiao">原</text>￥{{goods_info.shop_price}}</view>
+              </block>
+              <block wx:else>￥{{goods_info.shop_price}}</block>
+            </view>
+          </view>
+        </view>
+       
+        <view class="goods-attrs-box">
+          <block wx:for="{{goods_specification}}" wx:for-item="itemType">
+            <view class="attr_list">
+              <view class="attr_list_t">{{itemType.name}}</view>
+              <view>
+                <block wx:for="{{itemType.values}}" wx:for-item="itemVal">
+                  <text class="attr-list-li {{itemVal.ischeck?'on':''}}" bindtap="select_attr_bind" id="{{itemVal.id}}" data-type="{{itemType.name}}">{{itemVal.label}}</text>
+                </block>
+              </view>
+            </view>
+          </block>
+          <view class="options">
+            <view class="options-tiem">
+              <view class="count-set tc fr flex">
+                <view class="sub" bindtap="bind_cart_number_jian">
+                  <text class="iconfont icon-move"></text>
+                </view>
+                <view class="sub buy-couts">
+                  <input type="number" value="{{cart_default_number}}" bindblur="change_cart_number" />
+                </view>
+                <view class="sub" bindtap="bind_cart_number_jia">
+                  <text class="iconfont icon-add"></text>
+                </view>
+              </view>
+              <view class="name" style="line-height:30px;">
+                <text>购买数量：</text>
+              </view>
+            </view>
+          </view>
+        </view> -->
+
+        <view class="flex">
+          <button class="add-cart-btn sub" bindtap="goods_add_cart" disabled="{{btn_add_cart_disabled}}">加入购物车</button>
+          <button class="buy-now-btn sub" bindtap="goods_buy_now" disabled="{{btn_add_cart_disabled}}">立即购买</button>
+        </view>
+      </view>
+      <view class="floatBox floatBoxBg" style="display:block;" bindtap="set_close"></view>
+    </view>
+  </block>
+  <!--加入购物车 end-->
+  <!--tips-->
+  <view class="tips-foot tc f12 grey" wx:if="{{load_more}}">
+    <text class='loading-icon'></text>
+  </view>
+  <view class="tips-foot tc f12 grey" wx:else>
+    不要扯了，已经扯到底了
+  </view>
+</block>
+<!--右侧浮动-->
+<view class="aside-flote">
+  <button open-type="contact" hover-class="none" type="primary">
+    <text class="iconfont icon-mark" bindtap="bind_go_cart"></text>
+  </button>
+  <button type="primary" hover-class="none" bindtap="bind_go_cart">
+    <text class="iconfont icon-cart" bindtap="bind_go_cart"></text>
+  </button>
+</view>
+
+<!-- 广告弹框 -->
+<import src='../../plug-in/template/tpl.wxml' />
+<template is='popup-big' data='{{data:ad_popup}}' />

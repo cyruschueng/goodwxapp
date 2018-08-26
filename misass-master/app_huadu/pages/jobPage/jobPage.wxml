@@ -1,0 +1,78 @@
+<!--pages/jobPage/jobPage.wxml-->
+<view class="container">
+  <!--  在招岗位  -->
+  <view class="sub-aleready">
+
+    <view class="sa-top">
+      <view class="line"></view>
+      <text class="sa-t">合适推荐</text>
+      <view class="line"></view>
+    </view>
+
+    <view wx:if="{{interestList == ''}}">
+      <text class="noneWork">暂时没有合适推荐</text>
+    </view>
+
+    <block wx:if="{{status == 0}}">
+      <view wx:if="{{interestList != ''}}" bindtap='toWorkInfo' data-item-index="{{item.id}}" wx:for="{{interestList}}" class="interest-item">
+        <view class="i-l">
+          <view class="i-l-t">
+            <text>{{item.classification[2].name}}</text>
+            <image class="right" src="../../img/right2.png"></image>
+            <text>{{item.classification[1].name}}</text>
+          </view>
+          <view class="i-l-m">
+            <text>招聘企业：{{item.enterprise.enterprise_name}}</text>
+          </view>
+          <view class="i-l-b">
+            <text>招聘{{item.num}}人｜</text>
+            <text>{{item.start_time}}~{{item.end_time}}</text>
+          </view>
+          <view class="i-l-b">
+            <image class="lo" src="../../img/lo2.png"></image>
+            <text class="">{{item.address}}</text>
+          </view>
+          <view class='i-l-b'>
+            <text>距离我：{{item.km}}km</text>
+          </view>
+        </view>
+        <view class="i-r">
+          <image class="into" src="../../img/into.png"></image>
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{status == 1}}">
+      <view wx:if="{{interestList != ''}}" bindtap='toWorkInfo' data-item-index="{{item.id}}" wx:for="{{interestList}}" class="sub-item">
+        <view class="s-l">
+          <image class="head" src="../../img/head.jpg"></image>
+        </view>
+        <view class="s-r">
+          <view class="s-r-t">
+            <text>{{item.classification[2].name}}</text>
+            <image class="right" src="../../img/right.png"></image>
+            <text>{{item.classification[1].name}}</text>
+          </view>
+          <view class='s-r-m'>
+            <text>姓名：{{item.enterprise.username}}</text>
+            <text wx:if="{{item.enterprise.sex === '0'}}">性别：未知</text>
+            <text wx:if="{{item.enterprise.sex === '1'}}">性别：男</text>
+            <text wx:if="{{item.enterprise.sex === '2'}}">性别：女</text>
+          </view>
+          <view class="s-r-b">
+            <image class="lo" src="../../img/lo.png"></image>
+            <text class="addr2">{{item.address}}</text>
+          </view>
+        </view>
+        <view class="i-r">
+          <image class="into" src="../../img/into.png"></image>
+        </view>
+      </view>
+    </block>
+    <view class='record'>
+      <text wx:if="{{status == 0}}" >共有{{recordIndividual}}条记录</text>
+      <text wx:if="{{status == 1}}" >共有{{recordCompany}}条记录</text>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,121 @@
+// pages/searchResult/searchResult.js
+
+var that;
+const app = getApp();
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    tabs: [{ tabType: 1, title: "直播间", pageIndex: 1, hasMoreData: true }],
+    currentTabIndex: 0
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    that = this;
+    that.setData({
+      input: options.keywords
+    });
+    wx.getSystemInfo({
+      success: function (sys) {
+        var clientHeight = sys.windowHeight,
+          clientWidth = sys.windowWidth,
+          rpxR = 750 / clientWidth;
+        that.setData({
+          tabContentHeight: clientHeight * rpxR - 120,
+        });
+      }
+    });
+    that.data.tabs.forEach(function (item, index) {
+      that.loadData(index);
+    });
+  },
+
+  swichTab: function (e) {
+    this.setData({
+      currentTabIndex: e.currentTarget.dataset.currentIndex
+    });
+  },
+  switchTabContent: function (e) {
+    this.setData({
+      currentTabIndex: e.detail.current
+    });
+  },
+  loadData: function (tabIndex, fromSearch) {
+    var tab = that.data.tabs[tabIndex], data = tab.data || [];
+    var keywords = that.data.input;
+    if (fromSearch) {
+      tab.hasMoreData = true;
+      tab.pageIndex = 1;
+      data = [];
+    }
+
+    if (!tab.hasMoreData) {
+      return;
+    }
+    app.util.get("/ApiShop/List", { "type": tab.tabType, keywords: keywords, pageIndex: tab.pageIndex }, function (res) {
+      tab.pageIndex += 1;
+      if (res.length == 0) {
+        tab.hasMoreData = false;
+      }else{
+        res.forEach(function (item) {
+          data.push({
+            id: item.ZhuboId,
+            zhuboAvatar: item.ZhuboAvatar,
+            zhuboName: item.ZhuboName,
+            roomTitle: item.RoomTitle,
+            onlineCount: item.OnlineCount,
+            likeCount: item.LikeCount,
+            isOnline: item.IsOnline,
+            productImages: item.ProductImages,
+            productTotalCount: item.ProductTotalCount
+          });
+        });
+      }
+      var dataName = "tabs[" + tabIndex + "].data"
+      tab[dataName] = data;
+      that.setData(tab);
+    });
+  },
+  scrollToBottom: function (e) {
+    var tabIndex = e.currentTarget.dataset.tabIndex;
+    that.loadData(tabIndex);
+  },
+  input: function (e) {
+    that.setData({
+      input: e.detail.value
+    });
+  },
+  search: function (e) {
+    var keywords = that.data.input, historyKey = "searchHistory";;
+    that.loadData(0, true);
+    wx.getStorage({
+      key: historyKey,
+      success: function (res) {
+        var data = res.data || [];
+        var existIndex = -1;
+        data.forEach(function (item, index) {
+          if (item == keywords) {
+            existIndex = index;
+          }
+        });
+        if (existIndex != -1) {
+          data.splice(existIndex, 1);
+        }
+        data.splice(0, 0, keywords);
+        wx.setStorage({
+          key: historyKey,
+          data: data
+        });
+      },
+      fail: function (e) {
+        that.insertStorage([keywords]);
+      }
+    });
+  }
+})

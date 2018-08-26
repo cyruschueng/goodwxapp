@@ -1,0 +1,69 @@
+<!--pages/game/game.wxml-->
+<view class='game-icon'>
+  <image src='../../imgs/icon.png'></image>
+  <view class='icon-num'>
+   {{iconnum}}
+  </view>
+  <button class='add-icon' open-type='share'></button>
+</view>
+<view class="game-body">
+  <image src='../../imgs/game.png' mode='aspectFill' ></image>
+  <view class='game-area'>
+    <view class='select-area'>
+        <image src='../../imgs/selectback.png'></image>
+        <image src='../../imgs/selectback.png'></image>
+        <image src='../../imgs/selectback.png'></image>
+        <image src='../../imgs/selectback.png'></image>
+        <view class='select-font'>
+            <view class='selet-item' wx:for="{{selectFont}}" wx:key="{{index}}" animation="{{errAnima}}">
+              {{item}}
+            </view>
+        </view>
+    </view>
+    <view class='game-box'>
+       <image src='../../imgs/border.png'></image>
+       <view class='game-stone'>
+          <view class='stone-item' wx:for="{{fonts}}" wx:key="{{index}}">
+             <image src='../../imgs/stone.png' wx:if="{{item !== '' && !item.tapFlag && !item.active}}"></image>
+             <image src='../../imgs/clickstone.png' wx:elif="{{item !== '' && item.tapFlag}}" class='click-img' ></image>
+             <view wx:if="{{!item.active && item !== ''}}" class='stone-font' bindtap='onSelect' data-font='{{item.font}}' id='{{index}}' >
+              {{item.font}}
+             </view>
+             <view wx:elif="{{item.active && item !== ''}}"  class='font-sure'>
+            </view>
+          </view>
+       </view>
+    </view>
+  </view>
+</view>
+<!--当前关卡数  -->
+<view class='pass-num'>
+ {{passnum}}
+</view>
+<!--提示 求助 按钮  -->
+<view class='game-hint' bindtap='hint'>
+  <image src='../../imgs/hint.png'></image>
+</view>
+<view class='game-help'>
+  <image src='../../imgs/help.png'></image>
+  <button open-type='share' class="help-btn" data-cb="{{true}}" ></button>
+</view>
+<!--提示区域  -->
+<view class='hint-body' animation="{{animation}}">
+  <image src='../../imgs/hintBorder.png'></image>
+  <view class='hint-con'>
+      {{hintcon}}
+  </view>
+</view> 
+<!--下一关 界面  -->
+<view class='next-body' wx:if="{{nextFlag}}">
+    <view class='next-view' animation="{{passanimation}}" >
+      <image src='../../imgs/nextPassView.png' class='next-img'></image>
+      <formid-custom class='next-btn' bindtap='goNext'> 
+          <image src='../../imgs/nextpass.png'></image>
+      </formid-custom>
+      <view class='close-btn' bindtap='tapClose'>
+        <image src='../../imgs/close.png'></image>
+      </view>
+    </view>
+</view>

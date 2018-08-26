@@ -1,0 +1,48 @@
+<!--pages/payHtml/payHtml.wxml-->
+<view class='container'>
+  <view class='goods-list'>
+    <view class='goods-item' wx:for='{{items}}' wx:key='code'>
+      <image class='goods-img' src='{{item.goods_thumb}}'></image>
+      <view class='goods-text'>
+        <view class='goods-title'>{{item.goods_name}}</view>
+        <view class='goods-num'>
+          <view class='goods-price'>￥{{item.price}}</view>
+          <view class='change-num'>
+            <view class='minus' data-id='{{index}}' bindtap='minusCount'>-</view>
+            <view class='input-number'>{{item.goods_num}}</view>
+            <view class='plus' data-id='{{index}}' bindtap='addCount'>+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='buyers-info'>
+    <textarea placeholder='买家留言'></textarea>
+  </view>
+  <view class='noAddress' wx:if='{{noAddress}}' bindtap='add_address'>添加地址</view>
+  <view class='user-info' wx:else> 
+    <view class='user-info-hd'>
+      <view>
+        <view class='name'>{{name}}</view>
+        <view class='phone'>{{phone}}</view>
+      </view>
+      <view class='change-address'>
+        <view class='changeAddress' bindtap='selete_address'>更换</view>
+        <view bindtap='add_address'>添加地址</view>
+      </view>
+    </view>
+    <view class='address'>{{address}}</view>
+  </view>
+  <view class='goods-totalPrice'>
+    <view>商品金额</view>
+    <view class='goodsTotalPrice'>￥{{goods_totalPrice}}</view>
+  </view>
+  <view class='freight'>
+    <view>运费</view>
+    <view>￥{{freight}}</view>
+  </view>
+  <view class='section-ft'>
+    <view class='totalPrice'>合计：<text>{{totalPrice}}</text></view>
+    <view class='payNow' bindtap='submitPay'>去付款</view>
+  </view>
+</view> 

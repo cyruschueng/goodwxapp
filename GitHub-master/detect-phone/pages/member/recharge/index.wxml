@@ -1,0 +1,49 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{show}}">
+  <view class="fui-cell-group">
+    <view class="fui-cell">
+      <view class="fui-cell-label">当前余额</view>
+      <view class="fui-cell-info">￥{{credit}}</view>
+    </view>
+    <view class="fui-cell">
+      <view class="fui-cell-label">充值金额</view>
+      <view class="fui-cell-info">
+        <input class="fui-input" type="text" bindinput="money" value="{{money}}" />
+      </view>
+    </view>
+  </view>
+  <navigator class="fui-cell-group" hover-class="none" url="/pages/public/coupon/index?type=1&money={{money}}" wx:if="{{coupon.count > 0}}">
+    <view class="fui-cell">
+      <view class="fui-cell-text">{{!coupon.name ? '请选择优惠券' : '已选择优惠券：' + coupon.name}}</view>
+      <view class="fui-cell-remark">
+        <div class="badge">{{coupon.count}}</div>
+      </view>
+    </view>
+  </navigator>
+  <view class="fui-cell-group {{toggleStore ? 'toggleSend-group' : ''}}" wx:if="{{acts}}">
+    <view class="fui-cell" bindtap="toggle" data-id="{{toggleStore}}" data-type="toggleStore">
+      <view class="fui-cell-text">
+        <text class="store">充值活动 充值满
+          <text class="text-danger">{{acts[0].enough}}</text> 元立即送
+          <text class="text-danger">{{acts[0].give}}</text> 元
+        </text>
+      </view>
+      <view class="fui-cell-remark">更多</view>
+    </view>
+    <view class="send-code" wx:if="{{acts.length > 0}}">
+      <block wx:for="{{acts}}">
+        <block wx:if="{{index > 0}}">
+          <view class="fui-cell-group" style="margin-top: 0;">
+            <view class="fui-cell" style="padding-left: 40rpx">
+              <view class="fui-cell-text">充值满
+                <text class="text-danger">{{item.enough}}</text>元 立即送
+                <text class="text-danger">{{item.give}}</text>元
+              </view>
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
+  </view>
+  <view bindtap="submit" class="btn btn-success block {{disabled ? 'disabled' : ''}}">微信支付</view>
+</view>

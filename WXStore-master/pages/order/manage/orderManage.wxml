@@ -1,0 +1,25 @@
+<!--pages/order/manage/orderManage.wxml-->
+<wxs module="filters" src="../../../utils/tools.wxs"></wxs>
+<view class="container">
+  <view class='orderItem' wx:for="{{orderList}}" data-id='{{item.id}}' wx:key='item.id' catchtap='viewOrderInfo'>
+    <view style='display: flex;flex-direction: row; justify-content: space-between;'>
+      <view class='orderNo'>订单号：{{item.orderNo||'00000000'}}</view>
+      <view class='order-op' data-index='{{index}}' data-id='{{item.id}}' catchtap='deleOrder'>删除</view>
+    </view>
+    <view wx:for="{{item.goods}}" wx:key="item.id" class='orderInfo'>
+      <image mode='aspectFit' src='{{item.imgUrl||"../../images/head.png"}}'></image>
+      <view class='order-info'>
+        <view class='order-title'>{{item.title}}</view>
+        <view class='order-count'>
+          <view class='order-price'>￥{{item.price}}</view>
+          <view class='order-num'>x{{item.num}}</view>
+          <view class='order-all'>总价：{{filters.toFix(item.num * item.price)}}</view>
+        </view>
+
+      </view>
+    </view>
+    <view class='order-count'>
+      <view class='order-status'>订单状态：{{item.status}}</view>
+    </view>
+  </view>
+</view>

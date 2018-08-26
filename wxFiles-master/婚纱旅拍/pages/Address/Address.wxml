@@ -1,0 +1,77 @@
+<!--pages/Address/Address.wxml-->
+<view class="container">
+<block wx:for="{{addresslist}}">
+<view class="AddressBox">
+
+<view class="AddressTop" bindtap="returndata" id="{{index}}">
+<view style="height:60rpx;">{{item.name}}  {{item.phone}}</view>
+<view style="width:580rpx;padding-bottom:20rpx;">{{item.detail}}</view>
+
+</view>
+<!--end AddressTop-->
+
+<view class="AddressFoot">
+<block wx:if="{{item.moren&&type==0}}">
+<view class="fl"><icon type="success" color="#ff7a92" size="20"></icon></view>
+<view class="fl" style="color:#ff7a92;padding-left:20rpx;">已设为默认</view>
+</block>
+<block wx:if="{{!item.moren&&type==0}}">
+<view class="fl"><icon bindtap="moren" id="{{index}}" type="circle" color="#ff7a92" size="20"></icon></view>
+<view class="fl" style="color:#ff7a92;padding-left:20rpx;">设为默认</view>
+</block>
+<view class="fr" bindtap="deleteaddress" id="{{index}}" ><image style="width:34rpx;height:39rpx;" src="/images/29.png"></image> 删除</view>
+<view class="fr hidden" ><image style="width:34rpx;height:39rpx;" src="/images/30.png"></image>编辑</view>
+</view>
+<!--end AddressFoot-->
+
+</view>
+<!--end AddressBox-->
+</block>
+<view class="AddressBtn" bindtap="showAddAddress"><image src="/images/33.jpg"></image> 手动添加</view>
+
+<form  bindsubmit="sb">
+<view class="AddAddress {{AddHidden?'hidden':''}}">
+
+<view class="AddressBj"></view>
+<view class="AddAddressBox">
+
+<view class="AddAddressTitle">添加收货地址</view>
+
+<view class="NamePhone">
+<view class="name"><input bindblur="SaveName" placeholder="名字" name="name" placeholder-style="color:#8e8e8e;font-family:'冬青黑体简体中文';" /></view>
+<view class="phone"><input bindblur="SavePhoneNum" placeholder="电话" name="phone" placeholder-style="color:#8e8e8e;font-family:'冬青黑体简体中文';"  /></view>
+</view>
+
+<view class="Select">
+<view class="SelectProvince">
+  <input bindchange="ProvinceChange" style="height:80rpx" value="{{text1}}" name="province" range="{{Province}}" >
+    
+  </input>
+</view>
+<!--选择省份 end SelectProvince-->
+
+<view class="SelectCity">
+<input  bindchange="CityChange" style="height:80rpx" value="{{text2}}" name="city" range="{{City}}" >
+</input>
+</view>
+<!--选择当前城市 end SelectCity-->
+
+<view class="SelectRegion">
+<input bindchange="RegionChange" style="height:80rpx" value="{{text3}}"  name="area"  range="{{Region}}" >
+</input>
+</view>
+<!--选择当前地区 end SelectRegion-->
+</view>
+
+<view class="JieDao"><input bindblur="SaveDetailedAddress" name="detail" value="{{detail}}" placeholder="{{detail}}"  placeholder-style="color:#8e8e8e;font-family:'冬青黑体简体中文';" /></view>
+
+<button formType="submit" class="SaveAddress"  bindtap="SaveAddress">保存</button>
+
+</view>
+<!--end AddAddressBox-->
+<view class="CloseAddAddress" bindtap="CloseAddAddress"><icon color="#000" type="cancel"></icon></view>
+</view>
+<!--添加收货地址 end AddAddress-->
+</form>
+</view>
+<!--end container-->

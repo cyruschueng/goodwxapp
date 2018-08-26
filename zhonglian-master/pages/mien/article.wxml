@@ -1,0 +1,64 @@
+<!--pages/home/article/article.wxml-->
+<view class="contenter">
+  <!--头部标题-->
+  <view class="top-title gridXb">
+    <!--标题-->
+    <view class="title f18">{{title}}</view>
+    <!--时间-->
+    <view class="grey f14">
+      <text class="time mr5">{{create_time}}</text>
+      <text class="green">{{category_title}}</text>
+      <!--<text class="ml10 author green">喜羊羊与灰太狼</text>-->
+    </view>
+  </view>
+  <!--文章内容-->
+  <view class="article">
+    <view class="mb10 content">
+      <import src="../../wxParse/wxParse.wxml" />
+      <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+    </view>
+  </view>
+  <!--阅读量-->
+  <view class="read-num grey flex">
+    <view class="sub">
+      <text>阅读{{view}}</text>
+      <text class="zan-num" catchtap="onTogglePraiseTap">
+        <text class="green ml15 mr5 iconfont icon-zan"></text>{{praise}}</text>
+    </view>
+    <!--写留言-->
+    <view class="white-msg green" catchtap="onBindDataTap" data-name="isShowWrite" data-value="1"><span class="iconfont icon-bianji"></span>写留言</view>
+  </view>
+  <!--写留言弹出框-->
+  <view class="popup-write" wx:if="{{isShowWrite==1}}" catchtap="onBindDataTap" data-name="isShowWrite" data-value="0">
+    <form class="write-content" catchtap="onEmptyTap" bindsubmit="onCommentSubmit">
+      <textarea name="content" rows="5" placeholder="说点什么吧~~"></textarea>
+      <button class="m20 f16" form-type="submit" type="primary">提交</button>
+    </form>
+  </view>
+</view>
+<!--用户留言-->
+<view class="saying">
+  <view class="userlist flex mb20" wx:for="{{data}}" wx:key="*this">
+    <image class="img mr15" src="{{item.headimgurl}}" mode="aspectFill"></image>
+    <view class="sub">
+      <!--用户留言-->
+      <view class=" gridXb">
+        <view class="flex">
+          <view class="sub grey">{{item.nickname}}</view>
+          <!--<view class="zan-num grey"><span class="f18 green mr5 iconfont icon-zan"></span>235</view>-->
+        </view>
+        <view class="text">{{item.content}}</view>
+        <view class="time grey f12">{{item.create_time}}</view>
+      </view>
+      <!--作者回复-->
+      <!--<view class="mt10">
+        <view class="flex">
+          <view class="sub grey author">作者回复</view>
+          <view class="zan-num grey"><span class="f18 green mr5 iconfont icon-zan"></span>235</view>
+        </view>
+        <view class="text">文章写得太好了，给你32个赞！</view>
+        <view class="time grey f12">15小时前</view>
+      </view>-->
+    </view>
+  </view>
+</view>

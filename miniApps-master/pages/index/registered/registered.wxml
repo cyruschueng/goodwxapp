@@ -1,0 +1,14 @@
+<view class='phonebox'>
+    <image class='logo' src='/images/icon/dongtaiLgy.png'></image>
+  <view class='forinput'>
+   <input class='phoneput' type='number' placeholder='请输入手机号'  value="{{phone}}" maxlength="11" bindblur="bindblur"></input>
+        <button class='getnumber phonenum' wx:if="{{isgetnumber}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请输入手机号</button>    
+    <button class='verification' catchtap='getverification'>获取验证码</button> 
+  </view>
+   <view class='forinput'>
+   <input type='number' bindblur="smsbindblur" maxlength="4" class="verifi {{isgetnumber?'':'verifitop'}}" placeholder='请输入验证码' value='{{Verify}}'></input>
+   </view>
+  <view class='bankrupt' wx:if="{{clock}}">{{clock}}后重新发送验证码</view>
+  <button class='registered' catchtap='login'>立即注册></button>
+  <button class='wxreg' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">使用微信登陆</button>
+</view>

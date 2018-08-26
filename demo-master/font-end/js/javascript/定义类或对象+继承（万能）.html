@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//定义类或对象，构造函数和原型混合方式
+function Car(sColor,iDoors,iMpg) {
+  this.color = sColor;
+  this.doors = iDoors;
+  this.mpg = iMpg;
+  this.drivers = new Array("Mike","John");
+}
+
+Car.prototype.showColor = function() {
+  alert(this.color);
+};
+
+var oCar1 = new Car("red",4,23);
+var oCar2 = new Car("blue",3,25);
+
+oCar1.drivers.push("Bill");
+
+alert(oCar1.drivers);	//输出 "Mike,John,Bill"
+alert(oCar2.drivers);	//输出 "Mike,John"
+
+
+
+//继承，构造函数和原型混合方式
+function ClassA(sColor) {
+    this.color = sColor;
+}
+
+ClassA.prototype.sayColor = function () {
+    alert(this.color);
+};
+
+function ClassB(sColor, sName) {
+    ClassA.call(this, sColor);
+    this.name = sName;
+}
+
+ClassB.prototype = new ClassA();
+
+ClassB.prototype.sayName = function () {
+    alert(this.name);
+};
+
+
+</script>
+</body>
+</html>

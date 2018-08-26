@@ -1,0 +1,72 @@
+<?php
+namespace app\index\controller;
+use app\index\model\Advertisement as AdvertisementModel;
+use app\index\model\CarModel ;
+use app\index\model\User as UserModel;
+use app\index\model\Order ;
+use app\index\model\OrderH5 ;
+class Advertisement extends Base{
+
+	public function getAdvertisement()
+	{
+		$advertisement = new AdvertisementModel();
+		$advertisementinfo = $advertisement->select();
+		$response = array();
+		$openid = input('param.openid');
+		$user = new UserModel;
+		$userinfo = $user->where('openid',$openid)->find();
+		if(empty($userinfo)){
+			$response['error'] = 1;
+			$response['message'] = '出错了,请稍后再试';
+			exit(json_encode($response));
+		}
+		$user_id = $userinfo['id'];
+
+		$order = new Order();
+		$car = new CarModel();
+		$orderinfo = $order->where('user_id',$user_id)->where('status', '>',0)->select();
+		if(!empty($orderinfo)){
+			foreach ($orderinfo as $orderinfokey => $orderinfoval) {
+				
+				foreach ($advertisementinfo as $advertisementinfokey => $advertisementinfoval) {
+					if($orderinfoval['car_model_id'] == $advertisementinfoval['car_model_id']){
+						if($orderinfoval['status'] == 1){
+							$advertisementinfo[$advertisementinfokey]['statusmessage'] = "已预约 点击查看";
+							$advertisementinfo[$advertisementinfokey]['status'] = 1;
+						}
+						if($orderinfoval['status'] == 2){
+							$advertisementinfo[$advertisementinfokey]['statusmessage'] = "试驾完成";
+							$advertisementinfo[$advertisementinfokey]['status'] = 2;
+						}
+						$advertisementinfo[$advertisementinfokey]['orderid'] = $orderinfoval['id'];
+					}
+				}
+			}
+		}
+		$orderh5 = new OrderH5();
+		$orderh5info = $orderh5->where(['create_user_id'=>$user_id])->select();
+		if(!empty($orderh5info)){
+			foreach ($orderh5info as $orderh5infokey => $orderh5infoval) {
+				
+					foreach ($advertisementinfo as $advertisementinfokey => $advertisementinfoval) {
+						$carinfo = array();
+						$carinfo = $car->get($advertisementinfoval['car_model_id']);//车型详情
+						if($orderh5infoval['model_code'] == $carinfo['model_code']){
+							if($orderh5infoval['status'] == 0){
+								$advertisementinfo[$advertisementinfokey]['statusmessage'] = "已预约 点击查看";
+								$advertisementinfo[$advertisementinfokey]['status'] = 1;
+							}
+							if($orderh5infoval['status'] == 1){
+								$advertisementinfo[$advertisementinfokey]['statusmessage'] = "试驾完成";
+								$advertisementinfo[$advertisementinfokey]['status'] = 2;
+							}
+							$advertisementinfo[$advertisementinfokey]['orderid'] = $orderh5infoval['id'];
+						}
+					}
+				
+			}
+		}
+		$response['advertisementinfo'] = $advertisementinfo;
+		exit(json_encode($response));
+	}
+}

@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='goods' wx:for="{{goodsList}}" wx:key='item.id'>
+    <view class='goods-item'>
+      <image class='goods-img' bindtap='goodsInfo' data-id='{{item.id}}' src='{{item.imgUrl}}' mode='aspectFill'></image>
+      <view class='goods-left'>
+        <view class='goods-name'>{{item.title}}</view>
+        <view class='goods-info'>{{item.info}}</view>
+      </view>
+      <view class='goods-right'>
+        <view class='goods-price'>￥{{item.price}}</view>
+        <view class='goods-buy' data-id='{{item.id}}' bindtap='addCart'>加入购物车</view>
+      </view>
+    </view>
+  </view>
+</view>

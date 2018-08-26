@@ -1,0 +1,34 @@
+<template name='collocation'>
+  <view class='collocation-wrapper'>
+    <view class='collocation-left' data-storeno='{{product.storeNo}}' catchtap='clickStore'>
+      <image src='{{product.storeLogo}}' mode='aspectFill'></image>
+    </view>
+    <view class='collocation-right' data-id='{{product.postId}}' catchtap='showDetail'>
+      <view class='store-name' data-storeno='{{product.storeNo}}' catchtap='clickStore'>{{product.storeName}}</view>
+      <view class='product-desc'>{{product.postContent}}</view>
+      <view class='products-imgs'>
+        <view wx:for='{{product.postPics}}' wx:key='index' class='product-image' wx:if='{{product.postPics.length > 1}}'>
+          <image src='{{item.postPic}}' catchtap='previewImage' data-id='{{product.postId}}' data-src='{{item.postPic}}' mode='widthFix'></image>
+        </view>
+        <view wx:if='{{product.postPics.length == 1}}' class='product-img-single'>
+          <image src='{{product.postPics[0].postPic}}' catchtap='previewImage' data-id='{{product.postId}}' data-src='{{product.postPics[0].postPic}}' mode='widthFix'></image>
+        </view>
+      </view>
+      <view class='release-info'>
+        <text>{{product.createTime}}</text>
+        <view class='view-num'>
+          <image src='/images/icon/eye.png' mode='aspectFit'></image>
+          <text>{{product.viewCount}}</text>
+        </view>
+      </view>
+      <view class='release-options'>
+        <image data-phone='{{product.phoneNumber}}' catchtap='makePhone' src='/images/icon/phone_discover.png' mode='aspectFit'></image>
+        <text data-id='{{product.postId}}' catchtap='makeAppoint'>预约</text>
+        <view class='like' catchtap='likeTapHandle' data-id='{{product.postId}}'>
+          <image src='{{product.likeStatus?"/images/icon/like@active.png":"/images/icon/like.png"}}' mode='aspectFit'></image>
+          <image class='{{click_like_id==product.postId&&product.likeStatus?"floatAnimate":""}}' src='/images/icon/like@active.png' mode='aspectFit'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

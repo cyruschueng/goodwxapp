@@ -1,0 +1,9 @@
+<!--component/keyboard.wxml-->
+<view class='cmpt-keyboard'>
+  <view class='cmpt-board-row' wx:for="{{boardsMatrix}}" wx:key="idx" wx:for-item="row" >
+      <view class='cmpt-board-wrapper' wx:for="{{row}}" wx:for-item="key">
+           <board class='board-item' data-key="{{key}}"  key="{{key}}" bind:clickHandle="_randomKeyBoard" ></board>
+
+      </view>
+  </view>
+</view>

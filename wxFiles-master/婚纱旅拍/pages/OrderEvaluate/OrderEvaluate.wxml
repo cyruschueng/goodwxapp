@@ -1,0 +1,59 @@
+<!--pages/OrderEvaluate/OrderEvaluate.wxml-->
+<view class="container OrderEvaluate">
+
+<view class="Top">
+<view class="TopImg fl"><image src="/images/117.jpg"></image></view>
+<view class="fl" style="padding:0 15rpx;">描述相符</view>
+<view class="Star fl">
+<block wx:for="{{[1,2,3,4,5]}}">
+<view><image src="/images/4{{flagList0[index]?'1':'3'}}.png" id="{{index}}" bindtap="ChooseStar0"></image></view>
+</block>
+</view>
+<!--end Star-->
+</view>
+<!--end Top-->
+
+<view class="Share">
+<view>分享您的拍摄心得</view>
+<view class="ImageBox">
+<block wx:for="{{img}}">
+<image bindtap="ChooseImg" style="width:115rpx;height:115rpx;" src="{{item}}"></image>
+</block>
+</view>
+<!--end ImageBox-->
+</view>
+<!--end Share-->
+
+
+
+<view class="ServiceEvaluate">
+<view style="width:750rpx;height:112rpx;line-height:100rpx;">
+<view class="fl">商家服务</view>
+<view class="Star fl" style="padding-left:115rpx">
+<block wx:for="{{[1,2,3,4,5]}}">
+<view><image src="/images/4{{flagList1[index]?'1':'0'}}.png" id="{{index}}" bindtap="ChooseStar1"></image></view>
+</block>
+</view>
+<!--end Star-->
+</view>
+
+
+<view style="width:750rpx;height:112rpx;line-height:100rpx;">
+<view class="fl">物流服务</view>
+<view class="Star fl" style="padding-left:115rpx">
+<block wx:for="{{[1,2,3,4,5]}}">
+<view><image src="/images/4{{flagList2[index]?'1':'0'}}.png" id="{{index}}" bindtap="ChooseStar2"></image></view>
+</block>
+</view>
+<!--end Star-->
+</view>
+
+</view>
+<!--end ServiceEvaluate-->
+
+<view class="Btn" bindtap="{{MessageFalg?'':'Evaluation'}}">提交评价</view>
+
+<view class="Message {{MessageFalg?'':'hidden'}}">感谢您的评价</view>
+
+</view>
+<!--end container-->

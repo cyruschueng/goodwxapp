@@ -1,0 +1,13 @@
+<!--pages/first/first.wxml-->
+<view class="center">
+<text>{{meetingnuminfo}}</text>
+</view>
+<scroll-view scroll-y="true" style="height:320px">
+<view wx:for="{{meeting}}">
+  <button bindtap="clickmeeting" id="{{index+1}}" class="item">{{item.date}} {{item.time}}</button>
+</view>
+</scroll-view>
+<view class="makemeeting">
+<button bindtap="refresh" class="button">刷新显示</button>
+<button bindtap="make" type="primary" class="button">发起会面</button>
+</view>

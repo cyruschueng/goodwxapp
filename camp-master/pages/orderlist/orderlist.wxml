@@ -1,0 +1,52 @@
+<view class="page-orderlist">
+    <scroll-view scroll-y="{{true}}" 
+    style="height:{{height}}"
+    bindscrolltolower="getNext">
+        <block wx:for="{{orderlist}}">
+            <template is="orderinfo"></template>
+        </block>
+    </scroll-view>
+</view>
+
+
+<template name="orderinfo">
+    <view class="activeinfo zan-panel" catchtap="toDetail">
+        <view class="title">
+            <view class="orderId zan-font-14">订单号:11111111</view>
+            <view class="orderStatus zan-font-14">待支付</view>
+        </view>
+        <view class="zan-card">
+            <view class="zan-card__thumb">
+                <image class="zan-card__img"
+                src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"
+                mode="aspectFit"
+                ></image>
+            </view>
+            <view class="zan-card__detail">
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__right-col">¥ 999.99</view>
+                    <view class="zan-card__left-col zan-ellipsis--l2">
+                            2018春季夏令营
+                    </view>
+                    <view class="category">早鸟<view class="arror"></view></view>
+                </view>
+        
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <!-- <view class="zan-card__right-col">x2</view> -->
+                    <view class="zan-card__left-col activeinfo">
+                        <view>地点:宽窄巷子</view>
+                        <view>时间:2018.03.01 至 2018 03 30</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="footer">
+            <view class="btn-wrapper zan-pull-right">
+                <view class="btn zan-font-14">取消订单</view>
+                <view class="btn zan-font-14">删除订单</view>
+                <view class="btn pay zan-font-14">支付订单</view>
+            </view>
+        </view>
+    </view>
+    
+</template>

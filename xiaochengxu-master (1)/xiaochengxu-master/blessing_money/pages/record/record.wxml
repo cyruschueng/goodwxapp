@@ -1,0 +1,70 @@
+<!--MyRecord.wxml-->
+ <view class="bg_img" style="background-image: url('https://www.mqtp8.cn/imgs/record_img.png')">
+
+<view class="header">
+  <view class="header_left " bindtap='header_left'><view class="left_select {{addClass?'current':''}}">送出</view></view>
+  <view class="header_right" bindtap='header_right'><view class="right_select {{addClass1?'current':''}}">收到</view></view>
+  <view class='clearfix'></view>
+</view>
+
+<view class="{{showView?'show':''}}">
+<view class='bigBox'>
+  <view class='sendMoney_box'>
+    <view class='bigBox_tip'>总赏金(元)</view>
+    <view class="money">{{sendMoney}}</view>
+  </view>
+  <view class='sendCount_box'>
+    <view class='bigBox_tip'>总数量(个)</view>
+    <view class="container_count">{{sendCount}}</view>
+  </view>
+  <view class='clearfix'></view>
+</view>
+</view>
+  <!-- 发出的红包记录 -->
+   <view class="detial {{showView?'show':''}}">
+    <view class='detailHeader'>送出的祝福记录：</view>
+    <view class='detialContent' wx:for="{{items}}" wx:key="items" id="{{item.id}}">
+      <image class="detialPhoto" src="../imgs/sendMoney.png" background-size="cover"> </image>
+      <view class='detialInfo'>
+      <view class='detailTimet' >{{item.create_time}}</view>
+        <view class='detialcount'></view>
+      </view>
+      <view class='detailRight'>
+        <view class='detailMoney'>{{item.money}} 元</view>
+        <view class='detailMore' id="{{item.id}}" data-create="{{item.create_time}}" catchtap="gotorecerveDetails">详细信息</view>
+      </view>
+      <view class='clearfix'></view>
+    </view>
+</view> 
+
+<view class="{{showView1?'show':''}}">
+<view class='bigBox'>
+  <view class='sendMoney_box'>
+    <view class='bigBox_tip'>总赏金(元)</view>
+    <view class="money">{{receivedMoney}}</view>
+  </view>
+  <view class='sendCount_box'>
+    <view class='bigBox_tip'>总数量(个)</view>
+    <view class="container_count">{{receivedCount}}</view>
+  </view>
+  <view class='clearfix'></view>
+</view>
+</view> 
+  <!-- 发出的红包记录 -->
+   <view class="detial {{showView1?'show':''}}">
+    <view class='detailHeader'>收到的祝福记录：</view>
+    <view class='detialContent' wx:for="{{items1}}" wx:key="items" id="{{item.hid}}">
+      <image class="detialPhoto" src="../imgs/receiveMoney.png" background-size="cover"> </image>
+      <view class='detialInfo'>
+      <view class='detailTimet' >{{item.create_time}}</view>
+        <view class='detialcount'></view>
+      </view>
+      <view class='detailRight'>
+        <view class='detailMoney'>{{item.money}} 元</view>
+        <view class='detailMore' id="{{item.hid}}" data-create="{{item.create_time}}" catchtap="gotorecerveDetails">详细信息</view>
+      </view>
+      <view class='clearfix'></view>
+    </view>
+</view> 
+</view>
+

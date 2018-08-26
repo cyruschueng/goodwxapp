@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>history</title>
+</head>
+
+<body>
+    <div onclick="toBack">BACK</div>
+    <div>
+        <a href="www.baidu.com">baidu</a>
+    </div>
+    <script type="text/javascript">
+    function toBack(){
+    	window.history.back();
+    }
+    window.onpopstate = function(event) {
+        console.log("location: " + document.location + ", state: " + JSON.stringify(event.state))
+    }
+    </script>
+</body>
+
+</html>

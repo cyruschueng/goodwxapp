@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>关键字高亮显示</title>
+</head>
+
+<body>
+    <div class="result" id="result">
+        <div>脚本之家是一个专业的收集各类脚本学习资料的网站,尽量修正错误打造精品脚本类学习网站,我们为大家游戏脚本资源,源码,软件,asp,php,javascript等编程资料,是网页制作,网络编程,网站建设人士的聚集场所。</div>
+        <span>提供最新的网络编程、脚本编程、网页制作、网页设计、网页特效，为站长与网络编程从业者提供学习资料。</span>
+        <div>脚本,vbscript,正则表达式,jquery,dos,bat,批处理,javascript,Photoshop,HTML,div+css,ASP,PHP,ASP.NET</div>
+    </div>
+    <script>
+    function SearchHighlight(idVal, keyword) {
+        var pucl = document.getElementById(idVal);
+        if ("" == keyword) return;
+        var temp = pucl.innerHTML;
+        var htmlReg = new RegExp("\<.*?\>", "i");
+        var arrA = new Array();
+        //替换HTML标签 
+        for (var i = 0; true; i++) {
+            var m = htmlReg.exec(temp);
+            if (m) {
+                arrA[i] = m;
+            } else {
+                break;
+            }
+            temp = temp.replace(m, "{[(" + i + ")]}");
+        }
+        words = unescape(keyword.replace(/\+/g, ' ')).split(/\s+/);
+        //替换关键字 
+        for (w = 0; w < words.length; w++) {
+            var r = new RegExp("(" + words[w].replace(/[(){}.+*?^$|\\\[\]]/g, "\\$&") + ")", "ig");
+            temp = temp.replace(r, "<b style='color:Red;'>$1</b>");
+        }
+        //恢复HTML标签 
+        for (var i = 0; i < arrA.length; i++) {
+            temp = temp.replace("{[(" + i + ")]}", arrA[i]);
+        }
+        pucl.innerHTML = temp;
+    }
+    SearchHighlight("result", "脚本 学习 vbscript");
+    </script>
+</body>
+
+</html>

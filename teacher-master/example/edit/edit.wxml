@@ -1,0 +1,103 @@
+<form bindsubmit="submit">
+
+  <view wx:if="{{loaded}}">
+    <view wx:if="{{referFromUser}}">
+      <view class="weui-cells__title" style='padding-left:30px;padding-top:20px;padding-bottom:20px;padding-right:30px;'>
+        <view style='padding:5px' class="xm_auth_tip">您已经和{{currentUser.wxname}}和共享账户</view>
+      </view>
+      <view class='category-flex' style='padding-left:40px;padding-right:40px;'>
+        <view class='category-cells'>
+          <image style="height: 70px;width: 70px;border-radius:10px" src='{{referFromUser.wx_avatar_url}}'></image>
+          <view class='category-cell-title'>
+            {{referFromUser.wxname}}
+          </view>
+        </view>
+        <view class='category-cells'>
+          <view class='category-cell-title'>
+            已关联
+          </view>
+          <text class="category-cell-image-4"> </text>
+        </view>
+
+        <view class='category-cells'>
+          <image style="height: 70px;width: 70px;border-radius:10px" src='{{currentUser.wx_avatar_url}}'></image>
+          <view class='category-cell-title'>
+            {{currentUser.wxname}}
+          </view>
+        </view>
+      </view>
+      <view class="weui-btn-area">
+        <button class="weui-btn"  bindtap='unAssociate'  disabled='{{unAssociate_btn_disable}}'  type="default"  style='width:80%' >解除关联</button>
+      </view>
+
+      <view wx:if="{{currentUser.child_class_list.length>1||(currentUser.teach_class_list.length>0&&currentUser.child_class_list.length>0)}}" class="button-sp-area" style="height: 40rpx;margin-top: 20px;">
+        <button class="my-edit-btn" bindtap='changeRole' disabled='{{save_btn_disable}}'   type="default" style="height:40px;width:90%;background-color:#e5e5e5">切换身份</button>
+      </view>
+    </view>
+
+
+
+    <view wx:else>
+      <view class="my-edit-cells">
+        <view class="my-edit-cell weui-cell_input" catchtap="uploadProfile">
+          <view class="my-edit-cell__hd">
+            <view class="my-edit-label">个人头像</view>
+          </view>
+          <view class="my-edit-cell__bd" style="text-align: right;">
+            <image class="user-img" style="width:60px;height:60px;margin:10rpx;border-radius:4px;" mode="scaleToFill" src="{{currentUser.wx_avatar_url}}" />
+          </view>
+        </view>
+      </view>
+      <view class="my-edit-cells">
+        <view class="my-edit-cell my-edit-cell_input">
+          <view class="my-edit-cell__hd">
+            <view  wx:if="{{role=='parent'}}" class="my-edit-label">学生姓名</view>
+             <view wx:else class="my-edit-label">我的姓名</view>
+          </view>
+          <view   wx:if="{{role=='parent'}}" class="my-edit-cell__bd">
+            <input name="nickname"  value="{{childName}}" style="text-align:right;" class="my-edit-input" type="text" />
+          </view>
+          <view   wx:else class="my-edit-cell__bd">
+            <input name="nickname" value="{{currentUser.nickname}}" style="text-align:right;" class="my-edit-input" type="text" />
+          </view>
+        </view>
+      </view>
+
+
+      <view class="my-edit-cells">
+        <view class="my-edit-cell my-edit-cell_input">
+          <view class="my-edit-cell__hd">
+            <view class="my-edit-label">电话号码</view>
+          </view>
+          <view class="my-edit-cell__bd">
+            <input name="phone" value="{{currentUser.phone}}" style="text-align:right;" class="my-edit-input" type="text" />
+          </view>
+        </view>
+      </view>
+
+      <view class="button-sp-area" style="height: 40rpx;margin-top: 20px;margin-bottom: 35px;">
+        <button class="my-edit-btn"  disabled='{{save_btn_disable}}'  form-type="submit" type="primary" style="height:40px;width:90%;background-color:#1e90ff;margin-bottom:40px;">保存</button>
+      </view>
+
+
+      <view wx:if="{{currentUser.child_class_list.length>1||(currentUser.teach_class_list.length>0&&currentUser.child_class_list.length>0)}}" class="button-sp-area" style="height: 40rpx;margin-top: 20px;">
+        <button class="my-edit-btn" bindtap='changeRole' type="default" style="height:40px;width:90%;background-color:#e5e5e5">切换身份</button>
+      </view>
+
+
+ <view  class="button-sp-area" style="height: 40rpx;margin-top: 40px;">
+        <button class="my-edit-btn" bindtap='goClear' type="default" style="height:40px;width:90%;background-color:#e5e5e5">清除缓存</button>
+      </view>
+
+      <view wx:if="{{currentUser.is_admin}}" class="button-sp-area" style="height: 40rpx;margin-top: 40px;">
+        <button class="my-edit-btn" bindtap='goAdmin' type="default" style="height:40px;width:90%;background-color:#e5e5e5">进入管理员后台</button>
+      </view>
+
+      <view wx:if="{{isMock}}" class="button-sp-area" style="height: 40rpx;margin-top: 40px;">
+        <button class="my-edit-btn" bindtap='goClearMock' type="default" style="height:40px;width:90%;background-color:#e5e5e5">清除模拟</button>
+      </view>
+
+     
+    </view>
+  </view>
+</form>

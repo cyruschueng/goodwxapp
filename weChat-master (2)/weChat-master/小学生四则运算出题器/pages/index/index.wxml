@@ -1,0 +1,120 @@
+<!--index.wxml-->
+<view class="page" wx:if="{{isAuthority=='是'}}" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="kj">
+    <view class='title'>欢迎使用考试模式</view>
+    <view class='shuoming'>*使用前，请先进行配置</view>
+    <view class='peizhi'>
+
+    <picker range="{{array_yunsuanshu}}" value="{{index_yunsuanshu}}" mode='selector' bindchange='yunsuanshuchanged'>
+      <view class='peizhi-item'>
+        <view class='peizhi-item-left'>
+          <view>运算数</view>
+          <view>参与运算的数字个数</view>
+        </view>
+        <view class='peizhi-item-middle'>
+          <!-- <picker range="{{array_yunsuanshu}}" value="{{index_yunsuanshu}}" mode='selector'> -->
+            <view class='picker'>{{array_yunsuanshu[index_yunsuanshu]}}个</view>
+          <!-- </picker> -->
+        </view>
+        <view class='peizhi-item-right'><image style='width: 50rpx;height: 50rpx' src='/images/more.png'></image></view>
+      </view>
+    </picker>
+      <view class='line'></view>
+
+    <picker range="{{array_timushu}}" value="{{index_timushu}}" mode='selector' bindchange='timushuchanged'>
+      <view class='peizhi-item'>
+        <view class='peizhi-item-left'>
+          <view>题目数量</view>
+          <view>考试的题目数量</view>
+        </view>
+        <view class='peizhi-item-middle'>
+          <view class='picker'>{{array_timushu[index_timushu]}}个</view>
+        </view>
+        <view class='peizhi-item-right'><image style='width: 50rpx;height: 50rpx' src='/images/more.png'></image></view>
+      </view>
+    </picker>
+      <view class='line'></view>
+
+      <picker range="{{array_weishu}}" value="{{index_weishu}}" mode='selector' bindchange='weishuchanged'>
+      <view class='peizhi-item'>
+        <view class='peizhi-item-left'>
+          <view>位数</view>
+          <view>参与运算的数字位数</view>
+        </view>
+        <view class='peizhi-item-middle'>
+            <view class='picker'>{{array_weishu[index_weishu]}}位</view>
+        </view>
+        <view class='peizhi-item-right'><image style='width: 50rpx;height: 50rpx' src='/images/more.png'></image></view>
+      </view>
+      </picker>
+      <view class='line'></view>
+     
+      <view class='peizhi-item' bindtap='yunsuanfu_change'>
+        <view class='peizhi-item-left'>
+          <view>运算符</view>
+          <view>参与运算的运算符</view>
+        </view>
+        <view class='peizhi-item-middle'>
+          {{array_yunsuanfu_result}}
+        </view>
+        <view class='peizhi-item-right'><image style='width: 50rpx;height: 50rpx' src='/images/more.png'></image></view>
+      </view>
+      <view class='line'></view>
+    <picker range="{{array_time}}" value="{{index_time}}" mode='selector' bindchange='timechanged'>
+      <view class='peizhi-item'>
+        <view class='peizhi-item-left'>
+          <view>考试时间</view>
+          <view>设置考试所用时间</view>
+        </view>
+        <view class='peizhi-item-middle'>
+          <view class='picker'>{{array_time[index_time]}}分钟</view>
+        </view>
+        <view class='peizhi-item-right'><image style='width: 50rpx;height: 50rpx' src='/images/more.png'></image></view>
+      </view>
+    </picker>
+      <view class='line'></view>
+
+      <view class='peizhi-item'>
+        <view class='peizhi-item-left'>
+          <view>结果只保留整数</view>
+          <view>计算结果为小数，四舍五入得到整数</view>
+        </view>
+        <view class='peizhi-item-right peizhi-item-right2'><!-- 这里增加了一个类名，因为与上面的布局不同，上面的布局，主轴上有三个元素，宽度是80%，10%，10%，而现在这个布局，主轴上只有两个元素，宽度是80%，20% -->
+          <switch checked='{{switchState}}' bindchange='switchChange'></switch>
+        </view>
+        
+      </view>
+      
+      <view class='line'></view>
+      <picker range="{{array_xiaoshuwei}}" value="{{index_xiaoshuwei}}" mode='selector' bindchange='xiaoshuweichanged'>
+      <view class='peizhi-item' wx:if="{{!switchState}}">
+        <view class='peizhi-item-left'>
+          <view>保留小数位数</view>
+          <view>运算结果经四舍五入后，保留的小数位数</view>
+        </view>
+        <view class='peizhi-item-middle'>
+          <view class='picker'>{{array_xiaoshuwei[index_xiaoshuwei]}}个</view>
+        </view>
+        <view class='peizhi-item-right'><image style='width: 50rpx;height: 50rpx' src='/images/more.png'></image></view>
+      </view>
+      </picker>
+      <view class='line' wx:if="{{!switchState}}"></view>
+    </view>
+    <view><button bindtap='btStart'>开始运算</button></view>
+     <view><button bindtap='btExport' style='margin-top: 20rpx;'>导出题目</button></view> 
+    <view class='yunsuanfu' wx:if="{{show_yunsuanfu}}">
+      <view>
+        <view class='cancel' bindtap='cancelTap'>取消</view>
+        <view class='confirm' bindtap='confirmTap'>确定</view>
+      </view>
+      <checkbox-group bindchange="yunsuanfu_changed">
+        <view wx:for="{{array_yunsuanfu}}">
+          <checkbox value='{{item.name}}' checked='{{item.checked}}'>{{item.name}}</checkbox>
+        </view>
+      </checkbox-group>
+      
+      
+    </view>
+  </view>
+</view>
+<view wx:else></view>

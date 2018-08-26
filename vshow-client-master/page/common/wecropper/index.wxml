@@ -1,0 +1,18 @@
+<import src="./dist/weCropper.wxml"/>
+
+<view class="cropper-wrapper">
+    <template is="weCropper" data="{{...cropperOpt}}"/>
+    <view class="cropper-buttons">
+        <view
+                class="upload"
+                wx:if="{{ hasUploadBtn }}"
+                bindtap="uploadTap">
+            上传图片
+        </view>
+        <view
+                class="getCropperImage"
+                bindtap="getCropperImage">
+            {{ createBtnText || '生成图片' }}
+        </view>
+    </view>
+</view>

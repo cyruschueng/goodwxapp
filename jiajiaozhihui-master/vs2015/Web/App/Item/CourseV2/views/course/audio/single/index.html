@@ -1,0 +1,78 @@
+<div ng-controller="audioController" style="height: 100%;">
+    <div ng-controller="singleAudioController">
+        <div ng-include="'views/course/audio/single/header.html'"></div>
+        <div class="container" >
+            <div class="row" style="position: relative;">
+                <img style="width:100%;" ng-src="{{course.imgUrl}}">
+
+                <div style="position: absolute;top:50%; margin-top:-30px;left:50%;margin-left:-30px;">
+                    <div style="display: inline-block; border-radius:30px;" class="text-center">
+                        <span ng-click="play()"
+                              ng-if="!playing"
+                              class="se_play"></span>
+                        <span ng-click="pause()"
+                              ng-if="playing"
+                              class="se_pause"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-xs-12 text-center" ><!--style="padding:0;"-->
+                    <div class="player" >
+                        <div class="xl-progress" style="margin-top:0px;padding-top:0;">
+                            <span class="current"  ng-bind="song.currentTime|formattime"></span>
+                            <div class="xl-progress-bar" style="margin-bottom:0px;" xl-progress-bar>
+                                <div class="played" style="margin-left:{{progress*progressWidth+'px'}}"></div>
+                            </div>
+                            <span class="duration"  ng-bind="song.time|formattime"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="isStart<0">
+                <div class="col-xs-12">
+                    <div class="text-center">
+                        <span  style="padding:5px 0; color:#f0ad4e">开课时间:{{course.startDate|date:'yyyy-MM-dd HH:mm'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="course.section.length>1">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h4>课程章节</h4>
+                    </div>
+                    <div class="playlist">
+                        <ul style="padding-left:10px;">
+                            <li se-curr-player="{{$index}}" ng-repeat=" itme in course.section" style="padding:5px 0; border-left:1px solid #ccc; position: relative; list-style-type:none;">
+                                <span style="position:absolute; left: -5px;bottom: 8px;" class="fa fa-dot-circle-o"></span>
+                                <a style="margin-left:15px;text-decoration:none;color:#666;" ng-click="loading($index,true)">
+                                    <span style="font-size:14px;">{{itme.sectionName}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="course.detail!=''">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h4>课程介绍</h4>
+                    </div>
+                    <div ng-bind-html="course.detail"></div>
+                </div>
+            </div>
+            <div class="row" ng-if="course.teacher.detail!=''">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h4>讲师介绍</h4>
+                    </div>
+                    <img ng-src="{{course.teacher.imgUrl}}">
+                    <p style="padding:10px 0; width: 50%; text-align: center"><span class="text-success">{{course.lecturer}}</span></p>
+                    <div ng-bind-html="course.teacher.detail"></div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'views/course/audio/single/footer.html'"></div>
+    </div>
+    <iframe id="fr" src="javascript:parent.audio" frameborder="0" style="height: 1px; line-height: 1px;"></iframe>
+</div>

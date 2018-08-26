@@ -1,0 +1,43 @@
+<view class="package-box">
+    <view class="head" style="background-image:url({{  advertiserIcon }})"></view>
+
+    <!-- 详情页进来的  -->
+    <view class="p-msg" wx:if="{{ detail}}">
+        奖品由
+        <view class="yellow" style="display:inline-block">{{ advertiserName }}</view> 提供
+    </view>
+    <!-- 中奖  -->
+    <view class="p-msg" wx:if="{{ (status == 1) && !detail }}">
+        抢到
+        <view class="yellow" style="display:inline-block">{{ advertiserName }}</view> 发送的奖品一份
+    </view>
+
+    <view class="p-mm" wx:if="{{ (status == 2 || status == 3) && !detail }}">
+        <view class="yellow">{{  advertiserName }}</view>
+        <view class="c-p">好可惜，差点就中了</view>
+        <view class="c-p1">不要灰心，么么哒~</view>
+    </view>
+
+    <view class="p-label">
+        <image class="img" src="{{ entityIcon }}"></image>
+        <view class="msg">{{ entityName }}</view>
+    </view>
+
+    <view class="btn" wx:if="{{ status == 1 && !detail }}" bindtap="get"></view>
+
+    <view class="win-list">
+        <view class="li-title">
+            <view class="title">获奖记录</view>
+            <view class="user-msg">本轮送出了 {{num}} 份奖品</view>
+        </view>
+        <view class="li" wx:for="{{ users }}" wx:key="">
+            <image class="li-head" src="{{ item.icon }}"></image>
+            <view class="li-center">
+                <view class="li-name">{{ item.nickname }}</view>
+                <view class="li-time">{{item.lotteryTime}}</view>
+            </view>
+            <view class="li-money">奖品1份</view>
+        </view>
+        <view style="text-align:center; padding-top:20rpx;" wx:if="{{ lotteryUser.length == 0 }}">暂无中奖信息</view>
+    </view>
+</view>

@@ -1,0 +1,212 @@
+<style lang="less" rel="stylesheet/less">
+    page{
+        height:100%;
+    }
+
+    .userCell{
+
+        .demon-cell__ft{
+            view{
+                padding:10rpx 30rpx;
+                color: #ffffff;
+                background-color:#38A1CF;
+                font-size:15px;
+                border-radius:60rpx;
+                &.error{
+                    background-color: #CF382A;
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon_page admin">
+        <dm-tab>
+            <block slot="demon-tab__panel">
+                <dm-tab-panel>
+                    <swiper current="{{current}}" style="height: 100%;" bindchange="swiperChange">
+                        <swiper-item>
+                            <repeat for="{{userCell.userList}}" key="index" item="item">
+                                <dm-cell class="userCell" :type="userCell.type">
+                                    <block slot="demon-cell__hd">
+                                        <image src="http://wmimage.qn.d1money.com/head/{{item.createTime}}/{{item.agentUserId}}/46.jpg" mode="aspectFill" lazy-load="true"/>
+                                    </block>
+                                    <block slot="demon-cell__bd">
+                                        {{item.agentName}}
+                                    </block>
+                                    <view :class="{'error' : item.statue}" slot="demon-cell__ft" @tap="userCellBtnOnclick({{index}},{{item.agentUserId}},{{item.agentName}},{{item.statue}})">
+                                        <block wx:if="{{item.statue}}">
+                                            删除此人
+                                        </block>
+                                        <block wx:if="{{!item.statue}}">
+                                            批准加入
+                                        </block>
+                                    </view>
+                                </dm-cell>
+                            </repeat>
+                        </swiper-item>
+                        <swiper-item>
+                            <view class="dm-nomsg">
+                                <image src="../../static/img/empty_states-bee.png" lazy-load="true"/>
+                                <view class="text">亲~暂时有没数据</view>
+                            </view>
+                        </swiper-item>
+                    </swiper>
+
+                </dm-tab-panel>
+            </block>
+            <repeat for="{{tabBar.list}}" key="index" item="item" slot="demon-tabbar__item">
+                <dm-tabbar-item
+                    :item="item"
+                    @selectItem.user="selectItem"
+                ></dm-tabbar-item>
+            </repeat>
+        </dm-tab>
+
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import api from './../../common/api';
+    import G from './../../common/global';
+    import TabMixin from './../../mixins/dmTab';
+    import global from './../../mixins/global'
+    import dmTab from './../../components/Tab/dm-tab';
+    import dmCell from './../../components/Cell/dm-cell';
+    import dmTabPanel from './../../components/Tab/dm-tab-panel';
+    import dmTabbarItem from './../../components/Tab/dm-tabbar-item';
+    export default class extends wepy.page {
+        config = {
+            navigationBarTitleText: '后台管理'
+        }
+
+        components = {
+            'dm-tab': dmTab,
+            'dm-tab-panel': dmTabPanel,
+            'dm-tabbar-item': dmTabbarItem,
+            'dm-cell': dmCell
+        }
+
+        data = {
+            current: 0,
+            //
+            tabBar: {
+                list: [
+                    {
+                        active: 1,
+                        iconClass: 'icon-tuandui',
+                        text: '代理人'
+                    },
+                    {
+                        iconClass: 'icon-huodong',
+                        text: '活动管理'
+                    }
+
+                ]
+            },
+            userCell: {
+                type: 'user',
+                userList: []
+            }
+        }
+
+        computed = {
+
+        }
+
+        mixins = [TabMixin];
+
+        methods = {
+            // tabbar选择事件
+            selectItem(event){
+                // 获取当前点击 tabbar 的index
+                let clickIndex = event.source.$index;
+
+                this.tabBar.list.forEach((value, index, array) => {
+                    if (clickIndex !== index) {
+                        this.tabBar.list[index].active = 0;
+                    }
+                });
+                this.current = clickIndex;
+                this.$invoke('dm-tabbar-item', 'changeData', 1);
+            },
+            // swiper 切换时间
+            swiperChange(e){
+//                console.log(e.detail.current);
+                this.tabBar.list.forEach((value, index, array) => {
+                    if (index === e.detail.current) {
+                        this.tabBar.list[index].active = 1;
+                    } else {
+                        this.tabBar.list[index].active = 0;
+                    }
+                });
+            },
+            // 用户列表按钮事件
+            userCellBtnOnclick(index, fpUserId, nickName, status){
+                let content = status ? `删除 "${nickName}" ` : `批准 "${nickName}" 成为代理人`;
+//                console.log(status);
+                if(!status){
+                    api.showModal('提示',content)
+                        .then( res => {
+                            api.request({
+                                url: G.host + 'cyhManagement/doApprovalToJoin',
+                                data: {
+                                    fpUserId: parseInt(fpUserId)
+                                }
+                            }).then(res => {
+                                if(res.data.code == 'SUCCESS'){
+                                    this.userCell.userList[index].statue = 1;
+                                    this.$apply();
+                                }
+                            })
+                        }).catch(res => {
+//                        console.log('用户点击取消');
+                    });
+                }else{
+                    api.showModal('提示',content)
+                        .then( res => {
+                            api.request({
+                                url: G.host + 'cyhManagement/doRemoveAgent',
+                                data: {
+                                    fpUserId: parseInt(fpUserId)
+                                }
+                            }).then(res => {
+                                if(res.data.code == 'SUCCESS'){
+                                    this.userCell.userList.splice(index, 1);
+                                    this.$apply();
+                                }
+                            })
+                        }).catch(res => {
+//                        console.log('用户点击取消');
+                    });
+                }
+
+            }
+
+        }
+
+        events = {}
+
+        onLoad() {
+
+            this.loadOfficeStaffBackstageIndexData();
+
+        }
+
+        // 加载内容后台首页数据接口
+        loadOfficeStaffBackstageIndexData(){
+            api.request({url: G.host + 'cyhManagement/loadOfficeStaffBackstageIndexData'})
+                .then(res => {
+//                    console.log(res);
+                    let data = res.data.body;
+                    if(data.dataList){
+                        this.userCell.userList = data.dataList;
+                    }
+                    this.$apply();
+
+            });
+        }
+
+    }
+</script>

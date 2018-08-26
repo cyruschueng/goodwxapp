@@ -1,0 +1,30 @@
+<view class="weui-cells">
+  <view class="weui-cell_input">
+  <input name='oper_id' hidden value="{{oper_id}}" />
+  <input name='shipper_name' hidden value="{{shipper_name}}" />
+  <input placeholder="{{placeholder}}" class="weui-input" value="{{scancode}}" bindconfirm="bindConfirm" bindblur="inputBlur" name="code" focus="{{focus}}" />
+  <button bindtap="btnScan" class="btn_scan"></button>
+  </view>
+</view>
+  <view class="picker">
+  <label class="logistics"></label>
+  <view class="weui-cells__title logistics_title">
+  快递公司
+  </view>
+  <picker bindchange="shipperPickerChange" value="{{index}}" range="{{shipper_arr}}" disabled="{{disabled}}">
+{{shipper_0}}
+  </picker>
+  </view>
+  <view class="picker disabled">
+<label class="status"></label>
+<view class="weui-cells__title status_title">派送状态</view>
+<picker bindchange="sendStatusPickerChange" value="{{send_status_index}}" range="{{send_status_array}}" disabled>
+{{send_status_array[send_status_index]}}
+</picker>
+   </view>
+<!--<view>
+<view class="weui-cells__title"><image src="{{server}}/sp_images/icon_6.png" class="icon icon_6"></image> 快件状态:</view>
+</view>-->
+<!--<view>-->
+<!--<view class="weui-cells__title"><image src="{{server}}/sp_images/icon_7.png" class="icon icon_7"></image> 扫描时间:</view>
+</view>-->

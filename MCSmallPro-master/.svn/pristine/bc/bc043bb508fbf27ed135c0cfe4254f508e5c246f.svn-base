@@ -1,0 +1,71 @@
+var config = require('../config.js');
+
+module.exports = {
+  setTabBar: function (skin) {
+    var color = this.getSkinPrimaryColor(skin);
+    wx.setTabBarStyle({
+      selectedColor: color
+    });
+    wx.setTabBarItem({
+      index: 0,
+      text: "直播",
+      selectedIconPath: "images/icon-live-sel-" + skin + ".png"
+    });
+    wx.setTabBarItem({
+      index: 1,
+      text: "我的",
+      selectedIconPath: "images/icon-me-sel-" + skin + ".png"
+    });
+  },
+  getSkinPrimaryColor: function (skin) {
+    var color = "#ff5f8d";
+    switch (skin) {
+      case "gray":
+        color = "#505050";
+        break;
+      case "green":
+        color = "#148924";
+        break;
+      case "blue":
+        color = "#1db3d8";
+        break;
+    }
+    return color;
+  },
+  getSkinSecondColor: function (skin) {
+    var color = "#ff7fa2";
+    switch (skin) {
+      case "gray":
+        color = "#727272";
+        break;
+      case "green":
+        color = "#42a150";
+        break;
+      case "blue":
+        color = "#4ac3e1";
+        break;
+    }
+    return color;
+  },
+  getSkinThirdColor: function (skin) {
+    var color = "#ec98b0";
+    switch (skin) {
+      case "gray":
+        color = "#999999";
+        break;
+      case "green":
+        color = "#49bd59";
+        break;
+      case "blue":
+        color = "#6ed4ee";
+        break;
+    }
+    return color;
+  },
+  setNavigationBarColor:function(skin){
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: this.getSkinPrimaryColor(skin)
+    });
+  }
+}

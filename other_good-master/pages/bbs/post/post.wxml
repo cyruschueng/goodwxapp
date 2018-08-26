@@ -1,0 +1,34 @@
+<!--post.wxml-->
+
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class="new-post">
+    <view class="input-text-box">
+        <view class="section">
+            <input type="text" class="" name="post_title" placeholder="请输入帖子标题" maxlength="50" />
+        </view>
+        <view class="section">
+        <picker bindchange="bindPickerChange" value="{{cate_index}}" range="{{cateList}}" style="padding:0;">
+            <view class="picker new-post-cap arrowR">
+             <text class="grey">请选择版块：</text>{{cateList[cate_index]}}
+            </view>
+        </picker>
+        </view>
+        <view class="section" style="padding-top:15px;">
+            <textarea class="textarea" name="post_content" placeholder="写点什么吧..."  maxlength="-1"/>
+        </view>
+    </view>
+    <view class="upload-img">
+        <block wx:for="{{postimg}}">
+            <view class="item">
+                <image src="{{item}}" mode="aspectFill"></image>
+                <text class="iconfont icon-close item-del" bindtap="del_pic_bind" id="{{index}}"></text>
+            </view>
+        </block>
+        <view class="item add" bindtap="chooseimg_bind"></view>
+    </view>
+  </view>
+  <view class="m15 f16">
+    <input type="text" name="pid" value="{{forum_thisid}}" style="display:none;" />
+        <button form-type="submit" type="primary" hover-class="none" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">发表</button>
+    </view>
+</form>

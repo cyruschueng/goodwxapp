@@ -1,0 +1,23 @@
+<!--pages/noticelist/noticelist.wxml-->
+<view class='page__bd' style='padding-top:10px;'>
+  <block wx:for="{{noticelist}}"  wx:for-item="notice">
+    <navigator url='../noticeinfo/noticeinfo?id={{notice.id}}'>
+      <view class="weui-panel" style='margin-top:10px;' bindlongtap="longTap">
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text">
+                <view class="weui-media-box__title weui-media-box__title_in-text">
+                <text>{{notice.title}}</text>
+                <block wx:if="{{notice.zhidingNum != 0}}">
+                  <image src='../../image/ding.png' style='height:17px;width:17px;margin-left:10px;'></image>
+                </block>
+                </view>
+                <view class="weui-media-box__desc">{{notice.content}}</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">{{notice.create_time}}</view>
+                </view>
+            </view>
+        </view>
+      </view>
+    </navigator>
+  </block>
+</view>

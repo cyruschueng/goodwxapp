@@ -1,0 +1,74 @@
+<block>
+  <view class="divLine"></view>
+  <view class='bigList'>
+  <!-- 头部个人头像 -->
+    <view class='containerTop'>
+      <view>
+        <image src='{{list[0]}}' class='profileImage'></image>
+      </view>
+      <view class='topRightView'>
+        <text class='topRightName'>{{list[1]}}</text>
+        <text class='topRightTime'>{{list[2]}}</text>
+      </view>
+    </view>
+    <!-- 中间内容 -->
+    <view class='contentCenter'>
+      <text class='flexText'>{{list[3]}}</text>
+    </view>
+    <!-- 这里应该去判断是什么图 is_gif就是判断是否为gif -->
+      <view wx:if="{{list[9] != 0 && list[9]!=''}}" style="position: relative;">
+        <image class="centerContent" src="{{list[8]}}" mode="aspectFill" />
+      </view>
+      <!-- 普通大图 可点击查看全部图片 -->
+      <view data-url="{{list[8]}}" data-height="{{list[10]}}" data-width="{{list[11]}}"
+            bindtap="lookBigPicture" wx:elif="{{list[9] == 0 && list[9]!=''}}" style="position: relative;">
+        <!-- 图片资源 -->
+        <image class="centerContent" src="{{list[8]}}" mode="aspectFill" />
+        <!-- 图片上浮动的点击查看详情图片view -->
+        <view class="flexView">
+          <text class="flexText">点击查看全图</text>
+        </view>
+      </view>
+    <!-- 下边的点赞，取消，转发，评论按钮 -->
+    <view class='contentBottom'>
+      <view class='bottomItemView' bindtap="loveDz">
+        <image src='../images/ding.png' class='contentIcon'></image>   <!-- 点赞icon-->
+        <text class='doNum'>{{list[4]}}</text>    <!-- 点赞人数-->
+      </view>
+      <view class='bottomItemView' bindtap="hateDz">
+        <image src='../images/cai.png' class='contentIcon'></image>   <!-- 不喜欢icon-->
+        <text class='doNum'>{{list[5]}}</text>    <!-- 不喜欢人数-->
+      </view>
+      <view class='bottomItemView'>    <!-- 这个接口没有转发和评论的人数 -->
+        <image src='../images/share.png' class='contentIcon'></image>   <!-- 转发icon-->
+        <text class='doNum'>{{list[6]}}</text>    <!-- 转发人数-->
+      </view>
+      <view class='bottomItemView' id='{{item.id}}'>
+        <image src='../images/comment.png' class='contentIcon'></image>   <!-- 评论icon-->
+        <text class='doNum'>{{list[7]}}</text>    <!-- 评论人数-->
+      </view>
+    </view>
+  </view>
+  <view class='divLine'></view>
+  <view class='new'>最新评论</view>
+  <view class='bigList' wx:for-items="{{commentList}}">
+    <view class='containerTopO'>
+      <view class='containerTop'>
+        <view><!-- 头像-->
+          <image class='profileImage' src='{{item.user.profile_image}}'></image>
+        </view>
+        <view class='topRightView'>
+          <text class='topRightName'>{{item.user.username}}</text><!-- 用户名 -->
+        </view>
+      </view>
+      <view class='topRightIcon bottomItemView'>
+          <image src='../images/ding.png' class='contentIcon'></image>
+          <text class='doNum'>{{item.like_count}}</text><!-- 赞 -->
+      </view>
+    </view>
+      <view class='comContent'>
+        <text>{{item.content}}</text><!-- 评论内容 -->
+      </view>
+      <view class='fLine'></view>  <!--分割线-->
+  </view>
+</block>

@@ -1,0 +1,18 @@
+<view class='container'>
+  <view wx:if='{{userphone=="0"}}'>
+    <view class='item-title'>账号安全</view>
+    <view class='item' bindtap='tobind'>
+      <view>姓名</view>
+      <view>{{name}}</view>
+    </view>
+    <view class='item' bindtap='tobind'>
+      <view>手机号</view>
+      <view>{{phone}}</view>
+    </view>
+  </view>
+  <view class='bind' wx:if='{{userphone=="1"}}'>
+    <image src='/pages/source/images/nophone.png'></image>
+    <view>未绑定手机号</view>
+    <view class='bind-btn' bindtap='tobind'>绑定手机号</view>
+  </view>
+</view>

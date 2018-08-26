@@ -1,0 +1,36 @@
+<import src="../../wxParse/wxParse.wxml"/>
+
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title" style="text-align:center" >{{array.title}}</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-article">
+            <view class="weui-article__h3" style="float:right;color:#999999;margin-right:1rem">{{array.publishDate}}</view>
+            <view class="weui-article__section" style="float:left">                   
+                <view class="weui-article__p">
+                    <view class="wxParse">
+                        <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+                    </view>
+                </view>
+               
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="page" wx:for="{{comments}}" wx:key="*this" >
+    <view class="page__hd" style="padding:1vh 1vw;">
+        <view class="page__title" style="clear:both;margin:0 5vw;">{{item.author}}回复：</view>       
+    </view>
+    <view class="page__bd" style="padding-bottom:10px;">
+        <view class="weui-article" style="padding:5px 0">
+            <view class="weui-article__h1" style="margin:0 5vh;color:#646976;">{{item.content}}</view> 
+                     
+        </view>
+        <view class="classname">
+        <view class="timeIcon" style="float:left;margin:0.5vw 1vh 0 6vw;"><image src="../../resoursce/Time-Icon.png" style="width:16px;height:16px;"></image></view>
+         <view class="weui-article__h2" style="float:left;color:#a1a6bb">{{item.replyDate}}</view>
+         </view>
+    </view>
+</view>

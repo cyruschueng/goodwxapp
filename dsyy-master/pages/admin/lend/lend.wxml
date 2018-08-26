@@ -1,0 +1,172 @@
+<!--借阅中_Start-->
+<view hidden="{{lendingHidden}}" class="lend-bg">
+  <view class="page" style="height:20rpx;"></view>
+  <view>
+    <view class="margin-left-30 margin-right-30">
+      <view class="border-bottom ">
+        <view class="margin-top-30 margin-bottom-30 lend-word">
+          请输入借书码
+        </view>
+        <view class="margin-bottom-30">
+          <input type="text" class="lend-code padding-left-30" bindinput="judgeUser" placeholder="向用户索要借书码" />
+        </view>
+        <view class="margin-bottom-30" hidden="{{userHidden}}">
+          <view class="lend-user-photo margin-right-20">
+            <image src="{{user_photo}}" class="lend-photo"></image>
+          </view>
+          <view class="lend-user-info">
+            <view>{{user_name}}</view>
+            <view>{{user_tel==''||user_tel=='undefined'?'未设置电话号码':user_tel}}</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class=" margin-top-30 margin-bottom-30">
+        <view class="lend-word">借出图书</view>
+        <view class="lend-bar">（{{bar_name}}）</view>
+      </view>
+      <view class="clear"></view>
+      <!-- 无信息 -->
+      <view hidden="{{searchHidden}}">
+        <view class="weui-flex padding-top-30">
+          <view>
+            <view class="placeholder">
+              <image src="/images/ewm_icon.png" class="opt-icon-28 margin-left-10" bindtap="scanBook"></image>
+            </view>
+          </view>
+          <view class="weui-flex__item border-bottom">
+            <view class="placeholder">
+              <input class="weui-input" type="text" value="{{isbn}}" placeholder="如无法扫描ISBN号，请手动输入" class="margin-left-15 font-size-14" bindinput="inputISBN" />
+            </view>
+          </view>
+          <view class="border-bottom">
+            <view class="placeholder">
+              <image src="/images/search_icon.png" class="opt-icon-nor margin-right-15" bindtap="searchISBN"></image>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{noBook}}" class="text-center">此书吧中没有找到这本书</view>
+      </view>
+      <!-- 有信息 -->
+      <view hidden="{{!searchHidden}}">
+        <view class="book padding-top-25 padding-bottom-25">
+          <view class="book-img">
+            <image src="{{bookDetail.images_medium}}" class="book-img-sml" mode="aspectFill"></image>
+          </view>
+          <view class="book-info">
+            <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{bookDetail.title}}</view>
+            <view class="text-oneline margin-bottom-10 book-font">作者： {{bookDetail.author}}</view>
+            <view class="text-oneline margin-bottom-10 book-font">页数：{{bookDetail.pages}}页</view>
+            <view class="text-oneline margin-bottom-10 book-font">出版社：{{bookDetail.publisher}}</view>
+            <view class="text-oneline margin-bottom-10 book-font">数量：{{bookObj.length}}本</view>
+          </view>
+        </view>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <scroll-view scroll-y style="height:150px;">
+            <view wx:for="{{bookObj}}">
+              <view wx:if="{{item.status==0}}" class=" weui-flex">
+                <view class="book-sale margin-right-10 lend-width-190">图书编码：</view>
+                <view class="book-sale margin-right-10 lend-width-160">{{item.book_code}}</view>
+                <view class="book-sale lend-width-160">在架</view>
+                <radio class="book-radio lend-width-160" value="{{item.id}}" checked="{{item.checked}}" />
+              </view>
+              <view wx:else class=" weui-flex">
+                <view class="book-lend margin-right-10 lend-width-190">图书编码：</view>
+                <view class="book-lend margin-right-10 lend-width-160">{{item.book_code}}</view>
+                <view class="book-lend lend-width-160">借出</view>
+                <view class="lend-width-160"></view>
+              </view>
+              <view class="clear"></view>
+            </view>
+          </scroll-view>
+        </radio-group>
+      </view>
+    </view>
+    <view wx:if="{{bar_id!=''&&user_id!=''&&lend_id!=''}}" class="lend-button" bindtap="lendBook">借出</view>
+    <view wx:else class="lend-unused-button">借出</view>
+  </view>
+</view>
+<!--借阅中_End-->
+<!-- 借阅成功_Start -->
+<view hidden="{{!lendingHidden}}" class="page">
+  <view class="page" style="height:20rpx;"></view>
+  <form >
+  <view class="white-bg lend-success-flex padding-top-30 padding-bottom-30">
+    <view class="margin-left-30 margin-right-30 margin-top-30 text-center">
+      <icon type="success" size="60" />
+    </view>
+    <view class="lend-success weui-flex">
+      <view class="weui-flex__item ">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">会员：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="nick_name" class="weui-input" value="{{user_s_name}}" placeholder="{{user_s_name}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="lend-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">借阅图书：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="book_name" class="weui-input" value="{{book_s_name}}" placeholder="《{{book_s_name}}》" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="lend-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">书吧：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="bar_name" class="weui-input" value="{{bar_name}}" placeholder="{{bar_name}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="lend-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">借书时间：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="time" class="weui-input" value="{{time}}" placeholder="{{time}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="lend-success weui-flex">
+      <view class="weui-flex__item">
+        <view class="weui-cells_after-title user-list">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label user-list-word">管理员：</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="oper_name" class="weui-input" value="{{oper_name}}" placeholder="{{oper_name}}" disabled="true" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+   <button class="lend-button" bindtap="back"  form-type="submit">确定</button> 
+  </form>
+</view>
+<!-- 借阅成功_End -->

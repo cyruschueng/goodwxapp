@@ -1,0 +1,191 @@
+<!--detail.wxml-->
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+
+<block wx:if="{{is_bbs_manage == 1}}">
+    <view class="b_manage">
+        <text class="weui-form-preview__btn" bindtap="bbs_action_del_bind">删除帖子</text>
+    </view>
+</block>
+
+<view class="detail" style="display:block;">
+    <!--content start -->
+    <view class="tit f18">
+        <block wx:if="{{postinfo.digest == 1}}">
+            <view class="state marrow">精华</view>
+        </block>
+        <text>{{postinfo.title}}</text>
+    </view>
+
+    <view class="user-info mt10 gridXb">
+        <view class="fl avatar"><image src="{{postinfo.user_headimgurl}}"></image></view>
+        <view class="fl linght f12">
+            <text class="green mr5">{{postinfo.user_nickname}}</text>发表于<text class="ml5">{{postinfo.post_time}}</text>          
+        </view>
+    </view>
+
+    <view class="detail-content mt20">
+        <text>{{postinfo.content}}</text>
+        <view class="detail-albums" wx:if="{{postinfo.imgarr}}">
+            <block wx:for="{{postinfo.imgarr}}">
+                <view class="pic-item"><image src="{{item.imgurl}}" mode="aspectFill" bindtap="img_max_bind" data-key="{{index}}" data-url="{{item.imgurl}}"></image></view>
+            </block>
+        </view>
+        <view class="grey f12 detail-footer">
+            <view class="fr">
+                <text class="iconfont icon-appreciatefill" bindtap="post_xihuan_bind" id="{{postinfo.id}}" data-type="1">{{postinfo.praise}}</text>
+            </view>
+            <view>
+                <text class="mr10">{{postinfo.read_count}}阅</text>
+                <text class="mr10">{{postinfo.reply_count}}评</text>
+                <text bindtap="jubao_act_bind" id="{{postinfo.id}}" data-type="1">举报</text>
+            </view>
+        </view>
+    </view>
+    <!--content end -->
+
+    <!--comment start-->
+    <view class="comment-box mt20">
+            <view class="comment-tit gridXb">
+                <text>全部评论（{{postinfo.reply_count}}）</text>
+            </view>
+            <block wx:if="{{reply_items}}">
+            <block wx:for="{{reply_items}}">
+            <view class="comment-list-item flex">
+                <view class="avatar mr10"><image src="{{item.user_headimgurl}}"></image></view>
+                <view class="content sub">
+                    <view class="content-info grey flex">
+                        <view class="name-box sub">
+                            <text>{{item.user_nickname}}</text>
+                        </view>
+                        <view class="prise">
+                            <text class="iconfont icon-appreciate" bindtap="post_xihuan_bind" id="{{item.reply_id}}" data-type="2">{{item.digg_count}}</text>
+                            <text class="iconfont icon-more" bindtap="comment_reply_show_bind" id="{{item.reply_id}}"></text>
+                        </view>
+                        <view class="options {{item.isactive}}">
+                            <view class="options-box">
+                                <view class="reply" bindtap="detail_huifu_bind" id="{{item.reply_id}}">回复</view>
+                                <view class="report last" bindtap="jubao_act_bind" id="{{item.reply_id}}" data-type="2">举报</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="content-main mt5">
+                        <text class="txt">{{item.content}}</text>
+                    </view>
+                    <block wx:if="{{item.hflist}}">
+                    <block wx:for="{{item.hflist}}" wx:for-item="hitem">
+                    <view class="blockquote">
+                        <text>{{hitem.uname}}：{{hitem.content}}</text>
+                    </view>
+                    </block>
+                    </block>
+                    <view class="content-footer f12">
+                        <text class="linght">{{item.addtime}}</text>
+                    </view>
+                </view>
+            </view>
+    </block>
+    </block>
+    </view>
+    <!--comment end-->
+
+    <!--footbar start-->
+    <view class="footBar gridXt grey flex">
+        <view class="sub input tc" bindtap="reply_layer_show_bind">评论最能一针见血</view>
+        <view class="opt">
+            <text class="iconfont icon-appreciatefill mr15 f16" bindtap="post_xihuan_bind" id="{{postinfo.id}}" data-type="1">{{postinfo.praise}}</text>
+        </view>
+    </view>
+    <!--footbar end-->
+</view>
+
+
+
+<!--回复及发表评论 start-->
+<view class="floatBox mod-layer" wx:if="{{reply_layer_isshow}}">
+    <view class="mod-bar f16 gridXb flex">
+        <view class="btn cancel" bindtap="reply_layer_show_bind">取消</view>
+        <view class="title f20 sub tc">
+        <block wx:if="{{this_reply_id == 0}}">
+        发表评论
+        </block>
+        <block wx:else>
+        回复评论
+        </block>
+        </view>
+        <view class="btn submit green">   </view>
+    </view>
+    <form bindsubmit="comment_formSubmit">
+        <view class="input-text-box">
+            <textarea class="textarea" name="co_content" placeholder="写点什么吧..." auto-focus />
+        </view>
+        <view class="input-text-btn">
+            <button formType="submit" type="primary" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">提交保存</button>
+        </view>
+    </form>
+</view>
+<!--回复及发表评论 end-->
+
+
+<!--jubao start-->
+<view class="floatBox mod-layer" wx:if="{{jubao_layer_isshow}}">
+    <view class="mod-bar f16 gridXb flex">
+        <view class="btn cancel" bindtap="jubao_layer_show_bind">取消</view>
+        <view class="title f20 sub tc">举报</view>
+        <view class="btn submit green">   </view>
+    </view>
+    <form bindsubmit="report_formSubmit">
+        <view class="input-text-box">
+            <textarea class="textarea" name="co_content" placeholder="举报内容..." auto-focus />
+        </view>
+        <view class="input-text-btn">
+            <button formType="submit" type="primary" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">提交保存</button>
+        </view>
+    </form>
+</view>
+<!--jubao end-->
+
+<view class="postinfo-img-layer" wx:if="{{showImgLayer}}" bindtap="close_imglayer_bind" bindtouchstart="touch_start_bind" bindtouchend="touch_end_bind">
+    <view class="postinfo-img-layer-img"><image src="{{showImgUrl}}" mode="aspectFit"></image></view>
+    <view class="postinfo-img-layer-num">{{this_img_key_z}}/{{all_img_key}}</view>
+</view>
+</block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

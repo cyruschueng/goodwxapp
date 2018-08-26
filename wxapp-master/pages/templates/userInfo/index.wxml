@@ -1,0 +1,34 @@
+<wxs src="../../../utils/common.wxs" module="commonModule" />
+<template name="user-info">
+    <view class="user-info">
+        <navigator bindtap="goPlayerInfo" url="/packageInfo/playerInfo/index" class="user-avatar" wx:if="{{doJump}}">
+            <image wx:if="{{profile.headImgUrl}}" src="{{profile.headImgUrl}}"></image>
+        </navigator>
+        <view class="user-avatar" wx:else >
+            <image wx:if="{{profile.headImgUrl}}" src="{{profile.headImgUrl}}"></image>
+        </view>
+        <view class="middle-box">
+            <view class="player-info">
+                <text class="user-name">{{profile.nickName}}</text>
+                <view class="money">
+                    <view class="mask"></view>
+                    <view class="content">
+                        <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67ed39afbfc.png"></image>
+                        <text>{{commonModule.formatMoney(profile.money)}}兩</text>
+                    </view>
+                </view>
+            </view>
+            <view class="exp-info">
+                <text class="player-level">Lv.{{profile.level.now}}</text>
+                <view class="exp-progress">
+                    <view class="mask"></view>
+                    <view class="inner-bar {{isAndroid ? 'android' : ''}}" style="width:{{profile.level.percent}}%"></view>
+                </view>
+            </view>
+        </view>
+        <navigator bindtap="goPlayerProfile" url="/packageInfo/saveInfoImg/index" class="view-radar">
+            <view class="mask"></view>
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a669c21452ae.png"></image>
+        </navigator>
+    </view>
+</template>

@@ -1,0 +1,9 @@
+import { combineReducers } from 'redux';<% if (hasReducer) { %>
+import * as reducer from './reducer';<% } %><% if (hasSaga) { %>
+import saga from './saga';<% } %>
+
+export default {
+  name: '<%= modelName %>',<% if (hasReducer) { %>
+  reducer: combineReducers(reducer),<% } %><% if (hasSaga) { %>
+  saga<% } %>
+}

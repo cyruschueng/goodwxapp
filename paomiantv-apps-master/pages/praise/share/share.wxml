@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="user__info">
+    <image class="avatar" src="{{packet.avatar}}"></image>
+    <text class="nickname">{{packet.nickname}}</text>
+    <text class="tips">发了一个红包</text>
+  </view>
+  <!-- 祝福语 -->
+  <view class="blessings">{{packet.redpacket_title}}</view>
+  <!-- 二维码 -->
+  <view class="qs">
+    <image src="{{qrcodeUrl}}"></image>
+  </view>
+  <view class="handle__btn">
+    <view class="grey">
+      <button class="grey" open-type="share"> 转发到群聊</button>
+    </view>
+    <view class="green">
+      <button class="green" bindtap='saveScreen' disabled='{{circleBtnDisabled}}'>分享到朋友圈</button>
+    </view>
+  </view>
+  <view class="bottom">
+    <image src="/assets/share_bottom.png"></image>
+  </view>
+</view>

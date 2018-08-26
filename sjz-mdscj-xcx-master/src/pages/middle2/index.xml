@@ -1,0 +1,40 @@
+<view class="middle-wrap">
+  <view class="mod-swiper">
+    <swiper
+      class="swiper"
+      indicator-dots="{{state.indicatorDots}}" circular="{{state.circular}}"
+      indicator-color="{{state.indicatorColor}}" indicator-active-color="{{state.indicatorActiveColor}}"
+      autoplay="{{state.autoplay}}" interval="{{state.interval}}" duration="{{state.duration}}">
+      <block wx:key="*this" wx:for="{{props.detail.imageUrls}}">
+        <swiper-item>
+          <image src="{{item}}" mode="aspectFill" class="swiper-banner"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!--<image class="double11-ad" src="http://img-prod.kkkd.com/Fl2LFk4qXN_QynsxAXagSPYwbJML"></image>-->
+  <view class="product-info">
+    <view class="name">{{props.detail.prodName}}</view>
+    <view class="price-info" wx:if="{{props.detail.prodType === 0}}">
+      <!--<view class="price">
+        <text class="tag">原价</text>￥{{props.detail.salesPrice}}
+      </view>
+      <view class="price new-price">
+        <text class="tag">券后</text>￥{{props.detail.promotionPrice}}
+      </view>-->
+      <view class="price-coupon">{{props.detail.showCouponPrice}}元</view>
+      <view class="price-new">
+        券后价:<view class="price"><text>￥</text>{{props.detail.promotionPrice}}</view>
+      </view>
+    </view>
+    <view class="price-info pre" wx:else="">
+      <view class="price-pre">定金:￥<text class="price">{{props.detail.promotionPrice}}</text></view>
+      <view>预售价:<text class="price">￥{{props.detail.salesPrice}}</text></view>
+    </view>
+    <view class="code">{{props.detail.taokePwd}}</view>
+  </view>
+  <view class="copy-tips" wx:if="{{state.isShowCopyTips && !state.isCopyed}}">
+    <text>Tips: </text>复制失败，请更新微信版本到最新版
+  </view>
+  <view class="btn-copy-code" bindtap="handleCopy">{{state.isCopyed ? '复制成功，请打开手机淘宝' : '一键复制'}}</view>
+</view>

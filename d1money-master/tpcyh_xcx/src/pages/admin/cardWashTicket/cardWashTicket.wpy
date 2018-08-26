@@ -1,0 +1,189 @@
+<style lang="less" rel="stylesheet/less">
+    page{
+        background-color:#f2f2f2;
+        height:100%;
+    }
+    .demon-panel{
+        padding:0;
+        margin-bottom:20rpx;
+        background-color: #ffffff;
+        &:last-child{
+            margin-bottom:0;
+        }
+        .demon-panel__bd{
+            .name{
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+            }
+            .userCell{
+                .demon-cell__bd{
+                    display: flex;
+                    align-items: center;
+                    font-weight: normal;
+                    .name{
+                        width:130rpx;
+                    }
+                    .signTime{
+                        flex:1;
+                        text-align: center;
+                        color: #666666;
+                    }
+                    .tel{
+                        text-align: center;
+                        width:100rpx;
+                        color: #38A1CF;
+                        transform: rotate(270deg);
+                    }
+                }
+                .demon-cell__ft{
+                    view{
+                        width: 160rpx;
+                        display: inline-block;
+                        padding:10rpx 20rpx;
+                        color: #ffffff;
+                        background-color:#38A1CF;
+                        font-size:12px;
+                        border-radius:60rpx;
+                        text-align: center;
+                        &.error{
+                            background-color: #969696;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon_page cardWash">
+        <!--洗车券活动管理-->
+        <block wx:if="{{cardWashCell.list.length==0}}">
+            <view class="dm-nomsg" style="">
+                <image src="/static/img/empty_states-bee.png" lazy-load="true"/>
+                <view class="text">亲~暂时有没数据</view>
+            </view>
+        </block>
+        <dm-panel type="backstage">
+            <dm-panel-bd>
+                <repeat for="{{cardWashCell.list}}" key="index" item="item">
+                    <dm-cell class="userCell" :type="userCell.type">
+                        <block slot="demon-cell__hd">
+                            <image src="http://wmimage.qn.d1money.com/head/{{item.createTime}}/{{item.userId}}/46.jpg" mode="aspectFill" lazy-load="true"/>
+                        </block>
+                        <block slot="demon-cell__bd">
+                            <view class="name">{{item.userName}}</view>
+                            <view class="signTime">
+                                已签到
+                                <block wx:if="{{item.signCount}}">{{item.signCount}}</block>
+                                <block wx:if="{{!item.signCount}}">0</block>
+                                天
+                            </view>
+                            <view class="tel" @tap="tel({{item.userName}},{{item.userPhone}})">
+                                <i class="iconfont icon-dianhua" wx:if="{{item.userPhone}}"></i>
+                            </view>
+                        </block>
+                        <view wx:if="{{item.statue==0}}" slot="demon-cell__ft" @tap="userCellBtnOnclick({{index}},{{item.id}},{{item.userName}},{{item.statue}})">
+                            {{cardWashCell.status[item.statue]}}
+                        </view>
+                        <view wx:if="{{item.statue!=0}}" class="error" slot="demon-cell__ft">
+                            {{cardWashCell.status[item.statue]}}
+                        </view>
+                    </dm-cell>
+                </repeat>
+            </dm-panel-bd>
+        </dm-panel>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import api from './../../../common/api';
+    import G from './../../../common/global';
+    import global from './../../../mixins/global'
+
+    import singleLoad from './../../../mixins/singleLoad';
+    import dmCell from './../../../components/Cell/dm-cell';
+    import dmPanel from './../../../components/Panel/dm-panel';
+    import dmPanelHd from './../../../components/Panel/dm-panel-hd';
+    import dmPanelBd from './../../../components/Panel/dm-panel-bd';
+    import dmPanelFt from './../../../components/Panel/dm-panel-ft';
+    export default class extends wepy.page {
+        config = {
+            navigationBarTitleText: '洗车券活动管理'
+        }
+        components = {
+            'dm-cell': dmCell,
+            'dm-panel': dmPanel,
+            'dm-panel-hd': dmPanelHd,
+            'dm-panel-bd': dmPanelBd,
+            'dm-panel-ft': dmPanelFt
+        }
+
+
+        data = {
+            origin: 'cardWashCell',
+            userCell:{
+                type: 'user'
+            },
+            cardWashCell:{
+                isload:false,
+                page:{
+                    pageNo: 0,
+                    pageSize: 10,
+                    pageCount: 1
+                },
+                status:['确认送达','待领取','不可领取','已送达'],
+                list:[]
+            }
+        }
+
+        computed = {}
+
+        mixins = [ singleLoad, global];
+
+        methods = {
+            // 用户列表按钮事件
+            userCellBtnOnclick(index, id, nickName, status){
+//                console.log(id);
+//                console.log(nickName);
+                api.showModal('提示',`你确定已经将洗车券送给了 ${nickName} 客户 ?`)
+                    .then(res => {
+                    api.request({
+                        url: G.host + 'cyhManagement/doConfirmReceiveCarWashCoupon',
+                        data: {
+                            id
+                        }
+                    }).then( res => {
+                        this.cardWashCell.list[index].statue = 3;
+                        this.$apply();
+                    })
+                })
+            }
+        }
+
+        events = {}
+
+        async onLoad() {
+            this.cardWashCell.list = await this.loadmoreSingleLoad();
+            this.$apply();
+        }
+
+        loadmoreSingleLoad(){
+            return new Promise((resolve, reject) => {
+                api.request({
+                    url: G.host + 'cyhManagement/loadMoreCarCouponList',
+                    data: {
+                        start: this.pageNo,
+                        limit: this.pageSize
+                    }
+                }).then( (res) => {
+                    resolve(res.data.body.QaList);
+                }).catch(res => {
+                    reject(res);
+                })
+            })
+        }
+    }
+</script>

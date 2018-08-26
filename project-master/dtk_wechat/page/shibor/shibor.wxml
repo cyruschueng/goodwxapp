@@ -1,0 +1,60 @@
+<view class="wrap">
+  <view class="shiborBox">
+    <view class="time"><text>{{time}}</text> 最新Shibor利率</view>
+    <view class="content">
+      <view class="header">
+        <view class="title">期限</view>
+        <view class="title">Shibor(%)</view>
+        <view class="title">涨跌(BP)</view>
+      </view>
+      <view class="detail">
+        <view class="section" wx:for="{{shiborData}}" wx:key="index">
+          <view class="arrow"><image src="../../image/right.png"></image></view>
+          <view class="item">{{item.term}}</view>
+          <view class="item">{{item.shibor}}</view>
+          <view class="change"><image src="{{item.vary}}"></image></view>
+          <view class="item width">{{item.value}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="infoBox" wx:if="{{isShow}}">
+    <view class="info">
+      <text>小贴士：</text>上海银行间同业拆放利率（Shanghai Interbank Offered Rate，简称Shibor）是由信用等级较高的银行自主报出的人民币同业拆出利率计算确定的算术平均利率，是单利、无担保、批发性利率。
+    </view>
+  </view>
+
+  <view>
+    <loading wx:if="{{showLoading}}">加载中</loading>
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<view></view>

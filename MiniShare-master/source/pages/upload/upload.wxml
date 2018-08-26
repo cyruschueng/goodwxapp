@@ -1,0 +1,52 @@
+<!--pages/upload/upload.wxml-->
+<view class='superheader'></view>
+<text class='fa fa-chevron-left btnback' bindtap='back'></text>
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell ">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="添加描述。。。" maxlength='200' style="height: 3.3em" bindinput="changeDescription" />
+          <view class="weui-textarea-counter">{{description.length}}/200</view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" style='margin-top:2vh;'>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">选择图片</view>
+              <view class="weui-uploader__info">
+                <text wx:if="{{photos.length>0}}" bindtap="previewPhotos">预览 </text>{{photos.length}}</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files " id="uploaderFiles">
+                <block wx:for-items="{{photos}}" wx:key="{{index}}">
+                  <view class="weui-uploader__file" bindtap="deleteImage" id="photo_{{item}}">
+                    <image class="weui-uploader__img" src="{{uploadpath}}album/{{item}}" mode="aspectFill" />
+                  </view>
+                </block>
+                <view class="weui-uploader__input-box">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+
+    </view>
+
+
+  </view>
+  <view class="page__bd" style='padding:2vh;'>
+  <form name='uploadform' report-submit bindsubmit='uploadToAlbum'>  
+    <button type='primary' form-type="submit">上传到相册
+    </button>
+  </form>
+  </view>
+
+</view>

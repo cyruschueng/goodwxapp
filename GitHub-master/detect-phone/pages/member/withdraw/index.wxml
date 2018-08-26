@@ -1,0 +1,78 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{show}}">
+  <view class="fui-cell-group fui-cell-group-o">
+    <view class="fui-cell-title">
+      <view class="fui-cell-info" style="color:#999">当前可提现金额: ￥{{info.credit}}
+        <text bindtap="bindAll" class="text-primary">全部提现</text>
+      </view>
+    </view>
+    <view class="fui-cell-title">提现金额
+      <small wx:if="{{info.withdrawmoney > 0}}">提现额度最小为: <span class="text-danger">￥{{info.withdrawmoney}}</span></small>
+    </view>
+    <view class="fui-cell">
+      <view class="fui-cell-label big" style="width:auto;">￥</view>
+      <view class="fui-cell-info">
+        <input value="{{money}}" bindinput="moneyChange" class="fui-input money" type="digit" />
+      </view>
+    </view>
+    <view class="fui-cell">
+      <view class="fui-cell-label"><span class="re-g">提现方式</span></view>
+      <view class="fui-cell-info" wx:if="{{info.type_array.length < 1}}">未设置提现方式</view>
+      <picker class="fui-cell-info" rangeKey="name" bindchange="pickerChange" range="{{objectArray}}" value="{{checkedIndex}}" wx:if="{{checked}}">
+        {{checked.name}}
+      </picker>
+      <view class="fui-cell-remark" wx:if="{{info.type_array.length > 1}}"></view>
+    </view>
+    <view class="fui-cell" wx:if="{{checked.id == 3}}">
+      <view class="fui-cell-label"><span class="re-g">选择银行</span></view>
+      <picker class="fui-cell-info" bindchange="bankChange" rangeKey="bankname" range="{{info.banklist}}" value="{{bankCheckedIndex}}">
+        {{bankChecked.bankname}}
+      </picker>
+      <view class="fui-cell-remark"></view>
+    </view>
+    <view class="fui-cell" wx:if="{{checked.id == 2 || checked.id == 3}}">
+      <view class="fui-cell-label">姓名</view>
+      <view class="fui-cell-info">
+        <input bindinput="inputChange" class="fui-input" data-type="realname" max="25" placeholder="请输入姓名" type="text" value="{{info.last_data.realname}}" />
+      </view>
+    </view>
+    <block wx:if="{{checked.id == 2}}">
+      <view class="fui-cell">
+        <view class="fui-cell-label">支付宝帐号</view>
+        <view class="fui-cell-info">
+          <input bindinput="inputChange" class="fui-input" max="25" data-type="alipay" placeholder="请输入支付宝账号" value="{{info.last_data.alipay}}" />
+        </view>
+      </view>
+      <view class="fui-cell alipay-group">
+        <view class="fui-cell-label">确认帐号</view>
+        <view class="fui-cell-info">
+          <input bindinput="inputChange" class="fui-input" max="25" data-type="alipay1" placeholder="请确认支付宝账号" value="{{info.last_data.alipay}}" />
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{checked.id == 3}}">
+      <view class="fui-cell alipay-group">
+        <view class="fui-cell-label">银行卡号</view>
+        <view class="fui-cell-info">
+          <input bindinput="inputChange" class="fui-input" max="25" data-type="bankcard" placeholder="请输入银行卡号" value="{{info.last_data.bankcard}}" />
+        </view>
+      </view>
+      <view class="fui-cell alipay-group">
+        <view class="fui-cell-label">确认卡号</view>
+        <view class="fui-cell-info">
+          <input bindinput="inputChange" class="fui-input" max="25" data-type="bankcard1" placeholder="请确认银行卡号" value="{{info.last_data.bankcard}}" />
+        </view>
+      </view>
+    </block>
+    <view class="fui-cell-title" wx:if="{{info.withdrawcharge > 0}}">提现手续费为 {{info.withdrawcharge}}%</view>
+    <view class="fui-cell-title" wx:if="{{info.withdrawend > 0}}">手续费金额在￥{{info.withdrawbegin}}到￥{{info.withdrawend}}间免收</view>
+    <view class="fui-cell-title charge-group" wx:if="{{chargeShow}}">本次提现将扣除手续费 ￥
+      <text class="text-danger">{{deductionmoney}}</text>
+    </view>
+    <view class="fui-cell-title charge-group" wx:if="{{chargeShow}}">本次提现实际到账金额 ￥<span class="text-danger">{{realmoney}}</span></view>
+  </view>
+  <view bindtap="submit" class="btn btn-success block {{!isSubmit ? 'disabled' : ''}}">立即提现</view>
+  <view class="fui-toast {{FoxUIToast.show ? 'in' : 'out'}}">
+    <view class="text">{{FoxUIToast.text}}</view>
+  </view>
+</view>

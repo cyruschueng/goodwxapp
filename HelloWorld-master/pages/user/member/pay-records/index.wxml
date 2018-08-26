@@ -1,0 +1,28 @@
+<!--pages/user/member/pay-records/index.wxml-->
+<view class="card-money">
+    <view>会员余额</view>
+    <view class="card-balance">￥
+        <text class="card-balance-money">{{card.recharge}}</text>
+    </view>
+    <view class="card-cum">累计充值￥{{card.total_recharge}}，累计消费￥{{card.total_consume}}</view>
+</view>
+
+<view class="flex tc" catchtap='onSwtchTabTap'>
+    <view class="sub card-record-tit {{type==1?'active':''}}" data-index="1">充值记录</view>
+    <view class="sub card-record-tit {{type==0?'active':''}}" data-index="0">消费记录</view>
+</view>
+
+<view class="mt10">
+    <view class="card-record flex" wx:for='{{data}}' wx:key='{{item.id}}'>
+        <view class="sub mr10">
+            <view class="lineText">{{item.remark}}</view>
+            <view class="card-record-time">{{item.create_time}}</view>
+        </view>
+        <view class="card-record-moy">{{item.type==1?'+':'-'}} {{item.amount}}</view>
+    </view>
+</view>
+
+<view class="no-content tc" hidden='{{!isEmpty}}'>
+    <image class="no-content-img" src="http://ixiaochengxu.cc/resource/images/common/no-order.png" mode="widthFix"></image>
+    <view>暂无记录</view>
+</view>

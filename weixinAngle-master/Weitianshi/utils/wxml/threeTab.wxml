@@ -1,0 +1,824 @@
+<import src="/pages/Template/Template.wxml" />
+<view id='threeTab' wx:if='{{show_detail}}'>
+  <view class="swiper-tab">
+    <!--wx:if='{{show_company}}'  -->
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}} project-detail-tabm" data-current="0" bindtap="swichNav">详情</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}} buyers-mapm" data-current="1" bindtap="swichNav">潜在投资方</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}} due-diligencem" data-current="2" bindtap="swichNav">一键尽调</view>
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}} due-diligencem" data-current="3" bindtap="swichNav">相似公司</view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1038rpx" bindchange="bindChange">
+    <!--项目详情  -->
+    <swiper-item>
+      <scroll-view scroll-y="true">
+        <view class="classname">
+          <view class="projectDetailTop">
+            <view class="projectDetailBox">
+              <view>
+                <view class="flex"><view class="describle">{{project.pro_intro}}</view><image src="/img/img-dujia@2x.png" class="projectDetailType" wx:if="{{project.is_exclusive == 1}}"></image>
+                  <!-- <image src="/img/img-feidujiaqianyue@2x.png" class="projectDetailType" wx:if="{{project.is_exclusive == 2}}"></image> -->
+                </view>
+                <view class="flex allIndustry" wx:if="{{industy_sort.length != 0}}">
+                  <!-- <view class="industry">{{industy_sort}}</view> -->
+                  <block wx:for="{{pro_industry}}" wx:key="{{index}}">
+                    <label class="industry">{{item.industry_name}}</label>
+                  </block>
+                </view>
+                <view class="allProjectDetail flex" wx:if="{{project.pro_area != ''||project.pro_stage!=''||project.pro_scale!=''}}">
+                  <view class="projectDetailLine" wx:if="{{project.pro_scale.scale_money}}">{{project.pro_scale.scale_money}}</view>
+                  <!-- <view class="projectDetailLine" wx:if="{{project.pro_finance_stock_after!= 0}}">{{project.pro_finance_stock_after}}%</view> -->
+                  <view class="projectDetailLine" wx:if="{{project.pro_stage.stage_name}}">· {{project.pro_stage.stage_name}}</view>
+                  <view class="projectDetailLine" wx:if="{{project.pro_area.area_title}}">· {{project.pro_area.area_title}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="aline"></view>
+            <!--他人的项目  -->
+            <view wx:if="{{user.user_id!==user_id&&taren==true}}">
+              <view class="otherInfo flex" bindtap="userDetail" data-id="{{user.user_id}}" hover-class='t-hoverColor'>
+                <view>
+                  <image wx:if="{{user.user_avatar_url}}" class="others_pic" src="{{user.user_avatar_url}}" />
+                  <view wx:if="{{!user.user_avatar_url}}" class="others_nopic">{{user.user_avatar_text}}</view>
+                </view>
+                <view>
+                  <view class="userName">{{user.user_name}}</view>
+                  <view class="flex userInfo">
+                    <!--style="align-items: baseline;"  -->
+                    <view class="userCareer">{{user.user_career}}</view>
+                    <view class="userCompany">· {{user.user_company}}</view>
+                    <view class="contactPersonBox flex">
+                      <image src="/img/icon-jiantou3@2x.png" class="userIcon"></image>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <!--自己的项目  -->
+            <view class="flex bottomBox" wx:if="{{user.user_id==user_id&&ziji==true}}">
+              <view class="flex sceenPerson" catchtap="viewProject" data-proid="{{id}}" hover-class='t-hoverColor'>
+                <view class="viewTimeNew" wx:if="{{project.count.view_times_new != 0}}">+{{count.view_times_new}}</view>
+                <view class="viewTimeAll screenPersonColor project-sentimentm">浏览：
+                  <label>{{count.view_times_all}}</label>
+                </view>
+              </view>
+              <view class="t-line567"></view>
+              <view class="flex sceenPerson" catchtap="applyPerson" hover-class='t-hoverColor'>
+                <view class="applyProjectNew" wx:if="{{project.count.apply_times_new != 0}}">+{{count.apply_times_new}}</view>
+                <view class="viewTimeAll screenPersonColor" data-proid="{{id}}">申请查看：
+                  <label>{{count.apply_times_all}}</label>
+                </view>
+              </view>
+              <view class="t-line567"></view>
+              <!-- <view class="investPerson">-</view> -->
+              <view class="flex sceenPerson" catchtap="hasMeeting" hover-class='t-hoverColor'>
+                <view class="applyProjectNew" wx:if="{{project.count.meet_times_new != 0}}">+{{count.meet_times_new}}</view>
+                <view class="viewTimeAll screenPersonColor" data-proid="{{id}}">约谈：
+                  <label>{{count.meet_times_all}}</label>
+                </view>
+              </view>
+            </view>
+
+          </view>
+        </view>
+        <view id="projectBox">
+          <view class="bigBox">
+            <!--项目亮点-->
+            <view class="brightPoint " wx:if="{{project.pro_goodness.length!=0}}">
+              <view class="brightPointBox flex">
+                <!-- <image src="/img/img-star.png" class="titlePic"></image> -->
+                <view class="title" style="margin-bottom:32rpx">投资亮点</view>
+              </view>
+              <!-- <view class="{{isChecked0?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+              <view class="brightUnfoldAfter" value="{{number}}">
+                <block wx:for="{{project.pro_goodness}}" wx:for-item="goodness" wx:key="{{index}}">
+                  <view class="goodTitle1">
+                    <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+                    <view class="brightContent">
+                      {{goodness.goodness_desc}}
+                    </view>
+                  </view>
+                </block>
+              </view>
+              <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked0 == true && textBeyond0==true}}" data-check="{{0}}">全部</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked0== false && textBeyond0==true}}" data-check="{{0}}">收起</label> -->
+            </view>
+            <!--市场概况pro_market_genera  -->
+            <view class="brightPoint " wx:if="{{project.pro_market_genera.length!=0}}">
+              <view class="brightPointBox flex">
+                <!-- <image src="/img/icon-shichanggaikuang@2x.png" class="titlePic"></image> -->
+                <view class="title" style="margin-bottom:32rpx">市场概况</view>
+              </view>
+              <!-- <view class="{{isChecked1?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+              <view class="brightUnfoldAfter" value="{{number}}">
+                <block wx:for="{{project.pro_market_genera}}" wx:for-item="goodness" wx:key="{{index}}">
+                  <view class="goodTitle1">
+                    <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+                    <view class="brightContent">
+                      {{goodness.goodness_desc}}
+                    </view>
+                  </view>
+                </block>
+
+              </view>
+              <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked1 == true && textBeyond1==true}}" data-check="{{1}}">收起</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked1== false && textBeyond1==true}}" data-check="{{1}}">全部</label> -->
+            </view>
+            <!--产品概况pro_service -->
+            <view class="brightPoint " wx:if="{{project.pro_service.length!=0}}">
+              <view class="brightPointBox flex">
+                <!-- <image src="/img/icon-chanpingaikuang@2x.png" class="titlePic"></image> -->
+                <view class="title" style="margin-bottom:32rpx">产品概况</view>
+              </view>
+              <!-- <view class="{{isChecked2?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+              <view class="brightUnfoldAfter" value="{{number}}">
+                <block wx:for="{{project.pro_service}}" wx:for-item="goodness" wx:key="{{index}}">
+                  <view class="goodTitle1">
+                    <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+                    <view class="brightContent">
+                      {{goodness.goodness_desc}}
+                    </view>
+                  </view>
+                </block>
+              </view>
+              <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked2 == true && textBeyond2==true}}" data-check="{{2}}">收起</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked2== false && textBeyond2==true}}" data-check="{{2}}">全部</label> -->
+            </view>
+            <!--商业模式 pro_business_model -->
+            <view class="brightPoint " wx:if="{{project.pro_business_model.length!=0}}">
+              <view class="brightPointBox flex">
+                <!-- <image src="/img/icon-shangyemoshi@2x.png" class="titlePic"></image> -->
+                <view class="title" style="margin-bottom:32rpx">商业模式</view>
+              </view>
+              <!-- <view class="{{isChecked3?'brightUnfold':'brightUnfoldAfter'}}" value="{{number}}"> -->
+              <view class="brightUnfoldAfter" value="{{number}}">
+                <block wx:for="{{project.pro_business_model}}" wx:for-item="goodness" wx:key="{{index}}">
+                  <view class="goodTitle1">
+                    <view class="goodTitle">· {{goodness.goodness_title}}：</view>
+                    <view class="brightContent">
+                      {{goodness.goodness_desc}}
+                    </view>
+                  </view>
+                </block>
+
+              </view>
+              <!-- <label class="more" bindtap="allBrightPoint" wx:if="{{isChecked3 == true && textBeyond3 == true}}" data-check="{{3}}">收起</label>
+              <label class="more" bindtap="noBrightPoint" wx:if="{{isChecked3 == false && textBeyond3 == true}}" data-check="{{3}}">全部</label> -->
+            </view>
+            <image class="myPic" bindtap="potential" src="{{imgUrls1}}"></image>
+            <!--项目资料-->
+            <view class="material" style="position:relative;" wx:if="{{project.pro_BP.length != 0|| project.pro_name != ''||project.pro_company_name != ''||project.pro_status != ''||project.pro_company_scale !=''||project.pro_website != ''||project.contact.user_name !=''||project.contact.user_mobile !=''}}">
+              <view class="materialBox flex">
+                <view class="{{tagOfPro.length != 0?'title':'t-title1' }}">项目介绍</view>
+              </view>
+              <view class="contentAll">
+                <view class="titleRightBP send-bpm" bindtap='onKey'>
+                  一键尽调
+                </view>
+                <view>
+                  <!-- <view class="titleRightBP send-bpm" bindtap="businessBook" wx:if="{{project.pro_BP.length != 0}}">发送BP
+                    <image src="/img/icon-jiantou.png" class="titleRightBPIcon"></image>
+                  </view> -->
+                  <view class="pro_sorts flex teamPro" wx:if="{{tagOfPro.length != 0}}">
+                    <view class="pro_sort" wx:for="{{tagOfPro}}" wx:key="{{index}}">{{tagOfPro[index].tag_name}}</view>
+                  </view>
+                  <!-- <view class="proposal grayName" wx:if="{{project.pro_BP.length != 0}}">商业计划书：
+                    <label class="materialContent">{{project.pro_BP.file_title}}</label>
+                  </view> -->
+                  <!-- wx:if='{{show_company==true}}' -->
+                  <view class="grayName" wx:if="{{project.pro_name != ''}}">项目名称
+                    <label class="materialContent">{{project.pro_name}}</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_name == ''}}">项目名称
+                    <label class="materialContent">暂未透露</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_company_name != ''}}">公司名称
+                    <label class="materialContent byPass">{{project.pro_company_name}}</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_company_name == ''}}">公司名称
+                    <label class="materialContent">暂未透露</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_status != ''}}">运营状态
+                    <label class="materialContent">{{project.pro_status.status_name}}</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_status == ''}}">运营状态
+                    <label class="materialContent">暂未透露</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_company_scale !=''}}">公司规模
+                    <label class="materialContent">{{project.pro_company_scale.comp_scale_value}}</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_company_scale ==''}}">公司规模
+                    <label class="materialContent">暂未透露</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_website != ''}}">产品链接
+                    <label class="materialWeb materialContent byPass">{{project.pro_website}}</label>
+                  </view>
+                  <view class="grayName" wx:if="{{project.pro_website == ''}}">产品链接
+                    <label class="materialWeb materialContent byPass">暂未透露</label>
+                  </view>
+                  <!-- <view class="grayName proposalFinal" wx:if="{{project.contact.user_name !=''||project.contact.user_mobile !=''}}">项目联系人：
+                    <label class="materialContent" style="margin-right:24rpx;">{{project.contact.user_name}}</label>
+                    <label class="materialContent">{{project.contact.user_mobile}}</label>
+                  </view> -->
+                </view>
+              </view>
+            </view>
+
+            <!--产品  -->
+            <view class="brightPoint1" wx:if="{{project.brand.length != 0}}">
+              <view id="detailHead">
+                <view class="brightPointBox flex">
+                  <view class="title">产品</view>
+                  <view class="productAll" wx:if="{{brandList1.length>3}}" bindtap='toBrand'>全部（
+                    <label>{{brandList1.length}}</label>）</view>
+                </view>
+              </view>
+              <block wx:for="{{brandList}}" wx:key="{{brandList}}">
+                <template is="productBox" data='{{item}}'></template>
+              </block>
+            </view>
+            <!--历史融资  -->
+            <view class="brightPoint" wx:if="{{project.pro_history_finance.length !=0}}">
+              <view id="detailHead">
+                <view class="brightPointBox flex">
+                  <view class="title t-title345">历史融资</view>
+                  <view class="productAll" bindtap="toHistory" wx:if="{{pro_history_financeList1.length>3}}">全部（
+                    <label>{{pro_history_financeList1.length}}</label>）</view>
+                </view>
+              </view>
+              <block wx:for="{{pro_history_financeList}}" wx:key="{{pro_history_financeList}}">
+                <template is="investHistory" data='{{item}}'></template>
+              </block>
+            </view>
+            <!--融资信息  -->
+            <view class="brightPoint detailTop" wx:if="{{project.pro_finance_stock_after != '' || project.pro_scale != '' || project.pro_finance_value != ''||project.pro_finance_use != ''}}">
+              <view id="detailHead">
+                <view class="brightPointBox flex">
+                  <view class="title t-title345">融资信息</view>
+                </view>
+              </view>
+              <view class="signFAcontentAll" wx:if="{{project.pro_scale != '' ||project.pro_finance_stock_after !=''|| project.pro_finance_value!= ''}}">
+                <view class="contentBox flex">
+                  <view class="whiteContent">
+                    <view class="flex">
+                      <view class="txtContent">
+                        <view class="textTab">期望融资</view>
+                        <view class="textNum" wx:if="{{project.pro_scale.scale_money}}">{{project.pro_scale.scale_money}}</view>
+                        <view class="textNum" wx:if="{{!project.pro_scale.scale_money}}">暂未透露</view>
+                      </view>
+                      <view class="txtContent">
+                        <view class="textTab">投后股份</view>
+                        <view class="textNum" wx:if="{{project.pro_finance_stock_after}}">{{project.pro_finance_stock_after}}%</view>
+                        <view class="textNum" wx:if="{{!project.pro_finance_stock_after}}">暂未透露</view>
+                      </view>
+                      <view class="txtContent">
+                        <view class="textTab">估值</view>
+                        <view class="textNum" wx:if="{{project.pro_finance_value}}">{{project.pro_finance_value}}万</view>
+                        <view class="textNum" wx:if="{{!project.pro_finance_value}}">暂未透露</view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                <view class="purpose" wx:if="{{project.pro_finance_use}}">
+                  <view id="detailHead">
+                    <view class="brightPointBox flex">
+                      <view class="title t-title345">资金用途</view>
+                    </view>
+                  </view>
+                  <view class="purposeContent">{{project.pro_finance_use}}</view>
+                </view>
+              </view>
+            </view>
+            <!--品牌-->
+            <!--<view class="companyBrand">
+              <view class="corePersonBox flex">
+                <image src="/img/myOn.png" class="titlePic"></image>
+                <view class="title"> 品牌</view>
+              </view>
+              <view class="contentAll">
+                <view class="grayName">品牌名称：
+                  <label class="materialContent">已上线</label>
+                </view>
+                <view class="grayName">产品链接：
+                  <label class="materialWeb materialContent">www.weitianshi.cn</label>
+                </view>
+                <view class="grayName">品牌名称
+                  <label class="materialContent">5-20人</label>
+                </view>
+              </view>
+            </view>-->
+            <!--核心团队-->
+            <view class="brightPoint detailTop" wx:if="{{teamOfPro.length !=0 ||project.core_users.length!=0}}">
+              <view id="detailHead">
+                <view class="brightPointBox flex">
+                  <view class="{{teamOfPro.length != 0?'title':'t-title1' }}">核心团队</view>
+                  <view class="productAll" bindtap='toTeam' wx:if="{{core_memberArray1.length>3}}">全部（
+                    <label>{{core_memberArray1.length}}</label>）</view>
+                </view>
+              </view>
+              <view class="contentAll">
+                <view class="flex" wx:if="{{teamOfPro.length!=0}}">
+                  <view class="pro_sorts flex" wx:for="{{teamOfPro}}" wx:key="{{index}}">
+                    <view class="pro_sort">{{teamOfPro[index].tag_name}}</view>
+                  </view>
+                </view>
+                <block wx:for="{{core_memberArray}}" wx:key="{{core_memberArray}}">
+                  <template is='detailTeam' data='{{item}}'></template>
+                </block>
+              </view>
+            </view>
+            <!--里程碑-->
+            <view class="brightPoint detailTop" wx:if="{{project.pro_develop.length != 0}}">
+              <view id="detailHead">
+                <view class="brightPointBox flex">
+                  <view class="title t-title345">里程碑</view>
+                  <view class="productAll" bindtap='mileStone' wx:if="{{mileStoneArray1.length>3}}">全部（
+                    <label>{{mileStoneArray1.length}}</label>）</view>
+                </view>
+              </view>
+              <view class="classname">
+                <block wx:for="{{mileStoneArray}}" wx:key="{{mileStoneArray}}">
+                  <template is="investHistory1" data='{{item}}'></template>
+                </block>
+
+              </view>
+            </view>
+            <view class="detailBottom"></view>
+
+            <!--FA签约-->
+            <!-- <view class="signFA" wx:if="{{project.pro_FA}}">
+              <view class="signFABox flex">
+                <image src="/img/img-money.png" class="titlePic"></image>
+                <view class="title">FA签约</view>
+              </view>
+              <view class="signFAcontentAll" wx:if="{{project.pro_FA.commission !=0||project.pro_FA.stock_right !=0||project.pro_FA.stock_other!=0||project.pro_FA.stock_follow !=0}}">
+                <view class="flex">
+                  <view class="whiteContent">
+                    <view class="conBox flex">
+                      <view class="textFAContent">
+                        <view class="textTab">签约佣金</view>
+                        <view class="textNum" wx:if="{{project.pro_FA.commission}}">{{project.pro_FA.commission}}%</view>
+                        <view class="textNum" wx:if="{{!project.pro_FA.commission}}">-</view>
+                      </view>
+                      <view class="textFAContent">
+                        <view class="textTab">股权赠与</view>
+                        <view class="textNum" wx:if="{{project.pro_FA.stock_right!=0}}">{{project.pro_FA.stock_right}}%</view>
+                        <view class="textNum" wx:if="{{project.pro_FA.stock_right==0}}">-</view>
+                      </view>
+                      <view class="textFAContent">
+                        <view class="textTab">其他权益</view>
+                        <view class="textNum" wx:if="{{project.pro_FA.stock_other!=0}}">{{project.pro_FA.stock_other}}%</view>
+                        <view class="textNum" wx:if="{{project.pro_FA.stock_other==0}}">-</view>
+                      </view>
+                      <view class="textFAContent">
+                        <view class="textTab">跟投权</view>
+                        <view class="textNum" wx:if="{{project.pro_FA.stock_follow!=0}}">{{project.pro_FA.stock_follow}}%</view>
+                        <view class="textNum" wx:if="{{project.pro_FA.stock_follow==0}}">-</view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view> -->
+          </view>
+
+          <view style="height:36rpx;"></view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!--买家图谱  -->
+    <swiper-item wx:if='{{show_company}}'>
+      <view>
+
+        <!--买家图谱  -->
+        <scroll-view wx:if="{{matchBut}}" scroll-y="true" style="height: 1254rpx;" bindscrolltolower="loadMore">
+          <view class="t-matchButton flex">
+            <!--t-matchButton1  代表选中  -->
+            <button class="{{matchBut?'t-matchButton1':'t-matchButton3'}}" bindtap='matchButt'>投资人(
+              <label>{{matchCount}}</label>)
+            </button>
+            <button class="{{matchBut1?'t-matchButton4':'t-matchButton2'}}" bindtap='matchButt1'>投资机构(
+              <label>{{investment_total_num}}</label>)</button>
+          </view>
+          <view class="buyerPage">
+            <!-- <view id="matching">匹配推荐：
+            <label>{{matchCount}}</label>个</view> -->
+            <block wx:for="{{investor2}}" wx:key="{{investor2}}">
+              <view class="resourceBox flex" wx:if="{{item.remove !=1}}">
+                <view class="resourceLeft">
+                  <image class="resourceImg" wx:if="{{item.match_rank==1}}" src="/img/img-1@2x.png"></image>
+                  <image class="resourceImg" wx:if="{{item.match_rank==2}}" src="/img/img-2@2x.png"></image>
+                  <image class="resourceImg" wx:if="{{item.match_rank==3}}" src="/img/img-3@2x.png"></image>
+                  <view class="resourceImg" wx:if="{{item.match_rank!==1&&item.match_rank!==2&&item.match_rank!==3}}">{{item.match_rank}}</view>
+                </view>
+                <view class="resourceRight">
+                  <template is='matchButton' data='{{item,user_id,investor_id,push_status}}'></template>
+                  <view class="t-alineHeight" wx:if="{{type==2}}"></view>
+                  <template is='matchButton1' data='{{item}}' wx:if="{{type==2}}"></template>
+                </view>
+              </view>
+            </block>
+            <view style="height:32rpx;"></view>
+            <template is="theBottom" style="margin-bottom:92rpx" wx:if="{{jiandi==true&&investor2.length!==0}}"></template>
+            <view style="height:32rpx;"></view>
+            <!-- <template is="hasNothing" data="{{emptyNumber:investor2}}"></template> -->
+            <template is="isEmpty" data="{{emptyNumber:investor2}}"></template>
+          </view>
+        </scroll-view>
+        <!--机构版买家图谱  -->
+        <scroll-view wx:if="{{matchBut1}}" style='height:1254rpx;' scroll-y='true' scroll-top="{{scroll}}" bindscrolltolower='loadMore1'>
+           <view class="t-matchButton flex">
+          <!--t-matchButton1  代表选中  -->
+          <button class="{{matchBut?'t-matchButton1':'t-matchButton3'}}" bindtap='matchButt'>投资人(<label>{{matchCount}}</label>)
+          </button>
+          <button class="{{matchBut1?'t-matchButton4':'t-matchButton2'}}" bindtap='matchButt1'>投资机构(<label>{{investment_total_num}}</label>)</button>
+        </view>
+          <view class="{{investment_list.length==0?'media123':'media12'}}">
+            <view class="matchIntro">{{newPage.pro_intro}}</view>
+            <view id="investment1" wx:if="{{investment_list.length!=0}}">
+              <template is='investment1' data='{{investment_list}}'></template>
+              <template is="theBottom" wx:if="{{jiandi1==true&&investment_list.length!==0}}"></template>
+            </view>
+            <!-- <view class="hasNothing" wx:if="{{investment_list.length ==0 }}">暂无数据</view> -->
+            <template is="isEmpty" data="{{emptyNumber:investment_list}}"></template>
+          </view>
+
+
+          <!--错误提示-->
+          <!-- <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view> -->
+
+        </scroll-view>
+      </view>
+    </swiper-item>
+    <!--一键尽调页面的内容-->
+    <swiper-item wx:if='{{show_company}}'>
+      <scroll-view scroll-y="true">
+        <view id="oneKey" wx:if="{{nothing != 0}}">
+          <view class="projectDetailsBox" wx:if="{{projectDetailsList.length != 0}}">
+            <view class="boxName">项目信息</view>
+            <view class="pro_sorts flex" wx:if="{{project_labelArray !=0}}">
+              <view class="pro_sort" wx:for="{{project_labelArray}}" wx:key="{{index}}">{{project_labelArray[index]}}</view>
+            </view>
+            <view class="companyInfo flex">
+              <view class="left">
+                <image src="{{projectDetailsOne.project_logo}}" class="left"></image>
+              </view>
+              <view class="right">
+                <view class="companyProductName">{{projectDetailsOne.project_name}}</view>
+                <view class="companyProductText byPass">{{projectDetailsOne.project_introduce}}</view>
+                <view class="companyName">{{projectDetailsOne.company_name}}</view>
+              </view>
+            </view>
+            <view class="projectInfo">
+              <view class="industry" wx:if="{{projectDetailsOne.project_industry}}">
+                <image src="/img/icon-lingyu@2x.png" class="oneKeyIcon"></image>
+                <label>{{projectDetailsOne.project_industry}}</label>
+              </view>
+              <!--<view class="projectInfoText flex">
+              <image src="/img/icon-jine@2x.png" class="oneKeyIcon"></image>
+              <label>{{company.company_registered_capital}}
+                <label>|</label>
+              </label>
+              <label>{{project.pro_stage.stage_name}}
+                <label>|</label>
+              </label>
+              <label>{{project.pro_area.area_title}}
+                <label>|</label>
+              </label>
+            </view>-->
+              <view class="companyNet" wx:if="{{projectDetailsOne.project_website}}">
+                <image src="/img/icon-wangzhan@2x.png" class="oneKeyIcon"></image>
+                {{projectDetailsOne.project_website}}
+              </view>
+            </view>
+          </view>
+          <!--公司信息-->
+          <view class="companyIntroduce">
+            <view class="boxName">公司信息</view>
+            <view class="companyIntroduceName">公司名称
+              <view class="companyIntroduceNameText" wx:if="{{company.company_name}}">{{company.company_name}}</view>
+              <view class="companyIntroduceNameText" wx:if="{{!company.company_name}}">{{company.company_name}}</view>
+            </view>
+            <view class="companyIntroduceAdd">公司地址
+              <view class="companyIntroduceAddText" wx:if="{{company.company_address}}">{{company.company_address}}</view>
+              <view class="companyDateText" wx:if="{{!company.company_address}}">-</view>
+            </view>
+            <view class="companyIntroduceTop flex">
+              <view class="companyDateTitle">成立日期
+                <view class="companyDateText" wx:if="{{company.company_register_date}}">{{time}}</view>
+                <view class="companyDateText" wx:if="{{!company.company_register_date||company.company_register_date == '1970-01-01'}}">-</view>
+              </view>
+              <view class="companyDateTitle">公司规模
+                <view class="companyDateText" wx:if="{{company.company_team_size}}">{{company.company_team_size}}</view>
+                <view class="companyDateText" wx:if="{{!company.company_team_size}}">-</view>
+              </view>
+            </view>
+            <view class="companyIntroduceBottom flex">
+              <view class="companyDateTitle">邮箱地址
+                <view class="companyDateText" wx:if="{{company.company_email}}">{{company.company_email}}</view>
+                <view class="companyDateText" wx:if="{{!company.company_email}}">-</view>
+              </view>
+              <view class="companyDateTitle">联系电话
+                <view class="companyDateText" wx:if="{{company.company_contact}}">{{company.company_contact}}</view>
+                <view class="companyDateText" wx:if="{{!company.company_contact}}">-</view>
+              </view>
+            </view>
+          </view>
+          <!--产品信息-->
+          <view class="projectExample" wx:if="{{projectInfoList != ''}}">
+            <view class="boxName">产品信息</view>
+            <view class="projectExample1 flex" wx:for="{{projectInfoList}}" wx:key="{{index}}">
+              <view class="projectExample1Logo">
+                <image src="/img/img-logo@2x.png" class="projectExample1Logo"></image>
+              </view>
+              <view class="projectExample1Right">
+                <view class="projectExample1Info flex">
+                  <view class="projectExample1Name">{{projectInfoList[index].company_project_name}}</view>
+                  <view class="projectExample1Type">{{projectInfoList[index].company_project_type}}</view>
+                </view>
+                <view class="projectExampleText byPass">{{projectInfoList[index].company_project_introduce}}</view>
+              </view>
+            </view>
+          </view>
+          <!--商标信息-->
+          <view class="projectTrade" wx:if="{{brandInfoList != 0}}">
+            <view class="boxName">知识产权-商标信息</view>
+            <view wx:for="{{brandInfoList}}" wx:key="{{index}}">
+              <view class="projectTradeInfo" wx:if="{{brandInfoList[index].company_brand_name}}">{{brandInfoList[index].company_brand_name}}</view>
+              <view class="projectTradeInfo" wx:if="{{!brandInfoList[index].company_brand_name}}"></view>
+              <view class="flex">
+                <view class="projectTradeInfoLeft">
+                  <view class="projectTradeTitle flex">注册时间：
+                    <view class="projectTradeText" wx:if="{{brandInfoList[index].company_brand_time != '1970-01-01'}}">{{brandInfoList[index].company_brand_time}}</view>
+                    <view class="projectTradeText" wx:if="{{!brandInfoList[index].company_brand_time|| brandInfoList[index].company_brand_time == '1970-01-01'}}">-</view>
+                  </view>
+                  <view class="projectTradeTitle flex">状态：
+                    <view class="projectTradeText" wx:if="{{brandInfoList[index].company_brand_status}}">{{brandInfoList[index].company_brand_status}}</view>
+                    <view class="projectTradeText" wx:if="{{!brandInfoList[index].company_brand_status}}">-</view>
+                  </view>
+                </view>
+                <view class="projectTradeInfoRight">
+                  <view class="projectTradeTitle flex">注册号：
+                    <view class="projectTradeText" wx:if="{{brandInfoList[index].company_brand_registration_number}}">{{brandInfoList[index].company_brand_registration_number}}</view>
+                    <view class="projectTradeText" wx:if="{{!brandInfoList[index].company_brand_registration_number}}">-</view>
+                  </view>
+                  <view class="projectTradeTitle flex">类型：
+                    <view class="projectTradeText" wx:if="{{brandInfoList[index].company_brand_type}}">{{brandInfoList[index].company_brand_type}}</view>
+                    <view class="projectTradeText" wx:if="{{!brandInfoList[index].company_brand_type}}">-</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <!--工商变更-->
+          <view class="industrialChange" wx:if="{{companyChangeList != 0}}">
+            <view class="boxName">工商变更</view>
+            <view class="industrialChangeInfo" wx:for="{{companyChangeList}}" wx:key="{{index}}" wx:if="{{index<2 ||industrialChangeMore == 5}}">
+              <view class="industrialChangeTime" wx:if="{{companyChangeList[index].company_change_time!='1970-01-01'}}">{{companyChangeList[index].company_change_time}}</view>
+              <view class="industrialChangeBoxTitle">{{companyChangeList[index].company_change_matter}}</view>
+              <view class="industrialChangeTextBox flex">
+                <view class="industrialChangeBefore">
+                  <view class="industrialChangeTitle">变更前</view>
+                  <view class="industrialChangeText">{{companyChangeList[index].company_change_before}}</view>
+                </view>
+                <view class="industrialChangeAfter">
+                  <view class="industrialChangeTitle">变更后</view>
+                  <view class="industrialChangeTextAfter">{{companyChangeList[index].company_change_after}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="moreInfo" catchtap="checkMore" wx:if="{{industrialChangeMore != 5 && companyChangeList.length>2}}" data-id="{{5}}">展开</view>
+            <view class="moreInfo" catchtap="noCheckMore" wx:if="{{industrialChangeMore == 5}}" data-id="{{5}}">收起</view>
+          </view>
+          <!--工商信息-->
+          <view class="industrialInfo" wx:if="{{company.company_legal_representative||company.company_registered_capital||company.company_operating_state||company.company_organization_code ||company.company_business_number||company.company_register_office||company.company_type ||company.company_business_term || company.company_unified_code ||company.company_empirical_range}}">
+            <view class="boxName">工商信息</view>
+            <view class="bossInfo flex">
+              <view class="bossName">法定代表人
+                <view class="bossInfoText" wx:if="{{company.company_legal_representative}}">{{company.company_legal_representative}}</view>
+                <view class="bossInfoText" wx:if="{{!company.company_legal_representative}}">-</view>
+              </view>
+              <view class="bossMoney">注册资本
+                <view class="bossInfoText" wx:if="{{company.company_registered_capital}}">{{company.company_registered_capital}}</view>
+                <view class="bossInfoText" wx:if="{{!company.company_registered_capital}}">-</view>
+              </view>
+              <view class="bossStatus">经营状态
+                <view class="bossInfoText" wx:if="{{company.company_operating_state}}">{{company.company_operating_state}}</view>
+                <view class="bossInfoText" wx:if="{{!company.company_operating_state}}">-</view>
+              </view>
+            </view>
+            <view class="companyEstablish">
+              <view class="flex">
+                <view class="companyIntroduceLeft">
+                  <view class="companyEstablishTitle">组织机构代码
+                    <view class="companyEstablishText" wx:if="{{company.company_organization_code}}">{{company.company_organization_code}}</view>
+                    <view class="companyEstablishText" wx:if="{{!company.company_organization_code}}">-</view>
+                  </view>
+                  <view class="companyEstablishTitle">工商注册号
+                    <view class="companyEstablishText" wx:if="{{company.company_business_number}}">{{company.company_business_number}}</view>
+                    <view class="companyEstablishText" wx:if="{{!company.company_business_number}}">-</view>
+                  </view>
+                  <view class="companyEstablishTitle">登记机关
+                    <view class="companyEstablishText" wx:if="{{company.company_register_office}}">{{company.company_register_office}}</view>
+                    <view class="companyEstablishText" wx:if="{{!company.company_register_office}}">-</view>
+                  </view>
+
+                </view>
+                <view class="companyIntroduceRight">
+                  <view class="companyEstablishTitle">企业类型
+                    <view class="companyEstablishText" wx:if="{{company.company_type}}">{{company.company_type}}</view>
+                    <view class="companyEstablishText" wx:if="{{!company.company_type}}">-</view>
+                  </view>
+                  <view class="companyEstablishTitle">营业期限
+                    <view class="companyEstablishText" wx:if="{{company.company_business_term}}">{{company.company_business_term}}</view>
+                    <view class="companyEstablishText" wx:if="{{!company.company_business_term}}">-</view>
+                  </view>
+                  <view class="companyEstablishTitle">统一社会信用代码
+                    <view class="companyEstablishText" wx:if="{{company.company_unified_code}}">{{company.company_unified_code}}</view>
+                    <view class="companyEstablishText" wx:if="{{!company.company_unified_code}}">-</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="companyRange">
+              <view class="companyRangeTitle">经营范围</view>
+              <view class="companyRangeText" wx:if="{{company.company_empirical_range}}">{{company.company_empirical_range}}</view>
+              <view class="companyRangeText" wx:if="{{!company.company_empirical_range}}">-</view>
+            </view>
+          </view>
+          <!--核心成员-->
+          <view class="coreMember" wx:if="{{teamList!= ''}}">
+            <view class="boxName">核心成员</view>
+            <view class="coreMemberInfo flex" wx:for="{{teamList}}" wx:key="{{index}}">
+              <view class="coreMemberLeft">
+                <image src="{{teamList[index].team_member_photo}}" class="coreMemberLeftBox"></image>
+              </view>
+              <view class="coreMemberRight">
+                <view class="coreMemberRightBox flex">
+                  <view class="coreMemberName">{{teamList[index].team_member_name}}</view>
+                  <view class="coreMemberPosition">{{teamList[index].team_member_position}}</view>
+                </view>
+                <view class="coreMemberIntro">{{teamList[index].team_member_introduce}}</view>
+              </view>
+            </view>
+          </view>
+
+          <!--历史融资-->
+          <view class="historyFinance" wx:if="{{historyFinance.length != 0}}">
+            <view class="boxName">历史融资</view>
+            <view class="classname">
+              <view class="historyFinanceBox" wx:for="{{historyFinance}}" wx:if="{{index<2 ||historyMore == 4}}" wx:key="{{index}}">
+                <view class="milestoneContentBox">
+                  <view class="companyMilestoneContent flex">
+                    <image class="case_pic" src="/img/img-dian@2x.png"></image>
+                    <view class="companyCase_time" wx:if="{{historyFinance[index].history_financing_time}}">{{historyFinance[index].history_financing_time}}</view>
+                    <view class="flex">
+                      <view class="companyCase_content byPass">{{historyFinance[index].history_financing_money}}</view>
+                      <view class="pro_sort competitorTips" wx:if="{{historyFinance[index].history_financing_rounds!=''}}">{{historyFinance[index].history_financing_rounds}}</view>
+                    </view>
+                  </view>
+                  <view class="companyNewsNetWork">{{historyFinance[index].history_financing_who}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="moreInfo" catchtap="checkMore" wx:if="{{historyMore != 4 && historyFinance.length>2}}" data-id="{{4}}">展开</view>
+            <view class="moreInfo" catchtap="noCheckMore" wx:if="{{historyMore == 4}}" data-id="{{4}}">收起</view>
+          </view>
+          <!--里程碑-->
+          <view class="companyMileStone" wx:if="{{mileStone !=''}}">
+            <view class="boxName">里程碑</view>
+            <view class="classname">
+              <view class="milestone" wx:for="{{mileStone}}" wx:key="{{index}}" wx:if="{{index<2 || companyMileStoneMore == 1}}">
+                <view class="milestoneContentBox ">
+                  <view class="companyMilestoneContent flex ">
+                    <image class="case_pic" src="/img/img-dian@2x.png"></image>
+                    <view class="mileCompanyCase_time" wx:if="{{mileStone[index].milestone_time != '1970.01.01'}}">{{mileStone[index].milestone_time}}</view>
+                    <view class="mileCompanyCase_content byPass">{{mileStone[index].milestone_event}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="moreInfo" catchtap="checkMore" wx:if="{{companyMileStoneMore != 1 && mileStone.length>2}}" data-id="{{1}}">展开</view>
+            <view class="moreInfo" catchtap="noCheckMore" wx:if="{{companyMileStoneMore == 1}}" data-id="{{1}}">收起</view>
+          </view>
+          <!--新闻-->
+          <view class="companyNews" wx:if="{{newsList.length !=0}}">
+            <view class="boxName">新闻</view>
+            <view class="companyNewsBox">
+              <view class="companyNewsContentBox" wx:for="{{newsList}}" wx:if="{{index<2 || companyNews == 2}}" wx:key="{{index}}">
+                <view class="companyMilestoneContent flex">
+                  <image class="case_pic" src="/img/dot@3x.png"></image>
+                  <view class="companyCase_time" wx:if="{{newsList[index].project_news_time !='1970.01.01'}}">{{newsList[index].project_news_time}}</view>
+                  <view class="flex">
+                    <view class="companyCase_content byPass">{{newsList[index].project_news_title}}</view>
+                    <view class="pro_sort competitorTips" wx:if="{{newsList[index].project_news_label}}">{{newsList[index].project_news_label}}</view>
+                  </view>
+                </view>
+                <!-- <view class="companyNewsNet">{{newsList[index].source}}</view> -->
+              </view>
+            </view>
+            <view class="moreInfo" catchtap="checkMore" wx:if="{{companyNews != 2 && newsList.length>2}}" data-id="{{2}}">展开</view>
+            <view class="moreInfo" catchtap="noCheckMore" wx:if="{{companyNews == 2}}" data-id="{{2}}">收起</view>
+          </view>
+          <view class="competitor" wx:if="{{competeList.length != 0}}">
+            <view class="boxName">相似公司</view>
+            <view wx:for="{{competeList}}" class="competitorBox" wx:if="{{index<2 || competitorMore == 3}}" wx:key="{{index}}">
+              <view class="flex">
+                <view class="competitorBoxLeft">
+                  <image src="{{competeList[index].project_logo}}" class="competitorBoxLeft" wx:if="{{competeList[index].project_logo != ''}}"></image>
+                  <image src="/img/img-logo@2x.png" class="projectExample1Logo" wx:if="{{competeList[index].project_logo == ''}}"></image>
+                </view>
+                <view class="competitorBoxRight">
+                  <view class="flex competitorMessage">
+                    <view class="competitorProjectName">{{competeList[index].project_name}}</view>
+                    <view class="competitorProjectLocation">{{competeList[index].project_location}}</view>
+                    <view class="competitorProjectDate" wx:if="{{competeList[index].company_register_date !='1970-01-01'}}">{{competeList[index].company_register_date}}</view>
+                  </view>
+                  <view class="competitorProjectIntro">{{competeList[index].project_introduce}}</view>
+                </view>
+              </view>
+              <view class=" similarPro_sorts">
+                <block wx:for="{{competeList[index].project_label}}" wx:key="{{index}}">
+                  <label class="pro_sort similarCompany" wx:if="{{item.length != 0}}">{{item}}</label>
+                </block>
+              </view>
+              <view class="bottomBox flex" wx:if="{{competeList[index].history_financing.length != 0}}">
+                <view class="projectFinancing">最近融资：</view>
+                <view class="historyFinancing">
+                  <view class="flex">
+                    <view class="history_financing_time" wx:if="{{competeList[index].history_financing.history_financing_time!=1970-01-01}}">{{competeList[index].history_financing.history_financing_time}}</view>
+                    <view class="history_financing_money">{{competeList[index].history_financing.history_financing_money}}</view>
+                    <view class="history_financing_rounds">{{competeList[index].history_financing.history_financing_rounds}}</view>
+                  </view>
+                  <view class="history_financing_who">{{competeList[index].history_financing.history_financing_who}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="moreInfo" catchtap="checkMore" wx:if="{{competitorMore != 3 && competeList.length>2}}" data-id="{{3}}">展开</view>
+            <view class="moreInfo" catchtap="noCheckMore" wx:if="{{competitorMore == 3}}" data-id="{{3}}">收起</view>
+          </view>
+          <view style="height:88rpx;"></view>
+        </view>
+        <view class="noMessage" wx:if="{{nothing == 0}}">
+          <image src="/img/img-kong@2x.png" class="nothing"></image>
+          <view class="hasNoFind">暂未调查到相关信息</view>
+          <view class="writeCompanyName write-companynamem" bindtap="writeCompanyName" hover-class='t-color1' wx:if="{{other}}">完善公司名称</view>
+          <!--  -->
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!--相似公司  -->
+    <swiper-item>
+      <scroll-view scroll-y="true">
+        <view id="oneKey">
+          <view class="competitor" wx:if="{{competeList.length != 0}}">
+            <!-- <view class="boxName">相似公司</view> -->
+            <view wx:for="{{competeList}}" class="competitorBox" wx:if="{{index<2 || competitorMore == 3}}" wx:key="{{index}}">
+              <view class="flex">
+                <view class="competitorBoxLeft">
+                  <image src="{{competeList[index].project_logo}}" class="competitorBoxLeft" wx:if="{{competeList[index].project_logo != ''}}"></image>
+                  <image src="/img/img-logo@2x.png" class="projectExample1Logo" wx:if="{{competeList[index].project_logo == ''}}"></image>
+                </view>
+                <view class="competitorBoxRight">
+                  <view class="flex competitorMessage">
+                    <view class="competitorProjectName">{{competeList[index].project_name}}</view>
+                    <view class="competitorProjectLocation">{{competeList[index].project_location}}</view>
+                    <view class="competitorProjectDate" wx:if="{{competeList[index].company_register_date !='1970-01-01'}}">{{competeList[index].company_register_date}}</view>
+                  </view>
+                  <view class="competitorProjectIntro">{{competeList[index].project_introduce}}</view>
+                </view>
+              </view>
+              <view class=" similarPro_sorts">
+                <block wx:for="{{competeList[index].project_label}}" wx:key="{{index}}">
+                  <label class="pro_sort similarCompany" wx:if="{{item.length != 0}}">{{item}}</label>
+                </block>
+              </view>
+              <view class="bottomBox flex" wx:if="{{competeList[index].history_financing.length != 0}}">
+                <view class="projectFinancing">最近融资：</view>
+                <view class="historyFinancing">
+                  <view class="flex">
+                    <view class="history_financing_time" wx:if="{{competeList[index].history_financing.history_financing_time!=1970-01-01}}">{{competeList[index].history_financing.history_financing_time}}</view>
+                    <view class="history_financing_money">{{competeList[index].history_financing.history_financing_money}}</view>
+                    <view class="history_financing_rounds">{{competeList[index].history_financing.history_financing_rounds}}</view>
+                  </view>
+                  <view class="history_financing_who">{{competeList[index].history_financing.history_financing_who}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="moreInfo" catchtap="checkMore" wx:if="{{competitorMore != 3 && competeList.length>2}}" data-id="{{3}}">展开</view>
+            <view class="moreInfo" catchtap="noCheckMore" wx:if="{{competitorMore == 3}}" data-id="{{3}}">收起</view>
+          </view>
+          <template is="isEmpty" data="{{emptyNumber:competeList}}" wx:if="{{competeList.length==0}}"></template>
+          <view style="height:88rpx;"></view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <!-- 客服 -->
+  <button open-type="contact" class="t-contact" bindtap='contactTap' wx:if="{{currentTab==0}}">
+    <image class="service" wx:if="{{bindContact==false}}" src="/img/btn-lianxikefu@2x.png"></image>
+    <image class="service" wx:if="{{bindContact==true}}" src="/img/img-kefu-s@2x.png">
+    </image>
+  </button>
+  <!--项目打分  -->
+  <!-- <view class="projectScore" wx:if="{{score&&currentTab==0}}" bindtap="projectRemark">项目评价</view> -->
+</view>

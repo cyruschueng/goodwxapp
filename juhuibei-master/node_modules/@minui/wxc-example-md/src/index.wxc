@@ -1,0 +1,52 @@
+<template>
+  <view class="example__md example__md--{{type}}">
+    <rich-text nodes="{{content}}"></rich-text>
+  </view>
+</template>
+
+<script>
+export default {
+  properties: {
+    type: { // doc or demo
+      type: String,
+      value: 'doc'
+    },
+    content: {
+      type: String | Array,
+      value: ''
+    }
+  },
+  attached () {
+    // let { content, isRawCode } = this.data
+    // content = decodeURIComponent(content)
+    // if (isRawCode) {
+    //   content = '``` html \r\n' + content + '\r\n```'
+    // }
+
+
+    // content = marked(content)
+    // content = content.replace(/\<(|\/)pre\>/ig, '')
+    // content = content.replace(/\n/g, '<br/>')
+    // content = content.replace(/  /g, '<span class="tab-1"></span>')
+    // // content = markdownFormat(content)
+    // console.log(content)
+    // this.setData({
+    //   nodes: content
+    // })
+	}
+}
+</script>
+
+<style>
+@import './style/index.wxss';
+
+.example__md {
+  color: #555;
+  font-size: 24rpx;
+}
+.example__md--demo{
+  display: block;
+  background: #f6f6f6;
+  padding: 20rpx;
+}
+</style>

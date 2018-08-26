@@ -1,0 +1,1522 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>后台系统</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+    <!--<link rel="stylesheet" href="css/bootstrap.css">-->
+    <link href="image/login/icon.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/ppublic.css">-->
+    <link rel="stylesheet" type="text/css" href="css/system.css">
+    <link rel="stylesheet" href="css/zyUpload.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <link type="text/css" href="css/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+    <link type="text/css" href="css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-zh-CN.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
+</head>
+
+<body>
+    <section class="container-fluid">
+        <aside class="row totalInfo">
+            <div class="col-xs-1 col-sm-1 left common">
+                <div class="col-xs-12 col-sm-12 firstMenu firstMenu1"><span>开班信息</span></div>
+                <div class="col-xs-12 col-sm-12 firstMenu firstMenu2"><span class="active">教练管理</span></div>
+                <div class="col-xs-12 col-sm-12 firstMenu firstMenu3"><span>售卖管理</span></div>
+                <div class="col-xs-12 col-sm-12 firstMenu firstMenu4"><span class="activeMan">动作管理</span></div>
+            </div>
+            <div class="col-xs-1 col-sm-1 middle common" style="display: none;">
+                <!--最开始需要显示-->
+                <div class="secondMenu">
+                    <div class="col-xs-12 col-sm-12"><span class="active2">班级</span></div>
+                    <div class="col-xs-12 col-sm-12"><span>教练</span></div>
+                    <div class="col-xs-12 col-sm-12"><span onclick="getAllSportList()">学员</span></div>
+                </div>
+                <div class="secondMenu" style="display: none;">
+                    <!-- <div class="col-xs-12 col-sm-12"><span class="active2" onclick="getCouponList(1,10)">优惠券管理</span></div>
+                    <div class="col-xs-12 col-sm-12"><span class="orderManage">订单管理</span></div>
+                    <div class="col-xs-12 col-sm-12"><span class="studentManage">学员管理</span></div>
+                    <div class="col-xs-12 col-sm-12"><span class="goodshops">商品管理</span></div> -->
+                    <div class="col-xs-12 col-sm-12"><span class="active2">商品管理(1.5)</span></div>
+                    <div class="col-xs-12 col-sm-12"><span onclick="getCouponList(1,10)">优惠券管理</span></div>
+                    <div class="col-xs-12 col-sm-12"><span class="orderManage">订单管理</span></div>
+                    <div class="col-xs-12 col-sm-12"><span class="studentManage">学员管理</span></div>
+                    <div class="col-xs-12 col-sm-12"><span class="goodshops">商品后台管理</span></div>
+                </div>
+            </div>
+
+            <div class="col-xs-11 col-sm-11 right common specialRight" style="display: block;">
+                <div class="col-xs-12 col-sm-12 head head1 headHD"><span class="active3">营内互动</span><span>数据监督</span>
+                    <p id="coachLink" style="word-wrap:break-word"></p>
+                </div>
+                <div class="coachM">
+                    <div class="inner huDong" style="display: block;">
+                        <div class="col-xs-2 col-sm-2 aboutCoach">
+                            <input type="text" placeholder="搜索" class="search1 searchCoach">
+                            <div class="innerAboutCoach">
+                                <!--<div class="col-xs-12 col-sm-12 coaches">教练B</div>
+                            <div class="col-xs-12 col-sm-12 coaches">教练C</div>-->
+                            </div>
+                        </div>
+                        <div class="col-xs-10 col-sm-10 aboutInfo">
+                            <!--<iframe src="https://a.picooc.com/web/fatburn/studentList.html?version=23&userId=1121465&roleId=1580044&appver=3.1.0.1&timestamp=1479883005&os=android&lang=zh_CN&method=lst&timeZone=Asia/Shanghai&sign=9BC961F768FA7E7800ADACFFF3B41A7A&device_id=867826020134003&pushToken=android::867826020134003&webver=1&eventName=fatBurn" frameborder="0"></iframe>-->
+                            <iframe src="" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <div class="inner" style="display: block;">
+                        <!--数据监督-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-10 col-sm-10 right common" style="display: none;">
+                <div class="one" style="display: block;">
+                    <!--最开始需要显示-->
+                    <div class="col-xs-12 col-sm-12 head head1">
+                        <!--<span class="active3">班级列表</span>-->
+                        <span class="active3">新建班级</span>
+
+                    </div>
+                    <!--<div class="col-xs-12 col-sm-12">
+                    <div class="col-sm-12 col-xs-12 tabTitle">
+                        <input type="text" placeholder="模糊查询">
+                        <button>筛选</button>&emsp;&emsp;&emsp;
+                        <span>共有<em></em>数据</span>&emsp;&emsp;&emsp;
+                        <button>添加班级</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <table class="table tableStyle1">
+                            <thead>
+                                <tr>
+                                    <td>班级名称</td>
+                                    <td>开营时间</td>
+                                    <td>结营时间</td>
+                                    <td>教练名称</td>
+                                    <td>学员数</td>
+                                    <td>备注</td>
+                                    <td>操作</td>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="col-xs-12 col-sm-12 tabfo">
+                            <button class="borderStyle" id="">上一页</button>
+                            <button class="borderStyle" id="">下一页</button>
+                        </div>
+                    </div>
+                </div>-->
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="className">*班级名称：</lable>
+                            <input type="text" id="className">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="beginTime">*开营时间：</lable>
+                            <input type="text" class="timepicker" id="beginTime" value="" name="datetime">
+                            <!--<div style="width:100%;">
+                            <p class="datep"><input class="datainp" id="dateinfo" type="text" placeholder="请选择"  readonly></p>
+                        </div>-->
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing" style="position:relative">
+                            <lable for="coachName" style="">*教练名字：</lable>
+                            <div style="display:inline-block">
+                                <input type="text" id="coachName" data-roleId="" data-id="" placeholder="请输入内容用于检索" style="position:relative">
+                                <!--模糊匹配窗口-->
+                                <div id="div_itemsforcoach" class="div_items">
+                                    <!-- <div class="div_item">周杰伦</div>  
+                                <div class="div_item">周杰</div>  
+                                <div class="div_item">林俊杰</div>  
+                                <div class="div_item">林宥嘉</div>  
+                                <div class="div_item">林妙可</div>  -->
+                                </div>
+                            </div>
+                            <!--                         <select id="coachName">
+                            <option value ="volvo">abcd&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</option>
+                            <option value ="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select> -->
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="weeks">&nbsp;&nbsp;*周期(周)：</lable>
+                            <input type="text" id="weeks">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="remark">&nbsp;班级备注：</lable>
+                            <input type="text" id="remark">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <button class="btn" onclick="creatClass()">提交</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="one" style="display: none;">
+                    <div class="col-xs-12 col-sm-12 head head1">
+                        <!--<span class="active3">教练列表</span>-->
+                        <span class="active3">添加教练</span>
+                    </div>
+                    <!--教练列表-->
+                    <!--<div class="col-xs-12 col-sm-12" >
+                    <div class="col-sm-12 col-xs-12 tabTitle">
+                        <input type="text" placeholder="模糊查询">
+                        <button>筛选</button>&emsp;&emsp;&emsp;
+                        <span>共有<em></em>数据</span>&emsp;&emsp;&emsp;
+                        <button>添加教练</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <table class="table tableStyle1">
+                            <thead>
+                                <tr>
+                                    <td>教练昵称</td>
+                                    <td>手机号</td>
+                                    <td>性别</td>
+                                    <td>年龄</td>
+                                    <td>备注</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="col-xs-12 col-sm-12 tabfo">
+                            <button class="borderStyle" id="">上一页</button>
+                            <button class="borderStyle" id="">下一页</button>
+                        </div>
+                    </div>
+                </div>-->
+                    <!--添加教练-->
+                    <div class="col-xs-12 col-sm-12">
+                        <!--                     <div class="col-xs-12 col-sm-12 spacing">
+                        <lable for="className">*手机号：</lable>
+                        <input type="text" id="phone" placeholder="手机号/邮箱/userid至少填一项">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 spacing">
+                        <lable for="className">&nbsp;&emsp;*邮箱：</lable>
+                        <input type="text" id="email" placeholder="手机号/邮箱/userid至少填一项">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 spacing">
+                        <lable for="className">*userId：</lable>
+                        <input type="text" id="userID" placeholder="手机号/邮箱/userid至少填一项">
+                    </div> -->
+                        <div class="col-xs-12 col-sm-12 spacing">
+
+                            <select class="select" id="selectForAddCoach">
+                            <option value ="0">手机号</option>
+                            <option value ="1">邮箱</option>
+                            <option value="2">userId</option>
+                        </select>
+                            <input type="text" id="CoachInfoForAdd">
+
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="coach">&nbsp;教练昵称：</lable>
+                            <input type="text" id="coachNickName" placeholder="非必填">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="coachName">&nbsp;&emsp;&emsp;备注：</lable>
+                            <input type="text" id="coachRemark" placeholder="非必填">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <button class="btn" onclick="addCoach()">提交</button>
+                        </div>
+                    </div>
+                </div>
+                <!--学员-->
+                <div class="one" style="display: none;">
+                    <div class="col-xs-12 col-sm-12 head head1 stus">
+                        <span class="active3">添加学员</span>
+                        <span onclick="getAllSportList()">分配运动</span>
+                        <span onclick="">运动计划生成</span>
+                        <span onclick="">运动计划查询</span>
+                        <span onclick="">运动计划删除</span>
+                    </div>
+                    <!--添加学员-->
+                    <div class="inner innerChoose">
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <select class="select" id="selectForAddStu">
+                                    <option value ="0">手机号</option>
+                                    <option value ="1">邮箱</option>
+                                    <option value="2">userId</option>
+                                </select>
+                            <input type="text" id="youpinId">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="banJi">*班级名称：</lable>
+                            <div style="display:inline-block">
+                                <input type="text" id="classNameL" data-id="" placeholder="请输入内容用于检索" style="position:relative">
+
+                                <div id="div_itemsforAddStu" class="div_items">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="orderhao">*订单号：</lable>
+                            <div style="display:inline-block">
+                                <input type="text" id="orderhao" data-id="" placeholder="请输入订单号" style="position:relative">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <button class="btn" onclick="addStudent()">提交</button>
+                        </div>
+                        <div class="moreInfo">
+                            <form id="addStuForm" name="addStuForm" enctype="multipart/form-data">
+                                <input id="addStuFormfile" name="file" type="file" />
+                            </form>&emsp;<button id="addStuMany" onclick="addStuMany()" style="background-color:green">批量导入</button>
+                        </div>
+                    </div>
+                    <div class="inner innerChoose fenpeijihua" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="">*学员昵称:</lable>
+                            <div style="display: inline-block">
+                                <input type="text" id="studentName1" data-id="" placeholder="请输入内容" style="position: relative">
+                            </div>
+                            <ul class="studentList1 studentList" style="position:relative"></ul>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="banJi">*班级名称:</lable>
+                            <div style="display: inline-block">
+                                <input type="text" id="className1" data-id="" placeholder="请输入内容" style="position: relative">
+
+                            </div>
+                            <ul class="classList1 classList" style="position:relative"></ul>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="banJi">*第几周:</lable>
+                            <div style="display: inline-block">
+                                <input type="text" id="weekIndex1" data-id="" placeholder="请输入内容" style="position: relative">
+                            </div>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="banJi">计划URL:</lable>
+                            <div style="display: inline-block">
+                                <input type="text" id="plan" data-id="" placeholder="请输入内容" style="position: relative">
+                            </div>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+
+                            <div style="display: inline-block">
+                                <input type="button" id="search_plan" data-id="" value="查看" style="position: relative">
+                                <input type="button" id="change_plan" data-id="" value="修改" style="position: relative">
+                            </div>
+                        </div>
+                        </br>
+                        <div class="moreInfo">
+                            <form id="addSportForm" name="addSportForm" enctype="multipart/form-data">
+                                <input id="addSportFormfile" name="file" type="file" />
+                            </form>&emsp;<button id="addSportMany" onclick="addSportMany()" style="background-color:green">批量导入</button>
+                        </div>
+                    </div>
+                    <div class="inner innerChoose" style="display:none">
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="banJi">*学员昵称:</lable>
+                            <div style="display: inline-block">
+                                <input type="text" id="studentName2" data-id="" placeholder="请输入内容" style="position: relative">
+                            </div>
+                            <ul class="studentList2 studentList" style="position:relative"></ul>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="banJi">*班级名称:</lable>
+                            <div style="display: inline-block">
+                                <input type="text" id="className2" data-id="" placeholder="请输入内容" style="position: relative">
+                            </div>
+                            <ul class="classList2 classList" style="position:relative"></ul>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="fatOrShaping">*参营目的:</lable>
+                            <div style="display: inline-block" id="fatOrShaping">
+                                <input type="radio" value="0" name="fatOrShaping" checked="checked">&nbsp;塑形&nbsp;&nbsp;
+                                <input type="radio" value="1" name="fatOrShaping">&nbsp;减脂&nbsp;&nbsp;
+                                <input type="radio" value="2" name="fatOrShaping">&nbsp;增肌&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="taboos">*特殊标签:</lable>
+                            <div style="display: inline-block" id="taboos">
+                                <input type="checkbox" value="0" name="taboos" checked="checked">&nbsp;无标签&nbsp;
+                                <input type="checkbox" value="13" name="taboos">&nbsp;&nbsp;生理期&nbsp;
+                                <input type="checkbox" value="12" name="taboos">&nbsp;大基数&nbsp;
+                                <input type="checkbox" value="14" name="taboos">&nbsp;上肢损伤&nbsp;
+                                <input type="checkbox" value="15" name="taboos">&nbsp;下肢损失&nbsp;
+                                <input type="checkbox" value="16" name="taboos">&nbsp;核心损失
+                            </div>
+                        </div>
+                        </br>
+                        <!-- <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*是否有生理期:</lable>
+                                <div id="periodId1" style="display: inline-block">
+                                    <input type="radio" value="0" name="periodId" />&nbsp;无生理期&nbsp;&nbsp;
+                                    <input type="radio" value="1" name="periodId" />&nbsp;有生理期
+                                </div>
+                            </div> -->
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="">*第几周运动计划:</lable>
+                            <div style="display: inline-block" id="weekIndex2">
+                                <input type="checkbox" value="1" checked="checked">1
+                                <input type="checkbox" value="2">&nbsp;2&nbsp;&nbsp;
+                                <input type="checkbox" value="3">&nbsp;3&nbsp;&nbsp;
+                                <input type="checkbox" value="4">&nbsp;4&nbsp;&nbsp;
+                                <input type="checkbox" value="5">&nbsp;5&nbsp;&nbsp;
+                                <input type="checkbox" value="6">&nbsp;6
+                                <!-- <input type="text"  data-id="" placeholder="请输入内容" style="position: relative"> -->
+                            </div>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="planDuration">*计划总时长:</lable>
+                            <div id="planDuration" style="display: inline-block">
+                                <input type="radio" value="40" name="planDuration" />&nbsp;40&nbsp;&nbsp;
+                                <input type="radio" value="60" name="planDuration" checked="checked" />&nbsp;60&nbsp;&nbsp;
+                                <input type="radio" value="75" name="planDuration" />&nbsp;75&nbsp;&nbsp;
+                                <input type="radio" value="90" name="planDuration" />&nbsp;90
+                            </div>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="banJi">*计划类型:</lable>
+                            <div id="bodyType1" style="display: inline-block">
+                                <input type="radio" value="0" name="bodyType1" checked="checked" />&nbsp;运动计划&nbsp;&nbsp;
+                                <input type="radio" value="1" name="bodyType1" />&nbsp;体测视频&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="level1">*难度等级:</lable>
+                            <div style="display: inline-block" id="level1">
+                                <input type="radio" value="5" name="level1" checked="checked">&nbsp;A&nbsp;
+                                <input type="radio" value="6" name="level1">&nbsp;B&nbsp;
+                                <input type="radio" value="7" name="level1">&nbsp;C&nbsp;
+                                <input type="radio" value="8" name="level1">&nbsp;D&nbsp;
+                                <input type="radio" value="9" name="level1">&nbsp;E&nbsp;
+                                <input type="radio" value="10" name="level1">&nbsp;F&nbsp;
+                                </select>
+                            </div>
+                        </div>
+                        </br>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <input type="button" id="generateSport" data-id="" value="生成" style="position: relative; height: 50px; width: 80px;">
+                        </div>
+                    </div>
+                    <div class="inner innerChoose" style="display:none">
+                        <div id="resText">
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*学员昵称:</lable>
+                                <div style="display: inline-block">
+                                    <input type="text" id="studentName3" data-id="" placeholder="请输入内容" style="position: relative">
+                                </div>
+                                <ul class="studentList3 studentList" style="position:relative"></ul>
+                            </div>
+
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*班级名称:</lable>
+                                <div style="display: inline-block">
+                                    <input type="text" id="className3" data-id="" placeholder="请输入内容" style="position: relative">
+                                </div>
+                                <ul class="classList3 classList" style="position:relative"></ul>
+                            </div>
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*第几周运动计划：</lable>
+                                <div style="display: inline-block">
+                                    <input type="text" id="weekIndex3" data-id="" placeholder="请输入内容" style="position: relative">
+                                </div>
+                            </div>
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*计划类型:</lable>
+                                <div id="bodyType2" style="display: inline-block">
+                                    <input type="radio" value="0" name="bodyType" />运动计划
+                                    <input type="radio" value="1" name="bodyType" />体测视频
+                                </div>
+                            </div>
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <input type="button" id="sendSport" data-id="" value="查询" style="position: relative; height: 50px; width: 80px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner innerChoose" style="display:none">
+                        <div id="resText">
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*学员昵称:</lable>
+                                <div style="display: inline-block">
+                                    <input type="text" id="studentName4" data-id="" placeholder="请输入内容" style="position: relative">
+                                </div>
+                                <ul class="studentList4 studentList" style="position:relative"></ul>
+                            </div>
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*班级名称:</lable>
+                                <div style="display: inline-block">
+                                    <input type="text" id="className4" data-id="" placeholder="请输入内容" style="position: relative">
+                                </div>
+                                <ul class="classList4 classList" style="position:relative"></ul>
+                            </div>
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*第几周运动计划：</lable>
+                                <div style="display: inline-block">
+                                    <input type="text" id="weekIndex4" data-id="" placeholder="请输入内容" style="position: relative">
+                                </div>
+                            </div>
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="banJi">*计划类型:</lable>
+                                <div id="bodyType2" style="display: inline-block">
+                                    <input type="radio" value="0" name="bodyType" />运动计划
+                                    <input type="radio" value="1" name="bodyType3" />体测视频
+                                </div>
+                            </div>
+                            </br>
+                            <div class="col-xs-12 col-sm-12 spacing">
+                                <input type="button" id="delSport" data-id="" value="删除" style="position: relative; height: 50px; width: 80px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-xs-10 col-sm-10 right common sale" style="display: none;">
+                <!--商品管理-->
+                <div class="two goods" style="display: block;">
+                    <div class="col-xs-12 col-sm-12 head head2">
+                        <span class="active3" onclick="findGoods(1,10)">商品列表</span>
+                        <span onclick="clearGood()">创建商品</span>
+                        <span>发现售卖图片</span>
+                    </div>
+                    <div class="inner innerChoose2 goodsList" style="display: block;">
+                        <div class="bs-example">
+                            <table class="table table-bordered tableStyle1">
+                                <thead>
+                                    <tr>
+                                        <!-- <th></th> -->
+                                        <th>商品名</th>
+                                        <th>商品编号</th>
+                                        <th>原价</th>
+                                        <th>库存</th>
+                                        <th>总销量</th>
+                                        <th>创建时间 &#8595;</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="goodsList">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 listBottom">
+                            <!--                         <div class="col-xs-6 col-sm-6 listLeft">
+                            &emsp;&nbsp;<input type="checkbox" id="goodsCheckAll"> 全选&emsp;
+                            <span class="borderStyle">删除</span>
+                        </div> -->
+                            <div class="col-xs-12 col-sm-12 listRight">
+                                <button class="borderStyle" id="goodsListBefore">上一页</button>
+                                <button class="borderStyle" id="goodsListAfter">下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner innerChoose2 createGoods" id="createGoods" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="goodName1">*商品名称：</lable>
+                            <input type="text" id="goodName1">&emsp;&emsp;
+                            <lable for="goodId">*商品代号：</lable>
+                            <input type="text" id="goodId">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 textarea2 spacing">
+                            <lable for="goodTip">*温馨提示：</lable>
+                            <textarea id="goodTip" cols="40" rows="5"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            *商品头图：<a href="javascript:;" class="file">+加图
+                                            <input type="file" id="imgfileHead">
+                                </a>
+                            <div class="imglist" id="imglist">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="originPrice">&emsp;&emsp;*原价：</lable>
+                            <input type="text" id="originPrice" value="" placeholder="单位/元">&emsp;&emsp;
+                            <lable for="nowPrice">&emsp;&emsp;*现价：</lable>
+                            <input type="text" id="nowPrice" value="" placeholder="单位/元">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="oldstorage">*原始库存：</lable>
+                            <input type="text" id="oldstorage">&emsp;&emsp;
+                            <lable for="newstorage">*实际库存：</lable>
+                            <input type="text" id="newstorage">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="cuXiao">&emsp;促销工具：</lable>
+                            <select id="cuXiao">
+                            <option value ="">请选择</option>
+                            <option value ="2">买秤优惠码</option>
+                            <option value ="3">100抵300优惠券</option>
+                        </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="goodtype1"><span style="color:red;">*</span>商品类型：</lable>
+                            <select id="goodtype1">
+                            <option value ="">请选择</option>
+                            <option value ="1">燃脂营</option>
+                            <option value ="2">100抵300优惠券</option>
+                        </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="yuReTime">*预热时间：</lable>
+                            <input type="text" id="yuReTime">&emsp;&emsp;
+                            <lable for="saleTime">*开售时间：</lable>
+                            <input type="text" id="saleTime">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="kaiYing">*开营时间：</lable>
+                            <input type="text" id="kaiYing">&emsp;&emsp;
+                            <lable for="campWeeks">&emsp;&emsp;*周期：</lable>
+                            <input type="text" id="campWeeks" placeholder="单位/周">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="nextCampSale">&nbsp;下期编号：</lable>
+                            <input type="text" id="nextCampSale">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            *商品详情：<a href="javascript:;" class="file">+加图
+                                            <input type="file" id="imgfileHead2">
+                                </a>
+                            <div class="imglist" id="imglist2">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            *评论回复：<a href="javascript:;" class="file">+加图
+                                            <input type="file" id="replys1">
+                                </a>
+                            <div class="imglist" id="imglist5">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing" style="text-align:center;">
+                            &emsp;&emsp;<button class="btn" onclick="operateGoods()">保存并预览</button>&emsp;&emsp;
+                            <!-- <button class="btn" id="yulan1">预览</button> -->
+                        </div>
+                    </div>
+                    <div class="inner innerChoose2 createGoods" id="createGoods" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            *售卖图片：<a href="javascript:;" class="file">+上传图片(*完成后既已上传)
+                                            <input type="file" id="sellimg"/>
+                                </a>
+                            <div class="imglist" id="imglist8"></div>
+                        </div>
+                    </div>
+                    <div class="inner innerChoose2 createGoods" id="editGoods" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="goodName1">商品名称：</lable>
+                            <input type="text" id="goodName2">&emsp;&emsp;
+                            <lable for="goodId">商品代号：</lable>
+                            <input type="text" id="goodId2">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 textarea2 spacing">
+                            <lable for="goodTip2">*温馨提示：</lable>
+                            <textarea id="goodTip2" cols="40" rows="5"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            商品头图：<a href="javascript:;" class="file">+加图
+                                            <input type="file" name="" id="imgfileHead3">
+                                </a>
+                            <div class="imglist" id="imglist3">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="originPrice">&emsp;&emsp;原价：</lable>
+                            <input type="text" id="originPrice2" value="" placeholder="单位/元">&emsp;&emsp;
+                            <lable for="nowPrice">&emsp;&emsp;现价：</lable>
+                            <input type="text" id="nowPrice2" value="" placeholder="单位/元">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="oldstorage">原始库存：</lable>
+                            <input type="text" id="oldstorage2">&emsp;&emsp;
+                            <lable for="newstorage">实际库存：</lable>
+                            <input type="text" id="newstorage2">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="cuXiao">促销工具：</lable>
+                            <select id="cuXiao2" value="">
+                            <option value ="">请选择</option>
+                            <option value ="2">买秤优惠码</option>
+                            <option value ="3">100抵300优惠券</option>
+                        </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="goodtype2"><span style="color:red;">*</span>商品类型：</lable>
+                            <select id="goodtype2">
+                            <option value ="">请选择</option>
+                            <option value ="1">燃脂营</option>
+                            <option value ="2">100抵300优惠券</option>
+                        </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="yuReTime">预热时间：</lable>
+                            <input type="text" id="yuReTime2">&emsp;&emsp;
+                            <lable for="saleTime">开售时间：</lable>
+                            <input type="text" id="saleTime2">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="kaiYing">开营时间：</lable>
+                            <input type="text" id="kaiYing2">&emsp;&emsp;
+                            <lable for="campWeeks2">&emsp;&emsp;*周期：</lable>
+                            <input type="text" id="campWeeks2" placeholder="单位/周">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <lable for="nextCampSale2">&nbsp;下期编号：</lable>
+                            <input type="text" id="nextCampSale2">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            商品详情：<a href="javascript:;" class="file">+加图
+                                            <input type="file" name="" id="imgfileHead4">
+                                </a>
+                            <div class="imglist" id="imglist4">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            *评论回复：<a href="javascript:;" class="file">+加图
+                                            <input type="file" id="replys2">
+                                </a>
+                            <div class="imglist" id="imglist6">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 spacing" style="text-align:center;">
+                            <input type="hidden" id="hiddenGoodsId"> &emsp;&emsp;
+                            <button class="btn" onclick="operateGoods('edit')">保存并预览</button>&emsp;&emsp;
+                            <!-- <button class="btn" id="editPreview">预览</button> -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--优惠券管理-->
+                <div class="two coupon" style="display: none;">
+                    <div class="col-xs-12 col-sm-12 head head2 aboutCoupon"><span class="active3" onclick="getCouponList(1,10)">优惠券列表</span><span>创建优惠券</span><span>发放优惠券</span></div>
+
+
+                    <div class="inner innerChoose2 couponsList" style="display: block;">
+                        <div class="bs-example">
+                            <table class="table table-bordered tableStyle1">
+                                <thead>
+                                    <tr>
+                                        <!-- <th></th> -->
+                                        <th>优惠券名称</th>
+                                        <th>面额(元)</th>
+                                        <th>库存</th>
+                                        <th>有效期(天)</th>
+                                        <th>领取人数</th>
+                                        <th>已使用数</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="couponList">
+                                    <!--                             <tr>
+                                <td><input type="checkbox" checked></td>
+                                <td>送秤优惠码</td>
+                                <td>50</td>
+                                <td>60</td>
+                                <td>15</td>
+                                <td></td>
+                                <td></td>
+                                <td class="blue"><span id="storehouse">码库</span>&emsp;编辑</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>续营优惠券</td>
+                                <td>300</td>
+                                <td></td>
+                                <td>15</td>
+                                <td></td>
+                                <td></td>
+                                <td class="blue">&emsp;&emsp;&emsp;编辑</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 listBottom">
+                            <!--                         <div class="col-xs-6 col-sm-6 listLeft">
+                            &emsp;&nbsp;<input type="checkbox"> 全选&emsp;
+                            <span class="borderStyle">删除</span>
+                        </div> -->
+                            <div class="col-xs-12 col-sm-12 listRight">
+                                <button class="borderStyle" id="couponListBefore">上一页</button>
+                                <button class="borderStyle" id="couponListAfter">下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 创建优惠券 -->
+                    <div class="inner innerChoose2 createCoupons" style="display: none;">
+                        <form id="couponform" name="couponform" enctype="multipart/form-data">
+                            <div class="col-xs-12 col-sm-12 couponBorder">
+                                <div class="col-xs-2 col-sm-2 couponBorderLeft">基础信息</div>
+                                <div class="col-xs-10 col-sm-10">
+                                    <div class="col-xs-12 col-sm-12 couponBorderSet">
+                                        <lable for="aboutNames">&emsp;&emsp;*名称：</lable>
+                                        <input type="text" id="aboutNames" name="name">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 spacing">
+                                        <lable for="aboutPrice">&emsp;*面额：</lable>
+                                        <input type="text" id="aboutPrice" name="value">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 spacing">
+                                        <lable for="expire">*有效期：</lable>
+                                        <input type="text" id="expire" name="days"> 天
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 spacing">
+                                        <lable for="className">&emsp;*形式：</lable>
+                                        <input type="radio" value="2" name="type" checked>优惠码(导入码库)&emsp;&emsp;
+                                        <input type="file" name="file" id="uploadYHM"><br/> &nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;
+                                        <input type="radio" name="type" value="1">优惠券
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 couponBorder">
+                                <div class="col-xs-2 col-sm-2 couponBorderLeft">基础规则</div>
+                                <div class="col-xs-10 col-sm-10">
+                                    <div class="col-xs-12 col-sm-12 couponBorderSet">
+                                        <lable for="xianLing">&emsp;*每人限领：</lable>
+                                        <input type="text" id="xianLing" name="limit">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 spacing">
+                                        <lable for="tuiGuang">&nbsp; 推广设置：</lable>
+                                        <input type="checkbox" id="tuiGuang" name="isPromote" value="1">&emsp;允许分享领取链接
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        <lable for="outLink">&emsp; *外部链接：</lable>
+                                        <input type="text" id="outLink" name="link">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 textarea1">
+                                        <lable for="className">&emsp;使用规则：</lable>
+                                        <textarea id="couponRule" cols="22" rows="2" name="rule"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <!-- &emsp;&emsp;<button class="btn">取消</button>&emsp;&emsp; -->
+                            <button id="CouponSubmit" class="btn" onclick="createCoupon()">保存</button>
+                        </div>
+
+                    </div>
+                    <div class="inner innerChoose2" style="display: none;text-align:center;">
+                        <select id="sendCoupons" style="width:60%;height:40px"></select>
+                        <input id="sendCouponsUserId" style="width:60%;height:40px;margin:40px auto;display:block;" placeholder="输入userId" />
+                        <input id="sendCouponsBtn" type="button" style="width:30%;height:40px" value="发放" />
+                    </div>
+                    <!--编辑优惠券-->
+                    <div class="inner innerChoose2 createCoupons" id="editCoupons" style="display: none;">
+                        <form id="couponform2" name="couponform2" enctype="multipart/form-data">
+                            <div class="col-xs-12 col-sm-12 couponBorder">
+                                <div class="col-xs-2 col-sm-2 couponBorderLeft">基础信息</div>
+                                <div class="col-xs-10 col-sm-10">
+                                    <input type="hidden" id="couponid" name="id">
+                                    <input type="hidden" id="coupontype" name="type" value="2">
+                                    <div class="col-xs-12 col-sm-12 couponBorderSet">
+                                        <lable for="aboutNames">&emsp;&nbsp;&nbsp;&nbsp;*名称：</lable>
+                                        <input type="text" id="aboutNames2" name="name">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 spacing">
+                                        <lable for="aboutPrice">&emsp;*面额：</lable>
+                                        <input type="text" id="aboutPrice2" name="value">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 spacing">
+                                        <lable for="expire">*有效期：</lable>
+                                        <input type="text" id="expire2" name="days"> 天
+                                    </div>
+                                    <!--                             <div class="col-xs-12 col-sm-12 spacing">
+                                <lable for="className">&emsp;*形式：</lable>
+                                <input type="radio" value="2" name="type" checked>优惠码(导入码库)&emsp;&emsp;
+                                            <input type="file" name="file" id="uploadYHM"><br/>
+                                &nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="type" value="1">优惠券
+                            </div> -->
+                                    <div class="col-xs-12 col-sm-12 spacing yhmFile" style="display:none;">
+                                        <input type="file" name="file" id="uploadYHM2"><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 couponBorder">
+                                <div class="col-xs-2 col-sm-2 couponBorderLeft">基础规则</div>
+                                <div class="col-xs-10 col-sm-10">
+                                    <div class="col-xs-12 col-sm-12 couponBorderSet">
+                                        <lable for="xianLing">&emsp;*每人限领：</lable>
+                                        <input type="text" id="xianLing2" name="limit">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 spacing">
+                                        <lable for="tuiGuang">&nbsp; 推广设置：</lable>
+                                        <input type="checkbox" id="tuiGuang2" name="isPromote" value="1">&emsp;允许分享领取链接
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        <lable for="outLink">&emsp; *外部链接：</lable>
+                                        <input type="text" id="outLink2" name="link">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 textarea1">
+                                        <lable for="className">&emsp;使用规则：</lable>
+                                        <textarea id="couponRule2" cols="22" rows="2" name="rule"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-xs-12 col-sm-12 spacing">
+                            <!-- &emsp;&emsp;<button class="btn">取消</button>&emsp;&emsp; -->
+                            <button id="CouponSubmit2" class="btn">保存</button>
+                        </div>
+
+                    </div>
+
+                    <!--点击码库后显示内容-->
+                    <div class="inner innerChoose2 storehouse" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 listBottom listBottom2">
+                            <div class="col-xs-6 col-sm-6 listLeft">&emsp;&emsp; 买秤优惠码/ <span>码库</span>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 listRight">
+                                码号：<input id="codeSearchCode" type="text" placeholder="搜索">&emsp;<button id="codeSearch">搜索</button>
+                            </div>
+                        </div>
+                        <div class="bs-example">
+                            <table class="table table-bordered tableStyle2">
+                                <thead>
+                                    <tr>
+                                        <th>码号</th>
+                                        <th>创建时间</th>
+                                        <th>领取时间</th>
+                                        <th>领取人(微信号)</th>
+                                        <th>状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="codeList">
+                                    <!--                             <tr>
+                                <td>123456789</td>
+                                <td>2016-11-24 10:11:00</td>
+                                <td></td>
+                                <td>tom</td>
+                                <td>未过期</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>已过期</td>
+                            </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 listBottom">
+
+                            <div class="col-xs-12 col-sm-12 listRight">
+                                <button class="borderStyle" id="codeListBefore">上一页</button>
+                                <button class="borderStyle" id="codeListAfter">下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--订单管理-->
+                <div class="two order" style="display: none;">
+                    <div class="orderTop">
+                        <div class="col-xs-12 col-sm-12">
+                            <select>
+                            <option value ="">订单号</option>
+                            <!--<option value ="">商品名</option>-->  <!--这部分去掉了-->
+                            <option value="">商品编号</option>
+                            <option value="">微信号</option>
+                            <!--<option value="">微信昵称</option>-->
+                            <option value="">电话号</option>
+                            <option value="">有品账号</option>
+                        </select>
+                            <input type="text" id="orderChooseItem">
+                            <input type="checkbox" id="orderCheckbox1">
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            <label for="orderSelect">订单状态：</label>
+                            <select id="orderSelect">
+                                <option value ="等待付款">等待付款</option>
+                                <option value="已完成">已完成</option>
+                                <option value="已取消">已取消</option>
+                                <option value="超时关闭">超时关闭</option>
+                                <option value="退款完成">退款完成</option>
+                            </select>
+                            <input type="checkbox" id="orderCheckbox3">
+                            <form id="addOrderInfoForm" name="" enctype="multipart/form-data" style="margin-top:30px">
+                                <input id="addOrderInfoFormfile" name="file" type="file">
+                            </form>
+                            <button id="addOrderInfo" onclick="addOrderInfo()" style="background-color: aqua; height: 25px; width: 72px">批量导入</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            下单时间：
+                            <input type="text" class="nowToNext" id="orderBeginTime">至
+                            <input type="text" class="nowToNext" id="orderEndTime">
+                            <input type="checkbox" id="orderCheckbox2">&emsp;&emsp;&emsp;
+                            <button id="orderShaiXuan">筛选</button>
+                            <!--&emsp;&emsp;<button id="orderDaoChu">批量导出当前页</button>-->
+                            <!--批量导出当前页-->
+                            &emsp;&emsp;<button id="orderDaoChu2">批量导出</button>
+                            <!--批量导出所有-->
+                            &emsp;&emsp;&emsp;&emsp;共有<span class="blue" id="orderCount"></span>条数据
+                            </br>
+
+
+                        </div>
+                    </div>
+                    <div class="orderContent">
+                        <div class="bs-example">
+                            <table class="table table-bordered tableStyle2">
+                                <thead id="orderHead">
+                                    <tr>
+                                        <th>订单号</th>
+                                        <th>商品名</th>
+                                        <th>商品编号</th>
+                                        <th>应付</th>
+                                        <th>实际支付</th>
+                                        <th>优惠价</th>
+                                        <th>支付日期</th>
+                                        <th>支付时间</th>
+                                        <th>支付方式</th>
+                                        <th>支付流水号</th>
+                                        <th>下单日期&#8595;</th>
+                                        <th>下单时间&#8595;</th>
+                                        <th>订单来源</th>
+                                        <th>订单状态</th>
+                                        <th>流量来源</th>
+                                        <th>微信号</th>
+                                        <!--<th>微信昵称</th>-->
+                                        <th>电话号</th>
+                                        <th>有品账号</th>
+                                        <th>是否激活</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orderList">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 listBottom">
+                            <div class="col-xs-6 col-sm-6 listLeft">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 listRight">
+                                <button class="borderStyle" id="lastPageOrderInfo">上一页</button>
+                                <button class="borderStyle" id="nextPageOrderInfo">下一页</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12" id="returnOrderList"><button>返回订单管理首页</button></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 orderModify" style="display: none;">
+                        <div class="col-xs-6 col-sm-6">
+                            <table class="table table-bordered tableStyle2 tableStyle3 editOrderInfo">
+                                <tr>
+                                    <td rowspan="19" class="edit">编辑订单</td>
+                                    <td class="edit green">订单号</td>
+                                    <td class="edit orderId"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">商品名</td>
+                                    <td class="goodsName"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">商品代号</td>
+                                    <td class="goodsCode"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">应付</td>
+                                    <td class="origPrice"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">实际支付</td>
+                                    <td class=""><input class="currentPrice isEdited" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">优惠价</td>
+                                    <td class="couponPrice"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">支付时间</td>
+                                    <td class="paymentTime"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">支付方式</td>
+                                    <td class="paymentType"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">支付流水号</td>
+                                    <td class="paymentCode"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">下单时间&#8595;</td>
+                                    <td class="createTime"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">订单来源</td>
+                                    <td class="sourceType"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">订单状态</td>
+                                    <!--<td>
+                                    <input type="text" class="isEdited orderType">
+                                </td>-->
+                                    <td>
+                                        <select class="isEdited orderType">
+                                        <option>等待付款</option>
+                                        <option>已完成</option>
+                                        <option>取消</option>
+                                        <option>关闭</option>
+                                        <option style="display: none;"></option>
+                                        <option>退款完成</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="green">流量来源</td>
+                                    <td class="trafficSource"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">微信号</td>
+                                    <td>
+                                        <input type="text" class="isEdited weChat">
+                                    </td>
+                                </tr>
+                                <!--<tr>
+                                <td class="red">微信昵称</td>
+                                <td>
+                                    <input type="text" class="isEdited weChatName">
+                                </td>
+                            </tr>-->
+                                <tr>
+                                    <td class="red">电话号</td>
+                                    <td>
+                                        <input type="text" class="isEdited phoneNo">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="red">有品账号</td>
+                                    <td>
+                                        <input type="text" class="isEdited userId">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="green">是否激活</td>
+                                    <td class="isActive">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="red">备注</td>
+                                    <td>
+                                        <input type="text" class="isEdited remark">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 saveOrCancle">
+                            <button id="saveOrderInfo">保存</button>&emsp;&emsp;<button id="cancelOrderInfo">取消</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--学员管理-->
+                <div class="two student" style="display: none;">
+                    <div class="studentsTop" style="display: none;">
+                        <div class="col-xs-12 col-sm-12">
+                            <select class="select">
+                                <option value ="订单号">订单号</option>
+                                <option value ="微信号">微信号</option>
+                                <option value="微信昵称">微信昵称</option>
+                                <option value="电话号">电话号</option>
+                                <option value="有品账号">有品账号</option>
+                                <option value ="营编号">营编号</option>
+                            </select>
+                            <input type="text" id="textChoose" />
+                            <input type="checkbox" id="checkbox1" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            参营状态：
+                            <select class="select" id="campstatus">
+                                    <option value ="">请选择</option>
+                                    <option value ="0">新生</option>
+                                    <option value ="1">续营</option>
+                                    <option value="2">延期(新生)</option>
+                                    <option value="6">延期(续营)</option>
+                                    <option value="3">退营</option>
+                                    <option value="4">插班</option>
+                                    <option value="5">换班</option>
+                                </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            开营时间：
+                            <input type="text" id="startCampTime" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            下单时间：
+                            <input type="text" class="nowToNext" id="studentXiaDanTime">至
+                            <input type="text" class="nowToNext" id="studentXiaDanTimeEnd">
+                            <input type="checkbox" id="xiaDanCheckbox">&emsp;&emsp;&emsp;
+                            <button id="shaiXuanStudent">筛选</button>
+                            <!--&emsp;&emsp;<button id="daoChu1">批量导出当前页</button>&lt;!&ndash;批量导出当前页&ndash;&gt;-->
+                            &emsp;&emsp;<button id="daoChu2">批量导出</button>
+                            <!--批量导出所有-->
+
+                            &emsp;&emsp;&emsp;&emsp;共有<span class="blue" id="studentCount"></span>条数据
+                        </div>
+                    </div>
+                    <div class="studentsContent" style="display: none;">
+                        <div class="bs-example">
+                            <table class="table table-bordered tableStyle1 tableQuestionList">
+                                <thead id="studentHead">
+                                    <tr>
+                                        <!--<th></th>-->
+                                        <th id="dingdanhao">订单号</th>
+                                        <th>参营状态</th>
+                                        <th>上期教练</th>
+                                        <th>上期班级</th>
+                                        <th>本期教练</th>
+                                        <th>本期班级</th>
+                                        <th>本期学号</th>
+                                        <th>开营时间</th>
+                                        <th>微信号</th>
+                                        <th>微信昵称</th>
+                                        <th>微信添加</th>
+                                        <th>手机号</th>
+                                        <th>有品账号</th>
+                                        <th>性别</th>
+                                        <th>身高</th>
+                                        <th>年龄</th>
+                                        <th>最后一次测量时间</th>
+                                        <th>最后一次测量体重</th>
+                                        <th>最后一次测量体脂</th>
+                                        <th>身体类型</th>
+                                        <th>目的</th>
+                                        <th>运动等级</th>
+                                        <th>习惯测量时段</th>
+                                        <th>职业</th>
+                                        <th>目前所在地</th>
+                                        <th>上次生理期</th>
+                                        <th>【最】直观目标</th>
+                                        <th>希望更关注的内容</th>
+                                        <th>【最】关注身体的部位</th>
+                                        <th>日常饮食不良习惯</th>
+                                        <th>饮食方式</th>
+                                        <th>运动频率</th>
+                                        <th>运动场所</th>
+                                        <th>日均运动时间</th>
+                                        <th>损伤情况</th>
+                                        <th>损伤说明</th>
+                                        <th>特殊情况</th>
+                                        <th>收货地址</th>
+                                        <th>邮编</th>
+                                        <th>备注</th>
+                                        <th>是否体侧</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="questionList">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 listBottom">
+                            <div class="col-xs-6 col-sm-6 listLeft">
+                                <!--&emsp;&nbsp;<input type="checkbox" id="checkAll"> 全选&emsp;
+                            <span class="borderStyle" id="deleteStuInfo">删除</span>-->
+                            </div>
+                            <div class="col-xs-6 col-sm-6 listRight">
+                                <span class="borderStyle" id="lastPageStuInfo">上一页</span>
+                                <span class="borderStyle" id="nextPageStuInfo">下一页</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12" id="returnStuList"><button>返回学员管理首页</button></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 orderModify2" style="display: block;">
+                        <div class="col-xs-12 col-sm-12 editHead">&emsp;&emsp;编辑学员信息</div>
+                        <div class="col-xs-9 col-sm-9">
+                            <table class="table table-bordered tableStyle2 tableStyle3 tableStyle4 editStudentInfo">
+                                <tr>
+                                    <th colspan="2">班级信息</th>
+                                    <th colspan="2">个人基础信息</th>
+                                    <th colspan="2">营前问卷信息</th>
+                                </tr>
+                                <tr>
+                                    <td class="red">参营状态</td>
+                                    <td>
+                                        <select class="isEdited stat">
+                                            <option>新生</option>
+                                            <option>续营</option>
+                                            <option>延期(新生)</option>
+                                            <option>退营</option>
+                                            <option>插班</option>
+                                            <option>换班</option>
+                                            <option>延期(续营)</option>
+                                    </select>
+                                    </td>
+                                    <td class="red">微信号</td>
+                                    <td>
+                                        <input type="text" class="isEdited wechat">
+                                    </td>
+                                    <td class="green">【最】直观目标</td>
+                                    <td class="mostTargt"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">上期教练</td>
+                                    <td class="lastCoach"></td>
+                                    <td class="red">微信昵称</td>
+                                    <td>
+                                        <input type="text" class="isEdited wechatName">
+                                    </td>
+                                    <td class="green">希望更关注的内容</td>
+                                    <td class="careContent"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">上期班级</td>
+                                    <td class="lastCampName"></td>
+                                    <td class="red">微信添加</td>
+                                    <td>
+                                        <select class="isEdited wechatState">
+                                        <option>已申请</option>
+                                        <option>已添加</option>
+                                        <option>无此微信</option>
+                                        <option>信息有误</option>
+                                    </select>
+                                    </td>
+                                    <td class="green">【最】关注身体的部位</td>
+                                    <td class="bodyParts"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">本期教练</td>
+                                    <td>
+                                        <input type="text" class="isEdited coach">
+                                    </td>
+                                    <td class="red">手机号</td>
+                                    <td>
+                                        <input type="text" class="isEdited phone">
+                                    </td>
+                                    <td class="green">日常饮食不良习惯</td>
+                                    <td class="badEat"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">本期班级</td>
+                                    <td>
+                                        <input type="text" class="isEdited campName">
+                                    </td>
+                                    <td class="red">有品账号</td>
+                                    <td>
+                                        <input type="text" class="isEdited userId">
+                                    </td>
+                                    <td class="green">饮食方式</td>
+                                    <td class="eatType"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">本期学号</td>
+                                    <td>
+                                        <input type="text" class="isEdited stuId">
+                                    </td>
+                                    <td class="green">性别</td>
+                                    <td class="sex"></td>
+                                    <td class="green">运动频率</td>
+                                    <td class="sportTimes"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">学员昵称</td>
+                                    <td>
+                                        <input type="text" class="isEdited stuName">
+                                    </td>
+
+                                    <td class="green">身高</td>
+                                    <td class="height"></td>
+                                    <td class="green">运动场所</td>
+                                    <td class="sportVenues"></td>
+                                </tr>
+                                <tr>
+                                    <td class="red">开营时间</td>
+                                    <td>
+                                        <input type="text" class="isEdited beginTime" class="editStartDate">
+                                    </td>
+                                    <td class="green">年龄</td>
+                                    <td class="age"></td>
+                                    <td class="green">日均运动时间</td>
+                                    <td class="sportlong"></td>
+                                </tr>
+                                <tr>
+                                    <td class="green">营周期</td>
+                                    <td class="campWeeks"></td>
+                                    <td class="green">最后一次测量时间</td>
+                                    <td class="lastc"></td>
+                                    <td class="green">损伤情况</td>
+                                    <td class="sportInjury"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="green">最后一次测量体重</td>
+                                    <td class="weight"></td>
+                                    <td class="green">损伤说明</td>
+                                    <td class="injuryDesc"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="green">最后一次测量体脂</td>
+                                    <td class="bodyFat"></td>
+                                    <td class="green">特殊情况</td>
+                                    <td class="sick"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="green">身体类型</td>
+                                    <td class="bodyType"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="red">目的</td>
+                                    <td>
+                                        <input type="text" class="isEdited target">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="red">运动等级</td>
+                                    <td>
+                                        <input type="text" class="isEdited">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="green">习惯测量时段</td>
+                                    <td class="weightPeriod"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="green">职业</td>
+                                    <td class="career"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="green">目前所在地</td>
+                                    <td class="area"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="green">上次生理期</td>
+                                    <td class="physicalPeriod"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="red">收货地址</td>
+                                    <td>
+                                        <input type="text" class="isEdited address">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="red">邮编</td>
+                                    <td>
+                                        <input type="text" class="isEdited postcode">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="red">备注</td>
+                                    <td>
+                                        <input type="text" class="isEdited remark">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 saveOrCancle">
+                            <button id="saveStuInfo">保存</button>&emsp;&emsp;<button id="cancelStuInfo">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </section>
+</body>
+
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
+<script type="text/javascript" src="js/system.js?v=1"></script>
+<script type="text/javascript" src="js/class.js?v=7"></script>
+<script type="text/javascript" src="js/tableExport.js"></script>
+<script type="text/javascript" src="js/studentsManage.js?v=2"></script>
+<script type="text/javascript" src="js/orderManage.js?v=2"></script>
+<script type="text/javascript" src="js/coachManage.js?v=1"></script>
+<script type="text/javascript" src="js/campvideo.js?v=1"></script>
+<script>
+    //百度统计上传代码
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAutoPageview', false]);
+    _hmt.push(['_trackPageview', location.pathname]);
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?c508b5cd6342d9b51a4a2230e1cd7988";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+</script>
+
+</html>

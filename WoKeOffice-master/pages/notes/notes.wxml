@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="project-name-wrapper">
+    <image class="icon"></image>
+    <input class="project-name"
+      maxlength="9"
+      placeholder="通知名称"
+      value="{{projectName}}"/>
+  </view>
+  <view class="item-wrapper">
+    <image class="icon"></image>
+    <view class="item-word">通知内容：</view>
+  </view>
+  
+  <view class="page-section">
+    <view class="textarea-wrp">
+      <textarea bindblur="bindTextAreaBlur" auto-height />
+    </view>
+  </view>
+  
+  
+  <view class="item-wrapper">
+    <image class="icon"></image>
+    <view class="item-word">接受此通知的成员：</view>
+    <picker bindchange="pickTeam"
+      value="{{team}}"
+      range="{{array}}"
+      class="picker">
+      <view class="picker-word">
+        {{array[team]}}
+      </view>
+    </picker>
+  </view>
+  <button class="weui_btn_mini" type="primary" bindtap="confirmShedule">确认创建该日程</button>
+</view>

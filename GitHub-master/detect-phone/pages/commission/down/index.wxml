@@ -1,0 +1,49 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page navbar com-down" wx:if="{{show}}">
+  <view class="fui-tab fui-tab-warning">
+    <block wx:for="{{levels}}">
+      <view bindtap="myTab" class="item {{level == item.level ? 'active' : ''}}" data-level="{{item.level}}">
+        {{item.name}}(
+        <text>{{item.total}}</text>)
+      </view>
+    </block>
+  </view>
+  <view class="fui-title">
+    成员信息
+    <image class="image-32" src="/static/images/icon-red/favor.png">
+    </image> 为已经成为分销商的下线
+  </view>
+  <view class="fui-list-group" wx:if="{{list.length > 0}}">
+    <block wx:for="{{list}}">
+      <view class="fui-list">
+        <view class="fui-list-media">
+          <image src="{{item.avatar}}"></image>
+        </view>
+        <view class="fui-list-inner">
+          <view class="row">{{item.nickname || '未获取'}}
+            <image class="image-32" src="/static/images/icon-red/favor.png" wx:if="{{item.isagent == 1 && item.status == 1}}"></image>
+          </view>
+          <view class="subtitle" wx:if="{{item.isagent == 1 && item.status == 1}}">成为{{textagent}}时间: {{item.agenttime}}</view>
+          <view class="subtitle" wx:else>注册时间: {{item.createtime}}</view>
+        </view>
+        <view class="row-remark" wx:if="{{item.isagent == 1 && item.status == 1}}">
+          <view>+ {{item.commission_total}}</view>
+          <view>{{item.agentcount}}个成员</view>
+        </view>
+        <view class="row-remark" wx:else>
+          <view>消费: + {{item.moneycount.textyuan}}</view>
+          <view>{{item.ordercount}}个订单</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="center" wx:if="{{list.length < 1}}">
+    <view class="empty-tip">
+      <image class="light" src="/static/images/icon/lights-128.png"></image>
+      <view class="text-cancel">暂时没有任何数据</view>
+    </view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{loaded && list.length > 0}}">
+    <view class="text">没有更多了</view>
+  </view>
+</view>

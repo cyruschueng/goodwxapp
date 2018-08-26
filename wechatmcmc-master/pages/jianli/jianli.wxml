@@ -1,0 +1,147 @@
+<!--pages/workspost/workspost.wxml-->
+<form bindsubmit="formSubmit" bindreset="formReset" report-submit="true">
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__bd">
+
+        <view class="weui-cells__title"></view>
+        <view class="logo_header">
+            <image class="logo" name='img' bindtap="uplogo" src="{{logo}}" mode="aspecFill"  />
+            <input name="logo" style="display:none;" value="{{logo}}" />
+            <view><text style="font-size:12px;color:#808080">更换个人头像</text></view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="name" class="weui-input" value="{{user_name}}" placeholder="请输入姓名，2-6字"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">性别</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="xingbie" bindchange="bindxingbieChange" value="{{xingbieIndex}}" range="{{xingbietype}}">
+                        <view class="weui-select weui-select_in-select-after">{{xingbietype[xingbieIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">出生年月</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="bron" mode="date" start="1960-01" end="{{bron}}" fields="month" bindchange="bindbronChange" value="{{truebron}}"  >
+                        <view class="weui-select weui-select_in-select-after">{{truebron}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">工作经验</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="jingyan" bindchange="bindjingyanChange" value="{{jingyanIndex}}" range="{{jingyantype}}">
+                        <view class="weui-select weui-select_in-select-after">{{jingyantype[jingyanIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">期望职位</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="zhiwei" bindchange="bindzhiweiChange" value="{{zhiweiIndex}}" range="{{zhiweitype}}">
+                        <view class="weui-select weui-select_in-select-after">{{zhiweitype[zhiweiIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">期望薪资</view>
+                </view>
+                <view style="width:65px;flex:none;box-flex:none;" class="weui-cell__bd">
+                    <input name="zuidixinzi"  style="text-align:center" maxlength="5" value="{{user_zuidixinzi}}" type="number"  class="weui-input" placeholder="薪资"/>
+                </view>
+                <text style="margin-right:0px;">-</text>
+                <view style="width:65px;flex:none;box-flex:none;"  class="weui-cell__bd">
+                    <input name="zuigaoxinzi" style="text-align:center"  maxlength="5"  value="{{user_zuigaoxinzi}}" type="number"   class="weui-input" placeholder="薪资"/>
+                </view>
+                <text style="float:right;">元/月</text>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">期望区域</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="sheng" bindchange="bindshengChange" value="{{shengIndex}}" range="{{shengtype}}">
+                        <view class="weui-select weui-select_in-select-after">{{shengtype[shengIndex]}}</view>
+                    </picker>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="shi" bindchange="bindshiChange" value="{{shiIndex}}" range="{{shitype}}">
+                        <view class="weui-select weui-select_in-select-after">{{shitype[shiIndex]}}</view>
+                    </picker>
+                </view>
+                <!--<view class="weui-cell__bd">
+                    <picker name="qu" bindchange="bindquChange" value="{{quIndex}}" range="{{qutype}}">
+                        <view class="weui-select weui-select_in-select-after">{{qutype[quIndex]}}</view>
+                    </picker>
+                </view>-->
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input  name="phone"  value="{{user_phone}}" class="weui-input" placeholder="请输入手机号" />
+                </view>
+                <!--<view class="weui-cell__ft">
+                    <view class="weui-vcode-btn">获取验证码</view>
+                </view>-->
+            </view>
+            <!--<view class="weui-cells__title">文本域</view>-->
+            <view class=" weui-cells_after-title" style="background-color:#F8F8F8;border-top:1px solid #D9D9D9;">
+               
+                    <view  style="margin-left:16px;padding-top:4px;">
+                
+                    <view >自我介绍<text style="color:#808080"> （选填）</text></view>
+                    </view>
+                    
+               
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                   
+                    <view class="weui-cell__bd">
+                        <textarea name="miaoshu" maxlength='500' class="weui-textarea"  value="{{user_miaoshu}}"  placeholder="示例： 本人从事xx 3年，擅长xx等技能，曾在xx单位担任xx职位，荣获过xx，为人诚实，有责任心，进取心强。" style="height: 6em;position:relative;z-index:1;" />
+                        <view class="weui-textarea-counter">0/500</view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+
+
+        <checkbox-group bindchange="bindAgreeChange">
+            <label class="weui-agree" for="weuiAgree">
+                <view class="weui-agree__text">
+                    <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                    <view class="weui-agree__checkbox-icon">
+                        <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                    </view>
+                    阅读并同意<navigator url="../fabuxuzhi/fabuxuzhi?token=1" class="weui-agree__link">《发布须知》</navigator>
+                </view>
+            </label>
+        </checkbox-group>
+ <button class="weui-btn" style="width:90%;background-color:#FF5902;color:#ffffff" formType="submit" hover-class="none" type="default">发布简历</button>
+         
+    </view>
+</view>
+
+      
+           
+       
+</form>

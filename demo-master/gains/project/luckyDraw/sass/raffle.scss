@@ -1,0 +1,333 @@
+/*大转盘*/
+
+.container {
+    width: 100%;
+    background: url('../../img/bg_dazhuangpan.png') no-repeat;
+    background-size: cover;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+.login {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 65.5px;
+    height: 35px;
+    background: url('../../img/bg_gerenzhongxin.png') no-repeat;
+    background-size: cover;
+    span {
+        display: inline-block;
+        padding: 20px 0 0 10px;
+        box-sizing: border-box;
+        font-size: 9px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 12px;
+        letter-spacing: 0px;
+        color: #ffd200;
+    }
+}
+
+.logo {
+    width: 206px;
+    height: 70px;
+    margin: 0 auto;
+    padding-top: 44px;
+    box-sizing: content-box;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.operate {
+    position: relative;
+    .outer-cont {
+        position: relative;
+        width: 100%;
+        top: 12px;
+        margin-bottom: 30px;
+    }
+
+    .inner-cont {
+        position: absolute;
+        width: 100%;
+        top: 105px;
+    }
+
+    .outer {
+        width: 280px;
+        max-width: 280px;
+        height: 280px;
+        margin: 0 auto;
+        border: 1px solid red;
+        background-image: url("../../img/bg_biankuang.png");
+        background-size: 100% 100%;
+    }
+
+    .inner {
+        width: 80px;
+        max-width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+    .outer img,
+    .inner img {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.next {
+    width: 22px;
+    height: 10px;
+    margin: 20px auto;
+}
+
+.content {
+    margin-top: 85px;
+    .box {
+        width: 100%;
+        padding: 0 30px;
+        margin: 28px auto 0;
+        box-sizing: border-box;
+        position: relative;
+        .nav {
+            width: 100%;
+            text-align: center;
+            .nav-box {
+                height: 90px;
+                width: 300px;
+                margin: 0 auto;
+                background: url('../../img/bg_biaoti.png') no-repeat;
+                background-size: cover;
+                position: absolute;
+                top: -66px;
+                left: 50%;
+                margin-left: -150px;
+                i {
+                    font-family: PingFang-SC-Medium;
+                    font-size: 18px;
+                    font-weight: normal;
+                    letter-spacing: 0px;
+                    color: #fffe11;
+                    font-style: normal;
+                }
+            }
+            span {
+                height: 38px;
+                line-height: 38px;
+                font-size: 12px;
+                color: #ffffff;
+            }
+        }
+        .title {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            width: 166px;
+            height: 30px;
+            margin-left: -83px;
+            background: url('../../img/bg_zhuangshi.png') no-repeat;
+            background-size: 166px 30px;
+            background-position: center;
+            text-align: center;
+            span {
+                font-size: 12px;
+                color: #ffffff;
+            }
+        }
+        .detail {
+            background-color: #f9f9d8;
+            border: solid 10px #ffa676;
+            border-radius: 6px;
+            padding: 32px 0;
+            color: #ad9f71;
+            .table-header,
+            .table-body {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                font-size: 12px;
+                width: 100%;
+                height: 30px;
+            }
+            .table-header {
+                background-color: #f3eec3!important;
+            }
+            .table-body {
+                &.active {
+                    color: #ff544c;
+                }
+            }
+            .tr,
+            .td {
+                flex: 1;
+                text-align: center;
+                &:nth-child(2) {
+                    flex: 2;
+                }
+            }
+            .active {
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                background-color: #f3eec3!important;
+            }
+            .des {
+                width: 100%;
+                padding: 5px;
+                font-family: AdobeHeitiStd-Regular;
+                font-size: 20px;
+                font-weight: normal;
+                font-stretch: normal;
+                letter-spacing: 0px;
+                color: #ad9f71;
+                line-height: 19px;
+            }
+        }
+    }
+}
+
+
+.alert-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+
+.alert-box .wrapper {
+    padding: 0 30px;
+    margin: auto;
+}
+
+.box {
+    width: 100%;
+    /*padding: 0 30px;*/
+    /*margin: 28px auto 0;*/
+    box-sizing: border-box;
+    position: relative;
+    .title {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        width: 166px;
+        height: 30px;
+        margin-left: -83px;
+        background: url('../../img/bg_zhuangshi.png') no-repeat;
+        background-size: 166px 30px;
+        background-position: center;
+        text-align: center;
+        span {
+            font-size: 12px;
+            color: #ffffff;
+        }
+    }
+    .prompt {
+        background-color: #fff;
+        border-top: solid 10px #ffa676;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 32px 30px;
+        color: #ad9f71;
+        .active{
+            width: 220px;
+        }
+    }
+    .detail {
+        background-color: #f9f9d8;
+        border: solid 10px #ffa676;
+        border-radius: 6px;
+        padding: 32px 0;
+        color: #ad9f71;
+    }
+}
+
+
+.phone-number {
+    .form {
+        border-top: solid 10px #ffa676;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 30px 20px;
+        color: #ad9f71;
+        border-top: 7px solid #df453b;
+        background: #ede4e5;
+    }
+
+    .form-title {
+
+        font-family: AdobeHeitiStd-Regular;
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #333333;
+        padding-top: 15px;
+        margin: 0 auto;
+    }
+    .form-control {
+        background-color: #ffffff;
+        border-radius: 8px;
+        width: 220px;
+        height: 35px;
+        font-size: 12px;
+        line-height: 12px;
+        display: block;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #333;
+        vertical-align: middle;
+        padding: 5px;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        color: #c0c0c0;
+    }
+    .ipt {
+        margin-top: 15px;
+        position: relative;
+    }
+    .code {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: auto;
+        height: 25px;
+        line-height: 17px;
+        text-align: center;
+        background-color: #d9d9d9;
+        border-radius: 3px;
+        font-size: 12px;
+        letter-spacing: 0px;
+        color: #ffffff;
+        padding: 4px;
+        box-sizing: border-box;
+    }
+    .btn {
+        margin-top: 15px;
+        width: 160px;
+        height: 35px;
+        background-color: #df453b;
+        border-radius: 8px;
+        line-height: 35px;
+        color: #fff;
+        text-align: center;
+    }
+}

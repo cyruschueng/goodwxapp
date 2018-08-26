@@ -1,0 +1,349 @@
+<import src="../template/template.wxml" />
+<template wx:if="{{!is_showHideBtn}}" is='hideBtn' data='{{hideBtnData}}'></template>
+<!--0toubaoxinxi.wxml-->
+<view class="table">
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">使用性质</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.CarUsedType}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车牌号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.LicenseNo}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车主姓名</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.LicenseOwner}}</text>
+    </view>
+  </view>
+  <!-- <view class="tr bg-g">
+    <view class="td-1" selectable="true">投保人</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.PostedName}}</text>
+    </view>
+  </view> -->
+  <!-- <view class="tr bg-g">
+    <view class="td-1" selectable="true">被保险人</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.InsuredName}}</text>
+    </view>
+  </view> -->
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">新车购置价格</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.PurchasePrice}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">证件类型</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.IdType}}</text>
+    </view>
+  </view>
+  <!-- <view class="tr bg-g">
+    <view class="td-1" selectable="true">证件号码(车主本人)</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.CredentislasNum}}</text>
+    </view>
+  </view> -->
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">城市</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.CityCode}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">发动机号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.EngineNo}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">品牌型号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.ModleName}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车辆注册日期</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.RegisterDate}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车辆识别代号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.CarVin}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">交强险到期时间</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.ForceExpireDate}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">商业险到期时间</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.BusinessExpireDate}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">下年的交强起保日期</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.NextForceStartDate}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">下年的商业险起保日期</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.NextBusinessStartDate}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">座位数量</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.SeatCount}}</text>
+    </view>
+  </view>
+  <!-- <view class="tr bg-g">
+    <view class="td-1" selectable="true">被保人证件号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.InsuredIdCard}}</text>
+    </view>
+  </view> -->
+  <!-- <view class="tr bg-g">
+    <view class="td-1" selectable="true">被保人证件类型</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.InsuredIdType}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">被保人手机号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.InsuredMobile}}</text>
+    </view>
+  </view> -->
+  <!-- <view class="tr bg-g">
+    <view class="td-1" selectable="true">投保人证件号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.HolderIdCard}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">投保人证件类型</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.HolderIdType}}</text>
+    </view>
+  </view> -->
+  <!-- <view class="tr bg-g">
+    <view class="td-1" selectable="true">投保人联系方式</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.HolderMobile}}</text>
+    </view>
+  </view> -->
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">费率系数1</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.RateFactor1}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">费率系数2</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.RateFactor2}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">费率系数3</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.RateFactor3}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">费率系数4</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.RateFactor4}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">燃料种类</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.FuelType}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">条款种类</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.ProofType}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">条款类型</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.ClauseType}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">号牌底色</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.LicenseColor}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">行驶区域</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.RunRegion}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">是否公车</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.IsPublic}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">商业险保单号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.BizNo}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">交强险保单号</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.ForceNo}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">排量信息</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.ExhaustScale}}</text>
+    </view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">精友码</view>
+    <view class="td-2" selectable="true" scroll-y="true">
+      <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{UserInfo.AutoMoldCode}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="table">
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">上年保险公司</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.Source}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车损保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.CheSun}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">第三方责任险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.SanZhe}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">全车盗抢保险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.DaoQiang}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车上人员责任险(司机)保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.SiJi}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车上人员责任险(乘客)保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.ChengKe}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">玻璃单独破碎险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BoLi}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">车身划痕损失险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.HuaHen}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免赔险(车损)保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianCheSun}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免赔险(三者)保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianSanZhe}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免赔险(盗抢)保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianDaoQiang}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">涉水行驶损失险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.SheShui}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">自燃损失险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.ZiRan}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免乘客保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianChengKe}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免司机保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianSiJi}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免划痕保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianHuaHen}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免涉水保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianSheShui}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免自燃保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianZiRan}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免精神损失保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BuJiMianJingShenSunShi}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">机动车无法找到三方特约险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.HcSanFangTeYue}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">精神损失险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.HcJingShenSunShi}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">指定专修厂类型</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.HcXiuLiChangType}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">指定修理厂险</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.HcXiuLiChang}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">修理期间每天补偿</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.Fybc}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">天数</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.FybcDays}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">新增设备损失险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.SheBeiSunShi}}</text></view>
+  </view>
+  <view class="tr bg-g">
+    <view class="td-1" selectable="true">不计免设备损失险保额(元)</view>
+    <view class="td-2" selectable="true" scroll-y="true"><text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{SaveQuote.BjmSheBeiSunShi}}</text></view>
+  </view>
+</view>
+<view class="c-minheight wx-view_eEOWJz" data-c_e_id="wx_view_a358dca2">
+    <text class="c-block wx-text_QLV28Q" data-c_e_id="wx_text_e73553f5">- 568数据报告诠释&说明 -</text>
+    <text class="c-block wx-text_PVNqZv" data-c_e_id="wx_text_a4dcab57">此报告所包含内容及判断，仅基于截止到生成报告曰期之前收集到的相关数据。关于此车其他车辆信息（包括但不限于在非4s店或非制造商授杈店的 维修保养信息）有可能未被采集或收录，本报告仅作参考，请结合实车勘验和试乘试驾体验，做出更精准的交易决策。本报告内车型部分使用第三方接口，与维保记录无关，如有疑问请致电人工客服咨询。
+568数据为您査询车辆仅限于中国大陆地区合法登记车辆，您同意并承诺所购买568数据报告仅供个人使用。568数据提供报告为源数据文字呈现，不会人为添加或删减任何条目内容，但并不提供任何形式明示或暗示的担保。在任何情况下，568数据都没有责任和义务承担用户购买报告后续签 订的销售合同造成的各类损失，以及利用报告所造成的任何侵权（包括自身疏忽）伤害。这些损失及伤害，包括但不仅限于直接的，间接的，附带的，特殊的，惩罚性的，或类似的损害赔偿。568数据报告对用户承担的责任不超过用户为购买每份568数据报告所支付的款项，您同意不会因为在使用报告以外的行为中造成损失后，追究568数据及上述单位的股东、董事、管理人员、员工和代理商的责任。也不会提出任何索赔、诉讼、损害赔偿及其他 各类费甩要求等。</text>
+</view>

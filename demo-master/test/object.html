@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    var person = {
+        firstName: "David",
+        lastName: "Walsh",
+        others: "Smith"
+    };
+    Object.keys(person).forEach(function(trait) { //object.keys变为数组
+        console.log('person', trait, ':', person[trait]);
+    });
+    </script>
+</body>
+
+</html>
+<script type="text/javascript">
+function urlEncode(param, key, encode) {//get请求路径，param请求数据，key键，encode
+    if (param == null) return '';
+    var paramStr = '';
+    var t = typeof(param);
+    if (t == 'string' || t == 'number' || t == 'boolean') {
+        paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param);
+    } else {
+        for (var i in param) {
+            var k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
+            paramStr += this.urlEncode(param[i], k, encode);//递归
+        }
+    }
+    return paramStr;
+}
+
+
+console.log('192.168.40.100' + reqUrl + '?' + urlEncode(reqData).substring(1, ));
+</script>
+
+
+
+<!--  <script type="text/javascript">
+    var commafy = function(num) {
+
+        console.log(num.toString())
+        return num && num
+            .toString()
+            .replace(/(\d)(?=(\d{3})+\.)/g, function($1, $2) {
+                return $2 + ','
+            })
+    }
+    document.write(commafy(1111111111.1111111))
+    </script> -->

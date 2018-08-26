@@ -1,0 +1,63 @@
+<view class="statistics_box">
+
+
+
+    <view class="get_header">
+        <view class="getupBgView">
+            <view class="addTopBox">
+                <view class="canlendarTopView">
+                    <view class="leftBgView"  bindtap="handleCalendar" data-handle="prev">
+                        <image class="get_old" src="http://oss.xqzs.cn/resources/runmini/step_topjt.png" ></image>
+                    </view>
+                    <view class="get_centerView">{{cur_year || "--"}}年{{cur_month || "--"}}月</view>
+                    <view class="rightBgView" bindtap="handleCalendar" data-handle="next">
+                        <image class="get_next" src="http://oss.xqzs.cn/resources/runmini/step_topjt.png" ></image>
+                    </view>
+                </view>
+
+            </view>
+
+            <view class="getUpBorder">
+
+                <view class="get_weekBgView">
+                    <view class="get_weekView"  wx:for="{{weeks_ch}}" wx:for-item="item"
+                          wx:for-index="index" wx:key="key" >{{item}}</view>
+                </view>
+                <view class="dateBgView">
+                    <view class="get_dateEmptyView"  wx:for="{{empytGrids}}" wx:for-item="item"
+                          wx:for-index="index" wx:key="key" >{{item.index}}
+                    </view>
+                    <view   wx:for="{{days}}" bindtap="clickDay" data-step="{{item.step}}" data-index="{{item.index}}" wx:for-item="item" wx:for-index="index" wx:key="key" class="get_dateView  {{_month == cur_month&&index == today-1||item.selected? 'get_dateSelectView' : ''}}">
+
+                            <view class="get_datesView"><view class="get_yuan">{{item.index+1}}</view>
+
+                            </view>
+                            <view class="recordTime" wx:if="{{item.step!=0&&item.step!=-1}}">{{item.stepShow}}</view>
+                            <view class="recordTime"  wx:if="{{item.step==0}}"><image src="http://oss.xqzs.cn/resources/mpzq/norecord.png"></image></view>
+                            <view class="recordTime"   wx:if="{{item.step==-1}}" style="height: 19px;padding-top: 2px;"></view>
+
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="today">
+        <view class="i step">
+            <text>今日步数</text><text class="right"><text>{{todayRunInfo.step}}</text>步</text>
+        </view>
+        <view class="i km">
+            <text>行走距离</text><text class="right"><text>{{todayRunInfo.km}}</text>公里</text>
+        </view>
+        <view class="i kll">
+            <text>消耗卡路里</text><text class="right"><text>{{todayRunInfo.kll}}</text>大卡</text>
+        </view>
+    </view>
+
+</view>
+
+
+
+
+
+

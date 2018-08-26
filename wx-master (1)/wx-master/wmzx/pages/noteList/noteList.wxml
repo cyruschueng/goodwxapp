@@ -1,0 +1,15 @@
+<!--pages/noteList/noteList.wxml-->
+<view class='container'>
+<view class='content'>
+      <text class='time' style='font-weight:blod;'>完美智信还款计划说明</text>
+      <view class='item'>
+        0.1-0.3万,默认一天还完。0.3万-0.5万,默认1-3天还完。0.5-1.5万，默认天数3-5天。1.5万-2.5万，还款天数5-10天。2.5万-5万，还款天数8天以上。5万-8万，还款天数11天以上。8万-10万，还款天数13天以上。10万-15万，还款天数16天以上。15万以上，还款天数20天，最高20万。
+      </view>
+    </view>
+  <block wx:for="{{noteList}}" wx:key="index">
+    <view class='content'>
+      <text class='time'>{{noteList[index].createTime}}</text>
+      <view class='item'>{{noteList[index].ANNC}}</view>
+    </view>
+  </block>
+</view>

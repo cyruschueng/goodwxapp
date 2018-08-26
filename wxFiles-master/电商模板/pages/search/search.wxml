@@ -1,0 +1,38 @@
+<view class="searchsd">
+  <input placeholder="搜索商品" bindinput='searchInput' bindfocus='focus' bindblur='blur' />
+  
+</view>
+<view class="panll top-line" wx:if="{{list.length == 0 || showRecord}}">
+  <view class='panel-between'>
+    <view class="font-md margin-bottom-sm">历史搜索 </view>
+    <view class='font-md font-default margin-right-md' bindtap='clearRecord'>清空</view>
+  </view>
+  
+  <view class="element">
+    <view class='font-md padding-bottom-md' wx:if="{{record.length == 0}}">暂无历史记录</view>
+    <view class="item" wx:for="{{record}}" data-item='{{item}}' bindtap='recSearch'>{{item}}</view>
+  </view>
+</view>
+
+<view class="padding-sm">
+    <view wx:for="{{list}}" class="gpanel margin-top-sm" style="background: url({{url+item.imagePath}});background-size:100%" data-id='{{item.commodityId}}' bindtap="goToShopBuy">
+        <view class="xpanel">
+            <image src="{{url+item.imagePath}}" style="width:200rpx;height:200rpx;border-radius:20rpx;" mode="aspectFill"></image>
+            <view class="content">
+                <view class="font-md bold">{{item.commodityName}}</view>
+                <view class="font-md margin-top-xs">销量:{{item.sales}}</view>
+                <view class="font-lg margin-top-xs">价格：<text class="font-danger">￥{{item.commodityPrice}}</text></view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && list.length == 0}}">
+  <view class="font-lg  margin-left-sm font-default">没有搜索到相关记录</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && list.length != 0}}">
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+</view>

@@ -1,0 +1,72 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page commission" wx:if="{{show}}">
+  <view class="user-info">
+    <view class="fui-list">
+      <view class="fui-list-media">
+        <image src="{{member.avatar}}"></image>
+      </view>
+      <view class="fui-list-inner">
+        <view class="title">{{member.nickname}} </view>
+        <view class="subtitle">{{levelname}}</view>
+        <view class="text">{{set.texts.up}}：{{agentname}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="userblock">
+    <view class="line total">
+      <view>{{set.texts.commission_pay}}({{set.texts.yuan}})</view>
+      <view class="num">{{member.commission_pay}}</view>
+    </view>
+    <view class="line able">
+      <navigator class="btn pull-right disabled" hover-class="none" url="/pages/commission/withdraw/index">
+      {{set.texts.commission}}{{set.texts.withdraw}}
+      </navigator>
+      <view class="text">
+        <view>{{set.texts.commission_ok}}({{set.texts.yuan}})</view>
+        <view class="num">{{member.commission_ok}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="fui-block-group">
+    <navigator url="/pages/commission/withdraw/index" class="fui-block-child">
+        <view class="icon">
+          <image src="/static/images/icon-red/money.png"></image>
+        </view>
+        <view class="title">{{set.texts.commission1}}</view>
+        <view class="text">
+          <text>{{member.commission_total}}</text> {{set.texts.yuan}}
+        </view>
+    </navigator>
+    <navigator class="fui-block-child" url="/pages/commission/order/index">
+        <view class="icon">
+          <image src="/static/images/icon-red/list.png"></image>
+        </view>
+        <view class="title">{{set.texts.commission1}}</view>
+        <view class="text">
+          <text>{{member.ordercount0}}</text> 笔</view>
+    </navigator>
+    <navigator class="fui-block-child" url="/pages/commission/log/index">
+        <view class="icon">
+          <image src="/static/images/icon-red/manage-order.png"></image>
+        </view>
+        <view class="title">{{set.texts.commission_detail}}</view>
+        <view class="text">
+          <text>{{member.applycount}}</text> 笔</view>
+    </navigator>
+    <navigator class="fui-block-child" url="/pages/commission/down/index">
+        <view class="icon">
+          <image src="/static/images/icon-red/group.png"></image>
+        </view>
+        <view class="title">{{set.texts.mydown}}</view>
+        <view class="text">
+          <text>{{member.downcount}}</text> 人</view>
+    </navigator>
+    <navigator class="fui-block-child" url="/pages/commission/qrcode/index" wx:if="{{set.closed_qrcode == 0}}">
+        <view class="icon">
+          <image src="/static/images/icon-red/code.png"></image>
+        </view>
+        <view class="title">推广二维码</view>
+        <view class="text"></view>
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,18 @@
+<!--pages/prize/prize.wxml-->
+<view class='body' style='height: {{windowHeight}}px'>
+  <block wx:for="{{prizeList}}" wx:for-item="item" wx:for-index="idx">
+    <view class='flex_item_center prize_container'>
+        <image class='img' src='{{item.img}}'></image>
+        <view class='flex_column_container font_container'> 
+          <text class='describe'>{{item.describe}}</text>
+          <text class='rank_num' wx:if="{{idx <= 2}}">第{{idx + 1}}名</text>
+          <text class='rank_num' wx:if="{{idx == 3}}">第4名-第10名</text>
+           <text class='rank_num' wx:if="{{idx == 4}}">第11名-第100名</text>
+        </view>
+    </view>
+  </block>
+  <view class='bottom_font'>
+    <text style='padding: 0 20rpx;box-sizing: border-box;'>每周一凌晨清空排行榜并得出获奖名单，获奖名单周二在答尔文微信公众号和答尔文首页连续公示三天，并且收集快递信息，一周内快递送出！过期视为放弃！敬请留意</text>
+  </view>
+
+</view>

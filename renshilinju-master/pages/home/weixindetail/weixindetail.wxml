@@ -1,0 +1,76 @@
+<!--pages/home/weixindetail/weixindetail.wxml-->
+<view class="card" id="">
+  <view class="things">
+    <view class='ubox1'>
+      <text class="things-name t2">{{weixinlist.wname}}</text>
+      <view class='time t3'>{{weixinlist.time}}</view>
+    </view>
+    <view class='wjieshao'>{{weixinlist.desc}}</view>
+    <block wx:if="{{weixinlist.desc==''}}">
+      <view class='wjieshao'>这个社群还没有填写介绍</view>
+    </block>
+  </view>
+  <view class='assetsbox'>
+    <block wx:for="{{weixinlist.assets}}" wx:key="item">
+      <view class='picbox'>
+        <image class='asset' src="https://api.changching.cn/{{item.asset}}" alt="" />
+      </view>
+    </block>
+  </view>
+</view>
+<view class='qunzhu'>
+  <view class='quser'>
+    <image class='userasset1' src="{{weixinlist.userasset}}" alt="" />
+    <view class='name t2'>{{weixinlist.username}}</view>
+  </view>
+  <view class='numbox'>
+    <text class='t2' selectable="true">群主微信号：{{weixinlist.weino}}</text>
+    <view class='fuzhi' bindtap='fuzhi' data-num="{{weixinlist.weino}}">复制</view>
+  </view>
+</view>
+<view class='allmessage'>
+  <view class='mbox'>
+    <view class='mtitle t2'>全部留言（{{commentlenght}}）</view>
+    <view class='post t2' bindtap="powerDrawer" data-statu="open">发留言</view>
+  </view>
+  <!--mask-->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+  <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+    <!--drawer content-->
+    <view class="drawer_title">发布留言</view>
+    <view class="drawer_content">
+      <view class="section">
+        <textarea bindinput="getComment" value="{{title}}" auto-height placeholder="请输入您的内容" focus="{{focus}}" />
+      </view>
+    </view>
+    <view class='btnbox'>
+      <view class="btn_no" bindtap="powerDrawer" data-statu="close">取消</view>
+      <view class="btn_ok" bindtap="postComment" data-title="{{title}}" data-statu="close">确定</view>
+    </view>
+  </view>
+  <block wx:for="{{commentlists}}" wx:key="index">
+    <view class='user'>
+      <image class='userasset' src="{{item.userasset}}" alt="" />
+      <view class='ubox'>
+        <view class='name t2'>{{item.username}}</view>
+        <text class="things-name t2">{{item.title}}</text>
+        <view class='time t3'>{{item.time}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+<block wx:if="{{path=='fabu'}}">
+<view class="btn">
+  <button class='gogroup' bindtap="back">回到首页</button>
+  <button class='back' open-type='share'>转发到微信</button>
+</view>
+</block>
+<block wx:if="{{path!='fabu'}}">
+<view class="btn">
+  <button class='gogroup' bindtap="back">返回</button>
+  <button class='back' open-type='share'>转发到微信</button>
+</view>
+</block>

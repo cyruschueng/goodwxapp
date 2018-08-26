@@ -1,0 +1,19 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view id="personInfo">
+    <view class="registerPhone flex"> 
+      <image src='/img/icon-shojji@2x.png' class="registerImg"></image>
+      <input class='telephoneText' placeholder="手机号" type="number" bindinput="checkPhone" bindconfirm="checkPhone" value="{{telphone}}" placeholder-style='color:#999' />
+    </view>
+    <view class="registerNum flex">
+      <image src='/img/icon-yanzhengma@2x.png' class="registerImg"></image>
+      <input placeholder="请输入验证码" type="number" value="{{checkCode}}" bindinput="checkCode2" class='telephoneText' placeholder-style='color:#999' />
+      <button class="clear {{time=='1'?'clearOn':''}}" bindtap="checkCode" disabled="{{time==1}}" loading="{{checking==1}}">{{getCode}}</button>
+    </view>
+    <view class="btnBox">
+      <button form-type="submit" class="nextBtn complete-phone-binding" hover-class='t-other-button-hover' bindtap="nextPage" loading="{{loading=='1'}}">下一步</button>
+    </view>
+    <!--错误提示-->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+  </view>
+</view>

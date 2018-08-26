@@ -1,0 +1,20 @@
+<!-- 图片弹框模板 -->
+<template name="popup-big">
+    <view class='plugPopup img-pop' wx:for='{{data}}' wx:key='{{item.market_id}}' wx:if='{{item.min!==true}}'>
+        <view class="plugPopup-content" catchtap='onPlugNavigateTap' data-url='{{item.market_url}}'>
+            <view class='img-cont'>
+                <image src="{{item.market_img}}" mode='aspectFit'></image>
+            </view>
+            <view class="plugPop-close" catchtap='onPlugSetValueTap' data-value='{"ad_popup":{"min":true}}' data-index='{{index}}' data-is-multi='{{true}}'></view>
+        </view>
+        <view class='plugPopbg'></view>
+    </view>
+
+    <movable-area class="rightActive-area">
+        <movable-view class="rightActive-cont" inertia="true" direction="vertical">
+            <view class="active-img" wx:for='{{data}}' wx:key='{{item.market_id}}' wx:if='{{item.min==true}}'>
+                <image src="{{item.market_img}}" mode='aspectFit' catchtap='onPlugNavigateTap' data-url='{{item.market_url}}'></image>
+            </view>
+        </movable-view>
+    </movable-area>
+</template>

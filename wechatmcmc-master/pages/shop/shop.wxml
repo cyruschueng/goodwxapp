@@ -1,0 +1,73 @@
+<view>
+  <view style="text-align:center;" class="top">
+            <swiper indicator-dots="true"  duration="500" style="width:100%;height:240px;">
+               <block wx:for="{{logo}}" wx:for-item="item" wx:for-index="i" wx:key='a'> 
+                <swiper-item >
+                  <image bindtap="lookimg" data-url="{{item}}" mode="aspectFill"  src="{{item}}" style="width:100%;height:270px;"></image>
+                </swiper-item>
+               </block>   
+            </swiper>
+   </view>
+  
+        <view class="title">
+            <view class="t_top">
+              {{info.title}}
+            </view>
+            <view class="t_bottom">
+                <view class="t_left">{{info.time}}</view>
+                <block wx:if="{{info.vip==1}}">
+                  <view class="t_right">联盟商家</view>
+                </block>
+                <block wx:if="{{info.vip==0}}">
+                  <view class="t_right" style="color:#646464">普通商家</view>
+                </block>
+                
+                
+            </view>
+        </view>
+        <view class="type">
+            <view class="type_1">
+              <view class="ty_title">服务类型</view>
+              <view class="ty_name">{{leixing}}</view>
+            </view>
+           
+            <view class="type_1">
+              <view class="ty_title">公司名称</view>
+              <view class="ty_name">{{info.gongsi}}</view>
+            </view>
+            <view class="type_1">
+              <view class="ty_title">商家区域</view>
+              <view class="ty_name" >{{info.provincecityarea}}</view>
+            </view>
+             <view class="type_1">
+              <view class="ty_title">详细地址</view>
+              <view class="ty_name" >{{info.address}}</view>
+            </view>
+             <view class="type_2">
+              <view class="ty_title"><text style="color:#FFFFFF;">,</text>联 系 人</view>
+              <view class="ty_name"><text style="color:#FFFFFF;">,</text>{{info.contacts}}</view>
+            </view>
+        </view>
+        
+        <view class="info">
+          <view class="a_title">
+            <text style="color:#646464;">详细信息</text>
+          </view>
+          <view class="xiangqing">
+           <text style="line-height: 200%;"> {{info.content}}</text>
+          </view>
+        </view>
+        <view style="width:100%;height:70px;"></view>
+        <view class="bottom">
+            <view class="b_left" bindtap="call" data-id="{{info.phone}}">
+              <view class="b_img"><image src="http://www.mcmchw.com/Public/tupian/电话.png"/></view>
+              <view class="b_text"><text>拨打电话</text></view>
+            </view>
+            <view class="b_mid" bindtap="shoucang" ><text>收藏</text></view>
+            <view class="b_right" >
+              <button class="btn" open-type="share">
+              分享
+              </button>
+            </view>
+        </view>
+</view>

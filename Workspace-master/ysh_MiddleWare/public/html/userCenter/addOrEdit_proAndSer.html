@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>控制台</title>
+    <link rel="stylesheet" type="text/css" href="../../Css/identify.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/account.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/style.css" />
+    <link rel="stylesheet" type="text/css" href="" />
+    <link rel="stylesheet" type="text/css" href="../../Css/control_index.css" />
+    <style type="text/css">
+    #saveBtn,
+    #back {
+        display: block;
+        line-height: 30px;
+        width: 55px;
+        padding: 0 10px;
+        margin: 0 auto;
+        color: #87898b;
+        border-radius: 3px;
+        margin-top: 20px;
+        background: #f5f6fa;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="view-body">
+        <div class="view-product" style="left: 0px;right: 0;top: 0px;">
+            <div class="authority">
+                <div class="authority-head">
+                    <div class="manage-head">
+                        <h6 class="layout padding-left manage-head-con">主机编辑</h6>
+                    </div>
+                </div>
+                <div class="authority-content">
+                    <div class="list-content show">
+                        <div class="offcial-table tr-border margin-big-top clearfix">
+                            
+                            <div class="tr-th clearfix" style="color: white;">
+                                <div class="th w35"></div>
+                                <div class="th w10">
+                                    <div class="h5">服务器名称:</div>
+                                </div>
+                                <div class="th w20">
+                                    <select id="serviceNames" style="background:#fff;border: solid 1px #ccc">
+                                    </select>
+                                </div>
+                                <div class="th w35"></div>
+                            </div>
+                            <div class="tr-th clearfix" style="color: white;">
+                                <div class="th w35"></div>
+                                <div class="th w10">
+                                    <div class="h5">项目名称:</div>
+                                </div>
+                                <div class="th w20">
+                                    <select id="projectNames" style="background:#fff;border: solid 1px #ccc">
+                                    </select>
+                                </div>
+                                <div class="th w35"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button id="saveBtn">保存</button>
+                    <button id="back" style="display: none">返回</button>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../Js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="../../Js/haidao.offcial.general.js"></script>
+        <script type="text/javascript" src="../../Js/select.js"></script>
+        <script type="text/javascript" src="../../Js/laytpl.js"></script>
+        <script type="text/javascript" src="../../Js/layer.js"></script>
+        <script type="text/javascript" src="../../Js/haidao.validate.js"></script>
+        <script type="text/javascript" src="../../Js/public_fuc.js"></script>
+        
+        <!-- 项目 -->
+        <script id="pro_selectTpl" type="text/html">
+            <option value={{d.Id}}>{{d.projectName}}</option>
+        </script>
+        
+        <!-- 服务器 -->
+        <script id="ser_selectTpl" type="text/html">
+            <option value={{d.Id}}>{{d.serviceName}}</option>
+        </script>
+
+        <script>
+
+            // 获取下拉列表
+            var param = new Object;
+            param.query = "1000112,1000113"
+            $.ajax({
+                url: "http://localhost:3000/MiddleWare/webhelper_select",
+                dataType: "json",
+                async: true,
+                data: param,
+                type: "POST",
+                success: function(msn) {
+                    //项目列表
+                    if(msn && msn.length != 0){
+                        var proView = $("#projectNames");
+                        var pro_selectTpl = $("#pro_selectTpl").html();
+                        showData(proView,pro_selectTpl,msn[0].aaData)
+
+                        // 开发者列表
+                        var devView = $("#serviceNames")
+                        var ser_selectTpl = $("#ser_selectTpl").html();
+                        showData(devView,ser_selectTpl,msn[1].aaData)
+                    } else {
+                        alert(JOSN.stringify(msn))
+                    }
+                }
+            })
+
+            var id = GetRequest().id;
+            var action = GetRequest().action;
+
+            // 初始化数据
+            function initPage() {
+                var param = new Object;
+                param.Id = id;
+                // param.num = 0;
+
+                $.ajax({
+                    url: "http://localhost:3000/MiddleWare/select_proAndSer",
+                    dataType: "json",
+                    async: true,
+                    data: param,
+                    type: "POST",
+                    success: function(msn) {
+                        if(msn.aaData && msn.aaData.length != 0){
+                            $("#projectNames").val(msn.aaData[0].projectId);
+                            $("#serviceNames").val(msn.aaData[0].serviceId);
+                            
+                            console.log($("#projectNames").val())
+                            console.log($("#developerNames").val())
+                            
+                            if (action == "search") {
+                                $("#back").css("display", "block");
+                                $("#saveBtn").hide();
+                                $("select").each(function() {
+                                    $(this).attr("disabled", true);
+                                })
+                            }
+                            if (action == "editor") {
+                                $("input").each(function() {
+                                    $(this).attr("disabled", false);
+                                })
+                            }
+                            if (action == "add") {
+                                $("input").each(function() {
+                                    $(this).val("")
+                                })
+                            }
+                        } else {
+                            alert(JOSN.stringify(msn))
+                        }
+                    }
+                })
+            }
+            initPage();
+
+            // 查看返回
+            $("#back").on("click", function() {
+                window.location.href = "project_service.html"
+            })
+
+            //编辑保存
+            if (action == "editor") {
+                $("#saveBtn").on("click", function() {
+                    var param = new Object;
+                    param.Id = id;
+                    param.projectId = $("#projectNames").val();
+                    param.serviceId = $("#serviceNames").val();
+
+                    $.ajax({
+                        url: "http://localhost:3000/MiddleWare/update_proAndSer",
+                        dataType: "json",
+                        async: true,
+                        data: param,
+                        type: "POST",
+                        success: function(msn) {
+                            if (msn.err && msn.err.status == 0) {
+                                window.location.href = "project_service.html";
+                            } else {
+                                alert(JOSN.stringify(msn))
+                            }
+                        }
+                    })
+                })
+            }
+
+            //添加保存
+            if (action == "add") {
+                $("#saveBtn").on("click", function() {
+                    var param = new Object;
+                    param.projectId = $("#projectNames").val();
+                    param.serviceId = $("#serviceNames").val();
+
+                    $.ajax({
+                        url: "http://localhost:3000/MiddleWare/insert_proAndSer",
+                        dataType: "json",
+                        async: true,
+                        data: param,
+                        type: "POST",
+                        success: function(msn) {
+                            if (msn.err && msn.err.status == 0) {
+                                window.location.href = "project_service.html";
+                            } else {
+                                alert(JSON.stringify(msn))
+                            }
+                        } 
+                    })
+                })
+            }
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+<view class="weui-cells__title">单项选择（当前选择：{{country}}）</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group data-name="country" bindchange="onRadioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{['美国','中国','日本','英国']}}" wx:key="*this">
+      <view class="weui-cell__hd">
+        <radio value="{{item}}" checked="{{item == country}}"/>
+      </view>
+      <view class="weui-cell__bd">{{item}}</view>
+    </label>
+  </radio-group>
+</view>

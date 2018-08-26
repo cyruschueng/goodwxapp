@@ -1,0 +1,26 @@
+<!--pages/index/mission/rank/rank.wxml-->
+
+<view class="container">
+  <view class="header">
+    <image src="{{avatarUrl}}" class="avatar" />
+    <text class="caption">{{questionIndex >= questionCount?'恭喜！闯关成功':'正在闯关..'}}</text>
+    <text class="title"> 《{{title}}》</text>
+    <view class="desc" wx:if="{{questionIndex >= questionCount}}">
+      一共 <strong>{{questionCount}}</strong> 道题，答对了 <strong>{{questionRight}}</strong> 道
+    </view>
+    <view class="desc" wx:if="{{questionIndex < questionCount}}">
+      一共 <strong>{{questionCount}}</strong> 道题，我已经回答了 <strong>{{questionIndex}}</strong> 道题
+    </view>
+  </view>
+  <view class="players">
+    <view class="item {{item.score==item.subjectCount ? 'winner' : ''}}" wx:for="{{playerItems}}" wx:key="item">
+      <image src="{{item.avatarUrl}}" mode="aspectFit" lazy-load="true" class="avatar" />
+      <text class="score">{{item.score==item.subjectCount ? item.seconds : item.score}}</text>
+      <text class="nick">{{item.nick}}</text>
+    </view>
+  </view>
+  <view class="controls">
+    <button type="default" bindtap="onShareToTimeline" class="share"> 分享到朋友圈 </button>
+    <button type="default" open-type="share" class="share"> 分享至好友/群 </button>
+  </view>
+</view>

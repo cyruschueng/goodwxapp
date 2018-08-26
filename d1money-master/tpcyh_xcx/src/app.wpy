@@ -1,0 +1,234 @@
+<style lang="less">
+    @font-face {
+        font-family: 'iconfont';
+        src: url(data:font/truetype;charset=utf-8;base64,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) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .iconfont {
+        font-family:"iconfont" !important;
+        font-size:16px;
+        font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-huodong:before { content: "\e726"; }
+
+    .icon-guanbi:before { content: "\e657"; }
+
+    .icon-dianhua:before { content: "\e67f"; }
+
+    .icon-tuandui:before { content: "\e607"; }
+
+    .icon-tianjia:before { content: "\e692"; }
+
+    .icon-huida:before { content: "\e651"; }
+
+    .icon-question:before { content: "\e650"; }
+
+    .icon-arrow-right:before { content: "\e612"; }
+
+
+
+    view{
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    image{
+        width:100%;
+        height:100%;
+        object-fit: cover;
+    }
+    .demon_page {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+    /*遮盖层*/
+    .demon-mask{
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+    }
+    /*超过两行省略*/
+    view[data-lineSize="2"]{
+          overflow:hidden;
+          text-overflow:ellipsis;
+          display:-webkit-box;
+          -webkit-box-orient:vertical;
+          -webkit-line-clamp:2;
+      }
+    /*button 的默认样式*/
+    button[data-style="default"]{
+        background-color:#38A1CF;
+        -webkit-border-radius:40rpx;
+        -moz-border-radius:40rpx;
+        border-radius:40rpx;
+    }
+    .button-hover[type="primary"] {
+        color:rgba(255, 255, 255, 0.6);
+        background-color:#38A1CF;
+
+    }
+
+    .dm-em1{
+        display: inline-block;
+        width:1em;
+    }
+    .demon-placeholder{
+        color: #969696;
+    }
+
+    .dm-nomsg{
+        width:500rpx;
+        height:500rpx;
+        text-align: center;
+        position: relative;
+        top:40%;
+        transform: translateY(-50%);
+        margin: 0 auto;
+        image{
+            height: 480rpx;;
+        }
+        view.text{
+            padding-top:80rpx;
+            color: rgb(221, 221, 221);
+        }
+    }
+</style>
+
+<script>
+    import wepy from 'wepy';
+    import api from './common/api';
+    import G from './common/global';
+    import 'wepy-async-function';
+
+    export default class extends wepy.app {
+        config = {
+            pages: [
+                'pages/index',
+                'pages/questionAnswer',
+                'pages/activity/activityDetail',
+                'pages/admin/admin',
+                'pages/admin/fpUser',
+                'pages/admin/cardWashTicket/cardWashTicket',
+                'pages/admin/doorServer/doorServer'
+            ],
+            window: {
+                backgroundTextStyle: 'light',
+                navigationBarBackgroundColor: '#000',
+                navigationBarTitleText: 'WeChat',
+                navigationBarTextStyle: 'white',
+                backgroundColor: '#f2f2f2',
+                onReachBottomDistance: 450,
+            }
+        }
+
+        globalData = {
+            // 用户微信信息
+            userInfo: null,
+            //当前用户的工作室信息
+            currentUserInfo: null,
+            // 代理人Id
+            fpUserId: null,
+            scene: null,
+            query: null,
+            // 用户授权后拿到的信息
+            doEnsureUserInfo: null
+        }
+
+        constructor() {
+            super();
+            this.use('requestfix');
+            this.use('promisify');
+
+            this.intercept('request', { // request 的拦截器，在每次发送request请求时都会加上session
+                config(p) {
+                    let userInfo = api.getLocalStorageSync(G.userInfo);
+                    let session_3rd = api.getLocalStorageSync(G.session_3rd);
+                    let fpUserId = this.globalData.fpUserId;
+
+                    p.data = p.data ? p.data : {};
+                    p.data.session_3rd = session_3rd;
+                    if(!p.data.fpUserId){
+                        p.data.fpUserId = parseInt(this.globalData.fpUserId);
+                    }
+                    if(userInfo){
+                        p.data.userId = userInfo.userId;
+                    }
+                    return p;
+                }
+            });
+        }
+
+        onLaunch(options) {
+            this.globalData.query = options.query;      //打开小程序的query
+            this.globalData.scene = options.scene;      //打开小程序的场景值
+            //如果带有fpuserId参数 则参加参数
+            if(options.query.fpUserId){
+                this.globalData.fpUserId = options.query.fpUserId;
+            }
+            console.log(options);
+            console.log(this.globalData.query);
+            console.log(this.globalData.scene);
+            wepy.login()
+                .then(res => api.getSession(res.code))
+                .then(res => {
+                    api.setLocalStorageSync(G.session_3rd, res.data.body.session_3rd);
+                });
+        }
+
+        // 获取用户信息
+        requestUserInfo(){
+            return new Promise((resolve, reject) => {
+                const That = this;
+                console.log(That.globalData.userInfo);
+                if (That.globalData.userInfo && That.globalData.doEnsureUserInfo) {
+                    console.log('已存在');
+                    resolve(That.globalData.doEnsureUserInfo);
+                    return;
+                }
+
+                wepy.getUserInfo().then((res) => {
+                    api.request({
+                        url: G.host + 'tpcyh/doEnsureUserInfoIntegrity',
+                        data: {
+                            userInfoEncryptedData: encodeURIComponent(res.encryptedData),
+                            userInfoIv: res.iv,
+                            rawData: res.rawData,
+                            signature: res.signature
+                        }
+                    }).then(res => {
+                        // 设置 全局变量userInfo 存储
+                        That.globalData.userInfo = res.data.body.userId;
+                        // 设置 全局变量currentUserInfo
+                        That.globalData.currentUserInfo = res.data.body.user;
+                        // 设置 本地存储
+                        api.setLocalStorageSync(G.userInfo, res.data.body.userId);
+
+                        api.setLocalStorageSync(G.doEnsureUserInfo, res.data.body);
+                        resolve(res.data.body);
+                    }).catch(res => {
+                        console.log('code:' + res.data.code + '\t' + 'msg:' + res.data.msg);
+                    });
+                }).catch(res => {
+                    console.log(res);
+                    api.log('用户没有同意用户信息授权');
+                    wx.hideLoading();
+                    reject();
+                });
+            })
+
+        }
+    }
+</script>

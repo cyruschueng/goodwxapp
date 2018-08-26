@@ -1,0 +1,126 @@
+<view class="pay">
+     <view class='addP pay_add' wx:if="{{addressInfo.length==0}}" bindtap='editAddress'>
+     <view class='top_box'></view>
+      <image src='/images/medium/add.png'></image>
+      <view class='addP_msg'>
+      添加地址
+      </view>
+    </view> 
+    <view class='pay_add' bindtap='editAddress' wx:else>
+    <view class='top_box'></view>
+        <view class='pay_img'>
+            <image src='/images/icon_shop_distance.png'></image>
+        </view> 
+        <view class='pay_msg'>
+              <view class='pay_name'>
+              <view class='pay_name_l'>
+                  收货人：{{addressInfo.userName}}
+              </view>
+              <view class='pay_name_r'>
+                  {{addressInfo.telNumber}}
+              </view>
+              </view>
+              <view class='pay_name'>
+              <view class='pay_name_l'>
+                  收货地址：{{addressInfo.provinceName}}{{addressInfo.cityName}}{{addressInfo.countyName}}{{addressInfo.detailInfo}}
+              </view>
+              </view>
+        </view>
+    </view>
+<!--订单信息  -->
+<view class='dd_box'>
+  <view class='dd_box_msg'>
+      订单信息：
+  </view>
+  <view class='dd_box_con' wx:for="{{Datalist}}">
+      <view class='dd_box_img'>
+      <image src='{{item.image}}'></image>
+      </view>
+      <view class='dd_box_con_msg'>
+            <view class='dd_box_con_name'>
+              {{item.name}}
+            </view>
+            <view class='maney'>
+                ￥{{item.price}}
+            </view>
+            <view class='count'>
+                X{{item.number}}
+            </view>
+      </view>
+  </view>
+  
+
+</view>
+<!--订单信息 end -->
+<!--优惠券列表  -->
+<view class='dd_box' hidden='{{coupon.length<1}}'>
+  <view class='dd_box_msg'>
+      优惠券列表：
+  </view>
+   <view class='dd_box_con_list bt_dd' >
+    <view class='dd_box_con_list_name'>
+       优惠券名称
+    </view>
+    <view class='dd_box_con_list_maney'>
+        优惠价格
+    </view>
+    <view class='dd_box_con_list_count'>
+       选择使用优惠券
+    </view>
+  </view> 
+  <radio-group class="radio-group" bindchange="radioChange">
+   
+  <label class="dd_box_con_list" wx:for="{{coupon}}">
+    <view class='dd_box_con_list_name'>
+       {{item.coupon.name}}
+    </view>
+    <view class='dd_box_con_list_maney'>
+         -{{item.coupon.money}}元
+    </view>
+    <view class='dd_box_con_list_count'>
+           <radio value="{{item.coupon.coupon_id}}" checked="{{index==0}}" color='#ff4546' />
+    </view>
+  </label>
+   <label class="dd_box_con_list" >
+    <view class='dd_box_con_list_name'>
+       不使用优惠券
+    </view>
+    <view class='dd_box_con_list_maney'>
+         
+    </view>
+    <view class='dd_box_con_list_count'>
+           <radio value="{{99999}}"  color='#ff4546' />
+    </view>
+  </label>
+</radio-group> 
+</view>
+<!--优惠券列表 end -->
+<!--是否使用积分  -->
+<view class='dd_box body_view' hidden='{{userCount.integral<100||counts<100}}'>
+  <view class='dd_box_msg switch_box'>
+      <view>
+      是否使用积分：{{userCount.integral}}
+      </view>
+        <view class="body-view">
+        <switch checked='{{switchChecked}}'  bindchange="switchChange" data-integral="{{userCount.integral}}"  color='#ff4546'  />
+      </view>
+  </view>
+          <view class='dd_box_msg jf_button' bindtap='jf_button'>
+            <view class='jf_botton_left'>选择使用</view>
+            <view class='jf_botton_right'><image src='/images/right.png'></image></view>
+        </view>
+  </view>
+
+<!--是否使用积分 end -->
+    <!--支付  -->
+    <view class='foot'>
+    <view class='foot_count'>
+    总计￥ <text>{{count}}</text>  
+  </view>
+  <view class='goPay' bindtap='pay_end'>
+        去支付
+  </view>
+</view>
+    <!--支付 end -->
+</view>
+ <!-- <loading hidden="{{hiddenLoading}}">正在加载</loading> -->

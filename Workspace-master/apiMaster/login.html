@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>ApiMaster | 登录</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	  	<![endif]-->
+	</head>
+
+	<body class="hold-transition login-page" style="height: 0;">
+		<div class="login-box">
+			<div class="login-logo">
+				<a href="#"><b>API管理员</b></a>
+			</div>
+			<div class="login-box-body">
+				<p class="login-box-msg"></p>
+				<div class="form-group has-feedback">
+					<input type="text" class="form-control" placeholder="用户名" id="username">
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="password" class="form-control" placeholder="密码" id="password">
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback">
+					<button type="submit" id="loginSubimt" class="btn btn-primary btn-block btn-flat" style="border-radius: 3px;">登录</button>
+				</div>
+				<div class="row">
+					<div class="col-xs-8">
+						<a href="#">忘记密码</a>
+					</div>
+					<div class="col-xs-4 text-right"">
+						<a href="register.html">注册</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/layer/layer.js"></script>
+		<script src="js/common.js"></script>
+		<script type="text/javascript">
+			$(document).on('click','#loginSubimt',function(){
+				var param = new Object;
+				param.username = $("#username").val();
+				param.passwd = $("#password").val();
+				
+				// 输入验证
+				if(param.username == '' || param.password == '' ){
+					api_msg('请输入用户名或密码')
+				} else {
+					// api_alert(JSON.stringify(param))
+					var loginURL = apiurl + 'user/login';
+					$.ajax({
+						url: loginURL,
+						type: "POST",
+						data: param,
+						success: function(d) {
+							param.id = d.aaData[0].userid;
+							param.token = d.aaData[0].token;
+							setLocal("userInfo",JSON.stringify(param));
+							if(d.aaData[0].ret == 1){
+								api_msg('登录成功')
+								location.href = 'index.html'
+							} else {
+								api_msg('用户名或密码错误')
+							}
+						},
+						error: function() {
+							api_msg('服务器出错')
+						}
+					})
+				}
+			})
+		</script>
+	</body>
+
+</html>

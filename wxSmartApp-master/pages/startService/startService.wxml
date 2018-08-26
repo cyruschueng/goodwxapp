@@ -1,0 +1,37 @@
+
+<!--这个画面也基本没用  -->
+<view class="rectangle">
+     <image src="{{IMG_PATH}}/juxing4.png"></image> 
+    
+
+    <view class="device">
+
+          
+          <view class="deviceNo">设备编号：{{device.deviceNo}}</view> 
+          <view class="deviceName">设备名称：{{device.name}}</view> 
+
+           <view class="sh">设备价格：{{device.price*100}}嘀嘀币 </view>
+
+           <view class="rental">搭电费用：{{device.changeDdb}}嘀嘀币/次</view>
+        
+    </view>
+     
+</view>
+
+<!-- 用户选项   -->
+ <block wx:if="{{isManager=='false'}}">
+<view class='user'>
+    <button bindtap="buyStart" type="primary">购买</button> 
+  
+ 
+    <button bindtap="startService" type="primary">搭火</button>  
+    </view>
+</block> 
+
+<!--管理员选项  -->
+ <block wx:if="{{isManager=='true'}}">
+  <view class='manager'>
+       <button bindtap="reciveDevice" type="primary">取回</button>  
+ </view>
+</block> 
+

@@ -1,0 +1,24 @@
+<!--pages/address/editAddress/editAddress.wxml-->
+<view class="container edit-address">
+  <form bindsubmit="formSubmit">
+    <view class='address-item'>
+      收货人：
+      <input name="userName" value='{{address.userName||""}}' confirm-type='done'></input>
+    </view>
+    <view class='address-item'>
+      联系电话：
+      <input name="telNumber" value='{{address.telNumber||""}}' confirm-type='done'></input>
+    </view>
+    <view class='selection'>
+      <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+        <view class="picker">请选择：{{region[0]||''}}{{region[1]||''}}{{region[2]||''}}</view>
+      </picker>
+    </view>
+    <view class='address-item'>
+      详细地址：
+      <input name="detailInfo" value='{{address.detailInfo||""}}' confirm-type='done'></input>
+    </view>
+    <input name='addressId' value='{{address.id}}' hidden='true'></input>
+    <button size='default' type='primary' form-type='submit' data-id='{{address.id}}'>保存</button>
+  </form>
+</view>

@@ -1,0 +1,45 @@
+<!--pages/answer/answer.wxml-->
+<view class="container" style="background:url({{background}}) no-repeat;background-size: cover; ">
+  <scroll-view scroll-y="true" scroll-with-animation="true" scroll-into-view="{{scrollView}}" scroll-top="{{top_h}}" style="height:{{height}}vh">
+    <view wx:for="{{array}}" class="dialog_wrap" id="scroll{{index}}" wx:key="{{index}}">
+      <view class="left_item" wx:if="{{item.direction=='left'}}" style="opacity: {{opacity}};">
+        <image src="{{item.avatar}}" class="left_img"></image>
+        <view class="left_text">
+          <view wx:if="{{item.text}}">{{item.text}}</view>
+        </view>
+      </view>
+
+      <view class="right_item" wx:else>
+        <image src="{{u_avatar}}" class="right_img"></image>
+        <view class="right_text">{{item.text}}</view>
+      </view>
+    </view>
+    <view class="dialog_wrap" hidden="{{!show_btn}}" bindtap="check_certi">
+      <view class="left_item fadeInLeft">
+        <image src="{{p_avatar}}" class="left_img"></image>
+        <view class="left_text left_textiWing">
+          <view class="left_certi left_certiWing">
+            <view class="img_wrap">
+              <image src="{{p_avatar}}" class="img_btn"></image>
+              <image src="{{u_avatar}}" class="img_btn"></image>
+            </view>
+            <view class="left_btn">查看默契值</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+  </scroll-view>
+
+  <view class="option_wrap" style="height:{{opt_height}}vh" hidden="{{show_btn}}">
+      <view class="btn_wrap">
+        <button class="option {{options=='true'?'fadeInUpBig1':''}} {{sex==1?'optiona':'optionb'}}" bindtap="answerSubject" 
+                data-option="a" data-text="{{question.option_a}}">A {{question.option_a}}</button>
+        <button class="option {{options=='true'?'fadeInUpBig2':''}} {{sex==1?'optiona':'optionb'}}" bindtap="answerSubject"                           data-option="b" data-text="{{question.option_b}}">B {{question.option_b}}</button>
+        <button class="option {{options=='true'?'fadeInUpBig3':''}} {{sex==1?'optiona':'optionb'}}"  bindtap="answerSubject"                          data-option="c" data-text="{{question.option_c}}" hidden="{{!question.option_c}}">C {{question.option_c}}</button>
+      </view>
+    </view>
+</view>
+<view class='gif zindex' bindtap='redUrl'>
+    <image src="http://p1jrmxejh.bkt.clouddn.com/photo/hepulan.gif" mode='widthFix'></image>
+</view>

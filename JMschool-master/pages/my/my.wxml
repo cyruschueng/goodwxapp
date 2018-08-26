@@ -1,0 +1,78 @@
+<!--pages/my/my.wxml-->
+<view class="container">
+    <view class="user-info-box">
+        <block wx:if="{{is_bind}}">
+            <view class="user-info">
+                <view class="info-hd">
+                    <image class="user-avatar" src="{{user.wx.avatarUrl}}"></image>
+                    <view class="user-title">
+                        <text class="user-name">{{user.we.student_name}}</text>
+                        <text class="user-id">{{user.we.student_no}}</text>
+                    </view>
+                    <view class="time-box">
+                        <text class="time-term">{{time[0]-1+"~"+time[0]+"学年第一学期"}}</text>
+                        <text class="time-now">第{{time[1]}}周 - 星期{{time[2]}}</text>
+                    </view>
+                </view>
+                <view class="info-bd">
+                    <view class="info-bd-left">
+                        <text class="user-text">年级：{{user.we.student_nianji}}级</text>
+                        <text class="user-text">班级：{{user.we.student_banji}}班</text>
+                        <text class="user-text">学籍状态：{{user.we.student_xueji }}</text>
+                    </view>
+                    <view class="info-bd-right">
+                        <text class="user-text">在班编号：{{user.we.student_bianhao}}</text>
+                        <text class="user-text">分院：{{user.we.student_fenyuan }}</text>
+                        <text class="user-text">专业：{{user.we.student_zhuanye }}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <navigator url="/pages/bind/bind" class="user-info" wx:else>
+            <view class="info-hd">
+                <image class="user-avatar" src="{{user.wx.avatarUrl}}"></image>
+                <view class="user-title">
+                    <text class="user-name">{{user.wx.nickName}}</text>
+                    <text class="user-id">未绑定</text>
+                </view>
+                <text class="bind-btn">前往绑定</text>
+                <view class="btn-open">
+                    <image class="btn-enter" src="/images/more/enter.png"></image>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="more-list">
+        <view class="about-link">
+            <view class="more-btn">
+                <contact-button type="default-dark" size="21" session-from="weapp">
+                </contact-button>
+                <text class="btn-text1">客服消息</text>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <contact-button type="default-light" size="27" session-from="weapp"></contact-button>
+                <view class="btn-open">
+                    <image class="btn-enter" src="/images/more/enter.png"></image>
+                </view>
+            </view>
+        </view>
+        <navigator url="../about/about" class="about-link">
+            <view class="more-btn">
+                <image class="btn-icon" src="/images/more/about.png"></image>
+                <text class="btn-text">关于</text>
+                <view class="btn-open">
+                    <image class="btn-enter" src="/images/more/enter.png"></image>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <navigator url="../bind/bind" class="login-btn">
+        <text wx:if="{{is_bind}}">切换绑定</text>
+        <text wx:else>立即绑定</text>
+    </navigator>
+</view>

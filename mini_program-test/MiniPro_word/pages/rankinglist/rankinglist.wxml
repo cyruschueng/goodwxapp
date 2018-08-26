@@ -1,0 +1,38 @@
+<view class="outer">
+    <view class="pages">
+        <audio src="{{audioSrc}}" id="startAudio" style="display: none;"></audio>
+        <view class="header">
+            <image class="head_bg" src="{{groupStatus?'../../images/group_bg.png':'../../images/Group.png'}}"></image>
+            <view class="user-box" wx:if="{{!groupStatus}}">
+                <image src="{{head_img}}"></image>
+                <view class="nickname">{{nickname}}</view>
+                <view class="score">最高连续答对<text class="max">{{maxNum}}</text>个单词</view>
+            </view>
+        </view>
+        <view class="ranking">
+            <view class="ranking-box">
+                <view wx:for="{{ranklistdatas}}" wx:key="{{item}}" class="list" data-item="{{item}}" bindtap="toview_perinfo"  >
+                    <view class="{{item.rank>3?'index':'index_1'}}">{{item.rank}}</view>
+                    <view class="nickname">{{item.nickname}}</view>
+                    <view class="score">{{item.score}}</view>
+                    <view class="tag">{{item.title}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="mes">只显示前100位玩家成绩，每周一刷新</view>
+        <view class="footer-box">
+            <button wx:if="{{!groupStatus}}" bindtap="onShareAppMessage" open-type="share" class="group_btn">
+                <image class="group_img" src="../../images/group_rank.png"></image>
+            </button>
+            <image class="replay_img" src="../../images/button_start.png" bindtap="toTest"></image>
+        </view>
+    </view>
+    <view wx:if="{{addHeart}}" class="addModal">
+        <image class="bg" src="../../images/popup_life.png"></image>
+        <view>分享奖励复活<image class="heart_sm" src="../../images/heart_sm.png"></image>+1</view>
+        <image class="button_ok" src="../../images/button_ok.png" bindtap="hideAdd"></image>
+    </view>
+    <button open-type="contact" class="contact_btn">
+        <image src="../../images/help.png"></image>
+    </button>
+</view>

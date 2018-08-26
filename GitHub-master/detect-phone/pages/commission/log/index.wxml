@@ -1,0 +1,50 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page com-log" wx:if="{{show}}">
+  <view class="fui-cell-group">
+    <view class="fui-cell">
+      <view class="fui-cell-label">预计{{textcomm}}</view>
+      <view class="fui-cell-info"></view>
+      <view class="fui-cell-remark noremark">
+        <text>+{{commissioncount}}{{textyuan}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="fui-tab fui-tab-danger">
+    <view bindtap="myTab" class="item {{status == 0 ? 'active' : ''}}" data-status="0">所有</view>
+    <view bindtap="myTab" class="item {{status == 1 ? 'active' : ''}}" data-status="1">待审核</view>
+    <view bindtap="myTab" class="item {{status == 2 ? 'active' : ''}}" data-status="2">待打款</view>
+    <view bindtap="myTab" class="item {{status == 3 ? 'active' : ''}}" data-status="3">已打款</view>
+    <view bindtap="myTab" class="item {{status == 4 ? 'active' : ''}}" data-status="4">无效</view>
+  </view>
+  <view class="fui-list-group" wx:if="list.length > 0">
+    <block wx:for="{{list}}">
+      <navigator class="fui-list" hover-class="none" url="/pages/commission/log/detail?id={{item.id}}">
+        <view class="fui-list-inner">
+          <view class="row">
+            <view class="row-text">编号: {{item.applyno}}</view>
+          </view>
+          <view class="text">
+            申请{{textcomm}}:{{item.commission}} 实际金额:{{item.deductionmoney}} 个人所得税: {{item.deductionmoney}}{{textyuan}}
+          </view>
+          <view class="text" wx:if="{{item.status==1}}">申请时间: {{item.dealtime}}</view>
+          <view class="text" wx:elif="{{item.status==2}}">审核时间: {{item.dealtime}}</view>
+          <view class="text" wx:elif="{{item.status==3}}">打款时间: {{item.dealtime}}</view>
+          <view class="text" wx:else>无效时间: {{item.dealtime}}</view>
+        </view>
+        <view class="row-remark">
+          <view>+{{item.commission_pay}}</view>
+          <view>{{item.statusstr}}</view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+  <view class="center" wx:if="{{list.length < 1}}">
+    <view class="empty-tip">
+      <image class="light" src="/static/images/icon/lights-128.png"></image>
+      <view class="text-cancel">暂时没有任何数据</view>
+    </view>
+  </view>
+  <view class="fui-loading empty" wx:if="{{loaded && list.length > 0}}">
+    <view class="text">没有更多了</view>
+  </view>
+</view>

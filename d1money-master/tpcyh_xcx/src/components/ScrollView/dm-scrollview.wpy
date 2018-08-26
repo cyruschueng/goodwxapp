@@ -1,0 +1,45 @@
+<style lang="less" rel="stylesheet/less">
+    .demon-sv{
+        &.scrollX{
+            white-space: nowrap;
+        }
+        &.scrollY{
+
+        }
+    }
+</style>
+<template>
+    <scroll-view class="demon-sv" scroll-x="true" scroll-y="{{scrollY}}" scroll-with-animation="{{scrollWithAnimation}}">
+        <slot></slot>
+    </scroll-view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {
+            scrollX: {
+                type: Boolean,
+                default: true
+            },
+            scrollY: {
+                type: Boolean,
+                default: false
+            },
+            scrollWithAnimation: {
+                type: Boolean,
+                default: true
+            }
+        }
+
+        data = {}
+
+        events = {}
+
+        methods = {}
+
+        onLoad() {
+
+        }
+    }
+</script>

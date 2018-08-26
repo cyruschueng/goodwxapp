@@ -1,0 +1,223 @@
+<!--预览保单-->
+<!--起运时间-->
+<view class='{{_date == 1?"cover":""}}' style="display:{{_date == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeDate'>取消</text>
+                   <text>起运时间</text>
+                   <text bindtap='rightDate'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{datavalue}}" bindchange="bindChange">
+                  <picker-view-column>
+                    <view wx:for="{{years}}" style="line-height: 50px" wx:key="*this">{{item}}年</view>
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view wx:for="{{months}}" style="line-height: 50px" wx:key="*this">{{item}}月</view>
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view wx:for="{{days}}" style="line-height: 50px" wx:key="*this">{{item}}日</view>
+                  </picker-view-column>
+                      <picker-view-column>
+                    <view wx:for="{{hours}}" style="line-height: 50px" wx:key="*this">{{item}}时</view>
+                  </picker-view-column>
+                      <picker-view-column>
+                    <view wx:for="{{minute}}" style="line-height: 50px" wx:key="*this">{{item}}分</view>
+                  </picker-view-column>
+                      <picker-view-column>
+                    <view wx:for="{{second}}" style="line-height: 50px" wx:key="*this">{{item}}秒</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+<!--保险产品名称-->
+<view class='{{_product == 1?"cover":""}}' style="display:{{_product == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeProduct'>取消</text>
+                   <text>保险产品名称</text>
+                   <text bindtap='rightProduct'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="productChange">
+                  <picker-view-column>
+                    <view wx:for="{{productArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+<!--投保人-->
+<view class='{{_holder == 1?"cover":""}}' style="display:{{_holder == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeHolder'>取消</text>
+                   <text>投保人</text>
+                   <text bindtap='rightHolder'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="holderChange">
+                  <picker-view-column>
+                    <view wx:for="{{holderArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+<!--被保险人-->
+<view class='{{_insurant == 1?"cover":""}}' style="display:{{_insurant == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeInsurant'>取消</text>
+                   <text>被保险人</text>
+                   <text bindtap='rightInsurant'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="insurantChange">
+                  <picker-view-column>
+                    <view wx:for="{{insurantArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+<!--货物类型-->
+<view class='{{_cargoType == 1?"cover":""}}' style="display:{{_cargoType == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeCargo'>取消</text>
+                   <text>货物类型</text>
+                   <text bindtap='rightCargo'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="cargoChange">
+                  <picker-view-column>
+                    <view wx:for="{{cargoArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+<!--包装类型-->
+<view class='{{_packType == 1?"cover":""}}' style="display:{{_packType == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closePack'>取消</text>
+                   <text>货物类型</text>
+                   <text bindtap='rightPack'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="packChange">
+                  <picker-view-column>
+                    <view wx:for="{{packArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+<!--货物价值-->
+<view class='{{_goods == 1?"cover":""}}' style="display:{{_goods == 1?'block':'none'}}">
+              <view class='list_data_btn'>
+                   <text bindtap='closeGoods'>取消</text>
+                   <text>保险产品名称</text>
+                   <text bindtap='rightGoods'>确定</text>
+              </view>
+              <picker-view indicator-style="height: 50px;" style="width: 100%; height:280rpx;text-align:center;z-index:5;color:#000;background:#fff;" value="{{value}}" bindchange="goodsChange">
+                  <picker-view-column>
+                    <view wx:for="{{goodsArr}}" style="line-height: 50px" wx:key="*this">{{item}}</view>
+                  </picker-view-column>
+              </picker-view>
+</view>
+
+
+
+<!--起运地  -->
+<view class="dialog-mask aa" style="z-index:11;visibility:{{startState ? 'visible': 'hidden'}}" bindtap="hideCitySelected" />
+<!--城市三级联动-->
+<!--使用动画时不能wx:if="{{city.length>0&&isVisible}}" ，不能hidden=''属性否则无动画效果-->
+<view class="picker-view" animation="{{animationAddressStart}}" style="visibility:{{startState ? 'visible':'hidden'}}">
+  <view style="height:31%;width:100%;position:fixed;bottom:125px;z-index:6;background:#c6c6c6;display:flex;align-items:center;justify-content:space-between;">
+    <text catchtap="cityStartCancel" style='margin-left:32rpx;'>取消</text>
+    <text style="float: right" catchtap="cityStart" style='margin-right:32rpx;color:#00aff5'>确定</text>
+  </view>
+  <!--"可以显示默认的城市，使用后级联选择城市反应很慢就不使用了-->
+  <picker-view style="width: 100%; height: 300rpx;" bindchange="cityChange" value="{{value}}" wx:key="">
+    <picker-view-column>
+      <view wx:for="{{provinces}}" class="picker-item" wx:key="id">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" class="picker-item" wx:key="id">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{areas}}" class="picker-item" wx:key="id">
+        {{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+  <!-- 目的地 -->
+<view class="dialog-mask bb" style="z-index:11;visibility:{{addressMenuIsShow ? 'visible': 'hidden'}}" bindtap="hideCitySelected" />
+<!--城市三级联动-->
+<!--使用动画时不能wx:if="{{city.length>0&&isVisible}}" ，不能hidden=''属性否则无动画效果-->
+<view class="picker-view" animation="{{animationAddressMenu}}" style="visibility:{{addressMenuIsShow ? 'visible':'hidden'}}">
+  <view style="height:31%;width:100%;position:fixed;bottom:125px;z-index:6;background:#c6c6c6;display:flex;align-items:center;justify-content:space-between;">
+    <text catchtap="cityCancel" style='margin-left:32rpx;'>取消</text>
+    <text style="float: right" catchtap="citySure" style='margin-right:32rpx;color:#00aff5'>确定</text>
+  </view>
+  <!--"可以显示默认的城市，使用后级联选择城市反应很慢就不使用了-->
+  <picker-view style="width: 100%; height: 300rpx;" bindchange="cityChange" value="{{value}}" wx:key="">
+    <picker-view-column>
+      <view wx:for="{{provinces}}" class="picker-item" wx:key="id">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" class="picker-item" wx:key="id">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{areas}}" class="picker-item" wx:key="id">
+        {{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+
+<view class='insure'>
+    <view class='insure_content'>
+     <view bindtap="clickProduct">
+          <text>{{product}}</text>
+          <icon class='iconfont icon-dowm'></icon>
+      </view>
+      <view bindtap="clickHolder">
+          <text>{{holder}}</text>
+          <icon class='iconfont icon-dowm'></icon>
+      </view>
+        <view bindtap='clickInsurant'> 
+          <text>{{insurant}}</text>
+          <icon class='iconfont icon-dowm'></icon>
+      </view>
+      <view>
+          <input placeholder='货物名称'/>
+      </view>
+      <view bindtap='clickCargo'>
+          <text>{{cargoType}}</text>
+          <icon class='iconfont icon-dowm'></icon>
+      </view>
+        <view>
+          <input placeholder='货物件数'/>
+          <view bindtap='clickPack'>
+            <text>{{packType}}</text>
+            <icon class='iconfont icon-dowm'></icon>
+          </view>
+        </view>
+        <view bindtap='inputCar'>
+          <text>{{carNumber}}</text>
+        </view>
+        <view bindtap="selectStart">
+          <text>{{startArea}}</text>
+          <icon class='iconfont icon-dowm'></icon>
+        </view>
+        <view bindtap="selectDistrict">
+          <text>{{areaInfo}}</text>
+          <icon class='iconfont icon-dowm'></icon>
+        </view>
+        <view bindtap='clickDate'>
+          <text>{{dateValue}}</text>
+          <icon class='iconfont icon-dowm'></icon>
+        </view>
+        <view  wx:if='{{ifDown}}' class='active'>
+          <input placeholder='货物价值' value='{{goods}}'/> 
+          <view class='iconfont icon-dowm active' bindtap='clickGoods'></view>
+        </view>
+        <view wx:if='{{!ifDown}}'>
+          <text>{{goods}}</text>
+          <view class='iconfont icon-dowm active' bindtap='clickGoods'></view>
+        </view>
+    </view>
+    <view class='insure_protocol'>
+      <label class='iconfont {{_iconChange?"icon-checked":"icon-check"}}' bindtap='iconChange' data-iconv='{{_iconChange}}'></label>
+      <view class='insure_protocol_col'>我已阅读并同意<text bindtap='clauses'>《保险条款》</text>和<text bindtap='need'>《投保须知》</text></view>
+    </view>
+    <view class='insure_btn' bindtap='previewPolicy'>
+      <button class='{{_iconChange?"active":""}}'>预览保单</button>
+    </view> 
+</view>
+
+

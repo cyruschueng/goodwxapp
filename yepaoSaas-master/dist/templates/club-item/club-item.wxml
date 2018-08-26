@@ -1,0 +1,34 @@
+
+<template name='club-item'>
+
+  <view class='club-cell-view'>
+
+    <block wx:for='{{ clubList }}' wx:key='{{ index }}'>
+    <view class='club-cell' id='{{ item.activeId }}' bindtap='bindClubCellTap'>
+
+      <view class='club-title'>
+        <text >截止时间 {{ item.deadline }}</text>
+
+        <text class='club-status-text {{ item.status == "已结束" ? "gryColor" : "" }}'>{{ item.status }}</text>
+        <image class='club-status-icon' src='../../images/icon/club/{{ item.status == "已结束" ? "colourless_bg" : "yellow_bg" }}.png'></image>
+      </view>
+
+      <view class='weui-flex'>
+        <view>
+          <image class='club-img' mode='aspectFill' src='{{ item.titleImg }}'></image>
+        </view>
+        
+        <view class='weui-flex__item text-view'>
+          <view>{{ item.title }}</view>
+          <view class='people-view'>
+            <image class='people-icon' src='../../images/icon/club/people.png'></image>
+            <text>{{ item.nowPeople }}/{{ item.totalPeople }}</text>
+          </view>
+        </view>
+      </view>
+    
+    </view>
+    </block>
+  </view>
+
+</template>

@@ -1,0 +1,25 @@
+<import src="../../resource/Template/Template.wxml" />
+<view id='signCheckIndentity'>
+  <!--填写手机号码  -->
+  <view class='checkCard shadow'>
+    <view class='title'>填写手机号</view>
+    <view class='inputTel'>
+      <input type='number' value='{{mobile}}' placeholder='请输入活动报名填写的手机号' bindinput='mobile'></input>
+    </view>
+    <view class='footer'>
+      <button bindtap='checkIndentity' hover-class='classHover'>确定</button>
+    </view>
+  </view>
+  <!--活动基本信息  -->
+  <view class='activityCard shadow'>
+    <view class='title'>活动基本信息</view>
+    <block wx:for = '{{activityDetail}}' wx:key ='index'>
+      <view class='cardItem flex'>
+        <view class='name'>{{item.name}}</view>
+        <view class='value'>{{item.value}}</view>
+      </view>
+    </block>
+  </view>
+  <!--报错  -->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>  
+</view>

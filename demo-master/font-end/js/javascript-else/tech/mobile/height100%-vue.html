@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Document</title>
+
+    <script src="js/vue.js"></script>
+    <script src="js/jquery-2.1.4.js"></script>
+    <style type="text/css">
+    /*reset*/
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    a img {
+        border: 0;
+    }
+
+    a {
+        text-decoration: none;
+        .setTapColor();
+    }
+    /*main*/
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .app {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        box-sizing: border-box;
+        /*padding-bottom:  40px;*/
+        /*根据底部高度改变*/
+        font-size: 20px;
+    }
+
+    .main {
+        width: 100%;
+        height: 100%;
+        /*height:calc(100% - 40px);*/
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .center {
+        font-size: 10px;
+    }
+
+    .buttom1 {
+
+        height: 40px;
+        width: 100%;
+    }
+
+    .buttom2 {
+        height: 60px;
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="app" :style="{ paddingBottom:paddingButtom + 'px' }" id="app">
+        <div class="main">
+            <p class="center">less time,do more</p>
+            <div @click="check">底部切换</div>
+        </div>
+        <div class="buttom" id="btn">
+            <div class="buttom1" v-if="is_show_1"> 底部1</div>
+            <div class="buttom2" v-if="is_show_2"> 底部2</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        is_show_1: true,
+        is_show_2:false
+    },
+    created: function() {
+    },
+    mounted: function() {},
+    computed: {
+        paddingButtom: function() {
+            if(this.is_show_1){
+                return 40
+            }else{
+                return 60
+            }
+        }
+    },
+    watch: {},
+    methods: {
+        check: function() {
+            this.is_show_1 = !this.is_show_1;
+            this.is_show_2 = !this.is_show_2;
+        }
+    }
+})
+</script>

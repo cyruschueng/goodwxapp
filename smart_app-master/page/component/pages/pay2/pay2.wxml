@@ -1,0 +1,57 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '多人拼单分摊账单'}}" />
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+
+        <view class="weui-cells__title"> 总费用: {{sum}} 元, 总份额:{{part}} </view>
+        <view class="weui-cells__title"> 每人费用: {{fee1}} , {{fee2}} , {{fee3}} , {{fee4}} , {{fee5}} , {{fee6}} </view>
+        <!-- <view class="weui-cells__title"> 每人费用: {{fee1}} , {{fee2}} , {{fee3}} , {{fee4}} , {{fee5}}</view> -->
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">总费用</view>
+          </view>
+          <input class="weui-input" type="digit" bindinput="input_sum" placeholder="请输入：总费用" />
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">各份额</view>
+          </view>
+          <input class="weui-input" type="digit" bindinput="input_fee1" placeholder="a" />
+          <input class="weui-input" type="digsit" bindinput="input_fee2" placeholder="b" />
+          <input class="weui-input" type="digit" bindinput="input_fee3" placeholder="c" />
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">各份额</view>
+          </view>
+          <input class="weui-input" type="digit" bindinput="input_fee4" placeholder="d" />
+          <input class="weui-input" type="digit" bindinput="input_fee5" placeholder="e" />
+          <input class="weui-input" type="digit" bindinput="input_fee6" placeholder="f" />
+        </view>
+
+      </view>
+    </view>
+
+    <view class="btn-area" id="buttonContainer">
+      <view class="button-sp-area">
+        <button type="primary" plain="true" bindtap="output">计算</button>
+      </view>
+    </view>
+
+    <view class="page-section page-section-gap">
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/app_k.jpg" />
+        <!-- <image class="image" src="../../resources/pic/mmqrcode.png"/>  -->
+      </view>
+    </view>
+
+  </view>
+  <template is="foot" />
+</view>

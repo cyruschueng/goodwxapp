@@ -1,0 +1,59 @@
+<!--MyRecord.wxml-->
+<view class="header">
+  <view class="header_left {{addClass?'current':''}}" bindtap='header_left'>我发出的</view>
+  <view class="header_right {{addClass1?'current':''}}" bindtap='header_right'>我收到的</view>
+</view>
+
+<view class="{{showView?'show':''}}">
+<view class='container'> 
+  <image class="photo" src="{{imgUrl}}" background-size="cover"></image>
+  <view class="container_name">{{name}} 共发出（元）</view>
+  <view class="money">{{sendMoney}}</view>
+  <view class="container_count">数量 {{sendCount}} 个</view>
+  </view>
+  <!-- 发出的红包记录 -->
+  <view class='detial'>
+    <view class='detailHeader'>土豪的支出记录：</view>
+    <view class='detialContent' wx:for="{{items}}" wx:key="items" id="{{item.id}}">
+      <image class="detialPhoto" src="../img/sendMoney.png" background-size="cover"> </image>
+      <view class='detialInfo'>
+      <view class='detailTimet' >{{item.create_time}}</view>
+        <view class='detialcount'>
+        </view>
+      </view>
+      <view class='detailRight'>
+        <view class='detailMoney'>{{item.money}} 元</view>
+        <view class='detailMore' id="{{item.id}}" data-create="{{item.create_time}}" catchtap="gotorecerveMoney">详细信息</view>
+      </view>
+      <view class='clearfix'></view>
+    </view>
+</view>
+</view>
+
+ 
+<view class="{{showView1?'show':''}}">
+<view class='container'>
+  <image class="photo" src="{{imgUrl}}" background-size="cover"></image>
+  <view class="container_name">{{name}} 共收到（元）</view>
+  <view class="money">{{receivedMoney}}</view>
+  <view class="container_count">数量 {{receivedCount}} 个</view>
+</view>
+<!-- 收到的红包记录 -->
+<view class='detial'>
+    <view class='detailHeader'>土豪收到的记录：</view>
+    <view class='detialContent' wx:for="{{items1}}"  data-hid="{{item.hid}}">
+      <image class="detialPhoto" src="../img/receiveMoney.png" background-size="cover"> </image>
+      <view class='detialInfo'>
+      <view class='detailTimet'>{{item.create_time}}</view>
+        <view class='detialcount'></view>
+      </view>
+      <view class='detailRight'>
+        <view class='detailMoney'>{{item.money}} 元</view>
+        <view class='detailMore' data-hid="{{item.hid}}" catchtap="gotoreceiveRecord">详细信息</view>
+      </view>
+      <view class='clearfix'></view>
+    </view>
+</view>
+</view>
+
+

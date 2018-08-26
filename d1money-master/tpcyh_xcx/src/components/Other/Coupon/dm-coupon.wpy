@@ -1,0 +1,117 @@
+<style lang="less" rel="stylesheet/less">
+
+    .demon-coupon{
+        height:280rpx;
+        width:260rpx;
+        text-align: center;
+        -webkit-border-radius:15rpx;
+        -moz-border-radius:15rpx;
+        border-radius:15rpx;
+        overflow: hidden;
+        margin-left: 20rpx;
+        background-color: #ffffff;
+        .demon-coupon__hd{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            height:140rpx;
+            font-size:50rpx;
+            line-height: 50rpx;
+            color: #ffffff;
+            view{
+                width:100%;
+            }
+        }
+        .demon-coupon__bd{
+            height:68rpx;
+            line-height: 68rpx;
+            position: relative;
+            border-bottom:1px dashed #dddddd;
+            &:after{
+                 content: '';
+                 width:22rpx;
+                 height:22rpx;
+                 background-color:#f2f2f2;
+                 -webkit-border-radius:100%;
+                 -moz-border-radius:100%;
+                 border-radius:100%;
+                 position: absolute;
+                 left:-11rpx;
+                 bottom:-11rpx;
+             }
+            &:before{
+                content: '';
+                width:22rpx;
+                height:22rpx;
+                background-color:#f2f2f2;
+                -webkit-border-radius:100%;
+                -moz-border-radius:100%;
+                border-radius:100%;
+                position: absolute;
+                right:-11rpx;
+                bottom:-11rpx;
+            }
+        }
+        .demon-coupon__ft{
+            height:72rpx;
+            line-height:72rpx;
+        }
+
+        &:last-child{
+            margin-right: 20rpx;
+        }
+    }
+</style>
+<template>
+    <view class="demon-coupon">
+        <view class="demon-coupon__hd">
+            <view>{{name}}</view>
+            <view>
+                <block wx:if="{{type === 0 || !type}}">折扣券</block>
+            </view>
+        </view>
+        <view class="demon-coupon__bd">
+            <block wx:if="{{!discount}}">1</block>
+            <block wx:if="{{discount}}">{{discount}}</block>
+
+            折
+        </view>
+        <view class="demon-coupon__ft">
+            <block wx:if="{{status === 0}}">立即领取</block>
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {
+            name: {
+                type: String,
+                default: ''
+            },
+            type: {
+                type: Number,
+                default: 0
+            },
+            discount: {
+                type: Number,
+                default: 1
+            },
+            status: {
+                type: Number,
+                default: 0
+            }
+        }
+
+        data = {}
+
+        events = {}
+
+        methods = {}
+
+        onLoad() {
+
+        }
+    }
+</script>

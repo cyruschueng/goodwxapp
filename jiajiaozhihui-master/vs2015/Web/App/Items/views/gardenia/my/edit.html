@@ -1,0 +1,77 @@
+<div class="page" ng-controller="editPersonalController">
+    <div class="page__bd">
+        <form name="formeidt" ng-submit="check(formeidt.$invalid)"  novalidate="novalidate">
+            <div class="weui-cells__tips"></div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" required  ng-model="data.parent_name" name="parent_name" placeholder="请输入姓名"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">年龄</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" se-select-age required  ng-model="data.parent_age" name="parent_age" pattern="[0-9]*"  placeholder="请输入年龄"/>
+                    </div>
+                </div>
+                <div class="weui-cell ">
+                    <div class="weui-cell__hd"><label class="weui-label">职业</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" required  ng-model="data.profession"  name="profession" placeholder="请输入职业"/>
+                    </div>
+                </div>
+                <div class="weui-cell ">
+                    <div class="weui-cell__hd"><label class="weui-label">城市</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" required  ng-model="data.city"  name="city" placeholder="请输入城市"/>
+                    </div>
+                </div>
+                <div class="weui-cell ">
+                    <div class="weui-cell__hd"><label class="weui-label">孩子的性别</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" required se-select-sex  ng-model="data.child_sex"  name="child_sex" placeholder="请输入性别"/>
+                    </div>
+                </div>
+                <div class="weui-cell ">
+                    <div class="weui-cell__hd"><label class="weui-label">孩子年龄</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" se-select-age required  ng-model="data.child_age"  name="child_age" pattern="[0-9]*" placeholder="请输入年龄"/>
+                    </div>
+                </div>
+                <div class="weui-cell ">
+                    <div class="weui-cell__hd"><label class="weui-label">孩子的年级</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" required se-select-grade  ng-model="data.child_grade"  name="child_grade"  placeholder="请输入年级"/>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div ng-show="(formeidt.parent_name.$error.required && formeidt.parent_name.$touched) || (seInValid==true && formeidt.parent_name.$dirty==false)">
+                    <div class="error" style="padding-left:10px;">姓名不能为空</div>
+                </div>
+                <div ng-show="(formeidt.parent_age.$error.required && formeidt.parent_age.$touched) || (seInValid==true && formeidt.parent_age.$dirty==false)">
+                    <div class="error" style="padding-left:10px;">年龄不能为空</div>
+                </div>
+                <div ng-show="(formeidt.profession.$error.required && formeidt.profession.$touched) || (seInValid==true && formeidt.profession.$dirty==false)">
+                    <div class="error" style="padding-left:10px;">职业不能为空</div>
+                </div>
+                <div ng-show="(formeidt.city.$error.required && formeidt.city.$touched) || (seInValid==true && formeidt.city.$dirty==false)">
+                    <div class="error" style="padding-left:10px;">城市不能为空</div>
+                </div>
+                <div ng-show="(formeidt.child_sex.$error.required && formeidt.child_sex.$touched) || (seInValid==true && formeidt.child_sex.$dirty==false)">
+                    <div class="error" style="padding-left:10px;">孩子的性别不能为空</div>
+                </div>
+                <div ng-show="(formeidt.child_age.$error.required && formeidt.child_age.$touched) || (seInValid==true && formeidt.child_age.$dirty==false)">
+                    <div class="error" style="padding-left:10px;">孩子年龄不能为空</div>
+                </div>
+                <div ng-show="(formeidt.child_grade.$error.required && formeidt.child_grade.$touched) || (seInValid==true && formeidt.child_grade.$dirty==false)">
+                    <div class="error" style="padding-left:10px;">孩子的班级不能为空</div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <button type="submit" class="weui-btn weui-btn_primary">确认</button>
+            </div>
+        </form>
+    </div>
+</div>

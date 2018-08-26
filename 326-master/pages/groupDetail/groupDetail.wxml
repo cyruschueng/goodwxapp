@@ -1,0 +1,81 @@
+<view class="container">
+<!--top str -->
+  <view class='h8 flexBetw Skin pdr1 pdl1'>
+    <view></view>
+    <view>分组列表</view>
+    <view bindtap='userpage'>取消</view>
+  </view>
+<!--top end -->
+<view class='h8 flexBetw pdr1 pdl1 mb02 mt02 borderB bg256' bindtap='addGroupShow'>
+  <view class='flex'>
+    <image class='imgxs' src="/images/add_group.png"></image>
+    <view>新建分组</view>
+  </view>
+  <image class='imgxs' src="/images/next.png"></image>
+</view>
+<!--用户列表str  分组的-->
+<view  class='flexv1 modeldrawer_content pb1'>
+  <view class='flex  bgColor0 justi borderB' wx:for="{{AccountGroup}}" wx:key="{{index}}" wx:for-item="AccountGroup">
+    <view class='width10 justi'>
+      <image class='imgM' src="/images/icon_group.png"></image>
+    </view>
+    <view class='flexv1 justi pdl1'>
+      {{AccountGroup.name}}
+    </view>
+    <view class='width20 flex1 flex'>
+      <view class='flexCenter' bindtap='delGroup' data-id='{{AccountGroup.id}}'>
+        <image class='imgxs mr1' src="/images/delet.png"></image>
+      </view>
+      <view class='flexCenter' bindtap='editGroup' data-id='{{AccountGroup.id}}'>
+        <image class='imgxs' src="/images/gaimingzi.png"></image>
+      </view>
+    </view>
+  </view>
+<!--用户列表end -->
+<!--mask str-->
+<view class="modledrawer_screen"  wx:if="{{addGroupIf}}"></view> 
+<!--新建分组 str -->
+  <view animation="{{animationData}}" class="modeldrawer_box" wx:if="{{showModalStatus0}}">  
+     <view class="modeldrawer_title">新建分组</view>  
+       <view class="modeldrawer_content pAb15"> 
+        <view class="modeltop modelgrid"> 
+          <input class=" modelinput_h30 modelcol-1" placeholder='输入组名' type="text" bindinput='addGroupInput'></input> 
+        </view> 
+      </view>  
+       <view class='flexBetw'>
+        <view class="modelbtn_ok Skin" bindtap="confiaddGroup">确定</view> 
+        <view class="modelbtn_ok" bindtap="canceladdGroup" >取消</view> 
+      </view> 
+  </view>
+<!--新建分组 end -->
+<!--删除设备 str -->
+  <view animation="{{animationData}}" class="modeldrawer_box" wx:if="{{showModalStatus1}}">  
+    <view>删除分组</view> 
+    <view class="modeldrawer_content pAb15"> 
+      <view class="modeltop modelgrid color3"> 
+      确定删除该分组吗？
+      </view> 
+    </view> 
+    <view class='flexBetw'>
+      <view class="modelbtn_ok Skin" bindtap="configroupDev">确定</view> 
+      <view class="modelbtn_ok" bindtap="canceladdGroup" >取消</view> 
+    </view>
+  </view>
+<!--删除设备 end -->
+<!--编辑分组 str -->
+  <view animation="{{animationData}}" class="modeldrawer_box" wx:if="{{showModalStatus2}}">  
+     <view class="modeldrawer_title">编辑分组</view>  
+       <view class="modeldrawer_content pAb15"> 
+        <view class="modeltop modelgrid"> 
+          <input class=" modelinput_h30 modelcol-1" placeholder='输入组名' type="text" bindinput='editGroupInput'></input> 
+        </view> 
+      </view>  
+       <view class='flexBetw'>
+        <view class="modelbtn_ok Skin" bindtap="confieditGroup">确定</view> 
+        <view class="modelbtn_ok" bindtap="canceladdGroup" >取消</view> 
+      </view> 
+  </view>
+<!--编辑分组 end -->
+</view>
+<!--mask end-->
+</view> 

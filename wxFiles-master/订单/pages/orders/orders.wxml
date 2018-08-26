@@ -1,0 +1,56 @@
+<!-- 导航栏 start -->
+<view class="orders-navbar">
+  <view class='item' wx:for="{{barList}}" data-value='{{index}}' bindtap='changeBar'>
+    <view class='contain'>
+      <view class="{{item.active ? 'act':'def'}}">{{item.label}}</view>
+    </view>
+  </view>
+</view>
+<view style='height:100rpx'></view>
+<!-- 导航栏 end -->
+
+<!-- content start -->
+<view class='order-content' wx:for="{{3}}">
+ <view class='titlebar'>
+    <view wx:if="{{!checkedAll}}" class='quan' ></view>
+    <icon wx:if="{{checkedAll}}" type="success" size="20" color="#fe4070"/>
+    <view class='themeColor'>等待卖家付款</view>
+ </view>
+ <view class='goodsbar'>
+   <view class='goodsitem boisd' wx:for="{{2}}">
+    <view class='gostart'>
+      <view class='goodsUrl'>
+       <!-- <image src='' class="goodsImage" mode="aspectFill"></image>  -->
+      </view>
+      <view class='gcontent'>
+        <view class='tit'>商品名称</view>
+        <view class='txt'>商品规格</view>
+        <view class='pri'>￥650.00 <view class='num'>x1</view></view>
+      </view>
+    </view>
+   </view>
+ </view>
+ <view class='textbar'>
+    <view class='text-right'>共1件商品 合计：￥650.00 (含运费￥5.00）</view>
+ </view>
+ <view class='btngroup'>
+  <view class='orbtn orbtn-default'>取消订单</view>
+  <view class='orbtn orbtn-theme'>联系客服</view>
+  <view class='orbtn orbtn-theme-full'>付款</view>
+ </view>
+</view>
+<!-- content end -->
+
+<!-- 底部栏 start -->
+<view class='order-bottombar' wx:if="{{barList[0].active}}">
+  <view class='left'>
+    <view wx:if="{{!checkedAll}}" class='quan' style='margin-left:30rpx'></view>
+    <icon wx:if="{{checkedAll}}" style='margin-left:30rpx' type="success" size="20" color="#fe4070"/>
+    <view style='margin-left:10rpx'>全选</view>
+  </view>
+  <view class='right'>
+    <view style='margin-right:20rpx'>合计：￥0.00</view>
+    <view class='paybtn'>合并付款</view>
+  </view>
+</view>
+<!-- 底部栏 end -->

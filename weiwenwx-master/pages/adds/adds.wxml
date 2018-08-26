@@ -1,0 +1,113 @@
+<!--adds.wxml-->
+<view class="page">
+    <view class="box">
+        <text>问题:</text>
+        <input placeholder="请输入问题" auto-focus bindinput="changeTitle" maxlength='200' />
+    </view>
+    <view class="addpt">
+        <text>配图:</text>
+         <view class="log" catchtap='uploadlog'>
+           <image wx:if="{{uploadlog}}" mode="aspectFit" src="{{uploadlog}}"></image>
+           <image wx:if="{{!uploadlog}}"  src="../../images/addpt.png"></image> 
+        </view>
+        <view class="reducept" wx:if="{{uploadlog}}" bindtap='reducept'><image  src="../../images/reduce.png"></image> </view>
+    </view>
+    <view class="box">
+        <text>必答题</text>
+        <view class="right"><switch color="#1f5cd8" checked bindchange="switch1Change"/></view>
+    </view>
+    <view class="box">
+        <text>类型</text>
+        <radio-group class="radio-group" bindchange="radioChange1">
+            <label class="radio" wx:for="{{types}}" wx:key="this*">
+              <radio value="{{item.value}}" color="#1f5cd8" checked="{{item.checked}}"/>{{item.name}}
+            </label>
+        </radio-group>
+    </view>
+    <view class="box" wx:if="{{end_type==2}}">
+      <picker class="pickCheck" bindchange="bindPickerChange" value="{{index}}" range="{{array_end}}">
+        <view class="picker" wx:if="{{index<=nums.length}}">
+          最多可选：{{array[index]==0?'无限制':(array[index]+'项')}}
+        </view>
+        <view class="picker" wx:else>
+          最多可选：{{array[nums.length]}}项
+        </view>
+        <view class="pick_right">(请先添加完选项>)</view>
+      </picker>
+    </view>
+    <view class="help_tips" wx:if="{{answer}}">该问卷设有正确答案，请添加完选项后，选中或输入正确答案。</view>
+    <view class="box" wx:if="{{end_type!=3}}">
+        <text>选项</text>
+        <radio-group class="radio-group" bindchange="radioChange2">
+            <label class="radio" wx:for="{{options}}" wx:key="this*">
+              <radio value="{{item.value}}" color="#1f5cd8" checked="{{item.checked}}"/>{{item.name}}
+            </label>
+        </radio-group>
+    </view>
+    <view class="fuck" wx:if="{{end_type==3}}">
+      <textarea  value="{{answer_txt}}" cursor-spacing="180" maxlength='1000'  bindinput='bindTitle'  placeholder='填空答案'></textarea>
+    </view>
+    <radio-group bindchange="radioChange3" wx:if="{{nums.length>0}}">
+    <view class="radios" wx:if="{{end_type==1&&end_option==1}}">
+        <view class="radios_box {{current==index?'active':''}}" wx:for="{{nums}}" wx:key="this*"  wx:for-index="index">
+            <label class="radio">
+              <radio value="{{index}}"  color="#1f5cd8" disabled="{{disable}}"/>
+              <view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view>
+            </label>
+            <input  placeholder='选项' cursor-spacing="100" wx:for="{{vals}}"  wx:for-index="indexInput" wx:for-item="itemInput" wx:key="this*"  wx:if="{{index==indexInput}}"  bindinput="changeInput" data-key="{{index}}" value="{{itemInput.val}}"/>
+            <view class="reduce" data-hi="{{index}}" bindtap='reduce'><image  src="../../images/reduce.png"></image> </view>
+        </view>
+    </view>
+    <view class="radios" wx:if="{{end_type==1&&end_option==3}}">
+        <view class="radios_box2 {{current==index?'active':''}}" wx:for="{{nums}}" wx:key="this*"  wx:for-index="index">
+            <view class="logs" data-imgkey="{{index}}" catchtap='uploadlogs' wx:for="{{radioVals}}"  wx:for-index="indexRadio" wx:for-item="itemRedio" wx:key="this*"  wx:if="{{index==indexRadio}}">
+                <image wx:if="{{itemRedio.val}}" mode="aspectFit" src="{{itemRedio.val}}"></image>
+                <image wx:if="{{!itemRedio.val}}"  src="../../images/addpt.png"></image> 
+            </view>
+            <view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view>
+            <input  placeholder='选项' cursor-spacing="100" wx:for="{{vals}}"  wx:for-index="indexInput" wx:for-item="itemInput" wx:key="this*"  wx:if="{{index==indexInput}}"  bindinput="changeInput" data-key="{{index}}" value="{{itemInput.val}}"/>
+            <view class="rt">
+                <view class="reduce" data-hi="{{index}}" bindtap='reduce'><image  src="../../images/reduce.png"></image> </view>
+                  <label class="radio">
+                  <radio value="{{index}}"  color="#1f5cd8" disabled="{{disable}}"/>
+                  </label>
+            </view>
+        </view>
+    </view>
+    </radio-group>
+
+    <checkbox-group bindchange="checkboxChange" wx:if="{{nums.length>0}}">
+    <view class="radios" wx:if="{{end_type==2&&end_option==1}}">
+        <view class="radios_box {{IndexName.check==true?'active':''}}"  wx:for="{{nums}}" wx:key="this*"  wx:for-index="index" wx:for-item="IndexName">
+            <label class="radio">
+              <checkbox value="{{index}}"  color="#1f5cd8" checked="{{IndexName.check}}" disabled="{{disable}}"/>
+              <view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view>
+            </label>
+            <input  placeholder='选项' cursor-spacing="100" wx:for="{{vals}}"  wx:for-index="indexInput" wx:for-item="itemInput" wx:key="this*"  wx:if="{{index==indexInput}}"  bindinput="changeInput" data-key="{{index}}" value="{{itemInput.val}}"/>
+            <view class="reduce" data-hi="{{index}}" bindtap='reduce'><image  src="../../images/reduce.png"></image> </view>
+        </view>
+    </view>
+     <view class="radios" wx:if="{{end_type==2&&end_option==3}}">
+        <view class="radios_box2 {{IndexName.check==true?'active':''}}"  wx:for="{{nums}}" wx:key="this*"  wx:for-index="index" wx:for-item="IndexName">
+            <view class="logs" data-imgkey="{{index}}" catchtap='uploadlogs' wx:for="{{radioVals}}"  wx:for-index="indexRadio" wx:for-item="itemRedio" wx:key="this*"  wx:if="{{index==indexRadio}}">
+                <image wx:if="{{itemRedio.val}}" mode="aspectFit" src="{{itemRedio.val}}"></image>
+                <image wx:if="{{!itemRedio.val}}"  src="../../images/addpt.png"></image> 
+            </view>
+            <view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view>
+            <input  placeholder='选项' cursor-spacing="100" wx:for="{{vals}}"  wx:for-index="indexInput" wx:for-item="itemInput" wx:key="this*"  wx:if="{{index==indexInput}}"  bindinput="changeInput" data-key="{{index}}" value="{{itemInput.val}}"/>
+            <view class="rt">
+                <view class="reduce" data-hi="{{index}}" bindtap='reduce'><image  src="../../images/reduce.png"></image> </view>
+                  <label class="radio">
+                  <checkbox value="{{index}}" checked="{{IndexName.check}}"  color="#1f5cd8" disabled="{{disable}}"/>
+                  </label>
+            </view>
+        </view>
+    </view>
+    </checkbox-group>
+    
+    <view class="add" wx:if="{{nums.length<26}}" wx:if="{{end_type!=3}}" bindtap='add'><text>添加选项</text><image  src="../../images/add.png"></image></view>
+    <view class="do_over">
+        <!-- <navigator url="/pages/create/create" hover-class="none" ></navigator> -->
+        <button bindtap="check">保存</button>
+    </view>
+</view>

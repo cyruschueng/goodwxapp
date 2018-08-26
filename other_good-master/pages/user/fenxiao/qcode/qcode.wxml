@@ -1,0 +1,21 @@
+<!--pages/user/fen/qcode/qcode.wxml-->
+<view class="qheader tc gridXb">
+  <image src="{{data_list.headimgurl}}" class="avatar" mode="aspectFill"></image>
+  <view class="qname mt15">
+    <text class="f20">我是{{data_list.nickname}}</text>
+    <view class="slogan grey">我要为{{data_list.public_name}}代言</view>
+  </view>
+</view>
+
+<view class="erwema tc">
+  <image src="{{data_list.codeurl}}" class="qrcode" mode="aspectFill"></image>
+  <view class="etxt mt15">点击右上角分享给朋友</view>
+  <button type="primary" class="mt15" bindtap="saveimage">保存图片</button>
+</view>
+<view class="tips">
+  <view class="ttit grey gridXb"><text class="iconfont icon-fxicon-3"></text> 分销规则</view>
+  <view class="tcon">
+  <import src="../../../../wxParse/wxParse.wxml"/>
+      <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+  </view>
+</view>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <title>文明公约</title>
+    <meta name="Keywords" content="米播直播,米播,直播,手机直播,最热,最新,现场,才艺,生活">
+    <meta name="Description" content="米播·与美女的一场棋牌邂逅">
+
+    <script src="res/js/mibo-common-1.0.0.js"></script>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, menu, nav, section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .contanier {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .bt_list {
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        .bt_list li {
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        .test {
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="contanier">
+    <br>
+    <ul class="bt_list">
+        <li><input class="test" type="button" onclick="share()" value="测试分享"/></li>
+        <li><input class="test" type="button" onclick="toast('小逗B')" value="测试Toast"/></li>
+        <li><input class="test" type="button" onclick="closeWebview()" value="关闭webview"/></li>
+        <li><input class="test" type="button" onclick="getUserInfo()" value="获取用户信息"/></li>
+        <li><input class="test" type="button" onclick="jumpToUser('15')" value="测试用户主页"/></li>
+        <li><input class="test" type="button" onclick="jumpToLive('7')" value="测试Live"/></li>
+    </ul>
+
+    <hr>
+</div>
+<img src="http://mibores.yahalei.com/img/pub/201610/community_convention.jpg" width="100%" alt="">
+<script type="text/javascript">
+    function getUserInfo() {
+        var userinfo = getCurrentUserInfo();
+        alert(userinfo);
+    }
+    
+    function share() {
+        var shareInfo = '{"desc":"独家爆料，「米播小妹」正在直播【无人场-15:00 测试入口】","imgUrl":"http://mibores.yahalei.com/img/pub/201610/default_cover_of_no_achor.jpg","link":"http://miboweb.yahalei.com/wap/index.php?live_id\u003d7\u0026anchor_id\u003d2\u0026user_id\u003d14\u0026channel\u003dbt\u0026type\u003d3","live_id":"7","title":"「米播小妹」 的直播邀请","user_id":"14","type":1}';
+
+        onShare(shareInfo);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<view class="page">
+    <view class="page__bd">
+        <block wx:for="{{habits}}">
+            <view class="weui-flex">
+                <block wx:for="{{item}}">
+                    <view class="weui-flex__item">
+                        <navigator class="placeholder" wx:if="{{item.id!=0}}" 
+                            open-type="navigate" url="/pages/detail/detail?habitid={{item.id}}">
+                            <view class="weui-article" style="padding-left:0;padding-right:0;">
+                                <view><image src="{{item.imgurl}}" mode="widthFix" style="width:100%;" ></image></view>
+                                <view class="title_wrap">
+                                    <view class="title">{{item.title}}</view>
+                                    <view class="desc">{{item.join_num}}人加入</view>
+                                    <view class="plus fa fa-plus"></view>
+                                </view>
+                            </view>
+                        </navigator>
+                    </view >
+                </block>
+            </view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,69 @@
+<view class='orders-title'>
+  <text>有{{verifyListNum}}个订单</text>
+  <text class='orders-font' catchtap="orderIng" data-deskNum='{{deskNo}}' data-catNum='{{memberflag}}'>查看 ></text>
+</view>
+<checkbox-group bindchange="checkboxChange">
+  <view class='orders-detail'>
+    <!--分割-->
+    <view class='cutting-line'></view>
+
+    <view class='orders-li' wx:for="{{verifyList}}" wx:key="{{index}}">
+
+      <view class='_border'>
+        <view class='orders-number'>
+        <!--图片-->
+        <view class='nickname-img'>
+          <image src='{{item.headsculpture?item.headsculpture:"https://lingju360.com/miniapp/resources/image/paidui-1@2x.png"}}'></image>
+        </view>
+        <!--昵称和订单编号-->
+        <view class='orders-number-right'>
+          <view class='wx-nickname'>{{item.alias}}</view>
+          <view class='food-orders-number'>
+            <text>订单编号：<text>{{item.orderNo}}</text></text>
+          </view>
+        </view>
+      </view>
+
+      <view class='foods-list-box'>
+        <view class='orders-main'>
+          <view class='orders-nav'>
+            <text class='commodity'>商品</text>
+            <text class='price'>单价</text>
+            <text class='number'>数量</text>
+          </view>
+
+          <view class='food-list' wx:for="{{item.orderMenuList}}" wx:key="{{index}}">
+
+            <view class='food-list-main'>
+              <text class='menuName'>{{item.menuName}}</text>
+              <text class='price'>￥<text>{{item.price}}</text></text>
+              <text class='num'>{{item.catNum}}</text>
+            </view>
+
+            <view class='specification'  wx:if="{{item.menuSpecName==''? false :true}}">规格：
+              <text>{{item.menuSpecName}}</text>
+            </view>
+            <view class='make' wx:if="{{item.flavour==''?false:true}}">做法：
+              <text>{{item.flavour}}</text>
+            </view>
+
+          </view>
+
+
+        </view>
+      </view>
+
+      <view class='total-price'>
+        <text class='total-price-font'>合计金额：</text>
+        <text class='price'>￥{{item.totalAmount}}</text>
+      </view>
+      </view>
+
+      <!--分割-->
+
+    </view>
+
+
+
+  </view>
+</checkbox-group>

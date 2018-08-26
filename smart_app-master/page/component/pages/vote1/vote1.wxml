@@ -1,0 +1,124 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <!-- <template is="head" data="{{title: '总资产'}}" /> -->
+  <view class="page-body">
+
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+
+        <!-- <view class="weui-cell  ">
+          <view class="weui-cell__hd">
+            <view class="section">
+              <view class="section__title"></view>
+              <picker mode="date" value="{{value1}}" start="2017-01-01" end="2018-01-01" bindchange="input_value1">
+                <view class="picker flex-item">
+                  初始日期： {{value1}}
+                </view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cell  ">
+          <view class="section">
+            <view class="section__title"></view>
+            <picker mode="date" value="{{value4}}" start="2017-01-01" end="2018-01-01" bindchange="input_value4">
+              <view class="picker">
+                结束日期： {{value4}}
+              </view>
+            </picker>
+          </view>
+        </view> -->
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">初始日期：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="section">
+              <view class="section__title"></view>
+              <picker mode="date" value="{{value1}}" start="2017-01-01" end="2018-01-01" bindchange="input_value1">
+                <view class="picker">
+                  {{value1}}
+                </view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">结束日期：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="section">
+              <view class="section__title"></view>
+              <picker mode="date" value="{{value4}}" start="2017-01-01" end="2018-01-01" bindchange="input_value4">
+                <view class="picker">
+                  {{value4}}
+                </view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">初始现金：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" bindinput="input_value0" value="{{value0}}" placeholder="" />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">万元利息：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="digit" bindinput="input_value2" value="{{value2}}" placeholder="" />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前价值：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" disabled="false" value="{{value3}} 元">{{value}}</input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+        </view>
+      </view>
+    </view>
+
+    <view class="btn-area" id="buttonContainer">
+      <view class="button-sp-area">
+        <button type="primary" plain="true" bindtap="output">计算结果</button>
+      </view>
+    </view>
+
+    <!-- <view class="page-body">
+      <view class="page-section">
+        <view>支付金额</view>
+        <view class="price">{{price}}</view>
+        <view class="desc"> </view>
+        <view class="btn-area">
+          <button type="primary" bindtap="requestPayment" loading="{{loading}}">支付</button>
+        </view>
+      </view>
+    </view> -->
+
+    <view class="page-section page-section-gap">
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/app_k.jpg" />
+        <!-- <image class="image" src="../../resources/pic/mmqrcode.png"/>  -->
+      </view>
+    </view>
+
+  </view>
+  <template is="foot" />
+</view>

@@ -1,0 +1,85 @@
+<!--pages/list/list.wxml-->
+<view class='list-body'>
+   <image src='../../imgs/listback.png' mode='aspectFill'></image>
+</view>
+<view class='list-con'>
+      <!--排行榜前三  -->
+      <view class='top-body'>
+        <view class='top-item'>
+          <view class='top-two'>
+            <image src='../../imgs/no2.png' class='two-img'></image>
+            <view  class='user-photo'>
+                <image src='{{topUser[1].AvatarUrl}}'></image>
+            </view>
+          </view>
+          <view class='user-nick'>
+             {{topUser[1].NickName}}
+          </view>
+        </view>
+        <view class='top-item'>
+          <view class='top-one'>
+            <image src='../../imgs/no1.png' class='one-img'></image>
+            <view  class='one-photo'>
+                <image src='{{topUser[0].AvatarUrl}}'></image>
+            </view>
+          </view>
+          <view class='one-nick'>
+            {{topUser[0].NickName}}
+          </view>
+        </view>
+        <view class='top-item'>
+          <view class='top-two'>
+            <image src='../../imgs/no3.png' class='two-img'></image>
+            <view  class='user-photo'>
+                <image src='{{topUser[2].AvatarUrl}}'></image>
+            </view>
+          </view>
+          <view class='two-nick'>
+            {{topUser[2].NickName}}
+          </view>
+        </view>
+      </view>
+      <!--剩余排行  -->
+      <view class='rest-list'>
+           <view class='rest-item'  wx:for="{{restUser}}" wx:key="{{index}}">
+             <view class='rest-num'>
+                NO.{{index+4}}
+             </view>
+             <view class='rest-photo'>
+                <image src=' {{item.AvatarUrl}}'></image>
+             </view>
+             <view class='rest-nick'>
+               {{item.NickName}}
+             </view>
+             <view class='rest-pass'>
+               <image src='../../imgs/pass.png'></image>
+               <text> {{item.Pass-1}}</text>
+             </view>
+          </view> 
+      </view>
+   </view>
+<view class='self-start'>
+   <view class='bottom-line'></view>
+   <image class='bottom-back' src='../../imgs/listback.png' mode='bottom'></image>
+   <view class='self-item'>
+             <view class='rest-num' wx:if="{{selfPass === ''}}">
+                ----
+             </view>
+             <view class='rest-num' wx:else>
+                NO.{{selfPass+1}}
+             </view>
+             <view class='rest-photo'  wx:if="{{selfPhoto !== ''}}">
+                <image src='{{selfPhoto}}'></image>
+             </view>
+             <view class='rest-nick' wx:if="{{selfNick == ''}}">
+               ------
+             </view>
+             <view class='rest-nick' wx:else>
+               {{selfNick}}
+             </view>
+             <view class='start-game' bindtap='goGame'>
+                <image src='../../imgs/startgame.png' ></image>
+             </view>
+             <button open-type='share' class='share-btn' open-type='getUserInfo' bindgetuserinfo='userInfo' wx:if="{{infoFlag}}" ></button>
+    </view>
+</view>

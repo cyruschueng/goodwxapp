@@ -1,0 +1,23 @@
+<!--ReturnMoney.wxml-->
+<view class="container">
+  <image class="photo" src="{{imgUrl}}" background-size="cover"></image>
+  <view class='name'>{{name}}</view>
+  <view class="money">{{myCount}}</view>
+</view>
+
+<view class="return_money">
+  <text class="return_money_title">提现金额</text>
+  <view class="return_num">(当天剩余提现次数<text style='color:#d24d46'>{{return_num}}/3)</text></view>
+  <view class="return_money_content">
+    <text>￥</text>
+    <input style='font-size:14px;' type='digit' placeholder-style="color:#ccc" placeholder="提现金额不小于1.01元" value="{{value}}" name="returnMoney" bindinput="returnMoneyEvent" />
+    <view class="clearfix"></view>
+  </view>
+  <text class="return_count">提现资金直接打入您的微信钱包（含1%手续费）</text>
+  <!-- <text class="all_return" bindtap='allReturn'>全部提现</text> -->
+</view>
+<button class="submit_botton" bindtap="moneyBack" bindtouchstart="touchStart" bindtouchend="touchEnd">提现</button>
+
+<view class="return_describe1">1-3个工作日到账</view>
+<view class="return_describe2">每天提现3次，每次至少一元</view>
+<view class="return_describe3" bindtap='NormalProblem'>常见问题？</view>

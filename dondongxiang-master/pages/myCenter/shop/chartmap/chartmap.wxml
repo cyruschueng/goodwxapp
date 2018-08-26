@@ -1,0 +1,16 @@
+<!--pages/myCenter/shop/chartmap/chartmap.wxml-->
+<view class='mapview'>
+  <block wx:for="{{maplist}}" wx:key="">
+    <view class='site-item'>
+        <view data-id="{{item.address_id}}" bindtap='maplist'>
+            <view class='checkbox'><icon color='orange' size='25' type="{{checkbox==item.address_id ? 'success':'circle'}}"></icon></view>
+            <view class='userinfo'><text class='name'>{{item.user_name}}</text><text class='phone'>{{item.tel}}</text></view>
+            <view class='map'>{{item.address}}{{item.detail_address}}</view>
+        </view>
+        <view bindtap='mapdel' data-id="{{item.address_id}}" class='rightedit'>删除</view>
+    </view>
+  </block>
+</view>
+<view class='footmapbar'>
+    <view bindtap='mapadd' class='addmap'>新增收货地址</view>
+</view>

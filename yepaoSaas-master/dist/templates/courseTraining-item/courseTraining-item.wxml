@@ -1,0 +1,55 @@
+
+<template name="courseTraining-item">
+<view class=''>
+        
+<view class="page__bd page__bd_spacing">
+  <view class="kind-list">
+    <!-- 外层循环 -->
+    <block wx:for="{{ courseTrainingList }}" wx:for-item="outItem" wx:for-index="outIndex" wx:key="{{ outIndex }}">
+      <view class="kind-list__item">
+
+<!-- title -->
+<view id="{{ outIndex }}" class="weui-flex kind-list__item-hd {{ outItem.open ? 'kind-list__item-hd_show' : '' }}" bindtap="bingKindToggleTap">
+  <view class="weui-flex__item">
+    <text class='kind-list-title__text' >{{ outItem.title }}</text>
+  </view>
+  <image class="kind-list__img" style='{{ outItem.open ? "transform:rotate(180deg);" : "transform:rotate(0deg);" }}' src="../../../images/icon/arrow_down.png"></image> 
+</view>
+<!-- title -->
+
+<!-- body -->
+<view class="kind-list__item-bd {{ outItem.open ? 'kind-list__item-bd_show' : '' }}">
+  <view class="{{ outItem.open ? 'weui-cells_show' : '' }}">
+
+<!-- 内层循环 -->
+  <block wx:for="{{ outItem.courseList }}" wx:for-item="inItem" wx:for-index="inIndex" wx:key="{{ inIndex }}">
+  <view class='inside-cell' data-outindex='{{ outIndex }}' data-inindex='{{ inIndex }}' data-name='{{ inItem.name }}' bindtap='{{ courseShare ? "bindKindToggleInsideCellChoosedTap" : "bingKindToggleInsideCellTap" }}'>
+
+    <view data-outIndex='{{ outIndex }}' data-inIndex='{{ inIndex }}' data-name='{{ inItem.name }}' bindtap=''>
+      <image class='cellImg' src='{{ inItem.imgString }}' mode='aspectFill'></image>
+      <image class='cellIcon' src='../../../images/icon/video_play.png'></image>
+      <text class='text'>{{ inItem.name }}</text>
+    </view>
+    
+    <image wx:if='{{ courseShare }}' data-outIndex='{{ outIndex }}' data-inIndex='{{ inIndex }}' class='cellChoosedIcon' src='{{ inItem.choosed ? "../../../images/icon/video_choose.png" : "../../../images/icon/video_unchoose.png" }}' bindtap=''></image>
+    
+  </view>
+  </block>
+<!-- 内层循环 -->
+
+  </view>
+</view>
+<!-- body -->
+
+      </view>
+    </block>
+    <!-- 外层循环 -->
+
+  </view>
+</view>
+
+
+
+
+</view>
+</template>

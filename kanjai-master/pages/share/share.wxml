@@ -1,0 +1,60 @@
+<!--index.wxml-->
+<view class="container">
+      <swiper class="swiper" wx:if="{{lunbo.length !=0}}"  bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#fff" indicator-active-color="#ff4444">
+      <block wx:for="{{lunbo}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode='widthFix' id="{{index}}" catchtap="swipclick"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--text -->
+    <view class='text'>
+        <view class='title'>{{item.goods_title}}</view>
+        <view class='stock'>当前库存：{{informAll.surplus_count}}<text class='stockColor'>【库存为0时，所有砍价将停止】</text></view>
+    </view>
+    <!--inform  -->
+    <view class='notice'>{{informAll.nickname}}正在参加0.00元获得衣服，需要{{informAll.bargain_count_all}}位好友帮忙砍价TA就可以免费获得此商品！</view>
+    <view class='nowPrice'>
+        <view class='item'>
+            <view class='pay'>{{informAll.goods_price}}</view>
+            <view>原价</view>
+        </view> 
+        <view class='item two'>
+            <view class='pay'>0.00</view>
+            <view>最低价</view>
+        </view>
+        <view class='item'>
+            <view class='pay'>{{bargain_price}}</view>
+            <view>当前价</view>
+        </view>
+    </view>
+    <view class='time' wx:if="{{informAll.surplus_count<1}}">
+        活动提前结束：<text>已无更多库存</text>
+    </view>
+    <!--button  -->
+    <view class='buttons'>
+        <!--如果参加过未参加过  -->
+        <view bindtap='join' wx:if="{{already_bargain==false}}">我也参加</view>
+        <view bindtap='myself' wx:else>我的砍价</view>
+        <view bindtap='help' data-value="{{informAll.can_bargain}}">帮TA砍价</view>
+    </view>
+</view>
+<view class='bg' wx:if="{{share || kanjia || finish}}"></view>
+<view class='footer' wx:if="{{share}}"> 
+    <button form-type="submit" open-type='share'>转发</button>
+    <view bindtap='poster' class='poster'>朋友圈海报</view>
+    <view bindtap='cancel' class='cancel'>取消</view>
+</view>
+<!-- 砍价弹窗-->
+<view class='kanjia' wx:if="{{kanjia}}">
+    <image src='../img/success.png' mode='widthFix'></image>
+    <view class='less'>砍掉{{cut_money}}元</view>
+    <view class='little'>小手一甩，成功帮TA砍下一刀</view>
+    <view class='mine' bindtap='mine'>确定</view>
+</view>
+<!-- 砍价弹窗 -->
+ <view class='kanjia finish' wx:if="{{finish}}" >
+    <image src='../img/finish.png' mode='widthFix' style='width:140rpx'></image>
+    <view class='little'>此用户已完成砍价</view>
+    <view class='mine' bindtap='finishTap'>确定</view>
+</view> 

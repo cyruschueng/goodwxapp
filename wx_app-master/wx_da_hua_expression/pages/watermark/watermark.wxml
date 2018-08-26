@@ -1,0 +1,65 @@
+<!--watermark.wxml-->
+
+<view class="page">
+    <!--private 菜单-->
+    <view class="weui-flex">
+        <view class="weui-flex__item "> 
+            <view class="stage">
+                <image class="stage__img" src="{{watermark.img_url}}" mode="aspectFit" ></image>
+                <view id="input_view" style="position:absolute;left:{{watermark.wx_offsetLeft}};top:{{watermark.wx_offsetTop}}; border:1px dashed white;" 
+                catchtouchstart="touchstart" 
+                catchtouchmove="touchmove"
+                catchtouchend="touchend">
+                <!--输入的字-->
+                    <view style="font-size:{{watermark.wx_fontsize}};color:{{watermark.wx_fill}}; opacity:{{watermark.wx_dissolve}}; border:1px dashed black; line-height:{{watermark.wx_fontsize}} ">{{watermark.wx_text}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    
+    <!--input文本输入-->
+    <view class="tool-left">
+            <input class="layer-input-input"  value="{{watermark.wx_text}}" bindinput="inputChange" focus="true"  />            
+    </view>
+
+    <view class="page__bd_spacing">
+        <view class="weui-flex">
+            <block wx:for-items="{{grids}}" wx:key="{{index}}">
+                <view class="weui-flex__item {{ watermark.wx_fill == item ? 'select' : ''}}" catchtap="fill_change" data-fill="{{item}}">
+                    <view class="fill {{item}} "></view>
+                </view>
+            </block>
+        </view>
+    </view>
+  
+
+    <view class=" page__bd_spacing">
+        <view class="weui-flex">
+            <view class=""> 
+                <view class="title">透明度：</view>
+            </view>    
+            <view class="weui-flex__item">  
+                <slider bindchange="dissolve_sliderchange" value="90" min="10" max="100" show-value/>
+            </view>
+        </view>
+
+        <view class="weui-flex">
+            <view class=""> 
+                <view class="title">大小：</view>
+            </view>    
+            <view class="weui-flex__item"> 
+                <slider bindchange="size_sliderchange" value="47" min="8" max="{{maxFontSize}}" show-value/>
+            </view>
+        </view>
+    </view>  
+
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary"  bindtap="Create">预览</button>
+        <view class="weui-flex">
+            <view class="weui-flex__item page__desc show__des">温馨提示：文字超出图片，水印会无法显示哦</view>
+        </view>
+
+    </view>
+    
+</view>
+

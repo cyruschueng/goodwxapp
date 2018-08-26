@@ -1,0 +1,30 @@
+<view class="coupon">
+
+  <view class='li' wx:for="{{couponlist}}" wx:key="{{index}}">
+  
+    <view class='box_left'>
+    
+      <view class='i_left'>
+        <view class='num'>￥{{item.money}}</view>
+        <view class='t2'>满{{item.least}}元可用</view>
+        <view class='t3'>有效时间</view>
+      </view>
+
+      <view class='i_right'>
+        <view class='t1'>{{item.name}}</view>
+        <view class='t2'>{{item.isShopLimit ? '限门店': '不限门店'}}</view>
+        <view class='t3'>{{item.startTime}} 至 {{item.endTime}}</view>
+      </view>
+    
+    </view>
+  
+    <view class='box_right'>
+        
+        <view class='t1 {{item.num <= 0 ?"":"havecoupon"}}'>{{item.num <= 0 ?'全部抢完':''}}{{item.num>0 ?'还剩'+item.num+'张':''}}</view>
+        <view  data-id='{{item.id}}' data-index='{{index}}' catchtap='{{item.num >0 && item.canReceive==true?"getcoupon":""}}'  class='t2 {{(item.num <= 0)||(item.canReceive==false)?"nocoupon":""}}'>{{(item.num <= 0) && (item.canReceive==true)  ?'已抢完':''}}{{item.num>0 &&item.canReceive==true?'领取':''}}{{item.canReceive==false?'已领取':''}}</view>
+
+    </view>
+
+  </view>
+
+</view>

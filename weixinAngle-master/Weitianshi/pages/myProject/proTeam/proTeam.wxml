@@ -1,0 +1,15 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--核心团队  -->
+  <scroll-view style="height:1200rpx;background:#fff;padding-top:20rpx;padding-left:32rpx;width:98%" scroll-y="true">
+    <!-- <template is="searchNothing" data="{{empty:investorList}}"></template> -->
+    <block wx:for="{{core_memberArray}}" wx:key="{{core_memberArray}}">
+      <template is='detailTeam' data='{{item}}'></template>
+    </block>
+    <!-- <template is="theBottom" wx:if="{{core_memberArray!==''}}"></template> -->
+    <!-- <view class="high"></view> -->
+  </scroll-view>
+  <!--空状态-->
+  <template is="isEmpty" data="{{emptyNumber:core_memberArray}}"></template>
+</view>

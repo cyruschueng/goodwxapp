@@ -1,0 +1,23 @@
+<!--pages/kami/kami.wxml-->
+
+<view class='container'>
+<button class='sendKami' catchtap='sendkami'>分发记录</button>
+<block wx:for="{{arr}}" wx:key="{{item.id}}">
+ <view class="ui-cell input-box">
+    <view class="input-title"> <image src='{{item.src}}'></image> </view>
+    <view class="ui-primary">
+      <input type="number" password="{{arr[index].password}}" value = "{{arr[index].value1}}"  bindinput="{{arr[index].inputGet}}" focus="{{arr[index].focus }}" placeholder="{{arr[index].placehold}} "/>
+      </view> 
+</view>
+</block>
+
+ <view class="ui-cell input-box ">
+       <view class="input-title "><image src='../../images/kami/4.png'></image></view>
+      <view class="ui-primary ">
+        <input type="number "  bindinput="getCode" value="{{code}}" placeholder="请输入验证码 "/>
+      </view>
+      <button class="send-btn ui-cell " catchtap="sendCode" disabled='{{disa}}'>{{getBtnText}}</button> 
+    </view>
+<button class="login-btn ui-cell" catchtap="send" style='color:#fff;'>确定</button>
+
+</view>

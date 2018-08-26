@@ -1,0 +1,39 @@
+<view  wx:if="{{luggageInform==false}}" style="text-align:center;padding:30rpx 0;font-size:32rpx;">
+     <view class="classname">你还没有物品分类，快去新建~~</view>
+</view>
+<view class="container" wx:else>
+    <block wx:for="{{luggageList}}" wx:key="{{index}}"> 
+        <view class='item' bindtap='tapTheme' data-cat_id='{{item.cat_id}}' 
+              data-cat_name='{{item.cat_name}}' data-=''>
+            <view class='logo' data-cat_id='{{item.cat_id}}' wx:if="{{cat_id==item.cat_id}}" > 
+                <image src="../image/next.png" mode="widthFix"></image>
+            </view>
+            <view class='logo' data-cat_id='{{item.cat_id}}' 
+                  wx:else style='visibility: hidden;'> 
+                <image src="../image/next.png" mode="widthFix"></image>
+            </view>
+            <view class='content' data-cat_id='{{item.cat_id}}'>
+                <view class='text'>
+                    <view class='title'>{{item.cat_name}}</view>  
+                </view>
+            </view>
+            <view class='set' catchtap='setting' data-cat_id='{{item.cat_id}}' data-name='{{item.cat_name}}'>
+                <image src="../image/setting.png" mode="widthFix"></image>
+            </view>
+        </view>
+    </block>
+</view>
+<view class='footer'>
+    <image src="../image/add.png" mode='widthFix' bindtap='addNew'></image>
+</view>
+<view class='chen' wx:if="{{mode}}">
+    <view class='index'>
+        <view class='title'>类别</view>
+        <view class='theme'><input  bindinput="nameInput" placeholder='类别名称' value='{{name}}'/></view>
+        <view class='button'>
+            <view bindtap='cancel'>取消</view>
+            <view wx:if="{{cat_id}}" bindtap='delTheme' data-cat_id='{{cat_id}}'>删除</view>
+            <view bindtap='save'>保存</view>
+        </view>
+    </view>
+</view>

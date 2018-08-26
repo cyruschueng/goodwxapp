@@ -1,0 +1,16 @@
+<!--pages/user/red-packet/cash-record/index.wxml-->
+<view>
+    <view class="record-item gridXb" wx:for="{{list}}" wx:key="{{index}}">
+        <view>
+            <view>{{item.cash_type_text}}</view>
+            <view class="f12 grey">{{item.create_time}}</view>
+        </view>
+        <view class='statusBox'>
+            <view class="{{item.status_text_class}} record-money f16">{{item.status_text}}</view>
+            <view class="red record-money">-￥{{item.money}}</view>
+        </view>
+    </view>
+    <!--公共模板 没有数据 和 加载中-->
+    <import src="../template/nodataAndLoading.wxml" />
+    <template is="nodataAndLoading" data="{{list: list, isShowLoading: isShowLoading}}" />
+</view>

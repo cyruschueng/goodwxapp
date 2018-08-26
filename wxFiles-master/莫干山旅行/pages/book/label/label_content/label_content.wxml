@@ -1,0 +1,36 @@
+<view class="Page">
+  <view wx:if="{{remind}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+    <swiper class="swiper" current="{{current}}" wx:else>
+      <block wx:for="{{labels}}" wx:key="id">
+        <swiper-item>
+          <scroll-view scroll-y="true" style="height:1200rpx;">
+            <view class="body" wx:if="{{item.img.length > 0}}">
+              <image src="{{item.img}}" mode="aspectFill" class="img" binderror="errImg" data-err-img="labels[{{index}}].img" wx:if="{{item.img.length > 0}}"></image>
+              <image src="../../../../image/default.png" mode="aspectFill" class="img" wx:else></image>
+              <view class="title">{{item.name}}</view>
+              <view class="divide" style="{{'width:'+item.divide_width+'rpx;'}}"></view>
+              <view class="content">{{item.content}}</view>
+              <view class="pageIndex">
+                <text>{{icon1}}</text>
+                <text style="color:black">{{item.index}}</text>
+                <text>{{icon2}}</text>
+              </view>
+            </view>
+            <view class="body" style="display:flex;flex-direction:column;justify-content: center;" wx:else >
+              <view class="title">{{item.name}}</view>
+              <view class="divide" style="{{'width:'+item.divide_width+'rpx;'}}"></view>
+              <view class="content">{{item.content}}</view>
+            </view>
+             <view class="pageIndex">
+                <text>{{icon1}}</text>
+                <text style="color:black">{{item.index}}</text>
+                <text>{{icon2}}</text>
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </block>
+    </swiper>
+</view>

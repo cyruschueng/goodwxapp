@@ -1,0 +1,29 @@
+<!--pages/home/membershipCardDetails.wxml-->
+
+<view wx:if='{{ carDetail }}' class='bg-view'>
+  
+  <view class='title-view' >
+    <view class='car-cell' bindtap='bindCarCellTap'>
+      <image class='bg-img' src='{{ carDetail.bgimg }}'></image>
+      <view class='info-view'>
+        <view><image class='icon-img' src='../../images/icon/home/car/yepao_logo.png'></image></view>
+        
+        <view class='car-type-view'>{{ carDetail.carName }}</view>
+        <view>¥{{ carDetail.carPrice }}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='orderinfo-view deepGryColor'>
+    <view>卡类型：{{ carDetail.carType }}</view>
+    <view>剩余天数：{{ carDetail.timeLeft }}</view>
+    <view>有效时间：{{ carDetail.effectiveTime }}</view>
+    <view>开卡时间：{{ carDetail.openingTime }}</view>
+  </view>
+
+  <!-- <view class='renewFee-view' bindtap='bindRenewFeeTap'>
+    <text>续费</text>
+    <image class='right-icon' src='../../images/icon/arrow_right.png'></image>
+  </view> -->
+
+</view>

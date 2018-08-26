@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="stylesheet" href="js/control/css/zyUpload.css" type="text/css">
+		<title></title>
+	</head>
+
+	<body>
+		<div class="col-lg-3">
+			<div id="zyUpload" class="zyUpload"></div>
+		</div>
+		
+		<div class="col-lg-3">
+			<div id="zyUpload1" class="zyUpload"></div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/core/zyFile.js"></script>
+	<!-- 引用控制层插件 -->
+	<script type="text/javascript" src="js/control/js/zyUpload.js"></script>
+	<!-- 引用初始化JS -->
+	<script type="text/javascript" src="js/zyUpload.js"></script>
+	<!--common scripts for all pages-->
+	<script>
+		// 选择文件的回调方法
+		var onSelect = function(files, allFiles) {
+				alert("选中图片了:" + allFiles[0])
+			}
+			// 上传文件成功的回调方法
+		var onSuccess = function(file, response) {
+				alert("上传图片成功:" + JSON.stringify(response))
+			}
+			//上传文件失败的回调方法
+		var onFailure = function(file) {
+				alert("上传图片失败了:" + file)
+			}
+			//上传文件完成的回调方法
+		var onComplete = function(responseInfo) {
+			alert("上传图片完成：" + JSON.stringify(responseInfo))
+		}
+	</script>
+
+</html>

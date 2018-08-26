@@ -1,0 +1,85 @@
+<!-- 轮播图 start -->
+<swiper class="swiper" style='width:100%;height:{{innerWidth}}px' indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color='#fff' autoplay="true" >
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{ip+item.imagePath}}" class="slide-image" style='swiper' mode='aspectFill' style='width:100%;height:{{innerWidth}}px'/>
+    </swiper-item>
+  </block>
+</swiper>
+<!-- 轮播图 end -->
+
+<view class='panel'>
+  <view class='font-el bold'>{{msg.commodityName}}</view>
+  <view class='margin-top-xs font-md font-default'>{{msg.commodityRemark}}</view>
+  <view class='panel-between'>
+    <view><text class='font-danger font-50 bold'>￥{{msg.isDiscount == 1 ? msg.commodityPrice*msg.commodityDiscount:msg.commodityPrice}}</text><text class='margin-left-xs font-default font-sm through' wx:if="{{msg.isDiscount == 1}}">￥{{msg.commodityPrice}}</text></view>
+    <view class='panel-end item-center font-default' wx:if="{{store.minMailPrice != null || store.maxWeight != null}}">
+      <icon type="success" size="15" color="#ff4040"/>
+      <view class='margin-left-xs font-sm' wx:if="{{store.minMailPrice > 0}}">{{'满￥'+store.minMailPrice}}包邮</view>
+      <view class='margin-left-xs font-sm' wx:if="{{store.maxWeight > 0}}">{{'小于'+store.minMailPrice}}g包邮</view>
+    </view> 
+  </view>
+</view>
+
+<view class='panel panel-between item-center margin-top-sm bottom-line' bindtap='openCan'>
+  <view>产品参数</view>
+  <image src='/img/{{showCan ? "drop1":"drop"}}.png' class='icon-md'></image>
+</view>
+<view class='padding-md' wx:if="{{showCan}}">
+  <view  wx:for="{{msg.commodityValues}}" class='panel-between {{index > 0 ? "margin-top-sm":""}}'>
+    <view class=' font-sm'>{{item.label}}</view>
+    <view class=' font-sm'>{{item.value}}</view>
+  </view>
+</view>
+<view class='panel' style='padding-bottom:0'>商品详情</view>
+<view class='panel'>
+  <import src="../../wxParse/wxParse.wxml" />
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>
+
+<view class='fix-panel' style='width:{{innerWidth}}px;height:{{innerHeight}}px;background:rgba(0,0,0,0.5)' wx:if="{{showGui}}">
+  <view style='height:{{innerHeight*2-800}}rpx;width:100%' bindtap='closePanel'></view>
+  <view class='guiPanel'>
+    <view class='title panel-between'>
+      <view class='panel-start'>
+        <image src='{{ip+tempPhoto}}' class='kang' mode='aspectFill'></image>
+        <view class='margin-left-sm' style='width:350rpx;'>
+          <view class='font-lg bold '>{{msg.commodityName}}</view>
+          <view class='font-50 font-danger margin-top-xs' >￥{{msg.isDiscount==1 ? tempPriceD:tempPrice}}<text class='through font-md font-default' wx:if="{{msg.isDiscount == 1}}">￥{{tempPrice}}</text></view>
+          <view class='margin-top-x font-md'>已选择: {{tempChoose}}</view>
+        </view>
+      </view>
+      <image src='/img/close.png' class='icon-lg' bindtap='closePanel'></image>
+    </view>
+    <view class='choose-panel'>
+      <view class='font-md'>规格选择</view>
+      <view>
+        <view  wx:for="{{glist}}" class='gitem {{item.active ? "gitemAct":"gitemDef"}}' data-index='{{index}}' bindtap='chooseGui'>{{item.specificationName}}</view>
+      </view>
+    </view>
+    <view class='panel panel-between item-center'>
+      <view>数量</view>
+      <view class='panel-end item-center'>
+        <image src='/img/min.png' class='icon-xl' bindtap='minCount'></image>
+        <input class='numInput' value='{{count}}' bindinput='counted' ></input>
+        <image src='/img/add.png' bindtap='addCount' class='icon-xl'></image>
+      </view>
+    </view>
+    <view class='rightbtn' bindtap='submitToBuyStyle'>确定</view>
+  </view>
+</view>
+
+<view style='height:100rpx;'></view>
+
+<view class='bottom-bar'>
+  <view class='smbtn' bindtap='switchToHome'>
+    <image src='/img/shop.png' class='icon-lg margin-top-xs'></image>
+    <view class='font-22 font-default'>商城</view>
+  </view>
+  <view class='smbtn' bindtap='switchToCart'>
+    <image src='/img/cart.png' class='icon-lg margin-top-xs'></image>
+    <view class='font-22 font-default'>购物车</view>
+  </view>
+  <view class='incart' data-id='0' bindtap='tempDu'>加入购物车</view>
+  <view class='buybtn' data-id='1'  bindtap='tempDu'>{{version == 1 ? '立即购买':'我想购买'}}</view>
+</view>

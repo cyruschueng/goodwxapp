@@ -1,0 +1,25 @@
+<?php
+class Domain_Expense extends Domain_Common {
+    public function __construct() {
+        parent::__construct();
+    }
+
+    //充值记录
+    public function rechargeLog() {
+        $page_no = isset($this->req['page_no']) ? $this->req['page_no'] : 1;
+        $page_size = isset($this->req['page_size']) ? $this->req['page_size'] : 20;
+        $offset = ($page_no - 1) * $page_size;
+        $limit = $page_size;
+        $logs = DI()->notorm->recharge_log->where('user_id = ?', $this->req['user_id'])
+            ->where('is_notify = 1')->order('id DESC')->limit($offset, $limit)->fetchAll();
+        $model_recharge_item = new Model_RechargeItem();
+        foreach($logs as $log) {
+            if($log['operation_id'] == 1) {
+                //$model_recharge_item->getItemById($log['operation_value']);
+            }
+        }
+    }
+
+
+
+}

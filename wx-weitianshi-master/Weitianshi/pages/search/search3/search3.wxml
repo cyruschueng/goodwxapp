@@ -1,0 +1,61 @@
+<import src="/pages/Template/Template.wxml" />
+
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+
+  <view class="search_frame">
+    <label class="searchBox flex">
+      <input class="search" focus="" placeholder="{{placeHold}}" bindinput="searchSth" />
+    </label>
+    <view class="esc" bindtap="searchEsc">取消</view>
+  </view>
+  <view style="height:112rpx;"></view>
+  <!--展示内容  -->
+  <scroll-view style="height:1200rpx;" scroll-y="true" bindscrolltolower='loadMore'>
+    <!--精选  -->
+    <template is="selectProject" data="{{list:slectProject,type:2}}" wx:if='{{slectProject}}'></template>
+    <!--最新  -->
+    <template is="selectProject" data="{{list:financingNeed,type:2}}" wx:if='{{financingNeed}}'></template>
+    <!--投资人列表  -->
+    <block wx:for="{{investorList}}" wx:key="{{investorList}}" wx:if='{{investorList}}'>
+      <view class='investorCard'>
+        <view class="t-investorColor" hover-class='t-hoverColor'>
+          <template is='InvestorCard' data='{{item,user_id}}'></template>
+          <view class='t-alineHeight'></view>
+          <template is='cardBottom1' data='{{item,user_id}}'></template>
+        </view>
+      </view>
+    </block>
+    <!-- <template is="theBottom" wx:if="{{investorList!==''}}"></template> -->
+    <!--fa列表  -->
+    <block wx:for="{{faList}}" wx:key="{{faList}}" wx:if='{{faList}}'>
+      <view class='investorCard'>
+        <view class="t-investorColor" hover-class='t-hoverColor'>
+          <template is='InvestorCard' data='{{item,user_id}}'></template>
+          <view class='t-alineHeight'></view>
+          <template is='cardBottom1' data='{{item,user_id}}'></template>
+        </view>
+      </view>
+    </block>
+    <!--我的人脉列表  -->
+    <block wx:for="{{myList}}" wx:key="{{item.user_id}}" wx:if='{{myList}}'>
+      <view class='investorCard'>
+        <view class="t-investorColor" hover-class='t-hoverColor'>
+          <template is='InvestorCard' data='{{item,user_id}}'></template>
+          <view class='t-alineHeight'></view>
+          <template is='cardBottom1' data='{{item,user_id}}'></template>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!--搜索结果无-->
+  <view class="nullState" hidden='{{slectProject.length+financingNeed.length+investorList.length+faList.length+myList.length>0}}'>
+    <view class="nullState_text">
+      <view>暂无数据</view>
+    </view>
+  </view>
+  <!--信息反馈-->
+  <view class="error" wx:if="{{error==1}}">{{error_text}}</view>
+
+  </view>

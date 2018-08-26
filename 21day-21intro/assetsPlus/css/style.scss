@@ -1,0 +1,49 @@
+//禁止浏览器滚动
+.disable-scroll {
+    overflow: hidden !important;
+    //overflow:scroll!important;
+    //overflow-y: hidden!important;
+}
+
+// 覆盖容器
+@mixin cover-contain {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.main-container{
+    font-family: 'Microsoft yahei';
+}
+
+@function px2rem($px) {
+    @return $px / 20 * 1rem;
+}
+
+.hide {
+    display: none;
+}
+.show {
+    display: inherit;
+    opacity: 1;
+    background: #e7e7e7;
+}
+
+@mixin fullscreen($opacity) {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0, $opacity);
+}
+
+@import "home.scss";
+@import "componentSummary.scss";
+@import "animate.scss";
+@import "components/qrCodePay";
+@import "scoreExchange.scss";
+@import "exchangeRecord.scss";

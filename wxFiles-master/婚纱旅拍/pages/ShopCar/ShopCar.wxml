@@ -1,0 +1,57 @@
+
+<!--pages/ShopCar/ShopCar.wxml-->
+<view class="container">
+  <block wx:for="{{shopcarlist}}">
+    <view class="ShopCarList">
+      <view class="Icon" bindtap="choose" id="{{index}}">
+        <icon color="#ff7a92" type="{{item.choose?'success':'circle'}}"></icon>
+        <view style="float:right;color:#787878;font-size:16px;">预定日期:{{item.ydrq}}</view>
+      </view>
+      <view class="MainBox" style="background-color: #f4f4f4;">
+        <view class="fl imageBox">
+          <image class="ShopImg" src="{{item.image}}"></image>
+        </view>
+
+        <!--end imageBox-->
+        <view class="fl textBox">
+          <view class="text">{{item.name}}
+          </view>
+          <text style="color:#ff7a92;">¥ {{item.price}}</text>
+          <view class="Counter">
+            <view>
+              <image src="/images/21.jpg" bindtap="reduce" id="{{index}}"></image>
+            </view>
+            <view style="width:72rpx;height:60rpx;background-color:#fff">{{item.count}}</view>
+            <view>
+              <image src="/images/22.jpg" bindtap="add" id="{{index}}"></image>
+            </view>
+          </view>
+
+          <!--end Counter-->
+        </view>
+
+        <!--end textBox-->
+      </view>
+
+      <!--end MainBox-->
+      <view class="Foot">
+        <view style="float:right;line-height:40px; font-size:14px;color:#787878;padding-right:20px;">付款方式：{{item.payfs}}</view>
+      </view>
+    </view>
+
+    <!--end ShopCarList-->
+  </block>
+  <view class="Settlement">
+
+    <!--
+<view class="fl ChoiceAll"><image src="/images/20_1.jpg"></image> 全选</view>-->
+    <view class="fr jieSuan" bindtap="pay">结算</view>
+    <view class="fr price">合计：
+      <text style="color:#ff7a92;">¥ {{total}}</text>
+    </view>
+  </view>
+
+  <!--end Settlement-->
+</view>
+
+<!--end container-->

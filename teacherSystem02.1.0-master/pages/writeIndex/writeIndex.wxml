@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="wrap flex">
+    <view class="item flex" hover-class="activeStyle" bindtap="goSchool">
+      <view class="icon"><image class="icon1" mode="aspectFit" src="{{schoolSrc}}"></image></view>
+      <view class="txt">公立校信息</view>
+    </view>
+    <view class="item flex" hover-class="activeStyle" bindtap="goScore">
+      <view class="icon"><image class="icon2" mode="aspectFit" src="{{scoreSrc}}"></image></view>
+      <view class="txt">高思进门考</view>
+    </view>
+<!--     <button bindtap="scan"> 扫一扫 </button>   -->
+  </view>
+  <!-- 导航 -->
+  <view class="tabBar flex">
+    <view class="tabItem" bindtap="changeColor" wx:for="{{tabBarArr}}" data-id="{{index}}" wx:key="id">
+      <view class="icon"><image class="icon1" mode="aspectFit" src="{{item.iconSrc}}"></image></view>
+      <view class="txt" style="color:{{item.changeTextColor}}">{{item.txt}}</view>
+    </view>
+  </view>
+</view>

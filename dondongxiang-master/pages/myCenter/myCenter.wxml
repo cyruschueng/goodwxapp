@@ -1,0 +1,90 @@
+<!--pages/myCenter/myCenter.wxml-->
+<view  class="user_hd_item">
+    <view class="item_left"  bindtap="isShowToast">
+        <image mode="aspectFill" src="{{avatarUrl}}" class="image"/>
+    </view>
+    <view class='item-middle'>
+        <view class="mark" ><text class="text">{{nickName}}</text><text class='grade'>{{userIdentity}}</text></view> 
+        <view class="mark" ><text class="text">积分: </text><text class='price'>{{balance}}</text><text class='msgtext'>(1积分=1元)</text></view> 
+        <view class="mark" ><text class="text">冬瓜: </text><text class='price'>{{oneselfnumber}}</text><text class='msgtext'></text></view>
+        <button class="btn_action" bindtap="cashTap" hidden='{{hiddenfunction}}'>提现</button>
+    </view>
+    <view class="item-right">
+        <view class="btn_action" bindtap="detailsTap">代言
+            <image class='arrimg' src='/images/myCenter/arrow.png'></image>
+        </view>
+        <view class="btn_action" bindtap="recommendTap">详情
+            <image class='arrimg' src='/images/myCenter/arrow.png'></image>
+        </view>
+    </view>
+</view>
+<view class="message_list order">
+    <view class='rowlist'>
+        <image class='labelicon' src='/images/myCenter/ord.png'></image>
+        <view class='centext'>我的订单</view>
+        <view class='allorder' data-index="0" bindtap='orderinfo'>
+            <text>查看全部订单</text>
+            <image class='arrowicon' src='/images/myCenter/arrow.png'></image>
+        </view>
+    </view>
+    <view class='order-tab'>
+        <view class='ord-col-3' data-index="1" bindtap='orderinfo'>
+            <image class='icon' src='/images/myCenter/ord3.png'></image>
+            <text class='text'>待付款</text>
+        </view>
+        <view class='ord-col-3' data-index="2" bindtap='orderinfo'>
+            <image class='icon' src='/images/myCenter/ord3.png'></image>
+            <text class='text'>待发货</text>
+        </view>
+        <view class='ord-col-3' data-index="3" bindtap='orderinfo'>
+            <image class='icon' src='/images/myCenter/ord3.png'></image>
+            <text class='text'>待收货</text>
+        </view>
+        <view class='ord-col-3' data-index="4" bindtap='orderinfo'>
+            <image class='icon' src='/images/myCenter/ord3.png'></image>
+            <text class='text'>退款/退货</text>
+        </view>
+    </view>
+</view>
+<view class="message_list">
+    <view class='rowlist' wx:for="{{linkmessage}}" wx:key="">
+        <image src='{{item.icon}}' class='labelicon'></image>
+        <view bindtap="tap{{item.groupTap}}" class='centext'>{{item.groupName}}</view>
+        <image src='{{item.rightImage}}' class='arrowicon'></image>
+    </view>
+</view>
+<view class="message_list">
+    <view class='rowlist' wx:for="{{messages}}" wx:key="">
+        <image src='{{item.icon}}' class='labelicon'></image>
+        <view bindtap="tap{{item.groupTap}}" class='centext'>{{item.groupName}}</view>
+        <image src='{{item.rightImage}}' class='arrowicon'></image>
+    </view>
+</view>
+
+<view class="message_list">
+    <view class='rowlist'>
+        <image src='/images/myCenter/icon_goods_cert.png' class='labelicon'></image>
+        <view bindtap="tapchatblock" class='centext'>购物车</view>
+        <text class='wrep-msgnub'>12</text>
+        <image src='/images/myCenter/arrow.png' class='arrowicon'></image>
+    </view>
+    <view class='rowlist'>
+        <image src='/images/myCenter/Communication-Bt.png' class='labelicon'></image>
+        <view bindtap="tapaddressblock" class='centext'>收货地址</view>
+        <image src='/images/myCenter/arrow.png' class='arrowicon'></image>
+    </view>
+</view>
+
+<view class="message_list">
+    <view class='rowlist'>
+        <button style='position:absolute;top:0;right:0;width:90%;height:100%;z-index:3;opacity:0;' open-type='contact' session-from="weapp"></button>
+        <image src='/images/myCenter/Customer-Bg.png' class='labelicon'></image>
+        <view bindtap="tapcontact" class='centext'>在线客服</view>
+        <image src='/images/myCenter/arrow.png' class='arrowicon'></image>
+    </view>
+    <view class='rowlist'>
+        <image src='/images/myCenter/about.png' class='labelicon'></image>
+        <view bindtap="tapabout" class='centext'>关于咚咚</view>
+        <image src='/images/myCenter/arrow.png' class='arrowicon'></image>
+    </view>
+</view>

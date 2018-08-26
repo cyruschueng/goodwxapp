@@ -1,0 +1,141 @@
+<scroll-view scroll-y="true" scroll-with-animation="true" scroll-into-view="{{innerScroll ? 'toMeun':''}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px" bindscrolltolower="outerScrollListenerPlay" bindscrolltoupper="outerScrollListenerStop">
+    <view class="shop-top">
+        <view class="panel-start">
+            <image class="shop-img" src="{{url + shop.shopimage}}" mode="aspectFill"></image>
+            <view class="font-md margin-left-sm">
+                <view class="font-white font-lg">{{shop.shopname}}</view>
+                <view class="panel-start item-center margin-top-md" bindtap='makeCall'>
+                    <view class="font-md font-white">{{shop.shopphone}}</view>
+                    <image class="icon-md margin-left-sm" src="/img/pho.png"></image>
+                </view>
+            </view>
+        </view>
+
+        <view class="font-md panel-start item-center margin-top-sm">
+            <image class="icon-md" src="/img/location1.png"></image>
+            <view class=" font-sm margin-left-xs" style="color:#4f707a">{{shop.shopaddresscity}} {{shop.shopaddressdistrict}} {{shop.shopaddressstreet}} {{shop.shopaddressstreetNumber}}</view>
+        </view>
+    </view>
+    <view class="cantact panel-between bottom-line">
+        <view class='item {{ctapFlag == 1 ? "act":""}}' data-id='1' bindtap='ctap'>外卖商品</view>
+        <!-- <view class='item {{ctapFlag == 2 ? "act":""}}' data-id='2' bindtap='ctap'>节日订购</view> -->
+    </view>
+    <!-- <view class="{{ctapFlag == 2 ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight-42}}px;background:#f3f3f3">
+        <view class="padding-sm">
+            
+            <block wx:for="{{goods}}" wx:for-item="it" wx:for-index="in">
+                <view class="gpanel margin-top-md" style="background: url({{url+li.image}});background-size:100%" wx:for="{{it.product}}" wx:for-index="dex" wx:for-item="li" wx:if="{{li.ptype == 1}}" data-id='{{li.id}}' data-shopid='{{li.shopid}}' bindtap="navToGoodsDetail">
+                    <view class="xpanel">
+                        <image src="{{url+li.image}}" style="width:200rpx;height:200rpx;border-radius:20rpx;" mode="aspectFill"></image>
+                        <view class="content">
+                            <view class="font-md bold">{{li.name}}</view>
+                            <view class="font-md margin-top-xs">已预定:{{li.sales}}人</view>
+                            <view class="font-lg margin-top-xs">价格：<text class="font-danger">￥{{li.price}}起</text></view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view class="panel-center margin-bottom-sm margin-top-md" >
+                <image class="line margin-top-sm" src="/img/line.png"></image>
+                <view class="font-lg  margin-left-sm font-default">到底啦</view>
+                <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+            </view>
+        </view>
+    </view> -->
+    <view id="toMeun" class="{{ctapFlag == 1 ? '':'hidden'}} shop-panel panel-between" style="width:{{innerWidth}}px;height:{{innerHeight-42}}px">
+        <scroll-view style="width:180rpx;height:{{innerHeight-42}}px;background:#f3f3f3">
+            <view wx:for="{{goods}}" class="litem text-center font-sm {{item.active ? 'shop-active':''}}" data-index="{{index}}" bindtap="changeMeun">
+                <view>{{item.name}}</view>
+            </view>
+            <view style="height:100rpx"></view>
+        </scroll-view>
+        <scroll-view style="width:{{innerWidth - 90}}px;height:{{innerHeight-42}}px;" scroll-y="{{innerScroll}}" scroll-into-view="{{lfalg}}" scroll-with-animation="true">
+            <block wx:for="{{goods}}" wx:for-item="it" wx:for-index="in">
+                <view class="second" id="t{{in}}">{{it.name}}</view>
+                <view wx:for="{{it.product}}" wx:for-index="dex" wx:for-item="li" class="panel-start bottom-line deesd" wx:if="{{li.ptype != 1}}">
+                    <image class="simg" src="{{url}}{{li.image}}" mode="aspectFill"></image>
+                    <view class="margin-left-sm sgp">
+                        <view class="font-md bold ellipsis">{{li.name}}</view>
+                        <view class="font-xs margin-top-xs">销量:{{li.sales}}笔</view>
+                        <view class="font-lg font-danger margin-top-xs">￥{{li.price*li.discount}}<text wx:if="{{li.discount < 1}}" style="font-size:20rpx;color:#888;text-decoration: line-through">￥{{li.price}}</text></view>
+                        <view class="panel-end">
+                            <image class="icon-xl" src="/img/min.png" wx:if="{{li.count > 0 }}" data-id="{{li.id}}" data-type="0" bindtap="reduseBtn"></image>
+                            <view class="font-lg margin-left-sm" wx:if="{{li.count > 0 }}">{{li.count}}</view>
+                            <image class="icon-xl margin-left-sm" src="/img/add.png" data-in="{{in}}" data-dex="{{dex}}" bindtap="addBtn"></image>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view style="height:100rpx"></view>
+        </scroll-view>
+    </view>
+</scroll-view>
+
+<view wx:if="{{shopCart.length > 0}}" class="ogoods {{showCart ? '':'hidden'}}" style="height:{{innerHeight}}px">
+    <view class="panel-op">
+        <view class="opan panel-between" bindtap='closeTapCarts'>
+            <view class="tit font-md">已选商品</view>
+            <view class="font-md panel-end">
+                 <image src="/img/droph.png" class="icon-md"></image>
+            </view>
+        </view>
+        <view class="panel panel-between bottom-line item-center" wx:for="{{shopCart}}" wx:for-item="it" wx:for-index="itIndex">
+            <view class="font-md">
+                <view class="font-md">{{it.name}}</view>
+                <view class="font-24 font-default">
+                    <text>{{it.gui}}</text>
+                </view>
+            </view>
+            <view class="panel-end item-center">
+                <view class="font-danger font-lg margin-right-md">￥{{it.realprice}}</view>
+                <view class="panel-end">
+                    <image class="icon-xl" src="/img/min.png" data-index="{{itIndex}}" data-id="{{it.id}}" data-type="1" bindtap="reduseBtn"></image>
+                    <view class="font-lg margin-left-sm">{{it.count}}</view>
+                    <image class="icon-xl margin-left-sm" src="/img/add.png" data-index="{{itIndex}}" bindtap="cartShopAdd"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="ofix" style='{{ctapFlag == 1 ? "":"display:none"}}'>
+    <view class="panel-start">
+        <view class="left">
+            <image src="{{shopCart.length > 0 ? '/img/acar.png':'/img/car.png'}}" class="scart" bindtap="showCart"></image>
+            <view wx:if="{{shopCart.length > 0}}" class="cri bg-hear">{{shopNum}}</view>
+        </view>
+        <view class="center">
+            <view wx:if="{{shopCart.length == 0}}" class="nonetxt">未选择商品</view>
+            <view class="acttxt" wx:if="{{shopCart.length > 0}}">
+                <view class="font-xl font-white">￥{{totalPrice > shop.shopcouponstart ? totalPrice-shop.shopcouponend:totalPrice}}<text class="font-20" wx:if="{{totalPrice > shop.shopcouponstart}}">店铺满￥{{shop.shopcouponstart}}减￥{{shop.shopcouponend}}</text></view>
+                <view class="font-xs font-white" wx:if="{{isTangs == 0}}">另需配送费￥{{shop.shopsendprice}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="obtn {{totalPrice >= shop.shopstartprice ? 'actbtncol':'defbtncol'}}" bindtap="{{totalPrice >= shop.shopstartprice ? 'navToPayfor':''}}">{{totalPrice
+        < shop.shopstartprice ? '￥'+shop.shopstartprice+ '起送': '去结算'}}</view>
+    </view>
+
+    <view wx:if="{{tempGoods}}" class="goodsdetail {{showdetail ? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+        <view class="gdpanel">
+            <view class="gitem">
+                <view class="gdpho">
+                    <image mode="aspectFill" src="{{url + tempGoods.image}}" class="img"></image>
+                    <image src="/img/close.png" class="icon-lg closeimg" bindtap="close"></image>
+                </view>
+                <view class="content">
+                    <block wx:for="{{tempGoods.attribute}}" wx:for-index="in" wx:for-item="it">
+                        <view class="font-md margin-top-sm">{{it.title}}</view>
+                        <view class="panel-start">
+                            <view wx:for="{{it.content}}" wx:for-index="dex" wx:for-item="li" class="item {{li.active ? 'itemact':'itemdef'}}" wx:if="{{li.label != ''}}" data-in="{{in}}" data-dex="{{dex}}" bindtap="chooseIt">{{li.label}}</view>
+                        </view>
+                    </block>
+
+                </view>
+            </view>
+            <view class="take panel-center top-line">
+                <view class="item font-md font-default" bindtap="close">取消</view>
+                <view class="item font-md" style="color:{{theme}}" bindtap="addToCart">加入购物车</view>
+            </view>
+        </view>
+    </view>

@@ -1,0 +1,60 @@
+<import src="../../pages/templates/userInfo/index.wxml" />
+<import src="../../pages/templates/shareBtn/index.wxml" />
+<view class="page-player-info">
+    <view class="info-box">
+        <template is="user-info" data="{{profile: profile, isAndroid: isAndroid}}" />
+    </view>
+    <canvas canvas-id="info-canvas"></canvas>
+    <view class="pk-info">
+        <view class="info-line">
+            <view class="info-item">
+                <view class="mask"></view>
+                <view class="content">
+                    <text>用户ID：</text>
+                    <text class="value">{{pkInfo.userId}}</text>
+                </view>
+            </view>
+            <view class="info-item">
+                <view class="mask"></view>
+                <view class="content">
+                    <text>段位：</text>
+                    <text class="value">{{gradeMap[pkInfo.grade]}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="info-line">
+            <view class="info-item">
+                <view class="mask"></view>
+                <view class="content">
+                    <text>胜率：</text>
+                    <text class="value">{{pkInfo.winRate && (pkInfo.winRate + '%')}}</text>
+                </view>
+            </view>
+            <view class="info-item">
+                <view class="mask"></view>
+                <view class="content">
+                    <text>总场次：</text>
+                    <text class="value">{{pkInfo.allPlay}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="info-line">
+            <view class="info-item">
+                <view class="mask"></view>
+                <view class="content">
+                    <text>经验：</text>
+                    <text class="value">{{pkInfo.expPro}}</text>
+                </view>
+            </view>
+            <view class="info-item">
+                <view class="mask"></view>
+                <view class="content">
+                    <text>胜场：</text>
+                    <text class="value">{{pkInfo.winPlay}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template wx:if="{{shareShow}}" is="share-btn" data="{{shareText: '分享到微信群 查看我的排名', extraShareInfo: extraShareInfo}}" />
+</view>
+

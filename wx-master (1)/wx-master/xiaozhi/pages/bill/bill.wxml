@@ -1,0 +1,57 @@
+<!--交易明细pages/bill/bill.wxml-->
+<view class='container'>
+  <view class='title row'>
+    
+    <view class='{{className?"jine":"selectJine"}}' catchtap="onTab">时间排序</view>  
+    <view class='{{className?"selectTime":"dateTime"}} Jine1' catchtap="onTab">金额排序</view>
+  </view>
+  <!-- 没有账单是显示图片 -->
+  <view wx:if="{{show}}">
+    <image src='../../images/null.png' class='null'></image>
+    <view class='nulltxt'>您还没有产生账单</view>
+  </view>
+
+  <block wx:for="{{detailOrder}}" wx:key="{{item.id}}"  >
+    <view class='list column' bindtap='bindDetail' wx:if="{{!show}}" data-index="{{index}}" >
+      <view class='bankLogo'>
+        <image src="../../images/logo.png"></image>
+        <text class='bankName'>{{detailOrder[index].bankName}}</text>
+      </view>
+      <view class='detailDate '>
+        <view class='row time'>
+          <view class='pull-left'>订单号</view>
+          <view class='pull-right'>{{detailOrder[index].systr}}</view>
+        </view>
+        <view class='row time'>
+          <view class='pull-left'>订单类型</view>
+          <view class='pull-right type'>{{detailOrderT[index].genre?"自主还款":"平台还款"}}</view>
+        </view>
+
+        <view class='row time'>
+          <view class='pull-left'>信用卡卡号</view>
+          <view class='pull-right'>{{cardNum[index]}}</view>
+        </view>
+        <view class='row time'>
+          <view class='pull-left'>创建时间</view>
+          <view class='pull-right'>{{detailOrder[index].createTime}}</view>
+        </view>
+        
+
+        <view class='row time '>
+            <view class='pull-left'>手续费用</view>
+            <view class='pull-right'>{{detailOrder[index].poundage}}</view>
+        </view>
+
+        <view class='row time'>
+            <view class='pull-left'>还款金额</view>
+            <view class='pull-right type'>{{detailOrder[index].borrowMoney}}</view>
+        </view>
+        
+        <view class='row time status'>
+          <view class='pull-left'>订单状态</view>
+          <view class='pull-right type'>{{status[index]}}</view>
+        </view>
+</view>
+    </view> 
+  </block>     
+</view>

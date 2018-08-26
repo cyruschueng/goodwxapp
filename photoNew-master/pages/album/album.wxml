@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="musicList {{music_play?'music_play':'stop'}}"  bindtap='bindPlay'></view> 
+<view class="container common">
+    <view class='navbar' wx:if="{{navList.length>=3}}">
+        <view wx:for="{{navList}}" class="one {{cate_id==item.cate_id?'active':''}} " 
+              bindtap='navbar' data-now='h5' data-cate_id='{{item.cate_id}}'>
+        {{item.cate_name}}</view>
+    </view>  
+    <view class='navbar' wx:else>
+        <view wx:for="{{navList}}" class="one two {{cate_id==item.cate_id?'active':''}} " 
+              bindtap='navbar' data-now='h5' data-cate_id='{{item.cate_id}}'>
+        {{item.cate_name}}</view>
+    </view>
+    <view class='item' bindtap='albumInform' wx:for="{{photoList}}" wx:key="{{index}}" data-temp_id='{{item.temp_id}}'>
+          <text wx:if="{{item.activity==true}}" class='activity'>活动中</text>
+          <text wx:if="{{item.activity==true}}" class='activity1'>活动中</text>
+          <image src="{{item.thumb}}" mode='aspectFit'></image>
+    </view>
+</view>

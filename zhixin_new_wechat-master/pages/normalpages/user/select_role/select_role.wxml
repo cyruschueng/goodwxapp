@@ -1,0 +1,33 @@
+<!--pages/normalpages/user/select_role/select_role.wxml-->
+<view class="container">
+    <view class='gray-space'></view>
+
+    <view class='role-item-box-header'>
+        <view class='role-item-name'>
+            请选择您将以什么身份加入课程
+        </view>
+    </view>
+
+    <view class='gray-space-small'></view>
+
+    <radio-group bindchange="onSelectRole">
+        <view id="{{index}}" class='role-item-box' wx:for="{{roleSet}}" wx:key="{{index}}">
+            <radio id='{{index}}' value='{{item.name}}' class='role-raido-item'>
+                <view class='role-item-name'>
+                    {{item.value}}
+                </view>
+            </radio>
+
+            <view class='role-raido-item'>
+                {{item.description}}
+            </view>
+        </view>
+
+    </radio-group>
+
+    <view wx:if="{{userInfo.roleSet.length > 0}}" class='tips-area'>
+        请选择身份
+    </view>
+
+    <button wx:if="{{currentRole !==''}}" type='primary' bindtap='onNext'>下一步</button>
+</view>

@@ -1,0 +1,30 @@
+<!--forum.wxml-->
+<view class="forum">
+<block wx:for="{{cateList}}">
+    <view class="forum-item">        
+        <view class="forum-tit f18 green">
+            <block wx:if="{{item.isshow}}">
+                <view class="set fr" bindtap="isShow_bind" id="{{item.id}}"></view>
+            </block>
+            <block wx:else>
+                <view class="set fr active" bindtap="isShow_bind" id="{{item.id}}"></view>
+            </block>
+            <text class="iconfont icon-cascades"></text> {{item.name}}
+        </view>
+        <view class="forum-box" wx:if="{{item.isshow}}">
+            <block wx:for="{{item.cat}}">
+                <view class="forum-con gridXb flex" bindtap="forumlist_bind" id="{{item.id}}" data-name="{{item.weiba_name}}">
+                    <image src="{{item.logo}}" class="forum-img"></image>
+                    <view class="sub">
+                        <text class="forum-name">{{item.weiba_name}}</text>
+                        <text class="linght lineText f12 desc">{{item.intro}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</block>
+</view>
+
+
+

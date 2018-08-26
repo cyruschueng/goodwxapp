@@ -1,0 +1,80 @@
+<!--pages/music/music.wxml-->
+<form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+    <button formType="submit" class="submit" style='border-radius:0'>
+          <view class='container'>
+                <view class='header'>
+                     <view class='left common'>
+                          <view class='one'>
+                              <image src="{{houseImg}}" mode='widthFix'></image>
+                              <view>{{houseNum}}</view>
+                          </view>
+                          <view class='two'>
+                              <view class='name'>{{houseName}}</view>
+                          </view>
+                     </view>  
+                     <view class='time'>{{second}}</view>
+                     <view class='line'>
+                        <view class='finish'>
+                            <view  wx:if="{{otherNum}}" class='nowResult' style='width:{{(otherNum/(otherNum+houseNum))*500}}rpx'></view>
+                            <view  wx:if="{{houseNum==otherNum}}" class='nowResult' style='width:50%'></view>
+                        </view>
+                     </view>
+                     <view class='right common'>
+                          <view class='two'>
+                              <view class='name'>{{otherName}}</view>
+                          </view>
+                          <view class='one'>
+                              <image src="{{otherImg}}" mode='widthFix'></image>
+                              <view>{{otherNum}}</view>
+                          </view>
+                     </view>                  
+                </view>
+                <view class='music'>
+                      <image class='musicStar {{play?"play":"stop"}}' src="http://g-cdn.zealcdn.cn/music/14.png" 
+                            style='background:url(http://g-cdn.zealcdn.cn/music/14.png) no-repeat;background-size: 100%;'></image>
+                      <view class='status'>
+                          <image class='play' bindtap='stop' wx:if='{{play}}'  mode="widthFix" src="http://g-cdn.zealcdn.cn/music/17.png"></image>
+                          <image class='stop' bindtap='play' wx:else  mode="widthFix" src="http://g-cdn.zealcdn.cn/music/16.png"></image>
+                      </view>
+                </view>
+                <view class='resultShow'>
+                    <view class='showLeft'>
+                        <image wx:if="{{houseRight==2 && room_id == mid}}" src="http://ovhvevt35.bkt.clouddn.com/music/le.png" mode='widthFix'></image>
+                        <image wx:if="{{houseRight==1 && room_id == mid}}" src="http://ovhvevt35.bkt.clouddn.com/music/lr.png" mode='widthFix'></image>
+                    </view>
+                    <view class='title'>第<text class='yellow'>{{title}}</text>首</view>
+                    <view class='showRight'>
+                        <image wx:if="{{otherRight==2 && room_id != mid}}" src="http://ovhvevt35.bkt.clouddn.com/music/re.png" mode='widthFix'></image>
+                        <image wx:if="{{otherRight==1 && room_id != mid}}" src="http://ovhvevt35.bkt.clouddn.com/music/rr.png" mode='widthFix'></image>
+                    </view>
+                </view>
+                <view class='answer'>                    
+                    <view class='answerList {{error?"bright":""}}'>
+                        <view class='answerTitle' wx:for="{{answer}}" wx:key="{{index}}" bindtap='backText'
+                              data-index="{{index}}" data-askindex="{{item.index}}" data-text='{{item.text}}'
+                              data-notice="{{item.notice}}">
+                                <text class="{{item.text==0?'hide':''}}">{{item.text}}</text> 
+                                <!-- {{item.text}} -->
+                        </view>
+                        <view class='reset' bindtap='refresh'>
+                            <image class='' src="../image/reset.png" mode='widthFix'></image>
+                        </view>
+                    </view>                    
+                </view>
+                <view class='problem'>
+                    <view class='problemTitle' wx:for="{{problem}}" wx:key="{{index}}" bindtap='checked'
+                          data-index="{{index}}" data-text="{{item}}"><text class="{{item==0?'hide':''}}">{{item}}</text>
+                    </view>
+                </view>
+          </view>
+    </button>
+</form>
+<view class='bg' wx:if="{{bg}}">
+    <view class='zindex'>
+        <view class='title'>好友正在对战或退出了房间</view>
+        <view class='check'>
+            <!-- <view class='one' bindtap='no'>继续邀请</view> -->
+            <view class='two' bindtap='outTap'>退出</view>
+        </view>
+    </view>
+</view>

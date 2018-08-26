@@ -1,0 +1,48 @@
+<!--pages/normalpages/user/child_admin/child_admin.wxml-->
+
+<view class="container">
+    <view class='gray-space'></view>
+
+    <view class='user-item-box-header'>
+        <view class='user-item-name'>
+            所有宝贝（{{userInfo.parentSet.length}}）
+        </view>
+
+        <view class='user-item-action' bindtap='onAddChild'>
+            添加
+        </view>
+    </view>
+
+    <view class='gray-space-small'></view>
+
+    <checkbox-group bindchange="onSelectChild" class='checkbox'>
+        <view id="{{index}}" class='user-item-box' wx:for="{{userInfo.parentSet}}" wx:key="{{index}}">
+
+            <checkbox id='{{index}}' value='{{item.id}}' data-child="{{item}}"></checkbox>
+            <view class='user-item-value-container'>
+                <image class="user-item-value-image" id="avatar" name="avatar" src="{{item.avatar}}" />
+            </view>
+
+            <view class='user-item-name'>
+                {{item.nickName}}
+            </view>
+
+            <view id="{{index}}" class='user-item-action' bindtap='onViewChild'>
+                <view>
+                    详情
+                </view>
+            </view>
+        </view>
+
+    </checkbox-group>
+
+    <view wx:if="{{userInfo.parentSet.length > 0}}" class='tips-area'>
+        请选择要加入该课程的宝贝。
+    </view>
+
+    <view wx:else class='tips-area'>
+        您还没有添加宝贝，请添加一个吧。
+    </view>
+
+    <button wx:if="{{selectedChildrenId.length > 0}}" type='primary' bindtap='onJoin'>加入</button>
+</view>

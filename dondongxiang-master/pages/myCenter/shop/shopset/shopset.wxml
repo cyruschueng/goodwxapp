@@ -1,0 +1,95 @@
+<!--pages/myCenter/shop/shopset/shopset.wxml-->
+<view class='row-view'>
+    <view class='mobile-col'>
+        <view class='inner-name'>
+            <view class='label-text'>店铺名称</view>
+            <input type='text' bindinput="ShopNameInput" value="{{shopname}}" placeholder="请输入店铺名称"></input>
+        </view>
+        <view class='inner-name'>
+            <view class='label-text'>店铺地址</view>
+            <input type='text' bindinput="ShopAdressInput" value="{{shopadress}}"placeholder="请输入店铺地址"></input>
+             <image class='mapicon' bindtap='openLocation' src="/images/icon_shop_distance.png"></image> 
+        </view>
+        <view class='inner-name'>
+            <view class='label-text'>联系电话</view>
+            <input type='text' bindinput="ShopTelInput" value="{{shoptel}}"placeholder="请输入联系电话"></input>
+        </view>
+    </view>
+    <view class='mobile-col' style='padding-bottom:10px'>
+        <view class='label-text'>店铺介绍</view>
+        <view class='inner-intro'>
+            <textarea bindinput="IntroduceInput" value="{{shopdesc}}" placeholder='请输入店铺介绍（56字内）'></textarea>
+        </view>
+        <view class='inner-file'>
+            <view class='picimg'>
+                <view class="img" wx:for="{{shop_imgs}}" >
+                    <image src="{{item.img_url}}" bindtap="previewImg"></image>
+                    <text bindtap='deletePic' data-id="{{item.id}}" class='colse'>-</text>
+                </view>
+                <image class='addicon' bindtap='chooseImg' src='/images/introduce/medium/add.png'></image>
+            </view>
+        </view>
+    </view>
+
+    <view class='mobile-col'>
+        <view class='shop-inner'>
+            <image class='inner-pic' src='{{innersrc}}'></image>
+            <text class='setinnerpic' bindtap="choosePoster" >更换海报</text>
+        </view>
+    </view>
+
+    <view class='mobile-col'>
+        <view class='label-text'>活动编辑</view>
+        <view class='inner-intro'>
+            <textarea bindinput="Act_descriptionInput" placeholder='请输入活动简介' value="{{shopedit}}"></textarea>
+        </view>
+    </view>
+
+    <view class='mobile-col'>
+        <view class='block-tab'>
+        
+            <view class='tablist'>
+                <block wx:for="{{goods_cat}}">
+                  <view class='tab'>{{item.cat_name}}</view>
+                </block>
+                <text bindtap='delcatrequest' hidden='{{deltabmag}}' class="deltab">删除</text>
+            </view>
+            <view class='settab'>
+                <input type='text'bindinput="catInput" value="{{catinfo}}" placeholder='输入产品分类'></input>
+                <text bindtap='addcatrequest'  class='tabaddbtn'>添加</text>         
+            </view>
+        </view>
+    </view>
+
+    <view class='mobile-col'>
+        <view class='label-text'>店铺链接</view>
+        <view class='block-centent'>
+            <view class='linktext'>
+                <input type='text' bindinput="urlInput" placeholder='输入链接地址'></input>
+                <text class='copy-btn'></text>
+            </view>
+        </view>
+    </view>
+
+    <view class='mobile-col'>
+        <view class='label-text'>代言开关</view>
+        <view class="body-view" style='text-align:right;padding-top:7px;'>
+            <switch bindchange="switch1Change"/>
+        </view>
+    </view>
+
+    <view class='add-btn' bindtap='Stateshop'><button class='btn'>{{creatbtn}}</button></view>
+</view>
+
+<view class='dialog-view' hidden='{{dialogmsg}}'>
+    <view class='dialog-bg'></view>
+    <view class='dialog-main'>
+        <view class='dialog-title'>提示</view>
+        <view class='dialog-bd'>
+            <view class='msgtext'>还没有店铺！</view>
+        </view>
+        <view class='foot-btn'>
+            <view class='mesrt-btn' bindtap='setbtnshop'>创建</view>
+        </view>
+    </view>
+</view>

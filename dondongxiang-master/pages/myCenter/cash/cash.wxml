@@ -1,0 +1,55 @@
+<!--pages/dynamic/cash/cash.wxml-->
+<view class="container">
+    <view class='payhd'>
+        <image class='msgicon' src="/images/main/config/icon_cooperation_vip.png"></image>
+        <text class='paytit'>我的零钱</text>
+        <text class='allpays'>￥{{balance}}</text>
+    </view>
+    <view class='itembd'>
+        <view class='bankname'>
+            <text class='msgtit'>到账银行卡</text>
+            <text class='name' bindtap='powerDrawer'>{{bank_name}}</text>
+        </view>
+        <view class='postpay'>
+            <view class='msgtit'>提现金额</view>
+            <view class='setpay'><text>￥</text><input type='text' placeholder='0.00' bindinput="CashInput" ></input></view>
+            <view class='allpaysize'>可提现￥{{balance}}<text class='alltx'>全部提现</text></view>
+        </view>
+    </view>
+    <view class='setpaybtn'>
+        <button type='primary' bindtap='Cashsome'  class='btn allbtn'>提现</button>
+        <button class='btn recbtn' bindtap='Cashrecord'>提现记录</button>
+    </view>
+</view>
+<view class='item-foot'>
+    <text>提现说明</text>
+    <text>1.冬瓜与积分的区别，冬瓜是由社交链算法产生的不参与提现功能，仅用于提升合伙人模式</text>
+    <text>2.在咚咚享获得的积分可以兑换现金，兑换比例是1:1；</text>
+    <text>3.兑换现金暂时提现到银行卡，2.0版本提现到你的微信零钱，点击提现后，系统将在24小时内将金额打进你微信内；</text>
+    <text>4.最终解释权归咚咚官方所有</text>
+</view>
+
+
+<view class='ShowPhoneInfo' hidden='{{ShowPhoneInfo}}'>
+    <view class='ShowMsgBg' bindtap='ShowMsgBg'></view>
+    <view class='ShowBulgView'>
+        <view class='title'>绑定银行卡</view>
+        <view class='ShowRow'>
+            <view class='col-list'>
+                <text class='label'>银行名：</text>
+                <input placeholder='XXX银行XXXX支行' value='{{bank_name}}' bindinput='bank_nameInput'></input>
+            </view>
+            <view class='col-list'>
+                <text class='label'>卡号：</text>
+                <input placeholder='62XXXXXXX' value='{{bank_no}}'bindinput='bank_noInput'></input>
+            </view>
+            <view class='col-list'>
+                <text class='label'>开户名：</text>
+                <input placeholder='XXXX' value='{{bank_account_name}}'bindinput='bank_account_nameInput'></input>
+            </view>
+            <view class='col-list' style='height:40px;'>
+                <button style='line-height:40px;background:#1AAD19;color:#fff' bindtap='withdrawInfo'>提交</button>
+            </view>
+        </view>
+    </view>
+</view>

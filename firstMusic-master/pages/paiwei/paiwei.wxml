@@ -1,0 +1,45 @@
+<!--pages/paiwei/paiwei.wxml-->
+<view class="container">
+    <view class='inform'>
+        <view class="left">
+            <image src='{{userInfo.avatarUrl}}' mode='widthFix'></image>
+        </view>
+        <view class="right">
+            <view class="niceName">{{userInfo.nickName}}</view>
+            <view class="group">
+                    Lv.{{point.level}}
+            </view>
+            <view class="gold">
+                <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode="widthFix"></image>{{gold}}
+            </view>
+        </view>
+    </view>
+   <view class="morePlay" style='height:{{moreHeight}}rpx'>
+        <view class="item item{{index}}" wx:for="{{list}}" wx:key="{{index}}" data-unlock="{{item.unlock}}" 
+              data-gold="{{item.use_gold}}" data-order="{{index}}" bindtap="lockTap">
+            <image wx:if="{{item.unlock}}" src="http://ovhvevt35.bkt.clouddn.com/music/locka.png" mode="widthFix"></image>
+            <image wx:else src="http://ovhvevt35.bkt.clouddn.com/music/unlocka.png" mode="widthFix"></image>
+            <view class="level">{{item.title}}</view>
+            <view class="payGold">
+                <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode="widthFix"></image>{{item.use_gold}}
+            </view>
+        </view>
+   </view>
+   <view class="forward">更多关卡敬请期待！</view>
+</view>
+<view class='bg' wx:if="{{bg}}">
+    <view class='zindex' wx:if="{{unlock}}" style="height:196rpx;">
+        <view class='title'>本次解锁消耗{{goldPay}}<image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode="widthFix"></image>是否继续</view>
+        <view class="think">
+            <view class='item one' bindtap='noTap'>否</view>
+            <view class='item' bindtap='yesTap'>是</view>
+        </view>
+    </view>
+    <view class='zindex' wx:if="{{little}}">
+        <view class='title'>额，少年，您的金币貌似不够了，去赚金币解锁本关吧~</view>
+        <view class="think">
+            <view class='item one' bindtap='noTap'>返回</view>
+            <view class='item' bindtap='noTap'>继续挑战</view>
+        </view>
+    </view>
+</view>

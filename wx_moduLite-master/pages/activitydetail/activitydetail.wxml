@@ -1,0 +1,164 @@
+<!--activitydetail.wxml-->
+<import src="../../components/wxParse/wxParse.wxml"/>
+<view class='app'>
+ 
+<!--问答模板  -->
+<template name="comments">
+  <view class='com-box'>
+    <view class='question clear'>
+      <view class='com-left'>
+        <view class='user-head' style='background: url("{{avatarUrl}}") center / cover no-repeat'></view>      
+      </view>
+      <view class='com-right'>
+        <view class='com-name'>{{nickName}}</view>
+        <view class='com-cont'>{{content}}</view>
+      </view>
+    </view>
+    <block wx:if='{{reply != ""}}'>
+    <view class='answer clear'>
+      <view class='com-left'>
+          <view class='user-head' style='background: url("https://shtongnian.com/logo.png") center / cover no-repeat'></view>      
+        </view>
+        <view class='com-right'>
+          <view class='com-name'>掌上魔都</view>
+          <view class='com-cont'>{{reply}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>
+
+
+
+  <view class='banner' style='background: url("{{activity.image}}") center / cover no-repeat'>
+  </view>
+  <view class='title'>{{activity.title}}</view>
+
+  <view class='section'>
+  <view class='section-in'>
+    <view class='sec-title'>报名人数</view>
+    <view class='progress-box clear'>
+      <view class='progress'><progress percent="{{activity.percent}}" stroke-width="4" /></view>
+      <view class='limit'>限额人数：{{activity.limits}}人</view>
+    </view>
+    <view class='join-box'>
+      <view>已报名：{{activity.joined}}人</view>
+      <view class='join-head'>
+        <block wx:for="{{activity.joinedList}}">
+          <view class='join-item' style='background: url("{{item}}") center / cover no-repeat'></view>
+        </block>
+      </view>
+    </view>
+  </view>
+  </view>
+
+  <view class='section'>
+  <view class='section-in'>
+    <view class='act-info'>活动费用：{{activity.fee}}</view>
+    <view class='act-info'>活动时间：{{activity.time}}</view>
+    <view class='act-info'>活动地点：{{activity.address}}</view>
+  </view>
+  </view>
+
+  <view class='section'>
+  <view class='section-in'>
+    <view class='sec-title'>活动摘要</view>
+    <view class='act-desc'>
+    <view wx:for='{{activity.des}}'>{{item}}</view>
+    </view>
+  </view>
+  </view>
+
+  <view class='section'>
+  <view class='section-in'>
+    <view class='sec-title'>活动详情</view>
+    <view class='act-desc'>
+      <template is="wxParse" data="{{wxParseData:moduContent.nodes}}"/>
+    </view>
+  </view>
+  </view>
+
+  <view class='section no-border bt-ask-box'>
+  <view class='section-in'>
+    <view class='sec-title'>问答区</view>
+    <view class='act-ask-box'>
+      <block wx:for='{{comments}}'>
+        <template is="comments" data="{{...item}}"></template>
+      </block>
+    </view>
+  </view>
+  </view>
+
+<!--底部操作栏  -->
+  <view class='fixed-option'>
+    <view class='opt-left'>
+      <view class='opt-box'>
+        <view style='display: inline-block;' bindtap='{{followOption}}'>
+        <image class='opt-ico' src='{{followHeart}}'></image>
+        <view>{{followtxt}}</view>
+        </view>
+      </view>
+      <view class='opt-box'>
+        <button class='openshare' open-type='share'></button>
+        <image class='opt-ico' src='../../pictures/share.png'></image>
+        <view>分享</view>
+      </view>
+    </view>
+
+    <view class='opt-right'>
+      <view class='ask-btn' bindtap='question'>提问</view>
+      <view class='join-box'>
+        <view class='join-btn' bindtap='signup'>立即报名</view>
+      </view>
+    </view>
+  </view>
+
+
+<!--评论框  -->
+  <view class='box-bt-bg  {{showbox}}'  bindtouchend='closeComments'></view>
+  <view class='comments-box-bt  {{showbox}}'>
+    <view class='box-opt'>
+      <view class='opt-left' bindtap='closeComments' style='background: url("https://www.shtongnian.com/image/close_nocircle.png") center / cover no-repeat'></view>
+      <view class='opt-right' bindtap='sendThought'>发送</view>
+    </view>
+    <view class='text-box'> 
+      <textarea class='publish-area' name="comment" placeholder='写出你想问的问题吧' placeholder-style="color: #ccc; font-size: 14px;" 
+      maxlength="150" fixed cursor-spacing="150" value="{{value}}" bindinput='areaInput' bindconfirm="sendThought"></textarea>
+    </view>
+  </view>
+
+<!--报名表单  -->
+<view class='box-bt-bg {{showform}}'>
+  <form name="activityForm" bindsubmit='formsubmit' bindreset='formreset' report-submit="true">
+    <view class='form'>
+    <view class='form-in'>
+      <view class='form-title'>填写报名信息</view>
+      <view class='form-main'>
+      <!-- <input placeholder='姓名' name='name' type='text'></input> -->
+      <block wx:for="{{formList}}">
+        <view class='input-wrap'> 
+          <view class='label-box'><label class='label'>{{item.label}}</label>：</view>
+          <block wx:if="{{item.tmp == 'input'}}">
+            <input name='{{item.name}}' type='{{item.type}}' confirm-type="next" cursor-spacing="100"></input>
+          </block>
+          <block wx:if="{{item.tmp == 'picker'}}">
+            <!-- <picker mode="selector"></picker> -->
+            <picker class='picker' bindchange='picker_change' value="0" range="{{item.range}}" data-event="{{item.name}}">
+              <view class="picker-in">
+                {{item.rangeCurrent}}
+              </view>
+            </picker>
+          </block>
+
+        </view>
+      </block>
+      </view>
+      <view class='form-opt'>
+          <button size='default' type='primary' loading='{{formloading}}' form-type='submit'>提交</button>
+          <button size='default' type='default' form-type='reset'>放弃报名</button>
+      </view>
+    </view>
+    </view>
+  </form>
+</view>
+</view>

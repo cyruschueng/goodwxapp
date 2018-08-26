@@ -1,0 +1,80 @@
+<!--index.wxml-->
+<view class="container page__bd" style="padding-top: 0;">
+  <view style="width: 750rpx;height:250.75rpx;background-color: #02BF02;display: flex;justify-content: center;align-items: center;">
+    <view style="margin-top: 0;">
+      <view style="display: flex;justify-content: center;align-items: center;"><image style="width: 142rpx;height: 142rpx;" src="../../styles/logo.png"></image></view>
+      <view style="display: flex;justify-content: center;align-items: center;margin-top:30rpx;"><image style="width: 251rpx;height: 46rpx;" src="../../styles/font2.png"></image></view>
+    </view>
+  </view>
+  <view>
+    <image style="width: 750rpx;height: 56.75rpx;" src="../../styles/tuoyuan.png"></image>
+  </view>
+  <view class="weui-cells__title" style="margin: 40rpx 40rpx 0 40rpx;"></view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input auto-focus="true" name="fName" class="weui-input" placeholder="请输入姓氏"/>
+        <input name="lName" class="weui-input" placeholder="请输入名字"/>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">性别</view>
+      </view>
+      <view class="weui-cell__bd">
+        <radio-group class="radio-group" bindchange="sexChange">
+          <label class="radio" wx:key="*this" wx:for="{{sex}}">
+            <radio value="{{item.value}}" style="height:2.58823529em;min-height:2.58823529em;line-height:2.58823529em;" checked="{{item.checked}}"/>{{item.name}}
+          </label>
+        </radio-group>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">生日</view>
+      </view>
+      <view class="weui-cell__bd">
+        <radio-group class="radio-group" bindchange="lifaChange">
+          <label class="radio" wx:key="*this" wx:for="{{lifa}}">
+            <radio value="{{item.value}}" style="height:2.58823529em;min-height:2.58823529em;line-height:2.58823529em;" checked="{{item.checked}}"/>{{item.name}}
+          </label>
+        </radio-group>
+
+        <picker mode="date" value="{{date}}" start="1945-09-01" end="2025-09-01" bindchange="bindDateChange">
+          <view wx:if="{{date}}">
+            <view class="weui-select weui-select_in-select-after">{{date}}</view>
+          </view>
+          <view wx:else>
+            <view class="weui-select weui-select_in-select-after" style="color: #999;">年月日（选填）</view>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+          <view wx:if="{{time}}">
+            <view class="weui-select weui-select_in-select-after">{{time}}</view>
+          </view>
+          <view wx:else>
+            <view class="weui-select weui-select_in-select-after" style="color: #999;">时分（选填）</view>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+  </view>
+  <button formType="submit"  class="weui-btn" style="width: 80%;" type="primary">查看姓名得分</button>
+  </form>
+</view>

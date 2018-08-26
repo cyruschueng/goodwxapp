@@ -1,0 +1,112 @@
+<view class="bannerContainer">
+    <view class="bannerText text1 textFontS"><text class="bannerNumber">{{title.presons}}</text> 人解决了 <text class="bannerNumber">{{title.questions}}</text> 个问题</view>
+    <view class="bannerText text2 textFontS">平均用时 <text class="bannerNumber">{{title.avgTime}}</text> 分钟</view>
+    <view class="bannerText text3 textFontS">用户平均获得 <text class="bannerNumber">{{title.avgMoney}}</text> 元</view>
+    <view class="bannerBtn text4 textFontR" bindtap="publishEv">我要提问</view>
+    <image class="bgbg" src="{{pageImg.bg}}"></image>
+</view>
+
+<view class="tabBar">
+    <view class="textFontR already-solve {{!isSolvedPage?'choose-gray':''}}" bindtap="toSolved">已解决</view>
+    <view class="textFontR await-solve {{isSolvedPage?'choose-gray':''}}" bindtap="toUnSolved">待解决</view>
+    <view class="textFontR check-rules" bindtap="showRules">查看规则</view>
+</view>
+
+<view class="solve-div">
+    <block wx:for="{{list}}" wx:for-item="tag" wx:key="{{index}}">
+        <view class="voteContent" bindtap="detailEv" data-id="{{tag.id}}" >
+            <image class="head-img" src="{{tag.creatorImg}}"></image>
+            <view class="head-name textFontR">{{tag.creatorName}}</view>
+            <view class="pay textFontR">￥{{tag.amount}}</view>
+            <view class="content-text textFontR" wx:if="{{tag.helpType==2}}">{{tag.content}}</view>
+            <view class="content-voice" wx:if="{{tag.helpType==1}}">
+                <image class="bubble-img" src="{{pageImg.bubbleBig}}"></image>
+                <image class="icon-img" src="{{pageImg.sound}}"></image>
+                <text class="voice-time">{{tag.voiceDuration}}''</text>
+            </view>
+            <view class="contentFooter" wx:if="{{isSolvedPage}}">
+                <view class="solved-tag textFontR">{{tag.clockRes}}</view>
+                <view class="solved-time textFontR">{{tag.clockDesc}}</view>
+            </view>
+            <view class="contentFooter" wx:if="{{!isSolvedPage}}">
+                <view class="remain-time textFontR">{{tag.clockDesc}}</view>
+                <image class="solved-forward-img" src="{{pageImg.toSolve}}" data-id="{{tag.id}}"></image>
+                <text class="solved-forward-text textFontR" bindtap="solveEv" data-id="{{tag.id}}">去回答</text>
+            </view>
+        </view>
+    </block>
+
+    <!--<view class="voteContent"  bindtap="toVote" data-id="{{singleVote.id}}">
+        <image class="head-img" src="../../../images/headerIcon.png"></image>
+        <view class="head-name textFontR">哈哈哈</view>
+        <view class="pay textFontR">￥ 111</view>
+        <view class="content-text textFontR">333</view>
+        <view class="contentFooter">
+            <view class="solved-tag textFontR">已解决</view>
+            <view class="solved-time textFontR">2分钟内抢答</view>
+        </view>
+    </view>
+    <view class="voteContent"  bindtap="toVote" data-id="{{singleVote.id}}">
+        <image class="head-img" src="../../../images/headerIcon.png"></image>
+        <view class="head-name textFontR">哈哈哈</view>
+        <view class="pay textFontR">￥ 111</view>
+        <view class="content-voice">
+            <image class="bubble-img" src="../../../images/bubble-big.png"></image>
+            <image class="icon-img" src="../../../images/sound.png"></image>
+            <text class="voice-time">51''</text>
+        </view>
+        <view class="contentFooter">
+            <view class="remain-time textFontR">剩余18分钟</view>
+            <image class="solved-forward-img" src="../../../images/to-solve.png"></image>
+            <text class="solved-forward-text textFontR">去回答</text>
+        </view>
+    </view>-->
+    <view style="text-align:center" wx:if="{{empty}}">
+        <image class="noContents" src="{{dataEmpty}}"></image>
+        <view class="noText"><text>啥都木有，快来发布内容吧</text></view>
+    </view>
+    <view class="nomore" wx:if="{{nomore&&!empty}}">
+        <image class="nomore-img" src="{{pageImg.smile}}"></image>
+        <text class="nomore-text textFontR">没有更多了~</text>
+    </view>
+</view>
+
+<view class="rule-wrapper" hidden="{{!ifShowRule}}">
+    
+</view>
+<view class="rule-detail-wrapper textFontR" hidden="{{!ifShowRule}}">
+        <text class="rule-title">问技规则</text>
+        <view class="rule-detail textFontR">
+            <view class="rule-item">1.发起人塞钱进红包,提出问题,任何人都可以参与回答.</view>
+            <view class="rule-item">2.发起人选择满意的回答,被选中的回答者将平分红包70%的红包金额.</view>
+            <view class="rule-item">3.若48小时内无人帮助,则全额退款.</view>
+            <view class="rule-item">4.若48小时内没有选出满意答案,所有参与回答的达人平分70%的红包金额.</view>
+            <view class="rule-item">5.分享邀请到朋友的回答被采纳, 分享者将平分30%红包奖励.</view>
+            <view class="rule-item">6.问答结束后仅需付1元查看全部结果, 集得金额将平分给发起人和被采纳的回答者.</view>
+            7.每个问题可以回答一次,问题结束后将无法参与回答.
+        </view>
+        <view class="rule-btn textFontR" bindtap="hideRules">我知道了</view>
+        <image class="rule-close" bindtap="hideRules" src="{{pageImg.close}}"></image>
+        <view class="rule-close-cover" bindtap="hideRules"></view>
+        <!--<view class="rule-close" bindtap="hideRules"></view>-->
+</view> 
+    <!--<view class="publishBtn">
+        <button class="button-publish" hover-class="tapBtn" bindtap="publishEv">{{text}}</button>
+    </view>
+    <block wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+        <view class="voteContent"  bindtap="toVote" data-id="{{item.id}}">
+            <view class="pay">￥ {{item.amount}}</view>
+            <view class="remain-time">{{item.remin}}</view>
+            <view class="contentTitle">{{item.content}}</view>
+            <view class="contentFooter">
+                <view class="help-count">{{item.answerCount}}人帮助</view>
+                <view class="seen-count">{{item.visitorCount}}人看过</view>
+                <view wx:if="{{item.idfy == 0 ? true : false}}" class="card owner">我发布的</view>
+                <view wx:if="{{item.idfy == 1 ? true : false}}" class="card other">我参与的</view>
+            </view>
+        </view>
+    </block>
+    <view style="text-align:center" wx:if="{{empty}}">
+        <image class="noContents" src="{{dataEmpty}}"></image>
+        <view class="noText"><text>啥都木有，快来发布内容吧</text></view>
+    </view>-->

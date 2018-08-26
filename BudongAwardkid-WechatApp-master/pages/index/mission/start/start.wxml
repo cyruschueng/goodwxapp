@@ -1,0 +1,26 @@
+<!--pages/index/mission/start/start.wxml-->
+
+<view class="container">
+  <view class="review">
+    <image src="{{missionInfo.avatarUrl}}" mode="aspectFit" class="avatar" />
+    <span class="title">{{missionInfo.title}}</span>
+    <span class="author"><em>{{missionInfo.nick}}</em> {{missionInfo.age}} / {{missionInfo.sex}}</span>
+    <span class="tags">
+      <dfn wx:for="{{missionInfo.tags}}" wx:key="item" class="tag-item">{{item}}</dfn>
+    </span>
+    <span class="stars">
+      <span class="item">
+        <dfn>{{missionInfo.questionCount}}</dfn>
+        <em>题目数量</em>
+      </span>
+      <span class="item">
+        <dfn>{{missionInfo.playerCount}}</dfn>
+        <em>闯关人数</em>
+      </span>
+    </span>
+  </view>
+  <view class="controls">
+    <button class="start" bindtap="onMissionStart">开始答题</button>
+    <button class="rank" bindtap="onMissionRank">排行榜</button>
+  </view>
+</view>

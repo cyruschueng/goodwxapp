@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+	<head>
+	<title>阶段报告</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script>
+	var mobileApp=window.webkit.messageHandlers;
+	</script>
+	<style type="text/css">
+	.test1 img{
+		width: 100px;
+	}
+	a{
+		display: block;
+		width: 150px;
+		height: 150px;
+		background: #b18035;
+		font-size: 16px;
+	}
+	</style>
+	</head>
+	<body>
+		<div>页面1</div>
+		<div>测试新</div>
+		<p>没cookie</p>
+		<a href="test5.html">跳到页面2</a>
+
+
+		<p>测试页面跳转</p>
+		<a href="test5.html">跳到页面2</a>
+		<a href="https://detail.tmall.com/item.htm?spm=a21ag.7622616.pandect.4.w8RFiM&id=521066652216">跳淘宝</a>
+	</body>
+	
+	<script type="text/javascript" src="js/1.js?v=3"></script>
+	<script>
+		$(function(){
+			setTimeout(function(){
+				window.location.href="test5.html";
+			},2000);
+			$("p").html(getCookie("test"));
+		    setCookie("test","有cookie",1);
+
+			//var mobileApp=window.webkit.messageHandlers;
+			var getPageInfo = function (){
+		        var data = {
+		            title:"sss",
+		            isShare:false,
+		            backgroundColor:'#2c2f31'
+		        };
+		        return JSON.stringify(data);
+		    };
+
+		    mobileApp.getShareInfo.postMessage(getPageInfo());
+
+		    var getPageInfo1 = function (){
+		        var data = {
+		            iconType:1,//0:默认箭头，1：叉，2：iconUrl传图片
+		            backNum:1,//1为正常后退，
+		            closeWebview:0,//默认为0
+		            iconUrl:""
+		        };
+		        return JSON.stringify(data);
+		    }
+		    
+		    mobileApp.showLeftBtn.postMessage(getPageInfo1());
+
+		    var getPageInfo2 = function (){
+		        var data = {
+		            backNum:1,//默认为1，
+		            closeWebview:0,//默认为0
+		        };
+		        return JSON.stringify(data);
+		    };
+		    
+		    mobileApp.deleteHistory.postMessage(getPageInfo2());
+		    
+		    
+		})
+	</script>
+</html>

@@ -1,0 +1,92 @@
+<!-- wxml -->
+<!--封面页-->
+<view class="pages">
+    <view class="cover_wrap {{isIpx?'ipx_cover':''}} {{coverFlag?'':'hidden'}}">
+        <view class="cover">
+            <text class="book_name block" style="height: 40rpx;">{{bookData.book_name}}</text>
+            <image class="fenge_double" src="../../images/shelf/fenge_double.png"></image>
+            <image class="cover_img" src="{{book_pic}}"></image>
+            <image class="fenge_double" src="../../images/shelf/fenge_double.png"></image>
+            <view class="author">
+                <text wx:if="{{bookData.author}}" class="block">Written by {{bookData.author}}</text>
+                <text wx:if="{{bookData.illustrator}}" class="block">Illustrated by {{bookData.illustrator}}</text>
+            </view>
+            <image class="fenge_double" src="../../images/shelf/fenge_double.png"></image>
+            <view class="btn-box" bindtap="startRead">
+                <image class="start" src="../../images/shelf/read_start.png"></image>
+                <text class="block">开始阅读</text>
+            </view>
+            <image class="shadow_left" src="../../images/shelf/shadow_left.png"></image>
+            <image class="shadow_right" src="../../images/shelf/shadow_right.png"></image>
+        </view>
+    </view>
+    <view class="page_wrap">
+        <view class="bookpages {{isIpx?'ipx_cover':''}} {{coverFlag?'hidden':''}}">
+            <!--bindtouchstart="scrollStart" bindtouchmove="sMove" bindtouchend="scrollEnd"-->
+            <!--<scroll-view scroll-x class="{{bookData.cid<=9?isIp5?'star-box_5':'star-box':'hidden'}}" scroll-left="{{scrLeft}}" bindscroll="starScroll">-->
+            <scroll-view scroll-x class="{{bookData.cid<=9?'star-box':'hidden'}}" upper-threshold="5" lower-threshold="5" scroll-left="{{scrLeft}}" bindscroll="starScroll" bindscrolltolower="scrollLower" bindscrolltoupper="scrollUpper">
+                <view class="stars">
+                <!--<view class="stars">-->
+                    <!--style="float:{{starFloat}};"-->
+                    <view wx:for="{{pageData}}" data-item="{{item}}" wx:for-index="ind" class="{{scoreArr[ind].flag?'starY':'star'}}" data-page="{{ind}}" bindtap="goPage">
+                        <text>{{scoreArr[ind].score}}</text>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="{{bookData.cid<=9?'scroll-box':'hidden'}}">
+                <view class="scroll-btn" style="width: {{scrbtnWidth}}rpx;left:{{scrboxLeft}}rpx;">
+                </view>
+            </view>
+            <swiper indicator-dots="{{indicatorDots}}" bindchange="pageChange"
+                    autoplay="{{autoplay}}" interval="2000" current="{{currentPage}}" duration="250" class="{{bookData.cid<=9?'bookpage_wrap':'bookpage_p_wrap'}}">
+                <block wx:for="{{pageData}}" data-item="{{item}}" wx:for-index="ind">
+                    <swiper-item class="{{bookData.cid<=9?'bookpage':'bookpage_p'}}">
+                        <image class="{{bookData.orientation==1?'img_h':'img_w'}}" src="{{item.pic_path}}" lazy-load="true" mode="widthFix" style="height:{{bookH}}rpx;"></image>
+                        <text class="{{bookData.orientation==1?'pageContent_h':'pageContent_w'}}">{{item.page_content}}</text>
+                        <text class="pIndex">{{ind+1}}/{{pageNum}}</text>
+                        <image class="shadow_left" src="../../images/shelf/shadow_left.png"></image>
+                        <image class="shadow_right" src="../../images/shelf/shadow_right.png"></image>
+                    </swiper-item>
+                </block>
+            </swiper>
+            <view wx:if="{{bookData.cid<=9}}" class="read_fenge"></view>
+            <view class="{{bookData.cid<=9?'control-box':'control-box_p'}}">
+                <image wx:if="{{!audioStatus}}" class="{{bookData.cid<=9?'audio':'audio_p'}}" bindtap="audioPlay" src="../../images/icon/audio_play.png"></image>
+                <image wx:else="{{audioStatus}}" class="{{bookData.cid<=9?'audio':'audio_p'}}" bindtap="audioPlay" src="../../images/icon/audio_pause.png"></image>
+                <image src="../../images/icon/read_back.png" class="{{bookData.cid<=9?'hidden':'back_p'}}" bindtap="outScore">OUT</image>
+                <view wx:if="{{bookData.cid<=9}}" class="speak-box" bindtouchstart="startRecode" bindtouchend="endRecode">
+                    <image class="speak" src="{{!speaking?'../../images/icon/speaking_btn.png':'../../images/icon/end_speaking_btn.png'}}"></image>
+                    <text>{{speakText}}</text>
+                </view>
+                <!--<view class="messageBtn" bindtouchstart="startRecode" bindtouchend="endRecode"></view>-->
+                <view wx:if="{{bookData.cid<=9}}" class="submit-box" bindtap="addScore">
+                    <image class="submit" src="{{canSubmit?'../../images/icon/submit_btn.png':'../../images/icon/un_submit_btn.png'}}"></image>
+                    <!--<image class="submit {{canSubmit?'':'hidden'}}" src="../../images/icon/submit_btn.png"></image>-->
+                    <text>提交</text>
+                </view>
+            </view>
+            <image wx:if="{{speaking}}" class="recording_icon" src="../../images/icon/recording_icon.png"></image>
+            <view class="animation_wrap {{scoreAni?'':'hidden'}}">
+                <view class="score-box star_fade">
+                <!--<view class="score-box {{scoreAni?'star_fade':'hidden'}}">-->
+                    <image class="bg {{scoreAni?'scoreAni':'hidden'}}" src="../../images/icon/s_circleBg.png"></image>
+                    <image class="score_bg" src="../../images/icon/s_bg.png"></image>
+                    <text class="{{isIp5?'i5':''}}">{{endScore}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
+    <view class="sub_bg" wx:if="{{sub_bg}}"></view>
+    <audio src="{{lowSrc}}" id="lowAudio"></audio>
+    <audio src="{{highSrc}}" id="highAudio"></audio>
+    <audio src="{{resultSrc}}" id="resultAudio"></audio>
+    <!--<view animation="{{animation}}" class="animation-box {{animationStatus?'star_fade':'hidden'}}">-->
+    <view class="animation_wrap {{animationStatus?'':'hidden'}}">
+        <view class="animation-box star_fade">
+            <image src="../../images/icon/scoreStar.png"></image>
+            <text class="{{isIp5?'ip5':'ip'}}">{{pageScore}}</text>
+        </view>
+    </view>
+    <!--{{animationStatus?'star_fade':'hidden'}}-->
+</view>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>校育通—智慧家校云平台</title>
+
+    <link rel="stylesheet" href="../build/css/layui.mobile.css">
+
+</head>
+<body>
+
+<script src="../build/layui.js"></script>
+<script>
+
+    //layui绑定扩展
+    layui.config({
+        base: '../rc/'
+    }).extend({
+        rmlib: 'rmlib',
+        protobuf: 'protobuf',
+        socket: 'socket',
+    });
+
+    layui.config({
+        version: true
+    }).use(['socket', 'mobile', 'layim', 'jquery'], function () {
+        var mobile = layui.mobile
+            , layim = mobile.layim
+            , layer = mobile.layer
+            , $ = layui.jquery
+            , socket = layui.socket;
+
+        layim.config({
+            //上传图片接口
+            uploadImage: {
+                url: '/upload/image' //（返回的数据格式见下文）
+                , type: '' //默认post
+            }
+            //上传文件接口
+            , uploadFile: {
+                url: '/upload/file' //（返回的数据格式见下文）
+                , type: '' //默认post
+            }
+            //,brief: true
+            , init: {
+                //我的信息
+                mine: {
+                    "username": "春天" //我的昵称
+                    ,
+                    "id": "test0" //我的ID
+                    ,
+                    "avatar": "http://img02.sogoucdn.com/app/a/100520093/ea54b1c5225b5b8f-1f7d693ce5c84217-65bcb52a88b749bfa5bd038796a7f699.jpg" //我的头像
+                    ,
+                    "sign": "春天花会开"
+                }
+                //我的好友列表
+                , friend: [{
+                    "groupname": "xiaoyut"
+                    , "id": 1
+                    , "online": 2
+                    , "list": [{
+                        "username": "夏天"
+                        ,
+                        "id": "test1"
+                        ,
+                        "avatar": "http://img02.sogoucdn.com/app/a/100520093/ea54b1c5225b5b8f-1f7d693ce5c84217-65bcb52a88b749bfa5bd038796a7f699.jpg"
+                        ,
+                        "sign": "夏天的味道"
+                    }, {
+                        "username": "秋天"
+                        ,
+                        "id": "test2"
+                        ,
+                        "avatar": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502990251538&di=2c51dab51fd638a427c6a7c5fb343b12&imgtype=0&src=http%3A%2F%2Fv1.qzone.cc%2Favatar%2F201504%2F04%2F17%2F40%2F551fb1a2b79b6736.jpg%2521200x200.jpg"
+                        ,
+                        "sign": "秋天不回来"
+                    }]
+                }]
+                , "group": [{
+                    "groupname": "前端群"
+                    , "id": "101"
+                    , "avatar": "http://tp2.sinaimg.cn/2211874245/180/40050524279/0"
+                }, {
+                    "groupname": "Fly社区官方群"
+                    , "id": "102"
+                    , "avatar": "http://tp2.sinaimg.cn/5488749285/50/5719808192/1"
+                }]
+            }
+            , moreList: [{
+                alias: 'find'
+                , title: '班级空间'
+                , iconUnicode: '&#xe628;' //图标字体的unicode，可不填
+                , iconClass: '' //图标字体的class类名
+            }, {
+                alias: 'share'
+                , title: '校园空间'
+                , iconUnicode: '' //图标字体的unicode，可不填
+                , iconClass: '' //图标字体的class类名
+            }]
+            , tabIndex: 1 //用户设定初始打开的Tab项下标
+            //,isNewFriend: true 是否开启“新的朋友”
+            , isgroup: true //是否开启“群聊”
+            ,notice:true  //桌面提示
+            , chatTitleColor: '#7AC5A5' //顶部Bar颜色
+            , title: '校育通IM' //应用名，默认：我的IM
+            , copyright: true
+        });
+
+        //监听点击更多列表
+        layim.on('moreList', function (obj) {
+            switch (obj.alias) { //alias即为上述配置对应的alias
+                case 'find': //发现
+                    layer.msg('自定义发现动作');
+                    break;
+                case 'share':
+                    layim.panel({
+                        title: 'share' //分享
+                        , tpl: '<div style="padding: 10px;">自定义模版，{{d.data.test}}</div>' //模版
+                        , data: { //数据
+                            test: '123'
+                        }
+                    });
+                    break;
+            }
+        });
+
+        layim.showNew('List', true);//标注“联系人”新动态（实际生产中根据用户状态动态添加）
+        layim.showNew('Group', true);//标注“群聊”新动态（实际生产中根据用户状态动态添加）
+
+        //查看聊天信息
+        layim.on('detail', function (data) {
+            //console.log(data); //获取当前会话对象
+            layim.panel({
+                title: data.name + ' 聊天信息' //标题
+                ,
+                tpl: '<div style="padding: 10px;">自定义模版，<a href="http://www.layui.com/doc/modules/layim_mobile.html#ondetail" target="_blank">参考文档</a></div>' //模版
+                ,
+                data: { //数据
+                    test: '么么哒'
+                }
+            });
+        });
+
+        //监听返回
+        layim.on('back', function () {
+            /*history.back();*/
+        });
+
+        //监听查看更多记录
+        layim.on('chatlog', function (data, ul) {
+            console.log(data);
+            layim.panel({
+                title: '与 ' + data.name + ' 的聊天记录' //标题
+                , tpl: '<div style="padding: 10px;">这里是模版，{{d.data.test}}</div>' //模版
+                , data: { //数据
+                    test: 'Hello'
+                }
+            });
+        });
+
+        // 融云socket初始化
+        socket.config({
+            key: 'sfci50a7s1soi',
+            // 在线客服一 token（由唯一ID和共用AppSecret生成）
+            token: "vvh6CIehsOy3GxoN9Z3s0UFovttn7Vs0Dr7JMIBltYJ/r47qaGSchJqNtBGNf28LLtr1T05lwPqLjxJnzSZmZg==",
+            layim: layim
+        });
+        //console.log(layim.cache())  //获取最新LayIM的cache信息，包含一些基础配置信息、我的用户信息、好友/群列表信息、本地数据库信息等
+    });
+</script>
+</body>
+</html>

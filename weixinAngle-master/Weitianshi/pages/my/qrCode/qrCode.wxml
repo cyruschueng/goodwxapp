@@ -1,0 +1,63 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--我的名片-->
+  <view class="user_info flex" bindtap="cardEdit">
+    <view class="user_left">
+      <view class="flex">
+        <view class="user_name" wx:if="{{user.user_real_name}}">{{user.user_real_name}}</view>
+        <view class="user_career" wx:if="{{user.user_company_career}}">{{user.user_company_career}}</view>
+        <view class="user_career" wx:if="{{!user.user_company_career}}">职位名称</view>
+      </view>
+      <view class="user_company" wx:if="{{user.user_company_name}}">公司：{{user.user_company_name}}</view>
+      <view class="user_company" wx:if="{{user.user_brand}}">品牌：{{user.user_brand}}</view>
+      <view class="user_mobile" wx:if="{{user.user_mobile}}">手机：
+        <label data-telephone="{{user.user_mobile}}" catchtap="telephone">{{user.user_mobile}}</label>
+      </view>
+      <view class="user_email flex" wx:if="{{user.user_email}}">
+        <view>邮箱：{{user.user_email}}</view>
+      </view>
+      <view class="line"></view>
+      <view class="flex iconBox">
+        <view class="littleBox">
+          <image src="/img/icon-weixin@2x.png" class="messageIconStyle"></image>
+        </view>
+        <view class="littleBox">
+          <image src="/img/icon-maimai@2x.png" class="messageIconStyle"></image>
+        </view>
+        <view class="littleBox">
+          <image src="/img/icon-zhihu@2x.png" class="messageIconStyle"></image>
+        </view>
+        <view class="littleBox">
+          <image src="/img/icon-weibo@2x.png" class="messageIconStyle"></image>
+        </view>
+        <view class="littleBox">
+          <image src="/img/icon-qq@2x.png" class="messageIconStyle"></image>
+        </view>
+        <view class="littleBox">
+          <image src="/img/icon-linkedin@2x.png" class="messageIconStyle"></image>
+        </view>
+      </view>
+    </view>
+    <view class="user_right">
+      <image wx:if="{{user.user_avatar_url}}" class="user_pic" src="{{user.user_avatar_url}}"></image>
+      <view wx:if="{{user.user_avatar_text}}" class="user_text noPic">{{user.user_avatar_text}}</view>
+      <image wx:if="{{!user}}" class="user_pic" src="/img/img-avatar@3x.png"></image>
+    </view>
+  </view>
+  <!--二维码页面-->
+  <view class="QR_code">
+    <view class="QR_box">
+      <view class="QR_title">投资名片-智能精准匹配投融资双方神器</view>
+      <view class="QR_img">
+        <image class="QR_pic" src="{{access_token}}"></image>
+        <view class="QR_point">长按或微信扫码查看更多</view>
+      </view>
+    </view>
+  </view>
+  <view class="addFriend flex">
+    <button open-type="share" hover-class='t-other-button-hover' id="share">分享给朋友</button>
+    <label class="long"></label>
+    <button type="button" id="QR_save" hover-class='t-other-button-hover' bindtap="savePic">保存二维码图片</button>
+  </view>
+</view>

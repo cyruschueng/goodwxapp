@@ -1,0 +1,24 @@
+<view class="result">
+  <em>闯关成功，用时 <strong>{{levelTimespan}}</strong></em>
+  <dfn>{{levelEncourage}}</dfn>
+</view>
+<view class="clientlist">
+  <view wx:for="{{clientItems}}" wx:key="item" class="item {{item.isMe ? 'me' : ''}}">
+    <text class="time">{{item.subjectTimespan}}</text>
+    <text class="score">{{item.subjectOKCount}}</text>
+    <text class="index">{{index+1}}</text>
+    <image src="{{item.avatarUrl}}" class="avatar" />
+    <text class="nick">{{item.nick}}</text>
+  </view>
+</view>
+<view class="controls">
+  <button class="button left" hover-class="active" open-type="share">
+    <span> 分享给好友 </span>
+  </button>
+  <button class="button right" hover-class="active" bindtap="onForward">
+    <span> 返 回 </span>
+  </button>
+</view>
+
+<mc-coins id="coins"></mc-coins>
+<mc-toast id="toast"></mc-toast>

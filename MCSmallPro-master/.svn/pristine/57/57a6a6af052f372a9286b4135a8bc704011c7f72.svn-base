@@ -1,0 +1,164 @@
+// pages/me/children/orderDetail/orderDetail.js
+
+let that;
+var app = getApp();
+var timer;
+Page({  
+  /**
+   * 页面的初始数据
+   */
+  data: {
+     countdown: '',
+     creatTime: '',
+     total_second: 0,
+     res:{} 
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+     that = this;
+     that.setData({
+       orderId: options.orderId,
+     });
+     that.requestData()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  countDown: function () {
+    that.setData ({
+      countdown: that.dateFormat(that.data.total_second)
+    })
+    if (that.data.total_second<=0){
+      return;
+    }
+    clearTimeout(timer);
+    timer = setTimeout(()=>{
+      that.data.total_second-=1;
+       that.countDown()
+    },1000)
+  },
+
+  //时间格式
+  dateFormat: function (second){
+    if (second <= 0) {
+      return '00小时00分钟00秒';
+    }
+    //小时位
+    var hr = Math.floor(second / 3600);   
+    //分钟位
+    var min = that.fillZeroPrefix(Math.floor((second - hr*3600) / 60));
+    //秒位
+    var sec = that.fillZeroPrefix(Math.floor(second - hr*3600 - min*60));
+    return hr + '小时' + min + '分' + sec + '秒'
+  },
+
+  //位数不足补0
+  fillZeroPrefix: function(num){
+     return num < 10 ? '0'+num : num;
+  },
+
+  /* 获取日期时间格式*/
+  getDateTime: function (date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hh = date.getHours();
+    var mm = date.getMinutes();
+    var ss = date.getSeconds();
+    return year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
+  },
+  convertJSONDateToJSDateObject: function (jsondate) {
+    var date = new Date(parseInt(jsondate.replace("/Date(", "").replace(")/", ""), 10));
+    return date;
+  },
+  // 请求数据
+  requestData: function () {
+    app.util.get("/ApiShop/MyOrderDetail", { orderId: that.data.orderId }, function (res) {
+      let creatTime = that.getDateTime(that.convertJSONDateToJSDateObject(res.CreateTime))
+      let creatTemp = Date.parse(that.convertJSONDateToJSDateObject(res.CreateTime)) / 1000
+      let nowTemp = Date.parse(new Date()) / 1000
+      let stopTime = creatTemp + 24*60*60 - nowTemp
+      
+      that.setData({
+        res: res,
+        creatTime: creatTime,
+        total_second: stopTime
+      })
+      // 待支付状态倒计时
+      if (res.Status == 0){
+        that.countDown();
+      }
+    });
+  },
+  
+  //取消订单
+  cancelOrderAction: function (e) {
+    wx.showModal({
+      content: '这么好的宝贝，确定不要了吗？',
+      cancelColor: '#333333',
+      confirmColor: '#ff5f8d',
+      success: function (res) {
+        if (res.confirm) {
+          app.util.get("/ApiShop/CancelMyOrder", { orderId: e.target.dataset.orderid }, function (res) {
+            wx.showToast({
+              title: '取消成功',
+            })
+          });
+          wx.navigateBack();
+        }
+      }
+    })
+  },
+  // 删除订单
+  deleteOrderAction: function (e) {
+     wx.showModal({
+        content: '确认删除该订单吗？删除了的订单不可恢复',
+        cancelColor: '#333333',
+        confirmColor: '#ff5f8d',
+        success: function (res) {
+          if (res.confirm) {
+            app.util.get("/ApiShop/DeleteMyOrder", { orderId: e.currentTarget.dataset.orderid }, function (res) {
+              wx.showToast({
+                title: '删除成功',
+              })
+            });
+            wx.navigateBack();
+          }
+        }
+    })
+  },
+
+  //付款
+  payAction: function (e) {
+    let orderId = e.currentTarget.dataset.orderid;
+    app.util.post("/ApiShop/Pay", { orderId: orderId }, function (res) {
+      var pay = res.pay;
+      if (pay) {
+        wx.requestPayment({
+          timeStamp: pay.TimeStamp,
+          nonceStr: pay.NonceStr,
+          package: pay.Package,
+          signType: pay.SignType,
+          paySign: pay.PaySign,
+          success: function (res) {
+            wx.redirectTo({
+              url: '/pages/paycomplete/paycomplete?orderId=' + res.orderId
+            });
+          },
+          fail: function (res) {
+            app.util.error("支付失败，请稍后再试");
+          },
+        });
+      }
+    });
+  }
+
+})

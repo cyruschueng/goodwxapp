@@ -1,0 +1,44 @@
+<!--pages/feedBack/index.wxml-->
+<import src="../../components/gallery/gallery.wxml" />
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+
+<form bindsubmit="submitForm">
+        <view class='container'>
+                <text class='text'>问题类型</text>
+                <radio-group class="radio-group" bindchange="radioChange" name="radiogroup">
+                        <label class="radio" wx:for="{{items}}" wx:key="">
+                                <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+                        </label>
+                </radio-group>
+                <view class='line'></view>
+                <text class='text'>问题或建议</text>
+                <textarea class='textarea' placeholder='请描述你的问题或建议，如果有系统截图，请在添加图片处上传截图，我们将尽快优化体验，感谢您的反馈。' placeholder-style='color:#ccc' bindconfirm='' name="textarea"></textarea>
+                <text class='text'>添加图片</text>
+                <view class='img' hidden='{{hideAddImg}}'>
+                        <image class='add-image' src='../../images/add_ico.png' bindtap='chooseImg'></image>
+                </view>
+
+                <view class='gallery'>
+                        <view class="weui-cells weui-cells_after-title">
+                                <view class="weui-cell">
+                                        <view class="weui-cell__bd">
+                                                <view class="weui-uploader">
+                                                        <view class="weui-uploader__bd">
+                                                                <view class="weui-uploader__files">
+                                                                        <block wx:for-items="{{ urls }}" wx:key="{{ index }}">
+                                                                                <view class="weui-uploader__file" bindtap="previewImage" data-current="{{ item }}">
+                                                                                        <image class="weui-uploader__img" src="{{ item }}" />
+                                                                                </view>
+                                                                        </block>
+                                                                </view>
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </view>
+                </view>
+
+                <button class="weui-btn" style='width:80%;' type="primary" formType="submit">提交</button>
+        </view>
+</form>

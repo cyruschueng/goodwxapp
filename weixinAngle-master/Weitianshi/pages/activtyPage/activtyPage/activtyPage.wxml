@@ -1,0 +1,11 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view id='activtyPage' wx:if="{{nonet}}">
+  <image mode='widthFix' src='{{activtyPagePic}}'></image>
+  <form report-submit='true' bindsubmit='formSubmit' wx:if="{{packetStatus == 'SUCCESS' && buttonStyle == true}}">
+    <button form-type='submit' bindtap='createHB'>
+      <image src="{{imgUrls2}}" class="btn1 floatBtn" wx:if="{{bindContact == false}}"></image>
+      <image src="{{openHover2}}" class="btn1 floatBtn" wx:if="{{bindContact == true}}"></image>
+    </button>
+  </form>
+</view>

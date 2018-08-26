@@ -1,0 +1,245 @@
+<import src="../../common/zanUI/toast/index.wxml" />
+<import src="../../common/zanUI/field/index.wxml" />
+
+<scroll-view  scroll-y="{{true}}" class="main {{pop.show ? 'showpop' : ''}}" >
+    <view class="head">
+        <swiper class="banner" indicator-color="rgba(0, 0, 0, 0.3)" indicator-active-color="#111111" indicator-dots="{{true}}">
+            <swiper-item>
+                <image mode="aspectFill" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            </swiper-item>
+            <swiper-item>
+                <image mode="aspectFill" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            </swiper-item>
+            <swiper-item>
+                <image mode="aspectFill" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            </swiper-item>
+            <swiper-item>
+                <image mode="aspectFill" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+            </swiper-item>
+        </swiper> 
+
+        <view class="desc">
+            <view class="title ellipsis-2">2018春季夏令营</view>
+        </view>
+        <view class="active-info">
+            <view class="line">
+                <image src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg" class="logo"></image>
+                <text class="title">时间</text>
+                <text class="value">2018.03.01 至 2018 03 30</text>
+            </view>
+            <view class="line">
+                <image src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg" class="logo"></image>
+                <text class="title">目的</text>
+                <text class="value">成都宽窄巷子</text>
+            </view>
+            <view class="line">
+                <image src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg" class="logo"></image>
+                <text class="title">费用</text>
+                <view class="value"><text class="orgPrice">3000</text> <text class="promoPrice">2400</text></view>
+            </view>
+            <view class="line">
+                <image src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg" class="logo"></image>
+                <text class="title">年龄段</text>
+                <text class="value">5-10</text>
+            </view>
+        </view>
+        <view class="active-feature">
+            <view class="title">活动特色</view>
+            <view class="content">
+                <view class="feature">
+                    <image  class="logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+                    <view class="msg">希望营员在营地度过一个愉快暑假的同时，也能收获    一段人生中</view>
+                </view>
+                <view class="feature">
+                    <image  class="logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+                    <view class="msg">希望营员在营地度过一个愉快暑假的同时，也能收获    一段人生中</view>
+                </view>
+                <view class="feature">
+                    <image  class="logo" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+                    <view class="msg">希望营员在营地度过一个愉快暑假的同时，也能收获    一段人生中</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="cont">
+        <view class="tabs">
+            <view class="tab {{ tab.current=='imgs' ? 'current' : '' }}" catchtap="changeTab" data-id="imgs">动态更新</view>
+            <view class="tab {{ tab.current=='param' ? 'current' : '' }}" catchtap="changeTab" data-id="param">活动详情</view>
+        </view>
+
+        <!-- 图文详情 start -->
+        <view class="images" wx:if="{{ tab.current=='imgs' }}">
+            <image mode="widthFix" wx:for="{{pageData.detailImage}}" wx:key="index" src="{{item}}"></image>
+        </view>
+        <!-- 图文详情 end -->
+
+        <!-- 参数规格 start -->
+        <view class="parameters" wx:if="{{ tab.current=='param' }}">
+            <view class="row" wx:for="{{pageData.pros}}" wx:key="index">
+                <view class="key">{{index}}：</view>
+                <view class="value">{{item}}</view>
+            </view>
+        </view>
+        <!-- 参数规格 end -->
+
+    </view>
+
+
+
+
+
+    <view class="last-node"></view>
+</scroll-view>
+
+<view class="pop {{pop.show ? 'showpop' : '' }}">
+    <view class="head">
+        <image class="img" src="{{pageData.skuImage}}"></image>
+        <view class="info">
+            <view class="main">
+                <view class="price"><view class="sub">¥</view>{{ pageData.price ? pageData.price / 100 : pageData.originPrice / 100 }}</view>
+                <view class="stock">库存{{pageData.lastStock}}件</view>
+            </view>
+            <view class="name ellipsis-2">{{pageData.title}}</view>
+        </view>
+    </view>
+
+    <scroll-view class="cont" scroll-y="{{ true }}" wx:if="{{ pageData.saleProSku.pros && pageData.saleProSku.pros.length }}">
+        <view class="spec">
+            <view class="row" wx:for="{{ pageData.saleProSku.pros }}" wx:for-index="proIndex" wx:key="proId">
+                <view class="name">{{item.proName}}</view>
+                <view class="cells">
+                    <view catchtap="changePros" class="slt {{ pageData.attributesObj[ item.proId + ':' + slt.valueId ] ? 'current' : ''}}" wx:for="{{item.values}}" wx:key="valueId" wx:for-item="slt" data-level="{{proIndex}}" data-id="{{item.proId}}:{{slt.valueId}}">{{slt.valueName}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="count">
+            <view class="name">数量</view>
+            <view class="act">
+                <view class="minus" catchtap="minus">-</view>
+                <view class="num">{{buyNum}}</view>
+                <view class="plus" catchtap="plus">+</view>
+            </view>
+        </view>
+        <view class="last"></view>
+    </scroll-view>
+</view>
+
+
+<view class="toolbar">
+    <view class="icons">
+        <view class="cell">
+            <image src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+        </view>
+        <view class="cell" catchtap="toCart">
+            <image src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+        </view>
+        <view class="cell" catchtap="follow">
+            <image src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg"></image>
+        </view>
+    </view>
+
+    <view class="buttons" wx:if="{{ !pageData.seckillVO }}">
+        <view class="btn primary" catchtap="join">立即报名</view>
+    </view>
+</view>
+
+
+<view class="popup-example--bottom zan-popup zan-popup--bottom {{ activePeopleInfo.isShow ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleBottomPopup"></view>
+    <view class="zan-popup__container chosePeople">
+        <block wx:if="{{activePeopleInfo.currentStep/1===1}}">
+            <template is="addParent" data="{{...activePeopleInfo.parent,config}}"></template>
+        </block>
+        <block wx:if="{{activePeopleInfo.currentStep/1===2}}">
+            <template is="addChildren" data="{{...activePeopleInfo.children}}"></template>
+        </block>
+    </view>
+</view>
+
+
+<template name="addParent" class="addParent-tpl">
+        <view class="zan-panel-title">请填写家长信息</view>
+        <view class="zan-panel">
+          <template
+            is="zan-field"
+            data="{{ ...config.name }}"></template>
+          <template
+            is="zan-field"
+            data="{{ ...config.phone }}"></template>
+          <template
+            is="zan-field"
+            data="{{ ...config.idCard }}"></template>
+        </view>
+        <view class="bottom">
+            <view class="zan-col-24 btn next" catchtap="handleParent">下一步</view>
+        </view>
+</template>
+<template name="addChildren" class="addChildren-tpl">
+    <scroll-view style="height:600rpx" scroll-y="{{true}}">
+        <view class="title">
+            <view class="zan-panel-title">请填写孩子信息</view>
+            <view class="btn addChild" catchtap="toEditChildPage">添加孩子</view>
+        </view>
+        <view class="zan-panel">
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+            <template is="child-record"></template>
+        </view>
+    </scroll-view>
+    <view class="bottom">
+        <view  catchtap="backward" class="zan-col-12 btn back">返回</view>
+        <view class="zan-col-12 btn next" catchtap="handleChild">下一步</view>
+    </view>
+</template>
+
+<template is="zan-toast" data="{{ zanToast }}"></template>
+
+<template name="child-record">
+    <view class="child-record">
+        <view class="zan-col-4 logo-wrapper">
+            <image catchtap="selectChild" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg" class="select logo"></image>
+        </view>
+        <view class="zan-col-5">
+            <text class="name">王小二</text>
+        </view>
+        <view class="zan-col-5">
+            <text class="sex">男</text>
+        </view>
+        <view class="zan-col-5">
+            <text class="age">10岁</text>
+        </view>
+        <view class="zan-col-5  logo-wrapper">
+            <image catchtap="toEditChildPage" src="https://camp.theforward.xyz/img/thumbnail_demo.jpeg" class="logo"></image>
+        </view>
+    </view>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

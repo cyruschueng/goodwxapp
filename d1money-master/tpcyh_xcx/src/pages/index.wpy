@@ -1,0 +1,1035 @@
+<style lang="less" rel="stylesheet/less">
+    page{
+        background-color:#f2f2f2;
+    }
+    .index{
+        .demon-panel{
+            background-color:#FFFFFF;
+        }
+
+        /*问答*/
+        .question{
+            .demon-cell{
+                .demon-cell__title__icon i{
+                    color: #38a1cf;
+                }
+                .demon-cell__desc__icon i{
+                    color:#1AAD19;
+                }
+                &:after{
+                    left: 0;
+                    right:0;
+                }
+                &:last-child{
+                    &:after{
+                        display: none;
+                    }
+                    border-bottom:none;
+                }
+            }
+            .demon-panel__ft{
+                padding:12rpx 20rpx 0;
+            }
+        }
+
+        /*洗车券*/
+        .car-wash-ticket{
+            margin: 20rpx auto;
+            height: 200rpx;
+            width:710rpx;
+            display: flex;
+            align-items: center;
+            .img{
+                width:530rpx;
+                height:100%;
+                image{
+                    width:100%;
+                    height:100%;
+
+                }
+            }
+            .text{
+                flex:1;
+                height:100%;
+                background-color: #a9e5c5;
+                font-size:40rpx;
+                color: #ffffff;
+                align-items: center;
+                position: relative;
+                border-left:1px dashed #ffffff;
+                box-sizing: border-box;
+                view{
+                    width:2em;
+                    position: absolute;
+                    top:50%;
+                    left:50%;
+                    transform: translate(-50%,-50%);
+                    &.em3{
+                        width:3em;
+                    }
+                }
+                &.default{
+                    background-color: #dddddd;
+                }
+            }
+
+        }
+
+        /*活动*/
+        .activitys{
+            padding-bottom:0;
+            .demon-cell{
+                padding:30rpx 20rpx;
+                height:auto;
+                &:last-child{
+                    border-bottom:0;
+                }
+            }
+        }
+
+        /*折扣券*/
+        .coupons{
+            width:100%;
+            /*height: 280rpx;*/
+            box-sizing: border-box;
+            align-items: center;
+            margin:20rpx 0;
+            .coupon{
+                display:inline-block;
+                &:nth-child(3n+1){
+                    .demon-coupon__hd{
+                        background-color:#FD7A1B;
+                    }
+                    .demon-coupon__ft{
+                        color:#FD7A1B;
+                    }
+                }
+                &:nth-child(3n+2){
+                    .demon-coupon__hd{
+                        background-color:#38A1CF;
+                    }
+                    .demon-coupon__ft{
+                        color:#38A1CF;
+                    }
+                }
+                &:nth-child(3n){
+                    .demon-coupon__hd{
+                        background-color:#59C361;
+                    }
+                    .demon-coupon__ft{
+                        color:#59C361;
+                    }
+                }
+            }
+        }
+
+        /*技师团队*/
+        .technicianTeam{
+            width:100%;
+            /*标题*/
+            .technicianTeam__hd{
+                font-size: 18px;
+                color: #333333;
+                font-weight: bold;
+                text-align: center;
+            }
+            /*技师的详细信息*/
+            .technicianTeam__bd{
+                height:auto;
+                padding:34rpx;
+                background-color: #ffffff;
+                align-items: center;
+                margin-top:30rpx;
+                .demon-cell__img{
+                    -webkit-border-radius:100%;
+                    -moz-border-radius:100%;
+                    border-radius:100%;
+                    overflow: hidden;
+                    width:234rpx;
+                    height:234rpx;
+                    margin-right:15px;
+                }
+                .technicianTeam__bd__content_title{
+                    display: flex;
+                    align-items: center;
+                    .name{
+                        display: inline-block;
+                        font-size: 18px;
+                        color: #333333;
+                        font-weight: bold;
+                        margin-right:10rpx;
+                    }
+                    .tag{
+                        display: inline-block;
+                        font-size:12px;
+                        font-weight: bold;
+                        color: #38A1CF;
+                        padding:5rpx;
+                        border:1px solid #38A1CF;
+                    }
+                }
+
+                .technicianTeam__bd__content_desc{
+                    font-size:15px;
+
+                    line-height: 23px;
+                    color: #666666;
+                    margin-top: 10rpx;
+
+                    overflow:hidden;
+                    text-overflow:ellipsis;
+                    display:-webkit-box;
+                    -webkit-box-orient:vertical;
+                    -webkit-line-clamp:5;
+                }
+                .technicianTeam__bd__content_btn{
+                    height:60rpx;
+                    line-height:60rpx;
+                    font-size:15px;
+                    margin-top:20rpx;
+                    background-image:linear-gradient(to right,#5eceee,#99e8c3 65%);
+                    border: 1px solid #ffffff;
+                    &:after{
+                        border:none;
+                    }
+                }
+            }
+            /*滚动的技师*/
+            .technicianTeam__ft{
+                margin:20rpx 0;
+                align-items: center;
+                .demon-card{
+
+                    margin-left:20rpx;
+
+                    &:last-child{
+                        margin-right:20rpx;
+                    }
+                }
+            }
+        }
+
+        /*我们的会员*/
+        .ourmember{
+            /*background:#99e8c3;*/
+            /*background-image:linear-gradient(to right,#5eceee,#99e8c3 65%);*/
+            width:100%;
+            padding:30rpx 20rpx;
+            background-color: #ffffff;
+            .ourmember__hd{
+                font-size:18px;
+                color: #333333;
+                font-weight: bold;
+                text-align: center;
+            }
+            .ourmember__bd{
+                margin:20rpx 0;
+                .ourmember__bd__img{
+                    display: inline-block;
+                    height:80rpx;
+                    width:80rpx;
+                    border-radius:100%;
+                    overflow: hidden;
+                    margin-right:20rpx;
+                    &:last-child{
+                        margin-right:0;
+                    }
+                }
+
+            }
+            .ourmember__ft{
+                font-size:18px;
+                color: #333333;
+                text-align: center;
+            }
+        }
+
+        /*后台管理*/
+        .backstage{
+            width:100%;
+            padding:30rpx;
+
+        }
+
+        /*签到领券 todaySignCondition*/
+        .todaySignCondition{
+            .demon-dialog{
+                background-color: transparent;
+            }
+            .demon-dialog__hd{
+                position: relative;
+                height:90rpx;
+                .demon-dialog__hd__img{
+                    position: absolute;
+                    bottom:-81rpx;
+                    left:50%;
+                    transform: translateX(-50%);
+                    width:162rpx;
+                    height:162rpx;
+                    border-radius: 100%;
+                    overflow: hidden;
+                    box-shadow: 0 0 10rpx 0 #000;
+                }
+            }
+            .demon-dialog__bd{
+
+                border-radius:6px 6px 0 0;
+                color: #ffffff;
+                background:#99e8c3;
+                background-image:linear-gradient(to bottom, #99e8c3 , #5eceee);
+                text-align: center;
+                text{
+                    color: #ffffff;
+                    font-size:30px;
+                }
+                .content{
+                    padding:80rpx 40rpx 40rpx !important;
+                }
+                .noimg{
+                    padding: 40rpx 40rpx 40rpx !important
+                }
+            }
+            .demon-dialog__ft{
+                color:#16CBF9;
+            }
+        }
+
+        /*技师团队个人详情*/
+        .technicianDialog{
+            .demon-dialog{
+                width:480rpx;
+                .demon-dialog__hd{
+                    padding:0;
+                }
+                .demon-dialog__bd{
+                    padding:0;
+                    .demon-card {
+                        width: 100%;
+                        height: auto;
+                        box-shadow: none;
+                        .demon-card__hd {
+                            width: 100%;
+                            height: 315rpx;
+                        }
+                        .demon-card__bd {
+                            height: auto;
+                            .title {
+                                font-size: 18px;
+                            }
+                            .desc {
+                                font-size: 15px;
+                                line-height: 20px;
+                                margin:10rpx 30rpx;
+                                height:auto;
+                            }
+                            view[data-linesize="2"] {
+                                -webkit-line-clamp: 8;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        /*预约上门服务 dialog*/
+        .doorDialog{
+            .demon-dialog__hd{
+                padding:30rpx 0;
+            }
+            .demon-dialog__bd{
+                padding:30rpx 60rpx;
+                .demon-input{
+                    border-bottom:1px solid #f2f2f2;
+                }
+            }
+
+        }
+
+        .dm-nomsg{
+
+        }
+    }
+
+</style>
+<template>
+    <view class="demon_page index">
+        <!--问答-->
+        <dm-panel class="question">
+            <navigator url="questionAnswer" open-type="navigate" hover-class="none">
+                <dm-panel-hd>
+                    问答
+                </dm-panel-hd>
+            </navigator>
+
+            <dm-panel-bd>
+                <block wx:if="{{questionCell.list.length==0}}">
+                    <view style="width: 100%; text-align: center;padding:30rpx 0;font-size: 12px;color:#969696">- 目前还没有人提问呢, 快来提问吧! -</view>
+                </block>
+                <repeat for="{{questionCell.list}}" key="index" item="item">
+                    <dm-cell
+                        :type="questionCell.type"
+                        :title_icon="questionCell.title_icon"
+                        :desc_icon="questionCell.desc_icon"
+                    >
+                        <view slot="title">
+                            {{item.userQuestion}}
+                        </view>
+                        <view slot="desc">
+                            {{item.agentAnswer}}
+                        </view>
+                    </dm-cell>
+                </repeat>
+            </dm-panel-bd>
+            <dm-panel-ft>
+                <button type="primary" size="default" data-style="default" @tap="dialogToggle(questionDialog)">我要提问</button>
+            </dm-panel-ft>
+        </dm-panel>
+
+        <!--洗车卷-->
+        <view class="car-wash-ticket">
+            <view class="img">
+                <image src="./../static/img/car_wash_ticket.png" mode="aspectFill" lazy-load="true"/>
+            </view>
+            <view class="text" :class="{'default' : false}" @tap="signDialogToggle">
+                <view :class="{'em3' : todaySignCondition.havaReceiveTimes !== 0}">
+                    <block wx:if="{{!todaySignCondition.havaReceiveTimes}}">立即领取</block>
+                    <block wx:if="{{todaySignCondition.havaReceiveTimes}}">待领取</block>
+                </view>
+            </view>
+        </view>
+
+        <!--活动-->
+        <dm-panel class="activitys">
+            <!--<navigator url="questionAnswer" open-type="navigate" hover-class="none">-->
+                <dm-panel-hd>
+                    活动
+                </dm-panel-hd>
+            <!--</navigator>-->
+            <dm-panel-bd>
+                <repeat for="{{activity}}" key="index" item="item">
+                    <navigator url="activity/activityDetail?id={{item.id}}" open-type="navigate" hover-class="none">
+                        <dm-cell__activity
+                            :type="activityType"
+                            :title="item.title"
+                            :img="item.img"
+                        >
+                            <view>接受 {{item.reciveNum}}</view>
+                            <view>转发 {{item.shareNum}}</view>
+                            <view>阅读 {{item.readNum}}</view>
+                        </dm-cell__activity>
+                    </navigator>
+                </repeat>
+            </dm-panel-bd>
+        </dm-panel>
+
+        <!--折扣券-->
+        <dm-scrollview class="coupons scrollX">
+            <repeat for="{{couponList}}" key="index" item="item">
+                <dm-coupon
+                    class="coupon"
+                    :name="item.name"
+                    :type="item.type"
+                    :discount="item.discount"
+                    :status="item.status"
+                >
+
+                </dm-coupon>
+            </repeat>
+        </dm-scrollview>
+
+        <!--技师团队-->
+        <view class="technicianTeam">
+            <!--technicianTeam__hd-->
+            <view class="technicianTeam__hd">技师团队</view>
+            <!--technicianTeam__bd-->
+            <dm-cell__technician class="technicianTeam__bd" type="imgText">
+                <image src="http://wmimage.qn.d1money.com/head/{{technician.fPlanner.createTime}}/{{technician.fPlanner.userId}}/132.jpg" slot="img"/>
+                <view class="technicianTeam__bd__content" slot="content">
+                    <view class="technicianTeam__bd__content_title">
+                        <view class="name">{{technician.fPlanner.realName}}</view>
+                        <view class="tag">我的技师</view>
+                    </view>
+                    <view class="technicianTeam__bd__content_desc">
+                        {{technician.fPlanner.honor}}
+                    </view>
+
+                    <button @tap="dialogToggle(doorDialog)" class="technicianTeam__bd__content_btn" type="primary" size="default" data-style="default">预约上门服务</button>
+                </view>
+            </dm-cell__technician>
+
+            <dm-scrollview class="scrollX technicianTeam__ft">
+                <repeat for="{{technician.fpList}}" key="index" item="item">
+                    <dm-card
+                        :userId="item.userId"
+                        :name="item.realName"
+                        :desc="item.honor"
+                        :createTime="item.createTime"
+                        @dmCard-click.user="technicianDialogToggle"
+                    ></dm-card>
+                </repeat>
+            </dm-scrollview>
+
+        </view>
+
+        <!--我们的会员-->
+        <view class="ourmember">
+            <view class="ourmember__hd">
+                我们的会员
+            </view>
+            <view class="ourmember__bd">
+                <dm-scrollview class="scrollX">
+                    <repeat for="{{memberList}}" key="index" item="item">
+                        <view class="ourmember__bd__img">
+                            <image src="http://wmimage.qn.d1money.com/head/{{item.createTime}}/{{item.userId}}/46.jpg" mode="aspectFill" lazy-load="true"/>
+                            <!--http://wmimage.qn.d1money.com/head/201511/13/82011/46.jpg-->
+                        </view>
+
+                    </repeat>
+                </dm-scrollview>
+            </view>
+            <view class="ourmember__ft">
+                已有{{memberList.length}}位客户
+            </view>
+        </view>
+
+        <!--后台管理-->
+        <block wx:if="{{currentUser && currentUser.isFp}}">
+            <view class="backstage">
+                <button wx:if="{{currentUser.isManager}}" type="primary" size="default" data-style="default" @tap="navigateTo('admin/admin')">后台管理</button>
+                <button wx:if="{{!currentUser.isManager}}" type="primary" size="default" data-style="default" @tap="checkBackstage">后台管理</button>
+            </view>
+        </block>
+
+        <!--签到领券 Dialog-->
+        <dm-dialog
+            wx:if="{{todaySignCondition.show}}"
+            class="todaySignCondition"
+            closeBtn="topRight"
+            @dialogCloseBtn.user="signDialogToggle"
+        >
+            <block slot="dm-dialog__hd">
+                <view class="demon-dialog__hd__img" wx:if="{{userInfo.avatarUrl}}">
+                    <image src="{{userInfo.avatarUrl}}" mode="aspectFill" lazy-load="true"/>
+                </view>
+            </block>
+            <view class="content" slot="dm-dialog__bd" :class="{'noimg' : !userInfo.avatarUrl}">
+                <block wx:if="{{todaySignCondition.havaReceiveTimes}}">
+                    <view>已签到 <text>10</text> 天</view>
+                    免费获得一张洗车券
+                </block>
+                <block wx:if="{{!todaySignCondition.havaReceiveTimes}}">
+                    <view>已签到 {{todaySignCondition.haveSign}} 天 再签 <text>{{todaySignCondition.waitSign}}</text> 天</view>
+                    免费获得一张洗车券
+                </block>
+
+            </view>
+            <block slot="dm-dialog__ft">
+                <block wx:if="{{!todaySignCondition.havaReceiveTimes}}">
+                    <view @tap="signIn({{todaySignCondition.todaySign}})">
+                        <block wx:if="{{todaySignCondition.todaySign == 0}}">立即签到</block>
+                        <block wx:if="{{todaySignCondition.todaySign == 1}}">今日已签到</block>
+                    </view>
+                </block>
+                <block wx:if="{{todaySignCondition.havaReceiveTimes}}">
+                    <view @tap="signIn(2)">
+                        去领取
+                    </view>
+                </block>
+            </block>
+        </dm-dialog>
+
+        <!--领取洗车券 Dialog-->
+        <form report-submit="true" wx:if="{{cardWashTicketDialog.show}}" data-dialog="cardWashTicketDialog" bindsubmit="doApplyReceiveCarWashCoupon" bindreset="formReset">
+            <doorDialog class="doorDialog">
+                <view slot="dm-dialog__hd">
+                    领取洗车券
+                </view>
+                <block slot="dm-dialog__bd">
+                    <view class="demon-input">
+                        <view class="demon-input__label">姓名：</view>
+                        <view class="demon-input__input">
+                            <input name="userName" type="text" placeholder="请输入姓名" placeholder-class="demon-placeholder"/>
+                        </view>
+                    </view>
+                    <view class="demon-input">
+                        <view class="demon-input__label">手机：</view>
+                        <view class="demon-input__input">
+                            <input name="userPhone" type="number" placeholder="请输入手机号" placeholder-class="demon-placeholder"/>
+                        </view>
+                    </view>
+                </block>
+
+                <block slot="dm-dialog__ft">
+                    <view @tap="dialogToggle(cardWashTicketDialog)">取消</view>
+                    <button formType="submit">提交</button>
+                </block>
+            </doorDialog>
+        </form>
+
+        <!--技师团队个人详情-->
+        <technicianDialog
+            wx:if="{{technician.technicianDialog}}"
+            class="hide technicianDialog"
+            closeBtn="bottomCenter"
+            @dialogCloseBtn.user="technicianDialogToggle"
+        >
+            <view slot="dm-dialog__bd" class="technicianDialog__card">
+                <dm-card__desc
+                    :img="technician.fPlanner.img"
+                    :name="technician.realName"
+                    :desc="technician.honor"
+                ></dm-card__desc>
+            </view>
+        </technicianDialog>
+
+        <!--提问Dialog-->
+        <form report-submit="true" wx:if="{{questionDialog.show}}" bindsubmit="bindsubmit('tpcyh/doPublishQuestion')" data-dialog="questionDialog" bindreset="formReset">
+            <questionDialog>
+                <view slot="dm-dialog__bd">
+                    <textarea name="userQuestion" type="text" placeholder="请填写回答问题" placeholder-class="demon-placeholder"/>
+                </view>
+
+                <block slot="dm-dialog__ft">
+                    <view @tap="dialogToggle(questionDialog)">取消</view>
+                    <button formType="submit">提问</button>
+                </block>
+            </questionDialog>
+        </form>
+
+        <!--预约上门服务 Dialog-->
+        <form report-submit="true" wx:if="{{doorDialog.show}}" bindsubmit="bindsubmit('tpcyh/doSubmitReservationService')" data-dialog="doorDialog" bindreset="formReset">
+            <doorDialog class="doorDialog">
+                <view slot="dm-dialog__hd">
+                    预约上门服务
+                </view>
+                <block slot="dm-dialog__bd">
+                    <view class="demon-input">
+                        <view class="demon-input__label">姓名：</view>
+                        <view class="demon-input__input">
+                            <input name="userName" type="text" placeholder="请输入姓名" placeholder-class="demon-placeholder"/>
+                        </view>
+                    </view>
+                    <view class="demon-input">
+                        <view class="demon-input__label">手机：</view>
+                        <view class="demon-input__input">
+                            <input name="userPhone" type="number" placeholder="请输入手机号" placeholder-class="demon-placeholder"/>
+                        </view>
+                    </view>
+                    <view class="demon-input">
+                        <view class="demon-input__label">时间：</view>
+                        <view class="demon-input__input">
+                            <picker name="appointmentTime"
+                                    mode="date"
+                                    value="{{doorDialog.date}}"
+                                    bindchange="bindDateChange"
+                                    data-picker="doorDialog"
+                            >
+                                <view wx:if="{{doorDialog.date}}">
+                                    {{doorDialog.date}}
+                                </view>
+                                <view wx:if="{{!doorDialog.date}}" class="demon-placeholder">
+                                    请选择时间
+                                </view>
+                            </picker>
+                        </view>
+                    </view>
+                </block>
+
+                <block slot="dm-dialog__ft">
+                    <view @tap="dialogToggle(doorDialog)">取消</view>
+                    <button formType="submit">提交</button>
+                </block>
+            </doorDialog>
+        </form>
+
+        <!--后台管理 登录 Dialog-->
+        <form report-submit="true" wx:if="{{backstageManagementDialog.show}}" data-dialog="backstageManagementDialog" bindsubmit="backstageManagementSubmit" bindreset="formReset">
+            <doorDialog class="doorDialog">
+                <view slot="dm-dialog__hd">
+                    登录
+                </view>
+                <block slot="dm-dialog__bd">
+                    <view class="demon-input">
+                        <view class="demon-input__label">姓名：</view>
+                        <view class="demon-input__input">
+                            <input name="userName" data-value="姓名" type="text" placeholder="请输入姓名" placeholder-class="demon-placeholder" />
+                        </view>
+                    </view>
+                    <view class="demon-input">
+                        <view class="demon-input__label">手机：</view>
+                        <view class="demon-input__input">
+                            <input name="userPhone" type="number" placeholder="请输入手机号" placeholder-class="demon-placeholder"/>
+                        </view>
+                    </view>
+                    <input name="latitude" type="number" value="{{loacation.latitude}}" placeholder="请输入手机号" placeholder-class="demon-placeholder" style="display: none"/>
+                    <input name="longitude" type="number" value="{{loacation.longitude}}" placeholder="请输入手机号" placeholder-class="demon-placeholder" style="display: none"/>
+                </block>
+
+                <block slot="dm-dialog__ft">
+                    <view @tap="dialogToggle(backstageManagementDialog)">取消</view>
+                    <button formType="submit">提交</button>
+                </block>
+            </doorDialog>
+        </form>
+
+
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import api from './../common/api';
+    import G from './../common/global';
+
+    import globalMiXin from './../mixins/global';
+
+    import dmPanel from './../components/Panel/dm-panel';
+    import dmPanelHd from './../components/Panel/dm-panel-hd';
+    import dmPanelBd from './../components/Panel/dm-panel-bd';
+    import dmPanelFt from './../components/Panel/dm-panel-ft';
+    import dmCell from './../components/Cell/dm-cell';
+    import dmScrollview from './../components/ScrollView/dm-scrollview';
+    import dmCoupon from './../components/Other/Coupon/dm-coupon';
+    import dmCard from './../components/Other/Card/dm-card';
+    import dmDialog from './../components/Dialog/dm-dialog';
+    export default class extends wepy.page {
+        config = {
+            navigationBarTitleText: '车友会 '
+        }
+
+        components = {
+            'dm-panel': dmPanel,
+            'dm-panel-hd': dmPanelHd,
+            'dm-panel-bd': dmPanelBd,
+            'dm-panel-ft': dmPanelFt,
+            'dm-cell': dmCell,
+            'dm-cell__activity': dmCell,
+            'dm-cell__technician': dmCell,
+            'dm-scrollview': dmScrollview,
+            'dm-coupon': dmCoupon,
+            'dm-card': dmCard,
+            'dm-card__desc': dmCard,
+            'dm-dialog': dmDialog,
+            'technicianDialog': dmDialog,
+            'questionDialog': dmDialog,
+            'doorDialog': dmDialog
+        }
+
+        data = {
+            name: 'index.wpy',
+
+            // 活动类型
+            activityType: 'activity',
+            // 活动数据
+            activity: [
+                {
+                    id: 21,
+                    title: '亲子手工 DIY 开启亲密之旅第 21 期',
+                    img: '/static/img/activity_img.png',
+                    reciveNum: 5,
+                    shareNum: 25,
+                    readNum: 289
+                },
+                {
+                    id: 20,
+                    title: '亲子手工 DIY 开启亲密之旅第 20 期',
+                    img: '/static/img/activity_img.png',
+                    reciveNum: 5,
+                    shareNum: 25,
+                    readNum: 289
+                }
+            ],
+            // 问答
+            questionCell: {
+                type: 'text',
+                title_icon: 'icon-question',
+                desc_icon: 'icon-huida',
+                list: [
+                    {
+                        "agentAnswer": "您好！可以看下轮胎橡胶是否有很多细小的裂纹，如果裂纹很厉害就说明轮胎橡胶老化了就需要更换轮胎了，",
+                        "answerTime": 1505964175000,
+                        "id": 17,
+                        "userId": 228426,
+                        "userQuestion": "君威5轮胎使用5年2w公里不到是否要更换轮胎？",
+                        "questionTime": 1505900706000
+                    },
+                    {
+                        "agentAnswer": "润滑油作用：润滑各摩擦部件，减小摩擦阻力，可降低动力消耗。冷却作用：机油循环流动，可将摩擦热带走。降低机件的温度。清洗作用：将机件表面上的杂质冲走，减少磨损。密封作用：在活塞与气缸壁之间保持油层，可增加密封性。",
+                        "answerTime": 1505964175000,
+                        "id": 17,
+                        "userId": 228426,
+                        "userQuestion": "润滑油的作用是什么？",
+                        "questionTime": 1505900706000
+                    }
+                ]
+            },
+            questionDialog:{
+                show: false
+            },
+            // 折扣券
+            couponList: [
+                {
+                    name: '车险',
+                    discount: 9.8,
+                    status: 0
+                },
+                {
+                    name: '意外险',
+                    discount: 8.8,
+                    status: 0
+
+                },
+                {
+                    name: '疾病险',
+                    discount: 9.8,
+                    status: 0
+
+                }
+            ],
+            //技师团队
+            technician: {
+                technicianDialog: false,
+                // 我的技师
+                fPlanner:{
+                    'realName': '吴晓晖',
+                    'createTime': '201506/01',
+                    'honor': '第一财富网创始人，创业前曾就任于普华永道（PwC）和朗讯科技（Lucent Technologies）。 拥有十几年在美国知名企业中担任IT技术咨询的经验， 参与管理了美银美林（Merrill Lynch）的财富管理平台的开发，为他的3.5万名内部理财顾问提供在线的服务工具，为1千6百万客户提供理财服务。他在美国时给多家国际性金融机构提供IT和金融软件的咨询服务，包括：美银美林，花旗银行，纽约银行，千禧合伙（对冲基金），AIG，彭博等。在朗讯科技服务期间，他给很多Fortune 500强公司供了咨询服务，包括：微软和辉瑞。纽约大学物理学博士，计算机硕士和系统工程硕士。 ',
+                    'userId': 28706
+                },
+                // 技师列表
+                fpList:{}
+            },
+            // 预约上门服务 Dialog
+            doorDialog:{
+                show: false,
+                date: null
+            },
+            // 我们会员
+            memberList: [
+//                {userId:28706, createTime: '201506/01'}
+            ],
+            // 签到领券 Dialog
+            todaySignCondition: {
+                show: true,
+                haveSign: 0,
+                waitSign: 10,
+                todaySign: 0,
+                havaReceiveTimes: 0
+            },
+            // 领取洗车券 填写用户信息 Dialog
+            cardWashTicketDialog: {
+                show: false,
+                date: null
+            },
+            // 当前用户信息
+            currentUser: {},
+            // 后台管理 Dialog
+            backstageManagementDialog: {
+                show: false
+            },
+
+            // 用户地理位置
+            loacation: {}
+        }
+
+        computed = {
+
+        }
+
+        mixins = [globalMiXin];
+
+        methods = {
+            // 技师详情Dialog 显示和隐藏
+            technicianDialogToggle(event){
+//                console.log('technicianDialogToggle');
+                if (this.technician.technicianDialog){
+                    this.technician.technicianDialog = false;
+                } else {
+                    this.technician.technicianDialog = true;
+//                    console.log(event);
+                    let data = {
+                        createTime: event.source.$data.name.createTime,
+                        userId: event.source.$data.name.userId,
+                        name: event.source.$data.name.realName,
+                        desc: event.source.$data.name.honor
+                    };
+                    this.$invoke('dm-card__desc', 'changeData', data);
+                }
+            },
+
+            // 签到领券 开关
+            signDialogToggle(){
+                this.todaySignCondition['show'] = !this.todaySignCondition['show'];
+            },
+
+            // 签到领券（立即签到）
+            async signIn(status){
+                api.log(`signIn:  status=${status}`);
+                let userInfo = await this.checkUserInfoScope();
+                switch (parseInt(status)){
+                    case 0:
+                        api.log("执行签到");
+                        this.doSubmitSing();
+                        break;
+                    case 1:
+                        api.log("已签到，不需要签到");
+                        wx.hideLoading();
+                        return ;
+                        break;
+                    case 2:
+                        api.log("去领取");
+                        wx.hideLoading();
+                        this.dialogToggle('todaySignCondition');
+                        this.dialogToggle('cardWashTicketDialog');
+                }
+            },
+
+            // 时间选择事件
+            bindDateChange: function(e) {
+                let origin = e.currentTarget .dataset.picker;
+                api.log('picker发送选择改变，携带值为', e.detail.value)
+                this[origin].date = e.detail.value;
+            },
+
+            // 领取洗车券 (填写用户信息)
+            doApplyReceiveCarWashCoupon(e){
+                this.bindsubmit('tpcyh/doApplyReceiveCarWashCoupon',e)
+                    .then( () =>{
+                        this.todaySignCondition.havaReceiveTimes = 0;
+                        this.$apply();
+                    })
+            },
+            // 后台管理 登录
+            async checkBackstage(){
+                if(this.currentUser.isAgengt ==2){
+
+                    this.dialogToggle('backstageManagementDialog');
+                }else if(this.currentUser.isAgengt ==0){
+                    wx.showModal({
+                        title: '提示',
+                        content: '您的申请已经提交, 请等待管理员批准!',
+                        showCancel: false,
+                        success: function(res) {
+                            if (res.confirm) {
+                                api.log('用户点击确定');
+                            } else if (res.cancel) {
+                                api.log('用户点击取消');
+                            }
+                        }
+                    });
+                }else if(this.currentUser.isAgengt ==1){
+                    this.navigateTo('admin/fpUser');
+                }
+            },
+            // 后台管理登录Dialog提交
+            async backstageManagementSubmit(e){
+                wx.showLoading({
+                    title: '获取定位中',
+                });
+                this.loacation = await api.getLocation();
+                wx.hideLoading();
+                this.bindsubmit('cyhManagement/doApplyJoinAgent', e)
+                    .then(() => {
+                        api.showModal('提示', '您的申请已经提交, 请等待管理员批准!', false);
+                        this.currentUser.isAgengt = 0;
+                        this.$apply();
+                    });
+            },
+        }
+
+        events = {
+
+        }
+
+        onShow(){
+            let scene = this.$parent.globalData.scene;
+            api.log('onLoad');
+            api.log(this.$parent.globalData.query.fpUserId);
+
+            if(scene == 1011 || scene == 1012 || scene == 1013){
+                this.loadIndexData();
+            }else{
+                api.loadFpUserIdByCoordinate()
+                    .then(res => {
+                        api.log(res);
+                        this.$parent.globalData.fpUserId = res.data.body.agentUserId;
+                        this.loadIndexData();
+                    });
+            }
+
+        }
+        onLoad() {
+            wx.showLoading({
+                title: '加载中'
+            });
+        }
+
+        /**
+         * 提交签到
+         * index
+         * param:
+         *  userId 当前用户id
+         */
+        doSubmitSing(){
+             api.request({
+                 url: G.host + 'tpcyh/doSubmitSign',
+                 userId: this.userInfo.userId
+             }).then(res => {
+                 api.log('提交签到');
+                 api.log(res);
+                 wx.hideLoading();
+                 if(res.data.code == 'SUCCESS'){
+                     wx.showToast({
+                         title: '签到成功',
+                         icon: 'success',
+                         duration: 1500
+                     });
+                     this.todaySignCondition.todaySign = 1;
+                     this.todaySignCondition.waitSign--;
+                     this.todaySignCondition.haveSign++;
+                     if(this.todaySignCondition.waitSign == 0){
+                         this.todaySignCondition.havaReceiveTimes = 1;
+                         this.todaySignCondition.waitSign = this.todaySignCondition.haveSign;
+                         this.todaySignCondition.haveSign = 0;
+                     }
+                     this.$apply();
+                 }else{
+                     console.error(`提前签到出错: code: ${res.data.code} \n msg: ${res.data.msg}`);
+                 }
+             })
+        }
+        // 首页数据接口
+        loadIndexData(){
+            api.request({
+                url: G.host + 'tpcyh/loadIndexData'
+            }).then(res => {
+                let data = res.data.body;
+                if(data.todaySignCondition){
+                    this.todaySignCondition.haveSign = res.data.body.todaySignCondition.haveSign;
+                    this.todaySignCondition.todaySign = res.data.body.todaySignCondition.todaySign;
+                    this.todaySignCondition.waitSign = res.data.body.todaySignCondition.waitSign;
+                    this.todaySignCondition.havaReceiveTimes = res.data.body.todaySignCondition.havaReceiveTimes;
+                }
+                if(data.fPlanner){
+                    this.technician.fPlanner = data.fPlanner;
+                }
+                if(data.fpList){
+                    this.technician.fpList = data.fpList;
+                }
+                if(data.headUrls){
+                    this.memberList = data.headUrls;
+                }
+                if(data.homePageQAList){
+                    this.questionCell.list = data.homePageQAList;
+                }
+                if(data.user){
+                    this.currentUser = data.user;
+                }
+                this.$apply();
+                wx.hideLoading();
+            })
+        }
+    }
+</script>

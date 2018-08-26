@@ -1,0 +1,69 @@
+<!--index.wxml-->
+<view class="index-body">
+  <image src='../../imgs/index.png' mode='aspectFill'></image>
+  <button class='get-btn' open-type='getUserInfo' bindgetuserinfo='userInfo' wx:if="{{clickFlag}}"></button>
+  <formid-custom bind:taphandle="goGame" class='start-btn' >
+      <image src='../../imgs/startgame.png'></image>
+  </formid-custom>
+  <!-- <formid-custom bind:taphandle="goSelect" class='select-btn'>
+      <image src='../../imgs/selectpass.png'></image>
+  </formid-custom> -->
+  <view class='share-btn'>
+      <image src='../../imgs/fenxiang.png'></image>
+      <button open-type='share' class="share-true" data-cb="{{true}}"></button>
+  </view>
+  <button class='givesure-btn' open-type='getUserInfo' bindgetuserinfo='giveInfo' wx:if="{{clickFlag}}"></button>
+  <formid-custom bind:taphandle="goGive" class='give-btn'> 
+    <image src='../../imgs/dashang.png'></image>
+  </formid-custom> 
+</view>
+<view class='give-money' wx:if="{{giveFlag}}">
+  <view class='give-view'>
+     <view class='close-btn' bindtap='goClose'>
+         <image src='../../imgs/close.png'></image>
+     </view>
+     <image src='../../imgs/givemoney.png'></image>
+     <!-- <view class='no-pay'>
+        功能暂未开放
+     </view> -->
+     <!--支付界面 待开放-->
+      <view class='option-box'>
+       <view class='option-item' bindtap='goPayOne'>
+          <image src='../../imgs/199img.png'></image>
+          <view class='money-item'>
+             <image src='../../imgs/199.png'></image>
+          </view>
+       </view>
+       <view class='option-item' bindtap='goPayTwo'>
+          <image src='../../imgs/520img.png'></image>
+           <view class='money-item'>
+             <image src='../../imgs/520.png'></image>
+          </view>
+       </view>
+       <view class='option-item' bindtap='goPayThree'>
+          <image src='../../imgs/888img.png'></image>
+           <view class='money-item'>
+             <image src='../../imgs/888.png'></image>
+          </view>
+       </view>
+       <view class='option-item' bindtap='goPayFour'>
+          <image src='../../imgs/1010img.png'></image>
+           <view class='money-item'>
+             <image src='../../imgs/1010.png'></image>
+          </view>
+       </view>
+       <view class='option-item' bindtap='goPayFive'>
+          <image src='../../imgs/1314img.png'></image>
+           <view class='money-item'>
+             <image src='../../imgs/1314.png'></image>
+          </view>
+       </view>
+       <view class='option-item' bindtap='goPaySix'>
+          <image src='../../imgs/2018img.png'></image>
+           <view class='money-item'>
+             <image src='../../imgs/2018.png'></image>
+          </view>
+       </view>
+     </view> 
+  </view>
+</view>

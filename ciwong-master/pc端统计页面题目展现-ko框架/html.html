@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>pc端统计页面题目展现</title>
+
+	<style>
+		*{padding: 0;margin: 0;}
+		.mt10{margin-top: 10px;}
+		.clearfix {zoom: 1;}
+		.clearfix:after {content: "";display: block;visibility: hidden;height: 0;clear: both;}
+		
+		.questionDetailBox{width: 100%;margin:0 auto; max-width: 1140px;padding: 10px 0;font-family: 'Microsoft YaHei';}
+		.qdItem{padding: 20px 38px;font-size: 14px;color: #333;line-height: 24px;background-color: #f9f9f9;border-top: 1px solid #ebebeb;clear:both;}
+		.qdTitle{background-color: #fff;border: 0;}
+		.qdiHead{font-size: 16px;color: #19b200;}
+		.qdiBody .qdiVideo{position: relative;width: 50px;height: 50px;border-radius: 5px;overflow: hidden;display: inline-block;vertical-align: middle;margin-right: 10px;cursor: pointer;}
+		.qdiBody .qdivTxt{vertical-align: middle;display: inline-block;max-width: 80%;}
+		.qdiBody .qdiVideo i{position: absolute;left: 50%;top: 50%;margin: -14px 0 0 -14px;background: url(images/vPlayer.png) center no-repeat;width: 30px;height: 30px;}
+		.qdiBody .qdiVideo img{min-width: 100%;min-height: 100%;max-width: 120%;display: block;}
+		.qdiBody .qdiVideo span{min-width: 100%;min-height: 100%;max-width: 120%;display: block;}
+		/*视频弹出层*/
+		.videoBoxLayer{display: none;position: absolute;left: 0;top: 0;width: 100%;height: 100%;overflow: hidden;}
+		.videoBoxLayer .vBg{position: absolute;width: 100%;height: 100%;background-color: rgba(0,0,0,0.6);opacity: 0.6;z-index: 1;}
+		.videoBoxLayer .vClose{position: absolute;right: 10px;top: 0;color:#fff;font-size: 50px;font-family: 'Verdana','arial', 'Microsoft YaHei';-webkit-transform: rotate(-45deg);transform: rotate(-45deg);padding: 10px;cursor: pointer;z-index: 1;}
+		.videoBoxLayer .vPlayer{position: relative;z-index: 2;max-width: 1140px;margin: 10% auto 0;width: 100%;height: 80%;}
+		.videoBoxLayer .vPlayer>*{max-width: 100%;max-height: 100%;}
+	</style>
+
+	<script src="http://cdn.bootcss.com/knockout/3.1.0/knockout-min.js"></script>
+	<script>
+		// ko视图模型
+		var viewModel = {
+			question:ko.observableArray()
+		}
+		// 页面加载完成执行函数
+		window.onload=function(){
+			console&&console.log&&console.log('页面加载完成，开始请求数据')
+
+			// window.external.webLoadCompleted();
+			// 启动ko
+			// ko.applyBindings(viewModel);
+			// 获取数据
+			// getJson();
+		}
+
+		// 获取数据接口
+		function getJson(json){
+			console&&console.log&&console.log(json ? '获取数据成功':'暂无数据')
+
+			if(json && typeof json == 'object'){
+				viewModel.question(JSON.parse(json));
+			}else{ // 获取测试数据
+				getAjax('http://121.14.117.225:8069/Question/GetQuestionByVersions?vid=603280897255912138',function(json){
+					console&&console.log&&console.log('当前获取测试数据')
+					viewModel.question(JSON.parse(json).data)
+				})
+			}
+		}
+
+		// 打开视频 
+		function openPlayer(){
+			var player = document.getElementById('videoBoxLayer')
+			player.style.display = 'block'
+		}
+		// 关闭视频 
+		function closePlayer(){
+			var player = document.getElementById('videoBoxLayer')
+			player.style.display = 'none'
+		}
+		// ajax请求函数
+		function getAjax(url,callback){
+			if (window.XMLHttpRequest)
+			{// code for IE7+, Firefox, Chrome, Opera, Safari
+			  	xmlhttp=new XMLHttpRequest();
+			}else{// code for IE6, IE5
+			  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}			
+			xmlhttp.onreadystatechange=function(){
+			  	if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			    	typeof callback =='function' ? callback(xmlhttp.responseText) : (callback=xmlhttp.responseText);
+			  	}
+			}
+			xmlhttp.open("GET",url,true);
+			xmlhttp.send();
+		}
+	</script>
+
+</head>
+<body>
+	<div class="questionDetailBox">
+		<div class="qdItem qdTitle" data-bind="html:stem">
+			16、1.AB=AD= 1,AA1 =2,一 只 蚂 蚁 沿 侧 面 CC1D1D 从 C 点 出 发,经 过 棱 D D 1 上 的 一 点 M 到 达 A 1 ,当 蚂蚁所走的路程最短时,<br>
+			(1 ) 求 B 1 M 的 长 ;<br>
+			(2 ) 求 证 :B 1 M ⊥ 平 面 M A C .
+		</div>
+		<div class="qdItem">
+			<div class="qdiHead">解析</div>
+			<div class="qdiBody">
+				由 log2x ≤ 1 = log22 得 0 < x ≤ 2 ,则 A = (0 ,2 ];由 x 2 - 4x - 5 =
+				g(x)满足g(1)=0,且g′(x)=1- lnx′=x2-1+lnx. (x ) x2 <br>
+				当0<x<1时,x2-1<0,lnx<0,所以g′(x)<0,故g(x)单调递减; 当 x > 1 时 ,x 2 - 1 > 0 ,ln x > 0 ,所 以 g′ (x )> 0 ,<br>
+				故 g (x )单 调 递 增 .<br>
+				所 以 ,g (x )> g (1 )= 0 (∀ x > 0 且 x ≠ 1 ). 所以除切点之外,曲线C在直线L 的下方.
+			</div>
+		</div>
+		<div class="qdItem">
+			<div class="qdiHead">视频讲解</div>
+			<div class="qdiBody mt10 clearfix">
+				<div class="qdiVideo" onclick="openPlayer()"><i></i><img src="../video/html/images/pic.png" alt=""></div>
+				<div class="qdivTxt">视频介绍，除切点之外,曲线C在直线</div class="qdivTxt">
+			</div>
+			
+		</div>
+		<div class="qdItem">
+			<div class="qdiHead">答案</div>
+			<div class="qdiBody">
+				（1）单调递减 <br>
+				（2）当0<x<1时,x2-1<0,lnx<0,所以g′(x)<0,故g(x)单调递减; 当 x > 1 时 ,x 2 - 1 > 0 ,ln x > 0 ,所 以 g′ (x )> 0
+			</div>
+		</div>
+		<div class="qdItem">
+			<div class="qdiHead">考点</div>
+			<div class="qdiBody">
+				点、线、面的位置关系、单位递减原理
+			</div>
+		</div>
+	</div>
+
+	<!-- 弹出层 -->
+	<div class="videoBoxLayer" id="videoBoxLayer">
+		<div class="vBg" onclick="closePlayer()"></div>
+		<div class="vClose" onclick="closePlayer()">+</div>
+		<div class="vPlayer">
+			<embed src="http://yuntv.letv.com/bcloud.swf" allowfullscreen="true" quality="high" width="100%" height="96%" align="middle" allowscriptaccess="always" flashvars="uu=2bfc338ed7&amp;vu=ea7de2dac0&amp;auto_play=1&amp;width=820&amp;height=630" type="application/x-shockwave-flash">
+		</div>
+	</div>
+</body>
+</html>

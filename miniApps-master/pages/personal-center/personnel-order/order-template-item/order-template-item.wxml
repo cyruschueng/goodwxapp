@@ -1,0 +1,40 @@
+<template name="order_template">
+  <view class='personnelWrap' id="{{item.id}}" data-skuid="{{item.skuId}}" catchtap='lowerLevel' data-soStatus="{{item.soStatus}}">
+    <view class="personnelTime">
+      <view class="personnelTime_left">
+        <text wx:if="{{item.soStatus == 2 || item.soStatus == 3}}">{{item.paidTime?item.paidTime:item.updateTime}}</text>
+        <text wx:else>{{item.createTime}}</text>
+      </view>
+      <view class="personnelTime_right">
+        <text class="active" wx:if="{{item.soStatus == 1}}">待付款</text>
+        <text wx:if="{{item.soStatus == 2}}">已完成</text>
+        <text wx:if="{{item.soStatus == 3}}">已完成</text>
+        <text wx:if="{{item.soStatus == 10}}">已取消</text>
+      </view>
+    </view>
+    <view class='personnelOrder'>
+      <view class='iconLogoWrap'>
+        <image class='iconLogo_sj' src='/images/icon/xiangqiLGBL.gif'></image>
+      </view>
+      <view class='iconLogo-right'>
+        <view class='logo-right-top'>
+          <view class='logo-right-condition'>
+            <text>{{item.skuName}}</text>
+          </view>
+          <view class='roll-unused'>
+            <text>{{item.unitPrice}}</text>
+            <text>X {{item.skuNum}}</text>
+          </view>
+        </view>
+        <view class='roll-wrap-button'>
+          <view>
+            <text>总价</text>
+          </view>
+          <view>
+            <text>￥{{item.soAmount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

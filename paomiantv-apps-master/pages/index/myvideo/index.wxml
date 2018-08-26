@@ -1,0 +1,27 @@
+<view class="container">
+
+  <view class="video__tips">
+    <!-- 弧形背景 -->
+    <view class="video__tips_bg"></view>
+    <view class="video__tips_link">
+      <view class="tip2">泡面春节天天乐</view>
+      <view class="tip3">点击预览视频，可以转发</view>
+    </view>
+  </view>
+
+
+  <view class="video__list">
+    <block wx:for="{{ videoList }}" wx:key="{{item[0]}}">
+      <view class="video__list_item">
+        <view class="cover">
+          <image src="{{ item[2] }}" mode="widthFix" data-key='{{item[1]}}' data-img='{{item[2]}}' bindtap='playVideo'></image>
+        </view>
+          <button bindtap='playVideo' data-item="{{item}}" data-key='{{item[1]}}' data-img='{{item[2]}}' >预览</button>
+      </view>
+    </block>
+  </view>
+
+  <view class="handle__link {{showBtn?'':'hide'}}" bindtap='toIndex'>
+    <view>拍摄自己的祝福小视频 瓜分100,000元现金红包</view>
+  </view>
+</view>

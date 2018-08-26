@@ -1,0 +1,36 @@
+<view class='fixed-top'>
+  <view class="panel-center bottom-line bg-white">
+    <view wx:for="{{titleArray}}" class='acitem {{index == titleFlag ? "acitem-act":"acitem-def"}}'>
+      {{item}}
+    </view>
+  </view>
+  <view class=' panel-min bg-white panel-between'>
+    <view class='searchs panel-start item-center'>
+      <image src='/img/search.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
+      <input class='sinput' placeholder='输入公司名称搜索'></input>
+    </view>
+    <view style='width:180rpx;' class='panel-around item-center'>
+      <view class='ell' style='color:#888888;width:135rpx;text-align:right'>地区</view>
+      <image src='/img/dropdef.png' style='width:35rpx;height:35rpx;'></image>
+    </view>
+  </view>
+</view>
+<view style='height:200rpx'></view>
+<view class='bg-gray panel-min font-def'>共30家</view>
+
+<view class='panel bottom-line panel-between' wx:for="{{list}}" bindtap='navToDetail'>
+  <view class='panel-start item-center' >
+    <view class='tavatar'></view>
+    <view style='width:420rpx;margin-left:20rpx'>
+      <view class='font-def'>{{item.par1}}</view>
+      <view>{{item.par2}}</view>
+      <view class='panel-start' style='margin-top:10rpx'>
+        <view class='{{item.par3 == 1 ? "tag-warring":""}}{{item.par3 == 2 ? "tag-success":""}}{{item.par3 == 0 ? "tag-default":""}}'>{{item.par3 == 0 ? '未入住':''}}{{item.par3 == 1 ? '待入住':''}}{{item.par3 == 2 ? '已入住':''}}</view>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view class='font-22 font-def'>{{item.par4}} 负责</view>
+    <view style='text-align:right'><text>{{item.par5}}</text><text style='font-size:22rpx' class='font-def'> 次</text></view>
+  </view>
+</view>

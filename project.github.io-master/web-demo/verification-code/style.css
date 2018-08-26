@@ -1,0 +1,98 @@
+*{
+    margin : 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #ffffff;
+    font-family: -apple-system, PingFang SC, Hiragino Sans GB, Helvetica Neue, Arial;
+    /* -webkit-tap-highlight-color 这个属性只用于iOS (iPhone和iPad)。
+       当你点击一个链接或者通过Javascript定义的可点击元素的时候，
+       它就会出现一个半透明的灰色背景。
+       要重设这个表现，你可以设置-webkit-tap-highlight-color为任何颜色。*/
+    -webkit-tap-highlight-color: transparent;
+}
+.app{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 60px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.heading-2 {
+    color: #333333;
+}
+.v-code {
+    margin-top: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.v-code input {
+    position: absolute;
+    top : -100%;
+    left:-66666px;
+    opacity: 0;
+}
+.v-code .line {
+    position: relative;
+    width: 40px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 28px;
+}
+.v-code .line::after{
+    display:block;
+    position: absolute;
+    content: '';
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    height: 1px;
+    background-color: #aaaaaa;
+    transform: scaleY(.5);
+    transform-origin: 0 100%;
+}
+.v-code .line.animated::before{
+    display:block;
+    position:absolute;
+    left:50%;
+    top:20%;
+    width:1px;
+    height:60px;
+    content:'';
+    background-color:#333;
+    animation-name : coruscate;
+    animation-duration : 1s;
+    animation-iteration-count: infinite;
+    animation-fill-mode:both;
+}
+@keyframes coruscate {
+    0%{
+        opacity: 0;
+    }
+    25%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    75%{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}

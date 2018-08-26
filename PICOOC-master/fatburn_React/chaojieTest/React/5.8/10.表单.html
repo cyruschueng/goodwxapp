@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../build/react.js"></script>
+    <script type="text/javascript" src="../build/react-dom.js"></script>
+    <!--<script type="text/javascript" src="../build/browser.min.js"></script>-->
+    <script type="text/javascript" src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/jsx">
+    var Component =React.createClass({
+        getInitialState:function(){
+            return {value:'hello'};
+        },
+        changeInner:function(event){
+            this.setState({value:event.target.value});
+        },
+        render:function(){
+            var content = this.state.value;
+            return (<div>
+                <input type="text" value={content} onChange={this.changeInner} />
+                <p>{content}</p>
+            </div>);
+        }
+    });
+    ReactDOM.render(
+            <Component />,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>

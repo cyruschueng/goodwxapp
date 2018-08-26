@@ -1,0 +1,67 @@
+<!--detail.wxml-->
+<view class="wrap">
+    <include src="../header/header.wxml"/>
+    <view class="container">
+      <swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" 
+        indicator-active-color ="#fff" indicator-color="#ddd">
+          <block wx:for="{{imgUrls}}">
+            <swiper-item>
+              <image src="{{item}}" class="slide-image"/>
+            </swiper-item>
+          </block>
+      </swiper>
+      <view class="blink_wrap">
+        <view class="blink">
+          <view class="listText">
+              <block wx:for="{{content}}">
+                  <text>{{item}}</text>
+              </block>
+          </view>
+          <view class="picker_wrap">
+                <picker bindchange="bindModelChange" value="{{iModel}}" range="{{arrayModel}}">
+                    <view class="picker">
+                        {{arrayModel[iModel]}}
+                    </view>
+                </picker>
+                <picker bindchange="bindSChange" value="{{iS}}" range="{{arrayS}}">
+                    <view class="picker picker2">
+                        {{arrayS[iS]}}
+                    </view>
+                </picker>
+          </view>
+          <view class="info">
+              <text class="tel text">{{tel}}</text>
+              <text class="address text">您预约的4s店地址为:{{address}}</text>
+              <view class="map" bindtap="showMap">
+                  <image src="../../img/address2.png"></image><text>附近的店</text>>
+              </view>
+          </view>
+          <view class="next" bindtap="next">
+              <image src="../../img/next.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--地图  -->
+    <view class="M_map_wrap" style="display:{{showMap ? 'block' : 'none'}}">
+        <view class="M_map2" >
+           <map id="map" longitude="113.324520" latitude="23.099994" scale="14" bindtap="ddd"> </map>
+           <image src="../../img/close.png" class="close" bindtap="close"></image>
+           <image src="../../img/choose4s.png" class="choose4s"></image>
+           <scroll-view scroll-y  id="scroll">
+              <radio-group class="radio-group" bindchange="radioChange">
+                <label class="radio" wx:for="{{fourSItem}}">
+                    <view  class="scroll-view-item ">
+                      <text class="title">{{item.fourSTitle}}</text>
+                      <text class="con">{{item.fourSCon}}</text>
+                      <radio value="{{item.value}}" checked="{{item.checked}}"/>
+                    </view>
+                </label>
+              </radio-group>
+            </scroll-view>
+          <image src="../../img/sure.png" class="sure"></image>
+        </view>
+    </view>
+</view>
+

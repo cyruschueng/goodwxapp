@@ -1,0 +1,92 @@
+<!--index.wxml-->
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="*this">
+      <swiper-item>
+         <image src="{{item}}" class="slide-image"/> 
+      </swiper-item>
+    </block>
+</swiper>
+
+<view class="plate">
+  <navigator url="/pages/mathisbeauti/mathisbeauti" hover-class="plate-style" class="plate-item">
+     <view class="plate-img">
+       <image src="{{a1src}}"></image>
+       </view>
+       <text class="plate-info" align-items='center'>
+        数学之美
+       </text>
+  </navigator>
+  <navigator url="/pages/schedule/schedule" hover-class="plate-style" class="plate-item">
+     <view class="plate-img">
+       <image src="{{a2src}}"></image>
+       </view>
+       <text class="plate-info">
+        课表安排
+       </text>
+  </navigator>
+  <navigator url="/pages/teacher/teacher" hover-class="plate-style" class="plate-item">
+     <view class="plate-img">
+       <image src="{{a4src}}"></image>
+       </view>
+       <text class="plate-info">
+        名师简介
+       </text>
+  </navigator>
+  <navigator url="/pages/about/about" hover-class="plate-style" class="plate-item">
+     <view class="plate-img">
+       <image src="{{a3src}}"></image>
+       </view>
+       <text class="plate-info">
+        关于我们
+       </text>
+  </navigator>
+</view>
+<view class="clear"></view>
+<view class="appointment">
+ <view class="app-title">课程回顾</view>
+  <view class="app-moduler">
+
+    <navigator url="/pages/onePaper/onePaper" class="mod-item">
+      <view class="mod-signup">
+        <image src="{{hotimg}}"></image>
+      </view>
+      <view class="mod-img">
+        <image src="{{imgsrc}}" class="mod-image"></image>
+      </view>
+      <view class="mod-title">
+         <text>每日一篇美文</text>  
+      </view>
+      <view class="mod-info">
+        <view class="mod-icon">
+          <image src="{{iconsrc}}" class="icon"></image>
+        </view>
+        <view class="moinfont">17人已读</view>
+      </view>
+    </navigator>
+    
+    <navigator url="/pages/courseReview/courseReview" class="mod-item">
+      <view class="mod-signup">
+        <image src="{{hotimg}}"></image>
+      </view>
+      <view class="mod-img">
+        <image src="{{imgsrc}}" class="mod-image"></image>
+      </view>
+      <view class="mod-title">
+         <text>重点回顾</text>  
+      </view>
+      <view class="mod-info">
+        <view class="mod-icon">
+          <image src="{{iconsrc}}" class="icon"></image>
+        </view>
+        <view class="moinfont">17人已读</view>
+      </view>
+    </navigator>
+
+  </view>
+</view>
+<navigator class="more" url="/pages/about/about" hover-class="plate-style">
+  <view class="more-info">查看更多</view>
+  <view class="icon-jt"><image src="{{jtsrc}}" class="iconjtimg"></image></view>
+</navigator>
+<view class="clear"></view>

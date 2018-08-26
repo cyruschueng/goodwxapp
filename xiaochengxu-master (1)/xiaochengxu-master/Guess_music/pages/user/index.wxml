@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class='allbg'>
+  <form bindsubmit="obtainFormId" report-submit="true">
+    <view class='weapbox'>
+      <view class='lv' wx:for="{{lv}}" wx:key="app" wx:for-index="idx" wx:for-item="item">
+        <view wx:if="{{user.lv < item.lv}}" class="status_open1">
+          <button formType="submit" bindtap='goClose'>
+            <view class='status_close'>
+              <image src='/style/images/lv/{{item.lv}}.png'></image>
+              <view>{{item.name}}</view>
+            </view>
+          </button>
+        </view>
+        <view wx:else>
+          <button formType="submit" bindtap='goLv' id="{{item.lv}}" data-lv="{{item.lv}}">
+            <view class='status_open'>
+              <image src='/style/images/lv/{{item.lv}}.png'></image>
+              <view>{{item.name}}</view>
+            </view>
+          </button>
+        </view>
+      </view>
+    </view>
+        <button class="qunfa" open-type="contact" formType="submit">
+      <image src="../../style/images/wxlogo.png" class="wxlogo"></image>
+      <text class="tishi">1</text>
+    </button>
+  </form>
+</view>

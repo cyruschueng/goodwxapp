@@ -1,0 +1,32 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '数字抽签'}}" />
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+
+      <view class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
+        <text>{{text}}</text>
+      </view>
+      <button type="primary" plain="true" disabled="{{!canAdd}}" bindtap="add">前进</button>
+      <button type="primary" plain="true" disabled="{{!canRemove}}" bindtap="remove">后退</button>
+
+      <view class="btn-area" id="buttonContainer">
+
+        <view class="button-sp-area">
+          <button type="primary" plain="true" bindtap="restart">输出</button>
+        </view>
+      </view>
+
+      <view class="page-section page-section-gap">
+        <view class="page-section-ctn">
+          <image class="image" src="../../resources/pic/app_k.jpg" />
+          <!-- <image class="image" src="../../resources/pic/mmqrcode.png"/>  -->
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <template is="foot" />
+</view>

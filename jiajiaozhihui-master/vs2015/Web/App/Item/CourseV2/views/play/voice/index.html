@@ -1,0 +1,86 @@
+<div ng-controller="VideoController2 as controller">
+    <div class="videogular-container">
+        <videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url">
+            <vg-media vg-src="controller.config.sources"
+                      vg-tracks="controller.config.tracks">
+            </vg-media>
+
+            <vg-controls>
+                <vg-play-pause-button></vg-play-pause-button>
+                <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+                <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                </vg-scrub-bar>
+                <vg-time-display>{{ timeLeft | date:'mm:ss':'+0000' }}</vg-time-display>
+                <vg-volume>
+                    <vg-mute-button></vg-mute-button>
+                    <vg-volume-bar></vg-volume-bar>
+                </vg-volume>
+                <vg-fullscreen-button></vg-fullscreen-button>
+            </vg-controls>
+
+            <vg-overlay-play></vg-overlay-play>
+            <vg-buffering></vg-buffering>
+            <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+        </videogular>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="weui_tab">
+                <div class="weui_navbar">
+                    <div se-navbar="section" class="weui_navbar_item weui_bar_item_on">
+                        章节
+                    </div>
+                    <div se-navbar="detail" class="weui_navbar_item">
+                        课程详情
+                    </div>
+                    <div se-navbar="exercise" class="weui_navbar_item">
+                        练习
+                    </div>
+                    <div se-navbar="internship" class="weui_navbar_item">
+                        践行
+                    </div>
+                </div>
+                <div class="weui_tab_bd">
+                    <div ng-show="show.detail" >
+                        <div class="panel panel-default" style="margin-bottom:0;">
+                            <div class="panel-heading">
+                                <strong>课程名称</strong>
+                            </div>
+                            <div class="panel-body">
+                                {{courses.title}}
+                            </div>
+                        </div>
+                        <div class="panel panel-default" style="margin-bottom:0;">
+                            <div class="panel-heading">
+                                <strong>讲师</strong>
+                            </div>
+                            <div class="panel-body">
+                                {{courses.lecturer}}
+                            </div>
+                        </div>
+                        <div class="panel panel-default" style="margin-bottom:0;">
+                            <div class="panel-heading">
+                                <strong>课程介绍</strong>
+                            </div>
+                            <div class="panel-body">
+                                <div ng-bind-html=courses.intro|trustAsHtml></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="show.section">
+                        <div class="playlist">
+                            <ul style="padding-left:10px;">
+                                <div ng-repeat=" itme in controller.videos">
+                                    <li style="padding:5px 0;"> <a ng-click="controller.setVideo($index)">{{itme.sources[0].name}}</a></li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div ng-show="show.exercise" class="col-xs-12" >exercise</div>
+                    <div ng-show="show.internship" class="col-xs-12" >internship</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>jquery三级联动</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
+</head>
+<body>
+	<div style="line-height: 60px;font-size: 18px;">
+		城市选择器
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<select class=" form-control" id="pro">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="col-md-4">
+			<select class=" form-control" id="city">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="col-md-4">
+			<select class=" form-control" id="area">
+				<option value=""></option>
+			</select>
+		</div>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script type="text/javascript" src="addr.js"></script>-->
+	<script type="text/javascript" src="http://520yaya.vip/js/addr.js"></script>
+	<script type="text/javascript">
+		var proIndex = 0,cityIndex = 0;
+		function init(proName, cityName, areaName) {
+			var pro = $("#pro");
+			var proHtml = '',cityHtml = '',areaHtml = '';
+			var cityArr = [];//保存选中的city的值
+			var areaArr = [];//保存选中的area的值
+			addrData.forEach(function(ev, index) {
+				if(proName == ev.name) {
+					cityArr = ev;
+					proIndex = index;//初始化保存选中的省的下标
+					proHtml += '<option value=' + ev.name + ' selected="">' + ev.name + '</option>';
+					return ;
+				};
+				proHtml += '<option value=' + ev.name + '>' + ev.name + '</option>';
+			})
+			
+			cityArr.city.forEach(function(cityEv) {//遍历获取选中的市的县内部的值
+				if(cityName == cityEv.name) {
+					areaArr = cityEv;
+					cityHtml += '<option value=' + cityEv.name + ' selected="">' + cityEv.name + '</option>';
+					return ;
+				}
+				cityHtml += '<option value=' + cityEv.name + '>' + cityEv.name + '</option>';
+			})
+			
+			areaArr.area.forEach(function(areaEv) {//遍历获取选中的市的县内部的值
+				if(areaName == areaEv.name) {
+					areaHtml += '<option value=' + areaEv.name + ' selected="">' + areaEv.name + '</option>';
+					return ;
+				}
+				areaHtml += '<option value=' + areaEv.name + '>' + areaEv.name + '</option>';
+			})
+			
+			pro.html(proHtml);
+			$("#city").html(cityHtml);
+			$("#area").html(areaHtml);
+		};
+		
+		init('广东省', '深圳市', '坪山区');
+		
+		$("#pro").on('change',function() {
+			var cityHtml = '',areaHtml = '';
+			var cityArr = [];//保存选中的city的值
+			addrData.forEach(function(ev, index) {
+				if($("#pro").val() == ev.name) {
+					proIndex = index;//保存选中的省的下标
+					ev.city.forEach(function(cityEv, cityIndex) {//遍历选中省和市
+						
+						if(cityIndex ==  0) {
+							cityHtml += '<option value=' + cityEv.name + ' selected="">' + cityEv.name + '</option>';
+							cityArr = cityEv;
+							return cityArr;
+						}
+						cityHtml += '<option value=' + cityEv.name + '>' + cityEv.name + '</option>';
+					});	
+				}
+			});
+			cityArr.area.forEach(function(areaEv, areaIndex) {//遍历获取选中的市的县内部的值
+				if(areaIndex ==  0) {
+					areaHtml += '<option value=' + areaEv.name + ' selected="">' + areaEv.name + '</option>';
+					return ;
+				}
+				areaHtml += '<option value=' + areaEv.name + '>' + areaEv.name + '</option>';
+			})
+			
+			$("#city").html(cityHtml);
+			$("#area").html(areaHtml);
+		});
+		$("#city").on('change',function() {
+			var areaHtml = '';
+			addrData[proIndex].city.forEach(function(ev, index) {
+				if($("#city").val() == ev.name) {
+					ev.area.forEach(function(areaEv, areaIndex) {
+						if(areaIndex ==  0) {
+							areaHtml += '<option value=' + areaEv.name + ' selected="">' + areaEv.name + '</option>';
+							return ;
+						}
+						areaHtml += '<option value=' + areaEv.name + '>' + areaEv.name + '</option>';
+					})
+				}
+			});
+			$("#area").html(areaHtml);
+		});
+	</script>
+</body>
+</html>

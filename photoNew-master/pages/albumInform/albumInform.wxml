@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<view class="container">
+    <view class='management'>
+        <view class="left {{music_play?'music_play':'stop'}}" bindtap="bindPlay"></view>
+        <view class='right' wx:if="{{self}}" bindtap='management' >
+            <image src="../img/photoEdit.png" mode="widthFix"></image>
+        </view>  
+    </view>
+    <view class='photo'>
+         <view class='index' wx:if="{{finish}}" bindtap='savePhoto'></view>
+         <image class='play' wx:if="{{finish}}" bindtap='savePhoto' src="../img/sanjiao.png"></image> 
+         <image class='thumb' src='{{photoInform.thumb}}' mode='aspectFit'></image> 
+    </view>
+    <view class='notice'>注：此模板需上传{{photo_count}}张照片</view>
+    <view class='buttons'>
+          <!-- wx:if="{{finish}}"  -->
+          <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{self && !finish}}">
+              <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
+          </form>
+          <!-- <view class='active' bindtap='upPhoto' wx:if="{{self && !finish}}">上传图片</view> -->
+          <view class='active' bindtap='savePhoto' wx:if="{{finish}}">查看相册集</view> 
+          <!-- friends -->
+          <!-- <view class='active' bindtap='friends' wx:if="{{finish && self}}">分享给好友</view>  -->
+          <view class='active' wx:if="{{finish && self}}">
+              <button  open-type='share'>分享给好友</button>  
+          </view>
+          <view class='active' bindtap='myplay' wx:if="{{!self}}">我也要玩</view> 
+    </view>
+      <view class='checkboxs'  wx:if="{{finish && self}}">
+            <image  wx:if="{{checkboxs==1}}"  bindtap="Change" data-check='0' 
+                    src="../img/checka.png" mode='widthFix'></image>
+            <image wx:if="{{checkboxs==0}}"  bindtap="Change" data-check='1' 
+                    src="../img/check.png"  mode='widthFix'></image>
+          同意生成照片集展示在首页
+     </view>  
+</view>

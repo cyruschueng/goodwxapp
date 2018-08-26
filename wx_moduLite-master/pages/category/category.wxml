@@ -1,0 +1,27 @@
+<!--category.wxml-->
+<view class="app main">
+<!-- <view class='opt-cover' style='display: {{none}}'></view> -->
+<view class="list-box">
+  <view class="title">我的关注<text class="small-t" decode>&nbsp;|&nbsp;点击取消关注</text>
+    <view class='cate-opt'>
+      <!-- <view class='c-opt btn-edit' style='display: {{none}}' bindtap='edit'>编辑</view> -->
+      <!-- <view class='c-opt btn-update' style='display: {{block}}' bindtap='update'>完成</view> -->
+    </view>
+  </view>
+    <view class="cate-item" wx:for="{{myfollow}}" bindtap="unfollow" data-id="{{item.id}}">
+      <view class="icon-box" style='display: {{block}}'><icon class="opt-ico cancel" type="cancel" size="18" color="#f00" /></view>
+      <view class="all-in">{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="list-box" style="margin-top:2rem;">
+  <view class="title">未关注分类<text class="small-t" decode>&nbsp;|&nbsp;点击添加关注</text></view>
+    <view class="cate-item"  wx:for="{{unfollow}}"  bindtap="follow" data-id="{{item.id}}" >
+        <view class="icon-box success" style='display: {{block}}'><icon class="opt-ico success" type="success" size="18" /></view>
+      <view class="all-in">{{item.name}}</view>
+    </view>
+  </view>
+
+
+
+</view>

@@ -1,0 +1,42 @@
+<view class="container" style="min-height:529.6px">
+	<view class="group-info">
+		<view class="group-info-left">
+			<view class="group-name">{{informAll.group_info.group_name}}</view>
+			<view class="group-num">成员{{informAll.members.length}}</view>
+		</view>
+		<view class="other-btn" data-url="" bindtap='setting'>
+			<image mode="aspectFit" src="../images/setting.png"></image>
+		</view>
+	</view>
+	<!-- <view class="group-info" style="padding-bottom:11px;height:63px">
+		<image data-tabname="showGroup" src="http://ovhvevt35.bkt.clouddn.com/day/tab_birth_dowm.png"
+		mode='widthFix'></image>
+		<image data-tabname="showPlay" src="http://ovhvevt35.bkt.clouddn.com/day/tab_play_up.png"
+		mode='widthFix'></image>
+	</view> -->
+	<view class="group-member" style="display:block;">
+		<!-- <view class="cy order">
+			 订阅本群成员生日动态<text>✕</text>
+		</view> -->
+		<view class='allList'>
+        <view class="normal-birth" wx:for="{{informAll.members}}" data-mf_id='{{item.mf_id}}' bindtap='inform'>
+            <view class="birth-member-info">
+                <view class="avatar">
+                  <image src="{{item.avatar}}"></image>
+                </view>
+                <view class="detail-box">
+                  <view class="mate-name">{{item.name}}
+                    <view class="cy group-owner" wx:if="{{item.is_captain==true}}">	群主</view>
+                  </view>
+                  <view class="mate-birth">{{item.birth_year}}年{{item.birth_month}}月{{item.birth_day}}日</view>
+                </view>
+            </view>
+            <view class="birth-info-spe">
+              <view class="today-birth">{{item.surplus_day}}天后生日</view>
+            </view>
+        </view>
+		</view>
+		<button class="join-btn" open-type="share">	邀请群里更多人加入</button>
+		<view class="desc">只可邀请同一个微信群的朋友加入哦！</view>
+	</view>
+</view>

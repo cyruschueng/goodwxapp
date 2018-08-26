@@ -1,0 +1,32 @@
+<view  wx:if="{{luggageList==false}}" style="text-align:center;padding:30rpx 0;font-size:32rpx;">
+     <view class="classname">你还没有收藏分类，快去收藏</view>
+</view>
+<view wx:else class='boxs'>
+    <view class='checked'> 
+        <view class='sets'>
+            <image src="../image/dels.png" bindtap='backTap' style='width:40rpx' mode="widthFix"></image>
+        </view> 
+        <view class='sets'>
+            <image bindtap='bianji' wx:if="{{bianji}}" src="../image/save.png" mode="widthFix"></image>
+            <image bindtap='bianji' wx:else src="../image/shanchu.png" mode="widthFix"></image>
+        </view>
+    </view>
+    <view class="container" wx:for="{{luggageList}}" wx:key="{{index}}" data-cat_id='{{item.cat_id}}'>
+        <view class='header'> {{item.cat_name}} </view> 
+        <view class="item {{newItem.checked==true?'bgColor':''}}" wx:for="{{item.collects}}"  wx:for-item="newItem" data-cat_id='{{item.cat_id}}'
+              data-collect_id="{{newItem.collect_id}}" bindtap='collectsTap' data-childindex="{{index}}">
+            <view class='logo del' bindtap='shanchu' wx:if="{{bianji}}" data-collect_id='{{newItem.collect_id}}'>
+                <image src="../image/del.png" mode="widthFix"></image>
+            </view>
+            <view class='content'>
+                <view class='text'>
+                    <view class='title'>{{newItem.goods_name}}</view>  
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='footer' bindtap='addTravel'>
+   <view>添加到物品列表</view>
+</view>
+

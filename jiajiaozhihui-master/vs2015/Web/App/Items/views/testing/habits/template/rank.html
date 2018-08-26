@@ -1,0 +1,45 @@
+<div style="padding-top:35px;">
+    <div  ng-hide="ranks.top3.length<=0">
+        <div class="weui-panel habit-panel">
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg ">
+                    <div class="weui-cells">
+                        <div class="weui-cell weui-cell_access habit-cell" ng-repeat="item in ranks.top3">
+                            <div class="weui-cell__hd babit-rank">
+                                <div class="babit-rank__sn">{{item.row}}</div>
+                                <img style="width:40px;height:40px;" src="{{item.headImgUrl}}" />
+                            </div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <div class="habit-rank__nickName">{{item.nickName}}</div>
+                                <div class="habit-rank__desc">已坚持持{{item.finish}}天</div>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <img style="width:40px;height:40px;" src="./imgs/gardenia/rank{{$index+1}}.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  style="margin-top:15px;" ng-hide="ranks.top.length<=0">
+        <div class="weui-panel habit-panel">
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg ">
+                    <div class="weui-cells habit-cells">
+                        <div class="weui-cell weui-cell_access habit-cell" ng-repeat="item in ranks.top">
+                            <div class="weui-cell__hd babit-rank">
+                                <div class="babit-rank__sn">{{item.row}}</div>
+                                <img style="width:40px;height:40px;" src="{{item.headImgUrl}}" />
+                            </div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <div class="habit-rank__nickName">{{item.nickName}}</div>
+                                <div class="habit-rank__desc">已坚持持{{item.finish}}天</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

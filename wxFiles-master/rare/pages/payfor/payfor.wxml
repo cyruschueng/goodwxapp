@@ -1,0 +1,75 @@
+<view class="container {{isScroll == true ? '':'overflow-y-hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+<!--默认模态框 start-->
+   
+    <!--模态框-->
+    <view class="model {{model == 'myModel'? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;" data-model="cancel" bindtap="bindModel">
+      <view class="set" style="margin-top:{{innerHeight*0.2}}px">
+        <view class="title text-align-center">更换收获地址</view>
+        <view class="body text-align-center">
+          <view class="bottom-line" style="padding-top:30rpx;padding-bottom:30rpx;" wx:for="{{addressLi}}"  id="{{index}}" bindtap="changeAddress">
+             <view class="pull-left">收货人:{{item.telusername}}</view>
+             <view class="pull-right">{{item.tel}}</view>
+             <view class="clear-both"></view>
+             <view style="font-size:28rpx;text-align:left">收货地址：{{item.province}} {{item.city}} {{item.area}} {{item.address}}</view>
+          </view>
+        </view>
+        
+      </view>
+    </view>
+    <!--默认模态框 end-->
+  <view class="pan" data-model="myModel" bindtap="bindModel">
+    <image style="width:46rpx;height:46rpx;margin-top:35rpx;" class="pull-left" src="/img/adres.png"></image>
+    <view class="addres">
+      <view class="title">
+        <view class="pull-left font-xs">收货人：{{address.telusername}}</view>
+        <view class="pull-right font-xs">{{address.tel}}</view>
+      </view>
+      <view class="clear-both"></view>
+      <view class="font-xs">收货地址：{{address.province}} {{address.city}} {{address.area}} {{address.address}}</view>
+    </view>
+    <view class="clear-both"></view>
+  </view>
+  <image style="width:100%;height:15rpx;float:left;margin-top:-10rpx;" src="/img/linesds.png"></image>
+
+  <view class="pa">
+    <view class=" ssssd" style="margin-left:30rpx">订单详情</view>
+
+<block wx:for="{{list}}">
+    <view style="background:#fafafa;padding-bottom:10rpx;padding-right:30rpx;margin-top:3px">
+      <image class="imgds pull-left" src="{{item.icon}}"></image>
+      <view class="pull-left" style="margin-left:30rpx;margin-top:10rpx;width:500rpx;">
+        <view class="font-xs">{{item.proname}}{{item.msgcontent}}</view>
+        <view class="font-xs" style="color:#aaa; margin-top:20rpx;">{{gui}}</view>
+        <view class="font-xs" style=" margin-top:20rpx;">
+          <view class="pull-left" style="color:#e2906a;">￥{{item.sellprice}}</view>
+          <view class="pull-right" style="color:#aaa">X{{item.buypron}}</view>
+        </view>
+      </view>
+      <view class="clear-both"></view>
+    </view>
+</block>
+
+    
+  </view>
+  <view class="pan">
+    <view class="pull-left">快递费用</view>
+    <view class="pull-right">￥{{kd}}</view>
+    <view class="clear-both"></view>
+  </view>
+  <view class="pan" style="margin-top:-8rpx;">
+    <view class="pull-left">积分抵扣</view>
+    <view class="pull-right">省￥{{insum}}</view>
+    <view class="clear-both"></view>
+  </view>
+  <view class="pan" style="margin-top:-8rpx;">
+    <view class="pull-left">买家留言：</view>
+    <input class="pull-left" bindinput="remark" placeholder="（选填）对本次交易的说明" />
+    <view class="clear-both"></view>
+  </view>
+
+  <view style="height:100rpx;"></view>
+  <view style="position:fixed;bottom:0;width:100%;height:100rpx;">
+     <view class="pull-left" style="width:50%;line-height:100rpx; text-align:center;background:#fff;" >合计：<text style="color:#e2906a">￥{{countAll}}</text></view>
+     <view class="pull-right" style="width:50%;line-height:100rpx; background:#e2906a;color:#fff;text-align:center;" bindtap="payit">立即付款</view>
+  </view>
+</view>

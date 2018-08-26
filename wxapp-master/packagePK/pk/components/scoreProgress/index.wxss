@@ -1,0 +1,61 @@
+@import "../../../../css/variable/common.wxss";
+
+@keyframes progress-anim {
+  from {
+    height: 0;
+  }
+  to {
+    height: 525rpx;
+  }
+}
+.score-progress-animation {
+  animation: progress-anim 1s forwards;
+}
+.score-progress-wrap {
+  display: inline-block;
+  width: 78rpx;
+  position: relative;
+  overflow: auto;
+}
+.score-progress-wrap .content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.score-progress-wrap .content .score {
+  font-size: 36rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+.score-progress-wrap .content .score-bg {
+  display: inline-block;
+  width: 22rpx;
+  height: 444rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 96rpx;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.score-progress-wrap .content .score-bg .score-mask {
+  opacity: 0.3;
+  background: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.score-progress-wrap .content .score-bg .score-progress {
+  display: inline-block;
+  background-image: linear-gradient(-179deg, #26A8D2 4%, #51F09A 56%, #FD7F13 96%);
+  border-radius: 96rpx;
+  width: 22rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}

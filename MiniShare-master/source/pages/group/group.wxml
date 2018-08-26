@@ -1,0 +1,220 @@
+<!--pages/group/group.wxml-->
+<text class='fa fa-chevron-left btnback' bindtap='gohome'></text>
+<view class='top-bg'>
+  <view class='header'>
+    <open-data type="groupName" open-gid="{{info.opengid}}"></open-data>
+  </view>
+  <view class='edit flex-row'>
+    <view class='editblock  flex-row' bindtap='gotoMgr'>
+      <image src="http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/writting.png"></image>
+      <text>编辑</text>
+    </view>
+  </view>
+</view>
+<view class='bg-white flex-row '>
+  <view class='users' bindtap='gotoMgr'>
+    <block wx:for="{{memberpeoples}}" wx:key="k">
+      <image src="{{item.avatarUrl}}" class='mgruser'></image>
+    </block>
+  </view>
+  <view class='totaluser' bindtap='gotoMgr'>(共{{info.members.length}}人)</view>
+  <view class='gotomgr' bindtap='gotoMgr'>
+    <text class='fa fa-angle-right'></text>
+  </view>
+</view>
+<view class='bg-white '>
+  <view class='icons flex-row'>
+    <view class='icon first' bindtap='gotoVoteList' data-page="vote" data-param="group_id={{info.id}}">
+      <view class='img'>
+        <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-1.png'></image>
+      </view>
+      <view class='txt'>群投票</view>
+    </view>
+    <view class='icon next' bindtap='gotoAlbum' data-page="album" data-param="group_id={{info.id}}">
+      <view class='img'>
+        <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-2.png'></image>
+      </view>
+      <view class='txt'>群相册</view>
+    </view>
+    <view class='icon next' bindtap='gotoMap' data-page="map" data-param="group_id={{info.id}}">
+      <view class='img'>
+        <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-3.png'></image>
+      </view>
+      <view class='txt'>群位置</view>
+    </view>
+    <view class='icon next' bindtap='gotoNotifyList' data-page="notify" data-param="group_id={{info.id}}">
+      <view class='img'>
+        <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-4.png'></image>
+      </view>
+      <view class='txt'>群公告</view>
+    </view>
+  </view>
+</view>
+<view class='bg-white ' wx:if="{{latestnotice.id!='0'}}">
+  <view class='flex-row latestnotice'>
+    <view class='notice-horn'>
+      <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/latestnotice.png'></image>
+    </view>
+    <navigator url='/pages/post/post?id={{latestnotice.id}}' class='notice-txt'>
+      {{latestnotice.description}}
+    </navigator>
+  </view>
+</view>
+<view class='bg-white quweicenter' style='margin-top:10rpx;'>
+  <view class='flex-row'>
+    <view class='title-shot'></view>
+    <view class='title-view'>趣味中心</view>
+  </view>
+  <view class='flex-row'>
+    <view class='block-1'>
+      <view class='block-content'>
+        <view class='tit'>群红包</view>
+        <view class='des'>最有温度的红包</view>
+      </view>
+    </view>
+    <view class='block-2'>
+      <view class='block-content'>
+        <view class='tit'>群暗恋</view>
+        <view class='des'>最容易成功的暗恋</view>
+      </view>
+    </view>
+  </view>
+  <view class='flex-row'>
+    <view class='block-3'>
+      <view class='block-content'>
+        <view class='tit'>群游戏</view>
+        <view class='des'>最好玩的游戏</view>
+      </view>
+    </view>
+    <view class='block-4'>
+      <view class='block-content'>
+        <view class='tit'>群名片</view>
+        <view class='des'>最有逼格的名片</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='bg-white posts' style='margin-top:10rpx;padding-bottom:50rpx;'>
+  <view class="post" wx:for="{{list}}" wx:key="k">
+    <view class='flex-row'>
+      <view class='date'>{{item.updated_date_split.date}}</view>
+      <view class='month'>{{item.updated_date_split.month}}月</view>
+      <view>
+        <image class='photo' src="{{item.member_id_photo}}"></image>
+      </view>
+      <view class='name'>{{item.member_id_name}}</view>
+      <view class='flex-1 delete' wx:if="{{item.member_id_openid==UserInfo.openid||info.adminmember_id_name==UserInfo.openid}}">
+        <text bindtap='deletePost' id="{{item.id}}">删除</text>
+      </view>
+    </view>
+    <view class='flex-row'>
+      <view class='sctop' wx:if="{{item.operation=='N'}}">
+        <image class='ball' src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/n.png'></image>
+      </view>
+      <view class='sctop-o' wx:if="{{item.operation=='P'}}">
+        <image class='ball-o' src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/p.png'></image>
+      </view>
+      <view class='sctop-r' wx:if="{{item.operation=='V'}}">
+        <image class='ball-r' src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/v.png'></image>
+      </view>
+      <view class='postbody flex-1'>
+        <view class='operationstr'>{{item.operationstr}}</view>
+        <navigator url='/pages/post/post?id={{item.id}}' class='postcontent' wx:if="{{item.operation=='N'}}">
+        <view wx:if="{{item.noticecover_id_name!=null}}">
+          <image src='{{uploadpath}}banner/{{item.noticecover_id_name}}' style='width:100%;' mode="widthFix"></image>
+        </view>
+        <view  style='color:#333333;margin-top:16rpx;'>{{item.title}}</view>
+        <view style='margin-top:14rpx;' style='color:#666666'>{{item.description}}</view>
+        </navigator>
+        <navigator url='/pages/post/post?id={{item.id}}' class='postphotos flex-row' wx:if="{{item.operation=='P'}}">
+          <block wx:for-items="{{item.photos}}" wx:key="{{index}}" wx:for-item="photo">
+            <view class='photoview  flex-1'>
+              <image src="{{uploadpath}}album/{{photo.photo}}" mode="widthFix" />
+            </view>
+          </block>
+
+        </navigator>
+        <navigator url='/pages/post/post?id={{item.id}}' class='postcontent' wx:if="{{item.operation=='V'}}">
+          <view>{{item.title}}</view>
+          <block wx:for="{{item.voteoptions}}" wx:key="k">
+          <view class='options flex-row'  bindtap='selectedOption'  id="{{item.id}}" >
+          <view class='flex-4'>
+          {{item.optionstr}}
+          </view>
+          <view class='flex-1 text-right'>
+          ({{item.votemembers.length}}票)
+          </view>
+          </view>
+          </block>
+          <view class="desc" style='margin-top:3vh;' wx:if="{{item.vote_expired_count>0}}">投票截止时间：{{info.vote_expired}}</view>
+          <view class="desc" style='margin-top:3vh;' wx:if="{{item.vote_expired_count<<0}}">投票已结束</view>
+        </navigator>
+        <view class='flex-row'>
+          <view wx:for="{{item.memberview}}" wx:key="kf" style='margin-right:12rpx;'>
+            <image class='photo' src="{{item.avatarUrl}}"></image>
+          </view>
+          <view class='viewpeople'>{{item.memberviewcount}}人浏览过</view>
+          <view class='likecomment flex-row' style='position:absolute;right:42rpx;'>
+            <view>
+              <image class='likeicon' bindtap='likePost' id="{{item.id}}" src="http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/like.png"></image>
+            </view>
+            <view  class='likestr'>
+              {{item.like}}
+            </view>
+
+            <view>
+              <image class='commenticon' bindtap='navtoPage' data-page="post" data-param="id={{item.id}}" src="http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/comment.png"></image>
+            </view>
+            <view class='likestr'>
+              {{item.comment}}
+            </view>
+          </view>
+        </view>
+        <view class='postcomment' wx:for="{{item.membercomment}}"   wx:key="k" wx:for-item="comment">
+          {{comment.nickName}}：{{comment.comment}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnhome' bindtap='gohome'>
+  <image src="http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/btnhome.png"></image>
+</view>
+<view class='btnadd'>
+  <image bindtap='openbgselect' src="http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/btnadd.png"></image>
+</view>
+
+<view class='selectbg' wx:if="{{bgselect==true}}">
+  <view>
+    <view class='iconsb flex-row'>
+      <view class='icon first' bindtap='gotoVote' data-page="vote" data-param="group_id={{info.id}}">
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-1-1.png'></image>
+        </view>
+        <view class='txt'>投票</view>
+      </view>
+      <view class='icon next' bindtap='gotoAlbum' data-page="album" data-param="group_id={{info.id}}">
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-2-1.png'></image>
+        </view>
+        <view class='txt'>相册</view>
+      </view>
+      <view class='icon next' bindtap='gotoMap' data-page="map" data-param="group_id={{info.id}}">
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-3-1.png'></image>
+        </view>
+        <view class='txt'>位置</view>
+      </view>
+      <view class='icon next' bindtap='gotoNotify' data-page="notify" data-param="group_id={{info.id}}">
+        <view class='img'>
+          <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/icon-4-1.png'></image>
+        </view>
+        <view class='txt'>公告</view>
+      </view>
+    </view>
+  </view>
+  <view class='close' bindtap='closebgselect'>
+    <image src='http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/minishare/images/close.png'></image>
+  </view>
+</view>

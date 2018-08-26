@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>LayIM 3.x PC版本地演示</title>
+    <link rel="stylesheet" href="../build/css/layui.css">
+
+</head>
+<body data-token="roigGRiK+ak1utJChy937IbgbSWaKfmKyH0Gj9HAkypdSYC1l07Ehsvsl3CtSaKKdLxgCxH9aqIqQlJdTPPqEQ=="
+      data-rykey="sfci50a7s120i">
+
+</body>
+
+<script src="../build/layui.js"></script>
+<script>
+
+    if (!/^http(s*):\/\//.test(location.href)) {
+        alert('请部署到localhost上查看该演示');
+    }
+
+    //layui绑定扩展
+    layui.config({
+        base: '../rc/'
+    }).extend({
+        rmlib: 'rmlib',
+        protobuf: 'protobuf',
+        socket: 'socket',
+    });
+    layui.use(['layim', 'jquery', 'socket'], function (layim, socket) {
+        var $ = layui.jquery;
+        var socket = layui.socket;
+        var token = $('body').data('token');
+        var rykey = $('body').data('rykey');
+
+        layim.config({
+            init: {
+                //配置客户信息（即打开此页面的主人信息）
+                mine: {
+                    "username": "访客3" //访客3的昵称
+                    , "id": "fk3" //访客3的ID
+                    , "status": "online" //在线状态 online：在线、hide：隐身
+                    , "remark": "在深邃的编码世界，做一枚轻盈的纸飞机" //我的签名
+                    , "avatar": "http://tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg" //我的头像
+                }
+            }
+            //开启客服模式
+            , brief: true
+        });
+
+        //打开客服面板
+        layim.chat({
+            name: '在线客服一' //名称
+            , type: 'kefu' //聊天类型
+            , avatar: 'http://img4.imgtn.bdimg.com/it/u=24109447,116326719&fm=26&gp=0.jpg' //头像
+            , id: 'zxkf1' //定义唯一的id方便你处理信息（指向“在线客服一”的id）
+        });
+        layim.chat({
+            name: '在线客服二' //名称
+            , type: 'kefu' //聊天类型
+            , avatar: 'https://ss0.baidu.com/73x1bjeh1BF3odCf/it/u=1142825487,1776434340&fm=73' //头像
+            , id: 'zxkf2' //定义唯一的id方便你处理信息（指向“在线客服二”的id）
+        });
+        layim.setChatMin(); //收缩聊天面板
+
+        // 融云socket初始化
+        socket.config({
+            key: 'y745wfm8yrxfv',
+            // 访客3 token（由唯一ID和共用AppSecret生成）
+            token: "T6bjk3bEhph8v9lL8NDrNS5Zt1+6VbTAmrd1hcw7oARfVp8VRRyIfVy4cwQVK77vPEZvRsQukE4xf3vrvhr1tA==",
+            layim: layim
+        });
+
+    });
+</script>
+</body>
+</html>

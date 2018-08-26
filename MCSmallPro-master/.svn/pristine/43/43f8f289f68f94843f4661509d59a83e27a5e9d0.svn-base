@@ -1,0 +1,9 @@
+<!--pages/live/children/video/video.wxml-->
+<view class='video' hidden='{{productVisible}}' >
+  <live-player wx:if="{{canUserLivePlayer}}" autoplay='true' object-fit="fillCrop" src="{{videoUrl}}">
+    <include src="videoInner.wxml" />
+  </live-player>
+  <video wx:else poster='{{videoPoster}}' objectFit="cover" autoplay='true' src="{{videoUrl}}">
+    <include src="videoInner.wxml" />
+  </video>
+</view>

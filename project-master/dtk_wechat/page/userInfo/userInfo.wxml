@@ -1,0 +1,82 @@
+<!--userInfo.wxml-->
+<view class="container">
+  <view class="containerBox">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="section-box">
+        <view class="section" style="border:0;">
+            <view class="section__title">手机号：</view>
+              <input type="number" class="weui-input section-mian" name="mobile" placeholder="请输入手机号" bindinput="mobileInputEvent" value="{{dataList.user_id}}" />
+          </view>
+        <view class="section"  wx:if="{{isCode}}">
+          <view class="section__title">图形验证码：</view>
+            <input class="weui-input section-mian inputmin" name="imgCaptcha"  bindinput="imgInputEvent" />
+            <image class="imgCode" src="{{imgCode}}" bindtap="clickImgCode"></image>
+        </view>
+        <view class="section" hidden="{{listBox}}">
+            <view class="section__title">短信验证码：</view>
+            <input class="weui-input section-mian inputmin" name="captcha" />
+            <button type="primary" size="mini" plain="true" class="codeButton" bindtap="picCode" disabled="{{buttonDisable}}">{{verifyCodeTime}}</button>
+        </view>
+      </view>
+      <view class="section-box">
+        <view class="section" style="border:0;">
+          <view class="section__title">真实姓名：</view>
+            <input class="weui-input section-mian" name="name" placeholder="请输入真实姓名" value="{{dataList.name}}" />
+        </view>
+        <view class="section">
+          <view class="section__title">性别：</view>
+            <radio-group name="gender">
+              <label><radio value="0" checked="{{dataList.gender=='0'?'true':''}}"/>不限</label>
+              <label><radio value="1" checked="{{dataList.gender=='1'?'true':''}}"/>男</label>
+              <label><radio value="2" checked="{{dataList.gender=='2'?'true':''}}"/>女</label>
+            </radio-group>
+        </view>
+        <view class="section">
+          <view class="section__title">职位：</view>
+          <input class="weui-input section-mian" name="position" placeholder="请输入职位" value="{{dataList.position}}" />
+        </view>
+        <view class="section">
+          <view class="section__title">公司名称：</view>
+            <input class="weui-input section-mian" name="company" placeholder="请输入公司名称" value="{{dataList.company}}" />
+        </view>
+        <view class="section">
+          <view class="section__title">工作地点：</view>
+            <input class="weui-input section-mian" name="address" placeholder="请输入地址" value="{{dataList.address}}" />
+        </view>
+      </view>
+      <view class="section-box">
+        <view class="section" style="border:0;">
+          <view class="section__title">邮箱：</view>
+          <input class="weui-input section-mian" name="email" placeholder="请输入邮箱" value="{{dataList.email}}" />
+        </view>
+        <view class="section">
+          <view class="section__title">微信号：</view>
+          <input class="weui-input section-mian" name="wechat" placeholder="请输入微信号" value="{{dataList.wechat}}" />
+        </view>
+      </view>
+      <view class="section-box">
+        <view class="comment-tltle">业务介绍</view>
+        <view class="section clearfix" style="border:0;height:auto;">
+            <textarea placeholder="请输入业务介绍" name="comment" value="{{dataList.comment}}" />
+        </view>
+      </view>
+      <view class="section-box" style="margin:0 30rpx 20rpx;">
+        <view class="section money" style="border:0;">
+          <radio-group name="isopen">
+              <label class="label"><radio value="1" checked="{{dataList.isopen=='1'?'true':''}}" />公开</label>
+              <label class="label"><radio value="0" checked="{{dataList.isopen=='0'?'true':''}}" />不公开</label>
+            </radio-group>
+        </view>
+      </view>
+      <view class="tips">小贴士：当您成功绑定手机，并选择【公开】信息时，即可开启票友通讯录功能。</view>
+      <view class="btn-area">
+        <button type="warn" formType="submit">提交</button>
+      </view>
+      
+    </form>
+  </view>
+<loading hidden="{{loadingHidden}}">
+	加载中...
+</loading>
+</view>
+

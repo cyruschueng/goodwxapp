@@ -1,0 +1,104 @@
+<div class="container" ng-controller="answerController">
+    <div id="{{'row'+info.fileId}}" class="row" style="padding-bottom:15px; padding-top:5px;">
+
+        <div class="col-xs-12">
+            <div style="position: relative;padding-right: 5px;">
+                <img class="img-circle" style="height: 45px; width: 45px; margin-right:5px; margin-top:15px;" ng-src="{{info.wxUserInfo.headImgUrl}}">
+
+                <span class="text-primary" style="height: 36px; line-height: 36px;">{{info.wxUserInfo.nickName|cut:true:4:'...'}}</span>
+
+                <span class="glyphicon glyphicon-map-marker" style="margin-right:10px;"><span style="margin-left: 5px;">{{info.wxUserInfo.city}}</span></span>
+                <span style="height: 36px; line-height: 36px;margin-right:10px">{{info.player.age+'岁'}}</span>
+                <span style="height: 36px; line-height: 36px;margin-right:10px">{{info.player.sex}}</span>
+                <span class="" style="height: 36px; line-height: 36px;margin-right:10px"><span style="margin-left: 5px;">{{info.releaseTime}}</span></span>
+                            <span ng-if="info.isRight==1" se-top
+                                  class="btn btn-xs btn-danger pull-right"
+                                  style="padding:0 6px; font-size:11px; margin-top:20px;"
+                                  data-showTop="{{'top'+info.fileId}}"
+                                  data-fileId="{{info.fileId}}">
+                                精</span>
+                <span ng-show="info.isTop==1" id="{{'top'+info.fileId}}" class="glyphicon glyphicon-fire" style="color:#f00;position: absolute; right: 0;" ></span>
+                <span class="btn btn-xs btn-warning" style="position: absolute;top :40px; left: 50px;font-size:12px;">问？</span>
+            </div>
+        </div>
+        <div class="col-xs-12" style="padding: 15px; border-bottom:1px dashed #eee; ">
+            <div >
+                <div ng-click="browse(info.fileId)" style="color:#666;">{{ info.content}}</div>
+
+                <div ng-repeat="media in info.medias">
+                    <div ng-show="media.mediaType==1 && media.mediaUrl!=''" class="col-xs-12 text-left" style="padding-top:10px;">
+                        <img ng-click="showImg(media.mediaUrl)" style="width:20%;" ng-src="{{media.mediaUrl|resourceUrl}}"></img>
+                    </div>
+                    <div ng-show="media.mediaType==2 && media.mediaUrl!=''" class="col-xs-12 text-left" style="padding-top:10px;">
+                        <span player-link  data-src="{{media.mediaUrl|resourceUrl}}"
+                            class="btn btn-xs btn-success glyphicon glyphicon-volume-up">播放</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="row" style="padding: 5px; border-left:5px solid #f0ad4e;margin-top:15px; margin-bottom:0px;">
+                <div class="col-xs-6"><span class="btn btn-warning btn-xs" style="margin-left:30px;">全部回答！</span></div>
+                <div class="col-xs-6 text-right">
+                    <span se-comment
+                          class="btn  btn-danger"
+                          style="padding:0 6px; font-size:14px;"
+                          data-showComment="{{'commentWrap'+info.fileId}}"
+                          data-fileId="{{info.fileId}}">回复</span>
+                </div>
+            </div>
+            <div id="{{'commentWrap'+info.fileId}}" >
+                <div class="row" ng-if="info.comments.length>0" ng-repeat="m in info.comments" style="padding-top:10px; padding-bottom:10px; border-bottom:1px solid #eee;">
+                    <div style="padding: 15px 0; ">
+                        <div class="col-xs-2" >
+                            <img class="img-circle" style="width:30px;" ng-src="{{m.imgUrl}}">
+                            <p style="padding-top:15px;" se-pay
+                               headImgUrl="{{m.headImgUrl}}"
+                               nickName="{{m.nickName}}"
+                               imgUrl="{{m.imgUrl}}"
+                               userName="{{m.uName}}"
+                               fromOpenId="{{userOpenId}}"
+                               toOpenId="{{m.openId}}"
+                               commonId="{{m.id}}"
+                               expertType="{{m.expertType}}">
+                                <img style="width:30px;" src="./imgs/qa/pay.png">
+                            </p>
+                        </div>
+                        <div class="col-xs-10" style="padding-left:0px;">
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <div class="text-info">
+                                        <span>{{m.uName|cut:true:4:'...'}}</span>
+                                        <span style="display: none" ng-class="{'男':'icon-male','女':'icon-female','':''}[m.sex]"></span>
+                                        <img ng-hide="m.expertType==0" src="../../../content/imgs/v.png" style="width:12px;">
+                                        <span style="color:#666; font-size:12px;">{{m.releaseData}}</span>
+                                    </div>
+                                    <div style="padding:10px 0;">
+                                        {{m.details}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-top:1px solid #eee;" ng-if="info.comments.length==0">
+                    <div class="col-xs-12 text-center" style="color:#666; padding-top:15px;">暂无回复</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="actionSheet_wrap" >
+        <div class="weui_mask_transition" id="mask"></div>
+        <div class="weui_actionsheet" id="weui_actionsheet" style="z-index: 999999">
+            <div class="weui_actionsheet_menu" >
+                <div class="text-right" style="padding-right:5px;"><span id="btnClose" class="glyphicon glyphicon-remove"></span></div>
+                <div class="weui_actionsheet_cell">
+                    <textarea id="commentContext" class="weui_textarea" placeholder="请输入评论" style="padding:0 10px;" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="weui_actionsheet_action" style="z-index: 999999">
+                <input  type="button" class="btn btn-lg btn-default disabled" style="width:100%; border-radius: 0;" id="actionsheet_submit" value="提交" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+ <import src="../../style/footer.wxml" />
+<view class="page__hd i-header">
+    <view class="i-header-h1 h50">河长制助手——</view>
+    <view class="i-header-h1">新型河道水污检测与管理系统</view>
+</view>
+<view class="container">
+  <view class="page-body">
+    <view class="page-section-title" style='margin-top:30rpx;'>发现河道出现污染情况，普通市民用户以及巡查人员可以通过实时地拍照上传至服务器端，后台管理人员定时查看并通知河道负责人进行处理。</view>
+    <view class="page-section-title"></view>
+    <view class="btn-area">
+      <button type="primary" bindtap="upImg">图片上传（支持多张）</button>
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__hd">上传结果展示</view>
+        <view class="weui-panel__bd">
+          <block wx:for-items="{{urlArr}}" wx:key="{{index}}">
+          <!-- <block wx:for-items="{{urlArr}}"> -->
+            <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{item.url}}" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">已上传</view>
+                <view class="weui-media-box__desc">{{item.url}}</view>
+              </view>
+            </navigator>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

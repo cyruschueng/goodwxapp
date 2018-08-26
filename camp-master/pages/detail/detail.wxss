@@ -1,0 +1,216 @@
+
+page { width: 100%; height : 100%; font-size : 28rpx; background-color: #efefef; }
+
+.price { display: inline-block; font-size : 48rpx; color : #df393c; }
+.price .sub { display: inline-block; font-size : 30rpx; }
+
+.origin-price { display: inline-block; font-size : 26rpx; color : #ccc;  text-decoration:line-through; }
+
+.main { height : 100%; width : 100%; transition: all 0.5s ease; }
+.main.showpop {  transform-style: preserve-3d; perspective-origin: 100% 0; transform: perspective(1500px) translateZ(-400rpx); }
+.main .head { background-color: #fff; position: relative; }
+.main .head .banner { height : 380rpx; }
+.main .head .banner image { height : 100%; width : 100%; }
+.main .head .desc { padding : 30rpx; }
+.main .head .desc .title { font-size : 36rpx; color : #101010; line-height : 50rpx; }
+.main .head .desc .sub-title { font-size : 30rpx; color : #999; line-height: 50rpx; margin-top : 10rpx; }
+.main .head .desc .price-info { margin-top : 20rpx; }
+.main .head .desc .price-info .price { margin-right : 20rpx; }
+.main .head  .price-info .tags { display: inline-block; z-index: 100; padding : 6rpx 16rpx; border-radius: 60rpx; margin-left: 20rpx; background-color: #09BB07; color : #fff; font-size :24rpx; }
+.main .head .services { margin-top : 20rpx; align-items: center; font-size : 26rpx; display: flex; padding : 20rpx; justify-content : space-between; border-top : solid 1px #f9f9f9; }
+.main .head .services .cell { display: flex; align-items : center; color : #999; position: relative; }
+.main .head .services .cell image { margin-right : 10rpx; width : 24rpx; height : 24rpx; }
+.main .head .entrance { border-top : solid 1px #f9f9f9; font-size : 28rpx; color : #df393c; padding : 30rpx 0; display: flex; justify-content: center; align-items: center; }
+.main .head .time-info { padding : 20rpx 0; border : solid 1px #f0f0f0; border-width : 1px 0; margin : 10rpx 0; justify-content: center; display: flex; align-items: center; }
+.main .head .time { display: inline-flex; justify-content: center; align-items: center; }
+.main .head .time .s { height : 32rpx; line-height: 32rpx; padding : 0 10rpx; font-size : 20rpx; background-color: #000; color : #fff; border-radius: 8rpx; margin : 0 10rpx; }
+.main .head .time .t { margin : 0; }
+
+
+.main .cont { margin-top : 20rpx; background-color: #fff; }
+.main .cont .tabs { display: flex; padding : 6rpx 0; border-bottom : solid 1px #f9f9f9; }
+.main .cont .tabs .tab { font-size : 28rpx; color : #999; height : 70rpx; display: flex; align-items: center; justify-content: center; flex-grow : 1; border-right : solid 1px #f9f9f9; }
+.main .cont .tabs .tab.current { color : #101010; }
+.main .cont .tabs .tab:last-child { border-right : none; }
+.main .cont .images { padding : 30rpx; }
+.main .cont .images image { width : 690rpx; }
+.main .cont .parameters { padding : 30rpx; } 
+.main .cont .parameters .row { display: flex; margin-top : 20rpx; }
+.main .cont .parameters .row:first-child { margin-top : 0; }
+.main .cont .parameters .row .key { width : 200rpx; }
+.main .cont .parameters .row .value { width : 590rpx; color : #999; }
+.main .cont .brand { padding : 30rpx; }
+.main .cont .brand .brief { display: flex; font-size : 36rpx; align-items: center; margin-top : 20rpx; }
+.main .cont .brand .brief .logo { width : 120rpx; height : 120rpx; margin-right : 20rpx; border-radius: 8rpx; box-shadow: 0 10rpx 10rpx #efefef; }
+.main .cont .brand .desc { margin-top : 60rpx; color : #999; font-size : 30rpx; line-height: 36rpx; padding-bottom : 20rpx; }
+
+.comment-list { background-color: #fff; padding : 0 20rpx;  padding-bottom : 20rpx; }
+.comment-list .all { height : 100rpx; line-height: 100rpx; border-bottom : solid 1px #f9f9f9; }
+.comment-list .c-head { display: flex; height : 100rpx; align-items: center; }
+.comment-list .c-head image { width : 48rpx; height: 48rpx; margin-right : 20rpx; border-radius: 50%; overflow: hidden; background-color: #ccc; }
+.comment-list .c-sub { color : #ccc; margin-top : 20rpx; }
+.comment-list .c-more { width : 220rpx; height : 60rpx; border : solid 1px #eb2243; color : #eb2243; border-radius: 40rpx; text-align: center; line-height: 60rpx; margin : 20rpx auto; }
+.comment-list .c-img { display: flex; }
+.comment-list .c-img image { margin-left : 20rpx; width : 160rpx; height : 160rpx; }
+.comment-list .c-img image:first-child {margin-left: 0;}
+
+.main .more { padding: 0; margin:0; margin-top : 20rpx; background-color: #fff; }
+.main .more .m-title { height : 100rpx; text-align: center; line-height: 100rpx; font-size : 32rpx; background-color: #fff; }
+
+.main .last-node { height : 120rpx; background-color: transparent; }
+
+.toolbar {  background-color: #f8f8f8; position: fixed; bottom : 0; left : 0; height : 100rpx; width : 100%; z-index : 1000; display: flex; }
+.toolbar .icons { width : 300rpx; display: flex; }
+.toolbar .icons .cell { width: 100rpx; display: flex; flex-direction: column; font-size: 20rpx; align-items: center; justify-content: center; position : relative; }
+.toolbar .icons .cell button.call { opacity: 0; display: block; position: absolute; top : 0; left : 0; width : 100%; height : 100%; z-index: 10; background-color: #fff; }
+.toolbar .icons .cell image { height : 48rpx; width : 48rpx; }
+.toolbar .icons .cell .num { background-color: #eb2243; color : #fff; width : 36rpx; height : 36rpx; border-radius : 50%; text-align: center; line-height: 36rpx; font-size : 20rpx; position: absolute; left : 50%; margin-left : 10rpx; top : 10rpx; z-index: 1; }
+.toolbar .buttons { height: 100%; border-left : solid 1px rgba( 255, 255, 255, 0.2 ); display: flex; flex-grow: 1; width : 100%; }
+.toolbar .btn { height: 100%; width : 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; }
+.toolbar .btn.primary { background-color: #8bc34a;color: white }
+.mask { transition: opacity 0.5s ease; height: 0; width : 0; opacity: 0; background-color: #000; z-index: 100; position: fixed; left : 0; top : 0; }
+.mask.showpop { height : 100%; width : 100%; opacity: 0.6; }
+
+.pop { transform: translate3d( 0, 130%, 0); transition: all 0.5s ease; padding : 20rpx; padding-bottom : 0; width : 710rpx; display: flex; flex-direction: column; background-color: #fff; position: fixed; bottom : 100rpx; left : 0; z-index: 101; height : 70%; }
+.pop.showpop { transform: translate3d( 0, 0, 0);  }
+.pop .head { padding-bottom : 20rpx; height : 140rpx; display: flex; }
+.pop .head .info { display: flex; flex-direction: column; justify-content: space-between; width : 490rpx; }
+.pop .head .info .main { height : 30rpx; display: flex; margin-top : 20rpx; align-items: flex-end; }
+.pop .head .info .main .stock { margin-left : 20rpx; color : #999; }
+.pop .head .info .name { font-size : 32rpx; line-height: 36rpx; }
+.pop .head .info .sub { color : #999; font-size : 24rpx; }
+.pop .head .img { border : solid 6rpx #fff; box-shadow: 0 10rpx 10rpx #efefef; border-radius: 8rpx; width : 200rpx; height : 200rpx; position: relative; top : -66rpx; margin-right: 20rpx; }
+
+.pop .cont { border-top : solid 1px #f9f9f9; margin-top: 30rpx; flex-grow: 1; height : 100rpx; }
+.pop .spec {}
+.pop .spec .row { padding : 20rpx 0 30rpx 0; border-bottom : solid 1px #f9f9f9; }
+.pop .spec .row .name { font-size : 28rpx; }
+.pop .spec .row .cells { display: flex; flex-wrap: wrap; }
+.pop .spec .row .cells .slt { padding : 0 20rpx; border-radius: 25rpx; margin : 20rpx 0 0 20rpx; line-height: 50rpx; height : 50rpx; font-size : 24rpx; background-color: #efefef; color : #444; }
+.pop .spec .row .cells .slt.current { color : #fff; background-color: #df393c; }
+
+.pop .count { padding : 20rpx 0; display: flex; justify-content: space-between; align-items: center; }
+.pop .count .name { font-size : 28rpx; }
+.pop .count .act { display: flex; border-radius: 8rpx; overflow: hidden; }
+.pop .count .act view { text-align: center; line-height: 60rpx; height : 60rpx; width : 60rpx; background-color: #efefef; margin-left : 1px; }
+.pop .count .act view:first-child { margin-left : 0; }
+
+.pop .last { height : 20rpx; }
+
+.main .active-info .line{
+    display:flex;
+    align-items:center;
+    border-bottom:1rpx solid #bbb;
+    width:700rpx;
+    margin:auto;
+    padding-bottom:10rpx;
+    margin-bottom:20rpx;    
+}
+.main .active-info .line .logo{
+    width:50rpx;
+    height:50rpx;
+    margin-right: 20rpx;
+}
+.main .active-info .line .title{
+    width: 150rpx;
+    margin-right: 20rpx;
+
+}
+.main .active-info .line .value{
+
+}
+.main .active-info .line .value .orgPrice{
+    color:#bbb;
+    font-size: 28rpx;
+    text-decoration-line:line-through;
+    margin-right:20rpx;
+
+}
+.main .active-info .line .value .promoPrice{
+    font-size: 34rpx;
+    /* color:#bbb; */
+}
+
+.main .active-feature .feature{
+    display:flex;
+    padding:0 30rpx;
+    padding-bottom:30rpx;
+}
+.main .active-feature .title{
+    font-size: 32rpx;
+    margin: 20rpx;
+}
+.main .active-feature .feature .logo{
+    width:30rpx;
+    height:30rpx;
+    margin-right:20rpx;
+    margin-top:10rpx;
+}
+.main .active-feature .feature .msg{
+    font-size:30rpx;
+    line-height:50rpx;
+}
+.zan-popup__container.chosePeople{
+    width:100%;
+    z-index:10001;
+    height:700rpx;    
+}
+.child-record{
+    font-size: 28rpx;
+    display:flex;
+    height:100rpx;
+    align-items:center;    
+}
+.child-record .logo-wrapper{
+    text-align: center;
+}
+.child-record .logo{
+    width: 30rpx;
+    height: 30rpx;
+}
+.zan-popup__container .bottom{
+    height: 100rpx;
+    border-top:1px solid #f0f0f0;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.zan-popup__container .bottom .btn{
+    height: 100%;
+    /* width:50%; */
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.zan-popup__container .bottom .btn.back{
+    background-color: #f8f8f8;
+    /* color: #dbdbdb; */
+}
+.zan-popup__container .bottom .btn.next{
+    background-color:#8bc34a;
+    /* color: white; */
+}
+.zan-popup__container .title {
+    display: flex;
+    justify-content: space-between;
+}
+.zan-popup__container .title .addChild{
+    border:1px solid #bbb;
+    margin-top:25rpx;
+    color:#bababa;
+    padding:5rpx 15rpx;
+    border-radius:8rpx;
+    margin-right:20rpx;
+    
+}
+
+
+
+
+
+
+
+

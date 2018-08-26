@@ -1,0 +1,108 @@
+<!--topicdetail.wxml-->
+<view class='app'>
+<!--模板  -->
+
+<!--评论内容模板  -->
+<template name="comments">
+<view class='com-item-box'>
+  <view class='com-top'>
+    <view class='user-head'><image src='{{avatarUrl}}'></image></view>
+
+    <view class='user-name'>
+      <view class='name'>{{nickName}}</view>
+      <view class='time'>{{time}}</view>
+    </view>
+
+      <view class='thumb' data-id='{{id}}' bindtap='{{tap}}'>
+      <view class='thumb-num'>{{thumb}}</view>
+      <view class='thumb-icon'><image class='thumb-ico' src='{{src}}'></image></view>
+    </view>  
+  </view>
+
+  <view class='com-bot'>
+    <view class='com-cont'>{{comment}}</view>
+  </view>
+</view>
+</template>
+
+ 
+<!--发布评论对话框模板  -->
+<template name="sendTmp">
+<view class='send-box'>
+  <view class='send-left'>
+     <view class='send-btn' bindtap='startComments'><view class='send-icon'></view>说一说</view> 
+  </view>
+    
+  <view class='send-right'>
+    <view class='opt-box'>
+     <view style='display: inline-block' bindtap='{{followOption}}'>
+      <image class='opt-ico' src='{{followHeart}}'></image>
+      <view>{{followtxt}}</view>
+      </view> 
+    </view>
+    <view class='opt-box'>
+      <button class='openshare' open-type='share'></button>
+      <image class='opt-ico' src='../../pictures/share.png'></image>
+      <view>分享</view>
+    </view>
+  </view>
+</view>
+</template>
+ 
+
+  <view class='banner' style='background: url({{detail.image}}) no-repeat center / cover'></view>
+  
+  <view class='main'>
+  <view class='main-inner'>
+    <view class='title'>{{detail.title}}</view>
+    <view class='content'>{{detail.content}}</view>
+
+    <!--讨论用户展示  -->
+    <view class='people'>
+      <!-- <view class='join'><view class='icon'><image src='../../pictures/topic_msg.png'></image></view>{{detail.join}}</view>
+      <view class='people-list clear'>
+        <!--头像列表  -->
+        <!-- <block wx:for="{{people}}">
+          <view class='head-box'><image src='{{item.pic}}'></image></view>
+        </block>
+
+          <view class='bull'>...</view> 
+      </view> -->
+    </view>
+  
+    <!--评论内容  -->
+    <view class='comments-box'>
+      <view class='com-title'>话题讨论</view>
+
+      <block wx:for="{{comments}}">
+        <template is="comments" data="{{...item}}"></template>
+      </block>
+      <view class='load-more'>
+        <view class='more-inner'><icon type='waiting' size='16' color='#ccc'></icon>{{loadinfo}}</view>
+      </view>
+    </view>
+
+  </view>
+  </view>
+  
+  <!--底部操作栏  -->
+  <block>
+    <template is="sendTmp" data="{{followHeart,followOption,followtxt}}"></template>
+  </block>  
+
+
+<!--评论框  -->
+  <view class='box-bt-bg  {{showbox}}'  bindtouchend='closeComments'></view>
+  <view class='comments-box-bt  {{showbox}}'>
+    <view class='box-opt'>
+      <view class='opt-left' bindtap='closeComments'>
+        <image src='../../pictures/close_nocircle.png'></image>
+      </view>
+      <view class='opt-right' bindtap='sendThought'>发送</view>
+    </view>
+    <view class='text-box'> 
+      <textarea class='publish-area' name="comment" placeholder='快来说说你的想法吧' placeholder-style="color: #ccc; font-size: 14px;" 
+      maxlength="500" fixed="true" cursor-spacing="150" value="{{value}}" bindinput='areaInput' bindconfirm="sendThought"></textarea>
+    </view>
+  </view>
+</view>

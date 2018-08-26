@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" manifest="../common.appcache">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>听说模考</title>
+
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+     <div class="loading" style="display:block;">
+        <div class="load-inner">
+            <img style="width:1px;height: 1px;position: absolute;left: -9999px;top:-9999px;" src="../common/images/loading.gif" alt="">
+            <span style="text-align: center;">加载中...</span>
+        </div>
+    </div> 
+    <!--loading end-->
+    <div class="dialog" style="display:none;">
+        <div class="dialog-inner">
+            <span>暂无信息~</span>
+        </div>
+    </div><!--dialog end-->
+    <div class="m-error" style="display:none;">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.reload()">重 试</div> 
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div><!--error end-->
+
+    <div class="wrap word-wrap" id="app" style="display:none;">
+        <!-- userinfo -->
+        <div class="p30 bg-f1f0ec clearfix" v-if="userInfo">
+            <div class="user_score fs-24"><span class="fs-36 green">{{answers.actualScore || 0}}</span> 分 <span v-if="answers.workScore">/ 总分：{{answers.workScore || 0}} 分</span></div>
+            <div class="user_avatar fl"><img :src="userInfo.avatar || '../common/images/default.jpg'" alt=""></div>
+            <div class="fl ml20 maxw-530">
+                <div class="fs-36 lh70">{{userInfo.nickName || userInfo.realName}} &nbsp;</div>
+                <div class="col-999896 mt10 fs-24 lh30" v-for="item in userInfo.classes">{{item.schoolName}} &nbsp; {{item.className}}</div>
+            </div>
+        </div>
+        <!-- parts -->
+        <div v-for="part in exampaper.parts">
+            <div class="tit1 bdt4-f1f0ec">{{part.module_type_name}}</div>
+            <div v-for="question in part.children">
+                <question :question="question" :questionnum="getQuestionNo" :showrefanswers="showRefAnswers" :index="$index+1"></question>
+            </div>
+        </div>
+        <!-- parts end -->
+    </div>
+
+    <!-- 题目模板 -->
+    <script type="text/template" id="question-template">
+        <question-choice v-if="question.qtype==1"       :question="question" :questionnum="questionnum" :showrefanswers="showrefanswers" :parentqtype="parentqtype" :index="index"></question-choice>
+        <question-shortanswer v-if="question.qtype==6"  :question="question" :questionnum="questionnum" :showrefanswers="showrefanswers" :parentqtype="parentqtype" :index="index"></question-shortanswer>
+        <question-imitation v-if="question.qtype==7"    :question="question" :questionnum="questionnum" :showrefanswers="showrefanswers" :parentqtype="parentqtype" :index="index"></question-imitation>
+        <question-filling v-if="question.qtype==3"      :question="question" :questionnum="questionnum" :showrefanswers="showrefanswers" :index="index"></question-filling>
+        <question-reading v-if="question.qtype==5"      :question="question" :questionnum="questionnum" :showrefanswers="showrefanswers" :index="index"></question-reading>
+    </script>
+    <!-- 附件 模板 -->
+    <script type="text/template" id="attachments-template">
+        <!-- <h2>attachments</h2> -->
+        <div v-for="data in attachments">
+            <div v-if="data.file_url">
+                <div class="img-box mt30" v-if="data.file_type == 1">
+                    <img onclick="hammerClass(this)" :src="data.file_url" alt="" />
+                </div>
+                <div class="audioBox mt30 ml20 clearfix" v-if="data.file_type == 2">
+                    <div class="audioBtn"></div>
+                    <div class="taskBoxLinks"><h3><i></i></h3></div>
+                        <div class="timeBox"><em class="currentTime"></em><strong class="duration"></strong></div>
+                    <div class="loadError fl ml20"></div>
+                    <audio :src="data.file_url" preload="auto"></audio>
+                </div>
+                <div class="video pr mt30" v-if="data.file_type == 3">
+                    <video :src="data.file_url" controls="controls" preload="auto"></video>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- 选择题 模板 -->
+    <script type="text/template" id="question-choice-template">
+        <!-- <h2>choice</h2> -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span v-if="question.sort" :class="parentqtype?' zanshiwuyong':''">{{question.sort}}.</span>
+                    <div class="display-ib col-red" v-html="question.userAnswer | setAssessIcon"></div>
+                    <span class="fs-24 col-808080">(<span class="col-red" v-html="question.userAnswer | setAssess"></span>/{{parseFloat(question.question_ref_sorce)}}分)</span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem | formatHtml"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+
+                <!-- option -->
+                <div v-for="option in question.options">
+                    <div class="mt40">
+                        <span class="option {{option | setOptionsIcon question.userAnswer }}">{{$index | fromCharCode}}</span><div class="display-ib ml20 option-txt" v-html="option.stem | formatHtml"></div>
+                        <attachments :attachments="option.attachments"></attachments>
+                    </div>
+                </div>
+                <!-- option end -->
+                <div v-if="showrefanswers && question.ref_info && question.ref_info.answers">
+                    <div class="fs30 col-999896  mt30 pt30 bdt1-f1f0ec">参考答案</div>
+                    <div class="green mt20">
+                        <div v-for="val in question.ref_info.answers">{{val.index | fromCharCode}}</div>
+                    </div>
+                </div>
+                
+                <div v-if="question.textModule &&question.textModule[0] && question.textModule[0].textType==2 && question.textModule[0].questionStem!=''">
+                    <div class="fs30 col-999896 mt40">听力原文</div>
+                    <div class="tit2 mt20" v-html="question.textModule[0].questionStem | formatHtml"></div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- 填空题 模板 -->
+    <script type="text/template" id="question-filling-template">
+        <!-- <h2>filling</h2> -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span v-if="question.sort" class="">{{question.sort}}. </span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem | formatHtml question.qtype"></div>
+                <attachments :attachments="question.attachments"></attachments>
+            </div>
+            <!-- option -->
+            <div class="bdt4-f1f0ec" v-for="option in question.options">
+                <div class="m20">
+                    <div class="tit2 pt30 mt30">
+                        <span class="option " v-if="option.sort">{{option.sort}}. </span>
+                        <div class="display-ib col-red" v-html="question.userAnswer && question.userAnswer.answers[$index] | setAssessIcon"></div>
+                        <span class="fs-24 col-808080">(<strong class="col-red" v-html="question | setAssessFilling $index"></strong>/{{parseFloat( (question.question_ref_sorce/question.options.length).toFixed(2) ) || 0}}分)
+                        </span>
+                    </div>
+                    <div class="mt40">
+                        <div class="display-ib" v-html="$index | fillingSetStem question.userAnswer"></div>
+                        <attachments :attachments="option.attachments"></attachments>
+                    </div>
+
+                    <div v-if="showrefanswers && option.stem">
+                        <div class="fs30 col-999896  mt30 pt30 bdt1-f1f0ec">参考答案</div>
+                        <div class="green mt20" v-html="option.stem | formatHtml"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- option end -->
+        </div>
+    </script>
+    <!-- 简答题 模板 -->
+    <script type="text/template" id="question-shortanswer-template">
+        <!-- <h2>shortanswer qtype={{question.qtype}}</h2> -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span v-if="question.sort" :class="parentqtype?' zanshiwuyong':''">{{question.sort}}. </span>
+                    <div class="display-ib col-red" v-html="question.userAnswer | setAssessIcon"></div>
+                    <span class="fs-24 col-808080">(<span class="col-red" v-html="question.userAnswer | setAssess"></span>/{{parseFloat(question.question_ref_sorce)}}分)</span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem | formatHtml"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+                <div v-if="question.userAnswer.answers && question.userAnswer.answers[0] && question.userAnswer.answers[0].answerType==1 && question.userAnswer.answers[0].content && question.userAnswer.answers[0].content!='undefined'">
+                    <div class="fs30 col-999896 mt40">我的录音</div>
+                    <div class="audioBox mt30 ml20 clearfix">
+                        <div class="audioBtn"></div>
+                        <div class="taskBoxLinks"><h3><i></i></h3></div>
+                        <div class="timeBox"><em class="currentTime"></em><strong class="duration"></strong></div>
+                        <div class="loadError fl ml20"></div>
+                        <audio :src="question.userAnswer.answers[0].content | formatAudioUrl" preload="auto"></audio>
+                    </div>
+                </div>
+
+                <div v-if="showrefanswers && question.ref_info && question.ref_info.solving_idea">
+                    <div class="fs30 col-999896 mt30 pt30 bdt1-f1f0ec">参考答案</div>
+                    <div class="green mt20">
+                        <div v-html="question.ref_info.solving_idea | formatHtml"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- 仿声朗读 模板 -->
+    <script type="text/template" id="question-imitation-template">
+        <!-- <h2>imitation qtype={{question.qtype}}</h2> -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span v-if="question.sort" :class="parentqtype?' zanshiwuyong':''">{{question.sort}}. </span>
+                    <div class="display-ib col-red" v-html="question.userAnswer | setAssessIcon"></div>
+                    <span class="fs-24 col-808080">(<span class="col-red" v-html="question.userAnswer | setAssess"></span>/{{parseFloat(question.question_ref_sorce)}}分)</span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem | formatHtml"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+                <div v-if="question.userAnswer.answers && question.userAnswer.answers[0] && question.userAnswer.answers[0].answerType==1 && question.userAnswer.answers[0].content && question.userAnswer.answers[0].content!='undefined'">
+                    <div class="fs30 col-999896 mt40">我的录音</div>
+                    <div class="audioBox mt30 ml20 clearfix">
+                        <div class="audioBtn"></div>
+                        <div class="taskBoxLinks"><h3><i></i></h3></div>
+                        <div class="timeBox"><em class="currentTime"></em><strong class="duration"></strong></div>
+                        <div class="loadError fl ml20"></div>
+                        <audio :src="question.userAnswer.answers[0].content | formatAudioUrl" preload="auto"></audio>
+                    </div>
+                </div>
+
+                <div v-if="showrefanswers && question.ref_info && question.ref_info.answers">
+                    <div class="fs30 col-999896 mt30 pt30 bdt1-f1f0ec">参考答案</div>
+                    <div class="green mt20">
+                        <div v-for="val in question.ref_info.answers"><div v-html="val | formatAnswers | formatHtml"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- 阅读理解 模板 -->
+    <script type="text/template" id="question-reading-template">
+        <!-- <h2>reading</h2> -->
+        <div class="bdt4-f1f0ec">
+            <div class="m20">
+                <div class="tit2 mt30">
+                    <span v-if="question.sort" class="">{{question.sort}}. </span>
+                </div>
+                <div class="txt1 lh53" v-html="question.stem | formatHtml"></div>
+
+                <attachments :attachments="question.attachments"></attachments>
+            </div>
+            <div v-for="question in question.children">
+                <question :question="question" :questionnum="questionnum" :showrefanswers="showrefanswers" :parentqtype="question.qtype" :index="$index+1"></question>
+            </div>
+        </div>
+    </script>
+
+    
+    <script> var app_interaction = true; // 是否与APP交互 </script>
+    <!--<script src="../common/js/adaptive.js"></script>
+    <script src="../common/js/jquery.min.js"></script>
+    <script src="../common/js/cordova.min.js"></script>
+    <script src="../common/js/vue.min.js"></script>-->
+    <!--公共js打包压缩成build-->
+    <script src="../common/js/build.min.js"></script>
+
+    <!--通用函数-->
+    <script src="../common/js/common.js"></script>
+    <script src="js/question.js"></script>
+    <!-- 音频插件 -->
+    <script src="js/audiojs/hoasou.audio.js"></script>
+    <!-- 图片放大插件 -->
+    <script src="js/hammer.min.js"></script>
+    <!--end 通用函数-->
+</body>
+</html>

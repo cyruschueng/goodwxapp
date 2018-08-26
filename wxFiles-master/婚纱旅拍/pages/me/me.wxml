@@ -1,0 +1,58 @@
+<!--pages/me/me.wxml-->
+<scroll-view class="container" scroll-x="false">
+
+<view class="myBj">
+<view class="HeadImgBox">
+<image src="{{userinfo.avatarUrl}}"></image>
+</view>
+<!--end HeadImgBox-->
+
+<view class="nameBox"><text>{{userinfo.nickName}}</text></view>
+
+</view>
+<!--end myBj-->
+
+
+<view class="MyBox">
+
+<view class="MyOrder">
+
+<view class="MyOrderTop">
+<text class="fl">我的订单</text>
+<view class="lookMore fr" bindtap="gotoMyOrder">查看全部<image src="/images/moreImg.jpg"></image></view>
+</view>
+<!--end MyOrderTop-->
+<view class="MyOrderFoot">
+
+<view  bindtap="Payment"><image style="width:37rpx" src="/images/payment.jpg" ></image><text>待付款</text></view>
+
+<view bindtap="Send"><image  style="width:41rpx" src="/images/send.jpg" ></image><text>待发货</text></view>
+
+<view bindtap="Receipt"><image  style="width:53rpx" src="/images/delivery.jpg" ></image><text>待收货</text></view>
+
+<view  bindtap="Evaluate"><image  style="width:29rpx" src="/images/23.jpg" ></image><text>待评价</text></view>
+
+</view>
+<!--end MyOrderFoot-->
+</view>
+<!--end MyOrder-->
+
+
+<view class="addressBox" bindtap="gotoAddress">
+<image class="addressImg fl" src="/images/myAddress.jpg"></image>
+<view class="fl">收货地址</view>
+<image class="moreImg fr" src="/images/moreImg.jpg"></image>
+</view>
+<!--end addressBox-->
+
+<view class="addressBox" style="border-top:none" bindtap="gotoQuestions">
+<image class="addressImg fl" src="/images/question.jpg"></image>
+<view class="fl">常见问题</view>
+<image class="moreImg fr" src="/images/moreImg.jpg"></image>
+</view>
+<!--end addressBox-->
+
+</view>
+<!--end MyBox-->
+
+</scroll-view>

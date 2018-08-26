@@ -1,0 +1,33 @@
+<view class="map" style="width: 100%; height:{{video_height}}px">
+	<map id="map" 
+		longitude="{{ longitude }}" 
+		latitude="{{ latitude }}" 
+		scale="14" 
+		controls="{{ controls }}" 
+		polyline="{{ polyline }}" 
+		markers="{{ markers }}" 
+		style="width: 100%; height: 100%;"
+		></map>
+</view>
+<view class="select_line">
+	<view class="ul_line" >
+		<view wx:for-items="{{ new_strategy }}" wx:key="{{ index }}" data-id="{{item.strategy  }}" bindtap="selectLine" class="line_list {{ type == item.strategy ? 'line_list_active' : '' }}">
+			<block wx:if="{{ item.strategy == 0 }}">
+				<view class="line_tiele">时间最短</view>
+			</block>
+			<block wx:elif="{{ item.strategy == 2 }}">
+				<view class="line_tiele">距离最短</view>
+			</block>
+			<block wx:else="{{ item.strategy == 9 }}">
+				<view class="line_tiele">拥堵较少</view>
+			</block>
+			<view class="line_time">
+				<view class="time">{{ item.duration }}分钟</view>
+				<view class="distance">{{ item.distance }}公里</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="submit_btn">
+	<button bindtap="submit_btn">确认</button>
+</view>

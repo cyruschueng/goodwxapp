@@ -1,0 +1,54 @@
+<!--pages/manageUser/manageUser.wxml-->
+<view class='container'>
+<!--头部-->
+  <view class="head-area">
+    <view class="head-info row">
+      <navigator url='../login/login'>
+        <view class="head-portrait">
+          <image class="name" src="{{avatarUrl}}"></image>
+        </view>
+      </navigator>
+      <view class='head-info column'>
+        <view class="headText row">{{nickName}} <text style='font-size:28rpx;margin-top:10rpx;'>[{{display?sort:"未登录"}}]</text></view>
+        <view class='phone' wx:if="{{display}}">账号：{{phone}}</view>
+      </view>
+    </view>  
+  </view>
+<!--钱包-->
+<view class='wallet'>
+  <view class='wallet-content'>
+      <view class='title'>累计交易</view>
+      <view class='total-money'>￥{{total_money}} <text style='color:#666; font-size:26rpx;'> .00</text>元</view>
+      <button class='trade' catchtap='trade'>去交易</button>
+  </view>
+</view>
+
+  <view class='content'>
+    <view class='item row'>
+      <block wx:for="{{list}}" wx:key="{{index}}" >
+        <view catchtap='onTap' data-index="{{index}}" class='column'>
+          <image src='{{list[index].img}}'></image>
+          <text class='txt'>{{list[index].txt}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+
+<!-- //弹窗 -->
+ <view class="box-wrapper" wx:if="{{showModalStatus}}">
+  <view class='box-content pos-r'>
+    <view class='tips'>提示</view>
+    <view class='tips1 tipsb'>亲爱的用户:</view>
+    <view class='tips1'>如果您第一次使用该产品，请进行
+      <text class='remind'>注册</text>!</view>
+    <view class='tips1'>如果您已经有账号，请
+      <text class='remind'>登录</text>！</view>
+    <view class='bottom row'>
+      <button type="default" class="regist" catchtap="regist">注册</button>
+      <button type="default" class="login" catchtap="login">登录</button>
+    </view>
+    <image class='close' catchtap='close' src='../../images/index/close.png'></image>
+  </view>
+</view> 

@@ -1,0 +1,30 @@
+<view class='page'>
+  <view class='header'>
+    <view class='title'>出席总人数：{{sum}}</view>
+  </view>
+
+  <view class="list">
+    <view class="weui-cells weui-cells_after-title">
+      <block wx:for="{{wedding_list}}" wx:key="">
+        <view class="weui-cell weui-cell_access cell" hover-class="weui-cell_active" >
+          <view class='avatar'>
+            <block wx:if="{{item.user.avatar_url}}">
+              <image class="avatar-image" src="{{item.user.avatar_url}}" mode='aspectFill'></image>
+            </block>
+            <block wx:else>
+              <image class="avatar-image" src="https://www.juhuibei.com/images/add_photo.jpg" mode='aspectFill'></image>
+            </block>
+          </view>
+          
+          <view class="weui-cell__bd">
+            {{item.receipt_name}}
+          </view>
+          <view class="weui-cell__ft ">
+          {{item.receipt_num}}人出席
+          </view>
+        </view>
+      </block>
+
+    </view>
+  </view>
+</view>

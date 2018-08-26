@@ -1,0 +1,30 @@
+<!--pages/user/letter/letter.wxml-->
+<view class="reply">
+  <input bindinput="bindInput" maxlength="140" value="{{value}}" />
+  <view class="reply-btn" bindtap="bindReply">回复</view>
+</view>
+<view class="reply-name">
+  私信：{{nick}}
+</view>
+<view class="content">
+  <view class="item {{myId == item.FromId?'my':'call'}}" wx:for="{{list}}" wx:key="index">
+    <view class="info" wx:if="{{myId != item.FromId}}">
+      <image src="{{item.profile_image}}"></image>
+      <view class="box">
+        <view class="name">{{item.nick_name}}</view>
+        <view class="time">{{item.chat_date}}</view>
+      </view>
+    </view>
+    <view class="info" wx:if="{{myId == item.FromId}}">
+      <view class="box">
+        <view class="name">{{item.nick_name}}</view>
+        <view class="time">{{item.chat_date}}</view>
+      </view>
+      <image src="{{item.profile_image}}"></image>
+    </view>
+    <view class="desc">
+      <view>{{item.content}}</view>
+    </view>
+  </view>
+
+</view>

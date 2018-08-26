@@ -1,0 +1,22 @@
+<!--pages/cutImageInside/cutImageInside.wxml-->
+<template name="weCropper">
+  <canvas
+          class="cropper"
+          disable-scroll="true"
+          bindtouchstart="touchStart"
+          bindtouchmove="touchMove"
+          bindtouchend="touchEnd"
+          style="width:{{width}}px;height:{{height}}px;"
+          canvas-id="{{id}}">
+  </canvas>
+</template>
+<view class="cropper-wrapper c_flex">
+  <template is="weCropper" data="{{...cropperOpt}}"/>
+  <view class="cropper-buttons">
+    <view
+      class="getCropperImage"
+      bindtap="getCropperImage">
+      完成
+    </view>
+  </view>
+</view>

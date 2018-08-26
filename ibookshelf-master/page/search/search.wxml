@@ -1,0 +1,37 @@
+<import src="/wxSearch/wxSearch.wxml" />
+
+<view class="index">
+  <view class="search-section">
+    <view class="search-pancel">
+      <image class='search-img' src="resource/search.png"></image>
+      <input bindinput="wxSearchInput" bindfocus="wxSerchFocus" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="搜索书名" placeholder-class='placeholder' confirm-type="search" focus bindconfirm='wxSearchFn' />
+      <image wx:if="{{isShow_cancelImg}}" class='cancel-img' src="resource/cancel.png" bindtap='wxSearchClearInput'></image>
+    </view>
+  </view>
+
+  <template is="wxSearch" data="{{wxSearchData}}" />
+
+  <view wx:if="{{isShow_bookshelf}}">
+    <text class="wxSearchTitle">我的书架</text>
+    <view class="kind-list">
+      <block wx:for-items="{{bookList}}" wx:key="{{item.isbn13}}">
+        <view class="kind-list-item">
+          <view id="{{item.isbn13}}" class="kind-list-item-hd" bindtap="gotoBookDetail">
+            <image class="kind-list-img box-shadow" src='{{item.images.medium}}'></image>
+            <view class="kind-list-info">
+              <view class="kind-list-title">{{item.title}}</view>
+              <view class="kind-list-author">{{item.author}}</view>
+              <view class="kind-list-publisher">{{item.publisher}}</view>
+              <view class="kind-list-pubdate">{{item.pubdate}}</view>
+            </view>
+            <view class="kind-list-info-date">{{item.adddate}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view wx:if="{{isShow_nothing}}" class="nothing">
+    <text>未搜索到藏书，赶紧去收集吧~</text>
+  </view>
+</view>

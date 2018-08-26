@@ -1,0 +1,20 @@
+<view class="star">
+    <view class="title">萍聚评分:</view>
+    <view class="stars">
+        <image wx:for="{{star}}" src="{{item == 0 ? url[0]:url[1]}}" data-index="{{index}}" bindtap="bindStar"></image>
+    </view>
+    <view style="clear:both"></view>
+</view>
+<view class="star">
+    <view class="title">萍聚印象 (最多5项) :</view>
+    <view style="clear:both"></view>
+    <view class="item">
+        <view wx:for="{{evalList}}" style="{{item.color == 1? 'background:#06c1ae;color:#fff':''}}" data-index="{{index}}" bindtap="bindEva">{{item.title}}</view>
+    </view>
+    <view style="clear:both"></view>
+</view>
+
+<view class="btn btn-theme">
+    <view bindtap="publishBtn" bindtap="submit">确认评价</view>
+</view>
+

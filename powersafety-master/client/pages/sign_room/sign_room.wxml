@@ -1,0 +1,18 @@
+<!--pages/sing_room/sing_room.wxml-->
+<view wx:key="questionIndex" wx:for="{{questions}}" wx:for-index="questionIndex" wx:if="{{questionIndex === currentNo}}">
+  <view class='title'>
+    <text>第{{questionIndex+1}}题</text>
+  </view>
+  <view class="question-content">
+    <text>{{item.ask}}</text>
+  </view>
+  
+    <button type='{{answer.type}}' class='answer-btn' style='width: 80%' bindtap='answerResult' wx:key="answerIndex" wx:for="{{item.answer}}"
+  wx:for-index="answerIndex" wx:for-item="answer"
+   data-item='{{answer}}' data-answer-index="{{answerIndex}}"
+    data-question-index="{{questionIndex}}">
+    {{answer.answer}}
+  </button>  
+</view>
+
+

@@ -1,0 +1,42 @@
+<import src='../citySelectModel/citySelectModel.wxml'/> 
+
+<view class='addShippingAddress'>
+  <view class='addShoppingInputBox'>
+    <view class='addShoppingInputLine'>
+      <text>收货人：</text>
+      <input bindinput='getReceipt_name'></input>
+      <radio-group bindchange='radioChange'>
+          <view class='radioBox'>
+            <radio value='2'></radio>
+            <text>先生</text>
+          </view>
+          <view class='radioBox'>
+            <radio value='1'></radio>
+            <text>女士</text>
+          </view>
+        </radio-group>
+    </view>
+    <view class='addShoppingInputLine'>
+      <text>手机号码：</text>
+      <input bindinput='getTelephone' class='telephoneInput'></input>
+    </view>
+    <view class='addShoppingInputLine location' bindtap='locationAddress'>
+      <text>所在地区：</text> 
+      <input wx:if='{{isScroll}}' disabled='disabled' bindinput='getLocationAddress' value='{{province}} {{city}} {{county}}'></input>
+      <input wx:else disabled='disabled' bindinput='getMorenAddress' value='北京市 市辖区 东城区'></input>
+      <template is="areaData" data="{{...item}}"/>
+      <image src='../../../../images/location.jpg'></image>
+    </view>
+    <view class='addShoppingInputLine' >
+      <text>详细地址：</text>
+      <input bindinput='getFullAddress' class='AddressInput'></input> 
+    </view>
+  </view>
+</view>
+<view class='setDefaultAddress'>
+    <text>设置为默认地址</text>
+    <!-- <image src='../../../../images/demo1.png'></image>
+     -->
+    <switch bindchange="switchChange"></switch>
+</view>
+<view class='saveAddressBtn' bindtap='saveAddress'>保存</view>

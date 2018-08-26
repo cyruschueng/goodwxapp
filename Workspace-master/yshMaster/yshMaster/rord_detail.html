@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+    <title>商品管理</title>
+    <link rel="stylesheet" type="text/css" href="js/ios-switch/switchery.css" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/control/css/zyUpload.css" type="text/css">
+    <link href="js/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/ysh_comm.js"></script>
+    <script type="text/javascript">
+        checkPermission();
+    </script>
+</head>
+
+<body style="background: #EFF0F4;">
+<section>
+    <div>
+        <section class="panel">
+            <div class="panel-body">
+                <div class="page-heading">
+                    <h3>订单详情</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="wrapper">
+            <section class="panel">
+
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#orderEditeHtml" data-toggle="tab" onclick="trzz()">
+                            订单信息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#orderDetailHtml" data-toggle="tab">订单详情</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="panel-body tab-pane fade in active" id="orderEditeHtml">
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>订单编号</span>
+                            </div>
+                            <div class="col-lg-3">
+                                <span id="orderNum">20151214201</span>
+                            </div>
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>成交时间</span>
+                            </div>
+                            <div class="col-lg-3">
+                                <span id="createdTime">2015-12-16 18:25:33</span>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>商品名称</span>
+                            </div>
+                            <div class="col-lg-3">
+                                <span id="productName">asdasdasd</span>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>商品数量</span>
+                            </div>
+                            <div class="col-lg-1">
+                                <span id="productCount">15</span>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>订单备注</span>
+                            </div>
+                            <div class="col-lg-3">
+                                <textarea style="resize: none;" rows="6" class="form-control" maxlength="50" readonly="readonly" id="orderComment"></textarea>
+                            </div>
+                            <div class="col-lg-1">
+                                <!--<div class="btn btn-success" id="ediOrderComment">修改</div>-->
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;padding: 6px 12px;">
+                                <span>订单状态</span>
+                            </div>
+                            <select class="item-select btn col-lg-1" id="orderStatu" required disabled="disabled">
+                                <option value="10">未处理</option>
+                                <option value="20">处理</option>
+                                <option value="30">完成</option>
+                                <option value="40" id="hideTheOrder">已取消</option>
+                            </select>
+                            <div class="col-lg-1">
+                                <!--<div class="btn btn-success" id="ediOrderStatu">修改</div>-->
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;padding: 6px 12px;">
+                                <span>物流状态</span>
+                            </div>
+                            <select class="item-select btn col-lg-1" id="logisticStatu" required disabled="disabled">
+                                <option value="20">未发货</option>
+                                <option value="30">已发货</option>
+                                <option value="40">确认收货</option>
+                            </select>
+                            <div class="col-lg-1">
+                                <!--<div class="btn btn-success" id="ediLogisticStatu">修改</div>-->
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>物流跟踪</span>
+                            </div>
+                            <div class="col-lg-3" id="logistic">
+                                balabla
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;padding: 6px 12px;">
+                                <span>积分</span>
+                            </div>
+                            <div class="col-lg-1" style="padding: 6px 12px;">
+                                <input type="text" value="1000" readonly="readonly" id="credit" />
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>支付方式</span>
+                            </div>
+                            <div class="col-lg-1">
+                                <span id="payType">微信</span>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;padding: 6px 12px;">
+                                <span>应付金额</span>
+                            </div>
+                            <div class="col-lg-2" style="padding: 6px 12px;">
+                                <input type="text" value="1000" readonly="readonly" id="price" />(整数或两位小数)
+                            </div>
+                            <div class="col-lg-1">
+                                <!--<div class="btn btn-success" id="ediPrice">修改</div>-->
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;padding: 6px 12px;">
+                                <span>支付金额</span>
+                            </div>
+                            <div class="col-lg-2" style="padding: 6px 12px;">
+                                <input type="text" value="1000" readonly="readonly" id="buyerPrice" />(整数或两位小数)
+                            </div>
+                            <div class="col-lg-1">
+                                <!--<div class="btn btn-success" id="ediBuyerPrice">修改</div>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;padding: 6px 12px;">
+                                <span>收货方式</span>
+                            </div>
+                            <div class="col-lg-2" style="padding: 6px 12px;">
+                                <select id="shipway" onchange="chageTheWay()" disabled="disabled">
+                                    <option value="1">自提</option>
+                                    <option value="2">快递</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div id="wocao">
+                            <div class="row">
+                                <div class="col-lg-1" style="text-align: right;">
+                                    <span>收货人</span>
+                                </div>
+                                <div class="col-lg-1">
+                                    <input type="text" value="" readonly="readonly" id="deliverName" />
+                                </div>
+                                <div class="col-lg-1">
+                                    <!--<div class="btn btn-success" id="ediDeliverName">修改</div>-->
+                                </div>
+                            </div>
+                            <div class="row" style="height: 14px;"></div>
+                            <div class="row">
+                                <div class="col-lg-1" style="text-align: right;">
+                                    <span>收货人电话</span>
+                                </div>
+                                <div class="col-lg-1">
+                                    <input type="text" onchange="this.value=this.value.replace(/[^0123456789]/g, '')" onkeypress="this.value=this.value.replace(/[^0123456789]/g, '')" maxlength="11" value="" readonly="readonly" id="deliverPhone" />
+                                </div>
+                                <div class="col-lg-1">
+                                    <!--<div class="btn btn-success" id="ediDeliverPhone">修改</div>-->
+                                </div>
+                            </div>
+                            <div class="row" style="height: 14px;"></div>
+                            <div class="row">
+                                <div class="col-lg-1" style="text-align: right;">
+                                    <span>收货地址</span>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input type="text" style="width: 100%;" value="" readonly="readonly" id="deliverPlace" />
+                                </div>
+                                <div class="col-lg-1">
+                                    <!--<div class="btn btn-success" id="ediDeliverPlace">修改</div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>卖方名称</span>
+                            </div>
+                            <div class="col-lg-1">
+                                <span id="sellerName"></span>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>买方名称</span>
+                            </div>
+                            <div class="col-lg-1">
+                                <span id="buyerName"></span>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <span>买方电话</span>
+                            </div>
+                            <div class="col-lg-1">
+                                <span id="buyerPhone"></span>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 14px;"></div>
+                        <div class="row">
+                            <div class="col-lg-10"></div>
+                            <div class="col-lg-1">
+                                <!--<div class="btn btn-success" id="submit">保存</div>-->
+                            </div>
+                            <div class="col-lg-1">
+                                <!--<a class="btn btn-success" id="cancel">取消</a>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade panel-body tab-pane " id="orderDetailHtml">
+                        <table class="table table-bordered table-striped table-condensed ysh_table" id="orderTable">
+                            <thead>
+                            <tr>
+                                <th>商品名称</th>
+                                <th>单价</th>
+                                <th>单位</th>
+                                <th>下单量</th>
+                                <th>下单金额</th>
+                                <th>成交单价</th>
+                                <th>成交量</th>
+                                <th>成交金额</th>
+                                <th>物流单号</th>
+                            </tr>
+                            </thead>
+                            <tbody id="orderDetailTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+</section>
+
+<!--模态框-->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="modalForm">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <h4 class="modal-title">编辑物流单号</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group" id="divId">
+                            <label for="Id" class="control-label col-lg-4">物流单号：</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="logisticsNum" onchange="this.value=this.value.replace(/[^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]/g, '')" onkeypress="this.value=this.value.replace(/[^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]/g, '')">
+                                <input type="hidden" class="form-control" id="logisticsNumHid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveBtn" type="button" class="btn btn-success" onclick="savelogisticsNum()">保存</button>
+                    <button id="closeBtn" type="button" class="btn btn-default" data-dismiss="modal" onclick="clearData()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tplTable">
+    {{# for(var i in d){}}
+    <tr>
+        <td>{{d[i].ProductName||"空"}}</td>
+        <td>{{d[i].Price||0}}元</td>
+        <td>{{d[i].MeasureName||"空"}}</td>
+        <td>{{d[i].ItemWeight||0}}</td>
+        <td>{{((d[i].ItemWeight||0)*(d[i].Price||0)).toFixed(2)}}元</td>
+        <td>{{d[i].Price||0}}元</td>
+        <td>{{d[i].ActualWeight||d[i].ItemWeight||0}}</td>
+        <td>{{d[i].ActualAmount||((d[i].ItemWeight||0)*(d[i].Price||0)).toFixed(2)}}元</td>
+        <td><span class="sss">{{d[i].LogisticsNumber||"暂无"}}</span></td>
+        <!--<td><button id="uploadimg_btn" type="button" class="btn btn-info" onclick="wuliu({{d[i].OrderItemId||'0'}},{{d[i].SKUId||'0'}},{{d[i].OrderId||'0'}},{{d[i].LogisticsNumber}})"></button></td>-->
+    </tr>
+    {{# }}}
+</script>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/layer.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/ysh_comm.js"></script>
+<script src="js/laytpl.js"></script>
+<!-- 引用核心层插件 -->
+<script type="text/javascript" src="js/core/zyFile.js"></script>
+<!-- 引用控制层插件 -->
+<script type="text/javascript" src="js/control/js/zyUpload.js"></script>
+<!-- 引用初始化JS -->
+<script type="text/javascript" src="js/zyUpload.js"></script>
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+<script src="js/ios-switch/switchery.js"></script>
+<script src="js/ios-switch/ios-init.js"></script>
+<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
+<script src="script/orderDetial.js"></script>
+</body>
+
+</html>

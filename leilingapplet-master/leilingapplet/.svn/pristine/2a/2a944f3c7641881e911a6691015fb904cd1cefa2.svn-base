@@ -1,0 +1,25 @@
+<?php
+namespace app\index\controller;
+use app\index\model\User as UserModel;
+use think\Controller;
+use think\Session;
+use think\Exception;
+use think\Config;
+use think\Request;
+use think\DefaultRedis;
+class Base extends controller{
+	public $redis;
+	public $openid;
+	public $userid;
+	public $telephone;
+	public function __construct(){
+		$this->redis = new DefaultRedis(); 
+		$this->openid = input('param.openid');
+		if(!empty($this->openid)){
+			$user = new UserModel;
+			$userinfo = $user->where('openid',$this->openid)->find();
+			$this->userid = $userinfo['id'];
+			$this->telephone = $userinfo['telephone'];
+		}
+	}
+}

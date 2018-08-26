@@ -1,0 +1,31 @@
+  <image wx:if="{{isipx}}" src='question-bg-big.png' mode='widthFix' style='width:100%'></image> 
+ <image wx:else src='question-bg.png' mode='widthFix' style='width:100%'></image> 
+<view class="container {{isipx}}?'xStyle':'sStyle'">
+  <!-- 题号 -->
+  <view class='testNum'>
+    <text>第{{testnum}}题</text>
+  </view>
+  <view class="{{isipx?'blank':''}}"></view>
+  <!-- 问题 -->
+  <view class='question'>
+     <text>{{description}}</text> 
+  </view>
+  <view class="{{isipx?'blank':''}}"></view>
+
+  <!-- 选项 -->
+  <view class='chosen' bindtap='gonext'>
+  <!-- <image src='a.png' mode='widthFix' style='width:70rpx'></image> -->
+    <view class="choice {{screenWidth>400?'max':'min'}} {{isipx?'ipx':''}}" bindtap='clickA'>
+    <text class='choice-content'>{{A}}</text>
+    </view>
+    <view class="choice {{screenWidth>400?'max':'min'}} {{isipx?'ipx':''}}" bindtap='clickB'>{{B}}</view>
+    <view class="choice {{screenWidth>400?'max':'min'}} {{isipx?'ipx':''}}" bindtap='clickC'>{{C}}</view>
+    <view class="choice {{screenWidth>400?'max':'min'}} {{isipx?'ipx':''}}" bindtap='clickD'>{{D}}</view>
+  </view>
+  <!-- logo  -->
+  <view class="{{isipx?'blank':''}}"></view>
+  <view class='logo-view'>
+  <image src='http://bellazhang.cn/PNG/logo-pink.png' mode='widthFix' class='logo' bindtap='goAbout'></image>
+  </view>
+  <view class='logo-text'  bindtap='goAbout'>腾讯众创 | 有屋租房</view> 
+</view>

@@ -1,0 +1,177 @@
+<!--pages/mine/topicDetail/topicDetail.wxml-->
+<view class="card" id="{{postlist.postid}}">
+  <view class="things">
+    <block wx:if="{{postlist.leixing=='post'}}">
+      <view class='user'>
+        <image class='userasset' src="{{postlist.userasset}}" alt="" />
+        <view class='ubox'>
+          <view class='name t2'>{{postlist.username}}</view>
+          <text class="things-name t2">{{postlist.title}}</text>
+          <view class='assetsbox'>
+            <block wx:for="{{postlist.assets}}" wx:key="item">
+              <view class='picbox'>
+                <image class='asset' src="https://api.changching.cn/{{item.asset}}" alt="" />
+              </view>
+            </block>
+          </view>
+          <view class='time t3'>{{postlist.time}}</view>
+        </view>
+
+      </view>
+      <block wx:if="{{path=='fabu'}}">
+        <view class="btn">
+          <button class='gogroup' bindtap="back">回到首页</button>
+          <button class='back' open-type='share'>转发到微信</button>
+        </view>
+      </block>
+      <block wx:if="{{path!='fabu'}}">
+        <view class="btn">
+          <button class='gogroup' bindtap="back">返回</button>
+          <button class='back' open-type='share'>转发到微信</button>
+        </view>
+      </block>
+    </block>
+    <block wx:elif="{{postlist.leixing=='event'}}">
+      <view class='user'>
+        <view class='ubox'>
+          <text class="things-name t2">{{postlist.title}}</text>
+          <text class="things-name t2">{{postlist.body}}</text>
+          <view class='assetsbox'>
+            <block wx:for="{{postlist.assets}}" wx:key="item">
+              <view class='picbox'>
+                <image class='asset' src="https://api.changching.cn/{{item.asset}}" alt="" />
+              </view>
+            </block>
+          </view>
+          <view class='hhuser'>
+            <view class='huser'>
+              <image class='userasset' src="{{postlist.userasset}}" alt="" />
+              <view class='name t2'>{{postlist.username}}</view>
+            </view>
+            <view class='time t3'>{{postlist.time}}</view>
+          </view>
+        </view>
+
+      </view>
+      <block wx:if="{{path=='fabu'}}">
+        <view class="btn">
+          <button class='gogroup' bindtap="back">回到首页</button>
+          <button class='back' open-type='share'>转发到微信</button>
+        </view>
+      </block>
+      <block wx:if="{{path!='fabu'}}">
+        <view class="btn">
+          <button class='gogroup' bindtap="back">返回</button>
+          <button class='back' open-type='share'>转发到微信</button>
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <view class='tuijianbox'>
+        <view class='ftitle'>姓名：{{postlist.name}}</view>
+        <view class='fuwu'>
+          <view class='fname t2'>备注：{{postlist.desc}}</view>
+          <view class='fdesc t3' bindtap='call'>电话：{{postlist.phone}}</view>
+        </view>
+        <view class='tuijianren'>
+          <image class='userasset' src="{{postlist.userasset}}" alt="" />
+          <view class=''>{{postlist.username}}的推荐</view>
+        </view>
+      </view>
+      <view class='user'>
+        <view class='ubox'>
+          <view class='tags'>
+            <block wx:for="{{postlist.tags}}" wx:key="index">
+              <view class='zan'>
+                <view class='bbox'>
+                  <text class='tag'>{{item.tag}}</text>
+                  <progress percent="20" />
+                </view>
+                <block wx:if="{{message}}">
+                  <image class='zanicon' bindtap='praise' data-name='{{item.tag}}' src="/pages/images/praise_icon_h.png"></image>
+                  <text>{{item.sumthumbs}}</text>
+                </block>
+                <block wx:else>
+                  <image class='zanicon' bindtap='praise' data-name='{{item.tag}}' src="/pages/images/praise_icon_n.png"></image>
+                  <text>{{item.sumthumbs}}</text>
+                </block>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+      <block wx:if="{{path=='fabu'}}">
+        <view class="btn">
+          <button class='gogroup' bindtap="back">回到首页</button>
+          <button class='back' open-type='share'>转发到微信</button>
+        </view>
+      </block>
+      <block wx:if="{{path!='fabu'}}">
+        <view class="btn">
+          <button class='gogroup' bindtap="back">返回</button>
+          <button class='back' open-type='share'>转发到微信</button>
+        </view>
+      </block>
+    </block>
+  </view>
+</view>
+<block wx:if="{{postlist.leixing=='event'}}">
+  <view class='baoming'>
+    <block wx:if="{{postlist.status=='您已报名'}}">
+      <view class='canjia' data-id='{{postlist.id}}' bindtap='yibaoming'>您已报名</view>
+    </block>
+    <block wx:if="{{postlist.status!='您已报名'}}">
+      <view class='canjia' data-id='{{postlist.id}}' bindtap='baoming'>我要参加</view>
+    </block>
+    <view class='allpeo'>
+      <!-- <view bindtap='showDialogBtn'>1243</view> -->
+      <block wx:for="{{applies}}" wx:key="index">
+        <image class='userasset' data-applies='{{applies}}' bindtap='showDialogBtn' src="{{item.useravatar}}" alt="" />
+      </block>
+    </view>
+  </view>
+</block>
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">用户信息</view>
+  <view class="modal-content"></view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>
+<view class='allmessage'>
+  <view class='mbox'>
+    <view class='mtitle t2'>全部留言（{{commentlenght}}）</view>
+    <view class='post t2' bindtap="powerDrawer" data-statu="open">发留言</view>
+  </view>
+  <!--mask-->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+  <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+    <!--drawer content-->
+    <view class="drawer_title">发布留言</view>
+    <view class="drawer_content">
+      <view class="section">
+        <textarea bindinput="getComment" value="{{title}}" auto-height placeholder="请输入您的内容" focus="{{focus}}" />
+      </view>
+    </view>
+    <view class='btnbox'>
+      <view class="btn_no" bindtap="powerDrawer" data-statu="close">取消</view>
+      <view class="btn_ok" bindtap="postComment" data-title="{{title}}" data-statu="close">确定</view>
+    </view>
+  </view>
+  <block wx:for="{{commentlists}}" wx:key="index">
+    <view class='user'>
+      <image class='userasset' src="{{item.userasset}}" alt="" />
+      <view class='ubox'>
+        <view class='name t2'>{{item.username}}</view>
+        <text class="things-name t2">{{item.title}}</text>
+        <view class='time t3'>{{item.time}}</view>
+      </view>
+    </view>
+  </block>
+</view>

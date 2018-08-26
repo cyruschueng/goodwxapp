@@ -1,0 +1,85 @@
+<view class="fix-box" style='bottom:50px;'>
+  <view class="relative-box">
+    <scroll-view scroll-y style='width:100%;height:100%;'>
+      <view class="publish-form">
+        <scroll-view scroll-x style='width:100%;height:100px;'>
+          <view class="image-list" style='width:{{innerwidth}}px;'>
+            <block wx:for="{{proinnerimg}}">
+              <view class="image-block-item">
+                <image src="{{item.img_url}}"></image>
+                <view bindtap='delpic' class="image-delete" data-id="{{item.id}}">×</view>
+              </view>
+            </block>
+            <view class="image-block-add" bindtap='proinnerpic'>
+              <view class="image-add-btn">+</view>
+            </view>
+          </view>
+        </scroll-view>
+        <view class="form-item">
+          <view class="form-item-name">名称</view>
+          <view class="form-item-value">
+            <input type='text' placeholder='输入商品名称' bindinput='productNameInput' value='{{goods_name}}'></input>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-item-name">类目</view>
+            <picker class="form-picker" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                <view data-index="{{index}}" class="picker">{{array[index]}}</view>
+            </picker> 
+            <image class='form-arrow' src='/images/myCenter/arrow.png'></image>
+        </view>
+        <view class="form-item">
+          <view class="form-item-name">材质</view>
+          <view class="form-item-value">
+            <input type='text' placeholder='输入材质' bindinput='MaterialInput' value='{{material}}'></input>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-item-name">价格</view>
+          <view class="form-item-value">
+            <input type='number' placeholder='输入价格' bindinput='priceInput' value='{{price}}'></input>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-item-name">原价格</view>
+          <view class="form-item-value">
+            <input type='number' placeholder='输入原价格' bindinput='org_priceInput' value='{{oldprice}}'></input>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-item-name">运费</view>
+          <view class="form-item-value">
+            <input type='number' placeholder='输入运费' bindinput='freight_priceInput'></input>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-item-name">库存</view>
+          <view class="form-item-value">
+            <input type='number' placeholder='输入库存' bindinput='stock_numberInput' value='{{stock_number}}'></input>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-item-name">发货地</view>
+          <view class="form-item-value">
+            <input type='text' placeholder='输入发货地址' bindinput='deliver_addressInput'></input>
+          </view>
+        </view>
+        <view class="form-item" style='height:initial;margin-bottom:10px;padding:10px;'>
+            <view class="form-item-name">图文编辑<text style='color:#999;font-size:11px;'>(禁止发布违法违禁假冒违规商品)</text></view>
+            <view class='pro-desc'>
+                <textarea bindinput="bindTextAreaBlur" auto-height placeholder="输入描述" value='{{goods_desc}}'/>
+            </view>
+            <view class="img-v">
+              <view class="img" wx:for="{{descimglist}}">
+                  <image src="{{item.img_url}}" mode="aspectFill" bindtap="addDecpic"></image>
+                  <text class='colse'>-</text>
+              </view> 
+            <image  style='display:block;width:80px;height:80px;margin-bottom:10px;'src="/images/introduce/medium/add.png" bindtap="addDecpicImg"></image>
+            </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<view class="save-btn" bindtap='publisheditGoods'>保存发布</view>
+<view class="continue-btn">继续发布</view>

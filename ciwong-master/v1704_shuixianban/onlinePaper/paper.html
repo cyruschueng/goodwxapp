@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线作答</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-sca.0"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <link rel="stylesheet" href="js/plyr/dist/plyr.css">
+    <link rel="stylesheet" href="js/swiper/swiper.min.css">
+    <link rel="stylesheet" href="css/gestalt.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <script src="js/adaptive.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/jquery-1.8.0.min.js"></script>
+    <script src="js/swiper/swiper.min.js"></script>
+    <script src="js/plyr/dist/plyr.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/require.js?v=2017032908"></script>
+</head>
+<body data-bind="if: paper">
+<div class="swiper-container swiper-container-h"
+     data-bind="template:{ name: 'paperTemplate', data: paper, afterRender: afterRender}"></div>
+<script type="text/javascript">
+    $.showLoading();
+    function callback(data) {
+        require(["ko", "ciwong", "paper", "cordova", "questionDoTemplate"], function (ko, ciwong, paper) {
+            var settings = {
+                data: (typeof data) === "object" ? data : JSON.parse(data),
+                afterRender: after
+            }
+            ko.applyBindings(new paper.viewModel.preView(settings));
+        })
+    }
+
+    function after() {
+        var currPageY = 0,
+                boxH,
+                questBox = '.questArea',
+                answerBox = '.answerArea',
+                wrapperH = $(window).height(),
+                answerAreaH = $(answerBox).height(),
+                margins = parseInt(wrapperH * 0.1);
+
+        $(".optList li").on("click", function () {
+            if ($(this).find('.check').length > 0) {
+                if ($(this).hasClass('curr')) {
+                    $(this).removeClass('curr').addClass("hover").siblings().removeClass("hover");
+                } else {
+                    $(this).addClass('curr hover').siblings().removeClass("hover");
+                }
+            } else {
+                $(this).addClass("curr hover").siblings().removeClass("curr hover");
+            }
+        })
+
+        var swiperInstall2;
+        ciwong.swiperInstall = new Swiper('.swiper-container-h', {
+            // initialSlide: 41,
+            onInit: function () {
+                swiperInstall2 = new Swiper('.answerInfo', {
+                    nested: true,
+                    onTransitionEnd:function(swiper){
+                        $('.answerCon textarea').blur();
+                        
+                        // 最后一题可视界面必须显示完成按钮
+                        if( (ciwong && ciwong.swiperInstall && ciwong.swiperInstall.isEnd) && (swiperInstall2.length>0 && swiperInstall2[swiperInstall2.length-1].isEnd) ){
+                            $('.swiper-slide-active .answerCon .swiper-slide-active').each(function(){
+                                var _box = $(this).closest('.wrapper');
+                                var _answerBox = _box.find(answerBox);
+                                var _questBox = _box.find(questBox);
+                                var _finishAction = _answerBox.find('.finishAction');
+                                if(_finishAction.offset && _answerBox.offset){
+                                    var _fOffset = _finishAction.offset()
+                                    var _aOffset = _answerBox.offset()
+                                    if(_fOffset && _fOffset.top && _aOffset && _aOffset.top){
+                                        var _answerBoxH = _fOffset.top-_aOffset.top+_finishAction.height()+10
+                                        _answerBox.animate({height:_answerBoxH})
+                                        _questBox.animate({height:wrapperH - _answerBoxH})
+                                    }
+                                }
+                            })
+                        }
+                    }
+                })
+            },
+            onTransitionEnd:function(swiper){
+                $('.answerCon textarea').blur();
+            }
+        })
+
+        var agentInfo = window.navigator.userAgent;
+        if (agentInfo.indexOf("iPhone") > -1 || agentInfo.indexOf("iPad") > -1 || agentInfo.indexOf("iPod") > -1) {
+            //$(".answerCon").height(wrapperH);
+        }
+
+        $(questBox).height(wrapperH - answerAreaH);
+        $(".weui_toast,.weui_masktransparent").remove()
+
+
+        $('.toggleBox .btn').on('touchstart', function (e) {
+            var box = $(this).closest('.wrapper');
+            var _touch = e.originalEvent.targetTouches[0];
+            currPageY = _touch.pageY;
+            boxH = box.find(answerBox).height();
+            ciwong.swiperInstall.lockSwipes();
+            e.preventDefault();
+        }).on('touchmove', function (e) {
+            var box = $(this).closest('.wrapper');
+            var _touch = e.originalEvent.targetTouches[0];
+            var currY = _touch.pageY;
+            if (currY <= 5) {
+                return;
+            }
+            if (currY < currPageY) {
+                if (box.find(answerBox).height() >= wrapperH - margins) {
+                    return;
+                }
+                var moveLen = currPageY - _touch.pageY;
+                box.find(answerBox).height(boxH + moveLen);
+                box.find(questBox).height(wrapperH - boxH - moveLen);
+            } else {
+                if (box.find(answerBox).height() <= margins * 3) {
+                    return;
+                }
+                var moveLen = _touch.pageY - currPageY;
+                box.find(answerBox).height(boxH - moveLen);
+                box.find(questBox).height(wrapperH - boxH + moveLen);
+            }
+            e.preventDefault();
+        }).on('touchend', ciwong.swiperInstall.unlockSwipes);
+    
+        // 禁止ipad的textarea输入法上一项下一项操作以免样式错乱
+        if(/iPhone|iPad|iPod/i.test(navigator.userAgent)){
+            $('.answerCon textarea').blur(function(){
+                var isActive = true;
+                $(this).parents('.swiper-slide').each(function(index, el) {
+                    if(!$(this).hasClass('swiper-slide-active')){
+                        isActive = false;
+                        return;
+                    }
+                });
+                console.log(isActive)
+                if(isActive){
+                    $(this).focus();
+                    return false;
+                }
+            })
+        }
+        // 禁止输入emoji表情字符串到输入框
+        $('textarea,input').on('input', function(event) {
+            $(this).val( $(this).val().replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "") )
+        });
+
+    }
+
+
+</script>
+
+
+    <script>
+        var webdebug
+        if(location.href.split('?debug')[1]) webdebug = 1;
+        
+        if(webdebug) {
+            $(function(){
+                $.getJSON('../paper.json', {}, function(json, textStatus) {
+                    callback(json)
+                });
+            })
+        }
+    </script>
+</body>
+</html>
+
+

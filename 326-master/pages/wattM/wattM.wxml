@@ -1,0 +1,36 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+<!--top  str-->
+    <view class='panel flexCenter  Skin'>
+    <view class='panelL'>
+      <image class="imgL"src="/images/db.png"></image>
+    </view>
+    <view class='panelL'>
+      <view>{{WatDevPage.pn}}</view>
+      <view>地址:{{WatDevPage.devaddr}}</view>
+    </view>
+    <!--右上角下拉菜单str  -->
+  <view class='flexV1 deviceDetMode mr03'>
+  <template is="tapMenu" data="{{tapBox: tapBox}}"/> 
+</view>
+    <!--右上角下拉菜单end  -->
+  </view>
+<!--top end  -->
+<!--更新时间str  -->
+<view class='flexCenter padding015 Skin2'>更新时间：{{cDate}}</view>
+<!--更新时间end  -->
+<view class='width100'>
+  <template is="kalendar" data="{{kalendar: cdate}}"/>
+  <template is="slider" data="{{slider: slider}}"/>
+</view>
+  <!--参数表 str  -->
+  <view class='paraList wattMLis flexv1 modeldrawer_content' >
+    <view id='{{index}}'  wx:for="{{WattDetailLis}}" wx:for-index="index"   wx:for-item="WattDetailLis">
+      <view>{{WattDetailLis.title}}</view>
+      <view>{{WattDetailLis.unit}}</view>
+    </view>
+  </view>
+  <!--参数表 end  -->
+  <template is="operaModel" data="{{modelDat: modelDat}}"/>
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

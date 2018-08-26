@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>Form Layouts</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
+		<link href="css/autocomplete.css" rel="stylesheet" type="text/css">
+		<style>
+			td {
+				word-break: break-all
+			}
+		</style>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+	</head>
+
+	<body class="children-body">
+
+		<!--body wrapper start-->
+		<section>
+			<!-- page start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading">
+							平台消息
+						</header>
+						<div class="panel-body">
+							<form class="form-horizontal" role="form">
+								<div class="row clearfix">
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">标题:</label>
+											<div class="col-lg-9">
+
+												<input type="text" class="form-control" id="sr_title">
+
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label class="control-label col-lg-3 col-sm-3 ">开始时间:</label>
+											<div class="col-lg-9">
+												<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+													<input type="text" readonly="" value="" size="16" class="form-control" id="begintime">
+													<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary date-set" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label class="control-label col-lg-3 col-sm-3 ">结束时间:</label>
+											<div class="col-lg-9">
+												<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-12-12" class="input-append date dpYears">
+													<input type="text" readonly="" value="" size="16" class="form-control" id="endtime">
+													<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="text-right">
+											<button class="btn btn-info" type="button" id="btn_Search">搜索</button>
+											<button class="btn btn-danger" type="button" id="btn_Reset">重置</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
+
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+
+					<section class="panel">
+						<div class="panel-heading">
+							<div class="text-right">
+								<button class="btn btn-success" type="button" id="btn_Add">添加</button>
+								<button class="btn btn-danger" type="button" id="btn_batchDel">批量删除</button>
+							</div>
+						</div>
+						<div class="panel-body">
+							<table id="bs" class="table table-striped table-condensed table-hover talbe-border" data-side-pagination="server">
+								<thead>
+									<tr>
+										<th data-field="status" data-align="center" data-checkbox="true"></th>
+										<th data-field="Username" data-align="center">创建人</th>
+										<th data-field="Title" data-align="center">标题</th>
+										<th data-field="Message" data-align="center" data-width="30%">内容</th>
+										<th data-field="BeginDateTimeSTR" data-align="center">开始时间</th>
+										<th data-field="EndDateTimeSTR" data-align="center">结束时间</th>
+										<th data-field="Id" data-align="center" data-formatter="operationFormatter">操作</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+						<!-- Modal -->
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" data-backdrop="static">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<label id="lbl_IdValue" hidden="hidden"></label>
+										<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+										<h4 class="modal-title" id="tip_title">添加平台消息</h4>
+									</div>
+									<div class="modal-body">
+										<form class="form-horizontal" id="sub_form">
+											<div class="form-group ">
+												<label for="cemail" class="control-label col-lg-3">标题</label>
+												<div class="col-lg-8">
+													<input class="form-control " id="md_title" name="md_title" type="text" maxlength="50" />
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">内容</label>
+												<div class="col-lg-8">
+													<textarea style="resize: none;" class="form-control" name="md_content" rows="5" id="md_content" maxlength="200"></textarea>
+													<!--<input class="form-control " id="md_content" name="md_content" type="text" />-->
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">用户名</label>
+												<div class="col-lg-8">
+													<!--<select class="form-control input-lg m-bot15" id="UserIDlist">
+
+										                            </select>-->
+													<div id="UserIDlist"></div>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">开始时间</label>
+												<div class="col-lg-8">
+													<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+														<input type="text" readonly="" value="" size="16" class="form-control" id="in_begintime" name="in_begintime">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+													</div>
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="curl" class="control-label col-lg-3">结束时间</label>
+												<div class="col-lg-8">
+													<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2016-01-01" class="input-append date dpYears">
+														<input type="text" readonly="" value="" size="16" class="form-control" id="in_endtime" name="in_endtime">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                          </span>
+													</div>
+												</div>
+												<div class="col-lg-1">
+													<span style="color: red;">*</span>
+												</div>
+											</div>
+
+										</form>
+									</div>
+									<div class="modal-footer">
+
+										<button type="button" class="btn btn-success" onclick="Save();">保存</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- modal -->
+
+					</section>
+
+					<!--body wrapper end-->
+
+				</div>
+				<!-- main content end-->
+			</div>
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/bootstrapValidator.js"></script>
+		<script src="js/autocomplete.js"></script>
+		<script>
+			$(document).ready(function() {
+				a()
+			})
+
+			//
+			var a = function() {
+				var array_z = [0, 1, 2, 3]
+				for (var num in array_z) {
+					$.ajax({
+						type: "get",
+						url: yshurl + "GetOrderInfoById",
+						async: false,
+						data: {
+							"aa": array_z[num]
+						},
+						success: function(data) {
+							alert(1)
+						},
+						error: function(error) {
+							alert(2)
+						}
+					});
+				}
+			}
+		</script>
+		<!--
+	作者：443267568@qq.com
+	时间：2016-05-03
+	描述：修改结束
+-->
+	</body>
+
+</html>

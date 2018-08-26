@@ -1,0 +1,79 @@
+<import src="../item/userItem.wxml" />
+<import src="../item/emptyList.wxml" />
+<import src="/zanui/tab/index.wxml" />
+<view class="container">
+    <template is="zan-tab" data="{{tab: tabs, componentId: 'tabs'}}"></template>
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索" confirm-type="search" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">搜索</view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{searchResult.length > 0 && inputVal.length>0}}">
+        <block wx:for="{{searchResult}}" wx:key="*this" wx:for-index="index">
+            <view bindtap="selectUser" data-name="{{item.name}}" data-avatar="{{item.avatar}}" class="weui-cell" hover-class="weui-cell_active">
+                <image  src="{{item.avatar}}?imageView2/2/w/150" style="width: 2em;height: 2em;margin-right: 0.6em;"></image>
+                <view class="weui-cell__bd">
+                    <view>{{item.name}}</view>
+                </view>
+                <image  src="http://icons.maiyizhi.cn/zuoshangjiantou.png" style="width: 2em;height: 2em;margin-right: 0.6em;"></image>
+            </view>
+        </block>
+    </view>
+    <view class="weui-cells searchbar-result" wx:elif="{{inputVal.length>0}}">
+        <view class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+                <view>木有这个人呢</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length==0&&wuserHistory.length>0}}">
+        <view  class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+                <view style="font-weight: 700;">历史搜索</view>
+            </view>
+        </view>
+        <block wx:for="{{wuserHistory}}" wx:key="*this" wx:for-index="index">
+            <view bindtap="selectUser" data-name="{{item.name}}" data-avatar="{{item.avatar}}" class="weui-cell" hover-class="weui-cell_active">
+                <image  src="{{item.avatar}}?imageView2/2/w/150" style="width: 2em;height: 2em;margin-right: 0.6em;"></image>
+                <view class="weui-cell__bd">
+                    <view>{{item.name}}</view>
+                </view>
+                <image  src="http://icons.maiyizhi.cn/zuoshangjiantou.png" style="width: 2em;height: 2em;margin-right: 0.6em;"></image>
+            </view>
+        </block>
+    </view>
+    <block wx:if="{{list.length>0}}">
+        <view class="grid-view">
+            <block wx:for="{{list}}" wx:key="{{item.idx}}" wx:for-index="idx">
+                <template is="user-item" data="{{item: item}}" />
+            </block>
+        </view>
+
+        <!-- FooterView -->
+        <view class="">
+            <view wx:if="{{hasMore}}" class="weui-loadmore">
+                <view class="weui-loading"></view>
+                <view class="weui-loadmore__tips">正在加载</view>
+            </view>
+            <view wx:elif="{{list.length>9}}" class="weui-loadmore weui-loadmore_line">
+                <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多啦...</view>
+            </view>
+        </view>
+    </block>
+    <block wx:elif="{{list.length == 0}}">
+        <view class="weui-tab__content" >
+            <template is="empty_list" data="{{title: '暂时没有内容呢'}}" />
+        </view>
+    </block>
+</view>

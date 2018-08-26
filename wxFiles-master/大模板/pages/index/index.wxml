@@ -1,0 +1,7 @@
+<import src="../template/template.wxml"/>
+<view  wx:for="{{tabBar.list}}" wx:for-item="li" wx:for-index="page_flag" class='container' wx:if="{{li.active}}" style='background:{{body.backgroundColor}}'>
+  <block wx:for="{{pageData[page_flag].components}}" wx:for-item="it" wx:for-index="comp_index">
+    <template is="{{it.name}}" data="{{data:it}}"></template>
+  </block>
+</view>
+<template is="tabBar" data="{{data:tabBar}}"></template>

@@ -1,0 +1,16 @@
+<view class='containers'>
+<view class='altTitle'>可订日期<text wx:if="{{chmon}}">（已选日期{{chmon}}-{{chday}}）</text></view>
+  <view class='box' wx:for='{{days}}' wx:key='k' wx:for-index='k'>
+    <view class='title'>{{MonthArr[k]}}月</view>
+    <view class='week'>
+      <view class='weeks' wx:for='{{weeks}}' wx:key='{{item}}'>{{item}}</view>
+    </view>
+    <view class='date'>
+      <view class='day' wx:for='{{item}}' wx:key='index' wx:for-item='index' bindtap='choosedate' data-cdate='{{days[k][index]}}'>
+        <text wx:if='{{item[index].color}}' class='{{chmon == MonthArr[k] && chday == item[index].day?"days choosed":"days"}}' style='{{item[index].style}}'>{{item[index].day}}</text>
+        <text wx:else class='days' style='color: #dbdbdb'>{{item[index].day}}</text>
+      </view>
+    </view>
+  </view>
+</view> 
+ 

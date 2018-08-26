@@ -1,0 +1,45 @@
+<!--pages/addVote/addVote.wxml-->
+<view class="container">
+  <form  bindsubmit="formSubmit" class="addPublic">
+      <view class="publicInput">
+          <input type="value" name="title" placeholder="请输入投票标题(必填)" disabled="{{themeDisabled}}" bindconfirm="themeConfirm" class="themeInput" placeholder-class="inputPlaceholder" required/>
+          <textarea placeholder="补充描述内容(选填)" name="content" disabled="{{descDisabled}}"  bindconfirm="descConfirm" class="descInput" placeholder-class="inputPlaceholder"/>
+          <view class="options">
+            <block wx:for="{{options}}" wx:key="*this">
+              <view class="flexBox voteOption">
+                  <text bindtap="{{index > 1 ? 'delOption':''}}" data-idx="{{index}}">-</text>
+                  <input type="text" placeholder="请输入选项内容{{index > 1 ?'(选填)':'(必填)'}}" disabled="{{optionsDisabled}}" bindconfirm="optionsConfirmHandle" placeholder-class="inputPlaceholder" name="option_{{item}}"/>
+              </view>
+            </block>
+            <view class="addOption" bindtap="addOption"><text>+</text>添加选项</view>
+          </view>
+      </view>
+      <view class="publicSet">
+          <view class="publicSet-item">
+            <text>署名：</text>
+            <input name="author" value="{{userInfo.nickName}}" class="tr"></input>
+          </view>
+          <radio-group class="publicSet-item" name="vote_classify">
+            <text>投票类型：</text>
+            <view class="voteType">
+              <label class="radio" wx:for="{{voteType}}" wx:key="value">
+                <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+              </label>
+            </view>
+          </radio-group>
+          <view class="publicSet-item vote-anonymous">
+              <text>匿名投票：</text>
+              <switch  name="anonymous"/>
+          </view>
+            <picker mode="date" value="{{strDate}}" start="{{curDate}}" bindchange="bindDateChange">
+               <view class="publicSet-item publicDate"><text>截止日期：</text><text>{{strDate}}</text></view>
+            </picker>
+            <picker mode="time" value="{{strTime}}" start="{{curTime}}" bindchange="bindTimeChange">
+                <view class="publicSet-item publicDate"><text>截止时间：</text><text>{{strTime}}</text></view>
+            </picker>
+      </view>
+      <input type="hidden" name="deadline_date" class="none" value="{{strDate}}"/>
+      <input type="hidden" name="deadline_time" class="none" value="{{strTime}}"/>
+      <button formType="submit" type="primary" class="submitBtn" disabled='{{submitDisabled}}'>提交</button>
+  </form>
+</view>

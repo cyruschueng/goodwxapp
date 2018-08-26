@@ -1,0 +1,48 @@
+<view class="container">
+	<view class="info-layout">
+		<view class="name-layout">
+			<view class="label">	群名称	</view>
+			<view class="name-label"><input type="text" bindinput='qunNicename' value="{{group_name}}"/></view>
+		</view>
+		<view class="birth-layout">
+			<view class="label">订阅本群生日提醒	</view>
+			<view class="btn-desc"></view>
+			<switch class="switch" color="red" checked="{{checked1}}" bindchange="switch1Change"></switch>
+		</view>
+		<view class="birth-layout" bindtap='qunName'>
+			<view class="label">	成员昵称</view>
+			<image class="arrow" src="http://ovhvevt35.bkt.clouddn.com/birthwall_rightArrow.png"></image>
+		</view>
+		<view class="birth-layout" bindtap='myself'>
+			<view class="label">	我的生日</view>
+			<view class="btn-desc">	
+        {{informAll.config.birth_year}}年{{informAll.config.birth_month}}月{{informAll.config.birth_day}}日
+      </view>
+			<image class="arrow" src="http://ovhvevt35.bkt.clouddn.com/birthwall_rightArrow.png"></image>
+		</view>
+		<view class="birth-layout">
+			<view class="tip-label">本群成员不可见我的出生年份</view>
+			<switch class="switch" color="red" checked="{{checked2}}" bindchange="switch2Change"></switch>
+		</view>
+    <!--群主  -->
+     <view wx:if="{{informAll.group_info.is_captain==true}}"> 
+        <view class="birth-layout" bindtap='move' data-types="1">
+          <view class="label">	移除群成员</view>
+          <view class="btn-desc">	</view>
+          <image class="arrow" src="http://ovhvevt35.bkt.clouddn.com/birthwall_rightArrow.png"></image>
+        </view>
+        <view class="birth-layout" bindtap='qunmove' data-types="2">
+          <view class="label">	转让群主权限</view>
+          <view class="btn-desc">	</view>
+          <image class="arrow" src="http://ovhvevt35.bkt.clouddn.com/birthwall_rightArrow.png"></image>
+        </view>
+        <view class="birth-layout">
+          <view class="tip-label">仅本群微信群成员可加入生日群</view>
+          <switch class="switch" color="red" checked="{{checked3}}" bindchange="switch3Change"></switch>
+        </view>
+        <view class='title' wx:if="{{checked3==false}}">开关已关闭。微信里的任何人均可通过生日群成员邀请加入此群。</view>
+        <view class='title' wx:else>开关已开启。只有创建生日群时,群主第一次发到的微信群里的成员才能加入生日群,不在微信群的其他人无法加入</view>
+     </view> 
+	</view>
+	<view class="quit-btn" bindtap='out'>退出生日群</view>
+</view>

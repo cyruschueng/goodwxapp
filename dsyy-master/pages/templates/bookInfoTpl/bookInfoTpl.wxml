@@ -1,0 +1,48 @@
+<!--该模板用于编辑页面-->
+<template name="bookInfoBase">
+  <view class="book">
+    <view class="book-img">
+      <image src="{{images_medium}}" class="book-img-big" mode="aspectFill"></image>
+    </view>
+    <view class="book-info">
+      <view class="text-oneline margin-top-5">{{title}}</view>
+      <view class="text-oneline margin-top-5">{{publisher}} {{author}}</view>
+      <view class="text-oneline margin-top-5">{{type}} / {{pages}}页 / {{pubdate}}</view>
+      <view class="text-threeline margin-top-5 grey-font ">{{summary}}</view>
+    </view>
+  </view>
+</template>
+
+<!--该模板用于首页展示-->
+<template name="bookInfoIndex">
+  <view class="book border-bottom margin-left-40 margin-right-40 padding-top-25 padding-bottom-25" bindtap="jumpBookInfo" data-bookid="{{bookInfo.id}}">
+    <view class="book-img">
+      <image src="{{bookInfo.images_medium}}" class="book-img-sml" mode="aspectFill"></image>
+    </view>
+    <view class="book-info">
+      <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{bookInfo.title}}</view>
+      <view class="text-oneline margin-bottom-10 book-font">作者： {{bookInfo.author}}</view>
+      <view class="text-oneline margin-bottom-10 book-font">页数：{{bookInfo.pages}}页</view>
+      <view class="text-oneline margin-bottom-10 book-font">出版社：{{bookInfo.publisher}}</view>
+      <view class="text-oneline margin-bottom-10 book-font">图书分类：{{bookInfo.type}}</view>
+      <!-- <view class="text-fourline margin-bottom-10 book-font">简介：{{bookInfo.summary}}</view> -->
+    </view>
+  </view>
+</template>
+
+<!--该模板用于图书搜索页-->
+<template name="bookInfoSearch">
+  <view class="book border-bottom margin-left-40 margin-right-40 padding-top-25 padding-bottom-25" bindtap="jumpBookInfo" data-bookid="{{id}}">
+    <view class="book-img">
+      <image src="{{images_medium}}" class="book-img-sml" mode="aspectFill"></image>
+    </view>
+    <view class="book-info">
+      <view class="text-oneline font-weight margin-bottom-10 book-title-font">{{title}}</view>
+      <view class="text-oneline margin-bottom-10 book-font">作者： {{author}}</view>
+      <view class="text-oneline margin-bottom-10 book-font">页数：{{pages}}页</view>
+      <view class="text-oneline margin-bottom-10 book-font">出版社：{{publisher}}</view>
+      <view class="text-oneline margin-bottom-10 book-font">图书分类：{{type}}</view>
+      <!-- <view class="text-fourline margin-bottom-10 book-font">简介：{{summary}}</view> -->
+    </view>
+  </view>
+</template>

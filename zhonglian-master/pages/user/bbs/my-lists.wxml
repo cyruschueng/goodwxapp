@@ -1,0 +1,30 @@
+<!--暂无内容提示 start-->
+<view class="no-content tc" wx:if="{{data == null}}">
+  <text class="no-content-icon iconfont icon-yemianwuneirong"></text>
+  <view class="no-content-font">暂无帖子信息</view>
+</view>
+<!--暂无内容提示 end-->
+
+<block wx:else>
+  <view class="forumlist">
+    <block wx:for="{{data}}" wx:key="*this">
+      <view class="list-item gridXt" catchtap="onNavigateTap" data-url="../../bbs/detail/detail?id={{item.id}}">
+        <view class="title">
+          <view class="state marrow" wx:if="{{item.digest > 1}}">精华</view>
+          <text>{{item.title}}</text>
+        </view>
+        <view class="info linght f12">
+          <text class="fr iconfont icon-comment">{{item.reply_count}}</text>
+          <text>{{item.post_time}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!--loading start-->
+  <view class="m20 tc grey loading" wx:if="{{isShowLoading}}">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在加载...</text>
+  </view>
+  <!--loading end-->
+</block>

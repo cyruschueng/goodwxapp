@@ -1,0 +1,107 @@
+<!--pages/answer/answer.wxml-->
+<view class="box">
+    <view class="box_left">
+        <image  mode="aspectFit"  src="{{logo}}"></image>
+    </view>
+    <view class="box_center">
+        <view class="title">{{title}}</view>
+        <view class="describe" wx:if="{{describe}}">{{describe}}</view>
+        <view class="security">
+          <image wx:if="{{is_anony==1}}" src="../../images/4.png"></image>
+          <image wx:if="{{is_anony==2}}"  src="../../images/1.png"></image>
+          <image wx:if="{{has_correct==1}}" src="../../images/3.png"></image>
+          <image wx:if="{{is_open==2}}"  src="../../images/5.png"></image>
+          <image wx:if="{{is_open==1}}"  src="../../images/2.png"></image>
+          <image wx:if="{{is_push==1}}"  src="../../images/6.png"></image>
+        </view>
+    </view>
+    <view class="box_right">
+        <view class="persons">
+          <image  mode="aspectFit"  src="../../images/ps.png">
+          </image>
+          <text>{{num}}</text>
+        </view>
+        <view class="time">
+           <button bindtap='back'>编辑</button>
+        </view>
+    </view>
+</view>
+<view class="box send">
+    <image src="../../images/tabbar/create_icon_normal@3x.png"></image>
+    <text>是否发布到广场</text>
+    <view class="right"><switch color="#1f5cd8" checked="{{is_push==1}}" bindchange="switchChange"/></view>
+</view>
+<view class="box answers">
+    <image src="../../images/tabbar/bookstore_default@3x.png"></image>
+    <text>题目</text>
+     <view class="right"><button class="write" wx:if="{{!go_over}}" bindtap='shift'>编辑</button><button class="write2" wx:else bindtap='shift_two'>完成</button></view> 
+</view>
+<view wx:for="{{nums}}"  wx:key="this*" wx:for-index="iIndex" wx:for-item="itemIndex" class="bg">
+  <view wx:if="{{itemIndex.type==3}}"  class="inputTxt">
+    <view class="title"><view class="show" wx:if="{{show}}" data-id="{{iIndex}}" bindtap='show'><image wx:if="{{itemIndex.show}}" src="../../images/top.png"></image><image wx:else src="../../images/bottom.png"></image></view><view class="reduce" wx:if="{{go_del}}" data-id="{{itemIndex.id}}" bindtap='del'><image src="../../images/reduce.png"></image></view><text class="title_here">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(填空)</text><view class="goEidt"  data-id="{{itemIndex.id}}" bindtap='goEidt'><image  src="../../images/right.png"></image></view></view>
+    <view class="bigUrl" wx:if="{{itemIndex.show&&itemIndex.img}}"><image mode="aspectFit" src="{{itemIndex.img}}"></image></view>
+    <textarea wx:if="{{itemIndex.show}}" class="Input" value="{{itemIndex.correct}}" disabled='true' data-key="{{iIndex}}"  maxlength="200"></textarea>
+  </view>
+  <radio-group  wx:if="{{itemIndex.type==1&&itemIndex.option_type==3}}" data-key="{{iIndex}}">
+   <view class="title"><view class="show" wx:if="{{show}}" data-id="{{iIndex}}" bindtap='show'><image wx:if="{{itemIndex.show}}" src="../../images/top.png"></image><image wx:else src="../../images/bottom.png"></image></view><view class="reduce" wx:if="{{go_del}}" data-id="{{itemIndex.id}}" bindtap='del'><image src="../../images/reduce.png"></image></view><text class="title_here">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(图文单选)</text><view class="goEidt"  data-id="{{itemIndex.id}}" bindtap='goEidt'><image src="../../images/right.png"></image></view></view>
+   <view class="bigUrl" wx:if="{{itemIndex.show&&itemIndex.img}}"><image  mode="aspectFit" src="{{itemIndex.img}}"></image></view>
+    <view class="radios" wx:if="{{itemIndex.show}}" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+         <view class="radios_box {{item.if_correct==true?'active':''}}"> 
+            <label class="radio">
+              <image mode="aspectFit" src="{{item.file}}" bindlongtap='review' data-keys="{{iIndex}}" data-current="{{index}}"></image>
+              <radio value="{{index}}" checked="{{item.if_correct}}" disabled='true' class="move" color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+            </label>
+        </view>
+    </view>
+  </radio-group>
+
+  <radio-group  wx:if="{{itemIndex.type==1&&itemIndex.option_type==1}}" data-key="{{iIndex}}">
+  <view class="title"><view class="show" wx:if="{{show}}" data-id="{{iIndex}}" bindtap='show'><image wx:if="{{itemIndex.show}}" src="../../images/top.png"></image><image wx:else src="../../images/bottom.png"></image></view><view class="reduce" wx:if="{{go_del}}" data-id="{{itemIndex.id}}" bindtap='del'><image src="../../images/reduce.png"></image></view><text class="title_here">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(文字单选)</text><view class="goEidt"  data-id="{{itemIndex.id}}" bindtap='goEidt'><image src="../../images/right.png"></image></view></view>
+  <view class="bigUrl" wx:if="{{itemIndex.show&&itemIndex.img}}"><image mode="aspectFit"  src="{{itemIndex.img}}"></image></view>
+  <view class="radios" wx:if="{{itemIndex.show}}" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.if_correct==true?'active':''}}"> 
+          <label class="radio">
+            <radio value="{{index}}" checked="{{item.if_correct==true}}" disabled='true' color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+          </label>
+      </view>
+  </view>
+  </radio-group>
+
+
+  <checkbox-group  wx:if="{{itemIndex.type==2&&itemIndex.option_type==1}}" data-key="{{iIndex}}">
+  <view class="title"><view class="show" wx:if="{{show}}" data-id="{{iIndex}}" bindtap='show'><image wx:if="{{itemIndex.show}}" src="../../images/top.png"></image><image wx:else src="../../images/bottom.png"></image></view> <view class="reduce" wx:if="{{go_del}}" data-id="{{itemIndex.id}}" bindtap='del'><image src="../../images/reduce.png"></image></view><text class="title_here">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray" wx:if="{{itemIndex.multi_limit==0}}"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(文字多选)</text><text class="gray" wx:else><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(最多选{{itemIndex.multi_limit}}个)</text><view class="goEidt"  data-id="{{itemIndex.id}}" bindtap='goEidt'><image src="../../images/right.png"></image></view></view>
+  <view class="bigUrl" wx:if="{{itemIndex.show&&itemIndex.img}}"><image mode="aspectFit"  src="{{itemIndex.img}}"></image></view>
+  <view class="radios" wx:if="{{itemIndex.show}}" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.if_correct==true?'active':''}}"> 
+          <label class="radio">
+            <checkbox value="{{index}}" checked='{{item.if_correct==true}}' disabled='true' color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+          </label>
+      </view>
+  </view>
+  </checkbox-group>
+
+   <checkbox-group  wx:if="{{itemIndex.type==2&&itemIndex.option_type==3}}" data-key="{{iIndex}}">
+  <view class="title"><view class="show" wx:if="{{show}}" data-id="{{iIndex}}" bindtap='show'><image wx:if="{{itemIndex.show}}" src="../../images/top.png"></image><image wx:else src="../../images/bottom.png"></image></view><view class="reduce" wx:if="{{go_del}}" data-id="{{itemIndex.id}}" bindtap='del'><image src="../../images/reduce.png"></image></view><text class="title_here">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray" wx:if="{{itemIndex.multi_limit==0}}"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(图文多选)</text><text class="gray" wx:else><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(最多选{{itemIndex.multi_limit}}个)</text><view class="goEidt"  data-id="{{itemIndex.id}}" bindtap='goEidt'><image src="../../images/right.png"></image></view></view>
+  <view class="bigUrl" wx:if="{{itemIndex.show&&itemIndex.img}}"><image mode="aspectFit"  src="{{itemIndex.img}}"></image></view>
+  <view class="radios" wx:if="{{itemIndex.show}}" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.if_correct==true?'active':''}}"> 
+          <label class="radio">
+            <image mode="aspectFit" src="{{item.file}}" bindlongtap='review' data-keys="{{iIndex}}" data-current="{{index}}"></image>
+            <checkbox value="{{index}}" class="move" checked='{{item.if_correct==true}}' disabled='true' color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text>{{item.text}}</text>
+          </label>
+      </view>
+  </view>
+  </checkbox-group> 
+</view>
+<view wx:if="{{nums.length==0}}" class="nones">
+  暂无数据。。。
+</view>
+<button hover-class="none" class="add_answer" bindtap='go_add'>添加题目</button>
+<button bindtap='check'>完成</button>
+<view class="bottom">
+<text>图标说明</text>
+<view><text class="red">*</text>必答题</view>
+</view>
+
+
+    

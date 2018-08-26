@@ -1,0 +1,87 @@
+<view class="content">
+    <image id="banner" src="../../img/banner.png"></image>
+    <image class="bg-content" src="../../img/content.jpg"></image>
+    <image mode="aspectFit" src="../../img/begin.png" id="challenge" bindtap="toAnswer"></image>
+    <button open-type="share" class="share"><icon type="success" color="white"></icon> 转发到不同的群，挑战机会增加</button>
+    <view class="prompt" bindtap="detail">
+        <button class="left-prompt">答对12题奖励话费卡</button>
+        <button class="right-prompt">规则</button>
+    </view>
+    <view id="detail" style="display:{{bShowDetail}}">
+        <view class="detail-main">
+            <view class="item">
+                <view class="item-sign">1</view>
+                <text class="item-content">每人每天有一次免费挑战机会，同时将小程序分享到微信群后可以获得免费机会</text>
+            </view>
+            <view class="item">
+                <view class="item-sign">2</view>
+                <text class="item-content">每次挑战包含12道题目，全部答对即可获得一张5元话费卡</text>
+            </view>
+            <view class="item">
+                <view class="item-sign">3</view>
+                <text class="item-content">累计6张5元话费卡，即可兑换一张30元话费卡</text>
+            </view>
+            <view class="item">
+                <view class="item-sign">4</view>
+                <text class="item-content">用户可以将一个5元话费卡兑换为3次挑战机会</text>
+            </view>
+            <view class="item">
+                <view class="item-sign">5</view>
+                <text class="item-content">使用小程序二维码邀请成功后,您的挑战机会+1</text>
+            </view>
+            <view class="item">
+                <view class="item-sign">6</view>
+                <text class="item-content">话费领取成功后会在3个工作日内充值如有任何问题，可以联系客服</text>
+            </view>
+            <view style="text-align:center;font-size:27rpx;">该小程序最终解释权归一站答题王所有</view>
+            <button session-from="weapp" open-type="contact">联系客服</button>
+            <icon bindtap="detail" color="white" size="25" type="cancel"></icon>
+        </view>
+
+    </view>
+    <view class="switchTab">
+        <button class="active"
+                wx:for="{{items}}"
+                wx:key="index"
+                class="{{index==now?'active':''}}"
+                bindtap="setCur"
+                data-index="{{index}}"
+        >
+            {{item.name}}
+        </button>
+        <view>
+            <view style="height:80rpx;font-size:30rpx;margin-top:20rpx;margin-left:40rpx;"  class="{{0==now?'cur':'com'}}"  wx:for="{{toyRank}}" wx:key="index">
+                <text class="sign"
+                      style="background:{{index==0?'#ffd700':''}};background:{{index==1?'#c0c0c0':''}};background:{{index==2?'#d98719':''}};"
+                >{{index+1}}</text><image src="{{item.img}}"></image>
+                {{item.name}}
+                <text class="floRight">共获得了<text class="zoom">{{item.toy}}</text>张话费卡</text>
+            </view>
+        </view>
+        <view>
+            <view style="height:80rpx;font-size:30rpx;margin-top:20rpx;margin-left:40rpx;" class="{{1==now?'cur':'com'}}" id="hadChange" wx:for="{{hadRank}}"wx:key="index">
+                <text class="sign"
+                      style="background:{{index==0?'#ffd700':''}};background:{{index==1?'#c0c0c0':''}};background:{{index==2?'#d98719':''}};"
+                >{{index+1}}</text><image src="{{item.img}}"></image>
+                {{item.name}}
+                <view class="floRight">累计挑战<text class="zoom">{{item.has}}</text>次</view>
+            </view>
+            <text id="loadMore" class="{{1==now?'cur':'com'}}" bindtap="loadMore">点击加载更多</text>
+        </view>
+        <view>
+            <view style="height:80rpx;font-size:30rpx;margin-top:40rpx;margin-left:40rpx;" class="{{2==now?'cur':'com'}}" id="hadChange">
+                <image  id="toy" src="../../img/toy.jpg"></image>
+                <view class="opera">
+                    <button bindtap="toForm">领取奖品</button>
+                    <button bindtap="exchange">兑换次数</button>
+                </view>
+            </view>
+
+        </view>
+
+
+    </view>
+</view>
+
+
+

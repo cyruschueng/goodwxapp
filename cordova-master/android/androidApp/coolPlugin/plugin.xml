@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="coolPlugin" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>coolPlugin</name>
+    <js-module name="coolPlugin" src="www/coolPlugin.js">
+        <clobbers target="cordova.plugins.coolPlugin" />
+    </js-module>
+     <!-- android -->  
+    <platform name="android">  
+        <config-file target="res/xml/config.xml" parent="/*">  
+            <feature name="CoolToast">  
+                <param name="android-package" value="com.cool.toast.ShowToast"/>  
+            </feature>  
+        </config-file>  
+  
+  
+        <source-file src="src/android/ShowToast.java" target-dir="src/com/cool/toast" />  
+  
+  
+        <config-file target="AndroidManifest.xml" parent="/*">    
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />    
+        </config-file>   
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">  
+      
+        <activity android:name="com.example.hello.TestActivity" />  
+        </config-file>  
+  
+  
+        <source-file src="src/android/TestActivity.java" target-dir="src/com/example/hello" />  
+  
+  
+        <source-file src="src/android/layout/activity_text.xml" target-dir="res/layout" />  
+    </platform>  
+</plugin>

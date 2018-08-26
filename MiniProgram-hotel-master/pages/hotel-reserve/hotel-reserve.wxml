@@ -1,0 +1,47 @@
+<!--pages/hotel-reserve/hotel-reserve.wxml-->
+<view class='container'>
+  <view class='reserve-hd'>
+    <view class='date' bindtap='calendar'>
+      <image src='/image/rl.png'></image>
+      <view>{{date}}至{{dateF}}</view>
+    </view>
+    <view class='nights'>共住{{num}}晚 ></view>
+  </view>
+  <view class='reserve-item'>
+    <view class='item-hd' bindtap='hotel_details'>
+      <view class='item-content'>
+        <image src='{{imgUrl}}'></image>
+        <text class='title'>{{title}}</text>
+      </view>
+      <view class='price'>
+        <view class='nowPrice'>￥
+          <text>{{price}}</text>起</view>
+        <view class='save-price'>门市价
+          <text>￥{{save_price}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='item-ft'>
+      <view class='price-list'>
+        <view class='list-title'>到付价</view>
+        <view class='list-bd'>
+          <view class='nowPrice'>￥{{price}}</view>
+          <view class='payMode' bindtap='toShopCart'>
+            <view class='book'>订</view>
+            <view>到店付</view>
+          </view>
+        </view>
+      </view>
+      <view class='price-list'>
+        <view class='list-title'>促销价</view>
+        <view class='list-bd'>
+          <view class='nowPrice'>￥{{online_price}}</view>
+          <view class='payMode' bindtap='toShopCart'>
+            <view class='book'>订</view>
+            <view>在线付</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,41 @@
+<view class="padding-md">
+  <view class='status {{order.orderType == 1 ? "bg1":""}}{{order.orderType == 2 ? "bg2":""}}{{order.orderType == 3 ? "bg3":""}}{{order.orderType == 4 ? "bg4":""}} panel-between item-center'>
+    <view class='bold font-36'>{{order.orderType == 1 ? "待付款":""}}{{order.orderType == 2 ? "待发货":""}}{{order.orderType == 3 ? "待收货":""}}{{order.orderType == 4 ? "已完成":""}}</view>
+    <view class=''>{{order.createTime}}</view>
+  </view>
+</view>
+<view class='panel margin-top-sm bottom-line'>
+  <view class='bg-default panel-between bog' wx:for="{{order.orderItemModels}}" data-id='{{item.commodityId}}'  bindtap='navToShop'>
+    <view class='panel-start'>
+      <image src="{{ip+item.imagePath}}" class='gimg'></image>
+      <view class='margin-left-md bgsd'>
+        <view class='bold'>{{item.commodityName}}</view>
+        <view class='margin-top-sm'>{{item.specificationName}}</view>
+      </view>
+    </view>
+    <view style='text-align:right'>
+      <view class='font-danger bold'>￥{{item.itemPrice/item.itemCount}}</view>
+      <view>x{{item.itemCount}}</view>
+    </view>
+  </view>
+</view>
+<view class='panel panel-between' style='padding-bottom:0'>
+  <view>运费</view>
+  <view>￥{{order.mailPrice}}</view>
+</view>
+<view class='panel panel-between' >
+  <view class='bold'>需付款</view>
+  <view class='bold font-lg font-danger'>￥{{order.payPrice}}</view>
+</view>
+<view class='panel panel-between margin-top-sm bottom-line' >
+  <view class=''>订单编号</view>
+  <view class=' font-lg'>{{order.orderTag}}</view>
+</view>
+<view class='panel panel-between ' wx:if="{{order.logisticsTag}}">
+  <view class=''>物流编号</view>
+  <view class=' font-lg'>{{order.logisticsTag}}</view>
+</view>
+
+<view class='padding-md'>
+  <button style='background:#FF6666;color:#fff;' open-type='share'>发送给店家</button>
+</view>

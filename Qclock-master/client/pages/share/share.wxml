@@ -1,0 +1,36 @@
+<!--pages/qClock/qClock.wxml-->
+
+<view class="container">
+  <view class="index-hd">
+    <view class="index-desc">{{tip}}</view>
+  </view>
+  <view class="page-body">
+    <view class="page-section">
+      <form bindsubmit='formSubmit' report-submit='true'>
+        <view class="bottom-content">
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒日期</text>
+            <text class="bottom-detail">{{date}}</text>
+          </view>
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒时间</text>
+            <text class="bottom-detail">{{time}}</text>
+          </view>
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒内容</text>
+            <text class="bottom-detail">{{title}}</text>
+          </view>
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒备注</text>
+            <text class="bottom-detail">{{detail}}</text>
+          </view>
+        </view>
+
+        <view class="btn-area">
+          <button open-type='{{openType}}' style='background-color: #5fa9f0;' id='remind_other' name="remind_other" type="primary" formType="submit">确认提醒</button>
+          <button bindtap ='backChange' >返回修改</button>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

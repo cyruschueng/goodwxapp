@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- 网易 -->
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+</head>
+<body>
+	<script type="text/javascript">
+		// 网易，第一种
+		// var reactFlec = function (){
+		// 	document.documentElement.style.fontSize = window.innerWidth/7.5 +'px';
+		// }
+		// window.addEventListener('resize',reactFlec,false);
+		// document.addEventListener('DOMContentLoaded',reactFlec,false)
+
+		// 网易，第二种
+		(function (viewport) {
+			var docEl = document.documentElement;
+			//手机旋转事件和resize
+			var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			var recalc = function () {
+				var clientWidth = docEl.clientWidth;
+				if (!clientWidth) return;
+				if (clientWidth >= viewport) {
+					docEl.style.fontSize = '100px';
+				} else {
+					docEl.style.fontSize = 100 * (clientWidth / viewport) + 'px';
+				}
+			};
+			//响应屏幕改变
+			if (!document.addEventListener) return;
+			window.addEventListener(resizeEvt, recalc, false);
+			document.addEventListener('DOMContentLoaded', recalc, false);
+		})(640);
+
+		// 手机适配
+		// 原理：将布局视口尺寸固定，然后通过缩放使可视视口尺寸等于布局视口尺寸，进行元素布局时按照固定好的布局视口。
+		// 应用：布局视口的尺寸取设计稿的尺寸时，css像素对应设计稿中的 px，不需要进行单位换算。
+		function mobileShiPie(){
+			function isMobile() {
+		        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobi/i.test(navigator.userAgent) ||
+		                window.innerWidth < 500;
+		    };
+		    var pageScale = 1;
+		    var width = document.documentElement.clientWidth || 320;
+		    var height = document.documentElement.clientHeight || 486;
+		    pageScale = (width / height >= 320 / 486)?(height / 486):(width / 320); 
+		    var content = 'width=320, initial-scale=' + pageScale + ', maximum-scale=' + pageScale + ', user-scalable=no';
+		    document.getElementById('viewport').setAttribute('content', content)
+		}
+	</script>
+</body>
+</html>

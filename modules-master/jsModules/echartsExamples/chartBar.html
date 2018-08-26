@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="full">
+<head>
+    <meta charset="utf-8">
+    <title>智慧能源网关数据监测平台</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <style>
+        .full{
+            width: 100%;
+            height:100%;
+        }
+    </style>
+</head>
+<body class="full">
+
+<!--chart-->
+<div id="chartHor" class="full"></div>
+<script src="assets/js/common/zepto.min.js"></script>
+<!--lib-->
+<script src="assets/layer/layer.js"></script>
+<script src="assets/js/lib/echarts/echarts.min.js"></script>
+<script src="assets/js/lib/echarts/shine.js"></script>
+<script>
+    $(function () {
+
+        /* * * * * * * * * * * * * * *可视化数据展示图* * * * * * * * * * * * * * * */
+        //定义全局变量，用于存储ajax获取到的data
+        var dataGlo;
+        //定义绘制柱状图函数
+        function chartBar(id, xUnit, xData, sData) {
+            var obj = document.getElementById(id);
+            var myChart = echarts.init(obj, 'shine');
+            var option = {
+                tooltip: {
+                    formatter: '{b0}' + xUnit + ': 用电量{c0}'
+                },
+                legend: {
+                    data: ['用电量']
+                },
+/*                grid: {
+                    left: '0',
+                    right: '8%',
+                    bottom: '13%',
+                    containLabel: true
+                },*/
+                xAxis: {
+                    name: xUnit,
+                    data: xData
+                },
+                yAxis: {
+                    name: '用电量（kwh）',
+                    nameRotate: 1,
+                },
+                series: [{
+                    name: '用电量',
+                    type: 'bar',
+                    data: sData
+                }]
+            };
+            myChart.setOption(option);
+        };
+        // ajax获取json数据
+        $.ajax({
+            type: 'post',
+            url: "assets/jsons/energySta.json",
+            dataType: 'json',
+            beforeSend: function (xhr, options) {
+                layer.open({type: 2,shadeClose: false});
+            },
+            complete: function (XHR, TS) {
+                $('.layui-m-layer2').hide();
+            },
+            success: function (data) {
+                dataGlo = data;
+                //渲染index = 0 的tab项
+                chartBar(dataGlo[0].id, dataGlo[0].xUnit, dataGlo[0].xData, dataGlo[0].sData)
+            },
+            error: function () {
+            }
+        });
+    })
+</script>
+</body>
+</html>

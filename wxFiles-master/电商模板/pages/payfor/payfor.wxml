@@ -1,0 +1,60 @@
+<view class="panel panel-between item-center" bindtap="chooseAddress">
+  <image src='/img/l3.png' class='icon-xl'></image>
+  <view class='address'>
+    <view class='bold'>{{wxAddressInfo.userName}}，{{wxAddressInfo.telNumber}}</view>
+    <view>{{wxAddressInfo.provinceName+wxAddressInfo.cityName+wxAddressInfo.countyName+wxAddressInfo.detailInfo}}</view>
+  </view>
+  <image src='/img/right.png' class='icon-md'></image>
+</view>
+<image class='imline' src='/img/line.png'></image>
+
+<view class='panel margin-top-sm bottom-line'>
+  <view class='bg-default panel-between bog' wx:for="{{shop}}">
+    <view class='panel-start'>
+      <image src="{{ip+item.imagePath}}" class='gimg' mode='aspectFill'></image>
+      <view class='margin-left-md bgsd'>
+        <view class='bold'>{{item.commodityName}}</view>
+        <view class='margin-top-sm'>{{item.specificationName}}</view>
+      </view>
+    </view>
+    <view style='text-align:right'>
+      <view class='font-danger bold'>￥{{item.itemPrice/item.itemCount}}</view>
+      <view>x{{item.itemCount}}</view>
+    </view>
+  </view>
+</view>
+<view class='panel panel-between' style='padding-bottom:0'>
+  <view>商品数量</view>
+  <view>x{{countNumber}}</view>
+</view>
+<view class='panel panel-between' style='padding-bottom:0'>
+  <view>商品合计</view>
+  <view>￥{{countPrice}}</view>
+</view>
+<view class='panel panel-between'  style='padding-bottom:0'>
+  <view>运费</view>
+  <view>￥{{templatePrice}}</view>
+</view>
+<view class='panel panel-between bottom-line'>
+  <view>支付方式</view>
+  <view>微信支付</view>
+</view>
+<view class='panel bottom-line panel-between item-center' bindtap='showCompany'>
+  <view>快递方式</view>
+  <view class='panel-end item-center'>
+    <view class='font-default margin-right-sm'>{{companyShow}}</view>
+    <image src='/img/right.png' class='icon-md'></image>
+  </view>
+</view>
+<view class='panel panel-start item-center'>
+  <view>备注</view>
+  <input  class='margin-left-md' style='z-index:1;background:#f3f3f3;padding-left:20rpx;width:550rpx' bindinput='remarkInput' placeholder='选填，填写您的需求'></input>
+</view>
+
+
+<view style='height:100rpx;'></view>
+
+<view class='fixbottom panel-between item-center' style='z-index:100000'>
+  <view class='margin-left-md'>合计: <text class='font-danger bold'>￥{{sum}}</text></view>
+  <view class='jfbtn' bindtap='payIt'>{{version == 1 ? '立即付款':'我想下单'}}</view>
+</view>

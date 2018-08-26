@@ -1,0 +1,96 @@
+<!--pages/answer/answer.wxml-->
+<view class="box">
+    <view class="box_left">
+        <image  mode="aspectFit"  src="{{logo}}"></image>
+    </view>
+    <view class="box_center">
+        <text class="title" selectable='true'>{{title}}</text>
+        <view class="describe" wx:if="{{describe}}">{{describe}}</view>
+        <view class="security">
+          <image wx:if="{{is_anony==1}}" src="../../images/4.png"></image>
+          <image wx:if="{{is_anony==2}}"  src="../../images/1.png"></image>
+          <image wx:if="{{has_correct==1}}" src="../../images/3.png"></image>
+          <image wx:if="{{is_open==2}}"  src="../../images/5.png"></image>
+          <image wx:if="{{is_open==1}}"  src="../../images/2.png"></image>
+        </view>
+    </view>
+    <view class="box_right">
+        <view class="persons">
+          <image  mode="aspectFit"  src="../../images/ps.png">
+          </image>
+          <text>{{num}}</text>
+        </view>
+        <view class="time">
+           <view>{{time}}</view>
+        </view>
+    </view>
+</view>
+<view wx:for="{{nums}}"  wx:key="this*" wx:for-index="iIndex" wx:for-item="itemIndex" class="bg">
+  <view wx:if="{{itemIndex.type==3}}"  class="inputTxt">
+    <view class="title"><text class="title_here" selectable="true">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(填空)</text><text class="good" wx:if="{{itemIndex.is_correct==1}}">正确</text><text class="bad"  wx:if="{{itemIndex.is_correct==2}}">错误</text></view>
+    <view class="bigUrl"><image mode="aspectFit" wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+    <textarea  class="Input" value="{{itemIndex.reply}}" disabled='true' data-key="{{iIndex}}"  maxlength="200"></textarea>
+        <view style="text-align:right;font-size:28rpx;color:#333;padding:10rpx 30rpx;"><navigator url="../awresult/awresult?question_id={{id}}&q_option_id={{itemIndex.id}}" hover-class='none'>点击查看更多>></navigator></view>
+  </view>
+  <radio-group  wx:if="{{itemIndex.type==1&&itemIndex.option_type==3}}" data-key="{{iIndex}}">
+   <view class="title"><text class="title_here" selectable="true">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(图文单选)</text><text class="good" wx:if="{{itemIndex.is_correct==1}}">正确</text><text class="bad"  wx:if="{{itemIndex.is_correct==2}}">错误</text></view>
+   <view class="bigUrl"><image mode="aspectFit" wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+    <view class="radios" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+         <view class="radios_box {{item.is_select==1?'active':''}}"> 
+            <label class="radio">
+              <image mode="aspectFit" src="{{item.file}}" bindlongtap='review' data-keys="{{iIndex}}" data-current="{{index}}"></image>
+              <radio value="{{index}}" checked="{{item.is_select==1}}" disabled='true' class="move" color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text  class="itemTitle">{{item.text}}</text><image class="ok" wx:if="{{item.real_correct==1}}" src="../../images/ok.png"></image><view wx:if="{{create}}" class="results"><text>共{{item.total}}票</text><text>{{item.bite}}</text></view>
+            </label>
+        </view>
+    </view>
+  </radio-group>
+  <radio-group  wx:if="{{itemIndex.type==1&&itemIndex.option_type==1}}" data-key="{{iIndex}}">
+  <view class="title"><text class="title_here" selectable="true">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(文字单选)</text><text class="good" wx:if="{{itemIndex.is_correct==1}}">正确</text><text class="bad" wx:if="{{itemIndex.is_correct==2}}">错误</text></view>
+  <view class="bigUrl"><image mode="aspectFit"  wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+  <view class="radios" wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.is_select==1?'active':''}}"> 
+          <label class="radio">
+            <radio value="{{index}}" checked="{{item.is_select==1}}" disabled='true' color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text  class="itemTitle">{{item.text}}</text><image class="ok" wx:if="{{item.real_correct==1}}" src="../../images/ok.png"></image><view wx:if="{{create}}" class="results"><text>共{{item.total}}票</text><text>{{item.bite}}</text></view>
+          </label>
+      </view>
+  </view>
+  </radio-group>
+  <checkbox-group  wx:if="{{itemIndex.type==2&&itemIndex.option_type==1}}" data-key="{{iIndex}}">
+  <view class="title"><text class="title_here" selectable="true">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray" wx:if="{{itemIndex.multi_limit==0}}"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(文字多选)</text><text class="gray" wx:else><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(最多选{{itemIndex.multi_limit}}个)</text><text class="good" wx:if="{{itemIndex.is_correct==1}}">正确</text><text class="bad" wx:if="{{itemIndex.is_correct==2}}">错误</text></view>
+  <view class="bigUrl"><image mode="aspectFit" wx:if="{{itemIndex.img}}" src="{{itemIndex.img}}"></image></view>
+  <view class="radios"  wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.is_select==1?'active':''}}"> 
+          <label class="radio">
+            <checkbox value="{{index}}" checked='{{item.is_select==1}}' disabled='true' color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text  class="itemTitle">{{item.text}}</text><image class="ok" wx:if="{{item.real_correct==1}}" src="../../images/ok.png"></image><view wx:if="{{create}}" class="results"><text>共{{item.total}}票</text><text>{{item.bite}}</text></view>
+          </label>
+      </view>
+  </view>
+  </checkbox-group>
+   <checkbox-group  wx:if="{{itemIndex.type==2&&itemIndex.option_type==3}}" data-key="{{iIndex}}">
+  <view class="title"><text class="title_here" selectable="true">{{iIndex+1}}.{{itemIndex.title}}</text><text class="gray" wx:if="{{itemIndex.multi_limit==0}}"><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(图文多选)</text><text class="gray" wx:else><text class="red" wx:if="{{itemIndex.is_must==1}}">*</text>(最多选{{itemIndex.multi_limit}}个)</text><text class="good"  wx:if="{{itemIndex.is_correct==1}}">正确</text><text class="bad"  wx:if="{{itemIndex.is_correct==2}}">错误</text></view>
+  <view class="bigUrl"><image mode="aspectFit" wx:if="{{itemIndex.bigUrl}}" src="{{itemIndex.bigUrl}}"></image></view>
+  <view class="radios"  wx:for="{{itemIndex.formate_option}}" wx:for-index="index" wx:for-item="item" wx:key="this*">
+        <view class="radios_box {{item.is_select==1?'active':''}}"> 
+          <label class="radio">
+            <image mode="aspectFit" src="{{item.file}}" bindlongtap='review' data-keys="{{iIndex}}" data-current="{{index}}"></image>
+            <checkbox value="{{index}}" class="move" checked='{{item.is_select==1}}' disabled='true' color="#1f5cd8"/><view wx:for="{{type_nums}}" wx:for-index="indexnum" wx:for-item="itemName" wx:key="this*"  wx:if="{{index==indexnum}}">{{itemName.name}}.</view><text class="itemTitle">{{item.text}}</text><image class="ok"  wx:if="{{item.real_correct==1}}" src="../../images/ok.png"></image><view wx:if="{{create}}" class="results"><text>共{{item.total}}票</text><text>{{item.bite}}</text></view>
+          </label>
+      </view>
+  </view>
+  </checkbox-group> 
+</view>
+<view wx:if="{{nums.length==0}}" class="nones">
+ 请先回答才可查看结果！
+</view>
+<button wx:if="{{nums.length>0&&mycreate==true}}" bindtap='mycreate'>导出数据</button>
+<view class="bottom">
+<text>图标说明</text>
+<view><text class="red">*</text>必答题</view>
+<view><text class="red">*</text>选项中小图长按可预览</view>
+<view class="help_box">
+  <image  src="../../images/ok.png"></image>
+  <text>正确答案</text>
+</view>
+</view>
+
+    

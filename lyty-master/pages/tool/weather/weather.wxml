@@ -1,0 +1,202 @@
+<!--index.wxml-->
+
+<view class="container">
+  <scroll-view scroll-y="true" class="scroll">
+      <!--******************  主体部分  ********************-->
+    <view class="main-container">
+      <swiper indicator-dots="{{indicatordots}}" duration="{{duration}}">
+        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+          <swiper-item class="main">
+            <button size="mini" bindtap="goTo" class="goBack">返回首页</button>
+            <navigator class="change" url="list/list">切换</navigator>
+            <!--文字部分-->
+            <view class="main-section">
+              <view class="location">{{city}}</view>
+              <view class="weather">{{now.cond.txt}}</view>
+              <view class="temp">{{now.tmp}}℃</view>
+
+              <!--空气质量-->
+              <view class="air">
+                  <view class="num">{{aqi.aqi}}</view>
+                  <view class="value">{{aqi.qlty}}</view>
+              </view><!--空气质量结束-->
+            </view><!--文字部分结束-->
+
+            <!--图片-->
+
+            <!--<image src="{{item}}" class="slide-image"></image>  -->
+
+            <!--***************** 每天天气  *******************-->
+            <view class="day-container">
+              <!--每一天-->
+              <view class="day" wx:for="{{daily}}" wx:key="{{index}}">
+                <view class="date">{{day[index]}}</view>
+                <view class="icon"><image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/{{item.cond.code_d}}.png"></image></view>
+                <view class="degree">{{item.tmp.max}}℃/{{item.tmp.min}}℃</view>
+              </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  
+  
+    <!--***************** 空气质量  *******************-->
+    <view class="airvalue-container">
+      <!--左部分-->
+      <view class="airvalue-left">
+        <view class="value">{{aqi.qlty}}</view>
+        <view class="num">{{aqi.aqi}}</view>
+      </view><!--左部分结束-->
+
+      <!--右部分-->
+      <view class="airvalue-right">
+        <!--进度条上-->
+        <view class="progress-container">
+          <view class="pm">PM2.5 ug/m³</view>
+          <view class="per">{{aqi.pm25}}</view>
+          <progress percent="{{aqi.pm25/5}}" active color="#FEDC1B" stroke-width="4"/>
+        </view><!--进度条上结束-->
+
+        <!--进度条下-->
+        <view class="progress-container">
+          <view class="pm">PM10 ug/m³</view>
+          <view class="per">{{aqi.pm10}}</view>
+          <progress percent="{{aqi.pm10/5}}" active color="#FEDC1B" stroke-width="4"/>
+        </view><!--进度条下结束-->
+
+      </view><!--右部分结束-->
+    </view>
+
+    <!--***************** 其他  *******************-->
+    <view class="other-container">
+      <view class="other-wraper">
+        <!--风-->
+      <view class="items wind-items">
+        <view class="pic"><image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/fengli.png"></image></view>
+        <!--风向-->
+        <view class="wind-dir-container left">
+          <view class="wind-dir items-title-sub">风向</view>
+          <view class="wind-dir-text items-title-main">{{now.wind.dir}}</view>
+        </view><!--风向结束-->
+        <!--风力-->
+        <view class="wind-power-container right">
+          <view class="windpower items-title-sub">风力</view>
+          <view class="wind-power-text items-title-main">{{now.wind.sc}}</view>
+        </view><!--风力结束-->
+      </view><!--风结束-->
+
+      <!--太阳-->
+      <view class="items sun-items">
+        <view class="pic"><image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/taiyang.png"></image></view>
+        <!--日出-->
+        <view class="sun-up-container left">
+          <view class="sun-up items-title-sub">日出</view>
+          <view class="sun-up-text items-title-main">{{daily[0].astro.sr}}</view>
+        </view><!--日出结束-->
+        <!--日落-->
+        <view class="sun-dir-container right">
+          <view class="sun-down items-title-sub">日落</view>
+          <view class="sun-down-text items-title-main">{{daily[0].astro.ss}}</view>
+        </view><!--日落结束-->
+      </view><!--太阳结束-->
+      </view>
+      
+      <view class="other-wraper">
+           <!--湿度-->
+      <view class="items hum-items">
+        <view class="pic"><image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/shidu.png"></image></view>
+        <!--湿度文字-->
+        <view class="hum-container middle">
+          <view class="hum items-title-sub">湿度</view>
+          <view class="hum-text items-title-main">{{daily[0].hum}}</view>
+        </view><!--文字结束-->
+      </view><!--湿度结束-->
+
+      <!--体感温度-->
+      <view class="items tem-items">
+        <view class="pic"><image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/tiganwendu.png"></image></view>
+        <!--体感温度文字-->
+        <view class="tem-container middle">
+          <view class="tem items-title-sub">体感温度</view>
+          <view class="tem-text items-title-main">{{now.fl}}</view>
+        </view><!--文字结束-->
+      </view><!--体感温度结束-->
+      </view>
+     
+    </view><!--其他结束-->
+
+
+    <!--*****************  服务  *******************-->
+    <view class="serve-container">
+      <!--每一个item-->
+      <view class="items">
+        <view class="left">
+          <view class="pic">
+            <image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/cy.png"></image>
+          </view>
+          <text class="sub">穿衣指数</text>
+          <text class="eval">{{suggestion.drsg.brf}}</text>
+        </view>
+        <view class="dis">{{suggestion.drsg.txt}}</view>
+      </view>
+
+      <view class="items">
+        <view class="left">
+          <view class="pic">
+            <image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/zwx.png"></image>
+          </view>
+          <text class="sub">紫外线指数</text>
+          <text class="eval">{{suggestion.uv.brf}}</text>
+        </view>
+        <view class="dis">{{suggestion.uv.txt}}</view>
+      </view>
+
+      <view class="items">
+        <view class="left">
+          <view class="pic">
+            <image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/ly.png"></image>
+          </view>
+          <text class="sub">旅游指数</text>
+          <text class="eval">{{suggestion.trav.brf}}</text>
+        </view>
+        <view class="dis">{{suggestion.trav.txt}}</view>
+      </view>
+
+      <view class="items">
+        <view class="left">
+          <view class="pic">
+            <image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/yd.png"></image>
+          </view>
+          <text class="sub">运动指数</text>
+          <text class="eval">{{suggestion.sport.brf}}</text>
+        </view>
+        <view class="dis">{{suggestion.sport.txt}}</view>
+      </view>
+
+      <view class="items">
+        <view class="left">
+          <view class="pic">
+            <image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/ss.png"></image>
+          </view>
+          <text class="sub">舒适指数</text>
+          <text class="eval">{{suggestion.comf.brf}}</text>
+        </view>
+        <view class="dis">{{suggestion.comf.txt}}</view>
+      </view>
+
+      <view class="items">
+        <view class="left">
+          <view class="pic">
+          <image src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/weather/xc.png"></image>
+          </view>
+          <text class="sub">洗车指数</text>
+          <text class="eval">{{suggestion.cw.brf}}</text>
+        </view>
+        <view class="dis">{{suggestion.cw.txt}}</view>
+      </view><!--items结束-->
+
+    </view><!--服务结束-->
+
+  </scroll-view>
+</view>

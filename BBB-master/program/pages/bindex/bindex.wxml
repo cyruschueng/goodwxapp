@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<scroll-view scroll-y="true" class="container" style='height:{{scrollHeight}}px'  lower-threshold="5" bindscrolltolower="lower">
+  <block>
+    <text class="title">数据更新自:{{motto}}</text>
+  </block>
+  <view class='home_content'>
+    <view wx:for="{{list}}" wx:key="{{index}}" class='content_detail'>
+      <view class="eos-item-top">
+        <text class='name'>{{item.code}}</text>
+         <button open-type='share' plain class='share' data-coinname="{{item.code}}">
+          <image class="img-share" src='../images/ico-share.png' background-size="cover"></image>
+        </button>
+      </view>
+      <view class="eos-item-join-count">
+        <text class='total'>{{item.total}}人参与</text>
+        <text class="fr earn" wx:if="{{item.isGain == 1}}">我赚了</text>
+        <text  class="fr lose" wx:if="{{item.isGain == 2}}" >我赔了</text>
+      </view>
+      <view class='content-progress'>
+        <view class="eos-vote-progress">
+          <view class="eos-vote-active" style='width:{{item.gainPercent}}'></view>
+        </view>
+      </view> 
+    </view>
+  </view>
+  <view class='footer-space'></view> 
+  <view class='common-footer'>
+    <navigator hover-class="navigator-hover" class='nav-item-gtoup nav-index' url="/pages/bindex/bindex">
+    <image class="ico-img-coin" src='../images/ico-coin-active.png'></image>
+    <text class="ico-text-active">首页</text>
+    </navigator>
+    <navigator hover-class="navigator-hover"  class='nav-item-gtoup nav-add' url="/pages/addbb/addbb">
+      <image class="ico-img-plus" src='../images/ico-plus.png'></image>
+   </navigator>
+    <navigator hover-class="navigator-hover"  class='nav-item-gtoup nav-user'url="/pages/user/user">
+      <image class="ico-img-coin" src='../images/ico-user.png'></image>
+       <text class="ico-text">我的</text>
+   </navigator>
+</view>
+</scroll-view>
+

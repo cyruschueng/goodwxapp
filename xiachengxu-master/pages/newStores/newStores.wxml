@@ -1,0 +1,45 @@
+<view class="container storyContainer">
+  <view class="row">
+    <view>
+        <view class="new-arrival"><!--new-arrival start-->
+               <block wx:for="{{newStoreItem}}" wx:key="id">
+                  <view class="main"><!--main start -->
+                    <view class="data">
+                      <view class="dataSign">
+                          <image src="../../images/newIcon/dataSign@2X.png"></image>
+                          <text class="month">{{item.month}}</text>
+                          <text class="day">{{item.day}}ar</text>
+                      </view>
+                      
+                      <view class="line"></view>
+                    </view>
+
+                    <view class="body"><!--body start-->
+
+                      <view class="top">
+                        <image src='{{item.imgUrl}}' alt="" title=""></image>
+                      </view>
+
+                      <view class="bottom"><!--bottom start-->
+
+                         <block wx:for="{{item.goodsList}}" wx:for-item="imgItem" wx:key="id">
+                            <view class="item">
+                              <image src='{{imgItem.goods_pic}}' alt="" title=""></image>
+                              <view class="desc">
+                                <text>￥{{imgItem.goods_price}}</text>
+                                <text>{{imgItem.goods_name}}</text>
+                              </view>
+                            </view>
+                          </block>
+                          
+                      </view><!--bottom end-->
+                    </view><!--body end-->
+                    </view><!--main end -->
+                </block>
+            
+
+           
+          </view><!--new-arrival end-->
+    </view>
+  </view>
+</view>

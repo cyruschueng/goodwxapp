@@ -1,0 +1,32 @@
+<view class="flex-wrap header">
+  <text class="button front_text">打卡项目</text>
+  <text class="button add tappable" ontap="addTodo">添加</text>
+</view>
+<view class="container">
+  <view class="task_list">
+  <scroll-view scroll-y="true" style="height:340px;" class="scroll">
+    <block wx:for="{{todos}}" wx:for-item="todo" wx:key="objectId">
+      <view class="flex-warp todo">
+        <view class="cir">
+          <icon type="{{todo.done ?'success_circle':'circle'}}" size="23" data-id="{{todo.objectId}}"class="cir1" ontap="toggleDone"/>
+        </view>
+        <view class="task_wrap">
+          <text class="task_name tappable {{todo.done? 'done':''}}"data-id="{{todo.objectId}}" ontap="checkContext" > {{todo.T_name}}</text>
+          <view class="task_context tappable {{todo.done? 'done':''}}"> 坚持到：{{todo.T_date}}</view>
+        </view>
+        <view class="task_comfirm">
+          <text class="check" data-id="{{todo.objectId}}" ontap="checkDone">+</text>
+        </view>
+        <view class="process">
+          <progress percent="{{todo.Jin}}" color="#a49ab7" stroke-width="4" show-info active/>
+          <text>已坚持{{todo.Count}}天</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  </view>
+ 
+</view>
+ <view class="footer">
+    <text ontap="removeDone" class="remove-done tappable" wx-if="{{activeTodos.length<todos.length}}">{{con}}</text>
+  </view>

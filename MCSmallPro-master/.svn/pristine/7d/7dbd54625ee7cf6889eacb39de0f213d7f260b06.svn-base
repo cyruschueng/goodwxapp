@@ -1,0 +1,20 @@
+<scroll-view class='products-scroll-view' scroll-y="true">
+  <view class='product-rec' hidden='{{recommendProduct==null}}'>
+    <view class='product-item' bindtap='showProduct' data-product-id="{{recommendProduct.Id}}" data-zhubo-product-id="{{recommendProduct.ZhuboProductId}}">
+      <image class='product-image' src='{{recommendProduct.Image}}'></image>
+      <view class='product-info'>
+        <text class='product-num'>正在推荐</text>
+        <text class='product-price'>￥{{recommendProduct.Price}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='products'>
+    <view class='product-item' wx:for="{{products}}" wx:key="Id" wx:for-item="product" wx:for-index="productIndex" bindtap='showProduct' data-product-id="{{product.Id}}" data-zhubo-product-id="{{product.ZhuboProductId}}">
+      <image class='product-image' src='{{product.Image}}/100/100'></image>
+      <view class='product-info'>
+        <text class='product-num'>{{product.No}}</text>
+        <text class='product-price'>￥{{product.Price}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

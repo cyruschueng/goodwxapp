@@ -1,0 +1,47 @@
+<!--pages/regist/regist.wxml-->
+<!-- <import src="../../template/template.wxml"/> -->
+<view class="container">
+  <view class="fill-area">
+    <view class="ui-cell input-box">
+       <view class="input-title">手机</view>
+      <view class="ui-primary">
+        <input type="number" value="{{phone}}" bindinput="getPhone" maxlength="11" focus='focus' placeholder="请输入手机号码"/>
+      </view> 
+    </view>
+    <view class="ui-cell input-box">
+       <view class="input-title">验证码</view>
+      <view class="ui-primary">
+        <input type="number"  bindinput="getCode" value="{{code}}"  focus='{{focus1}}' placeholder="请输入验证码"/>
+      </view>
+      <button class="send-btn ui-cell" catchtap="sendCode" disabled='{{disa}}'>{{getBtnText}}</button> 
+    </view>
+    <view class="ui-cell input-box">
+       <view class="input-title">密码</view>
+      <view class="ui-primary">
+        <input type="text" password='true' confirm-type="done" bindconfirm="firm" bindinput="getPassword"  focus='{{focus2}}'value="{{password}}" placeholder="请输入密码"/>
+      </view>  
+    </view>
+    <view class="ui-cell input-box">
+       <view class="input-title">确认密码</view>
+      <view class="ui-primary">
+        <input type="text" password='true' bindinput="getPassword1" focus='{{focus3}}' confirm-type="done" bindconfirm="firm1" value="{{password1}}" placeholder="请再次输入密码"/>
+      </view>  
+    </view>
+    <view class="ui-cell input-box">
+       <view class="input-title">邀请码</view>
+      <view class="ui-primary">
+        <input type="number"  bindinput="getInvitation"  focus='{{focus4}}' value="{{Invitation}}" placeholder="请输入邀请码" maxlength="11"/>
+      </view>  
+    </view>
+
+    <view class='agree'>
+      <checkbox-group bindchange="checkboxChange">
+        <checkbox value="" checked="{{checked}}" />我已阅读并同意 <text  class="agreement" catchtap='registTreaty'>《小至管家注册协议》</text>
+      </checkbox-group>
+    </view>
+
+    <button class="login-btn ui-cell" catchtap="regist" disabled="{{!checked}}">注册</button>
+    <view class="forget-btn ui-cell pull-left" catchtap="login">登录</view>
+    <view class="forget-btn ui-cell pull-right" catchtap="findPwd">忘记密码?</view>
+  </view>
+</view>

@@ -1,0 +1,48 @@
+<!--index.wxml-->
+<import src="../item/emptyList.wxml" />
+<view class="container" style="padding-top: 40rpx;">
+  <view class="page__bd_spacing" style="width: 96%;">
+    <view style="text-align: left;color:#333;">起名基本信息</view>
+    <view style="  background-color: #f8f8f8;margin: 10px 0;font-size:13px;">
+      <view class="weui-flex">
+        <view class="weui-flex__item"><view class="placeholder">姓氏: {{fName}}</view></view>
+        <view class="weui-flex__item"><view class="placeholder">性别: {{xingbie}}</view></view>
+      </view>
+      <view class="weui-flex">
+        <view class="weui-flex__item"><view class="placeholder">形式: {{xingshi}}</view></view>
+        <view class="weui-flex__item"><view class="placeholder">偏好: {{pianhao}}</view></view>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+    <view style="text-align: left;color: #333;margin-top: 10px;">起名结果列表</view>
+    <view style="text-align: left;color: #999;font-size: 14px;margin: 10px 0;" >根据您输入的信息，为您挑选以下名字。点击查看姓名得分和详细分析</view>
+
+    <block wx:if="{{data_list.length>0}}">
+      <block wx:for="{{data_list}}" wx:key="{{item.idx}}" wx:for-index="idx">
+        <view class="weui-flex">
+          <block wx:for="{{item}}" wx:for-item="_item" wx:key="{{_item.index}}" wx:for-index="index">
+            <navigator url="/pages/detail/detail?lName={{data_list[idx][index].lname}}" class="bigItem">
+              <view class="weui-flex__item"><view class="nameholder">{{data_list[idx][index].name}}</view></view>
+            </navigator>
+          </block>
+        </view>
+      </block>
+      <!-- FooterView -->
+      <view class="">
+        <view wx:if="{{hasMore}}" class="weui-loadmore">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+        <view wx:else class="weui-loadmore weui-loadmore_line">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多啦...</view>
+        </view>
+      </view>
+    </block>
+    <block wx:elif="{{data_list.length == 0}}">
+      <view class="weui-tab__content" >
+        <template is="empty_list" data="{{title: '没有找到符合的名字呢', desc: '换个条件再试试吧'}}" />
+      </view>
+    </block>
+  </view>
+</view>

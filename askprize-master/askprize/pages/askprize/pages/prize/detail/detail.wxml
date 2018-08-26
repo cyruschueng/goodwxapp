@@ -1,0 +1,95 @@
+<!--pages/prize/detail/detail.wxml-->
+
+<login-tips show="{{loginShow}}" bind:onSubmit='_onSubmit'></login-tips>
+ <view class='mask' wx:if="{{maskBox}}">
+    <view class='mask-box'>
+      <image bindtap='closeMask' src='http://i1.dd-img.com/assets/image/1521703828-7a2eb26557dadc16-52w-52h.png'></image>
+      <view class='mask-box-title'>答题规则</view>
+      <view class='mask-box-paragraph'><view></view>每题答题时间为10秒，10秒内可任意选择及修改答案，倒计时结束后公布答题结果，答对则进入到下一题，答错则遗憾出局；</view>
+      <view class='mask-box-paragraph'><view></view>题目全部答对的通关者将平分本期奖金；</view>
+      <view class='mask-box-paragraph'><view></view>答题所得奖金超过10元即可在“我的余额”中申请提现，客服审核通过后，会将申请的金额通过微信进行发放。</view>
+      <view class='mask-box-tip'>Tip：想提前知道答案？关注<text>电动邦</text>公众号吧</view>
+
+    </view>
+</view>  
+<view wx:if="{{prizelastbox}}" class="container">
+    <view class='head-bgimg'></view>
+    <view class='question-head'>
+        <view class='head-rule' bindtap='onRule'>答题规则</view>
+        <view class='head-picimg'>
+            <image class='head-picimg-picture' src='{{prizelast.ico}}'></image>
+        </view>
+        <view class='head-text'>{{prizelast.ico_alt}}</view>
+        <!-- 有无奖金S -->
+        <!-- <view wx:if="{{prizemoneyend}}" class='head-data'>{{prizelast.start_time_date}}</view> -->
+         <view wx:if="{{Istimestatus==-1}}" class='head-data'>{{prizelast.start_time_date}}</view>
+        <!-- 有无奖金E -->
+        <view class='head-title'>{{prizelast.title}}</view>
+        <view class='head-foreword'>
+            <text>{{prizelast.desc}}</text>
+            <!-- 本期共12道题，每道10秒作答时间 -->
+            <!-- <text>时间到未作答或答错即出局</text> -->
+        </view>
+        <!-- <view wx:if="{{!prizemoneyend}}" class='head-price'> -->
+        <view wx:if="{{Istimestatus==1||Istimestatus==2||Istimestatus==3}}" class='head-price'>
+            <text>本期奖金</text>
+            <text class='head-price-old'>{{prizelast.money}}元</text>
+        </view>
+        <!-- 有无奖金S -->
+        <!-- <block wx:if="{{prizemoneyend}}"> -->
+         <block wx:if="{{Istimestatus==-1}}">
+            <view wx:if="{{prizelast.user.obtain_money == '0.00'}}" class='head-bonus'>
+                <text>您本期与{{prizelast.money}}块大洋</text>
+                <text class='head-bonus-block'>擦肩而过，下次努力</text>
+            </view>
+            <view wx:else class='head-bonus'>
+                <text>您本期获得</text>
+                <text class='head-bonus-old'>{{prizelast.user.obtain_money}}元</text>
+            </view>
+            <view class='head-bonus-have'>
+                <view>共计
+                    <text>{{prizelast.access_num}}</text> 人通关
+                </view>
+                <view>平分{{prizelast.money}}元奖金</view>
+            </view>
+        </block>
+        <!-- 有无奖金E -->
+        <view wx:if="{{Istimestatus==1}}" class='head-time-blue'>
+            <view class='head-time-title'>距离开始答题</view>
+            <view class='head-time-number'>
+           <block wx:if="{{downTime.day>0}}">{{downTime.day}}天</block>
+           <!-- <block wx:else></block> -->
+           {{downTime.hour}}:{{downTime.minute}}:{{downTime.second}}</view>
+        </view>
+        <view wx:if="{{Istimestatus==2}}" class='head-time-pink'>
+            <view class='head-time-number-old'>{{downTime.second}}</view>
+        </view>
+        <view wx:if="{{Istimestatus==3}}" class='head-time-gray'>
+            <text class='head-time-gray-ing'>答题活动正在进行中…</text>
+            <text>结果稍后公布</text>
+        </view>
+
+    </view>
+</view>
+
+
+<view wx:if="{{!prizelastbox}}" class='body'>
+    <view class='topic'>
+        <view class='topic-box'>{{question.title}}</view>
+        <view class="{{timer.num>0?'topic-timer':'font'}}">{{timer.num>0?timer.num:'时间到'}}</view>
+        <view class='topic-num'>第{{index+1}}题</view>
+        <view class='topic-count'>{{index+1}}/{{listData.length}}</view>
+    </view>
+    <view wx:for="{{question.options}}" class="{{item.option_index==selIndex ? selColor : (!timer.num&&item.option_index==question.answers ? 'option-itemRight' : 'option-item') }}" bindtap='selOption' data-index='{{item.option_index}}'>
+        <text>{{letterItems[index]}}、{{item.option_value}}</text>
+        <image class="{{item.option_index==selIndex ? 'option-item-checked':'none'}}" src='http://i1.dd-img.com/assets/image/1521082330-b97ed000dc08ec5c-90w-68h.png'></image>
+    </view>
+    <view class='error' wx:if="{{error}}">
+        <view class='error-box'>
+            <image src='http://i1.dd-img.com/assets/image/1520061117-ccfabeb2131a81ca-280w-280h.png'></image>
+            <view>差一点就能分钱了</view>
+            <view>别灰心，再接再厉</view>
+            <button bindtap='defeated'>我知道了</button>
+        </view>
+    </view>
+</view>

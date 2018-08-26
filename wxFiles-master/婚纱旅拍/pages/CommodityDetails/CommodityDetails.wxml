@@ -1,0 +1,180 @@
+
+<!--pages/CommodityDetails/CommodityDetails.wxml-->
+<scroll-view class="container scrollBox" bindscroll="EventHandle" scroll-y="true" scroll-top="{{ScrollTop}}">
+  <view class="swiper-container">
+    <swiper autoplay="auto" interval="5000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange">
+      <block wx:for="{{slider}}">
+        <swiper-item>
+          <image src="{{item}}" mode="widthFix" class="focusImg"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">
+      <block wx:for="{{slider}}">
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!--end swiper-container-->
+  <view class="TextBox">
+    <view style="font-size:50rpx;color:#ff7a92;font-weight:bolder">¥{{product.price}}</view>
+    <view class="fr" style="font-size:30rpx;color:#737373">已售{{product.sales}}件</view>
+    <view class="Text">{{product.name}}</view>
+    <view style="font-size:25rpx;color:#737373;border-bottom:1rpx solid #e0e0e0;height:60rpx;">全球旅拍 成品包邮 拍得好评价高 用客照说话</view>
+    <view class="TextBoxFoot">
+      <view>
+        <image src="/images/24.jpg"></image>不满意重拍</view>
+      <view>
+        <image src="/images/24.jpg"></image>底片全送</view>
+    </view>
+
+    <!--end TextBoxFoot-->
+  </view>
+
+  <!--end TextBox-->
+  <view class="CommodityDetails">
+    <view class="DetailsTitle">商品详情</view>
+
+    <!--end DetailsTitle-->
+  </view>
+
+  <!--end CommodityDetails-->
+  <block wx:for="{{ImgList}}">
+    <view class="DetailsImg">
+      <image src="{{item}}" mode="widthFix"></image>
+    </view>
+  </block>
+
+  <!--end DetailsImg-->
+  <view class="Recommend">
+    <image src="/images/25.jpg"></image>
+    <text>为您推荐</text>
+  </view>
+
+  <!--end Recommend-->
+  <view class="NewListBox">
+    <block wx:for="{{tj}}">
+      <view class="NewList" bindtap="tjclick" id="{{index}}">
+        <image src="{{item.image}}" mode="aspectFill"></image>
+        <view class="NewListText">{{item.name}}</view>
+        <view class="NewListFoot">
+          <text style="font-size:30rpx;color:#ff7a92">¥ {{item.price}}</text>
+          <text style="font-size:22rpx;color:#919191">已售{{item.sales}}套</text>
+        </view>
+
+        <!--end NewListFoot-->
+      </view>
+    </block>
+
+    <!--end NewList-->
+  </view>
+
+  <!--end NewListBox-->
+  <view class="ShopCarBox {{BoxFlag?'':'hidden'}}">
+    <view class="ShopCar">
+      <view class="ShopCarLeft fl">
+        <image src="/images/116.jpg"></image>
+      </view>
+      <view class="ShopCarRight fl">
+        <view>铂爵婚纱摄影 厦门三亚深圳青岛大连丽江海南杭州大理婚纱照伯爵</view>
+        <view style="color:#ff7a92">¥ 6666</view>
+      </view>
+
+      <!--end ShopCarRight-->
+      <view class="close" bindtap="choseShopCar">
+        <image src="/images/27.jpg"></image>
+      </view>
+    </view>
+
+    <!--end ShopCar-->
+    <view class="Counter">
+      <view>
+        <image src="/images/21.jpg"></image>
+      </view>
+      <view style="width:72rpx;height:60rpx;background-color:#f5f5f5">1</view>
+      <view>
+        <image src="/images/22.jpg"></image>
+      </view>
+    </view>
+
+    <!--end Counter-->
+    <view class="ShopCarFoot">
+      <view style="width:500rpx">实付款：
+        <text style="font-size:30rpx;color:#ff7a92;">¥ 6666</text>
+      </view>
+      <view style="background-color:#ff7a92;width:250rpx; color: #fff;" bindtap="choseShopCar">加入购物车</view>
+    </view>
+
+    <!--end ShopCarFoot-->
+  </view>
+
+  <!--end ShopCarBox-->
+  <view style="height:104rpx;"></view>
+  <view class="Foot">
+    <view style="background-color:#fff;padding-top:10rpx;" bindtap="shopc">
+      <image src="/images/26.jpg"></image>
+    </view>
+    <block>
+      <view style="background-color:#ffa2b2" bindtap="showShopCar">加入购物车</view>
+      <text class="shopCarNum">{{shopcarnumber}}</text>
+    </block>
+    <view style="background-color:#ff7a92" bindtap="ByNow">立即购买</view>
+  </view>
+
+  <!--end Foot-->
+  <view class="BackTop {{BackFlag?'':'hidden'}}" bindtap="BackTop">
+    <view style="padding-top:8rpx">∧</view>
+    <view>顶部</view>
+  </view>
+
+  <!--end BackTop-->
+  <view class="ShoppingCart" hidden="{{ShoppingCartFlag}}">
+  <image bindtap="closeDialog" style="width:25px;height:25px;float:right;margin-right:10px;" src="/images/27.jpg"></image>
+    <view class="ShoppingCartTop">
+      <view class="ShoppingCartImg fl">
+        <image src="{{product.image}}"></image>
+      </view>
+
+      <!--end ShoppingCartImg-->
+      <view class="ShoppingCartText fl">
+      
+        <text style="display:block;font-weight:bold;font-size:34rpx; width:450rpx; overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{product.name}}\n</text>
+        <text style="font-size:26rpx;color:#ff4200">￥ {{product.price}}</text>
+        <view class="ShoppingCartClose fr" bindtap="choseShopCar">x</view>
+      </view>
+
+      <!--end ShoppingCartText-->
+    </view>
+
+    <!--end ShoppingCartTop-->
+    <view class="ShoppingCartNum">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{payStyle}}">
+        <view class="picker">
+          付款方式：
+          <text>{{payStyle[index]}} ></text>
+        </view>
+      </picker>
+      <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+        <view class="picker">
+          预定日期:
+          <text>{{date}} ></text>
+        </view>
+      </picker>
+    </view>
+
+    <!--end ShoppingCartNum-->
+    <view class="ShoppingCartFoot">
+
+      <!--
+<view class="fl">总价：<text style="font-size:26rpx;color:#ff4200">￥ {{product.price}}</text></view>-->
+      <view class="fr" bindtap="addshopcar" style="background-color:#f9504f;width:238rpx;height:104rpx;font-size:34rpx;color:#fff;text-align:center">
+        <text>加入购物车</text>
+      </view>
+    </view>
+
+    <!--end ShoppingCartFoot-->
+  </view>
+
+  <!--加入购物车 end  ShoppingCart-->
+</scroll-view>

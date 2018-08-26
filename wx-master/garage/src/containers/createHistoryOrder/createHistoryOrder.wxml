@@ -1,0 +1,332 @@
+<view class="container">
+	<view class="topNav">
+		<view class="topNav_item"><text class="on">基本信息</text></view>
+		<view class="topNav_item"><text class="{{step>=3?'on':''}}">检车结果</text></view>
+		<view class="topNav_item"><text class="{{step>=4?'on':''}}">报价方案</text></view>
+	</view>
+	<import src="../../../component/selfToast/selfToast.wxml"></import>
+	<template is="toast_self" data="{{...toastSelft}}"></template>
+	<form report-submit="true" bindsubmit="submitStep4">
+	 <!-- 接车 -->
+		<view class="step" wx:if="{{step==1}}">
+		  <view class="outer_label">车辆信息</view>
+			<view class="section">
+				<view class="tr">
+					<view class="label">车牌</view>
+					<view class="tr noborder">
+					   <view class="province" bindtap="_showProvincePlant">{{form_step1.provinceCode}} <view class="provice_arrow"><image src="../../../images/arrow.png"></image></view></view>
+					   <input placeholder-class="phcolor" type="text" maxlength="6" data-key="form_step1.vehicleLicenceCode" value="{{form_step1.vehicleLicenceCode}}" bindinput="inputChange" placeholder="必填"></input>
+					</view>
+
+				</view>
+				<view class="tr">
+					<view class="label">车型</view>
+					<input placeholder-class="phcolor" maxlength="50" data-key="form_step1.autoModelChnName" value="{{form_step1.autoModelChnName}}" bindinput="inputChange" placeholder="必填，如大众迈腾"></input>
+					<view class="carTypeBtn" bindtap="showModal" data-key="showCarModel"><text>选择</text><image src="../../../images/arrow_right.png"></image></view>
+				</view>
+				<view class="tr">
+					<view class="label">里程</view>
+					<input placeholder-class="phcolor" maxlength="8" data-key="form_step1.mileage" value="{{form_step1.mileage}}" type="number" bindinput="inputChange" placeholder="必填"></input>
+					<text class="unit">KM</text>
+				</view>
+
+			</view>
+			<view class="outer_label">客户信息</view>
+			<view class="section">
+				<view class="tr">
+					<text class="label">姓名</text>
+					<input placeholder-class="phcolor" maxlength="20" data-key="form_step1.userName" value="{{form_step1.userName}}" bindinput="inputChange" placeholder="必填"></input>
+				</view>
+				<view class="tr gender">
+					<text class="label">称呼</text>
+					<radio-group class="radio-group" bindchange="genderChange" data-key="form_step1.sex">
+					  <label class="radio" wx:for="{{gender}}" wx:key="{{index}}">
+					    <radio value="{{item.name}}" checked="{{item.checked}}" color="#368FDB"/><text>{{item.value}}</text>
+					  </label>
+					</radio-group>
+				</view>
+			</view>
+			<view class="outer_label">服务项目</view>
+			<view class="section">
+				<view class="tr ">
+					<checkbox-group bindchange="checkboxChange" class="checkgroup">
+						<label class="checkbox" wx:for="{{needTypeItems}}" wx:key="{{item.name}}">
+												<checkbox  class="checkitem" value="{{item.name}}" checked="{{item.checked}}"
+												color="#368fdb"></checkbox>
+												<text class="checkname {{item.checked?'on':''}}">{{item.name}}</text>
+											</label>
+					</checkbox-group>
+				</view>
+				<view class="tr textarea" wx:if="{{needTypeItems[2].checked}}">
+					<textarea class="needType_textarea" maxlength="50" value="{{form_step1.customServiceItem}}" maxlength="50" placeholder-class="phcolor" placeholder="请输入服务项目名称（选填）" data-key="textCount0" bindinput="textareaChange"></textarea>
+					<!--<view class="indicator">{{textCount0}}/50</view>-->
+				</view>
+			</view>
+			<view class="middleLine"><view class="line"></view><view class="middle_text">以下为选填项，可以不填</view><view class="line"></view></view>
+			<view class="outer_label"><text class="strong">客户要求</text>(选填)</view>
+			<view class="section">
+				<view class="tr textarea noborder">
+					<textarea class="detail_textarea" maxlength='500' value="{{form_step1.description}}" placeholder-class="phcolor" placeholder="请填写详细信息" data-key="textCount1" bindinput="textareaChange"></textarea>
+					<!--<view class="indicator">{{textCount1}}</view>-->
+				</view>
+			</view>
+			<view class="section mt20">
+				<view class="tr">
+					<text class="label">手机号</text>
+					<input placeholder-class="phcolor" maxlength="11" type="number" data-key="form_step1.contactMobile" value="{{form_step1.contactMobile}}" bindinput="inputChange" placeholder="选填"></input>
+				</view>
+				<view class="tr">
+					<text class="label" style="width:240rpx">保险到期时间</text>
+					<picker mode="date" value="{{form_step1.insuranceExpireDate}}" fields="month" data-key="form_step1.insuranceExpireDate" start="{{startDate}}"  bindchange="bindDateChange">
+						 <view class="picker">
+								{{form_step1.insuranceExpireDate}}<image class="iconRight" src="../../../images/arrow-down.png"></image>
+						 </view>
+					 </picker>
+				</view>
+				<view class="tr">
+					<text class="label" style="width:240rpx">下次保养时间</text>
+					<picker mode="date" value="{{form_step1.nextMaintainDate}}" fields="month" start="{{startDate}}" data-key="form_step1.nextMaintainDate"  bindchange="bindDateChange">
+						 <view class="picker">
+								{{form_step1.nextMaintainDate}}<image class="iconRight" src="../../../images/arrow-down.png"></image>
+						 </view>
+					 </picker>
+				</view>
+			</view>
+			<view class="outer_label"><text class="strong">环车检查</text>(请检查车身外观是否异常，异常请上传图片)</view>
+			<view class="section overAll_photo">
+					<view class="photos">
+							<view class="photo">
+									<view class="viewPhoto" wx:for="{{form_step1.checkPhotos}}" wx:for-index="index" wx:key="{{index}}" wx:for-item="_item">
+											<image  src="{{_item.urlSmall}}" bindtap="previewImg" data-index="{{index}}" data-target="{{index}}"  data-key="form_step1.checkPhotos"></image>
+											<view class="clear_icon" catchtap="clearImg" data-index="{{index}}" data-target="{{index}}"  data-key="form_step1.checkPhotos">
+													<image src="../../../images/close.png" />
+											</view>
+									</view>
+									<view bindtap="uploadImg" style="float:left;" data-key="form_step1.checkPhotos" data-index='0' wx:if="{{form_step1.checkPhotos.length<5 || !form_step1.checkPhotos }}">
+												<image src="../../../images/uploadImg.png"></image>
+									</view>
+							</view>
+					</view>
+			</view>
+			<view class="outer_label"><text class="strong">车架号</text>(选填，拍照或手动输入)</view>
+			<view class="section">
+				<view class="photos" wx:if="{{!showVehicleFrameNoInput}}">
+						<view class="photo">
+								<view class="viewPhoto" wx:for="{{form_step1.vehicleFrameNoId}}" wx:for-index="index" wx:key="{{index}}" wx:for-item="_item">
+										<image  src="{{_item.urlSmall}}" bindtap="previewImg" data-index="{{index}}" data-target="{{index}}"  data-key="form_step1.vehicleFrameNoId"></image>
+										<view class="clear_icon" catchtap="clearImg" data-index="{{index}}" data-target="{{index}}"  data-key="form_step1.vehicleFrameNoId">
+												<image src="../../../images/close.png" />
+										</view>
+								</view>
+								<view bindtap="uploadImg" style="float:left;" data-key="form_step1.vehicleFrameNoId" data-index='0' wx:if="{{form_step1.vehicleFrameNoId.length<1 || !form_step1.vehicleFrameNoId }}">
+											<image src="../../../images/uploadImg.png"></image>
+								</view>
+						</view>
+				</view>
+				<view class="tr" wx:else>
+					     <input placeholder-class="phcolor" style="padding-left:0" maxlength="17" data-key="form_step1.vehicleFrameNo" value="{{form_step1.vehicleFrameNo}}" bindinput="inputChange" placeholder="选填" autofoucs="{{autoFocus}}" focus="{{autoFocus}}"></input>
+					     <view class="closeInput" data-key="form_step1.vehicleFrameNo" bindtap="_closeInput"><image src="../../../images/close.png"></image></view>
+				</view>
+         <view class="frameNoInputBtn"  wx:if="{{!showVehicleFrameNoInput && !form_step1.vehicleFrameNoId.length}}" bindtap="_showVehicleFrameNoInput">请输入车架号</view>
+			</view>
+
+			<view class="section mt20">
+			<view class="tr gender">
+				<text class="label">旧件处理</text>
+				<radio-group class="radio-group" bindchange="genderChange" data-key="form_step1.takeOldDevice">
+					<label class="radio" wx:for="{{oldDevice}}" wx:key="{{index}}">
+						<radio value="{{item.name}}" checked="{{item.checked}}" color="#368FDB"/><text>{{item.value}}</text>
+					</label>
+				</radio-group>
+			</view>
+			<view class="tr gender">
+				<text class="label">是否洗车</text>
+				<radio-group class="radio-group" bindchange="genderChange" data-key="form_step1.washCar">
+					<label class="radio" wx:for="{{washCar}}" wx:key="{{index}}">
+						<radio value="{{item.name}}" checked="{{item.checked}}" color="#368FDB"/><text>{{item.value}}</text>
+					</label>
+				</radio-group>
+			</view>
+			</view>
+      <view class="section mt20">
+          <view class="tr oil">
+            <view class="label"><text>油量</text><text class="oil_num">({{_slider_self_.percentage}})</text></view>
+            <import src="../../../component/sliderSelf/sliderSelf.wxml"></import>
+            <template is="slider_self" data="{{..._slider_self_}}"></template>
+          </view>
+      </view>
+			<view class="footer_btn btn_next {{!form_step1_flag?'gray':''}}" bindtap="submitStep1">
+				下一步
+			</view>
+		</view>
+
+
+		<!-- 检车 -->
+		<view class="step pb130" wx:if="{{step==3}}">
+		  <view class="outer_label">选择检车模板</view>
+      <view class="section">
+					<view class="tr pd20_vertical gender">
+							<radio-group class="radio-group" bindchange="modelChange">
+								<label class="radio" wx:for="{{checkModel}}" wx:key="{{index}}">
+									<radio value="{{item.name}}" checked="{{item.checked}}" color="#368FDB"/><text>{{item.value}}</text>
+								</label>
+							</radio-group>
+					</view>
+		  </view>
+			<view class="checkOrder mt20">
+				<view class="item" wx:for="{{form_step3.itemList}}" wx:for-index="index" wx:key="{{id}}">
+					  <view class="tr tr1">
+						    <view class="no">{{index+1}}</view>
+					     	<view class="label">
+						      	{{item.itemName}}
+					     	</view>
+						    <view class="radio_group_warp">
+		                  <radio-group class="radio_group" data-key="form_step3.itemList" data-index="{{index}}" bindchange="radioChange">
+		                    <label class="radio_item">
+		                        <radio value="1" checked="{{item.normal=='1'}}" color="#368fdb"/><text class="{{item.normal=='1'?'on':''}}">正常</text>
+                            </label>
+		                    <label class="radio_item">
+		                        <radio value="2" checked="{{item.normal=='2'}}" color="#368fdb"/><text class="{{item.normal=='2'?'on':''}}">异常</text>
+                            </label>
+		                  </radio-group>
+		            </view>
+				    	</view>
+					<view class="tr tr2" wx:if="{{item.normal==2}}">
+                <view class="no"></view>
+                <view class="label sub"><text>异常点照片</text></view>
+                <view class="photos">
+                    <view class="photo">
+                        <view class="viewPhoto" wx:for="{{item.abnormalPhotoList}}" wx:for-index="index_item" wx:key="{{item.id}}" wx:for-item="_item">
+                            <image  src="{{_item.urlSmall}}" bindtap="previewImg" data-index="{{index}}" data-target="{{index_item}}"  data-key="form_step3.itemList"></image>
+                            <view class="clear_icon" catchtap="clearImg" data-index="{{index}}" data-target="{{index_item}}"  data-key="form_step3.itemList">
+                                <image src="../../../images/close.png" />
+                            </view>
+                        </view>
+                        <view bindtap="uploadImg" style="float:left;" data-key="form_step3.itemList" data-index="{{index}}" wx:if="{{item.abnormalPhotoList.length<3 || !item.abnormalPhotoList }}">
+                              <image src="../../../images/uploadImg.png"></image>
+                        </view>
+                    </view>
+                </view>
+          </view>
+					<view class="tr tr3" wx:if="{{item.normal==2}}">
+              <view class="no"></view>
+            	<view class="label sub">备注</view>
+            	<input type="text" placeholder-class="phcolor" data-key="{{'form_step3.itemList['+index+'].remark'}}" value="{{item.remark}}" bindinput="inputChange" placeholder="点击输入（非必填）"></input>
+          </view>
+				 </view>
+			</view>
+			<view class="outer_label">检查结果</view>
+			<view class="section">
+				<view class="tr pd20_vertical {{checkStatus?'red':''}}">{{checkResult}}</view>
+				<view class="tr">
+					<input placeholder-class="phcolor" style="padding:0;" maxlength="100" data-key="form_step3.checkResultDescription" value="{{form_step3.checkResultDescription}}" bindinput="inputChange" placeholder="补充结果描述（选填）"></input>
+				</view>
+			</view>
+			<view class="outer_label">维修项目</view>
+			<view class="section">
+				<view class="tr textarea">
+					<input class="detail_textarea" value="{{form_step3.suggestion}}" maxlength="500" placeholder-class="phcolor" placeholder="选填" data-key="textCount2" bindinput="textareaChange"></input>
+					<!--<view class="indicator">{{textCount2}}/500</view>-->
+				</view>
+			</view>
+
+			<view class="footer_btn">
+				<view class="prev" data-step="1" bindtap="_prevStep">上一步</view>
+				<button class="complete {{!form_step3_flag?'gray':''}}" bindtap="submitStep3">下一步</button>
+        <button class="complete" bindtap="skipStep3">跳过</button>
+			</view>
+		</view>
+		<!-- 报价 -->
+		<view class="step pb130" wx:if="{{step==4}}">
+				<view class="outer_label" wx:if="{{!skipStep3}}">检查结果</view>
+				<view class="section" wx:if="{{!skipStep3}}">
+					<view class="tr pd20_vertical" style="color:{{checkStatus?'#ff1100':'#333'}}">{{checkResult}}</view>
+					<view class="tr">
+						<input placeholder-class="phcolor" style="padding:0;" maxlength="100" data-key="form_step3.checkResultDescription" value="{{form_step3.checkResultDescription}}" bindinput="inputChange" placeholder="补充结果描述（选填）"></input>
+					</view>
+				</view>
+       <view class="qutoe_item mt20" wx:for="{{form_step4.planItemList}}" wx:key="{{index}}">
+			     <view class="cuttle space-between"><view class="hc" bindtap="switchQuoteItem" data-index="{{index}}"><text class="index">项目{{index+1}}</text><image class="arrow" wx:if="{{!item.showFlag}}" src="../../../images/arrow-down.png"></image><image wx:else class="arrow active" src="../../../images/arrow-down.png"></image></view><view class="vc" wx:if="{{form_step4.planItemList.length>1}}" bindtap="deleteQuoteItem" data-index="{{index}}"><image class="delete" src="../../../images/delete.png"></image></view></view>
+           <view wx:if="{{item.showFlag}}">
+							 <view class="tr">
+										<text class="label">项目名称</text><input data-key="{{'form_step4.planItemList['+index+'].planItemName'}}" value="{{form_step4.planItemList[index].planItemName}}" bindinput="inputChange" placeholder="请输入项目名称" ></input>
+							 </view>
+							 <view class="tr">
+		                <text class="label">材料费</text><input data-key="{{'form_step4.planItemList['+index+'].materialPrice'}}" value="{{form_step4.planItemList[index].materialPrice}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="bindBlur" placeholder="请输入材料费" type="number" ></input><text>元</text>
+							 </view>
+							  <view class="tr">
+		                <text class="label">工时费</text><input data-key="{{'form_step4.planItemList['+index+'].workingPrice'}}" value="{{form_step4.planItemList[index].workingPrice}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="bindBlur" placeholder="请输入工时费" type="number" ></input><text>元</text>
+								</view>
+								<view class="tr">
+		               <text class="label">备注(选填)</text><input data-key="{{'form_step4.planItemList['+index+'].remark'}}" value="{{form_step4.planItemList[index].remark}}" bindinput="inputChange" placeholder="请输入备注" ></input>
+								</view>
+					 </view>
+			 </view>
+			 <view class="addQuoteItem mt20" bindtap="addQuoteItem">+新增报价项目</view>
+			 <view class="section mt20">
+				 <view class="tr">
+					 <text class="label" style="width:240rpx">取车时间：</text>
+					 <picker mode="date" value="{{form_step4.finishDate}}" data-key="form_step4.finishDate" start="{{startDate}}"  bindchange="bindDateChange">
+							<view class="picker">
+								 {{form_step4.finishDate}}<image class="iconRight" src="../../../images/arrow-down.png"></image>
+							</view>
+						</picker>
+				 </view>
+			 </view>
+			 <view class="section mt20">
+					 <view class="price_pannel">
+							 <view class='space-between'><view class="label">总材料费</view><view>{{form_step4.totalMaterialPrice}}.00元</view></view>
+							 <view class="space-between"><view class="label">总工时费</view><view>{{form_step4.totalWorkingPrice}}.00元</view></view>
+							 <view class="space-between"><view class="label">总费用</view><view>{{form_step4.totalPrice}}.00元</view></view>
+					 </view>
+			 </view>
+			 <view class="footer_btn">
+			   <view class="price_pannel_fixed"><text class="label">总费用:</text>{{form_step4.totalPrice}}.00元</view>
+				 <view class="prev" data-step="3" bindtap="_prevStep">上一步</view>
+				 <button class="complete {{!form_step4_flag?'gray':''}}" formType="submit">完成</button>
+			 </view>
+		</view>
+		<view class="provincePlant {{showProvincePlant?'active':''}}" >
+		     <view class="shadow" bindtap="_showProvincePlant"></view>
+				 <view class="province_container">
+				      <view class="province_content">
+                  <view class="province_btn {{item===form_step1.provinceCode?'selected':''}}" wx:for="{{cityNameShorts}}" wx:key="{{item}}" bindtap="_selectProvinceCode" data-code='{{item}}'>{{item}}</view>
+							</view>
+							<view class="cancel_btn" bindtap="_showProvincePlant">取消</view>
+				 </view>
+		</view>
+		<view class="modal" wx:if="{{showCarSeries}}">
+         <view class="content carSeries">
+              <view class="title">请选择车系<text class="closeBtn" bindtap="closeModal" data-key="showCarSeries">X</text></view>
+							<view class="list" >
+                   <view class="item" wx:for="{{brandAutoSeries}}" wx:key="{{item.autoSeriesName}}" bindtap="handleCarSeriesChoosed" data-id="{{item.autoSeriesName}}">{{item.autoSeriesName}}</view>
+
+							</view>
+				 </view>
+		</view>
+		<view class="modal" wx:if="{{showCarModel}}">
+				 <view class="content carModel">
+							<view class="title">请选择车辆品牌<text class="closeBtn" bindtap="closeModal" data-key="showCarModel">X</text></view>
+							<view class="list">
+							     <view class="section">
+									     <view class="topic">热门品牌</view>
+									     <view class="item" wx:for="{{tradeMarkHot}}" wx:key="{{item.name}}" bindtap="handleCarModelChoosed" data-id="{{item.id}}" data-name="{{item.name}}">
+                           <image src="https://pamap-gr.pingan.com.cn/mobile/images/carlogo/{{item.id}}.png"></image>
+													 <view class="name">{{item.name}}</view>
+											 </view>
+									 </view>
+									 <view class="section" wx:if="{{tradeMarkAll.length}}">
+											 <view class="section" wx:for="{{tradeMarkAll}}" wx:key="{{item.key}}">
+											     <view class="topic">{{item.key}}</view>
+													 <view class="item" wx:for="{{item.list}}" wx:for-item="_item" wx:key="{{_item.name}}" bindtap="handleCarModelChoosed" data-id="{{_item.id}}" data-name="{{_item.name}}">
+		                           <image src="https://pamap-gr.pingan.com.cn/mobile/images/carlogo/{{_item.id}}.png"></image>
+															 <view class="name">{{_item.name}}</view>
+													 </view>
+											 </view>
+									 </view>
+                   <view class="moreBtn" bindtap="queryCarModel" wx:if="{{!tradeMarkAll.length}}">点击查看更多品牌...</view>
+							</view>
+				 </view>
+		</view>
+	</form>
+</view>

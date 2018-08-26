@@ -1,0 +1,22 @@
+<!--pages/myCenter/cash/cashRecord/cashRecord.wxml-->
+<view class='wordview'>
+    <view class='hdbar'>
+        <view class='col-xs-15'>ID</view>
+        <view class='col-xs-35'>金额</view>
+        <view class='col-xs-35'>时间</view>
+        <view class='col-xs-15'>状态</view>
+    </view>
+    <view class='viewmain'>
+        <block wx:for="{{Recordlist}}" wx:key="">
+            <view data-='{{item.id}}' class='col-list'>
+                <view class='col-xs-15'>{{index+1}}</view>
+                <view class='col-xs-35'>{{item.money}}</view>
+                <view class='col-xs-35'>{{item.add_time}}</view>
+                <view wx:if="{{item.status==0}}" class='col-xs-15'>审核中</view>
+                <view wx:elif="{{item.status==1}}" class='col-xs-15'>已审核</view>
+                <view wx:elif="{{item.status==2}}" class='col-xs-15'>已打款</view>
+            </view>
+        </block>
+        <view class='msgtext' hidden="{{msgtext}}">没有更多数据</view>
+    </view>
+</view>

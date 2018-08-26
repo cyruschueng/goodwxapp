@@ -1,0 +1,51 @@
+<block wx:if="{{item.data.length > 0}}">
+  <view class="fui-cube">
+    <block wx:if="{{item.data.length == 1}}">
+      <navigator url="{{item.data[0].url}}">
+        <image mode="widthFix" src="{{item.data[0].img}}"></image>
+      </navigator>
+    </block>
+    <block wx:if="{{item.data.length > 1}}">
+      <view class="fui-cube-left">
+        <navigator url="{{item.data[0].url}}">
+          <image mode="widthFix" src="{{item.data[0].img}}"></image>
+        </navigator>
+      </view>
+      <view class="fui-cube-right">
+        <block wx:if="{{item.data.length == 2}}">
+          <navigator url="{{item.data[1].url}}">
+            <image mode="widthFix" src="{{item.data[1].img}}"></image>
+          </navigator>
+        </block>
+        <block wx:if="{{item.data.length > 2}}">
+          <view class="fui-cube-right1">
+            <navigator url="{{item.data[1].url}}">
+              <image mode="widthFix" src="{{item.data[1].img}}"></image>
+            </navigator>
+          </view>
+          <view class="fui-cube-right2">
+            <block wx:if="{{item.data.length == 3}}">
+              <navigator url="{{item.data[2].url}}">
+                <image mode="widthFix" src="{{item.data[2].img}}"></image>
+              </navigator>
+            </block>
+            <block wx:if="{{item.data.length > 3}}">
+              <view class="left">
+                <navigator url="{{item.data[2].url}}">
+                  <image mode="widthFix" src="{{item.data[2].img}}"></image>
+                </navigator>
+              </view>
+            </block>
+            <block wx:if="{{item.data.length == 4}}">
+              <view class="right">
+                <navigator url="{{item.data[3].url}}">
+                  <image mode="widthFix" src="{{item.data[3].img}}"></image>
+                </navigator>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+</block>

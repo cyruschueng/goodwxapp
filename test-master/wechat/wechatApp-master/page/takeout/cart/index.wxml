@@ -1,0 +1,47 @@
+<view class="footer">
+  <view class="num" wx:if="{{num}}">{{num}}</view>
+  <image wx:if="{{!num}}" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/shop.png"></image>
+  <view wx:if="{{num}}" class="rmb">¥{{price}}</view>
+  <view class="sub" catchtap="settle" wx:if="{{num}}">确认下单</view>
+  <view class="sub no" wx:if="{{!num}}">未选菜品</view>
+</view>
+
+
+
+<!-- 购物车 -->
+
+<view class="yes-select-menu-box {{ show ? 'ani' :''}}">
+  <view class="yes-select-menu">
+    <text class="f_l">我的菜单</text>
+
+<view catchtap="goBack" class="f_r cl add">
+      <image src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jia3.png"></image>添加</view>
+
+    <view catchtap="clear" class="f_r cl">
+      <image src="https://lingju360.natappvip.cc/miniapp/resources/image/new/de.png"></image> 清空</view>
+
+    
+  </view>
+
+  <view class="ul_menu" scroll-y="true">
+    <view class="li_menu" wx:for-items="{{buymenu}}" wx:if="{{item.num}}">
+      <view class="imgbox">
+        <image src="https://flashgoing.oss-cn-shenzhen.aliyuncs.com/{{item.menuPicture}}" mode="widthFix"></image>
+      </view>
+      <view class="t">
+        <view class="tit">{{item.menuName}}{{item.name}}</view>
+        <view class="num2">¥{{item.price*item.num}}</view>
+      </view>
+
+
+      <image class="jia" data-id="{{item.menuId}}" data-name="{{item.menuName}}{{item.name}}" data-price="{{item.price}}" catchtap="add" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jian.png"></image>
+      <image class="jia jian" data-id="{{item.menuId}}" data-name="{{item.menuName}}{{item.name}}" data-price="{{item.price}}" catchtap="minus" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jia.png"></image>
+      <text class="jia num">{{ item.num }}</text>
+    </view>
+  </view>
+
+  <view class="input_box">
+    <input placeholder="备注" />
+  </view>
+
+</view>

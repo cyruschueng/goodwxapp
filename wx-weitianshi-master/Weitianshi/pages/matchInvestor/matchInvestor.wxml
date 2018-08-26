@@ -1,0 +1,100 @@
+<import src="/pages/Template/Template.wxml" />
+<!--找项目投资人  -->
+
+
+<include src='/utils/wxml/common' />
+<view id='matchInvestor' wx:if="{{nonet}}">
+  <!--蓝顶  -->
+  <view class='blueTop'>
+    <view class='publicButton flex' hover-class='t-hoverColor' bindtap='publicBtn'>
+      <image src='/img/icon-fabu@2x.png'></image>
+      <view class="publicButtonTitle"> 发布融资项目</view>
+    </view>
+  </view>
+  <!--展示内容  -->
+  <scroll-view class='scroll' scroll-y="true" bindscrolltolower='loadMore'>
+    <block wx:for='{{myProject}}' wx:key='{{item.project_id}}'>
+      <view class='itemCard' hover-class='t-hoverColor' data-id='{{item.project_id}}' bindtap='projectDetail'>
+        <view class="inPadding">
+          <view class="flex cardTop">
+            <view>匹配推荐: {{item.match_count}}人</view>
+            <button class='pushBtn' data-pro-id='{{item.project_id}}' hover-class='t-other-button-hover' hover-stop-propagation='true' catchtap='goToMatchInvestor'>一键提交</button>
+          </view>
+          <view class="line" wx:if="{{item.match_count!=0}}"></view>
+          <!--匹配到的投资人  -->
+          <view class='matchInvestor flex'>
+            <block wx:for='{{item.match_investors}}' wx:key='investor.investor_id' wx:for-item='investor' wx:for-index='investorIndex'>
+              <view class='investorItem' data-id='{{investor.investor_id}}'>
+                <image class='investorPic' src='{{investor.investor_logo_url}}' wx:if='{{investor.investor_logo_url}}'></image>
+                <view class='investorPic' wx:else>{{investor.investor_logo_text}}</view>
+                <view class='investorName'>{{investor.investor_name}}</view>
+                <view class='investorBand'>{{investor.investor_company}}</view>
+              </view>
+            </block>
+          </view>
+          <!--项目详情  -->
+          <view class='projectDetal'>
+            <view class='projectTop flex'>
+              <view class='projectIntro'>{{item.pro_intro}}</view>
+              <view class='is_exclusive' wx:if='{{item.is_exclusive===1}}'>独家</view>
+              <view class='is_exclusive' wx:if='{{item.is_exclusive===2}}'>非独</view>
+            </view>
+            <view class='industryArr'>{{item.industryArr}}</view>
+            <view class="flex publishTag">
+              <view class='otherTag'>{{item.otherTag}}</view>
+              <view class='publish' wx:if='{{item.open_status==1}}'>公开</view>
+              <view class='publish' wx:else>私密</view>
+            </view>
+          </view>
+        </view>
+        <!-- 卡片底部  -->
+        <view class="ProjectDetailInfo flex">
+          <view class="flex sceenPerson" hover-class='t-hoverColor' hover-stop-propagation='true' catchtap="viewProject" data-proid="{{item.project_id}}">
+            <view class="viewTimeAll screenPersonColor project-sentimentm">
+              <view class="viewTimeNew" wx:if="{{item.count.view_times_new != 0}}">+{{item.count.view_times_new}}</view>
+              浏览：
+              <label>{{item.count.view_times_all}}</label>
+            </view>
+          </view>
+          <view class="t-line"></view>
+          <view class="flex sceenPerson" catchtap="applyPerson" hover-class='t-hoverColor' hover-stop-propagation='true' data-proid="{{item.project_id}}">
+            <view class="applyProjectNew" wx:if="{{item.count.apply_times_new != 0}}">+{{item.count.apply_times_new}}</view>
+            <view class="viewTimeAll screenPersonColor" data-proid="{{item.project_id}}">申请查看：
+              <label>{{item.count.apply_times_all}}</label>
+            </view>
+          </view>
+          <view class="t-line"></view>
+          <view class="flex sceenPerson" catchtap="hasMeeting" hover-class='t-hoverColor' hover-stop-propagation='true' data-proid="{{item.project_id}}">
+            <view class="applyProjectNew" wx:if="{{item.count.meet_times_new != 0}}">+{{item.count.meet_times_new}}</view>
+            <view class="viewTimeAll screenPersonColor" data-proid="{{item.project_id}}">约谈：
+              <label>{{item.count.meet_times_all}}</label>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!--内容为空的时候的样式  -->
+    <view class="emptyStyle" wx:if="{{myProject.length == 0||noUserId}}">
+      <view class="hasNothing">暂无数据，发布融资项目，可匹配投资人</view>
+      <image src="{{imgUrls}}"></image>
+    </view>
+
+  </scroll-view>
+  <!--电脑上传扫一扫  -->
+  <view class="modalBox" hidden="{{modalBox==0}}">
+    <view class="classname" bindtap="closeModal">
+      <image src="/img/icon-guanbi@2x.png" class="close"></image>
+    </view>
+    <view class="contactModalBox">
+      <image src="/img/img-saoyisao@2x.png" class="aPic"></image>
+      <view class="modalTitle">电脑打开,点击扫一扫</view>
+      <view class="modalTips">www.weitianshi.cn/qr</view>
+      <view class="btn" hover-class='t-other-button-hover' bindtap="createProjectPc">扫一扫</view>
+    </view>
+  </view>
+  <!--创建项目引导  -->
+  <template is='createProject'></template>
+
+  <!--错误提示  -->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

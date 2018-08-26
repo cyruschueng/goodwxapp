@@ -1,0 +1,35 @@
+<template name="mainInfo">
+  <view class="infoWrapper">
+    <view class="infoHeader tc pr">
+      <image src="{{infoData.template.hearder}}" mode="widthFix"></image>
+    </view>
+    <view class="infoContent">
+      <text class="theme">{{infoData.title}}</text>
+      <view class="desc" wx:if="{{infoData.content}}">{{infoData.content}}</view>
+      <block wx:for="{{infoData.image}}" wx:for-item="pic"  wx:key="*this" wx:if="{{infoData.image}}">
+        <image src="{{pic}}" mode="widthFix" class="infoPic"></image>
+      </block>
+      <view class="infoNote">
+        <text>{{infoData.author}}\n{{infoData.build_time}}</text>
+      </view>
+      <view class="address" wx:if="{{infoData.address_name}}" bindtap='openLocation'>
+        <span class="iconfont icon-dingwei mr5"></span>
+        <text>{{infoData.address_name}}</text>
+        <span class="iconfont icon-next ml5"></span>
+      </view>
+      <view class="keyWords" wx:if="{{infoData.keywords}}">
+        <text>关键词：</text>
+        <block wx:for="{{infoData.keywords}}" wx:for-item="keywords"  wx:key="*this">
+          <text class="mr5">{{keywords}}</text>
+        </block>
+      </view>
+    </view>
+    <image src="{{infoData.template.footer}}" mode="widthFix"></image>
+  </view>
+  <view class="btnGroups">
+    <button open-type ="share">分享到群里</button>
+    <button type ="default" bindtap="toPublicHandle" data-type="{{infoData.classify}}">
+      {{infoData.classify == '1'?'发布群通知':'发布群活动'}}
+    </button>
+  </view>
+</template>

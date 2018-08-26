@@ -1,0 +1,80 @@
+<?php
+namespace app\index\controller;
+use app\index\model\Advertisement as AdvertisementModel;
+use app\index\model\User as UserModel;
+use app\index\model\Order ;
+use app\index\model\OrderH5 ;
+class Advertisement extends Base{
+
+	public function getAdvertisement()
+	{
+		$advertisement = new AdvertisementModel();
+		$advertisementinfo = $advertisement->select();
+		dump($advertisementinfo);
+		if(empty($this->access_token)){
+			//没有登录
+			exit(json_encode($advertisementinfo));
+		}
+
+		$access_token_redis_key = "access_token_" . $this->access_token;
+		if(!$this->redis->existsRedis($access_token_redis_key)){
+			$response['error'] = 1;
+			$response['message'] = '对不起,登录过期了';
+			exit(json_encode($response));
+		}
+
+		$user = new UserModel;
+		$userinfo = $user->where('access_token',$this->access_token)->find();
+		$user_id = $userinfo['id'];
+
+		$order = new Order();
+		$orderinfo = $order->where('user_id',$user_id)->where('status', '>',0)->select();
+		if(!empty($orderinfo)){
+			foreach ($orderinfo as $orderinfokey => $orderinfoval) {
+				if($orderinfoval['status'] == 1){
+					foreach ($advertisementinfo as $advertisementinfokey => $advertisementinfoval) {
+						if($orderinfoval['car_model_id'] == $advertisementinfoval['car_model_id']){
+							$advertisementinfo[$advertisementinfokey]['statusmessage'] = "已预约 点击查看";
+							$advertisementinfo[$advertisementinfokey]['status'] = 1;
+							$advertisementinfo[$advertisementinfokey]['orderid'] = $orderinfoval['id'];
+						}
+					}
+				}
+				if($orderinfoval['status'] == 2){
+					foreach ($advertisementinfo as $advertisementinfokey => $advertisementinfoval) {
+						if($orderinfoval['car_model_id'] == $advertisementinfoval['car_model_id']){
+							$advertisementinfo[$advertisementinfokey]['statusmessage'] = "试驾完成";
+							$advertisementinfo[$advertisementinfokey]['status'] = 2;
+							$advertisementinfo[$advertisementinfokey]['orderid'] = $orderinfoval['id'];
+						}
+					}
+				}
+			}
+		}
+		$orderh5 = new OrderH5();
+		$orderh5info = $orderh5->where(['create_user_id'=>$user_id])->find();
+		if(!empty($orderh5info)){
+			foreach ($orderh5info as $orderh5infokey => $orderh5infoval) {
+				if($orderh5infoval['status'] == 0){
+					foreach ($advertisementinfo as $advertisementinfokey => $advertisementinfoval) {
+						if($orderh5infoval['car_model_id'] == $advertisementinfoval['car_model_id']){
+							$advertisementinfo[$advertisementinfokey]['statusmessage'] = "已预约 点击查看";
+							$advertisementinfo[$advertisementinfokey]['status'] = 1;
+							$advertisementinfo[$advertisementinfokey]['orderid'] = $orderh5infoval['id'];
+						}
+					}
+				}
+				if($orderh5infoval['status'] == 1){
+					foreach ($advertisementinfo as $advertisementinfokey => $advertisementinfoval) {
+						if($orderh5infoval['car_model_id'] == $advertisementinfoval['car_model_id']){
+							$advertisementinfo[$advertisementinfokey]['statusmessage'] = "试驾完成";
+							$advertisementinfo[$advertisementinfokey]['status'] = 2;
+							$advertisementinfo[$advertisementinfokey]['orderid'] = $orderh5infoval['id'];
+						}
+					}
+				}
+			}
+		}
+		exit(json_encode($advertisementinfo));
+	}
+}

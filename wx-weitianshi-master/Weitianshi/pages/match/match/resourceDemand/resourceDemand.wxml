@@ -1,0 +1,52 @@
+<import src="/pages/Template/Template.wxml" />
+<!--可提供资源-->
+
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view id="resourceEnchange">
+    <view class="offer">
+      <view class="flex">
+        <view class="title">可提供资源</view>
+        <!--<view class="title offerAdd" bindtap="offerAdd">自定义添加</view>-->
+      </view>
+      <view class="context flex">
+        <block wx:for="{{enchange}}" wx:key="{{item.industry_id}}">
+          <label class="tips">
+            <view class="{{enchangeCheck[index]==true?'checkedOne':''}}" id="{{item.resource_id}}" data-index="{{index}}" data-value='{{item.resource_name}}' data-check="false" bindtap="checkboxChange">
+              {{item.resource_name}}</view>
+          </label>
+        </block>
+      </view>
+    </view>
+
+    <!--在寻求资源-->
+    <view class="search">
+      <view class="flex">
+        <view class="title">在寻求资源</view>
+        <!--<view class="title searchAdd" bindtap="searchAdd">自定义添加</view>-->
+      </view>
+      <view class="context flex">
+        <block wx:for="{{target}}" wx:key="{{item.resource_id}}">
+          <label class="tips">
+            <view class="{{targetCheck[index]==true?'checkedOne':''}}" id="{{item.resource_id}}" data-index="{{index}}" data-value='{{item.resource_name}}' data-check="false" bindtap="checkboxChange2">
+              {{item.resource_name}}</view>
+          </label>
+        </block>
+      </view>
+    </view>
+    <view>
+
+      <!--具体描述-->
+      <view class="describe">具体描述</view>
+      <textarea placeholder="其他需求的描述,如:阿里系的创业团队我更亲睐" placeholder-style='color:#ccc' bindinput="bindTextAreaBlur" maxlength="30" value="{{describe}}" />
+    </view>
+
+    <view style='height:98rpx;'></view>
+
+    <!--错语提示-->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+  </view>
+
+  <!--发布项目-->
+  <template is="buttonOne" data="{{text:buttonOneText,btnName:'publish',disabled}}"></template>
+</view>

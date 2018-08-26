@@ -1,0 +1,36 @@
+﻿<div class="page" ng-controller="detailController">
+    <div ng-include="'./views/detail/header.html'"></div>
+    <div class="page__hd">
+        <img class="img-responsive" style="width:100%;" ng-src="{{info.img_url}}" />
+    </div>
+    <div class="page__bd">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">标题</div>
+                <div class="weui-cell__ft">
+                    <p>{{info.title}}</p>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">有效期</div>
+                <div class="weui-cell__ft">
+                    <p>{{info.valid_date|date:"yyyy-MM-dd"}}</p>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">状态</div>
+                <div class="weui-cell__ft">
+                    <p class="text-primary" ng-show="info.is_act==1">使用中</p>
+                    <p class="text-muted" ng-show="info.is_act==0 && !isValidDate(info.valid_date)">过期</p>
+                    <p class="text-muted" ng-show="info.is_act==0 && isValidDate(info.valid_date)">等待中</p>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">操作</div>
+                <div class="weui-cell__ft">
+                    <p ><span ng-click="delete(info.id)"  class="weui-btn weui-btn_mini weui-btn_default">删除</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

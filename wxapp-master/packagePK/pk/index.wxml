@@ -1,0 +1,204 @@
+<view class="pk-wrapper">
+    <view class="content {{(game.type === 'invite' ? 'invite' : 'pk') + '-' + game.status}}">
+        <!--我的头像-->
+        <view
+            class="my-avatar avatar my-avatar-{{game.status}}-{{userInfo.isShowAvatar ? 'show' : 'hidden'}}"
+        >
+            <image wx:if="{{userInfo.isWinner}}" class="hat" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67ed395dd3e.png"></image>
+            <avatar
+                is-hidden="{{!userInfo.isShowAvatar}}"
+                user-info="{{userInfo.baseInfo}}"
+                is-hidden-other-info="{{avatar.isHiddenOtherInfo}}"
+                is-maker="{{game.type === 'invite' && userInfo.baseInfo.userId === userId}}"
+            >
+            </avatar>
+        </view>
+        <!--vs-->
+        <view wx:if="{{isShowVs}}" class="vs vs-{{isShowVs ? 'show' : 'hidden'}}">
+            <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a66d01653202.png"></image>
+            <view class="icon icon-vs"></view>
+        </view>
+        <!--时间计数器，倒计时-->
+        <view class="count-down count-down-{{game.status}}">
+            <!--云图，图腾-->
+            <view class="cloud" wx:if="{{isShowCloud}}">
+                <cloud
+                    is-show="{{game.type !== 'invite' && !enemyInfo.baseInfo && game.status === 'find'}}"
+                    top="{{leftCloud.top}}"
+                    offset-x="{{leftCloud.offsetX}}"
+                    move-offset="{{leftCloud.moveOffset}}"
+                >
+                </cloud>
+                <cloud
+                    direction="right"
+                    is-show="{{game.type !== 'invite' && !enemyInfo.baseInfo && game.status === 'find'}}"
+                    top="{{rightCloud.top}}"
+                    offset-x="{{rightCloud.offsetX}}"
+                    move-offset="{{rightCloud.moveOffset}}"
+                >
+                </cloud>
+            </view>
+            <timer
+                count="{{timer.num}}"
+                is-hidden="{{!timer.isShow}}"
+                bindcountdownendevent="onCountDownEndEvent"
+                type="{{timer.type}}"
+            ></timer>
+            <view
+                wx:if="{{isShowFindEnemyTips}}"
+                class="find-enemy-tips"
+            >
+                寻找对手...
+            </view>
+        </view>
+        <!--对手头像-->
+        <view
+            wx:if="{{(game.type==='invite' && game.status !== 'find-error') || enemyInfo.baseInfo}}"
+            class="enemy-avatar avatar enemy-avatar-{{game.status === 'find' ? 'find' : 'pk'}}-{{enemyInfo.isShowAvatar ? 'show' : 'hidden'}}"
+        >
+            <image wx:if="{{enemyInfo.isWinner}}" class="hat" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67ed395dd3e.png"></image>
+            <avatar
+                is-hidden="{{!enemyInfo.isShowAvatar}}"
+                user-info="{{enemyInfo.baseInfo}}"
+                is-hidden-other-info="{{avatar.isHiddenOtherInfo}}"
+                is-maker="{{game.type==='invite' && enemyInfo.baseInfo.userId === userId}}"
+            ></avatar>
+        </view>
+        <!--查找对手-->
+        <view wx:if="{{game.type==='invite' && game.status=='find'}}" class="invite">
+            <!--邀请好友-->
+            <view wx:if="{{!isFriendRingCreated}}" class="waiting">
+                请等待对手{{userInfo.baseInfo.userId === userId ? '加入' : '开始'}}比赛
+            </view>
+            <!--开始比赛-->
+            <view wx:if="{{isFriendRingCreated}}" class="start" bindtap="onBeginFriendRingTap">
+                <view class="icon icon-font-start"></view>
+            </view>
+            <view class="question-tips">
+                共5道题，每题10秒钟回答时间
+            </view>
+        </view>
+        <view wx:if="{{game.type==='invite' && game.status=='find'}}" class="footer">
+            <button
+                wx:if="{{userInfo.baseInfo.userId === userId && !isFriendRingCreated}}"
+                open-type="share"
+                data-type="invite"
+                class="btn btn-invite"
+            >
+                邀请好友
+            </button>
+            <view class="btn btn-giveup" bindtap="onGiveUp">放弃挑战</view>
+        </view>
+        <!--擂台-->
+        <view wx:if="{{game.status=='pk'}}" class="ring">
+            <!--双倍暴击-->
+            <view class="double-combo" wx:if="{{isShowDoubleCombo}}">
+                <image class="img" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a67edbd3bdd0.png"></image>
+            </view>
+            <!--连击-->
+            <view wx:if="{{question.isQuestionOver}}" class="combo">
+                <view wx:if="{{isShowMyCombo}}">
+                    <combo
+                        count="{{question.result.combo}}"
+                    >
+                    </combo>
+                </view>
+                <view wx:if="{{isShowEnemyCombo}}">
+                    <combo
+                        wx:if="{{isShowEnemyCombo}}"
+                        count="{{question.result.enemyCombo}}"
+                        direction="right"
+                    >
+                    </combo>
+                </view>
+            </view>
+            <!--标题和标签-->
+            <view class="title-wrap">
+                <view class="tag-wrap">
+                    <view wx:if="{{question.tag}}" class="round round-{{question.tagDisplayType}} icon icon-font-question-{{question.currentRound}}"></view>
+                    <view wx:if="{{question.tag}}" class="tag-{{question.tagDisplayType}} tag">{{question.tag}}</view>
+                </view>
+                <view
+                    wx:if="{{question.tagDisplayType === 'hidden' && question.isShowQustionTitle}}"
+                    class="title question-title-{{question.tagDisplayType === 'show' ? 'hidden' : 'show'}}"
+                >
+                    <rich-text nodes="{{nodes}}"></rich-text>
+                </view>
+            </view>
+            <!--我的分数-->
+            <view class="score my-score">
+                <score-progress score="{{myScore}}"></score-progress>
+            </view>
+            <!--题目选项-->
+            <view class="questions" wx:if="{{question.isShowQuestionOptions}}">
+                <question-options
+                    options="{{question.options}}"
+                    result="{{question.result}}"
+                    bindselectedoptionsevent="onAnswerEvent"
+                    bindquestionoverevent="onQuestionOverEvent"
+                    bindanimationendevent="onOptionsAnimationendEvent"
+                    is-question-over="{{question.isQuestionOver}}"
+                >
+                </question-options>
+            </view>
+            <!--对手分数-->
+            <view class="score enemy-score">
+                <score-progress score="{{enemyScore}}"></score-progress>
+            </view>
+        </view>
+        <!--结果-->
+        <view wx:if="{{game.status=='over'}}" class="over">
+            <view wx:if="{{result.isShowTotal}}" class="total-score my-total-score">
+                <total-score score="{{result.totalScore}}"></total-score>
+            </view>
+            <view wx:if="{{result.isShowTotal}}" class="total-score enemy-total-score">
+                <total-score score="{{result.enemyTotalScore}}"></total-score>
+            </view>
+            <view class="result">
+                <show-result result="{{finalReport}}"></show-result>
+            </view>
+            <view class="footer">
+                <view
+                    wx:if="{{isShowResultAgainBtn && (!isWSClose || game.type !== 'invite')}}"
+                    class="btn btn-again btn-anim"
+                    bindtap="onPlayAgainTap"
+                >
+                    {{game.type === 'invite' ? '再来一局' : '继续挑战'}}
+                </view>
+                <button
+                    wx:if="{{isShowResultAgainBtn && isWSClose && game.type === 'invite'}}"
+                    open-type="share"
+                    data-type="invite"
+                    class="btn btn-invite btn-anim"
+                >
+                    邀请好友
+                </button>
+                <view wx:if="{{isShowResultShareBtn && shareShow}}" class="">
+                    <button open-type="share" data-type="normal" class="btn btn-share btn-anim">
+                        <view class="icon icon-share"></view>
+                        分享到微信炫耀战绩
+                    </button>
+                    <view wx:if="{{extraShareInfo}}" class="share-tips btn-anim">
+                        {{extraShareInfo}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{game.status=='find-error'}}" class="find-error">
+            <view wx:if="{{joinNotFoundFriendRing}}" class="tips">
+                擂主不战而逃，你可以自己发起一场对战或去参加排位赛；
+            </view>
+            <view wx:if="{{friendRingHasBegin}}" class="tips">
+                你来晚了，擂主正在战斗中，你可以自己发起一场对战或去参加排位赛；
+            </view>
+            <button
+                open-type="share"
+                data-type="invite"
+                class="btn btn-invite"
+            >
+                发起好友对战
+            </button>
+            <view class="btn join-pk-rate-btn" bindtap="onJoinPkRate">参加排位赛</view>
+        </view>
+    </view>
+</view>

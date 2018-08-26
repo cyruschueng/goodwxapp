@@ -1,0 +1,96 @@
+<!--me.wxml-->
+<import src="/pages/template/blog_list_item.wxml" />
+<import src="/pages/template/post_btn.wxml" />
+<import src="/pages/template/float_comment.wxml" />
+
+<view class="container">
+  <view class="column_view column_top column_left user_info">
+    <image class="user_avatar" src="{{loginInfo.imgUrl}}" background-size="cover"></image>
+    <view class="user_info_right">
+      <text class="user_nickname">{{loginInfo.nickname}}</text>
+      <view class="column_view column_left level_view">
+        <text class="">Lv{{loginInfo.level || 0}}</text>
+        <image class="honor_icon" src="{{honors[0 | (loginInfo.level/ 5)]}}"></image>
+        <text class="">经验值：</text>
+        <progress percent="{{expProgress}}"></progress>
+        <text class="">{{loginInfo.expPoints || 0}}/{{loginInfo.nextLevelExpPoints}}</text>
+        <text class="iconfont icon-liked like_me">{{loginInfo.userLikes || 0}}</text>
+      </view>
+      <image class="sign_pic" mode="aspectFit" src="{{signed ? '/img/signed.png' : '/img/dailySign.png'}}" catchtap="dailySign"></image>
+    </view>
+  </view>
+
+  <view class="column_view column_space_between type_view" style="display:{{hidePost ? 'none' : 'flex'}}">
+    <view class="row_view {{tab==1? 'type_sel' : ''}}" catchtap="catchTabTap" data-index='1'>
+      <text class="">{{countBlog}}</text>
+      <text class="type_font">纷享</text>
+    </view>
+
+    <view class="row_view {{tab==2? 'type_sel' : ''}}" catchtap="catchTabTap" data-index='2'>
+      <text class="">{{countFollow}}</text>
+      <text class="type_font">关注</text>
+    </view>
+
+    <view class="row_view {{tab==3? 'type_sel' : ''}}" catchtap="catchTabTap" data-index='3'>
+      <text class="">{{countFans}}</text>
+      <text class="type_font">粉丝</text>
+    </view>
+  </view>
+
+  <!-- <view class="column_view">
+    <text class="">Lv{{loginInfo.level}}</text>
+    <image class="honor_icon" src="{{honors[0 | (loginInfo.level/ 5)]}}"></image>
+    <text class="">经验值：</text>
+    <progress percent="{{expProgress}}"></progress>
+    <text class="">{{loginInfo.expPoints || 0}}/{{loginInfo.nextLevelExpPoints}}</text>
+    <text class="iconfont icon-liked like_me">{{loginInfo.userLikes}}</text>
+  </view> -->
+
+  <view wx:for="{{blogs}}" wx:key="blogId" class="column_view column_left column_top list_item {{tab==1 ? '' : 'hide'}}" style="display:{{hidePost ? 'none' : 'flex'}}" data-blogid='{{item.blogId}}' catchtap="bindListTap">
+    <template is="blog_list_item" data="{{item: item, index: index, isMy: true, showUser: false, hidePost: hidePost}}" />
+  </view>
+
+  <view wx:for="{{follows}}" wx:key="userCode" class="column_view column_left column_top list_item {{tab==2 ? '' : 'hide'}}" data-otherusercode='{{item.userCode}}' catchtap="catchUserTap">
+    <view class="column_view column_left">
+      <image class="user_avatar_small" src="{{item.userLogo || '/img/icon81.png'}}"></image>
+      <view class="column_view comment_left column_space_between list_comment_item_right">
+        <view class="row_view row_left">
+          <text class="user_name_small">{{item.userName}}</text>
+          <view class="column_view column_left">
+            <text class="user_name level">Lv{{item.level || 0}}</text>
+            <image class="honor_icon" src="{{honors[0 | (item.level/ 5)]}}"></image>
+          </view>
+        </view>
+
+        <view class="column_view column_right">
+          <text wx:if="{{item.hasFollow == 0}}" catchtap="catchFollowTap" data-index='{{index}}' class="follow">＋关注</text>
+          <text wx:if="{{item.hasFollow == 1}}" catchtap="catchFollowTap" data-index='{{index}}' class="follow followed">已关注</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:for="{{fans}}" wx:key="userCode" class="column_view column_left column_top list_comment_item {{tab==3 ? '' : 'hide'}}" data-otherusercode='{{item.userCode}}' catchtap="catchUserTap">
+    <view class="column_view column_left">
+      <image class="user_avatar_small" src="{{item.userLogo || '/img/icon81.png'}}"></image>
+      <view class="column_view comment_left column_space_between list_comment_item_right">
+        <view class="row_view row_left">
+          <text class="user_name_small">{{item.userName}}</text>
+          <view class="column_view column_left">
+            <text class="user_name level">Lv{{item.level || 0}}</text>
+            <image class="honor_icon" src="{{honors[0 | (item.level/ 5)]}}"></image>
+          </view>
+        </view>
+
+        <view class="column_view column_right">
+          <text wx:if="{{item.hasFollow == 0}}" catchtap="catchFollowTap" data-index='{{index}}' class="follow">＋关注</text>
+          <text wx:if="{{item.hasFollow == 1}}" catchtap="catchFollowTap" data-index='{{index}}' class="follow followed">已关注</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<template is="post_btn" data="{{hidePost: hidePost}}" />
+<template is="float_comment" data="{{hidePost: hidePost, showComment: showComment, floatCommentContent: floatCommentContent}}" />

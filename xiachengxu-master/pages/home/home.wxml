@@ -1,0 +1,179 @@
+<!--引入探索页面-->
+<import src="../explore/explore.wxml" />
+
+<view class="container storyContainer {{showExplore?'addExplore':''}}">
+
+  <view class="head"> <!--head start -->
+    <swiper circular="{{headInfos.circular}}"
+     autoplay="{{headInfos.autoplay}}" interval="{{headInfos.interval}}" duration="{{headInfos.duration}}" style="width:100%;height:100%" bindchange="headChange">
+      <block wx:for="{{headInfos.imgInfos}}">
+      <swiper-item wx:if='{{headInfos.imgInfos.length}}' >
+        <image src="{{item.imgUrl}}" class="slide-image"  alt="item.name" title="item.name"  ontap='showDetailPopup'  data-link='{{item.link}}' data-id='{{item.id}}' mode='aspectFill' data-name='{{item.name}}'></image>
+      </swiper-item>
+      </block>
+    </swiper>
+    
+    <!--进度条-->
+    <view class="progress">
+       <view>
+          <view class="percent" style="margin-left:{{headInfos.current}}%;width:{{headInfos.percent}}%;"></view>
+       </view>
+      </view>
+      
+      <!--探索-->
+      <view class="explore" style="background-image:url('../../images/story/explore.png');" bindtap="exploreFn">
+       <text>探 索</text>         
+      </view>
+     
+  </view>
+  <!--head end -->
+  
+  <view class="limited-time"><!--limited-time start -->
+      <view class="title"><!--title start -->
+         <view class="h1">
+            <text class="title1">{{bannerItem.name}}</text>
+            <view class="more" catchtap='showEventList'  data-index='1'>
+              <text>更多</text>
+              <image src="/images/story/more.png"></image>
+            </view>
+          </view>
+          <view class="line">
+              <view class="block"></view>
+              <view class="block"></view>
+          </view>
+          <text class="title2">{{bannerItem.desc}}</text>
+      </view><!--title end --> 
+
+      <view class="main"><!--main start -->
+          <swiper
+            autoplay="{{bannerItem.autoplay}}" interval="{{bannerItem.interval}}" duration="{{bannerItem.duration}}" bindchange="timeChange">
+            <block wx:for="{{bannerItem.imgInfos}}">
+              <swiper-item><!--swiper-item start-->
+              
+                <view class="item" data-id="{{goodsList.goods_id}}"   data-index='{{index}}' data-storeno='{{item.storeNo}}' bindtap='onProductTap'><!--item start-->
+                    <view class="item-left">
+                      <image src="{{item.goods_pic}}" class="slide-image {{limitedState?'animation':''}}" alt="{{item.goods_name}}" title="{{item.goods_name}}"></image>
+                    </view>
+                    <view class="item-right">
+                      <text>{{item.goods_name}}</text>
+                      <view class="price">
+                        <text>￥{{item.discount_price}}</text>
+                        <view class="oldPrice">
+                          <text>￥{{item.goods_price}}</text>
+                        </view>
+                      </view>
+                    </view>
+                     <view class="discount" style="background-image:url('../../images/story/discountBack.png');">
+                        <text>折扣</text>
+                     </view>
+
+                </view><!--item end -->
+              </swiper-item><!--swiper-item end-->
+            </block>
+          </swiper>
+      </view><!--main end -->
+
+      <!--进度条-->
+      <view class="progress content">
+      <view>
+          <view class="percent" style="margin-left:{{bannerItem.current}}%;width:{{bannerItem.percent}}%;"></view>
+       </view>
+      </view>
+  </view><!--limited-time end -->
+
+  <view class="new-arrival"><!--new-arrival start-->
+      <view class="title"><!--title start -->
+          <text class="title1">{{newArrival.name}}</text>
+          <view class="line">
+              <view class="block"></view>
+              <view class="block"></view>
+          </view>
+          <text class="title2">{{newArrival.desc}}</text>
+        </view><!--title end -->
+
+        <view class="main"><!--main start -->
+
+          <swiper 
+            autoplay="{{newArrival.autoplay}}" interval="{{newArrival.interval}}" duration="{{newArrival.duration}}" bindchange="newArrivalChange">
+            <block wx:for="{{newArrival.imgInfos}}">
+              <swiper-item><!--swiper-item start-->
+                <view class="body"><!--body start-->
+                  <view class="top" data-id="{{item.id}}" data-storeNo="{{item.storeNo}}" bindtap='showDetailPopup'  data-link='{{item.link}}' mode='aspectFill' data-name='{{item.name}}'>
+                    <image src='{{item.imgUrl}}' alt="" title=""></image>
+                  </view>
+                  <view class="bottom"><!--bottom start-->
+                    <block wx:for="{{item.goodsList}}" wx:for-item="goodsList">
+                      <view class="item" data-id="{{goodsList.goods_id}}"   data-index='{{index}}' data-storeno='{{item.storeNo}}' bindtap='onProductTap'>
+                        <image src='{{goodsList.goods_pic}}' alt="{{goodsList.goods_name}}" title="{{goodsList.goods_name}}"></image>
+                        <view class="desc">
+                          <text>￥{{goodsList.goods_price}}</text>
+                          <text>{{goodsList.goods_name}}</text>
+                        </view>
+                      </view>
+                    </block>
+                  </view><!--bottom end-->
+                </view><!--body end-->
+                
+              </swiper-item><!--swiper-item end-->
+            </block>
+          </swiper>
+        </view><!--main end -->
+
+        <!--进度条-->
+        <view class="progress content">
+          <view>
+            <view class="percent" style="margin-left:{{newArrival.current}}%;width:{{newArrival.percent}}%;"></view>
+        </view>
+        </view>
+      </view><!--new-arrival end-->
+      
+      <view class="popular"><!--popular start-->
+        <view class="title"><!--title start -->
+          <text class="title1">{{popular.name}}</text>
+          <view class="line">
+              <view class="block"></view>
+              <view class="block"></view>
+          </view>
+          <text class="title2">{{popular.desc}}</text>
+        </view><!--title end -->
+
+        <view class="main"><!--main start -->
+          <block wx:for="{{popular.items}}">
+            <view class="item {{popular.items.length>4?'many':'less'}}" data-id="{{item.tagId}}" data-storeNo="{{item.storeNo}}"  bindtap="classifyFn"><!--item start-->
+              <image src="{{item.tagPic}}" alt="" title=""></image>
+              <view class="item_text">
+                <text>{{item.tagName}}</text>
+                <view class="line"></view>
+              </view>
+              <view class="shade"></view>
+            </view><!---item end-->
+          </block>
+        </view><!--main end -->
+
+      </view><!--popular end-->
+
+      <view class="active"><!--active start-->
+         <view class="title"><!--title start -->
+          <text class="title1">{{active.name}}</text>
+          <view class="line">
+              <view class="block"></view>
+              <view class="block"></view>
+          </view>
+          <text class="title2">{{active.desc}}</text>
+        </view><!--title end -->
+
+        <view class="main"><!--main start-->
+          <block wx:for="{{active.items}}">
+            <view class="item" data-id="{{item.id}}" data-link="{{item.link}}" data-remark="{{item.remark}}" data-storeNo="{{item.storeNo}}" bindtap='showDetailPopup' data-name='{{item.name}}'>
+              <image src="{{item.imgUrl}}" alt="{{item.name}}" title="{{item.name}}"></image>
+            </view>
+          </block>
+        </view><!--main end-->
+
+      </view><!--active end-->
+
+      <template is="explore" data='{{type: showExplore, data: discountProducts, listIndex: 1}}'></template>
+
+  </view>
+
+

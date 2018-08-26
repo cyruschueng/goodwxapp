@@ -1,0 +1,53 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="title">
+    今日剩余提交
+    <label>{{pushTimes.remain_times}}</label>次(1个项目推给1个投资人计为1次)
+  </view>
+  <view class="s_frame">
+    <scroll-view scroll-y="true" bindscrolltolower="loadMore" scroll-top="{{scroll}}">
+      <block wx:for="{{dataList}}" wx:key="{{index}}">
+        <view class="outBox {{item.check==true?'checkedOne':''}}" bindtap="checkboxChange" data-id="{{item.project_id}}" data-index="{{index}}">
+          <view class="matching">匹配度：
+            <label class="matchingNum">{{dataList[index].match_weight}}%</label>
+          </view>
+          <view class="projectInfoBox">
+            <view class="classname">
+              <view class="flex">
+                <view class="describle">{{dataList[index].pro_intro}}</view>
+                <image src="/img/img-dujiaqianyue1@2x.png" class="projectDetailType" wx:if="{{dataList[index].is_exclusive == 1}}"></image>
+                <image src="/img/img-feidujiaqianyue@2x.png" class="projectDetailType" wx:if="{{dataList[index].is_exclusive == 2}}"></image>
+              </view>
+              <view class="industry">
+                <block wx:for="{{item.pro_industry}}" wx:key="{{item.index}}" wx:for-item='userIndustry'>
+                  <label wx:if="{{index < item.pro_industry.length-1}}">{{userIndustry.industry_name}}、</label>
+                  <label wx:if="{{index == item.pro_industry.length-1}}">{{userIndustry.industry_name}}</label>
+                </block>
+              </view>
+              <view class="allProjectDetail flex">
+                <view class="projectDetailLine" wx:if="{{dataList[index].pro_scale}}">{{dataList[index].pro_scale.scale_money}}</view>
+                <view class="projectDetailLine" wx:if="{{dataList[index].pro_finance_stock_after!= 0}}">{{dataList[index].pro_finance_stock_after}}%</view>
+                <view class="projectDetailLine" wx:if="{{dataList[index].pro_stage.stage_name}}">{{dataList[index].pro_stage.stage_name}}</view>
+                <view class="projectDetailLine" wx:if="{{dataList[index].pro_area.area_title}}">{{dataList[index].pro_area.area_title}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <!--空状态  -->
+      <view class="hasNone" wx:if="{{dataList.length == 0}}">
+        <image src="/img/img-kong@2x.png" class="iconStyle"></image>
+        <view class="none">暂无项目</view>
+        <view class="createProject" bindtap="createProject" hover-class='t-other-button-hover'>创建项目</view>
+      </view>
+      <view style="height:54rpx;"></view>
+    </scroll-view>
+  </view>
+
+  <button disabled="{{clicked}}" class="floatBtn flex pushPro" bindtap="pushTo" hover-class='t-other-button-hover'>
+    <label class="pushProjectAfter">提交</label>
+  </button>
+  <!-- 错误提示-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+</view>

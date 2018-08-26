@@ -1,0 +1,26 @@
+<template name="star">
+    <view wx:if="{{!unlock}}" class="star-box">
+        <view wx:for="{{need}}" wx:key="{{item}}" class="star-item">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b33e0e5a0.png"></image>
+        </view>
+    </view>
+    <view wx:elif="{{have === need && unlock}}" class="star-box">
+        <view wx:for="{{have}}" wx:key="{{item}}" class="star-item">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b33dd217c.png"></image>
+        </view>
+    </view>
+    <view wx:elif="{{unlock && have <= need}}" class="star-box">
+        <view wx:for="{{have}}" wx:key="{{item}}" class="star-item">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b33e38a48.png"></image>
+        </view>
+        <view wx:for="{{need - have}}" wx:key="{{item}}" class="star-item">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b33e0e5a0.png"></image>
+        </view>
+    </view>
+    <view wx:elif="{{unlock && have > need}}" class="star-box">
+        <view wx:for="{{need}}" wx:key="{{item}}" class="star-item">
+            <image src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b33dd217c.png"></image>
+        </view>
+        <text>{{have}}</text>
+    </view>
+</template>

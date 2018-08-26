@@ -1,0 +1,51 @@
+<!--pages/albumdetail/albumdetail.wxml-->
+<view class='superheader'></view>
+<text class='fa fa-chevron-left btnback' bindtap='back'></text>
+
+
+
+<view class="page">
+  <view class="page__bd">
+  <scroll-view  style='height:{{album_id==0?"100":"88"}}vh;' scroll-y="true">
+    <view class="weui-cells weui-cells_after-title" style='margin-top:2vh;' wx:for="{{info.photos}}" wx:key="{{v}}" wx:for-item="photogroup" >
+      <view class="weui-cell" >
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">{{photogroup.date}}</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files " id="uploaderFiles">
+                <block wx:for-items="{{photogroup.photos}}" wx:key="{{index}}">
+                  <view class="weui-uploader__file" id="photo_{{item.id}}">
+                    <image class="weui-uploader__img" src="{{uploadpath}}album/{{item.photo}}" mode="aspectFill" bindtap='viewPhotos' id="{{uploadpath}}album/{{item.photo}}" />
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+
+    </view>
+    </scroll-view>
+  </view>
+
+
+  <view class="page__bd page__bd_spacing"  style='height:unset;' wx:if="{{album_id!=0}}">
+    <view class="weui-footer weui-footer_fixed-bottom" style=' padding-left:10vw;padding-right:10vw;padding-top:1vw;'>
+      <view class="weui-flex">
+        <view   class="weui-flex__item btnBottom" >
+          <button type='primary' bindtap='uploadPhoto'>上传图片</button>
+        </view>
+        <!--
+        <view   class="weui-flex__item btnBottom">
+          <button type='primary' bindtap='cancelManage'>上传视频</button>
+        </view>-->
+      </view>
+    </view>
+  </view>
+
+</view>

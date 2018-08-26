@@ -1,0 +1,24 @@
+phpStudy(nginx + mysql + php)
+
+选择版本php-5.6.27-nts + nginx
+
+1.修改phpStudy\nginx\conf\ngnix.conf文件(主要配置)
+
+1.1root   "D:/phpStudy/WWW/home-admin/public";//修改，读取根目录（public是lanavel的唯一入口）
+
+1.2读取php文件
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+    index  index.html index.htm index.php l.php;//修改，读取index.php文件
+   autoindex  off;
+}
+
+2.注意添加php扩展
+
+3.php，laravel框架修改
+
+4.laravel中.env
+
+4.1改数据库地址。
+4.2修改SERVER_HOST=http://192.168.30.202为本地。
+

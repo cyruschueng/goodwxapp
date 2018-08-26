@@ -1,0 +1,48 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="pocket__form">
+        <view class="pocket__form_header">
+            <view class="pocket__form_header_user">
+                <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+                <text class="nickname">{{userInfo.nickName}}</text>
+            </view>
+        </view>
+        <!-- 红包表单 -->
+        <view class="pocket__form_body">
+            <view class="item">
+                <view class="label">赏金（元）</view>
+                <input type='digit' placeholder='请输入金额' placeholder-class="placeholder" value='{{packet.redpacket_amount}}' data-key="packet.redpacket_amount" bindinput="handleInput" ></input>
+            </view>
+            <view class="item">
+                <view class="label">数量（个）</view>
+                <input type='number' placeholder='请输入红包数量' placeholder-class="placeholder" value='{{packet.redpacket_number}}' data-key="packet.redpacket_number" bindinput="handleInput"></input>
+            </view>
+            <view class="item picker" style="margin-bottom: 22rpx;">
+                <view class="label">赞美主题</view>
+                <picker bindchange="changeTitle" value="{{titleIndex}}" range="{{packet.redpacket_title}}">
+                    <view>
+                        {{ titleIndex < 0 ? '请选择主题' : packet.redpacket_title[titleIndex] }}
+                        <view class="arrow"></view>
+                    </view>
+                </picker>
+            </view>
+            <view class="item picker">
+                <view class="label">可领取门槛</view>
+                <picker bindchange="changeLevel" value="{{levelIndex}}" range="{{levelItem}}">
+                    <view>
+                        {{ levelIndex < 0 ? '请选择' : levelItem[levelIndex] }}
+                        <view class="arrow"></view>
+                    </view>
+                </picker>
+            </view>
+            <!-- 提交红包按钮 -->
+            <view class="item">
+                <button bindtap='createPraisePacket'>生成红包</button>
+            </view>
+        </view>
+        <!-- 用户余额显示处 -->
+        <view class="pocket__form_footer">
+            优先使用账户余额，当前余额为￥{{ balance }}
+        </view>
+    </view>
+</view>

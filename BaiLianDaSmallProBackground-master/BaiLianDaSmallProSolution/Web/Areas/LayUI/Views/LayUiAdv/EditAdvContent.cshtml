@@ -1,0 +1,349 @@
+﻿@model Web.Areas.LayUI.Models.Advs.EditAdvContentModel
+@using BaseDatabase.Entities.Admins.AdvertisingSpaces;
+@{
+    ViewBag.Title = "编辑广告内容";
+    var advContentInfoModel = Model.AdvContentInfoModel;
+}
+
+@section headerCss{
+
+}
+<blockquote class="layui-elem-quote">说明：对广告内容进行管理</blockquote>
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>编辑广告内容</legend>
+</fieldset>
+<div class="layui-container">
+    <form class="layui-form">
+        <input type="hidden" name="Id" value="@advContentInfoModel.Id" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">目标广告位</label>
+            <div class="layui-input-block">
+                <select name="AdvertisingSpaceInfoSign" lay-verify="" lay-search>
+                    @foreach (var item in ViewBag.AdvertisingSpaceSelectItemList as List<SelectListItem>)
+                    {
+                        <option value="@item.Value" @Html.Raw(item.Value == advContentInfoModel.AdvertisingSpaceInfoSign ? "selected" : "")>@item.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">广告名称</label>
+            <div class="layui-input-block">
+                <input name="Title" required lay-verify="required" placeholder="请输入广告名称" autocomplete="off" class="layui-input" value="@advContentInfoModel.Title">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">显示顺序</label>
+            <div class="layui-input-block">
+                <input name="Order" required lay-verify="required|number" placeholder="请输入显示顺序" autocomplete="off" class="layui-input" value="@advContentInfoModel.Order">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">搜索关键词</label>
+            <div class="layui-input-block">
+                <input name="ContentJsonKeyword" required lay-verify="required" placeholder="请输入搜索关键词" autocomplete="off" class="layui-input" value="@advContentInfoModel.ContentJsonKeyword">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">广告类型</label>
+            <div class="layui-input-block">
+                @foreach (var item in ViewBag.AdvContentInfoTypeSelectItemList as List<SelectListItem>)
+                {
+                    <input type="radio" class="advType" name="Type" lay-filter="advType" value="@item.Value" title="@item.Text" @Html.Raw(item.Value == ((int)advContentInfoModel.Type).ToString() ? "checked" : "")>
+                }
+            </div>
+        </div>
+
+        <div id="picDiv" class="showHideDiv" style="display:@Html.Raw(advContentInfoModel.Type == AdvContentInfoType.Pic?"block":"none")">
+            <div class="layui-form-item">
+                <label class="layui-form-label">广告图片</label>
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" id="uploadAdvImg">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
+                    <div class="layui-upload-list">
+                        <input type="hidden" id="hidPicSrc" name="PicUrl" value="@Model.AdvContentPicModel.PicUrl" />
+                        <img class="layui-upload-img" id="advImg" style="width:113px;" src="@Model.AdvContentPicModel.PicUrl">
+                        <img id="advImgHide" style="display:none;" src="@Model.AdvContentPicModel.PicUrl">
+                        <p id="advImgContent"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片描述</label>
+                <div class="layui-input-block">
+                    <input name="PicImageAlt" id="PicImageAlt" placeholder="请输入图片描述" value="@Model.AdvContentPicModel.PicImageAlt" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">链接地址</label>
+                <div class="layui-input-block">
+                    <input name="PicLink" id="PicLink" placeholder="请输入链接地址" value="@Model.AdvContentPicModel.PicLink" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div id="wordDiv" class="showHideDiv" style="display:@Html.Raw(advContentInfoModel.Type == AdvContentInfoType.Word?"block":"none")">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文字内容</label>
+                <div class="layui-input-block">
+                    <input name="WordTitle" id="WordTitle" placeholder="请输入文字内容" autocomplete="off" class="layui-input" value="@Model.AdvContentWordModel.WordTitle">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文字大小</label>
+                <div class="layui-input-block">
+                    <input name="WordSize" id="WordSize" placeholder="请输入文字大小，单位为px" autocomplete="off" class="layui-input" value="@Model.AdvContentWordModel.WordSize">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文字颜色</label>
+                <div class="layui-input-block">
+                    <input name="WordColor" id="WordColor" placeholder="请输入文字颜色，如#FFFFFF" autocomplete="off" class="layui-input" value="@Model.AdvContentWordModel.WordColor">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">链接地址</label>
+                <div class="layui-input-block">
+                    <input name="WordLink" id="WordLink" placeholder="请输入链接地址" autocomplete="off" class="layui-input" value="@Model.AdvContentWordModel.WordLink">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">说明</label>
+            <div class="layui-input-block">
+                <textarea id="intro" placeholder="请输入内容" lay-verify="content" name="Intro" class="layui-textarea">@advContentInfoModel.Intro</textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">价格</label>
+            <div class="layui-input-block">
+                <input name="Price" required lay-verify="required|number" placeholder="请输入价格，单位为：元" autocomplete="off" class="layui-input" value="@advContentInfoModel.Price">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-block">
+                <input name="BeginDatetime" id="beginTime" required lay-verify="required" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input" value="@advContentInfoModel.BeginDatetime.ToString("yyyy-MM-dd HH:mm:ss")">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-block">
+                <input name="EndDateTime" id="endTime" required lay-verify="required" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input" value="@advContentInfoModel.EndDateTime.ToString("yyyy-MM-dd HH:mm:ss")">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">目标窗口</label>
+            <div class="layui-input-block">
+                <select name="TargetType">
+                    @foreach (var item in ViewBag.TargetTypeSelectItemList as List<SelectListItem>)
+                    {
+                        <option value="@item.Value" @Html.Raw(item.Value == ((int)advContentInfoModel.TargetType).ToString() ? "selected" : "")>@item.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit lay-filter="save">保存</button>
+            <a class="layui-btn" href="/layui/LayUiAdv/AdvertisingSpaceIndex">返回列表</a>
+        </div>
+
+    </form>
+</div>
+@section footerJs{
+    <script>
+        layui.config({
+            base: '/Areas/LayUI/Content/commonJs/'
+            , version: '1515376178709'
+        }).extend({
+            myAjax: 'myAjax'
+        });
+    </script>
+    <script>
+        //Demo
+        layui.use(['form', 'layedit', 'upload', 'laydate', 'jquery', 'myAjax'], function () {
+            var form = layui.form;
+            var $ = layui.jquery;
+            var aj = layui.myAjax;
+            var upload = layui.upload;
+            var laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#beginTime'
+                , type: 'datetime'
+                , format: 'yyyy-MM-dd HH:mm:ss'
+            });
+
+            laydate.render({
+                elem: '#endTime'
+                , type: 'datetime'
+                , format: 'yyyy-MM-dd HH:mm:ss'
+            });
+
+            var uploadInst = upload.render({
+                elem: '#uploadAdvImg' //绑定元素
+                , exts: "jpg|png|gif|bmp|jpeg"
+                , url: '/Picture/SingleAsyncUpload' //上传接口
+                , before: function (obj) {
+                    layer.load();
+                    obj.preview(function (index, file, result) {
+                        $('#advImg').attr('src', result);
+                        $('#advImgHide').attr('src', result);
+                    });
+                }
+                , done: function (res) {
+                    $("#hidPicSrc").val(res.data.src);
+                    $('#advImg').attr('src', res.data.src);
+                    $('#advImgHide').attr('src', res.data.src);
+                    layer.closeAll('loading');
+                }
+                , error: function (index, upload) {
+                    var advImgContent = $('#advImgContent');
+                    advImgContent.html('<span style="color: #FF5722;">上传失败</span></br> <a class="layui-btn layui-btn-mini advImg_reload">重试</a>');
+                    advImgContent.find('.advImg_reload').on('click', function () {
+                        uploadInst.upload();
+                    });
+                }
+            });
+
+
+            var layedit = layui.layedit
+            layedit.set({
+                tool: [
+                    'strong', 'italic', 'underline', 'del'
+                    , '|'
+                    , 'left', 'center', 'right'
+                    , '|'
+                    , 'link', 'unlink'
+                    , '|'
+                    , 'code'
+                ]
+            });
+
+            //创建一个编辑器
+            var editIndex = layedit.build('intro');
+            form.verify({
+                content: function (value) {
+                    layedit.sync(editIndex);
+                }, imgUpload: function (value) {
+                    if ($.trim(value) == "" && $(".advType:checked").val() == "1") {
+                        return "请上传图片";
+                    }
+                }
+            });
+
+            //监听提交
+            form.on('submit(save)', function (data) {
+                aj.postNoSyncReq('/layui/LayUiAdv/EditAdvContent', data.field, function (data) {
+                    aj.dealResult(data, function () {
+                        layer.confirm(data.ReturnMsg + "，是否继续？", function (index) {
+                            layer.close(index);
+                            window.location = window.location;
+                        }, function () {
+                            window.location = '/layui/LayUiAdv/AdvContentIndex';
+                        });
+                    });
+                });
+
+                return false;
+            });
+
+            function setWordVerify() {
+                $("#WordTitle").attr("lay-verify", "required");
+                $("#WordSize").attr("lay-verify", "required");
+                $("#WordColor").attr("lay-verify", "required");
+                $("#WordLink").attr("lay-verify", "required");
+            }
+
+            function cancelWordVerify() {
+                $("#WordTitle").attr("lay-verify", "");
+                $("#WordSize").attr("lay-verify", "");
+                $("#WordColor").attr("lay-verify", "");
+                $("#WordLink").attr("lay-verify", "");
+            }
+
+            function setPicVerify() {
+                $("#hidPicSrc").attr("lay-verify", "imgUpload")
+                $("#PicImageAlt").attr("lay-verify", "required");
+                $("#PicLink").attr("lay-verify", "required");
+            }
+
+            function cancelPicVerify() {
+                $("#hidPicSrc").attr("lay-verify", "");
+                $("#PicImageAlt").attr("lay-verify", "");
+                $("#PicLink").attr("lay-verify", "");
+            }
+
+            @if(advContentInfoModel.Type == AdvContentInfoType.Word)
+            {
+                <text>
+            cancelPicVerify();
+            setWordVerify();
+
+            </text>
+            }
+
+            @if(advContentInfoModel.Type == AdvContentInfoType.Pic)
+            {
+                <text>
+            cancelWordVerify();
+            setPicVerify();
+
+            </text>
+            }
+
+            form.on("radio(advType)", function (data) {
+                            $(".showHideDiv").hide();
+                switch (data.value) {
+                    case "0":
+                        $("#wordDiv").show();
+                        //取消验证和添加验证
+                        cancelPicVerify();
+                        setWordVerify();
+                        break;
+                    case "1":
+                        $("#picDiv").show();
+                        //取消验证和添加验证
+                        cancelWordVerify();
+                        setPicVerify();
+                        break;
+                }
+            })
+
+            function reduceWidthAndHeight(obj) {
+                    if (obj.width > $(window).width() || obj.height > $(window).height()) {
+                    obj.width = obj.width * (1 - 0.1);
+                    obj.height = obj.height * (1 - 0.1);
+                    reduceWidthAndHeight(obj);
+                }
+            }
+
+            $(".layui-upload-img").on("click", function () {
+                var imgSize = {};
+                imgSize.width = $('#advImgHide').width();
+                imgSize.height = $('#advImgHide').height();
+                reduceWidthAndHeight(imgSize);
+                layer.open({
+                    type: 1,
+                    shade: 0.01,
+                    title: false,
+                    closeBtn: 0,
+                    skin: 'layui-layer-nobg', //没有背景色
+                    shadeClose: true,
+                    area: [imgSize.width + "px", imgSize.height + "px"],
+                    content: '<div><img style="width:' + imgSize.width + 'px;" src="' + $(this).attr("src") + '"></div>'
+                });
+
+            })
+        });
+    </script>
+}

@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class="container">
+  <image class="pz_bg_img" mode="{{item.mode}}" src="../../image/bg_1@2x.png"></image>
+  <view class="pz_search_wrap" animation="{{searchAnimationData}}">
+    <view class="pz_header_wrap">
+      <!-- <image mode="{{item.mode}}" src="{{loadingBarSrc}}"></image> -->
+      <text class="pz_header_text">焦点风向标</text>
+    </view>
+    <view class="pz_search_form">
+      <input class="pz_search_input" type="text" placeholder="请输入关键词" placeholder-style="color: #c7c7cd" value="{{inputValue}}" confirm-type="search" bindinput="inputTyping"/>
+      <button class="pz_search_btn" hover-class="pz_search_btn_hover" bindtap="startSearchTap">
+        <icon class="pz_search_btn_ico" type="search" size="28" color="#ffffff"/>
+      </button>
+    </view>
+    <view class="pz_keyword_records_wrap">
+      <text wx:if="{{keywordRecords.length > 0}}">查询历史：</text>
+      <view class="pz_keyword_records" hover-class="pz_keyword_records_hover" data-index="{{keyword}}" catchtap="hotSearchTap" wx:for="{{keywordRecords}}" wx:key="keywordRecordsId" wx:for-item="keyword">{{keyword}}</view>
+      <icon type="cancel" size="20" color="#cccccc" wx:if="{{keywordRecords.length > 0}}" bindtap="clearRecordsTap"/>
+    </view>
+  </view>
+  <view class="pz_footer">
+    <image style="width: 18px; height: 18px;" mode="{{item.mode}}" src="{{loadingBarSrc}}"  catchlongtap="versionlongtap"></image>
+    <text>比量科技 版权所有</text>
+  </view>
+<!--   <view class="pz_footer"  bindtap="articleListTaptest">
+    <image style="width: 18px; height: 18px;" mode="{{item.mode}}" src="{{loadingBarSrc}}"></image>
+    <text>比量科技 版权所有</text>
+  </view> -->
+  <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">进入客服会话</button> -->
+</view>

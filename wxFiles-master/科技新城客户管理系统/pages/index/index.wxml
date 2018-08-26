@@ -1,0 +1,48 @@
+<view class='fixed-top'>
+  <view class="search-bg">
+    <view class='search-panel panel-center item-center'>
+      <view class='sitem '>
+        <picker bindchange="bindPickerChange" value="{{rentFlag}}" range="{{rentArray}}">
+          <view class='panel-center item-center'>
+            <view>{{rentText}}</view>
+            <image src='/img/dropdef.png'></image>
+          </view>
+        </picker>
+      </view>
+      <view class='sitem '>
+        <picker bindchange="bindPickerChange" value="{{areaFlag}}" range="{{areaArray}}">
+          <view class='panel-center item-center'>
+            <view>{{areaText}}</view>
+            <image src='/img/dropdef.png'></image>
+          </view>
+        </picker>
+      </view>
+      <view class='sitem '>
+        <picker bindchange="bindPickerChange" value="{{decorateFlag}}" range="{{decorateArray}}">
+          <view class='panel-center item-center'>
+            <view>{{decorateText}}</view>
+            <image src='/img/dropdef.png'></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='height:80rpx'></view>
+
+<view class='panel'>
+  <view class='pitem bottom-line panel-start' wx:for="{{list}}" bindtap='navToDetail'>
+    <view class='pimage-bg'>
+      <image src='{{item.image}}' mode='aspeactFill'></image>
+    </view>
+    <view class='context'>
+      <view class='title bold'>{{item.title}}</view>
+      <view class='panel-start' style='margin-top:10rpx'>
+        <view class='txt'>{{item.rent}}元/㎡·天</view>
+        <view class='txt' style='margin-left:30rpx'>{{item.area}}㎡</view>
+        <view class='txt' style='margin-left:30rpx'>{{item.dec}}</view>
+      </view>
+      <view class='pri' style='margin-top:10rpx'>￥{{item.price}}万/月</view>
+    </view>
+  </view>
+</view>

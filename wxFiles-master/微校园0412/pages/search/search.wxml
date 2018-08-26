@@ -1,0 +1,46 @@
+<view class="search flex-between" >
+  <view class="sea">
+    <image src="/images/search.png"></image>
+    <input bindinput="search" bindfocus="open" placeholder="输入店铺名称" value="{{keysd}}" />
+  </view>
+  <view class="btnsds" bindtap="dosearch">搜索</view>
+</view>
+<view class="panel bottom-line {{open ? '':'hidesdsd'}}" wx:for="{{key}}">
+  <view style="font-size:30rpx" data-keys="{{item}}" bindtap="sosa">{{item}}</view>
+</view>
+
+<view class="cnone"  style="{{search == 2 ? '':'display:none'}}" >
+   <image src="/images/gs.png"></image>
+   <view>扎心了老铁，没有搜到噢！</view>
+</view>
+
+<view class="cnone" style="{{search == 0 ? '':'display:none'}}">
+   <image src="/images/gs.png"></image>
+   <view>请输入关键字搜索</view>
+</view>
+
+<view style="padding-bottom:20rpx;" class="panel bottom-line glist" wx:for="{{shopList}}" bindtap="storeMenu" data-in="{{index}}" id="{{item.id}}">
+  <view class="pho">
+    <image class="p1 " src="{{url}}controller/{{item.imagec.url}}" data-index="{{index}}" bindload="loadImg"></image>
+    <image class="p2 {{item.code ? 'hidesdsd':''}}" src="/images/index/12.jpg"></image>
+  </view>
+  <view class="con">
+    <view class="tit bold" style="color:#232323;font-size:32rpx;">{{item.name}}</view>
+    <view class="txt">
+      <image src="/images/item/star.png"></image>
+      <view style="font-size:24rpx">月销{{item.sales}}单</view>
+    </view>
+    <view class="tet">
+      <text style="font-size:24rpx;position:relative;">起送￥{{item.startprice}}</text>
+      <text style="margin-left:20rpx;font-size:24rpx;position:relative;">配送￥{{item.boxprice}}</text>
+    </view>
+  </view>
+  <view class="status">
+  <image wx:if="{{item.status == 'off'}}" src="/images/item/dayangzhon.png"></image>
+  <image wx:if="{{item.status != 'off'}}" src="/images/item/yingyezhon.png"></image>
+  <view style="margin-top:-10rpx;text-align:center" wx:if="{{item.minDiscount < 10 && item.minDiscount !=1}}">
+      <view style="margin-top:6rpx;margin-left:35rpx;font-size:20rpx; width:30rpx;height:30rpx; line-height:30rpx;text-align:center;background:#FF4040;color:#fff;border-radius:10rpx;">折</view>
+      <view style="height:20rpx;line-height:20rpx;font-size:24rpx;color:#919191;padding-top:20rpx">{{item.minDiscount}}折起</view>
+    </view>
+  </view>
+</view>

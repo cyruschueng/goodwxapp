@@ -1,0 +1,35 @@
+<view>
+    <!--顶部按钮-->
+    <view class="buttonlist">
+        <view bindtap="gainMyQuestion" class="{{listType === 1 ? 'choose' : ''}}">我提问的</view>
+        <view bindtap="gainMyAnswer" class="{{listType === 2 ? 'choose' : ''}}">我回答的</view>
+        <view bindtap="gainMyShare" class="{{listType === 3 ? 'choose' : ''}}">我分享的</view>
+    </view>
+    <!--列表-->
+    <view wx:if="{{show}}">
+        <view bindtap="toDetail" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.questionId}}" class="list">
+            <view wx:if="{{listType === 2}}" class="reply-title">{{item.answerContent}}</view>
+            <view wx:if="{{item.contentType === 2 || item.questionType === 2}}" class="content {{listType === 2 ? 'reply-content' : ''}}">
+                <text wx:if="{{listType === 2}}">{{item.questionContent}}</text>
+                <text wx:else>{{item.questionContent}}</text>
+            </view>
+            <view wx:else class="record {{listType === 2 ? 'reply-content' : ''}}">
+                <image src="../../../images/smallrecord.png"></image>
+                <image src="../../../images/sound.png" class="voice-deco"></image>
+                <text>{{item.questionVoiceLength}}"</text>
+            </view>
+            <view class="list-footer">
+                <text wx:if="{{listType !== 2}}" class="amount">￥{{item.questionAmount / 100}}</text>
+                <text class="create-time {{listType === 2 ? 'answer-time' : ''}}">{{item.createTime}}</text>
+                <text class="status {{item.statusText === '被采纳' ? 'status-choose' : ''}}">{{item.statusText}}</text>
+            </view>
+        </view>
+        <view wx:if="{{!hasNextPage && list.length !== 0}}" class="nomore">
+            <image src="../../../images/cute.png"></image>
+            <text>没有更多了~</text>
+        </view>
+        <view class="none" wx:if="{{list.length === 0}}">
+            啥都木有呢
+        </view>
+    </view>
+</view>

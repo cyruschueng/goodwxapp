@@ -1,0 +1,14 @@
+<import src="../../tpls/products/products-tpl.wxml" />
+<import src="../../tpls/nextInfo/index.wxml" />
+
+<view class='container list-container' hidden='{{!loadingHidden}}'>
+  <template wx:if='{{products.length}}' is="products" data='{{type: "home", data: products}}'></template>
+  <template is='next-info' data='{{hasMore, data: products}}'></template>
+  <!--浮层弹窗  -->
+  <view class='popup' wx:if='{{isShowPopup}}'>{{tip}}</view>
+
+</view>
+
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

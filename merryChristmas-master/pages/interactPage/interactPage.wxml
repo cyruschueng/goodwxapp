@@ -1,0 +1,9 @@
+<import src="/Template/Template.wxml" />
+<view id='interactPage'>
+  <image src='{{picUrl}}'></image>
+  <block wx:for='{{appliances}}' wx:key='{{item.id}}'>
+    <view class='appliances' data-id='{{item.id}}' style='left:{{item.left}}rpx;top:{{item.top}}rpx;width:{{item.width}}rpx;height:{{item.height}}rpx;' bindtap='appliances'></view>
+  </block>
+</view>
+<!--报错提示  -->
+<template is='errorHide' data='{{error,error_text}}'></template>

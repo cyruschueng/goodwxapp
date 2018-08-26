@@ -1,0 +1,67 @@
+<view class="page">
+  <view class="coupon-headblock">
+    <view class="top-layer"></view>
+    <view class="line-layer"></view>
+    <view class="bottom-layer"></view>
+    <view class="gold" style="background-image: url('{{approot}}template/mobile/default/static/images/gold.png')"></view>
+    <view class="link-text">请至【
+      <navigator hover-class="none" open-type="redirect" url="/pages/sale/coupon/my/index/index" class="inline">
+        我的优惠券
+      </navigator>】查看</view>
+    <view class="paper">
+      <view class="title">恭喜获得</view>
+      <view class="text">
+        <i class="d1"></i>
+        <i class="d2"></i>
+        <p class="t1">{{detail.couponname}}</p>
+      </view>
+      <i class="line"></i>
+      <i class="dot-top"></i>
+      <i class="dot-left"></i>
+      <i class="dot-right"></i>
+      <i class="dot-1"></i>
+      <i class="dot-2"></i>
+      <i class="dot-3"></i>
+      <i class="dot-4"></i>
+      <i class="dot-5"></i>
+      <i class="dot-6"></i>
+    </view>
+  </view>
+  <view class="coupon-groupblock">
+    <view class="group-top">
+      <view class="inner">
+        <view class="left" wx:if="{{detail.backtype == 0}}"><span>￥</span>{{detail.deduct}}</view>
+        <view class="left" wx:else>优惠券</view>
+        <view class="right">
+          <view class="title">优惠券</view>
+          <view class="subtitle">{{detail.title2}}</view>
+        </view>
+      </view>
+    </view>
+    <scroll-view scroll-x="true" class="coupon-items">
+      <view class="container1">
+        <block wx:for="{{goods}}">
+          <navigator hover-class="none" class="item" open-type="redirect" url="/pages/goods/detail/index?id={{item.id}}">
+            <view class="image">
+              <image src="{{item.thumb}}"></image>
+            </view>
+            <view class="title">{{item.title}}</view>
+            <view class="price">
+              <view class="product">¥{{item.minprice}}</view>
+              <view class="market">¥{{item.couponprice}} <span>用劵价</span></view>
+            </view>
+          </navigator>
+        </block>
+        <navigator hover-class="none" class="item" open-type="redirect" url="/pages/goods/index/index?id={{detail.id}}">
+          <view class="more">查看更多>></view>
+        </navigator>
+      </view>
+    </scroll-view>
+  </view>
+  <navigator hover-class="none" class="btn btn-danger block" open-type="redirect" url="/pages/sale/coupon/index/index" style="margin: 0 20rpx 20rpx;">
+    <div>继续领取优惠券</div>
+  </navigator>
+  <navigator hover-class="none" open-type="redirect" style="margin: 0 20rpx 20rpx;" class="btn btn-default block" url="/pages/sale/coupon/my/index">
+    <div>查看我的优惠券</div>
+  </navigator>
+</view>

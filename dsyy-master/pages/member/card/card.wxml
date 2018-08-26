@@ -1,0 +1,48 @@
+<!--开通会员_Start-->
+<view class="card-bg">
+  <image src="{{bg}}" class="card-img"></image>
+  <view class="margin-left-30 margin-right-30">
+    <view class="border-bottom card-word">选择会员</view>
+    <view>
+      <view wx:for="{{cards}}">
+        <view wx:if="{{recommend_id==item.id}}">
+          <view>
+            <view class="{{level_id==item.id?'card-button-hover-recommend':'card-button-recommend'}} margin-top-30" bindtap="chooseCard" data-level="{{item.id}}">
+              {{item.name}}
+            </view>
+            <view class="button-recommend margin-right-30 margin-top-30">推荐</view>
+          </view>
+        </view>
+        <view wx:else>
+          <view class="{{level_id==item.id?'card-button-hover':'card-button'}} margin-right-30 margin-top-30" bindtap="chooseCard" data-level="{{item.id}}">
+            {{item.name}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="clear"></view>
+    <view class="margin-top-50 card-text padding-left-20 padding-top-20 padding-right-20 padding-bottom-20">
+      开通会员，立即享受免费借阅特权：
+      <view wx:for="{{cards}}" class="display">
+        充值{{item.name}}，{{item.description}}；
+      </view>
+    </view>
+  </view>
+  <view class="card-confirm" bindtap="recharge">开通会员</view>
+</view>
+<!--开通会员_End-->
+<!--确认开通会员_Start-->
+<view wx:if="{{showModal}}">
+<view class="card-cover"></view>
+<view class="card-box white-bg">
+  <image src="/images/cover_banner.png" class="cover-banner"></image>
+  <view class="card-box-text margin-bottom-100">
+    您当前还不是会员，请先办理会员
+  </view>
+  <view class="card-box-button">
+    <view class="card-box-button-close float-left" bindtap="clickClose">算了</view>
+    <view class="card-box-button-open float-right" bindtap="clickOpen">开通会员</view>
+  </view>
+</view>
+</view>
+<!--确认开通会员_End-->

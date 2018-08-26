@@ -1,0 +1,45 @@
+<view class='carts skin-{{skin}}'>
+  <view class='cart-item' wx:for="{{cart.Items}}" wx:for-item="cart" wx:key="CartId">
+    <label class="checkbox" bindtap='changeCartProductStatus' data-cart-id="{{cart.CartId}}">
+      <checkbox hidden='true' checked="{{cart.Selected}}" />
+      <view class='flex flex-column-center'>
+        <icon type="circle" size="22" hidden="{{cart.Selected}}"></icon>
+        <icon type="success" color='#ff5f8d' size="22" hidden="{{!cart.Selected}}"></icon>
+      </view>
+    </label>
+    <navigator class='ml10' url="/pages/product/product?id={{cart.ProductId}}">
+      <image class='product-image' src='{{cart.ProductImage}}/100/100'></image>
+    </navigator>
+    <view class='flex flex-column ml10 flex-column-self-start flex-grow1 overflow-hidden'>
+      <navigator class='ellipsis' url="/pages/product/product?id={{cart.ProductId}}">{{cart.ProductName}}</navigator>
+      <navigator class='small text-gray mt5 ellipsis' url="/pages/product/product?id={{cart.ProductId}}">规格：{{cart.Attr}}</navigator>
+      <view class='product-qty flex mt10'>
+        <button id="minusCartProductQty" disabled='{{cart.Qty<2}}' bindtap='changeCartProductQty' data-cart-id="{{cart.CartId}}">-</button>
+        <input value='{{cart.Qty}}' disabled='true'></input>
+        <button id='addCartProductQty' disabled='{{cart.Qty>99}}' bindtap='changeCartProductQty' data-cart-id="{{cart.CartId}}">+</button>
+      </view>
+    </view>
+    <view class='flex flex-column flex-row-between flex-column-self-stretch'>
+      <text>￥{{cart.Price}}</text>
+      <image class='cart-remove flex-column-self-end' src='http://res.o2o.com.cn:8082/img/8189140856a34fe58c2c7d6f3b8819eb' bindtap='removeCartProduct' data-cart-id="{{cart.CartId}}"></image>
+    </view>
+  </view>
+
+  <view class='cart-bottom-holder'></view>
+
+  <view class='cart-bottom'>
+    <label class="checkbox flex flex-column-center" bindtap="changeCartAllProductStatus">
+      <checkbox hidden='true' checked="{{cart.IsSelectedAll}}" />
+      <view class='flex flex-column-center'>
+        <icon type="circle" size="22" hidden="{{cart.IsSelectedAll}}"></icon>
+        <icon type="success" color='{{skin}}' size="22" hidden="{{!cart.IsSelectedAll}}"></icon>
+      </view>
+      <view class='ml5'>全选（{{cart.TotalQty}}）</view>
+    </label>
+    <view class='flex flex-column-center'>
+      <text class='text-primary'>￥{{cart.TotalAmt}}</text>
+      <view class='cart-go-order' bindtap='goBuy'>结算</view>
+    </view>
+  </view>
+
+</view>

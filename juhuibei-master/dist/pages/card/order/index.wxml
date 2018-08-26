@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="header-box"></view>
+  <view class="show-box">
+    <view class="page__bd pay-box">
+      <view class="weui-form-preview">
+
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item ">
+            <view class="weui-form-preview__label">付款金额</view>
+            <view class="weui-form-preview__value_in-hd price">￥{{info.shop_price}}</view>
+          </view>
+        </view>
+
+        <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item line-bottom">
+            <view class="weui-form-preview__label">销售单价</view>
+            <view class="weui-form-preview__value">{{info.price}} 元</view>
+          </view>
+
+          <view class="weui-form-preview__item line-bottom">
+            <view class="weui-form-preview__label">订单编号</view>
+            <view class="weui-form-preview__value">{{order_sn}}</view>
+          </view>
+          
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">{{info.name}}</view>
+            <block wx:for="{{info.power}}" wx:key="">
+              <view class="weui-form-preview__value">{{item}}</view>
+            </block>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{order_sn}}">
+    <view class="submit-box" hover-class="submit-btn_active">
+      <view class="submit-btn" bindtap="payOrder">立即支付</view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="submit-box" style='background:#313538'>
+      <view class="submit-btn" bindtap="toBack">订单有误 点击返回</view>
+    </view>
+  </block>
+</view>
+  

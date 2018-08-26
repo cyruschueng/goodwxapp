@@ -1,0 +1,64 @@
+<template name="foot-item">
+  <view wx:if='{{type != "customer"}}' class='item' style='left: {{goodsId == current ? left : "0"}}rpx' data-id='{{goodsId}}' bindtouchstart='{{type =="cart"?"touchS":""}}' bindtouchmove='{{type =="cart"?"touchM":""}}' bindtouchend='{{type =="cart"?"touchE":""}}'>
+    <view class='item-product' catchtap='{{from=="manage"?"showDetail":"detailTap"}}' data-id='{{from=="manage"?bookingId:goodsId}}'>
+      <view class='left-box back_img'>
+        <image src='{{goodsPic}}' mode='widthFix'></image>
+      </view>
+      <view class='right-box' wx:if='{{type != "cart"}}'>
+        <text>{{goodsName}}</text>
+        <text class='bookingCount'>{{bookingCount}}人已预约</text>
+        <text class='price'>￥{{goodsPrice}}</text>
+      </view>
+      <view class='right-box-cart' wx:else>
+        <text>{{goodsName}}</text>
+        <view class='right-box-cart-bottom'>
+          <view class='price-content' wx:if='{{discountPrice}}'>
+            <text>￥{{discountPrice}}</text>
+            <text>￥{{goodsPrice}}</text>
+          </view>
+          <view class='price-content' wx:else>
+            <text>￥{{goodsPrice}}</text>
+          </view>
+          <text>{{bookingCount}}人已预约</text>
+        </view>
+      </view>
+      <view class='order-btn' wx:if='{{type=="foot"}}'>
+        <text class='hasAppoint' wx:if='{{bookingStatus == 1}}'>已预约</text>
+        <text class='appoint' data-id='{{goodsId}}' catchtap='makeAppoint' wx:else>预约</text>
+      </view>
+    </view>
+    <view class='order-info-wrapper' wx:if='{{type=="order"}}'>
+      <view class='order-info'>
+        <text>预约联系人： {{bookerName}} {{mobile}}</text>
+        <text>到店时间：{{bookingDate}}</text>
+      </view>
+      <view wx:if='{{from != "manage"}}' class='order-status'>
+        <text wx:if='{{status==3}}'>已过期</text>
+        <text wx:elif='{{status==0}}'>已取消</text>
+        <text wx:elif='{{status==2}}'>已赴约</text>
+        <text wx:else data-storeno='{{storeNo}}' data-id='{{bookingId}}' catchtap='showDetail'>查看详情</text>
+      </view>
+      <view wx:else class='order-manage'>
+        <view wx:if='{{status == null}}'>
+          <text data-id='{{bookingId}}' data-status='3' catchtap='appointOperation'>未赴约</text>
+          <text data-id='{{bookingId}}' data-status='2' catchtap='appointOperation'>已赴约</text>
+        </view>
+        <view wx:else>
+          <text wx:if='{{status==0}}'>取消预约</text>
+          <text wx:elif='{{status==2}}'>已赴约</text>
+          <text wx:else='{{status==3}}'>未赴约/已过期</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--控制台客户数据模板  -->
+  <view class='item-console' wx:else>
+    <image src='{{headImage}}' mode='aspectFill'></image>
+    <view class='customer-info'>
+      <text>{{nickName}}</text>
+      <!-- <text>浏览了你的店铺</text> -->
+    </view>
+  </view>
+
+</template>

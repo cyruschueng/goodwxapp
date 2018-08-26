@@ -1,0 +1,24 @@
+<!--pages/search/search.wxml-->
+<view class='container' style="background:url({{background}}) no-repeat;background-size: cover; ">
+  <view class='search_wrap'>
+    <input type='text' class='search_input'></input>
+    <view class='search_btn'>搜索</view>
+  </view>
+  <view class='content'>
+    <scroll-view scroll-y="true"> 
+      <!-- <view class='title'>默契大考验标准答案</view> -->
+
+      <view class='tips'>Tips：标红为回答错误</view>
+
+      <view class='item' wx:for="{{list}}" wx:key="{{idnex}}">
+        <view class='item_title {{item.correct=="n"?"red":""}}'>{{index+1}}、{{item.title}}<text>（{{item.option}}）</text></view>
+        <view class='choose' wx:if="{{item.option_a}}">A、{{item.option_a}}</view>
+        <view class='choose' wx:if="{{item.option_b}}">B、{{item.option_b}}</view>
+        <view class='choose' wx:if="{{item.option_c}}">C、{{item.option_c}}</view>
+      </view>
+
+      <view class='bottom'>微信小程序.默契大考验</view>
+    </scroll-view>
+  </view>
+  <view class='no_content'>暂无结果</view>
+</view>

@@ -1,0 +1,14 @@
+<!--NormalProblem.wxml-->
+<button wx:for="{{items}}" wx:key="{{item.id}}" class="list" bindtap="showDetail" data-id="{{index+1}}">
+  <view>
+    <text class="text">{{item.content}}</text>
+    <!-- <image class="xiala" src="/pages/img/tubiao5.png"></image> -->
+    <view class="clearfix"></view>
+  </view>
+   <!-- {{showView?'show':''}} -->
+  <view data-id="{{index+1}}" detail="{{item.detail}}" class="detail">{{item.detail}}</view> 
+</button>
+<button class="Contact_service"  open-type="contact" session-from="weapp">
+<image class="msg" src="/pages/imgs/msg.png"></image>
+<view class='Contact_service_text'>客 服</view>
+</button> 

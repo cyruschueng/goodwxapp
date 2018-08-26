@@ -1,0 +1,26 @@
+<!--pages/notify/notify.wxml-->
+<view class='superheader'>
+  <view class='title'>群公告</view>
+</view>
+<text class='fa fa-chevron-left btnback' bindtap='back'></text>
+<view>
+  <navigator url='/pages/post/post?id={{item.id}}' id="{{item.id}}" class='noticeitem debug' wx:for="{{list}}" wx:key="k">
+    <view class='title'>{{item.title}}</view>
+    <view class='description'>{{item.description}}</view>
+    <view class='flex-row'>
+      <view>
+        <image class='photo' src="{{item.member_id_photo}}"></image>
+      </view>
+      <view class='membername'>{{item.member_id_name}}</view>
+      <view class='delete' wx:if="{{item.member_id_openid==UserInfo.openid||info.adminmember_id_name==UserInfo.openid}}" bindtap='deletePost' id="{{item.id}}">删除</view>
+      <view class='flex-1 updatetime text-right'>{{item.updated_date_str}}</view>
+    </view>
+  </navigator>
+  <view>
+    <view class="page__bd page__bd_spacing" >
+      <form name='uploadform' report-submit bindsubmit='gotoNotify'>
+        <button class="btnNotice" type="primary" form-type="submit">发起公告</button>
+      </form>
+    </view>
+  </view>
+</view>

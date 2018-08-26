@@ -1,0 +1,78 @@
+<!--支付押金画面  -->
+
+<view class="rectangle">
+
+           <view class="device">              
+              <image src="{{device.imgUrl}}"></image>              
+              <view class='desc'>
+                <view class="code"> 设备编号：{{device.deviceNo}}</view>
+                <view class="code1">设备名称：{{device.name}}</view> 
+                <view class="code3">设备押金：{{device.shareMoney}}元</view> 
+                <view class="code4">设备租金：{{rental}}嘀嘀币/{{rentalType}}</view>  
+              </view> 
+            </view>       
+
+</view>
+
+
+<view class="remainShare">押金余额：{{reminShare}}￥</view>
+
+<view class="yuan">押金：{{money}}￥</view>
+
+
+
+<view class='opration' bindtap="wechatPay">
+
+  <image  src='{{IMG_PATH}}/pay.png'></image>
+
+</view>
+
+<!-- 描述信息  -->
+<view class='des'>
+   <view class='content'>
+      <view >1.</view>
+      <view>1元=100嘀嘀币</view>
+   </view>
+
+   <view class='content'>
+      <view >2.</view>
+      <view>帐户余额可在我的钱包查看</view>
+   </view>
+
+    <view class='content'>
+      <view >3.</view>
+      <view>设备租金欠费时，您需要还清欠费才可以退押金</view>
+   </view>
+
+       <view class='content'>
+      <view >4.</view>
+      <view>嘀嘀币不能用来支付租金</view>
+   </view>
+
+</view>
+
+
+<view class="nav">
+  <view class="" bindtap="homePage">
+    <image src="{{IMG_PATH}}/shoye2.jpg"></image>
+    <view>首页</view>
+  </view>
+  <view class="" bindtap="goToShare">
+    <image src="{{IMG_PATH}}/fangdian.png"></image>
+    <view>发布</view>
+  </view>
+  <view class="scanCode" bindtap="scanCode">
+    <image src="{{IMG_PATH}}/chudian.png"></image>
+    <view>扫一扫</view>
+  </view>
+  <view class="" bindtap="goToMap">
+    <image src="{{IMG_PATH}}/laidian.png"></image>
+    <view>附近</view>
+  </view>
+
+  <view class="" bindtap="goToUser">
+    <image src="{{IMG_PATH}}/wode.png"></image>
+    <view>我的</view>
+  </view>
+
+</view>

@@ -1,0 +1,109 @@
+<!--mail.wxml-->
+<!--mall-menu start-->
+<!--<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>-->
+<!--<block wx:else>-->
+    <!--<scroll-view style="height:800px;" bindscrolltolower="indexscrolltolower" lower-threshold="50" scroll-y="true">-->
+<view class="mall-menu f16 flex white">
+    <view class="sub">
+    <scroll-view scroll-x="true" scroll-left="{{this_scroll_left_data}}" scroll-with-animation="true">
+        <view class="content">
+            <block wx:if="{{this_item == 0}}">
+                <view class="active" bindtap="index_item_bind" id="0">全部商品</view>  
+            </block>
+            <block wx:else>
+                <view bindtap="index_item_bind" id="0">全部商品</view>
+            </block>
+            <block wx:for="{{cate_list}}">
+                <block wx:if="{{this_item == item.id}}">
+                    <view class="active" bindtap="index_item_bind" id="{{item.id}}">{{item.title}}</view>
+                </block>
+                <block wx:else>
+                    <view bindtap="index_item_bind" id="{{item.id}}">{{item.title}}</view>
+                </block>
+            </block>
+        </view>
+    </scroll-view>
+    </view>
+</view>
+<!--商品幻灯片 start-->
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+<view class="swiper">
+  <swiper indicator-dots="true" indicator-color="#fff" indicator-active-color="#e51d1d" autoplay="true" current="{{swiperCurrent}}" interval="5000" duration="600" bindchange="swiperChange">
+    <block wx:for="{{swiperData}}">
+      <swiper-item>
+        <image src="{{imgUrlPX}}{{item.cover}}" mode="aspectFill"/>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!--<view class="dots">
+    <block >
+      <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+    </block>
+  </view>-->
+</view>
+<!--商品幻灯片 end-->
+<!--mall-list start-->
+<block wx:if="{{goods_list == null||goods_list.length==0}}">
+<!--暂无内容提示 start-->
+<view class="no-content tc">
+    <text class="no-content-icon iconfont icon-yemianwuneirong"></text>
+    <view class="no-content-font">暂无商品信息</view>
+</view>
+<!--暂无内容提示 end-->
+</block>
+
+<block wx:else>
+<view class="mall-list">
+    <view class="content clearfix">
+    <block wx:for="{{goods_list}}">
+        <view class="item" bindtap="detail" id="{{item.id}}">
+            <view class="pic">
+                <image src="{{imgUrlPX}}{{item.cover}}" mode="aspectFill"></image>
+                <text class="price">{{item.price}} 积分</text>
+            </view>           
+            <text class="title lineText">{{item.title}}</text>
+        </view>
+    </block>
+    </view>
+</view>
+<!--mall-list end-->
+
+
+</block>
+<!--</scroll-view>-->
+<!--浮动购物车按钮 start-->
+<view class="cart-float-btn notempty" bindtap="mallcart">
+    <text class="iconfont icon-cartfill f18"></text>
+</view>
+
+<!--<view class="float-btn float-comment">
+<contact-button type="default-light" size="20" session-from="duoguan_shop"></contact-button>
+</view>-->
+<!--浮动购物车按钮 end-->
+
+<!--优惠劵弹窗-->
+<!--<view class="privilege" wx:if="{{shop_quan_info}}">
+    <view class="privilege-img mid">
+        <image class="privilege-img" src="{{this_quan_d_img}}" mode="aspectFill"></image>
+        <view class="money">{{shop_quan_info.q_dai_jiner}}</view>
+        <view class="get" bindtap="go_quan_info_bind"><button>立即领取</button></view>
+        <view class="close tc" bindtap="close_quan_bind"><text class="iconfont icon-close write"></text></view>
+    </view>
+</view>-->
+
+</block>
+
+<!--loading start-->
+<view class="m20 tc grey loading" wx:if="{{showLoading}}">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在加载...</text>
+</view>
+<!--loading end-->

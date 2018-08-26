@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../build/react.js"></script>
+    <script type="text/javascript" src="../build/react-dom.js"></script>
+    <!--<script type="text/javascript" src="../build/browser.min.js"></script>-->
+    <script type="text/javascript" src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/jsx">
+    /*
+    * Mounting：已插入真实 DOM
+     Updating：正在被重新渲染
+     Unmounting：已移出真实 DOM
+    * */
+
+    var Component = React.createClass({
+        getInitialState:function(){
+            return ({value:1});
+        },
+        componentWillMount:function(){
+            console.log(1);
+        },
+        componentDidMount:function(){
+            console.log(2);
+        },
+        componentWillUpdate:function(){
+            console.log(3);
+        },
+        componentDidUpdate:function(){
+            console.log(4);
+        },
+        componentWillUnmount:function(){
+            console.log(5);
+        },
+        /*componentDidUnmount:function(){
+            console.log(6);
+        },*/
+        changeInner:function(event){
+            var number = this.state.value;
+            setInterval(function(){
+                number++;
+                this.setState({value:number});
+            }.bind(this),1000);//此处用到了bind函数；
+        },
+        render:function(){
+            var number = this.state.value;
+            return (<div>
+                <h2 onClick={this.changeInner} style={{color:"#f00"}}>{number}</h2>
+            </div>);
+        }
+    });
+    ReactDOM.render(
+            <Component />,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>

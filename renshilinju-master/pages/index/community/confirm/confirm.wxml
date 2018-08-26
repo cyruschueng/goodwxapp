@@ -1,0 +1,36 @@
+<!--pages/index/community/confirm/confirm.wxml-->
+<!-- <view>
+  <view class = "confirm-message">请确认您选择的信息</view>
+  <view class = "info">
+    {{province}}{{resultCity}}{{resultCountys}}{{Community}}
+  </view>
+  
+</view> -->
+<view class="mine-info">
+  <view class='infobox'>
+    <view class="information">
+      <image src="{{avatar}}" class="icon"></image>
+      <view class="cbox t2">
+        {{name}}
+        <block wx:if="{{gender==2}}">
+          <image src="/pages/images/WechatIMG37.png" class="sex"></image>
+        </block>
+        <block wx:if="{{gender==1}}">
+          <image src="/pages/images/WechatIMG36.png" class="sex"></image>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="choose">第二步,请确认您选择的小区</view>
+
+<view class="container">
+  <view class="input">
+    <input placeholder="选择" value="{{province}}-{{resultCity}}-{{resultCountys}}-{{Community}}" focus="{{focus}}" bindfocus="open" />
+  </view>
+</view>
+<view class="button">
+  <text bindtap="back" class="back">取消</text>
+  <text bindtap="confirm" class="go">确认</text>
+</view>

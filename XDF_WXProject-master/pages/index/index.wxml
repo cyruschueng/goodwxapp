@@ -1,0 +1,87 @@
+<!--index.wxml-->
+<view class="container page-home">
+    <scroll-view scroll-y class='index-scroll' lower-threshold='10' bindscrolltolower="lower">
+        <view class='scroll-cnt'>
+            <view class='rule-bar' bindtap="openModal">
+                <image class='rule-ico' src='/res/rule_icon.png'></image>
+                <text class='tip'>游戏规则</text>
+            </view>
+            <view class='t-cnt'>
+                <view class='btn-group'>
+                    <view class='tip'>
+                        <text>当前共有</text>
+                        <text class='c-num'>{{'12345'}}</text>
+                        <text>次挑战</text>
+                    </view>
+                    <image bindtap='startGame' class='start img-btn' src='/res/challenge.png'></image>
+                    <!-- <image class='restart img-btn' src='/res/restart.png' bindtap='onShareAppMessage' open-type="share"></image> -->
+                    <button class='restart img-btn' open-type="share" ></button>
+                    <text class='tip'>转发微信群可以再获得一次挑战机会</text>
+                </view>
+                <!-- <image class='bg' src='/res/bg.png'></image> -->
+            </view>
+            <view class='b-cnt'>
+                <view class='navbar'>
+                    <view bindtap='changeTab' data-tab='list' class="{{tabId==='list'?'active':'hide'}} tab-item">
+                        <image mode='aspectFit' class='im-tab'
+                               src="{{tabId === 'list'?'/res/week_list_active.png':'/res/week_list.png'}}"></image>
+                    </view>
+                    <view bindtap='changeTab' data-tab='totalList'
+                          class="{{tabId === 'totalList'?'active':'hide'}} tab-item">
+                        <image mode='aspectFit' class='im-tab'
+                               src="{{tabId === 'totalList'?'/res/total_list_active.png':'/res/total_list.png'}}"></image>
+                    </view>
+                    <view bindtap='changeTab' data-tab='about' class="{{tabId === 'about'?'active':'hide'}} tab-item">
+                        <image mode='aspectFit' class='im-tab'
+                               src="{{tabId === 'about'?'/res/about_active.png':'/res/about.png'}}"></image>
+                    </view>
+                </view>
+
+            </view>
+            <view class='b-content'>
+                <view wx:if='{{tabId === "list"}}'>
+                    <view wx:for="{{weekList}}" wx:for-index="index" wx:for-item="player">
+                        {{player.name}}
+                    </view>
+                </view>
+                <view wx:if='{{tabId === "totalList"}}'>
+                    <view wx:for="{{totalList}}" wx:for-index="index" wx:for-item="player">
+                        {{player.name}}
+                    </view>
+                </view>
+                <view class='about-tab' wx:if='{{tabId === "about"}}'>
+                    <view class='about-p-c'>
+                        <view>1、怎么才能获得奖品</view>
+                        <view class='about-p'>
+                            每周将评出一次周排行榜，冠军将获得小鸟夜灯1个，排名2~20的挑战者将获得笔袋1个;挑战结束后，将评出一次总排行榜，冠军将获得照片打印机1个，第二名将获得拍立得1个，排名3~20名小鸟夜灯1个。
+                        </view>
+                    </view>
+                    <view class='about-p-c'>
+                        <view>2、奖品应该怎么领？</view>
+                        <view class='about-p'>周榜及总榜中奖名单每周一将在 “新东方成都学校”官方微信公众号公布。
+                            领奖地址：武侯区人民南路45号，新希望大厦4楼前台（新东方成都学校总部）
+                        </view>
+                    </view>
+                    <view class='about-p-c'>
+                        <view>3、了解更多，请关注“新东方成都学校”官方微信公众号。</view>
+                    </view>
+                    <view>
+                        <image mode='aspectFit' class='qrcode' src='/res/qrcode.png'></image>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+    </scroll-view>
+    <modal
+            id="modal"
+            title='我是标题'
+            content='恭喜你，学会了小程序组件\n恭喜你，学会了小程序组件恭喜你，学会了小程序组件恭喜你，学会了小程序组件'
+            cancelText='知道了'
+            confirm='谢谢你'
+            bind:cancelEvent="closeModal"
+            bind:confirmEvent="closeModal"
+    >
+
+    </modal>
+</view>

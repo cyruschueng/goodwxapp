@@ -1,0 +1,70 @@
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <import src="/pages/Template/Template.wxml" />
+  <!--页面主体  -->
+  <view id="myDetail">
+    <include src='/utils/wxml/threeTab.wxml' />
+  </view>
+
+  <view class="flex t-aboutNetwork">
+    <view class="t-flexBox" hover-class="t-hoverColor" bindtap="moreProject">
+      <image src='/img/icon-shouye@2x.png' class='t-shopPic'></image>
+      <view class='t-shopBlock'>首页</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox">
+      <view class='t-shopBlock' bindtap="deleteProject" id="shareFriend" hover-class="t-hoverColor">
+        <image src='/img/icon-shanchu@2x.png' class='t-shopPic'></image>
+        删除</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox" bindtap="maintainProject" hover-class="t-hoverColor">
+      <image src='/img/icon-bianji1@2x.png' class='t-shopPic'></image>
+      <view class='t-shopBlock'>编辑</view>
+    </view>
+    <view class="t-line"></view>
+    <view class="t-flexBox" bindtap="initPrivacy" hover-class="t-hoverColor">
+      <image src='/img/icon-simixing@2x.png' class='t-shopPic'></image>
+      <view class='t-shopBlock'>私密性设置</view>
+    </view>
+    <view class="t-line"></view>
+    <button open-type="share" class='t-creatProject' hover-class="t-redColor">分享</button>
+  </view>
+
+  <!--邮箱-->
+  <view class="modal" wx:if="{{sendPc == 1}}">
+    <view class="bpModal">
+      <view class="bpModalBox">
+        <view class="bpModalText">BP会发送到您的邮箱</view>
+        <input class="writeBpEmail" value="{{userEmail}}" bindinput="writeBpEmail" placeholder="请输入邮箱" />
+
+        <view class="choiceBox">
+          <view class="flex">
+            <view class="bpModalCancel" bindtap="bpModalCancel" data-index="0">取消</view>
+            <view class="bpModalSure {{checkEmail==true? '':'checkEmail'}}" bindtap="bpModalSure" data-index="0">发送</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--公司信息-->
+  <view class="modal" wx:if="{{sendCompany == 1}}">
+    <view class="bpModal">
+      <view class="bpModalBox">
+        <view class="bpModalText">请完善您的公司全称</view>
+        <input class="writeBpEmail" placeholder="请输入您的公司" value="{{project.pro_company_name}}" bindinput="writeCompany" />
+        <view class="choiceBox">
+          <view class="flex">
+            <view class="bpModalCancel" bindtap="bpModalCancel" data-index="1">取消</view>
+            <view class="bpModalSure" bindtap="bpModalSure" data-index="1">确定</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--没有更多-->
+  <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+
+  <!--详情,买家图谱,一键尽调三个Tab页模版  -->
+  <template name='threeTab' data="{{type:2}}"></template>
+</view>

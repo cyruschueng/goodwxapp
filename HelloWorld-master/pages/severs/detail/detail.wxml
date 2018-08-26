@@ -1,0 +1,233 @@
+<view class="top bgwhite">
+
+    <view class="flex f16" style="align-items:center;">
+        <view class="sub red" catchtap='onNavigateTap' data-url='../lists/lists?cid={{cid}}&title={{category.title}}&&childCid={{cid2}}'>#{{category.title}}
+            <text wx:if='{{cid2>0}}'>●{{category2.title}}</text>#</view>
+        <view class="aside-more arrowB" catchtap="onSetValueTap" data-name='isShowActionMenu' data-value='{{true}}'></view>
+    </view>
+
+    <!-- 更多操作 弹出层 -->
+    <view class="floatBox {{isShowActionMenu?'active':''}}" hidden="{{!isShowActionMenu}}">
+        <view class="more-content {{isShowActionMenu?'active':''}} bgwhite tc  f14">
+            <view class="item gridXb" wx:if="{{is_admin}}" catchtap="{{is_top>0?'onToggleTopTap':'onSetValueTap'}}" data-name='isShowTop' data-value='{{true}}'>{{is_top!=0?'取消置顶':'置顶'}}</view>
+            <view class="item gridXb" wx:if="{{is_admin && status==0}}" catchtap="onCheckTap">审核</view>
+            <view class="item gridXb" wx:if="{{currentUid==uid || is_admin}}" catchtap="onToggleShowActionMenuTap" catchtap="onDeleteTap">删除</view>
+            <view class="item gridXb" wx:if="{{is_admin && currentUid!=uid}}" catchtap="onPullBlackTap">拉黑</view>
+            <view class="item gridXb" catchtap="onNavigateTap" data-url="../jubao/jubao?id={{id}}">举报</view>
+        </view>
+        <view class="floatBox floatBoxBg" style="display:block;" catchtap="onSetValueTap" data-name='isShowActionMenu' data-value='{{false}}'></view>
+    </view>
+
+    <view class="flex mt15" style="align-items:center;">
+        <image class="user-img" src="{{user.headimgurl}}" catchtap="onNavigateTap" data-url="../frd_info/frd_info?uid={{uid}}&vest_id={{vest_id}}" mode="aspectFill"></image>
+        <view class="sub ml10 user-msg">
+            <view>
+                <text class="lineText">{{user.nickname}}</text>
+                <text class="grey f12 ml10">{{create_time}}</text>
+            </view>
+            <view class="flex grey f12" wx:if="{{address!=''}}">
+                <text class="mr5 iconfont icon-locationfill"></text>
+                <view class="sub lineText" catchtap="onOpenMapTap">{{address}}</view>
+                <view class="ml10">{{distance?distance:'离您0米'}}</view>
+            </view>
+        </view>
+    </view>
+
+</view>
+
+<view class="content f18" catchtap="onPreviewTap" data-urls="{{imgs}}">
+    <rich-text nodes="{{content}}" wx:if="{{isUseRichText}}" style="{{style}}" class='rich-text' catchlongtap='onContentActionTap' />
+    <text wx:else catchlongtap='onContentActionTap'>{{content}}</text>
+    <image class="mt10" style="width:100%;" src="{{item}}" mode="widthFix" wx:for="{{imgs}}" wx:key="{{index}}" data-index="{{index}}"></image>
+    <view class='wallet_pwd' wx:if='{{wallet.is_pwd==1}}' catchtap='onCopyPwdTap'>红包口令：{{wallet.pwd}}</view>
+</view>
+
+<import src="../tpl.wxml" />
+<template is="recommend-list" data="{{data:recommend}}" />
+
+<!--评论内容-->
+<view class="bgwhite mt10">
+    <view class="co-title f16 gridXb">全部评论（{{comment}}）</view>
+    <view class="comment f14" wx:if="{{data.length && config.show_comment!==0}}">
+        <view class="co-item flex gridXb" wx:for="{{data}}" wx:key="{{item.id}}" catchlongtap="onShowDeleteCommentTap" data-id="{{item.id}}" data-index="{{index}}" data-show="{{currentUid==item.uid||currentUid==uid?1:0||is_admin}}" data-uid='{{item.uid}}'>
+
+            <view class="co-userimg">
+                <image src="{{item.headimgurl}}"></image>
+            </view>
+
+            <view class="sub ml15">
+                <view class="flex grey name">
+                    <text class="sub lineText">{{item.nickname}}</text>
+                    <!-- <text class="linght">3楼</text> -->
+                </view>
+                <view class="f16 mt5">{{item.content}}</view>
+
+                <view class="flex mt10 grey" style="align-items:center;">
+                    <view class="sub">{{item.create_time}}</view>
+                    <view class="co-caozuo iconfont icon-jubao linght" catchtap='onNavigateTap' data-url='../jubao/jubao?uid={{item.uid}}'></view>
+                    <view class="co-caozuo iconfont icon-huifu" catchtap='onShowCommentTap' data-reply-id="{{item.id}}" data-uid="{{item.uid}}" data-index="{{index}}" data-nickname="{{item.nickname}}"></view>
+                </view>
+
+                <view class="co-answerb mt10" wx:if="{{item.reply_list.length}}">
+                    <view class="co-answer" wx:for="{{item.reply_list}}" wx:for-index="replyIndex" wx:key="{{item.id}}" data-id="{{item.id}}" catchlongtap="onShowDeleteCommentTap" data-index="{{index}}" data-reply-index="{{replyIndex}}" data-show="{{currentUid==item.uid||currentUid==uid?1:0||is_admin}}">
+                        <text class='blue' catchtap='onShowCommentTap' data-reply-id="{{item.reply_id}}" data-uid="{{item.uid}}" data-index="{{index}}" data-reply-index="{{replyIndex}}" data-nickname="{{item.nickname}}">{{item.nickname}}</text> 回复
+                        <text class='blue' catchtap='onShowCommentTap' data-reply-id="{{item.reply_id}}" data-uid="{{item.reply_uid}}" data-index="{{index}}" data-reply-index="{{replyIndex}}" data-nickname="{{item.reply_nickname}}">{{item.reply_nickname}}：</text>
+
+                        <text>{{item.content}}</text>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 底部固定 -->
+<view class="bottom-btn-box">
+    <view class="flex tc bgwhite gridXt">
+        <!--评论点赞-->
+        <view class="sub flex f20">
+            <view class="sub bottom-btn" catchtap="onNavigateTap" data-type='switchTab' data-url='../index/index'>
+                <view class="iconfont icon-home"></view>
+                <view class="f12 grey">首页</view>
+            </view>
+            <button class="sub share bottom-btn" open-type="share">
+                <view class="iconfont icon-share"></view>
+                <view class="f12 grey">分享</view>
+            </button>
+            <view class="sub bottom-btn" catchtap="onShowCommentTap" data-doc-id="{{id}}" data-nickname="{{user.nickname}}" wx:if="{{config.show_comment!==0}}">
+                <view class="iconfont icon-comment"></view>
+                <view class="f12 grey">评论</view>
+            </view>
+            <view class="bottom-btn zan-btn sub {{is_good?'green':''}}" catchtap="onGoodTap" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{config.show_good!==0}}">
+                <view class="iconfont {{is_good?'icon-appreciatefill':'icon-appreciate'}} {{isActive?'zanactive':''}}"></view>
+                <view class="f12 {{is_good?'':'grey'}}">{{good}}</view>
+            </view>
+        </view>
+        <!--联系ta-->
+        <button class="contact-btn" type="primary" data-mobile="{{mobile}}" catchtap="onCallTap" disabled="{{mobile==''}}">联系Ta</button>
+    </view>
+</view>
+
+<!--评论输入框-->
+<view class="floatBox" wx:if="{{show_comment}}">
+    <view class="pinglun-input">
+        <view class="flex f16">
+            <text class="sub">评论</text>
+            <text class="close tc grey" catchtap="onHideCommentTap">×</text>
+        </view>
+        <form report-submit="true" bindsubmit="onCommentSubmit">
+            <view class="input-box mt10">
+                <textarea name="content" focus="true" fixed="true" cursor-spacing="115" placeholder="{{comment_placeholder}}" placeholder-class="linght" />
+                <!-- <input class="mr10" name="content" focus="true" placeholder="{{comment_placeholder}}" /> -->
+            </view>
+            <view class="flex mt10">
+                <view class="sub linght f12">
+                    <text class="mr5 iconfont icon-wran"></text>请遵循用户协议</view>
+                <button class="send-btn f16" type="primary" form-type="submit">发送</button>
+            </view>
+        </form>
+    </view>
+    <view class="floatBox floatBoxBg" style="display:block;" catchtap="onHideCommentTap"></view>
+</view>
+
+<!--置顶弹出层-->
+<view class="floatBox" style="z-index:1;" hidden="{{!isShowTop}}">
+    <view class="zhiding-choose mid">
+        <view class="f16 tc">选择置顶时间</view>
+        <view class="mt15 tc grey">
+            <picker mode="selector" range="{{['永久',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]}}" bindchange="onTopDayChange">{{top_day==0?'永久':top_day+'天'}}</picker>
+        </view>
+        <view class="flex tc mt20 zhiding-btn">
+            <view class="sub green" catchtap="onToggleTopTap">确定</view>
+            <view class="sub" catchtap="onSetValueTap" data-name='isShowTop' data-value='{{false}}'>取消</view>
+        </view>
+    </view>
+    <view class="floatBox floatBoxBg" style="display:block;"></view>
+</view>
+
+<!-- <view class="aside-float">
+    <button class="iconfont icon-kefu" type="primary" open-type='contact'></button>
+</view> -->
+
+<!-- 浮动红包 -->
+<view class="red-bag-float tc" wx:if='{{wallet}}'>
+    <image src="/images/resBag.png" catchtap='onSetValueTap' data-name='isShowWallet' data-value='{{true}}'></image>
+    <!-- <text class="iconfont icon-hongbao" catchtap='onSetValueTap' data-name='isShowWallet' data-value='{{true}}'></text> -->
+    <text class="gold-coin gold-1">￥</text>
+    <text class="gold-coin gold-2">￥</text>
+    <text class="gold-coin gold-3">￥</text>
+    <text class="gold-coin gold-4">￥</text>
+    <text class="gold-coin gold-5">￥</text>
+    <text class="gold-coin gold-6">￥</text>
+    <text class="gold-coin gold-7">￥</text>
+</view>
+
+<!-- 红包弹出层 -->
+<view class="floatBox red-packets-box" hidden='{{!isShowWallet}}'>
+    <view class="red-packets tc f16 {{isShowWalletDetail?'active':''}}">
+        <view class="red-packets-close" catchtap='onSetValueTap' data-value='{"isShowWallet":false,"isShowWalletDetail":false}'></view>
+
+        <!-- 抢红包 -->
+        <form hidden='{{isShowWalletMoney}}' report-submit='true' bindsubmit='onPullWalletSubmit'>
+            <view class="f14 packets-from">来自
+                <text class='ml5'>{{user.nickname}}</text>
+            </view>
+            <view class="word-inp" wx:if='{{wallet.is_pwd!=0}}'>
+                <input placeholder="请输入口令" placeholder-class="word-plchdcolor" name='pwd' />
+            </view>
+            <view class="f14 word-inp-prompt" wx:if='{{wallet.is_pwd!=0}}'>需要输入口令才能抢哦~</view>
+            <view class="f14 word-inp-prompt" wx:if='{{pull_wallet_msg}}'>{{pull_wallet_msg}}</view>
+            <view class="red-packets-bottom">
+                <button class="open-packets active" form-type='submit'>抢</button>
+            </view>
+        </form>
+
+        <!-- 打开红包 -->
+        <view hidden='{{!isShowWalletMoney}}' class='red-inner-box'>
+            <view class="packets-tips" wx:if='{{wallet.is_pwd!=0}}'>口令红包</view>
+            <view class="f18">
+                <block wx:if='{{pull_wallet_amount}}'>
+                    <text class="packets-money">{{pull_wallet_amount}}</text>
+                    <text>元</text>
+                </block>
+                <block wx:else>
+                    <view class="mt20">来晚一步，领完啦~</view>
+                </block>
+            </view>
+            <view class="red-packets-bottom">
+                <view class="open-packets">
+                    <image src="{{user.headimgurl}}" mode="aspectFill"></image>
+                </view>
+                <view class="packets-from lineText">来自
+                    <text class='ml5'>{{user.nickname}}</text>
+                </view>
+                <view class="detail-tips-active">
+                    <view class="f12">
+                        <block wx:if='{{pull_wallet_amount}}'>你已经领过这个红包了~</block>
+                    </view>
+                    <view class="f14 more-details tc" catchtap='onSetValueTap' data-name='isShowWalletDetail' data-value='{{true}}'>查看领取详情</view>
+                </view>
+                <!-- 领取详情 -->
+                <view class="packets-details-box" hidden='{{!isShowWalletDetail}}'>
+                    <view class="f12 grey pac-item-tit">{{wallet.pull_num}}/{{wallet.num}}个红包，已领{{wallet.pull_amount+''}}元</view>
+                    <view class='f12 tr pac-item-tit' catchtap='onNavigateTap' data-url='/pages/user/red-packet/redwallet-record/index'>查看我领取的红包</view>
+                    <view class="pac-item-box" wx:if='{{wallet_users}}'>
+                        <view class="pac-item flex gridXb" wx:for='{{wallet_users}}' wx:key='{{item.uid}}'>
+                            <view class="pac-user-img">
+                                <image src="{{item.headimgurl}}" mode="aspectFill"></image>
+                            </view>
+                            <view class="sub ml10 mr10">
+                                <view>{{item.nickname}}</view>
+                                <view class="f12 grey">{{item.create_time}}</view>
+                            </view>
+                            <view>{{item.amount+''}}元</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+    </view>
+    <view class="floatBox floatBoxBg" catchtap='onSetValueTap' data-name='isShowWallet' data-value='{{false}}'></view>
+</view>

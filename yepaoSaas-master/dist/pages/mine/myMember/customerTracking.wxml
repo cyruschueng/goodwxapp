@@ -1,0 +1,100 @@
+<!--pages/mine/myMember/customerTracking.wxml-->
+
+
+<import src="../../../templates/customerTrack-item/customerTrack-item.wxml"/>
+<import src="../../../templates/empty-view/empty-view.wxml"/>
+<import src="../../../templates/intention-item/intention-item.wxml"/>
+<import src="../../../templates/intention-item/intention-leftbox.wxml"/>
+
+
+<view class='bg-view'>
+
+  <!-- tab -->
+<view class="weui-tab">
+  <!-- tab  -->
+  <view class="weui-navbar">
+    <block wx:for-items="{{ navbarTabs }}" wx:key="{{ index }}">
+      <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="bindNavbarTabTap">
+        <view class="weui-navbar__title">
+          {{ item }}
+        </view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+  </view>
+
+  <!-- panel -->
+  <view class="weui-tab__panel">
+
+<!-- 选项一 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
+      <!-- 选项一 内容 -->
+
+      <!-- 提示 -->
+      <view class='up-remind-view weui-flex'>
+        <view class='weui-flex__item'>加油哦！快把意向成员变为会员吧！</view>
+        <view><image class='filter-icon' src='../../../images/icon/mine/filter.png' bindtap='bindFilterSearchTap'></image></view>
+      </view>
+
+      <block wx:if='{{ intentionList.length > 0 }}'>
+      <block wx:for='{{ intentionList }}' wx:for-item='intl' wx:key='{{ index }}'>
+        <template is="intention-item" data="{{ ...intl }}"/> 
+      </block>
+      </block>
+      
+      <!--无 更多 -->
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
+    </view>
+<!-- 选项一 结束 -->
+
+<!-- 选项二 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
+      <view class='up-remind-view'>加油哦！今天已成交{{ dealList.length }}单啦！</view>
+      <!-- 选项二 内容 -->
+      <block wx:if='{{ dealList.length > 0 }}'>
+      <block wx:for='{{ dealList }}' wx:for-item='cutl' wx:key='{{ index }}'>
+        <template is="customerTrack-item" data="{{ ...cutl }}"/> 
+      </block>
+      </block>
+      <!-- 无 更多 -->
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
+    </view>
+<!-- 选项二结束 -->
+
+<!-- 选项三 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
+      <view class='up-remind-view'>两个月内ta们就到期了！快去提醒ta们吧！</view>
+      <!-- 选项三 内容 -->
+      <block wx:if='{{ closeDeadlineList.length > 0 }}'>
+      <block wx:for='{{ closeDeadlineList }}' wx:for-item='cutl' wx:key='{{ index }}'>
+        <template is="customerTrack-item" data="{{ ...cutl,telephoneHidden }}"/> 
+      </block>
+      </block>
+      <!-- 无 更多 -->
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
+    </view>
+<!-- 选项三 结束 -->
+
+<!-- 选项四 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 3 }}">
+      <view class='up-remind-view'>ta们到期啦！快去联系ta们吧！</view>
+      <!-- 选项四 内容 -->
+      <block wx:if='{{ alreadyDeadlineList.length > 0 }}'>
+      <block wx:for='{{ alreadyDeadlineList }}' wx:for-item='cutl' wx:key='{{ index }}'>
+        <template is="customerTrack-item" data="{{ ...cutl,telephoneHidden }}"/> 
+      </block>
+      </block>
+      <!-- 无 更多 -->
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
+    </view>
+<!-- 选项四 结束 -->
+
+  </view>
+</view>
+
+<!-- 意向 侧面 弹窗  -->
+<view hidden='{{ leftboxHidden }}'>
+  <template is='intention-leftbox' data='{{ leftboxList }}'/> 
+</view>
+
+</view>

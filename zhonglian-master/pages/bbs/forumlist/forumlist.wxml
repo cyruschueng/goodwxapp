@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="glo_load_view" wx:if="{{isload}}">
+  <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+  <text>正在努力加载</text>
+</view>
+<block wx:else>
+  <!--帖子列表 start-->
+  <view class="postList">
+    <view class="post-item" wx:for="{{data}}" wx:key="*this">
+      <view class="info">
+        <block wx:if="{{item.digest>0}}">
+          <view class="fr state marrow">精华</view>
+        </block>
+        <view class="fr mcolor forum-name">{{item.weiba_name}}</view>
+        <view class="user-info">
+          <view class="fl avatar">
+            <image src="{{item.avatar}}"></image>
+          </view>
+          <view class="fl grey">{{item.user_name}}</view>
+        </view>
+      </view>
+      <view bindtap="onNavigateTap" data-url="../detail/detail?id={{item.id}}" id="{{item.id}}" class="desc">
+        <text class="lineText3">{{item.content}}</text>
+        <view class="flex albums is-three" wx:if="{{item.img_list}}" catchtap="onPreviewTap" data-imgs="{{item.img_list}}">
+          <view class="sub pic-item" wx:for="{{item.img_list}}" wx:key="*this">
+            <image src="{{item}}" mode="aspectFill" data-index="{{index}}"></image>
+          </view>
+        </view>
+      </view>
+      <view class="grey f12 item-footer">
+        <view class="fr">
+          <text class="iconfont icon-comment mr20">{{item.reply_count}}</text>
+          <text class="iconfont icon-appreciate">{{item.praise}}</text>
+        </view>
+        <view>
+          <text class="mr10">{{item.post_time}}</text>
+          <text>{{item.read_count}} 阅</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--帖子列表 end-->
+  <!--loading start-->
+  <view class="m20 tc grey loading" wx:if="{{showLoading}}">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在加载...</text>
+  </view>
+  <!--loading end-->
+  <!--发帖按钮 start-->
+  <view class="post-btn" bindtap="onNavigateTap" data-url="../post/post">
+    <text class="iconfont icon-write"></text>
+  </view>
+  <!--发帖按钮 end-->
+</block>

@@ -1,0 +1,21 @@
+<import src="../../templates/personalInfo.wxml"/>
+<view hidden="{{listBox}}">
+  <view class="container">
+    <!-- 没有数据显示 -->
+    <template is="nothing" wx:if="{{msgList.length <= 0}}"></template>
+    <view class="news" wx:for="{{dataList}}"  wx:key="id" id="{{item.id}}" bindtap="listClick">
+      <view class="news-title">{{item.title}}</view>
+      <view class="news-box clearfix">
+        <image class="news-box-image" src="{{item.pic}}"></image>
+        <view class="news-box-text">
+          {{item.brief}}
+        </view>
+        <view class="time">{{item.create_datetime}}</view>
+      </view>
+    </view>
+
+  </view>
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

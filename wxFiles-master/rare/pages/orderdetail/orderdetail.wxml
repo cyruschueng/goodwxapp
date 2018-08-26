@@ -1,0 +1,151 @@
+<view class="container-theme {{opq == 0? '':'hidden'}}" style="width:{{innerWidth}}px;height:{{innerHeight}}px;padding-top:250rpx;">
+<view class="spinner-cube-grid">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+</view>
+</view>
+<view class="container" style="width:{{innerWidth}}px;height:{{innerHeight}}px">
+  <view class="header">
+    <view class="pull-left">
+      <view class="wait" wx:if="{{ju.orderflag == 0}}">等待买家付款</view>
+      <view class="wait" wx:if="{{ju.orderflag == 1}}">已付款</view>
+      <view class="wait" wx:if="{{ju.orderflag == 2}}">等待卖家发货</view>
+      <view class="wait" wx:if="{{ju.orderflag == 3}}">已发货</view>
+      <view class="wait" wx:if="{{ju.orderflag == 4}}">等待买家收货</view>
+      <view class="wait" wx:if="{{ju.orderflag == 5}}">已收货</view>
+      <view class="wait" wx:if="{{ju.orderflag == 6}}">等待买家评价</view>
+      <view class="wait" wx:if="{{ju.orderflag == 7}}">已评价</view>
+      <view class="date">创建日期：{{ju.recordtime}}</view>
+    </view>
+    <image style="width:120rpx;height:120rpx;float:right;margin-right:80rpx;" src="/img/book.png"></image>
+    <view class="clear-both"></view>
+  </view>
+  <view class="qiuqiu">
+    <view class="li">
+      <view class="qiu" >
+        <view wx:if="{{ju.orderflag >= 1}}"></view>
+      </view>
+      <view class="title">已支付</view>
+      <view class="date"></view>
+    </view>
+
+    <view class="li">
+      <view class="qiu" >
+        <view wx:if="{{ju.orderflag >= 3}}"></view>
+      </view>
+      <view class="title">已发货</view>
+      <view class="date"></view>
+    </view>
+
+    <view class="li">
+      <view class="qiu" >
+        <view wx:if="{{ju.orderflag >= 5}}"></view>
+      </view>
+      <view class="title">已收货</view>
+      <view class="date"></view>
+    </view>
+
+    <view class="li">
+      <view class="qiu" >
+        <view wx:if="{{ju.orderflag >= 7}}"></view>
+      </view>
+      <view class="title">已评价</view>
+      <view class="date"></view>
+    </view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="panel">
+    <image style="width:46rpx;height:46rpx;margin-top:35rpx;" class="pull-left" src="/img/adres.png"></image>
+    <view class="addres">
+      <view class="title">
+        <view class="pull-left font-xs">收货人：{{ju.sendname}}</view>
+        <view class="pull-right font-xs">{{ju.sendtel}}</view>
+      </view>
+      <view class="clear-both"></view>
+      <view class="font-xs">收货地址：{{ju.address}}</view>
+    </view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="pa">
+    <view class="align-right color-b font-xs ssssd" style="height:20rpx"></view>
+
+    <view style="background:#fafafa;padding-bottom:10rpx;padding-right:30rpx;" wx:for="{{ju.tOrOrderdetaillist}}" bindtap="navToGoods" >
+      <image class="imgds pull-left" src="{{item.icon}}"></image>
+      <view class="pull-left" style="margin-left:30rpx;margin-top:10rpx;width:500rpx;">
+        <view class="font-xs">{{item.msgcontent}}</view>
+        <view class="font-xs" style="color:#aaa; margin-top:20rpx;">{{item.prostandard}}</view>
+        <view class="font-xs" style=" margin-top:20rpx;">
+          <view class="pull-left" style="color:#ff3e3e;">￥{{item.sellprice}}</view>
+          <view class="pull-right" style="color:#aaa">X{{item.sumbuy}}</view>
+        </view>
+      </view>
+      <view class="clear-both"></view>
+    </view>
+
+
+    <view class="kld">
+      <view>
+        <view class="pull-left font-xs">快递费用</view>
+        <view class="pull-right font-xs">￥{{ju.sendprice}}</view>
+        <view class="clear-both"></view>
+      </view>
+      <view>
+        <view class="pull-left font-xs">积分抵扣</view>
+        <view class="pull-right font-xs">-￥{{ju.inprice}}</view>
+        <view class="clear-both"></view>
+      </view>
+      <view>
+        <view class="pull-left ">需付款(含运费)</view>
+        <view class="pull-right " style="color:#ff3e3e">￥{{ju.countprice}}</view>
+        <view class="clear-both"></view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="panel">
+    <view class="lis" style="border-right: 1px solid #f3f3f3;">
+      <image class="pull-left" style="width:46rpx;height:46rpx;margin-left:30rpx" src="/img/kef.png"></image>
+      <view class="tit pull-left" style="margin-left:15rpx;">联系客服</view>
+      <view class="clear-both"></view>
+    </view>
+    <view class="lis">
+      <image class="pull-left" style="width:46rpx;height:46rpx;margin-left:80rpx" src="/img/call.png"></image>
+      <view class="tit pull-left" style="margin-left:15rpx;">联系电话</view>
+      <view class="clear-both"></view>
+    </view>
+    <view class="clear-both"></view>
+  </view>
+
+  <view class="panel">
+    <view>
+        <view class="pull-left font-xs">订单编号</view>
+        <view class="pull-right font-xs">{{ju.orderNum}}</view>
+        <view class="clear-both"></view>
+      </view>
+      <view>
+        <view class="pull-left font-xs">支付方式</view>
+        <view class="pull-right font-xs">微信支付</view>
+        <view class="clear-both"></view>
+      </view>
+      <view>
+        <view class="pull-left font-xs">创建时间</view>
+        <view class="pull-right font-xs">{{ju.recordtime}}</view>
+        <view class="clear-both"></view>
+      </view>
+  </view>
+  <view style="height:100rpx;"></view>
+  <view class="{{ju.orderflag > 0 ? 'hidden':''}}" style="position:fixed;bottom:0;width:100%;height:100rpx;">
+     <view class="pull-left" style="width:50%;line-height:100rpx;text-align:center;background:#fff" bindtap="cancelpl">取消订单</view>
+     <view class="pull-left" style="width:50%;line-height:100rpx; background:#e6bfae;color:#fff;text-align:center;" bindtap="payit" >立即付款</view>
+  </view>
+</view>

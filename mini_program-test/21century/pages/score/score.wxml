@@ -1,0 +1,70 @@
+<view class="wrap">
+  <view class="header {{isIpx?'ipx':''}}">
+    <text wx:if="{{timeStatus == 1}}" class="count_down">距初赛开始还有<text class="count_time">{{c_day}}</text>天<text class="count_time">{{c_hour}}</text>时<text class="count_time">{{c_min}}</text>分<text class="count_time">{{c_sis}}</text>秒</text>
+    <text wx:elif="{{timeStatus == 2}}" class="count_down">距结果查询还有<text class="count_time">{{c_day}}</text>天<text class="count_time">{{c_hour}}</text>时<text class="count_time">{{c_min}}</text>分<text class="count_time">{{c_sis}}</text>秒</text>
+    <text wx:else="{{timeStatus == 3}}" class="count_down">初赛结果已出炉！您可查询初赛结果</text>
+    <view wx:if="{{timeStatus == 3}}" class="query-box" bindtap="toResult">
+      <image class="query_btn" src="../../images/icon/query_btn.png"></image>
+      <text>查询</text>
+    </view>
+    <view wx:else="{{timeStatus == 2}}" class="query-box" bindtap="toResult">
+      <image class="query_btn" src="../../images/icon/un_query_btn.png"></image>
+      <text>查询</text>
+    </view>
+  </view>
+  <view class="head">
+    <image class="head_icon" src="../../images/icon/head_icon.png"></image>
+    <image class="head_img" src="{{head_url}}"></image>
+  </view>
+  <view class="main">
+    <view class="num {{isIpx?'ipx_top15':''}}">恭喜您提交成功！您是第<text>{{rank}}</text>个参赛者！</view>
+    <view class="{{fStatus?'fScore':'score'}}">
+      <image class="{{fStatus?'fScore_img':'score_img'}}" src="../../images/icon/score_icon.png"></image>
+      <text>{{score}}</text>
+    </view>
+    <view wx:if="{{!fStatus}}" class="score_e">
+      <view class="{{isIpx?'ipx_top15':''}}">
+        <view class="sc_box">
+          <text class="text">跟读</text>
+          <view class="bg">
+            <view class="read_score" style="width:{{read_score*2}}%;"></view>
+          </view>
+        </view>
+        <text wx:if="{{read_score<30}}" class="f_text">多听多模仿，单词发音和连读需特别加强。</text>
+        <text wx:elif="{{read_score>=30&&read_score<=40}}" class="f_text">对单词发音、连读，重读进行针对模仿和提高。</text>
+        <text wx:elif="{{read_score>40}}" class="f_text">发音标准，语速适中，重读和连读较准确。</text>
+      </view>
+      <view class="{{isIpx?'ipx_top15':''}}">
+        <view class="sc_box">
+          <text class="text">答题</text>
+          <view class="bg">
+            <view class="select_score" style="width:{{select_score*2}}%;"></view>
+          </view>
+        </view>
+        <text wx:if="{{select_score<30}}" class="f_text">多阅读多积累词汇，逐步掌握阅读技巧。</text>
+        <text wx:elif="{{select_score>=30&&select_score<=40}}" class="f_text">阅读的时候要更加注意细节内容哦！</text>
+        <text wx:elif="{{select_score>40}}" class="f_text">注意读懂问题，灵活运用阅读技巧。</text>
+      </view>
+    </view>
+    <view class="code-box {{isIpx?'ipx_top15':''}}">
+      <text wx:if="{{fStatus&&score<60}}" class="text">多阅读多积累词汇，逐步掌握阅读技巧。</text>
+      <text wx:elif="{{fStatus&&score>=60&&score<=80}}" class="text">阅读的时候要更加注意细节内容哦！</text>
+      <text wx:elif="{{fStatus&&score>80}}" class="text">注意读懂问题，灵活运用阅读技巧。</text>
+      <image src="../../images/icon/abc_app.png"></image>
+      <text>拿起Ipad扫码下载ABCtime提高成绩吧！</text>
+    </view>
+  </view>
+  <view class="footer">
+    <view class="btn-box {{isIpx?'ipx_top50':''}}" bindtap="saveImg">
+      <image src="../../images/shelf/button21.png"></image>
+      <text>保存相册，转发朋友圈炫耀一下吧</text>
+    </view>
+    <!--<image src="../../images/icon/abc_app.png"></image>-->
+    <!--<text>拿起Ipad扫码下载ABCtime提高成绩吧！</text>-->
+  </view>
+</view>
+<view id="canvas-box" wx:if="{{saveStatus}}">
+  <canvas canvas-id="shareCanvas" id="shareCanvas"/>
+</view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
+<view class="tran_bg" style="display: {{tranStatus?'block':'none'}}"></view>

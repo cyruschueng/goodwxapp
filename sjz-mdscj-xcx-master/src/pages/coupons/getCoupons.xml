@@ -1,0 +1,55 @@
+<form bindsubmit="formSubmit" report-submit='true'>
+  <button formType="submit" class="formIdBtn">
+    <view class="wrap-coupons">
+      <view class="get-coupon">
+        <view class="head"></view>
+        <view class="submit-tel">
+          <view class="tips" wx:if="{{props.dataTemp.isShowDrawedTips}}">{{props.couponsDetail.length ? '您已成功领取了优惠券！' : '暂无可以领取的优惠券~'}}</view>
+          <view class="input btn-get" catchtap="couponsDraw">{{props.dataTemp.btnText}}</view>
+          <navigator class="go-index" open-type="navigate" url="/pages/coupons/list">去查看优惠券</navigator>
+        </view>
+        <view class="coupon-list">
+          <view class="coupon-item" wx:for="{{props.couponsDetail}}">
+            <view class="coupon-info">
+              <view class="coupon-fee">
+                <view class="fee"><text class="yen">¥</text>{{item.profitFee}}</view>
+                <view class="rule-fee">全场满¥{{item.couponRuleVO.fullFee}}</view>
+              </view>
+              <view class="coupon-detail">
+                <view class="ul">
+                  <view class="li name">{{item.couponName}}</view>
+                  <view class="li time">{{item.startTime}} - {{item.endTime}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="alert-dialog" hidden="{{!props.dataTemp.isShowSuccModal}}" capture-bind:tap="modalClose">
+          <view class="dialog {{props.dataTemp.isShowSuccModal ? 'active' : ''}}">
+            <view class="close" catchtap="modalClose"></view>
+            <view class="img-wrapper"></view>
+            <view class="h2">领取成功!</view>
+            <view class="p">优惠券查看: 我的->我的优惠券</view>
+            <navigator class="a to-use" open-type="switchTab" url="/pages/index/index">立即使用</navigator>
+          </view>
+        </view>
+        <view class="coupon-rules">
+          <view class="rule-desc">
+            <view class="li">
+              <text class="index">1</text>
+              <text class="p">请在有效期内使用优惠券，未使用的优惠券过期后，将自动作废；</text>
+            </view>
+            <view class="li">
+              <text class="index">2</text>
+              <text class="p">使用优惠券支付的订单，若产生退货退款，优惠券均不退回，退款金额按优惠后的金额退回；</text>
+            </view>
+            <view class="li">
+              <text class="index">3</text>
+              <text class="p">不同的优惠券有不同的使用场景，请按具体规定使用。</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </button>
+</form>

@@ -1,0 +1,56 @@
+<view class='container'>
+  <view class='break'></view>
+  <view class='address'>
+    <view class='item' wx:for="{{address}}" wx:key="{{index}}">
+      <view class='name'>
+        <text>{{item.consignee}},</text><text>  {{item.tel}}</text>      
+      </view>
+      <view class='room'>
+      <view>
+        <text>{{item.province}} </text> <text>{{item.city}} </text> <text>{{item.area}} </text>       
+      </view>
+      <view><text>{{item.address}}</text> </view>
+      </view>
+      <view class='sudo'>
+        <view class='default' bindtap='default' data-index='{{index}}' data-id='{{item.id}}'>
+          <image src='{{item.is_default=="1"?"/pages/source/images/selted.png":"/pages/source/images/unseleted.png"}}'></image> 
+          <text style='color:{{item.is_default=="1"?"#38adff":"#000"}}'>{{item.is_default=="1"?"已设为默认":"设为默认"}}</text>        
+        </view>
+        <view class='edit'>
+          <view bindtap='update' data-index='{{index}}'>
+            <image src='/pages/source/images/edit.png'></image>
+            <text>编辑</text>
+          </view>
+          <view bindtap='del' data-index='{{index}}' data-id='{{item.id}}'>
+            <image src='/pages/source/images/delete.png'></image>
+            <text>删除</text>            
+          </view>
+        </view>        
+      </view>     
+    </view>
+  </view>
+  <view class='null' wx:if="{{isNull=='1'}}">
+      <image src='/pages/source/images/without.png'></image>
+      <view>请填写您的收货地址</view>
+    </view>
+  <view class='add' bindtap='add'>添加新地址</view>
+</view>
+<view class='model' wx:if="{{hidden=='0'}}">
+  <view class='window'>
+    <view class='wintitle'>添加收货地址</view>
+    <view class='wininput'>
+      <input maxlength='15' placeholder='收货人' bindinput='getName' value='{{addName}}'></input>
+      <input maxlength='11' placeholder='电话' bindinput='getDel' value='{{addDel}}'></input>
+    </view>
+    <view>
+      <picker mode='region' bindchange='setNew'>
+          {{addprovince}} {{addcity}} {{addarea}}
+      </picker>
+    </view>
+    <view class='info'>
+      <input placeholder='请输入详细地址' bindinput='getInfo' value='{{addInfo}}'></input>
+    </view>    
+    <view class='sub' bindtap='sub'>确定</view>
+    <image class='close' bindtap='close' src='/pages/source/images/close.png'></image>
+  </view>
+</view>

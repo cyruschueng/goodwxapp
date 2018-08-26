@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+	<title>学员首页</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+<link rel="stylesheet" type="text/css" href="https://a.picooc.com/statics/Portal/css/plst.css?v=2017020601">
+<script type="text/javascript" src="jsv1/jquery-3.0.0.min.js"></script>
+	</head>
+	<style>
+	.row{
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		vertical-align: middle;
+		width: 200px;
+		height: 200px;
+		line-height: 200px;
+		background: #666;
+		color: #fff;
+	}
+	.newFatburn{
+		background: #f345de;
+	}
+	</style>
+	<body>
+		
+		<a class="row productDetailsLink">
+		线上商品售卖
+        </a>
+
+        <a class="row newFatburn" href="javascript:void(0);" onclick="javascript:this.href='https://a.picooc.com/web/fatburntestReact/myOrder.html'+location.search">
+            我的订单
+        </a>
+		
+
+	<script>
+	$.ajax({
+		type:"get",
+		url:window.location.protocol+"//"+window.location.host+"/v1/api/article/getCampSale"+window.location.search,
+		dataType:"json",
+		success:function(data){
+			if(data.code == 200){
+				var host=window.location.protocol+"//"+window.location.host;
+				var link=data.resp.link;
+				var linkSearch="";
+				var c="fatburntestReact";
+				if(link.indexOf("?")>=0){
+					$(".productDetailsLink").css("display","block");
+					linkSearch='&'+link.split("?")[1];
+					link=link.split("?")[0];
+					link=link.replace(/fatburn/ig,'fatburntestReact');
+					//productDetailsLink页面底部跳转燃脂营商品，唯一
+					$(".productDetailsLink").attr("href",link+window.location.search+'&refer=5'+linkSearch);
+				}
+			}
+		}
+	})
+	</script>
+	</body>
+
+</html>

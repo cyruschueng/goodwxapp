@@ -1,0 +1,268 @@
+<view class='containers' bindtouchmove='touchMove'>
+  <!-- Section0 Swiper -->
+  <view>
+    <view>
+      <view wx:if='{{detail.videoUrl}}' class='movieBox'>
+        <video id='myVideo' class='movie' src='{{detail.videoUrl}}' autoplay='true' objectFit='cover' show-fullsceen-btn='false' muted='{{isMuted}}' loop='true' page-gesture='true' direction='vertical' bindfullscreenchange='bindfullscreen'></video>
+        <view wx:if='{{detail.minimumCharge}}' class='price'>
+          <text>{{detail.minimumCharge}}</text>
+        </view>
+      </view>
+      <view wx:else class='swiper-container'>
+        <swiper class='swiper-wrapper' indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+          <block wx:for="{{detail.slideList}}" wx:key="item">
+            <swiper-item class='swiper-item'>
+              <image mode='widthFix' lazy-load='true' wx:if='{{item.pic}}' src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
+              <image mode='widthFix' lazy-load='true' wx:else  src="../../images/logo-gray.png" class="slide-image" mode='aspectFill'/>
+            </swiper-item>
+          </block>
+          </swiper>
+        <view wx:if='{{detail.minimumCharge}}' class='price'>
+          <text>{{detail.minimumCharge}}</text>
+        </view>
+        <view wx:if='{{detail.tips}}' class='endTime'>
+          <text class='tan'>!</text>
+          {{detail.tips}}
+        </view>
+      </view>
+    </view>
+
+    <!-- Section1 当前产品的介绍 -->
+    <view class='viewDetail'>
+      <view class='hotRecommend' wx:if='{{detail.promotionTag.name}}'>{{detail.promotionTag.name}}</view>
+      <view wx:else></view>
+      <view class='text'>
+        <view class='{{isCollect?"heartSelected iconfont icon-xin":"heart iconfont icon-xin-xian"}} ' bindtap='optCollect'></view>
+        <view class='message'>
+          <view class='tit'><text selectable='true'>{{detail.shopName}}</text></view>
+          <view class='count'>
+            <text class='star'>
+              <text wx:for='{{detail.stars}}' wx:key='ns' class='iconfont icon-star'>
+              </text>
+              <text wx:if='{{detail.half}}' class='iconfont icon-217-star-half'></text>
+              <text>({{detail.score}}分)</text>
+            </text> <text class='line'>|</text>
+            <text wx:if="{{detail.visitors > 100000}}">100000+人参与体验过</text>
+            <text wx:else>{{detail.visitors}}人参与体验过</text>
+          </view>
+          <view class='distance'>
+            <view wx:if="{{detail.serviceTagList.length > 0}}" class='welfare'>
+              <text wx:for="{{detail.serviceTagList}}" wx:key="st" wx:for-item="st" class='type'>{{st.name}}</text>
+            </view>
+            <view class='meters'>
+              <text class='iconfont icon-location_fill'></text>
+              距离您的位置
+              <text wx:if="{{detail.distance >= 1000 && detail.distance <= 100000}}" class='meter'>{{detail.distance/1000}}km</text>
+              <text wx:elif="{{detail.distance > 100000}}" class='meter'>>100km</text>
+              <text wx:else class='meter'>{{detail.distance}}m</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{detail.detailInfo.brief.length > 0}}" class='introduce'>         
+        <view class='box'>
+          <view wx:if='{{detail.voiceGuideId}}' class='voiceGuideId' id='{{detail.voiceGuideId}}' bindtap='tovoiceGuide'>
+            <image mode='widthFix' lazy-load='true' mode='widthFix' src='{{VGinfo.voiceGuideImg}}'></image>
+          </view>
+          <view class='content'>
+            <view class='personIntroduce' wx:for='{{detail.detailInfo.brief}}' wx:key='{{item}}'>
+              <text class='disc'>·</text>
+              {{item}}
+            </view>
+          </view>
+          <!-- adpic模块 shopid=3 -->
+          <view wx:if='{{detail.detailInfo.adPic}}' class='preferential' bindtap='activeDetail' id='{{detail.shopId}}'>
+            <image mode='widthFix' lazy-load='true' src='{{detail.detailInfo.adPic}}' mode='widthFix'></image>
+          </view>
+        </view>
+
+        <!-- attention模块 shopid=3 -->
+        <view wx:if="{{detail.detailInfo.attention.length > 0}}" class='condition'>
+          <view class='conditionText' wx:for='{{detail.detailInfo.attention}}' wx:key='{{item}}'>
+            <image mode='widthFix' lazy-load='true' src='{{item.icon}}' class='icon'></image>{{item.info}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Section2 开放时间 shopid=3-->
+    <view wx:if="{{detail.detailInfo.openTime}}" class='time-map'>
+      <view class='time'>
+        <view class='title'>{{detail.detailInfo.openTime.title}}</view>
+        <view wx:for="{{detail.detailInfo.openTime.list}}" wx:key="{{item}}" class='timeCondition'>
+              <text class='disc'>·</text> 
+            {{item}}
+        </view>
+        <view wx:if='{{detail.detailInfo.openTime.tel}}' class='phone'>
+          <text class='disc'>·</text>
+          <view class='number' bindtap='callPhone' data-phoneNumber='{{detail.detailInfo.openTime.tel}}'>电话：<text>{{detail.detailInfo.openTime.tel}}</text></view>
+        </view> 
+        <view wx:if="{{detail.detailInfo.openTime.tips}}" class='tips'>
+          <view class='title-small'>小贴士</view>
+          <view class='text'>
+            <view>{{detail.detailInfo.openTime.tips}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 地址信息 shopid=3-->
+      <view wx:if="{{detail.detailInfo.addrInfo.list}}" class='map'>
+        <view class='title'>{{detail.detailInfo.addrInfo.title}}</view>
+        <view class='title-small'>{{detail.detailInfo.addrInfo.subtitle}}</view>
+        <view class='map-address'>
+          <text class='iconfont icon-location_fill'></text><text bindtap='gotolocation'>{{detail.addrInfo}}</text>
+        </view>
+        <view class='timeCondition' wx:for='{{detail.detailInfo.addrInfo.list}}' wx:key='{{item}}'>
+          <text class='disc'>·</text>{{item}}
+        </view>
+        <view wx:if="{{detail.detailInfo.addrInfo.tips}}" class='tips'>
+          <view class='title-small'>小贴士</view>
+          <view class='text'>
+            <view>{{detail.detailInfo.addrInfo.tips}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Section3 概览 shopid=3-->
+    <view wx:if="{{detail.detailInfo.overview.list.length > 0}}" class='scenic-spot'>
+      <view class='title'>{{detail.detailInfo.overview.title}}</view>
+      <view wx:if='{{showmore}}'>
+        <view wx:for='{{detail.detailInfo.overview.list}}' wx:key="item" class='context'>
+          <view wx:if='{{item.pic}}' class='images'>
+            <image mode='widthFix' lazy-load='true' src='{{item.pic}}' bindtap='ScreenImg' data-imgUrl="{{item.pic}}"></image>
+          </view>
+          <view class='text'>{{item.info}}</view>
+        </view>
+      </view>
+      <view wx:else>
+        <view class='context'>
+          <view class='images' wx:if='{{detail.detailInfo.overview.list[0].pic}}'>
+            <image mode='widthFix' lazy-load='true' src='{{detail.detailInfo.overview.list[0].pic}}' data-imgUrl="{{detail.detailInfo.overview.list[0].pic}}" bindtap='ScreenImg'></image>
+          </view>
+          <view class='text'>{{detail.detailInfo.overview.list[0].info}}</view>
+        </view>
+      </view>
+      <text wx:if='{{detail.detailInfo.overview.list.length > 1}}' class='more' bindtap='checkMore'>{{textofmore}}</text>
+    </view>
+
+    <!-- Section4 购票须知 shopid=1 -->
+    <view class='wrapper-box'>
+      <view wx:if="{{detail.detailInfo.ticketingNotes.list.length > 0}}" class='buy-ticket'>
+        <view class='title'>{{detail.detailInfo.ticketingNotes.title}}</view>
+        <view class='mustNow' wx:for='{{detail.detailInfo.ticketingNotes.list}}' wx:key='{{item}}' wx:if='{{item.list.length > 0}}'>
+          <view class='title-small'>{{item.subtitle}}</view>
+          <view class='textList' wx:for='{{item.list}}' wx:key='itl' wx:for-item='itl'>
+            <text class='disc'>·</text>{{itl}}
+          </view>
+        </view>
+
+        <!--白天和夜晚的地图-----shopid=2 -->
+        <view class='mapType'>
+          <view wx:if="{{detail.detailInfo.dayService}}" class='daytime'>
+            <view class='title-small'>{{detail.detailInfo.dayService.title}}</view>
+            <view wx:if='{{detail.detailInfo.dayService.pic}}' class='mapBanner' bindtap='ScreenImg' data-imgUrl="{{detail.detailInfo.dayService.pic}}">
+              <image mode='widthFix' lazy-load='true' wx:if='{{detail.detailInfo.dayService.pic}}' src='{{detail.detailInfo.dayService.pic}}'></image>
+              <image mode='widthFix' lazy-load='true' wx:else  src='../../images/logo-gray.png'></image>
+            </view>
+            <view wx:else></view>
+          </view>
+          <view wx:if="{{detail.detailInfo.nightService}}" class='nightTime'>
+            <view class='title-small'>{{detail.detailInfo.nightService.title}}</view>
+            <view class='mapBanner' bindtap='ScreenImg' data-imgUrl='{{detail.detailInfo.nightService.pic}}'>
+              <image mode='widthFix' lazy-load='true' wx:if='{{detail.detailInfo.nightService.pic}}' src='{{detail.detailInfo.nightService.pic}}'></image>
+              <image mode='widthFix' lazy-load='true' wx:else  src='../../images/logo-gray.png'></image>
+            </view> 
+          </view>
+          <view wx:else></view>
+        </view>
+
+        <!--关于退改----- shopid=1 -->
+        <view wx:if="{{detail.detailInfo.refund.list.length > 0}}" class='question'>
+          <view class='title-small'>{{detail.detailInfo.refund.title}}</view>
+            <view wx:for="{{detail.detailInfo.refund.list}}" wx:key="item" class='textList'>
+            <text class='disc'>·</text>{{item}}
+          </view>
+        </view>
+      </view>
+      <!-- 常见问题 -->
+      <view class='questions'>
+        <view class='title-small'>常见问题</view>
+        <view>
+          <text class='disc'>·</text>请点击
+          <text class='questions-text' bindtap='understandQuestion'>了解其他常见问题</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Section5 景点附近的体验 shopid=1 -->
+    <view wx:if='{{recommend}}' class='nearExperience'>
+      <view class='title'>附近的体验</view>
+      <view class='wrappers'>
+        <scroll-view class="scroll-box" scroll-x style="width: 100%">
+          <view wx:for="{{recommend}}" wx:key="item" class='box' bindtap='viewdetail' id='{{item.shopId}}'>
+              <view class='banner'>
+                <image mode='widthFix' lazy-load='true' wx:if='{{item.surface}}' src='{{item.surface}}'></image>
+                <view wx:if='{{item.promotionTag.name}}' class='tuijian'>{{item.promotionTag.name}}</view>
+                <view wx:else></view>
+                <view wx:if='{{item.minimumCharge}}' class='price'><text>{{item.minimumCharge}}</text></view>
+              </view>
+              <view class='message'>
+                <view class='tit'>{{item.shopName}}</view>
+                <view class='count'>
+                  <text class='star'>
+                    <text wx:for='{{item.stars}}' wx:key='ns' class='iconfont icon-star'>
+                    </text>
+                    <text wx:if='{{item.half}}' class='iconfont icon-217-star-half'></text>
+                    <text>({{item.score}}分)</text>
+                  </text> | 
+                  <text wx:if="{{item.visitors > 1000000}}">1000000+人参与体验过</text>
+                  <text wx:else>{{item.visitors}}人参与体验过</text>
+                </view>
+                <view class='distance'>
+                    <view class='types'>
+                      <text wx:for="{{item.serviceTagList}}" wx:key="st" wx:for-item="st" class='type'>{{st.name}}</text>
+                    </view>
+                  <text class='iconfont icon-location_fill'></text>
+                  距离您的位置
+                  <text wx:if="{{item.distance >= 1000 && item.distance <= 100000}}" class='meter'>{{item.distance/1000}}km</text>
+                  <text wx:elif="{{item.distance > 100000}}" class='meter'>>100km</text>
+                  <text wx:else class='meter'>{{item.distance}}m</text>
+                </view>
+              </view>
+            </view>
+        </scroll-view>
+      </view>
+    </view>
+    <view wx:else></view>
+  
+    <!-- Section6 底部价格，立即体验 -->
+     <view wx:if="{{detail.bizType == 1 && detail.productId || detail.bizType == 2}}" class="{{showpay?'footer':'hideFooter'}}">
+      <view class='price'>
+        <text>{{detail.minimumCharge}}</text>
+      </view>
+      <view class='explain' bindtap='showCostexplain'>费用说明</view>
+      <view class='button' bindtap='goorder' id="{{detail.shopId}}">立即预订</view>
+    </view>
+  </view>
+
+  <view class="{{showCostExplain?'costExplain':'hideCostExplain'}}" bindtap='hideDialog'>
+    <view class='dialog' catchtap='showDialog'>
+      <view class='content'>
+        <view class='title'>{{detail.costDesc.title}}</view>
+        <view class='timeCondition' wx:for='{{detail.costDesc.list}}' wx:key='{{item}}'>
+          <view class='type'>{{item.subtitle}}</view>
+          <text class='disc'>·</text>
+          <text class='text' wx:for="{{item.list}}" wx:key="ds" wx:for-item="ds">{{ds}};</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{fromshare}}" bindtap='backtoHome' class='backtoHome'>
+  <text>返回</text>
+  <text>首页</text>
+</view>

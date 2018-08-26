@@ -1,0 +1,25 @@
+<view class="container">
+    <view class="classname">
+       <image class="head-image" mode="widthFix" src="{{postList.avatar}}"></image>
+    </view>
+  <text class="title">{{postList.title}}</text>
+  <view class="tool">
+    <view class="circle-img">
+      <image wx:if="{{collected}}" catchtap="onCollectionTap" src=""></image>
+      <image wx:else catchtap="onCollectionTap" src=""></image>
+      <image  class="share-img" catchtap="callPhone" src="http://api.h6vr.com/cdn.h6vr.com/lyty/images/icon/call.png"></image>
+    </view>
+    <view class="horizon"></view>
+  </view>
+  <text class="detail">{{postList.detail}}</text>
+  <text class="detail"><text class="btext">热门国家和地区：</text>{{postList.place}}</text>
+  <text class="detail"><text class="btext">服务范围：</text>{{postList.service}}</text>
+  <text class="detail" catchtap="callTel"><text class="btext">座机：</text>{{postList.tel}}</text>
+  <text class="detail" catchtap="callMb"><text class="btext">手机(微信)：</text>{{postList.mb}}</text>
+  <text class="detail"><text class="btext">QQ：</text>{{postList.qq}}</text>
+  <view class="classname">
+    <image class="tupian" mode="widthFix" src="/images/pngnew.png"></image>
+    <button bindtap="goTo" type="primary" size="mini" style="margin-top:12px;margin-left:1%">返回首页</button>
+  </view>
+   
+</view>

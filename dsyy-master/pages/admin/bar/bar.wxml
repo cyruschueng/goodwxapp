@@ -1,0 +1,65 @@
+<view class="admin-bar-bg padding-top-20">
+  <form bindsubmit="formSubmit" style="height:100%;">
+    <view class="white-bg">
+      <view class="padding-left-30 padding-right-30">
+        <view class="weui-cells_after-title bar-view border-bottom">
+          <view class="weui-cell weui-cell_input padding-0">
+            <view class="weui-cell__hd">
+              <view class="weui-label bar-view-word">图片</view>
+            </view>
+            <view class="weui-cell__bd text-right bar-view-img" catchtap="editImg">
+              <image src="{{barInfo.picture}}" class="bar-view-photo"></image>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells_after-title bar-list border-bottom">
+          <view class="weui-cell weui-cell_input padding-0">
+            <view class="weui-cell__hd">
+              <view class="weui-label bar-list-word">名称</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="name" class="weui-input" placeholder="{{barInfo.name}}" />
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells_after-title bar-list border-bottom" bindtap="chooseLocation">
+          <view class="weui-cell weui-cell_input padding-0">
+            <view class="weui-cell__hd">
+              <view class="weui-label bar-list-word">地址</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+            {{barInfo.address}}
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells_after-title bar-list">
+          <view class="weui-cell weui-cell_input padding-0">
+            <view class="weui-cell__hd">
+              <view class="weui-label bar-list-word">电话</view>
+            </view>
+            <view class="weui-cell__bd text-right">
+              <input name="phonenum" class="weui-input" placeholder="{{barInfo.phonenum}}" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="white-bg bar-intro margin-top-20 padding-right-30 padding-left-30">
+      <view class="bar-intro-title">书吧介绍</view>
+      <view class="bar-intro-content">
+        <textarea name="intro" class="padding-left-10 padding-top-10 padding-bottom-10 padding-right-40" placeholder="{{barInfo.intro==''||barInfo.intro=='undefined'?'在此输入文字':barInfo.intro}}" />
+      </view>
+    </view>
+    <view class="white-bg bar-intro margin-top-20 padding-right-30 padding-left-30">
+      <view class="bar-intro-title">提供服务</view>
+      <view class="bar-intro-content">
+        <textarea name="service" class="padding-left-10 padding-top-10 padding-bottom-10 padding-right-40" placeholder="{{barInfo.service==''||barInfo.service=='undefined'?'在此输入文字':barInfo.service}}" />
+      </view>
+    </view>
+    <button class="bar-button" form-type="submit">提交</button>
+  </form>
+</view>
+<!-- 黑框提示并消失 -->  
+<toast hidden="{{toastHidden}}" bindchange="toastChange">  
+    {{notice_str}}  
+</toast>  

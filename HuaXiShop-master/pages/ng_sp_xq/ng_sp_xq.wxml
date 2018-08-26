@@ -1,0 +1,153 @@
+<!--pages/ng_sp_xq/ng_sp_xq.wxml-->
+<!--商品详情-->
+<view class="container">
+  <!--商品banner-->
+  <view class="bg_img">
+    <!--群主信息  -->
+    <view class="qunzhuIfon">
+      <image class='touxiang' src='{{dl_pic}}' style='opacity: 100%;'></image>
+      <view class='nameview'>
+        <text style='margin-right:14rpx margin-left:14rpx'>{{dl_name}} </text>
+        <text>群主:</text>
+        <text style='margin-left:20rpx'>葡萄籽面膜, 采用德国技术提取葡萄籽精华,经过七七四十九天练治而成.</text>
+      </view>
+    </view>
+    <!--群主信息  -->
+    <swiper class="banner" indicator-dots="true">
+      <!-- <view wx:if="{{VideoUrl}}">
+         <swiper-item>
+          <video objectFit="cover" autoplay="true" controls="{{false}}" src="{{VideoUrl}}" style="width:100%;height:100%" bindended="video_end"></video>
+        </swiper-item> 
+      </view> -->
+      <!-- <block wx:for="{{bannerImg}}" wx:key="{{index}}">  -->
+      <swiper-item>
+        <!-- <image src="../../image/sp.jpeg " /> -->
+
+        <image src='{{imgageDomainUrl}}{{bannerImg}}'></image>
+      </swiper-item>
+      <!-- </block>  -->
+    </swiper>
+
+  </view>
+  <!--商品banner-->
+  <view class="sp_details ">
+
+    <view class="sp_name ">{{sp_xq.ProductName}}</view>
+    <view class="info ">
+      <view class="price ">
+      </view>
+      <view class="xiaoliang ">销量：{{sp_xq.Order_Pay_Count}}件</view>
+    </view>
+    <view class='buyerinfo'>
+      <block wx:for='{{buyerhand}}' wx:for-item="imgsrc ">
+        <!-- <text>{{imgsrc.imgurl}}</text>  -->
+        <!-- <view class="buyerHand "> -->
+        <image src='{{imgsrc.imgurl}}'></image>
+        <!-- </view> -->
+      </block>
+      <view class='qunByIfo'>
+        <view style='  color: red;'>#</view>
+        <open-data style=' color: red;' type="groupName " open-gid="{{openGId}} " />
+        <view style='  color: red;'>群#</view>
+        <view style='color:#909090'>100</view>
+        <view style='color:#909090'>位成员已购买</view>
+      </view>
+    </view>
+
+    <view class="detail_tab ">
+      <view class="sp_js ">商品介绍</view>
+      <view class="sp_pj ">评价(0)</view>
+    </view>
+
+    <view class="js_img ">
+      <!-- <block wx:for="{{details_img}} "> -->
+      <image src="{{imgageDomainUrl}}{{bannerImg}} " mode="widthFix "></image>
+      <image src="{{imgageDomainUrl}}{{bannerImg}} " mode="widthFix "></image>
+
+      <image src="{{imgageDomainUrl}}{{bannerImg}} " mode="widthFix "></image>
+
+      <image src="{{imgageDomainUrl}}{{bannerImg}} " mode="widthFix "></image>
+
+
+      <!-- </block> -->
+
+    </view>
+
+    <view class="pj_tx ">
+      <textarea class="pinglun " />
+      <button>评论</button>
+    </view>
+  </view>
+  <view class="buy ">
+    <navigator url="/pages/index/index" open-type='switchTab'>
+      <view class='home_btn'>
+        <image src='../../image/home.png' mode="widthFix "></image>
+        <view>主页</view>
+      </view>
+    </navigator>
+    <!-- <navigator url="../cart2/cart2 "> -->
+
+    <view class='home_btn' bindtap='onShareAppMessage'>
+      <image class='shareim' src='../../image/share.png' mode="widthFix "></image>
+      <view class='shareText'>分享</view>
+      <button class='shareBtn' open-type='share'>
+      </button>
+    </view>
+    <!-- </navigator> -->
+    <view class="big_but sp_cart " bindtap="addToCart ">￥{{sp_xq.SalePrice}}直接购买</view>
+
+    <view class="big_but sp_buy " bindtap="buy_shop">￥{{sp_xq.NeiGouPrice}}内购价购买</view>
+
+    <!--快捷下单-->
+    <view class='m_mask' wx:if="{{payShop}}"></view>
+    <view class="lj_pay" wx:if="{{payShop}}">
+      <view class="pay_top">
+        <view class="pay_title">快捷下单</view>
+        <view class="pay_close" bindtap="payClose">
+          <image src="../../image/close.png"></image>
+        </view>
+      </view>
+      <!--收货地址-->
+      <view class="pay_address" bindtap="pay_Address">
+        <image src="../../image/yjline.png" class='caidai' mode="widthFix"></image>
+        <view class='address_info'>
+          <view class='icon'>
+            <image src="../../image/lbs.png" mode='widthFix'></image>
+          </view>
+          <view class='ad_tx'>
+            <view class='ad_name'>收货人：{{Name}}</view>
+            <view class='ad_desp'>收货地址：{{Province}}{{City}}{{Area}}{{Address}}</view>
+          </view>
+          <view class='jt'>
+            <image src="../../image/right.png"></image>
+          </view>
+        </view>
+      </view>
+      <!--收货地址-->
+
+      <view class="pay_goods shop_info">
+        <view class="sp_img">
+          <image src="../../image/sp.jpeg" mode="widthFix"></image>
+        </view>
+        <view class="sp_tx">
+          <view class="pay_sp_name">商品名称商品名称商品名称</view>
+          <view class="sp_number">数量：
+            <view class="number_but">
+              <view class="delete" bindtap="minusCount" data-index="{{index}}">-</view>
+              <input type="text" value="1" disabled="disabled" />
+              <view class="add" bindtap="addCount" data-index="{{index}}">+</view>
+            </view>
+            <view class="sp_price">
+              <view class="pay_price">￥{{sp_xq.SalePrice}}</view>
+              <view class="sale_price">￥{{sp_xq.NeiGouPrice}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="pay_but" bindtap="lj_pay">立即支付￥{{sp_xq.NeiGouPrice}}</view>
+    </view>
+    <!--快捷下单-->
+  </view>
+
+</view>

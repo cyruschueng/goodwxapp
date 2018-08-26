@@ -1,0 +1,74 @@
+<form bindsubmit="formSubmit" report-submit='true'>
+  <button formType="submit" class="formIdBtn">
+    <view class="wrap-groups">
+      <view class="groups-header">
+        <view class="pro-img">
+          <image class="address-title" src="{{props.dataDetail.orderItems[0].orderItem.img}}"></image>
+        </view>
+        <view class="pro-r">
+          <view class="pro-title">{{state.proTitle}}</view>
+          <view class="pro-info">{{props.dataDetail.memberLimit}}人团: <text>￥{{props.dataDetail.promotionPrice/100}}/件</text></view>
+          <view class="groups-tag tag-wait" wx:if="{{props.dataDetail.status === 'ACTIVE'}}"></view>
+          <view class="groups-tag tag-succ" wx:if="{{props.dataDetail.status === 'SUCCESS'}}"></view>
+          <view class="groups-tag tag-error" wx:if="{{props.dataDetail.status === 'FAILED'}}"></view>
+        </view>
+      </view>
+      <view class="groups-members">
+        <block wx:if="{{props.dataDetail.status === 'ACTIVE' && (state.timeLimit < 0)}}">
+          <view class="groups-txt">还差<text>{{props.dataTemp.lackMembers}}</text>人成团，呼朋唤友来参团吧！</view>
+          <view class="groups-count">剩余:<text>{{state.dataCountdown.days}}天</text>:<text>{{state.dataCountdown.hours}}</text>:<text>{{state.dataCountdown.minutes}}</text>:<text>{{state.dataCountdown.seconds}}</text>结束</view>
+        </block>
+        <block wx:if="{{props.dataDetail.status === 'SUCCESS' && (state.timeLimit < 0)}}">
+          <view class="groups-txt">该团已满</view>
+        </block>
+        <block wx:if="{{props.dataDetail.status === 'FAILED' && (state.timeLimit > 0)}}">
+          <view class="groups-txt">{{props.dataDetail.endTime}}已结束</view>
+        </block>
+        <view class="groups-user-img">
+          <view class="user-item" wx:for="{{props.dataDetail.usersPaid}}">
+            <view wx:if="{{index < 9}}">
+              <image class="address-title" src="{{item.avatar}}" wx:if="{{item.avatar}}"></image>
+              <text class="iconfont icon-yonghu" wx:if="{{!item.avatar}}"></text>
+              <text class="tag" wx:if="{{item.memberType === 'HEAD'}}">团长</text>
+            </view>
+            <view wx:if="{{props.dataDetail.usersPaid.length >= 10 && index === 9}}">
+              <text class="iconfont icon-more"></text>
+            </view>
+          </view>
+        </view>
+        <view class="groups-user-handle" wx:if="{{props.dataDetail.usersPaid.length > 10}}" bindtap="handleUserList">{{ state.showUserList ? '收起参团详情 ▲' : '查看参团详情 ▼'}}</view>
+        <view class="groups-user-list" wx:if="{{state.showUserList}}">
+          <view class="item" wx:for="{{props.dataDetail.users}}">
+            <image class="img" src="{{item.avatar}}"></image>
+            <text class="name"><text wx:if="{{item.memberType === 'HEAD'}}">【团长】</text>{{item.buyNickName}}</text>
+            <text class="time">{{item.paidAt}}{{item.memberType === 'HEAD' ? '开团' : '参团' }}</text>
+          </view>
+        </view>
+      </view>
+      <view class="groups-rules">
+        <view class="title">拼团玩法</view>
+        <view class="text"> ①开团/参团 > ② 邀请好友> ③ 满人数拼成功> ④ 查看结果 </view>
+      </view>
+      <view class="pros-desc">
+        <text class="product-desc-title">图文详情</text>
+        <view class="product-desc-title-border"></view>
+        <view class="product-desc-notice">
+          <image src="http://img-prod.kkkd.com/FlFzE2uHHcUMDwhtuKJaZ8p_Yf3L"></image>
+        </view>
+        <view class="product-desc-imgs">
+          <block wx:for="{{props.dataDetail.productVO.descElements}}" wx:key="*this">
+            <image class="product-desc-img" wx:if="{{item.type === 'IMAGE'}}" mode="widthFix" src="{{item.content}}"/>
+            <text wx:else="">{{item.content}}</text>
+          </block>
+        </view>
+      </view>
+      <view class="mod-btns btn-col2" wx:if="{{state.btnShow}}">
+        <view class="btn" bindtap="handleLinkMore">查看更多拼团</view>
+        <view class="btn btn-primary" wx:if="{{state.btnStatus !== 'INVITING'}}" bindtap="handleGroup" data-btn-status="{{state.btnStatus}}" data-data-detail="{{props.dataDetail}}">{{state.btnText}}</view>
+        <button class="btn btn-primary" wx:if="{{state.btnStatus === 'INVITING'}}" open-type="share">{{state.btnText}}</button>
+      </view>
+
+      <component key="skuPanel" name="sku-panel"/>
+    </view>
+  </button>
+</form>

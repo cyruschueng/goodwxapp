@@ -1,0 +1,31 @@
+<!--pages/integral/integral-record/index.wxml-->
+
+<view class='goods-item mb10' wx:for='{{data}}' wx:key='{{item.id}}' catchtap='onNavigateTap' data-url='../integral-goods/index?id={{item.goods_id}}'>
+    <view class="goods-info gridXb">
+        <view class="goods-img mr10">
+            <image src="{{item.thumbnail}}" mode="aspectFill"></image>
+        </view>
+        <view class="goods-cont">
+            <view class="goods-name lineText">{{item.title}}</view>
+            <!-- <view class="goods-desc lineText2 f14 grey mt5">{{item.description}}</view> -->
+            <view class='f14 mt10'>
+                <view class="integral-time">兑换截至：{{item.end_time}}</view>
+                <view class="linght mt5">兑换码：{{item.key}}</view>
+                <view class="red mt5" wx:if='{{!item.is_end_time}}'>剩余{{item.surplus_day}}天</view>
+                <view class="grey mt5" wx:else>已截止</view>
+            </view>
+        </view>
+    </view>
+    <view class='tr goods-btn-box'>
+        <button class="goods-btn" catchtap='onCopyTap' data-index='{{index}}'>复制兑换码</button>
+        <button class="goods-btn">兑换说明</button>
+    </view>
+</view>
+
+<view class="no-content tc" wx:if='{{!isLoading && data.length==0}}'>
+    <image class="no-content-img" src='http://www.ixiaochengxu.cc/resource/images/common/no-message.png' mode='widthFix'></image>
+    <view class='f12 grey'>暂无记录</view>
+</view>
+
+<!-- 文字提示 -->
+<view class="font-tips mid" hidden='{{!isShowCopyTips}}'>复制成功</view>

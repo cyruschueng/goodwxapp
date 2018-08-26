@@ -1,0 +1,50 @@
+<!--index.wxml-->
+<view class="eran-container">
+	<view class="eran-info">
+		<view class="eran-info__hd">
+			<view>赚车主</view>
+			<text>{{ userInfo.nickName }}</text>
+		</view>
+		<view class="eran-info__bd">
+			<view>累计赚取10车币</view>
+			<view>
+				<text>相当于0.1%的车款（首付）</text>
+				<image src="../../../assets/images/make.png" style="width: 14px;height: 14px;margin-right: 5px" />
+			</view>
+		</view>
+		<view class="eran-info__avatar">
+			<image class="avatar-image" src="{{ userInfo.avatarUrl }}"></image>
+		</view>
+	</view>
+	<view class="eran-obtain">
+		<view class="eran-obtain__data">
+			<view class="data-info">已赚：{{eranInfo}}</view>
+			<image class="data-image" src="{{ userInfo.avatarUrl }}"></image>
+		</view>
+		<view class="weui-cells weui-cells_after-title">
+	        <view class="weui-cell weui-cell_access">
+	            <view class="weui-cell__bd">沈阳鑫达4s店，旗下有20款车</view>
+	            <view class="weui-cell__ft weui-cell__ft_in-access">
+	                <view>详细信息</view>
+	            </view>
+	        </view>
+	    </view>
+	</view>
+	<view class="eran-form">
+		<button class="weui-btn" type="primary" bindtap="navigateTo" data-id="{{eranInfo}}">马上吆喝</button>
+		<text>单人查看一次最多可获得10车币</text>
+	</view>
+	<view class="eran-raiders">
+		<view class="weui-cells weui-cells_after-title">
+	        <view class="weui-cell weui-cell_access">
+	            <view class="weui-cell__bd">转发到群，赚的更多</view>
+	            <view class="weui-cell__ft weui-cell__ft_in-access">
+	                <view bindtap="navigateTo" data-path="/pages/carcoin/index">查看攻略</view>
+	            </view>
+	        </view>
+	    </view>
+	</view>
+	<view class="eran-list">
+		<view class="eran-list__title">有50人正在帮他赚车，累计赚取2000车币</view>
+	</view>
+</view>

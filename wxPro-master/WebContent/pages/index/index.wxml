@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<import src="/pages/template/blog_list_item.wxml" />
+<import src="/pages/template/post_btn.wxml" />
+<import src="/pages/template/float_comment.wxml" />
+
+<view class="container">
+  <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+    <block wx:for="{{hotBlogs}}" wx:key="*this">
+      <swiper-item catchtap="bindListTap" data-blogid='{{item.blogId}}'>
+        <image src="{{item.imgUrl}}" mode="aspectFill" class="" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="type_box column_center">
+    <view wx:for="{{blogTypes}}" wx:key="*this" class="row_view type_view" data-blogtype='{{item.name}}' catchtap="bindTypeTap">
+      <image src="{{item.img}}" mode="aspectFit" class="type_img" />
+      <text class="type_tab {{blogType==item.name ? 'type_tab_hover' : ''}}">{{item.name}}</text>
+    </view>
+    <view class="row_view type_view" catchtap="bindTypeTap">
+      <image src="/img/types/qita.png" mode="aspectFit" class="type_img" />
+      <text class="type_tab">更多</text>
+    </view>
+  </view>
+
+  <view wx:for="{{blogs}}" wx:key="blogId" class="column_view column_left column_top list_item" data-blogid='{{item.blogId}}' catchtap="bindListTap">
+    <template is="blog_list_item" data="{{item: item, index: index, showUser: true, hidePost: hidePost}}" />
+  </view>
+
+</view>
+
+<template is="post_btn" data="{{hidePost: hidePost}}" />
+<template is="float_comment" data="{{hidePost: hidePost, showComment: showComment, floatCommentContent: floatCommentContent}}" />

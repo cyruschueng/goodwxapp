@@ -1,0 +1,24 @@
+<view class='body'>
+  <view class='topic'>
+    <view class='topic-box'>{{question.title}}</view>
+    <view class="{{timer.num>0 ?'topic-timer':'font'}}">{{timer.num>0 ?timer.num:'时间到'}}</view>
+    <view class='topic-num'>第{{index+1}}题</view>
+    <view class='topic-count'>{{index+1}}/{{listData.length}}</view>
+  </view>
+
+  <view wx:for="{{question.options}}" class="{{item.option_index == onIndex ?onColor:(!timer.num&&item.option_index==question.answers ? 'option-itemRight' : 'option-item') }}" bindtap='selOption' data-index='{{item.option_index}}'>
+    <text>{{letterItems[index]}}、{{item.option_value}}</text>
+    <image class="{{item.option_index == onIndex ?'option-item-checked':'none'}}" src='http://i1.dd-img.com/assets/image/1521082330-b97ed000dc08ec5c-90w-68h.png'></image>
+  </view>
+
+</view>
+
+
+<view class='error' wx:if="{{error}}">
+  <view class='error-box'>
+    <image src='http://i1.dd-img.com/assets/image/1523851288-d65be25e80774dae-280w-280h.jpg'></image>
+    <view>差一点就能分钱了</view>
+    <view>别灰心，再接再厉</view>
+    <button bindtap='defeated'>我知道了</button>
+  </view>
+</view>

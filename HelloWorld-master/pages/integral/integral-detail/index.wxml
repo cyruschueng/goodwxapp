@@ -1,0 +1,14 @@
+<!--pages/integral-detail/index.wxml-->
+<view class="integral-item flex gridXb" wx:for='{{data}}' wx:key='{{item.id}}'>
+    <view class="sub">
+        <view>{{item.remark}}</view>
+        <view class="grey f12">{{item.cTime}}</view>
+    </view>
+    <view class="consume integral-num" wx:if='{{item.type==0}}'>-{{item.score}}</view>
+    <view class="earn integral-num" wx:else>+{{item.score}}</view>
+</view>
+
+<view class="no-content tc" wx:if='{{!isLoading && data.length==0}}'>
+    <image class="no-content-img" src='http://www.ixiaochengxu.cc/resource/images/common/no-order.png' mode='widthFix'></image>
+    <view class='f12 grey'>暂无记录</view>
+</view>

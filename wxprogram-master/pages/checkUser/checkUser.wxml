@@ -1,0 +1,17 @@
+<view wx:if='{{geters.length>0}}' class='edit' bindtap='editUser'>{{editText}}</view>
+<view class='containers'>
+  <view class='user'>
+    <view class='userMessage' wx:for='{{geters}}' wx:key='{{item}}'>
+      <view wx:if='{{edit}}'>
+        <view class='change iconfont icon-icon6' id='{{item.buyerId}}' data-x='{{item.firstName}}' data-m='{{item.lastName}}' data-phone='{{item.mobile}}' data-email='{{item.mail}}' bindtap='modify'></view>
+        <view class='remove' id='{{item.buyerId}}' bindtap='del'>删除</view>
+      </view>
+      <view bindtap='choosegeter' data-info='{{item}}'>
+      <view class='userName'>{{item.firstName}}  {{item.lastName}}</view>
+      <view class='userPhone'>手机号码：{{item.mobile}}</view>
+      <view class='userEmail'>E-mail：{{item.mail}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='add' bindtap='addUser'>添加取票人</view>
+</view>

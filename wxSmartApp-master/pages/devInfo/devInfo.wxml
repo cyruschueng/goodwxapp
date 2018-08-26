@@ -1,0 +1,32 @@
+<!--设备详情页  -->
+<view class="rectangle">
+
+           <view class="device">      
+             <view class='img'>
+               <image src="{{devInfo.imgUrl}}"></image>                           
+             </view>
+           
+              <view class='desc'>
+                <view class="code"> 设备编号：{{devInfo.deviceNo}}</view>
+                <view class="code1">设备名称：{{devInfo.name}}</view> 
+                <view class="code3">设备押金：{{devInfo.shareMoney}}元</view> 
+                <view class="code3">设备价格：{{devInfo.shareMoney}}元</view> 
+                <view class="code4">设备租金：{{rental}}嘀嘀币/{{rentalType}}</view>  
+                <view class="code3">换电费用：{{devInfo.changeDdb}}嘀嘀币/次</view> 
+              </view> 
+            </view>       
+
+</view>
+
+ <view class="use-user">
+  <view class="title">设备使用历史记录</view>
+
+  <view class="img-box">
+    <text wx:if="{{userList.length == 0}}">此前没用用户使用过该设备</text>
+    <view wx:for="{{userList}}" wx:key="index">
+      <image bindtap="goToShareHistory" data-id="{{item.userId}}" mode="widthFix" src="{{item.headImg}}"></image>
+    </view>
+  </view>
+</view> 
+
+

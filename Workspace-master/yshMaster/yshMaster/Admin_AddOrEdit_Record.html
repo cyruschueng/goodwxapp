@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<script src="http://blog.163.com/yhwwen@126/blog/../js/vendor/modernizr-2.6.2.min.js"></script>
+		<link rel="shortcut icon" href="#" type="image/png">
+		<title>新增备案</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
+		<link href="css/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
+		<link href="js/control/css/zyUpload.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+
+		<style>
+			.numberControlBox {
+				display: inline-block;
+				height: 26px;
+				overflow: hidden;
+				vertical-align: middle;
+				margin-left: -26px;
+			}
+			
+			.ncb_up,
+			.ncb_down {
+				font-size: 0px;
+				display: block;
+				height: 10px;
+				background-color: #f4f4f4;
+				background: -moz-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(230, 230, 230) 50%, rgb(255, 255, 255) 100%);
+				width: 24px;
+				border: 1px solid #d1d1d1;
+				cursor: pointer;
+			}
+			
+			.ncb_up {
+				margin-bottom: 1px;
+			}
+			
+			.numberControlBox .ncb_ico {
+				display: block;
+				height: 10px;
+				background-image: url(../img/arrow.png);
+				background-repeat: no-repeat;
+			}
+			
+			.ncb_up .ncb_ico {
+				background-position: -22px center;
+			}
+			
+			.ncb_down .ncb_ico {
+				background-position: 1px center;
+			}
+			
+			.ncb_btn_hover {
+				border: 1px solid #9dc7e7;
+				background-color: #dff2fc;
+				background: -moz-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(210, 237, 250) 50%, rgb(255, 255, 255) 100%);
+			}
+			
+			.ncb_btn_selected {
+				border: 1px solid #6198c2;
+				background-color: #aee1fb;
+				background: -moz-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(174, 225, 251) 50%, rgb(255, 255, 255) 100%);
+			}
+		</style>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+	</head>
+
+	<body class="children-body">
+
+		<!--body wrapper start-->
+		<section class="">
+			<!-- page start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading">
+							<span id="headerTitle">添加备案</span>
+						</header>
+						<div class="panel-body">
+							<div class=" form">
+								<form class="cmxform form-horizontal adminex-form" id="editForm">
+									<input type="hidden" id="Id" name="Id">
+									<div class="form-group " id="divMerchantId">
+										<label for="MerchantId" class="control-label col-lg-2">经营者编码</label>
+										<div class="col-lg-7">
+											<input class=" form-control" id="MerchantId" name="MerchantId" minlength="2" type="text" readonly="readonly" />
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="Market_Id" class="control-label col-lg-2">市场名称</label>
+										<div class="col-lg-7">
+											<select Id="Market_Id" name="Market_Id" class="form-control m-bot15">
+
+											</select>
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="MerchantName" class="control-label col-lg-2">经营者名称</label>
+										<div class="col-lg-7">
+											<input class="form-control " maxlength="50" id="MerchantName" type="text" name="MerchantName" required />
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="Reg_Id" class="control-label col-lg-2">工商注册号/身份证号</label>
+										<div class="col-lg-7">
+											<input class="form-control" id="Reg_Id" type="text" name="Reg_Id" required />
+											<!--onchange="this.value=this.value.replace(/[^0123456789()-ABCDEFGHIJKLMNOPQRSTUVWxXYZ]/g, '')" onkeypress="this.value=this.value.replace(/[^0123456789()-ABCDEFGHIJKLMNOPQRSTUVWxXYZ]/g, '')" -->
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="yyzz" class="control-label col-lg-2">营业执照图片</label>
+										<div class="col-lg-7">
+											<img id="yyzzimg" class="form-control" style="width: 150px;height: 150px; display: none;" />
+											<button id="uploadimg_btn" type="button" class="btn btn-info">上传营业执照</button>
+											<div id="img_ul"></div>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="cname" class="control-label col-lg-2">经营性质</label>
+										<div class="col-lg-7">
+											<select id="PropertyId" name="PropertyId" class="form-control m-bot15">
+
+											</select>
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="Type_Id" class="control-label col-lg-2">经营类型</label>
+										<div class="col-lg-7">
+											<select id="Type_Id" name="Type_Id" class="form-control m-bot15">
+												
+											</select>
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="Legal_Represent" class="control-label col-lg-2">法人代表</label>
+										<div class="col-lg-7">
+											<input class="form-control " maxlength="20" id="Legal_Represent" type="text" name="Legal_Represent" required/>
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="Tel" class="control-label col-lg-2">联系电话</label>
+										<div class="col-lg-7">
+											<input class="form-control " id="Tel" maxlength="20" type="text" name="Tel" required/>
+										</div>
+										<div class="col-lg-1">
+											<span style="color: red;">*</span>
+										</div>
+									</div>
+									<div class="form-group ">
+										<label for="Addr" class="control-label col-lg-2">地址</label>
+										<div class="col-lg-7">
+											<textarea style="resize: none;" id="Addr" name="Addr" maxlength="200" class="wysihtml5 form-control" rows="5" style="resize: none;"></textarea>
+										</div>
+
+									</div>
+									<div class="form-group ">
+										<label for="Remark" class="control-label col-lg-2">备注</label>
+										<div class="col-lg-7">
+											<textarea style="resize: none;" id="Remark" name="Remark" maxlength="500" class="wysihtml5 form-control" rows="6" style="resize: none;"></textarea>
+										</div>
+
+									</div>
+
+									<div class="form-group">
+										<div class="col-lg-offset-2 col-lg-10">
+											<button id="saveBtn" class="btn btn-info" type="button">保存</button>
+											<button id="cancelBtn" class="btn btn-default" type="button" onclick="goback();">取消</button>
+										</div>
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!-- main content end-->
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+		<script src="js/jquery.searchableSelect.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!-- 引用核心层插件 -->
+		<script type="text/javascript" src="js/core/zyFile.js"></script>
+		<!-- 引用控制层插件 -->
+		<script type="text/javascript" src="js/control/js/zyUpload.js"></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<script src="js/control/js/zyUpload.js"></script>
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<script src="js/fill-form.js"></script>
+
+		<script>
+			var id = ysh_GetQueryString("id");
+			var userID = ysh_GetQueryString("userid");
+			var type = '';
+			var marketcode = '';
+			var fileurl = '';
+			if(id == undefined || id == "0") {
+				document.title = '新增备案';
+				$("#headerTitle").text("新增备案");
+				type = "add";
+				$("#divMerchantId").hide();
+				getRecordBasicDatas();
+			} else {
+				document.title = '编辑备案';
+				$("#headerTitle").text("编辑备案");
+				type = "edit";
+				getRecordBasicDatas();
+				getRecordData(id);
+			}
+			//用过Id查询备案数据
+			function getRecordData(id) {
+				getDataList(yshurl + "Admin_GetRecordById", {
+					pId: id
+				}, function(d) {
+					if(d && d.state == 0) {
+						initData(d.many[0][0]);
+						if(d.many[1].length > 0) {
+							$("#yyzzimg").show();
+							$("#yyzzimg").attr('src', imgurl + d.many[1][0].Picurl);
+						}
+					} else {
+						ysh_msg("获取备案数据失败");
+					}
+				});
+			}
+			//获取基础数据
+			function getRecordBasicDatas() {
+				getDataList(yshurl + "Admin_GetRecordBasicDatas", {}, function(d) {
+					if(d && d.state == 0) {
+						var marketnames = getCompleteHtml(d.MarketName.aaData);
+						$("#Market_Id").append(marketnames);
+						var merchantproperty = getCompleteHtml(d.MerchantProperty.aaData);
+						$("#PropertyId").append(merchantproperty);
+						var merchanttype = getCompleteHtml(d.MerchantType.aaData);
+						$("#Type_Id").append(merchanttype);
+					} else {
+						ysh_msg("获取基础数据失败");
+					}
+				});
+			}
+			//生成option元素字符串
+			function getCompleteHtml(data) {
+				var html = "";
+				for(var i = 0; i < data.length; i++) {
+					html += '<option value=' + data[i].value + '>' + data[i].text + '</option>'
+				}
+				return html;
+			}
+			//初始化元素数据
+			function initData(obj) {
+				$("#Id").val(obj.Id);
+				$("#MerchantId").val(obj.MerchantId);
+				$("#Market_Id").val(obj.Market_Id);
+				$("#MerchantName").val(obj.MerchantName);
+				$("#Reg_Id").val(obj.Reg_Id);
+				$("#PropertyId").val(obj.PropertyId);
+				$("#Type_Id").val(obj.Type_Id);
+				$("#Legal_Represent").val(obj.Legal_Represent);
+				$("#Tel").val(obj.Tel);
+				$("#Addr").val(obj.Addr);
+				$("#Remark").val(obj.Remark);
+			}
+			//回退
+			function goback() {
+				window.history.back();
+			}
+			// 选择文件的回调方法
+			onSelect = function(files, allFiles) {
+					//					alert("选中图片了:" + allFiles[0])
+					//					var type = files[0].type;
+					//					if(!/\/(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG|BMP)$/.test(type)){
+					//						ysh_alert("请选择有效的图片文件，包括 gif、jpg、jpeg、png、bmp格式");
+					//						allFiles.splice(allFiles.length - files.length, files.length);
+					//						//ZYFILE.uploadFile.splice(ZYFILE.length - files.length, files.length);
+					//						files.splice(0,files.length);
+					//					}
+					if(ZYFILE.uploadFile.length > 1) {
+						ZYFILE.uploadFile.splice(0, 1);
+					}
+					if(files.length > 0)
+						$(".upload_preview").html('');
+					setIframeHeight()
+				}
+				// 上传文件成功的回调方法
+			onSuccess = function(file, response) {
+					fileurl = JSON.parse(response).aaData[0].fileurl;
+					if(type == "edit") {
+						getDataList(yshurl + 'InsertPicture', {
+							Picurl: fileurl,
+							PicType: 9,
+							OwnId: id
+						}, function(res) {
+							if(res && res.state == 0) {
+								ysh_msg("图片保存成功");
+								$("#yyzzimg").attr('src', imgurl + fileurl);
+								$("#yyzzimg").show();
+							} else {
+								ysh_msg("图片保存成功");
+							}
+						});
+					}
+					setIframeHeight();
+				}
+				//上传文件失败的回调方法
+			onFailure = function(file) {
+					ysh_alert("上传图片失败了:" + file)
+				}
+				//上传文件完成的回调方法
+			onComplete = function(responseInfo) {
+				ysh_msg("图片上传完成");
+			}
+			$(function() {
+				if(type == 'add') {
+					$('select').searchableSelect();
+				} else {
+					$('#Type_Id,#PropertyId').searchableSelect();
+					$("#Market_Id").attr('disabled', 'disabled');
+				}
+				//表单验证
+				$('#editForm').bootstrapValidator({
+						message: 'This value is not valid',
+						feedbackIcons: {
+							valid: 'glyphicon glyphicon-ok',
+							invalid: 'glyphicon glyphicon-remove',
+							validating: 'glyphicon glyphicon-refresh'
+						},
+						submitHandler: function(validator, form, submitButton) {
+							// Do nothing
+						},
+						fields: {
+							MerchantName: {
+								validators: {
+									notEmpty: {
+										message: '经营户名称不能为空'
+									},
+									stringLength: {
+										message: '已达输入上限'
+									}
+								}
+							},
+							Reg_Id: {
+								validators: {
+									notEmpty: {
+										message: '工商注册号不能为空'
+									},
+									stringLength: {
+										message: '已达输入上限'
+									}
+								}
+							},
+							Legal_Represent: {
+								validators: {
+									notEmpty: {
+										message: '法人代表不能为空'
+									},
+									stringLength: {
+										message: '已达输入上限'
+									}
+								}
+							},
+							Tel: {
+								validators: {
+									notEmpty: {
+										message: '联系电话不能为空'
+									},
+//									regexp: {
+////										regexp: /^((\+?86)|(\(\+86\)))?(13[012356789][0-9]{8}|15[012356789][0-9]{8}|18[012356789][0-9]{8}|147[0-9]{8}|170[0-9]{8}|1349[0-9]{7})$|^[0-9]{3}-[0-9]{8}$|^[0-9]{4}-[0-9]{7}$/,
+//										message: "电话号码格式错误,格式如 18000000000、028-12345678、0812-1234567"
+//									},
+									stringLength: {
+										message: '已达输入上限'
+									},
+								}
+							},
+							Addr: {
+								validators: {
+									stringLength: {
+										message: '已达输入上限'
+									}
+								}
+							},
+							Remark: {
+								validators: {
+									stringLength: {
+										message: '已达输入上限'
+									}
+								}
+							}
+						}
+					})
+					// 初始化插件
+				$("#uploadimg_btn").click(function() {
+					$("#img_ul").append('<div id="zyUpload"></div>');
+					$(this).hide();
+					$("#zyUpload").zyUpload({
+						width: "650px", // 宽度
+						height: "350px", // 宽度
+						itemWidth: "120px", // 文件项的宽度
+						itemHeight: "100px", // 文件项的高度
+						url: "http://f.yshfresh.com/upload", // 上传文件的路径
+						multiple: false, // 是否可以多个文件上传
+						dragDrop: true, // 是否可以拖动上传文件
+						del: true, // 是否可以删除文件
+						finishDel: false // 是否在上传文件完成后删除预览
+					});
+					$("#fileImage").attr('accept', "image/*");
+					setIframeHeight();
+				});
+				$("#saveBtn").click(function() {
+						//验证表单
+						$('#editForm').data('bootstrapValidator').validate();
+						if($('#editForm').data('bootstrapValidator').isValid()) {
+							var param = convertParams("editForm");
+							param.pId = param.Id;
+							if(type == "add") {
+								insertData(param);
+							} else {
+								updateData(param);
+							}
+						}
+						setIframeHeight();
+						
+					})
+					/*********  新增、、更新  ***********/
+				function insertData(data) {
+					getDataList(yshurl + 'Admin_GetMerchantCount', {
+						pId: data.Market_Id,
+						Market_Id: data.Market_Id
+					}, function(d) {
+						if(d && d.state == 0 && d.aaData) {
+							var code = d.many[0].code[0].MarketId;
+							var count = d.many[1].count[0].total;
+							count = count.substr(count.length - 4, 4);
+							count = ("000" + (parseInt(count) + 1));
+							count = count.substr(count.length - 4, 4)
+							data.MerchantId = code + count;
+							getDataList(yshurl + "Admin_InsertMerchant", data, function(d) {
+								if(d && d.state == 0) {
+									var insertId = d.aaData.insertId;
+									if(fileurl) {
+										getDataList(yshurl + 'InsertPicture', {
+											Picurl: fileurl,
+											PicType: 9,
+											OwnId: insertId
+										}, function(res) {
+//											console.info(res);
+										});
+									}
+
+									if(id && userID){
+										ysh_confirm("备案还未绑定，是否现在绑定备案？", "确定", "取消", function(ret) {
+											if(ret) {
+												getDataList(yshurl + 'Admin_BindUserAndMerchant', {
+													Merchant_Id: insertId,
+													pId: userID
+												}, function(data){
+													ysh_msg("备案绑定成功");
+													setTimeout(function() {
+														window.location.href = "Admin_CustomerCenter.html"
+													}, 1500);
+												})
+											}else{
+												ysh_msg("备案添加成功");
+												setTimeout(function() {
+													window.location.href = "Admin_CustomerCenter.html"
+												}, 1500);
+											}
+										})
+									}else{
+										ysh_msg("添加成功");
+										setTimeout(function() {
+											window.history.back()
+										}, 1500);
+									}
+								} else {
+									ysh_msg("添加失败");
+								}
+							})
+						} else {
+							ysh_msg("数据错误，添加失败");
+						}
+					});
+				}
+
+
+				function updateData(data) {
+					getDataList(yshurl + "Admin_UpdateMerchant", data, function(d) {
+						if(d && d.state == 0) {
+							ysh_msg("修改成功");
+							setTimeout(function() {
+								window.history.back()
+							}, 1500);
+						} else {
+							ysh_msg("修改失败");
+						}
+					})
+				}
+				setIframeHeight();
+			});
+		</script>
+
+	</body>
+
+</html>

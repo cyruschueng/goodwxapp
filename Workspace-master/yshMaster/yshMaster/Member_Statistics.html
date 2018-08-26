@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>用户中心</title>
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+		<!--common scripts for all pages-->
+		<script src="js/layer.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/ysh_comm.js"></script>
+		<!--adddate-->
+		<script src="js/adddate.js"></script>
+		<script src="js/select2.min.js"></script>
+		
+		<script type="text/javascript">
+			checkPermission();
+		</script>
+	</head>
+
+	<body class="children-body">
+
+		<section>
+			<!--body wrapper start-->
+			<section>
+				<!-- page start-->
+
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								会员统计
+							</header>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form" id="condition">
+									<div class="row clearfix">
+										<div class="col-lg-3">
+											<label class="control-label col-lg-3 col-sm-3">性别:</label>
+											<div class="col-lg-4">
+												<select class="form-control m-bot15 formData" id="sex" onchange="initSearch('#1')">
+															<option value="男">男</option>
+															<option value="女">女</option>
+												</select>
+											</div>
+											<label id="sexPeo" class="control-label col-lg-2 col-sm-2" style="color: red;"></label>
+											<label class="control-label col-lg-1 col-sm-1">人</label>
+										</div>
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label class="control-label col-lg-3 col-sm-3 ">时间：</label>
+												<div class="col-lg-9">
+													<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2015-01-01" class="input-append date dpYears" id="dStartTime">
+														<input type="text" readonly="" size="16" class="form-control" name="StartTime" id="StartTime" value="2014-06-30">
+														<input type="hidden" readonly="" size="16" class="form-control" name="StartTimeHide" id="StartTimeHide" value="2014-06-30">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                        </span>
+													</div>-->
+														<input type="text" size="16" class="form-control" name="StartTime" id="StartTime" value="2014-06-30" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+													
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="control-label col-lg-3 col-sm-3 ">至:</label>
+												<div class="col-lg-7">
+													<!--<div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2018-01-01" class="input-append date dpYears" id="dEndTime">
+														<input type="text" readonly="" size="16" class="form-control" name="EndTime" id="EndTime" value="2020-01-1">
+														<input type="hidden" readonly="" size="16" class="form-control" name="EndTimeHide" id="EndTimeHide" value="2020-01-1">
+														<span class="input-group-btn add-on">
+                                                            <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                         </span>
+													</div>-->
+														<input type="text" size="16" class="form-control" name="EndTime" id="EndTime" value="2020-01-1" onclick="SelectDate(this,'yyyy-MM-dd')"/>
+													
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-1" style="text-align: center;">
+											<button class="btn btn-info" type="button" onclick="initSearch('#1')">搜索</button>
+										</div>
+									</div>
+									<div style="height:10px;background-color: #eff1f5;"></div>
+									<div class="row">
+										<div class="col-lg-3">
+											<label class="control-label col-lg-4 col-sm-4 ">会员:</label>
+											<div class="col-lg-2">
+												<label id="memberNum" class="control-label col-lg-2 col-sm-2 " style="color: red;">0</label>
+											</div>
+											<div class="col-lg-2">
+												<label class="control-label col-lg-2 col-sm-2 ">人</label>
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<label class="control-label col-lg-4 col-sm-4">有订单会员:</label>
+											<div class="col-lg-2">
+												<label id="OrderMemberNum" class="control-label col-lg-2 col-sm-2 " style="color: red;">0</label>
+											</div>
+											<div class="col-lg-2">
+												<label class="control-label col-lg-2 col-sm-2 ">人</label>
+											</div>
+										</div>
+										<div class="col-lg-3">
+											<label class="control-label col-lg-5 col-sm-5">购买率：</label>
+											<div class="col-lg-4">
+												<label id="buyPer" class="control-label col-lg-4 col-sm-4" style="color: red;">0.00</label>
+											</div>
+											<div class="col-lg-2">
+												<label class="control-label col-lg-2 col-sm-2 ">%</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-3">
+											<label class="control-label col-lg-4 col-sm-4 ">复购率:</label>
+											<div class="col-lg-2">
+												<label id="ReBuyPer" class="control-label col-lg-2 col-sm-2 " style="color: red;">0</label>
+											</div>
+											<div class="col-lg-2">
+												<label class="control-label col-lg-2 col-sm-2 ">%</label>
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<label class="control-label col-lg-4 col-sm-4">会员购物数:</label>
+											<div class="col-lg-2">
+												<label id="total4" class="control-label col-lg-2 col-sm-2 " style="color: red;">0</label>
+											</div>
+											<div class="col-lg-2">
+												<label class="control-label col-lg-2 col-sm-2 ">笔</label>
+											</div>
+										</div>
+										<div class="col-lg-3">
+											<label class="control-label col-lg-5 col-sm-5">会员购物额：</label>
+											<div class="col-lg-4">
+												<label id="dump" class="control-label col-lg-4 col-sm-4 " style="color: red;">0</label>
+											</div>
+											<div class="col-lg-2">
+												<label class="control-label col-lg-2 col-sm-2 ">元</label>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</section>
+
+						<section class="panel">
+							<div class="panel-body">
+								<table id='goodstable' class="table table-bordered table-striped table-condensed ysh_table">
+									<thead>
+										<tr>
+											<th data-width="8%" data-field="Code" data-align="center">所属区域</th>
+											<th data-width="8%" data-field="Code" data-align="center">总人数(男、女)</th>
+										</tr>
+									</thead>
+									<tbody id="view">
+
+									</tbody>
+								</table>
+								<div class="row">
+									<div class="col-lg-4">
+										<div style="height: 30px;">总共<span id="pageTotal"></span>页，<span id="itemTotal"></span>条记录，每页显示10条</div>
+									</div>
+									<div class="col-lg-7" style="text-align: right;">
+										<ul class="pagination pagination-lg" id="paginator">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+		</section>
+	</body>
+
+</html>
+<script src="js/layer.js"></script>
+<script src="js/laytpl.js"></script>
+<script src="js/ysh_comm.js"></script>
+<script src="script/Member_Statistics.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('select').select2();
+	})
+</script>
+<script type="text/html" id="tpl">
+	<tr>
+		<td>{{d.areas||"匿名区域"}}</td>
+		<td>{{d.totals||"0000"}}</td>
+	</tr>
+</script>

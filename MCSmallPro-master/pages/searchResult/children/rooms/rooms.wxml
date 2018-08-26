@@ -1,0 +1,34 @@
+<!--pages/searchResult/room/room.wxml-->
+<view class='rooms'>
+  <navigator class='room-item clearfix' wx:key="{{room.id}}" wx:for="{{item.data}}" wx:for-item="room" wx:for-index="roomIndex" url="/pages/live/live?id={{room.id}}">
+    <view class='room-item-left pull-left'>
+      <image class='room-item-avatar' src='{{room.zhuboAvatar}}'></image>
+      <view class='room-item-left-content'>
+        <view class='room-item-left-top'>
+          <text>直播中</text>
+        </view>
+        <view class='room-item-left-bottom'>
+          <view>
+            <image class='icon-people-count' src='http://res.o2o.com.cn:8082/img/14d5c633830f45dea674c16571d5ce32'></image>
+            <text>{{room.onlineCount}}</text>
+          </view>
+          <view>
+            <image class='icon-like' src='http://res.o2o.com.cn:8082/img/f764588d857a43b7be6f9427e76b0d9d'></image>
+            <text>{{room.likeCount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='room-item-right'>
+      <text class='text-black block ellipsis fs15'>{{room.roomTitle}}</text>
+      <text class='text-default block ellipsis mt5'>{{room.zhuboName}}</text>
+      <view class='room-product-images mt20'>
+        <image wx:key="*this" wx:for="{{room.productImages}}" wx:for-item="{{image}}" src='{{image}}'></image>
+        <view wx:if="{{room.productTotalCount>4}}" class='room-product-info'>
+          <view>{{room.productTotalCount}}件</view>
+          <view>直播购</view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+</view>

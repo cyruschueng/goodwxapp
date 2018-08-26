@@ -1,0 +1,35 @@
+<?php
+namespace app\index\controller;
+use think\Controller;
+use think\Session;
+use think\Exception;
+use think\Config;
+use think\Request;
+use think\DefaultRedis;
+class Base extends controller{
+	protected $beforeActionList = [
+	// 'authenticationLogin' => ['except'=>'getAdvertisement'],
+		'authenticationLogin' ,
+	];
+	public $redis;
+	public $access_token;
+	public function __construct(){
+		$this->redis = new DefaultRedis(); 
+		$this->access_token = input('param.access_token');
+	}
+	public function  authenticationLogin()
+	{
+		
+		if(empty($this->access_token)){
+			//用户未登录
+		}
+		$access_token_redis_key = "access_token_" . $this->access_token;
+		if(!$this->redis->existsRedis($access_token_redis_key)){
+			//用户登录过期了
+		}
+		
+		// $action = request()->action();
+		// $noauthentication = config('noauthentication');
+		
+	}
+}

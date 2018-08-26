@@ -1,0 +1,19 @@
+<!--pages/zhuangfa/zhuangfa.wxml-->
+<view class="container" style="height:553.6px;">
+	 <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+    <view class="bg-layout">
+      <view class="name">{{userInfo.nickName}}</view>
+      <view class="text" wx:for="{{niceText}}" data-index='{{index}}' wx:if="{{index == now}}">
+        {{item}}</view>
+      <view class="change-word" bindtap='change'>换一句</view>
+      <button class="share" open-type="share">转发到群</button>
+    </view>
+    <view class="tip-layout">
+      <view class="text1">
+        •转发到微信群,群成员填写生日后,将自动创建一个微信生日群,您将成为群主;
+      </view>
+      <view class="text1">
+        •生日群的成员可以看到彼此的生日,可订阅群成员生日提醒并添加他们的生日。
+      </view>
+    </view>
+</view>

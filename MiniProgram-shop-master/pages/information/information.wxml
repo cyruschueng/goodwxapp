@@ -1,0 +1,13 @@
+<!--pages/information/information.wxml-->
+<view class='container'>
+  <view class='title'>{{list_title}}</view>
+  <view class='info-list'>
+    <view class='info-item' wx:for='{{items}}' wx:key='unique' data-id='{{item.id}}' bindtap='info_details'>
+      <view class='item-content'>
+        <view class='item-title'>{{item.title}}</view>
+        <view class='item-text'>{{item.content}}</view>
+      </view>
+      <image src='{{item.thumb}}'></image>
+    </view>
+  </view>
+</view>

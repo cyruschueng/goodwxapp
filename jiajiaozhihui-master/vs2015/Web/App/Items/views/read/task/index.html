@@ -1,0 +1,80 @@
+﻿<div class="container" ng-controller="taskController">
+    <div class="row">
+        <div class="col-xs-12">
+            <div ng-if="task.id!=0">
+                <div class="weui_panel_hd se_panel_hd">诵读社计划</div>
+                <div class="weui_panel weui_panel_access" style="margin-top: 0">
+                    <div class="weui_panel_bd">
+                        <div  class="weui_media_box weui_media_appmsg" style="padding-left:0; padding-right:0;padding-bottom:30px;">
+                            <div class="weui_media_hd" style="position: relative">
+                                <img class="weui_media_appmsg_thumb" src="http://weixin.jiajiaozhihui.cn/Files/zxs/20160805122939aaef.png" alt="">
+                                <p style="margin-top:15px; position: absolute; bottom: -50px; left: 15px;">
+                                    <span ng-show="task.fileType==0">诵读</span>
+                                    <span ng-show="task.fileType==1">故事</span>
+                                </p>
+                            </div>
+                            <div class="weui_media_bd">
+                                <h4 class="weui_media_title">
+                                    <span>{{task.planName}}</span>
+                                </h4>
+                                <div class="weui_media_desc" style="padding-top:5px; ">
+                                    {{task.intro}}
+                                </div>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)" ng-click="run(task.id,task.fileType)" class="btn btn-success">开始</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_panel_hd se_panel_hd">我的计划</div>
+            <div class="weui_panel weui_panel_access" style="margin-top: 0">
+                <div class="weui_panel_bd">
+                    <div  class="weui_media_box weui_media_appmsg" style="padding-left:0; padding-right:0;padding-bottom:30px;">
+                        <div class="weui_media_hd" style="position: relative">
+                            <img class="weui_media_appmsg_thumb" src="http://weixin.jiajiaozhihui.cn/Files/zxs/20160805122939aaef.png" alt="">
+                            <p style="margin-top:15px; position: absolute; bottom: -50px; left: 15px;">
+                                <span>故事</span>
+                            </p>
+                        </div>
+                        <div class="weui_media_bd">
+                            <h4 class="weui_media_title">
+                                <span>每日故事</span>
+                            </h4>
+                            <div class="weui_media_desc" style="padding-top:5px;">
+                                说说我身边的故事
+                            </div>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)" ng-click="run('0',1)" class="btn btn-success">开始</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_panel weui_panel_access" style="margin-top: 0">
+                <div class="weui_panel_bd">
+                    <div  class="weui_media_box weui_media_appmsg" style="padding-left:0; padding-right:0;padding-bottom:30px;">
+                        <div class="weui_media_hd" style="position: relative">
+                            <img class="weui_media_appmsg_thumb" src="http://weixin.jiajiaozhihui.cn/Files/zxs/20160805122939aaef.png" alt="">
+                            <p style="margin-top:15px; position: absolute; bottom: -50px; left: 15px;">
+                                <span>诵读</span>
+                            </p>
+                        </div>
+                        <div class="weui_media_bd">
+                            <h4 class="weui_media_title">
+                                <span>每日诵读</span>
+                            </h4>
+                            <div class="weui_media_desc" style="padding-top:5px;">
+                                美文诵读
+                            </div>
+                        </div>
+                        <div>
+                            <a class="btn btn-success" href="javascript:void(0)" ng-click="run('0',0)">开始</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

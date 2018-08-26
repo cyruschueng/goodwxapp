@@ -1,0 +1,31 @@
+<import src="../../../wux/rater/rater.wxml"/>
+<!--<view style=""></view>-->
+
+<view class="page">
+  <view class="title">
+    {{item.name}}
+  </view>
+  <view class="start">
+    <template is="rater" data="{{ ...$wux.rater.history }}"/>
+    {{item.readnum}}万人在测
+    <!-- <view class="num">{{item.num}}万人在测</view> -->
+  </view>
+  <view wx:if="{{condition}}" class='padding'>
+    <image class="banner" src="{{item.avatar.url}}" alt="banner"/>
+    <text>{{item.text}}</text>
+    <button class="zan-btn zan-btn--large" bindtap='start'>点击开始</button>
+    <view class="more">
+      <view class="more-title">
+        <view>↓ 更多好玩的测试 ↓</view>
+        <view>[换一组]</view>
+      </view>
+      <view class="more-content">
+        <view wx:key="{{index}}" wx:for="{{list}}" data-url="{{item.url}}" data-id="{{item.id}}">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!condition}}">
+    问题
+  </view>
+
+</view>

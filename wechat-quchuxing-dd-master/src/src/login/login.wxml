@@ -1,0 +1,20 @@
+<view class="header">欢迎回来</view>
+
+<view class="form_login">
+	<view class="section {{ phone_false ? 'border_No' : '' }}">
+	  <input bindinput="inPhone" placeholder="输入手机号" confirm-type="完成" />
+	</view>
+	<view class="section verification_code {{ code_false ? 'border_No' : '' }}">
+	  <input bindinput="inCode" placeholder="输入验证码" confirm-type="完成" />
+		<button bindtap="getCode" disabled="{{disabled}}">{{ countdown }}</button>
+	</view>
+</view>
+
+<view class="submit">
+	<block wx:if="{{ code_type === 'yes' && phone_type === 'yes' }}">
+		<button bindtap="submit_login" class="button_active_over">登录 / 注册</button>
+	</block>
+	<block wx:else>
+		<button class="button_active_none">登录 / 注册</button>
+	</block>
+</view>

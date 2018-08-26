@@ -1,0 +1,61 @@
+<swiper indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" autoplay="true" interval="5000" duration="1000" style="height:500rpx" circular="true">
+    <swiper-item>
+        <image src="{{url+goods.image}}" mode="aspectFill" style="width:100%;height:500rpx"></image>
+    </swiper-item>
+</swiper>
+<view class="panel" style="padding-bottom:20rpx">
+    <view class="font-md bold">{{goods.name}}</view>
+    <view class="font-md panel-between margin-top-sm">
+        <view class="font-danger bold"><text class="font-xl ">￥{{goods.price*goods.discount}}</text> 起</view>
+        <view class="font-sm font-default">制作时间:{{goods.makeday}}天</view>
+        <view class="font-sm font-default">已预订:{{goods.sales}}人</view>
+    </view>
+</view>
+
+<view class="panel margin-top-sm panel-between item-center bottom-line">
+    <view class="font-md">购买数量</view>
+    <view class="panel-end item-center">
+        <image src="/img/min.png" class="icon-xl" bindtap="remin"></image>
+        <view class="font-lg margin-left-sm margin-right-sm">{{count}}</view>
+        <image src="/img/add.png" class="icon-xl" bindtap="readd"></image>
+    </view>
+</view>
+<view class="panel panel-between item-center bottom-line" bindtap='close'>
+    <view class="font-md">请选择 <text wx:for="{{goods.attribute}}">{{item.title}}/</text></view>
+    <view class="panel-end item-center">
+        <image src="/img/right.png" class="icon-xl" bindtap="remin"></image>
+    </view>
+</view>
+
+<view class='' style="width:{{innerWidth}}px; height:{{innerHeight}}px; position:fixed;top:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;flex-wrap: wrap;border-radius:10px;{{showDialog ? '':'display:none'}}">
+    <view style="width:90%;margin:auto;background:#fff; ">
+        <view style='padding:20rpx;background:#fff'>
+            <block wx:for="{{goods.attribute}}" wx:for-item="it" wx:for-index="in">
+                <view class='font-md'>{{it.title}}</view>
+                <view style='display:flex;align-items:flex-start;flex-wrap: wrap;'>
+                  <view wx:for="{{it.content}}" wx:for-item="li"  wx:for-index="dex" style='padding:0 30rpx;line-height:80rpx;background:#{{li.active ? "00a2d3":"d1d1d1"}};margin-right:20rpx;margin-top:20rpx;border-radius:10rpx;color:#{{li.active ? "ffffff":""}}' class='font-md' data-in='{{in}}' data-dex='{{dex}}' bindtap='chooseIt' >{{li.label}}</view>
+                </view>
+            </block>
+        </view>
+        <view class='panel-center' style='width:100%;background:#fff;line-height:90rpx;margin:auto;'>
+            <view style="width:49%;text-align:center;border-right:1px solid #e1e1e1" bindtap='close' class='font-md'>取消</view>
+            <view style="width:49%;text-align:center;color:#00a2d3" bindtap='close' class='font-md'>确定</view>
+        </view>
+    </view>
+</view>
+
+
+
+
+<view class="payforfix panel-between margin-top-sm">
+    <view class="font-lg margin-left-md" style="line-height:100rpx;">总价: <text class="font-lg font-danger bold">￥{{goods.totalPrice}}</text></view>
+    <view class="paybtn bg-inbox" bindtap="navToPayfor">立即购买</view>
+</view>
+
+<view style='width:100%'>
+    <view class='panel'>
+        <import src="../../wxParse/wxParse.wxml" />
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+
+</view>

@@ -1,0 +1,34 @@
+<view>
+    <view class="history_top">
+        <view class="cover">
+            <view class="cover_bar"></view>
+        </view>
+        <view class="history_header">
+            <view class="history_box" animation="{{animationData}}">
+                <view class="history_item" wx:for="{{list}}" bindtap="goGroup" id="{{item.pkId}}">
+                    <view class="item_img" wx:if="{{item.shareType==1}}">
+                        <image src="{{item .targetFaceUrl}}"></image>
+                    </view>
+                    <view wx:if="{{item.shareType==2}}" class="groupImg imgG{{item.faceList.length>9?'9':item.faceList.length}}" >
+                        <image src="{{item}}" wx:for="{{item.faceList}}"></image>
+                    </view>
+
+                    <view class="item_name">
+                        <block wx:if="{{item.shareType==2}}">
+                            <open-data type="groupName" open-gid="{{item.openGId}}"></open-data>
+                        </block>
+                        <block wx:if="{{item.shareType==1}}">
+                            {{item.targetNickName}}                 
+                        </block>
+                    </view>
+                    <view class="item_right">第{{item.rank}}名</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<view class="crile"></view>
+
+<view class="crile2"></view>

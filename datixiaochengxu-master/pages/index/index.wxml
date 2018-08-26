@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class="container">
+	<view class="title">知识冲冲冲</view>
+	<view class="explain">答对10道题,可获得奖金</view>
+
+	<view class="userinfo">
+		<image bindtap="bindViewTap" class="userinfo-avatar" src="../../images/avatar.jpeg" background-size="cover"></image>
+	</view>
+	<view class="menu">
+		<view class="btn btn0" wx:if="{{challengeNumber}}" bindtap="toDaTi">开始答题</view>
+		<view class="btn btn1">分享群，挑战次+1</view>
+		<block wx:if="{{!challengeNumber}}">
+			<view class="btn btn2">重新挑战</view>
+			<view class="btn btn3" bindtap="toGuanMing">我来出题</view>
+		</block>
+		<view class="btn btn4" bindtap="toGuangChang">竞猜大厅</view>
+		<view class="tips">每道题答题时间10秒，剩余挑战次数:0</view>
+	</view>
+	<ul class="user-list">
+		<li class="user-item"  wx:for="{{[1,2,3,4,5,6,7,8,9]}}">
+			<view class="img-container">
+				<image class="user-avatar" src="../../images/avatar.jpeg"></image>
+			</view>
+			<view class="info-container">
+				<view class="niki-name">张三</view>
+				<view class="info-box">
+					<view class="info">挑战<view style="color: #ff5d47; display:inline" >19</view>次，用<view style="color: #ff5d47; display:inline" >123</view>秒，答对<view style="color: #ff5d47; display:inline" >123</view>题</view>
+					<view class="money">抢到123元</view>
+				</view>
+			</view>
+		</li>
+	</ul>
+</view>

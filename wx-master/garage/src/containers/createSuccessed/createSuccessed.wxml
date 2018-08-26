@@ -1,0 +1,42 @@
+<view class="container fullPage">
+	<view class="topNav">
+		<view class="topNav_item"><text class="on">接车</text></view>
+		<view class="topNav_item"><text class="on">扫码</text></view>
+		<view class="topNav_item"><text class="on">检车</text></view>
+		<view class="topNav_item"><text class="on">报价</text></view>
+		<view class="topNav_item"><text class="on">完成</text></view>
+	</view>
+
+	<view class="code mt20">
+		<image src="../../../images/success_decorate.png" ></image>
+		<view class="t2">已发送微信通知，等待客户同意...</view>
+	</view>
+
+  <view class="outer_label">你还可以</view>
+	<view class="section">
+       <view class="tr space-between" bindtap="_callingPhone" wx:if="{{orderDetail.contactMobile}}">
+			    <view class="hc"><image class="iconLeft" src="../../../images/phone_icon.png"></image><text>拨打客户电话</text></view>
+					<view class="hc"><text>{{orderDetail.contactMobile}}</text><image class="iconRight" src="../../../images/arrow-down.png"></image></view>
+			 </view>
+			 <view class="tr space-between" bindtap="actionSheetChange">
+			    <view class="hc"><image class="iconLeft" src="../../../images/wx_icon.png"></image><text>微信发给客户</text></view>
+			    <view class="hc"><image class="iconRight" src="../../../images/arrow-down.png"></image></view>
+			 </view>
+	</view>
+	<view class="btn_group space-between">
+
+		<view class="btn btn_send" bindtap="toHome">回到首页</view>
+		<view class="btn btn_examine" bindtap="goOrderList">查看订单详情</view>
+	</view>
+	<!--
+	<action-sheet hidden="{{actionSheetHidden}}" bindtap="actionSheetTap">
+  		<view style="text-align: center;font-size: 34rpx;line-height: 68rpx;color: #368fdb;">请选择</view>
+		  <button class="sendWx" bindtap="actionSheetChange">微信发给客户</button>
+		  <button class="sendMsg" bindtap="sendMsg">发送短信给客户</button>
+	    <block wx:for-items="{{actionSheetItems}}">
+		    	<action-sheet-item class="item" bindtap="bind{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+		   </block>
+		<action-sheet-cancel class="cancel" bindtap="actionSheetTap">取消</action-sheet-cancel>
+	</action-sheet>
+	-->
+</view>

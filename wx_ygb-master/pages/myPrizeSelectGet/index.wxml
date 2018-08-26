@@ -1,0 +1,37 @@
+<view class="get-header" wx:if="{{getType == 3}}">
+    <view class="header-item left-item {{ isHideSmzq ? '' : 'current-item'  }}" bindtap="selectSmzq">上门自取</view>
+    <view class="header-item right-item {{ isHideKdwl ? '' : 'current-item'  }}" bindtap="selectKdwl">快递物流</view>
+</view>
+
+<view class="get-content">
+    <!-- 上门自取2  -->
+    <view class="get-input" hidden="{{isHideSmzq}}">
+        <view class="input-box">
+            <view class="font">姓名</view>
+            <input placeholder-style="color:#999;" class="input" placeholder="2到12个字符" bindinput="getNameValue"></input>
+        </view>
+        <view class="input-box">
+            <view class="font">手机</view>
+            <input placeholder-style="color:#999;" class="input" placeholder="11位手机号" type="number" bindinput="getPhoneValue"></input>
+        </view>
+    </view>
+    <button class="get-btn" hidden="{{isHideSmzq}}" bindtap="submitSmzq">提交</button>
+    <!-- 选择快递物流1  -->
+    <view class="get-select" hidden="{{!isHideAddress || isHideKdwl}}" bindtap="getAddress">
+        添加收货地址
+    </view>
+    <!-- 快递物流地址  -->
+    <view class="get-list" hidden="{{ isHideAddress }}" bindtap="getAddress">
+        <view class="list-item" style="height:auto">
+            <view class="item-top">{{userName}} {{telNumbel}}</view>
+            <view class="item-address">{{ address }}</view>
+        </view>
+    </view>
+    <view class="get-msg" hidden="{{isHideSmzq}}">
+        <view class="msg-p">领奖地址：{{oAddress}}</view>
+        <view class="msg-p">领奖电话：{{oPhone}}</view>
+    </view>
+</view>
+<button class="get-btn" hidden="{{isHideKdwl}}" bindtap="submitKdwl">提交</button>
+
+<c-msg cmsg-is-show="{{!cmsgIsShow}}" cmsg-value="{{cmsgValue}}"></c-msg>

@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<import src="../../../../wxParse/wxParse.wxml"/> 
+<view class="title">
+      <text>{{title}}</text>
+    </view>
+    <view class="info">
+      <text wx:if="{{time}}">发布时间：{{time}}</text>
+      <text>{{"--校园头条"}}</text>
+    </view>
+    <view class="content">
+      <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+    </view>
+
+
+
+

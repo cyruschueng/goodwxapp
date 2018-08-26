@@ -1,0 +1,16 @@
+<!--pages/integral/integral-info/index.wxml-->
+
+<view class='integral-info'>
+    <!-- <view class='integral-item'>
+          <rich-text nodes='{{integral_rule}}'></rich-text>   
+    </view> -->
+    <view class="wxParse">
+        <import src="../../../wxParse/wxParse.wxml"/>
+        <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+    </view>
+</view>
+
+<view class="no-content tc" wx:if='{{integral_rule==0}}'>
+    <image class="no-content-img" src='http://www.ixiaochengxu.cc/resource/images/common/no-message.png' mode='widthFix'></image>
+    <view class='f12 grey'>暂无记录</view>
+</view>

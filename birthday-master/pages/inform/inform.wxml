@@ -1,0 +1,47 @@
+<!--pages/inform/inform.wxml-->
+<view class="container">
+    <view class="label">
+      <view class="banner" style="background:url('{{history1.picture}}');background-size:100%">
+          <view class="music">
+            <image src="{{history1.picture}}" style="transition: transform 1000ms linear 0ms; transform: rotate(71640deg); transform-origin: 50% 50% 0px;">
+            </image>
+            <view class="pf-l">{{history1.title}}</view>
+          </view>
+        <audio loop="" class="music" id="myAudio" src="{{history1.music}}"
+        style="display:none" action="null"></audio>
+      </view>
+      <view><text>-{{history.lunar}} -</text></view>
+      <view class="birth">	{{item.times}}</view>
+      <view class="word-1 pf-l">{{history1.title}}</view>
+      <view class="summary pf-l">	{{history1.conetent}}</view>
+      <!--操作  -->
+      <!-- <view class="btnbox">
+        <image class="think-icon" src="../images/pencil.png"></image>
+        <view data-type="label" class="think-num" data-id="60">	感悟（0）</view>
+        <image data-type="label" class="share-icon" src="../images/share_black1.png"></image>
+      </view> -->
+    </view>
+    <view class='list' wx:for="{{history2}}" wx:index="{{index}}">
+        <view class="line"></view>
+        <view class="person">
+          <view class="person-header">
+            0{{index+1}}/<image src="{{item.picture}}"></image>
+          </view>
+          <view class="year">	{{item.times}}</view>
+          <view class="tag">{{item.desc}}</view>
+          <text class="desc pf-l">{{item.conetent}}</text>
+          <!--操作  -->
+          <!-- <view class="btnbox-detail">
+            <image class="think-icon" src="../images/pencil.png"></image>
+            <view class="think-num" data-id="120" data-type="story">	感悟（0）</view>
+            <image class="share-icon" src="../images/share_black1.png" data-type="story"
+            data-index="0"></image>
+          </view>-->
+        </view> 
+    </view>
+    <view class="line"></view>
+    <view class="page">
+        <view class="before" bindtap='inforBefore'>前一天</view>
+        <view class="after" bindtap='inforAfter' wx:if="{{before==true}}">后一天</view>
+    </view>
+</view>

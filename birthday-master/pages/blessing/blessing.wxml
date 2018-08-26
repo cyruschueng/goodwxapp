@@ -1,0 +1,130 @@
+<div style="height: 100%;">
+	<view class="top-part clearfix">
+		<image class="sx-photo" src="{{informAll.friend_info.avatar}}"></image>
+		<view class="sx-guajian"></view>
+		<view class="bir-line">	{{informAll.friend_info.birthday}} | {{informAll.friend_info.star}}
+			<text>| ♀</text>
+		</view>
+		<view class="sx-name sx-name-f ellipsis">{{name}}	</view>
+		<view class="operation clearfix">
+			<view class="fhb common">
+				<view class="top">
+					<view class="icon"></view>{{informAll.total_red_friend_count}}个好友红包
+				</view>
+				<view class="count">{{informAll.total_red_money}}</view>
+				<view class="btn" bindtap='sendBtn'>发红包</view>
+			</view>
+			<view class="dz common">
+				<view class="top">
+					<view class="icon"></view>{{informAll.total_friend_count}}个好友祝福
+				</view>
+				<view class="count" wx:if="{{total_wish_count==null}}">0</view>
+        <view class="count" wx:else>{{total_wish_count}}</view>
+				<view class="btn" bindtap='zan'>点赞</view>
+			</view>
+		</view>
+		<view class="my-info">
+			<image src="{{userInfo.avatarUrl}}"></image>
+			您为她发了{{informAll.my_red_money}}元红包，点了{{informAll.my_wish_count}}个赞
+		</view>
+	</view>
+	<view class="bottom-part clearfix">
+		<view class="care-title">	最关心她的人</view>
+		<view class="first-ul">
+			<view class="first-item" data-mid="{{informAll.most_care.first_share.mid}}">
+        <image wx:if="{{!informAll.most_care.most_red.avatar}}" src="../images/nullheadphoto.png"></image>
+				<image wx:else src="{{informAll.most_care.first_share.avatar}}"></image>
+				<view class="mark markFx"></view>
+				<view class="first-name ellipsis"></view>
+			</view>
+			<view class="first-item" data-mid="{{informAll.most_care.first_red.mid}}">
+        <image wx:if="{{!informAll.most_care.most_red.avatar}}" src="../images/nullheadphoto.png"></image>
+				<image wx:else src="{{informAll.most_care.first_red.avatar}}"></image>
+				<view class="mark markHb"></view>
+				<view class="first-name ellipsis">	</view>
+			</view>
+			<view class="first-item" data-mid="{{informAll.most_care.frist_wish.mid}}">
+        <image wx:if="{{!informAll.most_care.most_red.avatar}}" src="../images/nullheadphoto.png"></image>
+				<image wx:else src="{{informAll.most_care.frist_wish.avatar}}"></image>
+				<view class="mark markDz"></view>
+				<view class="first-name ellipsis"></view>
+			</view>
+		</view>
+		<view class="first-ul second-line" data-mid="{{informAll.most_care.most_share.mid}}">
+			<view class="first-item">
+        <image wx:if="{{!informAll.most_care.most_red.avatar}}" src="../images/nullheadphoto.png"></image>
+				<image wx:else src="{{informAll.most_care.most_share.avatar}}">	</image>
+				<view class="mark markFx"></view>
+				<view class="first-name ellipsis"></view>
+			</view>
+			<view class="first-item" data-mid="{{informAll.most_care.most_red.mid}}">
+        <image wx:if="{{!informAll.most_care.most_red.avatar}}" src="../images/nullheadphoto.png"></image>
+				<image wx:else src="{{informAll.most_care.most_red.avatar}}"></image>
+        <view class="mark markHb"></view>
+				<view class="first-name ellipsis"></view>
+			</view>
+			<view class="first-item" data-mid="{{informAll.most_care.most_wish.mid}}">
+        <image wx:if="{{!informAll.most_care.most_red.avatar}}" src="../images/nullheadphoto.png"></image>
+				<image wx:else src="{{informAll.most_care.most_wish.avatar}}"></image>
+				<view class="mark markDz"></view>
+				<view class="first-name ellipsis"></view>
+			</view>
+		</view>
+		<button open-type="share" class="express-thanks">	分享给朋友</button>
+		<view class="order-btns">
+			<view bindtap='tabnav' class="{{show=='red'?'active':''}}" data-show="red">点赞排行</view>
+			<view bindtap='tabnav' class="{{show=='wish'?'active':''}}" data-show="wish">红包排行</view>
+		</view>
+		<view class="order-list dz-order red" wx:if="{{show=='red'}}">
+      <view class='noData' wx:if="{{informAll.rank_list.red.length==0}}">暂时没有点赞数据</view>
+			<view wx:elseif="{{informAll.rank_list.red.lengthg>0}}" class="order-item" 
+            wx:for="{{informAll.rank_list.red}}">
+				<view class="left">{{index+1}}</view>
+				<view class="center">
+					<image src="{{item.avatar}}" class="center"></image>
+					<view class="crown"> </view>
+				</view>
+				<view class="right">
+					<view class="name ellipsis">{{item.name}}</view>
+					<view class="desc ellipsis">点了{{item.wish_count}}个赞，发了{{item.red_money}}元红包</view>
+				</view>
+			</view>
+		</view>
+    <view class="order-list dz-order wish" wx:if="{{show=='wish'}}">
+      <view class='noData' wx:if="{{informAll.rank_list.wish.length==0}}">暂时没有点红包</view>
+			<view wx:elseif="{{informAll.rank_list.wish.lengthg>0}}" class="order-item" 
+            wx:for="{{informAll.rank_list.wish}}">
+				<view class="left">{{index+1}}</view>
+				<view class="center">
+					<image src="{{item.avatar}}" class="center"></image>
+					<view class="crown"> </view>
+				</view>
+				<view class="right">
+					<view class="name ellipsis">{{item.name}}</view>
+					<view class="desc ellipsis">点了{{item.wish_count}}个赞，发了{{item.red_money}}元红包</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</div>
+<!--弹窗  -->
+<view class="xuanjine-bg" wx:if="{{pay==true}}">
+	<view class="XJ">
+		<view class="close-btn" bindtap='close'></view>
+		<view class="inputjine clearfix">
+			<view class="input-wrap">
+				<input bindinput="nowhongbaovalue" focus="" id="jine" name="jine" placeholder="红包金额"
+				placeholder-style="font-size:23px;color:#FFD7D7;" type="digit" value="{{money}}" />
+			</view>
+			<view class="unit">	元</view>
+		</view>
+		<view class="jine-btns"> 
+			<view class="jine-item {{index == now ?'active':''}}" bindtap='change' 
+            wx:for='{{moneyList}}' data-value="{{item.num}}" data-now="{{index}}">
+				<view class="line1">{{item.num}}元</view>
+				<view class="line2">生日快乐</view>
+			</view>
+		</view>
+		<view class="sublit-btn" bindtap='sendRed'>塞钱进红包</view>
+	</view>
+</view>

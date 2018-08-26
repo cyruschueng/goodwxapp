@@ -1,0 +1,29 @@
+<import src="/zanui/toast/index.wxml" />
+<!--index.wxml-->
+<view class="container page__bd" >
+  <view class="weui-cells__title"></view>
+  <form bindsubmit="formSubmit" id="formSubmit">
+      <view class="weui-cells__title"> </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view style="padding: 0 15px;">
+          <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{detail.likes}}" wx:key="{{item}}">
+                  <view class="weui-uploader__file" bindtap="deleteImage" id="{{item}}" style="margin: 6px 6px 6px 0;">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" style="width: 40px;height: 40px;" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box" style="width: 40px;height: 40px;margin: 6px 6px 6px 0;">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+          </view>
+          </view>
+        </view>
+      </view>
+
+    <button formType="submit" disabled="{{disabled}}" class="weui-btn" style="width: 80%;" type="primary">保存</button>
+  </form>
+</view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

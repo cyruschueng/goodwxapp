@@ -1,0 +1,18 @@
+<view class="container">
+  <image class="head-image" src="{{postData.avatar}}"></image>
+  
+  
+  <text class="title">{{postData.title}}</text>
+  <view class="tool">
+    <view class="circle-img">
+      <image wx:if="{{collected}}" catchtap="onCollectionTap" src=""></image>
+      <image wx:else catchtap="onCollectionTap" src=""></image>
+      <image  class="share-img" src="http://api.h6vr.com/cdn.h6vr.com/chwl/images/icon/collection.png"></image>
+    </view>
+    <view class="horizon"></view>
+  </view>
+  <text class="detail">{{postData.detail}}</text>
+  <text class="detail"><text class="btext">最佳观赏时间：</text>{{postData.besttime}}</text>
+  <text class="detail"><text class="btext">地址：</text>{{postData.place}}</text>
+  <text class="detail"><text class="btext">乘车路线：</text>{{postData.roadmap}}</text>
+</view>

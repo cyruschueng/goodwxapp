@@ -1,0 +1,131 @@
+<view class="submit">
+
+
+  <navigator wx:if="{{!addressId}}" url='./addAdd/index'  >
+
+    <view class='add'>
+
+      <view class='top'>
+        <text class='t1'>您还没有收获地址！</text>
+        <text class='t2'>去添加</text>
+      </view>
+    </view>
+
+  </navigator>
+
+  <navigator wx:if="{{addressId}}" url='./addList/index?active= {{addList.id}}'>
+
+    <view class='add'>
+
+      <image mode="scaleToFill" src="https://lingju360.natappvip.cc/miniapp/resources/image/add/a.png"></image>
+
+      <view class='top'>
+        <text class='t1'>收货人：{{addList.name}}</text>
+        <text class='t2'>{{addList.phone}}</text>
+      </view>
+      <view class='more'>
+        <text class='t1'>收货地址：</text>
+        <text class='t2'>{{addList.province}} {{addList.city}} {{addList.area}} {{addList.address}}</text>
+      </view>
+    </view>
+
+  </navigator>
+
+  <view class='timer block'>
+
+    <view class='li'>
+      <text>送达时间：</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker p3">
+          {{array[index]}}
+        </view>
+      </picker>
+    </view>
+
+    <view class='li'>
+      <input class="i1" placeholder="备注信息" bindinput="bindremark" value="{{remark}}" />
+    </view>
+
+  </view>
+
+  <view wx:if="{{0}}" class='timer block'>
+
+    <view class='li'>
+      <text>支付方式：</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array2}}">
+        <view class="picker p3">
+          {{array2[index]}}
+        </view>
+      </picker>
+    </view>
+
+    <view class='li'>
+      <text>选择优惠券：</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array3}}">
+        <view class="picker p3">
+          {{array3[index]}}
+        </view>
+      </picker>
+    </view>
+
+
+
+  </view>
+
+
+
+  <view class="title">{{storeNane}}</view>
+
+
+  <view class="list-food">
+    <view class="food_li" wx:key="{{item.id}}" wx:for-items="{{buymenu}}" wx:if="{{item.num}}">
+      <text class="t1 f_l">{{item.menuName}}{{item.name}}</text>
+      <text class="t2 ">{{item.num}}份</text>
+      <text class="t3 f_r">¥{{item.price}}</text>
+    </view>
+
+  </view>
+
+
+  <view class="pay-money-box">
+    <text class="t1 f_1">支付金额</text>
+    <text class="t2">(数量{{num}})</text>
+    <text class="t3 f_r">¥{{price}}</text>
+  </view>
+
+  <view wx:if="{{0}}" class="table">
+
+    <view class="hander li">
+      <text>消费内容</text>
+      <text>单价</text>
+      <text>总价</text>
+      <text>数量</text>
+    </view>
+
+    <view class="body li" wx:key="{{item.id}}" data-id="{{item.id}}" wx:for-items="{{moreData}}">
+      <text>{{item.name}}</text>
+      <text>¥ {{item.price}}</text>
+      <text>¥ {{item.totalPrice}}</text>
+      <view>
+        <image class="jia" data-id="{{item.id}}" catchtap="del" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jia.png"></image>
+        <text>{{item.num}}</text>
+        <image class="jia" data-id="{{item.id}}" catchtap="add" src="https://lingju360.natappvip.cc/miniapp/resources/image/new/jian.png"></image>
+      </view>
+    </view>
+
+
+    <view class="foot">
+      金额
+      <text>¥ {{sumprice}}</text>
+    </view>
+
+  </view>
+
+
+</view>
+
+<view class="footer">
+  <view class="num">实付:</view>
+  <view class="rmb">¥{{all}}</view>
+  <view class="sub" catchtap="sub">提交订单</view>
+</view>

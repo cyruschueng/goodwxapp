@@ -1,0 +1,155 @@
+
+	<view class="">
+		<view class="popup theme-switch-float" wx:if="{{popup1}}">
+			<view class="box">
+				<view class="rank border-line-top border-line-bottom">
+					<view class="rank-title btn-null">
+						<text class="text">切换排行榜
+						</text>
+						<text class="iconfont icon-close" bindtap='closenewFriend'></text>
+					</view>
+				</view>
+				<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+					<view class="scroll-view">
+						<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+							<view style="height: 100%;">
+								<view class="rank-list" wx:for="{{listQue}}" bindtap='newfriends'>
+									<view class="item border-line-bottom" data-friend_content="{{item.title}}"
+									data-id="{{item.g_id}}">
+										<view class="item-title">
+											{{item.title}}
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		<view class="popup theme-switch-float" wx:if="{{popup2}}">
+			<view class="box">
+				<view class="rank border-line-top border-line-bottom">
+					<view class="rank-title btn-null">
+						<text class="text">
+							<text>
+                Ta猜中的答案
+							</text>
+						</text>
+						<text class="iconfont icon-close" bindtap='closeonlyFriend'></text>
+					</view>
+				</view>
+				<scroll-view class="scroll-view" scroll-y="" style="height: 83%;">
+					<view class="scroll-view">
+						<view style="overflow-x: hidden; overflow-y: auto;" class="scroll-view">
+							<view style="height: 100%;">
+                
+                <!--答对  -->
+                <view class="option-list" wx:if="{{friendsAsk}}">
+                    <view class='queList' wx:for="{{friendsAsk}}">
+                        <view class='spaces'>{{item.chosen.choice_title}}</view>
+                        <view class='nowraps'>{{item.quesiton.title}}</view>
+                        <view class='groups'>
+                            <image wx:if="{{item.chosen.item.image}}" src="{{item.chosen.item.image}}" mode="widthFix"></image> 
+                            <image wx:else src="https://qncdn.playonwechat.com/nice/users.png" mode="widthFix"></image> 
+                            <image src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
+                        </view>
+                    </view>
+                </view>
+                <!--没有答对  -->
+								 <view class="option-list" wx:else>
+                    <view class="item-null">
+                        <view class=''>
+                          一题都没猜对也是一种技术
+                        </view>
+                    </view>
+								</view>  
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		<view class="dialog">
+			<view class="dialog-inner">
+				<view class="dialog-body center">
+					<view class="dlapp-inner">
+						<image class="fadeIn animated img" src="../image/zan.png"></image>
+						<view class="title">
+							<view>
+								下载朋友印象APP
+							</view>
+							<view>
+								并绑定微信后解锁
+							</view>
+						</view>
+					</view>
+					<view class="dlapp-tips">
+						查看全部好友猜中了哪些
+					</view>
+				</view>
+				<view class="dialog-footer">
+					<view class="dialog-btn green">
+						知道了
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="home">
+			<view class="header border-line-bottom">
+				<view class="logo">
+					 <text class='color'>印</text>朋友印象
+				</view>
+				<view class="header-avatar">
+					<image class="fadeIn animated" mode="widthFix" src="{{userInfo.avatarUrl}}"></image>
+				</view>
+				<view class="theme-list" wx:for="{{listQue}}">
+					<view  data-id="{{item.g_id}}" data-q_id="{{q_id}}"  bindtap='tapKeyWorld' data-title="{{item.title}}"
+                  class="btn btn-null btn-green2 {{item.is_set?'active':'item'}}" >
+              <view class="item-title">	{{item.title}}	</view>
+              <view wx:if="{{item.is_set==true}}" data-id="{{item.g_id}}" class="iconfont icon-share" catchtap='shareque'></view>
+              <view wx:if="{{item.is_set==true}}" data-id="{{item.g_id}}" class="iconfont icon-edit"></view>
+              <view wx:else class="iconfont icon-info" style="color:#000"></view>
+					</view>
+				</view>
+			</view>
+			<view class="rank border-line-top border-line-bottom margin-top-20">
+				<view class="rank-title" bindtap='newFriend'>
+					<text class="text">最新“{{nowTitle}}”好友</text>
+					<button form-type="submit" class="btn-null iconfont icon-arrowdown">
+					</button>
+				</view>
+				<view class="rank-list"  wx:if="{{listNew}}" >
+					<view class="item border-line-top"  wx:for="{{listNew}}"  
+                style='padding-top:15rpx;' data-index="0" data-r_id="{{item.r_id}}" bindtap='friendsAsk'>
+						  <image data-id="1901894242" class="item-img fadeIn animated" data-status="false" mode="widthFix" 
+						src="{{item.avatarurl}}">
+						</image>
+						<view class="item-info">
+							<view class="item-title">
+								<text data-id="1901894242" data-status="false">远航</text>
+							</view>
+						</view>
+						<view class="item-sup img-sup padding-bottom-33" bindtap="informList">
+                 <text>{{item.point}}</text><text>%</text>
+						</view>
+						<view class="item-msg">{{item.desc}}</view>
+					</view>
+				</view>
+        <view wx:else class='nolist'>
+              暂无数据
+        </view> 
+			</view>
+			<view class="visit border-line-top margin-top-20">
+				<view class="visit-title">最近访客</view>
+				<view class="visit-list">
+					<view wx:for="{{nearest}}" data-index="{{index}}" class="btn-null item" data-time="{{item.count}}" bindtap='whattime'>
+						<image class="item-img fadeIn animated" mode="widthFix" src="{{item.avatarurl}}">	</image>
+						<view class="item-num">{{item.count}}次</view>
+					</view>
+				</view>
+				<view class="add-more">
+				</view>
+			</view>
+		</view>
+	</view>

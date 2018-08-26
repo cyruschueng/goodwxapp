@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="format-detection"content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/ppublic.css">-->
+    <style type="text/css">
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: deeppink;
+        }
+        /*loading动画*/
+        .loading{
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 18%;
+            font-size: 1.0625rem;
+            width: 64%;
+            color: #ffffff;
+            text-align: center;
+            padding: 1.875rem 0;
+            margin-top: -2.5rem;
+            background: rgba(0,0,0,0.7);
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
+            z-index: 9999;
+        }
+        .loading-point{
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: #828282;
+            margin: 0 6px;
+            -moz-border-radius: 1px;
+            -webkit-border-radius: 1px;
+            -o-border-radius: 1px;
+            border-radius: 1px;
+        }
+        .loading-point-active{
+            background: #ffffff;
+        }
+        .imgIcon{
+            background-color: #bfa;
+        }
+    </style>
+</head>
+<body>
+<div class="box1">setCookie</div>
+<div class="box2">delCookie</div>
+<hr>
+<!--loading动画-->
+<aside class="loading">
+    <span class="loading-point loading-point-active"></span>
+    <span class="loading-point"></span>
+    <span class="loading-point"></span>
+</aside>
+<div class="imgIcon">
+    <img src="http://picoocheadportrait.oss-cn-beijing.aliyuncs.com/web/res/fatburn/image/icon/msg3.png" alt="">
+</div>
+<hr/>
+<div class="imgIcon">
+    <img src="http://picoocheadportrait.oss-cn-beijing.aliyuncs.com/web/res/fatburn/image/icon/storage-right1-an.png" alt="">
+</div>
+<hr/>
+<div class="imgIcon">
+    <img src="http://picoocheadportrait.oss-cn-beijing.aliyuncs.com/web/res/fatburn/image/icon/right-ios.png" alt="">
+</div>
+<hr/>
+<div class="imgIcon">
+    <img src="http://picoocheadportrait.oss-cn-beijing.aliyuncs.com/web/res/fatburn/image/icon/right21-an.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="https://cdn2.picooc.com/web/res/event/chrome/icon_share_normal.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/fatburn/image/icon/right1-an.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/fatburn/image/icon/right1-ios.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/fatburn/image/icon/complete.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/fatburn/image/icon/rightTop5.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/fatburn/image/student/noRight.png" alt="">
+</div>
+<hr/>
+<hr/>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/fatburn/image/student/student-11.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/appFriend/rightIcon/lefticon5-ios.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/appFriend/rightIcon/righticon10-ios.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="https://cdn2.picooc.com/web/res/event/chrome/icon_share_normal.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/personal/image/icon/right2-an.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/fatburn/image/icon/rightTop5.png" alt="">
+</div>
+<div class="imgIcon">
+    <img src="http://cdn2.picooc.com/web/res/personal/image/storage/right1-novalue.png" alt="">
+</div>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //alert(getCookie('happy'));
+        console.log(getCookie('happy'));
+        console.log(getCookie('happy') === '');//如果没有定义cookie，则cookie为空字符串；
+        $('.box1').click(function(){
+            setCookie('happy', 'newYear',1);
+            alert(getCookie('happy'));
+        });
+        $('.box2').click(function(){
+            delCookie('happy');
+            alert(getCookie('happy'));
+        });
+
+        //loading动画  初始时为显示状态，当ajax请求成功的时候，在success函数里面display设置为none；
+        var loadingIndex=1;
+        var loadingTime=setInterval(function(){
+            if(loadingIndex==$(".loading-point").length){
+                loadingIndex=0;
+            }
+            $(".loading-point").removeClass("loading-point-active");
+            $(".loading-point").eq(loadingIndex).addClass("loading-point-active");
+            loadingIndex++;
+        },150);
+    });
+</script>
+</body>
+</html>

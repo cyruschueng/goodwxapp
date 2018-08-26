@@ -1,0 +1,45 @@
+ <view class='container'>
+  <view class='paycarList'>
+    <view class='paycarItem' wx:for="{{paycar}}" wx:key="*this" wx:if="{{item.actives_type!='2'}}">
+      <view class='break'></view>
+      <scroll-view scroll-left="{{zero}}" scroll-x class='item'>
+        <view class='main'>
+          <view class='left'>
+            <image src='{{isSel[index]=="0"?"/pages/source/images/unseleted.png":"/pages/source/images/selted.png"}}' bindtap='seleted' data-index='{{index}}' data-isSel='{{isSel[index]}}' data-sum='{{item.goods_price*item.goods_number}}'></image>
+          </view>
+          <view class='right'>
+            <view>
+              <image src='{{item.goods_img}}'></image>
+            </view>
+            <view class='itemInfo'>
+              <view>{{item.goods_name}}</view>
+              <view>
+                <text>{{item.goods_attr_color}}</text>;
+                <text>{{item.goods_attr_size}}</text>
+              </view>
+              <view >
+                <text>¥{{item.goods_price}}</text>
+                <text>X{{item.goods_number}}</text>
+              </view>
+            </view>
+          </view>      
+        </view>
+        <view class='del' bindtap='del' data-index='{{index}}' data-id='{{item.id}}'>移除</view>  
+      </scroll-view>
+    </view>
+  </view>
+  <view class='null' wx:if="{{isNull=='1'}}">
+      <image src='/pages/source/images/paycar_null.png'></image>
+      <view>您的购物车还没有商品,去逛逛吧</view>
+    </view>
+  <view class='sum' wx:if="{{isNull!='1'}}">
+    <view class='left'>
+      <image src='{{isAll=="0"?"/pages/source/images/unseleted.png":"/pages/source/images/selted.png"}}' bindtap='all'></image>
+      <text>合计</text>
+    </view>
+    <view class='right'>
+      <view>合计:<text> ¥{{sum}}</text></view>
+      <view bindtap='topay'>结算</view>
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,16 @@
+<!--experiene.wxml-->
+<view class="containers">
+  <view class='city'>
+    <view>当前城市：</view>
+    <view class='cityName'>{{cityName}}</view>
+  </view>
+  <view class='cityList'>
+    <view class='cityType' wx:for='{{checkView}}' wx:key='{{item}}' bindtap='choosecity' id='{{item.cityId}}'>
+      <view class='logo'>
+        <image src='{{item.logo}}' mode='widthFix' lazy-load='true'></image>
+      </view>
+      <view>{{item.name}}</view>
+      <view class='{{item.cityId == cityid?"checked iconfont icon-dui":"nochecked"}}'></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,118 @@
+<!--index.wxml-->
+<wxs src="./tools.wxs" module="tools" />
+<view class="{{isFHMask ? 'ovh fullvh' : ''}}">
+  <view class='userInfo-index'>
+    <view class='df mx24' >
+      <view class='f1 fyb'>
+          <view class='df por'>
+          <text class='tar fc-fff h6 mt10' bindtap='toRule'>答题规则</text>
+          <view class='ml10 ruleIcon' bindtap='toRule'></view>
+      </view>
+      </view>
+      <view class="userinfo">
+        <image bindtap="" class="wh100 userIconA" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <!-- <text class="userinfo-nickname h4 fc-fff mt20">{{userInfo.nickName}}</text> -->
+        <view class='fh' bindtap='showFHMask'>获得复活卡</view>
+      </view>
+      <view class='df f1 fdy  fsb fxr'>
+          <text class='tar toac'>复活卡 ×{{userInfo.u_goods_ticket||0}}</text>
+          <view class='tar toac' bindtap='toac'>个人中心 ＞ </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{!isWaitting}}" class='mainbg ovh'>
+    <view class='df fxc mt20'>
+      <view class='area-com'>
+        <text class='h5 fc-fff ml20'>百万夺金赛</text>
+        <text class='askMinInfo ml20'>{{userInfo.msg1}}</text>
+      </view>
+    </view>
+    <view wx:if="{{tools.isLevel(userInfo)}}">
+        <view  class='df fxc mt20 root3d por' >
+            <view class="por" bindtap="toAsk" data-levelid="{{userInfo.u_level}}" >
+              <image
+                class="baseLevel cube levelItem"
+                src="{{'https://wxapp.haizeihuang.com/wannengdequan_php/images/LV'+userInfo.u_level+'.png'}}"></image>
+              <view class='levelName'> 共{{userInfo.question_nums}}题 / {{userInfo.level_bonus/100}}元</view>
+            </view>
+            <view wx:if="{{tools.isMask(userInfo)}}" class='levelMaskAreal1'>
+                <view class='df fxyc'>
+                    <view class='levelMaskCore mt40'>
+                        <view class='nextAskTime'>下期开始时间：{{userInfo.next_start_time}}</view>
+                        <view class="df fxc">
+                            <view class='nextAskTip mt20'>敬请期待</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view>
+      <view class='df fxc mt20'>
+        <view class='area-com'>
+          <text class='h5 fc-fff ml20'>品牌独享赛</text>
+          <text class='askMinInfo ml20'>{{userInfo.msg2}}</text>
+        </view>
+      </view>
+      <view
+      wx:for="{{goodlist}}"
+      wx:for-index="idx"
+      wx:key="idx"
+      wx:for-item="gt"
+      class='df fxc mt20 por'>
+          <view class='por'>
+            <image bindtap='togm' data-gmid='{{gt.g_id}}' class='PrizeImg'src="{{gt.g_img}}"></image>
+            <view wx:if='{{gt.is_participate||gt.g_stock<1}}'class='PrizeImgMask df fxyc'>
+                <view wx:if='{{gt.is_participate}}'  class='df fdy fyc'>
+                      <text class='tipInfo-goods'>今日已答，明日再来</text>
+                      <view class='userfh' data-gmid='{{gt.g_id}}' bindtap='checkFH'>使用复活卡答题</view>
+                </view>
+                 <view wx:else class='df fdy fyc'>
+                    <text  class='tipInfo-goods'>本场比赛已结束</text>
+                    <!-- <view class='userfh' data-gmid='{{gt.g_id}}' bindtap='checkFH'>使用复活卡答题</view> -->
+                 </view>
+
+            </view>
+          </view>
+
+          <view wx:if='{{gt.is_participate==false && gt.g_stock>1}}' class='lbgBygoods h4 fc-fff'>{{gt.participate_nums}}人已参与</view>
+          <view wx:if='{{gt.is_participate==false && gt.g_stock>1}}' class='rbgBygoods h4 fc-fff'>{{gt.get_nums}}人已获得</view>
+      </view>
+    </view>
+    <view class='df fxc mt20 por'>
+        <image
+          class='PrizeImg'
+          src="https://wxapp.haizeihuang.com/wannengdequan_php/images/xiayiqi.png">
+        </image>
+    </view>
+    <view class='focusAPPWrap'>
+        <button open-type='contact' class='focusAPP'></button>
+    </view>
+    <view class='mt40'></view>
+  </view>
+  <view wx:if="{{isFHMask}}" class='fullwh df fdy fyc fxr' bindtap='hideFHMask'>
+      <view class='fhtask df fdy fyc por'>
+            <view class='fhtitle'>复活卡任务</view>
+            <view class='df  fsbyc fhItem'>
+                <view class='fhponit'></view>
+                <view class='fhlna f1'>
+                      <view class='h4'>分享到微信群</view>
+                      <view class='h6 fc-333'>每2个群获得一张复活卡(每日限十张)</view>
+                </view>
+                <button open-type="share" class='fhb'>去分享</button>
+            </view>
+            <view class='fhc' bindtap='hideFHMask'>×</view>
+      </view>
+  </view>
+</view>
+
+<!--
+          <view
+            class='mt40 por'
+            wx:for="{{[1,2,3,4]}}"
+            wx:for-index="idx"
+            wx:key="qid"
+            wx:for-item="qid"
+          >
+  -->

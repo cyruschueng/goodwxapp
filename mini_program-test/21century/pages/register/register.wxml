@@ -1,0 +1,77 @@
+<view class="login_title">
+    <text>21世纪分级阅读大赛</text>
+</view>
+<form bindsubmit="checkCode" class="{{saveStatus ? 'hidden' : ''}}">
+    <view class="form-list">
+        <view class="form-item">
+            <!--<view class="form-item-hd">手机号码：</view>-->
+            <image class="phone_img" src="../../images/icon/phone_icon.png"></image>
+            <input type="number" placeholder-class="input-placeholder" bindchange="input_phoneNum" name="tel" value="{{tel}}" placeholder="请输入手机号码" maxlength="11"/>
+        </view>
+        <view class="form-item">
+            <!--<view class="form-item-hd">验证码：</view>-->
+            <image class="code_img" src="../../images/icon/code_icon.png"></image>
+            <input type="number" placeholder-class="input-placeholder" name="code" value="{{code}}" placeholder="请输入验证码" maxlength="6"/>
+            <view class="code {{sendStatus?'gray':'gray'}}" bindtap="sendCode" disabled="{{sendStatus}}">{{codeText}}</view>
+        </view>
+    </view>
+    <button formType="submit" class="next-btn {{isIpx?'ipx':''}}">下一步</button>
+</form>
+<form bindsubmit="savePersonInfo" class="{{saveStatus ? '' : 'hidden'}}">
+    <view class="form-list">
+        <view class="form-item">
+            <!--<view class="form-item-hd">姓名：</view>-->
+            <image class="nickname_img" src="../../images/icon/nickname_icon.png"></image>
+            <input type="text" placeholder-class="input-placeholder" name="name" value="{{name}}" maxlength="5" placeholder="2~5个汉字"/>
+        </view>
+        <view class="form-item">
+            <!--<view class="form-item-hd">姓名：</view>-->
+            <image class="age_img" src="../../images/icon/age_icon.png"></image>
+            <input type="number" placeholder-class="input-placeholder" name="age" value="{{age}}" placeholder="请输入参赛者年龄" maxlength="2"/>
+        </view>
+        <view class="form-item" bindtap="showGradepicker">
+            <!--<view class="form-item-hd">姓名：</view>-->
+            <image class="level_img" src="../../images/icon/level_icon.png"></image>
+            <input type="text" placeholder-class="input-placeholder" disabled name="grade" value="{{grade}}" placeholder="请输入参赛者年级"/>
+            <image src="../../images/shelf/select_icon.png" class="sel_image {{gradeArea ? 'rotateLeft' :''}}"></image>
+        </view>
+        <view class="form-item" bindtap="showCitypicker">
+            <image class="phone_img" src="../../images/icon/city_icon.png"></image>
+            <input class="area_input" type="text" placeholder-class="input-placeholder" disabled name="area" value="{{area}}" placeholder="请填写所在地区"/>
+            <image src="../../images/shelf/select_icon.png" class="sel_image {{cityArea ? 'rotateLeft' :''}}"></image>
+        </view>
+        <button formType="submit" class="next-btn {{isIpx?'ipx':''}}">确 定</button>
+    </view>
+</form>
+<view class="distpicker {{cityArea ? '' : 'hidden'}}">
+    <view class="distpicker-btn">
+        <view class="distpicker-cancel-btn" bindtap="distpickerCancel">取消</view>
+        <view class="distpicker-sure-btn" bindtap="distpickerSure">确定</view>
+    </view> 
+    <picker-view indicator-style="height: 110rpx;" class="distpicker-content" value="{{value}}" bindchange="changeArea">
+        <!-- 省 -->
+        <picker-view-column>
+            <view wx:for="{{provinceName}}" wx:key="province" class="area-item"><text>{{item}}</text></view>
+        </picker-view-column>
+        <!-- 市 -->
+        <picker-view-column>
+            <view wx:for="{{cityName}}" wx:key="city" class="area-item"><text>{{item}}</text></view>
+        </picker-view-column>
+        <!-- 区 -->
+        <!--<picker-view-column>-->
+            <!--<view wx:for="{{districtName}}" wx:key="district" class="area-item">{{item}}</view>-->
+        <!--</picker-view-column>-->
+    </picker-view>
+</view>
+<view class="mask" catchtap="distpickerCancel" hidden="{{!cityArea}}"></view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
+<view class="gradepicker_wrap {{gradeArea ? '' : 'hidden'}}" bindtap="gradeHide">
+    <view class="gradepicker">
+        <picker-view indicator-class="gradepicker-in" class="gradepicker-content" value="{{value}}" bindchange="changeGrade">
+            <picker-view-column>
+                <view wx:for="{{gradeData}}" wx:key="{{item}}" data-item="{{item}}" class="grade-item">{{item.name}}</view>
+            </picker-view-column>
+        </picker-view>
+    </view>
+</view>
+<view class="tran_bg" style="display: {{tranStatus?'block':'none'}}"></view>

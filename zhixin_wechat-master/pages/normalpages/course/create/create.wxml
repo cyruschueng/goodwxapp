@@ -1,0 +1,174 @@
+<!--pages/normalpages/create_course/create_course.wxml-->
+<view class="container">
+
+    <view class='gray-space-small'></view>
+
+    <!-- bindreset="onFormReset" -->
+    <form class='form-container' bindsubmit="onFormSubmit">
+        <view class='items-container'>
+
+            <!-- 课程名设置 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.name.name}}
+                </view>
+
+                <view class='item-value'>
+                    <view class='item-value-input'>
+                        <input id="{{courseItems.name.id}}" name="{{courseItems.name.id}}" type='text' value='{{courseItems.name.value}}' placeholder='{{courseItems.name.tip}}' bindinput='onInput' />
+                    </view>
+                </view>
+
+            </view>
+
+            <!-- 上课地址设置 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.location.name.name}}
+                </view>
+
+                <view class='item-value'>
+                    <view class='item-value-input' style='margin-right:0'>
+                        <input id="{{courseItems.location.name.id}}" name="{{courseItems.location.name.id}}" value='{{courseItems.location.name.value}}' placeholder='{{courseItems.location.name.tip}}' bindinput='onInput' />
+                    </view>
+                    <image class='image-arrow' src='../../image/right_arrow.png' bindtap='onChooseLocation'></image>
+                </view>
+
+            </view>
+
+            <!-- 上课教室设置 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.location.room.name}}
+                </view>
+                <view class='item-value'>
+                    <view class='item-value-input'>
+                        <input id="{{courseItems.location.room.id}}" name="{{courseItems.location.room.id}}" type='text' value='{{courseItems.location.room.value}}' placeholder='{{courseItems.location.room.tip}}' bindinput='onInput' />
+                    </view>
+                </view>
+            </view>
+
+            <!-- 课程起止日期 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.startDate.name}}
+                </view>
+                <view class="item-value">
+
+                    <picker id="{{courseItems.startDate.id}}" name="{{courseItems.startDate.id}}" mode='date' start='{{courseItems.startDate.start}}' value='{{courseItems.startDate.value}}' bindchange='onPickerChange'>
+                        <view class='item-value-picker'>
+                            <view class='item-value-picker-text'>{{courseItems.startDate.value}} </view>
+                            <!-- <image class='image-arrow' src='../../image/down_arrow.png'></image> -->
+                        </view>
+                    </picker>
+
+                    <view class=''>到</view>
+
+                    <picker id="{{courseItems.endDate.id}}" name="{{courseItems.endDate.id}}" mode='date' start='{{courseItems.endDate.start}}' value='{{courseItems.endDate.value}}' bindchange='onPickerChange'>
+                        <view class='item-value-picker'>
+                            <view class='item-value-picker-text'>{{courseItems.endDate.value}}</view>
+                            <!-- <image class='image-arrow' src='../../image/down_arrow.png'></image> -->
+                        </view>
+                    </picker>
+
+                </view>
+
+            </view>
+
+            <!-- 重复规则 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.recurringRule.name}}
+                </view>
+
+                <view class='item-value' bindtap='onSetRecurringRules'>
+                    <!-- 空白占位 -->
+                    <view class='item-value-picker-text' style='width:20rpx'></view>
+                    <view class='item-value-picker'>
+                        <view class='item-value-picker-text'>{{courseItems.recurringRule.value}}</view>
+                        <image class='image-arrow' src='../../image/down_arrow.png'></image>
+                    </view>
+                </view>
+            </view>
+
+            <view class="item-box row" wx:if="{{showRecurringRule}}">
+                <view class="day-selector" >
+                    <view class="day-box" wx:for="{{weekVisual}}" wx:key="{{index}}" id="{{item.id}}" data-date="{{item}}" bindtap="onSelectRecurringDay">
+                        <view class="day-item {{item.selected?'day-item-selected':''}}">{{item.value}}</view>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 每次课开始的时间 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.startTime.name}}
+                </view>
+
+                <view class='item-value'>
+                    <!-- 空白占位 -->
+                    <view class='item-value-picker-text' style='width:100rpx'></view>
+                    <picker id="{{courseItems.startTime.id}}" name="{{courseItems.startTime.id}}" mode='time' start='{{courseItems.startTime.start}}' value='{{courseItems.startTime.value}}' bindchange='onPickerChange'>
+                        <view class='item-value-picker'>
+                            <view class='item-value-picker-text'>{{courseItems.startTime.value}}</view>
+                            <image class='image-arrow' src='../../image/down_arrow.png'></image>
+                        </view>
+                    </picker>
+                </view>
+            </view>
+
+            <!-- 每次课时间长度 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.duration.name}}
+                </view>
+
+                <view class='item-value'>
+                    <input class='item-input-text' id="{{courseItems.duration.id}}" name="{{courseItems.duration.id}}" type='number' value='{{courseItems.duration.value}}' bindinput='onInput' />
+
+                    <picker id="{{courseItems.duration.id}}" mode='selector' value="{{timeListIdx}}" range='{{timeList}}' bindchange='onPickerChange'>
+                        <view class='item-value-picker'>
+                            <view class='item-text'>
+                                分钟
+                            </view>
+                            <view class='item-image'>
+                                <image class='image-arrow' src='../../image/down_arrow.png'></image>
+                            </view>
+                        </view>
+
+                    </picker>
+                </view>
+
+            </view>
+
+            <!-- 上课学生人数上限 -->
+            <view class="item-box row">
+                <view class='item-name'>
+                    {{courseItems.totalStudentNumber.name}}
+                </view>
+                <view class='item-value'>
+                    <view class='item-value-input'>
+                        <input id="{{courseItems.totalStudentNumber.id}}" name="{{courseItems.totalStudentNumber.id}}" type='number' value='{{courseItems.totalStudentNumber.value}}' placeholder='{{courseItems.totalStudentNumber.tip}}' bindinput='onInput' />
+                    </view>
+                </view>
+            </view>
+
+            <!-- 文本输入框 -->
+            <view class="item-big-box column">
+                <view class='item-name'>
+                    {{courseItems.description.name}}
+                </view>
+                <view class='item-textarea'>
+                    <textarea id="{{courseItems.description.id}}" name="{{courseItems.description.id}}" class='decription-item-text' show-confirm-bar='{{false}}' type='text' value='{{courseItems.description.value}}' placeholder='{{courseItems.description.tip}}' bindinput='onInput'
+                    />
+                </view>
+            </view>
+
+        </view>
+
+        <view class="btn-area">
+            <button type='primary' formType="submit">确定</button>
+        </view>
+    </form>
+
+</view>

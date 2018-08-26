@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+	<title>阶段报告</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+	
+	<style type="text/css">
+	#canvas1{
+		background: #3acfd1;
+	}
+
+	#canvas2{
+		background: #d13acc;
+	}
+	</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="200" height="100"></canvas>
+		<canvas id="canvas2" width="200" height="100"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript" src="js/1.js?v=3"></script>
+	<script>
+		$(function(){
+			appNoShare();
+			function appNoShare(){
+				var getPageInfo1 = function (){
+					var data = {
+						title:'右上角文案6_1',
+						/*isShare:false,
+						 backgroundColor:'#2c2f31'*/
+						color:"",
+						opacity:"",
+						backgroundColor:"",
+						backgroundOpacity:""
+					};
+					return JSON.stringify(data);
+				};
+				var deviceType=isMobile();
+				if(deviceType == "isApp" && (typeof mobileApp != "undefined")){
+					if(getParamByUrl("os")=="android"){
+						mobileApp.controlTitle(getPageInfo1());
+					}
+					else{
+						mobileApp.controlTitle.postMessage(getPageInfo1());
+					}
+					//mobileApp.getShareInfo(getPageInfo1());
+				}
+				/*mobileApp.getShareInfo(getPageInfo());*/
+				document.documentElement.style.webkitTouchCallout='none';
+			}
+			/*右上角文案*/
+			/*var getPageInfo = function (){
+				var data = {
+					iconType:1,//0走图片逻辑，1走文案逻辑
+					rightStr:{
+						str:"编辑2",
+						color:"",
+						opacity:"",
+						id:"0",
+						type:"0",
+						functionName:"ccc",
+						redDotType:"2",
+						redDotShow:true,
+						redDotNum:"12",
+						nativeType:"",
+						content:""
+					}
+				};
+			    return JSON.stringify(data);
+			};
+            if(getParamByUrl("os")=="android"){
+                mobileApp.controlRight(getPageInfo());
+            }
+            else{
+                window.webkit.messageHandlers.controlRight.postMessage(getPageInfo());
+            }*/
+		});
+		function ccc(){
+			alert(1);
+		}
+		
+	</script>
+</html>

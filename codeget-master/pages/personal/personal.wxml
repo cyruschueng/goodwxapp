@@ -1,0 +1,147 @@
+<!--personal.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="userinfo">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel">
+      <view class="weui-panel__hd">用户资料</view>
+      <view class="weui-panel__bd">
+        <block wx:if="{{complete}}">
+          <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="/images/tel.png" style="width: 20px;height: 20px;margin-right: 5px" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view catchtap="toModifyData" data-content="telnum">电话:{{result.telnum}}</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="/images/weixin.png" style="width: 20px;height: 20px;margin-right: 5px" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view catchtap="toModifyData" data-content="weixin">微信:{{result.weixin}}</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="/images/qq.png" style="width: 20px;height: 20px;margin-right: 5px" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view catchtap="toModifyData" data-content="qq">QQ:{{result.qq}}</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="/images/github.png" style="width: 20px;height: 20px;margin-right: 5px" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view catchtap="toModifyData" data-content="github">Github:{{result.github}}</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="/images/edit.png" style="width: 20px;height: 20px;margin-right: 5px" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view catchtap="toModifyData" data-content="content">个人简介:{{result.content}}</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="btn-area">
+            <form bindsubmit="personalData">
+              <view class="weui-cells__title">手机</view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" name="contact" placeholder="请输入联系方式" />
+                  </view>
+                </view>
+              </view>
+              <view class="weui-cells__title">微信号</view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" name="weixin" placeholder="请输入微信号" />
+                  </view>
+                </view>
+              </view>
+              <view class="weui-cells__title">QQ</view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" name="qq" placeholder="请输入qq号" />
+                  </view>
+                </view>
+              </view>
+              <view class="weui-cells__title">github</view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" name="github" placeholder="请输入github" />
+                  </view>
+                </view>
+              </view>
+              <view class="weui-cells__title">个人简介</view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                  <view class="weui-cell__bd">
+                    <textarea bindinput="bindInput" class="weui-textarea" name="content" placeholder="请输入个人简介" style="height: 3.3em" />
+                    <view class="weui-textarea-counter">{{num}}/200</view>
+                  </view>
+                </view>
+              </view>
+              <button class="weui-btn" formType="submit" type="primary">保存</button>
+            </form>
+
+          </view>
+        </block>
+
+      </view>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__text">Copyright © Kn0w thyself</view>
+  </view>
+</view>
+
+
+
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <!--对话框标题-->
+  <view class="dialog-title">
+    请输入要修改的内容
+  </view>
+  <!--对话框输入部分-->
+  <view class="input-view">
+    <input type="text" bindblur="input_content" class="input-style" />
+  </view>
+  <!--对话框按钮-->
+  <view class="line-top">
+  </view>
+  <view class="btn-view">
+    <view class="btn-cancel" bindtap="click_cancel">
+      取 消
+    </view>
+    <view class="btn-line">
+    </view>
+    <view class="btn-cancel" bindtap="click_ok">
+      确 定
+    </view>
+  </view>
+</view>

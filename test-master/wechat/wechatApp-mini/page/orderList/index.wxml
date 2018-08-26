@@ -1,0 +1,44 @@
+
+<!--list  -->
+<view >
+
+  <!-- <view class='order_tab'>
+
+    <view wx:key="index" data-index='{{item.num}}' catchtap='change_active_tab'  class='li {{ item.num === active_tab ? "active" : ""  }}' wx:for="{{tab}}">{{item.text}}
+       <text>{{item.tab_num}}</text> 
+    </view>
+
+  </view> -->
+
+  <view class='order_content' wx:if='{{contentlist.length}}'>
+    <view class='list' wx:for='{{contentlist}}' wx:key="{{index}}">
+      <view>
+        <image src='https://flashgoing.oss-cn-shenzhen.aliyuncs.com/{{item.buslogo}}'></image>
+      </view>
+      <view  catchtap='{{item.flag==1 ? "toOrder_2" : "" }}{{item.flag==0 ? "toOrder" : "" }}{{item.flag==-1 ? "order" : "" }}' data-deskId='{{item.deskId}}' data-id='{{item.id}}' data-orderNo='{{item.orderNo}}'>
+        <view>总价：<text class='t_t_p'>￥{{item.totalMoney}}</text>
+        </view>
+        <view class='shopname'>桌号： {{item.deskNo ? item.deskNo : '暂无'}}</view>
+        <view style='width:500rpx;z-index:99999'>下单时间：{{item.createdDate}}</view>
+      </view>
+      <view>
+        <view class='status' data-flag='{{}}'>{{item.flag==0?'未验单':''}}{{item.flag==1?'已验单':''}}{{item.flag==-1?'已取消':''}}</view>
+        <view class='deal'  wx:if='{{item.flag==0}}' catchtap='dealCancel' data-index='{{index}}' data-deskId='{{item.deskId}}' id='{{item.id}}'>取消</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+<view class='selfCheckout_no' wx:if="{{showcontentlist}}">
+
+
+  <view class='i1'>
+    <image src='http://lingju360.com/miniapp/resources/image/new/0.png'></image>
+  </view>
+  <view class='t1'>暂无订单</view>
+
+</view>

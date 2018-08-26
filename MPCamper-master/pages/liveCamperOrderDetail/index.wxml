@@ -1,0 +1,125 @@
+<view class="container">
+        <view class="page__bd">
+                <view class="weui-form-preview">
+                        <view class="weui-form-preview__hd_e">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview_columm__label">
+                                                <text class="title">{{camperOrderDetail.CampShortName}}</text>
+                                                <text class="info">{{camperOrderDetail.CamperTypeName}}</text>
+                                        </view>
+                                        <view class="weui-form-preview__value_in-hd">
+                                                <image style="width:50px; height:50px;border-radius: 50%;" src='{{camperOrderDetail.Logo}}' mode='aspectFill'></image>
+                                        </view>
+                                </view>
+                        </view>
+
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">{{camperOrderDetail.BTime}}至{{camperOrderDetail.ETime}}</view>
+                                        <view class="weui-form-preview__value_in-hd">{{camperOrderDetail.Days}}晚</view>
+                                </view>
+                        </view>
+
+
+                        <view class='line'></view>
+
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">房费({{camperOrderDetail.Days}}晚)</view>
+                                        <view class="weui-form-preview__value">￥{{camperOrderDetail.TotalMoney}}</view>
+                                </view>
+                                <view class="weui-form-preview__item" wx:if="{{camperOrderDetail.IsInvoice==1}}">
+                                        <view class="weui-form-preview__label_e">发票邮费</view>
+                                        <view class="weui-form-preview__value">￥{{camperOrderDetail.InvoiceFee}}</view>
+                                </view>
+
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">押金</view>
+                                        <view class="weui-form-preview__value">￥{{camperOrderDetail.Deposit}}</view>
+                                </view>
+                        </view>
+                        <view class='line'></view>
+                        <view class="weui-form-preview__hd_s">
+                                <view class="weui-form-preview__label_s">实付款：</view>
+                                <view class="weui-form-preview__value">￥{{camperOrderDetail.PayMoney}}</view>
+                        </view>
+                        <view class='line'></view>
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">预订人信息</view>
+                                        <view class="weui-form-preview__value">{{camperOrderDetail.BookingPersonName}}({{camperOrderDetail.BookingPersonPhone}})</view>
+                                </view>
+                        </view>
+                        <view class='line'></view>
+                        <view class="img_box">
+                                <image src="{{amapSrc}}" mode='widthFix'></image>
+                        </view>
+                        <view class="top">
+                                <view class="top_l" bindtap='goTel'>
+                                        <image class="top_img" src="/images/tel.png" />
+                                        <text class="top_text">电话咨询</text>
+                                </view>
+                                <view class="top_c" bindtap='goMap'>
+                                        <image class="top_img" src="/images/map.png" />
+                                        <text class="top_text">地图导航</text>
+                                </view>
+                        </view>
+
+                        <view class='line'></view>
+                        <view class="h3">交易规则</view>
+                        <view class="h4">订金</view>
+                        <view class="content">确认订单后，在线支付房费100%作为订金</view>
+                        <view class="h4">押金</view>
+                        <view class="content">￥{{camperOrderDetail.Deposit}}</view>
+                        <view class="h4">入住</view>
+                        <view class="content">进行入住登记后，扫码开锁即可入住</view>
+                        <view class='line'></view>
+                        <block wx:if="{{invoiceInfo}}">
+                                <view class="h4">发票信息</view>
+                                <view class="order_info">抬头类型：{{invoiceInfo.headerType==0?"企业":"个人"}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.headerTitle}}">发票抬头：{{invoiceInfo.headerTitle}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.number}}">纳税人识别号：{{invoiceInfo.number}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.invoiceContent}}">发票内容：{{invoiceInfo.invoiceContent}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.invoiceFee}}">发票金额：{{invoiceInfo.invoiceFee}}</view>
+                                <view class='line'></view>
+                        </block>
+
+                        <view class="h4">订单信息</view>
+                        <view class="order_info">订单编号：{{camperOrderDetail.OrderNo}}</view>
+                        <view class="order_info" wx:if="{{camperOrderDetail.PayNo}}">交易号：{{camperOrderDetail.PayNo}}</view>
+                        <view class="order_info">创建时间：{{camperOrderDetail.CreateTime}}</view>
+                        <view class="order_info" wx:if="{{camperOrderDetail.PayTime}}">付款时间：{{camperOrderDetail.PayTime}}</view>
+
+                        <view class="h3"></view>
+                </view>
+
+        </view>
+
+</view>
+
+<view class="content-b" wx:if="{{camperOrderDetail.OrderStatus==1||camperOrderDetail.OrderStatus==7}}">
+        <view class="content-c ">
+                <view class='content-left'>
+                        <view wx:if="{{camperOrderDetail.OrderStatus==1}}" class="countdown">{{ c1 }}</view>
+                </view>
+                <view wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderCancel">
+                        <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
+                </view>
+                <view wx:if="{{camperOrderDetail.OrderStatus==7}}" class='content-left' bindtap="orderDel">
+                        <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
+                </view>
+                <view wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderPay">
+                        <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
+                </view>
+                <!-- <view  wx:if="{{camperOrderDetail.OrderStatus==3}}" class='content-left' >
+                        待入住
+                </view>
+                <view  wx:if="{{camperOrderDetail.OrderStatus==4}}" class='content-left' >
+                        已入住
+                </view>
+                <view  wx:if="{{camperOrderDetail.OrderStatus==6}}" class='content-left' >
+                        已消费
+                </view> -->
+
+        </view>
+</view>

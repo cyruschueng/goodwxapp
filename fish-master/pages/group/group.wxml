@@ -1,0 +1,59 @@
+<!--index.wxml-->
+<view class="group">
+  <view class="main">
+    <view class="main-banner">
+      <image src="{{fishImg}}"></image>
+      <view class="river">
+          <view class="wave"></view>
+          <view class="wave"></view>
+          <view class="wave"></view>
+          <view class="wave"></view>
+          <view class="wave"></view>
+          <view class="wave"></view>
+          <view class="wave"></view>
+        </view>
+    </view>
+    <view class="main-controller">
+      <text class="start" bindtap="startGame">直接开始</text>
+      <button type="default" class="share" open-type="share">转发到群，大家继续嗨</button>
+    </view>
+    <view class="main-data">
+      <view class="name">{{groupName}}</view>
+      <view class="detail">
+        <view class="people">
+          <view class="data">{{people}}</view>
+          <view class="desc">
+            今天在玩
+          </view>
+        </view>
+        <view class="play">
+          <view class="data">{{totalCounts}}</view>
+          <view class="desc">
+            共生宝宝数
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="member-list">
+      <scroll-view scroll-y lower-threshold="50">
+        <view class="title">
+          <view class="rank">排名</view>
+          <view class="profile">成员头像</view>
+          <view class="name">昵称</view>
+          <view class="counts">生宝宝数</view>
+        </view>
+          <view class="member-item"
+            wx:for="{{members}}"
+            wx:key="{{item.id}}"
+          >
+            <view class="rank">{{index + 1}}</view>
+            <view class="img">
+              <image src="{{item.user.avatar_url}}"></image>
+            </view>
+            <view class="name">{{item.user.name}}</view>
+            <view class="counts">{{item.counts}}</view>
+        </view>
+        </scroll-view>
+    </view>
+  </view>
+</view>

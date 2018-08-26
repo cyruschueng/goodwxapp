@@ -1,0 +1,77 @@
+<!--pages/me/index.wxml-->
+<view class="me-container">
+    <view class="user-info">
+        <image class="user-avatar" src="{{userInfo.avatarUrl}}" bindlongtap="clearStorage"></image> 
+        <text class="username">{{userInfo.nickName}}</text> 
+    </view>
+    <view class="v-sep"></view>
+    <view class="cell" bindtap="goSelected">
+      <view class="left-cell">币行情自选</view>
+      <view class="right-cell">
+        <image class="detail" src="/images/icons/detail.png"></image>
+      </view>
+    </view>
+
+    <view class="v-sep"></view>
+    <!-- <view class="cell">
+      <view class="left-cell">币行情展示</view>
+      <view class="right-cell"><view class="section">
+          <picker class='picker-view' bindchange="setSymbolCnt" value="{{symbolCntIndex}}" range="{{symbolCnt}}">
+            <view class="picker">
+              {{symbolCnt[symbolCntIndex]}}
+              <image class="detail" src="/images/icons/detail.png"></image>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="item-line"></view>
+    <view class="cell">
+      <view class="left-cell">币价单位</view>
+      <view class="right-cell">
+        <view class="section">
+          <picker class='picker-view' bindchange="setFiat" value="{{defaultFiatIndex}}" range="{{fiatList}}">
+            <view class="picker">
+              {{fiatList[defaultFiatIndex]}}
+              <image class="detail" src="/images/icons/detail.png"></image>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view> -->
+    <view class="item-line"></view>
+    <view class="cell">
+      <view class="left-cell">红涨绿跌</view>
+      <view class="right-cell"><switch class='trend-switch' checked="{{riseColor == 'red'}}" color="#2196F3" bindchange="switchTrendColor"/></view>
+    </view>
+
+    <view class="v-sep"></view>
+    <view class="cell" bindtap="addWechat">
+      <view class="left-cell">加微信群</view>
+      <view class="right-cell">
+        <image class="detail" src="/images/icons/detail.png"></image>
+      </view>
+    </view>
+    <view class="item-line"></view>
+    <view class="cell"  bindtap="aboutUs">
+      <view class="left-cell">关于 MyToken</view>
+      <view class="right-cell">v0.4.0
+        <image class="detail" src="/images/icons/detail.png"></image>
+      </view>
+    </view>
+    <view class="item-line"></view>
+    <view class="cell">
+      <view class="left-cell">呼叫小月</view>
+      <view class="right-cell">
+        <button open-type="contact" id='service-btn' plain="true" session-from="weapp">
+          <image class="service-img" src="/images/buttons/xiaoyueyue_avatar.jpg"></image>
+        </button>
+      </view>
+    </view>
+
+    <view class="message">
+        <text>{{showMessage}}</text>
+    </view>
+
+
+</view>

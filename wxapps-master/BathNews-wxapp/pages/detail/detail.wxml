@@ -1,0 +1,26 @@
+<!--pages/detail/detail.wxml-->
+<view class="detail-container">
+  <view class="title-autor">
+    <text class="title">{{detaildata.title}}</text>
+    <view class="author-msg">
+      <image class="author-img" src="{{detaildata.authorImg}}"></image>
+      <view class="author-name">
+        <text class="name-text">{{detaildata.author}}</text>
+        <text>{{detaildata.publish_time}}</text>
+      </view>
+      <image class="share_btn" src="/images/share_icon.png" catchtap="onSharetap"/>
+    </view>
+  </view>
+  <view class="banner">
+    <image src="{{detaildata.bannerUrl}}"></image>
+  </view>
+  <view class="content">
+    <text class="content-text">{{detaildata.content}}</text>
+  </view>
+  <view class="preview-img">
+    <canvas canvas-id="myCanvas" style="width:700rpx;height:900rpx;display:none;"/>
+  </view>
+  <view class="{{showView?'showCanvas':'hideCanvas'}}">
+    <canvas id="myCanvas2" canvas-id="myCanvas2" style="width:700rpx;height:800rpx;" />
+  </view>
+</view>

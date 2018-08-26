@@ -1,0 +1,38 @@
+﻿<div class="page" ng-controller="loginController">
+    <div class="page__bd">
+        <form ng-submit="login()" novalidate name="loginForm" >
+            <div class="weui-cells__title">
+                <div class="form-error"
+                     ng-show="(loginForm.username.$invalid && loginForm.username.$dirty && !loginForm.username.$focused) || (loginForm.username.$invalid && submitted)">
+                    <span ng-show="loginForm.username.$error.required">用户名不能为空</span>
+                </div>
+                <div class="form-error"
+                     ng-show="(loginForm.password.$invalid && loginForm.password.$dirty && !loginForm.password.$focused) || (loginForm.password.$invalid && submitted)">
+                    <span ng-show="loginForm.password.$error.required">密码不能为空</span>
+                </div>
+                <div class="form-error">
+                    <span ng-show="error">帐号或密码出错</span>
+                </div>
+            </div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">帐号</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" ng-model="userInfo.userName" name="username" id="username" required placeholder="请输入帐号">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">密码</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" ng-model="userInfo.password" name="password" id="password" type="password" required placeholder="请输入密码">
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <input type="submit" class="weui-btn weui-btn_primary" id="login" value="登录" />
+            </div>
+        </form>
+    </div>
+</div>

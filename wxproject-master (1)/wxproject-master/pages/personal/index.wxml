@@ -1,0 +1,32 @@
+<view id="header">
+    <view class="content" bindtap="bingo">
+    	<image src="{{userInfo.avatarUrl}}"></image>
+        <view class="nickname">{{userInfo.nickName}}</view>
+
+    </view>
+</view>
+<view id="section">
+    <view class="flex-wrp" style="flex-direction:row;">
+        <view class="flex-item {{item.classes}}" wx:for="{{x_menus}}" 
+        bindtap="redirect" wx:key='{{index}}'>
+            <view>
+                <image src="{{item.icon}}" class="icon"></image>
+            </view>
+            <view class="menus_title">
+                <text>{{item.title}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view id="menus">
+    <block wx:for="{{y_menus}}" wx:key="{{index}}">
+        <view class="content" bindtap="redirect" data-url="{{item.url}}" >
+            <view class="view"><text>{{item.title}}</text></view>
+            <view class="right"><image src="/images/rightjian.png" style="width:14px;height:14px"></image></view>
+        </view>
+    </block>
+     <toast hidden="{{toast.display}}" bindchange="toastChange" >
+        {{toast.msg}}
+      </toast>
+</view>

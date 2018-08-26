@@ -1,0 +1,31 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+<block wx:if="{{quan_list == null || quan_list == ''}}">
+<!--暂无内容提示 start-->
+<view class="no-content tc">
+    <text class="no-content-icon iconfont icon-yemianwuneirong"></text>
+    <view class="no-content-font">暂无优惠券</view>
+</view>
+<!--暂无内容提示 end-->
+</block>
+<block wx:else>
+<view class="contenter">
+    <block wx:for="{{quan_list}}">
+    <view class="dollar-list">
+        <view class="top write {{item.q_class}}">
+            <view class="money-msg f16">¥ <text class="money">{{item.quan_jiner}}</text> 优惠劵</view>
+            <view class="status tc fr">{{item.q_text}}</view>
+        </view>
+        <view class="bottom grey">
+            <view><text class="iconfont icon-time mr10 linght"></text>领取日期：{{item.quan_add_time}}</view>
+            <view><text class="iconfont icon-info mr10 linght"></text>使用日期：{{item.quan_begin_time}} - {{item.quan_end_time}}</view>
+        </view>
+    </view>
+    </block>
+</view>
+</block>
+</block>

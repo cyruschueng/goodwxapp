@@ -1,0 +1,26 @@
+<import src="../../pages/templates/rankItem/index.wxml" />
+<import src="../../pages/templates/shareBtn/index.wxml" />
+<view class="page-rank">
+    <view class="rank-tab" bindtap="switchTab">
+        <view data-type="friend" class="tab-item {{activeTab === 'friend' ? 'active' : ''}}">好友排名</view>
+        <view data-type="world" class="tab-item {{activeTab === 'world' ? 'active' : ''}}">世界排名</view>
+    </view>
+    <view class="awards">
+        <view class="scroll-content">
+            <view class="content">
+                赛季结束后第1名奖励iPhone X，2~5名奖励kindle电纸书，6~10名奖励儿童手表或网易严选拉杆箱
+            </view>
+        </view>
+        <text bindtap="showAwardRules">奖励规则 ></text>
+    </view>
+    <scroll-view bindscrolltolower="loadingMore" scroll-with-animation scroll-y class="rank-list {{activeTab}}">
+        <view wx:for="{{items}}" wx:key="{{index}}">
+            <template is="rank-item" data="{{item:item, isMyRank:0, rankImage:rankImages[item.index], gradeText: gradeMap[item.grade]}}" />
+        </view>
+    </scroll-view>
+    <view class="my-rank" wx:if="{{activeTab === 'world' && myRank}}">
+        <template is="rank-item" data="{{item:myRank, isMyRank:1, rankImage:rankImages[item.index], gradeText: gradeMap[myRank.grade]}}" />
+    </view>
+    <template wx:if="{{shareShow}}" is="share-btn" data="{{shareText: '分享到微信群 查看我的排名', extraShareInfo: extraShareInfo}}" />
+</view>
+<awardRules-dialog show-dialog="{{showAwardRulesDialog}}"></awardRules-dialog>

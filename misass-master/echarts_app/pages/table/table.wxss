@@ -1,0 +1,112 @@
+/* pages/table/table.wxss */
+.table{
+  width: 250px;
+  height: 250px;
+  border: 1px solid #ddd;
+  position: relative;
+  margin: 50px auto;
+}
+.table .tas{
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  position: absolute;
+  border:20px solid red;
+  border-radius: 50%;
+  animation: asb 5s linear infinite;
+}
+.table .tasmdl{
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  position: absolute;
+  border:20px solid #bbb;
+  border-radius: 50%;
+
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  margin: 50rpx auto;
+  position: relative;
+}
+
+.box>view {
+  width: 100px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
+.box>view>text {
+  width: 160px;
+  height: 160px;
+  border: 20px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
+
+.box>view:nth-of-type(1) {
+  left: 0;
+}
+
+.box>view:nth-of-type(2) {
+  right: 0;
+}
+
+.box>view:nth-of-type(2)>text {
+  border-top: 20px solid green;
+  border-right: 20px solid green;
+  right: 0;
+  animation: circleProgressLoad_right 5s linear infinite;
+}
+
+.box>view:nth-of-type(1)>text {
+  border-bottom: 20px solid green;
+  border-left: 20px solid green;
+  left: 0;
+  transform: rotate(70deg);
+  animation: circleProgressLoad_left 5s linear infinite;
+}
+
+.model{
+  background-color: #fff;
+  width: 200rpx;
+  height: 100rpx;
+  left: 50%;
+  bottom: 9%;
+  position: absolute;
+  margin-left: -50px;
+  border-radius: 15%
+}
+  /* @keyframes circleProgressLoad_right {
+   0% {
+    -webkit-transform: rotate(-45deg);
+  } 
+
+  50%, 100% {
+    -webkit-transform: rotate(-225deg);
+  }
+}  */
+
+ @keyframes circleProgressLoad_left {
+  0%, 50% {
+    -webkit-transform: rotate(-45deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(225deg);
+  }
+}    
+
+@keyframes asb{
+  0%, 50% {
+    -webkit-transform: rotate(45deg);
+  }
+   100% {
+    -webkit-transform: rotate(225deg);
+  }
+}

@@ -1,0 +1,10 @@
+ <view class="w_container" id="lazyImg" data-node="loadMore">
+    <view class="list_item" wx:for="{{list}}" wx:for-item="item" wx:key="index">
+        <view class="trade_type">{{item.comment}}</view>
+        <view class="trade_time">{{item.createTime}}</view>
+        <view class="trade_num {{item.isIncome ? 'add' : 'decrease'}}">{{item.isIncome ? '+' : '-'}} {{item.amount / 100}}元</view>
+    </view> 
+    <view class="list-empty" wx:if="!{{list.length}}">
+      <view>暂无明细</view>
+    </view>
+</view>

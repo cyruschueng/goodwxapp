@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="ThemeBucket">
+		<link rel="shortcut icon" href="#" type="image/png">
+
+		<title>Tabs & Accordions</title>
+
+		<!--pickers css-->
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+
+		<!--multi-select-->
+		<link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+		<!--file upload-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.min.css" />
+		<!--tags input-->
+		<link rel="stylesheet" type="text/css" href="js/jquery-tags-input/jquery.tagsinput.css" />
+
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/jquery.stepy.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+	</head>
+
+	<body class="sticky-header" style="background: #EFF0F4;">
+		<section>
+			<!-- main content start-->
+			<div class="">
+				<!-- page heading start-->
+				<div class="page-heading">
+					<h3>
+                溯源信息管理
+            </h3>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">控制台</a>
+						</li>
+						<li>
+							<a href="#">产品管理</a>
+						</li>
+						<li class="active"> 溯源信息录入 </li>
+					</ul>
+				</div>
+				<!-- page heading end-->
+
+				<!--body wrapper start-->
+				<div class="wrapper">
+					<div class="row">
+						<div class="col-md-12">
+
+							<section class="panel">
+								<header class="panel-heading custom-tab turquoise-tab">
+									<ul class="nav nav-tabs">
+										<li class="active">
+											<a data-toggle="tab" href="#prod">
+                                        产品详情
+                                    </a>
+										</li>
+										<li>
+											<a data-toggle="tab" href="#base">
+                                        生产基地信息
+                                    </a>
+										</li>
+										<li class="">
+											<a data-toggle="tab" href="#sci">
+                                        供应企业信息
+                                    </a>
+										</li>
+									</ul>
+								</header>
+								<div class="panel-body">
+									<div class="tab-content">
+										<div id="prod" class="tab-pane active">
+											<div class="row">
+												<div class="col-lg-12">
+													<section class="panel">
+														<div class="panel-body">
+															<div class=" form">
+																<form class="cmxform form-horizontal adminex-form" id="commentForm" method="get" action="">
+																	<div class="form-group ">
+																		<label for="cname" class="control-label col-lg-2">溯源码</label>
+																		<div class="col-lg-10">
+																			<input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="cemail" class="control-label col-lg-2">产品名称</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="cemail" type="email" name="email" required />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="curl" class="control-label col-lg-2">品牌</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">批次号</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">溯源信息认证机构/商户编码</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label class="control-label col-lg-2">生产日期</label>
+																		<div class="col-md-4 col-xs-11">
+
+																			<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" class="input-append date dpYears">
+																				<input type="text" value="12-02-2012" size="16" class="form-control">
+																				<span class="input-group-btn add-on">
+                                                                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                                      </span>
+																			</div>
+																			<span class="help-block">选择日期</span>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<div class="col-lg-offset-2 col-lg-10">
+																			<button class="btn btn-primary" type="submit">下一步</button>
+																			<button class="btn btn-default" type="button">重置</button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+
+														</div>
+													</section>
+												</div>
+											</div>
+										</div>
+										<div id="base" class="tab-pane ">
+											<div class="row">
+												<div class="col-lg-12">
+													<section class="panel">
+														<div class="panel-body">
+															<div class=" form">
+																<form class="cmxform form-horizontal adminex-form" id="commentForm" method="get" action="">
+																	<div class="form-group ">
+																		<label for="cname" class="control-label col-lg-2">企业名称</label>
+																		<div class="col-lg-10">
+																			<input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
+																		</div>
+																	</div>
+																	<div class="form-group last">
+																		<label class="control-label col-lg-2">营业执照</label>
+																		<div class="col-lg-10">
+																			<div class="fileupload fileupload-new" data-provides="fileupload">
+																				<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+																					<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+																				</div>
+																				<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+																				<div>
+																					<span class="btn btn-default btn-file">
+                                                   <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
+																					<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+																					<input type="file" class="default" />
+																					</span>
+																					<a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+																				</div>
+																			</div>
+																			<br/>
+																			<span class="label label-danger ">NOTE!</span>
+																			<span>在最新的Firefox附加的图像的缩略图，支持Chrome，Opera，Safari和Internet Explorer 10</span>
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="curl" class="control-label col-lg-2">联系方式</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">联系人</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">品牌</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label class="control-label col-lg-2">采摘日期</label>
+																		<div class="col-md-4 col-xs-11">
+
+																			<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" class="input-append date dpYears">
+																				<input type="text" value="12-02-2012" size="16" class="form-control">
+																				<span class="input-group-btn add-on">
+                                                                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                                      </span>
+																			</div>
+																			<span class="help-block">选择日期</span>
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label class="control-label col-lg-2">食用日期</label>
+																		<div class="col-md-4 col-xs-11">
+
+																			<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" class="input-append date dpYears">
+																				<input type="text" value="12-02-2012" size="16" class="form-control">
+																				<span class="input-group-btn add-on">
+                                                                        <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                                                      </span>
+																			</div>
+																			<span class="help-block">选择日期</span>
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">环境气候</label>
+																		<div class="col-lg-10">
+																			<textarea  style="resize: none;" class="wysihtml5 form-control" rows="9"></textarea>
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">源产地</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">天气/气温/空气质量</label>
+																		<div class="col-lg-10">
+																			<textarea  style="resize: none;" class="wysihtml5 form-control" rows="9"></textarea>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<div class="col-lg-offset-2 col-lg-10">
+																			<button class="btn btn-primary" type="submit">下一步</button>
+																			<button class="btn btn-default" type="button">重置</button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+
+														</div>
+													</section>
+												</div>
+											</div>
+										</div>
+										<div id="sci" class="tab-pane ">
+											<div class="row">
+												<div class="col-lg-12">
+													<section class="panel">
+														<div class="panel-body">
+															<div class=" form">
+																<form class="cmxform form-horizontal adminex-form" id="commentForm" method="get" action="">
+																	<div class="form-group ">
+																		<label for="cname" class="control-label col-lg-2">企业名称</label>
+																		<div class="col-lg-10">
+																			<input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
+																		</div>
+																	</div>
+																	<div class="form-group last">
+																		<label class="control-label col-lg-2">营业执照</label>
+																		<div class="col-lg-10">
+																			<div class="fileupload fileupload-new" data-provides="fileupload">
+																				<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+																					<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+																				</div>
+																				<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+																				<div>
+																					<span class="btn btn-default btn-file">
+                                                   <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
+																					<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+																					<input type="file" class="default" />
+																					</span>
+																					<a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+																				</div>
+																			</div>
+																			<br/>
+																			<span class="label label-danger ">NOTE!</span>
+																			<span>在最新的Firefox附加的图像的缩略图，支持Chrome，Opera，Safari和Internet Explorer 10</span>
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="curl" class="control-label col-lg-2">联系方式</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																	<div class="form-group ">
+																		<label for="ccomment" class="control-label col-lg-2">联系人</label>
+																		<div class="col-lg-10">
+																			<input class="form-control " id="curl" type="url" name="url" />
+																		</div>
+																	</div>
+																</form>
+															</div>
+
+														</div>
+													</section>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+						</div>
+					</div>
+
+				</div>
+				<!--body wrapper end-->
+
+				<!--footer section start-->
+
+				<!--footer section end-->
+
+			</div>
+			<!-- main content end-->
+		</section>
+
+		<!-- Placed js at the end of the document so the pages load faster -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.min.js"></script>
+		<script src="js/jquery.nicescroll.js"></script>
+
+		<!--pickers plugins-->
+		<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+		<!--bootstrap Table-->
+		<script src='js/bootstrap-table.js'></script>
+		<script src='js/bootstrap-table-zh-CN.js'></script>
+		<script src='js/bootstrap-editable.js'></script>
+		<script src='js/bootstrap-table-editable.js'></script>
+
+		<!--pickers initialization-->
+		<script src="js/pickers-init.js"></script>
+
+		<!--common scripts for all pages-->
+		<script src="js/scripts.js"></script>
+
+		<script>
+			jQuery(document).ready(function() {
+				$(window.parent.document).find("#main").attr("height", document.body.scrollHeight)
+				$('.wysihtml5').wysihtml5();
+			});
+		</script>
+	</body>
+
+</html>

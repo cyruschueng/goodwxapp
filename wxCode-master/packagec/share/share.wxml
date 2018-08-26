@@ -1,0 +1,23 @@
+<!--pages/share/share.wxml-->
+<text>pages/share/share.wxml</text>
+<text>分享的文字内容</text>
+<image src='../../image/food.jpg'></image>
+ <button open-type='share'>share</button> 
+
+<block wx:if="{{shareAble}}">
+  <text>可分享的链接</text>
+  <button open-type='share'>share</button> 
+</block>
+<block wx:else>
+  <text>参加评测的链接</text>
+  <navigator url="../link/link">go to there</navigator>
+</block>
+<block>
+  <button open-type='share'>
+    <image class='anm' src='../../image/girl.jpg'  ></image>
+  </button>
+  <button bindtap='ctrlShare'>control share</button>
+  <block wx:if="{{shareAfter}}">
+    <text>分享后可见。</text>
+  </block>
+</block>

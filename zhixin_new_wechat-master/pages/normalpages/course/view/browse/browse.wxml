@@ -1,0 +1,285 @@
+<!--pages/normalpages/course/view/browse/browse.wxml-->
+<!--pages/normalpages/modify_course/modify_course.wxml-->
+
+<view class="container">
+
+    <view class='gray-space-small'></view>
+
+    <!-- Tab头 -->
+    <view class="tab">
+        <block wx:for="{{tabData}}" wx:key="{{index}}">
+            <view class="tab-list {{currentTabIdx===index ? 'current-highlight': ''}}" data-current="{{index}}" bindtap="onSwitchTab">{{item.name}}</view>
+        </block>
+    </view>
+
+    <view class='gray-space'></view>
+    <!-- 以下是Tab内容 -->
+
+    <!-- 基本信息 -->
+    <form wx:if="{{tabData[0].selected}}" class='form-container'>
+
+        <!-- 课程名字 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.name.name}}
+            </view>
+
+            <view class='item-value'>
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:20rpx'></view>
+                <view class='item-value-view'>
+                    {{courseItems.name.value}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 上课地址 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.location.name.name}}
+            </view>
+
+            <view class='item-value' bindtap='onOpenLocation'>
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:10rpx'></view>
+                <view class='item-value-view'>
+                    <view class='item-value-view'>
+                        {{courseItems.location.name.value}}
+                    </view>
+                    <image class='image-arrow' src='../../../../image/right_arrow.png'></image>
+                </view>
+            </view>
+        </view>
+
+        <!-- 上课教室 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.location.room.name}}
+            </view>
+
+            <view class='item-value'>
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:20rpx'></view>
+                <view class='item-value-view'>
+                    {{courseItems.location.room.value}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 课程开始日期 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.startDate.name}}
+            </view>
+
+            <view class="item-value">
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:20rpx'></view>
+                <view class="item-value-view">
+                    {{courseItems.startDate.value}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 课程结束日期 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.endDate.name}}
+            </view>
+
+            <view class="item-value">
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:20rpx'></view>
+                <view class="item-value-view">
+                    {{courseItems.endDate.value}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 日期安排 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.recurringRule.name}}
+            </view>
+
+            <view class='item-value' bindtap='onSetRecurringRules'>
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:20rpx'></view>
+                <view class="item-value-view">
+                    {{courseItems.recurringRule.value}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 隐藏的日期安排 -->
+        <view class="item-box row" wx:if="{{showRecurringRule}}">
+            <view class="day-selector">
+                <view class="day-box" wx:for="{{weekVisual}}" wx:key="{{index}}" id="{{item.id}}" data-date="{{item}}">
+                    <view class="day-item {{item.selected?'day-item-selected':''}}">{{item.value}}</view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 每次课开始的时间 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.startTime.name}}
+            </view>
+
+            <view class='item-value'>
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:100rpx'></view>
+                <view class='item-value-view'>
+                    {{courseItems.startTime.value}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 每次课时间长度 -->
+        <view class="item-box row">
+            <view class='item-name'>
+                {{courseItems.duration.name}}
+            </view>
+
+            <view class='item-value'>
+                <!-- 空白占位 -->
+                <view class='item-value-view' style='width:100rpx'></view>
+                <view class='item-value-view'>
+                    {{courseItems.duration.value}} 分钟
+                </view>
+            </view>
+        </view>
+
+        <!-- 课程描述 -->
+        <view class="item-big-box column">
+            <view class='item-name'>
+                {{courseItems.description.name}}
+            </view>
+
+            <view class='item-textarea'>
+                {{courseItems.description.value}}
+            </view>
+        </view>
+    </form>
+
+    <!-- 今日课程 -->
+    <form wx:else class='form-container'>
+        <!-- 当天有课 -->
+        <view wx:if="{{true}}" class='items-container'>
+            <view class='items-container'>
+                <!-- 课程名字 -->
+                <view class="item-box row">
+                    <view class='item-name'>
+                        {{courseItems.name.name}}
+                    </view>
+
+                    <view class='item-value'>
+                        <!-- 空白占位 -->
+                        <view class='item-value-view' style='width:20rpx'></view>
+                        <view class='item-value-view'>
+                            {{courseItems.name.value}}
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 上课地址 -->
+                <view class="item-box row">
+                    <view class='item-name'>
+                        {{courseItems.location.name.name}}
+                    </view>
+
+                    <view class='item-value' bindtap='onOpenLocation'>
+                        <!-- 空白占位 -->
+                        <view class='item-value-view' style='width:10rpx'></view>
+                        <view class='item-value-view'>
+                            <view class='item-value-view'>
+                                {{courseItems.location.name.value}}
+                            </view>
+                            <image class='image-arrow' src='../../../../image/right_arrow.png'></image>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 上课教室 -->
+                <view class="item-box row">
+                    <view class='item-name'>
+                        {{courseItems.location.room.name}}
+                    </view>
+
+                    <view class='item-value'>
+                        <!-- 空白占位 -->
+                        <view class='item-value-view' style='width:20rpx'></view>
+                        <view class='item-value-view'>
+                            {{courseItems.location.room.value}}
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 上课日期 -->
+                <view class="item-box row">
+                    <view class='item-name'>
+                        上课日期：
+                    </view>
+
+                    <view class='item-value'>
+                        <!-- 空白占位 -->
+                        <view class='item-value-view' style='width:20rpx'></view>
+                        <view class='item-value-view'>
+                            {{options.date}}
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 开始时间 -->
+                <view class="item-box row">
+                    <view class='item-name'>
+                        {{courseItems.startTime.name}}
+                    </view>
+
+                    <view class='item-value'>
+                        <!-- 空白占位 -->
+                        <view class='item-value-view' style='width:100rpx'></view>
+                        <view class='item-value-view'>
+                            {{courseItems.startTime.value}}
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 每次课时间长度 -->
+                <view class="item-box row">
+                    <view class='item-name'>
+                        {{courseItems.duration.name}}
+                    </view>
+
+                    <view class='item-value'>
+                        <!-- 空白占位 -->
+                        <view class='item-value-view' style='width:100rpx'></view>
+                        <view class='item-value-view'>
+                            {{courseItems.duration.value}} 分钟
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 课程描述 -->
+                <view class="item-big-box column">
+                    <view class='item-name'>
+                        {{courseItems.description.name}}
+                    </view>
+
+                    <view class='item-textarea'>
+                        {{courseItems.description.value}}
+                    </view>
+                </view>
+            </view>
+        </view>
+
+
+        <view class="btn-area">
+            <button type='primary' bindtap="onDeliverHomework">提交作业</button>
+        </view>
+
+    </form>
+
+
+
+</view>

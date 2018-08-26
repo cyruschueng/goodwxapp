@@ -1,0 +1,55 @@
+<view class='slbd result {{loadclass}}'>
+    <view class="user-box">
+        <view class="face-box">
+            <image class="user-face" src="{{userface}}" mode="aspectFit"></image>
+        </view>
+         <!-- <view class="user-nick">{{usernick}}</view>  -->
+    </view>
+    <view class='result-level'>
+        <view class='level-box'>
+            <view class='level-con'>
+                <view class='level-bar'>
+                    <view class='bar-hl' style='width:{{levelBarWidth}}'></view>
+                </view>
+                <view class='level-min'>{{levelNowVal}}</view>
+                <view class='level-max'>{{levelNextVal}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='info-wrap result-info'>
+        <view class='info-list'>
+            <view class='info-li'>
+                <image class='info-title img-this' src="../../asset/image/info-this.png" mode="aspectFit"></image>
+                <text class='info-con'>{{theScore}}</text>
+            </view>
+            <view class='info-li'>
+                <image class='info-title img-all' src="../../asset/image/info-all.png" mode="aspectFit"></image>
+                <text class='info-con'>{{userScore}}</text>
+            </view>
+            <view class='info-li'>
+                <image class='info-title img-sort' src="../../asset/image/info-sort.png" mode="aspectFit"></image>
+                <text class='info-con'>第{{friendRank}}名</text>
+            </view>
+        </view>
+    </view>
+    <view class='result-handle'>
+        <view class='handle-list'>
+            <view class='handle-row'>
+                <button class='handle-btn {{haschoice}}' bindtap="linkPageGame">
+                    <image src="{{gameChoiceImgSrc}}" mode="widthFix"></image>
+                </button>
+            </view>
+            <view class='handle-row'>
+                <button class='handle-btn' bindtap="linkPageRank">
+                    <image src="../../asset/image/btn-list.png" mode="widthFix"></image>
+                </button>
+            </view>
+            <view class='handle-row'>
+                <button class='handle-btn' open-type="share">
+                    <image src="{{shareScoreImgSrc}}" mode="widthFix"></image>
+                    <view class='handle-more'>{{shareScoreTipText}}</view>
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

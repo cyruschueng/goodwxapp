@@ -1,0 +1,26 @@
+<view>
+  <block wx:for="{{carousel.list}}" wx:for-item="item" wx:for-index="idx" wx:key="{{index}}">
+    <view class='recommendation'>
+      <view class='recommendation-each'>
+        <view class='recommendation-nae'>
+          <image class='recommendation-images' mode="aspectFill" src='{{item.picUrl}}'></image>
+          <view class='recommendation-right'>
+            <view class='recom-popularity'>
+              <text class='recommName'>{{item.skuName}}</text>
+              <image class='popularity' src='/images/icon/restaurant_hot.png'></image>
+            </view>
+            <view class='recommRight-top recommpingfen'>
+                <image catchtap=' onclickMore ' src='/images/icon/star1.png '></image>
+                <image src='/images/icon/star1.png '></image>
+                <image src='/images/icon/star1.png '></image>
+                <image src='/images/icon/star1.png '></image>
+                <image src='/images/icon/star2.png '></image>
+                <text class='like-collect '>{{qrCodeFlag ? '4.9 ' : '4.8 '}}</text>
+              </view>
+            <text class='cuisine-introduce '>{{item.skuInfo}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+   </block> 
+</view>

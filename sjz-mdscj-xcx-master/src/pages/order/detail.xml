@@ -1,0 +1,122 @@
+<form bindsubmit="formSubmit" report-submit='true'>
+  <button formType="submit" class="formIdBtn">
+    <view class="order-detail">
+      <view class="status" wx:if="{{props.detail.status != undefined}}">
+        <image class="bg-orderdetail" src="../../images/bg_orderdetail.jpg"></image>
+        <text wx:if="{{props.detail.status === 'CLOSED'}}"
+              class="block status-text">订单已关闭</text>
+        <text wx:if="{{props.detail.status === 'CANCELLED'}}"
+              class="block status-text">订单已取消</text>
+        <text wx:if="{{props.detail.status === 'WAIT' || props.detail.status === 'SUBMITTED'}}"
+              class="block status-text">等待买家付款</text>
+        <text wx:if="{{props.detail.status === 'SHIPPED'}}"
+              class="block status-text">待收货</text>
+        <text wx:if="{{props.detail.status === 'FINISHED'}}"
+              class="block status-text">交易成功</text>
+        <text wx:if="{{props.detail.status === 'WAIT_SHIPPING'}}"
+              class="block status-text">等待卖家发货</text>
+        <block wx:if="{{props.detail.promotionType === 'TUAN'}}">
+          <text wx:if="{{props.detail.promotion.status == 'ACTIVE' && props.detail.status != 'FINISHED'}}"
+                class="block status-text">组团中，未成功</text>
+          <text wx:if="{{props.detail.promotion.status == 'WAIT'}}"
+                class="block status-text">等待买家付款</text>
+          <text wx:if="{{props.detail.promotion.status == 'FAILED'}}"
+                class="block status-text">组团失败</text>
+          <text wx:if="{{props.detail.promotion.status == 'SUCCESS' && props.detail.status == 'SHIPPED'}}"
+                class="block status-text">组团成功，已发货</text>
+          <text wx:if="{{props.detail.item.status == 'FINISHED'}}"
+                class="block status-text">交易成功</text>
+          <text wx:if="{{props.detail.status == 'CLOSED'}}"
+                class="block status-text">订单已关闭</text>
+          <text wx:if="{{props.detail.status == 'CANCELLED'}}"
+                class="block status-text">订单已取消</text>
+        </block>
+      </view>
+      <view class="address">
+        <view class="bg"></view>
+        <view class="content">
+          <view class="icon-wrapper">
+            <image class="icon-location" src="../../images/detail_address.png"></image>
+          </view>
+          <view class="address-content" wx:if="{{props.detail.orderAddress}}">
+            <view class="personal-info">
+              <text class="receiver">收件人：{{props.detail.orderAddress.consignee}}</text>
+              <text>{{props.detail.orderAddress.phone}}</text>
+            </view>
+            <view class="address-info">
+              {{
+              props.detail.orderAddress.province +
+              props.detail.orderAddress.city +
+              props.detail.orderAddress.district +
+              props.detail.orderAddress.street
+              }}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order-info">
+        <view class="order-status">
+          {{state.packageStatusText}}
+        </view>
+        <view class="order-content">
+          <navigator class="content-item" hover-class="none" wx:for="{{props.detail.orderItems}}"
+                     wx:key="{{index}}" url="{{'../product/detail?id=' + item.orderItem.productId}}">
+            <image class="order-product" src="{{item.orderItem.img}}"></image>
+            <view class="product-name">
+              <text>{{item.orderItem.productName}}</text>
+            </view>
+            <view class="sku-detail">
+              <text>{{item.orderItem.skuStr}}</text>
+            </view>
+            <view class="price-info">
+              <view class="price">
+                ¥ {{item.orderItem.promotionPrice / 100}}
+              </view>
+              <view class="count">
+                x {{item.orderItem.quantity}}
+              </view>
+            </view>
+            <view class="btn-refund">
+              <block wx:if="{{props.detail.promotionType !== 'TUAN'}}">
+                <block wx:if="{{item.returnRefundStatus === null || item.returnRefundStatus === 'CANCELLED' || item.returnRefundStatus === 'REJECTED'}}">
+                  <text class="btn btn-refund-apply" catchtap="handleRefundApply"
+                        wx:if="{{ props.detail.status === 'WAIT_SHIPPING'}}">申请退款</text>
+                </block>
+              </block>
+              <text class="btn btn-refund-details" data-index="{{index}}" catchtap="handleRefundDetails"
+                    wx:if="{{item.hasReturnRefund}}">查看退款状态</text>
+            </view>
+          </navigator>
+        </view>
+      </view>
+      <view class="fee-info" wx:if="{{props.detail.paymentAmount}}">
+        <view class="logisticAmount">
+          <text>运费</text>
+          <text class="fee">¥{{props.detail.logisticAmount / 100}}</text>
+        </view>
+        <view class="payamount">
+          <text>实付</text>
+          <text class="fee">¥{{props.detail.paymentAmount / 100}}</text>
+        </view>
+      </view>
+      <view class="other-info" wx:if="{{state.createTime}}">
+        <text class="block">订单号：{{props.detail.orderNo}}</text>
+        <text class="block time">下单时间：{{state.createTime}}</text>
+        <text class="block time" wx:if="{{state.paidTime}}">付款时间：{{state.paidTime}}</text>
+        <text class="block time" wx:if="{{state.shippedTime}}">发货时间：{{state.shippedTime}}</text>
+      </view>
+      <view class="service-info">
+        <text class="block">客服电话：0571-87352347</text>
+      </view>
+      <view class="operation"
+            wx:if="{{state.canCancel || state.canPay || state.canSure}}">
+        <button wx:if="{{state.canSure}}" catchtap="handleDetailSign"
+                data-order-no="{{props.detail.orderNo}}" class="important">确认收货</button>
+        <button wx:if="{{state.canPay}}" catchtap="handleDetailPay"
+                data-order-no="{{props.detail.orderNo}}" class="important">立即支付</button>
+        <button wx:if="{{state.canCancel}}" catchtap="handleDetailCancel"
+                data-order-no="{{props.detail.orderNo}}">取消订单</button>
+      </view>
+    </view>
+  </button>
+</form>

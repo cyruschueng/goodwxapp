@@ -1,0 +1,704 @@
+.top{ margin: 0rpx;  padding-top: 20rpx; padding-bottom: 10rpx;
+    position: relative;}
+
+page{ background: #f5f3fa; }
+
+@font-face{
+    font-family: 'Impact';
+    src : url('http://oss.xqzs.cn/resources/runmini/impact_regular.ttf');
+}
+
+.top_animation{ height: 640rpx; position: relative;
+	background:#FF514A; /* 一些不支持背景渐变的浏览器 */
+    background:-moz-linear-gradient(top, #FF514A, #FEDE97);
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#FF514A), to(#FEDE97));
+}
+.man{
+    width:164px;
+    height: 164px; position: absolute;
+    z-index: 2;
+    left:50%; margin-left: -82px; top:50%; margin-top: -122px;
+}
+.man image{ width: 60rpx; height: 60rpx; position: absolute; top:0rpx;  left:50%; margin-left: -40rpx;}
+
+.run_glup{
+    position: absolute;
+    margin: 0 auto;
+    height: 164px;
+    width: 164px;
+    left:50%; margin-left: -82px; top:50%; margin-top: -122px;
+}
+
+
+.run_glup .cirle{ border: 10px solid rgba(255,255,255,1) ;  height: 144px;border-radius: 50%; position: absolute; top:0; left:0;
+    width: 144px;}
+.rnd{width: 100%; height: 100% ; position: absolute; top:0 ; z-index: 10000}
+.lion{ width: 60rpx; height: 60rpx; position: absolute; z-index: 500; margin-top: -30rpx; margin-left: -30rpx;left:164rpx; top:0;   }
+
+.pie_left,  .pie_right {  width:328rpx;  height:328rpx;  position: absolute;  top: 0;left: 0;  }
+.left, .right{  width:328rpx;  height:328rpx;  background:url(http://oss.xqzs.cn/resources/runmini/index_round_c.png) no-repeat; background-size: 328rpx;   position: absolute;  top: 0;  left: 0;  }
+.pie_right, .right { clip:rect(0,auto,auto,164rpx);  }
+.pie_left,  .left{  clip:rect(0,164rpx,auto,0);  }
+
+
+
+
+
+@keyframes round2 {
+    0%{
+        transform:   scale(1);
+        -webkit-transform:  scale(1);
+    }
+    15%{
+        transform:  scale(1.15);
+        -webkit-transform:   scale(1.15);
+    }
+    40%{
+        transform:  scale(1);
+        -webkit-transform:   scale(1);
+    }
+    70%{
+        transform:  scale(1.25);
+        -webkit-transform:   scale(1.25);
+    }
+    100%{
+        transform:   scale(1);
+        -webkit-transform:  scale(1);
+    }
+}
+
+
+
+
+
+.top .coin{ background: url(http://oss.xqzs.cn/xqzs/mini/program/index_coin.png) no-repeat ;   background-size: 30rpx;   height: 32rpx; font-size: 30rpx; padding-left: 40rpx; line-height: 1; color:#FF9933 ; position: absolute;top:40rpx;left: 30rpx;}
+
+.contact_btn_h{background: #FF9933;height: 72rpx; width: 168rpx;border-bottom-left-radius: 36rpx;border-top-left-radius: 36rpx; position: absolute; right:0; top:48rpx;}
+.top  .contact_btn_h .coin{ background: url(http://oss.xqzs.cn/xqzs/mini/program/index_coin_w.png) no-repeat ;   background-size: 20rpx; line-height: 1;   height: 20rpx; font-size: 24rpx; padding-left: 32rpx ; color:#fff ; position: absolute;top:8rpx;left: 26rpx;}
+.top  .contact_btn_h .line{ height: 2rpx ; width: 108rpx; background: rgba(255,255,255,0.6); position: absolute; top:36rpx; left:24rpx; }
+.top .contact_btn_h .right{ background: url(http://oss.xqzs.cn/xqzs/mini/program/run/mini_run_coin_right.png) no-repeat; width: 22rpx; height: 44rpx; background-size: 12rpx; position: absolute; right:0rpx; top:24rpx;}
+
+
+.top .contactttt{color:#fff ; font-size: 20rpx; position: absolute;top:0rpx;left: 0rpx; padding: 0; border: none;  background: none; padding-left:26rpx; padding-top:28rpx; padding-right: 30rpx; z-index: 1111 }
+.top .contactttt:after{ display: none; }
+
+
+.today_run_num view{ display: block; line-height: 1;}
+.today_run_num view.num{ color: #00d082; font-size: 72rpx;  margin: 52rpx 0; margin-bottom: 56rpx;  }
+.notice_link.navigator-hover{ background: none}
+.today_run_num .text{ padding-top: 12rpx}
+.today_run_num view{ font-size: 30rpx; color:#999;}
+.ad{
+    height: 88rpx;
+    overflow: hidden;
+    background: url(http://oss.xqzs.cn/xqzs/mini/program/index_ad_bg.png) no-repeat; background-size: 100% 100%; text-align: center; color:#666; font-size: 26rpx; line-height: 88rpx;  margin: 30rpx;  }
+.ad .text{ width: 90%; margin: 0 auto; overflow: hidden}
+
+@import "../marquee/marquee.wxss";
+
+.today_run_num .unit{ font-size: 28rpx;}
+.nums{ width: 100%; text-align: center;  display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;  }
+.nums>view
+{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    color:#666; font-size: 36rpx;
+}
+.nums>view text{ display: block; color:#FF9133}
+.nums>view text.text
+{
+    margin-bottom: 8rpx;
+    color:#999; font-size: 24rpx;
+}
+button.change{ background: #75CF85 ; height: 84rpx; display: block; margin: 48rpx auto; width: 320rpx; overflow: hidden; border:0; border-radius: 42rpx; line-height: 84rpx; color:#fff; font-size: 30rpx;}
+button.change:active{ background: #56cf51  }
+button.changed{ background:rgba(121,212,157,0.4);
+
+}
+button.changed.button-hover,button.changed:active{background:rgba(121,212,157,0.4) !important;
+
+}
+button.change::after{
+    border:none;
+}
+.tj {position: relative}
+.tabh{ height: 88rpx;margin-bottom: 30rpx;}
+.tab.over{ position: fixed; width: 100%; background:#fff; top:0; left:0; z-index: 100000; border-bottom: 2rpx solid #f5f3fa}
+.top .tip{ color:#999; font-size: 24rpx; text-align: center}
+.tab {  display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    height: 88rpx; background: #fff; margin-bottom: 30rpx;
+}
+.tab>text
+{ -webkit-box-flex: 1;
+    -webkit-flex: 1; font-size: 28rpx;
+    flex: 1; text-align: center;
+    height: 88rpx; line-height: 88rpx;
+}
+.tab>text.on{ color:#75CF85; position: relative}
+.tab>text.on .line{ height: 4rpx; width: 24rpx; position: absolute; bottom:0; left:50%; margin-left:-12rpx;display: block; background: #75CF85}
+.tj  .item{
+    background: #fff; position: relative; height: 132rpx;
+}
+.tj  .item.myself{ background: rgba(117,207,133,0.15)}
+
+.tj .item .order{ line-height: 132rpx; color:#969696 ; font-size: 30rpx; width: 56rpx; text-align: center;   position: absolute; left:20rpx;}
+.tj .item .line{ height: 2rpx; background: #f1f1f1; width: 100%;   display: block; position: absolute; bottom:0; left:0}
+.tj .item image{ height: 80rpx; width: 80rpx; border-radius: 10rpx; position: absolute; left:92rpx; top:26rpx;}
+.tj  .item text{line-height: 132rpx; color:#333; font-size: 28rpx;    font-family: Arial;}
+
+.tj  .item .num{  position: absolute; right:80rpx;}
+.tj  .item .num text{ color:#3E3F52 ; font-size: 46rpx; float:left; margin-right: 4rpx; margin-left: 0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif}
+.tj .item .num text.step_w{color:#FF9933 ; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif }
+.tj  .item .num text.c{ font-size:24rpx; margin-right: 0; line-height: 146rpx; height: 132rpx; overflow: hidden }
+scroll-view{ height: 100%; overflow: auto}
+
+.tj .item .hearts{ width: 88rpx; text-align: center;  padding-top: 24rpx; padding-bottom: 12rpx; position: absolute; top:4px; right:0;}
+
+.tj .item .hearts .heart_on{ background: url(http://oss.xqzs.cn/resources/runmini/index_good_on.png) no-repeat; height:30rpx; width: 32rpx; background-size: 32rpx; margin: 0 auto;  margin-top:6rpx;}
+
+.tj .item .hearts .heart{ background: url(http://oss.xqzs.cn/resources/runmini/index_good.png) no-repeat; height:30rpx; width: 32rpx; background-size: 32rpx; margin: 0 auto;  margin-top:6rpx;}
+.tj .item .hearts .num2{ font-size: 24rpx; color:#999; }
+
+.bottom_rank{background: #75CF85; height: 148rpx; position: fixed; bottom:0; left:0; width: 100%; border-top: none}
+.bottom_rank .item{ background: none; color:#fff !important}
+.bottom_rank .item .order{ color:#fff; font-size: 42rpx;  line-height: 148rpx;}
+.bottom_rank .item image{ height: 104rpx; width: 104rpx; border: 2rpx solid  #fff; margin-top: 20rpx;}
+
+.bottom_rank .item text{ color:#fff; line-height: 148rpx; font-size: 32rpx;}
+.bottom_rank .item .num text { color:#fff;}
+.bottom_rank .item .hearts .num2 { color:#fff;}
+.bottom_rank .item .hearts .heart{ background: url(http://oss.xqzs.cn/xqzs/mini/program/index_heart_w.png) no-repeat; height:26rpx; width: 28rpx; background-size: 28rpx; margin: 0 auto;  margin-top:6rpx;}
+.bottom_rank  .item .num text.c{ height: 140rpx; line-height: 160rpx; overflow: hidden}
+.run_infos{ height: 132rpx; width: 360rpx; position: absolute ; left:200rpx;}
+.hit {
+    -webkit-animation: heart 0.1s linear;
+    animation: heart 0.1s linear;
+}
+
+@-webkit-keyframes heart {
+    from {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+    to {
+        -webkit-transform: scale(1.2,1.2);
+        transform: scale(1.2,1.2);
+    }
+}
+@keyframes heart {
+    from {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+    to {
+        -webkit-transform: scale(1.2,1.2);
+        transform: scale(1.2,1.2);
+    }
+}
+
+
+
+.notice_box{
+
+    border-bottom: 2rpx solid #eee;
+}
+.notice_box_p{ padding-bottom: 32rpx}
+.notice{
+    height: 80rpx;
+    width: 360rpx;
+    background: #393939;
+    border-radius: 10rpx;
+    margin: 0 auto;
+
+}
+.notice:active{ background: #1f1f1f}
+.notice_friend{
+    height:64rpx;
+    width: 64rpx;
+    float: left;
+    margin-left:10rpx;
+    margin-top:8rpx;
+    display: block;
+}
+.notice view{
+    float: left;
+    height:80rpx;
+    line-height: 80rpx;
+    color: #fff;
+    margin-left:64rpx;
+    font-size: 26rpx;
+}
+.notice .goNotice{
+    width:32rpx;
+    height:32rpx;
+    display: block;
+    float: right;
+    margin-right: 28rpx;
+    margin-top:24rpx;
+}
+.notice img{
+    height: 60rpx;
+    width:60rpx;
+}
+
+
+
+/*积分动画*/
+.coin_add{ position: fixed; width:5.558823529411765rem; height: 5.558823529411765rem; top:50%; left:50%; margin-left: -2.779411764705883rem; margin-top: -2.779411764705883rem; z-index: 1000;
+    animation: coin_add_show 2.5s  forwards;
+    -webkit-animation: coin_add_show 2.5s  forwards;}
+.coin_add .coin_add_round{ background: url(http://oss.xqzs.cn/xqzs/mini/program/coin_add_round.png) no-repeat center; width: 100%; height: 100%; background-size: 100%; position: absolute; top:0;
+    animation: coin_round_round 1s    infinite linear ;
+    -webkit-animation: coin_round_round 1s  infinite linear ;
+    animation-delay:0.8s;
+    -webkit-animation-delay:0.8s;
+
+}
+.coin_add .coin_add_coin{ background: url(http://oss.xqzs.cn/xqzs/mini/program/coin_add_coin.png) no-repeat center; width: 100%; height: 100%; background-size: 3.617647058823529rem; position: absolute; top:0;
+    animation: coin_coin_round 1s   infinite linear ;
+    -webkit-animation: coin_coin_round 1s  infinite linear ;
+    animation-delay:0.8s;
+    -webkit-animation-delay:0.8s;}
+
+.coin_add .add_num{ font-size: 24rpx; color:#ffaa00; position: absolute; top:0; width: 100%; text-align: center;
+    animation: coin_big 1.5s  forwards linear;
+    -webkit-animation: coin_big 1.5s  forwards  linear;
+    animation-delay:0.8s;
+    -webkit-animation-delay:0.8s;
+}
+@keyframes coin_coin_round {
+    0%{
+        backface-visibility: hidden;
+        transform: rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
+    }
+    100%{
+        backface-visibility: hidden;
+        transform: rotateY(720deg);
+        -webkit-transform: rotateY(720deg);
+    }
+
+}
+
+@keyframes coin_round_round {
+
+    0%{
+        backface-visibility: hidden;
+
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    }
+    100%{
+        backface-visibility: hidden;
+
+        transform: rotate(720deg);
+        -webkit-transform: rotate(720deg);
+    }
+
+}
+
+
+@keyframes coin_big {
+    0%{
+        transform: translate3d(0, 0, 0)   scale(1);
+        -webkit-transform: translate3d(0,0, 0) scale(1);
+    }
+    70%{
+        transform: translate3d(0, -200%, 0)   scale(2.5);
+        -webkit-transform: translate3d(0,-200%, 0) scale(2.5);
+        opacity: 1;
+    }
+    100%{
+        transform: translate3d(20%, -300%, 0)   scale(3);
+        -webkit-transform: translate3d(20%,-300%, 0) scale(3);
+        opacity: 0;
+    }
+
+}
+
+@keyframes coin_add_show {
+    0%{
+        transform: translate3d(100%, -200%, 0)   scale(0);
+        -webkit-transform: translate3d(100%,-200%, 0) scale(0);
+    }
+    15%{
+        transform: translate3d(0, 0, 0)   scale(1);
+        -webkit-transform: translate3d(0,0, 0) scale(1);
+    }
+    85%{
+        transform: translate3d(0, 0, 0)   scale(1);
+        -webkit-transform: translate3d(0,0, 0) scale(1);
+    }
+    100%{
+        transform: translate3d(-100%, -200%, 0)   scale(0);
+        -webkit-transform: translate3d(-100%,-200%, 0) scale(0);
+    }
+}
+
+button.share_btn {
+    background:#75CF85;
+    height:84rpx;
+    display:block;
+
+    width:400rpx;
+    overflow:hidden;
+    border:0;
+    border-radius:42rpx;
+    line-height:84rpx;
+    color:#fff;
+    font-size:30rpx;
+    margin: 0 auto;
+}
+button.share_btn:active{ background: #56cf51  }
+button.share_btn::after{  border:none;  }
+
+.view_btn_share{ padding-top: 48rpx; padding-bottom: 48rpx;}
+
+
+
+.tj .item .hearts .fly_heart{
+    height:30rpx;
+    width:32rpx;
+    position: absolute;top: 10rpx; left: 12rpx;
+    border-radius:0;
+
+}
+.tj .item .hearts   .fly_heart.start1{
+    animation: fly_height1 1.5s forwards linear;
+}
+.tj .item .hearts    .fly_heart.start2{
+    animation: fly_height2 1.8s forwards linear;
+}
+.tj .item .hearts   .fly_heart.start3{
+    animation: fly_height3 1.3s forwards linear;
+}
+.tj .item .hearts  .fly_heart.start4{
+    animation: fly_height4 3s forwards linear;
+}
+.tj .item .hearts  .fly_heart.start0{
+    animation: fly_height5 2.5s forwards linear;
+}
+@keyframes fly_height1{
+    0%{
+        opacity: 1;
+        transform: translate3d(0, 0, 0)   scale(1);
+        -webkit-transform: translate3d(0,0, 0)   scale(1);
+    }
+    100%{
+        opacity: 0;
+        transform: translate3d(-300rpx, -50rpx, 0)   scale(1);
+        -webkit-transform: translate3d(-300rpx, -50rpx, 0)   scale(1);
+    }
+}
+@keyframes fly_height2{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translate3d(-50rpx, -300rpx, 0)   scale(1);
+        -webkit-transform: translate3d(-50rpx, -300rpx, 0)   scale(1);
+    }
+}
+@keyframes fly_height3{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translate3d(-150rpx, -100rpx, 0)   scale(1);
+        -webkit-transform:  translate3d(-150rpx, -100rpx, 0)   scale(1);
+    }
+}
+@keyframes fly_height4{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translate3d(-200rpx, -80rpx, 0)   scale(1);
+        -webkit-transform: translate3d(-200rpx, -80rpx, 0)   scale(1);
+    }
+}
+@keyframes fly_height5{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translate3d(-100rpx, -200rpx, 0)   scale(1);
+        -webkit-transform: translate3d(-100rpx, -200rpx, 0)   scale(1);
+    }
+}
+.img{
+  position: absolute;
+}
+
+@keyframes cloud {
+    0%{
+        opacity:0.8;
+        transform: translate3d(650rpx, 0, 0) ;
+    }
+    100%{
+        opacity:0.8;
+        transform: translate3d(-700rpx, 0, 0) ;
+
+    }
+}
+.img.cloud1{
+    opacity: 0.5;
+  top: 20rpx;
+  left: 440rpx;
+  width: 140rpx;
+    height: 26rpx;
+    animation: cloud 12s infinite linear;
+    background: url(http://oss.xqzs.cn/resources/runmini/index_cloud1.png) no-repeat; background-size:100%;
+}
+.img.cloud2{
+    opacity: 0;
+  top: 30rpx;
+  left: 340rpx;
+    height: 32rpx;
+  width: 172rpx;
+    background: url(http://oss.xqzs.cn/resources/runmini/index_cloud1.png) no-repeat; background-size:100%;
+    animation: cloud 15s infinite linear;
+    -webkit-animation-delay: 2s;
+
+}
+.img.branch1{ top:0rpx; left: 0rpx; width: 170rpx; height: 204rpx;background: url(http://oss.xqzs.cn/resources/runmini/index_branch1.png) no-repeat; background-size: 100%}
+.img.branch2{top:70rpx; right: 0rpx;width:170rpx;height: 204rpx;background: url(http://oss.xqzs.cn/resources/runmini/index_branch2.png) no-repeat; background-size: 100%}
+.img.branch3{top:300rpx; right: 0rpx; width: 120rpx;z-index: 3;height: 278rpx;background: url(http://oss.xqzs.cn/resources/runmini/index_branch3.png) no-repeat; background-size: 100%}
+.img image{
+  width: 100%;
+}
+.nav image{
+  width: 100%;
+}
+.run_info{
+  color: #fff;
+  text-align: center;
+}
+.run_title{
+  font-size: 26rpx;
+  margin-top: 48rpx;
+}
+
+.run_bushu{
+  font-size: 72rpx;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  margin-top: 10rpx;
+}
+.run_goal{font-size: 24rpx;margin-top: 12rpx;}
+.nav{width: 690rpx; height: 230rpx;position:relative;z-index: 99; left: 30rpx; top:480rpx; background: url("http://oss.xqzs.cn/resources/runmini/index_housetop.png") no-repeat;background-size: 100%}
+.nav .nav_items{display: flex;height: 180rpx; position: absolute;top:100rpx; width: 100%;text-align: center}
+.nav .nav_cat{position: absolute;left: 8rpx;top: -56rpx; width: 130rpx;}
+.nav .nav_snow{position: absolute;width: 548rpx; left: 110rpx; top: -10rpx;}
+.nav .nav_items .nav_icon{ width: 40rpx; margin: 0 auto;}
+.nav .nav_items .nav_icon image{width: 100%}
+.nav .nav_items .nav_item{width: 20% ;margin: 20rpx 2.5%;}
+.nav .nav_items .nav_item button{ height: 100%; width: 100%; padding-top: 50rpx;font-size: 24rpx;color: rgba(81,84,102,1);  }
+.nav .nav_items .nav_item.tj button{background: url(http://oss.xqzs.cn/resources/runmini/index_total.png) no-repeat top center; background-size: 40rpx; }
+.nav .nav_items .nav_item.goal button{background: url(http://oss.xqzs.cn/resources/runmini/index_goal.png) no-repeat top center; background-size: 40rpx; }
+.nav .nav_items .nav_item.bind button{background: url(http://oss.xqzs.cn/resources/runmini/index_relation.png) no-repeat top center; background-size: 40rpx; }
+.nav .nav_items .nav_item.pk button{background: url(http://oss.xqzs.cn/resources/runmini/index_pk.png) no-repeat top center; background-size: 40rpx; }
+
+.tabs{
+position: absolute;
+left: 50%;
+margin-left: -128rpx;
+top:120rpx;
+width:256rpx;
+height:60rpx;
+border-radius: 35rpx ;
+border: 1rpx solid #FC5739 ;
+display: flex;
+overflow: hidden;
+}
+.tabs .btn{
+  width: 50%;
+  font-size: 25rpx;
+  line-height: 66rpx;
+  color: #666666;
+  text-align: center;
+}
+.tabs .btn.selected{
+  color: #fff;
+  background: #FC5739  !important;
+}
+.rank{height: 240rpx; background: #DFD0C2 ;width: 100%;position: relative;}
+.rank .z1{position: absolute; width:15rpx; right: 80rpx; top: 110rpx;font-size: 24rpx;animation: z1 3s linear infinite ;}
+.rank .z2{position: absolute; width:15rpx; right: 65rpx; top: 100rpx; font-size: 28rpx; animation: z2 3s linear infinite ;  }
+.rank .z3{position: absolute; width:15rpx; right: 45rpx; top: 90rpx; font-size: 32rpx; animation: z3 3s linear infinite ;  }
+
+@keyframes z1{
+    0% {opacity: 0}
+    33%{   opacity: 1}
+    66%{   opacity: 1}
+    100%{   opacity: 1}
+}
+@keyframes z2{
+    0% {opacity: 0}
+    33%{   opacity: 0}
+    66%{   opacity: 1}
+    100%{   opacity: 1}
+}
+@keyframes z3{
+     0% {opacity: 0}
+     33%{   opacity: 0}
+     66%{   opacity: 0}
+     100%{   opacity: 1}
+ }
+
+.img.snow1{top:102rpx; left: 0;width: 170rpx;}
+.img.dog{top:106.2rpx; right: 70rpx;width: 130rpx; z-index: 2}
+.img.hulu{top:157rpx; right: 105rpx;width: 25rpx; z-index: 3 ;animation: hulu linear infinite 3s}
+.img.listsnow{top: -26rpx; left: 0;width: 250rpx; position: absolute;z-index: 5}
+.img.rightsnow{top:-26rpx; right: -160rpx;width: 250rpx;position: absolute; z-index: 5}
+.artsnow{width: 70rpx; height: 28rpx; border-radius: 70%; position: absolute;right: -40rpx; top:80rpx;background: #FFF}
+.artshadow{width: 110rpx; height: 30rpx; border-radius: 70%; position: absolute;right: 80rpx; top: 200rpx;background: rgba(125,136,146,0.7)}
+.shuju{
+  text-align: left;
+  color: #7D8892;
+  font-size: 24rpx;
+}
+.run_name{
+  text-align: left;
+ color: #8C8D98 ;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  margin-top: 30rpx;
+}
+.run_infos .shuju text{ text-align: left;
+  color: #7D8892;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  margin-left: 0}
+.moredata{ font-weight: bold; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif}
+.img.dl{top: 48rpx;left: 52rpx;width: 64rpx; height: 224rpx; animation: denglong infinite linear 5s; background: url(http://oss.xqzs.cn/resources/runmini/index_dl.png)  no-repeat; background-size: 64rpx; background-position: 0 100rpx;}
+.img.dl1{top: 160rpx;right: 52rpx;width: 48rpx; height: 168rpx; animation: denglong infinite linear 6s; background: url(http://oss.xqzs.cn/resources/runmini/index_dl.png) no-repeat; background-size: 48rpx; background-position: 0 80rpx;}
+@keyframes denglong{
+  0%{
+    transform-origin: 50% 50%; transform: rotate(0deg);
+  }
+  25%{
+     transform-origin: 50% 50%; transform: rotate(45deg)
+  }
+  50%{transform-origin: 50% 50%; transform: rotate(0deg) }
+
+  75%{
+    transform-origin: 50% 50%; transform: rotate(45deg)
+  }
+  100%{ transform-origin: 50% 50%; transform: rotate(0deg)}
+}
+@keyframes hulu{
+  0% {   transform: translate3d(0, 0, 0)   scale(1);}
+  50%{ transform: translate3d(30rpx, -30rpx, 0)   scale(3);}
+  100%{ transform: translate3d(0, 0, 0)   scale(1);}
+}
+
+
+
+
+.snowflakes{ position: absolute; height: 580rpx; width: 100%; z-index: 100}
+.snowflakes .snowflake{
+
+    position: absolute; top:0; left:0; height:28rpx ; width: 32rpx; background: url(http://oss.xqzs.cn/resources/runmini/index_smallsnow.png) no-repeat; background-size: 32rpx;
+}
+.snowflakes .snowflake1{animation: snowflake1 infinite linear 6.6s;}
+.snowflakes .snowflake2{animation: snowflake2 infinite linear 5.6s ; }
+.snowflakes .snowflake3{animation: snowflake3 infinite linear 5.9s}
+.snowflakes .snowflake4{animation: snowflake4 infinite linear 6.8s}
+.snowflakes .snowflake5{animation: snowflake5 infinite linear 7s}
+.snowflakes .snowflake6{animation: snowflake6 infinite linear 8s}
+.snowflakes .snowflake7{animation: snowflake7 infinite linear 9s}
+.snowflakes .snowflake8{animation: snowflake8 infinite linear 10s}
+.snowflakes .snowflake9{animation: snowflake9 infinite linear 8.3s}
+.snowflakes .snowflake0{animation: snowflake0 infinite linear 8.5s}
+@keyframes snowflake1  {
+    0% {transform: translate3d(750rpx, 0, 0) scale(0.3);opacity: 0.8}
+    50% {transform: translate3d(550rpx, 320rpx, 0) scale(0.3);opacity: 0.8}
+    90%{transform: translate3d(150rpx, 540rpx, 0)scale(0.3);opacity:0.8}
+    100%{transform: translate3d(140rpx, 540rpx, 0)scale(0.3);opacity: 0}
+}
+
+@keyframes snowflake2  {
+    0% {transform: translate3d(450rpx, 0, 0) scale(0.4);opacity: 0.8}
+    50% {transform: translate3d(250rpx, 420rpx, 0) scale(0.4);opacity: 0.8}
+    90%{transform: translate3d(100rpx, 520rpx, 0)scale(0.4);opacity: 0.8}
+    100%{transform: translate3d(100rpx, 540rpx, 0)scale(0.4);opacity: 0}
+}
+
+@keyframes snowflake3  {
+    0% {transform: translate3d(350rpx, 0, 0) scale(0.3);opacity: 0.8}
+    50% {transform: translate3d(250rpx, 320rpx, 0) scale(0.3);opacity: 0.8}
+    90%{transform: translate3d(50rpx, 540rpx, 0)scale(0.3);opacity: 0.8}
+    100%{transform: translate3d(50rpx, 540rpx, 0)scale(0.3);opacity:0}
+}
+
+@keyframes snowflake4  {
+    0% {transform: translate3d(150rpx, 0, 0) scale(0.6);opacity: 1}
+    50% {transform: translate3d(50rpx, 320rpx, 0) scale(0.6);opacity: 1}
+    90%{transform: translate3d(60rpx, 540rpx, 0)scale(0.6);opacity: 1}
+    100%{transform: translate3d(60rpx, 540rpx, 0)scale(0.2);opacity: 0}
+}
+
+@keyframes snowflake5  {
+    0% {transform: translate3d(600rpx, 0, 0) scale(0.55);opacity: 1}
+    50% {transform: translate3d(400rpx, 320rpx, 0) scale(0.55);opacity: 1}
+    90%{transform: translate3d(300rpx, 540rpx, 0)scale(0.55);opacity: 1}
+    100%{transform: translate3d(300rpx, 540rpx, 0)scale(0.45);opacity: 0}
+}
+
+@keyframes snowflake6  {
+    0% {transform: translate3d(300rpx, 0, 0) scale(0.54);opacity: 1}
+    50% {transform: translate3d(200rpx, 300rpx, 0) scale(0.52);opacity: 1}
+    90%{transform: translate3d(100rpx, 540rpx, 0)scale(0.53);opacity: 1}
+    100%{transform: translate3d(100rpx, 540rpx, 0)scale(0.54);opacity:0}
+}
+
+@keyframes snowflake7  {
+    0% {transform: translate3d(750rpx, 0, 0) scale(0.51);opacity: 1}
+    50% {transform: translate3d(600rpx, 400rpx, 0) scale(0.51);opacity: 1}
+    90%{transform: translate3d(500rpx, 540rpx, 0)scale(0.51);opacity: 1}
+    100%{transform: translate3d(500rpx, 540rpx, 0)scale(0.45);opacity: 0}
+}
+@keyframes snowflake8  {
+    0% {transform: translate3d(450rpx, 0, 0) scale(0.48);opacity: 1}
+    50% {transform: translate3d(300rpx, 400rpx, 0) scale(0.48);opacity: 1}
+    90%{transform: translate3d(600rpx, 540rpx, 0)scale(0.48);opacity: 1}
+    100%{transform: translate3d(600rpx, 540rpx, 0)scale(0.4);opacity: 0}
+}
+@keyframes snowflake9  {
+    0% {transform: translate3d(550rpx, 0, 0) scale(0.46);opacity: 1}
+    50% {transform: translate3d(300rpx, 400rpx, 0) scale(0.46);opacity: 1}
+    90%{transform: translate3d(200rpx, 540rpx, 0)scale(0.46);opacity: 1}
+    100%{transform: translate3d(100rpx, 540rpx, 0)scale(0.4);opacity: 0}
+}
+
+@keyframes snowflake0  {
+    0% {transform: translate3d(570rpx, 0, 0) scale(0.6);opacity: 1}
+    50% {transform: translate3d(280rpx, 200rpx, 0) scale(0.6);opacity: 1}
+    90%{transform: translate3d(220rpx, 530rpx, 0)scale(0.6);opacity: 1}
+    100%{transform: translate3d(100rpx, 540rpx, 0)scale(0.6);opacity: 0}
+}
+
+page{  height: 100%; width: 100%}
+.bind_mini_program_tip{ position: fixed; top:0; left:0; z-index: 10001; height: 100%; width: 100%}
+.bind_mini_program_tip .bg{ position: absolute; height: 100%; width: 100%; background: rgba(0,0,0,0.6) }
+.bind_mini_program_tip .main{ background: #fff; border-radius: 16rpx; position: absolute; top:10%;left:50%; width: 590rpx; margin-left: -295rpx; height: 80%}
+.bind_mini_program_tip .main .top{ background: url(http://oss.xqzs.cn/resources/mpzq/bind_mini_program_tip_top.png) no-repeat; width: 562rpx; background-size: 562rpx; height: 100rpx; position: absolute; top:14rpx;left:14rpx;}
+
+.bind_mini_program_tip .main .foot{ background: url(http://oss.xqzs.cn/resources/mpzq/bind_mini_program_tip_foot.png) no-repeat; width: 562rpx; background-size: 562rpx; height: 100rpx; position: absolute; bottom:14rpx;left:14rpx;font-size: 24rpx; color:#666 ; text-align: center;  line-height: 140rpx; overflow: hidden}
+.bind_mini_program_tip .main .title{ font-size: 36rpx; color:#000; text-align: center; margin: 66rpx 0; margin-bottom: 40rpx;}
+.bind_mini_program_tip .main .content{ background: #fff; font-size: 30rpx; line-height:  50rpx;color:#333; width: 480rpx; margin: 0 auto;}
+.bind_mini_program_tip .main .content text{ display: block; min-height: 50rpx;}
+.bind_mini_program_tip .main .copy{ color:#FF9900;  display: inline !important}
+.bind_mini_program_tip .main .close{background: url(http://oss.xqzs.cn/resources/mpzq/bind_mini_program_tip_close.png) no-repeat  center; height: 88rpx; width: 88rpx; background-size: 28rpx; position: absolute; top:28rpx; right:28rpx; z-index: 34}
+
+
+

@@ -1,0 +1,83 @@
+<view wx:if="{{startStatus == true}}" class="content-box">
+    <view class="right-box">
+        <image class="role_btn" bindtap="showRole" src="../../images/icon/role_btn.png"></image>
+    </view>
+    <text class="time {{isIpx?'ipx':''}}">{{c_hour}}:{{c_min}}:{{c_sis}}</text>
+    <view class="role" wx:if="{{quiz.length==5}}">
+        本次初赛分为跟读和单项选择两部分，完成跟读后才可开始答题。其中跟读每题25分，共2题，单项选择每题10分，共5题。总分为100分，请您在60分钟内尽快答完所有题目并提交成绩。
+    </view>
+    <view class="role" wx:else="{{quiz.length==10}}">
+        本次初赛均为单项选择题，请您先阅读绘本，根据绘本内容答题。其中单项选择题每题10分，共10题，总分为100分，请您在60分钟内尽快答完所有题目并提交成绩。
+    </view>
+    <view class="books-box">
+        <text wx:if="{{quiz.length==5}}">READING AND SPEAKING (50points)</text>
+        <text wx:else="{{quiz.length==10}}">READING </text>
+        <view class="l {{book_ids[index].book_id?'book_yellow':'book_blue'}}" wx:for="{{books}}">
+            <image class="book_img" src="{{item.pic}}" data-book-id="{{item.id}}" data-book-pic="{{item.pic}}" data-book-index="{{index}}" bindtap="toWeb"></image>
+            <view class="book_name">
+                <text>{{item.book_name}}</text>
+            </view>
+            <image class="score_bg {{book_ids[index].score?'':'hidden'}}" src="../../images/icon/score_bg.png"></image>
+            <view class="score {{book_ids[index].score?'':'hidden'}}">
+                {{book_ids[index].score}}
+            </view>
+        </view>
+    </view>
+    <view class="questions" bindtap="start">
+        <text wx:if="{{quiz.length==5}}" class="{{isIpx?'ipx_b':''}}">QUESTIONS (50points)</text>
+        <text wx:else="{{quiz.length==10}}" class="{{isIpx?'ipx_b':''}}">QUESTIONS (100points)</text>
+        <image src="../../images/shelf/button21.png"></image>
+        <view class="btn_text">开始答题</view>
+    </view>
+</view>
+<view wx:else="{{startStatus == false}}" class="topic-box {{isIpx?'ipx_topic':''}}">
+    <view class="count_down {{isIpx?'ipx_p':''}}">
+        <image class="progress_bg" src="../../images/icon/progress_bg.png"></image>
+        <view class="progress" style="width:{{countTime/3600000*490}}rpx">{{c_hour}}:{{c_min}}:{{c_sis}}</view>
+    </view>
+    <view class="quiz-box">
+        <view class="quiz" wx:for="{{quiz}}" data-item="item" wx:key="item" wx:for-index="ind">
+            <view class="quiz_ind" wx:if="{{page==ind}}">
+                <image src="../../images/icon/quiz_ind.png"></image>
+                <text>第{{ind+1}}题</text>
+            </view>
+            <image class="quiz_pre" src="../../images/icon/quiz_pre.png" wx:if="{{page==ind&&page>0}}" bindtap="quiz_pre"></image>
+            <view class="content" wx:if="{{page==ind}}">
+                <view class="topic_title">{{item.title}}</view>
+                <image wx:if="{{item.topic_type==7}}" class="topic_img" mode="widthFix" src="{{item.pic_path}}" bindload="imageLoad" binderror="imageError"></image>
+                <view class="topic_content {{ans[ind][i]?'check_bg':''}}" wx:for="{{item.quiz}}" wx:for-index="i" wx:for-item="q" wx:key="q" data-word="{{item.words_id}}" data-content="{{q.title}}" data-flag="{{q.flag}}" data-page="{{ind}}" data-ind="{{i}}" bindtap="check_ans">
+                    <!--<text>{{item.topic_type}}++{{i}}</text>-->
+                    <view class="item_bg">
+                        <image src="{{ans[ind][i]?'../../images/icon/item_yes.png':'../../images/icon/item_no.png'}}"></image>
+                        <text style="color:{{ans[ind][i]?'#FFB669':'#F4ECDF'}}">{{itemArr[i]}}</text>
+                    </view>
+                    <view class="item_con">
+                        <!--<text>{{q.pic_path}}</text>-->
+                        <!--<text>{{item.topic_type}}</text>-->
+                        <!--style="height:{{ansH}}rpx;"-->
+                        <image wx:if="{{item.topic_type==5}}" class="ans_img" src="{{q.pic_path}}" mode="widthFix" bindload="imgsLoad"></image>
+                        <text wx:else="{{item.topic_type!=5}}">{{q.title}}</text>
+                    </view>
+                </view>
+            </view>
+            <image class="quiz_next" src="../../images/icon/quiz_next.png" wx:if="{{page<ind}}" bindtap="quiz_next"></image>
+            <view class="btn-box">
+                <image wx:if="{{submitStatus}}" src="../../images/icon/button_yes.png"></image>
+                <image wx:else="{{!submitStatus}} "src="../../images/icon/button_no.png"></image>
+                <text class="{{submitStatus?'yes_color':'no_color'}}" bindtap="subResult">提交成绩</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{moStatus}}" class="modal-box">
+    <image class="modal_bg" src="../../images/icon/modal_bg.png"></image>
+    <view class="text">
+        <text class="title">温馨提示</text>
+        <text>{{modalText}}</text>
+        <text></text>
+    </view>
+    <image class="modal_btn" src="../../images/icon/modal_btn.png" bindtap="modalHide"></image>
+</view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
+<view class="tran_bg" style="display: {{tranStatus?'block':'none'}}"></view>
+

@@ -1,0 +1,42 @@
+<!--pages/qClock/qClock.wxml-->
+
+<view class="container">
+  <view class="index-hd">
+    <image class="index-logo" src="../../images/logo.png"></image>
+    <view class="index-desc">您的好友为您设置了一个提醒，如您接受提醒将会在好友设置的日期里收到一个提醒，如果忽略将不会受到。</view>
+  </view>
+  <view class="page-body">
+    <view class="page-section">
+      <form bindsubmit='formSubmit' report-submit='true'>
+        <view class="bottom-content">
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒日期</text>
+            <text class="bottom-detail">{{date}}</text>
+          </view>
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒时间</text>
+            <text class="bottom-detail">{{time}}</text>
+          </view>
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒内容</text>
+            <text class="bottom-detail">{{title}}</text>
+          </view>
+          <view class="bottom-cell">
+            <text class="bottom-title">提醒备注</text>
+            <text class="bottom-detail">{{detail}}</text>
+          </view>
+        </view>
+        <view wx:if="{{status == 0}}" class="btn-area">
+          <button style='background-color: #5fa9f0;' id='accept' name="accept" type="primary" formType="submit">接受提醒</button>
+          <button id='ignore' name="ignore" formType="submit">忽略提醒</button>
+        </view>
+        <view wx:if="{{status == 1}}" class="btn-area">
+          <button disabled="true" type="default">已接受</button>
+        </view>
+        <view wx:if="{{status == 2}}" class="btn-area">
+          <button disabled="true" type="default">已提醒</button>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

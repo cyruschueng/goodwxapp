@@ -1,0 +1,25 @@
+
+<view class="header clearfix">
+  <view class='input_box'>
+    <input type='text' bindinput='queryList' placeholder-class="phcolor" placeholder='请输入餐桌号码'></input>
+  </view>
+</view>
+
+
+
+<view class="tables" >
+  <view class='li' catchtap='radioChange' data-id='{{item.id}}' wx:key="{{index}}" wx:for="{{List}}">
+    <text class="numbers">{{item.deskNo}}</text>
+    <text class="persons">{{item.deskTypeName}}人桌</text>
+    <radio-group class="radio-group">
+      <label class="radio">
+        <radio value='{{item.id}}' color='#5fbaf4' checked="{{active == item.id ? true : false}}" />
+      </label>
+    </radio-group>
+  </view>
+
+</view>
+
+<view class='btn_box'>
+<view class='btn' catchtap='changeTable'>确定</view>
+</view>

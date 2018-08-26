@@ -1,0 +1,22 @@
+<view class="page-loading">
+    <view class="loading-container" wx:if="{{!authFailed}}">
+        <view class="loading-background" animation="{{hideBgAnimationData}}">
+            <view class="bg-shadow darker" animation="{{darkAnimationData}}"></view>
+            <view class="bg-shadow dark" animation="{{darkAnimationData}}"></view>
+            <view class="bg-shadow light" animation="{{lightAnimationData}}"></view>
+        </view>
+        <view class="loading-images">
+            <image class="image-text" animation="{{textAnimationData}}" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b314c6af5.png"></image>
+            <image class="image-cloud" animation="{{rightCloudAnimationData}}" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/01/5a65b314a5690.png"></image>
+            <image class="image-cloud small" animation="{{leftCloudAnimationData}}" src="https://imgs.genshuixue.com/0cms/d/file/content/2018/02/5a76d9911e139.png"></image>
+        </view>
+    </view>
+    <view class="auth-container" wx:else>
+        <view class="remind-info">授权后才能继续使用小程序</view>
+        <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">点击授权</button>
+        <view class="bottom-text">
+            <text>本小程序版权归金牌诗词大会所有</text>
+        </view>
+    </view>
+</view>
+<notice-dialog dialog-data="{{noticeDialogData}}"></notice-dialog>

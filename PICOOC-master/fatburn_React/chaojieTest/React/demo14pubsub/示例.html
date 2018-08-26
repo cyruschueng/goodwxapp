@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/javascript" src="../build/react.js"></script>
+<script type="text/javascript" src="../build/react-dom.js"></script>
+<script type="text/javascript" src="../build/JSXTransformer.js"></script>
+<script type="text/javascript" src="../build/pubsub.js"></script>
+<script type="text/jsx">
+    var ComponentBox = React.createClass({
+        render:function(){
+            return (
+                    <div>
+                        <Title />
+                        <Sections value="A" />
+                        <Sections value="B" />
+                        <Sections value="C" />
+                    </div>
+            );
+        }
+    });
+    var Title = React.createClass({
+        getInitialState:function(){
+            return ({
+                section:'none'
+            });
+        },
+        componentDidMount: function () {
+            var me = this;
+            //当publish的时候才会执行subscribe
+            me.sectionValue = PubSub.subscribe("choose", function(msg, section){
+                me.setState({
+                    section:section
+                });
+            });
+        },
+        componentWillMount:function(){
+            var me = this;
+            PubSub.unsubscribe(me.sectionValue);
+        },
+        render:function(){
+            var me = this;
+            return (
+                    <div>你的选择是：{me.state.section}</div>
+            );
+        }
+    });
+    var Sections = React.createClass({
+        clickFun: function (event) {
+            console.log(event.currentTarget.innerHTML);
+            PubSub.publish('choose', this.props.value);
+        },
+        render: function () {
+            var me = this;
+            return (
+                    <div onClick={me.clickFun}>{this.props.value}</div>
+            );
+        }
+    });
+    ReactDOM.render(<ComponentBox />, document.getElementById("example"));
+</script>
+</body>
+</html>

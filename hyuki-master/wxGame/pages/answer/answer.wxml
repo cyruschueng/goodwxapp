@@ -1,0 +1,64 @@
+<view class='userinfo'>
+  <view class='ufleft'>
+    <image src='{{userInfo.avatarurl}}' class='uImg'></image>
+    <view class='uname'>
+      <view class='name'>{{userInfo.nickname}}</view>
+      <view class='sheng'>
+        <view>第</view>
+        <view class='numt'>{{reply}}/10</view> 
+        <!-- <view class='numt'>{{reply}}</view> -->
+        <view>题</view>
+        </view>
+    </view>
+  </view>
+  <view class='sharebtn'>
+    <canvas canvas-id="canvasArc"></canvas>  
+    <view class="cc">{{num_show}}</view>    
+  </view>
+</view>
+<view  animation="{{qaaAnma}}" class='datiqu'>
+  <view class='difficulty'>
+    <view>难度:</view>
+    <image src='{{timu.lv}}'></image>
+  </view>
+  <view wx:if="{{lastTimu}}" animation="{{lastTimuAnma}}">
+    <view class='question'>{{timu.question}}</view>
+    <view class='{{btnStyleA}}' bindtouchend='solutionA' hover-class="answerBtn-down" data-txt="{{timu.optionA}}">{{timu.optionA}}</view>
+    <view class='{{btnStyleB}}' bindtouchend='solutionB' hover-class="answerBtn-down" data-txt="{{timu.optionB}}">{{timu.optionB}}</view>
+    <view class='{{btnStyleC}}' bindtouchend='solutionC' hover-class="answerBtn-down" data-txt="{{timu.optionC}}">{{timu.optionC}}</view>
+    <view class='{{btnStyleD}}' bindtouchend='solutionD' hover-class="answerBtn-down" data-txt="{{timu.optionD}}">{{timu.optionD}}</view>
+  </view>
+  <view wx:else  animation="{{lastTimuAnma}}">
+    <view wx:if="{{!isWin}}" class='jiesuanStyle'>
+      <image src='http://yukicomic-pic.oss-cn-hangzhou.aliyuncs.com/XCX_rongyao/defeat.png' class='jsImg'></image>
+      <view  class='jsTxt'>分享获取挑战机会<text>+1</text></view>
+      <button class='answerBtn-right' hover-class="none" open-type="share">去分享</button>
+      <button class='answerBtn-right' hover-class="none" bindtap='backIndex'>返回首页</button>
+    </view>
+    <view wx:else class='jiesuanStyle'>
+      <image src='http://yukicomic-pic.oss-cn-hangzhou.aliyuncs.com/XCX_rongyao/victory.png' class='jsImg'></image>
+      <view  class='jsTxt'>恭喜获得奖品</view>
+      <!-- <button class='answerBtn-right' open-type="contact">去选择礼物</button> -->
+      <button class='answerBtn-right'  hover-class="none" bindtap='goGift'>去选择奖品</button>
+    </view>
+  </view>
+</view> 
+<view class='datiqudao'  animation="{{djsAnma}}">
+  <view class='difficulty'>
+    <view>难度:</view>
+    <image src='http://yukicomic-pic.oss-cn-hangzhou.aliyuncs.com/XCX_rongyao/lv1.png'></image>
+  </view>
+  <view class='daojishiTxt'>倒计时</view>
+  <image src='{{showNum}}' animation="{{vsAnma}}" class='numIMg'></image>
+  <!-- <view wx:if='{{daojishi}}' class='daojishi' animation="{{vsAnma}}">{{daojishi}}</view> -->
+</view> 
+<!-- 遮罩 -->
+<view wx:if="{{isTanchuang}}" class='mask'></view>
+<!-- 弹框 -->
+<view wx:if="{{isTanchuang}}" class='{{popBg}}'>
+  <image src='../../img/close.png' class='close' bindtap='closePopup'></image>
+  <image src='{{popIcon}}' class='cuowu'></image>
+  <view class='tt1'>分享到群立即复活</view>
+  <view class='tt2'>每局复活{{resurgence}}次</view>
+  <button class='answerBtn-right tt3'  hover-class="none" open-type="share">确定</button>
+</view>

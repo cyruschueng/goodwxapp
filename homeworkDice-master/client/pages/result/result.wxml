@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container" style="background:url('http://chinnmt.com/content/plugins/kl_album/upload/201803/beab4d77a2af7a055fa574df9ce990ca20180304161701649239289.jpg') no-repeat;background-size:100% 100%">
+  <view class="userinput">
+    <!--设置分配的家务  -->
+    <view class='cards'>
+      <view class='inputList'>
+        <view wx:for="{{works}}" wx:for-index="i" wx:key="unique">
+          <view class='name'>
+            <text>{{item}}</text>分配到的家务：          
+          </view>
+          <view class='houseworkItem'>
+            <view wx:for="{{res[i]}}" wx:key="unique" wx:for-index="idx" class='houseworkListItem'>
+              <text class='houseworkItemText'>{{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='buttonArea'>
+        <button class='myButton' bindtap='bindtapButton' hover-class='tapStyle' id='prev'>上一步</button>
+        <button class='myButton' open-type='share' id='share' hover-class='tapStyle'>分享到好友群</button>
+      </view>
+    </view>
+  </view>
+</view>

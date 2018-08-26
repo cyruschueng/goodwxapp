@@ -1,0 +1,52 @@
+<!--pages/news/news.wxml-->
+
+<view class="swipper-box">
+  <swiper circular="{{circular}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#f5f5f5">
+    <block wx:for="{{imgUrls}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item}}" mode='aspectFit' class="slide-image" width="100%" height="100%" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<view class='quan1'>
+ <view class="classname1" catchtap="altertueClick">
+  <image src='/images/iconfont/kehu.png' class='f1'></image>
+  <view class='f2'>客户</view>
+</view>
+
+<view class="classname1" catchtap="shoppingClick">
+  <image src='/images/iconfont/shangpin.png' class='f1'></image>
+  <view class='f2'>商品</view>
+</view>
+
+<view class="classname1" catchtap='subscribeclick'>
+  <image src='/images/iconfont/yuyue.png' class='f1'></image>
+  <view class='f2'>预约</view>
+</view>
+</view>
+
+<view class='quan2'>
+ <view class="classname1" bindtap="powerDrawer" data-statu="open">
+  <image src='/images/iconfont/xiaoxi.png' class='f1'></image>
+  <view class='f2'>消息</view>
+</view>
+<view class="classname1" bindtap="powerDrawer" data-statu="open">
+  <image src='/images/iconfont/haibao.png' class='f1'></image>
+  <view class='f2'>海报</view>
+</view>
+<view class="classname1" catchtap="innerClick">
+  <image src='/images/iconfont/jingying.png' class='f1'></image>
+  <view class='f3'>经营数据</view>
+</view>
+</view>
+
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <!--drawer content-->
+  <view class="drawer_title">尽情期待</view>
+  <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view>
+</view>

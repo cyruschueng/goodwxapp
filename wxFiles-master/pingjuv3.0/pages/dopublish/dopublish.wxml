@@ -1,0 +1,51 @@
+<view style="height:20rpx"></view>
+<view class="pitem">
+    <label>萍聚城市:</label>
+    <text>{{msg.city}}</text>
+</view>
+<view class="pitem">
+    <label>萍聚信息:</label>
+    <text wx:if="{{msg.general == 'movie'}}">电影</text>
+    <text wx:if="{{msg.general == 'travel'}}">旅行</text>
+    <text wx:if="{{msg.general == 'ktv'}}">唱歌</text>
+    <text wx:if="{{msg.general == 'climb'}}">爬山</text>
+    <text wx:if="{{msg.general == 'sports'}}">运动</text>
+    <text wx:if="{{msg.general == 'running'}}">跑腿</text>
+    <text wx:if="{{msg.general == 'drink'}}">酒吧</text>
+    <text wx:if="{{msg.general == 'dine'}}">吃饭</text>
+    <text wx:if="{{msg.general == 'shopping'}}">逛街</text>
+    <text wx:if="{{msg.general == 'charity'}}">公益</text>
+
+</view>
+<view class="pitem">
+    <label>萍聚人数:</label>
+    <text>{{msg.num}}人</text>
+</view>
+<view class="pitem">
+    <label>性别选择:</label>
+    <text wx:if="{{msg.sex_limit == 2}}">男女不限</text>
+    <text wx:if="{{msg.sex_limit == 0}}">限男性</text>
+    <text wx:if="{{msg.sex_limit == 1}}">限女性</text>
+</view>
+<view class="pitem">
+    <label>萍聚日期:</label>
+    <text>{{msg.open_date}}</text>
+</view>
+<view class="pitem">
+    <label>开支性质:</label>
+    <text wx:if="{{msg.expend == 0}}">AA制</text>
+    <text wx:if="{{msg.expend == 1}}">我做东</text>
+    <text wx:if="{{msg.expend == 2}}">求请</text>
+    <text wx:if="{{msg.expend == 3}}">男A女免</text>
+</view>
+<view class="pitem">
+    <label>金额预算:</label>
+    <text>{{msg.budget}}</text>
+</view>
+<view class="pitem">
+    <label>萍聚介绍:</label>
+    <text>{{msg.des}}</text>
+</view>
+<view style="height:50rpx"></view>
+<view class="dopublish" bindtap="dopublish"><view style="padding:25rpx">确认萍聚</view></view>
+<view class="updatepj" bindtap="back"><view style="padding:25rpx">返回修改</view></view>

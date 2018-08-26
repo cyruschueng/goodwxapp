@@ -1,0 +1,18 @@
+<import src="../../../dist/weCropper.wxml"/>
+
+<view class="cropper-wrapper">
+    <template is="weCropper" data="{{...cropperOpt}}"/>
+    <view class="cropper-buttons">
+        <view
+                class="upload"
+                bindtap="uploadTap">
+            重新选择
+        </view>
+        <view wx:if="{{tapss}}" class="getCropperImage  one" bindtap="getCropperImage" >
+            确定
+        </view>
+        <view wx:else class="getCropperImage two" >
+            确定
+        </view>
+    </view>
+</view>

@@ -1,0 +1,81 @@
+<import src="../tpls/foot/foot-item-tpl.wxml" />
+
+
+<view class='appointment' hidden='{{!loadingHidden}}'>
+  <form bindsubmit='{{type=="multiple"?"multipleAppoint":"formSubmit"}}' report-submit='true'>
+    <view wx:if='{{type != "multiple"}}' class='product-info'>
+      <template is='foot-item' data='{{...appoint}}'></template>
+    </view>
+    <view wx:else style='height: {{multipleProducts.length > 2 && !showMore ? "460rpx" : "auto"}};' class='product-info {{!showMore?"less":""}}'>
+      <block wx:for='{{multipleProducts}}' wx:key='index'>
+        <template is='foot-item' data='{{...item, type: "cart"}}'></template>
+      </block>
+    </view>
+    <view class='show-more' wx:if='{{type == "multiple" && multipleProducts.length > 2}}' catchtap='showMoreProducts'>
+      <view class='product-count'>共{{multipleProducts.length}}件商品</view>
+      <image style='{{showMore?"transform: rotate(180deg);":""}}' src='/images/icon/arrow@right.png' mode='aspectFill'></image>
+    </view>
+    <view class='order-info-address'>
+      <text>店铺名称：{{storeInfo.storeName}}</text>
+      <text>店铺地址：{{storeInfo.location}}</text>
+      <text>咨询电话：{{storeInfo.phoneNumber}}</text>
+    </view>
+    <view class="weui-cells__title">预约人信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input disabled='{{!isModify}}' data-type='name' bindchange='bindChange' class="weui-input" name="userName" value='{{appoint.bookerName}}' placeholder="请输入预约人姓名" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机号</view>
+        </view>
+        <button class='form_button' open-type='{{!appoint.mobile && initial?"getPhoneNumber":""}}' bindgetphonenumber='getUserPhoneNumber'>
+          <view class="weui-cell__bd">
+            <input disabled='{{!isModify || initial}}' data-type='mobile' bindchange='bindChange' type="number" name="mobile" class="weui-input" value='{{appoint.mobile}}' placeholder="请输入手机号" />
+          </view>
+        </button>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker disabled='{{!isModify}}' name='date' data-type='date' mode="date" value='{{appoint.date}}' start='{{date}}' bindchange="bindChange">
+            <view class="weui-input">{{appoint.date}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker disabled='{{!isModify}}' name='time' data-type='time' mode="time" value='{{appoint.time}}' start='08:30' end='22:00' bindchange="bindChange">
+            <view class="weui-input">{{appoint.time}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='complete-btn' wx:if='{{isModify&&from!="manage"}}'>
+      <button loading='{{loading}}' formType="submit" hover-class='button-active'>完成</button>
+    </view>
+    <view class='save-btn' wx:elif='{{!isModify && from !="manage"}}'>
+      <button wx:if='{{!isAdd}}' catchtap='cancelAppoint' data-id='{{appoint.bookingId}}'>取消预约</button>
+      <button wx:else catchtap='cancelMakeAppoint'>取消</button>
+
+      <button data-id='{{appoint.bookingId}}' catchtap='modifyAppoint' hover-class='button-active'>修改</button>
+    </view>
+    <view wx:elif='{{appoint.status == null}}' class='save-btn'>
+      <button data-id='{{appoint.bookingId}}' data-status='3' catchtap='appointOperation'>未赴约</button>
+      <button data-id='{{appoint.bookingId}}' data-status='2' catchtap='appointOperation'>已赴约</button>
+    </view>
+  </form>
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

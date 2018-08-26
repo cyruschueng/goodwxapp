@@ -1,0 +1,104 @@
+<import src="../item/commentItem.wxml" />
+<template name="news_item">
+    <view style="{{style}}" class="detail-item">
+        <view class="grid-view" catchtap="popupEdit" id="{{index}}">
+            <view style="padding:0 15rpx 0 15rpx;width:82rpx; ">
+                <image lazyload="true" class="" mode="aspectFill" src="{{item.avatar}}" style="width:82rpx;height:82rpx;" />
+            </view>
+            <view style="padding-right:25rpx;" class="flex_all">
+                <view class="b_flex">
+                    <view class="news_name flex_all" style="font-size: 15px;color: #576b95;font-weight:700;margin-top:-6rpx;">{{item.name}}</view>
+                    <view wx:if="{{item.ad.content}}" style="position:relative;width:128.125rpx;height:45.83rpx;padding-right: 1rpx;border:1px solid #adadad;border-radius: 7rpx;" class="flex_center">
+                        <image src="http://icons.maiyizhi.cn/diliweizhi.png" style="width:28rpx;height: 28rpx;"></image>
+                        <text style="font-size: 14px;color: #adadad;">广告</text>
+                        <image  style="width:14.58rpx;height: 14.58rpx;margin-left: 8rpx;" src="http://icons.maiyizhi.cn/xiala.png"></image>
+                    </view>
+                </view>
+
+                <view class="news_text" style="white-space:pre-line;font-size:15px;line-height:20px;padding-top:0;color:#1e1e20;word-break:break-all;">{{item.content}}</view>
+                <view wx:if="{{item.link.content}}" style="background-color: #f3f2f7;" class="flex_col_center">
+                    <view class="zan-pull-left">
+                        <image src="{{item.link.avatar?item.link.avatar:'http://avatars.maiyizhi.cn/link.png'}}" mode="aspectFill" style="width:82rpx;height:82rpx;margin: 10rpx 10rpx 0 10rpx;"></image>
+                    </view>
+                    <view class="zan-pull-left" style="font-size:15px;line-height:18px;overflow:hidden; color:#1e1e20;text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; ">
+                        {{item.link.content}}
+                    </view>
+                    <view style="clear: both;"></view>
+                </view>
+                <view wx:elif="{{item.files.length==4}}" class="news_media" style="max-width: 65%;">
+                    <block wx:if="{{item.video}}" >
+                        <video src="{{item.video}}" objectFit="cover" style="width:96%;position:static;"></video>
+                    </block>
+                    <block wx:for="{{item.files}}" wx:key="{{_item}}" wx:for-item="pic">
+                        <image lazyload="true" mode="aspectFill"  wx:if="{{item.files.length==1 && pic.width>pic.height}}" src="{{pic.url}}" class="pic" style="height: {{oneSize/pixelRatio*pic.height/pic.width}}px;width:{{oneSize/pixelRatio}}px;" data-index="{{index}}"  />
+                        <image lazyload="true" mode="aspectFill"  wx:elif="{{item.files.length==1 && pic.height>=pic.width}}" src="{{pic.url}}" class="pic" style="height: {{oneSize/pixelRatio}}px;width:{{oneSize/pixelRatio*pic.width/pic.height}}px;" data-index="{{index}}"  />
+                        <image lazyload="true" mode="aspectFill" wx:elif="{{item.files.length==4||item.files.length==2}}" src="{{pic.url}}" class="pic" style="height: {{twoSize/pixelRatio}}px;width:{{twoSize/pixelRatio}}px;" data-index="{{index}}"  />
+                        <image lazyload="true" mode="aspectFill"  wx:else src="{{pic.url}}" class="pic" style="height: {{threeSize/pixelRatio}}px;width:{{threeSize/pixelRatio}}px;" data-index="{{index}}"  />
+                    </block>
+                </view>
+                <view wx:else class="news_media">
+                    <block wx:if="{{item.video}}" >
+                        <video src="{{item.video}}" objectFit="cover" style="width:96%;position:static;"></video>
+                    </block>
+                    <block wx:for="{{item.files}}" wx:key="{{_item}}" wx:for-item="pic">
+                        <image lazyload="true" mode="aspectFill"  wx:if="{{item.files.length==1 && pic.width>pic.height}}" src="{{pic.url}}" class="pic" style="height: {{oneSize/pixelRatio*pic.height/pic.width}}px;width:{{oneSize/pixelRatio}}px;" data-index="{{index}}"  />
+                        <image lazyload="true" mode="aspectFill"  wx:elif="{{item.files.length==1 && pic.height>=pic.width}}" src="{{pic.url}}" class="pic" style="height: {{oneSize/pixelRatio}}px;width:{{oneSize/pixelRatio*pic.width/pic.height}}px;" data-index="{{index}}"  />
+                        <image lazyload="true" mode="aspectFill" wx:elif="{{item.files.length==4||item.files.length==2}}" src="{{pic.url}}" class="pic" style="height: {{twoSize/pixelRatio}}px;width:{{twoSize/pixelRatio}}px;" data-index="{{index}}"  />
+                        <image lazyload="true" mode="aspectFill"  wx:else src="{{pic.url}}" class="pic" style="height: {{threeSize/pixelRatio}}px;width:{{threeSize/pixelRatio}}px;" data-index="{{index}}"  />
+                    </block>
+                </view>
+                <view class="news_info a_flex" wx:if="{{item.ad.content}}" style="padding: 15rpx 0 5rpx 0;">
+                    <view style="white-space:pre-line;color:#576b95;font-size: 14px;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:1;" >{{item.ad.content}}</view>
+                    <image style="width:28.125rpx;height: 28.125rpx;margin-left: 12.5rpx;" src="http://icons.maiyizhi.cn/lianjie3.png"></image>
+                </view>
+                <view class="news_info" wx:if="{{item.city}}">
+                    <text style="color:#576b95;" >{{item.city?(item.city+(item.loc?'·'+item.loc:'')):''}}</text>
+                </view>
+                <view>
+                    <view class="news_info" style="float: left;">
+                            {{item.time?item.time:'1分钟前'}}<text wx:if="{{mode=='detail'||(mode=='circle'&&name==item.name)}}" style="color:#7477a0;margin-left: 10px;">删除</text>
+                    </view>
+                    <view style="float: right;height:26px;" catchtap="operate" id="{{index}}">
+                        <image src="http://avatars.maiyizhi.cn/comment.png" style="width:20px;height: 14px;padding:6px;"></image>
+                    </view>
+                    <view style="clear: both;"></view>
+                </view>
+
+            </view>
+        </view>
+        <view style="{{padding}}" wx:if="{{item.comments.length || item.likes.length}}">
+            <view class="r"></view>
+            <view class="cmt-wrap">
+                <view class="like flex_row"  catchtap="operateLike" id="{{index}}" wx:if="{{item.likes.length}}">
+                    <view wx:if="{{mode=='detail'}}" style="width:40rpx;margin-right:6px;margin-top:27rpx;">
+                        <image class="like-icon" src="http://icons.maiyizhi.cn/like.png"></image>
+                    </view>
+                    <view wx:else style="width:40rpx;margin-top:12rpx;">
+                        <image class="like-icon" src="http://icons.maiyizhi.cn/like.png"></image>
+                    </view>
+                    <view class="like-list flex_all"  wx:if="{{mode=='detail'}}">
+                        <block wx:for="{{item.likes}}" wx:key="{{like}}"  wx:for-item="like">
+                            <view class="like-item">
+                                <image mode="aspectFill" class="{{isAndroid?'like-avatar':'like-avatar-ios'}}" src="{{like}}"></image>
+                            </view>
+                        </block>
+                        <view style="clear: both;"></view>
+                    </view>
+                    <view class="like-list flex_all"  wx:else>
+                        <view style="font-size: 14px;color: #576b95;font-weight:700;">{{item.likes}}</view>
+                    </view>
+                </view>
+                <view class="cmt-list flex_row"  wx:if="{{item.comments.length}}">
+                    <view  style="width:40rpx;margin-top:32rpx;margin-right:3px;" wx:if="{{mode=='detail'}}">
+                        <image class="like-icon" src="http://icons.maiyizhi.cn/huifu.png"></image>
+                    </view>
+                    <view  class="flex_all">
+                        <block wx:for="{{item.comments}}" wx:key="{{comment.content}}" wx:for-index="idx" wx:for-item="comment"  >
+                            <template is="comment_item" data="{{mode:mode,idx:idx,index:index,item: comment,name:item.name,idx:idx}}" />
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

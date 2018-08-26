@@ -1,0 +1,178 @@
+/*全局引入UI库*/
+@import "../resources/lib/zanui/index.wxss";
+/**app.wxss**/
+page{
+    margin: 0;
+    padding: 0;
+}
+text{
+    font-family: "微软雅黑"
+}
+.container {
+    background: #F9F9F9;
+    overflow: hidden;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.container::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    content: ' ';
+    width: 100%;
+    height: 1rpx;
+    background-color: #e2e2e2;
+    z-index: 5;
+}
+
+/*重置panle样式*/
+.zan-panel {
+    margin-top: 0;
+}
+
+.zan-panel .s-height {
+    height: 30rpx;
+    background-color: #f9f9f9;
+}
+
+/*设置顶部信息字体大小*/
+
+.zan-panel .s-height .zan-cell__bd, .zan-panel .s-height .zan-cell__ft {
+    font-size: 26rpx;
+}
+
+.zan-panel .s-height .zan-btn--plain {
+    border: none;
+}
+
+/*设置点击查询关于之后的颜色*/
+
+.zan-panel .s-height .setting:active {
+    background-color: #f9f9f9;
+}
+
+/*设置列表显示背景颜色*/
+
+.zan-panel .zan-cell--access {
+    background-color: #fff;
+}
+
+.scroll {
+    margin-top: -1rpx;
+}
+
+/*点击之后的样式*/
+
+.zan-panel .zan-cell--access:active {
+    background-color: #f9f9f9;
+}
+
+/*底部说明信息*/
+
+.scroll .zan-cell__ft {
+    font-size: 29rpx;
+}
+
+/*详细信息显示*/
+
+.zan-cell--access .address {
+    margin-top: 9rpx;
+    font-size: 24rpx;
+}
+
+/*页面底部说明信息*/
+
+.bottom-desc {
+    margin-top: 60rpx;
+    margin-bottom: 100rpx;
+    font-size: 24rpx;
+    padding: 0 100rpx;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: none;
+    color: #b5afaf;
+}
+
+/*页面刷新按钮*/
+
+.handle {
+    width: 80rpx;
+    height: auto;
+    position: fixed;
+    bottom: 60rpx;
+    right: 50rpx;
+    z-index: 100;
+}
+
+.handle > .location{
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.handle > .refresh{
+    margin-top: 20rpx;
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.handle > .about{
+    margin-top: 20rpx;
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.handle > .refresh:active {
+    transform: rotate(720deg);
+    transition: all 1s ease;
+}
+
+/*没有数据样式*/
+
+.no-data {
+    height: calc(100vh);
+    text-align: center;
+}
+
+.no-data .zan-cell__bd {
+    text-align: center;
+    margin-top: 50rpx;
+    margin-bottom: 70rpx;
+    font-size: 30rpx;
+    line-height: 50rpx;
+}
+
+.no-data .zan-btns:active {
+    background-color: #f9f9f9;
+}
+
+.no-data image {
+    height: 128rpx;
+    widows: 128rpx;
+    margin-top: 100rpx;
+}
+
+/*没有连网*/
+
+.error {
+    background-color: #fff;
+    text-align: center;
+}
+
+.error-info {
+    margin-top: 50rpx;
+    text-align: center;
+    padding: 0 150rpx;
+    font-size: 30rpx;
+    margin-bottom: 50rpx;
+    line-height: 50rpx;
+}
+
+.error .zan-panel {
+    height: calc(100vh);
+}
+
+.error image {
+    height: 128rpx;
+    widows: 128rpx;
+    margin-top: 100rpx;
+}

@@ -1,0 +1,46 @@
+<scroll-view scroll-y="true" class="team" upper-threshold="50" lower-threshold="100" bindscrolltolower="scrolltolower">
+  <view class="team-head">
+    <view class="team-image">
+      <image class="team-back" src="{{teamData.avatar_l}}"></image>
+    </view>
+    <view class="team-message">
+      <image src="{{teamData.avatar_l}}"></image>
+      <view class="team-nickname">
+        <text class="nickname">{{teamData.nickname?teamData.nickname:teamData.username}}</text>
+        <text class="hanor">{{teamData.hanor}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="team-video">
+    <view class="main-title">
+      <text>视频</text>
+    </view>
+
+    <view class="content-main">
+      <block wx:for="{{ teamVideo }}" wx:key="id">
+        <view class="main-item">
+          <navigator open-type="redirect" url="../video/video?video_id={{item.id}}">
+            <image class="item-image" src="{{item.thumb.normal}}"></image>
+          </navigator>
+          <navigator open-type="redirect" url="../video/video?video_id={{id}}">
+            <text class="item-text">{{item.title}}</text>
+          </navigator>
+          <view class="item-video-msg">
+            <icon class="bofang-icon size25"></icon>
+            {{item.play_count}}
+          </view>
+        </view>
+      </block>
+    </view>
+    <view hidden="{{hotshidden}}" class="box-more">
+      <view wx:if="{{hothidden}}">
+        <image src="../../images/loading.gif" /> 加载中...
+      </view>
+      <view wx:else>
+        <text> 没有更多了 </text>
+      </view>
+    </view>
+
+    <!--<loading hidden="{{hidden}}">加载中...</loading>-->
+  </view>
+</scroll-view>

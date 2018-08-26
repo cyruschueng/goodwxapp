@@ -1,0 +1,205 @@
+<!--分类  -->
+<template name="allClassify">
+  <view class='warp_classify'>
+    <view class='classify' catchtap='shopping'>
+      <image class='classify_img' src='/images/icon/home_icon_xqq.png'></image>
+    </view>
+    <view class='classify' bindtap='entertainment'>
+      <image class='classify_img recomm-right' src='/images/icon/home_icon_yl.png'></image>
+    </view>
+  </view>
+</template>
+<!--推荐餐厅-->
+<template name="postItem">
+  <view class='wrap_recommend' catchtap='recommendCt'>
+    <view class='recommend'>
+      <image class='recommend_img' src='/images/icon/home_sign.png'></image>
+      <view class='recommend_text'>推荐餐厅</view>
+    </view>
+    <view class='djevenMore'>
+      <view class='recommend_right'>查看更多</view>
+      <image class='recommend_more' src='/images/icon/home_arrow.png'></image>
+    </view>
+  </view>
+</template>
+<!--推荐餐厅  -->
+<template name="postItemss">
+  <view id="{{item.id}}" class="scroll-view-item bc_green" data-postId="{{item.id}}" catchtap='diningHhall'>
+    <image wx:if="{{item.logoUrl}}" mode="aspectFill" class='scroll-view-item-img' src='{{item.logoUrl}}'></image>
+    <image wx:else class='scroll-view-item-img' src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1975347470,2770072390&fm=27&gp=0.jpg'></image>
+    <view class='cate_site'>{{item.shopName}}</view>
+  </view>
+</template>
+<!--美食墙 -->
+<template name="classify">
+  <view class='wrap_recommend' catchtap='cateWall'>
+    <view class='recommend'>
+      <image class='recommend_img' src='/images/icon/home_sign.png'></image>
+      <view class='recommend_text'>美食栏</view>
+    </view>
+    <view class='djevenMore'>
+      <view class='recommend_right'>查看更多</view>
+      <image class='recommend_more' src='/images/icon/home_arrow.png'></image>
+    </view>
+  </view>
+</template>
+<!--美食墙  -->
+<template name="classifyss">
+  <view id="{{item.id}}" catchtap="fooddetails" class="scroll_user">
+    <image class='cateWallImg' mode="aspectFill" src='{{item.homePic}}'></image>
+    <view class='catewallGroup'>
+      <image class='catewalltou' mode="aspectFill" src='{{item.iconUrl}}'></image>
+      <text class='catewallText'>{{item.userName}}</text>
+    </view>
+    <view class='foodDescription'>
+      <view class='gastronomeName'></view>
+      <view class='DescriptionText foodDescri'>{{item.summary}}</view>
+    </view>
+  </view>
+</template>
+
+<!--热门活动  -->
+<template name="hotActivity">
+  <view class='wrap_recommend' catchtap='preferential'>
+    <view class='recommend'>
+      <image class='recommend_img' src='/images/icon/home_sign.png'></image>
+      <view class='recommend_text'>热门活动</view>
+    </view>
+    <view class='djevenMore'>
+      <view class='recommend_right'>查看更多</view>
+      <image class='recommend_more' src='/images/icon/home_arrow.png'></image>
+    </view>
+  </view>
+</template>
+<!--热门活动  -->
+<template name="hotActivityss">
+  <view class="preferential" id="{{item.id}}" catchtap='detailOfTheActivity'>
+    <image wx:if="{{item.mainPic}}" mode="aspectFill" class='preferential_img' src='{{item.mainPic}}'></image>
+    <image wx:else class='scroll-view-item-img' src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1975347470,2770072390&fm=27&gp=0.jpg'></image>
+  </view>
+</template>
+
+<!--趣享直播  -->
+<template name="liveStreaming">
+  <view class='wrap_recommend'>
+    <view class='recommend'>
+      <image class='recommend_img' src='/images/icon/home_sign.png'></image>
+      <view class='recommend_text'>享七吃货</view>
+    </view>
+    <view class='djevenMore'>
+      <view class='recommend_right'>查看更多</view>
+      <image class='recommend_more' src='/images/icon/home_arrow.png'></image>
+    </view>
+  </view>
+</template>
+
+<!--趣享直播  -->
+<template name="liveStreamingss">
+  <view id="{{item.id}}" bindtap='tolive' class="anchor bc_green">
+    <image wx:if="{{item.vedioUrl}}" mode="aspectFill" class='anchor_img' src='{{item.vedioUrl}}'></image>
+    <view class='cate_site'>{{item.anchorNickName}}:{{item.title}}</view>
+  </view>
+</template>
+
+<!-- 专题推荐 菜系推荐 -->
+<template name="styleOfCookingTm">
+  <view class='classOfService'>
+    <view class='classOfPadding'>
+      <image class='classOfImages' id="{{item.img.id}}" catchtap='clickimg' mode="aspectFill" src='{{item.img.imgUrl}}'></image>
+
+      <view class='special-merchant' wx:if="{{item.data[0].id}}" id="{{item.data[0].id}}" catchtap='clickcon'>
+        <image class='merchant-img' mode="aspectFill" src='{{item.data[0].logoUrl}}'></image>
+        <view class='merchant-cxName'>
+          <view class='merchant-cxName-cs'>{{item.data[0].shopName}}</view>
+          <text>{{item.data[0].shopInfo}}</text>
+        </view>
+      </view>
+ 
+      <view class='homeCuisine'>
+        <view class='homeCuisine-grid' wx:if="{{item.data[1].id}}" id="{{item.data[1].id}}" catchtap='clickcon'>
+          <view class='homeRight'>
+            <text>{{item.data[1].shopName}}</text>
+            <text>{{item.data[1].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[1].logoUrl}}'></image>
+        </view>
+        <view class='homeCuisine-grid' wx:if="{{item.data[2].id}}" id="{{item.data[2].id}}" catchtap='clickcon'>
+          <view class='homeRight'>
+            <text>{{item.data[2].shopName}}</text>
+            <text>{{item.data[2].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[2].logoUrl}}'></image>
+        </view>
+      </view>
+
+      <view class='homeCuisine homTwentieth'>
+        <view class='homeCuisine-grid' wx:if="{{item.data[3].id}}" id="{{item.data[3].id}}" catchtap='clickcon'>
+          <view class='homeRight'>
+            <text>{{item.data[3].shopName}}</text>
+            <text>{{item.data[3].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[3].logoUrl}}'></image>
+        </view>
+        <view class='homeCuisine-grid' wx:if="{{item.data[4].id}}" id="{{item.data[4].id}}" catchtap='clickcon'>
+          <view class='homeRight'>
+            <text>{{item.data[4].shopName}}</text>
+            <text>{{item.data[4].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[4].logoUrl}}'></image>
+        </view>
+      </view>
+       
+    </view>
+  </view>
+</template>
+
+<!-- 专题推荐 服务专题 -->
+<template name="CreateEmailAlerts">
+  <view class='classOfService'>
+    <view class='classOfPadding'>
+      <image class='classOfImages' id="{{item.img.id}}" catchtap='clickimg'  mode="aspectFit" src='{{item.img.imgUrl}}'></image>
+
+      <view class='special-merchant' wx:if="{{item.data[0].id}}" id="{{item.data[0].id}}" catchtap='clickcon'>
+        <image class='merchant-img' mode="aspectFill" src='{{item.data[0].logoUrl}}'></image>
+        <view class='merchant-cxName'>
+          <view class='merchant-cxName-cs'>{{item.data[0].shopName}}</view>
+          <text>{{item.data[0].shopInfo}}</text>
+        </view>
+      </view>
+
+      <view class='homeCuisine'>
+        <view class='homeCuisine-grid' wx:if="{{item.data[1].id}}" id="{{item.data[1].id}}" catchtap='clickcon'>
+          <view class='homeRight'>
+            <text>{{item.data[1].shopName}}</text>
+            <text>{{item.data[1].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[1].logoUrl}}'></image>
+        </view>
+        <view class='homeCuisine-grid' wx:if="{{item.data[2].id}}" id="{{item.data[2].id}}" catchtap='clickcon'>
+          <view class='homeRight'>
+            <text>{{item.data[2].shopName}}</text>
+            <text>{{item.data[2].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[2].logoUrl}}'></image>
+        </view>
+      </view>
+
+      <view class='homeCuisine homTwentieth' wx:if="{{item.data[3].id}}" id="{{item.data[3].id}}" catchtap='clickcon'>
+        <view class='homeCuisine-grid'>
+          <view class='homeRight'>
+            <text>{{item.data[3].shopName}}</text>
+            <text>{{item.data[3].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[3].logoUrl}}'></image>
+        </view>
+        <view class='homeCuisine-grid' wx:if="{{item.data[4].id}}" id="{{item.data[4].id}}" catchtap='clickcon'>
+          <view class='homeRight'>
+            <text>{{item.data[4].shopName}}</text>
+            <text>{{item.data[4].shopInfo}}</text>
+          </view>
+          <image class='homeImages' mode="aspectFill" src='{{item.data[4].logoUrl}}'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

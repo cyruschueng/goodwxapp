@@ -1,0 +1,75 @@
+<import src="/wux/notification/notification.wxml"/>
+<template is="notification" data="{{ ...$wux.notification }}"/>
+<view class="container page__bd" wx:if="{{name!='jietuwang'}}">
+    <!--<customer-service right="0" bottom="200" width="250" content="看这里～，有你想要的哦" image="http://avatars.maiyizhi.cn/5a40964193.jpg"></customer-service>-->
+    <view style="margin-top: 140rpx;">
+        <view class="grids">
+            <block wx:for="{{list}}" wx:key="{{item.idx}}" wx:for-index="idx">
+                <view wx:if="{{item.type=='tap'}}" bindtap="{{item.event}}" style="float: left;position: relative;" >
+                    <view  class="grid" hover-class="weui-grid_active"  style="background-color: {{item.background}};">
+                        <image class="weui-grid__icon" src="{{item.pic}}" />
+                    </view>
+                    <view>
+                        <view class="weui-grid__label">{{item.name}}</view>
+                    </view>
+                    <image wx:if="{{item.new}}" src="http://icons.maiyizhi.cn/new_1.png" style="width: 60rpx;height: 35rpx;position: absolute;right: 16rpx;top:16rpx;"></image>
+                    <image wx:if="{{item.hot}}" src="http://icons.maiyizhi.cn/hot_1.png" style="width: 60rpx;height: 35rpx;position: absolute;right: 16rpx;top:16rpx;"></image>
+                </view>
+                <navigator url="{{item.url}}" wx:elif="{{item.type=='link'}}" style="float: left;position: relative;" >
+                    <view class="grid" hover-class="weui-grid_active" style="background-color:{{item.background}};">
+                        <image class="weui-grid__icon" src="{{item.pic}}" />
+                    </view>
+                    <view>
+                        <view class="weui-grid__label">{{item.name}}</view>
+                    </view>
+                    <image wx:if="{{item.new}}" src="http://icons.maiyizhi.cn/new_1.png" style="width: 60rpx;height: 35rpx;position: absolute;right: 16rpx;top:16rpx;"></image>
+                    <image wx:if="{{item.hot}}" src="http://icons.maiyizhi.cn/hot_1.png" style="width: 60rpx;height: 35rpx;position: absolute;right: 16rpx;top:16rpx;"></image>
+                </navigator>
+            </block>
+            <view style="clear: both;"></view>
+
+        </view>
+    </view>
+</view>
+<view class="container page__bd" wx:else style="padding-top: 10px;">
+    <view style="">
+        <view class="grid-view">
+            <block wx:for="{{list}}" wx:key="{{item.idx}}" wx:for-index="idx">
+                <view class="bigItem" style="background-color:{{item.background}};">
+                    <navigator url="{{item.url}}" class="column_flex" style="height: 100%;">
+                        <image src="{{item.pic}}" style="width: 116rpx;height: 116rpx;margin: 0;"></image>
+                        <view style="color: #fff;font-size:16px;margin: 10rpx 0 0 0;">{{item.name}}</view>
+                    </navigator>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view wx:if="{{!is_verify}}" class="flex_col_center" style="padding-left: 34rpx;margin-top: 100rpx;padding-bottom:20rpx;font-size: 16px;color: #333;border-bottom: 1rpx solid #ccc;">
+        <image src="http://icons.maiyizhi.cn/tuijian.png" style="height:46rpx;width:46rpx;margin-right: 10rpx;"></image>
+        <text>精品小程序推荐</text>
+    </view>
+    <view wx:if="{{!is_verify}}" style="">
+        <view class="grids">
+            <block wx:for="{{tuijian}}" wx:key="{{item.idx}}" wx:for-index="idx">
+                <view wx:if="{{item.type=='tap'}}" catchtap="{{item.event}}" style="float: left;" >
+                    <view  class="grid" hover-class="weui-grid_active"  style="background-color: {{item.background}};width:128rpx;height: 128rpx;margin:30rpx 29.5rpx 0 29.5rpx;">
+                        <image style="width:52rpx;height:52rpx;padding-top:38rpx;" class="weui-grid__icon" src="{{item.pic}}" />
+                    </view>
+                    <view>
+                        <view class="weui-grid__label">{{item.name}}</view>
+                    </view>
+                </view>
+                <view data-url="{{item.url}}" bindtap="go_tuijian" wx:elif="{{item.type=='link'}}" style="float: left;position: relative;" >
+                    <view class="grid" hover-class="weui-grid_active" style="background-color:{{item.background}};width:128rpx;height: 128rpx;margin:30rpx 29.5rpx 0 29.5rpx;">
+                        <image style="width:52rpx;height:52rpx;padding-top:38rpx;" class="weui-grid__icon" src="{{item.pic}}" />
+                    </view>
+                    <view>
+                        <view class="weui-grid__label">{{item.name}}</view>
+                    </view>
+                    <image wx:if="{{item.new}}" src="http://icons.maiyizhi.cn/new_red.png" style="width: 60rpx;height: 35rpx;position: absolute;right: 16rpx;top:16rpx;"></image>
+                </view>
+            </block>
+            <view style="clear: both;"></view>
+        </view>
+    </view>
+</view>

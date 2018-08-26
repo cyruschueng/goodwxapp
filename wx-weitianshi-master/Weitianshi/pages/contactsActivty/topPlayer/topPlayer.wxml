@@ -1,0 +1,120 @@
+<import src="/pages/Template/Template.wxml" />
+<view class="swiper-tab">
+
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">个人</view>
+
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">战队</view>
+
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1140rpx" bindchange="bindChange">
+  <!--个人排名  -->
+  <swiper-item>
+    <scroll-view scroll-y="true" scroll-top="{{scroll}}" bindscrolltolower="moreThing">
+      <view id="explain">排行规则：总人脉数（一级人脉+二级人脉）最多者</view>
+      <view style="height:80rpx;"></view>
+      <view class="flex">
+        <view class="littleBox">
+          <view class="number">{{my_rank.one_level}}</view>
+          <view class="ranking">一级人脉</view>
+        </view>
+        <view class="littleBox">
+          <view class="number">{{my_rank.two_level}}</view>
+          <view class="ranking">二级人脉</view>
+        </view>
+        <view class="littleBox">
+          <view class="number">{{my_rank.rank}}</view>
+          <view class="ranking">当前排名</view>
+        </view>
+      </view>
+      <block wx:for="{{rank_list}}" wx:key="{{index}}">
+        <view>
+          <view class="flex totalNum">
+            <view class="{{item.rank  >10 ? 'noColor' : 'topRank'}}">top{{item.rank}}</view>
+            <view class="rightBox flex">
+              <view class="firstFriend">一级人脉：
+                <label class="personNum">{{item.one_level}}</label> ，</view>
+              <view class="secondFriend">二级人脉：
+                <label class="personNum">{{item.two_level}}</label>
+              </view>
+            </view>
+          </view>
+          <view class="flex infoBox">
+            <view class="infoLeft" bindtap="goTo" data-applyid="{{item.user_id}}">
+              <image src="{{item.user_avatar_url}}" class="headPic" wx:if="{{item.user_avatar_url}}"></image>
+              <view class="others_nopic" wx:if="{{item.user_avatar_text}}">{{item.user_avatar_text}}</view>
+            </view>
+            <view class="infoCenter" bindtap="goTo" data-applyid="{{item.user_id}}">
+              <view class="userName">{{item.user_real_name}}</view>
+              <view class="userCompany">{{item.user_company_name}}</view>
+              <view class="userPosition">{{item.user_company_career}}</view>
+            </view>
+            <view class="infoRight">
+              <view class="flex addNetwork">
+                <view class="refuse" wx:if="{{item.follow_status == 1}}">已为人脉</view>
+                <view class="refuse" wx:if="{{item.follow_status == 2}}">待验证</view>
+                <view class="addPersonBtn" wx:if="{{item.follow_status == 0 || item.follow_status == 3}}" data-applyid="{{item.user_id}}" data-follow_status="{{item.follow_status}}" catchtap="addPerson">加人脉</view>
+              </view>
+              <button plain='true' class='addNetwork sharePage' open-type='share' data-applyid="{{item.user_id}}" data-name='{{item.user_real_name}}' data-type='1'>为他拉票</button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view style="height:88rpx"></view>
+    </scroll-view>
+  </swiper-item>
+  <!--战队排名  -->
+  <swiper-item>
+    <scroll-view bindscrolltolower="loadMore" scroll-top="{{scroll}}" scroll-y="true">
+      <view id="explain">排行规则：总人脉数（一级人脉+二级人脉）最多者</view>
+      <!--搜索框  -->
+      <view class="search_frame" style='margin-top:80rpx;'>
+        <label class="searchBox flex">
+          <icon type="search" size="12" class="search_icon"></icon>
+          <input class="searchInput" placeholder="搜索战队名、创始人" value='{{str}}' bindinput="searchSth" />
+        </label>
+      </view>
+      <view style="height:168rpx;"></view>
+      <block wx:for="{{team_rank_list}}" wx:key="{{index}}">
+        <view>
+          <view class="flex totalNum" wx:if='{{item.rank}}'>
+            <view class="{{item.rank  >10 ? 'noColor' : 'topRank'}}">top{{item.rank}}</view>
+            <view class="rightBox flex">
+              <view class="firstFriend">一级人脉：
+                <label class="personNum">{{item.one_level}}</label> ，</view>
+              <view class="secondFriend">二级人脉：
+                <label class="personNum">{{item.two_level}}</label>
+              </view>
+            </view>
+          </view>
+          <view class='totalNum' wx:else style='heigth:64rpx;'></view>
+          <view class="flex infoBox">
+            <view class="brandPic" bindtap="allPerson" data-id="{{item.team_id}}" data-name='{{item.team_name}}'>
+              <image src="/img/warband-logo.png" wx:if="{{item.team_logo_text}}" class="team_logo"></image>
+              <image src="{{item.team_logo_url}}" wx:if="{{item.team_logo_url}}" class="team_logo"></image>
+            </view>
+            <view class="infoCenter" bindtap="allPerson" data-id="{{item.team_id}}" data-name='{{item.team_name}}'>
+              <view class="brandName">{{item.team_name}}</view>
+              <view class="representativeName">代表人：
+                <label>{{item.team_founder}}</label>
+              </view>
+            </view>
+            <view class="infoRight">
+              <view class="flex addNetwork">
+                <view class="refuse" wx:if="{{item.follow_status == 1}}">已加入</view>
+                <view class="addPersonBtn " wx:if="{{item.follow_status == 0}}" catchtap="addTeam" data-team_id="{{item.team_id}}" data-status="{{item.follow_status}}">加战队</view>
+              </view>
+              <button plain='true' class='addNetwork sharePage' open-type='share' data-applyid="{{item.team_id}}" data-name='{{item.team_name}}' data-type='2'>为他拉票</button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view style="height:88rpx"></view>
+    </scroll-view>
+  </swiper-item>
+</swiper>
+<!--没有更多-->
+<view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+<view class="flex bottomBtn">
+  <view class="backTo" bindtap="backTo">返回小程序</view>
+  <view class="expandMyContacts" bindtap="expandMyContacts">扩展我的人脉</view>
+</view>

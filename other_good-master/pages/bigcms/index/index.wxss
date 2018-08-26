@@ -1,0 +1,58 @@
+
+@import "/pages/bigcms/font_cms.wxss";
+
+page{font-size: 32rpx;}
+.top-box{height: 100rpx;}
+.top { position: fixed; top: 0; line-height: 100rpx; height: 100rpx;box-shadow: 12rpx 0 10rpx rgba(0, 0, 0, 0.3);z-index: 20;}
+/*导航一级菜单*/
+.menu {display: inline-block; width: 650rpx;overflow-x: auto;  white-space: nowrap; }
+.menu-scroll-view{height: 100rpx;}
+.nav { display: inline-block; padding: 0 20rpx;color: #808080; position: relative;vertical-align: bottom;}
+
+/*导航菜单右侧阴影*/
+.menu:after { content: ""; display: inline-block; width: 40rpx; height: 100rpx; position: absolute; top: 0; right: 100rpx;background-image: linear-gradient(270deg, #fff, rgba(255,255,255, 0)); }
+/*导航菜单激活状态*/
+.nav.active {font-weight:bold;color: #000;}
+.menu .nav.active:after { content: ""; display: block;  position: absolute; bottom: 0; left: 20rpx; right: 20rpx; height:6rpx; background:rgba(0, 0, 0, 0.8);}
+/*搜索按钮*/
+.top-search { display: inline-block; width: 100rpx; height: 100rpx; line-height: 100rpx;position: relative; vertical-align: top;}
+.nav:active,.top-search:active{background: rgba(0, 0, 0, 0.05);}
+/*搜索弹出*/
+.search {position: absolute; top: 0; left: 0; animation: fideIn 0.5s;}
+@keyframes fideIn{from{transform: translateX(750rpx);}to{transform: translateX(0);}}
+/*搜索上的关闭按钮*/
+.search .close { background: #f4f4f4; width: 100rpx; line-height: 100rpx;height: 100rpx; }
+.search .close:active { background: #e2e2e2; }
+/*搜索输入框*/
+.search input { width: 540rpx; height: 100rpx; padding: 0 20rpx; }
+.search .search-icon { width: 120rpx; line-height: 100rpx; font-size: 40rpx; }
+/*轮播图*/
+swiper,.slide-image{width: 750rpx;height: 375rpx;}
+page .wx-swiper-dots.wx-swiper-dots-horizontal{bottom:0; padding:0 2rpx;}
+page .wx-swiper-dot{ height: 14rpx;}
+page .wx-swiper-dot.wx-swiper-dot-active{width: 36rpx;border-radius: 60rpx;}
+/*文章列表*/
+.article-list{padding:40rpx 30rpx;}
+.img-box{width:200rpx;height:162rpx; background: #000; position: relative;}
+.img-box-item{ width: 100%; height: 100%; position: absolute; left: 0; top: 0;}
+.title{ line-height: 140%; height: 88rpx; font-weight: 500;}
+.list-items:nth-child(n+2){ margin-left: 16rpx;}
+.list-items .iconfont{ margin-right: 6rpx;}
+.article-list:active{background:rgba(0, 0, 0, 0.05);}
+.img-box-video{  padding-bottom: 50%; position: relative; background: #000;}
+
+.voice-icon{ width:80rpx; height: 80rpx;line-height: 80rpx; text-align: center; border-radius: 50%; display: inline-block; font-size: 18px; z-index: 1; background: #000;}
+.video-icon{ z-index: 1; font-size:120rpx; color:#000;}
+.video-icon::after{ content: ""; display: block; width: 50%; padding-bottom: 50%; background:#fff; z-index: -1; position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%);transform: translate(-50%,-50%);}
+
+.voice-icon + image,.video-icon + image{ opacity: 0.8;}
+
+/*左侧按钮*/
+.left-btn{position:fixed;bottom:80rpx;left:20rpx;line-height:70rpx;z-index:2;}
+.left-btn .little-btn{background:#09bb07;width:70rpx;height:70rpx;border-radius:50%;overflow: hidden;}
+
+@import "/css/DuoguanBigCms/DuoguanBigCms-template-default.wxss";
+
+
+
+

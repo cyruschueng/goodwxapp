@@ -1,0 +1,73 @@
+<view class="header">
+    <image wx:if="{{userInfo.bgcover == ''}}" class="bg" src="/img/bg.jpg"></image>
+    <image wx:if="{{userInfo.bgcover != '' }}" class="bg" src="{{userInfo.bgcover}}"></image>
+    <image class="head" src="{{userInfo.avatar}}"></image>
+    <view class="title">{{userInfo.name}}</view>
+    <view class="bar">
+        <view class="{{uflag == 0 ? 'active':''}}" style="border-right:1px solid #f2f2f2" data-id="s1" bindtap="changeTap">Ta的信息</view>
+        <view class="{{uflag == 1 ? 'active':''}}" data-id="s2" bindtap="changeTap">Ta的相册</view>
+    </view>
+</view>
+<view style="clear:both;background:#f2f2f2;height:25rpx;"></view>
+<block wx:if="{{uflag == 0}}">
+<view class="item">
+    <view class="left">性别</view>
+    <view class="right">{{userInfo.sex}}</view>
+    <view style="clear:both"></view>
+</view>
+<view class="item">
+    <view class="left">年龄</view>
+    <view class="right">{{userInfo.age}}</view>
+    <view style="clear:both"></view>
+</view>
+<view class="item">
+    <view class="left">婚姻状态</view>
+    <view class="right">{{userInfo.marital}}</view>
+    <view style="clear:both"></view>
+</view>
+<view class="item">
+    <view class="left">星座</view>
+    <view class="right">{{userInfo.constellation}}</view>
+    <view style="clear:both"></view>
+</view>
+<view class="item">
+    <view class="left">个人介绍</view>
+    <view style="clear:both;color:#888888;margin-top:20rpx;">{{userInfo.des}}</view>
+    <view style="clear:both"></view>
+</view>
+<view style="clear:both;background:#f2f2f2;line-height:50rpx;padding-left:20rpx;font-size:25rpx;color:#888888">他获得的标签</view>
+<view class="sads">
+    <view class="sad" wx:for="{{userInfo.tags}}" wx:if="{{item != ''}}">{{item}}</view>
+    <view style="clear:both"></view>
+</view>
+<view  class="soli" wx:if="{{tags.length == 0}}">
+  <view class="title">Ta还没获得标签哦！！！</view>
+</view>
+</block>
+
+<view class="its" wx:if="{{uflag == 1}}">
+  <view class="item" >
+    <view style="clear:both"></view>
+    <view class="li ">
+      <view wx:if="{{userInfo.photo_a != null && userInfo.photo_a != ''}}" style="width:220rpx;margin-top:8rpx;height:220rpx;background:url({{userInfo.photo_a}});background-size:auto 300rpx;float:left;margin-left:8rpx" data-sat="{{userInfo.photo_a}}" bindtap="setit"></view>
+      <view wx:if="{{userInfo.photo_b != null && userInfo.photo_b != ''}}" style="width:220rpx;margin-top:8rpx;height:220rpx;background:url({{userInfo.photo_b}});background-size:auto 300rpx;float:left;margin-left:8rpx" data-sat="{{userInfo.photo_b}}" bindtap="setit"></view>
+      <view wx:if="{{userInfo.photo_c != null && userInfo.photo_c != ''}}" style="width:220rpx;margin-top:8rpx;height:220rpx;background:url({{userInfo.photo_c}});background-size:auto 300rpx;float:left;margin-left:8rpx" data-sat="{{userInfo.photo_c}}" bindtap="setit"></view>
+      <view wx:if="{{userInfo.photo_d != null && userInfo.photo_d != ''}}" style="width:220rpx;margin-top:8rpx;height:220rpx;background:url({{userInfo.photo_d}});background-size:auto 300rpx;float:left;margin-left:8rpx" data-sat="{{userInfo.photo_d}}" bindtap="setit"></view>
+      <view wx:if="{{userInfo.photo_e != null && userInfo.photo_e != ''}}" style="width:220rpx;margin-top:8rpx;height:220rpx;background:url({{userInfo.photo_e}});background-size:auto 300rpx;float:left;margin-left:8rpx" data-sat="{{userInfo.photo_e}}" bindtap="setit"></view>
+      <view wx:if="{{userInfo.photo_f != null && userInfo.photo_f != ''}}" style="width:220rpx;margin-top:8rpx;height:220rpx;background:url({{userInfo.photo_f}});background-size:auto 300rpx;float:left;margin-left:8rpx" data-sat="{{userInfo.photo_f}}" bindtap="setit"></view>
+      
+    
+      <view style="clear:both"></view>
+    </view>
+  </view>
+</view>
+
+<view class="btn btn-default" wx:if="{{audit == 1}}">
+    <view>已同意参加我的萍聚</view>
+</view>
+<view class="btn btn-default" wx:if="{{audit == 2 || audit == 3}}">
+    <view>已取消</view>
+</view>
+<view class="btn" style="text-align:center; color: #888888">
+    我是有底线的
+</view>

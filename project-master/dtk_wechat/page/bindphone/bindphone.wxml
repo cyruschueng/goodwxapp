@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="containerBox">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="section-box">
+        <view class="section" style="border:0;">
+            <view class="section__title">手机号：</view>
+              <input type="number" class="weui-input section-mian" name="user_id" placeholder="请输入手机号" bindinput="mobileInputEvent" />
+          </view>
+        <view class="section"  wx:if="{{isCode}}">
+          <view class="section__title">图形验证码：</view>
+            <input class="weui-input section-mian inputmin" name="imgCaptcha"  bindinput="imgInputEvent" />
+            <image class="imgCode" src="{{imgCode}}" bindtap="clickImgCode"></image>
+        </view>
+        <view class="section">
+            <view class="section__title">短信验证码：</view>
+            <input class="weui-input section-mian inputmin" name="captcha" />
+            <button type="primary" size="mini" plain="true" class="codeButton" bindtap="picCode" disabled="{{buttonDisable}}">{{verifyCodeTime}}</button>
+        </view>
+
+        
+
+      </view>
+      <view class="btn-area">
+        <button type="warn" formType="submit">提交</button>
+      </view>
+    </form>
+  </view>
+</view>

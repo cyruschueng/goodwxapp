@@ -1,0 +1,140 @@
+<!--pages/shoppingCar/shoppingCarIn.wxml-->
+
+<view class='body'>
+
+  <!-- <block wx:for="{{ historyList }}" wx:key="{{ index }}" wx:for-item="his"> -->
+  <view class='history-cell'>
+    <view class='title'>
+      <text class='float-left'>{{ reservedDate }}</text> 
+      <text class='float-right' bindtap='bindOrderEditTap'>{{ edit }}</text>
+      <view class='delete-button' wx:if="{{ edit == '完成' }}" bindtap='bindDeleteTap'>删除</view>
+    </view>
+    <checkbox-group bindchange="bindCheckboxChange" wx:if="{{ paymentList.length > 0 }}">
+    <block wx:for="{{ paymentList }}" wx:for-item="pay" wx:key="{{ pay.shopppingid }}">
+    <view class='payment-cell'>
+      <checkbox class='checkbox' value="{{ pay.shopppingid }}" checked="{{ pay.checked }}"/>
+      <image class='cellImg' src='{{ pay.imgUrl }}' mode='aspectFill'></image>
+      <!-- 文字view -->
+      <view class='text' style='{{ pay.symbolEdit == "false" ? "display:block;" : "display:none;" }}'> 
+        <view class='name'>
+          <text>{{ pay.title }} <text class='{{ pay.packageStage ? "fz28 second-txt-color" : "" }}'>{{ pay.packageStage ? pay.name : '' }}</text> </text>
+          <image wx:if='{{ pay.finalTableNum }}' data-shopppingid='{{ pay.shopppingid }}' data-type='edit' bindtap='bindShoppingEditTap' src='../../images/shopping-edit.png'></image>
+        </view>
+        <view class='second-txt-color'> 
+          <text>{{ pay.packageStage ? pay.packageStage.packName : pay.name }} {{ pay.packageStage.stage == true ? ' ( 有全息 ) ' : '' }} {{ pay.floor }}</text>
+          <text style='{{ pay.floorHeight ? "margin-left:30rpx;" : "" }}'>{{ pay.floorHeight }}</text>
+        </view>
+        <view class='price'>
+          ¥ {{ pay.title == '宴会厅' ? pay.price : (pay.price == 0 ? '价格面议' : pay.price) }}
+          <text class='second-txt-color' style='float:right;'>x{{ pay.nums }} {{ pay.finalTableNum ? '桌' : '' }}</text> 
+          
+          </view>
+      </view>
+      <!-- 编辑view -->
+      <view class='edit-view' style='{{ pay.symbolEdit == "true" ? "display:block;" : "display:none;" }}'> 
+        <view class='edit-left'>
+          <view class='weui-flex'>
+            <view class='edit-symbol' data-shopppingid='{{ pay.shopppingid }}' data-type='reduce' bindtap='bindShoppingSymbolTap'>
+              <image class='edit-symbol-reduce' src='../../images/shopping-reduce.png'></image>
+            </view>
+            <view class='edit-symbol weui-flex__item'>{{ pay.nums }}</view>
+            <view class='edit-symbol' data-shopppingid='{{ pay.shopppingid }}' data-type='add' bindtap='bindShoppingSymbolTap'>
+              <image class='edit-symbol-add' src='../../images/shopping-add.png'></image>
+            </view>
+          </view>
+        </view>
+        <view  class='edit-right' data-shopppingid='{{ pay.shopppingid }}' data-type='finished' bindtap='bindShoppingEditTap'>完成</view>
+      </view>
+    </view>
+    </block>
+    </checkbox-group>
+
+    <!-- 提示 -->
+    <view class='shoppingtypes-view' wx:if="{{ shoppingtypes.length > 0 && paymentList.length > 0  }}">
+      您可能还需要
+      <block wx:for='{{ shoppingtypes }}' wx:key='{{ index }}'>
+        <text id='{{ item }}' bindtap='bindMissingShoppingTypesTap'>{{ item }}{{ index == shoppingtypes.length-1 ? '' : '、' }}</text>
+      </block>
+    </view>
+
+  </view>
+  <!-- </block> -->
+
+  <view class='shopping-car-empty-view' wx:if="{{ paymentList.length <= 0 }}">购物车是空的~</view>
+
+  <!-- 结算 -->
+  <view class='weui-footer weui-footer_fixed-bottom settlement-view'>
+    <view class='weui-flex'>
+      <view>
+        <checkbox-group class='settlement-checkbox' data-checked="{{ allchecked }}" bindchange="bindAllCheckboxChange">
+        <checkbox checked="{{ allchecked }}"/> 
+        </checkbox-group>
+        <text style='float:left;'>全选</text>
+      </view>
+      <view class='weui-flex__item'>
+        <view class='price-text'>合计：<text>¥ {{ totalPrice }}</text></view>
+        <view class='preprice-text'>定金：<text class='price'>¥ {{ prepayPrice }}</text></view>
+      </view>
+      <view>
+        <view class='{{ isGetReadyMakeAppoint ? "settlement-btn" : "not-settlement-btn" }}' bindtap='bindPayTap'>预约</view>
+      </view>
+    </view>
+  </view> 
+  
+</view>
+
+<!--填写 信息 时间 弹窗 -->
+<!-- <view class='selectDate-bgview' hidden='{{ reserveddateData.dateViewHidden }}'>
+  <view class='datepicker-view'> -->
+
+    <!-- 联系人 -->
+    <!-- <view class='title'>
+      联系人：<input bindinput="bindContactInput" placeholder='请填写联系人'></input>
+    </view> -->
+    <!-- 性别 -->
+    <!-- <view class='title'>
+      性别：
+      <radio-group bindchange="bindGenderCheckboxChange">
+        <label wx:for="{{ genderItems }}" wx:key='{{ item.name }}'>
+          <radio value="{{ item.name }}" checked="{{ item.checked }}"/>{{ item.value }}
+        </label>
+      </radio-group>
+    </view> -->
+    <!-- 联系电话 -->
+    <!-- <view class='title'>
+      联系电话：<input bindinput="bindContactInfoInput" type='number' placeholder='请填写联系电话'></input>
+    </view> -->
+    <!-- 预定日期 -->
+    <!-- <view class='title'>
+      预订日期：{{ reserveddateData.choose_year }}-{{ reserveddateData.choose_month }}-{{ reserveddateData.choose_day }} 
+      <text class='reserved-text'>{{ reserveddateData.reserved ? "不可预定" : "" }}</text>
+    </view> -->
+    <!-- 桌数 -->
+    <!-- <view class='title'>
+      <text class='table-text'>桌数：</text>
+      <view class="table-slider-view">
+        <slider activeColor='#F15A4A' bindchange="bindTableSliderChange" min="{{ ballInfo.minTable }}" max="{{ ballInfo.maxTable }}" show-value/>
+      </view>
+    </view> -->
+    <!-- 日期选择器 -->
+    <!-- <view class='picker'>
+      <picker-view class="flex" indicator-style="height: 50px;" value="{{ reserveddateData.picker_value }}" bindchange="pickerChange">
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_year }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_month }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_day }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+      </picker-view> 
+    </view> -->
+    <!-- 按钮 -->
+    <!-- <view class='weui-flex picker-btns'>
+      <view class='weui-flex__item' style='border-right:1px #f1f1f1 solid;' bindtap='bindCancelBtnTap'>取消</view>
+      <view class='weui-flex__item' style='{{ reserveddateData.reserved ? "color:#666;" : "color:#62b900;" }}' bindtap='bindConfirmBtnTap'>确定</view>
+    </view> -->
+<!-- 
+  </view> 
+</view>  -->

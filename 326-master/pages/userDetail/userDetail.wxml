@@ -1,0 +1,43 @@
+<import src="/template/listStyle.wxml" />
+<view class="container">
+<!--top str -->
+  <view class='h8 flexBetw Skin pdr1 pdl1'>
+    <view bindtap='accountAllChecked'>全选</view>
+    <view>概况</view>
+    <view bindtap='userpage'>取消</view>
+  </view>
+<!--top end -->
+<!--用户列表str  value="{{item.name}}" checked="{{item.checked}}"-->
+<checkbox-group  class='flexv1 modeldrawer_content pb1' bindchange="enableChange">
+  <view class="list bg256 borderE"  wx:for="{{accountArr}}" wx:key="{{index}}" wx:for-item="accountArr" > 
+      <view class='flexCenter'>
+        <checkbox class='mr0 br50' value='{{index}}' checked="{{accountChecked}}"></checkbox> 
+      </view>
+      <view class='listImg flexColumn flexCenter' style='margin-right:0px'>
+        <image class="imgL br50"src="/images/userW.png"></image>
+      </view>
+      <view class='listPar flex'>
+          <image class='imgxs' src="/images/{{accountArr.enable==true?'hookb.png':'hookp.png'}}"></image>
+        <view class="flexColumn">
+            <view> 
+              <view class="lisNum">{{accountArr.usr}}</view>
+            </view>
+            <view class='flex'>
+              <view class="lisNum mr1">{{accountArr.role==0?'电站业主':accountArr.role==1?'厂家账户':accountArr.role==2?'管理员':accountArr.role==3?'集团账号':'电站浏览账号'}}</view>
+              <view class="color2">{{accountArr.groupId?'已分组':'未分组'}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </checkbox-group> 
+<!--用户列表end --> 
+<!--bottom str -->
+  <view class='h8 flexBetw bgColorE'>
+    <view class='width33 h100 flexCenter' bindtap='AbleAccount0'>开启</view>
+    <view class='width33 h100 flexCenter' bindtap='EnableAccount'>禁用</view>
+    <view class='width33 h100 flexCenter' bindtap='groupClasspage'>移动到</view>
+  </view>
+<!--bottom end -->
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>
+

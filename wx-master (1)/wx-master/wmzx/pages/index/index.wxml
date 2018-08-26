@@ -1,0 +1,88 @@
+<!--index.wxml-->
+
+<view class="container">
+  <!--头部信息-->
+  <view class="head-area pos-r">
+    <view class="head-info row">
+      <navigator url='../login/login' class='row above'>
+        <view class="head-portrait">
+          <image class="name" src="{{avatarUrl}}"></image>
+        </view>
+        <view class='head-info column'>
+          <view class="headText">{{nickName}}</view>
+        </view>
+      </navigator>
+      <!--appName-->
+      <view class='appName'>
+        <image src='../../images/index/title.png'></image>
+      </view>
+      <navigator url='../noteList/noteList'>
+        <image class='notice' src='../../images/index/notice.png'></image>
+      </navigator>
+    </view>
+  </view>
+  <!--topfunc-->
+  <view class='topFunc row'>
+    <view class='row func-item' catchtap='beginRepay'>
+      <view style='margin:auto;' class='row'>
+        <image src="../../images/index/repayment.png"></image>
+        <view>申请还款</view>
+      </view>
+    </view>
+    <view class='func-item row'>
+      <view style='margin:auto;' class='row' catchtap='beginSmartRepay'>
+        <image src="../../images/index/smartBill.png"></image>
+        <view>智能账单</view>
+      </view>
+    </view>
+  </view>
+  <!--公告-->
+  <!-- <swiper autoplay="true" vertical="false" circular="true" interval="3000" duration="800" class="swiper-banner bg-white">
+    <block wx:for="{{banners}}" wx:key="{{item.id}}">
+      <navigator url='../noteList/noteList' open-type='navigate'>
+        <swiper-item>
+          <view class="item" data-index="{{index}}">公告：{{banners[index].ANNC}}</view>
+        </swiper-item>
+      </navigator>
+    </block>
+  </swiper> -->
+  <!--轮播图-->
+
+  <swiper indicatorDots="true" indicator-dots="true" autoplay="true" interval="5000" duration="1000" indicator-color="#e1ab36" indicator-active-color="#f60" circular="true">
+    <block wx:for="{{imgUrls}}" wx:key="{{item.index}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" width="355" height="150" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!--nav-->
+
+  <view class="menuWrap bg-white row">
+    <view class="menuWrap-item row">
+      <block wx:for="{{nav1}}" wx:key="{{item.index}}">
+        <view class="menuWrap-item-navi" data-title="{{nav1[index].url}}" data-index="{{index}}" catchtap="onSkip">
+          <image class='icon' src='{{nav1[index].src}}'></image>
+          <text class='navList'>{{nav1[index].txt}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<!--//弹窗-->
+<view class="box-wrapper" wx:if="{{showModalStatus}}">
+  <view class='box-content pos-r'>
+    <view class='tips'>提示</view>
+    <view class='tips1 tipsb'>亲爱的用户:</view>
+    <view class='tips1'>如果您第一次使用该产品，请进行
+      <text class='remind'>注册</text>!</view>
+    <view class='tips1'>如果您已经有账号，请
+      <text class='remind'>登录</text>！</view>
+    <view class='bottom row'>
+      <button type="default" class="regist" catchtap="regist">注册</button>
+      <button type="default" class="login" catchtap="login">登录</button>
+    </view>
+    <image class='close' catchtap='close' src='../../images/index/close.png'></image>
+  </view>
+</view>

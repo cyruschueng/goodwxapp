@@ -1,0 +1,55 @@
+<!--pages/addVote/addVote.wxml-->
+<view class="container">
+  <form  bindsubmit="formSubmit" class="addPublic">
+      <view class="publicInput">
+          <input type="value" name="title" placeholder="请输入通知标题(必填)" disabled="{{themeDisabled}}" bindconfirm="themeConfirm" class="themeInput" placeholder-class="inputPlaceholder" maxlength="20" required/>
+          <textarea placeholder="补充通知内容(必填)" name="content" disabled="{{descDisabled}}" class="descInput" placeholder-class="inputPlaceholder" maxlength="1000"  bindinput="descInput"/>
+          <view class="descWords"><text>({{descWordsNum}}</text>/<text>1000)</text></view>
+      </view>
+      <view class="publicUpload">
+        <block wx:for="{{imgUrls}}" wx:key="{{item}}"  wx:key="*this">
+          <view class="uploadImg">
+            <image src="{{item}}" mode="aspectFit"></image>
+            <view class="delUploadImg" catchtap='delUploadImg' data-url="{{item}}"><icon type="clear" size="20"/></view>
+          </view>
+        </block>
+        <view class="addUpload" catchtap='uploadImg'><text class="prcenter"><text style="font-size:48rpx">+\n</text>添加图片</text></view>
+      </view>
+      <view class="publicSet">
+        <view class="publicSet-item">
+            <text>发起人：</text>
+            <input name="author" value="{{userInfo.nickName}}" class="tr"></input>
+        </view>
+        <view class="publicSet-item">
+            <text>文号：</text>
+            <input name="wenhao" placeholder='自定义文号' class="tr" placeholder-class="inputPlaceholder"></input>
+        </view>
+        <view class="publicSet-item">
+            <text>添加关键词：</text>
+            <input name="keywords" placeholder='自定义关键词，以逗号分隔'  class="tr"  placeholder-class="inputPlaceholder"></input>
+        </view>
+        <view class="publicSet-item">
+            <text>人数限制：</text>
+            <input name="limit_human" type="number" placeholder='不填为不限人数'  class="tr"  placeholder-class="inputPlaceholder"></input>
+        </view>
+        <view class="publicSet-item">
+            <text>活动地址：</text>
+            <input class="none" disabled='disabled' value="{{address.name}}" ></input> 
+            <view style="flex:1" class="tr" catchtap='chooseAddressHandle'>{{address.name}}<span class="iconfont icon-next ml5"></span></view>
+        </view>
+      </view>
+      <view class="applyerInput">
+        <text class="secName">需要报名人信息</text>
+        <view class="publicSet-item">
+            <text>姓名：</text>
+            <switch name="name_need"/>
+        </view>
+        <view class="publicSet-item">
+            <text>手机：</text>
+            <switch name="phone_need"/>
+        </view>
+      </view>
+      <button formType="submit" type="primary" class="submitBtn">提交</button>
+      <text class="formNote">*当报名人数达到限制人数时将会提前结束活动报名</text>
+  </form>
+</view>

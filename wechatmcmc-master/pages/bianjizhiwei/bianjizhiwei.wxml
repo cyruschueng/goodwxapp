@@ -1,0 +1,160 @@
+<!--pages/jobs/jobs.wxml-->
+
+<view class="page">
+<!--start-->
+<view class="page__hd" style="padding:10px;">
+
+    <view class="postitle">
+        <view class="title">{{info.title}}</view>
+    </view>
+    <view class="detail">
+        
+        <view class="items">
+			<view class="weui-flex">
+                <view class="weui-flex__item">
+					<view class="items-ii" style="min-width:108px;">
+						<image class="icon" src="http://7pun6r.com2.z0.glb.qiniucdn.com/%E5%B7%A5%E8%B5%84%20%281%29.png" />
+						<text style="margin-left:5px;" class="item"><text class="text">{{info.gongzi}}</text></text>
+					</view>
+				</view>
+                <view class="weui-flex__item">
+					<view class="items-ii" style="margin-left:20px;">
+						<image class="icon" src="http://7pun6r.com2.z0.glb.qiniucdn.com/人员.png" />
+						<text style="margin-left:5px;" class="item"><text class="text">{{info.renshu}}</text></text>
+					</view>
+				</view>
+                <view class="weui-flex__item">
+					<view class="items-ii">
+						<image class="icon" src="http://7pun6r.com2.z0.glb.qiniucdn.com/%E6%80%A7%E5%88%AB.png" />
+						<text style="margin-left:5px;" class="item"><text class="text">{{info.xingbie}}</text></text>
+					</view>
+				</view>
+            </view>
+			<view class="weui-flex">
+                <view class="weui-flex__item">
+					<view class="items-ii"style="min-width:108px;">
+						<image class="icon" src="http://7pun6r.com2.z0.glb.qiniucdn.com/%E5%9C%B0%E5%8C%BA.png" />
+						<text style="margin-left:5px;" class="item"><text class="text">{{info.city}} {{info.quyu}}</text></text>
+					</view>
+				</view>
+                <view class="weui-flex__item">
+					<view class="items-ii"style="margin-left:20px;">
+						<image class="icon" src="http://7pun6r.com2.z0.glb.qiniucdn.com/%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C.png" />
+						<text style="margin-left:5px;" class="item"><text class="text">{{info.jingyan}}</text></text>
+					</view>
+				</view>
+                <view class="weui-flex__item">
+					
+				</view>
+            </view>
+        
+        
+        
+        
+        
+
+        </view>
+    </view>
+    <!--公司-->
+    <view class="company">
+        <navigator url="../company/company?token={{info.companytoken}}">
+            <image src="{{info.logo}}"  />
+            <view class="desc">
+                <view class="dleft">
+                    <view class="title">{{info.company}}</view>
+                    <!-- <view class="info">{{info.companydes}}</view> -->
+                </view>
+                <image src="{{info.renzheng}}" class="dright" />
+            </view>
+        </navigator>
+    </view>
+    <!--职位描述-->
+    <view class="positiondesc">
+        <view class="header">职位描述</view>
+        <view class="content">
+            <text>{{info.zhiweimiaoshu}}</text>
+        </view>
+    </view>
+
+    <!--企业信息-->
+   <view class="positiondesc">
+        <view class="header">公司信息</view>
+        <view class="content2">
+          
+            <view style=" width:23%;float:left;"><text >公司地址：</text></view>
+            <view style="width:77%;float:left; text-align:left;">{{info.qiyedizhi}}</view>
+            <view style=" width:23%;float:left;padding:10px 0px;"><text> 联 系 人：</text></view>
+            <view style="width:77%;float:left;padding:10px 0px;text-align:left;">{{info.lianxiren}}</view>
+            <view style=" width:23%;float:left;padding:5px 0px;"><text>联系电话：</text></view>
+            <view style="width:77%;float:left;padding:5px 0px;text-align:left;">{{info.callphone}}</view>
+           <view style="width:90%;height:80px; position: absolute;margin-top:100px;"></view>
+          
+        </view>
+    </view>
+
+
+
+
+</view>
+<view class="page__bd">
+    
+
+</view>
+<view style="width:100%;position:fixed;bottom:0;border-top:solid 1px #e8e8e8;padding:8px 0px;padding-left:0px;text-align:center;background-color:#ffffff;">
+    
+	
+	<block wx:if="{{info.isuser == 0}}">
+        <!-- <view style="width:185px;margin-right:5px;display:inline-block;">
+            <button class="weui-btn" type="primary" bindtap="toudi">立即应聘</button>
+        </view>
+        <view style="display:inline-block;margin-right:5px;margin-top:5px;">
+            <button style="height:40px;" class="weui-btn" type="primary" plain="true" bindtap="shoucang">收藏</button>
+        </view>
+        <view style="display:inline-block;margin-right:0px;margin-top:5px;">
+            <button class="weui-btn" style="height:40px;" type="primary" plain="true" data-hi="{{info.callphone}}"  bindtap="callphone">电话</button>
+        </view> -->
+        <view class="foot">
+          <view class="z_right">
+              <form  bindsubmit="toudi" report-submit="true" >
+                <button style="background-color:#D81E06;color:#ffffff;" type="primary" form-type="submit">立即应聘</button>
+              </form>
+          </view>
+          <view class="z_left">
+              <view class="l_img1" bindtap="shoucang">   
+                    收藏
+              </view>
+              <view class="l_img2" data-hi="{{info.callphone}}"  bindtap="callphone" >
+                  电话
+              </view>
+      </view>
+</view>
+    </block>
+    <!-- <block wx:if="{{info.isuser == 1}}">
+        <view style="margin-right:20px;display:inline-block;">
+            <button class="weui-btn" type="default" bindtap="shuaxin" plain="true">刷新</button>
+        </view>
+
+        <view style="display:inline-block;margin-right:20px;">
+            <button class="weui-btn" type="default" plain="true" bindtap="xiugai">修改</button>
+        </view>
+
+        <block wx:if="{{info.isshangxian == 1}}">
+            <view style="display:inline-block;margin-right:20px;">
+                <button class="weui-btn" type="default" plain="true" bindtap="xiajia">下架</button>
+            </view>
+        </block>
+        <block wx:if="{{info.isshangxian == 0}}">
+            <view style="display:inline-block;margin-right:20px;">
+                <button class="weui-btn" type="default" plain="true" bindtap="shangjia">上架</button>
+            </view>
+        </block>
+        <view style="display:inline-block;">
+            <button class="weui-btn" type="default" plain="true" bindtap="shanchu">删除</button>
+        </view>
+    </block> -->
+    
+    
+</view>
+<!--end-->
+
+</view> 

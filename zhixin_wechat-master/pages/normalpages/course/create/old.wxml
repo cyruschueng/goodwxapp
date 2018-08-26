@@ -1,0 +1,41 @@
+<!--pages/course/course.wxml-->
+<view class="container">
+
+    <view class='gray-space'></view>
+
+    <form class='form-container' bindsubmit="onFormSubmit" bindreset="onFormReset">
+        <view class='items-container'>
+
+            <!-- 角色设置 -->
+            <view class='items-container'>
+                <label class="items-container" wx:for="{{displayItems}}" wx:key="{{index}}">
+                    <view class="item-box {{item.component.name==='textarea'?'column':'row'}}">
+                        <view id="{{item.id}}" class='item-name'>
+                            {{item.name}}
+                        </view>
+
+                        <!-- 普通输入框 -->
+                        <view wx:if="{{item.component.name==='input'}}" class='item-input'>
+                            <input id="{{item.id}}" value="{{item.value}}" type='{{item.component.type}}' placeholder='{{item.tip}}'> </input>
+                        </view>
+                        <!-- 下拉选择器 -->
+                        <view wx:if="{{item.component.name==='picker'}}" class='item-picker'>
+                            <picker id="{{item.id}}" mode='{{item.component.mode}}' start='{{item.component.start}}' end='{{item.component.end}}' value="{{item.component.value}}" bindchange='onPickerChange'> {{item.component.value}} </picker>
+                        </view>
+                        <!-- 文本输入框 -->
+                        <view wx:if="{{item.component.name==='textarea'}}" class='item-textarea'> 
+                            <textarea id="{{item.id}}" class='decription-item-text' value="{{item.value}}" show-confirm-bar='{{false}}' type='{{item.component.type}}' placeholder='{{item.tip}}'></textarea>
+                        </view>
+                        
+                    </view>
+                </label>
+            </view>
+        </view>
+
+        <view class="foot-box">
+            <button class='reset-btn' type='default' size='default' formType="reset">重置</button>
+            <button class='confirm-btn' type='primary' size='default' formType="submit">保存</button>
+        </view>
+    </form>
+
+</view>

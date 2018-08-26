@@ -1,0 +1,45 @@
+
+<view class="panel addressp bottom-line">
+  <view class="tit">
+    <image src="/images/l1.png"></image>
+    <view>联系人</view>
+  </view>
+  <input placeholder="联系人姓名" bindinput="contactPersonInput" />
+</view>
+<view class="panel addressp bottom-line">
+  <view class="tit">
+    <image src="/images/l2.png"></image>
+    <view>联系电话</view>
+  </view>
+  <input placeholder="手机或固话" bindinput="telInput" />
+</view>
+<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+<view class="panel addressp bottom-line">
+  <view class="tit">
+    <image src="/images/l3.png"></image>
+    <view>送餐地址</view>
+  </view>
+  <view style="font-size:32rpx;color:{{xs == '请选择' ? '#919191':'#000'}}">{{xs}}</view>
+</view>
+</picker>
+<view class="panel addressp ">
+  <view class="tit">
+    <image src="/images/l4.png"></image>
+    <view>详细地址(如寝室号)</view>
+  </view>
+  <input placeholder="详细地址(如寝室号)" bindinput="detailAddressInput" />
+</view>
+
+
+
+
+
+
+
+
+<!--创建新地址-->
+<view class="createAddress">
+  <view class="xinsizhi_anniu"  bindtap="saveNewAdres">
+     创建新地址
+  </view>
+</view>

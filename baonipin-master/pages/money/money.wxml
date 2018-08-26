@@ -1,0 +1,26 @@
+<!--pages/money/money.wxml-->
+<view class='box'>
+    <view class='logo'>
+        <image src="../images/tixian.png" mode='widthFix'></image>
+        <view class='money'>{{money}}</view>
+    </view>
+    <view class='content'>
+        <label>提现金额</label>
+        <view class='money'>
+          ￥<input wx:if="{{all}}" type="text" bindchange="bindPickerChange" value='' placeholder='请输入提现金额'/>  
+            <input wx:else type="text" disabled value='{{money}}' placeholder='请输入提现金额'/>  
+        </view>
+        <view class='notice'>
+            提现金额直接打入您的微信钱包 
+             <view bindtap='allMoney' class="color">全部提现</view> 
+            <form report-submit="true" bindsubmit="pay" class="formSubmit">
+                <button class="submit button active" formType="submit">提现</button>
+            </form>
+        </view>
+        <view class='bottom'>
+            <view>1-5个工作日到账</view>
+            <view>每天可提现3次，每次至少1元</view>
+        </view>
+        <view class="color question" bindtap='question'>常见问题？</view>
+    </view>
+</view>

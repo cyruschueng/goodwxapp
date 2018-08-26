@@ -1,0 +1,225 @@
+<view class="search" style="padding-left:20rpx;">
+  <text style="color:#8d8e92;line-height:60rpx" bindtap="navToCity">{{city}}</text>
+  <image src="/img/dropdown.png" style="width:20rpx;height:16rpx;margin-top:8px;" bindtap="navToCity"></image>
+  <view class="input" bindtap="navToSearch"><image src="/img/search.png"></image><text>大家都在搜：旅行</text></view>
+  <view style="clear:both"></view>
+</view>
+<swiper circular="true" indicator-dots="true" autoplay="true" interval="5000" duration="1000" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" style="height:350rpx">
+  <block wx:for="{{carousel}}">
+    <swiper-item>
+      <image src="https://dateapp.superprism.cn/{{item.pic_url}}"  class="slide-image" style="height:350rpx;width:100%" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class="icon">
+  <view class="item" wx:for="{{iconList}}" data-en="{{item.en}}" data-cn="{{item.cn}}" bindtap="navToClassify">
+    <image src="{{item.url}}"></image>
+    <view style="font-size:26rpx">{{item.cn}}</view>
+  </view>
+  <view style="clear:both"></view>
+</view>
+<view style="clear:both;background:#f2f2f2;height:25rpx;"></view>
+<view class="bar">
+  <view class="item {{so0 == 1? 'active':''}}" id="so0" bindtap="changeTap">最新萍聚</view>
+  <view class="item {{so1 == 1? 'active':''}}" id="so1" bindtap="changeTap">我发布的</view>
+  <view class="item {{so2 == 1? 'active':''}}" id="so2" bindtap="changeTap">报名中的</view>
+  <view class="item {{so3 == 1? 'active':''}}" id="so3" bindtap="changeTap">已成功的</view>
+</view>
+<view class="panel">
+  <block wx:for="{{all}}" wx:for-item="it"  wx:if="{{so0 == 1 && all.length !=0}}">
+    <block wx:for="{{iconList}}" wx:for-item="ic" wx:if="{{it.general == ic.en}}" >
+    <view class="item" id="{{uid == it.uid ? 'meact':'taact'}}" data-id="{{it.id}}" data-uid="{{it.uid}}" bindtap="navToDetail" >
+      <view class="head" style="background:{{ic.color}}"></view>
+      <view class="msg">
+        <view class="line">
+          <image class="header" src="{{it.icon}}"></image>
+          <image wx:if="{{it.sex == '男'}}" class="gender" src="/img/male.png"></image>
+          <image wx:if="{{it.sex == '女'}}" class="gender" src="/img/female.png"></image>
+          <view class="dot">
+            <image src="/img/dot.png"></image>
+            <view>已报名人数:{{it.apply_total}}</view>
+          </view>
+          <image class="type" src="{{ic.url1}}"></image>
+          <view style="position:relative;left:350rpx;top:-70rpx;color:{{ic.color}}">{{it.general_title}}</view>
+        </view>
+        
+        <view class="line-msg">
+          <image src="/img/clock.png"></image>
+          <view class="title">时间：{{it.open_date}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/localtion.png"></image>
+          <view class="title">地点：{{it.address}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/money.png"></image>
+          <view class="title">预算金额：{{it.budget}}</view>
+        </view>
+        <view class="line-msg" style="padding-bottom:15px;border-bottom:1px solid #f2f2f2">
+          <image src="/img/flag.png"></image>
+          <view class="title">开支性质：<text wx:if="{{it.expend == 0}}">AA</text><text wx:if="{{it.expend == 1}}">我做东</text><text wx:if="{{it.expend == 2}}">求请</text><text wx:if="{{it.expend == 3}}">男A女免</text></view>
+        </view>
+        <view style="clear:both"></view>
+        <view class="link">查看详情
+          <image src="/img/right.png" style="margin-top:1rpx;width:30rpx;height:30rpx;"></image>
+        </view>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+    <view style="clear:both;height:25rpx;"></view>
+  </block></block>
+  <block wx:for="{{act}}" wx:for-item="it"  wx:if="{{so1 == 1 && act.length !=0}}">
+    <block wx:for="{{iconList}}" wx:for-item="ic" wx:if="{{it.general == ic.en}}" >
+    <view class="item" id="meact" data-id="{{it.id}}" data-uid="{{it.uid}}" bindtap="navToDetail" >
+      <view class="head" style="background:{{ic.color}}"></view>
+      <view class="msg">
+        <view class="line">
+          <image class="header" src="{{it.icon}}"></image>
+          <image wx:if="{{it.sex == '男'}}" class="gender" src="/img/male.png"></image>
+          <image wx:if="{{it.sex == '女'}}" class="gender" src="/img/female.png"></image>
+          <view class="dot">
+            <image src="/img/dot.png"></image>
+            <view>已报名人数:{{it.apply_total}}</view>
+          </view>
+          <image class="type" src="{{ic.url1}}"></image>
+          <view style="position:relative;left:350rpx;top:-70rpx;color:{{ic.color}}">{{it.general_title}}</view>
+        </view>
+        
+        <view class="line-msg">
+          <image src="/img/clock.png"></image>
+          <view class="title">时间：{{it.open_date}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/localtion.png"></image>
+          <view class="title">地点：{{it.address}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/money.png"></image>
+          <view class="title">预算金额：{{it.budget}}</view>
+        </view>
+        <view class="line-msg" style="padding-bottom:15px;border-bottom:1px solid #f2f2f2">
+          <image src="/img/flag.png"></image>
+          <view class="title">开支性质：{{it.expend_title}}</view>
+        </view>
+        <view style="clear:both"></view>
+        <view class="link">查看详情
+          <image src="/img/right.png" style="margin-top:1rpx;width:30rpx;height:30rpx;"></image>
+        </view>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+    <view style="clear:both;height:25rpx;"></view>
+  </block></block>
+
+<block wx:for="{{apply}}" wx:for-item="it"  wx:if="{{so2 == 1 && apply.length !=0}}">
+    <block wx:for="{{iconList}}" wx:for-item="ic" wx:if="{{it.general == ic.en}}">
+    <view class="item" id="taact" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail" >
+      <view class="head" style="background:{{ic.color}}"></view>
+      <view class="msg">
+        <view class="line">
+          <image class="header" src="{{it.icon}}"></image>
+          <image wx:if="{{it.sex == '男'}}" class="gender" src="/img/male.png"></image>
+          <image wx:if="{{it.sex == '女'}}" class="gender" src="/img/female.png"></image>
+          <view class="dot">
+            <image src="/img/dot.png"></image>
+            <view wx:if="{{it.audit == 0}}">申请中</view>
+            <view wx:if="{{it.audit == 1}}">已通过</view>
+            <view wx:if="{{it.audit == 2 || it.audit == 3}}">已取消</view>
+          </view>
+          <image class="type" src="{{ic.url1}}"></image>
+          <view style="position:relative;left:350rpx;top:-70rpx;color:{{ic.color}}">{{it.general_title}}</view>
+        </view>
+        
+        <view class="line-msg">
+          <image src="/img/clock.png"></image>
+          <view class="title">时间：{{it.open_date}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/localtion.png"></image>
+          <view class="title">地点：{{it.address}}</view>
+        </view>
+        <view class="line-msg">
+          <image src="/img/money.png"></image>
+          <view class="title">预算金额：{{it.budget}}</view>
+        </view>
+        <view class="line-msg" style="padding-bottom:15px;border-bottom:1px solid #f2f2f2">
+          <image src="/img/flag.png"></image>
+          <view class="title">开支性质：{{it.expend_title}}</view>
+        </view>
+        <view style="clear:both"></view>
+        <view class="link">查看详情
+          <image src="/img/right.png" style="margin-top:1rpx;width:30rpx;height:30rpx;"></image>
+        </view>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+    <view style="clear:both;height:25rpx;"></view>
+  </block></block>
+
+  <block wx:for="{{finish}}" wx:for-item="it"  wx:if="{{so3 == 1 && finish.length != 0}}">
+  <block wx:for="{{iconList}}" wx:for-item="ic"  wx:if="{{it.general == ic.en}}">
+    <view class="item" >
+      <view class="head" style="background:{{ic.color}}" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail"></view>
+      <view class="msg">
+        <view class="line" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail"> 
+          <image class="header" src="{{it.icon}}"></image>
+          <image wx:if="{{it.sex == '男'}}" class="gender" src="/img/male.png"></image>
+          <image wx:if="{{it.sex == '女'}}" class="gender" src="/img/female.png"></image>
+          <view class="dot" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail">
+            <image src="/img/dot.png"></image>
+            <view>已成功的萍聚</view>
+          </view>
+          <image class="type" src="{{ic.url1}}"></image>
+          <view style="position:relative;left:350rpx;top:-70rpx;color:{{ic.color}}">{{ic.cn}}</view>
+        </view>
+        <view class="line-msg" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail">
+          <image src="/img/clock.png"></image>
+          <view class="title">时间：{{it.open_date}}</view>
+        </view>
+        <view class="line-msg" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail">
+          <image src="/img/localtion.png"></image>
+          <view class="title">地点：{{it.city}}</view>
+        </view>
+        <view class="line-msg" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail">
+          <image src="/img/money.png"></image>
+          <view class="title">预算金额：{{it.budget}}</view>
+        </view>
+        <view class="line-msg" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail" style="padding-bottom:15px;border-bottom:1px solid #f2f2f2">
+          <image src="/img/flag.png"></image>
+          <view class="title">开支性质：{{it.expend_title}}</view>
+        </view>
+        <view style="clear:both"></view>
+        
+        <view class="link" style="padding-top:10px;padding-bottom:5px;">
+          <view style="float:left;width:320rpx;text-align:center;border-right:1px solid #f2f2f2;color:#000;" id="finish" data-id="{{it.aid}}" data-uid="{{it.uid}}" bindtap="navToDetail">查看详情</view>
+          <view wx:if="{{it.comment == 0}}" data-aid="{{it.aid}}" style="float:left;width:320rpx;text-align:center;#06c1ae" bindtap="navToEvaluate" >去评价</view>
+          <view wx:if="{{it.comment == 1}}" data-aid="{{it.aid}}" data-uid="{{it.uid}}" style="float:left;width:320rpx;text-align:center;color:#000;" bindtap="navToFind">评价成功</view>
+          <view style="clear:both"></view>
+        </view>
+      </view>
+      <view style="clear:both"></view>
+    </view>
+    <view style="clear:both;height:25rpx;"></view>
+  </block></block>
+  <view wx:if="{{so0 == 1 && all.length == 0}}" class="soli">
+    <view class="title">没有您喜歡萍聚，去其他城市看看</view>
+    <view class="notice">萍水相逢 有缘再聚 去报名吧</view>
+    <image src="/img/none.png"></image>
+  </view>
+
+  <view wx:if="{{so1 == 1 && act.length == 0}}" class="soli">
+    <view class="title">没有发布的萍聚</view>
+    <view class="notice">萍水相逢 有缘再聚 去报名吧</view>
+    <image src="/img/none.png"></image>
+  </view>
+  <view wx:if="{{so2 == 1 && apply.length == 0}}" class="soli">
+    <view class="title">没有报名中的萍聚</view>
+    <view class="notice">萍水相逢 有缘再聚 去报名吧</view>
+    <image src="/img/none.png"></image>
+  </view>
+  <view wx:if="{{so3 == 1 && finish.length == 0}}" class="soli">
+    <view class="title">没有已成功的萍聚</view>
+    <view class="notice">萍水相逢 有缘再聚 去报名吧</view>
+    <image src="/img/none.png"></image>
+  </view>
+</view>

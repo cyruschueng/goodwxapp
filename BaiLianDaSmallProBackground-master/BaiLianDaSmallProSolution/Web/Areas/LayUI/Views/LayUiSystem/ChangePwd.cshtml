@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "修改密码";
+}
+@section headerCss{
+
+}
+<blockquote class="layui-elem-quote">说明：修改您的密码</blockquote>
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>修改密码</legend>
+</fieldset>
+
+<div class="layui-container">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">原始密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="oldPassword" required lay-verify="required|verifyOldPwd" placeholder="请输入旧密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">必填项</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新的密码</label>
+            <div class="layui-input-inline">
+                <input id="pwd" type="password" name="newPassword" required lay-verify="required|pass" placeholder="请输入新的密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">必填项，密码长度为6到12位</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="confirmPassword" required lay-verify="required|pass|checkIsSameToPwd" placeholder="请输入确认密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">必填项，密码长度为6到12位,与密码相同</div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit lay-filter="changePwd">立即修改</button>
+        </div>
+
+    </form>
+</div>
+@section footerJs{
+    <script>
+        layui.config({
+            base: '/Areas/LayUI/Content/commonJs/'
+            , version: '1515376178709'
+        }).extend({
+            myAjax: 'myAjax'
+        });
+    </script>
+    <script>
+        layui.use(['form', 'jquery', 'myAjax'], function () {
+            var form = layui.form;
+            var $ = layui.jquery;
+            var aj = layui.myAjax;
+
+            form.verify({
+                verifyOldPwd: function (value) {
+                    var errMsg;
+                    //return '请输入正确的旧密码';
+                    aj.postSyncReq('/layui/LayUiSystem/CheckOldPwd'
+                        , { oldPwd: $.trim(value) }
+                        , function (data) {
+                            aj.dealResult(data, function () {
+                                errMsg = undefined;
+                            }, function () {
+                                errMsg = data.ReturnMsg;
+                            });
+                        });
+                    if (errMsg) {
+                        return errMsg;
+                    }
+                }
+                ,
+                checkIsSameToPwd: function (value) {
+                    if (value != $("#pwd").val()) {
+                        return "两次输入的密码必须一致"
+                    }
+                }
+                , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            });
+
+            //监听提交
+            form.on('submit(changePwd)', function (data) {
+                aj.postNoSyncReq('/layui/LayUiSystem/ChangePwd', data.field, function (data) {
+                    aj.dealResult(data, function () {
+                        layer.msg(data.ReturnMsg, function () {
+                            if (window.parent) {
+                                window.parent.location = "/layui/LayUiAdminLogin/LogOut";
+                            }
+                        })
+                    });
+                });
+                return false;
+            });
+        });
+    </script>
+}

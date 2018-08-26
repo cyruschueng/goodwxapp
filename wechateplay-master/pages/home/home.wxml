@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{!hasUserInfo}}">
+      <image class="userinfo-avatar" src="img/cat.jpg" background-size="cover"></image>
+      <text class="userinfo-nickname">{{motto}}</text>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="activestep">
+    <button class="activestep-play" bindtap="playStart">开始游戏</button>
+    <button class="activestep-play">好友对战</button>
+    <button class="activestep-play">世界排行</button>
+  </view>
+</view>

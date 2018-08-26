@@ -1,0 +1,83 @@
+<!--youhuiquan.wxml-->
+<view class="weui-tab">
+<!--头部tab  -->
+            <view class="weui-navbar">
+                <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="width: 33.3%;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+<!--内容  -->
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}" >
+                    <!--选项一-->
+                    <block wx:for-items="{{wei}}" wx:key="{{index}}">
+                      <view class="wei">
+                        <view class="y-top">
+                            <view class="y-left">
+                                ¥<text style="font-size:20px;">{{item.jine}}</text>
+                            </view>
+                            <view class="y-right">
+                                满{{item.zjine}}使用
+                            </view>
+                        </view>
+                        <view class="y-bottom">
+                            <view style="float:left;width:30%;height:35px;text-align:center;line-height:35px;">全平台</view>
+                            <view style="float:right;width:70%;height:35px;text-align:center;line-height:35px;">{{item.time}}-{{item.gtime}}</view>
+                        </view>
+
+                      </view>
+                    </block>
+                </view>
+
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}" >
+                    <!--选项二--> 
+                    <block wx:for-items="{{yi}}" wx:key="{{index}}">
+                      <view class="yi">
+                        <view class="yy-top">
+                            <view class="yy-left">
+                                ¥<text style="font-size:20px;">{{item.jine}}</text>
+                            </view>
+                            <view class="yy-right">
+                                满{{item.zjine}}使用
+                            </view>
+                        </view>
+                        <view class="yy-bottom">
+                            <view style="float:left;width:30%;height:25px;text-align:center;line-height:35px;">全平台</view>
+                            <view style="float:right;width:70%;height:25px;text-align:center;line-height:35px;">{{item.time}}-{{item.gtime}}</view>
+                        </view>
+
+                      </view>
+                    </block>
+                </view>
+
+                <view class="weui-tab__content" hidden="{{activeIndex != 2}}" >
+                    <!--选项三-->
+                   <block wx:for-items="{{guo}}" wx:key="{{index}}">
+                      <view class="guo">
+                        <view class="gy-top">
+                            <view class="gy-left">
+                                ¥<text style="font-size:20px;">{{item.jine}}</text>
+                            </view>
+                            <view class="gy-right">
+                                满{{item.zjine}}使用
+                            </view>
+                        </view>
+                        <view class="gy-bottom">
+                            <view style="float:left;width:30%;height:25px;text-align:center;line-height:35px;">全平台</view>
+                            <view style="float:right;width:70%;height:25px;text-align:center;line-height:35px;">{{item.time}}-{{item.gtime}}</view>
+                        </view>
+
+                      </view>
+                    </block>
+                </view>
+            </view>
+<!--底部按钮-->
+          <view style="width:100%;height:50px;"></view>
+            <view class="bottom" bindtap="lingqu">
+                <text style="line-height:45px;">领取优惠券</text>
+            </view>
+</view>
+

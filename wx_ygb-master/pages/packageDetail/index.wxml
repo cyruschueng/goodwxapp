@@ -1,0 +1,59 @@
+<view class="package-box" hidden="{{ !isShowPage }}">
+    <view class="head" style="background-image:url({{ advertiserIcon }})"></view>
+    <!-- 中奖 -->
+    <view class="" wx:if="{{ obj.status == '1' && obj.isLottery }}">
+        <view class="msg1">抢到
+            <view class="yellow">{{ advertiserName }}</view>
+            发送的现金红包</view>
+        <view class="msg2">
+            <view class="money">{{ obj.money }}</view>元
+        </view>
+        <view class="msg3">红包已放入
+            <view class="yellow">个人中心>钱包</view>
+            中</view>
+        <button class="btn" open-type="share" wx:if="{{ obj.hasLottery }}"></button>
+    </view>
+    <!--没中奖  -->
+    <view class="" wx:if="{{ obj.status == '2' || (obj.status == '1' && !obj.isLottery)   }}" style="padding-top:20px">
+        <view class="yellow">{{ obj.advertiserName || advertiserName }}</view>
+        <view class="big-font">手慢了，红包被抢光了</view>
+        <view class="min-font">老铁，下次加油吧~</view>
+    </view>
+    <!-- 本群不能抢了 -->
+    <view class="" wx:if="{{ obj.status == '3' }}">
+        <view class="yellow" >{{ obj.advertiserName }}</view>
+        <view class="compere-type" style="margin-top:-40rpx;">您已经抢过本群红包了~</view>
+        <button class="btn share-btn" open-type="share"></button>
+    </view>
+    <!-- 主持人推送消息进来的 -->
+    <view class="compere-type" style="padding-top:30rpx;" wx:if="{{ obj.status == '4' }}">
+        本次红包由
+        <view class="yellow">{{ advertiserName }}</view>
+        提供
+    </view>
+    <view class="win-list" style="max-height:752rpx; overflow:auto">
+        <view class="li-title" >
+            <view class="title">领取记录</view>
+            <!-- 中奖了 -->
+            <view class="user-msg" wx:if="{{ obj.status == '1' }}">本群共抢到了 {{moneyTotle}}元 红包</view>
+            <!-- 没中奖 -->
+            <!-- <view class="user-msg" wx:if="{{ obj.status == '2' }}">本群共抢到了 {{obj.totalMoney}}元 红包</view> -->
+             <view class="user-msg" wx:if="{{ obj.status == '2' }}">本群共抢到了 {{moneyTotle}}元 红包</view>
+            <!-- 本群不能抢了 -->
+            <view class="user-msg" wx:if="{{ obj.status == '3' }}">本群共抢到了 {{moneyTotle}}元 红包</view>
+            <!-- 主持人推送消息进来的 -->
+            <view class="user-msg" wx:if="{{ obj.status == '4' }}">共 {{totalMoneyStatus4}} 元 已领取 {{moneyTotle}} 元</view>
+        </view>
+        <view wx:if="{{ list.length != 0 }}" class="li" wx:for="{{list}}" wx:key="">
+            <image class="li-head" src="{{ item.icon }}"></image>
+            <view class="li-center">
+                <view class="li-name">{{ item.nickname }}</view>
+                <view class="li-time">{{ item.lotteryTime }}</view>
+            </view>
+            <view class="li-money">{{ item.money }}元</view>
+        </view>
+        <view wx:if="{{list.length == 0}}" style="text-align:center; padding-top:20rpx;">暂无中奖信息</view>
+    </view>
+    <!-- 主持人推送消息不显示  -->
+    <view wx:if="{{ obj.status != '4'  }}" class="my-wallet-btn" bindtap="toMain"></view>
+</view>

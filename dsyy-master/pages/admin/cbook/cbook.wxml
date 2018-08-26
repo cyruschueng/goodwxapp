@@ -1,0 +1,82 @@
+<view class="page">
+  <view class="page__hd">
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <!--输入框部分-->
+    <view class="white-bg">
+      <view class="weui-flex padding-top-15 padding-bottom-5">
+        <view>
+          <view class="placeholder">
+            <image src="../../../images/ewm_icon.png" class="opt-icon-28 margin-left-10" bindtap="scannerBook"></image>
+          </view>
+        </view>
+        <view class="weui-flex__item border-bottom">
+          <view class="placeholder">
+            <input class="weui-input" type="text" value="{{isbn}}" placeholder="如无法扫描ISBN号，请手动输入" class="margin-left-15 font-size-14" bindinput="inputISBN" />
+          </view>
+        </view>
+        <view class="border-bottom">
+          <view class="placeholder">
+            <image src="../../../images/search_icon.png" class="opt-icon-nor margin-right-15" bindtap="searchISBN"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--检索图书信息部分-->
+    <view wx:if="{{bookInfo.title}}" class="white-bg margin-top-10">
+      <!--图书进本信息-->
+      <import src="../../templates/bookInfoTpl/bookInfoTpl.wxml" />
+      <template is="bookInfoBase" data="{{...bookInfo}}" />
+      <!--图书对象基本信息-->
+      <view class="margin-top-5">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">图书类型</view>
+            <view class="weui-cell__ft">
+              {{bookInfo.type}}
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">图书编码</view>
+            <view class="weui-cell__ft">
+              {{bookObj.book_code}}
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">新书/旧书</view>
+            <view class="weui-cell__ft">
+              <switch type="switch" checked="{{bookObj.o_n=='1'?true:''}}" bindchange="changeO_n" />
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">能否邮寄</view>
+            <view class="weui-cell__ft">
+              <switch type="switch" checked="{{bookObj.mail=='1'?true:''}}" bindchange="changeMail" />
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">精品/普通</view>
+            <view class="weui-cell__ft">
+              <switch type="switch" checked="{{bookObj.flag=='1'?true:''}}" bindchange="changeFlag" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--占位-->
+    <view style="height:60rpx;"></view>
+
+    <!--下方按钮-->
+    <view wx:if="{{bookInfo.title}}" class="weui-footer weui-footer_fixed-bottom" bindtap="publishTW">
+      <view class="weui-flex text-center" style="width:100%;" class="padding-top-10 padding-bottom-10">
+        <button class="weui-btn" style="margin-left:50px;margin-right:50px;" type="primary" bindtap="createBookObj">录入图书</button>
+      </view>
+    </view>
+    <view wx:else class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-flex text-center" style="width:100%;" class="padding-top-10 padding-bottom-10">
+        <button class="weui-btn" style="margin-left:50px;margin-right:50px;" type="default" disabled="true">录入图书</button>
+      </view>
+    </view>
+
+  </view>
+</view>

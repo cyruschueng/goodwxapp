@@ -1,0 +1,98 @@
+<!--pages/addsOver/addsOver.wxml-->
+
+<view>
+  <view class="box">
+        <view class="box_left" bindtap='bigImg'>
+            <image  mode="aspectFit"  src="{{logo}}"></image>
+        </view>
+        <view class="box_center">
+            <view class="title">{{title}}</view>
+            <view class="describe" wx:if="{{describe}}">{{describe}}</view>
+            <view class="security">
+              <image wx:if="{{is_anony==1}}" src="../../images/4.png"></image>
+              <image wx:if="{{is_anony==2}}"  src="../../images/1.png"></image>
+              <image wx:if="{{has_correct==1}}" src="../../images/3.png"></image>
+              <image wx:if="{{is_open==2}}"  src="../../images/5.png"></image>
+              <image wx:if="{{is_open==1}}"  src="../../images/2.png"></image>
+              <image wx:if="{{is_push==1}}"  src="../../images/6.png"></image>
+            </view>
+        </view>
+        <view class="box_right">
+            <view class="persons">
+              <image  mode="aspectFit"  src="../../images/ps.png">
+              </image>
+              <text>{{num}}</text>
+            </view>
+            <view class="time">
+              <view>{{time}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="content">
+        <view class="avatar">
+          <image  mode="aspectFit"  src="{{avatar}}"></image>
+        </view>
+        <view class="from">
+            <text wx:if="{{nickName}}">{{nickName}}</text>
+            <text wx:else>匿名</text>
+            <text class="small">创建的问卷</text>
+        </view>
+        <view class="result">
+          <text wx:if="{{result}}">已答卷</text>
+          <text wx:else>共{{total}}个问题,预计用时{{total*3}}秒</text>
+          <text class="small" wx:if="{{is_limit==2}}">截至时间:不限</text>
+          <text class="small" wx:if="{{is_limit==1}}">截至时间:{{endTime}}</text>
+        </view>
+        <view class="go" wx:if="{{!isUser&&code==200}}">
+          <navigator url="../result/result?id={{id}}"><button disabled="{{total==0}}" hover-class="none" class="color mr20">查看结果</button></navigator>
+         <button hover-class="none" bindtap='edits'>编辑</button>
+        </view>
+        <view class="go" wx:if="{{!isUser&&code==200}}">
+        <button disabled="{{total==0}}" bindtap='checkTime'  hover-class="none" class="color mr20" wx:if="{{!result}}">开始答卷</button>
+        <button disabled="{{total==0}}" hover-class="none" class="{{result==true?'long':''}}" open-type="share">转发</button>
+        </view>
+        <view wx:if="{{isUser&&code==200}}" class="isUser">
+         <button bindtap='checkTime' wx:if="{{!result}}" disabled="{{total==0}}" hover-class="none"  class="color">开始答卷</button>
+          <navigator url="../result/result?id={{id}}" wx:else><button hover-class="none" disabled="{{total==0}}" class="color">查看结果</button></navigator>
+          <button class="mt20" disabled="{{total==0}}" hover-class="none" open-type="share" wx:if="{{is_relay==2}}">转发</button>
+        </view>
+        <view class="wx" bindtap='reView'>
+            <!-- <image src="../../images/wx.jpg" mode="aspectFit"></image>
+            <text>微信扫一扫,回答这问卷</text> -->
+            <view class="warn" bindtap='warn'><icon type="warn" size="20"/>举报</view>
+        </view>
+    </view>
+    <view class="help_tips">
+      <view class="help_box">
+        <image  src="../../images/4.png"></image>
+        <text>记名答卷，记录答题人信息</text>
+      </view>
+      <view class="help_box">
+        <image  src="../../images/1.png"></image>
+        <text>匿名答卷，不记录答题人信息，只记录答案</text>
+      </view>
+      <view class="help_box">
+        <image  src="../../images/2.png"></image>
+        <text>问卷统计结果发起者和参与者都可见</text>
+      </view>
+      <view class="help_box">
+        <image  src="../../images/5.png"></image>
+        <text>问卷统计结果仅发起者可见</text>
+      </view>
+      <view class="help_box">
+        <image  src="../../images/3.png"></image>
+        <text>问卷有正确答案，答题完成后，将显示是否正确</text>
+      </view>
+       <view class="help_box">
+        <image  src="../../images/6.png"></image>
+        <text>问卷有推送广场</text>
+      </view>
+    </view>
+
+</view>
+<view class="fixed">
+    <view bindtap='one'><image src="../../images/tabbar/bookstore_default@3x.png"></image><text>问卷</text></view>
+    <view bindtap='two'><image src="../../images/tabbar/create_icon_normal@3x.png"></image><text>广场</text></view>
+    <view bindtap='thr'><image src="../../images/tabbar/my_icon_normal@3x.png"></image><text>我的</text></view>
+</view>
+<view class="fesh" bindtap='am' animation="{{animationData}}"><image mode='aspectFill' src="../../images/fesh.png"></image></view>

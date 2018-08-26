@@ -1,0 +1,79 @@
+<import src="/template/tabBar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<import src="/template/listStyle.wxml" />  
+<view class='container'>
+<!--固定页头str  -->
+    <!--下拉菜单str  -->
+  <dl class="dropdownMenu" >
+    <dt  class="Skin flex ">
+      <view class='width10'>
+      </view>
+      <view class='width10'></view>
+      <input class='flexv1 br02 h100 bgColor0 textalignL' placeholder-class='textalignL' placeholder='输入设备名字' hidden='{{inputDev}}' bindinput='devInput' value='{{devInputVal}}' bindconfirm="inputdevSearch"></input>
+      <view class="dropdownMenutitle flexv1 font09" data-index="{{tapBox.tapTop.topSerial}}" bindtap="tapMainMenu" wx:if="{{tapVal01H}}">
+        {{tapBox.tapTop.topName}}
+        <image class="imgxs ml03"src="{{tapBox.tapTop.topPic}}"></image>
+      </view>
+      <view bindtap="devSearch" data-statu="adddColl" class='width10 flexCenter mr03'>
+          <image src='/images/sousuo.png' class='adds imgx1s'></image>
+      </view>
+      <view bindtap="powerDrawer" data-statu="adddColl" class='width10 flexCenter'>
+          <image src='/images/addd.png' class='adds imgx1s'></image>
+      </view>
+    </dt>
+   <template is="tapMenu1" data="{{tapBox: tapBox}}"/> 
+  </dl>
+   <view class='orderFilter bg256' hidden="{{tapCate=='0'?false:true}}"> 
+     <template is="tapMenu" data="{{tapBox: tapBox1}}"/>  
+     <template is="tapMenu" data="{{tapBox: tapBox2}}"/>  
+   </view> 
+  <view class='padd '></view>
+  <!--逆变器  -->
+<view class=' modeldrawer_content {{tapCate=="0"?"flexv1 pb1":"h0"}}'>
+  <template is="deviceList" data="{{listBox: listBox}}"/> 
+</view>    
+<!--数采器  -->
+<view class=' modeldrawer_content {{tapCate=="1"?"flexv1 pb1":"h0"}}'>
+  <template is="collList" data="{{collListBox: collDev}}"/> 
+</view>
+<!--环测仪  -->
+  <view class='modeldrawer_content {{tapCate=="2"?"flexv1 pb1":"h0"}}'>
+    <template is="deviceList" data="{{listBox: listBox}}"/> 
+  </view> 
+<!--智能电表-->
+<view class=' modeldrawer_content {{tapCate=="3"?"flexv1 pb1":"h0"}}'>
+  <template is="deviceList" data="{{listBox: listBox}}"/> 
+</view>
+<!--汇流箱 -->
+  <view class='modeldrawer_content {{tapCate=="4"?"flexv1 pb1":"h0"}}'>
+    <template is="deviceList" data="{{listBox: listBox}}"/> 
+  </view>
+<!--添加数采器-->
+<!--mask-->
+<view class="modledrawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showaddColl}}"></view> 
+<view animation="{{animationData}}" class="modeldrawer_box" wx:if="{{showaddColl0}}">  
+ <view class="modeldrawer_title mb01 font09 flexBetw">
+    <view>添加数采器</view>
+    <view class='btnxs' bindtap="powerOthCancel" hidden='{{chosews}}'>取消</view>
+ </view> 
+  <!--选择  -->
+  <view class="modeldrawer_content" hidden='{{choseWS}}'>
+    <button bindtap='writtS' class='mb05 Skin'>手动输入</button>
+    <button bindtap='scanningS' class='bgColorC'>扫码</button>
+  </view>
+  <!--选择1 str  -->
+   <view class="modeldrawer_content" hidden='{{writtH}}'> 
+    <view class="modeltop  flexColumn"> 
+        <input class=" modelinput_h30 modelcol-1 mb01" placeholder='输入pn号' type="text" bindinput='addCollpN' value='{{addCollV1}}'></input> 
+        <input class=" modelinput_h30 modelcol-1" placeholder='输入别名' type="text" bindinput='addCollalias' value='{{addCollV2}}'></input> 
+    </view> 
+ </view> 
+ <view class='flexBetw' hidden='{{writtH}}'>
+    <view class="modelbtn_ok Skin" bindtap="confiAliadd">确定</view> 
+    <view class="modelbtn_ok" bindtap="powerOthCancel">取消</view> 
+ </view>
+ <!--选择1 end  -->
+</view>
+<!--修改数采器 end -->
+<template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

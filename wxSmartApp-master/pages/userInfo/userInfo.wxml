@@ -1,0 +1,72 @@
+<!--用户注册信息  -->
+
+<view class="header">
+  <view class="user-img">
+   <image src="{{userInfo.avatarUrl}}"></image>
+   <!--<view class="user-nick">{{userInfo.nickName}}</view>-->
+  </view>
+</view>
+<view class="content">
+  <view class="item">
+    <view class="title">昵称</view>
+    <view class="info">
+      <input placeholder="输入昵称" placeholder-class="placeholder" value="{{user.nickName}}" bindinput="bindinputNick" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">姓名</view>
+    <view class="info">
+      <input placeholder="输入姓名" placeholder-class="placeholder" value="{{user.name}}" bindinput="bindinputName" />
+    </view>
+  </view>
+  
+  <view class="item">
+    <view class="title">性别</view>
+    <view class="info">
+      <radio-group class="radio-group" bindchange="sexChange">
+        <label class="radio">
+          <radio value="1" checked="{{user.sex==1}}" />男
+        </label>
+        <label class="radio">
+          <radio value="2" checked="{{user.sex==2}}" />女
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">年龄</view>
+    <view class="info">
+      <input type="number" placeholder="输入年龄" placeholder-class="placeholder" bindinput="bindinputAge" value="{{user.age}}" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">绑定手机号</view>
+    <view class="info">
+      <view class="classname" bindtap="bindTestPhone">{{user.mobile?user.mobile:'输入手机号'}}</view>
+      <!-- <input disabled="true" type="number" placeholder="输入手机号" placeholder-class="placeholder" bindtap="bindTestPhone" bindinput="bindinputPhone" value="{{user.mobile}}"  /> -->
+    </view>
+  </view>
+
+
+</view>
+
+<view class="submit" bindtap="submit">完成</view>
+
+<view class="mask {{maskState?'mask-on':''}}">
+  
+  <view class="container">
+    <view class="close-mask">
+      <image bindtap="bindCloseMask" src="{{IMG_PATH}}/close-icon.png"></image>
+    </view>
+    <view class="phone-box">
+      <input bindinput="bindPhone" placeholder="请输入手机号" placeholder-class="placeholder" value="{{phone}}" />
+    </view>
+    <view class="test-box">
+      <input bindinput="bindCode" placeholder="输入验证码" placeholder-class="placeholder" value="{{code}}"/>
+      <view bindtap="bindGetCode" class="classname">{{getCodeText}}</view>
+    </view>
+    
+
+    <view class="test-sub" bindtap="bindSubCode">提交</view>
+  </view>
+</view>

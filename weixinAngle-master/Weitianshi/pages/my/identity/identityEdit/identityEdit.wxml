@@ -1,0 +1,235 @@
+<import src="/pages/Template/Template.wxml" />
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <view class="classname">
+    <view class="visitCard flex" bindtap="scanIDcard" hover-class='t-hoverColor'>
+      <view class="visitCardMessage">名片</view>
+      <image src="/img/icon-mingpian-n@2x.png" class="pushIdCard" wx:if="{{upLoadSuccess == false}}"></image>
+      <image src="/img/icon-mingpian-s@2x.png" class="pushIdCard" wx:if="{{upLoadSuccess == true}}"></image>
+    </view>
+    <view class="personList">
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userNameContent flex" bindtap="writeNewThing" data-type="{{0}}">
+          <view class="personListTile">姓名*</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_real_name}}">请输入姓名</view>
+            <view class="personListContentAfter" wx:if="{{user_info.user_real_name}}">{{user_info.user_real_name}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userPhoneContent flex" bindtap="writeNewThing" data-type="{{1}}">
+          <view class="personListTile">手机*</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_mobile}}">请输入手机号码</view>
+            <view class="personListContent" wx:if="{{user_info.user_mobile}}">{{user_info.user_mobile}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userBrandContent flex" bindtap="writeNewThing" data-type="{{2}}">
+          <view class="personListTile">品牌</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_brand}}">请输入品牌</view>
+            <view class="personListContentAfter" wx:if="{{user_info.user_brand}}">{{user_info.user_brand}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userCompanyContent flex" bindtap="writeNewThing" data-type="{{3}}">
+          <view class="personListTile">公司*</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_company_name}}">请输入公司</view>
+            <view class="personListContentAfter" wx:if="{{user_info.user_company_name}}">{{user_info.user_company_name}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userPositionContent flex" bindtap="writeNewThing" data-type="{{4}}">
+          <view class="personListTile">职位*</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_company_career}}">请输入职位</view>
+            <view class="personListContentAfter" wx:if="{{user_info.user_company_career}}">{{user_info.user_company_career}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userEmailContent flex" bindtap="writeNewThing" data-type="{{5}}">
+          <view class="personListTile">邮箱</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_email}}">请输入邮箱</view>
+            <view class="personListContentAfter" wx:if="{{user_info.user_email}}">{{user_info.user_email}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userEmailContent flex" bindtap="writeNewThing" data-type="{{6}}">
+          <view class="personListTile">微信</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_wechat}}">请输入微信</view>
+            <view class="personListContentAfter" wx:if="{{user_info.user_wechat}}">{{user_info.user_wechat}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="userBox" hover-class='t-hoverColor'>
+        <view class="userDescribeContent flex" bindtap="writeNewThing" data-type="{{7}}">
+          <view class="personListTile">个人描述</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{!user_info.user_intro}}">请输入个人描述</view>
+            <view class="personListContentAfter" wx:if="{{user_info.user_intro}}">{{user_info.user_intro}}</view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="point">选填（建议填写，完善的信息有助于精准对接）</view>
+    <view class="investList">
+      <view class="investBox" bindtap="toIndustry" hover-class='t-hoverColor'>
+        <view class="investContent flex">
+          <view class="investListTile">投资领域</view>
+          <view class="flex overMore">
+            <view class="personListContent" wx:if="{{invest_info.invest_industry.length == 0}}">请选择</view>
+            <view class="overMore flex" wx:if="{{invest_info.invest_industry.length != 0}}">
+              <block wx:for="{{invest_info.invest_industry}}" wx:key="{{index}}" wx:for-item='industry'>
+                <label class="investStyle" wx:if="{{index < invest_info.invest_industry.length-1}}">{{industry.industry_name}}、</label>
+                <label class="investStyle" wx:if="{{index == invest_info.invest_industry.length-1}}">{{industry.industry_name}}</label>
+              </block>
+            </view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="investBox" bindtap="toStage" hover-class='t-hoverColor'>
+        <view class="investContent flex">
+          <view class="investListTile">投资轮次</view>
+          <view class="flex overMore">
+            <view class="personListContent" wx:if="{{invest_info.invest_stage.length == 0}}">请选择</view>
+            <view class="flex overMore" wx:if="{{invest_info.invest_stage.length != 0}}">
+              <block wx:for="{{invest_info.invest_stage}}" wx:key="{{index}}" wx:for-item='stage'>
+                <label class="investStyle" wx:if="{{index < invest_info.invest_stage.length-1}}">{{stage.stage_name}}、</label>
+                <label class="investStyle" wx:if="{{index == invest_info.invest_stage.length-1}}">{{stage.stage_name}}</label>
+              </block>
+            </view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="investBox" bindtap="toScale" hover-class='t-hoverColor'>
+        <view class="investContent flex">
+          <view class="investListTile">投资金额</view>
+          <view class="flex">
+            <view class="personListContent" wx:if="{{invest_info.invest_scale.length == 0}}">请选择</view>
+            <view class="overMore flex" wx:if="{{invest_info.invest_scale.length != 0}}">
+              <block wx:for="{{invest_info.invest_scale}}" wx:key="{{index}}" wx:for-item='scale'>
+                <label class="investStyle" wx:if="{{index < invest_info.invest_scale.length-1}}">{{scale.scale_money}}、</label>
+                <label class="investStyle" wx:if="{{index == invest_info.invest_scale.length-1}}">{{scale.scale_money}}</label>
+              </block>
+            </view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+      <view class="investBox" bindtap="toArea1" hover-class='t-hoverColor'>
+        <view class="userDescribeContent flex">
+          <view class="investListTile">投资地区</view>
+          <view class="flex overMore">
+            <view class="personListContent" wx:if="{{invest_info.invest_area.length == 0}}">请选择</view>
+            <view class="flex overMore" wx:if="{{invest_info.invest_area.length != 0}}">
+              <block wx:for="{{invest_info.invest_area}}" wx:key="{{index}}" wx:for-item='area' wx:if="{{invest_info.invest_area}}">
+                <label class="investStyle" wx:if="{{index < invest_info.invest_area.length-1}}">{{area.area_title}}、</label>
+                <label class="investStyle" wx:if="{{index == invest_info.invest_area.length-1}}">{{area.area_title}}</label>
+              </block>
+            </view>
+            <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="choiceList">
+      <view class="choice" wx:if="{{group_id == 18 ||group_id == 21}}">
+        <view class="userBox">
+          <view class="investContent flex">
+            <!-- group_id 18:买方FA 19:卖方FA  6:投资人 3:创业者 8:其他  -->
+            <view class="personListTile">申请加入FA行业联盟</view>
+            <picker id="bindFAService" bindchange="bindFAService" value="{{is_alliance}}" range="{{array}}">
+              <view class="flex" wx:if="{{group_id == 18 ||group_id == 21}}">
+                <view class="chooseContent" wx:if="{{!array[is_alliance]}}">请选择</view>
+                <view class="chooseAfter" wx:if="{{array[is_alliance] !=''}}">{{array[is_alliance]}}</view>
+                <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="choice" wx:if="{{group_id == 6|| group_id == 8}}">
+        <view class="userBox">
+          <view class="userDescribeContent flex">
+            <view class="personListTile">兼职FA业务</view>
+            <picker id="partFA" bindchange="partFA" value="{{is_FA_part}}" range="{{array}}">
+              <view class="flex">
+                <view class="chooseContent" wx:if="{{!array[is_FA_part]}}">请选择</view>
+                <view class="chooseAfter" wx:if="{{array[is_FA_part] !=''}}">{{array[is_FA_part]}}</view>
+                <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="choice" wx:if="{{group_id == 3}}">
+        <view class="userBox">
+          <view class="userDescribeContent flex">
+            <view class="personListTile">需要FA（财务顾问）融资服务</view>
+            <picker id="needFA" bindchange="needFA" value="{{is_financing}}" range="{{array}}">
+              <view class="flex">
+                <view class="chooseContent" wx:if="{{!array[is_financing]}}">请选择</view>
+                <view class="chooseAfter" wx:if="{{array[is_financing] !=''}}">{{array[is_financing]}}</view>
+                <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="choice" wx:if="{{group_id == 18 ||group_id == 21}}">
+        <view class="userBox">
+          <view class="investContent flex">
+            <view class="personListTile">申请使用创业项目库的管理sass系统</view>
+            <picker id="sass" bindchange="sass" value="{{is_saas}}" range="{{array}}">
+              <view class="flex">
+                <view class="chooseContent" wx:if="{{!array[is_saas]}}">请选择</view>
+                <view class="chooseAfter" wx:if="{{array[is_saas] !=''}}">{{array[is_saas]}}</view>
+                <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="choice" wx:if="{{group_id == 18 ||group_id == 21}}">
+        <view class="userBox">
+          <view class="userDescribeContent flex">
+            <view class="personListTile">加入FA社群认证会员</view>
+            <picker id="addFAService" bindchange="addFAService" value="{{is_identify_member}}" range="{{array}}">
+              <view class="flex">
+                <view class="chooseContent" wx:if="{{!array[is_identify_member]}}">请选择</view>
+                <view class="chooseAfter" wx:if="{{array[is_identify_member] !=''}}">{{array[is_identify_member]}}</view>
+                <image src="/img/icon-jiantou3@2x.png" class="arrowStyle"></image>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view style="height:152rpx;"></view>
+    </view>
+    <!--错误提示-->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+  </view>
+
+  <!--保存  -->
+  <template is="buttonOne" data="{{text:buttonOneText,btnName:'submit',disabled}}"></template>
+</view>

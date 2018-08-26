@@ -1,0 +1,123 @@
+<!--通用底部  -->
+<template name="tabBar">
+  <view class="tab_bar" style='background:{{data.backgroundColor}};border-top:1px solid {{data.borderColor}}'>
+    <view class='tab_bar_item' style='width:{{100/data.list.length}}%' wx:for="{{data.list}}" data-params='{{index}}' data-function='tabBarChange' bindtap='generalFilterFunction'>
+      <view class='text' style='line-height:100rpx;font-size:32rpx;color:{{item.active ? data.selectedTextColor:data.defaultTextColor}};'>{{item.text}}</view>
+    </view>
+  </view>
+</template>
+
+<!-- 通用轮播图 -->
+<template name="carsouel">
+<view style='overflow:hidden;padding:{{data.styleData.padding}};margin:{{data.styleData.margin}}'>
+<swiper indicator-dots="{{data.styleData.indicatorDots}}" 
+  indicator-color='{{data.styleData.indicatorColor}}' 
+  indicator-active-color='{{data.styleData.indicatorActiveColor}}' 
+  style='width:{{data.styleData.width}};height{{data.styleData.height}};border-radius:{{data.styleData.borderRadius}};overflow:hidden'   circular="{{data.styleData.circular}}" 
+  vertical="{{data.styleData.vertical}}"
+  autoplay="{{data.styleData.autoplay}}" 
+  interval="{{data.styleData.interval}}" 
+  duration="{{data.styleData.duration}}">
+  <block wx:for="{{data.data.imgUrls}}">
+    <swiper-item style='width:{{data.styleData.width}};height{{data.styleData.height}};background-image:url({{item}});background-size:cover;background-position:center'>
+      
+    </swiper-item>
+  </block>
+</swiper>
+</view>
+</template>
+
+<!--通用自定义按钮组件  -->
+<template name="customButton">
+  <view 
+  class='flex align-items-center justify-content-center {{data.styleData.vertical ? "warp":""}}' 
+  style='width:{{data.styleData.width}};height:{{data.styleData.height}};border-radius:{{data.styleData.borderRadius}};background-color:{{data.styleData.backgroundColor}};box-shadow:{{data.styleData.boxShadow}};{{data.styleData.fixed ? "position:fixed;":""}} top:{{data.styleData.top}};right:{{data.styleData.right}};text-align:{{data.styleData.textAlign}};margin:{{data.styleData.margin}};left:{{data.styleData.left}};{{data.styleData.bottom}}'>
+    <image wx:if="{{data.styleData.iconShow}}" src='/img/search.png' class='icon-{{data.styleData.iconSize}}'></image>
+    <view style='margin:{{data.styleData.textMargin}};font-size:{{data.styleData.textSize}};color:{{data.styleData.textColor}}' 
+    wx:if="{{data.styleData.textShow}}">{{data.styleData.text}}</view>
+  </view>
+</template>
+
+<!--通用带自定义图标的菜单  -->
+<template name="meunWithCustomIcon">
+  <view style='padding:{{data.styleData.padding}};margin:{{data.styleData.margin}}'>
+<swiper indicator-dots="{{data.data.list.length <= 8 ? false:data.styleData.indicatorDots}}" 
+  indicator-color='{{data.styleData.indicatorColor}}' 
+  indicator-active-color='{{data.styleData.indicatorActiveColor}}' 
+  style='border-radius:{{data.styleData.borderRadius}};overflow:hidden;height:{{data.styleData.height}};background-color:{{data.styleData.backgroundColor}};padding:10rpx 0'   
+  circular="{{data.styleData.circular}}" 
+  vertical="{{data.styleData.vertical}}"
+  autoplay="{{data.styleData.autoplay}}" 
+  interval="{{data.styleData.interval}}" 
+  duration="{{data.styleData.duration}}">
+  <block wx:for="{{data.data.list.length > 8 ? 2:1}}" wx:for-index="si_index">
+    <swiper-item wx:if="{{si_index == 0}}">
+    <view   >
+      <view class='inline-block' wx:for="{{data.data.list}}" wx:for-item="it" wx:for-index="mwci_index"  wx:if="{{mwci_index <8 }}"
+      style='{{data.data.list.length>=7||data.data.list.length==4 ? "width:"+(100/4)+"%;":""}}{{data.data.list.length == 6||data.data.list.length == 3 ? "width:"+(100/3)+"%;":""}}{{data.data.list.length == 5 ? "width:"+(100/5)+"%;":""}}text-align:center;padding:20rpx 0;margin:auto;{{data.styleData.itemBackgroundImageShow ? "background-image:url("+it.bg+");background-size:cover;background-position:center":""}}' bindtap="generalFilterFunction" data-function="navToPage" data-page="{{it.page}}" data-params="{{it.params}}">
+        <image wx:if="{{data.styleData.iconShow}}" class='icon-60' src='{{it.image}}'></image>
+        <view wx:if="{{data.styleData.textShow}}" style='font-size:30rpx'>{{it.text}}</view>
+      </view>
+    </view>
+    </swiper-item>
+    <swiper-item wx:if="{{si_index == 1}}">
+      <view  >
+      <view class='inline-block' wx:for="{{data.data.list}}" wx:for-item="it" wx:for-index="mwci_index"  wx:if="{{mwci_index >=8 }}"
+      style='width:25%;text-align:center;padding:20rpx 0;margin:auto'>
+        <image class='icon-{{data.styleData.iconSize}}' src='{{it.image}}'></image>
+        <view style='font-size:{{data.styleData.textSize}};color:{{data.styleData.textColor}}'>{{it.text}}</view>
+      </view>
+    </view>
+    </swiper-item>
+  </block>
+</swiper>
+  </view>
+</template>
+
+<!-- 卡片式图文展示列表  -->
+<template name="flattenedCardList">
+<view style='margin:{{data.styleData.margin}};padding:{{data.styleData.padding}}'>
+  <view wx:for="{{data.data.list}}" wx:for-item="fcl" wx:for-index="fcl_index" 
+  style='background-image:url({{fcl.image}});background-size:cover;background-position:center;height:{{data.styleData.itemHeight}};border-radius:{{data.styleData.itemBorderRadius}};overflow:hidden;margin:{{data.styleData.itemMargin}}'>
+    <view class='flex align-items-center justify-content-center' style='background-color:{{data.styleData.itemBackgroundColor}};height:{{data.styleData.itemHeight}};color:#ffffff;padding:0 30rpx;'>
+      <view style='text-align:center;padding:20rpx'>
+        <text>
+          <text style='font-size:{{data.styleData.titleTextSize}}'>{{fcl.title}}\n</text>
+          <text style='font-size:{{data.styleData.titleContentSize}}'>{{fcl.subTitle}}</text>
+        </text>
+      </view>
+    </view>
+  </view>
+</view>
+</template>
+
+<!-- 通用带一个筛选的搜索  -->
+<template name="searchWidthAFilter">
+<view style='{{data.styleData.fixed ? "position:fixed;":""}}top:{{data.styleData.top}};left:{{data.styleData.left}};bottom:{{data.styleData.bottom}};right:{{data.styleData.right}};width:100%'>
+  <view class='flex align-items-center justify-content-between' style='padding:{{data.styleData.padding}};margin:{{data.styleData.margin}};background-color:{{data.styleData.backgroundColor}}'>
+    <view>
+        <view class='flex align-items-center justify-content-center'>
+          <image src='{{data.styleData.iconUrl}}' class='icon-40'></image>
+          <view style='color:#ffffff;margin-left:20rpx;font-size:{{data.styleData.textSize}}'> {{data.data.filterList[data.data.implantationData]}}</view>
+        </view>
+    </view>
+    <view class='flex align-items-center justify-content-start' style='background-color:{{data.styleData.searchBackgroundColor}};height:{{data.styleData.searchHeight}};width:{{data.styleData.searchWidth}};border-radius:{{data.styleData.searchBorderRadius}}'>
+      <image src='{{data.styleData.searchIcon}}' style='margin-left:30rpx' class='icon-40'></image>
+      <input style='margin-left:30rpx;width:{{data.styleData.inputWidth}};font-size:{{data.styleData.textSize}}' placeholder='{{data.styleData.placeholder}}'></input>
+    </view>
+  </view>
+</view>
+</template>
+
+<!-- 通用标题展示  -->
+<template name="title">
+<view style='padding:{{data.styleData.padding}};margin:{{data.styleData.margin}}' class='flex align-items-center justify-content-start'>
+  <view wx:if="{{data.styleData.flagShow}}" style='border-radius:{{data.styleData.flagBorderRadius}};width:{{data.styleData.flagWidth}};height:{{data.styleData.flagHeight}};background:{{data.styleData.flagColor}}'></view>
+  <view style='width:90%;text-align:{{data.styleData.textAlign}};margin-left:{{data.styleData.flagShow ? "30rpx":""}};font-size:{{data.styleData.textSize}};color:{{data.styleData.textColor}}'>{{data.styleData.text}}</view>
+</view>
+</template>
+
+<!-- 通用左图右文展示列表  -->
+<template name="leftImageRightContentList">
+<view style='padding:{{data.styleData.padding}};margin:{{data.styleData.margin}}'></view>
+</template>

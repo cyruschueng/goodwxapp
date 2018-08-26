@@ -1,0 +1,39 @@
+<view class="top123 item-center panel-between item-center" bindtap="takeOpen">
+  <view class="panel-start item-center margin-left-md">
+    <image src='/img/fl.png' class='icon-md'></image>
+    <view class='font-md font-white margin-left-sm'>{{blockTools[bIndex].name}}</view>
+  </view>
+  <image src='/img/down.png'  class='icon-sm margin-right-md'></image>
+</view>
+<view class='{{open ? "":"hidden"}}' style='position:fixed;width:100%;top:100rpx;background:#fff'>
+  <view class='bottom-line font-md panel-between' wx:for="{{blockTools}}" style='padding:20rpx 80rpx;padding-right:30rpx;' data-index='{{index}}' bindtap='changeTab'>
+    <view>{{item.name}}</view>
+    <image src='/img/ddds.png' class='icon-sm' wx:if="{{bIndex == index}}"></image>
+  </view>
+</view>
+<view style='height:100rpx;'></view>
+<view class="golpanel margin-top-sm">
+    <view class="item" wx:for="{{blockTools[bIndex].product}}" style="background:url({{url+item.image}});background-size:100%" data-shopid="{{item.shopid}}" data-shop="{{item}}" bindtap="goToShopBuy">
+      <view class="il panel-start" style="background:rgba(255,255,255,0.8)">
+        <image mode="aspectFill" class="img" src="{{url+item.image}}"></image>
+        <view class="con">
+          <view class="font-md ellipsis">{{item.name}}</view>
+          <view class="font-24 font-default margin-top-md">销量: {{item.sales}}笔</view>
+          <view class="font-lg font-danger margin-top-md">￥{{item.price}}</view>
+        </view>
+        <view class="control">
+          <view class="font-md docome" style="color:#00a2d3">来一份</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

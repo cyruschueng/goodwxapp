@@ -1,0 +1,66 @@
+<view class="page">
+  
+    <!--搜索-->
+    <view class="search_groups">
+        <icon class="icon-search" type="search" size="14"></icon>
+        <input type="text" class="input" value="{{search_inputVal}}" focus="{{search_inputShowed}}" bindinput="inputTyping" bindconfirm="search" confirm-type="search" placeholder="请输入您想搜索的内容"/>
+    </view>
+    <view class="init" wx:if="{{remind}}">
+      {{remind}}
+    </view>
+    <scroll-view scroll-y="true" style="height:{{scrollHeight}}px;" wx:if="{{remind.length == 0}}">
+    <!--生活-->
+    <view class="live" wx:if="{{live.length > 0}}">
+      <view class="title_group">
+        <view class="icon"></view>
+        <view class="title">班夫生活</view>
+      </view>
+      <view class="body">
+        <block wx:for="{{live}}" wx:key="id">
+          <navigator url="{{'../live/food/merchants/merchants?id='+item.id}}" class="item" wx:if="{{item.img.length > 0}}" style="{{'display:'+item.isShow}}">
+            <image src="{{item.img}}" mode="aspectFill" class="img"></image>
+            <view class="meta">
+              <view class="name">{{item.name}}</view>
+              <view class="intro">{{item.content}}</view>
+            </view>
+          </navigator>
+          <navigator url="{{'../live/food/merchants/merchants?id='+item.id}}" class="item2" wx:else style="{{'display:'+item.isShow}}">
+            <view class="name">{{item.name}}</view>
+            <view class="intro">{{item.content}}</view>
+          </navigator>
+        </block>
+       <view class="more" style="{{'display:'+liveShowMore}}" bindtap="liveMore">
+        <image src="../../image/more.png" class="icon"></image>
+        <view class="text">查看更多内容</view>
+       </view> 
+      </view>
+    </view>
+    <view class="divide"></view>
+    <!--精彩-->
+    <view class="wonderful" wx:if="{{wonderful.length > 0}}">
+      <view class="title_group">
+        <view class="icon"></view>
+        <view class="title">精彩班夫</view>
+      </view>
+      <view class="body">
+        <block wx:for="{{wonderful}}" wx:key="id">
+          <navigator url="{{item.url}}" class="item" wx:if="{{item.img.length > 0}}" style="{{'display:'+item.isShow}}">
+            <image src="{{item.img}}" mode="aspectFill" class="img"></image>
+            <view class="meta">
+              <view class="name">{{item.name}}</view>
+              <view class="intro">{{item.content}}</view>
+            </view>
+          </navigator>
+          <navigator url="{{item.url}}" class="item2" wx:else style="{{'display:'+item.isShow}}">
+            <view class="name">{{item.name}}</view>
+            <view class="intro">{{item.content}}</view>
+          </navigator>
+        </block>
+        <view class="more" style="{{'display:'+wonderfulShowMore}}" bindtap="wonderfulMore">
+          <image src="../../image/more.png" class="icon"></image>
+          <view class="text">查看更多内容</view>
+       </view> 
+      </view>
+    </view>
+  </scroll-view>
+</view>

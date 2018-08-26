@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript" src="../build/jquery.min.js"></script>
+<script type="text/javascript" src="../build/pubsub.js"></script>
+<script type="text/javascript">
+    //Basic example
+    //创建一个函数来订阅主题
+    var mySubscriber = function (msg, data) {
+        console.log(msg, data);
+    };
+    //订阅
+    var token = PubSub.subscribe("MY TOPIC", mySubscriber);
+    //发布
+    PubSub.publish('MY TOPIC', 'hello');
+</script>
+</body>
+</html>

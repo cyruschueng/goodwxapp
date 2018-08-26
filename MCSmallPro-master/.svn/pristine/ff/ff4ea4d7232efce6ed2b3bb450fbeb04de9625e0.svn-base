@@ -1,0 +1,37 @@
+<view class="product" hidden='{{!productVisible}}'>
+  <image class='product-close' bindtap='closeProduct' src='http://res.o2o.com.cn:8082/img/42cddec8493a464b81998028fb7f6d56'></image>
+  <view class='flex' bindtap='navigateToProuct' data-product-id='{{product.Id}}'>
+    <image class='product-image' src='{{product.Image}}'></image>
+    <view class='ml10 flex flex-column flex-row-between flex-grow1'>
+      <view class='flex flex-column flex-column-start'>
+        <text class='product-no'>{{product.No}}号</text>
+        <text class='mt10 ellipsis2'>{{product.Name}}</text>
+      </view>
+      <text class='text-primary'>￥{{product.Price}}</text>
+    </view>
+  </view>
+  <view class='product-line mt15 mb15'></view>
+
+  <view class='flex flex-column'>
+    <text>规格：</text>
+    <view class='flex flex-wrap mt5'>
+      <text class='product-attr-item {{attr.Selected?"selected":""}}' wx:key="Value" wx:for="{{product.Attrs}}" wx:for-item="attr" bindtap="showProduct" data-product-id="{{attr.Value}}" data-zhubo-product-id="{{product.ZhuboProductId}}">{{attr.Text}}</text>
+    </view>
+    <text class='mt10'>数量：</text>
+    <view class='product-qty flex mt5'>
+      <button disabled='{{productQty<2}}' bindtap='minusProductQty'>-</button>
+      <input value='{{productQty}}' disabled='true'></input>
+      <button disabled='{{productQty>99}}' bindtap='addProductQty'>+</button>
+    </view>
+  </view>
+
+  <view class='product-bottom'>
+    <view class='product-bottom-button'>
+      <view class='product-add-cart' bindtap='addCart'>加入购物车</view>
+      <view class='product-show-buy' bindtap='buy'>立即购买</view>
+    </view>
+    <view class='product-image-show-cart-container' bindtap='showCart'>
+      <image class='product-image-show-cart' src='http://res.o2o.com.cn:8082/img/12eef7ebc9844fe3a7d4f5cc4e46be8d'></image>
+    </view>
+  </view>
+</view>

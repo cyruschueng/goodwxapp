@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <title>同步跟读</title>
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div id="debug"></div>
+     <div class="loading" style="display:block;">
+        <div class="load-inner">
+            <span>加载中...</span>
+        </div>
+    </div>
+    <!--loading end-->
+    <div class="dialog">
+        <div class="dialog-inner">
+            <span>暂无信息~</span>
+        </div>
+    </div><!--dialog end-->
+    <div class="m-error">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.reload()">重 试</div> 
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div><!--error end-->
+
+    <div id="app" class="wrap word-wrap" style="display:none;">
+        <!-- userinfo -->
+        <div class="pos-fixed bg-f1f0ec">
+            <div class="m-30 clearfix" v-if="userInfo">
+                <div class="user_score fs-24"><span class="fs-36 green">{{userInfo.actualScore || 0}}</span> 分</div>
+                <div class="user_avatar fl"><img :src="userInfo.avatar" alt=""></div>
+                <div class="fl ml20 maxw-530">
+                    <div class="fs-36 lh70">{{userInfo.nickName || userInfo.realName}} &nbsp;</div>
+                    <div class="col-999896 mt10 fs-24 lh30" v-for="item in userInfo.classes">{{item.schoolName}} &nbsp; {{item.className}}</div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 1.8rem;" v-if="userInfo">&nbsp;</div>
+            
+        <!--单词跟读-->
+        <!--<div v-if="pageType==1 || pageType==2">
+            <div class="list-item p-30 bdb-f1f0ec clearfix" v-for="item in list">
+                <div class="fl maxw-560">
+                    <div><div class="inline" v-html="item.words | formatSentence"></div></div>
+                    <div class="fs-24 lh-36 c-999896">{{item.pretations}}</div>
+                </div>
+                <div class="fr ml20 mt20" :class="item.userAnswer && item.userAnswer.score | scoreClass">{{item.userAnswer && item.userAnswer.score || 0}}分</div>
+            </div>
+        </div>-->
+        <div v-if="pageType==1 || pageType==2">
+            <div class="list-item2 bdb-f1f0ec clearfix" index="{{index}}" v-for="(index,item) in list">
+                <div class="list-item-l">
+                    <div class="d-table-cell">
+                        <div v-html="item.words | formatSentence"></div>
+                        <div class="fs-24 lh-36 c-999896">{{item.pretations}}</div>
+                    </div>
+                </div>
+                <div class="list-item-r" :class="item.userAnswer && item.userAnswer.score | scoreClass">
+                    <div class="audio-btn2"><audio :src="item.userAnswer && item.userAnswer.audioUrl" preload="auto"></audio></div>
+                    <span class="score">{{item.userAnswer && item.userAnswer.score || 0}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!--句子跟读-->
+        <div v-if="pageType==3 || pageType==4">
+            <div class="list-item2 bdb-f1f0ec clearfix" index="{{index}}" v-for="(index,item) in list">
+                <div class="list-item-l"><div class="d-table-cell" v-html="item.name | formatSentence"></div></div>
+                <div class="list-item-r" :class="item.userAnswer && item.userAnswer.score | scoreClass">
+                    <div class="audio-btn2"><audio :src="item.userAnswer && item.userAnswer.audioUrl" preload="auto"></audio></div>
+                    <span class="score">{{item.userAnswer && item.userAnswer.score || 0}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script> var app_interaction = false; // 是否与APP交互 </script>
+    <!--<script src="../common/js/adaptive.js"></script>
+    <script src="../common/js/jquery.min.js"></script>
+    <script src="../common/js/cordova.min.js"></script>
+    <script src="../common/js/vue.min.js"></script>-->
+    <!--公共js打包压缩成build-->
+    <script src="../common/js/build.min.js"></script>
+    
+    <script src="../common/js/common.js"></script>
+    <script>
+        var  pageType = $common.getUrlParaBase64('pageType') || '';
+        // 分享页不需要交互app，禁用cordova
+        if(pageType!=1 && pageType!=3){
+            // window.prompt = function(){}
+        }else{
+            window.app_interaction = true;
+            var script = document.createElement('script')
+            script.src = '../common/js/build.min.js';
+            document.body.appendChild(script)
+        }
+        
+    </script>
+    <script src="js/index.js"></script>
+    <!-- 音频插件 -->
+    <script src="js/audiojs/hoasou.audio.js"></script>
+</body>
+</html>

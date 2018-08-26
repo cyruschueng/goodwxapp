@@ -1,0 +1,25 @@
+<map style="width: 100%; height: 300px;" latitude="{{latitude}}" 
+  longitude="{{longitude}}" markers="{{markers}}" circles="{{circles}}" 
+  scale="{{scale}}" polyline="{{polyline}}"  
+  show-location include-points="{{markers}}" bindtap="onTap">
+<cover-view>
+  <cover-view class="weui-msg__title hcenter" 
+  style="background-color:rgba(0,0,0,.3);color:white;padding:10rpx">广州海珠万里画行</cover-view>
+</cover-view>
+<cover-view style="position:absolute;width:100%;bottom:0;display:flex;">
+  <cover-image style="width:30px;height:30px" data-location="1" 
+  bindtap="changeLocation" src="/image/green_tri.png" />
+  <cover-image style="width:30px;height:30px" data-location="2" 
+  bindtap="changeLocation" src="/image/green_tri.png" />
+</cover-view>
+</map>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view>缩放</view>
+    </view>
+    <view class="weui-cell__bd">
+      <slider value="{{scale}}" min="5" max="18" step="1" data-name="scale" bindchange="onSliderChange" show-value/>
+    </view>
+  </view>
+</view>

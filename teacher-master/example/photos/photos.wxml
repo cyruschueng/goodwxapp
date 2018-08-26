@@ -1,0 +1,185 @@
+<view wx:if="{{album.music_album}}" class='musicMode' bindtap='musicMode'>
+  <view>切为影集模式</view>
+</view>
+<view wx:if="{{loaded}}">
+  <view wx:if="{{photos.length==0&&selectedImgs.length==0}}" style='background-color: white;height:{{winHeight}}px;' class="page">
+    <view class="weui-msg">
+      <view class="weui-msg__icon-area">
+        <image style='width:100px;height:100px' src='../../image/moren1.png'></image>
+      </view>
+      <view class="weui-msg__text-area">
+        <view class="weui-msg__title" style='font-size:17px;color:#6d6a6a'>此相册还没有照片或小视频</view>
+        <view class="weui-msg__desc"></view>
+      </view>
+      <view class="weui-msg__opr-area">
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" bindtap='chooseType' style='background-color:#1e90ff;width:80%'>上传</button>
+          <!-- <button class="weui-btn" type="default">辅助操作</button> -->
+        </view>
+      </view>
+      <view class="weui-msg__extra-area">
+        <view class="weui-footer">
+          <view class="weui-footer__links">
+            <navigator url="" class="weui-footer__link">班级群小管家</navigator>
+          </view>
+          <view class="weui-footer__text">Copyright © 2008-2016 qihuiqiang</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <view wx:if="{{photos.length>0&&selectedImgs.length==0}}" style="background:white;margin-bottom:100px;">
+    <view wx:if="{{album.is_owner}}" class="weui-cells__title photo_tip" style='margin-top:0px;height: 40px;line-height: 40px;background-color:#f5f3f3;margin-bottom:10px;font-size:13px'> 提示:长按照片可以对发布进行管理</view>
+    <block wx:for="{{photos}}" wx:key="id">
+      <view class="feed-source">
+        <view class="avatar" bindtap="goOther" data-poster_id="{{item.from_user_id}}" style=" display: flex;justify-content: space-between;">
+          <image src="{{item.creator_avatar}}"></image>
+          <view style=" display: flex;flex-direction: column;justify-content: space-between;">
+            <text wx:if="{{item.roletype==2}}">{{item.creator_name}}老师</text>
+            <text wx:else>{{item.creator_name}}{{item.role}}</text>
+            <!-- <text style="font-size:24rpx;color:#afaaaa">2012-12-12</text> -->
+          </view>
+        </view>
+        <view class="feed-time" bindtap="show_comment_input" data-id="{{item._id}}">
+          <text class="item-more" style="color:#afaaaa;">{{item.create_at}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{item.desc}}" class='photo_text'>{{item.desc}}</view>
+      <view class="weui-cell__bd" style='padding:5px 10px;'>
+        <view class="weui-uploader" style='padding-left:10px;'>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+              <block wx:for="{{item.urls}}" wx:key="*this" wx:for-item="url">
+                <view class="weui-uploader__file" bindtap="previewPhoto" id="{{url}}" style='position:relative' data-photoid="{{item._id}}" bindlongpress="action" data-owner="{{item.is_owner}}">
+                  <image style='width:{{photoWidth}}px;height:{{photoWidth}}px;border:1px solid #ddd;' class="weui-uploader__img" src="{{aliyunImageOssPreUrl+url}}?x-oss-process=image/resize,w_{{photoWidth}},h_{{photoWidth}},m_fill/auto-orient,1/quality,q_100/interlace,1/format,jpg"
+                    mode="aspectFill" />
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+
+      <view wx:if="{{item.type&&item.type==1&&item.url}}">
+        <navigator url='../video/video?src={{aliyunVideoOssPreUrl+item.url}}'>
+          <view style='text-align:center;position:relative;'>
+            <image style='width:{{winWidth-60}}px' src='{{aliyunVideoOssPreUrl+item.url+aliyunVideoCoverExt}}'></image>
+            <image src="/image/play.png" mode="widthFix" style="width:52px;position:absolute;top:40%;left:45%;;background-position: center center; background-repeat: no-repeat; " />
+          </view>
+        </navigator>
+      </view>
+
+      <view style='height:8px;background-color:#F8F8F8;'></view>
+    </block>
+    <view class="weui-msg__opr-area" wx:if="{{album.music_album&&album.is_owner}}">
+      <view class="weui-btn-area">
+        <button class="weui-btn" open-type="share" type="primary" id="sharemusicalbum" style='background-color:#1e90ff;'>分享音乐影集到班级群</button>
+      </view>
+    </view>
+
+
+    <view class='category-flex photo-op-fixed' wx:if="{{album.is_owner}}">
+      <view class='category-cells' hover-class="btn_hover" bindtap='chooseType'>
+        <text class="category-cell-image-2"> </text>
+        <view class='category-cell-title'>
+          上传照片(视频)
+        </view>
+      </view>
+
+
+
+      <view class='category-cells' hover-class="btn_hover" bindtap="cmd" id="music">
+        <text class="category-cell-image-3"> </text>
+        <view class='category-cell-title'>
+          {{album.music_album?"重新制作影集":"制作音乐影集"}}
+        </view>
+      </view>
+
+      <view class='category-cells'>
+
+        <view class='category-cell-title'>
+          <button style='border: 0px solid #353535;padding-left:0px;padding-right:0px;line-height:1.5;font-size: 12px;flex:1;display:flex;flex-direction:column;justify-content:space-between;' plain="true" open-type='share'>
+            <text class="category-cell-image-1"></text>
+            <text>分享至微信</text>
+          </button>
+        </view>
+      </view>
+
+
+
+
+      <view class='category-cells' hover-class="btn_hover" bindtap="cmd" id="op">
+        <text class="category-cell-image-4"> </text>
+        <view class='category-cell-title'>
+          更多
+        </view>
+      </view>
+    </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </view>
+
+
+
+
+
+
+
+  <view class="page" wx:if="{{selectedImgs.length>0}}" style='height:{{winHeight}}px;padding-top:10px'>
+    <form bindsubmit="submit" report-submit="true">
+      <view class="weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" name="desc" placeholder="简单的描述一下吧" style="height: 4.3em" />
+          </view>
+        </view>
+        <view style='height:8px;background-color:#F8F8F8;'></view>
+        <view class="weui-uploader__bd" style='padding:10px 7px;margin-right:0px;'>
+          <view class="weui-uploader__files" id="uploaderFiles">
+            <block wx:for="{{selectedImgs}}" wx:key="*this">
+              <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}" style='position:relative'>
+                <image style='width:60px;height:60px;border:1px solid #ddd;' class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                <view class="weui-badge" id="{{item}}" catchtap='removeImg' style='position:absolute;top:-0.1em;right:-0.4em;background-color:#bbb8b8;'>X</view>
+              </view>
+            </block>
+          </view>
+          <view class="weui-uploader__input-box" style='width:60px;height:60px'>
+            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+          </view>
+        </view>
+      </view>
+      <view class="page__bd">
+        <view class="weui-msg__opr-area">
+          <view class="weui-btn-area">
+            <button class="weui-btn" formType="submit" type="primary" style='background-color:#1e90ff;width:80%'>发布</button>
+
+
+          </view>
+        </view>
+      </view>
+    </form>
+
+  </view>
+
+</view>

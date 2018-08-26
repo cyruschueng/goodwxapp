@@ -1,0 +1,44 @@
+<!--pages/talents/talentMorePic.wxml-->
+
+<view class='body'>
+
+<view class='imgList-view' hidden='{{ !showPicHidden }}'>
+
+<block wx:for="{{ imgUrls }}" wx:for-index='x' wx:key="{{ index }}" wx:for-item="img">
+<view class='panel'>
+
+  <view class='title'>{{ img.time }}</view>
+
+  <view class='img'>
+    <block wx:for="{{ img.urls }}" wx:for-index='y' wx:key="{{ index }}" wx:for-item="url">
+    <image wx:if='{{ img.urls.length <= 1 }}' src='{{ url.src }}' mode='aspectFill' data-index='{{ x * 2 + y + 1 }}' bindtap='bindImageTap'></image>
+    <image wx:else src='{{ url.src }}' mode='aspectFill' style='float:{{ y%2 == 0 ? "left" : "right" }};' data-index='{{ x * 2 + y + 1 }}' bindtap='bindImageTap'></image>
+    </block>
+  </view>
+
+</view>
+</block>
+
+</view>
+
+<!-- 弹窗 -->
+<view class='showPic' hidden='{{ showPicHidden }}'>
+
+  <view class='numberText'>
+    <text>{{ picIndex }}</text>/{{ picUrls.length }}
+    <text class='hiddenPic' bindtap='bindPackupPic'>X</text>
+  </view>
+
+  <swiper class='swiper' bindchange="bindChangePicTap" current='{{ picIndex-1 }}' data-time="{{ picUrls[picIndex-1].time }}">
+  <block wx:for="{{ picUrls }}" wx:key="{{ index }}">
+    <swiper-item id="{{ index }}" data-time="{{ item.time }}">
+      <image class='pic' id="{{ index }}" src="{{ item.url }}" mode='aspectFit'></image>
+    </swiper-item>
+  </block>
+  </swiper>
+
+  <view class='foot-view'>{{ picTime }}</view>
+
+</view>
+
+</view>

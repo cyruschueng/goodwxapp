@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" manifest="../common.appcache">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>学习记录</title>
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+     <div class="loading" style="display:block;">
+        <div class="load-inner">
+            <span style="width:100%;text-align: center;">加载中...</span>
+        </div>
+    </div> 
+    <!--loading end-->
+    <div class="dialog" style="display:none;">
+        <div class="dialog-inner">
+            <span>暂无信息~</span>
+        </div>
+    </div><!--dialog end-->
+    <div class="m-error" style="display:none;">
+        <div class="m-error_inner">
+            <div class="u-img1"></div>
+            <div class="u-img2"></div>
+            <div class="f-btn mt20" onclick="javascript:location.reload()">重 试</div> 
+            <div class="u-txt mt30" onclick="$(this).css('opacity',1)"></div>
+        </div>
+    </div><!--error end-->
+
+    <div id="app" class="wrap word-break" style="display:none;">
+        <!--<a style="font-size:0.4rem;" href="test.html" @click="urlTo()">--测试跳转速度链接</a><br><br><br>-->
+        <div v-for="item in pageList" v-if="item.moduleId==124 || item.moduleId==10 || item.moduleId==15" track-by="$index">
+            <div class="m-themonth p-lr30 lh-80 fs-30 green bg-f1f0ec" v-if="item.isShowMonth">{{formatMonth(item.submitDate)}}</div>
+            <div class="record-item" :class="item.moduleId | setModuleIdIcon" @click="urlTo(item)">
+                <div class="fl">
+                    <div class="lh-50"><span class="work-title fs-30">{{item.resourceName}}</span><i class="icon-work" v-if="item.workId!=0"></i></div>
+                    <div class="lh-40 fs-24 c-999896">{{item.submitDate | formatDate 'W MM/dd'}}<i class="icon-checked" v-if="item.comment"></i></div>
+                </div>
+                <div class="fr lh-50 m-r30 c-999896 fs-30">{{item.actualScore || 0}}分</div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div id="loadMore" class="loadMore c-999896" @click="loadMore"><div class="loading-icon"></div> <div class="load-txt">正在加载中</div></div>
+    </div>
+
+
+    <script> var app_interaction = true; // 是否与APP交互 </script>
+    <!--<script src="../common/js/adaptive.js"></script>
+    <script src="../common/js/jquery.min.js"></script>
+    <script src="../common/js/cordova.min.js"></script>
+    <script src="../common/js/vue.min.js"></script>-->
+    <!--公共js打包压缩成build-->
+    <script src="../common/js/build.min.js"></script>
+
+    <script src="../common/js/common.js"></script>
+    <script src="js/index.js"></script>
+
+    <!--页面跳转插件-->
+    <!--<link rel='stylesheet' href='../common/js/nprogress/nprogress.css'/>
+    <script src='../common/js/nprogress/nprogress.js'></script>-->
+</body>
+</html>

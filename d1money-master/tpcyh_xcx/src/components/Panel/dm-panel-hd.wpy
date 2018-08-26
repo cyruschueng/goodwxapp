@@ -1,0 +1,66 @@
+<style lang="less" rel="stylesheet/less">
+
+    .demon-panel__hd{
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+
+        /*padding:0 20rpx;*/
+        .demon-panel__hd__text{
+            font-size:18px;
+            color: #333333;
+        }
+        &.default{
+            text-align: center;
+            justify-content: center;
+            i{
+                color:#38a1cf;
+            }
+        }
+
+        &.backstage{
+
+            padding:30rpx;
+            .demon-panel__hd__text{
+                flex:1;
+                padding-left:20rpx;
+                border-left: 2px solid #38a1cf;
+            }
+            i{
+                color: #969696;
+            }
+        }
+    }
+</style>
+<template>
+    <view class="demon-panel__hd {{type}}">
+        <span class="demon-panel__hd__text">
+            <slot></slot>
+        </span>
+        <i class="iconfont icon-arrow-right"></i>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+
+    export default class extends wepy.component {
+        props = {
+            type: {
+                type: String,
+                default: 'default'
+            }
+        }
+
+        data = {}
+
+        events = {}
+
+        methods = {
+
+        }
+
+        onLoad() {
+
+        }
+    }
+</script>

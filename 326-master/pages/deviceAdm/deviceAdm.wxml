@@ -1,0 +1,40 @@
+<import src="/template/tabBar.wxml" />  
+<import src="/template/listStyle.wxml" /> 
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<view class="container">
+<!--top  -->
+  <view class='h8' class='orderFilter Skin  borderB'  hidden='{{stationAdmH}}'>
+    <template is="tapMenu" data="{{tapBox: tapBox}}"/> 
+  </view>
+    <!--搜索框str  -->
+  <view class="searchWrapper flex bgColor0  pdlr0"> 
+    <view  class='orderFilter bg256 border0 width30 height185 flexCenter' hidden='{{stationAdmH}}'>
+      <template is="tapMenu" data="{{tapBox: tapBox1}}"/> 
+  </view>
+  <template is="Input" data="{{inputBox: inputBox}}"/>
+  <view class='flexCenter width3 color0 height185' bindtap='deviSearch'>搜索</view>
+  </view>  
+  <!--nav  -->
+  <view class='bgColorD pd05 flex flexCenter'>
+    <view class='mr1 cir' style='min-width:100px;min-height:100px;'>
+      <view class='ecBar' hidden='{{ecShow}}'>
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+      </view>
+    </view>
+    <view class='flexColumn flex1' style='min-height:100px;'>
+      <template is="listAdmStat" data="{{admStaBox: admStaBox}}" />
+    </view>
+  </view>
+  <!--top end  -->
+  <!--nav str  -->
+  <view class='h8 borderB ' class='orderFilter bg256 ' hidden='{{stationAdmH}}'>
+    <view class='width30 h100'>
+      <template is="tapMenu" data="{{tapBox: tapBox2}}"/> 
+    </view>
+  </view>
+  <!--body -->
+  <view class='flexv1 modeldrawer_content pb1'>
+    <template is="deviceList" data="{{listBox: listBox}}"/> 
+  </view>
+  <template is="errTip" data="{{errBox: errBox}}"/> 
+</view>

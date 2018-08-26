@@ -1,0 +1,82 @@
+<!--confirmOrder.wxml-->
+<view class="wrap" wx:if="{{show}}">
+  <view class="info">
+    <view class="time">等待支付时间：{{hour}}:{{min}}</view>
+    <view class="title-wrap">
+      <view class="title">王者荣耀</view>
+      <view class="title">{{region}}</view>
+      <view class="title">排位赛</view>
+      <view class="title">{{levelName}}</view>
+      <view class="title">{{gameNumber}}局</view>
+    </view>
+    <!-- <view class="game-num">游戏局数</view>
+    <view class="num-wrap">
+      <image class="reduce" src="{{reduceSrc}}" bindtap="reduceEv"></image>
+      <view class="num">{{gameNumber}}</view>
+      <image class="add" src="{{addSrc}}" bindtap="addEv"></image>
+    </view> -->
+    <view class="tip">优惠抵扣券</view>
+    <view class="card" bindtap="toCard">{{cardName}}</view>
+    <view class="friend">一元请好友一起上车，更划算</view>
+    <switch type="switch" checked="{{friendShow}}" class="friend-switch" color="#09BB07" bindchange="switchEv" />
+    <view wx:if="{{friendShow}}" class="friend-wrap none" data-node="friendWrap">
+        <view class="friend-option" data-num="1" bindtap="chooseFriendEv">
+          <image src="{{friendImage1}}"></image>
+          带1位好友<text>+ ¥ 1</text>
+        </view>
+        <view class="friend-option" data-num="2" bindtap="chooseFriendEv">
+          <image src="{{friendImage2}}"></image>
+          带2位好友
+          <text>+ ¥ 2</text>
+        </view>
+    </view>
+    <image src="../../../images/dotBg.png" class="das"></image>
+    <view class="price">总价:{{price + '.0'}}元</view>
+    <view class="last-price">实付：<text>¥{{(price - cardValue / 100) > 0 ? price - cardValue / 100 : 0}}</text></view>
+  </view>
+  <view class="pay-way">
+    <view class="wx-pay {{!ifWallet ? 'wx-pay-cannot' : ''}}" data-num="6" bindtap="choosePayWay">
+      问技钱包
+      <text>余额：{{wallet}}元</text>
+      <image src='{{srcWallet}}'></image>
+    </view>
+    <view class="wx-pay" data-num="5" bindtap="choosePayWay">
+      微信支付
+      <image src='{{srcWx}}'></image>
+    </view>
+  </view>
+  <view class="confirm-button" bindtap="confirmEv">确认下单</view>
+  <view class="to-question" bindtap="toQuestionEv">常见问题</view>
+  <!-- <view class="black-modal" wx:if="{{ modalShow }}">
+    <view class="modal-back" bindtap="hideRuleEv"></view>
+    <view class="price-list">
+        <view class="price-title">
+          <view class="price-title1">段位</view>
+          <view class="price-title2">每局价格</view>
+        </view>
+        <view class="price-item">
+          <view class="item-name">倔强青铜</view>
+          <view class="item-price">3.0元/局</view>
+        </view>
+        <view class="price-item">
+          <view class="item-name">秩序白银</view>
+          <view class="item-price">4.0元/局</view>
+        </view>
+        <view class="price-item">
+          <view class="item-name">荣耀黄金</view>
+          <view class="item-price">5.0元/局</view>
+        </view>
+        <view class="price-item">
+          <view class="item-name">尊贵铂金</view>
+          <view class="item-price">10.0元/局</view>
+        </view>
+        <view class="price-item">
+            <view class="item-name">永恒钻石</view>
+            <view class="item-price">20.0元/局</view>
+        </view> 
+    </view>
+    <view class="close" bindtap="hideRuleEv">
+      <image src="../../../images/closeX.png"></image>
+    </view>
+  </view> -->
+</view>

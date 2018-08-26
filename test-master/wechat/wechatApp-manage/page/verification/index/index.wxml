@@ -1,0 +1,84 @@
+<!--page/verification/index/index.wxml-->
+<view class='orders-title'>
+  <text>有{{verifyListNum}}个订单可选，已选{{checkboxNum}}个订单，共{{sum}}份菜</text>
+  <text class='orders-font' catchtap="orderIng">下单 ></text>
+</view>
+<checkbox-group bindchange="checkboxChange">
+  <view class='orders-detail'>
+    <!--分割-->
+
+    <view class='orders-li' wx:for="{{verifyList}}"  wx:key="{{index}}"  data-orderId='{{item.orderId}}'>
+
+      <view class='_border'>
+        <view class='orders-number'>
+        <!--图片-->
+        <view class='nickname-img'>
+          <image src='{{item.headsculpture?item.headsculpture:"https://lingju360.com/miniapp/resources/image/paidui-1@2x.png"}}'></image>
+        </view>
+        <!--昵称和订单编号-->
+        <view class='orders-number-right'>
+          <view class='wx-nickname'>{{item.alias}}</view>
+          <view class='food-orders-number'>
+            <text>订单编号：<text>{{item.orderNo}}</text></text>
+
+            <label class='checkbox-label'>
+              <checkbox class='checkbox' checked="{{true}}" color="#ff4800" value="{{index}}" data-checked='{{item.checked}}'></checkbox>
+            </label>
+
+          </view>
+        </view>
+      </view>
+
+      <view class='foods-list-box'>
+        <view class='orders-main'>
+          <view class='orders-nav'>
+            <text class='commodity'>商品</text>
+            <text class='price'>单价</text>
+            <text class='number'>数量</text>
+          </view>
+
+          <view class='food-list' wx:for="{{item.orderMenuList}}"  wx:key="{{index}}">
+
+            <view class='food-list-main'>
+              <text class='menuName'>{{item.menuName}}</text>
+              <text class='price'>￥<text>{{item.price}}</text></text>
+              <image catchtap="bandMinus" class='minus' data-index="{{item.index}}" src='https://lingju360.com/miniapp/resources/image/common/minus.png'></image>
+              <text class='num'>{{item.catNum}}</text>
+              <image catchtap='bandAdd' class='add' data-index="{{item.index}}" src='https://lingju360.com/miniapp/resources/image/common/add.png'></image>
+            </view>
+
+            <view class='specification' wx:if="{{item.menuSpecName==''? false :true}}">规格：
+              <text>{{item.menuSpecName}}</text>
+            </view>
+            <view class='make' wx:if="{{item.flavour==''?false:true}}">做法：
+              <text>{{item.flavour}}</text>
+            </view>
+
+          </view>
+
+
+        </view>
+      </view>
+      <view class='total-price'>
+        <text class='total-price-font'>合计金额：</text>
+        <text class='price'>￥<text  wx:key="{{index}}" wx:for='{{lists}}'></text>{{lists[index]}}</text>
+      </view>
+      </view>
+      <!--分割-->
+    </view>
+  </view>
+</checkbox-group>
+<!--弹框-->
+<!-- <view class='warm-prompt' wx:if="{{hide}}">
+  <view class='warm-prompt-font'>温馨提示</view>
+  <view class='dishes'>
+    <text>确定取消菜品</text>
+    <text>（{{foodName}}）？</text>
+  </view>
+  <view class='delete'>
+    <text class='cancel' catchtap='cancel'>否</text>
+    <text class='confirm' catchtap="confirm">是</text>
+  </view>
+</view> -->
+<!--遮罩层-->
+<!-- <view class='mask-layer' wx:if="{{hide}}"></view> -->

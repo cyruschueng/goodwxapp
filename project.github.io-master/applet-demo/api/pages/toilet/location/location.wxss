@@ -1,0 +1,93 @@
+/*全局引入UI库*/
+@import "../resources/lib/zanui/index.wxss";
+/**app.wxss**/
+page{
+    margin: 0;
+    padding: 0;
+}
+text{
+    font-family: "微软雅黑"
+}
+.container {
+    background: #F9F9F9;
+    overflow: hidden;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.container::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    content: ' ';
+    width: 100%;
+    height: 1rpx;
+    background-color: #e2e2e2;
+    z-index: 5;
+}
+/*容器区域*/
+
+.main {
+    height: calc(100vh);
+    width: 100%;
+}
+
+/*地图样式控制*/
+
+map {
+    height: calc(100vh - 160rpx);
+    width: 100%;
+}
+
+/*底部详细信息控制*/
+
+.descript {
+    height: 160rpx;
+    width: 100%;
+}
+
+.descript {
+    display: flex;
+    position: absolute;
+    height: 160rpx;
+    bottom: 0rpx;
+    left: 0rpx;
+    right: 0rpx;
+}
+
+.descript .left {
+    flex: 1 0 0;
+    display: flex;
+    padding-left: 10rpx;
+    flex-direction: column;
+}
+
+.descript .right {
+    flex: 0 0 170rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.descript .left .name {
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 41rpx;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top:15rpx;
+}
+
+.descript .left .brief-addr {
+    height: 90rpx;
+    font-size: 30rpx;
+    display: flex;
+    align-items: center;
+}
+
+/*详细路径导航按钮*/
+
+.navigate {
+    width: 130rpx;
+    height: 130rpx;
+}

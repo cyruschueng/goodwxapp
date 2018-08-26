@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+
+	html,	
+	body{
+		width: 100%;
+      	height: 100%;
+	}
+      .box{
+      	width: 100%;
+      	height: 100%;
+      	display: flex;
+      	flex-wrap: wrap;
+      	flex-direction: column;
+      	align-items: center;
+      	justify-content: center;
+      }
+      .box .long{
+      	font-size: 24px;
+      	font-style: 700;
+      }
+	</style>
+</head>
+<body>
+<div class="box">
+	<div id="smm"  class="long">孙惜寒子</div>
+	<div id="cxx"  class="long">崔铭宇</div>	
+</div>
+
+<script type="text/javascript">
+	
+
+	window.onload = function(){
+		var osmm = document.getElementById("smm");
+		var ocxx = document.getElementById("cxx");
+
+		setInterval(function(){
+			osmm.style.color = colorlist();
+			ocxx.style.color = colorlist();
+		},100)
+		
+		setInterval(function(){
+			document.body.style.background = colorlist();
+		},1000)
+
+		function colorlist() {
+            var r = parseInt(Math.random() * 255);
+            var g = parseInt(Math.random() * 255);
+            var b = parseInt(Math.random() * 255);
+            var colorHex = "#" + r.toString(16) + g.toString(16) + b.toString(16);
+            return colorHex;
+        }
+	}	
+</script>
+
+</body>
+</html>

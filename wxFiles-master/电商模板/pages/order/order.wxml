@@ -1,0 +1,45 @@
+<view class="titleBar">
+  <view wx:for="{{titleBar}}" class='item {{item.active ? "act":""}}' data-index='{{index}}' bindtap='changeBar'>{{item.label}}</view>
+</view>
+<view style='height:70rpx'></view>
+
+<view class='margin-top-sm orders' wx:for="{{list}}" wx:for-item="it" >
+  <view class='title bottom-line panel-between'>
+    <view>{{it.orderInfo.createTime}}</view>
+    <view style='color:#{{it.orderInfo.orderType == 1 ? "ff9900":""}}{{it.orderInfo.orderType == 2 ? "999999":""}}{{it.orderInfo.orderType == 3 ? "FF6633":""}}{{it.orderInfo.orderType == 4 ? "66CC66":""}}'>{{it.orderInfo.orderType == 1 ? "待付款":""}}{{it.orderInfo.orderType == 2 ? "待发货":""}}{{it.orderInfo.orderType == 3 ? "待收货":""}}{{it.orderInfo.orderType == 4 ? "已完成":""}}</view>
+  </view>
+  <view class='goodspanel bottom-line' data-id='{{it.orderInfo.orderId}}' bindtap='navToOrderDetail'>
+    <view class='goodsitem panel-between' wx:for="{{it.orderItems}}" wx:for-item="li" >
+      <view class='panel-start'>
+        <image src='{{ip+li.imagePath}}' mode="aspectFill" style='width:170rpx;height:170rpx'></image>
+        <view class='margin-left-sm' style='width:350rpx;'>
+          <view class='bold'>{{li.commodityName}}</view>
+          <view class="font-default margin-top-sm">{{li.specificationName}}</view>
+        </view>
+      </view>
+      <view style='text-align:right'>
+        <view class='font-lg font-danger bold'>￥{{li.itemPrice/li.itemCount}}</view>
+        <view class='margin-top-sm'>x{{li.itemCount}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='title panel-end item-center'>
+    <view>合计: <text class='font-danger bold'>￥{{it.orderInfo.payPrice}} </text><text class='font-sm font-default'>(含运费￥{{it.orderInfo.mailPrice}})</text></view>
+    <view class='margin-left-sm buybtn' wx:if="{{it.orderInfo.orderType == 1}}" bindtap='{{version == 1 ? "pay":""}}' data-id='{{it.orderInfo.orderId}}'>{{version == 1? '立即付款':'联系卖家'}}</view>
+    <view class='margin-left-sm buybtn' style='background:#FF6633' 
+    wx:if="{{it.orderInfo.orderType == 3}}" 
+    data-id='{{it.orderInfo.orderId}}' 
+    data-lo='{{it.orderInfo.logisticsId}}' bindtap='receive'>确认收货</view>
+  </view>
+</view>
+
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view style='padding:40rpx;text-align:center' class='font-default' wx:if="{{!loading && list.length > 0}}">到底啦</view>
+
+<view style='margin-top:50rpx;padding:40rpx;text-align:center' wx:if="{{!loading && list.length == 0}}">
+  <image src='/img/orderkong.png' style='width:160rpx;height:160rpx'></image>
+  <view class='font-default'> 订单空的哦</view>
+</view>

@@ -1,0 +1,58 @@
+<view class="user_content">
+    <view class="Member_head">
+        <view class="Member_img domain">
+            <image class="userinfo-avatar" src="{{userInfo.user_headimg}}" background-size="cover"></image>
+            <view class="userinfo_name">{{userInfo.user_nickname}}</view>
+        </view>
+    </view>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="user_edit_con">
+            <view class="user_edit_li">
+                <view class="user_edit_li_title"><text class="fr grey"></text>姓名</view>
+                <view class="user_edit_li_input"><input name="u_name" maxlength="16" placeholder="8个字以内" value="{{userInfo.user_nickname}}" /></view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_title">性别</view>
+                <view class="user_edit_li_input">
+                    <radio-group class="radio-group" name="u_sex">
+                        <block wx:if="{{userInfo.u_sex == 1}}">
+                            <radio value="1" checked="checked" />男
+                        </block>
+                        <block wx:else>
+                            <radio value="1" />男
+                        </block>
+                        <block wx:if="{{userInfo.u_sex == 2}}">
+                            <radio value="2" checked="checked" />女
+                        </block>
+                        <block wx:else>
+                            <radio value="2" />女
+                        </block>
+                    </radio-group>
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_title"><text></text>手机号</view>
+                <view class="user_edit_li_input">
+                    <input name="u_phone" maxlength="11" placeholder="请正确填写手机号" value="{{userInfo.u_phone}}" />
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_title">
+                    <text class="fr grey">(18个字以内)</text>地址
+                </view>
+                <view class="user_edit_li_input">
+                    <input name="u_address" maxlength="18" placeholder="18个字以内" value="{{userInfo.u_address}}" />
+                </view>
+            </view>
+            <view class="user_edit_li">
+                <view class="user_edit_li_title"><text class="fr grey">(100个字以内)</text>详细介绍下自己</view>
+                <view class="user_edit_li_input">
+                    <input name="u_jieshao" maxlength="100" placeholder="100个字以内" value="{{userInfo.u_jieshao}}" />
+                </view>
+            </view>
+        </view>
+        <view class="m20">
+            <button formType="submit" type="primary" disabled="{{!userInfo}}" hover-class="none">提交保存</button>
+        </view>
+    </form>
+</view>

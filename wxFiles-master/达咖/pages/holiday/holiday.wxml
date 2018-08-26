@@ -1,0 +1,31 @@
+<view class="searchsd">
+    <input placeholder="搜索订购商品" bindinput='searchInput' />
+    <view class="searchBtn bg-inbox" bindtap='doSearch'>搜索</view>
+</view>
+<view class="padding-sm">
+    <view wx:for="{{list}}" class="gpanel margin-top-sm" style="background: url({{url+item.image}});background-size:100%" data-index='{{index}}' bindtap="navToGoodsDetail">
+        <view class="xpanel">
+            <image src="{{url+item.image}}" style="width:200rpx;height:200rpx;border-radius:20rpx;" mode="aspectFill"></image>
+            <view class="content">
+                <view class="font-md bold">{{item.name}}</view>
+                <view class="font-md margin-top-xs">已预定:{{item.sales}}人</view>
+                <view class="font-lg margin-top-xs">价格：<text class="font-danger">￥{{item.price}}起</text></view>
+            </view>
+        </view>
+    </view>
+
+</view>
+<view class="panel-center padding-md item-center" wx:if="{{loading}}">
+  <view class="three-quarters-loader">Loading</view>
+  <view class="loading-txt">加载中...</view>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && list.length == 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">没有搜索到相关记录</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>
+<view class="panel-center margin-bottom-sm margin-top-md" wx:if="{{!loading && list.length != 0}}">
+  <image class="line margin-top-sm" src="/img/line.png"></image>
+  <view class="font-lg  margin-left-sm font-default">到底啦</view>
+  <image class="line margin-left-sm margin-top-sm" src="/img/line.png"></image>
+</view>

@@ -1,0 +1,32 @@
+<view class="container flower_container">
+  <view class="flower-header-bg" background-size="contain"/>
+  <view class="flower-list-content">
+      <view class="add_text">
+        <text>请输入要添加的网红名</text>
+      <!-- <view class="section"> -->
+        <input class="input" placeholder="网红名" name="newWH_name" bindinput="newWHName" auto-focus/>
+      </view>
+      <!-- </view> -->
+      <view class="add_btn">
+        <button class="weui-btn" bindtap="checkExists" type="warn" disabled='{{hasChecked}}'>检测是否存在</button>
+      </view>
+    <block wx:if="{{hasChecked}}">
+      <block wx:if="{{possible.length > 0}}">
+        <block wx:for-items="{{possible}}" wx:for-item="item" wx:key="item">
+          <image class="item-portrait" src="{{item.avatar}}" mode="aspectFill"/>
+        </block>
+        <view class="add_btn">
+          <text>你想要添加的是Ta吗？</text>
+          <button class="weui-btn" bindtap="create" type="warn">不是，继续添加</button>
+          <button class="weui-btn" bindtap="cancel" type="warn">是，添加另一个</button>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="add_btn">
+          <button class="weui-btn" bindtap="create" type="warn">继续添加</button>
+        </view>
+      </block>
+    </block>
+  </view>
+  <!-- <view class="flower-header-bg" background-size="contain" />   -->
+</view>

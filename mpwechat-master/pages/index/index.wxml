@@ -1,0 +1,48 @@
+<!--<import src="../common/loadding/loadding.wxml" />
+<view class="index_load" wx:if="{{load}}">
+  <template is="loadding"  />
+</view>-->
+<view class="container">
+  <image src="{{jumbotronSrc}}" class="demon_jumbotron"></image>
+  <view class="demon_tabBox" style="height:{{tabBox.height}}">
+    <view class="demon_tab">
+      <view bindtap="bindViewTap" class="demon_tab_item {{tabSetting.selectIndex==index ? 'active' :''}}" wx:for="{{tabSetting.item}}" wx:key="item" data-index="{{index}}">
+        {{item}}
+      </view>
+    </view>
+    <!--群排行-->
+    <view class="demon_tab_content" style="height:{{tabSetting.rankHeight}};" wx:if="{{tabSetting.selectIndex==0}}">
+      <view class="demon_userInfo rankbox" wx:if="{{!load}}">
+        <view class="demon_userImg">
+          <image src="{{result.imgUrl}}" class="demon_img"></image>
+        </view>
+        <view class="demon_userInfo_content">
+          <view class="demon_userInfo_content_item">
+            <text class="text" wx:if="{{result.customerCount}}">{{result.customerCount}}</text>
+            <text class="text" wx:else="{{result.customerCount}}">0</text>
+            <text class="text">好友数</text>
+          </view>
+          <view class="demon_userInfo_content_item">
+            <text class="text">{{result.weekCount}}</text>
+            <text class="text">本周新客户</text>
+          </view>
+          <view class="demon_userInfo_content_item">
+            <text class="text">{{result.AllCount}}</text>
+            <text class="text">积累客户</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--群动态-->
+    <view class="demon_tab_content dynamicgroup" style="height:{{tabSetting.rankHeight}};" wx:if="{{tabSetting.selectIndex==1}}">
+      <!--没有数据时-->
+      <view class="nomsgBox">
+        <image class="nomsgimg" src="./../../static/img/nomsg.png"></image>
+        <view class="nomsgtext">这里有点冷清 ～</view>
+      </view>
+    </view>
+    <button class="demon_btn" type="primary" open-type="share" size="{{tabSetting.btn.primarySize}}" loading="{{tabSetting.btn.loading}}" plain="{{tabSetting.btn.plain}}" disabled="{{tabSetting.btn.disabled}}">
+      分 享
+    </button>
+  </view>
+</view>

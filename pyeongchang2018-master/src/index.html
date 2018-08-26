@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>全景看冬奥 这里是平昌</title>
+    <style type="text/css">html {height: 100%;margin: 0;} body {height: 100%;margin: 0;}</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <style>
+        #panoMaker{
+            background-image:url(./app.bundle/images/pano/arrow.png);
+            background-position:0 0;
+            background-size:100% auto;
+               -webkit-animation:movingArrowkey infinite steps(25) 800ms;
+            animation:movingArrowkey infinite steps(25) 800ms;
+        }
+        @-webkit-keyframes movingArrowkey{
+            0%{
+                background-position:0 1000px;
+            }
+            100%{
+                background-position:0 0;
+            }
+        }
+        @-webkit-keyframes flash {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+                font-size: 18px;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes flash {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+                font-size: 18px;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        #blink{
+               -webkit-animation:flash 1.5s infinite  cubic-bezier(1,0,0.5,0) ;
+            animation:flash 1.5s infinite  cubic-bezier(1,0,0.5,0) ;
+        }
+        #allDiv{
+            width:100%;height:100%;position: absolute;
+            left:0;top:0;
+        }
+        .trump-control-bottom{zoom:1 !important;}
+        .trump-play-controller{zoom:1 !important;}
+        .trump-play-controller *{opacity: 0;}
+        .trump-play-controller{background: url("./album_pano.bundle/album/images/btn_play.png") no-repeat center center/42px 42px;}
+
+        #videoBox_intro ,#videoBox_intro *{
+            color:#fff !important;
+        }
+    </style>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<div id="allDiv">
+    <div id="appContainer" style="position: absolute;width: 100%; height: 100%;"></div>
+    <div id="loadingDiv" style="position:absolute;width:100%;height:100%;background: #000000;"></div>
+    <script src="//mob.visualbusiness.cn/appengine_web/v1.0.182/css/loading_controlled.js"></script>
+</div>
+<!-- 视频 -->
+<div id="videoBox" style="overflow-y:auto;position: fixed;left:0;width:100%;height:100%;top:0;display: none; background: rgba(0,0,0,0.6);">
+    <div id="videoBoxInner">
+        <div id="id_video_container" ></div>
+        <div id="videoBox_intro" style="margin:20px 15px 20px;">
+        </div>
+    </div>
+    <div id="videoClose" style="height: 80px;position: fixed;z-index: 999;top:0;width: 100%;background-image:linear-gradient(0deg,rgba(0,0,0,0),rgba(0,0,0,0.5)); ">
+        <div id="videoCloseBtn" style="position: absolute;right:0;top:0;height:100%;padding:0 25px 0;">
+            <img src="./app.bundle/images/pano/close.png"  style="width: 30px;vertical-align: center;padding-top: 25px;" />
+        </div>
+    </div>
+</div>
+<audio id="audioDom"  style="display:none; height: 0"  preload="auto" loop="loop">
+    <source src="app.bundle/data/music.mp3" type="audio/mp3">
+</audio>
+<script>
+    var _mtac = {"performanceMonitor":1,"senseQuery":1};
+    (function() {
+        var mta = document.createElement("script");
+        mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500585891");
+        mta.setAttribute("cid", "500585892");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+    })();
+</script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="//webapp.vizen.cn/vizengine_web/v2.0.52/thirdparty/jquery.3.1.1.min.js"></script>
+<script type="application/javascript" src="//mob.visualbusiness.cn/vizengine_web/v2.0.52/vizengine_web.js"></script>
+<script src="//qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js"></script>
+<script type="text/javascript" src="./lib/share.js"></script>
+<script type="text/javascript" src="./lib/exif.js" ></script>
+<script type="text/javascript" src="./lib/video.js" ></script>
+<!-- <script src="//192.168.0.104/jon/vb/common/vconsole.min.js" async></script> -->
+<script>
+    new com.appengine.App(document.getElementById("appContainer"),"app.bundle");
+    window.shareInfo = {
+        url:location.href,
+        title:"全景看冬奥 这里是平昌",
+        desc :"第23届冬季奥运会开幕了！新华社独家带你全景看冬奥，还可订制你的冬奥海报，一起来参与吧！",
+        img  :window.location.protocol + "//webapp.vizen.cn/pyeongchang2018/app.bundle/images/shareLogo.png"
+    };
+    window.shareConfig = function() {
+        window.getShareInfoSub (shareInfo.url, shareInfo.title, shareInfo.desc, shareInfo.img)
+    };
+    shareConfig();
+</script>
+</body>
+</html>
+
+

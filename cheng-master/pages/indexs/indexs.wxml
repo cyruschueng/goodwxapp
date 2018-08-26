@@ -1,0 +1,100 @@
+<form report-submit="true" bindsubmit="formSubmit" class="formSubmit" >
+    <button formType="submit" class="submit" style='border-radius:0'>
+        <view class="container">
+            <view class='banner'>
+                <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/banner.png" mode="widthFix"></image>
+            </view>
+            <view class="checkBox">
+                <view class='box'>
+                    <view class="one" bindtap='gameTap'>
+                        <view>排位赛</view>
+                        <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/1.png" mode="widthFix"></image>
+                    </view>
+                      <view class="two">  
+                         <button class="two" open-type='share'> 
+                                <view>好友对战</view>
+                                <image class="friend" src="http://ovhvevt35.bkt.clouddn.com/chengyu/2.png" mode="widthFix"></image>
+                                <image class="self" src="http://ovhvevt35.bkt.clouddn.com/chengyu/3.png" mode="widthFix"></image>
+                         </button> 
+                      </view>  
+                </view>
+                <view class='box'>
+                    <view class="three" bindtap='bankTap'>
+                        <view>银行
+                          <!--time  -->
+                          <view class='bankAll'>
+                                <view class='gold'>
+                                    <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode='widthFix'></image>
+                                    {{allPoint.bank_point}}
+                                </view>
+                                <view class='line'>
+                                    <view class='bgColor' style='width:{{width}}rpx'></view>
+                                </view>
+                                <view class='time'>{{time}}</view>
+                          </view>
+                        </view>
+                        <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/4.png" mode="widthFix"></image>
+                    </view>
+                    <view class="four" bindtap='shopTap'>
+                        <view>商店</view>
+                        <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/5.png" mode="widthFix"></image>
+                    </view>
+                </view>
+                <view class='box'>
+                    <view class="five" bindtap='rankTap'>
+                        <view>排行榜</view>
+                        <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/6.png" mode="widthFix"></image>
+                    </view>
+                    <view class="sex" bindtap='setTap'>
+                        <view>设置</view>
+                        <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/7.png" mode="widthFix"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--inform  -->
+        <view class='inform'>
+            <view class='left'>
+                <image src="{{userInfo.avatarUrl}}" mode='widthFix'></image>
+            </view>
+            <view class='right'>
+                <view class='nickName'>{{userInfo.nickName}}</view>
+                <view class='jinbi'>
+                    <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode='widthFix'></image>
+                    {{allPoint.user_point}}
+                </view>
+            </view>
+        </view>
+    </button>
+</form>
+<!--设置 音效 -->
+<view class='bg' wx:if="{{setting}}">
+    <view class='setting'>
+        <view class='title'>
+            设置
+            <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/del.png" mode='widthFix' bindtap='close'></image>
+        </view>
+        <view class='music'>
+            音效 <switch checked bindchange="switch1Change" color="#3d66a1"/>
+        </view>
+        <view class='music'>
+            音乐 <switch checked="{{music}}" bindchange="switch2Change" color="#3d66a1"/>
+        </view>
+        <view class='version'>当前版本：<text>1.0.0</text> </view>
+    </view>
+</view>
+<!--银行  -->
+<view class='bg' wx:if="{{bank}}">
+    <view class='bank' style='background:url(http://ovhvevt35.bkt.clouddn.com/chengyu/bank.png?{{math}}) no-repeat; background-size: cover;'>
+        <image class='close' src="http://ovhvevt35.bkt.clouddn.com/chengyu/del.png" mode='widthFix' bindtap='closeBank'></image>
+        <view class='header'>
+           银行
+        </view>
+        <view class='title'>
+            +{{allPoint.bank_point}}<image src="http://ovhvevt35.bkt.clouddn.com/chengyu/8.png" mode='widthFix'></image>
+        </view>
+    </view>
+</view>
+<view class='adver' bindtap='hepulan'>
+    <image src="http://ovhvevt35.bkt.clouddn.com/chengyu/honbao.gif" mode='aspectFill'></image>
+</view>

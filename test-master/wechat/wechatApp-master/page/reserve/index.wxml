@@ -1,0 +1,66 @@
+ <view class="header">
+  <image mode="widthFix" class="imgsss"  src="https://lingju360.natappvip.cc/miniapp/resources/image/index/banner1.png"></image>
+</view> 
+
+<view class="main">
+  <text class="t1">营业时间：{{startTime}}-{{endTime}}</text>
+  <text class="t2">{{address}}</text>
+  <view bindtap="phone" class="phoneRight">
+    <text class="icon2_phone"></text>
+  </view>
+</view>
+
+<view class="twoSection">
+  
+  <view class="section">
+    <input class="i1" placeholder="请输入姓名" bindinput="inputName" value="{{inputName}}"/>
+  </view>
+
+  <view class="section">
+    <input class="i2"  placeholder="请输入电话" bindinput="inputPhone" value="{{inputPhone}}"/>
+  </view>
+
+
+<view class="section">
+  
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker p3">
+      用餐类型：{{array[index]}}
+    </view>
+  </picker>
+</view>
+
+<view class="section">
+  <picker mode="time" value="{{time}}" start="{{startTime}}" end="{{endTime}}" bindchange="bindTimeChange">
+    <view class="picker p4">
+      时间: {{time}}
+    </view>
+  </picker>
+</view>
+
+
+<view class="section">
+  
+  <picker mode="date" value="{{date}}" start="{{date2}}" end="" bindchange="bindDateChange">
+    <view class="picker p5">
+      日期: {{date}}
+    </view>
+  </picker>
+</view>
+
+<view class="section">
+  
+  <picker bindchange="binddeskChange" value="{{deskindex}}" range="{{desk}}"  range-key="text">
+    <view class="picker p6">
+      餐桌类型：{{desk[deskindex].text}}
+    </view>
+  </picker>
+</view>
+
+
+
+<text class="ts">姓名和电话是必填选项,请务必填写,谢谢配合!</text>
+
+</view>
+
+<button bindtap="getdata" class="btn">立即预约</button>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+	<title>阶段报告</title>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="format-detection"content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstraptc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ppublic.css">
+	
+	<style type="text/css">
+	#canvas1{
+		background: #3acfd1;
+	}
+
+	#canvas2{
+		background: #d13acc;
+	}
+	a{
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		vertical-align: middle;
+	}
+	</style>
+	</head>
+	<body>
+		<a  href="javascript:void(0);" onclick="javascript:this.href='testcj1.html'+location.search;alert(window.location.href);" style="width:200px;height:100px;line-height:100px;background:red;color:#fff;">右shareType=0（带数字）</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj1_2.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:#fff;">右shareType=1（带数字）</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj1_3.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:#fff;">右shareType=2（带数字）</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj1_4.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:#fff;">右分享（openWebview）</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj2.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:#bfa;">右分享（不带数字）</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj3.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:pink;">右分享（无小红点）</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj4.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:#fff;">右分享/收藏</a>
+    <a href="javascript:void(0);" onclick="javascript:this.href='testcj5.html'+location.search"  style="width:200px;height:100px;line-height:100px;background:red;color:#bfa;">右三个以上</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj6.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:pink;">右上角文案</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj6_1.html'+location.search" style="width:200px;height:100px;line-height:100px;background:red;color:pink;">右上角文案2</a>
+    <a  href="javascript:void(0);" onclick="javascript:this.href='testcj7.html'+location.search" style="width:200px;height:100px;line-height:100px;background:blue;color:red;">截图分享</a>
+    <a href="javascript:void(0);" onclick="javascript:this.href='test13.html'+location.search" style="width:200px;height:100px;background:#c17462;color:#fff;">右上角方法测试文案</a>
+		<a href="javascript:void(0);" onclick="javascript:this.href='test12.html'+location.search" style="width:200px;height:100px;background:#c16296;color:#fff;">右上角方法测试图片</a>
+
+		<a href="http://pm.picooc.com:9989/web/fatburntest/test10.html?os=android" style="width:200px;height:100px;background:#c17462;color:#fff;">左上角方法和中间android</a>
+		<a href="http://pm.picooc.com:9989/web/fatburntest/test10.html" style="width:200px;height:100px;background:#c17462;color:#fff;">左上角方法和中间iOS</a>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script>
+		
+
+			var data={
+				url:"tanchao@picooc.com"
+			}
+			data=JSON.stringify(data);
+			if(getParamByUrl("os")=="android" && (typeof mobileApp != "undefined")){
+				mobileApp.gotoEmail(data);
+		  	}
+			else if(getParamByUrl("os")=="iOS" && (typeof window.webkit != "undefined")){
+				window.webkit.messageHandlers.gotoEmail.postMessage(data);
+			}
+
+		
+	</script>
+</html>

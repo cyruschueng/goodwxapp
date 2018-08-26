@@ -1,0 +1,122 @@
+<!--profile.wxml-->
+<import src="../common/foot.wxml" />
+
+<view class="page">
+  <view class="page__hd">
+    <view class="userinfo">
+      <block wx:if="{{hasUserInfo}}">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+      <block wx:else>
+        <button open-type="getUserInfo" type="primary" bindgetuserinfo="getUserInfo" bindtap="canILogin"> 点击登录 </button>
+      </block>
+    </view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel">
+      <view class="weui-panel__hd">账户中心</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+            <block wx:if="{{hasUserInfo}}">
+              <navigator url="../personal/personal?currentId={{currentId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="/images/edit.png" style="width: 20px;height: 20px;margin-right: 5px" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view>个人资料</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </navigator>
+            </block>
+            <navigator url="../rules/rules" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/images/rules.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>规则</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="../feedback/feedback" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/images/edit.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>反馈建议</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="" bindtap="about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="/images/help.png" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>关于本程序</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+
+    <view class="weui-panel__hd">发布的项目：</view>
+    <view class="weui-panel__bd">
+      <block wx:if="{{myproject.length>0}}">
+        <block wx:for="{{myproject}}">
+          <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text" data-id="{{item.objectId}}" bindtap="publish_action">{{item.title}}</view>
+            <view class="weui-media-box__info">
+              <view class="weui-media-box__info__meta weui-media-time">时间：{{item.updatedAt}}</view>
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
+
+
+
+
+
+
+
+    <view class="weui-panel__hd">参加的项目：</view>
+    <view class="weui-panel__bd">
+      <block wx:if="{{join_in_porject.length>0}}">
+        <block wx:for="{{join_in_porject}}">
+          <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text" data-id="{{item.objectId}}" bindtap="joinin_action">
+              <view class=" weui-cell__bd weui-cell_primary">{{item.title}}</view>
+            </view>
+            <view class="weui-media-box__info">
+              <view class="weui-media-box__info__meta weui-media-time">时间：{{item.updatedAt}}</view>
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
+
+
+
+    <view class="weui-panel__hd">被选择的项目：</view>
+    <view class="weui-panel__bd">
+      <block wx:if="{{isSelected.length>0}}">
+        <block wx:for="{{isSelected}}">
+          <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text" hover-class="weui-cell_active">
+              <view bindtap="chatroom" data-id="{{item.objectId}}" class="weui-cell__bd weui-cell_primary">{{item.title}}</view>
+            </view>
+            <view class="weui-media-box__info">
+              <view class="weui-media-box__info__meta weui-media-time">点击沟通</view>
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
+  </view>
+  </view>

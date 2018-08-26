@@ -1,0 +1,95 @@
+<!--pages/six/six.wxml-->
+<!-- <text>pages/six/six.wxml</text> -->
+<text>button</text>
+<view>
+  <button size='130' type='' plain='true' disabled='false'>button</button>
+  <button open-type='share'>share</button>
+  <button open-type='contact'>contact</button>
+  <button open-type='getUserInfo'>getUserInfo</button>
+  <button type='warn'>warn</button>
+  <button type='primary'>primary</button>
+  <button type='default'>default</button>
+  <button size='mini'>minisfeeeeeeee</button>
+  <button loading='true'>sdfs</button>
+  <button hover-class='red'>color</button>
+</view>
+<text>checkbox</text>
+<view>
+  <checkbox-group>
+    <label for='no1'>no1</label>
+    <checkbox id='no1' value='value1' color='blue'></checkbox>
+    <label for='no2'>no2</label>
+    <checkbox id='no2' value='value2' color='red'></checkbox>
+    <label for='no3'>no3</label>
+    <checkbox id='no3' value='value3' color='pick'></checkbox>
+  </checkbox-group>
+
+  <rich-text nodes="{{node}}"></rich-text>
+  <checkbox-group>
+    <block wx:for="{{items}}">
+      <label for="{{item.name}}">{{item.value}}</label>
+      <checkbox id="{{item.name}}" value='{{item.value}}'></checkbox>
+    </block>
+  </checkbox-group>
+
+  <rich-text nodes="{{node}}"></rich-text>
+  <view>
+    <checkbox-group>
+      <label wx:for="{{items}}">
+        <checkbox value='{{item.value}}' checked='{{item.checked}}'>{{item.value}}</checkbox>
+      </label>
+    </checkbox-group>
+  </view>
+
+  <checkbox-group bindchange="checkboxChange">
+    <label class="checkbox" wx:for="{{items}}">
+      <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    </label>
+  </checkbox-group>
+
+  <rich-text nodes="{{node}}"></rich-text>
+  <view wx:for="{{list}}">
+    {{index}} {{item.value}}
+  </view>
+
+  <text>input</text>
+  <input value='init text' placeholder='palho'></input>
+  <rich-text nodes="{{node}}"></rich-text>
+  <input type='number'></input>
+  <rich-text nodes="{{node}}"></rich-text>
+  <input confirm-type='send'></input>
+  <input auto-focus='' placeholder='auto focus'></input>
+  <input type='text' focus='{{focus}}' placeholder='click button to focus this input'></input>
+  <button bindtap='bindButtonTap'>get focus</button>
+  <view>
+  <text>您输入的是：</text>
+    <text>{{inputcontent}}</text>
+  </view>
+  <input auto-focus='' placeholder='data can sync' bindinput='syncdata'></input>
+
+  <view>
+    <label for='accordBt'>accord to button</label>
+  </view>
+  <button bindtap='accordbt' id='accordBt'>accord label</button>
+  <text>picker</text>
+  <picker mode="selector" range='{{country}}' value='{{index}}' bindchange='bindPickerChange'>
+    <text>{{country[index]}}</text>
+  </picker>
+  <picker mode="date" value='{{date}}' end="2018-04-01" start="2017-11-01" bindchange='bindDateChange' fields="month">
+    <view>selected: {{date}}</view>
+  </picker>
+  <picker mode="time" value='{{time}}' start="00:00" end="23:59" bindchange='timechange'>
+    <text>{{time}}</text>
+  </picker>
+  <picker mode="selector" range='{{obj}}' range-key='{{index}}'>
+    <view>{{obj[index]}}</view>
+  </picker>
+  <picker mode='region' value='regions'  custom-item="{{customItem}}" bindchange='regionchange'>
+    <text>selected: {{region[0]}}, {{region[1]}}, {{region[2]}}</text>
+  </picker>
+  <picker mode="multiSelector" bindchange='multiPickerChange' bindcolumnchange="multiPickerColumnChange" value='{{multiIndex}}' range='{{multiArray}}'>
+    <!-- <text>{{multiArray[0][multiIndex[0]}}</text> -->
+    <text>{{multiArray}}</text>
+  </picker>
+</view>
+

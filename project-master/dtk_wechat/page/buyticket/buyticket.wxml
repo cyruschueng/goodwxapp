@@ -1,0 +1,57 @@
+<import src="../../templates/personalInfo.wxml"/>
+<view class="listBox" hidden="{{listBox}}">
+  <view class="swiper-tab">  
+    <view class="swiper-tab-list"><text data-current="0" bindtap="swichNav" class="{{currentTab==0 ? 'on' : ''}}">全部</text></view>  
+    <view class="swiper-tab-list"><text data-current="1" bindtap="swichNav" class="{{currentTab==1 ? 'on' : ''}}">我的</text></view> 
+    <view class='addbusiness' bindtap="addList"><image src="../../image/addbusiness.png"></image></view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight}}rpx" bindchange="bindChange">  
+    <swiper-item>
+    <!-- 我要收票=全部  begin -->
+    <!-- 没有数据显示 -->
+      <view hidden="{{nothingAll}}">
+        <template is="nothing"></template>
+      </view>
+      <view class="list-main-all" wx:for="{{msgAllList}}"  wx:key="id" id="{{item.id}}" bindtap="listClick">
+        <view class='list-all-title clearfix'>
+          <text class='list-all-title-box'>{{item.draft_type}}</text>
+          <text class='list-all-title-time'>{{item.update_datetime}}</text>
+        </view>
+        <view class='list-all-main clearfix'>
+          <image class='list-all-main-image' src="{{item.creator.avatar ? item.creator.avatar : '../../image/m.png'}}"></image>
+          <view class='list-all-main-title clearfix'><text>{{item.creator.name ? item.creator.name:'保密'}}</text><text wx:if="{{item.creator.user_id}}">({{item.creator.user_id}})</text></view>
+          <view class='list-all-main-box clearfix'>
+            <view class="ticketList-footer clearfix" style='padding-left:0;'><view class="bank">期限：</view><view class="bank bank-width">{{item.draft_term}}<text wx:if="{{item.draft_term !== '不限'}}">个月</text></view></view>
+            <view class="ticketList-footer clearfix" style='padding-left:0;'><view class="bank">承兑人：</view><view class="bank bank-width" style='width:450rpx;'>{{item.acceptance_type}}</view></view>
+          </view>
+        </view>
+
+
+
+
+
+        
+      </view>
+    <!-- 我要收票=全部  end -->
+    </swiper-item>  
+    <swiper-item>
+    <!-- 我要收票=我的  begin -->
+    <!-- 没有数据显示 -->
+      <view hidden="{{nothing}}">
+        <template is="nothing"></template>
+      </view>
+      <view class="list-main-lists"  wx:for="{{msgList}}"  wx:key="id" id="{{item.id}}" data-draftstatus="{{item.draft_status}}" bindtap="listClick" >
+        <view class="ticketList-title clearfix" >
+          <view class="list-main-lists-left-text"><image src="../../image/buyticket.png"></image></view>
+          <view class="ticketList-title-text clearfix">{{item.draft_type}}<text class='list-all-title-time'>{{item.update_datetime}}</text></view>
+        </view>
+        <view class="ticketList-footer clearfix"><view class="bank">期限：</view><view class="bank bank-width">{{item.draft_term}}<text wx:if="{{item.draft_term !== '不限'}}">个月</text></view></view>
+        <view class="ticketList-footer clearfix"><view class="bank">承兑人：</view><view class="bank bank-width">{{item.acceptance_type}}</view></view>
+      </view>
+    <!-- 我要收票=我的  end -->
+    </swiper-item>  
+  </swiper>
+</view>
+<loading hidden="{{loadingHidden}}">
+    加载中...
+</loading>

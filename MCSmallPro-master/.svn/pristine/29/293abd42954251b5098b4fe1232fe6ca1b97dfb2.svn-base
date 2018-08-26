@@ -1,0 +1,32 @@
+<!--pages/me/me.wxml-->
+
+<view class='header-container'>
+  <image class='header-image' src="{{imageUrl}}"></image>
+  <view class='header-message'>
+    <text class='header-nickName'>{{nickName}}</text>
+    <text class='header-address text-default' bindtap='shoppingAddressTab'>我的收货地址></text>
+  </view>
+</view>
+<view class='center-flow'>
+  <block wx:for-items="{{orderList}}" wx:key="{{index}}">
+    <view class='center-item' bindtap='flowTap' data-id="{{index}}">
+      <view class='center-num' wx:if='{{(index == 0) && (waitNum > 0)}}'>{{waitNum}}</view>
+      <image class='center-item-image' src="{{item.image}}"></image>
+      <text class='center-item-text'>{{item.title}}</text>
+    </view>
+  </block>
+</view>
+
+<view class='list-view'>
+  <block wx:for-items="{{list}}" wx:key="{{index}}">
+    <view class="list-item {{index+1 == list.length ? '' : 'list-item-line'}}" bindtap='listCellTap' data-id="{{index}}">
+      <view class='list-top'>
+        <image class='list-image' src="{{item.image}}"></image>
+        <text class='list-text'>{{item.name}}</text>
+      </view>
+      <image class='list-arrow' src="{{arrow}}"></image>
+      <button class='contact-btn' wx:if="{{item.name == '消息'}}" open-type="contact">
+      </button>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,45 @@
+<!--pages/mine/myMember/memberInfoRegistration.wxml-->
+
+<import src="../../../templates/textInput-item/textInput-item.wxml"/>
+
+<view class='bg-view'>
+
+  <view class='input-view'>
+    
+    <block wx:for='{{ textInputItems }}' wx:for-item='textInput' wx:key='{{ index }}'>
+    <template is='textInput-item' data='{{ ...textInput }}'/>
+    </block>
+
+  </view> 
+
+  <view class='foot-view' bindtap='bindSaveInfoBtnTap'>保存信息</view>
+
+    <!-- 弹窗 选择框-->
+  <view class='picker-bgview' hidden='{{ pickerViewHidden }}'>
+    
+    <view class='picker-view'>
+
+      <view class='weui-flex title-view'>
+        <view bindtap='bindPickerCancelTap'>取消</view>
+        <view class='weui-flex__item'>{{ pickerValueTitle }}</view>
+        <view bindtap='bindPickerConfirmTap'>确定</view>
+      </view>
+
+      <picker-view class="picker" 
+              value="{{ pickerValue }}" 
+              indicator-style='height: 90rpx;'
+              data-title='{{ pickerValueTitle }}'
+              bindchange="bindPickerChange">
+              
+        <block wx:for='{{ pickerList }}' wx:for-item='picker' wx:key='{{ index }}'>
+          <picker-view-column>
+            <view class="picker-item" wx:for="{{ picker }}" wx:key='{{ index }}'>{{ item }}</view>
+          </picker-view-column>
+        </block>
+
+      </picker-view>
+    
+    </view>
+  </view>
+
+</view>

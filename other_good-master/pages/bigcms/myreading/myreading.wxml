@@ -1,0 +1,76 @@
+<!--pages/my/myreading/myreading.wxml-->
+<view class="app-reading" wx:for="{{c_data}}" wx:key="*this">
+  <!--图文-->
+  <view wx:if="{{item.typeid==1}}">
+    <view class="article-list flex gridXb bgwhite" catchtap="onNavigateTap" data-url="../../bigcms/article/article?id={{item.id}}&typeid={{item.typeid}}">
+      <image class="left-img mr10" src="{{item.imgurl}}" mode="aspectFill"></image>
+      <view class="article-right sub">
+        <view class="title lineText2">{{item.title}}</view>
+        <view class="flex mt15 bottom-right">
+          <view wx:if="{{item.isopenpay==1}}">
+            <view class="red sub f18">￥{{item.pay_price}}</view>
+          </view>
+          <view class="grey f14">
+            <text>{{item.add_time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--音频-->
+  <view wx:elif="{{item.typeid==2}}">
+    <view class="article-list flex gridXb bgwhite" catchtap="onNavigateTap" data-url="../../bigcms/article/article?id={{item.id}}&typeid={{item.typeid}}">
+      <view class="img-box mr10">
+        <text class="iconfont icon-tongzhi mid voice-icon"></text>
+        <image class="left-img mr10" src="{{item.imgurl}}" mode="aspectFill"></image>
+      </view>
+      <view class="article-right sub">
+        <view class="title lineText2">{{item.title}}</view>
+        <view class="flex mt15 bottom-right">
+          <view wx:if="{{item.isopenpay==1}}">
+            <view class="red sub f18">￥{{item.pay_price}}</view>
+          </view>        
+          <view class="grey f14">
+            <text>{{item.add_time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--视频-->
+  <view wx:else>
+    <view class="article-list video-list gridXb" catchtap="onNavigateTap" data-url="../../bigcms/article/article?id={{item.id}}&typeid={{item.typeid}}">
+      <view class="title lineText2">{{item.title}}</view>
+      <view class="img-box-video">
+         <text class="iconfont icon-videofill mid video-icon"></text>
+         <image src="{{item.imgurl}}" class="img-box-item" mode="aspectFill" />
+      </view>
+      <view class="article-right" style="width:100%;">
+          <!--<view class="flex mt15 bottom-right">
+              <text class="red f18 fl">￥{{item.pay_price}}</text>
+              <view class="grey f14"><text>{{item.add_time}}</text></view>
+          </view>-->
+          <view class="flex mt15 bottom-right">
+            <view wx:if="{{item.isopenpay==1}}">
+              <view class="red sub f18">￥{{item.pay_price}}</view>
+            </view>            
+            <view class="grey f14">
+              <text>{{item.add_time}}</text>
+            </view>
+          </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--正在加载中-->
+<!--<view class="loding grey mt10 mb10 tc f14">
+  <text class="mr10 loading-icon"></text> 
+  <text>正在加载中</text>
+</view>-->
+<!--没有更多了-->
+<view class="nothing grey mt10 mb10 tc f14 flex" wx:if="{{is_load_more==false}}">
+  <text class="line sub mr10"></text>
+  <text>没有更多了</text>
+  <text class="line sub ml10"></text>
+</view>

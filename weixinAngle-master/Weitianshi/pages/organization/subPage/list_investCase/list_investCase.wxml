@@ -1,0 +1,27 @@
+<!--pages/organization/subPage/list_investCase/list_investCase.wxml-->
+<import src="/pages/Template/Template.wxml" />
+
+<include src='/utils/wxml/common' />
+<view wx:if="{{nonet}}">
+  <!--筛选和搜索  -->
+  <template is='search' data='{{SearchInit,linkDataShow,linkShow, currentIcon:0,hidden:true}}'></template>
+  <!-- <template is='searchResult' data='{{SearchInit}}'></template> -->
+  <scroll-view scroll-top="{{scroll}}" scroll-y="true" style="height:1130rpx" bindscrolltolower='loadMore'>
+    <view class="investImg" wx:if="{{newPage.investment_event_url}}">
+      <image src="{{newPage.investment_event_url}}"></image>
+    </view>
+    <!--循环投资案例  -->
+    <view>
+      <view class="media">
+        <block wx:for="{{project_list}}" wx:key="{{project_list}}">
+          <template is='invest' data='{{item}}'></template>
+        </block>
+      </view>
+      <view class="hasNothing" wx:if="{{project_list.length ==0 }}">暂无数据</view>
+    </view>
+
+    <!--错误提示-->
+    <view class="error" wx:if="{{error=='1'}}">{{error_text}}</view>
+
+  </scroll-view>
+</view>

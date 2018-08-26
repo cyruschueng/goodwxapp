@@ -1,0 +1,176 @@
+
+/*侧边栏*/
+
+.c-menu-mask {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    left: 0;
+    top: 0;
+    z-index: 10;
+    transition: all ease-out 0.3s;
+    opacity: 0;
+    display: none;
+}
+
+.c-menu {
+    position: fixed;
+    width: 620rpx;
+    height: 100%;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    box-sizing: border-box;
+    transform: translate3d(100%, 0, 0);
+    transition: all ease-out 0.3s;
+}
+
+.c-menu .menu-box {
+    box-sizing: border-box;
+    /* padding-left: 103rpx; */
+    padding-top: 45rpx;
+    width: 620rpx;
+    height: 100%;
+    background-color: #fff;
+    /*margin-left: 130rpx;*/
+    /* background-size: 620rpx 242rpx;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-image: url(https://1251097942.cdn.myqcloud.com/1251097942/platform/miniApp/shake_broadcast_images/center.jpg); */
+}
+
+.c-menu-mask.c-show-menu {
+    opacity: 1;
+    display: block;
+}
+
+.c-menu.c-show-menu {
+    transform: translate3d(0, 0, 0);
+}
+
+
+
+.c-menu .menu-box .box-user-info {
+    padding-left: 100rpx;
+    position: relative;
+    padding-bottom: 60rpx;
+    padding-top: 40rpx;
+}
+
+.c-menu .menu-box .box-user-info::after{
+    content: '';
+    position: absolute;
+    height: 0.5px;
+    left:100rpx;
+    right:0;
+    bottom:0;
+    background-color: #ebebeb;
+}
+
+.c-menu .menu-box .box-user-info .info-head {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4rpx #fff;
+    /*border: 3rpx solid #fff;*/
+}
+
+.c-menu .menu-box .box-user-info .info-name {
+    display: inline-block;
+    min-width: 110rpx;
+    padding-right: 50rpx;
+    margin: 25rpx 0;
+    text-align: center;
+    font-size: 36rpx;
+    color: #333;
+    line-height: 42rpx;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 34rpx 34rpx;
+    background-image: url(https://1251097942.cdn.myqcloud.com/1251097942/platform/miniApp/shake_broadcast_images/center-icon.png);
+}
+
+.c-menu .menu-box .box-list {
+    padding-top: 60rpx;
+}
+
+.c-menu .menu-box .box-list .list-item {
+    display: flex;
+    background-repeat: no-repeat;
+    background-position: 80rpx 40rpx;
+    padding-left: 163rpx;
+    line-height: 120rpx;
+}
+
+.c-menu .menu-box .box-list .item-font {
+    font-size: 32;
+    color: #666;
+}
+
+.c-menu .menu-box .box-list .item-money {
+    font-size: 30;
+    color: #d9341f;
+    padding-left: 100rpx;
+}
+
+.c-menu .menu-box .box-list .icon-money {
+    background-size: 40rpx 39rpx;
+    background-image: url(https://1251097942.cdn.myqcloud.com/1251097942/platform/miniApp/shake_broadcast_images/center-qb.png);
+}
+
+.c-menu .menu-box .box-list .icon-entity {
+    background-size: 42rpx 42rpx;
+    background-image: url(https://1251097942.cdn.myqcloud.com/1251097942/platform/miniApp/shake_broadcast_images/center-jp.png);
+}
+
+.c-menu .menu-box .box-list .icon-address {
+    background-size: 35rpx 46rpx;
+    background-image: url(https://1251097942.cdn.myqcloud.com/1251097942/platform/miniApp/shake_broadcast_images/center-dz.png);
+}
+
+
+/*isFull  */
+
+.c-menu.isFull{
+    transform: translate3d(0, 0, 0);
+}
+
+.isFull{
+    width:100%;
+    background-color:#fff;
+}
+
+.isFull .menu-box .box-user-info::after{
+    content: '';
+    position: absolute;
+    height: 0.5px;
+    left:100rpx;
+    right:0;
+    bottom:0;
+    background-color: transparent;
+}
+
+.isFull .menu-box {
+    box-sizing: border-box;
+    /* padding-left: 103rpx; */
+    padding-top: 50rpx;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    /*margin-left: 130rpx;*/
+     background-size: 750rpx 242rpx;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-image: url(https://1251097942.cdn.myqcloud.com/1251097942/platform/miniApp/shake_broadcast_images/center.jpg); 
+}
+
+.version{
+    position: absolute;
+    right:20rpx;
+    bottom:120rpx;
+    color:#ccc;
+    font-size: 20rpx;
+    line-height: 24rpx;
+    z-index: 10;
+}

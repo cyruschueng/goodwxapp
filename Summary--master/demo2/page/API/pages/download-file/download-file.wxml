@@ -1,0 +1,23 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <view class="page-body">
+    <image wx:if="{{imageSrc}}" src="{{imageSrc}}" mode="center" />
+    <block wx:else>
+      <view class="page-body-wording">
+        <text class="page-body-text">
+          点击按钮下载服务端示例图片
+        </text>
+      </view>
+      <progress percent="{{progress}}" show-info />
+      <view class="btn-area">
+        <button bindtap="downloadImage" type="primary">下载</button>
+        <button bindtap="cancelDownload" type="default" hidden="{{!loading}}">取消</button>
+      </view>
+    </block>
+    <button wx:if="{{imageSrc}}" bindtap="saveFile" type="default">保存</button>
+  </view>
+
+  <template is="foot" />
+</view>

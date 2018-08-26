@@ -1,0 +1,38 @@
+
+<template name="star-item">
+
+  <view class='star-view' wx:if='{{ score == 5 }}'>
+  <block wx:for='{{ [0,1,2,3,4] }}' wx:key='*this'>
+    <image class='star-icon' src='{{ starUrl }}'></image>
+  </block>
+  </view>
+
+  <view class='star-view' wx:if='{{ score == 4 }}'>
+  <block wx:for='{{ ["star","star","star","star",""] }}' wx:key='*this'>
+    <image wx:if='{{ item == "star" }}' class='star-icon' src='{{ starUrl }}'></image>
+    <image wx:if='{{ item == "" }}' class='star-icon' src='{{ emptUrl }}'></image>
+  </block>
+  </view>
+
+  <view class='star-view' wx:if='{{ score == 3 }}'>
+  <block wx:for='{{ ["star","star","star","",""] }}' wx:key='*this'>
+    <image wx:if='{{ item == "star" }}' class='star-icon' src='{{ starUrl }}'></image>
+    <image wx:if='{{ item == "" }}' class='star-icon' src='{{ emptUrl }}'></image>
+  </block>
+  </view>
+
+  <view class='star-view' wx:if='{{ score == 2 }}'>
+  <block wx:for='{{ ["star","star","","",""] }}' wx:key='*this'>
+    <image wx:if='{{ item == "star" }}' class='star-icon' src='{{ starUrl }}'></image>
+    <image wx:if='{{ item == "" }}' class='star-icon' src='{{ emptUrl }}'></image>
+  </block>
+  </view>
+
+  <view class='star-view' wx:if='{{ score == 1 }}'>
+  <block wx:for='{{ ["star","","","",""] }}' wx:key='*this'>
+    <image wx:if='{{ item == "star" }}' class='star-icon' src='{{ starUrl }}'></image>
+    <image wx:if='{{ item == "" }}' class='star-icon' src='{{ emptUrl }}'></image>
+  </block>
+  </view>
+
+</template>

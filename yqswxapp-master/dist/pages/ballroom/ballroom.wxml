@@ -1,0 +1,116 @@
+<!--pages/ballroom/ballroom.wxml-->
+
+<!-- <import src="../../templates/remind-item/remind-reserveddate-item.wxml"/> -->
+
+<view class="ballroomBgView">
+
+  <swiper class='imgSwiper' indicator-dots="true" autoplay="false" >
+  <block wx:for="{{ ballInfo.imgUrls }}" wx:key="{{ index }}">
+    <swiper-item>
+      <image class='room-img' mode="aspectFit" src="{{ item }}"/>
+    </swiper-item>
+  </block>
+  </swiper>
+
+  <view class='room-info' wx:if='{{ ballInfo.name }}'>
+    <view>{{ ballInfo.name }} {{ ballInfo.level }}</view>
+    <view class='weui-flex room-info-text'>
+      <view class='weui-flex__item' >层高：{{ ballInfo.highLevel }}</view>
+      <view class='weui-flex__item' >面积：{{ ballInfo.area }}</view>
+      <view class='weui-flex__item' >可容纳：{{ ballInfo.tabNums }}</view>
+    </view>
+  </view>
+
+  <view class="weui-footer weui-footer_fixed-bottom foot-view">
+    <view class='weui-flex'>
+      <view class='comment-view' bindtap='goCommentPage'>
+        <image class='comment' src='../../images/comment.png'></image>
+      </view>
+      <!-- <view class='weui-flex__item foot-btn' data-title='档期查询' bindtap='goScheduleQueryPage'>档期查询</view> -->
+      <view class='weui-flex__item '>
+        <view class='foot-btn' style='width:150rpx;margin:auto;' data-title='预约看场' bindtap='goAppointmentSitePage'>预约看场</view>
+      </view>
+      
+      <view class='foot-btn' bindtap='goScheduleQueryPage'>预定</view>
+    </view>
+  </view>
+
+</view>
+
+<!-- 时间 弹窗 -->
+<!-- <template is="remindReserveddate" data="{{ reserveddateData }}"/> -->
+
+
+<view class='selectDate-bgview' hidden='{{ reserveddateData.dateViewHidden }}'>
+  <view class='datepicker-view'>
+
+    <!-- 联系人 -->
+    <view class='title'>
+      联系人：<input bindinput="bindContactInput" placeholder='请填写联系人'></input>
+    </view>
+    <!-- 性别 -->
+    <view class='title'>
+      性别：
+      <radio-group bindchange="bindGenderCheckboxChange">
+        <label class="checkbox" wx:for="{{ genderItems }}" wx:key='{{ item.name }}'>
+          <radio value="{{ item.name }}" checked="{{ item.checked }}"/>{{ item.value }}
+        </label>
+      </radio-group>
+    </view>
+    <!-- 联系电话 -->
+    <view class='title'>
+      联系电话：<input bindinput="bindContactInfoInput" type='number' placeholder='请填写联系电话'></input>
+    </view>
+    <!-- 预定日期 -->
+    <view class='title'>
+      预订日期：{{ reserveddateData.choose_year }}-{{ reserveddateData.choose_month }}-{{ reserveddateData.choose_day }} 
+      <text class='reserved-text'>{{ reserveddateData.reserved ? "不可预定" : "" }}</text>
+    </view>
+    <!-- 桌数 -->
+    <view class='title'>
+      <text class='table-text'>桌数：</text>
+      <view class="table-slider-view">
+        <slider activeColor='#F15A4A' bindchange="bindTableSliderChange" min="{{ ballInfo.minTable }}" max="{{ ballInfo.maxTable }}" show-value/>
+      </view>
+    </view>
+    <!-- 日期选择器 -->
+    <view class='picker'>
+      <picker-view class="flex" indicator-style="height: 50px;" value="{{ reserveddateData.picker_value }}" bindchange="pickerChange">
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_year }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_month }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="picker-view" wx:for="{{ reserveddateData.picker_day }}" wx:key="{{ item }}" style="line-height: 50px">{{ item }}</view>
+        </picker-view-column>
+      </picker-view>  
+    </view>
+    <!-- 按钮 -->
+    <view class='weui-flex picker-btns'>
+      <view class='weui-flex__item' style='border-right:1px #f1f1f1 solid;' bindtap='bindCancelBtnTap'>取消</view>
+      <view class='weui-flex__item' style='{{ reserveddateData.reserved ? "color:#666;" : "color:#62b900;" }}' bindtap='bindConfirmBtnTap'>确定</view>
+    </view>
+
+  </view> 
+
+</view> 
+
+<!-- 桌数弹窗 -->
+<view class='table-bg-view' hidden='{{ tableHidden }}'>
+  <view class='table-view'>
+    <view class='table-title-view'>
+      <text class="table-section__title">桌数：{{ ballInfo.tabNumsText }}</text>
+    </view>
+    <view class="body-view">
+      <slider activeColor='#F15A4A' bindchange="bindTableSliderChange" min="{{ ballInfo.minTable }}" max="{{ ballInfo.maxTable }}" show-value/>
+    </view>
+
+    <view class="weui-flex picker-btns">
+      <view class='weui-flex__item' style='border-right:1px #f1f1f1 solid;' data-type='table' bindtap='bindCancelBtnTap'>取消</view>
+      <view class='weui-flex__item' style='color:#62b900;' data-type='table' bindtap='bindConfirmBtnTap'>确定</view>
+    </view> 
+
+  </view>
+</view>

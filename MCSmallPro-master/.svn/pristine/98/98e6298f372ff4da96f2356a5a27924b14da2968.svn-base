@@ -1,0 +1,30 @@
+<!--pages/me/children/evaluate/evaluate.wxml-->
+<view class='top-view'>
+   <image class='top-image' src='{{image}}'></image>
+   <view class='top-right-view'>
+     <view>评价</view>
+     <view class='top-star'> 
+         <image class='star-img' src='{{(item == 0) ? grayStar : lightStar}}' bindtap='starAction' data-index='{{index}}' wx:for='{{starList}}' wx:key='{{index}}'></image>      
+     </view>
+   </view>
+</view>
+<view class='text-view'>
+  <textarea class='textarea-view' bindinput='inputAction' placeholder="仔细填写评论可以对其他人有帮助哦～" placeholder-style="color:lightgray" maxlength='500'/>
+  <view class='text-num'>{{500 - content.length}}</view>
+</view>
+<view class='bottom-view'>
+   <block wx:for-items='{{imageList}}' wx:key='{{index}}'>
+     <view class='photo-view'>
+        <image class='photo' src='{{item}}' ></image>
+        <view class='photo-del-view' bindtap='photoDelAction' data-index='{{index}}'>
+           <image class='photo-del' src='http://res.o2o.com.cn:8082/img/e18c2474b58647f584b3581f2f8993fe'></image>
+        </view>
+     </view>
+   </block>
+   <view class='add-btn' bindtap='addAction' hidden='{{imageList.length == 3}}'>
+     <image class='add-image' src='http://res.o2o.com.cn:8082/img/6a1fe11fe3154660baa6de0667b570a6'></image>
+     <text>照片</text>
+   </view>
+</view>
+
+<button class='admit-btn skin-{{skin}}' hover-class='admit-hover' bindtap='admitAction'>提交</button>

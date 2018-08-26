@@ -1,0 +1,86 @@
+<import src="../template/template.wxml" />
+<view class="search">
+  <view class="search-header"></view>
+
+  <!--搜索-->
+  <view class="index-search">
+    <view class="search-view">
+      <icon class="search-icon size30" />
+      <input bindfocus="openClose" bindblur="controlClose" placeholder="搜索舞蹈教程" type="text" value="{{ searchText }}" placeholder-style="color:#ceedff" focus="{{focus}}" class="search-input" bindinput="bindSearch" />
+      <icon catchtap="clickClose" hidden="{{!focus}}" class="close-icon"></icon>
+    </view>
+    <text bindtap="searchClickEvent" class="on-search">搜索</text>
+  </view>
+
+  <!--大家都在搜-->
+  <view hidden="{{!show}}">
+    <view class="search-hot">
+      <text class="hot-title">大家都在搜</text>
+      <view class="hot-list">
+        <view bindtap="searchClickEvent" wx:for="{{ popularList }}" wx:key="name" data-keyword="{{item.title}}" class="hot-item">{{ item.title }}</view>
+      </view>
+    </view>
+    <view class="search-history">
+      <view wx:for="{{searchData}}" class="history-item" wx:key="" wx:for-index="idx">
+        <icon class="timeing-icon"></icon>
+        <text class="history-text" bindtap="searchClickEvent" data-keyword="{{item}}">{{item}}</text>
+        <icon data-idx="{{idx}}" bindtap="delHistory" class="history-close-icon flr"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="search-tab-content" hidden="{{show}}">
+
+    <!--最新-->
+    <scroll-view scroll-y="true" style="height:100%" upper-threshold="50" lower-threshold="100" class="search-content" bindscrolltolower="scrolltolower" hidden="{{!tabhideen}}">
+      <view class="music-tab">
+        <view class="m-t">
+          <text data-index="1" catchtap="handleTap" class="{{tabhideen?'t-active':''}}">最新</text>
+        </view>
+        <view class="m-t">
+          <text data-index="2" catchtap="handleTap" class="{{!tabhideen?'t-active':''}}">最热</text>
+        </view>
+      </view>
+      <view class="content-main">
+        <block wx:for="{{ newData.data }}" wx:key="{{item.id}}">
+          <template is="itemList" data="{{ ...item }}" />
+        </block>
+      </view>
+      <view hidden="{{newData.hotshidden}}" class="box-more">
+        <view wx:if="{{newData.hothidden}}">
+          <image src="../../images/loading.gif" /> 加载中...
+        </view>
+        <view wx:else>
+          <text> 没有更多了 </text>
+        </view>
+      </view>
+      <template is="empty" data="{{...empty}}" />
+    </scroll-view>
+
+    <!--最热-->
+    <scroll-view scroll-y="true" style="height:100%" upper-threshold="50" lower-threshold="100" class="search-content" bindscrolltolower="scrolltolower" hidden="{{tabhideen}}">
+      <view class="music-tab">
+        <view class="m-t">
+          <text data-index="1" catchtap="handleTap" class="{{tabhideen?'t-active':''}}">最新</text>
+        </view>
+        <view class="m-t">
+          <text data-index="2" catchtap="handleTap" class="{{!tabhideen?'t-active':''}}">最热</text>
+        </view>
+      </view>
+      <view class="content-main">
+        <block wx:for="{{ hotData.data }}" wx:key="{{item.id}}">
+          <template hidden="{{empty.isshow}}" is="itemList" data="{{ ...item }}" />
+        </block>
+      </view>
+      <view hidden="{{hotData.hotshidden}}" class="box-more">
+        <view wx:if="{{hotData.hothidden}}">
+          <image src="../../images/loading.gif" /> 加载中...
+        </view>
+        <view wx:else>
+          <text> 没有更多了 </text>
+        </view>
+      </view>
+      <template is="empty" data="{{...empty}}" />
+    </scroll-view>
+  </view>
+</view>
+<loading hidden="{{hidden}}">加载中...</loading>
