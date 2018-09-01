@@ -1,2 +1,0 @@
-# qgg
-qgg for myself

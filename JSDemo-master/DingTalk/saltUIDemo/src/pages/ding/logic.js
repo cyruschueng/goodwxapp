@@ -1,7 +1,0 @@
-export default {
-  defaults() {
-    return {
-    };
-  },
-
-};

@@ -1,2 +1,0 @@
-# weChat
-weixinsizeyunsuanxiaochengxu

@@ -1,2 +1,0 @@
-# wechatmcmc
-mcmc

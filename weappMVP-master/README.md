@@ -1,1 +1,0 @@
-## wechat small app use MVP

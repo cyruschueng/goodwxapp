@@ -1,1 +1,0 @@
-send new year card

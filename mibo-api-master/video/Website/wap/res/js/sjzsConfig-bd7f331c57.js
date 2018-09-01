@@ -1,1 +1,0 @@
-function __getButtonLabel__(n){return"download"===n?"立刻下载":"downloading"===n?"下载中":"pause"===n?"暂停":"resume"===n?"继续":"waiting"===n?"请等待":"install"===n?"安装":"open"===n?"打开花椒":void 0}

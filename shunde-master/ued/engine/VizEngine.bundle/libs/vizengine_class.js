@@ -1,2 +1,0 @@
-module("/libs/vizengine_template.js",function(){var d=!1;this.Class=function(){};var g=function(a){a=a.split(".");for(var c="",b=0;b<a.length-1;b++)c=0==b?a[0]:c+("."+a[b]),"undefined"==eval("typeof "+c)&&eval(c+"={}")};Class.extend=function(a,c){function b(){!d&&this.init&&this.init.apply(this,arguments)}null==c&&(c=a,a=null);null!=a&&g(a);d=!0;var e=new this;d=!1;for(var f in c)e[f]=c[f];b.prototype=e;b.prototype.constructor=b;b.extend=arguments.callee;b.className=a;null!=a&&(window.__temp__obj__=
-b,eval(a+"=window.__temp__obj__;"),delete window.__temp__obj__);return b}});

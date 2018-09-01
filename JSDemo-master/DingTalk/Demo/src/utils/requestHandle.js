@@ -1,3 +1,0 @@
-static function requestData () {
-    
-}
